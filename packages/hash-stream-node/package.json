@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/hash-stream-node",
-    "version": "0.1.0-preview.1",
+    "version": "0.1.0-preview.2",
     "scripts": {
         "prepublishOnly": "tsc",
         "pretest": "tsc -p tsconfig.test.json",
@@ -15,12 +15,12 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.2",
         "tslib": "^1.8.0"
     },
     "devDependencies": {
-        "@aws-js-sdk-v3-prerelease/crypto-sha256-js": "^0.1.0-preview.1",
-        "@aws-js-sdk-v3-prerelease/util-hex-encoding": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/crypto-sha256-js": "^0.1.0-preview.2",
+        "@aws-js-sdk-v3-prerelease/util-hex-encoding": "^0.1.0-preview.2",
         "@types/jest": "^20.0.2",
         "@types/node": "^8.10.29",
         "jest": "^20.0.4",

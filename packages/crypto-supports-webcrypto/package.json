@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/crypto-supports-webcrypto",
-    "version": "0.1.0-preview.1",
+    "version": "0.1.0-preview.2",
     "description": "Provides functions for detecting if the host environment supports the WebCrypto API",
     "scripts": {
         "prepublishOnly": "tsc",

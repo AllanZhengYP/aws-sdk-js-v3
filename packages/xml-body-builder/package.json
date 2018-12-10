@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/xml-body-builder",
-    "version": "0.1.0-preview.1",
+    "version": "0.1.0-preview.2",
     "description": "XML Body Builder for the AWS SDK",
     "main": "./build/XmlBodyBuilder.js",
     "devDependencies": {
@@ -9,10 +9,10 @@
         "typescript": "^3.0.0"
     },
     "dependencies": {
-        "@aws-js-sdk-v3-prerelease/is-iterable": "^0.1.0-preview.1",
-        "@aws-js-sdk-v3-prerelease/protocol-timestamp": "^0.1.0-preview.1",
-        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
-        "@aws-js-sdk-v3-prerelease/xml-builder": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/is-iterable": "^0.1.0-preview.2",
+        "@aws-js-sdk-v3-prerelease/protocol-timestamp": "^0.1.0-preview.2",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.2",
+        "@aws-js-sdk-v3-prerelease/xml-builder": "^0.1.0-preview.2",
         "tslib": "^1.8.0"
     },
     "scripts": {
