@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'fs';
 import { dirname, join } from 'path';
-import { fromSmokeTestModelJson } from '@aws-sdk/service-model';
-import { SmokeTestModel } from '@aws-sdk/build-types';
+import { fromSmokeTestModelJson } from '@aws-js-sdk-v3-prerelease/service-model';
+import { SmokeTestModel } from '@aws-js-sdk-v3-prerelease/build-types';
 
 /**
  * Loads the smoke.json file within the given directory.

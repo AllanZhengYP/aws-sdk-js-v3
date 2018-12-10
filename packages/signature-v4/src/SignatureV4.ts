@@ -31,9 +31,9 @@ import {
     RequestSigningArguments as RequestSigningArguments,
     SigningArguments,
     StringSigner,
-} from '@aws-sdk/types';
-import {iso8601, toDate} from '@aws-sdk/protocol-timestamp';
-import {toHex} from '@aws-sdk/util-hex-encoding';
+} from '@aws-js-sdk-v3-prerelease/types';
+import {iso8601, toDate} from '@aws-js-sdk-v3-prerelease/protocol-timestamp';
+import {toHex} from '@aws-js-sdk-v3-prerelease/util-hex-encoding';
 import {hasHeader} from './hasHeader';
 
 export interface SignatureV4Init {

@@ -3,9 +3,9 @@ import {
     createScope,
     getSigningKey
 } from "./credentialDerivation";
-import {toHex} from '@aws-sdk/util-hex-encoding';
-import {Sha256} from '@aws-sdk/crypto-sha256-js';
-import {Credentials} from "@aws-sdk/types";
+import {toHex} from '@aws-js-sdk-v3-prerelease/util-hex-encoding';
+import {Sha256} from '@aws-js-sdk-v3-prerelease/crypto-sha256-js';
+import {Credentials} from "@aws-js-sdk-v3-prerelease/types";
 
 describe('createScope', () => {
     it('should create a scoped identifier for the credentials used', () => {

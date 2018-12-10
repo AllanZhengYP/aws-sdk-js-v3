@@ -1,4 +1,4 @@
-import {Provider} from "@aws-sdk/types";
+import {Provider} from "@aws-js-sdk-v3-prerelease/types";
 
 /**
  *

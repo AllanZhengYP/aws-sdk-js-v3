@@ -3,7 +3,7 @@ import {
     MiddlewareCustomizationDefinition,
     ServiceCustomizationDefinition,
     TreeModel,
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import { packageNameToVariable } from '../../packageNameToVariable';
 import { IMPORTS } from '../../internalImports';
 
@@ -14,7 +14,7 @@ const idNormalizerMiddleware: MiddlewareCustomizationDefinition = {
     imports: [
         IMPORTS['route53-id-normalizer-middleware']
     ],
-    expression: `${packageNameToVariable('@aws-sdk/route53-id-normalizer-middleware')}.idNormalizerMiddleware`,
+    expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/route53-id-normalizer-middleware')}.idNormalizerMiddleware`,
     tags: `{NORMALIZE_ROUTE53_IDS: true}`,
 };
 
@@ -25,7 +25,7 @@ const changeBatchNormalizerMiddleware: MiddlewareCustomizationDefinition = {
     imports: [
         IMPORTS['route53-id-normalizer-middleware']
     ],
-    expression: `${packageNameToVariable('@aws-sdk/route53-id-normalizer-middleware')}.changeBatchAliasTargetIdNormalizerMiddleware`,
+    expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/route53-id-normalizer-middleware')}.changeBatchAliasTargetIdNormalizerMiddleware`,
     tags: `{NORMALIZE_ROUTE53_IDS: true}`,
 };
 

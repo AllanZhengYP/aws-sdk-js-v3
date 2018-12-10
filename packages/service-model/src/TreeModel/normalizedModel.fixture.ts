@@ -1,4 +1,4 @@
-import {NormalizedModel} from '@aws-sdk/build-types';
+import {NormalizedModel} from '@aws-js-sdk-v3-prerelease/build-types';
 
 export const model: NormalizedModel = {
     metadata: {

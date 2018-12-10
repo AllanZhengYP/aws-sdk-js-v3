@@ -1,6 +1,6 @@
 import {_ItemCollectionKeyAttributeMap} from './_ItemCollectionKeyAttributeMap';
 import {_ItemCollectionSizeEstimateRange} from './_ItemCollectionSizeEstimateRange';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const _ItemCollectionMetrics: _Structure_ = {
     type: 'structure',

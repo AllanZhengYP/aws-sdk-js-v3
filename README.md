@@ -12,10 +12,10 @@ The new AWS SDK for JavaScript will also be able to run alongside the version 2.
 ## Getting started
 Let’s walk through setting up a project that depends on DynamoDB from the SDK and makes a simple service call. The following steps use npm as an example. These steps assume you have node.js and npm already installed.
 1.	Create a new node.js project.
-2.	Inside of the project, run: `npm install --save @aws-sdk/client-dynamodb-v2-node@preview`
+2.	Inside of the project, run: `npm install --save @aws-js-sdk-v3-prerelease/client-dynamodb-v2-node@preview`
 3.	Create a new file called index.js, create a DynamoDB service client and send a request.
 ```javascript
-const {DynamoDB} = require('@aws-sdk/client-dynamodb-v2-node');
+const {DynamoDB} = require('@aws-js-sdk-v3-prerelease/client-dynamodb-v2-node');
 async function example() {
   const client = new DynamoDB({region: 'us-west-2'});
   try {
@@ -38,7 +38,7 @@ For those that were already importing services as sub-modules from the version 2
 const Lambda = require('aws-sdk/clients/lambda');
 
 // import the Lambda client constructor in the node.js version of the Developer Preview
-const {Lambda} = require('@aws-sdk/client-lambda-node');
+const {Lambda} = require('@aws-js-sdk-v3-prerelease/client-lambda-node');
 ```
 It is also possible to import both versions of the Lambda client by changing the variable name the Lambda constructor is stored in.
 Separate packages for browser and node.js

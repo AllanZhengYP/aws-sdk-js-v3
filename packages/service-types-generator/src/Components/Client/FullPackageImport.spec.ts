@@ -9,8 +9,8 @@ describe('FullPackageImport', () => {
     });
 
     it('should resolve variable-safe names for scoped packages', () => {
-        expect((new FullPackageImport('@aws-sdk/types')).toString())
-            .toBe("import * as __aws_sdk_types from '@aws-sdk/types';");
+        expect((new FullPackageImport('@aws-js-sdk-v3-prerelease/types')).toString())
+            .toBe("import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';");
         expect((new FullPackageImport('@types/node')).toString())
             .toBe("import * as __types_node from '@types/node';");
     });

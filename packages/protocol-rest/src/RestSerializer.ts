@@ -1,6 +1,6 @@
 import {
     rfc822
-} from '@aws-sdk/protocol-timestamp';
+} from '@aws-js-sdk-v3-prerelease/protocol-timestamp';
 import {
     BodySerializer,
     Decoder,
@@ -14,14 +14,14 @@ import {
     RequestSerializer,
     SerializationModel,
     Structure as StructureShape
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 import {
     escapeUri,
     escapeUriPath
-} from '@aws-sdk/util-uri-escape';
+} from '@aws-js-sdk-v3-prerelease/util-uri-escape';
 
-import {isIterable} from '@aws-sdk/is-iterable';
+import {isIterable} from '@aws-js-sdk-v3-prerelease/is-iterable';
 
 export interface UserInput {
     [key: string]: any;

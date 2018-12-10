@@ -5,7 +5,7 @@ import {
     SerializeHandler,
     SerializeHandlerArguments,
     SerializeMiddleware,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export function serializerMiddleware<
     Input extends object,

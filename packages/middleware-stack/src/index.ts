@@ -10,7 +10,7 @@ import {
     MiddlewareStack as IMiddlewareStack,
     SerializeHandlerOptions,
     Step,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 interface HandlerListEntry<
     Input extends object,

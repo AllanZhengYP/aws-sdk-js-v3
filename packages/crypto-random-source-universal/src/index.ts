@@ -1,10 +1,10 @@
 import {
     randomValues as browserRandomValues
-} from '@aws-sdk/crypto-random-source-browser';
+} from '@aws-js-sdk-v3-prerelease/crypto-random-source-browser';
 import {
     randomValues as nodeRandomValues
-} from '@aws-sdk/crypto-random-source-node';
-import {randomValues as IRandomValues} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/crypto-random-source-node';
+import {randomValues as IRandomValues} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * @implements {IRandomValues}

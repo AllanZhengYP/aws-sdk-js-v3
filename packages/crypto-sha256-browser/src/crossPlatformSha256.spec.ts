@@ -1,17 +1,17 @@
 import {Sha256} from './crossPlatformSha256';
 import {Sha256 as Ie11Sha256} from './ie11Sha256';
-import {Sha256 as JsSha256} from '@aws-sdk/crypto-sha256-js';
+import {Sha256 as JsSha256} from '@aws-js-sdk-v3-prerelease/crypto-sha256-js';
 import {Sha256 as WebCryptoSha256} from './webCryptoSha256';
-import {locateWindow} from '@aws-sdk/util-locate-window';
+import {locateWindow} from '@aws-js-sdk-v3-prerelease/util-locate-window';
 
-jest.mock('@aws-sdk/crypto-ie11-detection', () => {
+jest.mock('@aws-js-sdk-v3-prerelease/crypto-ie11-detection', () => {
     return { isMsWindow: jest.fn() };
 });
-import {isMsWindow} from '@aws-sdk/crypto-ie11-detection';
-jest.mock('@aws-sdk/crypto-supports-webcrypto', () => {
+import {isMsWindow} from '@aws-js-sdk-v3-prerelease/crypto-ie11-detection';
+jest.mock('@aws-js-sdk-v3-prerelease/crypto-supports-webcrypto', () => {
     return { supportsWebCrypto: jest.fn() };
 });
-import {supportsWebCrypto} from '@aws-sdk/crypto-supports-webcrypto';
+import {supportsWebCrypto} from '@aws-js-sdk-v3-prerelease/crypto-supports-webcrypto';
 
 beforeEach(() => {
     (isMsWindow as any).mockReset();

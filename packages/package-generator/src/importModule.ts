@@ -33,7 +33,7 @@ export function importModule(generator: ModuleGenerator): void {
 
     const importTarget = join(
         dirname(dirname(__dirname)),
-        generator.name.replace(/^@aws-sdk\//, '')
+        generator.name.replace(/^@aws-js-sdk-v3-prerelease\//, '')
     );
 
     if (existsSync(importTarget)) {

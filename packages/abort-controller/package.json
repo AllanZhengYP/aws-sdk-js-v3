@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/abort-controller",
+    "name": "@aws-js-sdk-v3-prerelease/abort-controller",
     "version": "0.1.0-preview.1",
     "description": "A simple abort controller library",
     "main": "./build/index.js",
@@ -16,7 +16,7 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
         "tslib": "^1.8.0"
     },
     "devDependencies": {

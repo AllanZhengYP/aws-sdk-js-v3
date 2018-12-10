@@ -3,7 +3,7 @@ import {
     ImdsCredentials,
     isImdsCredentials,
 } from "./ImdsCredentials";
-import {Credentials} from "@aws-sdk/types";
+import {Credentials} from "@aws-js-sdk-v3-prerelease/types";
 
 const creds: ImdsCredentials = Object.freeze({
     AccessKeyId: 'foo',

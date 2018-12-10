@@ -1,5 +1,5 @@
 import {prepareRequest} from "./prepareRequest";
-import {HttpRequest} from "@aws-sdk/types";
+import {HttpRequest} from "@aws-js-sdk-v3-prerelease/types";
 import {
     AMZ_DATE_HEADER,
     AUTH_HEADER,

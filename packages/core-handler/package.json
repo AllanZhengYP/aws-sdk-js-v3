@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/core-handler",
+    "name": "@aws-js-sdk-v3-prerelease/core-handler",
     "description": "AWS SDK Core Handler",
     "version": "0.1.0-preview.1",
     "scripts": {
@@ -8,7 +8,7 @@
         "test": "jest"
     },
     "dependencies": {
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
         "tslib": "^1.8.0"
     },
     "main": "./build/index.js",

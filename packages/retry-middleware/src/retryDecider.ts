@@ -3,12 +3,12 @@ import {
     isClockSkewError,
     isStillProcessingError,
     isThrottlingError,
-} from '@aws-sdk/service-error-classification';
+} from '@aws-js-sdk-v3-prerelease/service-error-classification';
 import {
     MetadataBearer,
     SdkError,
     RetryDecider
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export function defaultRetryDecider(
     retryClockSkewErrors = false

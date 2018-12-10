@@ -1,4 +1,4 @@
-import { MiddlewareCustomizationDefinition } from '@aws-sdk/build-types';
+import { MiddlewareCustomizationDefinition } from '@aws-js-sdk-v3-prerelease/build-types';
 import { IMPORTS } from '../../internalImports';
 import { packageNameToVariable } from '../../packageNameToVariable';
 
@@ -11,7 +11,7 @@ export const retryMiddleware: MiddlewareCustomizationDefinition = {
     step: 'finalize',
     priority: Number.POSITIVE_INFINITY,
     tags: '{RETRY: true}',
-    expression: `${packageNameToVariable('@aws-sdk/retry-middleware')}.retryMiddleware(
+    expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/retry-middleware')}.retryMiddleware(
         this.config.maxRetries,
         this.config.retryDecider,
         this.config.delayDecider
@@ -30,13 +30,13 @@ export const retryMiddleware: MiddlewareCustomizationDefinition = {
         },
         retryDecider: {
             type: 'unified',
-            inputType: `${packageNameToVariable('@aws-sdk/types')}.RetryDecider`,
+            inputType: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/types')}.RetryDecider`,
             required: false,
             documentation: 'A function that determines whether an error is retryable',
         },
         delayDecider: {
             type: 'unified',
-            inputType: `${packageNameToVariable('@aws-sdk/types')}.DelayDecider`,
+            inputType: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/types')}.DelayDecider`,
             required: false,
             documentation: 'A function that determines how long (in milliseconds) the SDK should wait before retrying a request',
         },

@@ -1,4 +1,4 @@
-import {List as _List_} from '@aws-sdk/types';
+import {List as _List_} from '@aws-js-sdk-v3-prerelease/types';
 import {_WriteRequest} from './_WriteRequest';
 
 export const _WriteRequests: _List_ = {

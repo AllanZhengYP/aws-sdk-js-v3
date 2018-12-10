@@ -4,7 +4,7 @@ import {packageNameToVariable} from '../../packageNameToVariable';
  * @internal
  */
 export function staticOrProvider(staticType: string) {
-    return `${staticType}|${packageNameToVariable('@aws-sdk/types')}.Provider<${staticType}>`;
+    return `${staticType}|${packageNameToVariable('@aws-js-sdk-v3-prerelease/types')}.Provider<${staticType}>`;
 }
 
 /**

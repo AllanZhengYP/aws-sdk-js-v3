@@ -1,8 +1,8 @@
-import {Hash} from '@aws-sdk/hash-node';
+import {Hash} from '@aws-js-sdk-v3-prerelease/hash-node';
 import {
     SignatureV4 as BaseSignatureV4,
     SignatureV4Init,
-} from '@aws-sdk/signature-v4';
+} from '@aws-js-sdk-v3-prerelease/signature-v4';
 
 export class SignatureV4 extends BaseSignatureV4 {
     constructor(

@@ -1,5 +1,5 @@
 import { parseUrl } from './';
-import { HttpEndpoint } from '@aws-sdk/types';
+import { HttpEndpoint } from '@aws-js-sdk-v3-prerelease/types';
 
 describe('parseUrl', () => {
     const testCases = new Map<string, HttpEndpoint>([

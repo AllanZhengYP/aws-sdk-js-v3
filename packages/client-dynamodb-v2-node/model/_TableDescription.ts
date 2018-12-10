@@ -6,7 +6,7 @@ import {_GlobalSecondaryIndexDescriptionList} from './_GlobalSecondaryIndexDescr
 import {_StreamSpecification} from './_StreamSpecification';
 import {_RestoreSummary} from './_RestoreSummary';
 import {_SSEDescription} from './_SSEDescription';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const _TableDescription: _Structure_ = {
     type: 'structure',

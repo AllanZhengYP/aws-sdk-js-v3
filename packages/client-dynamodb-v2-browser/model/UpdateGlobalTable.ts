@@ -5,7 +5,7 @@ import {GlobalTableNotFoundException} from './GlobalTableNotFoundException';
 import {ReplicaAlreadyExistsException} from './ReplicaAlreadyExistsException';
 import {ReplicaNotFoundException} from './ReplicaNotFoundException';
 import {TableNotFoundException} from './TableNotFoundException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const UpdateGlobalTable: _Operation_ = {

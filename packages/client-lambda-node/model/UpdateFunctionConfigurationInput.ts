@@ -2,7 +2,7 @@ import {_VpcConfig} from './_VpcConfig';
 import {_Environment} from './_Environment';
 import {_DeadLetterConfig} from './_DeadLetterConfig';
 import {_TracingConfig} from './_TracingConfig';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const UpdateFunctionConfigurationInput: _Structure_ = {
     type: 'structure',

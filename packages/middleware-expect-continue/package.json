@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/middleware-expect-continue",
+    "name": "@aws-js-sdk-v3-prerelease/middleware-expect-continue",
     "version": "0.1.0-preview.1",
     "scripts": {
         "prepublishOnly": "tsc",
@@ -15,8 +15,8 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-sdk/middleware-header-default": "^0.1.0-preview.1",
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/middleware-header-default": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
         "tslib": "^1.8.0"
     },
     "devDependencies": {

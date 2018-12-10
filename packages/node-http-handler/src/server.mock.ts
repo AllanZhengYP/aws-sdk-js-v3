@@ -12,7 +12,7 @@ import {readFileSync} from 'fs';
 import {join} from 'path';
 import {Readable} from 'stream';
 
-import {HttpResponse} from '@aws-sdk/types';
+import {HttpResponse} from '@aws-js-sdk-v3-prerelease/types';
 
 const fixturesDir = join(__dirname, '..', 'fixtures');
 

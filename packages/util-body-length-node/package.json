@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/util-body-length-node",
+    "name": "@aws-js-sdk-v3-prerelease/util-body-length-node",
     "description": "Determines the length of a request body in node.js",
     "version": "0.1.0-preview.1",
     "scripts": {

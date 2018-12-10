@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/middleware-stack",
+    "name": "@aws-js-sdk-v3-prerelease/middleware-stack",
     "version": "0.1.0-preview.1",
     "description": "Provides a means for composing multiple middleware functions into a single handler",
     "scripts": {
@@ -16,7 +16,7 @@
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
     "dependencies": {
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
         "tslib": "^1.8.0"
     },
     "devDependencies": {

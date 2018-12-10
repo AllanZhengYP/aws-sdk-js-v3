@@ -3,8 +3,8 @@ import {
     HandlerArguments,
     HandlerExecutionContext,
     MetadataBearer,
-} from "@aws-sdk/types";
-import {removeSensitiveLogs} from '@aws-sdk/remove-sensitive-logs';
+} from "@aws-js-sdk-v3-prerelease/types";
+import {removeSensitiveLogs} from '@aws-js-sdk-v3-prerelease/remove-sensitive-logs';
 
 export function logOperationInfoMiddleware<
     Input extends object,

@@ -1,6 +1,6 @@
 import {_SamplingTargetDocumentList} from './_SamplingTargetDocumentList';
 import {_UnprocessedStatisticsList} from './_UnprocessedStatisticsList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const GetSamplingTargetsOutput: _Structure_ = {
     type: 'structure',

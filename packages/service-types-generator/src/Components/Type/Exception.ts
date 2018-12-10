@@ -1,5 +1,5 @@
 import {Structure} from "./Structure";
-import {SerializationType} from "@aws-sdk/types";
+import {SerializationType} from "@aws-js-sdk-v3-prerelease/types";
 import {IndentedSection} from "../IndentedSection";
 import {getUnmarshalledShapeName} from "./helpers";
 import {Import} from "../Import";

@@ -1,5 +1,5 @@
 import {getStringDeclaration} from "./getStringDeclaration";
-import {TreeModelMap} from "@aws-sdk/build-types";
+import {TreeModelMap} from "@aws-js-sdk-v3-prerelease/build-types";
 
 export function getMapIndexDeclaration(map: TreeModelMap): string {
     if (map.key.shape.type !== 'string') {

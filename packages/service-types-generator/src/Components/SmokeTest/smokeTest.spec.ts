@@ -1,4 +1,4 @@
-import {SmokeTestCase} from '@aws-sdk/build-types';
+import {SmokeTestCase} from '@aws-js-sdk-v3-prerelease/build-types';
 import {SmokeTest} from './smokeTest';
 
 describe('SmokeTest', () => {

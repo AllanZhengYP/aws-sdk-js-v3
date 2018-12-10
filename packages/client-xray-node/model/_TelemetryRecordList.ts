@@ -1,4 +1,4 @@
-import {List as _List_} from '@aws-sdk/types';
+import {List as _List_} from '@aws-js-sdk-v3-prerelease/types';
 import {_TelemetryRecord} from './_TelemetryRecord';
 
 export const _TelemetryRecordList: _List_ = {

@@ -1,6 +1,6 @@
 import {_Location} from './_Location';
 import {_Comment} from './_Comment';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const PostCommentForComparedCommitOutput: _Structure_ = {
     type: 'structure',

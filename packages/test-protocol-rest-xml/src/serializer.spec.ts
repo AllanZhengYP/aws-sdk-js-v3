@@ -1,5 +1,5 @@
-import {RestSerializer} from '@aws-sdk/protocol-rest';
-import {XmlBodyBuilder} from '@aws-sdk/xml-body-builder';
+import {RestSerializer} from '@aws-js-sdk-v3-prerelease/protocol-rest';
+import {XmlBodyBuilder} from '@aws-js-sdk-v3-prerelease/xml-body-builder';
 import { OperationModel, Structure, Member } from '../../types/build/index';
 
 let operation: OperationModel;

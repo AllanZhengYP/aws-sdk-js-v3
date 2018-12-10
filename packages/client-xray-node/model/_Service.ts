@@ -2,7 +2,7 @@ import {_ServiceNames} from './_ServiceNames';
 import {_EdgeList} from './_EdgeList';
 import {_ServiceStatistics} from './_ServiceStatistics';
 import {_Histogram} from './_Histogram';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const _Service: _Structure_ = {
     type: 'structure',

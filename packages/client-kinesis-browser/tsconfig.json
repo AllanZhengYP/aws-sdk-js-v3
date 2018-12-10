@@ -25,6 +25,6 @@
         "ignoreCompilerErrors": true,
         "mode": "file",
         "out": "./docs",
-        "plugin": "@aws-sdk/client-documentation-generator"
+        "plugin": "@aws-js-sdk-v3-prerelease/client-documentation-generator"
     }
 }

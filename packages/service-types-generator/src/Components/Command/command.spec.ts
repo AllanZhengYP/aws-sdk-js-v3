@@ -2,7 +2,7 @@ import {Command} from './command';
 import {model} from '../../shapes.fixture';
 import {
     MiddlewareCustomizationDefinition
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import {Client} from "../Client/Client";
 
 describe('Command', () => {
@@ -20,7 +20,7 @@ describe('Command', () => {
         const mockFooMiddlewareDefinition: MiddlewareCustomizationDefinition = {
             imports: [
                 {
-                    package: '@aws-sdk/foo',
+                    package: '@aws-js-sdk-v3-prerelease/foo',
                     version: '^1.0.0'
                 }
             ],
@@ -32,11 +32,11 @@ describe('Command', () => {
         const mockBarMiddlewareDefinition: MiddlewareCustomizationDefinition = {
             imports: [
                 {
-                    package: '@aws-sdk/bar',
+                    package: '@aws-js-sdk-v3-prerelease/bar',
                     version: '^1.0.0'
                 },
                 {
-                    package: '@aws-sdk/bar-middleware',
+                    package: '@aws-js-sdk-v3-prerelease/bar-middleware',
                     version: '^1.0.0'
                 }
             ],
@@ -49,7 +49,7 @@ describe('Command', () => {
         it('should include defined middleware', () => {
             const sender = new Command(operation, 'node', [mockFooMiddlewareDefinition]);
             const commandCode = sender.toString();
-            expect(commandCode).toMatch(`import * as __aws_sdk_foo from '@aws-sdk/foo';`);
+            expect(commandCode).toMatch(`import * as __aws_sdk_foo from '@aws-js-sdk-v3-prerelease/foo';`);
             [
                 'stack.add(',
                 `${mockFooMiddlewareDefinition.expression}`,
@@ -63,7 +63,7 @@ describe('Command', () => {
         it('should include tags', () => {
             const sender = new Command(operation, 'node', [{...mockFooMiddlewareDefinition, tags: '{FOO: true}'}]);
             const commandCode = sender.toString();
-            expect(commandCode).toMatch(`import * as __aws_sdk_foo from '@aws-sdk/foo';`);
+            expect(commandCode).toMatch(`import * as __aws_sdk_foo from '@aws-js-sdk-v3-prerelease/foo';`);
             [
                 'stack.add(',
                 `${mockFooMiddlewareDefinition.expression}`,
@@ -81,9 +81,9 @@ describe('Command', () => {
                 mockBarMiddlewareDefinition
             ]);
             const commandCode = sender.toString();
-            expect(commandCode).toMatch(`import * as __aws_sdk_foo from '@aws-sdk/foo';`);
-            expect(commandCode).toMatch(`import * as __aws_sdk_bar from '@aws-sdk/bar';`);
-            expect(commandCode).toMatch(`import * as __aws_sdk_bar_middleware from '@aws-sdk/bar-middleware';`);
+            expect(commandCode).toMatch(`import * as __aws_sdk_foo from '@aws-js-sdk-v3-prerelease/foo';`);
+            expect(commandCode).toMatch(`import * as __aws_sdk_bar from '@aws-js-sdk-v3-prerelease/bar';`);
+            expect(commandCode).toMatch(`import * as __aws_sdk_bar_middleware from '@aws-js-sdk-v3-prerelease/bar-middleware';`);
             [
                 'stack.add(',
                 `${mockFooMiddlewareDefinition.expression}`,

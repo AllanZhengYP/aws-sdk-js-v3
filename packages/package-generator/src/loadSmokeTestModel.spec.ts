@@ -1,5 +1,5 @@
 import {loadSmokeTestModel} from './loadSmokeTestModel';
-import {SmokeTestModel} from '@aws-sdk/build-types';
+import {SmokeTestModel} from '@aws-js-sdk-v3-prerelease/build-types';
 import {join} from 'path';
 
 jest.mock('fs', () => {

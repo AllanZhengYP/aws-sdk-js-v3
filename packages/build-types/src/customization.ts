@@ -1,5 +1,5 @@
 import { TreeModel } from './TreeModel';
-import { Step } from '@aws-sdk/types';
+import { Step } from '@aws-js-sdk-v3-prerelease/types';
 
 export interface DefaultValue {
     type: 'value';

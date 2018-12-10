@@ -1,5 +1,5 @@
 import {_UnmarshalledStreamDescription} from './_StreamDescription';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Represents the output for <code>DescribeStream</code>.</p>

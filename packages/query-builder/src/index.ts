@@ -1,6 +1,6 @@
-import {iso8601} from "@aws-sdk/protocol-timestamp";
-import {isArrayBuffer} from '@aws-sdk/is-array-buffer';
-import {isIterable} from '@aws-sdk/is-iterable';
+import {iso8601} from "@aws-js-sdk-v3-prerelease/protocol-timestamp";
+import {isArrayBuffer} from '@aws-js-sdk-v3-prerelease/is-array-buffer';
+import {isIterable} from '@aws-js-sdk-v3-prerelease/is-iterable';
 import {
     BodySerializerBuildOptions,
     BodySerializer,
@@ -13,7 +13,7 @@ import {
     Map,
     Blob,
     Timestamp
-} from "@aws-sdk/types";
+} from "@aws-js-sdk-v3-prerelease/types";
 
 export class QueryBuilder implements BodySerializer {
     private readonly isEC2Query: boolean;

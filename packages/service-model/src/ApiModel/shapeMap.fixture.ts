@@ -1,4 +1,4 @@
-import {ShapeMap, Shape, Type} from '@aws-sdk/build-types';
+import {ShapeMap, Shape, Type} from '@aws-js-sdk-v3-prerelease/build-types';
 
 export const minimalShapeMap: ShapeMap & {[key in Type]: Shape} = {
     blob: {type: 'blob'},

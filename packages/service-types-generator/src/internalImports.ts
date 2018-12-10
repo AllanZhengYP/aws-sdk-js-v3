@@ -1,471 +1,471 @@
-import {Import} from '@aws-sdk/build-types';
+import {Import} from '@aws-js-sdk-v3-prerelease/build-types';
 
 /**
  * @internal
  */
 export const IMPORTS: {[key: string]: Import} = {
     'abort-controller': {
-        package: '@aws-sdk/abort-controller',
+        package: '@aws-js-sdk-v3-prerelease/abort-controller',
         version: '^0.1.0-preview.1',
     },
     'add-glacier-checksum-headers-browser': {
-        package: '@aws-sdk/add-glacier-checksum-headers-browser',
+        package: '@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-browser',
         version: '^0.1.0-preview.1',
     },
     'add-glacier-checksum-headers-node': {
-        package: '@aws-sdk/add-glacier-checksum-headers-node',
+        package: '@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-node',
         version: '^0.1.0-preview.1',
     },
     'add-glacier-checksum-headers-universal': {
-        package: '@aws-sdk/add-glacier-checksum-headers-universal',
+        package: '@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-universal',
         version: '^0.1.0-preview.1',
     },
     'apply-body-checksum-middleware': {
-        package: '@aws-sdk/apply-body-checksum-middleware',
+        package: '@aws-js-sdk-v3-prerelease/apply-body-checksum-middleware',
         version: '^0.1.0-preview.1',
     },
     'bucket-endpoint-middleware': {
-        package: '@aws-sdk/bucket-endpoint-middleware',
+        package: '@aws-js-sdk-v3-prerelease/bucket-endpoint-middleware',
         version: '^0.1.0-preview.1',
     },
     'build-types': {
-        package: '@aws-sdk/build-types',
+        package: '@aws-js-sdk-v3-prerelease/build-types',
         version: '^0.1.0-preview.1',
     },
     'chunked-blob-reader': {
-        package: '@aws-sdk/chunked-blob-reader',
+        package: '@aws-js-sdk-v3-prerelease/chunked-blob-reader',
         version: '^0.1.0-preview.1',
     },
     'chunked-stream-reader-node': {
-        package: '@aws-sdk/chunked-stream-reader-node',
+        package: '@aws-js-sdk-v3-prerelease/chunked-stream-reader-node',
         version: '^0.1.0-preview.1',
     },
     'client-codecommit-node': {
-        package: '@aws-sdk/client-codecommit-node',
+        package: '@aws-js-sdk-v3-prerelease/client-codecommit-node',
         version: '^0.1.0-preview.1',
     },
     'client-cognito-identity-browser': {
-        package: '@aws-sdk/client-cognito-identity-browser',
+        package: '@aws-js-sdk-v3-prerelease/client-cognito-identity-browser',
         version: '^0.1.0-preview.1',
     },
     'client-documentation-generator': {
-        package: '@aws-sdk/client-documentation-generator',
+        package: '@aws-js-sdk-v3-prerelease/client-documentation-generator',
         version: '^0.1.0-preview.1',
     },
     'client-dynamodb-v2-browser': {
-        package: '@aws-sdk/client-dynamodb-v2-browser',
+        package: '@aws-js-sdk-v3-prerelease/client-dynamodb-v2-browser',
         version: '^0.1.0-preview.1',
     },
     'client-dynamodb-v2-node': {
-        package: '@aws-sdk/client-dynamodb-v2-node',
+        package: '@aws-js-sdk-v3-prerelease/client-dynamodb-v2-node',
         version: '^0.1.0-preview.1',
     },
     'client-kinesis-browser': {
-        package: '@aws-sdk/client-kinesis-browser',
+        package: '@aws-js-sdk-v3-prerelease/client-kinesis-browser',
         version: '^0.1.0-preview.1',
     },
     'client-lambda-node': {
-        package: '@aws-sdk/client-lambda-node',
+        package: '@aws-js-sdk-v3-prerelease/client-lambda-node',
         version: '^0.1.0-preview.1',
     },
     'client-xray-node': {
-        package: '@aws-sdk/client-xray-node',
+        package: '@aws-js-sdk-v3-prerelease/client-xray-node',
         version: '^0.1.0-preview.1',
     },
     'config-resolver': {
-        package: '@aws-sdk/config-resolver',
+        package: '@aws-js-sdk-v3-prerelease/config-resolver',
         version: '^0.1.0-preview.1',
     },
     'core-handler': {
-        package: '@aws-sdk/core-handler',
+        package: '@aws-js-sdk-v3-prerelease/core-handler',
         version: '^0.1.0-preview.1',
     },
     'crc32': {
-        package: '@aws-sdk/crc32',
+        package: '@aws-js-sdk-v3-prerelease/crc32',
         version: '^0.1.0-preview.1',
     },
     'credential-provider-cognito-identity': {
-        package: '@aws-sdk/credential-provider-cognito-identity',
+        package: '@aws-js-sdk-v3-prerelease/credential-provider-cognito-identity',
         version: '^0.1.0-preview.1',
     },
     'credential-provider-env': {
-        package: '@aws-sdk/credential-provider-env',
+        package: '@aws-js-sdk-v3-prerelease/credential-provider-env',
         version: '^0.1.0-preview.1',
     },
     'credential-provider-imds': {
-        package: '@aws-sdk/credential-provider-imds',
+        package: '@aws-js-sdk-v3-prerelease/credential-provider-imds',
         version: '^0.1.0-preview.1',
     },
     'credential-provider-ini': {
-        package: '@aws-sdk/credential-provider-ini',
+        package: '@aws-js-sdk-v3-prerelease/credential-provider-ini',
         version: '^0.1.0-preview.1',
     },
     'credential-provider-node': {
-        package: '@aws-sdk/credential-provider-node',
+        package: '@aws-js-sdk-v3-prerelease/credential-provider-node',
         version: '^0.1.0-preview.1',
     },
     'crypto-ie11-detection': {
-        package: '@aws-sdk/crypto-ie11-detection',
+        package: '@aws-js-sdk-v3-prerelease/crypto-ie11-detection',
         version: '^0.1.0-preview.1',
     },
     'crypto-random-source-browser': {
-        package: '@aws-sdk/crypto-random-source-browser',
+        package: '@aws-js-sdk-v3-prerelease/crypto-random-source-browser',
         version: '^0.1.0-preview.1',
     },
     'crypto-random-source-node': {
-        package: '@aws-sdk/crypto-random-source-node',
+        package: '@aws-js-sdk-v3-prerelease/crypto-random-source-node',
         version: '^0.1.0-preview.1',
     },
     'crypto-random-source-universal': {
-        package: '@aws-sdk/crypto-random-source-universal',
+        package: '@aws-js-sdk-v3-prerelease/crypto-random-source-universal',
         version: '^0.1.0-preview.1',
     },
     'crypto-sha256-browser': {
-        package: '@aws-sdk/crypto-sha256-browser',
+        package: '@aws-js-sdk-v3-prerelease/crypto-sha256-browser',
         version: '^0.1.0-preview.1',
     },
     'crypto-sha256-js': {
-        package: '@aws-sdk/crypto-sha256-js',
+        package: '@aws-js-sdk-v3-prerelease/crypto-sha256-js',
         version: '^0.1.0-preview.1',
     },
     'crypto-sha256-universal': {
-        package: '@aws-sdk/crypto-sha256-universal',
+        package: '@aws-js-sdk-v3-prerelease/crypto-sha256-universal',
         version: '^0.1.0-preview.1',
     },
     'crypto-supports-webcrypto': {
-        package: '@aws-sdk/crypto-supports-webcrypto',
+        package: '@aws-js-sdk-v3-prerelease/crypto-supports-webcrypto',
         version: '^0.1.0-preview.1',
     },
     'ec2-error-unmarshaller': {
-        package: '@aws-sdk/ec2-error-unmarshaller',
+        package: '@aws-js-sdk-v3-prerelease/ec2-error-unmarshaller',
         version: '^0.1.0-preview.1',
     },
     'eventstream-marshaller': {
-        package: '@aws-sdk/eventstream-marshaller',
+        package: '@aws-js-sdk-v3-prerelease/eventstream-marshaller',
         version: '^0.1.0-preview.1',
     },
     'fetch-http-handler': {
-        package: '@aws-sdk/fetch-http-handler',
+        package: '@aws-js-sdk-v3-prerelease/fetch-http-handler',
         version: '^0.1.0-preview.1',
     },
     'hash-blob-browser': {
-        package: '@aws-sdk/hash-blob-browser',
+        package: '@aws-js-sdk-v3-prerelease/hash-blob-browser',
         version: '^0.1.0-preview.1',
     },
     'hash-node': {
-        package: '@aws-sdk/hash-node',
+        package: '@aws-js-sdk-v3-prerelease/hash-node',
         version: '^0.1.0-preview.1',
     },
     'hash-stream-node': {
-        package: '@aws-sdk/hash-stream-node',
+        package: '@aws-js-sdk-v3-prerelease/hash-stream-node',
         version: '^0.1.0-preview.1',
     },
     'http-headers': {
-        package: '@aws-sdk/http-headers',
+        package: '@aws-js-sdk-v3-prerelease/http-headers',
         version: '^0.1.0-preview.1',
     },
     'http-serialization': {
-        package: '@aws-sdk/http-serialization',
+        package: '@aws-js-sdk-v3-prerelease/http-serialization',
         version: '^0.1.0-preview.1',
     },
     'is-array-buffer': {
-        package: '@aws-sdk/is-array-buffer',
+        package: '@aws-js-sdk-v3-prerelease/is-array-buffer',
         version: '^0.1.0-preview.1',
     },
     'is-iterable': {
-        package: '@aws-sdk/is-iterable',
+        package: '@aws-js-sdk-v3-prerelease/is-iterable',
         version: '^0.1.0-preview.1',
     },
     'is-node': {
-        package: '@aws-sdk/is-node',
+        package: '@aws-js-sdk-v3-prerelease/is-node',
         version: '^0.1.0-preview.1',
     },
     'json-builder': {
-        package: '@aws-sdk/json-builder',
+        package: '@aws-js-sdk-v3-prerelease/json-builder',
         version: '^0.1.0-preview.1',
     },
     'json-error-unmarshaller': {
-        package: '@aws-sdk/json-error-unmarshaller',
+        package: '@aws-js-sdk-v3-prerelease/json-error-unmarshaller',
         version: '^0.1.0-preview.1',
     },
     'json-parser': {
-        package: '@aws-sdk/json-parser',
+        package: '@aws-js-sdk-v3-prerelease/json-parser',
         version: '^0.1.0-preview.1',
     },
     'karma-credential-loader': {
-        package: '@aws-sdk/karma-credential-loader',
+        package: '@aws-js-sdk-v3-prerelease/karma-credential-loader',
         version: '^0.1.0-preview.1',
     },
     'location-constraint-middleware': {
-        package: '@aws-sdk/location-constraint-middleware',
+        package: '@aws-js-sdk-v3-prerelease/location-constraint-middleware',
         version: '^0.1.0-preview.1',
     },
     'logger': {
-        package: '@aws-sdk/logger',
+        package: '@aws-js-sdk-v3-prerelease/logger',
         version: '^0.1.0-preview.1',
     },
     'md5-js': {
-        package: '@aws-sdk/md5-js',
+        package: '@aws-js-sdk-v3-prerelease/md5-js',
         version: '^0.1.0-preview.1',
     },
     'md5-universal': {
-        package: '@aws-sdk/md5-universal',
+        package: '@aws-js-sdk-v3-prerelease/md5-universal',
         version: '^0.1.0-preview.1',
     },
     'middleware-content-length': {
-        package: '@aws-sdk/middleware-content-length',
+        package: '@aws-js-sdk-v3-prerelease/middleware-content-length',
         version: '^0.1.0-preview.1',
     },
     'middleware-ec2-copysnapshot': {
-        package: '@aws-sdk/middleware-ec2-copysnapshot',
+        package: '@aws-js-sdk-v3-prerelease/middleware-ec2-copysnapshot',
         version: '^0.1.0-preview.1',
     },
     'middleware-expect-continue': {
-        package: '@aws-sdk/middleware-expect-continue',
+        package: '@aws-js-sdk-v3-prerelease/middleware-expect-continue',
         version: '^0.1.0-preview.1',
     },
     'middleware-header-default': {
-        package: '@aws-sdk/middleware-header-default',
+        package: '@aws-js-sdk-v3-prerelease/middleware-header-default',
         version: '^0.1.0-preview.1',
     },
     'middleware-input-default': {
-        package: '@aws-sdk/middleware-input-default',
+        package: '@aws-js-sdk-v3-prerelease/middleware-input-default',
         version: '^0.1.0-preview.1',
     },
     'middleware-operation-logging': {
-        package: '@aws-sdk/middleware-operation-logging',
+        package: '@aws-js-sdk-v3-prerelease/middleware-operation-logging',
         version: '^0.1.0-preview.1',
     },
     'middleware-rds-presignedurl': {
-        package: '@aws-sdk/middleware-rds-presignedurl',
+        package: '@aws-js-sdk-v3-prerelease/middleware-rds-presignedurl',
         version: '^0.1.0-preview.1',
     },
     'middleware-sdk-api-gateway': {
-        package: '@aws-sdk/middleware-sdk-api-gateway',
+        package: '@aws-js-sdk-v3-prerelease/middleware-sdk-api-gateway',
         version: '^0.1.0-preview.1',
     },
     'middleware-sdk-glacier': {
-        package: '@aws-sdk/middleware-sdk-glacier',
+        package: '@aws-js-sdk-v3-prerelease/middleware-sdk-glacier',
         version: '^0.1.0-preview.1',
     },
     'middleware-serializer': {
-        package: '@aws-sdk/middleware-serializer',
+        package: '@aws-js-sdk-v3-prerelease/middleware-serializer',
         version: '^0.1.0-preview.1',
     },
     'middleware-stack': {
-        package: '@aws-sdk/middleware-stack',
+        package: '@aws-js-sdk-v3-prerelease/middleware-stack',
         version: '^0.1.0-preview.1',
     },
     'modeled-endpoint-middleware': {
-        package: '@aws-sdk/modeled-endpoint-middleware',
+        package: '@aws-js-sdk-v3-prerelease/modeled-endpoint-middleware',
         version: '^0.1.0-preview.1',
     },
     'node-http-handler': {
-        package: '@aws-sdk/node-http-handler',
+        package: '@aws-js-sdk-v3-prerelease/node-http-handler',
         version: '^0.1.0-preview.1',
     },
     'package-generator': {
-        package: '@aws-sdk/package-generator',
+        package: '@aws-js-sdk-v3-prerelease/package-generator',
         version: '^0.1.0-preview.1',
     },
     'property-provider': {
-        package: '@aws-sdk/property-provider',
+        package: '@aws-js-sdk-v3-prerelease/property-provider',
         version: '^0.1.0-preview.1',
     },
     'protocol-json-rpc': {
-        package: '@aws-sdk/protocol-json-rpc',
+        package: '@aws-js-sdk-v3-prerelease/protocol-json-rpc',
         version: '^0.1.0-preview.1',
     },
     'protocol-query': {
-        package: '@aws-sdk/protocol-query',
+        package: '@aws-js-sdk-v3-prerelease/protocol-query',
         version: '^0.1.0-preview.1',
     },
     'protocol-rest': {
-        package: '@aws-sdk/protocol-rest',
+        package: '@aws-js-sdk-v3-prerelease/protocol-rest',
         version: '^0.1.0-preview.1',
     },
     'protocol-timestamp': {
-        package: '@aws-sdk/protocol-timestamp',
+        package: '@aws-js-sdk-v3-prerelease/protocol-timestamp',
         version: '^0.1.0-preview.1',
     },
     'query-builder': {
-        package: '@aws-sdk/query-builder',
+        package: '@aws-js-sdk-v3-prerelease/query-builder',
         version: '^0.1.0-preview.1',
     },
     'query-error-unmarshaller': {
-        package: '@aws-sdk/query-error-unmarshaller',
+        package: '@aws-js-sdk-v3-prerelease/query-error-unmarshaller',
         version: '^0.1.0-preview.1',
     },
     'query-request-presigner': {
-        package: '@aws-sdk/query-request-presigner',
+        package: '@aws-js-sdk-v3-prerelease/query-request-presigner',
         version: '^0.1.0-preview.1',
     },
     'querystring-builder': {
-        package: '@aws-sdk/querystring-builder',
+        package: '@aws-js-sdk-v3-prerelease/querystring-builder',
         version: '^0.1.0-preview.1',
     },
     'querystring-parser': {
-        package: '@aws-sdk/querystring-parser',
+        package: '@aws-js-sdk-v3-prerelease/querystring-parser',
         version: '^0.1.0-preview.1',
     },
     'region-provider': {
-        package: '@aws-sdk/region-provider',
+        package: '@aws-js-sdk-v3-prerelease/region-provider',
         version: '^0.1.0-preview.1',
     },
     'remove-sensitive-logs': {
-        package: '@aws-sdk/remove-sensitive-logs',
+        package: '@aws-js-sdk-v3-prerelease/remove-sensitive-logs',
         version: '^0.1.0-preview.1',
     },
     'response-metadata-extractor': {
-        package: '@aws-sdk/response-metadata-extractor',
+        package: '@aws-js-sdk-v3-prerelease/response-metadata-extractor',
         version: '^0.1.0-preview.1',
     },
     'retry-middleware': {
-        package: '@aws-sdk/retry-middleware',
+        package: '@aws-js-sdk-v3-prerelease/retry-middleware',
         version: '^0.1.0-preview.1',
     },
     'route53-id-normalizer-middleware': {
-        package: '@aws-sdk/route53-id-normalizer-middleware',
+        package: '@aws-js-sdk-v3-prerelease/route53-id-normalizer-middleware',
         version: '^0.1.0-preview.1',
     },
     'service-error-classification': {
-        package: '@aws-sdk/service-error-classification',
+        package: '@aws-js-sdk-v3-prerelease/service-error-classification',
         version: '^0.1.0-preview.1',
     },
     'service-model': {
-        package: '@aws-sdk/service-model',
+        package: '@aws-js-sdk-v3-prerelease/service-model',
         version: '^0.1.0-preview.1',
     },
     'service-types-generator': {
-        package: '@aws-sdk/service-types-generator',
+        package: '@aws-js-sdk-v3-prerelease/service-types-generator',
         version: '^0.1.0-preview.1',
     },
     'sha256-tree-hash': {
-        package: '@aws-sdk/sha256-tree-hash',
+        package: '@aws-js-sdk-v3-prerelease/sha256-tree-hash',
         version: '^0.1.0-preview.1',
     },
     'shared-ini-file-loader': {
-        package: '@aws-sdk/shared-ini-file-loader',
+        package: '@aws-js-sdk-v3-prerelease/shared-ini-file-loader',
         version: '^0.1.0-preview.1',
     },
     'signature-v4': {
-        package: '@aws-sdk/signature-v4',
+        package: '@aws-js-sdk-v3-prerelease/signature-v4',
         version: '^0.1.0-preview.1',
     },
     'signature-v4-browser': {
-        package: '@aws-sdk/signature-v4-browser',
+        package: '@aws-js-sdk-v3-prerelease/signature-v4-browser',
         version: '^0.1.0-preview.1',
     },
     'signature-v4-node': {
-        package: '@aws-sdk/signature-v4-node',
+        package: '@aws-js-sdk-v3-prerelease/signature-v4-node',
         version: '^0.1.0-preview.1',
     },
     'signature-v4-universal': {
-        package: '@aws-sdk/signature-v4-universal',
+        package: '@aws-js-sdk-v3-prerelease/signature-v4-universal',
         version: '^0.1.0-preview.1',
     },
     'signing-middleware': {
-        package: '@aws-sdk/signing-middleware',
+        package: '@aws-js-sdk-v3-prerelease/signing-middleware',
         version: '^0.1.0-preview.1',
     },
     'ssec-middleware': {
-        package: '@aws-sdk/ssec-middleware',
+        package: '@aws-js-sdk-v3-prerelease/ssec-middleware',
         version: '^0.1.0-preview.1',
     },
     'stream-collector-browser': {
-        package: '@aws-sdk/stream-collector-browser',
+        package: '@aws-js-sdk-v3-prerelease/stream-collector-browser',
         version: '^0.1.0-preview.1',
     },
     'stream-collector-node': {
-        package: '@aws-sdk/stream-collector-node',
+        package: '@aws-js-sdk-v3-prerelease/stream-collector-node',
         version: '^0.1.0-preview.1',
     },
     'test-protocol-rest-xml': {
-        package: '@aws-sdk/test-protocol-rest-xml',
+        package: '@aws-js-sdk-v3-prerelease/test-protocol-rest-xml',
         version: '^0.1.0-preview.1',
     },
     'types': {
-        package: '@aws-sdk/types',
+        package: '@aws-js-sdk-v3-prerelease/types',
         version: '^0.1.0-preview.1',
     },
     'url-parser-browser': {
-        package: '@aws-sdk/url-parser-browser',
+        package: '@aws-js-sdk-v3-prerelease/url-parser-browser',
         version: '^0.1.0-preview.1',
     },
     'url-parser-node': {
-        package: '@aws-sdk/url-parser-node',
+        package: '@aws-js-sdk-v3-prerelease/url-parser-node',
         version: '^0.1.0-preview.1',
     },
     'url-parser-universal': {
-        package: '@aws-sdk/url-parser-universal',
+        package: '@aws-js-sdk-v3-prerelease/url-parser-universal',
         version: '^0.1.0-preview.1',
     },
     'util-base64-browser': {
-        package: '@aws-sdk/util-base64-browser',
+        package: '@aws-js-sdk-v3-prerelease/util-base64-browser',
         version: '^0.1.0-preview.1',
     },
     'util-base64-node': {
-        package: '@aws-sdk/util-base64-node',
+        package: '@aws-js-sdk-v3-prerelease/util-base64-node',
         version: '^0.1.0-preview.1',
     },
     'util-base64-universal': {
-        package: '@aws-sdk/util-base64-universal',
+        package: '@aws-js-sdk-v3-prerelease/util-base64-universal',
         version: '^0.1.0-preview.1',
     },
     'util-body-length-browser': {
-        package: '@aws-sdk/util-body-length-browser',
+        package: '@aws-js-sdk-v3-prerelease/util-body-length-browser',
         version: '^0.1.0-preview.1',
     },
     'util-body-length-node': {
-        package: '@aws-sdk/util-body-length-node',
+        package: '@aws-js-sdk-v3-prerelease/util-body-length-node',
         version: '^0.1.0-preview.1',
     },
     'util-buffer-from': {
-        package: '@aws-sdk/util-buffer-from',
+        package: '@aws-js-sdk-v3-prerelease/util-buffer-from',
         version: '^0.1.0-preview.1',
     },
     'util-error-constructor': {
-        package: '@aws-sdk/util-error-constructor',
+        package: '@aws-js-sdk-v3-prerelease/util-error-constructor',
         version: '^0.1.0-preview.1',
     },
     'util-format-url': {
-        package: '@aws-sdk/util-format-url',
+        package: '@aws-js-sdk-v3-prerelease/util-format-url',
         version: '^0.1.0-preview.1',
     },
     'util-hex-encoding': {
-        package: '@aws-sdk/util-hex-encoding',
+        package: '@aws-js-sdk-v3-prerelease/util-hex-encoding',
         version: '^0.1.0-preview.1',
     },
     'util-locate-window': {
-        package: '@aws-sdk/util-locate-window',
+        package: '@aws-js-sdk-v3-prerelease/util-locate-window',
         version: '^0.1.0-preview.1',
     },
     'util-uri-escape': {
-        package: '@aws-sdk/util-uri-escape',
+        package: '@aws-js-sdk-v3-prerelease/util-uri-escape',
         version: '^0.1.0-preview.1',
     },
     'util-utf8-browser': {
-        package: '@aws-sdk/util-utf8-browser',
+        package: '@aws-js-sdk-v3-prerelease/util-utf8-browser',
         version: '^0.1.0-preview.1',
     },
     'util-utf8-node': {
-        package: '@aws-sdk/util-utf8-node',
+        package: '@aws-js-sdk-v3-prerelease/util-utf8-node',
         version: '^0.1.0-preview.1',
     },
     'util-utf8-universal': {
-        package: '@aws-sdk/util-utf8-universal',
+        package: '@aws-js-sdk-v3-prerelease/util-utf8-universal',
         version: '^0.1.0-preview.1',
     },
     'xml-body-builder': {
-        package: '@aws-sdk/xml-body-builder',
+        package: '@aws-js-sdk-v3-prerelease/xml-body-builder',
         version: '^0.1.0-preview.1',
     },
     'xml-body-parser': {
-        package: '@aws-sdk/xml-body-parser',
+        package: '@aws-js-sdk-v3-prerelease/xml-body-parser',
         version: '^0.1.0-preview.1',
     },
     'xml-builder': {
-        package: '@aws-sdk/xml-builder',
+        package: '@aws-js-sdk-v3-prerelease/xml-builder',
         version: '^0.1.0-preview.1',
     },
 };

@@ -1,6 +1,6 @@
 import {_AutoScalingSettingsUpdate} from './_AutoScalingSettingsUpdate';
 import {_ReplicaGlobalSecondaryIndexSettingsUpdateList} from './_ReplicaGlobalSecondaryIndexSettingsUpdateList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const _ReplicaSettingsUpdate: _Structure_ = {
     type: 'structure',

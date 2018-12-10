@@ -1,5 +1,5 @@
 import {_GlobalTableList} from './_GlobalTableList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const ListGlobalTablesOutput: _Structure_ = {
     type: 'structure',

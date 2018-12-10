@@ -20,7 +20,7 @@ import {KMSInvalidStateException} from './KMSInvalidStateException';
 import {KMSAccessDeniedException} from './KMSAccessDeniedException';
 import {KMSNotFoundException} from './KMSNotFoundException';
 import {InvalidRuntimeException} from './InvalidRuntimeException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const Invoke: _Operation_ = {

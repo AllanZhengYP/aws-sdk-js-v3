@@ -3,7 +3,7 @@ import {
     ServiceCustomizationDefinition,
     CustomizationDefinition,
     MiddlewareCustomizationDefinition
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import { IMPORTS } from '../../internalImports';
 import { packageNameToVariable } from '../../packageNameToVariable';
 
@@ -14,7 +14,7 @@ export const defaultContentType: MiddlewareCustomizationDefinition = {
     tags: '{\'Content-Type\': true}',
     imports: [IMPORTS['middleware-header-default']],
     expression: `${
-        packageNameToVariable('@aws-sdk/middleware-header-default')
+        packageNameToVariable('@aws-js-sdk-v3-prerelease/middleware-header-default')
     }.headerDefault(
         {'Content-Type': 'application/octet-stream'}
     )`,

@@ -1,4 +1,4 @@
-import {ProviderError} from "@aws-sdk/property-provider";
+import {ProviderError} from "@aws-js-sdk-v3-prerelease/property-provider";
 import {
     ENV_KEY,
     ENV_SECRET,

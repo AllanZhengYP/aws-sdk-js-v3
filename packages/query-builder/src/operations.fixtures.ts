@@ -1,4 +1,4 @@
-import {OperationModel} from '@aws-sdk/types';
+import {OperationModel} from '@aws-js-sdk-v3-prerelease/types';
 
 export const minimalOperation: OperationModel = {
     metadata: {

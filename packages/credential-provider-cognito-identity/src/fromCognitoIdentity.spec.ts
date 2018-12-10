@@ -1,8 +1,8 @@
 import { fromCognitoIdentity } from './fromCognitoIdentity';
-import { ProviderError } from '@aws-sdk/property-provider';
+import { ProviderError } from '@aws-js-sdk-v3-prerelease/property-provider';
 import {
     GetCredentialsForIdentityCommand,
-} from '@aws-sdk/client-cognito-identity-browser/commands/GetCredentialsForIdentityCommand';
+} from '@aws-js-sdk-v3-prerelease/client-cognito-identity-browser/commands/GetCredentialsForIdentityCommand';
 
 describe('fromCognitoIdentity', () => {
     const identityId = 'id';

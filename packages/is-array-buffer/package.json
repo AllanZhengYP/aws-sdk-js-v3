@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/is-array-buffer",
+    "name": "@aws-js-sdk-v3-prerelease/is-array-buffer",
     "version": "0.1.0-preview.1",
     "description": "Provides a function for detecting if an argument is an ArrayBuffer",
     "scripts": {

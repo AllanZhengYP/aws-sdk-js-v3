@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/util-error-constructor",
+    "name": "@aws-js-sdk-v3-prerelease/util-error-constructor",
     "version": "0.1.0-preview.1",
     "scripts": {
         "prepublishOnly": "tsc",
@@ -9,7 +9,7 @@
     "main": "./build/index.js",
     "types": "./build/index.d.ts",
     "dependencies": {
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
         "tslib": "^1.8.0"
     },
     "author": {

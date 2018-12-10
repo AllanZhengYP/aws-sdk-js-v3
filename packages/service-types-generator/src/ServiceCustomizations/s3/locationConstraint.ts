@@ -5,7 +5,7 @@ import {
     ServiceCustomizationDefinition,
     SyntheticParameterCustomizationDefinition,
     TreeModel,
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import { packageNameToVariable } from '../../packageNameToVariable';
 import { IMPORTS } from '../../internalImports';
 
@@ -17,7 +17,7 @@ export const locationConstraintCustomization: ServiceCustomizationDefinition = {
                 type: 'Middleware',
                 step: 'initialize',
                 priority: 0,
-                expression: `${packageNameToVariable('@aws-sdk/location-constraint-middleware')}.locationConstraintMiddleware(configuration.region)`,
+                expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/location-constraint-middleware')}.locationConstraintMiddleware(configuration.region)`,
                 imports: [
                     IMPORTS['location-constraint-middleware'],
                 ]

@@ -1,5 +1,5 @@
 import {Configuration} from './Configuration';
-import {ConfigurationPropertyDefinition} from '@aws-sdk/build-types';
+import {ConfigurationPropertyDefinition} from '@aws-js-sdk-v3-prerelease/build-types';
 
 const requiredProperty: ConfigurationPropertyDefinition = {
     type: 'unified',

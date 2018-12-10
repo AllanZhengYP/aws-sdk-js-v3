@@ -1,12 +1,12 @@
-import {CredentialProvider, Credentials} from '@aws-sdk/types';
-import {ProviderError} from '@aws-sdk/property-provider';
+import {CredentialProvider, Credentials} from '@aws-js-sdk-v3-prerelease/types';
+import {ProviderError} from '@aws-js-sdk-v3-prerelease/property-provider';
 import {
     loadSharedConfigFiles,
     ParsedIniData,
     Profile,
     SharedConfigFiles,
     SharedConfigInit,
-} from '@aws-sdk/shared-ini-file-loader';
+} from '@aws-js-sdk-v3-prerelease/shared-ini-file-loader';
 
 const DEFAULT_PROFILE = 'default';
 export const ENV_PROFILE = 'AWS_PROFILE';

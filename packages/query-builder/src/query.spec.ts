@@ -1,5 +1,5 @@
 import {QueryBuilder} from "./";
-import {Member, OperationModel} from "@aws-sdk/types";
+import {Member, OperationModel} from "@aws-js-sdk-v3-prerelease/types";
 import {minimalOperation} from './operations.fixtures';
 import {
     blobShape,

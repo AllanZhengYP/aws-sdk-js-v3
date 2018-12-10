@@ -10,7 +10,7 @@ import {
     RuntimeTarget,
     SyntheticParameterCustomizationDefinition,
     TreeModelStructure,
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import { streamType } from '../../streamType';
 import { FullPackageImport } from '../Client/FullPackageImport';
 

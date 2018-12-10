@@ -1,6 +1,6 @@
 import {getCanonicalHeaders} from "./getCanonicalHeaders";
 import {ALWAYS_UNSIGNABLE_HEADERS} from "./constants";
-import {HttpRequest} from "@aws-sdk/types";
+import {HttpRequest} from "@aws-js-sdk-v3-prerelease/types";
 
 describe('getCanonicalHeaders', () => {
     it('should downcase all headers', () => {

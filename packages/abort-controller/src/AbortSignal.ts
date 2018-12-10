@@ -1,7 +1,7 @@
 import {
     AbortSignal as IAbortSignal,
     AbortHandler,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export class AbortSignal implements IAbortSignal {
     public onabort?: AbortHandler;
