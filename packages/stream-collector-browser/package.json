@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/stream-collector-browser",
-    "version": "0.1.0-preview.1",
+    "version": "0.1.0-preview.2",
     "description": "Provides a way to store the contents of a stream into a Uint8Array",
     "scripts": {
         "prepublishOnly": "tsc",

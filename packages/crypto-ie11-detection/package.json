@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/crypto-ie11-detection",
-    "version": "0.1.0-preview.1",
+    "version": "0.1.0-preview.2",
     "description": "Provides functions and types for detecting if the host environment is IE11",
     "scripts": {
         "prepublishOnly": "tsc",
