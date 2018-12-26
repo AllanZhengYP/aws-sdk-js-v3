@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/crypto-sha256-browser",
+    "name": "@aws-js-sdk-v3-prerelease/crypto-sha256-browser",
     "version": "0.1.0-preview.1",
     "scripts": {
         "prepublishOnly": "tsc",
@@ -13,12 +13,12 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-sdk/crypto-ie11-detection": "^0.1.0-preview.1",
-        "@aws-sdk/crypto-sha256-js": "^0.1.0-preview.1",
-        "@aws-sdk/crypto-supports-webcrypto": "^0.1.0-preview.1",
-        "@aws-sdk/types": "^0.1.0-preview.1",
-        "@aws-sdk/util-locate-window": "^0.1.0-preview.1",
-        "@aws-sdk/util-utf8-browser": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/crypto-ie11-detection": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/crypto-sha256-js": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/crypto-supports-webcrypto": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/util-locate-window": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/util-utf8-browser": "^0.1.0-preview.1",
         "tslib": "^1.8.0"
     },
     "devDependencies": {

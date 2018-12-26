@@ -4,7 +4,7 @@ import {
     Import,
     RuntimeTarget,
     TreeModelOperation
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import {IndentedSection} from '../IndentedSection';
 import {Import as DestructuringImport} from '../Import';
 import {FullPackageImport} from '../Client/FullPackageImport';
@@ -35,8 +35,8 @@ export class Command {
         const outputType = this.getOutputType();
         const streamType = getStreamType(this.target);
         const resolvedConfiguration = `${this.prefix}ResolvedConfiguration`;
-        const typesPackage = packageNameToVariable('@aws-sdk/types');
-        const middlewareStackPackage = packageNameToVariable('@aws-sdk/middleware-stack');
+        const typesPackage = packageNameToVariable('@aws-js-sdk-v3-prerelease/types');
+        const middlewareStackPackage = packageNameToVariable('@aws-js-sdk-v3-prerelease/middleware-stack');
         const configurationImport = new DestructuringImport(
             `../${this.prefix}Configuration`,
             resolvedConfiguration
@@ -58,7 +58,7 @@ export class ${this.className} implements ${typesPackage}.Command<
     ${resolvedConfiguration},
     ${streamType}
 > {
-    readonly middlewareStack = new ${packageNameToVariable('@aws-sdk/middleware-stack')}.MiddlewareStack<
+    readonly middlewareStack = new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/middleware-stack')}.MiddlewareStack<
         ${inputType},
         ${outputType},
         ${streamType}
@@ -103,8 +103,8 @@ ${this.customizations.filter(definition => definition.type === 'Middleware')
 
     private imports(): string {
         const packages = new Set<string>([
-            '@aws-sdk/middleware-stack',
-            '@aws-sdk/types'
+            '@aws-js-sdk-v3-prerelease/middleware-stack',
+            '@aws-js-sdk-v3-prerelease/types'
         ]);
         if (this.target === 'node') {
             packages.add('stream');

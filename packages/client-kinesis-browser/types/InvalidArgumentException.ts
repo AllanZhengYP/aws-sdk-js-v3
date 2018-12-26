@@ -1,4 +1,4 @@
-import {ServiceException as __ServiceException__} from '@aws-sdk/types';
+import {ServiceException as __ServiceException__} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>A specified parameter exceeds its restrictions, is not supported, or can't be used. For more information, see the returned message.</p>

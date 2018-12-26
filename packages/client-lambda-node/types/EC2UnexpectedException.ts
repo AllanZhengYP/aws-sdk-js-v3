@@ -1,4 +1,4 @@
-import {ServiceException as __ServiceException__} from '@aws-sdk/types';
+import {ServiceException as __ServiceException__} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>AWS Lambda received an unexpected EC2 client exception while setting up for the Lambda function.</p>

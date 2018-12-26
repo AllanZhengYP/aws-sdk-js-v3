@@ -9,7 +9,7 @@ import {KMSAccessDeniedException} from './KMSAccessDeniedException';
 import {KMSNotFoundException} from './KMSNotFoundException';
 import {KMSOptInRequired} from './KMSOptInRequired';
 import {KMSThrottlingException} from './KMSThrottlingException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const PutRecords: _Operation_ = {

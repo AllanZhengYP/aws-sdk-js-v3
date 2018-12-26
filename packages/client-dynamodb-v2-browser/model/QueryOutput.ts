@@ -1,7 +1,7 @@
 import {_ItemList} from './_ItemList';
 import {_Key} from './_Key';
 import {_ConsumedCapacity} from './_ConsumedCapacity';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const QueryOutput: _Structure_ = {
     type: 'structure',

@@ -2,9 +2,9 @@ import {
     BuildHandler,
     BuildHandlerArguments,
     HttpRequest
-} from '@aws-sdk/types';
-import {Sha256} from '@aws-sdk/crypto-sha256-browser';
-import {fromUtf8} from '@aws-sdk/util-utf8-browser';
+} from '@aws-js-sdk-v3-prerelease/types';
+import {Sha256} from '@aws-js-sdk-v3-prerelease/crypto-sha256-browser';
+import {fromUtf8} from '@aws-js-sdk-v3-prerelease/util-utf8-browser';
 import {addChecksumHeaders} from './index';
 
 describe('addChecksumHeaders', () => {

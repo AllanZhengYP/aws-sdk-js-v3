@@ -1,4 +1,4 @@
-import {Credentials, HashConstructor, SourceData} from '@aws-sdk/types';
+import {Credentials, HashConstructor, SourceData} from '@aws-js-sdk-v3-prerelease/types';
 import {KEY_TYPE_IDENTIFIER, MAX_CACHE_SIZE} from './constants';
 
 const signingKeyCache: {[key: string]: Promise<Uint8Array>} = {};

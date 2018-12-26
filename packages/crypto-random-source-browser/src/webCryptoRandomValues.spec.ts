@@ -1,5 +1,5 @@
 import {randomValues} from './webCryptoRandomValues';
-import {locateWindow} from '@aws-sdk/util-locate-window';
+import {locateWindow} from '@aws-js-sdk-v3-prerelease/util-locate-window';
 
 describe('randomValues', () => {
     it('should call the random source built into most browsers', async () => {

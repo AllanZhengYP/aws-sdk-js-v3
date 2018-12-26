@@ -2,7 +2,7 @@ import {_VpcConfigResponse} from './_VpcConfigResponse';
 import {_DeadLetterConfig} from './_DeadLetterConfig';
 import {_EnvironmentResponse} from './_EnvironmentResponse';
 import {_TracingConfigResponse} from './_TracingConfigResponse';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const GetFunctionConfigurationOutput: _Structure_ = {
     type: 'structure',

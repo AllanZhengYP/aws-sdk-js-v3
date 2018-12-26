@@ -1,5 +1,5 @@
 import {randomBytes} from 'crypto';
-import {randomValues as IRandomValues} from '@aws-sdk/types';
+import {randomValues as IRandomValues} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * @implements {IRandomValues}

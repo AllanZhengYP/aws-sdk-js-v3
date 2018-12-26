@@ -3,11 +3,11 @@ import {isStructureMember} from './Shape';
 import {
     isSupportedSignatureVersion,
 } from "./ServiceMetadata";
-import {Operation} from '@aws-sdk/build-types';
+import {Operation} from '@aws-js-sdk-v3-prerelease/build-types';
 import {
     HttpTrait,
     SupportedSignatureVersion,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * @internal

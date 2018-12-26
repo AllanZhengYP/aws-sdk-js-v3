@@ -1,7 +1,7 @@
 import {
     ResponseMetadata,
     ServiceException,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * An interface used to construct a ServiceException.

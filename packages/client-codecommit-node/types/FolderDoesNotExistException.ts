@@ -1,4 +1,4 @@
-import {ServiceException as __ServiceException__} from '@aws-sdk/types';
+import {ServiceException as __ServiceException__} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>The specified folder does not exist. Either the folder name is not correct, or you did not provide the full path to the folder.</p>

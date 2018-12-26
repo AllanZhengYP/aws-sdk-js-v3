@@ -2,7 +2,7 @@ import {getMemberType} from "./getMemberType";
 import {ModeledStructure} from "./ModeledStructure";
 import {getInterfaceType} from "./getInterfaceType";
 import {getUnmarshalledShapeName} from "./helpers";
-import {TreeModelStructure} from "@aws-sdk/build-types";
+import {TreeModelStructure} from "@aws-js-sdk-v3-prerelease/build-types";
 
 describe('ModeledStructure', () => {
     it(

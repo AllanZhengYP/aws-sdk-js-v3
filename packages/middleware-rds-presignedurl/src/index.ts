@@ -10,11 +10,11 @@ import {
     HttpEndpoint,
     Provider,
     QueryParameterBag
-} from '@aws-sdk/types';
-import {formatUrl} from '@aws-sdk/util-format-url';
-import {presignRequestQuery} from '@aws-sdk/query-request-presigner';
-import {QuerySerializer} from "@aws-sdk/protocol-query";
-import {QueryBuilder} from '@aws-sdk/query-builder';
+} from '@aws-js-sdk-v3-prerelease/types';
+import {formatUrl} from '@aws-js-sdk-v3-prerelease/util-format-url';
+import {presignRequestQuery} from '@aws-js-sdk-v3-prerelease/query-request-presigner';
+import {QuerySerializer} from "@aws-js-sdk-v3-prerelease/protocol-query";
+import {QueryBuilder} from '@aws-js-sdk-v3-prerelease/query-builder';
 
 const regARN = /arn:[\w+=/,.@-]+:[\w+=/,.@-]+:([\w+=/,.@-]*)?:[0-9]+:[\w+=/,.@-]+(:[\w+=/,.@-]+)?(:[\w+=/,.@-]+)?/;
 

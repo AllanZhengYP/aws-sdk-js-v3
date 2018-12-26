@@ -1,5 +1,5 @@
 import { ssecMiddleware } from './';
-import { Handler, HandlerArguments, Hash, SourceData } from '@aws-sdk/types';
+import { Handler, HandlerArguments, Hash, SourceData } from '@aws-js-sdk-v3-prerelease/types';
 
 describe('ssecMiddleware', () => {
     const next = jest.fn(() => Promise.resolve({}));

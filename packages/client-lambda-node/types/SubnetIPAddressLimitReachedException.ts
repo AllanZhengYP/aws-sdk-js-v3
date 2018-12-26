@@ -1,4 +1,4 @@
-import {ServiceException as __ServiceException__} from '@aws-sdk/types';
+import {ServiceException as __ServiceException__} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>AWS Lambda was not able to set up VPC access for the Lambda function because one or more configured subnets has no available IP addresses.</p>

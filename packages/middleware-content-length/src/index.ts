@@ -4,7 +4,7 @@ import {
     BuildMiddleware,
     BodyLengthCalculator,
     MetadataBearer,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export function contentLengthMiddleware(
     bodyLengthCalculator: BodyLengthCalculator

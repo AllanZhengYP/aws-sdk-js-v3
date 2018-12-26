@@ -1,9 +1,9 @@
 import { HeaderMarshaller } from './HeaderMarshaller';
 import { Message, MessageHeaders, MessageHeaderValue } from './Message';
 import { splitMessage } from './splitMessage';
-import { Crc32 } from '@aws-sdk/crc32';
-import { Decoder, Encoder } from '@aws-sdk/types';
-import { toHex } from '@aws-sdk/util-hex-encoding';
+import { Crc32 } from '@aws-js-sdk-v3-prerelease/crc32';
+import { Decoder, Encoder } from '@aws-js-sdk-v3-prerelease/types';
+import { toHex } from '@aws-js-sdk-v3-prerelease/util-hex-encoding';
 
 /**
  * A marshaller that can convert binary-packed event stream messages into

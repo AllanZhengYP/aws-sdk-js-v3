@@ -1,4 +1,4 @@
-import {ServiceException as __ServiceException__} from '@aws-sdk/types';
+import {ServiceException as __ServiceException__} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>One or more branch names specified for the trigger is not valid.</p>

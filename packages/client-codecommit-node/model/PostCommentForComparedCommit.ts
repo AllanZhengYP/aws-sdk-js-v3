@@ -23,7 +23,7 @@ import {BeforeCommitIdAndAfterCommitIdAreSameException} from './BeforeCommitIdAn
 import {CommitDoesNotExistException} from './CommitDoesNotExistException';
 import {InvalidPathException} from './InvalidPathException';
 import {PathDoesNotExistException} from './PathDoesNotExistException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const PostCommentForComparedCommit: _Operation_ = {

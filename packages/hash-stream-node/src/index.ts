@@ -2,7 +2,7 @@ import {
     Hash,
     HashConstructor,
     StreamHasher,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 import { HashCalculator } from './hash-calculator';
 import { createReadStream, ReadStream } from 'fs';
 import { Readable } from 'stream';

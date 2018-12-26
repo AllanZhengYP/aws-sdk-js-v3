@@ -8,7 +8,7 @@ import {
     String,
     Structure,
     Timestamp
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export const structureWithSensitiveMember: Structure = {
     type: 'structure',

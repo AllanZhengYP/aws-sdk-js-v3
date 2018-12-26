@@ -18,11 +18,11 @@ import {
     Structure,
     SupportedSignatureVersion,
     Timestamp,
-} from "@aws-sdk/types";
+} from "@aws-js-sdk-v3-prerelease/types";
 
 /**
  * Represents a service definition compatible with the protocol model defined
- * in the @aws-sdk/types package that has been further decorated with documentation
+ * in the @aws-js-sdk-v3-prerelease/types package that has been further decorated with documentation
  * and naming metadata from the API model (as defined in ../ApiModel/*)
  */
 export interface TreeModel extends Documented, Named {

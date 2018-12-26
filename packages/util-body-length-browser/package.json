@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/util-body-length-browser",
+    "name": "@aws-js-sdk-v3-prerelease/util-body-length-browser",
     "description": "Determines the length of a request body in browsers",
     "version": "0.1.0-preview.1",
     "scripts": {

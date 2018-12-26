@@ -1,8 +1,8 @@
 import { fromCognitoIdentityPool } from './fromCognitoIdentityPool';
-import { ProviderError } from '@aws-sdk/property-provider';
+import { ProviderError } from '@aws-js-sdk-v3-prerelease/property-provider';
 import {
     GetIdCommand,
-} from '@aws-sdk/client-cognito-identity-browser/commands/GetIdCommand';
+} from '@aws-js-sdk-v3-prerelease/client-cognito-identity-browser/commands/GetIdCommand';
 import { Storage } from './Storage';
 
 jest.mock('./fromCognitoIdentity', () => {

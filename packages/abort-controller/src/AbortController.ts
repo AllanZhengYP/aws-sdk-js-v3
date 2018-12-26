@@ -1,4 +1,4 @@
-import {AbortController as IAbortController} from "@aws-sdk/types";
+import {AbortController as IAbortController} from "@aws-js-sdk-v3-prerelease/types";
 import {AbortSignal} from "./AbortSignal";
 
 export class AbortController implements IAbortController {

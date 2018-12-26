@@ -1,4 +1,4 @@
-import {OperationModel, ResolvedHttpResponse, Member, Structure} from '@aws-sdk/types';
+import {OperationModel, ResolvedHttpResponse, Member, Structure} from '@aws-js-sdk-v3-prerelease/types';
 import {queryErrorUnmarshaller} from './index';
 
 describe('XML protocol Error Unmarshaller', () => {

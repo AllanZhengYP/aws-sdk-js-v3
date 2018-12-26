@@ -1,4 +1,4 @@
-import { ServiceCustomizationDefinition, TreeModel, MiddlewareCustomizationDefinition, CustomizationDefinition } from '@aws-sdk/build-types';
+import { ServiceCustomizationDefinition, TreeModel, MiddlewareCustomizationDefinition, CustomizationDefinition } from '@aws-js-sdk-v3-prerelease/build-types';
 import { packageNameToVariable } from '../../packageNameToVariable';
 import { IMPORTS } from '../../internalImports';
 
@@ -16,7 +16,7 @@ function buildMiddleware(sourceIdentifierKeyName: string): MiddlewareCustomizati
         priority: 0,
         tags: '{PRESIGNED_URL: true}',
         imports: [IMPORTS['middleware-rds-presignedurl']],
-        expression: `${packageNameToVariable('@aws-sdk/middleware-rds-presignedurl')}.buildCrossRegionPresignedUrl({
+        expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/middleware-rds-presignedurl')}.buildCrossRegionPresignedUrl({
         sourceIdentifierKey: '${sourceIdentifierKeyName}',
         region: configuration.region,
         credentials: configuration.credentials,

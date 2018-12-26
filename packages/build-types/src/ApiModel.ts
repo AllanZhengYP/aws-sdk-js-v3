@@ -3,7 +3,7 @@ import {
     ServiceMetadata,
     SupportedSignatureVersion,
     XmlNamespace,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * Represents a definition of an API, complete with rich typing, validation
@@ -12,7 +12,7 @@ import {
  *
  * This type exists to allow the TreeModel (cf ../TreeModel/*) to be built from
  * JSON files with a known structure. The runtime SDK should only rely on types
- * defined in the @aws-sdk/types package, and the code generator should rely on the
+ * defined in the @aws-js-sdk-v3-prerelease/types package, and the code generator should rely on the
  * TreeModel's types.
  *
  * If you're using this model or its shape or operation types to do anything

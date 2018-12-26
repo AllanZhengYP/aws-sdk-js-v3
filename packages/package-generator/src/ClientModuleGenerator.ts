@@ -7,7 +7,7 @@ import {
     RuntimeTarget,
     TreeModel,
     SmokeTestModel
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import {
     ClientGenerator,
     CommandGenerator,
@@ -15,8 +15,8 @@ import {
     OperationGenerator,
     SmokeTestGenerator,
     TypeGenerator,
-} from '@aws-sdk/service-types-generator';
-import {ServiceMetadata} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/service-types-generator';
+import {ServiceMetadata} from '@aws-js-sdk-v3-prerelease/types';
 import {join, sep} from 'path';
 import {intersects} from 'semver';
 
@@ -169,7 +169,7 @@ tsconfig.test.json
             ignoreCompilerErrors: true,
             mode: 'file',
             out: './docs',
-            plugin: '@aws-sdk/client-documentation-generator'
+            plugin: '@aws-js-sdk-v3-prerelease/client-documentation-generator'
         }
 
         return {
@@ -235,7 +235,7 @@ tsconfig.test.json
 
     private devDependencies(): {[key: string]: string} {
         const devDependencies: {[key: string]: string} = {
-            '@aws-sdk/client-documentation-generator': '^0.1.0-preview.1',
+            '@aws-js-sdk-v3-prerelease/client-documentation-generator': '^0.1.0-preview.1',
             'rimraf': '^2.6.2',
             'typedoc': '^0.10.0',
             'typescript': '^3.0.0'

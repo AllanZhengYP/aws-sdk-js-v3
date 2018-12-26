@@ -2,9 +2,9 @@ import {
     BuildHandler,
     BuildHandlerArguments,
     HandlerExecutionContext
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
-import {headerDefault} from '@aws-sdk/middleware-header-default';
+import {headerDefault} from '@aws-js-sdk-v3-prerelease/middleware-header-default';
 
 export function addExpectContinue(
     next: BuildHandler<any, any, any>,

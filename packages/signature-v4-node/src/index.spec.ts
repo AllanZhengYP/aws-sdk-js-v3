@@ -5,7 +5,7 @@ import {
     requests,
     service,
     signingDate,
-} from '@aws-sdk/signature-v4/build/suite.fixture';
+} from '@aws-js-sdk-v3-prerelease/signature-v4/build/suite.fixture';
 
 /**
  * Executes the official AWS Signature Version 4 test suite.

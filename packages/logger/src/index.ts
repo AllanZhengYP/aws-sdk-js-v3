@@ -2,7 +2,7 @@ import {
     LogLevel,
     LoggerOptions,
     Logger as LoggerInterface
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 type Operations = 'log'|'info'|'warn'|'error';
 

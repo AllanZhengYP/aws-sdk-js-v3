@@ -10,10 +10,10 @@ import {
     ConfigurationPropertyDefinition,
     ConfigurationDefinition,
     MiddlewareCustomizationDefinition,
-} from '@aws-sdk/build-types';
-import {ServiceMetadata, SupportedProtocol} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
+import {ServiceMetadata, SupportedProtocol} from '@aws-js-sdk-v3-prerelease/types';
 
-const typesPackage = packageNameToVariable('@aws-sdk/types');
+const typesPackage = packageNameToVariable('@aws-js-sdk-v3-prerelease/types');
 const supportedProtocols = new Set<SupportedProtocol>([
     'json',
     'rest-json',
@@ -64,7 +64,7 @@ export function serializerMiddleware(
         step: 'serialize',
         priority: 90,
         tags: '{SERIALIZER: true}',
-        expression: `${packageNameToVariable('@aws-sdk/middleware-serializer')}.serializerMiddleware(this.config.serializer)`,
+        expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/middleware-serializer')}.serializerMiddleware(this.config.serializer)`,
         configuration: serializerConfigurationProperties(metadata, streamType),
     }
 }
@@ -103,11 +103,11 @@ function parserProperty(
         streamCollector: ${typesPackage}.StreamCollector<${streamType}>,
         utf8Encoder: ${typesPackage}.Encoder
     }
-) => new ${packageNameToVariable('@aws-sdk/protocol-json-rpc')}.JsonRpcParser(
-    new ${packageNameToVariable('@aws-sdk/json-parser')}.JsonParser(
+) => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-json-rpc')}.JsonRpcParser(
+    new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/json-parser')}.JsonParser(
         configuration.base64Decoder
     ),
-    ${packageNameToVariable('@aws-sdk/json-error-unmarshaller')}.jsonErrorUnmarshaller,
+    ${packageNameToVariable('@aws-js-sdk-v3-prerelease/json-error-unmarshaller')}.jsonErrorUnmarshaller,
     configuration.streamCollector,
     configuration.utf8Encoder
 )`
@@ -131,12 +131,12 @@ function parserProperty(
         streamCollector: ${typesPackage}.StreamCollector<${streamType}>,
         utf8Encoder: ${typesPackage}.Encoder
     }
-) => new ${packageNameToVariable('@aws-sdk/protocol-rest')}.RestParser<${streamType}>(
-    new ${packageNameToVariable('@aws-sdk/json-parser')}.JsonParser(
+) => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-rest')}.RestParser<${streamType}>(
+    new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/json-parser')}.JsonParser(
         configuration.base64Decoder
     ),
     configuration.streamCollector,
-    ${packageNameToVariable('@aws-sdk/json-error-unmarshaller')}.jsonErrorUnmarshaller,
+    ${packageNameToVariable('@aws-js-sdk-v3-prerelease/json-error-unmarshaller')}.jsonErrorUnmarshaller,
     configuration.utf8Encoder,
     configuration.base64Decoder,
 
@@ -161,12 +161,12 @@ function parserProperty(
         streamCollector: ${typesPackage}.StreamCollector<${streamType}>,
         utf8Encoder: ${typesPackage}.Encoder
     }
-) => new ${packageNameToVariable('@aws-sdk/protocol-rest')}.RestParser<${streamType}>(
-    new ${packageNameToVariable('@aws-sdk/xml-body-parser')}.XmlBodyParser(
+) => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-rest')}.RestParser<${streamType}>(
+    new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/xml-body-parser')}.XmlBodyParser(
         configuration.base64Decoder
     ),
     configuration.streamCollector,
-    ${packageNameToVariable('@aws-sdk/query-error-unmarshaller')}.queryErrorUnmarshaller,
+    ${packageNameToVariable('@aws-js-sdk-v3-prerelease/query-error-unmarshaller')}.queryErrorUnmarshaller,
     configuration.utf8Encoder,
     configuration.base64Decoder
 )`
@@ -190,11 +190,11 @@ function parserProperty(
         streamCollector: ${typesPackage}.StreamCollector<${streamType}>,
         utf8Encoder: ${typesPackage}.Encoder
     }
-) => new ${packageNameToVariable('@aws-sdk/protocol-query')}.QueryParser(
-    new ${packageNameToVariable('@aws-sdk/xml-body-parser')}.XmlBodyParser(
+) => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-query')}.QueryParser(
+    new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/xml-body-parser')}.XmlBodyParser(
         configuration.base64Decoder
     ),
-    ${packageNameToVariable('@aws-sdk/query-error-unmarshaller')}.queryErrorUnmarshaller,
+    ${packageNameToVariable('@aws-js-sdk-v3-prerelease/query-error-unmarshaller')}.queryErrorUnmarshaller,
     configuration.streamCollector,
     configuration.utf8Encoder
 )`
@@ -218,11 +218,11 @@ function parserProperty(
         streamCollector: ${typesPackage}.StreamCollector<${streamType}>,
         utf8Encoder: ${typesPackage}.Encoder
     }
-) => new ${packageNameToVariable('@aws-sdk/protocol-query')}.QueryParser(
-    new ${packageNameToVariable('@aws-sdk/xml-body-parser')}.XmlBodyParser(
+) => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-query')}.QueryParser(
+    new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/xml-body-parser')}.XmlBodyParser(
         configuration.base64Decoder
     ),
-    ${packageNameToVariable('@aws-sdk/ec2-error-unmarshaller')}.ec2ErrorUnmarshaller,
+    ${packageNameToVariable('@aws-js-sdk-v3-prerelease/ec2-error-unmarshaller')}.ec2ErrorUnmarshaller,
     configuration.streamCollector,
     configuration.utf8Encoder
 )`
@@ -268,9 +268,9 @@ function serializerProperty(
     }
 ) => {
     const promisified = configuration.endpoint()
-        .then(endpoint => new ${packageNameToVariable('@aws-sdk/protocol-json-rpc')}.JsonRpcSerializer<${streamType}>(
+        .then(endpoint => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-json-rpc')}.JsonRpcSerializer<${streamType}>(
             endpoint,
-            new ${packageNameToVariable('@aws-sdk/json-builder')}.JsonBuilder(
+            new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/json-builder')}.JsonBuilder(
                 configuration.base64Encoder,
                 configuration.utf8Decoder
             )
@@ -299,9 +299,9 @@ function serializerProperty(
     }
 ) => {
     const promisified = configuration.endpoint()
-        .then(endpoint => new ${packageNameToVariable('@aws-sdk/protocol-rest')}.RestSerializer<${streamType}>(
+        .then(endpoint => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-rest')}.RestSerializer<${streamType}>(
             endpoint,
-            new ${packageNameToVariable('@aws-sdk/json-builder')}.JsonBuilder(
+            new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/json-builder')}.JsonBuilder(
                 configuration.base64Encoder,
                 configuration.utf8Decoder
             ),
@@ -332,9 +332,9 @@ function serializerProperty(
     }
 ) => {
     const promisified = configuration.endpoint()
-        .then(endpoint => new ${packageNameToVariable('@aws-sdk/protocol-rest')}.RestSerializer<${streamType}>(
+        .then(endpoint => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-rest')}.RestSerializer<${streamType}>(
             endpoint,
-            new ${packageNameToVariable('@aws-sdk/xml-body-builder')}.XmlBodyBuilder(
+            new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/xml-body-builder')}.XmlBodyBuilder(
                 configuration.base64Encoder,
                 configuration.utf8Decoder
             ),
@@ -366,9 +366,9 @@ function serializerProperty(
     }
 ) => {
     const promisified = configuration.endpoint()
-        .then(endpoint => new ${packageNameToVariable('@aws-sdk/protocol-query')}.QuerySerializer<${streamType}>(
+        .then(endpoint => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/protocol-query')}.QuerySerializer<${streamType}>(
             endpoint,
-            new ${packageNameToVariable('@aws-sdk/query-builder')}.QueryBuilder(
+            new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/query-builder')}.QueryBuilder(
                 configuration.base64Encoder,
                 configuration.utf8Decoder,
                 '${metadata.protocol}'
@@ -397,7 +397,7 @@ export function streamCollectorProperty(
             imports: [IMPORTS['stream-collector-browser']],
             default: {
                 type: 'value',
-                expression: `${packageNameToVariable('@aws-sdk/stream-collector-browser')}.streamCollector`,
+                expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/stream-collector-browser')}.streamCollector`,
             }
         },
         node: {
@@ -405,7 +405,7 @@ export function streamCollectorProperty(
             imports: [IMPORTS['stream-collector-node']],
             default: {
                 type: 'value',
-                expression: `${packageNameToVariable('@aws-sdk/stream-collector-node')}.streamCollector`,
+                expression: `${packageNameToVariable('@aws-js-sdk-v3-prerelease/stream-collector-node')}.streamCollector`,
             }
         },
         universal: {
@@ -418,9 +418,9 @@ export function streamCollectorProperty(
             default: {
                 type: 'value',
                 expression:
-`${packageNameToVariable('@aws-sdk/is-node')}.isNode
-    ? ${packageNameToVariable('@aws-sdk/stream-collector-node')}.streamCollector
-    : ${packageNameToVariable('@aws-sdk/stream-collector-browser')}.streamCollector`
+`${packageNameToVariable('@aws-js-sdk-v3-prerelease/is-node')}.isNode
+    ? ${packageNameToVariable('@aws-js-sdk-v3-prerelease/stream-collector-node')}.streamCollector
+    : ${packageNameToVariable('@aws-js-sdk-v3-prerelease/stream-collector-browser')}.streamCollector`
             }
         },
     }

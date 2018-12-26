@@ -1,5 +1,5 @@
 import {_UnmarshalledAliasRoutingConfiguration} from './_AliasRoutingConfiguration';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Provides configuration information about a Lambda function version alias.</p>

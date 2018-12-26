@@ -2,7 +2,7 @@ import {QuerySerializer} from './QuerySerializer';
 import {
     OperationModel,
     HttpEndpoint
-} from '@aws-sdk/types'
+} from '@aws-js-sdk-v3-prerelease/types'
 
 const operation: OperationModel = {
     http: {

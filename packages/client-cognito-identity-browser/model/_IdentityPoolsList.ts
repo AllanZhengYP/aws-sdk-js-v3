@@ -1,4 +1,4 @@
-import {List as _List_} from '@aws-sdk/types';
+import {List as _List_} from '@aws-js-sdk-v3-prerelease/types';
 import {_IdentityPoolShortDescription} from './_IdentityPoolShortDescription';
 
 export const _IdentityPoolsList: _List_ = {

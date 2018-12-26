@@ -3,7 +3,7 @@ import {DeleteStreamOutput} from './DeleteStreamOutput';
 import {ResourceNotFoundException} from './ResourceNotFoundException';
 import {LimitExceededException} from './LimitExceededException';
 import {ResourceInUseException} from './ResourceInUseException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const DeleteStream: _Operation_ = {

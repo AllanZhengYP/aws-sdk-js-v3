@@ -1,7 +1,7 @@
 import {_UnmarshalledAttributeValue} from './_AttributeValue';
 import {_UnmarshalledConsumedCapacity} from './_ConsumedCapacity';
 import {_UnmarshalledItemCollectionMetrics} from './_ItemCollectionMetrics';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Represents the output of an <code>UpdateItem</code> operation.</p>

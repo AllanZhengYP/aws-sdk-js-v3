@@ -1,4 +1,4 @@
-import { Crc32 } from '@aws-sdk/crc32';
+import { Crc32 } from '@aws-js-sdk-v3-prerelease/crc32';
 
 // All prelude components are unsigned, 32-bit integers
 const PRELUDE_MEMBER_LENGTH = 4;

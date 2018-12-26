@@ -1,5 +1,5 @@
 import {_UnmarshalledCredentials} from './_Credentials';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Returned in response to a successful <code>GetCredentialsForIdentity</code> operation.</p>

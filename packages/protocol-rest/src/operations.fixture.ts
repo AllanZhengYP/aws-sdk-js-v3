@@ -1,7 +1,7 @@
 import {
     OperationModel,
     ServiceMetadata
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 const minimumMetadata: ServiceMetadata = {
     apiVersion: '2017-09-21',

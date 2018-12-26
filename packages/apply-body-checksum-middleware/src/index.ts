@@ -1,4 +1,4 @@
-import { isArrayBuffer } from '@aws-sdk/is-array-buffer';
+import { isArrayBuffer } from '@aws-js-sdk-v3-prerelease/is-array-buffer';
 import {
     BuildHandler,
     BuildHandlerArguments,
@@ -7,7 +7,7 @@ import {
     Hash,
     HeaderBag,
     StreamHasher,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export function applyBodyChecksumMiddleware<StreamType>(
     headerName: string,

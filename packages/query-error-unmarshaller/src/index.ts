@@ -7,13 +7,13 @@ import {
     ServiceException,
     Structure,
     ServiceExceptionParser,
-} from '@aws-sdk/types'
+} from '@aws-js-sdk-v3-prerelease/types'
 import {
     ERR_RESP_SHAPE,
     ParsedErrorResponse,
 } from './constants';
-import {extractMetadata} from '@aws-sdk/response-metadata-extractor';
-import {initServiceException} from '@aws-sdk/util-error-constructor';
+import {extractMetadata} from '@aws-js-sdk-v3-prerelease/response-metadata-extractor';
+import {initServiceException} from '@aws-js-sdk-v3-prerelease/util-error-constructor';
 
 interface errorCommonProperties {
     name?: string,

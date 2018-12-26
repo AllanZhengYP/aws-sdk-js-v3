@@ -1,5 +1,5 @@
 import {InlineType} from "./InlineType";
-import {SerializationModel} from "@aws-sdk/types";
+import {SerializationModel} from "@aws-js-sdk-v3-prerelease/types";
 
 describe('InlineType', () => {
     it('should return a type node of a serialization model tree', () => {

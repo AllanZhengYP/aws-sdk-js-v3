@@ -1,4 +1,4 @@
-import {Map as _Map_} from '@aws-sdk/types';
+import {Map as _Map_} from '@aws-js-sdk-v3-prerelease/types';
 import {_WriteRequests} from './_WriteRequests';
 
 export const _BatchWriteItemRequestMap: _Map_ = {

@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/is-iterable",
+    "name": "@aws-js-sdk-v3-prerelease/is-iterable",
     "version": "0.1.0-preview.1",
     "description": "Provides a function for detecting if input is iterable",
     "scripts": {

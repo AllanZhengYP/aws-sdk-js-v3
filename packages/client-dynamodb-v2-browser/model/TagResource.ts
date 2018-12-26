@@ -4,7 +4,7 @@ import {LimitExceededException} from './LimitExceededException';
 import {ResourceNotFoundException} from './ResourceNotFoundException';
 import {InternalServerError} from './InternalServerError';
 import {ResourceInUseException} from './ResourceInUseException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const TagResource: _Operation_ = {

@@ -4,7 +4,7 @@ import {
     HttpRequest,
     OperationModel,
     RequestSerializer,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export class JsonRpcSerializer<StreamType> implements
     RequestSerializer<StreamType>

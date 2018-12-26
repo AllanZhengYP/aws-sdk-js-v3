@@ -1,1 +1,1 @@
-# @aws-sdk/http-headers
+# @aws-js-sdk-v3-prerelease/http-headers

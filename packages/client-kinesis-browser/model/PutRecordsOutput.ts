@@ -1,5 +1,5 @@
 import {_PutRecordsResultEntryList} from './_PutRecordsResultEntryList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const PutRecordsOutput: _Structure_ = {
     type: 'structure',

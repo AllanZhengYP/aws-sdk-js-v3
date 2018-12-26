@@ -1,1 +1,1 @@
-# @aws-sdk/crc32
+# @aws-js-sdk-v3-prerelease/crc32

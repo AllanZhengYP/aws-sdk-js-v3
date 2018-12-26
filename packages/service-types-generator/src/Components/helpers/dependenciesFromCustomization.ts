@@ -2,7 +2,7 @@ import {
     CustomizationDefinition,
     Import,
     RuntimeTarget
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 
 import {dependenciesFromConfiguration} from './dependenciesFromConfiguration';
 

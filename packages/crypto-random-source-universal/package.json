@@ -1,5 +1,5 @@
 {
-    "name": "@aws-sdk/crypto-random-source-universal",
+    "name": "@aws-js-sdk-v3-prerelease/crypto-random-source-universal",
     "version": "0.1.0-preview.1",
     "scripts": {
         "prepublishOnly": "tsc",
@@ -13,9 +13,9 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-sdk/crypto-random-source-browser": "^0.1.0-preview.1",
-        "@aws-sdk/crypto-random-source-node": "^0.1.0-preview.1",
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/crypto-random-source-browser": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/crypto-random-source-node": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
         "tslib": "^1.8.0"
     },
     "devDependencies": {
@@ -25,7 +25,7 @@
         "typescript": "^3.0.0"
     },
     "browser": {
-        "@aws-sdk/crypto-random-source-node": false
+        "@aws-js-sdk-v3-prerelease/crypto-random-source-node": false
     },
     "main": "./build/index.js",
     "types": "./build/index.d.ts"

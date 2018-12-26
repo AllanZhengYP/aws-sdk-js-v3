@@ -1,4 +1,4 @@
-import {TreeModelString} from "@aws-sdk/build-types";
+import {TreeModelString} from "@aws-js-sdk-v3-prerelease/build-types";
 
 export function getStringDeclaration(shape: TreeModelString): string {
     return shape.enum

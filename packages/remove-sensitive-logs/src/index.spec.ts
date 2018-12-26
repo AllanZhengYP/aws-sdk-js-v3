@@ -1,5 +1,5 @@
 import {removeSensitiveLogs} from './';
-import {Member} from '@aws-sdk/types';
+import {Member} from '@aws-js-sdk-v3-prerelease/types';
 import {
     mapWithSensitiveValue,
     sensitiveMapShape,

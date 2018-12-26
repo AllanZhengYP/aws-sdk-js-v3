@@ -1,7 +1,7 @@
 import {_AttributeValue} from './_AttributeValue';
 import {_ExpectedAttributeValue} from './_ExpectedAttributeValue';
-import {NodeHttpOptions as __HttpOptions__} from '@aws-sdk/types';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import {NodeHttpOptions as __HttpOptions__} from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Represents the input of a <code>DeleteItem</code> operation.</p>

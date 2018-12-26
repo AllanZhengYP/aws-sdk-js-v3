@@ -1,7 +1,7 @@
 import {
     HttpRequest,
     QueryParameterBag,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * @internal

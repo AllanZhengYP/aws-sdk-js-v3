@@ -1,4 +1,4 @@
-import {Member} from '@aws-sdk/types';
+import {Member} from '@aws-js-sdk-v3-prerelease/types';
 
 export const bodyBlobMember: Member = {
     shape: {type: 'blob'},

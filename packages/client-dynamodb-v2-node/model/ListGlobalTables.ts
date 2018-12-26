@@ -1,7 +1,7 @@
 import {ListGlobalTablesInput} from './ListGlobalTablesInput';
 import {ListGlobalTablesOutput} from './ListGlobalTablesOutput';
 import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const ListGlobalTables: _Operation_ = {

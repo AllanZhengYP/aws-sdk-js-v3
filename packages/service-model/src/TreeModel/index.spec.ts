@@ -13,7 +13,7 @@ import {
     Map,    
     String,
     Timestamp,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 import {
     OperationMap,
     Structure,
@@ -21,7 +21,7 @@ import {
     TreeModelList,
     TreeModelMap,
     TreeModelString,
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 
 describe('TreeModel parser', () => {
     it('should throw when input cannot be parsed with JSON.parse', () => {

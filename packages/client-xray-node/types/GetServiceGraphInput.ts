@@ -1,5 +1,5 @@
-import {NodeHttpOptions as __HttpOptions__} from '@aws-sdk/types';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import {NodeHttpOptions as __HttpOptions__} from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * GetServiceGraphInput shape

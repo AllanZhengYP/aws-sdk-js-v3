@@ -2,7 +2,7 @@ import {PutTelemetryRecordsInput} from './PutTelemetryRecordsInput';
 import {PutTelemetryRecordsOutput} from './PutTelemetryRecordsOutput';
 import {InvalidRequestException} from './InvalidRequestException';
 import {ThrottledException} from './ThrottledException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const PutTelemetryRecords: _Operation_ = {

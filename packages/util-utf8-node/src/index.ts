@@ -1,4 +1,4 @@
-import {fromArrayBuffer, fromString} from '@aws-sdk/util-buffer-from';
+import {fromArrayBuffer, fromString} from '@aws-js-sdk-v3-prerelease/util-buffer-from';
 
 export function fromUtf8(input: string): Uint8Array {
     const buf = fromString(input, 'utf8');

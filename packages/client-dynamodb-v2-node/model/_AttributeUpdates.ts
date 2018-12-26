@@ -1,4 +1,4 @@
-import {Map as _Map_} from '@aws-sdk/types';
+import {Map as _Map_} from '@aws-js-sdk-v3-prerelease/types';
 import {_AttributeValueUpdate} from './_AttributeValueUpdate';
 
 export const _AttributeUpdates: _Map_ = {

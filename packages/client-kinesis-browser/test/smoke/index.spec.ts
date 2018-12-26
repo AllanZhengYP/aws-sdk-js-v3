@@ -3,7 +3,7 @@ import {ListStreamsCommand} from '../../commands/ListStreamsCommand';
 import {DescribeStreamCommand} from '../../commands/DescribeStreamCommand';
 declare let defaultRegion: string;
 declare const credentials: any;
-describe('@aws-sdk/client-kinesis-browser Smoke Tests:', () => {
+describe('@aws-js-sdk-v3-prerelease/client-kinesis-browser Smoke Tests:', () => {
     defaultRegion = defaultRegion || 'us-west-2';
     it('ListStreams should succeed when given correct input', (done) => {
         const client = new KinesisClient({
