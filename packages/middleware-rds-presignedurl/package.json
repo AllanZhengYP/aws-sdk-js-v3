@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/middleware-rds-presignedurl",
-    "version": "0.1.0-preview.3",
+    "version": "0.1.0-preview.4",
     "scripts": {
         "prepublishOnly": "tsc",
         "pretest": "tsc -p tsconfig.test.json",
@@ -15,11 +15,11 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-js-sdk-v3-prerelease/protocol-query": "^0.1.0-preview.3",
-        "@aws-js-sdk-v3-prerelease/query-builder": "^0.1.0-preview.3",
-        "@aws-js-sdk-v3-prerelease/query-request-presigner": "^0.1.0-preview.3",
-        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
-        "@aws-js-sdk-v3-prerelease/util-format-url": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/protocol-query": "^0.1.0-preview.4",
+        "@aws-js-sdk-v3-prerelease/query-builder": "^0.1.0-preview.4",
+        "@aws-js-sdk-v3-prerelease/query-request-presigner": "^0.1.0-preview.4",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.4",
+        "@aws-js-sdk-v3-prerelease/util-format-url": "^0.1.0-preview.4",
         "tslib": "^1.8.0"
     },
     "devDependencies": {
