@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/xml-body-builder",
-    "version": "0.1.0-preview.4",
+    "version": "0.1.0-preview.5",
     "description": "XML Body Builder for the AWS SDK",
     "main": "./build/XmlBodyBuilder.js",
     "devDependencies": {

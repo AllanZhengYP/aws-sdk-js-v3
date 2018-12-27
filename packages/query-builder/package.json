@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/query-builder",
-    "version": "0.1.0-preview.4",
+    "version": "0.1.0-preview.5",
     "description": "A marshaller for the body portion of AWS's Query(EC2) protocols",
     "main": "./build/index.js",
     "scripts": {

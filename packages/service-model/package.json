@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/service-model",
-    "version": "0.1.0-preview.4",
+    "version": "0.1.0-preview.5",
     "description": "A service model parser and validator",
     "main": "./build/index.js",
     "scripts": {

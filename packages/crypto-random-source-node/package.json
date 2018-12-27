@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/crypto-random-source-node",
-    "version": "0.1.0-preview.4",
+    "version": "0.1.0-preview.5",
     "description": "A Node.JS implementation of the AWS SDK for JavaScript's `randomValues` interface",
     "main": "./build/index.js",
     "scripts": {
