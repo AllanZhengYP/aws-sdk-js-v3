@@ -1,15 +1,15 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/query-error-unmarshaller",
-    "version": "0.1.0-preview.2",
+    "version": "0.1.0-preview.3",
     "scripts": {
         "prepublishOnly": "tsc",
         "pretest": "tsc -p tsconfig.test.json",
         "test": "jest"
     },
     "dependencies": {
-        "@aws-js-sdk-v3-prerelease/response-metadata-extractor": "^0.1.0-preview.1",
-        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
-        "@aws-js-sdk-v3-prerelease/util-error-constructor": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/response-metadata-extractor": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/util-error-constructor": "^0.1.0-preview.3",
         "tslib": "^1.8.0"
     },
     "main": "./build/index.js",
