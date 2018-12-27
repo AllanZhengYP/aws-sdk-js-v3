@@ -1,6 +1,6 @@
 import {Sha256} from './';
-import {Sha256 as BrowserSha256} from '@aws-sdk/crypto-sha256-browser';
-import {Hash} from '@aws-sdk/hash-node';
+import {Sha256 as BrowserSha256} from '@aws-js-sdk-v3-prerelease/crypto-sha256-browser';
+import {Hash} from '@aws-js-sdk-v3-prerelease/hash-node';
 
 describe('implementation selection', () => {
     it(

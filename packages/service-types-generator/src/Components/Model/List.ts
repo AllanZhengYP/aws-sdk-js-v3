@@ -2,13 +2,13 @@ import {Import} from "../Import";
 import {MemberRef} from "./MemberRef";
 import {IndentedSection} from "../IndentedSection";
 import {requiresImport} from "./helpers";
-import {TreeModelList} from "@aws-sdk/build-types";
+import {TreeModelList} from "@aws-js-sdk-v3-prerelease/build-types";
 
 export class List {
     constructor(private readonly shape: TreeModelList) {}
 
     toString(): string {
-        let toReturn: string = `${new Import('@aws-sdk/types', 'List as _List_')}\n`;
+        let toReturn: string = `${new Import('@aws-js-sdk-v3-prerelease/types', 'List as _List_')}\n`;
         const {flattened, member, min, sensitive} = this.shape;
         const props: Array<string> = ["type: 'list'"];
         if (flattened) {

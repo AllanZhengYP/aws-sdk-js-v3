@@ -1,7 +1,7 @@
 import {_UnmarshalledFunctionConfiguration} from './_FunctionConfiguration';
 import {_UnmarshalledFunctionCodeLocation} from './_FunctionCodeLocation';
 import {_UnmarshalledConcurrency} from './_Concurrency';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>This response contains the object for the Lambda function location (see <a>FunctionCodeLocation</a>.</p>

@@ -4,14 +4,14 @@ import {
  } from './constants';
 import { defaultDelayDecider } from './delayDecider';
 import { defaultRetryDecider } from './retryDecider';
-import { isThrottlingError } from '@aws-sdk/service-error-classification';
+import { isThrottlingError } from '@aws-js-sdk-v3-prerelease/service-error-classification';
 import {
     DelayDecider,
     FinalizeHandler,
     FinalizeHandlerArguments,
     MetadataBearer,
     RetryDecider,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export function retryMiddleware(
     maxRetries: number,

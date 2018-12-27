@@ -1,4 +1,4 @@
-import {ApiModel} from '@aws-sdk/build-types';
+import {ApiModel} from '@aws-js-sdk-v3-prerelease/build-types';
 
 /**
  * Determines if the shape name provided is used as the shape for any

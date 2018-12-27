@@ -1,4 +1,4 @@
-import {RuntimeTarget} from "@aws-sdk/build-types";
+import {RuntimeTarget} from "@aws-js-sdk-v3-prerelease/build-types";
 import {packageNameToVariable} from './packageNameToVariable';
 
 export function streamType(target: RuntimeTarget): string {

@@ -1,15 +1,15 @@
 import { defaultProvider, ENV_IMDS_DISABLED } from "./";
-import { ProviderError } from "@aws-sdk/property-provider";
+import { ProviderError } from "@aws-js-sdk-v3-prerelease/property-provider";
 
-jest.mock('@aws-sdk/credential-provider-env', () => {
+jest.mock('@aws-js-sdk-v3-prerelease/credential-provider-env', () => {
     const envProvider = jest.fn();
     return {
         fromEnv: jest.fn(() => envProvider),
     };
 });
-import {fromEnv} from '@aws-sdk/credential-provider-env';
+import {fromEnv} from '@aws-js-sdk-v3-prerelease/credential-provider-env';
 
-jest.mock('@aws-sdk/credential-provider-ini', () => {
+jest.mock('@aws-js-sdk-v3-prerelease/credential-provider-ini', () => {
     const iniProvider = jest.fn();
     return {
         ENV_PROFILE: 'AWS_PROFILE',
@@ -20,13 +20,13 @@ import {
     ENV_PROFILE,
     fromIni,
     FromIniInit,
-} from '@aws-sdk/credential-provider-ini';
+} from '@aws-js-sdk-v3-prerelease/credential-provider-ini';
 import {
     ENV_CONFIG_PATH,
     ENV_CREDENTIALS_PATH,
-} from '@aws-sdk/shared-ini-file-loader';
+} from '@aws-js-sdk-v3-prerelease/shared-ini-file-loader';
 
-jest.mock('@aws-sdk/credential-provider-imds', () => {
+jest.mock('@aws-js-sdk-v3-prerelease/credential-provider-imds', () => {
     const containerMdsProvider = jest.fn();
     const instanceMdsProvider = jest.fn();
     return {
@@ -42,7 +42,7 @@ import {
     fromContainerMetadata,
     fromInstanceMetadata,
     RemoteProviderInit,
-} from '@aws-sdk/credential-provider-imds';
+} from '@aws-js-sdk-v3-prerelease/credential-provider-imds';
 
 const envAtLoadTime: {[key: string]: string} = [
     ENV_CONFIG_PATH,

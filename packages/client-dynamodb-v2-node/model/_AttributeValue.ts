@@ -3,7 +3,7 @@ import {_NumberSetAttributeValue} from './_NumberSetAttributeValue';
 import {_BinarySetAttributeValue} from './_BinarySetAttributeValue';
 import {_MapAttributeValue} from './_MapAttributeValue';
 import {_ListAttributeValue} from './_ListAttributeValue';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const _AttributeValue: _Structure_ = {
     type: 'structure',

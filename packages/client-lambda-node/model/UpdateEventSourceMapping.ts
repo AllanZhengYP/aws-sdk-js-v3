@@ -6,7 +6,7 @@ import {InvalidParameterValueException} from './InvalidParameterValueException';
 import {TooManyRequestsException} from './TooManyRequestsException';
 import {ResourceConflictException} from './ResourceConflictException';
 import {ResourceInUseException} from './ResourceInUseException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const UpdateEventSourceMapping: _Operation_ = {

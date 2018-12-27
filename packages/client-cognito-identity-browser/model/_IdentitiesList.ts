@@ -1,4 +1,4 @@
-import {List as _List_} from '@aws-sdk/types';
+import {List as _List_} from '@aws-js-sdk-v3-prerelease/types';
 import {_IdentityDescription} from './_IdentityDescription';
 
 export const _IdentitiesList: _List_ = {

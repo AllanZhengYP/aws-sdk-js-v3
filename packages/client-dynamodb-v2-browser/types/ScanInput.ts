@@ -1,7 +1,7 @@
 import {_Condition} from './_Condition';
 import {_AttributeValue} from './_AttributeValue';
-import {BrowserHttpOptions as __HttpOptions__} from '@aws-sdk/types';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import {BrowserHttpOptions as __HttpOptions__} from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Represents the input of a <code>Scan</code> operation.</p>

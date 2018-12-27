@@ -1,6 +1,6 @@
 import {_SubnetIds} from './_SubnetIds';
 import {_SecurityGroupIds} from './_SecurityGroupIds';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const _VpcConfigResponse: _Structure_ = {
     type: 'structure',

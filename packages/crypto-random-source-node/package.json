@@ -1,6 +1,6 @@
 {
-    "name": "@aws-sdk/crypto-random-source-node",
-    "version": "0.1.0-preview.1",
+    "name": "@aws-js-sdk-v3-prerelease/crypto-random-source-node",
+    "version": "0.1.0-preview.3",
     "description": "A Node.JS implementation of the AWS SDK for JavaScript's `randomValues` interface",
     "main": "./build/index.js",
     "scripts": {
@@ -15,11 +15,11 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
         "tslib": "^1.8.0"
     },
     "devDependencies": {
-        "@aws-sdk/util-buffer-from": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/util-buffer-from": "^0.1.0-preview.3",
         "@types/jest": "^20.0.2",
         "@types/node": "^8.10.29",
         "jest": "^20.0.4",

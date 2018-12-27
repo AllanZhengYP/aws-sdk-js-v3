@@ -3,7 +3,7 @@ import {ListTablesCommand} from '../../commands/ListTablesCommand';
 import {DescribeTableCommand} from '../../commands/DescribeTableCommand';
 declare let defaultRegion: string;
 declare const credentials: any;
-describe('@aws-sdk/client-dynamodb-v2-browser Smoke Tests:', () => {
+describe('@aws-js-sdk-v3-prerelease/client-dynamodb-v2-browser Smoke Tests:', () => {
     defaultRegion = defaultRegion || 'us-west-2';
     it('ListTables should succeed when given correct input', (done) => {
         const client = new DynamoDBClient({

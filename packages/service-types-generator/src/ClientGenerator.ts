@@ -13,7 +13,7 @@ import {
     TreeModel,
     Import,
     ServiceCustomizationDefinition
-} from "@aws-sdk/build-types";
+} from "@aws-js-sdk-v3-prerelease/build-types";
 import { getServiceCustomizations } from './ServiceCustomizations';
 
 export class ClientGenerator {

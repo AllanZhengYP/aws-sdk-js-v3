@@ -1,6 +1,6 @@
 import {getMapIndexDeclaration} from './getMapIndexDeclaration';
 import {getStringDeclaration} from "./getStringDeclaration";
-import {TreeModelMember, TreeModelShape} from "@aws-sdk/build-types";
+import {TreeModelMember, TreeModelShape} from "@aws-js-sdk-v3-prerelease/build-types";
 import {GENERIC_STREAM_TYPE} from '../../constants';
 import {getUnmarshalledShapeName} from "./helpers";
 

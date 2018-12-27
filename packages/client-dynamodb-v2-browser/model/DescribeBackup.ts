@@ -2,7 +2,7 @@ import {DescribeBackupInput} from './DescribeBackupInput';
 import {DescribeBackupOutput} from './DescribeBackupOutput';
 import {BackupNotFoundException} from './BackupNotFoundException';
 import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const DescribeBackup: _Operation_ = {

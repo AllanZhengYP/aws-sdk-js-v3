@@ -1,8 +1,8 @@
 import {
     HttpRequest,
     QueryParameterBag,
-} from '@aws-sdk/types';
-import { buildQueryString } from '@aws-sdk/querystring-builder';
+} from '@aws-js-sdk-v3-prerelease/types';
+import { buildQueryString } from '@aws-js-sdk-v3-prerelease/querystring-builder';
 
 export function formatUrl(request: HttpRequest): string {
     let {

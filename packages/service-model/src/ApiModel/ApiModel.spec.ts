@@ -1,6 +1,6 @@
 import {isApiModel} from "./ApiModel";
 import {minimalValidServiceMetadata} from "./serviceMetadata.fixture";
-import {ApiModel} from '@aws-sdk/build-types';
+import {ApiModel} from '@aws-js-sdk-v3-prerelease/build-types';
 
 describe('isApiModel', () => {
     const minimalValidApiModel: ApiModel = {

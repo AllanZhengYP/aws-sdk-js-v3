@@ -4,7 +4,7 @@ import {
     Structure,
     ServiceMetadata
 } from "./Components/Model";
-import {TreeModel} from "@aws-sdk/build-types";
+import {TreeModel} from "@aws-js-sdk-v3-prerelease/build-types";
 
 export class ModelGenerator {
     constructor(private readonly model: TreeModel) {}

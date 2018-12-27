@@ -1,9 +1,9 @@
-import {isIterable} from '@aws-sdk/is-iterable';
+import {isIterable} from '@aws-js-sdk-v3-prerelease/is-iterable';
 import {
     epoch,
     iso8601,
     rfc822
-} from '@aws-sdk/protocol-timestamp';
+} from '@aws-js-sdk-v3-prerelease/protocol-timestamp';
 import {
     Blob as BlobShape,
     BodySerializer,
@@ -20,11 +20,11 @@ import {
     Timestamp as TimestampShape,
     XmlNamespace,
     ServiceMetadata
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 import {
     XmlNode,
     XmlText
-} from '@aws-sdk/xml-builder';
+} from '@aws-js-sdk-v3-prerelease/xml-builder';
 
 const XML_NAMESPACE_PREFIX = 'xmlns';
 

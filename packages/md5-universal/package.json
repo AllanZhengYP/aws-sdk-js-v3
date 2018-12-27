@@ -1,6 +1,6 @@
 {
-    "name": "@aws-sdk/md5-universal",
-    "version": "0.1.0-preview.1",
+    "name": "@aws-js-sdk-v3-prerelease/md5-universal",
+    "version": "0.1.0-preview.3",
     "scripts": {
         "prepublishOnly": "tsc",
         "pretest": "tsc -p tsconfig.test.json",
@@ -15,13 +15,13 @@
     },
     "license": "Apache-2.0",
     "browser": {
-        "@aws-sdk/hash-node": false,
+        "@aws-js-sdk-v3-prerelease/hash-node": false,
         "crypto": false
     },
     "dependencies": {
-        "@aws-sdk/hash-node": "^0.1.0-preview.1",
-        "@aws-sdk/md5-js": "^0.1.0-preview.1",
-        "@aws-sdk/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/hash-node": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/md5-js": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
         "tslib": "^1.8.0"
     },
     "devDependencies": {

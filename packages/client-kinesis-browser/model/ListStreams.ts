@@ -1,7 +1,7 @@
 import {ListStreamsInput} from './ListStreamsInput';
 import {ListStreamsOutput} from './ListStreamsOutput';
 import {LimitExceededException} from './LimitExceededException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const ListStreams: _Operation_ = {

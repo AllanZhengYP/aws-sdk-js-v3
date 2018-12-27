@@ -2,7 +2,7 @@ import {
     BuildHandler,
     BuildHandlerArguments,
     BuildMiddleware
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export interface HeaderDefaultArgs {
     [header: string]: string;

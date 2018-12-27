@@ -1,5 +1,5 @@
 import {Hash} from './';
-import {fromString, fromArrayBuffer} from '@aws-sdk/util-buffer-from';
+import {fromString, fromArrayBuffer} from '@aws-js-sdk-v3-prerelease/util-buffer-from';
 const hashVectors = require('hash-test-vectors');
 const hmacVectors = require('hash-test-vectors/hmac');
 

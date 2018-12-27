@@ -1,5 +1,5 @@
-import {isArrayBuffer} from '@aws-sdk/is-array-buffer';
-import {extractMetadata} from '@aws-sdk/response-metadata-extractor';
+import {isArrayBuffer} from '@aws-js-sdk-v3-prerelease/is-array-buffer';
+import {extractMetadata} from '@aws-js-sdk-v3-prerelease/response-metadata-extractor';
 import {
     BodyParser,
     Encoder,
@@ -10,7 +10,7 @@ import {
     StreamCollector,
     ResponseMetadata,
     ServiceExceptionParser,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export class QueryParser<StreamType> implements ResponseParser<StreamType> {
     constructor(

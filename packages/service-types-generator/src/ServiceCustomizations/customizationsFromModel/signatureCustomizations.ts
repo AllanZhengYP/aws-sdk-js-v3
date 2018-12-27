@@ -10,11 +10,11 @@ import {
     TreeModel,
     RuntimeTarget,
     MiddlewareCustomizationDefinition,
-} from '@aws-sdk/build-types';
+} from '@aws-js-sdk-v3-prerelease/build-types';
 import {
     ServiceMetadata,
     SupportedSignatureVersion,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 import { streamType } from '../../streamType';
 
 interface AuthTypeMap {
@@ -150,7 +150,7 @@ function customizationsForAuthType(
     const customizations: Array<CustomizationDefinition> = [];
 
     if (authType !== 'none' && clientAuthType === 'none') {
-        const typesPackage = packageNameToVariable('@aws-sdk/types');
+        const typesPackage = packageNameToVariable('@aws-js-sdk-v3-prerelease/types');
         customizations.push({
             type: 'Middleware',
             step: 'finalize',
@@ -165,7 +165,7 @@ function customizationsForAuthType(
             },
             imports: [ IMPORTS['signing-middleware'] ],
             expression:`${
-                packageNameToVariable('@aws-sdk/signing-middleware')
+                packageNameToVariable('@aws-js-sdk-v3-prerelease/signing-middleware')
             }.signingMiddleware<InputTypesUnion, OutputTypesUnion, ${streamType(runtime)}>(this.config.signer)`
         });
     }
@@ -178,7 +178,7 @@ function customizationsForAuthType(
             imports: [ IMPORTS['middleware-header-default'] ],
             tags: '{UNSIGNED_PAYLOAD: true}',
             expression: `${
-                packageNameToVariable('@aws-sdk/middleware-header-default')
+                packageNameToVariable('@aws-js-sdk-v3-prerelease/middleware-header-default')
             }.headerDefault({'X-Amz-Content-Sha256': 'UNSIGNED_PAYLOAD'})`
         })
     }
@@ -192,7 +192,7 @@ function customizationsForAuthType(
 function signerProperty(
     metadata: ServiceMetadata
 ): ConfigurationPropertyDefinition {
-    const typesPackage = packageNameToVariable('@aws-sdk/types');
+    const typesPackage = packageNameToVariable('@aws-js-sdk-v3-prerelease/types');
 
     return {
         type: 'unified',
@@ -214,7 +214,7 @@ function signerProperty(
         sha256: ${typesPackage}.HashConstructor,
         signingName: string,
     }
-) => new ${packageNameToVariable('@aws-sdk/signature-v4')}.SignatureV4({
+) => new ${packageNameToVariable('@aws-js-sdk-v3-prerelease/signature-v4')}.SignatureV4({
     credentials: configuration.credentials,
     region: configuration.region,
     service: configuration.signingName,

@@ -1,6 +1,6 @@
 {
-    "name": "@aws-sdk/signature-v4",
-    "version": "0.1.0-preview.1",
+    "name": "@aws-js-sdk-v3-prerelease/signature-v4",
+    "version": "0.1.0-preview.3",
     "description": "A standalone implementation of the AWS Signature V4 request signing algorithm",
     "main": "./build/index.js",
     "scripts": {
@@ -16,16 +16,16 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-sdk/is-array-buffer": "^0.1.0-preview.1",
-        "@aws-sdk/protocol-timestamp": "^0.1.0-preview.1",
-        "@aws-sdk/types": "^0.1.0-preview.1",
-        "@aws-sdk/util-hex-encoding": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/is-array-buffer": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/protocol-timestamp": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/util-hex-encoding": "^0.1.0-preview.3",
         "tslib": "^1.8.0"
     },
     "devDependencies": {
-        "@aws-sdk/crypto-sha256-js": "^0.1.0-preview.1",
-        "@aws-sdk/http-serialization": "^0.1.0-preview.1",
-        "@aws-sdk/util-buffer-from": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/crypto-sha256-js": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/http-serialization": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/util-buffer-from": "^0.1.0-preview.3",
         "@types/jest": "^20.0.2",
         "jest": "^20.0.4",
         "typescript": "^3.0.0"

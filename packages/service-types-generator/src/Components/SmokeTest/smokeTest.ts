@@ -1,4 +1,4 @@
-import { SmokeTestCase, RuntimeTarget } from '@aws-sdk/build-types';
+import { SmokeTestCase, RuntimeTarget } from '@aws-js-sdk-v3-prerelease/build-types';
 import { IndentedSection } from '../IndentedSection';
 
 export interface SmokeTestOptions {

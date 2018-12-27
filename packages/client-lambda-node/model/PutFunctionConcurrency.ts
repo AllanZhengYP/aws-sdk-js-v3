@@ -4,7 +4,7 @@ import {ServiceException} from './ServiceException';
 import {InvalidParameterValueException} from './InvalidParameterValueException';
 import {ResourceNotFoundException} from './ResourceNotFoundException';
 import {TooManyRequestsException} from './TooManyRequestsException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const PutFunctionConcurrency: _Operation_ = {

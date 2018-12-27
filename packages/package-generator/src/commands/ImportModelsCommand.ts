@@ -1,6 +1,6 @@
 import { clientModuleIdentifier } from '../clientModuleIdentifier';
-import { fromModelJson, fromSmokeTestModelJson } from '@aws-sdk/service-model';
-import { TreeModel, SmokeTestModel } from '@aws-sdk/build-types';
+import { fromModelJson, fromSmokeTestModelJson } from '@aws-js-sdk-v3-prerelease/service-model';
+import { TreeModel, SmokeTestModel } from '@aws-js-sdk-v3-prerelease/build-types';
 import { existsSync, readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import * as yargs from 'yargs';

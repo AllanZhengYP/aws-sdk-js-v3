@@ -1,4 +1,4 @@
-import {HttpRequest} from "@aws-sdk/types";
+import {HttpRequest} from "@aws-js-sdk-v3-prerelease/types";
 import {cloneRequest} from "./cloneRequest";
 import {
     GENERATED_HEADERS,

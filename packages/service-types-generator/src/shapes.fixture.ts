@@ -5,8 +5,8 @@ import {
     TreeModelShape,
     TreeModelString,
     TreeModelStructure,
-} from "@aws-sdk/build-types";
-import {ServiceMetadata} from "@aws-sdk/types";
+} from "@aws-js-sdk-v3-prerelease/build-types";
+import {ServiceMetadata} from "@aws-js-sdk-v3-prerelease/types";
 
 export const scalarTypes = new Set<'blob'|'boolean'|'number'|'string'|'timestamp'>([
     'blob',

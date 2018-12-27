@@ -2,7 +2,7 @@ import {_FunctionConfiguration} from './_FunctionConfiguration';
 import {_FunctionCodeLocation} from './_FunctionCodeLocation';
 import {_Tags} from './_Tags';
 import {_Concurrency} from './_Concurrency';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const GetFunctionOutput: _Structure_ = {
     type: 'structure',

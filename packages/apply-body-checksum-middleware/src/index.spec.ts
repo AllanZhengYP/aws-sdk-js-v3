@@ -1,5 +1,5 @@
 import { applyBodyChecksumMiddleware } from './';
-import { HashConstructor, HttpRequest } from '@aws-sdk/types';
+import { HashConstructor, HttpRequest } from '@aws-js-sdk-v3-prerelease/types';
 
 describe('applyChecksumMiddleware', () => {
     const mockEncoder = jest.fn(() => 'encoded');

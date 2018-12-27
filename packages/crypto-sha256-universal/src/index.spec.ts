@@ -1,5 +1,5 @@
 import {Sha256} from './';
-import {Hash} from '@aws-sdk/hash-node';
+import {Hash} from '@aws-js-sdk-v3-prerelease/hash-node';
 
 describe('Sha256', () => {
     it('should proxy method calls to underlying implementation', () => {

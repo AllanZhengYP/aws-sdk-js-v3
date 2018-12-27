@@ -7,7 +7,7 @@ import {
     Hash,
     Middleware,
     SourceData,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
 export type SsecPropertiesConfiguration<Input extends object> = {
     [sourceProperty in keyof Input]?: {

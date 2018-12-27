@@ -1,5 +1,5 @@
 import {_UnmarshalledRepositoryTrigger} from './_RepositoryTrigger';
-import * as __aws_sdk_types from '@aws-sdk/types';
+import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Represents the output of a get repository triggers operation.</p>

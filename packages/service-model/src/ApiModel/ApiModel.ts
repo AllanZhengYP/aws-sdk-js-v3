@@ -1,7 +1,7 @@
 import {isOperationMap} from "./OperationMap";
 import {isServiceMetadata} from "./ServiceMetadata";
 import {isShapeMap} from "./ShapeMap";
-import {ApiModel} from '@aws-sdk/build-types';
+import {ApiModel} from '@aws-js-sdk-v3-prerelease/build-types';
 
 /**
  * @internal

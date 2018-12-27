@@ -1,5 +1,5 @@
-import {BodyParser, Decoder, Member, SerializationModel} from "@aws-sdk/types";
-import {toDate} from "@aws-sdk/protocol-timestamp";
+import {BodyParser, Decoder, Member, SerializationModel} from "@aws-js-sdk-v3-prerelease/types";
+import {toDate} from "@aws-js-sdk-v3-prerelease/protocol-timestamp";
 
 type Scalar = string|number|boolean|null;
 

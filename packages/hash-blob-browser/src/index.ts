@@ -2,9 +2,9 @@ import {
     Hash,
     HashConstructor,
     StreamHasher,
-} from '@aws-sdk/types';
+} from '@aws-js-sdk-v3-prerelease/types';
 
-import {blobReader} from '@aws-sdk/chunked-blob-reader';
+import {blobReader} from '@aws-js-sdk-v3-prerelease/chunked-blob-reader';
 
 export const calculateSha256: StreamHasher<Blob> = async function calculateSha256(
     hashCtor: HashConstructor,

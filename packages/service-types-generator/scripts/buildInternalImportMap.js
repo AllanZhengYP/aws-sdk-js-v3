@@ -1,7 +1,7 @@
 const {readdirSync, readFileSync, statSync, writeFileSync} = require('fs');
 const {dirname, join} = require('path');
 
-let content = `import {Import} from '@aws-sdk/build-types';
+let content = `import {Import} from '@aws-js-sdk-v3-prerelease/build-types';
 
 /**
  * @internal
@@ -19,7 +19,7 @@ for (const packageName of readdirSync(packagesRoot)) {
         );
         content += `
     '${packageName}': {
-        package: '@aws-sdk/${packageName}',
+        package: '@aws-js-sdk-v3-prerelease/${packageName}',
         version: '^${packageJson.version}',
     },`;
     }

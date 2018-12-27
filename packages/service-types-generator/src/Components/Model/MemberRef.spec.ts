@@ -1,5 +1,5 @@
 import {MemberRef} from "./MemberRef";
-import {TreeModelMember} from "@aws-sdk/build-types";
+import {TreeModelMember} from "@aws-js-sdk-v3-prerelease/build-types";
 
 describe('MemberRef', () => {
     it('should use an inline type declaration for blobs', () => {

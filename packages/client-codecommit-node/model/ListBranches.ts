@@ -9,7 +9,7 @@ import {EncryptionKeyDisabledException} from './EncryptionKeyDisabledException';
 import {EncryptionKeyNotFoundException} from './EncryptionKeyNotFoundException';
 import {EncryptionKeyUnavailableException} from './EncryptionKeyUnavailableException';
 import {InvalidContinuationTokenException} from './InvalidContinuationTokenException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const ListBranches: _Operation_ = {

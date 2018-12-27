@@ -3,7 +3,7 @@ import {BatchGetItemOutput} from './BatchGetItemOutput';
 import {ProvisionedThroughputExceededException} from './ProvisionedThroughputExceededException';
 import {ResourceNotFoundException} from './ResourceNotFoundException';
 import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {OperationModel as _Operation_} from '@aws-js-sdk-v3-prerelease/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
 export const BatchGetItem: _Operation_ = {

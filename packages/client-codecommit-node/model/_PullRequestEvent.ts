@@ -2,7 +2,7 @@ import {_PullRequestCreatedEventMetadata} from './_PullRequestCreatedEventMetada
 import {_PullRequestStatusChangedEventMetadata} from './_PullRequestStatusChangedEventMetadata';
 import {_PullRequestSourceReferenceUpdatedEventMetadata} from './_PullRequestSourceReferenceUpdatedEventMetadata';
 import {_PullRequestMergedStateChangedEventMetadata} from './_PullRequestMergedStateChangedEventMetadata';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {Structure as _Structure_} from '@aws-js-sdk-v3-prerelease/types';
 
 export const _PullRequestEvent: _Structure_ = {
     type: 'structure',

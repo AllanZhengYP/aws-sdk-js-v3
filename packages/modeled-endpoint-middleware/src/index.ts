@@ -6,7 +6,7 @@ import {
     UrlParser,
     HandlerExecutionContext,
     QueryParameterBag,
-} from "@aws-sdk/types";
+} from "@aws-js-sdk-v3-prerelease/types";
 
 const PATH_PARAMETER_PATTERN = /\{[^\}]+\}/;
 const GREEDY_PATH_PARAMETER_PATTERN = /\{[^\}]+\+\}/;
