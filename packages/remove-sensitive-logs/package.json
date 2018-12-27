@@ -1,8 +1,8 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/remove-sensitive-logs",
-    "version": "0.1.0-preview.2",
+    "version": "0.1.0-preview.3",
     "dependencies": {
-        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.1",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
         "tslib": "^1.8.0"
     },
     "devDependencies": {
