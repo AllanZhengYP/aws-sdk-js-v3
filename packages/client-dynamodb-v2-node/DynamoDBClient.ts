@@ -1,25 +1,25 @@
-import * as __aws_sdk_config_resolver from '@aws-js-sdk-v3-prerelease/config-resolver';
-import * as __aws_sdk_core_handler from '@aws-js-sdk-v3-prerelease/core-handler';
-import * as __aws_sdk_credential_provider_node from '@aws-js-sdk-v3-prerelease/credential-provider-node';
-import * as __aws_sdk_hash_node from '@aws-js-sdk-v3-prerelease/hash-node';
-import * as __aws_sdk_json_builder from '@aws-js-sdk-v3-prerelease/json-builder';
-import * as __aws_sdk_json_error_unmarshaller from '@aws-js-sdk-v3-prerelease/json-error-unmarshaller';
-import * as __aws_sdk_json_parser from '@aws-js-sdk-v3-prerelease/json-parser';
-import * as __aws_sdk_middleware_content_length from '@aws-js-sdk-v3-prerelease/middleware-content-length';
-import * as __aws_sdk_middleware_serializer from '@aws-js-sdk-v3-prerelease/middleware-serializer';
-import * as __aws_sdk_middleware_stack from '@aws-js-sdk-v3-prerelease/middleware-stack';
-import * as __aws_sdk_node_http_handler from '@aws-js-sdk-v3-prerelease/node-http-handler';
-import * as __aws_sdk_protocol_json_rpc from '@aws-js-sdk-v3-prerelease/protocol-json-rpc';
-import * as __aws_sdk_region_provider from '@aws-js-sdk-v3-prerelease/region-provider';
-import * as __aws_sdk_retry_middleware from '@aws-js-sdk-v3-prerelease/retry-middleware';
-import * as __aws_sdk_signature_v4 from '@aws-js-sdk-v3-prerelease/signature-v4';
-import * as __aws_sdk_signing_middleware from '@aws-js-sdk-v3-prerelease/signing-middleware';
-import * as __aws_sdk_stream_collector_node from '@aws-js-sdk-v3-prerelease/stream-collector-node';
-import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
-import * as __aws_sdk_url_parser_node from '@aws-js-sdk-v3-prerelease/url-parser-node';
-import * as __aws_sdk_util_base64_node from '@aws-js-sdk-v3-prerelease/util-base64-node';
-import * as __aws_sdk_util_body_length_node from '@aws-js-sdk-v3-prerelease/util-body-length-node';
-import * as __aws_sdk_util_utf8_node from '@aws-js-sdk-v3-prerelease/util-utf8-node';
+import * as __aws_js_sdk_v3_prerelease_config_resolver from '@aws-js-sdk-v3-prerelease/config-resolver';
+import * as __aws_js_sdk_v3_prerelease_core_handler from '@aws-js-sdk-v3-prerelease/core-handler';
+import * as __aws_js_sdk_v3_prerelease_credential_provider_node from '@aws-js-sdk-v3-prerelease/credential-provider-node';
+import * as __aws_js_sdk_v3_prerelease_hash_node from '@aws-js-sdk-v3-prerelease/hash-node';
+import * as __aws_js_sdk_v3_prerelease_json_builder from '@aws-js-sdk-v3-prerelease/json-builder';
+import * as __aws_js_sdk_v3_prerelease_json_error_unmarshaller from '@aws-js-sdk-v3-prerelease/json-error-unmarshaller';
+import * as __aws_js_sdk_v3_prerelease_json_parser from '@aws-js-sdk-v3-prerelease/json-parser';
+import * as __aws_js_sdk_v3_prerelease_middleware_content_length from '@aws-js-sdk-v3-prerelease/middleware-content-length';
+import * as __aws_js_sdk_v3_prerelease_middleware_serializer from '@aws-js-sdk-v3-prerelease/middleware-serializer';
+import * as __aws_js_sdk_v3_prerelease_middleware_stack from '@aws-js-sdk-v3-prerelease/middleware-stack';
+import * as __aws_js_sdk_v3_prerelease_node_http_handler from '@aws-js-sdk-v3-prerelease/node-http-handler';
+import * as __aws_js_sdk_v3_prerelease_protocol_json_rpc from '@aws-js-sdk-v3-prerelease/protocol-json-rpc';
+import * as __aws_js_sdk_v3_prerelease_region_provider from '@aws-js-sdk-v3-prerelease/region-provider';
+import * as __aws_js_sdk_v3_prerelease_retry_middleware from '@aws-js-sdk-v3-prerelease/retry-middleware';
+import * as __aws_js_sdk_v3_prerelease_signature_v4 from '@aws-js-sdk-v3-prerelease/signature-v4';
+import * as __aws_js_sdk_v3_prerelease_signing_middleware from '@aws-js-sdk-v3-prerelease/signing-middleware';
+import * as __aws_js_sdk_v3_prerelease_stream_collector_node from '@aws-js-sdk-v3-prerelease/stream-collector-node';
+import * as __aws_js_sdk_v3_prerelease_types from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_js_sdk_v3_prerelease_url_parser_node from '@aws-js-sdk-v3-prerelease/url-parser-node';
+import * as __aws_js_sdk_v3_prerelease_util_base64_node from '@aws-js-sdk-v3-prerelease/util-base64-node';
+import * as __aws_js_sdk_v3_prerelease_util_body_length_node from '@aws-js-sdk-v3-prerelease/util-body-length-node';
+import * as __aws_js_sdk_v3_prerelease_util_utf8_node from '@aws-js-sdk-v3-prerelease/util-utf8-node';
 import * as _stream from 'stream';
 import {DynamoDBConfiguration, DynamoDBResolvedConfiguration, configurationProperties} from './DynamoDBConfiguration';
 import {InputTypesUnion} from './types/InputTypesUnion';
@@ -28,20 +28,20 @@ import {OutputTypesUnion} from './types/OutputTypesUnion';
 export class DynamoDBClient {
     protected readonly config: DynamoDBResolvedConfiguration;
 
-    readonly middlewareStack = new __aws_sdk_middleware_stack.MiddlewareStack<
+    readonly middlewareStack = new __aws_js_sdk_v3_prerelease_middleware_stack.MiddlewareStack<
         InputTypesUnion,
         OutputTypesUnion,
         _stream.Readable
     >();
 
     constructor(configuration: DynamoDBConfiguration) {
-        this.config = __aws_sdk_config_resolver.resolveConfiguration(
+        this.config = __aws_js_sdk_v3_prerelease_config_resolver.resolveConfiguration(
             configuration,
             configurationProperties,
             this.middlewareStack
         );
         this.middlewareStack.add(
-            __aws_sdk_middleware_serializer.serializerMiddleware(this.config.serializer),
+            __aws_js_sdk_v3_prerelease_middleware_serializer.serializerMiddleware(this.config.serializer),
             {
                 step: 'serialize',
                 priority: 90,
@@ -49,7 +49,7 @@ export class DynamoDBClient {
             }
         );
         this.middlewareStack.add(
-            __aws_sdk_middleware_content_length.contentLengthMiddleware(
+            __aws_js_sdk_v3_prerelease_middleware_content_length.contentLengthMiddleware(
                 this.config.bodyLengthChecker
             ),
             {
@@ -60,7 +60,7 @@ export class DynamoDBClient {
         );
         if (this.config.maxRetries > 0) {
             this.middlewareStack.add(
-                __aws_sdk_retry_middleware.retryMiddleware(
+                __aws_js_sdk_v3_prerelease_retry_middleware.retryMiddleware(
                     this.config.maxRetries,
                     this.config.retryDecider,
                     this.config.delayDecider
@@ -73,7 +73,7 @@ export class DynamoDBClient {
             );
         }
         this.middlewareStack.add(
-            __aws_sdk_signing_middleware.signingMiddleware<InputTypesUnion, OutputTypesUnion, _stream.Readable>(this.config.signer),
+            __aws_js_sdk_v3_prerelease_signing_middleware.signingMiddleware<InputTypesUnion, OutputTypesUnion, _stream.Readable>(this.config.signer),
             {
                 step: 'finalize',
                 priority: 0,
@@ -94,19 +94,19 @@ export class DynamoDBClient {
     send<
         InputType extends InputTypesUnion,
         OutputType extends OutputTypesUnion
-    >(command: __aws_sdk_types.Command<InputTypesUnion, InputType, OutputTypesUnion, OutputType, DynamoDBResolvedConfiguration, _stream.Readable>): Promise<OutputType>;
+    >(command: __aws_js_sdk_v3_prerelease_types.Command<InputTypesUnion, InputType, OutputTypesUnion, OutputType, DynamoDBResolvedConfiguration, _stream.Readable>): Promise<OutputType>;
     send<
         InputType extends InputTypesUnion,
         OutputType extends OutputTypesUnion
     >(
-        command: __aws_sdk_types.Command<InputTypesUnion, InputType, OutputTypesUnion, OutputType, DynamoDBResolvedConfiguration, _stream.Readable>,
+        command: __aws_js_sdk_v3_prerelease_types.Command<InputTypesUnion, InputType, OutputTypesUnion, OutputType, DynamoDBResolvedConfiguration, _stream.Readable>,
         cb: (err: any, data?: OutputType) => void
     ): void;
     send<
         InputType extends InputTypesUnion,
         OutputType extends OutputTypesUnion
     >(
-        command: __aws_sdk_types.Command<InputTypesUnion, InputType, OutputTypesUnion, OutputType, DynamoDBResolvedConfiguration, _stream.Readable>,
+        command: __aws_js_sdk_v3_prerelease_types.Command<InputTypesUnion, InputType, OutputTypesUnion, OutputType, DynamoDBResolvedConfiguration, _stream.Readable>,
         cb?: (err: any, data?: OutputType) => void
     ): Promise<OutputType>|void {
         const handler = command.resolveMiddleware(

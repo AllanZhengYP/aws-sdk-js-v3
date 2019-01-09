@@ -4,7 +4,7 @@ import {_GlobalSecondaryIndexUpdate} from './_GlobalSecondaryIndexUpdate';
 import {_StreamSpecification} from './_StreamSpecification';
 import {_SSESpecification} from './_SSESpecification';
 import {NodeHttpOptions as __HttpOptions__} from '@aws-js-sdk-v3-prerelease/types';
-import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_js_sdk_v3_prerelease_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Represents the input of an <code>UpdateTable</code> operation.</p>
@@ -50,7 +50,7 @@ export interface UpdateTableInput {
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal
      */
-    $abortSignal?: __aws_sdk_types.AbortSignal;
+    $abortSignal?: __aws_js_sdk_v3_prerelease_types.AbortSignal;
 
     /**
      * Per-request HTTP configuration options. If set, any options specified will override the corresponding HTTP option set on the client for this command.

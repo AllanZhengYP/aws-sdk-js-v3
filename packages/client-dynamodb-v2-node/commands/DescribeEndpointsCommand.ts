@@ -1,5 +1,5 @@
-import * as __aws_sdk_middleware_stack from '@aws-js-sdk-v3-prerelease/middleware-stack';
-import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_js_sdk_v3_prerelease_middleware_stack from '@aws-js-sdk-v3-prerelease/middleware-stack';
+import * as __aws_js_sdk_v3_prerelease_types from '@aws-js-sdk-v3-prerelease/types';
 import * as _stream from 'stream';
 import {DescribeEndpoints} from '../model/DescribeEndpoints';
 import {InputTypesUnion} from '../types/InputTypesUnion';
@@ -8,7 +8,7 @@ import {DescribeEndpointsInput} from '../types/DescribeEndpointsInput';
 import {DescribeEndpointsOutput} from '../types/DescribeEndpointsOutput';
 import {DynamoDBResolvedConfiguration} from '../DynamoDBConfiguration';
 
-export class DescribeEndpointsCommand implements __aws_sdk_types.Command<
+export class DescribeEndpointsCommand implements __aws_js_sdk_v3_prerelease_types.Command<
     InputTypesUnion,
     DescribeEndpointsInput,
     OutputTypesUnion,
@@ -16,7 +16,7 @@ export class DescribeEndpointsCommand implements __aws_sdk_types.Command<
     DynamoDBResolvedConfiguration,
     _stream.Readable
 > {
-    readonly middlewareStack = new __aws_sdk_middleware_stack.MiddlewareStack<
+    readonly middlewareStack = new __aws_js_sdk_v3_prerelease_middleware_stack.MiddlewareStack<
         DescribeEndpointsInput,
         DescribeEndpointsOutput,
         _stream.Readable
@@ -25,13 +25,13 @@ export class DescribeEndpointsCommand implements __aws_sdk_types.Command<
     constructor(readonly input: DescribeEndpointsInput) {}
 
     resolveMiddleware(
-        clientStack: __aws_sdk_middleware_stack.MiddlewareStack<InputTypesUnion, OutputTypesUnion, _stream.Readable>,
+        clientStack: __aws_js_sdk_v3_prerelease_middleware_stack.MiddlewareStack<InputTypesUnion, OutputTypesUnion, _stream.Readable>,
         configuration: DynamoDBResolvedConfiguration
-    ): __aws_sdk_types.Handler<DescribeEndpointsInput, DescribeEndpointsOutput> {
+    ): __aws_js_sdk_v3_prerelease_types.Handler<DescribeEndpointsInput, DescribeEndpointsOutput> {
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_js_sdk_v3_prerelease_types.HandlerExecutionContext = {
             logger: {} as any,
             model: DescribeEndpoints
         };

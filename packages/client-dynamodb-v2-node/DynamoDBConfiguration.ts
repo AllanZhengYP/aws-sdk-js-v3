@@ -1,21 +1,21 @@
-import * as __aws_sdk_core_handler from '@aws-js-sdk-v3-prerelease/core-handler';
-import * as __aws_sdk_credential_provider_node from '@aws-js-sdk-v3-prerelease/credential-provider-node';
-import * as __aws_sdk_hash_node from '@aws-js-sdk-v3-prerelease/hash-node';
-import * as __aws_sdk_json_builder from '@aws-js-sdk-v3-prerelease/json-builder';
-import * as __aws_sdk_json_error_unmarshaller from '@aws-js-sdk-v3-prerelease/json-error-unmarshaller';
-import * as __aws_sdk_json_parser from '@aws-js-sdk-v3-prerelease/json-parser';
-import * as __aws_sdk_middleware_serializer from '@aws-js-sdk-v3-prerelease/middleware-serializer';
-import * as __aws_sdk_node_http_handler from '@aws-js-sdk-v3-prerelease/node-http-handler';
-import * as __aws_sdk_protocol_json_rpc from '@aws-js-sdk-v3-prerelease/protocol-json-rpc';
-import * as __aws_sdk_region_provider from '@aws-js-sdk-v3-prerelease/region-provider';
-import * as __aws_sdk_signature_v4 from '@aws-js-sdk-v3-prerelease/signature-v4';
-import * as __aws_sdk_signing_middleware from '@aws-js-sdk-v3-prerelease/signing-middleware';
-import * as __aws_sdk_stream_collector_node from '@aws-js-sdk-v3-prerelease/stream-collector-node';
-import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
-import * as __aws_sdk_url_parser_node from '@aws-js-sdk-v3-prerelease/url-parser-node';
-import * as __aws_sdk_util_base64_node from '@aws-js-sdk-v3-prerelease/util-base64-node';
-import * as __aws_sdk_util_body_length_node from '@aws-js-sdk-v3-prerelease/util-body-length-node';
-import * as __aws_sdk_util_utf8_node from '@aws-js-sdk-v3-prerelease/util-utf8-node';
+import * as __aws_js_sdk_v3_prerelease_core_handler from '@aws-js-sdk-v3-prerelease/core-handler';
+import * as __aws_js_sdk_v3_prerelease_credential_provider_node from '@aws-js-sdk-v3-prerelease/credential-provider-node';
+import * as __aws_js_sdk_v3_prerelease_hash_node from '@aws-js-sdk-v3-prerelease/hash-node';
+import * as __aws_js_sdk_v3_prerelease_json_builder from '@aws-js-sdk-v3-prerelease/json-builder';
+import * as __aws_js_sdk_v3_prerelease_json_error_unmarshaller from '@aws-js-sdk-v3-prerelease/json-error-unmarshaller';
+import * as __aws_js_sdk_v3_prerelease_json_parser from '@aws-js-sdk-v3-prerelease/json-parser';
+import * as __aws_js_sdk_v3_prerelease_middleware_serializer from '@aws-js-sdk-v3-prerelease/middleware-serializer';
+import * as __aws_js_sdk_v3_prerelease_node_http_handler from '@aws-js-sdk-v3-prerelease/node-http-handler';
+import * as __aws_js_sdk_v3_prerelease_protocol_json_rpc from '@aws-js-sdk-v3-prerelease/protocol-json-rpc';
+import * as __aws_js_sdk_v3_prerelease_region_provider from '@aws-js-sdk-v3-prerelease/region-provider';
+import * as __aws_js_sdk_v3_prerelease_signature_v4 from '@aws-js-sdk-v3-prerelease/signature-v4';
+import * as __aws_js_sdk_v3_prerelease_signing_middleware from '@aws-js-sdk-v3-prerelease/signing-middleware';
+import * as __aws_js_sdk_v3_prerelease_stream_collector_node from '@aws-js-sdk-v3-prerelease/stream-collector-node';
+import * as __aws_js_sdk_v3_prerelease_types from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_js_sdk_v3_prerelease_url_parser_node from '@aws-js-sdk-v3-prerelease/url-parser-node';
+import * as __aws_js_sdk_v3_prerelease_util_base64_node from '@aws-js-sdk-v3-prerelease/util-base64-node';
+import * as __aws_js_sdk_v3_prerelease_util_body_length_node from '@aws-js-sdk-v3-prerelease/util-body-length-node';
+import * as __aws_js_sdk_v3_prerelease_util_utf8_node from '@aws-js-sdk-v3-prerelease/util-utf8-node';
 import * as _stream from 'stream';
 import {OutputTypesUnion} from './types/OutputTypesUnion';
 
@@ -23,29 +23,29 @@ export interface DynamoDBConfiguration {
     /**
      * The function that will be used to convert a base64-encoded string to a byte array
      */
-    base64Decoder?: __aws_sdk_types.Decoder;
+    base64Decoder?: __aws_js_sdk_v3_prerelease_types.Decoder;
 
     /**
      * The function that will be used to convert binary data to a base64-encoded string
      */
-    base64Encoder?: __aws_sdk_types.Encoder;
+    base64Encoder?: __aws_js_sdk_v3_prerelease_types.Encoder;
 
     /**
      * The credentials used to sign requests.
      *
      * If no static credentials are supplied, the SDK will attempt to credentials from known environment variables, from shared configuration and credentials files, and from the EC2 Instance Metadata Service, in that order.
      */
-    credentials?: __aws_sdk_types.Credentials|__aws_sdk_types.Provider<__aws_sdk_types.Credentials>;
+    credentials?: __aws_js_sdk_v3_prerelease_types.Credentials|__aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.Credentials>;
 
     /**
      * A function that determines how long (in milliseconds) the SDK should wait before retrying a request
      */
-    delayDecider?: __aws_sdk_types.DelayDecider;
+    delayDecider?: __aws_js_sdk_v3_prerelease_types.DelayDecider;
 
     /**
      * The fully qualified endpoint of the webservice. This is only required when using a custom endpoint (for example, when using a local version of S3).
      */
-    endpoint?: string|__aws_sdk_types.HttpEndpoint|__aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>;
+    endpoint?: string|__aws_js_sdk_v3_prerelease_types.HttpEndpoint|__aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.HttpEndpoint>;
 
     /**
      * The endpoint provider to call if no endpoint is provided
@@ -55,12 +55,12 @@ export interface DynamoDBConfiguration {
     /**
      * The handler to use as the core of the client's middleware stack
      */
-    handler?: __aws_sdk_types.Terminalware<any, _stream.Readable>;
+    handler?: __aws_js_sdk_v3_prerelease_types.Terminalware<any, _stream.Readable>;
 
     /**
      * The HTTP handler to use
      */
-    httpHandler?: __aws_sdk_types.HttpHandler<_stream.Readable>;
+    httpHandler?: __aws_js_sdk_v3_prerelease_types.HttpHandler<_stream.Readable>;
 
     /**
      * The maximum number of redirects to follow for a service request. Set to `0` to disable retries.
@@ -80,22 +80,22 @@ export interface DynamoDBConfiguration {
     /**
      * The AWS region to which this client will send requests
      */
-    region?: string|__aws_sdk_types.Provider<string>;
+    region?: string|__aws_js_sdk_v3_prerelease_types.Provider<string>;
 
     /**
      * A function that determines whether an error is retryable
      */
-    retryDecider?: __aws_sdk_types.RetryDecider;
+    retryDecider?: __aws_js_sdk_v3_prerelease_types.RetryDecider;
 
     /**
      * A constructor for a class implementing the @aws-js-sdk-v3-prerelease/types.Hash interface that computes the SHA-256 HMAC or checksum of a string or binary buffer
      */
-    sha256?: __aws_sdk_types.HashConstructor;
+    sha256?: __aws_js_sdk_v3_prerelease_types.HashConstructor;
 
     /**
      * The signer to use when signing requests.
      */
-    signer?: __aws_sdk_types.RequestSigner;
+    signer?: __aws_js_sdk_v3_prerelease_types.RequestSigner;
 
     /**
      * The service name with which to sign requests.
@@ -110,22 +110,22 @@ export interface DynamoDBConfiguration {
     /**
      * A function that converts a stream into an array of bytes.
      */
-    streamCollector?: __aws_sdk_types.StreamCollector<_stream.Readable>;
+    streamCollector?: __aws_js_sdk_v3_prerelease_types.StreamCollector<_stream.Readable>;
 
     /**
      * The function that will be used to convert strings into HTTP endpoints
      */
-    urlParser?: __aws_sdk_types.UrlParser;
+    urlParser?: __aws_js_sdk_v3_prerelease_types.UrlParser;
 
     /**
      * The function that will be used to convert a UTF8-encoded string to a byte array
      */
-    utf8Decoder?: __aws_sdk_types.Decoder;
+    utf8Decoder?: __aws_js_sdk_v3_prerelease_types.Decoder;
 
     /**
      * The function that will be used to convert binary data to a UTF-8 encoded string
      */
-    utf8Encoder?: __aws_sdk_types.Encoder;
+    utf8Encoder?: __aws_js_sdk_v3_prerelease_types.Encoder;
 }
 
 export interface DynamoDBResolvableConfiguration extends DynamoDBConfiguration {
@@ -142,61 +142,61 @@ export interface DynamoDBResolvableConfiguration extends DynamoDBConfiguration {
     /**
      * The parser to use when converting HTTP responses to SDK output types
      */
-    parser: __aws_sdk_types.ResponseParser<_stream.Readable>;
+    parser: __aws_js_sdk_v3_prerelease_types.ResponseParser<_stream.Readable>;
 
     /**
      * The serializer to use when converting SDK input to HTTP requests
      */
-    serializer: __aws_sdk_types.Provider<__aws_sdk_types.RequestSerializer<_stream.Readable>>;
+    serializer: __aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.RequestSerializer<_stream.Readable>>;
 }
 
 export interface DynamoDBResolvedConfiguration extends DynamoDBConfiguration {
     _user_injected_http_handler: boolean;
 
-    base64Decoder: __aws_sdk_types.Decoder;
+    base64Decoder: __aws_js_sdk_v3_prerelease_types.Decoder;
 
-    base64Encoder: __aws_sdk_types.Encoder;
+    base64Encoder: __aws_js_sdk_v3_prerelease_types.Encoder;
 
     bodyLengthChecker: (body: any) => number | undefined;
 
-    credentials: __aws_sdk_types.Provider<__aws_sdk_types.Credentials>;
+    credentials: __aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.Credentials>;
 
-    endpoint: __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>;
+    endpoint: __aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.HttpEndpoint>;
 
     endpointProvider: any;
 
-    handler: __aws_sdk_types.Terminalware<any, _stream.Readable>;
+    handler: __aws_js_sdk_v3_prerelease_types.Terminalware<any, _stream.Readable>;
 
-    httpHandler: __aws_sdk_types.HttpHandler<_stream.Readable>;
+    httpHandler: __aws_js_sdk_v3_prerelease_types.HttpHandler<_stream.Readable>;
 
     maxRedirects: number;
 
     maxRetries: number;
 
-    parser: __aws_sdk_types.ResponseParser<_stream.Readable>;
+    parser: __aws_js_sdk_v3_prerelease_types.ResponseParser<_stream.Readable>;
 
-    region: __aws_sdk_types.Provider<string>;
+    region: __aws_js_sdk_v3_prerelease_types.Provider<string>;
 
-    serializer: __aws_sdk_types.Provider<__aws_sdk_types.RequestSerializer<_stream.Readable>>;
+    serializer: __aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.RequestSerializer<_stream.Readable>>;
 
-    sha256: __aws_sdk_types.HashConstructor;
+    sha256: __aws_js_sdk_v3_prerelease_types.HashConstructor;
 
-    signer: __aws_sdk_types.RequestSigner;
+    signer: __aws_js_sdk_v3_prerelease_types.RequestSigner;
 
     signingName: string;
 
     sslEnabled: boolean;
 
-    streamCollector: __aws_sdk_types.StreamCollector<_stream.Readable>;
+    streamCollector: __aws_js_sdk_v3_prerelease_types.StreamCollector<_stream.Readable>;
 
-    urlParser: __aws_sdk_types.UrlParser;
+    urlParser: __aws_js_sdk_v3_prerelease_types.UrlParser;
 
-    utf8Decoder: __aws_sdk_types.Decoder;
+    utf8Decoder: __aws_js_sdk_v3_prerelease_types.Decoder;
 
-    utf8Encoder: __aws_sdk_types.Encoder;
+    utf8Encoder: __aws_js_sdk_v3_prerelease_types.Encoder;
 }
 
-export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
+export const configurationProperties: __aws_js_sdk_v3_prerelease_types.ConfigurationDefinition<
     DynamoDBResolvableConfiguration,
     DynamoDBResolvedConfiguration
 > = {
@@ -208,9 +208,9 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         defaultValue: 3
     },
     region: {
-        defaultProvider: __aws_sdk_region_provider.defaultProvider,
+        defaultProvider: __aws_js_sdk_v3_prerelease_region_provider.defaultProvider,
         normalize: (
-            value: string|__aws_sdk_types.Provider<string>|undefined
+            value: string|__aws_js_sdk_v3_prerelease_types.Provider<string>|undefined
         ) => {
             if (typeof value === 'string') {
                 const promisified = Promise.resolve(value);
@@ -224,7 +224,7 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         defaultValue: true
     },
     urlParser: {
-        defaultValue: __aws_sdk_url_parser_node.parseUrl
+        defaultValue: __aws_js_sdk_v3_prerelease_url_parser_node.parseUrl
     },
     endpointProvider: {
         defaultValue: (
@@ -241,7 +241,7 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
             configuration: {
                 sslEnabled: boolean,
                 endpointProvider: any,
-                region: __aws_sdk_types.Provider<string>,
+                region: __aws_js_sdk_v3_prerelease_types.Provider<string>,
             }
         ) => {
             const promisified = configuration.region()
@@ -252,11 +252,11 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
             return () => promisified;
         },
         normalize: (
-            value: string|__aws_sdk_types.HttpEndpoint|__aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>|undefined,
+            value: string|__aws_js_sdk_v3_prerelease_types.HttpEndpoint|__aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.HttpEndpoint>|undefined,
             configuration: {
-                urlParser?: __aws_sdk_types.UrlParser,
+                urlParser?: __aws_js_sdk_v3_prerelease_types.UrlParser,
             }
-        ): __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint> => {
+        ): __aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.HttpEndpoint> => {
             if (typeof value === 'string') {
                 const promisified = Promise.resolve(configuration.urlParser!(value));
                 return () => promisified;
@@ -273,32 +273,32 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         }
     },
     base64Decoder: {
-        defaultValue: __aws_sdk_util_base64_node.fromBase64
+        defaultValue: __aws_js_sdk_v3_prerelease_util_base64_node.fromBase64
     },
     base64Encoder: {
-        defaultValue: __aws_sdk_util_base64_node.toBase64
+        defaultValue: __aws_js_sdk_v3_prerelease_util_base64_node.toBase64
     },
     utf8Decoder: {
-        defaultValue: __aws_sdk_util_utf8_node.fromUtf8
+        defaultValue: __aws_js_sdk_v3_prerelease_util_utf8_node.fromUtf8
     },
     utf8Encoder: {
-        defaultValue: __aws_sdk_util_utf8_node.toUtf8
+        defaultValue: __aws_js_sdk_v3_prerelease_util_utf8_node.toUtf8
     },
     streamCollector: {
-        defaultValue: __aws_sdk_stream_collector_node.streamCollector
+        defaultValue: __aws_js_sdk_v3_prerelease_stream_collector_node.streamCollector
     },
     serializer: {
         defaultProvider: (
             configuration: {
-                base64Encoder: __aws_sdk_types.Encoder,
-                endpoint: __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>,
-                utf8Decoder: __aws_sdk_types.Decoder
+                base64Encoder: __aws_js_sdk_v3_prerelease_types.Encoder,
+                endpoint: __aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.HttpEndpoint>,
+                utf8Decoder: __aws_js_sdk_v3_prerelease_types.Decoder
             }
         ) => {
             const promisified = configuration.endpoint()
-                .then(endpoint => new __aws_sdk_protocol_json_rpc.JsonRpcSerializer<_stream.Readable>(
+                .then(endpoint => new __aws_js_sdk_v3_prerelease_protocol_json_rpc.JsonRpcSerializer<_stream.Readable>(
                     endpoint,
-                    new __aws_sdk_json_builder.JsonBuilder(
+                    new __aws_js_sdk_v3_prerelease_json_builder.JsonBuilder(
                         configuration.base64Encoder,
                         configuration.utf8Decoder
                     )
@@ -309,15 +309,15 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
     parser: {
         defaultProvider: (
             configuration: {
-                base64Decoder: __aws_sdk_types.Decoder,
-                streamCollector: __aws_sdk_types.StreamCollector<_stream.Readable>,
-                utf8Encoder: __aws_sdk_types.Encoder
+                base64Decoder: __aws_js_sdk_v3_prerelease_types.Decoder,
+                streamCollector: __aws_js_sdk_v3_prerelease_types.StreamCollector<_stream.Readable>,
+                utf8Encoder: __aws_js_sdk_v3_prerelease_types.Encoder
             }
-        ) => new __aws_sdk_protocol_json_rpc.JsonRpcParser(
-            new __aws_sdk_json_parser.JsonParser(
+        ) => new __aws_js_sdk_v3_prerelease_protocol_json_rpc.JsonRpcParser(
+            new __aws_js_sdk_v3_prerelease_json_parser.JsonParser(
                 configuration.base64Decoder
             ),
-            __aws_sdk_json_error_unmarshaller.jsonErrorUnmarshaller,
+            __aws_js_sdk_v3_prerelease_json_error_unmarshaller.jsonErrorUnmarshaller,
             configuration.streamCollector,
             configuration.utf8Encoder
         )
@@ -326,28 +326,28 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         defaultProvider: (configuration: {httpHandler?: any}) => !configuration.httpHandler
     },
     httpHandler: {
-        defaultProvider: () => new __aws_sdk_node_http_handler.NodeHttpHandler()
+        defaultProvider: () => new __aws_js_sdk_v3_prerelease_node_http_handler.NodeHttpHandler()
     },
     handler: {
         defaultProvider: (
             configuration: {
-                httpHandler: __aws_sdk_types.HttpHandler<_stream.Readable>,
-                parser: __aws_sdk_types.ResponseParser<_stream.Readable>,
+                httpHandler: __aws_js_sdk_v3_prerelease_types.HttpHandler<_stream.Readable>,
+                parser: __aws_js_sdk_v3_prerelease_types.ResponseParser<_stream.Readable>,
             }
-        ) => __aws_sdk_core_handler.coreHandler<OutputTypesUnion, _stream.Readable>(
+        ) => __aws_js_sdk_v3_prerelease_core_handler.coreHandler<OutputTypesUnion, _stream.Readable>(
             configuration.httpHandler,
             configuration.parser
         )
     },
     bodyLengthChecker: {
-        defaultValue: __aws_sdk_util_body_length_node.calculateBodyLength
+        defaultValue: __aws_js_sdk_v3_prerelease_util_body_length_node.calculateBodyLength
     },
     retryDecider: {},
     delayDecider: {},
     credentials: {
-        defaultProvider: __aws_sdk_credential_provider_node.defaultProvider,
+        defaultProvider: __aws_js_sdk_v3_prerelease_credential_provider_node.defaultProvider,
         normalize: (
-            value: __aws_sdk_types.Credentials|__aws_sdk_types.Provider<__aws_sdk_types.Credentials>|undefined
+            value: __aws_js_sdk_v3_prerelease_types.Credentials|__aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.Credentials>|undefined
         ) => {
             if (typeof value === 'object') {
                 const promisified = Promise.resolve(value);
@@ -358,7 +358,7 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         }
     },
     sha256: {
-        defaultValue: __aws_sdk_hash_node.Hash.bind(null, 'sha256')
+        defaultValue: __aws_js_sdk_v3_prerelease_hash_node.Hash.bind(null, 'sha256')
     },
     signingName: {
         defaultValue: 'dynamodb'
@@ -366,12 +366,12 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
     signer: {
         defaultProvider: (
             configuration: {
-                credentials: __aws_sdk_types.Provider<__aws_sdk_types.Credentials>,
-                region: __aws_sdk_types.Provider<string>,
-                sha256: __aws_sdk_types.HashConstructor,
+                credentials: __aws_js_sdk_v3_prerelease_types.Provider<__aws_js_sdk_v3_prerelease_types.Credentials>,
+                region: __aws_js_sdk_v3_prerelease_types.Provider<string>,
+                sha256: __aws_js_sdk_v3_prerelease_types.HashConstructor,
                 signingName: string,
             }
-        ) => new __aws_sdk_signature_v4.SignatureV4({
+        ) => new __aws_js_sdk_v3_prerelease_signature_v4.SignatureV4({
             credentials: configuration.credentials,
             region: configuration.region,
             service: configuration.signingName,

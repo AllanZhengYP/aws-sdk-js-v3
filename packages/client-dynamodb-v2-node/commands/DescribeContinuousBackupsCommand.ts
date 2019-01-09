@@ -1,5 +1,5 @@
-import * as __aws_sdk_middleware_stack from '@aws-js-sdk-v3-prerelease/middleware-stack';
-import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_js_sdk_v3_prerelease_middleware_stack from '@aws-js-sdk-v3-prerelease/middleware-stack';
+import * as __aws_js_sdk_v3_prerelease_types from '@aws-js-sdk-v3-prerelease/types';
 import * as _stream from 'stream';
 import {DescribeContinuousBackups} from '../model/DescribeContinuousBackups';
 import {InputTypesUnion} from '../types/InputTypesUnion';
@@ -8,7 +8,7 @@ import {DescribeContinuousBackupsInput} from '../types/DescribeContinuousBackups
 import {DescribeContinuousBackupsOutput} from '../types/DescribeContinuousBackupsOutput';
 import {DynamoDBResolvedConfiguration} from '../DynamoDBConfiguration';
 
-export class DescribeContinuousBackupsCommand implements __aws_sdk_types.Command<
+export class DescribeContinuousBackupsCommand implements __aws_js_sdk_v3_prerelease_types.Command<
     InputTypesUnion,
     DescribeContinuousBackupsInput,
     OutputTypesUnion,
@@ -16,7 +16,7 @@ export class DescribeContinuousBackupsCommand implements __aws_sdk_types.Command
     DynamoDBResolvedConfiguration,
     _stream.Readable
 > {
-    readonly middlewareStack = new __aws_sdk_middleware_stack.MiddlewareStack<
+    readonly middlewareStack = new __aws_js_sdk_v3_prerelease_middleware_stack.MiddlewareStack<
         DescribeContinuousBackupsInput,
         DescribeContinuousBackupsOutput,
         _stream.Readable
@@ -25,13 +25,13 @@ export class DescribeContinuousBackupsCommand implements __aws_sdk_types.Command
     constructor(readonly input: DescribeContinuousBackupsInput) {}
 
     resolveMiddleware(
-        clientStack: __aws_sdk_middleware_stack.MiddlewareStack<InputTypesUnion, OutputTypesUnion, _stream.Readable>,
+        clientStack: __aws_js_sdk_v3_prerelease_middleware_stack.MiddlewareStack<InputTypesUnion, OutputTypesUnion, _stream.Readable>,
         configuration: DynamoDBResolvedConfiguration
-    ): __aws_sdk_types.Handler<DescribeContinuousBackupsInput, DescribeContinuousBackupsOutput> {
+    ): __aws_js_sdk_v3_prerelease_types.Handler<DescribeContinuousBackupsInput, DescribeContinuousBackupsOutput> {
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_js_sdk_v3_prerelease_types.HandlerExecutionContext = {
             logger: {} as any,
             model: DescribeContinuousBackups
         };

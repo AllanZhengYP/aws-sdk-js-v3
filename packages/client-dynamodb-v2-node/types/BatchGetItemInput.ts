@@ -1,6 +1,6 @@
 import {_KeysAndAttributes} from './_KeysAndAttributes';
 import {NodeHttpOptions as __HttpOptions__} from '@aws-js-sdk-v3-prerelease/types';
-import * as __aws_sdk_types from '@aws-js-sdk-v3-prerelease/types';
+import * as __aws_js_sdk_v3_prerelease_types from '@aws-js-sdk-v3-prerelease/types';
 
 /**
  * <p>Represents the input of a <code>BatchGetItem</code> operation.</p>
@@ -26,7 +26,7 @@ export interface BatchGetItemInput {
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal
      */
-    $abortSignal?: __aws_sdk_types.AbortSignal;
+    $abortSignal?: __aws_js_sdk_v3_prerelease_types.AbortSignal;
 
     /**
      * Per-request HTTP configuration options. If set, any options specified will override the corresponding HTTP option set on the client for this command.
