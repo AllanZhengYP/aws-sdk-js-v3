@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/middleware-operation-logging",
-    "version": "0.1.0-preview.5",
+    "version": "0.1.0-preview.6",
     "dependencies": {
         "@aws-js-sdk-v3-prerelease/logger": "^0.1.0-preview.4",
         "@aws-js-sdk-v3-prerelease/remove-sensitive-logs": "^0.1.0-preview.4",

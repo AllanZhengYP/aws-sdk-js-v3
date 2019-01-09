@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/credential-provider-imds",
-    "version": "0.1.0-preview.5",
+    "version": "0.1.0-preview.6",
     "description": "AWS credential provider that sources credentials from the EC2 instance metadata service and ECS container metadata service",
     "main": "./build/index.js",
     "scripts": {

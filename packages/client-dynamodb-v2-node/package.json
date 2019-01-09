@@ -1,7 +1,7 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/client-dynamodb-v2-node",
     "description": "Node SDK for Amazon DynamoDB",
-    "version": "0.1.0-preview.5",
+    "version": "0.1.0-preview.6",
     "scripts": {
         "clean": "npm run remove-definitions && npm run remove-maps && npm run remove-js",
         "build-documentation": "npm run clean && typedoc ./",
