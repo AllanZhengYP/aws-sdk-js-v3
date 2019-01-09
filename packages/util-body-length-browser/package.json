@@ -1,7 +1,7 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/util-body-length-browser",
     "description": "Determines the length of a request body in browsers",
-    "version": "0.1.0-preview.6",
+    "version": "0.1.0-preview.7",
     "scripts": {
         "prepublishOnly": "tsc",
         "pretest": "tsc -p tsconfig.test.json",
