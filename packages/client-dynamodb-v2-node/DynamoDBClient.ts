@@ -15,7 +15,6 @@ import * as __aws_sdk_signing_middleware from '@aws-sdk/signing-middleware';
 import * as __aws_sdk_stream_collector_node from '@aws-sdk/stream-collector-node';
 import * as __aws_sdk_types from '@aws-sdk/types';
 import * as __aws_sdk_url_parser_node from '@aws-sdk/url-parser-node';
-import * as __aws_sdk_util_base64_node from '@aws-sdk/util-base64-node';
 import * as __aws_sdk_util_body_length_node from '@aws-sdk/util-body-length-node';
 import * as __aws_sdk_util_utf8_node from '@aws-sdk/util-utf8-node';
 import * as _stream from 'stream';

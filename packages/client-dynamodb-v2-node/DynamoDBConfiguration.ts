@@ -11,22 +11,12 @@ import * as __aws_sdk_signing_middleware from '@aws-sdk/signing-middleware';
 import * as __aws_sdk_stream_collector_node from '@aws-sdk/stream-collector-node';
 import * as __aws_sdk_types from '@aws-sdk/types';
 import * as __aws_sdk_url_parser_node from '@aws-sdk/url-parser-node';
-import * as __aws_sdk_util_base64_node from '@aws-sdk/util-base64-node';
 import * as __aws_sdk_util_body_length_node from '@aws-sdk/util-body-length-node';
 import * as __aws_sdk_util_utf8_node from '@aws-sdk/util-utf8-node';
 import * as _stream from 'stream';
 import {OutputTypesUnion} from './types/OutputTypesUnion';
 
 export interface DynamoDBConfiguration {
-    /**
-     * The function that will be used to convert a base64-encoded string to a byte array
-     */
-    base64Decoder?: __aws_sdk_types.Decoder;
-
-    /**
-     * The function that will be used to convert binary data to a base64-encoded string
-     */
-    base64Encoder?: __aws_sdk_types.Encoder;
 
     /**
      * The credentials used to sign requests.
@@ -151,10 +141,6 @@ export interface DynamoDBResolvableConfiguration extends DynamoDBConfiguration {
 export interface DynamoDBResolvedConfiguration extends DynamoDBConfiguration {
     _user_injected_http_handler: boolean;
 
-    base64Decoder: __aws_sdk_types.Decoder;
-
-    base64Encoder: __aws_sdk_types.Encoder;
-
     bodyLengthChecker: (body: any) => number | undefined;
 
     credentials: __aws_sdk_types.Provider<__aws_sdk_types.Credentials>;
@@ -270,12 +256,6 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
             return value!;
         }
     },
-    base64Decoder: {
-        defaultValue: __aws_sdk_util_base64_node.fromBase64
-    },
-    base64Encoder: {
-        defaultValue: __aws_sdk_util_base64_node.toBase64
-    },
     utf8Decoder: {
         defaultValue: __aws_sdk_util_utf8_node.fromUtf8
     },
@@ -288,9 +268,7 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
     serializer: {
         defaultProvider: (
             configuration: {
-                base64Encoder: __aws_sdk_types.Encoder,
                 endpoint: __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>,
-                utf8Decoder: __aws_sdk_types.Decoder
             }
         ) => {
             const promisified = configuration.endpoint()
@@ -303,7 +281,6 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
     parser: {
         defaultProvider: (
             configuration: {
-                base64Decoder: __aws_sdk_types.Decoder,
                 streamCollector: __aws_sdk_types.StreamCollector<_stream.Readable>,
                 utf8Encoder: __aws_sdk_types.Encoder
             }
