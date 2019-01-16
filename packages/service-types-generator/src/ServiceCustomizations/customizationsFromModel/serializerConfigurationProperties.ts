@@ -36,8 +36,6 @@ export function serializerConfigurationProperties(
     }
 
     return {
-        base64Decoder,
-        base64Encoder,
         utf8Decoder,
         utf8Encoder,
         streamCollector: streamCollectorProperty(streamType),
@@ -90,7 +88,6 @@ function parserProperty(
                 ...sharedProps,
                 imports: [
                     IMPORTS['protocol-json-rpc'],
-                    IMPORTS['json-parser'],
                     IMPORTS['json-error-unmarshaller'],
                     IMPORTS.types,
                 ],
@@ -99,14 +96,10 @@ function parserProperty(
                     expression:
 `(
     configuration: {
-        base64Decoder: ${typesPackage}.Decoder,
         streamCollector: ${typesPackage}.StreamCollector<${streamType}>,
         utf8Encoder: ${typesPackage}.Encoder
     }
 ) => new ${packageNameToVariable('@aws-sdk/protocol-json-rpc')}.JsonRpcParser(
-    new ${packageNameToVariable('@aws-sdk/json-parser')}.JsonParser(
-        configuration.base64Decoder
-    ),
     ${packageNameToVariable('@aws-sdk/json-error-unmarshaller')}.jsonErrorUnmarshaller,
     configuration.streamCollector,
     configuration.utf8Encoder
@@ -254,7 +247,6 @@ function serializerProperty(
                 imports: [
                     IMPORTS['middleware-serializer'],
                     IMPORTS['protocol-json-rpc'],
-                    IMPORTS['json-builder'],
                     IMPORTS.types,
                 ],
                 default: {
@@ -262,18 +254,12 @@ function serializerProperty(
                     expression:
 `(
     configuration: {
-        base64Encoder: ${typesPackage}.Encoder,
         endpoint: ${typesPackage}.Provider<${typesPackage}.HttpEndpoint>,
-        utf8Decoder: ${typesPackage}.Decoder
     }
 ) => {
     const promisified = configuration.endpoint()
         .then(endpoint => new ${packageNameToVariable('@aws-sdk/protocol-json-rpc')}.JsonRpcSerializer<${streamType}>(
             endpoint,
-            new ${packageNameToVariable('@aws-sdk/json-builder')}.JsonBuilder(
-                configuration.base64Encoder,
-                configuration.utf8Decoder
-            )
         ));
     return () => promisified;
 }`
