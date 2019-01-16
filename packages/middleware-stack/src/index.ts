@@ -106,14 +106,14 @@ export class MiddlewareStack<
         OutputType extends Output
     >(
         handler: FinalizeHandler<InputType, OutputType, Stream>,
-        context: HandlerExecutionContext
+        context: HandlerExecutionContext<InputType, OutputType>
     ): Handler<InputType, OutputType> {
         if (!this.sorted) {
             this.sort();
         }
 
         for (const {middleware} of this.entries) {
-            handler = middleware(handler as Handler<Input, OutputType>, context) as any;
+            handler = middleware(handler as Handler<Input, OutputType>, context as any) as any;
         }
 
         return handler as Handler<InputType, OutputType>;

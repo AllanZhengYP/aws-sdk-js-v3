@@ -1,9 +1,7 @@
 import * as __aws_sdk_core_handler from '@aws-sdk/core-handler';
 import * as __aws_sdk_credential_provider_node from '@aws-sdk/credential-provider-node';
 import * as __aws_sdk_hash_node from '@aws-sdk/hash-node';
-import * as __aws_sdk_json_builder from '@aws-sdk/json-builder';
 import * as __aws_sdk_json_error_unmarshaller from '@aws-sdk/json-error-unmarshaller';
-import * as __aws_sdk_json_parser from '@aws-sdk/json-parser';
 import * as __aws_sdk_middleware_serializer from '@aws-sdk/middleware-serializer';
 import * as __aws_sdk_node_http_handler from '@aws-sdk/node-http-handler';
 import * as __aws_sdk_protocol_json_rpc from '@aws-sdk/protocol-json-rpc';
@@ -297,11 +295,7 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         ) => {
             const promisified = configuration.endpoint()
                 .then(endpoint => new __aws_sdk_protocol_json_rpc.JsonRpcSerializer<_stream.Readable>(
-                    endpoint,
-                    new __aws_sdk_json_builder.JsonBuilder(
-                        configuration.base64Encoder,
-                        configuration.utf8Decoder
-                    )
+                    endpoint
                 ));
             return () => promisified;
         }
@@ -314,9 +308,6 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
                 utf8Encoder: __aws_sdk_types.Encoder
             }
         ) => new __aws_sdk_protocol_json_rpc.JsonRpcParser(
-            new __aws_sdk_json_parser.JsonParser(
-                configuration.base64Decoder
-            ),
             __aws_sdk_json_error_unmarshaller.jsonErrorUnmarshaller,
             configuration.streamCollector,
             configuration.utf8Encoder

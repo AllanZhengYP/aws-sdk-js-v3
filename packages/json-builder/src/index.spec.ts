@@ -1,17 +1,17 @@
-import {JsonBuilder} from "./";
-import {OperationModel, Member} from "@aws-sdk/types";
+// import {JsonBuilder} from "./";
+// import {OperationModel, Member} from "@aws-sdk/types";
 
-import {minimalOperation} from './operations.fixtures';
-import {
-    blobShape,
-    booleanShape,
-    floatShape,
-    integerShape,
-    listOfStringsShape,
-    mapOfStringsToIntegersShape,
-    stringShape,
-    timestampShape
-} from './shapes.fixtures';
+// import {minimalOperation} from './operations.fixtures';
+// import {
+//     blobShape,
+//     booleanShape,
+//     floatShape,
+//     integerShape,
+//     listOfStringsShape,
+//     mapOfStringsToIntegersShape,
+//     stringShape,
+//     timestampShape
+// } from './shapes.fixtures';
 
 describe('JsonBuilder', () => {
     // describe('structures', () => {

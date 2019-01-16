@@ -1,7 +1,7 @@
-import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
 import {ListTablesInput as ListTablesInput_Type} from '../types/ListTablesInput';
 
-export const ListTablesInput: _StructureModel_<ListTablesInput_Type, any> = {
+export const ListTablesInput: _OperationInputShapeModel_<ListTablesInput_Type, any> = {
     parse: (data: any): ListTablesInput_Type => {
         let rtn: any = {};
         if (data.ExclusiveStartTableName) rtn.ExclusiveStartTableName = data.ExclusiveStartTableName;

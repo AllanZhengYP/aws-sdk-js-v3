@@ -1,12 +1,10 @@
 import {extractMetadata} from '@aws-sdk/response-metadata-extractor';
 import {isArrayBuffer} from '@aws-sdk/is-array-buffer';
 import {
-    BodyParser,
     Encoder,
     HeaderBag,
     HttpResponse,
     MetadataBearer,
-    OperationModel,
     ResponseParser,
     StreamCollector,
     ServiceException,
@@ -19,7 +17,6 @@ import {
 
 export class JsonRpcParser<StreamType> implements ResponseParser<StreamType> {
     constructor(
-        private readonly bodyParser: BodyParser,
         private readonly parseServiceException: ServiceExceptionParser,
         private readonly bodyCollector: StreamCollector<StreamType>,
         private readonly utf8Encoder: Encoder,
@@ -31,16 +28,14 @@ export class JsonRpcParser<StreamType> implements ResponseParser<StreamType> {
     ): Promise<OutputType> {
         const body = await this.resolveBodyString(input)
         if (input.statusCode > 299) {
-            throw this.parseServiceException(
-                operation,
-                {...input, body: body},
-                this.bodyParser
-            )
+            // throw this.parseServiceException(
+            //     operation,
+            //     {...input, body: body},
+            //     this.bodyParser
+            // )
+            throw new Error(String(input.statusCode));
         }
-        const partialOutput = this.bodyParser.parse<OutputType>(
-            operation.output,
-            body,
-        )
+        const partialOutput = operation.output.parse(body);
         partialOutput.$metadata = extractMetadata(input);
         return partialOutput as OutputType;
     }

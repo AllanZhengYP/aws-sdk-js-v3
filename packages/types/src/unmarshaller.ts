@@ -11,21 +11,6 @@ import {MetadataBearer} from './response';
 import {ServiceException} from './exception';
 import { OperationOutputShapeModel } from "./modelon";
 
-export interface BodyParser<SerializedType = string> {
-    /**
-     * Convert the provided input into the shape described in the supplied
-     * serialization model.
-     *
-     * @param shape A serialization model describing the expected shape of the
-     *              value supplied as `input`.
-     * @param input The value to parse
-     */
-    parse<OutputType>(
-        shape: OperationOutputShapeModel<OutputType>,
-        input: SerializedType
-    ): OutputType;
-}
-
 export interface ResponseParser<StreamType = Uint8Array> {
     /**
      * Converts the output of an operation into JavaScript types.
@@ -52,5 +37,5 @@ export interface StreamCollector<StreamType> {
  * parse the error response according to response and throw the ServiceException
  */
 export interface ServiceExceptionParser {
-    (operation: OperationModelon<any, any>, response: ResolvedHttpResponse, errorBodyParser: BodyParser): ServiceException
+    (operation: OperationModelon<any, any>, response: ResolvedHttpResponse): ServiceException
 }
