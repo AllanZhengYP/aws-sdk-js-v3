@@ -30,7 +30,7 @@ export class TagResourceCommand implements __aws_sdk_types.Command<
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<TagResourceInput, TagResourceOutput, any> = {
             logger: {} as any,
             model: TagResource
         };

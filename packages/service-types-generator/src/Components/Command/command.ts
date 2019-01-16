@@ -73,7 +73,7 @@ export class ${this.className} implements ${typesPackage}.Command<
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: ${typesPackage}.HandlerExecutionContext = {
+        const handlerExecutionContext: ${typesPackage}.HandlerExecutionContext<${inputType}, ${outputType}, any> = {
             logger: {} as any,
             model: ${this.operation.name}
         };

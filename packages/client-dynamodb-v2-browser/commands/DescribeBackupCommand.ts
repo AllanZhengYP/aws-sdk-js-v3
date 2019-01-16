@@ -30,7 +30,7 @@ export class DescribeBackupCommand implements __aws_sdk_types.Command<
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<DescribeBackupInput, DescribeBackupOutput, any> = {
             logger: {} as any,
             model: DescribeBackup
         };
