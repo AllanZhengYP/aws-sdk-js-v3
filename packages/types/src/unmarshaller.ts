@@ -1,6 +1,7 @@
 import {
     Member,
     OperationModel,
+    OperationModelon,
 } from "./protocol";
 import {
     HttpResponse, 
@@ -8,6 +9,7 @@ import {
 } from "./http";
 import {MetadataBearer} from './response';
 import {ServiceException} from './exception';
+import { OperationOutputShapeModel } from "./modelon";
 
 export interface BodyParser<SerializedType = string> {
     /**
@@ -19,7 +21,7 @@ export interface BodyParser<SerializedType = string> {
      * @param input The value to parse
      */
     parse<OutputType>(
-        shape: Member,
+        shape: OperationOutputShapeModel<OutputType>,
         input: SerializedType
     ): OutputType;
 }
@@ -33,7 +35,7 @@ export interface ResponseParser<StreamType = Uint8Array> {
      * @param input     The HTTP response received from the service
      */
     parse<OutputType extends MetadataBearer>(
-        operation: OperationModel,
+        operation: OperationModelon<any, OutputType>,
         input: HttpResponse<StreamType>
     ): Promise<OutputType>;
 }
@@ -50,5 +52,5 @@ export interface StreamCollector<StreamType> {
  * parse the error response according to response and throw the ServiceException
  */
 export interface ServiceExceptionParser {
-    (operation: OperationModel, response: ResolvedHttpResponse, errorBodyParser: BodyParser): ServiceException
+    (operation: OperationModelon<any, any>, response: ResolvedHttpResponse, errorBodyParser: BodyParser): ServiceException
 }

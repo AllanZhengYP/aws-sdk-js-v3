@@ -14,6 +14,7 @@ import {
     Member,
     ServiceMetadata,
     ServiceExceptionParser,
+    OperationModelon,
 } from '@aws-sdk/types';
 
 export class JsonRpcParser<StreamType> implements ResponseParser<StreamType> {
@@ -25,7 +26,7 @@ export class JsonRpcParser<StreamType> implements ResponseParser<StreamType> {
     ) {}
 
     async parse<OutputType extends MetadataBearer>(
-        operation: OperationModel,
+        operation: OperationModelon<any, OutputType>,
         input: HttpResponse<StreamType>
     ): Promise<OutputType> {
         const body = await this.resolveBodyString(input)
@@ -36,7 +37,7 @@ export class JsonRpcParser<StreamType> implements ResponseParser<StreamType> {
                 this.bodyParser
             )
         }
-        const partialOutput = this.bodyParser.parse<Partial<OutputType>>(
+        const partialOutput = this.bodyParser.parse<OutputType>(
             operation.output,
             body,
         )

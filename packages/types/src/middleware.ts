@@ -314,7 +314,7 @@ export interface MiddlewareStack<
  * Data and helper objects that are not expected to change from one execution of
  * a composed handler to another.
  */
-export interface HandlerExecutionContext<Input, Output, MidProduct=any> {
+export interface HandlerExecutionContext<Input, Output, SerializedShape=any> {
     /**
      * A logger that may be invoked by any handler during execution of an
      * operation.
@@ -325,5 +325,5 @@ export interface HandlerExecutionContext<Input, Output, MidProduct=any> {
      * The serialization model for the input, output, and possible errors for
      * the operation executed by invoking the composed handler.
      */
-    model: OperationModelon<Input, Output, MidProduct>;
+    model: OperationModelon<Input, Output, SerializedShape>;
 }

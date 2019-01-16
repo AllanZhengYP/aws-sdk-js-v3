@@ -1,4 +1,4 @@
-import {StructureModel} from './modelon';
+import {OperationInputShapeModel, OperationOutputShapeModel} from './modelon';
 
 export type SerializationType = 'blob'|'boolean'|'float'|'integer'|'list'|'map'|'string'|'structure'|'timestamp';
 
@@ -101,12 +101,12 @@ export interface OperationModel {
     errors: Array<Member>;
 }
 
-export interface OperationModelon<Input, Output, MidProduct=string> {
+export interface OperationModelon<Input, Output, SerializedShape=any> {
     http: HttpTrait;
     name: string;
     metadata: ServiceMetadata;
-    input: StructureModel<Input, MidProduct>;
-    output: StructureModel<Output, MidProduct>;
+    input: OperationInputShapeModel<Input, SerializedShape>;
+    output: OperationOutputShapeModel<Output, SerializedShape>;
     errors: Array<Member>;
 }
 

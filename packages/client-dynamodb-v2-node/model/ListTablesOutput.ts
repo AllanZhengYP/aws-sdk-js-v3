@@ -5,7 +5,6 @@ import {StructureModel as _StructureModel_} from '@aws-sdk/types';
 export const ListTablesOutput: _StructureModel_<ListTablesOutput_Type, any> = {
     parse: (data: any): ListTablesOutput_Type => {
         let rtn: any = {};
-        console.log('____');
         if (data.TableNames) rtn.TableNames = _TableNameList.parse!(data.TableNames);
         if (data.LastEvaluatedTableName) rtn.LastEvaluatedTableName = data.LastEvaluatedTableName;
         return rtn as ListTablesOutput_Type;

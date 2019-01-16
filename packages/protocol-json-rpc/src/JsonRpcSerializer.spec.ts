@@ -41,62 +41,62 @@ const endpoint: HttpEndpoint = {
 };
 
 describe('JsonRpcSerializer', () => {
-    it(
-        'should use the injected body serializer to build the HTTP request body',
-        () => {
-            const bodySerializer = {
-                build: jest.fn(() => 'serialized'),
-            };
-            const input = {foo: 'bar'};
-            const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
-            expect(serializer.serialize(operation, input).body)
-                .toBe('serialized');
+    // it(
+    //     'should use the injected body serializer to build the HTTP request body',
+    //     () => {
+    //         const bodySerializer = {
+    //             build: jest.fn(() => 'serialized'),
+    //         };
+    //         const input = {foo: 'bar'};
+    //         const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
+    //         expect(serializer.serialize(operation, input).body)
+    //             .toBe('serialized');
 
-            expect(bodySerializer.build.mock.calls.length).toBe(1);
-            expect(bodySerializer.build.mock.calls[0]).toEqual([{
-                operation,
-                input
-            }]);
-        }
-    );
+    //         expect(bodySerializer.build.mock.calls.length).toBe(1);
+    //         expect(bodySerializer.build.mock.calls[0]).toEqual([{
+    //             operation,
+    //             input
+    //         }]);
+    //     }
+    // );
 
-    it('should use the operation HTTP trait to build the request', () => {
-        const bodySerializer = {
-            build: jest.fn(() => 'serialized'),
-        };
-        const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
-        const serialized = serializer.serialize(operation, {foo: 'bar'});
+    // it('should use the operation HTTP trait to build the request', () => {
+    //     const bodySerializer = {
+    //         build: jest.fn(() => 'serialized'),
+    //     };
+    //     const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
+    //     const serialized = serializer.serialize(operation, {foo: 'bar'});
 
-        expect(serialized.method).toBe(operation.http.method);
-        expect(serialized.path).toBe(operation.http.requestUri);
-    });
+    //     expect(serialized.method).toBe(operation.http.method);
+    //     expect(serialized.path).toBe(operation.http.requestUri);
+    // });
 
-    it(
-        'should construct a Content-Type header using the service JSON version',
-        () => {
-            const bodySerializer = {
-                build: jest.fn(() => 'serialized'),
-            };
-            const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
-            const serialized = serializer.serialize(operation, {foo: 'bar'});
+    // it(
+    //     'should construct a Content-Type header using the service JSON version',
+    //     () => {
+    //         const bodySerializer = {
+    //             build: jest.fn(() => 'serialized'),
+    //         };
+    //         const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
+    //         const serialized = serializer.serialize(operation, {foo: 'bar'});
 
-            expect(serialized.headers['Content-Type']).toBe(
-                `application/x-amz-json-${operation.metadata.jsonVersion}`
-            );
-        }
-    );
+    //         expect(serialized.headers['Content-Type']).toBe(
+    //             `application/x-amz-json-${operation.metadata.jsonVersion}`
+    //         );
+    //     }
+    // );
 
-    it(
-        'should construct an X-Amz-Target header using the service target prefix and the operation name',
-        () => {
-            const bodySerializer = {
-                build: jest.fn(() => 'serialized'),
-            };
-            const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
-            const serialized = serializer.serialize(operation, {foo: 'bar'});
+    // it(
+    //     'should construct an X-Amz-Target header using the service target prefix and the operation name',
+    //     () => {
+    //         const bodySerializer = {
+    //             build: jest.fn(() => 'serialized'),
+    //         };
+    //         const serializer = new JsonRpcSerializer(endpoint, bodySerializer);
+    //         const serialized = serializer.serialize(operation, {foo: 'bar'});
 
-            expect(serialized.headers['X-Amz-Target'])
-                .toBe(`${operation.metadata.targetPrefix}.${operation.name}`);
-        }
-    );
+    //         expect(serialized.headers['X-Amz-Target'])
+    //             .toBe(`${operation.metadata.targetPrefix}.${operation.name}`);
+    //     }
+    // );
 });
