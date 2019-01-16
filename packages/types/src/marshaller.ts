@@ -1,6 +1,7 @@
-import {Member, OperationModel} from "./protocol";
-import {HttpRequest} from "./http";
-
+import { Member } from "./protocol";
+import { HttpRequest } from "./http";
+import { OperationModelon } from './protocol';
+import { StructureModel } from "./modelon";
 export interface BodySerializer<SerializedType = string> {
     /**
      * Converts the provided `input` into the serialized format described in the
@@ -11,10 +12,9 @@ export interface BodySerializer<SerializedType = string> {
      * @throws if a node in the input cannot be converted into the type
      *          specified by the serialization model
      */
-    build(options: BodySerializerBuildOptions): SerializedType;
+    build(options: BodySerializerBuildOptions<any, any, SerializedType>): SerializedType;
 }
-
-export interface BodySerializerBuildOptions {
+export interface BodySerializerBuildOptions<Input, Output, SerializedType> {
     /**
      * Whether the operation input contains a payload member.
      */
@@ -28,7 +28,7 @@ export interface BodySerializerBuildOptions {
      * Should be either operation input or the input payload member.
      * Defaults to operation.input.
      */
-    member?: Member;
+    member?: StructureModel<any>;
     /**
      * Location name for the member.
      */
@@ -36,7 +36,7 @@ export interface BodySerializerBuildOptions {
     /**
      * The operation model to which the input should be converted.
      */
-    operation: OperationModel;
+    operation: OperationModelon<any, any, SerializedType>;
 }
 
 export interface RequestSerializer<StreamType = Uint8Array> {
@@ -47,5 +47,5 @@ export interface RequestSerializer<StreamType = Uint8Array> {
      *                  request.
      * @param input     The user input to serialize.
      */
-    serialize(operation: OperationModel, input: any): HttpRequest<StreamType>;
+    serialize(operation: OperationModelon<any, any, any>, input: any): HttpRequest<StreamType>;
 }

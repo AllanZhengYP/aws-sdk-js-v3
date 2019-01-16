@@ -16,7 +16,7 @@ export function serializerMiddleware<
 ): SerializeMiddleware<Input, Output, Stream> {
     return (
         next: SerializeHandler<Input, Output, Stream>,
-        {model}: HandlerExecutionContext
+        {model}: HandlerExecutionContext<Input, Output>
     ): SerializeHandler<Input, Output, Stream> => async (
         args: SerializeHandlerArguments<Input, Stream>
     ): Promise<Output> => {

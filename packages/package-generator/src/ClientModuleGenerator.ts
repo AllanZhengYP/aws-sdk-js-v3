@@ -37,7 +37,6 @@ export class ClientModuleGenerator extends ModuleGenerator {
     private readonly commandGenerator: CommandGenerator;
     private readonly smokeTestGenerator?: SmokeTestGenerator;
     private readonly model: TreeModel;
-    private readonly circularDependencies?: CircularDependenciesMap;
     private readonly target: RuntimeTarget;
 
     constructor({
@@ -74,11 +73,6 @@ export class ClientModuleGenerator extends ModuleGenerator {
         this.commandGenerator = new CommandGenerator(model, runtime);
         this.target = runtime;
         this.model = model;
-
-        const circularDependencies = detectCircularModelDependency(model);
-        if (Object.keys(circularDependencies).length > 0) {
-            this.circularDependencies = circularDependencies;
-        }
     }
 
     private clientReadme(input: ReadmeInterface): string {
@@ -292,7 +286,7 @@ tsconfig.test.json
     }
 
     private *modelFiles() {
-        yield* new ModelGenerator(this.model, this.circularDependencies);
+        yield* new ModelGenerator(this.model);
         yield* new OperationGenerator(this.model);
     }
 

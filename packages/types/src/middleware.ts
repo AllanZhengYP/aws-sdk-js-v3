@@ -1,5 +1,5 @@
 import {HttpRequest} from './http';
-import {OperationModel} from './protocol';
+import {OperationModelon} from './protocol';
 import {Logger} from './logger';
 
 export interface HandlerArguments<Input extends object> {
@@ -95,7 +95,7 @@ export interface Middleware<Input extends object, Output extends object> {
      */
     (
         next: Handler<Input, Output>,
-        context: HandlerExecutionContext
+        context: HandlerExecutionContext<Input, Output>
     ): Handler<Input, Output>;
 }
 
@@ -116,7 +116,7 @@ export interface SerializeMiddleware<
      */
     (
         next: SerializeHandler<Input, Output, Stream>,
-        context: HandlerExecutionContext
+        context: HandlerExecutionContext<Input, Output>
     ): SerializeHandler<Input, Output, Stream>;
 }
 
@@ -137,7 +137,7 @@ export interface FinalizeMiddleware<
      */
     (
         next: FinalizeHandler<Input, Output, Stream>,
-        context: HandlerExecutionContext
+        context: HandlerExecutionContext<Input, Output>
     ): FinalizeHandler<Input, Output, Stream>;
 }
 
@@ -156,7 +156,7 @@ export interface Terminalware<
     Stream = Uint8Array
 > {
     <Input extends object, Output extends OutputConstraint>(
-        context: HandlerExecutionContext
+        context: HandlerExecutionContext<Input, Output>
     ): FinalizeHandler<Input, Output, Stream>;
 }
 
@@ -306,7 +306,7 @@ export interface MiddlewareStack<
         OutputType extends Output
     >(
         handler: FinalizeHandler<InputType, OutputType, Stream>,
-        context: HandlerExecutionContext
+        context: HandlerExecutionContext<InputType, OutputType>
     ): Handler<InputType, OutputType>;
 }
 
@@ -314,7 +314,7 @@ export interface MiddlewareStack<
  * Data and helper objects that are not expected to change from one execution of
  * a composed handler to another.
  */
-export interface HandlerExecutionContext {
+export interface HandlerExecutionContext<Input, Output, MidProduct=any> {
     /**
      * A logger that may be invoked by any handler during execution of an
      * operation.
@@ -325,5 +325,5 @@ export interface HandlerExecutionContext {
      * The serialization model for the input, output, and possible errors for
      * the operation executed by invoking the composed handler.
      */
-    model: OperationModel;
+    model: OperationModelon<Input, Output, MidProduct>;
 }

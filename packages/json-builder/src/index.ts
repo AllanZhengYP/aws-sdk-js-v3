@@ -8,7 +8,8 @@ import {
     Encoder,
     OperationModel,
     SerializationModel,
-    Structure as StructureShape
+    Structure as StructureShape,
+    StructureModel
 } from "@aws-sdk/types";
 
 type Scalar = string|number|boolean|null;
@@ -29,11 +30,10 @@ export class JsonBuilder implements BodySerializer {
 
     public build({
         operation,
-        member = operation.input,
+        member = operation.input as StructureModel<any>,
         input
-    }: BodySerializerBuildOptions): string {
-        let shape = member.shape as StructureShape;
-        return JSON.stringify(this.format(shape, input));
+    }: BodySerializerBuildOptions<any, any, any>): string {
+        return JSON.stringify(member.parse!(input));
     }
 
     private format(shape: SerializationModel, input: any): JsonValue {

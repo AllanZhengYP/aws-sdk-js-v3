@@ -10,27 +10,26 @@ import {TreeModel} from "@aws-sdk/build-types";
 export class ModelGenerator {
     constructor(
         private readonly model: TreeModel,
-        private readonly circularDependencies: CircularDependenciesMap = {}
     ) {}
 
     *[Symbol.iterator](): Iterator<[string, string]> {
-        const {shapes} = this.model;
+        const {shapes, metadata: {protocol}} = this.model;
         for (let shapeName of Object.keys(shapes)) {
             const shape = shapes[shapeName];
             if (shape.type === 'list') {
                 yield [
                     shapeName,
-                    new ListModule(shape, this.circularDependencies).toString(),
+                    new ListModule(shape, protocol).toString(),
                 ];
             } else if (shape.type === 'map') {
                 yield [
                     shapeName,
-                    new MapModule(shape, this.circularDependencies).toString(),
+                    new MapModule(shape).toString(),
                 ];
             } else if (shape.type === 'structure') {
                 yield [
                     shapeName,
-                    new StructureModule(shape, this.circularDependencies).toString(),
+                    new StructureModule(shape).toString(),
                 ];
             }
         }

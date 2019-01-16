@@ -18,7 +18,7 @@ export class JsonParser implements BodyParser {
         shape: Member,
         input: string
     ): OutputType {
-        return this.unmarshall(shape.shape, JSON.parse(input));
+        return (shape as any).parse(JSON.parse(input));
     }
 
     private unmarshall(shape: SerializationModel, input: JsonValue): any {

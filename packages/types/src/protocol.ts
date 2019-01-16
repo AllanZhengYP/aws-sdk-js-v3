@@ -1,3 +1,5 @@
+import {StructureModel} from './modelon';
+
 export type SerializationType = 'blob'|'boolean'|'float'|'integer'|'list'|'map'|'string'|'structure'|'timestamp';
 
 export type MemberLocation = 'header'|'headers'|'uri'|'querystring'|'statusCode';
@@ -96,6 +98,15 @@ export interface OperationModel {
     metadata: ServiceMetadata;
     input: Member;
     output: Member;
+    errors: Array<Member>;
+}
+
+export interface OperationModelon<Input, Output, MidProduct=string> {
+    http: HttpTrait;
+    name: string;
+    metadata: ServiceMetadata;
+    input: StructureModel<Input, MidProduct>;
+    output: StructureModel<Output, MidProduct>;
     errors: Array<Member>;
 }
 

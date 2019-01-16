@@ -6,10 +6,10 @@ import {CircularDependenciesMap} from "../helpers/detectCircularModelDependency"
 import {TreeModelStructure} from "@aws-sdk/build-types";
 
 export class Structure {
-    private useGetter = false;
+    // private useGetter = false;
     constructor(
         private readonly shape: TreeModelStructure,
-        private readonly circularDependencies: CircularDependenciesMap = {}
+        // private readonly circularDependencies: CircularDependenciesMap = {}
     ) {}
 
     toString(): string {
@@ -45,9 +45,9 @@ ${new IndentedSection(properties.join(',\n'))},
         let importStr = shapes
             .map(shape => new Import(`./${shape}`, shape))
             .concat([new Import('@aws-sdk/types', 'Structure as _Structure_')]);
-        if (this.useGetter) {
-            importStr = importStr.concat([new Import('@aws-sdk/types', 'Member as _Member_')]);
-        }
+        // if (this.useGetter) {
+        //     importStr = importStr.concat([new Import('@aws-sdk/types', 'Member as _Member_')]);
+        // }
         return importStr.join('\n');
     }
 
@@ -74,23 +74,23 @@ ${new IndentedSection(properties.join(',\n'))},
         const membersProps = [];
         for (let memberName of Object.keys(members)) {
             const member = this.shape.members[memberName];
-            if (
-                this.circularDependencies[this.shape.name] &&
-                this.circularDependencies[this.shape.name].has(member.shape.name)
-            ) {
-                this.useGetter = true;
-                membersProps.push(`get ${memberName}(): _Member_ {
-    Object.defineProperty(${this.shape.name}, '${memberName}', {value: ${
-        new IndentedSection(new MemberRef(member)).toString().replace(/^\s+/, '')
-    }});
-    return ${
-        new IndentedSection(new MemberRef(member)).toString().replace(/^\s+/, '')
-    };
-}`
-                );
-            } else {
+//             if (
+//                 this.circularDependencies[this.shape.name] &&
+//                 this.circularDependencies[this.shape.name].has(member.shape.name)
+//             ) {
+//                 this.useGetter = true;
+//                 membersProps.push(`get ${memberName}(): _Member_ {
+//     Object.defineProperty(${this.shape.name}, '${memberName}', {value: ${
+//         new IndentedSection(new MemberRef(member)).toString().replace(/^\s+/, '')
+//     }});
+//     return ${
+//         new IndentedSection(new MemberRef(member)).toString().replace(/^\s+/, '')
+//     };
+// }`
+//                 );
+//             } else {
                 membersProps.push(`${memberName}: ${new MemberRef(member)}`);
-            }
+            // }
         }
 
         return `
