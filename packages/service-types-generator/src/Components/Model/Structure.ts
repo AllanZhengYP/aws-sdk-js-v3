@@ -79,7 +79,7 @@ ${new IndentedSection(properties.join(',\n'))},
     private parserAssignMembers(members: {[key: string]: TreeModelMember}): string {
         const strArray: Array<string> = [];
         for (const memberName of Object.keys(members)) {
-            const member = members[name];
+            const member = members[memberName];
             strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.parserAssignMembersValue(memberName, member)};`);
         }
         return strArray.join('\n');
@@ -97,14 +97,14 @@ ${new IndentedSection(properties.join(',\n'))},
     private serializerAssignMembers(members: {[key: string]: TreeModelMember}): string {
         const strArray: Array<string> = [];
         for (const memberName of Object.keys(members)) {
-            const member = members[name];
+            const member = members[memberName];
             strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.serializerAssignMembersValue(memberName, member)};\n`);
         }
         return strArray.join('\n');
     }
 
     private serializerAssignMembersValue(memberName: string, member: TreeModelMember): string {
-        if (requiresImport(member.shape)) return `${member.shape.name}.serialize!(data.${memberName})`;
+        if (requiresImport(member.shape)) return `${member.shape.name}.serialize!(data.${memberName} as any)`;
         else if (member.shape.type === 'timestamp') {
             this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'toDate as _toDate_'));
             return `_toDate_(data.${memberName})`;

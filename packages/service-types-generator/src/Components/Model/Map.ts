@@ -1,7 +1,7 @@
 import {Import} from "../Import";
 import {IndentedSection} from "../IndentedSection";
 import {MemberRef} from "./MemberRef";
-import {requiresImport, generic} from "./helpers";
+import {requiresImport, genericTypeName} from "./helpers";
 import {CircularDependenciesMap} from "../helpers/detectCircularModelDependency";
 import {TreeModelMap, TreeModelMember} from "@aws-sdk/build-types";
 import { SupportedProtocol } from '@aws-sdk/types';
@@ -28,11 +28,13 @@ export class Map {
         properties.push(this.serialize(this.shape.value, this.protocol));
 
         if (requiresImport(value.shape)) {
-            this.imports.push(new Import(`./${value.shape.name}`, value.shape.name));
+            const typeName = value.shape.name
+            this.imports.push(new Import(`./${typeName}`, typeName));
+            this.imports.push(new Import(`../types/${typeName}`, `${typeName} as ${typeName}_Type`));
         }
         let toReturn = this.imports.reduce<string>((prev, singleImport) => prev += `${singleImport.toString()}\n`, '');
         toReturn += `
-export const ${this.shape.name}: _MapModel_<${generic(value)}, any> = {
+export const ${this.shape.name}: _MapModel_<${genericTypeName(value)}, any> = {
 ${new IndentedSection(properties.join(',\n'))},
 };`;
 
@@ -41,12 +43,12 @@ ${new IndentedSection(properties.join(',\n'))},
 
     private parse(member: TreeModelMember, protocol: SupportedProtocol): string {
         if (protocol === 'json') {
-            return `parse: (data: any): {[key: string]: ${generic(member)}} => {
+            return `parse: (data: any): {[key: string]: ${genericTypeName(member)}} => {
     let rtn: any = {};
     for (const key of Object.keys(data)) {
         rtn[key] = ${this.assignValue(member, 'parse')};
     }
-    return rtn as {[key: string]: ${generic(member)}};
+    return rtn as {[key: string]: ${genericTypeName(member)}};
 }`
         }
         throw new Error('protocols other than json is not supported');
@@ -65,7 +67,7 @@ ${new IndentedSection(properties.join(',\n'))},
 
     private serialize(member: TreeModelMember, protocol: SupportedProtocol): string {
         if (protocol === 'json') {
-            return `serialize: (data: {[key: string]: ${generic(member)}}): any => {
+            return `serialize: (data: {[key: string]: ${genericTypeName(member)}}): any => {
     let rtn: any = {};
     for (const key of Object.keys(data)) {
         rtn[key] = ${this.assignValue(member, 'serialize')};

@@ -23,3 +23,7 @@ export function generic(member: TreeModelMember): string {
     }
 }
 
+export function genericTypeName(member: TreeModelMember): string {
+    return `${generic(member)}${requiresImport(member.shape) ? '_Type' : ''}`; 
+}
+

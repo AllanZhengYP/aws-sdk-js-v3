@@ -4,19 +4,18 @@ import {
     ServiceExceptionOption
 } from '@aws-sdk/util-error-constructor';
 import {
-    BodyParser,
     HeaderBag,
     OperationModel,
     ResolvedHttpResponse,
     ServiceException,
     ServiceExceptionParser,
     Structure,
+    OperationModelon,
 } from '@aws-sdk/types';
 
 export const jsonErrorUnmarshaller: ServiceExceptionParser = (
-    operation: OperationModel,
+    operation: OperationModelon<any, any>,
     response: ResolvedHttpResponse,
-    errorBodyParser: BodyParser<string>,
 ): ServiceException => {
     const {body} = response;
     const {errors, name: operationName} = operation;

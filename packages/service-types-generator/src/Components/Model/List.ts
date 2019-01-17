@@ -1,6 +1,6 @@
 import {Import} from "../Import";
 import {IndentedSection} from "../IndentedSection";
-import {requiresImport, generic} from "./helpers";
+import {requiresImport, genericTypeName} from "./helpers";
 import {TreeModelList, TreeModelMember} from "@aws-sdk/build-types";
 import {SupportedProtocol} from '@aws-sdk/types';
 
@@ -25,12 +25,13 @@ export class List {
 
         if (requiresImport(member.shape)) {
             const {name} = member.shape;
+            this.imports.push(new Import(`../types/${name}`, `${name} as ${name}_Type`));
             this.imports.push(new Import(`./${name}`, name));
         }
         const midProductGeneric = this.midProductGeneric(this.protocol);
         let toReturn = this.imports.reduce<string>((prev, singleImport) => prev += `${singleImport.toString()}\n`, '');
         toReturn += `
-export const ${this.shape.name}: _ListModel_<${generic(member)}${midProductGeneric ? `, ${midProductGeneric}` : ''}> = {
+export const ${this.shape.name}: _ListModel_<${genericTypeName(member)}${midProductGeneric ? `, ${midProductGeneric}` : ''}> = {
 ${new IndentedSection(props.join(',\n'))},
 };`;
 
@@ -39,8 +40,8 @@ ${new IndentedSection(props.join(',\n'))},
 
     private parse(member: TreeModelMember, protocol: SupportedProtocol): string {
         if (protocol === 'json') {
-            return `parse: (data: any): Array<${generic(member)}> => {
-    return (data as Array<${generic(member)}>)data.map(${this.parserMapFunction(member)});
+            return `parse: (data: any): Array<${genericTypeName(member)}> => {
+    return (data as Array<${genericTypeName(member)}>).map(${this.parserMapFunction(member)});
 }`
         }
         throw Error('protocols other than json is not supported');
@@ -49,7 +50,7 @@ ${new IndentedSection(props.join(',\n'))},
     private serialize(member: TreeModelMember, protocol: SupportedProtocol): string {
         if (protocol === 'json') {
             return  `
-serialize: (input: Array<${generic(member)}>): any => {
+serialize: (input: Array<${genericTypeName(member)}>): any => {
     return input.map(${this.serializerMapFunction(member)});
 }`
         }
@@ -66,7 +67,7 @@ serialize: (input: Array<${generic(member)}>): any => {
     }
 
     private parserMapFunction(member: TreeModelMember): string {
-        if (requiresImport(member.shape)) return `_item => ${member.shape.name}.parse(_item)`;
+        if (requiresImport(member.shape)) return `_item => ${member.shape.name}.parse!(_item)`;
         switch (member.shape.type) {
             case 'timestamp':
                 this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'toDate as _toDate_'));
@@ -77,7 +78,7 @@ serialize: (input: Array<${generic(member)}>): any => {
     }
 
     private serializerMapFunction(member: TreeModelMember): string {
-        if (requiresImport(member.shape)) return `_item => ${member.shape.name}.serialize(_item)`;
+        if (requiresImport(member.shape)) return `_item => ${member.shape.name}.serialize!(_item)`;
         switch (member.shape.type) {
             case 'timestamp':
                 this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'epoch as _epoch_'));
