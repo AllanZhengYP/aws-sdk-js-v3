@@ -20,7 +20,7 @@ import {ListModel as _ListModel_} from '@aws-sdk/types';
 
 export const MyList: _ListModel_<boolean, any> = {
     parse: (data: any): Array<boolean> => {
-        return (data as boolean[])data.map(_item => _item);
+        return (data as Array<boolean>)data.map(_item => _item);
     },
 
     serialize: (input: Array<boolean>): any => {

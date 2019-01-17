@@ -38,7 +38,7 @@ ${new IndentedSection(properties.join(',\n'))},
         `.trim();
     }
 
-    parse(shape: TreeModelStructure, protocol: SupportedProtocol): string {
+    private parse(shape: TreeModelStructure, protocol: SupportedProtocol): string {
         const {members, name} = shape;
         if (protocol === 'json') {
             return `parse: (data: any): ${name}_Type => {
@@ -50,7 +50,7 @@ ${new IndentedSection(properties.join(',\n'))},
         throw new Error('protocols other than json is not supported');
     }
 
-    serialize(shape: TreeModelStructure, protocol: SupportedProtocol): string {
+    private serialize(shape: TreeModelStructure, protocol: SupportedProtocol): string {
         const {members, name, required} = shape;
         if (protocol === 'json') {
             return `serialize: (data: ${name}_Type): any => {${required.length > 0 ? '\n\t\t' + this.validateRequired(shape) : ''}
@@ -62,7 +62,7 @@ ${new IndentedSection(properties.join(',\n'))},
         throw new Error('protocols other than json is not supported');
     }
 
-    getType(shape: TreeModelStructure): string {
+    private getType(shape: TreeModelStructure): string {
         const {topLevel, name} = shape;
         if (topLevel === 'input') {
             this.imports.push(new Import('@aws-sdk/types', 'OperationInputShapeModel as _OperationInputShapeModel_'));
@@ -76,16 +76,16 @@ ${new IndentedSection(properties.join(',\n'))},
         return `_StructureModel_<${name}_Type, any>`;
     }
 
-    parserAssignMembers(members: {[key: string]: TreeModelMember}): string {
+    private parserAssignMembers(members: {[key: string]: TreeModelMember}): string {
         const strArray: Array<string> = [];
         for (const memberName of Object.keys(members)) {
             const member = members[name];
-            strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.assignMembersValue(memberName, member)};`);
+            strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.parserAssignMembersValue(memberName, member)};`);
         }
         return strArray.join('\n');
     }
 
-    assignMembersValue(memberName: string, member: TreeModelMember): string {
+    private parserAssignMembersValue(memberName: string, member: TreeModelMember): string {
         if (requiresImport(member.shape)) return `${member.shape.name}.parse!(data.${memberName})`;
         else if (member.shape.type === 'timestamp') {
             this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'toDate as _toDate_'));
@@ -94,22 +94,31 @@ ${new IndentedSection(properties.join(',\n'))},
         return `data.${memberName}`;
     }
 
-    serializerAssignMembers(members: {[key: string]: TreeModelMember}): string {
+    private serializerAssignMembers(members: {[key: string]: TreeModelMember}): string {
         const strArray: Array<string> = [];
         for (const memberName of Object.keys(members)) {
             const member = members[name];
-            strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.assignMembersValue(memberName, member)};\n`);
+            strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.serializerAssignMembersValue(memberName, member)};\n`);
         }
         return strArray.join('\n');
     }
 
-    validateRequired(shape: TreeModelStructure): string {
+    private serializerAssignMembersValue(memberName: string, member: TreeModelMember): string {
+        if (requiresImport(member.shape)) return `${member.shape.name}.serialize!(data.${memberName})`;
+        else if (member.shape.type === 'timestamp') {
+            this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'toDate as _toDate_'));
+            return `_toDate_(data.${memberName})`;
+        }
+        return `data.${memberName}`;
+    }
+
+    private validateRequired(shape: TreeModelStructure): string {
         return `if (${shape.required.map(requiredShape => `!data.${requiredShape}`).join('||')}) {
     throw new Error('${shape.name} has missing required parameter');
 }`
     }
 
-    printImports(): string {
+    private printImports(): string {
         const shapes: Array<string> = [...new Set(
             Object.keys(this.shape.members)
                 .map(memberName => this.shape.members[memberName].shape)

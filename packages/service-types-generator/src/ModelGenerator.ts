@@ -24,7 +24,7 @@ export class ModelGenerator {
             } else if (shape.type === 'map') {
                 yield [
                     shapeName,
-                    new MapModule(shape).toString(),
+                    new MapModule(shape, protocol).toString(),
                 ];
             } else if (shape.type === 'structure') {
                 yield [
