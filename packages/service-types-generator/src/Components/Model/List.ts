@@ -1,18 +1,17 @@
 import {Import} from "../Import";
-import {MemberRef} from "./MemberRef";
 import {IndentedSection} from "../IndentedSection";
 import {requiresImport} from "./helpers";
 import {TreeModelList, TreeModelMember} from "@aws-sdk/build-types";
 import {SupportedProtocol} from '@aws-sdk/types';
 
 export class List {
+    private imports: Array<Import> = [new Import('@aws-sdk/types', 'ListModel as _ListModel_')];
     constructor(
         private readonly shape: TreeModelList,
         private readonly protocol: SupportedProtocol,
     ) {}
 
     toString(): string {
-        let imports: Array<Import> = [new Import('@aws-sdk/types', 'ListModel as _ListModel_')];
         const {flattened, member, min, sensitive} = this.shape;
         const props: Array<string> = [];
 
@@ -26,10 +25,10 @@ export class List {
 
         if (requiresImport(member.shape)) {
             const {name} = member.shape;
-            imports.push(new Import(`./${name}`, name));
+            this.imports.push(new Import(`./${name}`, name));
         }
         const midProductGeneric = this.midProductGeneric(this.protocol);
-        let toReturn = imports.reduce<string>((prev, singleImport) => prev += `${singleImport.toString()}\n`, '');
+        let toReturn = this.imports.reduce<string>((prev, singleImport) => prev += `${singleImport.toString()}\n`, '');
         toReturn += `
 export const ${this.shape.name}: _ListModel_<${this.arrayGeneric(member)}${midProductGeneric ? `, ${midProductGeneric}` : ''}> = {
 ${new IndentedSection(props.join(',\n'))},
@@ -40,8 +39,8 @@ ${new IndentedSection(props.join(',\n'))},
 
     parse(member: TreeModelMember, protocol: SupportedProtocol): string {
         if (protocol === 'json') {
-            return `parse: (data: Array<any>): Array<${this.arrayGeneric(member)}> => {
-    return data.map(${this.parserMapFunction(member)});
+            return `parse: (data: any): Array<${this.arrayGeneric(member)}> => {
+    return (data as ${this.arrayGeneric(member)}[])data.map(${this.parserMapFunction(member)});
 }`
         }
         throw Error('protocols other than json is not supported');
@@ -88,6 +87,7 @@ serialize: (input: Array<${this.arrayGeneric(member)}>): any => {
         if (requiresImport(member.shape)) return `_item => ${member.shape.name}.parse(_item)`;
         switch (member.shape.type) {
             case 'timestamp':
+                this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'toDate as _toDate_'));
                 return `_item => _toDate_(_item)`;
             default:
                 return `_item => _item`;
@@ -98,6 +98,7 @@ serialize: (input: Array<${this.arrayGeneric(member)}>): any => {
         if (requiresImport(member.shape)) return `_item => ${member.shape.name}.serialize(_item)`;
         switch (member.shape.type) {
             case 'timestamp':
+                this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'epoch as _epoch_'));
                 return `_item => _epoch_(_item)`;
             default:
                 return `_item => _item`;

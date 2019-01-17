@@ -8,10 +8,14 @@ export class Operation {
     constructor(private readonly operation: TreeModelOperation) {}
 
     toString(): string {
+        const {
+            input: {shape: {name: input}},
+            output: {shape: {name: output}}
+        } = this.operation;
         return `
 ${this.imports}
 
-export const ${this.operation.name}: _Operation_ = {
+export const ${this.operation.name}: _Operation_<${input}_Type, ${output}_Type, any> = {
 ${this.getOperationDefinition()}
 };
         `.trim();
@@ -23,11 +27,14 @@ ${this.getOperationDefinition()}
             [input.shape.name, output.shape.name]
                 .concat(errors.map(member => member.shape.name))
         )];
-
+        const inputName = input.shape.name;
+        const outputName = output.shape.name;
         return shapes
             .map(shape => new Import(`./${shape}`, shape))
             .concat([
-                new Import('@aws-sdk/types', 'OperationModel as _Operation_'),
+                new Import(`../types/${inputName}`, `${inputName} as ${inputName}_Type`),
+                new Import(`../types/${outputName}`, `${outputName} as ${outputName}_Type`),
+                new Import('@aws-sdk/types', 'OperationModelon as _Operation_'),
                 new Import('./ServiceMetadata', 'ServiceMetadata')
             ])
             .join('\n');
@@ -46,8 +53,8 @@ ${this.getOperationDefinition()}
 metadata: ServiceMetadata,
 name: '${name}',
 http: ${new HttpTrait(http)},
-input: ${new MemberRef(input)},
-output: ${new MemberRef(output)},
+input: ${input.shape.name},
+output: ${output.shape.name},
 errors: ${this.getErrors()},
         `.trim());
     }

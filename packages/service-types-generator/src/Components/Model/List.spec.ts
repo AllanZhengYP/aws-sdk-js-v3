@@ -19,8 +19,8 @@ describe('List', () => {
 import {ListModel as _ListModel_} from '@aws-sdk/types';
 
 export const MyList: _ListModel_<boolean, any> = {
-    parse: (data: Array<any>): Array<boolean> => {
-        return data.map(_item => _item);
+    parse: (data: any): Array<boolean> => {
+        return (data as boolean[])data.map(_item => _item);
     },
 
     serialize: (input: Array<boolean>): any => {

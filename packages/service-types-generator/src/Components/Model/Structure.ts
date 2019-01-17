@@ -3,22 +3,19 @@ import {IndentedSection} from "../IndentedSection";
 import {MemberRef} from "./MemberRef";
 import {requiresImport} from "./helpers";
 import {CircularDependenciesMap} from "../helpers/detectCircularModelDependency";
-import {TreeModelStructure} from "@aws-sdk/build-types";
+import {TreeModelStructure, TreeModelMember} from "@aws-sdk/build-types";
+import {SupportedProtocol} from '@aws-sdk/types';
 
 export class Structure {
-    // private useGetter = false;
+    private imports: Array<Import> = [];
     constructor(
         private readonly shape: TreeModelStructure,
-        // private readonly circularDependencies: CircularDependenciesMap = {}
+        private readonly protocol: SupportedProtocol,
     ) {}
 
     toString(): string {
-        const {members, required, payload, sensitive} = this.shape;
-        const properties: Array<string> = [
-            `type: 'structure'`,
-            `required: ${this.required}`,
-            `members: ${this.members}`,
-        ].concat(this.innateProps);
+        const {payload, sensitive, topLevel} = this.shape;
+        const properties: Array<string> = [];
         if (payload) {
             properties.push(`payload: '${payload}'`);
         }
@@ -26,16 +23,93 @@ export class Structure {
             properties.push(`sensitive: true`);
         }
 
-        return `
-${this.imports}
+        if (topLevel !== 'input') properties.push(this.parse(this.shape, this.protocol));
 
-export const ${this.shape.name}: _Structure_ = {
+        if (topLevel !== 'output') properties.push(this.serialize(this.shape, this.protocol));
+
+        const modelType = this.getType(this.shape);
+
+        return `
+${this.printImports()}
+
+export const ${this.shape.name}: ${modelType} = {
 ${new IndentedSection(properties.join(',\n'))},
 };
         `.trim();
     }
 
-    private get imports(): string {
+    parse(shape: TreeModelStructure, protocol: SupportedProtocol): string {
+        const {members, name} = shape;
+        if (protocol === 'json') {
+            return `parse: (data: any): ${name}_Type => {
+    let rtn: any = {};
+    ${this.parserAssignMembers(members)}
+    return rtn as ${name}_Type;
+}`
+        }
+        throw new Error('protocols other than json is not supported');
+    }
+
+    serialize(shape: TreeModelStructure, protocol: SupportedProtocol): string {
+        const {members, name, required} = shape;
+        if (protocol === 'json') {
+            return `serialize: (data: ${name}_Type): any => {${required.length > 0 ? '\n\t\t' + this.validateRequired(shape) : ''}
+    let rtn: any = {};
+    ${this.serializerAssignMembers(members)}
+    return rtn;
+}`
+        }
+        throw new Error('protocols other than json is not supported');
+    }
+
+    getType(shape: TreeModelStructure): string {
+        const {topLevel, name} = shape;
+        if (topLevel === 'input') {
+            this.imports.push(new Import('@aws-sdk/types', 'OperationInputShapeModel as _OperationInputShapeModel_'));
+            return `_OperationInputShapeModel_<${name}_Type, any>`;
+        }
+        else if (topLevel === 'output') {
+            this.imports.push(new Import('@aws-sdk/types', 'OperationOutputShapeModel as _OperationOutputShapeModel_'));
+            return `_OperationOutputShapeModel_<${name}_Type, any>`;
+        }
+        this.imports.push(new Import('@aws-sdk/types', 'StructureModel as _StructureModel_'));
+        return `_StructureModel_<${name}_Type, any>`;
+    }
+
+    parserAssignMembers(members: {[key: string]: TreeModelMember}): string {
+        const strArray: Array<string> = [];
+        for (const memberName of Object.keys(members)) {
+            const member = members[name];
+            strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.assignMembersValue(memberName, member)};`);
+        }
+        return strArray.join('\n');
+    }
+
+    assignMembersValue(memberName: string, member: TreeModelMember): string {
+        if (requiresImport(member.shape)) return `${member.shape.name}.parse!(data.${memberName})`;
+        else if (member.shape.type === 'timestamp') {
+            this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'toDate as _toDate_'));
+            return `_toDate_(data.${memberName})`;
+        }
+        return `data.${memberName}`;
+    }
+
+    serializerAssignMembers(members: {[key: string]: TreeModelMember}): string {
+        const strArray: Array<string> = [];
+        for (const memberName of Object.keys(members)) {
+            const member = members[name];
+            strArray.push(`if (data.${memberName}) rtn.${memberName} = ${this.assignMembersValue(memberName, member)};\n`);
+        }
+        return strArray.join('\n');
+    }
+
+    validateRequired(shape: TreeModelStructure): string {
+        return `if (${shape.required.map(requiredShape => `!data.${requiredShape}`).join('||')}) {
+    throw new Error('${shape.name} has missing required parameter');
+}`
+    }
+
+    printImports(): string {
         const shapes: Array<string> = [...new Set(
             Object.keys(this.shape.members)
                 .map(memberName => this.shape.members[memberName].shape)
@@ -44,72 +118,10 @@ ${new IndentedSection(properties.join(',\n'))},
         )];
         let importStr = shapes
             .map(shape => new Import(`./${shape}`, shape))
-            .concat([new Import('@aws-sdk/types', 'Structure as _Structure_')]);
-        // if (this.useGetter) {
-        //     importStr = importStr.concat([new Import('@aws-sdk/types', 'Member as _Member_')]);
-        // }
+            .concat([
+                ...this.imports,
+                new Import(`../types/${this.shape.name}`, `${this.shape.name} as ${this.shape.name}_Type`),
+            ]);
         return importStr.join('\n');
-    }
-
-    private get innateProps(): Array<string> {
-        const props: Array<string> =[];
-        if (this.shape.exception) {
-            if (this.shape.exceptionType) {
-                props.push(`exceptionType: '${this.shape.exceptionType}'`);
-            }
-            if (this.shape.exceptionCode) {
-                props.push(`exceptionCode: '${this.shape.exceptionCode}'`);
-            }
-        }
-
-        return props;
-    }
-
-    private get members(): string {
-        const {members} = this.shape;
-        if (Object.keys(members).length === 0) {
-            return '{}';
-        }
-
-        const membersProps = [];
-        for (let memberName of Object.keys(members)) {
-            const member = this.shape.members[memberName];
-//             if (
-//                 this.circularDependencies[this.shape.name] &&
-//                 this.circularDependencies[this.shape.name].has(member.shape.name)
-//             ) {
-//                 this.useGetter = true;
-//                 membersProps.push(`get ${memberName}(): _Member_ {
-//     Object.defineProperty(${this.shape.name}, '${memberName}', {value: ${
-//         new IndentedSection(new MemberRef(member)).toString().replace(/^\s+/, '')
-//     }});
-//     return ${
-//         new IndentedSection(new MemberRef(member)).toString().replace(/^\s+/, '')
-//     };
-// }`
-//                 );
-//             } else {
-                membersProps.push(`${memberName}: ${new MemberRef(member)}`);
-            // }
-        }
-
-        return `
-{
-${new IndentedSection(membersProps.join(',\n'))},
-}
-        `.trim();
-    }
-
-    private get required(): string {
-        const {required} = this.shape;
-        if (required.length > 0) {
-            return `
-[
-${new IndentedSection(required.map(prop => `'${prop}'`).join(',\n'))},
-]
-            `.trim();
-        }
-
-        return '[]';
     }
 }

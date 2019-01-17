@@ -29,7 +29,7 @@ export class ModelGenerator {
             } else if (shape.type === 'structure') {
                 yield [
                     shapeName,
-                    new StructureModule(shape).toString(),
+                    new StructureModule(shape, protocol).toString(),
                 ];
             }
         }
