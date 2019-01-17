@@ -32,7 +32,8 @@ export class Map {
             this.imports.push(new Import(`./${typeName}`, typeName));
             this.imports.push(new Import(`../types/${typeName}`, `${typeName} as ${typeName}_Type`));
         }
-        let toReturn = this.imports.reduce<string>((prev, singleImport) => prev += `${singleImport.toString()}\n`, '');
+        const importStatements = [...new Set<string>(this.imports.map(singleImport => singleImport.toString()))];
+        let toReturn = importStatements.reduce<string>((prev, singleImport) => prev += `${singleImport}\n`, '');
         toReturn += `
 export const ${this.shape.name}: _MapModel_<${genericTypeName(value)}, any> = {
 ${new IndentedSection(properties.join(',\n'))},
@@ -56,7 +57,7 @@ ${new IndentedSection(properties.join(',\n'))},
 
     private assignValue(member: TreeModelMember, mode: 'parse'|'serialize'): string {
         if (requiresImport(member.shape)) {
-            return `${member.shape.name}.parse!(data[key])`;
+            return `${member.shape.name}.${mode}!(data[key])`;
         }
         else if (member.shape.type === 'timestamp') {
             this.imports.push(new Import('@aws-sdk/protocol-timestamp', 'toDate as _toDate_'));

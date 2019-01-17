@@ -131,6 +131,7 @@ ${new IndentedSection(properties.join(',\n'))},
                 ...this.imports,
                 new Import(`../types/${this.shape.name}`, `${this.shape.name} as ${this.shape.name}_Type`),
             ]);
-        return importStr.join('\n');
+        const importStatements = [...new Set<string>(importStr.map(singleImport => singleImport.toString()))];
+        return importStatements.join('\n');
     }
 }

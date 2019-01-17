@@ -22,10 +22,9 @@ ${this.getOperationDefinition()}
     }
 
     private get imports(): string {
-        const {errors, input, output} = this.operation;
+        const {input, output} = this.operation;
         const shapes: Array<string> = [...new Set(
             [input.shape.name, output.shape.name]
-                .concat(errors.map(member => member.shape.name))
         )];
         const inputName = input.shape.name;
         const outputName = output.shape.name;
@@ -55,7 +54,7 @@ name: '${name}',
 http: ${new HttpTrait(http)},
 input: ${input.shape.name},
 output: ${output.shape.name},
-errors: ${this.getErrors()},
+errors: [],
         `.trim());
     }
 

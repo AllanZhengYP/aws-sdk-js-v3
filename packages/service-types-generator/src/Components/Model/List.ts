@@ -29,7 +29,8 @@ export class List {
             this.imports.push(new Import(`./${name}`, name));
         }
         const midProductGeneric = this.midProductGeneric(this.protocol);
-        let toReturn = this.imports.reduce<string>((prev, singleImport) => prev += `${singleImport.toString()}\n`, '');
+        const importStatements = [...new Set<string>(this.imports.map(singleImport => singleImport.toString()))];
+        let toReturn = importStatements.reduce<string>((prev, singleImport) => prev += `${singleImport}\n`, '');
         toReturn += `
 export const ${this.shape.name}: _ListModel_<${genericTypeName(member)}${midProductGeneric ? `, ${midProductGeneric}` : ''}> = {
 ${new IndentedSection(props.join(',\n'))},

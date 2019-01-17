@@ -35,7 +35,7 @@ export class JsonRpcParser<StreamType> implements ResponseParser<StreamType> {
             // )
             throw new Error(String(input.statusCode));
         }
-        const partialOutput = operation.output.parse(body);
+        const partialOutput = operation.output.parse(JSON.parse(body));
         partialOutput.$metadata = extractMetadata(input);
         return partialOutput as OutputType;
     }

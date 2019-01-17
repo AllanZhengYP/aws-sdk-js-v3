@@ -37,6 +37,7 @@ export class Client {
             IMPORTS.types,
             IMPORTS['config-resolver'],
             IMPORTS['middleware-stack'],
+            IMPORTS['protocol-timestamp']
         ];
 
         for (const customization of this.customizations) {
