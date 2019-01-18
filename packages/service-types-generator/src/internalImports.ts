@@ -40,10 +40,6 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/chunked-stream-reader-node',
         version: '^0.1.0-preview.1',
     },
-    'client-codecommit-node': {
-        package: '@aws-sdk/client-codecommit-node',
-        version: '^0.1.0-preview.1',
-    },
     'client-cognito-identity-browser': {
         package: '@aws-sdk/client-cognito-identity-browser',
         version: '^0.1.0-preview.1',
@@ -60,20 +56,8 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/client-dynamodb-v2-node',
         version: '^0.1.0-preview.1',
     },
-    'client-glacier-node': {
-        package: '@aws-sdk/client-glacier-node',
-        version: '^0.1.0-preview.1',
-    },
     'client-kinesis-browser': {
         package: '@aws-sdk/client-kinesis-browser',
-        version: '^0.1.0-preview.1',
-    },
-    'client-lambda-node': {
-        package: '@aws-sdk/client-lambda-node',
-        version: '^0.1.0-preview.1',
-    },
-    'client-xray-node': {
-        package: '@aws-sdk/client-xray-node',
         version: '^0.1.0-preview.1',
     },
     'config-resolver': {
