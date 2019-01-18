@@ -1,20 +1,13 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
+import {ListStreamsInput as ListStreamsInput_Type} from '../types/ListStreamsInput';
 
-export const ListStreamsInput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        Limit: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        ExclusiveStartStreamName: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
+export const ListStreamsInput: _OperationInputShapeModel_<ListStreamsInput_Type, any> = {
+    serialize: (data: ListStreamsInput_Type): any => {
+        let rtn: any = {};
+        if (data.Limit) rtn.Limit = data.Limit;
+
+    if (data.ExclusiveStartStreamName) rtn.ExclusiveStartStreamName = data.ExclusiveStartStreamName;
+
+        return rtn;
     },
 };

@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {TableNotFoundException as TableNotFoundException_Type} from '../types/TableNotFoundException';
 
-export const TableNotFoundException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const TableNotFoundException: _StructureModel_<TableNotFoundException_Type, any> = {
+    parse: (data: any): TableNotFoundException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as TableNotFoundException_Type;
     },
-    exceptionType: 'TableNotFoundException',
+    serialize: (data: TableNotFoundException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

@@ -1,22 +1,14 @@
 import {_RolesMap} from './_RolesMap';
 import {_RoleMappingMap} from './_RoleMappingMap';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {GetIdentityPoolRolesOutput as GetIdentityPoolRolesOutput_Type} from '../types/GetIdentityPoolRolesOutput';
 
-export const GetIdentityPoolRolesOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        IdentityPoolId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        Roles: {
-            shape: _RolesMap,
-        },
-        RoleMappings: {
-            shape: _RoleMappingMap,
-        },
+export const GetIdentityPoolRolesOutput: _OperationOutputShapeModel_<GetIdentityPoolRolesOutput_Type, any> = {
+    parse: (data: any): GetIdentityPoolRolesOutput_Type => {
+        let rtn: any = {};
+        if (data.IdentityPoolId) rtn.IdentityPoolId = data.IdentityPoolId;
+    if (data.Roles) rtn.Roles = _RolesMap.parse!(data.Roles);
+    if (data.RoleMappings) rtn.RoleMappings = _RoleMappingMap.parse!(data.RoleMappings);
+        return rtn as GetIdentityPoolRolesOutput_Type;
     },
 };

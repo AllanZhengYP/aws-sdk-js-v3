@@ -1,12 +1,11 @@
 import {_TableDescription} from './_TableDescription';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {DescribeTableOutput as DescribeTableOutput_Type} from '../types/DescribeTableOutput';
 
-export const DescribeTableOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        Table: {
-            shape: _TableDescription,
-        },
+export const DescribeTableOutput: _OperationOutputShapeModel_<DescribeTableOutput_Type, any> = {
+    parse: (data: any): DescribeTableOutput_Type => {
+        let rtn: any = {};
+        if (data.Table) rtn.Table = _TableDescription.parse!(data.Table);
+        return rtn as DescribeTableOutput_Type;
     },
 };

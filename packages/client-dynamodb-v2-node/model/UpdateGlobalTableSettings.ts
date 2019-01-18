@@ -1,45 +1,18 @@
 import {UpdateGlobalTableSettingsInput} from './UpdateGlobalTableSettingsInput';
 import {UpdateGlobalTableSettingsOutput} from './UpdateGlobalTableSettingsOutput';
-import {GlobalTableNotFoundException} from './GlobalTableNotFoundException';
-import {ReplicaNotFoundException} from './ReplicaNotFoundException';
-import {IndexNotFoundException} from './IndexNotFoundException';
-import {LimitExceededException} from './LimitExceededException';
-import {ResourceInUseException} from './ResourceInUseException';
-import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {UpdateGlobalTableSettingsInput as UpdateGlobalTableSettingsInput_Type} from '../types/UpdateGlobalTableSettingsInput';
+import {UpdateGlobalTableSettingsOutput as UpdateGlobalTableSettingsOutput_Type} from '../types/UpdateGlobalTableSettingsOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const UpdateGlobalTableSettings: _Operation_ = {
+export const UpdateGlobalTableSettings: _Operation_<UpdateGlobalTableSettingsInput_Type, UpdateGlobalTableSettingsOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'UpdateGlobalTableSettings',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: UpdateGlobalTableSettingsInput,
-    },
-    output: {
-        shape: UpdateGlobalTableSettingsOutput,
-    },
-    errors: [
-        {
-            shape: GlobalTableNotFoundException,
-        },
-        {
-            shape: ReplicaNotFoundException,
-        },
-        {
-            shape: IndexNotFoundException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-        {
-            shape: InternalServerError,
-        },
-    ],
+    input: UpdateGlobalTableSettingsInput,
+    output: UpdateGlobalTableSettingsOutput,
+    errors: [],
 };

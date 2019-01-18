@@ -1,18 +1,12 @@
 import {_Credentials} from './_Credentials';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {GetCredentialsForIdentityOutput as GetCredentialsForIdentityOutput_Type} from '../types/GetCredentialsForIdentityOutput';
 
-export const GetCredentialsForIdentityOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        IdentityId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        Credentials: {
-            shape: _Credentials,
-        },
+export const GetCredentialsForIdentityOutput: _OperationOutputShapeModel_<GetCredentialsForIdentityOutput_Type, any> = {
+    parse: (data: any): GetCredentialsForIdentityOutput_Type => {
+        let rtn: any = {};
+        if (data.IdentityId) rtn.IdentityId = data.IdentityId;
+    if (data.Credentials) rtn.Credentials = _Credentials.parse!(data.Credentials);
+        return rtn as GetCredentialsForIdentityOutput_Type;
     },
 };

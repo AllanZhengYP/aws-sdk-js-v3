@@ -1,11 +1,11 @@
-import {List as _List_} from '@aws-sdk/types';
+import {ListModel as _ListModel_} from '@aws-sdk/types';
 
-export const _MetricsNameList: _List_ = {
-    type: 'list',
-    min: 1,
-    member: {
-        shape: {
-            type: 'string',
-        },
+export const _MetricsNameList: _ListModel_<string, any> = {
+    parse: (data: any): Array<string> => {
+        return (data as Array<string>).map(_item => _item);
+    },
+
+    serialize: (input: Array<string>): any => {
+        return input.map(_item => _item);
     },
 };

@@ -1,33 +1,18 @@
 import {ScanInput} from './ScanInput';
 import {ScanOutput} from './ScanOutput';
-import {ProvisionedThroughputExceededException} from './ProvisionedThroughputExceededException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {ScanInput as ScanInput_Type} from '../types/ScanInput';
+import {ScanOutput as ScanOutput_Type} from '../types/ScanOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const Scan: _Operation_ = {
+export const Scan: _Operation_<ScanInput_Type, ScanOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'Scan',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: ScanInput,
-    },
-    output: {
-        shape: ScanOutput,
-    },
-    errors: [
-        {
-            shape: ProvisionedThroughputExceededException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: InternalServerError,
-        },
-    ],
+    input: ScanInput,
+    output: ScanOutput,
+    errors: [],
 };

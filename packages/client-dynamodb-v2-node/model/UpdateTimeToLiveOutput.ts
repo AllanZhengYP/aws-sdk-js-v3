@@ -1,12 +1,11 @@
 import {_TimeToLiveSpecification} from './_TimeToLiveSpecification';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {UpdateTimeToLiveOutput as UpdateTimeToLiveOutput_Type} from '../types/UpdateTimeToLiveOutput';
 
-export const UpdateTimeToLiveOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        TimeToLiveSpecification: {
-            shape: _TimeToLiveSpecification,
-        },
+export const UpdateTimeToLiveOutput: _OperationOutputShapeModel_<UpdateTimeToLiveOutput_Type, any> = {
+    parse: (data: any): UpdateTimeToLiveOutput_Type => {
+        let rtn: any = {};
+        if (data.TimeToLiveSpecification) rtn.TimeToLiveSpecification = _TimeToLiveSpecification.parse!(data.TimeToLiveSpecification);
+        return rtn as UpdateTimeToLiveOutput_Type;
     },
 };

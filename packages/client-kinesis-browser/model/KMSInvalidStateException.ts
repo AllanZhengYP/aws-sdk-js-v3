@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {KMSInvalidStateException as KMSInvalidStateException_Type} from '../types/KMSInvalidStateException';
 
-export const KMSInvalidStateException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const KMSInvalidStateException: _StructureModel_<KMSInvalidStateException_Type, any> = {
+    parse: (data: any): KMSInvalidStateException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as KMSInvalidStateException_Type;
     },
-    exceptionType: 'KMSInvalidStateException',
+    serialize: (data: KMSInvalidStateException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

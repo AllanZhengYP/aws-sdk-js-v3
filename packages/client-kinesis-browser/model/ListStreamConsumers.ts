@@ -1,41 +1,18 @@
 import {ListStreamConsumersInput} from './ListStreamConsumersInput';
 import {ListStreamConsumersOutput} from './ListStreamConsumersOutput';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {InvalidArgumentException} from './InvalidArgumentException';
-import {LimitExceededException} from './LimitExceededException';
-import {ExpiredNextTokenException} from './ExpiredNextTokenException';
-import {ResourceInUseException} from './ResourceInUseException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {ListStreamConsumersInput as ListStreamConsumersInput_Type} from '../types/ListStreamConsumersInput';
+import {ListStreamConsumersOutput as ListStreamConsumersOutput_Type} from '../types/ListStreamConsumersOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const ListStreamConsumers: _Operation_ = {
+export const ListStreamConsumers: _Operation_<ListStreamConsumersInput_Type, ListStreamConsumersOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'ListStreamConsumers',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: ListStreamConsumersInput,
-    },
-    output: {
-        shape: ListStreamConsumersOutput,
-    },
-    errors: [
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: InvalidArgumentException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: ExpiredNextTokenException,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-    ],
+    input: ListStreamConsumersInput,
+    output: ListStreamConsumersOutput,
+    errors: [],
 };

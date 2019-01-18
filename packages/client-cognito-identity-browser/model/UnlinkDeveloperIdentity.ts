@@ -1,45 +1,18 @@
 import {UnlinkDeveloperIdentityInput} from './UnlinkDeveloperIdentityInput';
 import {UnlinkDeveloperIdentityOutput} from './UnlinkDeveloperIdentityOutput';
-import {InvalidParameterException} from './InvalidParameterException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {NotAuthorizedException} from './NotAuthorizedException';
-import {ResourceConflictException} from './ResourceConflictException';
-import {TooManyRequestsException} from './TooManyRequestsException';
-import {InternalErrorException} from './InternalErrorException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {UnlinkDeveloperIdentityInput as UnlinkDeveloperIdentityInput_Type} from '../types/UnlinkDeveloperIdentityInput';
+import {UnlinkDeveloperIdentityOutput as UnlinkDeveloperIdentityOutput_Type} from '../types/UnlinkDeveloperIdentityOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const UnlinkDeveloperIdentity: _Operation_ = {
+export const UnlinkDeveloperIdentity: _Operation_<UnlinkDeveloperIdentityInput_Type, UnlinkDeveloperIdentityOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'UnlinkDeveloperIdentity',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: UnlinkDeveloperIdentityInput,
-    },
-    output: {
-        shape: UnlinkDeveloperIdentityOutput,
-    },
-    errors: [
-        {
-            shape: InvalidParameterException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: NotAuthorizedException,
-        },
-        {
-            shape: ResourceConflictException,
-        },
-        {
-            shape: TooManyRequestsException,
-        },
-        {
-            shape: InternalErrorException,
-        },
-    ],
+    input: UnlinkDeveloperIdentityInput,
+    output: UnlinkDeveloperIdentityOutput,
+    errors: [],
 };

@@ -1,37 +1,18 @@
 import {UpdateShardCountInput} from './UpdateShardCountInput';
 import {UpdateShardCountOutput} from './UpdateShardCountOutput';
-import {InvalidArgumentException} from './InvalidArgumentException';
-import {LimitExceededException} from './LimitExceededException';
-import {ResourceInUseException} from './ResourceInUseException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {UpdateShardCountInput as UpdateShardCountInput_Type} from '../types/UpdateShardCountInput';
+import {UpdateShardCountOutput as UpdateShardCountOutput_Type} from '../types/UpdateShardCountOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const UpdateShardCount: _Operation_ = {
+export const UpdateShardCount: _Operation_<UpdateShardCountInput_Type, UpdateShardCountOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'UpdateShardCount',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: UpdateShardCountInput,
-    },
-    output: {
-        shape: UpdateShardCountOutput,
-    },
-    errors: [
-        {
-            shape: InvalidArgumentException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-    ],
+    input: UpdateShardCountInput,
+    output: UpdateShardCountOutput,
+    errors: [],
 };

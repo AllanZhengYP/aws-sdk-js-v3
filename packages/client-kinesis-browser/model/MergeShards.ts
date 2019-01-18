@@ -1,37 +1,18 @@
 import {MergeShardsInput} from './MergeShardsInput';
 import {MergeShardsOutput} from './MergeShardsOutput';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {ResourceInUseException} from './ResourceInUseException';
-import {InvalidArgumentException} from './InvalidArgumentException';
-import {LimitExceededException} from './LimitExceededException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {MergeShardsInput as MergeShardsInput_Type} from '../types/MergeShardsInput';
+import {MergeShardsOutput as MergeShardsOutput_Type} from '../types/MergeShardsOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const MergeShards: _Operation_ = {
+export const MergeShards: _Operation_<MergeShardsInput_Type, MergeShardsOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'MergeShards',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: MergeShardsInput,
-    },
-    output: {
-        shape: MergeShardsOutput,
-    },
-    errors: [
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-        {
-            shape: InvalidArgumentException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-    ],
+    input: MergeShardsInput,
+    output: MergeShardsOutput,
+    errors: [],
 };

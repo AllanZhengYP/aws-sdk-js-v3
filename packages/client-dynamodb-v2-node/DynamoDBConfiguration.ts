@@ -17,7 +17,6 @@ import * as _stream from 'stream';
 import {OutputTypesUnion} from './types/OutputTypesUnion';
 
 export interface DynamoDBConfiguration {
-
     /**
      * The credentials used to sign requests.
      *
@@ -273,7 +272,7 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         ) => {
             const promisified = configuration.endpoint()
                 .then(endpoint => new __aws_sdk_protocol_json_rpc.JsonRpcSerializer<_stream.Readable>(
-                    endpoint
+                    endpoint,
                 ));
             return () => promisified;
         }

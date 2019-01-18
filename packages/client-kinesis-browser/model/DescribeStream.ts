@@ -1,29 +1,18 @@
 import {DescribeStreamInput} from './DescribeStreamInput';
 import {DescribeStreamOutput} from './DescribeStreamOutput';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {LimitExceededException} from './LimitExceededException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {DescribeStreamInput as DescribeStreamInput_Type} from '../types/DescribeStreamInput';
+import {DescribeStreamOutput as DescribeStreamOutput_Type} from '../types/DescribeStreamOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const DescribeStream: _Operation_ = {
+export const DescribeStream: _Operation_<DescribeStreamInput_Type, DescribeStreamOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'DescribeStream',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: DescribeStreamInput,
-    },
-    output: {
-        shape: DescribeStreamOutput,
-    },
-    errors: [
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-    ],
+    input: DescribeStreamInput,
+    output: DescribeStreamOutput,
+    errors: [],
 };

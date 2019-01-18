@@ -1,33 +1,18 @@
 import {DeregisterStreamConsumerInput} from './DeregisterStreamConsumerInput';
 import {DeregisterStreamConsumerOutput} from './DeregisterStreamConsumerOutput';
-import {LimitExceededException} from './LimitExceededException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {InvalidArgumentException} from './InvalidArgumentException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {DeregisterStreamConsumerInput as DeregisterStreamConsumerInput_Type} from '../types/DeregisterStreamConsumerInput';
+import {DeregisterStreamConsumerOutput as DeregisterStreamConsumerOutput_Type} from '../types/DeregisterStreamConsumerOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const DeregisterStreamConsumer: _Operation_ = {
+export const DeregisterStreamConsumer: _Operation_<DeregisterStreamConsumerInput_Type, DeregisterStreamConsumerOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'DeregisterStreamConsumer',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: DeregisterStreamConsumerInput,
-    },
-    output: {
-        shape: DeregisterStreamConsumerOutput,
-    },
-    errors: [
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: InvalidArgumentException,
-        },
-    ],
+    input: DeregisterStreamConsumerInput,
+    output: DeregisterStreamConsumerOutput,
+    errors: [],
 };

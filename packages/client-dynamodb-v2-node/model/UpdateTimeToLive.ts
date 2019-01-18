@@ -1,37 +1,18 @@
 import {UpdateTimeToLiveInput} from './UpdateTimeToLiveInput';
 import {UpdateTimeToLiveOutput} from './UpdateTimeToLiveOutput';
-import {ResourceInUseException} from './ResourceInUseException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {LimitExceededException} from './LimitExceededException';
-import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {UpdateTimeToLiveInput as UpdateTimeToLiveInput_Type} from '../types/UpdateTimeToLiveInput';
+import {UpdateTimeToLiveOutput as UpdateTimeToLiveOutput_Type} from '../types/UpdateTimeToLiveOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const UpdateTimeToLive: _Operation_ = {
+export const UpdateTimeToLive: _Operation_<UpdateTimeToLiveInput_Type, UpdateTimeToLiveOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'UpdateTimeToLive',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: UpdateTimeToLiveInput,
-    },
-    output: {
-        shape: UpdateTimeToLiveOutput,
-    },
-    errors: [
-        {
-            shape: ResourceInUseException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: InternalServerError,
-        },
-    ],
+    input: UpdateTimeToLiveInput,
+    output: UpdateTimeToLiveOutput,
+    errors: [],
 };

@@ -1,12 +1,11 @@
 import {_GlobalTableDescription} from './_GlobalTableDescription';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {CreateGlobalTableOutput as CreateGlobalTableOutput_Type} from '../types/CreateGlobalTableOutput';
 
-export const CreateGlobalTableOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        GlobalTableDescription: {
-            shape: _GlobalTableDescription,
-        },
+export const CreateGlobalTableOutput: _OperationOutputShapeModel_<CreateGlobalTableOutput_Type, any> = {
+    parse: (data: any): CreateGlobalTableOutput_Type => {
+        let rtn: any = {};
+        if (data.GlobalTableDescription) rtn.GlobalTableDescription = _GlobalTableDescription.parse!(data.GlobalTableDescription);
+        return rtn as CreateGlobalTableOutput_Type;
     },
 };

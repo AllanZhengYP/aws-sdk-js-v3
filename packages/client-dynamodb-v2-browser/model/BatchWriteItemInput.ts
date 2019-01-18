@@ -1,24 +1,19 @@
 import {_BatchWriteItemRequestMap} from './_BatchWriteItemRequestMap';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
+import {BatchWriteItemInput as BatchWriteItemInput_Type} from '../types/BatchWriteItemInput';
 
-export const BatchWriteItemInput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'RequestItems',
-    ],
-    members: {
-        RequestItems: {
-            shape: _BatchWriteItemRequestMap,
-        },
-        ReturnConsumedCapacity: {
-            shape: {
-                type: 'string',
-            },
-        },
-        ReturnItemCollectionMetrics: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const BatchWriteItemInput: _OperationInputShapeModel_<BatchWriteItemInput_Type, any> = {
+    serialize: (data: BatchWriteItemInput_Type): any => {
+    		if (!data.RequestItems) {
+        throw new Error('BatchWriteItemInput has missing required parameter');
+    }
+        let rtn: any = {};
+        if (data.RequestItems) rtn.RequestItems = _BatchWriteItemRequestMap.serialize!(data.RequestItems as any);
+
+    if (data.ReturnConsumedCapacity) rtn.ReturnConsumedCapacity = data.ReturnConsumedCapacity;
+
+    if (data.ReturnItemCollectionMetrics) rtn.ReturnItemCollectionMetrics = data.ReturnItemCollectionMetrics;
+
+        return rtn;
     },
 };

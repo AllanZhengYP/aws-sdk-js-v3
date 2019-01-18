@@ -1,33 +1,21 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {toDate as _toDate_} from '@aws-sdk/protocol-timestamp';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
+import {ListStreamConsumersInput as ListStreamConsumersInput_Type} from '../types/ListStreamConsumersInput';
 
-export const ListStreamConsumersInput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'StreamARN',
-    ],
-    members: {
-        StreamARN: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        NextToken: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        MaxResults: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        StreamCreationTimestamp: {
-            shape: {
-                type: 'timestamp',
-            },
-        },
+export const ListStreamConsumersInput: _OperationInputShapeModel_<ListStreamConsumersInput_Type, any> = {
+    serialize: (data: ListStreamConsumersInput_Type): any => {
+    		if (!data.StreamARN) {
+        throw new Error('ListStreamConsumersInput has missing required parameter');
+    }
+        let rtn: any = {};
+        if (data.StreamARN) rtn.StreamARN = data.StreamARN;
+
+    if (data.NextToken) rtn.NextToken = data.NextToken;
+
+    if (data.MaxResults) rtn.MaxResults = data.MaxResults;
+
+    if (data.StreamCreationTimestamp) rtn.StreamCreationTimestamp = _toDate_(data.StreamCreationTimestamp);
+
+        return rtn;
     },
 };

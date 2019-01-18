@@ -1,18 +1,12 @@
 import {_GlobalTableList} from './_GlobalTableList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {ListGlobalTablesOutput as ListGlobalTablesOutput_Type} from '../types/ListGlobalTablesOutput';
 
-export const ListGlobalTablesOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        GlobalTables: {
-            shape: _GlobalTableList,
-        },
-        LastEvaluatedGlobalTableName: {
-            shape: {
-                type: 'string',
-                min: 3,
-            },
-        },
+export const ListGlobalTablesOutput: _OperationOutputShapeModel_<ListGlobalTablesOutput_Type, any> = {
+    parse: (data: any): ListGlobalTablesOutput_Type => {
+        let rtn: any = {};
+        if (data.GlobalTables) rtn.GlobalTables = _GlobalTableList.parse!(data.GlobalTables);
+    if (data.LastEvaluatedGlobalTableName) rtn.LastEvaluatedGlobalTableName = data.LastEvaluatedGlobalTableName;
+        return rtn as ListGlobalTablesOutput_Type;
     },
 };

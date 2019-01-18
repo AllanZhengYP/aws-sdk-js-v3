@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {KMSDisabledException as KMSDisabledException_Type} from '../types/KMSDisabledException';
 
-export const KMSDisabledException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const KMSDisabledException: _StructureModel_<KMSDisabledException_Type, any> = {
+    parse: (data: any): KMSDisabledException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as KMSDisabledException_Type;
     },
-    exceptionType: 'KMSDisabledException',
+    serialize: (data: KMSDisabledException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

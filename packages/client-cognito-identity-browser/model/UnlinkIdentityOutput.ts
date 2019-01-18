@@ -1,7 +1,10 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {UnlinkIdentityOutput as UnlinkIdentityOutput_Type} from '../types/UnlinkIdentityOutput';
 
-export const UnlinkIdentityOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {},
+export const UnlinkIdentityOutput: _OperationOutputShapeModel_<UnlinkIdentityOutput_Type, any> = {
+    parse: (data: any): UnlinkIdentityOutput_Type => {
+        let rtn: any = {};
+
+        return rtn as UnlinkIdentityOutput_Type;
+    },
 };

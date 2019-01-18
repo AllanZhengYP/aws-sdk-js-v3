@@ -1,25 +1,15 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
+import {ListGlobalTablesInput as ListGlobalTablesInput_Type} from '../types/ListGlobalTablesInput';
 
-export const ListGlobalTablesInput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        ExclusiveStartGlobalTableName: {
-            shape: {
-                type: 'string',
-                min: 3,
-            },
-        },
-        Limit: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        RegionName: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const ListGlobalTablesInput: _OperationInputShapeModel_<ListGlobalTablesInput_Type, any> = {
+    serialize: (data: ListGlobalTablesInput_Type): any => {
+        let rtn: any = {};
+        if (data.ExclusiveStartGlobalTableName) rtn.ExclusiveStartGlobalTableName = data.ExclusiveStartGlobalTableName;
+
+    if (data.Limit) rtn.Limit = data.Limit;
+
+    if (data.RegionName) rtn.RegionName = data.RegionName;
+
+        return rtn;
     },
 };

@@ -1,25 +1,18 @@
 import {ListBackupsInput} from './ListBackupsInput';
 import {ListBackupsOutput} from './ListBackupsOutput';
-import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {ListBackupsInput as ListBackupsInput_Type} from '../types/ListBackupsInput';
+import {ListBackupsOutput as ListBackupsOutput_Type} from '../types/ListBackupsOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const ListBackups: _Operation_ = {
+export const ListBackups: _Operation_<ListBackupsInput_Type, ListBackupsOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'ListBackups',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: ListBackupsInput,
-    },
-    output: {
-        shape: ListBackupsOutput,
-    },
-    errors: [
-        {
-            shape: InternalServerError,
-        },
-    ],
+    input: ListBackupsInput,
+    output: ListBackupsOutput,
+    errors: [],
 };

@@ -1,37 +1,18 @@
 import {UntagResourceInput} from './UntagResourceInput';
 import {UntagResourceOutput} from './UntagResourceOutput';
-import {LimitExceededException} from './LimitExceededException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {InternalServerError} from './InternalServerError';
-import {ResourceInUseException} from './ResourceInUseException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {UntagResourceInput as UntagResourceInput_Type} from '../types/UntagResourceInput';
+import {UntagResourceOutput as UntagResourceOutput_Type} from '../types/UntagResourceOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const UntagResource: _Operation_ = {
+export const UntagResource: _Operation_<UntagResourceInput_Type, UntagResourceOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'UntagResource',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: UntagResourceInput,
-    },
-    output: {
-        shape: UntagResourceOutput,
-    },
-    errors: [
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: InternalServerError,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-    ],
+    input: UntagResourceInput,
+    output: UntagResourceOutput,
+    errors: [],
 };

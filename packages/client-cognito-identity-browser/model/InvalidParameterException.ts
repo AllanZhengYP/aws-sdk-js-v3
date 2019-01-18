@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {InvalidParameterException as InvalidParameterException_Type} from '../types/InvalidParameterException';
 
-export const InvalidParameterException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const InvalidParameterException: _StructureModel_<InvalidParameterException_Type, any> = {
+    parse: (data: any): InvalidParameterException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as InvalidParameterException_Type;
     },
-    exceptionType: 'InvalidParameterException',
+    serialize: (data: InvalidParameterException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

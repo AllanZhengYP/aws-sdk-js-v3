@@ -1,18 +1,12 @@
 import {_BackupSummaries} from './_BackupSummaries';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {ListBackupsOutput as ListBackupsOutput_Type} from '../types/ListBackupsOutput';
 
-export const ListBackupsOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        BackupSummaries: {
-            shape: _BackupSummaries,
-        },
-        LastEvaluatedBackupArn: {
-            shape: {
-                type: 'string',
-                min: 37,
-            },
-        },
+export const ListBackupsOutput: _OperationOutputShapeModel_<ListBackupsOutput_Type, any> = {
+    parse: (data: any): ListBackupsOutput_Type => {
+        let rtn: any = {};
+        if (data.BackupSummaries) rtn.BackupSummaries = _BackupSummaries.parse!(data.BackupSummaries);
+    if (data.LastEvaluatedBackupArn) rtn.LastEvaluatedBackupArn = data.LastEvaluatedBackupArn;
+        return rtn as ListBackupsOutput_Type;
     },
 };

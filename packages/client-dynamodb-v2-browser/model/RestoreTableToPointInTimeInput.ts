@@ -1,33 +1,21 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {toDate as _toDate_} from '@aws-sdk/protocol-timestamp';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
+import {RestoreTableToPointInTimeInput as RestoreTableToPointInTimeInput_Type} from '../types/RestoreTableToPointInTimeInput';
 
-export const RestoreTableToPointInTimeInput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'SourceTableName',
-        'TargetTableName',
-    ],
-    members: {
-        SourceTableName: {
-            shape: {
-                type: 'string',
-                min: 3,
-            },
-        },
-        TargetTableName: {
-            shape: {
-                type: 'string',
-                min: 3,
-            },
-        },
-        UseLatestRestorableTime: {
-            shape: {
-                type: 'boolean',
-            },
-        },
-        RestoreDateTime: {
-            shape: {
-                type: 'timestamp',
-            },
-        },
+export const RestoreTableToPointInTimeInput: _OperationInputShapeModel_<RestoreTableToPointInTimeInput_Type, any> = {
+    serialize: (data: RestoreTableToPointInTimeInput_Type): any => {
+    		if (!data.SourceTableName||!data.TargetTableName) {
+        throw new Error('RestoreTableToPointInTimeInput has missing required parameter');
+    }
+        let rtn: any = {};
+        if (data.SourceTableName) rtn.SourceTableName = data.SourceTableName;
+
+    if (data.TargetTableName) rtn.TargetTableName = data.TargetTableName;
+
+    if (data.UseLatestRestorableTime) rtn.UseLatestRestorableTime = data.UseLatestRestorableTime;
+
+    if (data.RestoreDateTime) rtn.RestoreDateTime = _toDate_(data.RestoreDateTime);
+
+        return rtn;
     },
 };

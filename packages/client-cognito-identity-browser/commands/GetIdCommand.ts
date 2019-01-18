@@ -30,7 +30,7 @@ export class GetIdCommand implements __aws_sdk_types.Command<
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<GetIdInput, GetIdOutput, any> = {
             logger: {} as any,
             model: GetId
         };

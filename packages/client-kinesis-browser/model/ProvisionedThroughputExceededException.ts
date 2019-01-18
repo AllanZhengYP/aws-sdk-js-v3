@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {ProvisionedThroughputExceededException as ProvisionedThroughputExceededException_Type} from '../types/ProvisionedThroughputExceededException';
 
-export const ProvisionedThroughputExceededException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const ProvisionedThroughputExceededException: _StructureModel_<ProvisionedThroughputExceededException_Type, any> = {
+    parse: (data: any): ProvisionedThroughputExceededException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as ProvisionedThroughputExceededException_Type;
     },
-    exceptionType: 'ProvisionedThroughputExceededException',
+    serialize: (data: ProvisionedThroughputExceededException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

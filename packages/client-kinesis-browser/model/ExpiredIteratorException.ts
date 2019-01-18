@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {ExpiredIteratorException as ExpiredIteratorException_Type} from '../types/ExpiredIteratorException';
 
-export const ExpiredIteratorException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const ExpiredIteratorException: _StructureModel_<ExpiredIteratorException_Type, any> = {
+    parse: (data: any): ExpiredIteratorException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as ExpiredIteratorException_Type;
     },
-    exceptionType: 'ExpiredIteratorException',
+    serialize: (data: ExpiredIteratorException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

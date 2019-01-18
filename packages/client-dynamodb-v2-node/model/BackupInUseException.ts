@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {BackupInUseException as BackupInUseException_Type} from '../types/BackupInUseException';
 
-export const BackupInUseException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const BackupInUseException: _StructureModel_<BackupInUseException_Type, any> = {
+    parse: (data: any): BackupInUseException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as BackupInUseException_Type;
     },
-    exceptionType: 'BackupInUseException',
+    serialize: (data: BackupInUseException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

@@ -2,50 +2,20 @@ import {_IdentityProviders} from './_IdentityProviders';
 import {_OIDCProviderList} from './_OIDCProviderList';
 import {_CognitoIdentityProviderList} from './_CognitoIdentityProviderList';
 import {_SAMLProviderList} from './_SAMLProviderList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {CreateIdentityPoolOutput as CreateIdentityPoolOutput_Type} from '../types/CreateIdentityPoolOutput';
 
-export const CreateIdentityPoolOutput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'IdentityPoolId',
-        'IdentityPoolName',
-        'AllowUnauthenticatedIdentities',
-    ],
-    members: {
-        IdentityPoolId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        IdentityPoolName: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        AllowUnauthenticatedIdentities: {
-            shape: {
-                type: 'boolean',
-            },
-        },
-        SupportedLoginProviders: {
-            shape: _IdentityProviders,
-        },
-        DeveloperProviderName: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        OpenIdConnectProviderARNs: {
-            shape: _OIDCProviderList,
-        },
-        CognitoIdentityProviders: {
-            shape: _CognitoIdentityProviderList,
-        },
-        SamlProviderARNs: {
-            shape: _SAMLProviderList,
-        },
+export const CreateIdentityPoolOutput: _OperationOutputShapeModel_<CreateIdentityPoolOutput_Type, any> = {
+    parse: (data: any): CreateIdentityPoolOutput_Type => {
+        let rtn: any = {};
+        if (data.IdentityPoolId) rtn.IdentityPoolId = data.IdentityPoolId;
+    if (data.IdentityPoolName) rtn.IdentityPoolName = data.IdentityPoolName;
+    if (data.AllowUnauthenticatedIdentities) rtn.AllowUnauthenticatedIdentities = data.AllowUnauthenticatedIdentities;
+    if (data.SupportedLoginProviders) rtn.SupportedLoginProviders = _IdentityProviders.parse!(data.SupportedLoginProviders);
+    if (data.DeveloperProviderName) rtn.DeveloperProviderName = data.DeveloperProviderName;
+    if (data.OpenIdConnectProviderARNs) rtn.OpenIdConnectProviderARNs = _OIDCProviderList.parse!(data.OpenIdConnectProviderARNs);
+    if (data.CognitoIdentityProviders) rtn.CognitoIdentityProviders = _CognitoIdentityProviderList.parse!(data.CognitoIdentityProviders);
+    if (data.SamlProviderARNs) rtn.SamlProviderARNs = _SAMLProviderList.parse!(data.SamlProviderARNs);
+        return rtn as CreateIdentityPoolOutput_Type;
     },
 };

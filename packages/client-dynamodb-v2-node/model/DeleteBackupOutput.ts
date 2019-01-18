@@ -1,12 +1,11 @@
 import {_BackupDescription} from './_BackupDescription';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {DeleteBackupOutput as DeleteBackupOutput_Type} from '../types/DeleteBackupOutput';
 
-export const DeleteBackupOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        BackupDescription: {
-            shape: _BackupDescription,
-        },
+export const DeleteBackupOutput: _OperationOutputShapeModel_<DeleteBackupOutput_Type, any> = {
+    parse: (data: any): DeleteBackupOutput_Type => {
+        let rtn: any = {};
+        if (data.BackupDescription) rtn.BackupDescription = _BackupDescription.parse!(data.BackupDescription);
+        return rtn as DeleteBackupOutput_Type;
     },
 };

@@ -1,16 +1,14 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
+import {DeleteIdentityPoolInput as DeleteIdentityPoolInput_Type} from '../types/DeleteIdentityPoolInput';
 
-export const DeleteIdentityPoolInput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'IdentityPoolId',
-    ],
-    members: {
-        IdentityPoolId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
+export const DeleteIdentityPoolInput: _OperationInputShapeModel_<DeleteIdentityPoolInput_Type, any> = {
+    serialize: (data: DeleteIdentityPoolInput_Type): any => {
+    		if (!data.IdentityPoolId) {
+        throw new Error('DeleteIdentityPoolInput has missing required parameter');
+    }
+        let rtn: any = {};
+        if (data.IdentityPoolId) rtn.IdentityPoolId = data.IdentityPoolId;
+
+        return rtn;
     },
 };

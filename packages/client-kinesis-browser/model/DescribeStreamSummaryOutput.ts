@@ -1,14 +1,11 @@
 import {_StreamDescriptionSummary} from './_StreamDescriptionSummary';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {DescribeStreamSummaryOutput as DescribeStreamSummaryOutput_Type} from '../types/DescribeStreamSummaryOutput';
 
-export const DescribeStreamSummaryOutput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'StreamDescriptionSummary',
-    ],
-    members: {
-        StreamDescriptionSummary: {
-            shape: _StreamDescriptionSummary,
-        },
+export const DescribeStreamSummaryOutput: _OperationOutputShapeModel_<DescribeStreamSummaryOutput_Type, any> = {
+    parse: (data: any): DescribeStreamSummaryOutput_Type => {
+        let rtn: any = {};
+        if (data.StreamDescriptionSummary) rtn.StreamDescriptionSummary = _StreamDescriptionSummary.parse!(data.StreamDescriptionSummary);
+        return rtn as DescribeStreamSummaryOutput_Type;
     },
 };

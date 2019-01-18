@@ -1,25 +1,22 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {_CognitoIdentityProvider as _CognitoIdentityProvider_Type} from '../types/_CognitoIdentityProvider';
 
-export const _CognitoIdentityProvider: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        ProviderName: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        ClientId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        ServerSideTokenCheck: {
-            shape: {
-                type: 'boolean',
-            },
-        },
+export const _CognitoIdentityProvider: _StructureModel_<_CognitoIdentityProvider_Type, any> = {
+    parse: (data: any): _CognitoIdentityProvider_Type => {
+        let rtn: any = {};
+        if (data.ProviderName) rtn.ProviderName = data.ProviderName;
+    if (data.ClientId) rtn.ClientId = data.ClientId;
+    if (data.ServerSideTokenCheck) rtn.ServerSideTokenCheck = data.ServerSideTokenCheck;
+        return rtn as _CognitoIdentityProvider_Type;
+    },
+    serialize: (data: _CognitoIdentityProvider_Type): any => {
+        let rtn: any = {};
+        if (data.ProviderName) rtn.ProviderName = data.ProviderName;
+
+    if (data.ClientId) rtn.ClientId = data.ClientId;
+
+    if (data.ServerSideTokenCheck) rtn.ServerSideTokenCheck = data.ServerSideTokenCheck;
+
+        return rtn;
     },
 };

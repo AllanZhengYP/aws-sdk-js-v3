@@ -8,6 +8,7 @@ import * as __aws_sdk_middleware_serializer from '@aws-sdk/middleware-serializer
 import * as __aws_sdk_middleware_stack from '@aws-sdk/middleware-stack';
 import * as __aws_sdk_node_http_handler from '@aws-sdk/node-http-handler';
 import * as __aws_sdk_protocol_json_rpc from '@aws-sdk/protocol-json-rpc';
+import * as __aws_sdk_protocol_timestamp from '@aws-sdk/protocol-timestamp';
 import * as __aws_sdk_region_provider from '@aws-sdk/region-provider';
 import * as __aws_sdk_retry_middleware from '@aws-sdk/retry-middleware';
 import * as __aws_sdk_signature_v4 from '@aws-sdk/signature-v4';

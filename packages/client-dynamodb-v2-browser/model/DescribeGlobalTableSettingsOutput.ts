@@ -1,18 +1,12 @@
 import {_ReplicaSettingsDescriptionList} from './_ReplicaSettingsDescriptionList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {DescribeGlobalTableSettingsOutput as DescribeGlobalTableSettingsOutput_Type} from '../types/DescribeGlobalTableSettingsOutput';
 
-export const DescribeGlobalTableSettingsOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        GlobalTableName: {
-            shape: {
-                type: 'string',
-                min: 3,
-            },
-        },
-        ReplicaSettings: {
-            shape: _ReplicaSettingsDescriptionList,
-        },
+export const DescribeGlobalTableSettingsOutput: _OperationOutputShapeModel_<DescribeGlobalTableSettingsOutput_Type, any> = {
+    parse: (data: any): DescribeGlobalTableSettingsOutput_Type => {
+        let rtn: any = {};
+        if (data.GlobalTableName) rtn.GlobalTableName = data.GlobalTableName;
+    if (data.ReplicaSettings) rtn.ReplicaSettings = _ReplicaSettingsDescriptionList.parse!(data.ReplicaSettings);
+        return rtn as DescribeGlobalTableSettingsOutput_Type;
     },
 };

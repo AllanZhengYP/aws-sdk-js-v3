@@ -1,26 +1,12 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {UpdateShardCountOutput as UpdateShardCountOutput_Type} from '../types/UpdateShardCountOutput';
 
-export const UpdateShardCountOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        StreamName: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        CurrentShardCount: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        TargetShardCount: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
+export const UpdateShardCountOutput: _OperationOutputShapeModel_<UpdateShardCountOutput_Type, any> = {
+    parse: (data: any): UpdateShardCountOutput_Type => {
+        let rtn: any = {};
+        if (data.StreamName) rtn.StreamName = data.StreamName;
+    if (data.CurrentShardCount) rtn.CurrentShardCount = data.CurrentShardCount;
+    if (data.TargetShardCount) rtn.TargetShardCount = data.TargetShardCount;
+        return rtn as UpdateShardCountOutput_Type;
     },
 };

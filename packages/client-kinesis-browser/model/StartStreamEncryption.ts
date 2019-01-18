@@ -1,61 +1,18 @@
 import {StartStreamEncryptionInput} from './StartStreamEncryptionInput';
 import {StartStreamEncryptionOutput} from './StartStreamEncryptionOutput';
-import {InvalidArgumentException} from './InvalidArgumentException';
-import {LimitExceededException} from './LimitExceededException';
-import {ResourceInUseException} from './ResourceInUseException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {KMSDisabledException} from './KMSDisabledException';
-import {KMSInvalidStateException} from './KMSInvalidStateException';
-import {KMSAccessDeniedException} from './KMSAccessDeniedException';
-import {KMSNotFoundException} from './KMSNotFoundException';
-import {KMSOptInRequired} from './KMSOptInRequired';
-import {KMSThrottlingException} from './KMSThrottlingException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {StartStreamEncryptionInput as StartStreamEncryptionInput_Type} from '../types/StartStreamEncryptionInput';
+import {StartStreamEncryptionOutput as StartStreamEncryptionOutput_Type} from '../types/StartStreamEncryptionOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const StartStreamEncryption: _Operation_ = {
+export const StartStreamEncryption: _Operation_<StartStreamEncryptionInput_Type, StartStreamEncryptionOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'StartStreamEncryption',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: StartStreamEncryptionInput,
-    },
-    output: {
-        shape: StartStreamEncryptionOutput,
-    },
-    errors: [
-        {
-            shape: InvalidArgumentException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: KMSDisabledException,
-        },
-        {
-            shape: KMSInvalidStateException,
-        },
-        {
-            shape: KMSAccessDeniedException,
-        },
-        {
-            shape: KMSNotFoundException,
-        },
-        {
-            shape: KMSOptInRequired,
-        },
-        {
-            shape: KMSThrottlingException,
-        },
-    ],
+    input: StartStreamEncryptionInput,
+    output: StartStreamEncryptionOutput,
+    errors: [],
 };

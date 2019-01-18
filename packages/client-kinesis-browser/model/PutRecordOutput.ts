@@ -1,27 +1,12 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {PutRecordOutput as PutRecordOutput_Type} from '../types/PutRecordOutput';
 
-export const PutRecordOutput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'ShardId',
-        'SequenceNumber',
-    ],
-    members: {
-        ShardId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        SequenceNumber: {
-            shape: {
-                type: 'string',
-            },
-        },
-        EncryptionType: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const PutRecordOutput: _OperationOutputShapeModel_<PutRecordOutput_Type, any> = {
+    parse: (data: any): PutRecordOutput_Type => {
+        let rtn: any = {};
+        if (data.ShardId) rtn.ShardId = data.ShardId;
+    if (data.SequenceNumber) rtn.SequenceNumber = data.SequenceNumber;
+    if (data.EncryptionType) rtn.EncryptionType = data.EncryptionType;
+        return rtn as PutRecordOutput_Type;
     },
 };

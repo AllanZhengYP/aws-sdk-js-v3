@@ -1,9 +1,7 @@
 import * as __aws_sdk_core_handler from '@aws-sdk/core-handler';
 import * as __aws_sdk_crypto_sha256_browser from '@aws-sdk/crypto-sha256-browser';
 import * as __aws_sdk_fetch_http_handler from '@aws-sdk/fetch-http-handler';
-import * as __aws_sdk_json_builder from '@aws-sdk/json-builder';
 import * as __aws_sdk_json_error_unmarshaller from '@aws-sdk/json-error-unmarshaller';
-import * as __aws_sdk_json_parser from '@aws-sdk/json-parser';
 import * as __aws_sdk_middleware_serializer from '@aws-sdk/middleware-serializer';
 import * as __aws_sdk_protocol_json_rpc from '@aws-sdk/protocol-json-rpc';
 import * as __aws_sdk_signature_v4 from '@aws-sdk/signature-v4';
@@ -11,22 +9,11 @@ import * as __aws_sdk_signing_middleware from '@aws-sdk/signing-middleware';
 import * as __aws_sdk_stream_collector_browser from '@aws-sdk/stream-collector-browser';
 import * as __aws_sdk_types from '@aws-sdk/types';
 import * as __aws_sdk_url_parser_browser from '@aws-sdk/url-parser-browser';
-import * as __aws_sdk_util_base64_browser from '@aws-sdk/util-base64-browser';
 import * as __aws_sdk_util_body_length_browser from '@aws-sdk/util-body-length-browser';
 import * as __aws_sdk_util_utf8_browser from '@aws-sdk/util-utf8-browser';
 import {OutputTypesUnion} from './types/OutputTypesUnion';
 
 export interface KinesisConfiguration {
-    /**
-     * The function that will be used to convert a base64-encoded string to a byte array
-     */
-    base64Decoder?: __aws_sdk_types.Decoder;
-
-    /**
-     * The function that will be used to convert binary data to a base64-encoded string
-     */
-    base64Encoder?: __aws_sdk_types.Encoder;
-
     /**
      * The credentials used to sign requests.
      */
@@ -148,10 +135,6 @@ export interface KinesisResolvableConfiguration extends KinesisConfiguration {
 export interface KinesisResolvedConfiguration extends KinesisConfiguration {
     _user_injected_http_handler: boolean;
 
-    base64Decoder: __aws_sdk_types.Decoder;
-
-    base64Encoder: __aws_sdk_types.Encoder;
-
     bodyLengthChecker: (body: any) => number | undefined;
 
     credentials: __aws_sdk_types.Provider<__aws_sdk_types.Credentials>;
@@ -267,12 +250,6 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
             return value!;
         }
     },
-    base64Decoder: {
-        defaultValue: __aws_sdk_util_base64_browser.fromBase64
-    },
-    base64Encoder: {
-        defaultValue: __aws_sdk_util_base64_browser.toBase64
-    },
     utf8Decoder: {
         defaultValue: __aws_sdk_util_utf8_browser.fromUtf8
     },
@@ -285,18 +262,12 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
     serializer: {
         defaultProvider: (
             configuration: {
-                base64Encoder: __aws_sdk_types.Encoder,
                 endpoint: __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>,
-                utf8Decoder: __aws_sdk_types.Decoder
             }
         ) => {
             const promisified = configuration.endpoint()
                 .then(endpoint => new __aws_sdk_protocol_json_rpc.JsonRpcSerializer<Blob>(
                     endpoint,
-                    new __aws_sdk_json_builder.JsonBuilder(
-                        configuration.base64Encoder,
-                        configuration.utf8Decoder
-                    )
                 ));
             return () => promisified;
         }
@@ -304,14 +275,10 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
     parser: {
         defaultProvider: (
             configuration: {
-                base64Decoder: __aws_sdk_types.Decoder,
                 streamCollector: __aws_sdk_types.StreamCollector<Blob>,
                 utf8Encoder: __aws_sdk_types.Encoder
             }
         ) => new __aws_sdk_protocol_json_rpc.JsonRpcParser(
-            new __aws_sdk_json_parser.JsonParser(
-                configuration.base64Decoder
-            ),
             __aws_sdk_json_error_unmarshaller.jsonErrorUnmarshaller,
             configuration.streamCollector,
             configuration.utf8Encoder

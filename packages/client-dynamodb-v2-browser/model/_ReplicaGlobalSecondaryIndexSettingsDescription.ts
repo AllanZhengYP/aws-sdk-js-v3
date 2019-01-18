@@ -1,40 +1,35 @@
 import {_AutoScalingSettingsDescription} from './_AutoScalingSettingsDescription';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {_ReplicaGlobalSecondaryIndexSettingsDescription as _ReplicaGlobalSecondaryIndexSettingsDescription_Type} from '../types/_ReplicaGlobalSecondaryIndexSettingsDescription';
 
-export const _ReplicaGlobalSecondaryIndexSettingsDescription: _Structure_ = {
-    type: 'structure',
-    required: [
-        'IndexName',
-    ],
-    members: {
-        IndexName: {
-            shape: {
-                type: 'string',
-                min: 3,
-            },
-        },
-        IndexStatus: {
-            shape: {
-                type: 'string',
-            },
-        },
-        ProvisionedReadCapacityUnits: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        ProvisionedReadCapacityAutoScalingSettings: {
-            shape: _AutoScalingSettingsDescription,
-        },
-        ProvisionedWriteCapacityUnits: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        ProvisionedWriteCapacityAutoScalingSettings: {
-            shape: _AutoScalingSettingsDescription,
-        },
+export const _ReplicaGlobalSecondaryIndexSettingsDescription: _StructureModel_<_ReplicaGlobalSecondaryIndexSettingsDescription_Type, any> = {
+    parse: (data: any): _ReplicaGlobalSecondaryIndexSettingsDescription_Type => {
+        let rtn: any = {};
+        if (data.IndexName) rtn.IndexName = data.IndexName;
+    if (data.IndexStatus) rtn.IndexStatus = data.IndexStatus;
+    if (data.ProvisionedReadCapacityUnits) rtn.ProvisionedReadCapacityUnits = data.ProvisionedReadCapacityUnits;
+    if (data.ProvisionedReadCapacityAutoScalingSettings) rtn.ProvisionedReadCapacityAutoScalingSettings = _AutoScalingSettingsDescription.parse!(data.ProvisionedReadCapacityAutoScalingSettings);
+    if (data.ProvisionedWriteCapacityUnits) rtn.ProvisionedWriteCapacityUnits = data.ProvisionedWriteCapacityUnits;
+    if (data.ProvisionedWriteCapacityAutoScalingSettings) rtn.ProvisionedWriteCapacityAutoScalingSettings = _AutoScalingSettingsDescription.parse!(data.ProvisionedWriteCapacityAutoScalingSettings);
+        return rtn as _ReplicaGlobalSecondaryIndexSettingsDescription_Type;
+    },
+    serialize: (data: _ReplicaGlobalSecondaryIndexSettingsDescription_Type): any => {
+    		if (!data.IndexName) {
+        throw new Error('_ReplicaGlobalSecondaryIndexSettingsDescription has missing required parameter');
+    }
+        let rtn: any = {};
+        if (data.IndexName) rtn.IndexName = data.IndexName;
+
+    if (data.IndexStatus) rtn.IndexStatus = data.IndexStatus;
+
+    if (data.ProvisionedReadCapacityUnits) rtn.ProvisionedReadCapacityUnits = data.ProvisionedReadCapacityUnits;
+
+    if (data.ProvisionedReadCapacityAutoScalingSettings) rtn.ProvisionedReadCapacityAutoScalingSettings = _AutoScalingSettingsDescription.serialize!(data.ProvisionedReadCapacityAutoScalingSettings as any);
+
+    if (data.ProvisionedWriteCapacityUnits) rtn.ProvisionedWriteCapacityUnits = data.ProvisionedWriteCapacityUnits;
+
+    if (data.ProvisionedWriteCapacityAutoScalingSettings) rtn.ProvisionedWriteCapacityAutoScalingSettings = _AutoScalingSettingsDescription.serialize!(data.ProvisionedWriteCapacityAutoScalingSettings as any);
+
+        return rtn;
     },
 };

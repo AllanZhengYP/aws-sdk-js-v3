@@ -31,7 +31,7 @@ export class DescribeTimeToLiveCommand implements __aws_sdk_types.Command<
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<DescribeTimeToLiveInput, DescribeTimeToLiveOutput, any> = {
             logger: {} as any,
             model: DescribeTimeToLive
         };

@@ -1,16 +1,18 @@
-import {Map as _Map_} from '@aws-sdk/types';
+import {MapModel as _MapModel_} from '@aws-sdk/types';
 
-export const _RolesMap: _Map_ = {
-    type: 'map',
-    key: {
-        shape: {
-            type: 'string',
-        },
+export const _RolesMap: _MapModel_<string, any> = {
+    parse: (data: any): {[key: string]: string} => {
+        let rtn: any = {};
+        for (const key of Object.keys(data)) {
+            rtn[key] = data[key];
+        }
+        return rtn as {[key: string]: string};
     },
-    value: {
-        shape: {
-            type: 'string',
-            min: 20,
-        },
+    serialize: (data: {[key: string]: string}): any => {
+        let rtn: any = {};
+        for (const key of Object.keys(data)) {
+            rtn[key] = data[key];
+        }
+        return rtn;
     },
 };

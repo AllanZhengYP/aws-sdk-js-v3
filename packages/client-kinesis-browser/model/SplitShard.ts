@@ -1,37 +1,18 @@
 import {SplitShardInput} from './SplitShardInput';
 import {SplitShardOutput} from './SplitShardOutput';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {ResourceInUseException} from './ResourceInUseException';
-import {InvalidArgumentException} from './InvalidArgumentException';
-import {LimitExceededException} from './LimitExceededException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {SplitShardInput as SplitShardInput_Type} from '../types/SplitShardInput';
+import {SplitShardOutput as SplitShardOutput_Type} from '../types/SplitShardOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const SplitShard: _Operation_ = {
+export const SplitShard: _Operation_<SplitShardInput_Type, SplitShardOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'SplitShard',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: SplitShardInput,
-    },
-    output: {
-        shape: SplitShardOutput,
-    },
-    errors: [
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-        {
-            shape: InvalidArgumentException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-    ],
+    input: SplitShardInput,
+    output: SplitShardOutput,
+    errors: [],
 };

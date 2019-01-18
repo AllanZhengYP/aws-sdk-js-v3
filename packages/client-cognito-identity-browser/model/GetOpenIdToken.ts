@@ -1,49 +1,18 @@
 import {GetOpenIdTokenInput} from './GetOpenIdTokenInput';
 import {GetOpenIdTokenOutput} from './GetOpenIdTokenOutput';
-import {InvalidParameterException} from './InvalidParameterException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {NotAuthorizedException} from './NotAuthorizedException';
-import {ResourceConflictException} from './ResourceConflictException';
-import {TooManyRequestsException} from './TooManyRequestsException';
-import {InternalErrorException} from './InternalErrorException';
-import {ExternalServiceException} from './ExternalServiceException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {GetOpenIdTokenInput as GetOpenIdTokenInput_Type} from '../types/GetOpenIdTokenInput';
+import {GetOpenIdTokenOutput as GetOpenIdTokenOutput_Type} from '../types/GetOpenIdTokenOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const GetOpenIdToken: _Operation_ = {
+export const GetOpenIdToken: _Operation_<GetOpenIdTokenInput_Type, GetOpenIdTokenOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'GetOpenIdToken',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: GetOpenIdTokenInput,
-    },
-    output: {
-        shape: GetOpenIdTokenOutput,
-    },
-    errors: [
-        {
-            shape: InvalidParameterException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: NotAuthorizedException,
-        },
-        {
-            shape: ResourceConflictException,
-        },
-        {
-            shape: TooManyRequestsException,
-        },
-        {
-            shape: InternalErrorException,
-        },
-        {
-            shape: ExternalServiceException,
-        },
-    ],
+    input: GetOpenIdTokenInput,
+    output: GetOpenIdTokenOutput,
+    errors: [],
 };

@@ -1,14 +1,20 @@
 import {_MappingRulesList} from './_MappingRulesList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {_RulesConfigurationType as _RulesConfigurationType_Type} from '../types/_RulesConfigurationType';
 
-export const _RulesConfigurationType: _Structure_ = {
-    type: 'structure',
-    required: [
-        'Rules',
-    ],
-    members: {
-        Rules: {
-            shape: _MappingRulesList,
-        },
+export const _RulesConfigurationType: _StructureModel_<_RulesConfigurationType_Type, any> = {
+    parse: (data: any): _RulesConfigurationType_Type => {
+        let rtn: any = {};
+        if (data.Rules) rtn.Rules = _MappingRulesList.parse!(data.Rules);
+        return rtn as _RulesConfigurationType_Type;
+    },
+    serialize: (data: _RulesConfigurationType_Type): any => {
+    		if (!data.Rules) {
+        throw new Error('_RulesConfigurationType has missing required parameter');
+    }
+        let rtn: any = {};
+        if (data.Rules) rtn.Rules = _MappingRulesList.serialize!(data.Rules as any);
+
+        return rtn;
     },
 };

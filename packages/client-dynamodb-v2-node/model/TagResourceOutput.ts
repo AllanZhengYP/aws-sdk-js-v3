@@ -1,7 +1,10 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {TagResourceOutput as TagResourceOutput_Type} from '../types/TagResourceOutput';
 
-export const TagResourceOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {},
+export const TagResourceOutput: _OperationOutputShapeModel_<TagResourceOutput_Type, any> = {
+    parse: (data: any): TagResourceOutput_Type => {
+        let rtn: any = {};
+
+        return rtn as TagResourceOutput_Type;
+    },
 };

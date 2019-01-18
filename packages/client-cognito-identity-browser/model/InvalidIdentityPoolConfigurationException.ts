@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {InvalidIdentityPoolConfigurationException as InvalidIdentityPoolConfigurationException_Type} from '../types/InvalidIdentityPoolConfigurationException';
 
-export const InvalidIdentityPoolConfigurationException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const InvalidIdentityPoolConfigurationException: _StructureModel_<InvalidIdentityPoolConfigurationException_Type, any> = {
+    parse: (data: any): InvalidIdentityPoolConfigurationException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as InvalidIdentityPoolConfigurationException_Type;
     },
-    exceptionType: 'InvalidIdentityPoolConfigurationException',
+    serialize: (data: InvalidIdentityPoolConfigurationException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

@@ -1,20 +1,12 @@
 import {_TagList} from './_TagList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {ListTagsForStreamOutput as ListTagsForStreamOutput_Type} from '../types/ListTagsForStreamOutput';
 
-export const ListTagsForStreamOutput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'Tags',
-        'HasMoreTags',
-    ],
-    members: {
-        Tags: {
-            shape: _TagList,
-        },
-        HasMoreTags: {
-            shape: {
-                type: 'boolean',
-            },
-        },
+export const ListTagsForStreamOutput: _OperationOutputShapeModel_<ListTagsForStreamOutput_Type, any> = {
+    parse: (data: any): ListTagsForStreamOutput_Type => {
+        let rtn: any = {};
+        if (data.Tags) rtn.Tags = _TagList.parse!(data.Tags);
+    if (data.HasMoreTags) rtn.HasMoreTags = data.HasMoreTags;
+        return rtn as ListTagsForStreamOutput_Type;
     },
 };

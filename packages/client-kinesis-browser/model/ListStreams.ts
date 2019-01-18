@@ -1,25 +1,18 @@
 import {ListStreamsInput} from './ListStreamsInput';
 import {ListStreamsOutput} from './ListStreamsOutput';
-import {LimitExceededException} from './LimitExceededException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {ListStreamsInput as ListStreamsInput_Type} from '../types/ListStreamsInput';
+import {ListStreamsOutput as ListStreamsOutput_Type} from '../types/ListStreamsOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const ListStreams: _Operation_ = {
+export const ListStreams: _Operation_<ListStreamsInput_Type, ListStreamsOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'ListStreams',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: ListStreamsInput,
-    },
-    output: {
-        shape: ListStreamsOutput,
-    },
-    errors: [
-        {
-            shape: LimitExceededException,
-        },
-    ],
+    input: ListStreamsInput,
+    output: ListStreamsOutput,
+    errors: [],
 };

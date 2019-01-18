@@ -1,34 +1,20 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationInputShapeModel as _OperationInputShapeModel_} from '@aws-sdk/types';
+import {ListIdentitiesInput as ListIdentitiesInput_Type} from '../types/ListIdentitiesInput';
 
-export const ListIdentitiesInput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'IdentityPoolId',
-        'MaxResults',
-    ],
-    members: {
-        IdentityPoolId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        MaxResults: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        NextToken: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        HideDisabled: {
-            shape: {
-                type: 'boolean',
-            },
-        },
+export const ListIdentitiesInput: _OperationInputShapeModel_<ListIdentitiesInput_Type, any> = {
+    serialize: (data: ListIdentitiesInput_Type): any => {
+    		if (!data.IdentityPoolId||!data.MaxResults) {
+        throw new Error('ListIdentitiesInput has missing required parameter');
+    }
+        let rtn: any = {};
+        if (data.IdentityPoolId) rtn.IdentityPoolId = data.IdentityPoolId;
+
+    if (data.MaxResults) rtn.MaxResults = data.MaxResults;
+
+    if (data.NextToken) rtn.NextToken = data.NextToken;
+
+    if (data.HideDisabled) rtn.HideDisabled = data.HideDisabled;
+
+        return rtn;
     },
 };

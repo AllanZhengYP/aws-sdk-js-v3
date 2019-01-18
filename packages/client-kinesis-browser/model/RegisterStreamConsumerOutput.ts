@@ -1,14 +1,11 @@
 import {_Consumer} from './_Consumer';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {RegisterStreamConsumerOutput as RegisterStreamConsumerOutput_Type} from '../types/RegisterStreamConsumerOutput';
 
-export const RegisterStreamConsumerOutput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'Consumer',
-    ],
-    members: {
-        Consumer: {
-            shape: _Consumer,
-        },
+export const RegisterStreamConsumerOutput: _OperationOutputShapeModel_<RegisterStreamConsumerOutput_Type, any> = {
+    parse: (data: any): RegisterStreamConsumerOutput_Type => {
+        let rtn: any = {};
+        if (data.Consumer) rtn.Consumer = _Consumer.parse!(data.Consumer);
+        return rtn as RegisterStreamConsumerOutput_Type;
     },
 };

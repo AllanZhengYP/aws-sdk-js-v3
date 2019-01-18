@@ -30,7 +30,7 @@ export class DecreaseStreamRetentionPeriodCommand implements __aws_sdk_types.Com
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<DecreaseStreamRetentionPeriodInput, DecreaseStreamRetentionPeriodOutput, any> = {
             logger: {} as any,
             model: DecreaseStreamRetentionPeriod
         };

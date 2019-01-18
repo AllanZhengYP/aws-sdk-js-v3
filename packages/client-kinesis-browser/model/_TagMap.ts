@@ -1,16 +1,18 @@
-import {Map as _Map_} from '@aws-sdk/types';
+import {MapModel as _MapModel_} from '@aws-sdk/types';
 
-export const _TagMap: _Map_ = {
-    type: 'map',
-    key: {
-        shape: {
-            type: 'string',
-            min: 1,
-        },
+export const _TagMap: _MapModel_<string, any> = {
+    parse: (data: any): {[key: string]: string} => {
+        let rtn: any = {};
+        for (const key of Object.keys(data)) {
+            rtn[key] = data[key];
+        }
+        return rtn as {[key: string]: string};
     },
-    value: {
-        shape: {
-            type: 'string',
-        },
+    serialize: (data: {[key: string]: string}): any => {
+        let rtn: any = {};
+        for (const key of Object.keys(data)) {
+            rtn[key] = data[key];
+        }
+        return rtn;
     },
 };

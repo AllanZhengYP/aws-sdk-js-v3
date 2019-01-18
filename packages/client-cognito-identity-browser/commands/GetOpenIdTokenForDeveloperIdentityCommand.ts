@@ -30,7 +30,7 @@ export class GetOpenIdTokenForDeveloperIdentityCommand implements __aws_sdk_type
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<GetOpenIdTokenForDeveloperIdentityInput, GetOpenIdTokenForDeveloperIdentityOutput, any> = {
             logger: {} as any,
             model: GetOpenIdTokenForDeveloperIdentity
         };

@@ -1,12 +1,11 @@
 import {_TableDescription} from './_TableDescription';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {DeleteTableOutput as DeleteTableOutput_Type} from '../types/DeleteTableOutput';
 
-export const DeleteTableOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        TableDescription: {
-            shape: _TableDescription,
-        },
+export const DeleteTableOutput: _OperationOutputShapeModel_<DeleteTableOutput_Type, any> = {
+    parse: (data: any): DeleteTableOutput_Type => {
+        let rtn: any = {};
+        if (data.TableDescription) rtn.TableDescription = _TableDescription.parse!(data.TableDescription);
+        return rtn as DeleteTableOutput_Type;
     },
 };

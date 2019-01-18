@@ -1,45 +1,18 @@
 import {GetIdentityPoolRolesInput} from './GetIdentityPoolRolesInput';
 import {GetIdentityPoolRolesOutput} from './GetIdentityPoolRolesOutput';
-import {InvalidParameterException} from './InvalidParameterException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {NotAuthorizedException} from './NotAuthorizedException';
-import {ResourceConflictException} from './ResourceConflictException';
-import {TooManyRequestsException} from './TooManyRequestsException';
-import {InternalErrorException} from './InternalErrorException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {GetIdentityPoolRolesInput as GetIdentityPoolRolesInput_Type} from '../types/GetIdentityPoolRolesInput';
+import {GetIdentityPoolRolesOutput as GetIdentityPoolRolesOutput_Type} from '../types/GetIdentityPoolRolesOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const GetIdentityPoolRoles: _Operation_ = {
+export const GetIdentityPoolRoles: _Operation_<GetIdentityPoolRolesInput_Type, GetIdentityPoolRolesOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'GetIdentityPoolRoles',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: GetIdentityPoolRolesInput,
-    },
-    output: {
-        shape: GetIdentityPoolRolesOutput,
-    },
-    errors: [
-        {
-            shape: InvalidParameterException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: NotAuthorizedException,
-        },
-        {
-            shape: ResourceConflictException,
-        },
-        {
-            shape: TooManyRequestsException,
-        },
-        {
-            shape: InternalErrorException,
-        },
-    ],
+    input: GetIdentityPoolRolesInput,
+    output: GetIdentityPoolRolesOutput,
+    errors: [],
 };

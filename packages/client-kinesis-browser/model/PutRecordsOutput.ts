@@ -1,25 +1,13 @@
 import {_PutRecordsResultEntryList} from './_PutRecordsResultEntryList';
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {PutRecordsOutput as PutRecordsOutput_Type} from '../types/PutRecordsOutput';
 
-export const PutRecordsOutput: _Structure_ = {
-    type: 'structure',
-    required: [
-        'Records',
-    ],
-    members: {
-        FailedRecordCount: {
-            shape: {
-                type: 'integer',
-                min: 1,
-            },
-        },
-        Records: {
-            shape: _PutRecordsResultEntryList,
-        },
-        EncryptionType: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const PutRecordsOutput: _OperationOutputShapeModel_<PutRecordsOutput_Type, any> = {
+    parse: (data: any): PutRecordsOutput_Type => {
+        let rtn: any = {};
+        if (data.FailedRecordCount) rtn.FailedRecordCount = data.FailedRecordCount;
+    if (data.Records) rtn.Records = _PutRecordsResultEntryList.parse!(data.Records);
+    if (data.EncryptionType) rtn.EncryptionType = data.EncryptionType;
+        return rtn as PutRecordsOutput_Type;
     },
 };

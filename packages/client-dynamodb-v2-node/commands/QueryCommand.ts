@@ -31,7 +31,7 @@ export class QueryCommand implements __aws_sdk_types.Command<
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<QueryInput, QueryOutput, any> = {
             logger: {} as any,
             model: Query
         };

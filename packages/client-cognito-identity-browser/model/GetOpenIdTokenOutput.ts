@@ -1,19 +1,11 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {OperationOutputShapeModel as _OperationOutputShapeModel_} from '@aws-sdk/types';
+import {GetOpenIdTokenOutput as GetOpenIdTokenOutput_Type} from '../types/GetOpenIdTokenOutput';
 
-export const GetOpenIdTokenOutput: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        IdentityId: {
-            shape: {
-                type: 'string',
-                min: 1,
-            },
-        },
-        Token: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const GetOpenIdTokenOutput: _OperationOutputShapeModel_<GetOpenIdTokenOutput_Type, any> = {
+    parse: (data: any): GetOpenIdTokenOutput_Type => {
+        let rtn: any = {};
+        if (data.IdentityId) rtn.IdentityId = data.IdentityId;
+    if (data.Token) rtn.Token = data.Token;
+        return rtn as GetOpenIdTokenOutput_Type;
     },
 };

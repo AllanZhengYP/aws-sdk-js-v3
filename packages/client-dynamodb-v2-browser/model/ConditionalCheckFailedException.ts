@@ -1,14 +1,16 @@
-import {Structure as _Structure_} from '@aws-sdk/types';
+import {StructureModel as _StructureModel_} from '@aws-sdk/types';
+import {ConditionalCheckFailedException as ConditionalCheckFailedException_Type} from '../types/ConditionalCheckFailedException';
 
-export const ConditionalCheckFailedException: _Structure_ = {
-    type: 'structure',
-    required: [],
-    members: {
-        message: {
-            shape: {
-                type: 'string',
-            },
-        },
+export const ConditionalCheckFailedException: _StructureModel_<ConditionalCheckFailedException_Type, any> = {
+    parse: (data: any): ConditionalCheckFailedException_Type => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+        return rtn as ConditionalCheckFailedException_Type;
     },
-    exceptionType: 'ConditionalCheckFailedException',
+    serialize: (data: ConditionalCheckFailedException_Type): any => {
+        let rtn: any = {};
+        if (data.message) rtn.message = data.message;
+
+        return rtn;
+    },
 };

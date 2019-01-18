@@ -1,37 +1,18 @@
 import {TagResourceInput} from './TagResourceInput';
 import {TagResourceOutput} from './TagResourceOutput';
-import {LimitExceededException} from './LimitExceededException';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {InternalServerError} from './InternalServerError';
-import {ResourceInUseException} from './ResourceInUseException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {TagResourceInput as TagResourceInput_Type} from '../types/TagResourceInput';
+import {TagResourceOutput as TagResourceOutput_Type} from '../types/TagResourceOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const TagResource: _Operation_ = {
+export const TagResource: _Operation_<TagResourceInput_Type, TagResourceOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'TagResource',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: TagResourceInput,
-    },
-    output: {
-        shape: TagResourceOutput,
-    },
-    errors: [
-        {
-            shape: LimitExceededException,
-        },
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: InternalServerError,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-    ],
+    input: TagResourceInput,
+    output: TagResourceOutput,
+    errors: [],
 };

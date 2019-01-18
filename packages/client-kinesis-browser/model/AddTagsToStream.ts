@@ -1,37 +1,18 @@
 import {AddTagsToStreamInput} from './AddTagsToStreamInput';
 import {AddTagsToStreamOutput} from './AddTagsToStreamOutput';
-import {ResourceNotFoundException} from './ResourceNotFoundException';
-import {ResourceInUseException} from './ResourceInUseException';
-import {InvalidArgumentException} from './InvalidArgumentException';
-import {LimitExceededException} from './LimitExceededException';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {AddTagsToStreamInput as AddTagsToStreamInput_Type} from '../types/AddTagsToStreamInput';
+import {AddTagsToStreamOutput as AddTagsToStreamOutput_Type} from '../types/AddTagsToStreamOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const AddTagsToStream: _Operation_ = {
+export const AddTagsToStream: _Operation_<AddTagsToStreamInput_Type, AddTagsToStreamOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'AddTagsToStream',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: AddTagsToStreamInput,
-    },
-    output: {
-        shape: AddTagsToStreamOutput,
-    },
-    errors: [
-        {
-            shape: ResourceNotFoundException,
-        },
-        {
-            shape: ResourceInUseException,
-        },
-        {
-            shape: InvalidArgumentException,
-        },
-        {
-            shape: LimitExceededException,
-        },
-    ],
+    input: AddTagsToStreamInput,
+    output: AddTagsToStreamOutput,
+    errors: [],
 };

@@ -1,29 +1,18 @@
 import {DescribeContinuousBackupsInput} from './DescribeContinuousBackupsInput';
 import {DescribeContinuousBackupsOutput} from './DescribeContinuousBackupsOutput';
-import {TableNotFoundException} from './TableNotFoundException';
-import {InternalServerError} from './InternalServerError';
-import {OperationModel as _Operation_} from '@aws-sdk/types';
+import {DescribeContinuousBackupsInput as DescribeContinuousBackupsInput_Type} from '../types/DescribeContinuousBackupsInput';
+import {DescribeContinuousBackupsOutput as DescribeContinuousBackupsOutput_Type} from '../types/DescribeContinuousBackupsOutput';
+import {OperationModelon as _Operation_} from '@aws-sdk/types';
 import {ServiceMetadata} from './ServiceMetadata';
 
-export const DescribeContinuousBackups: _Operation_ = {
+export const DescribeContinuousBackups: _Operation_<DescribeContinuousBackupsInput_Type, DescribeContinuousBackupsOutput_Type, any> = {
     metadata: ServiceMetadata,
     name: 'DescribeContinuousBackups',
     http: {
         method: 'POST',
         requestUri: '/',
     },
-    input: {
-        shape: DescribeContinuousBackupsInput,
-    },
-    output: {
-        shape: DescribeContinuousBackupsOutput,
-    },
-    errors: [
-        {
-            shape: TableNotFoundException,
-        },
-        {
-            shape: InternalServerError,
-        },
-    ],
+    input: DescribeContinuousBackupsInput,
+    output: DescribeContinuousBackupsOutput,
+    errors: [],
 };

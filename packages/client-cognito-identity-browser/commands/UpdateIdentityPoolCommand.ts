@@ -30,7 +30,7 @@ export class UpdateIdentityPoolCommand implements __aws_sdk_types.Command<
         const {handler} = configuration;
         const stack = clientStack.concat(this.middlewareStack);
 
-        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
+        const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext<UpdateIdentityPoolInput, UpdateIdentityPoolOutput, any> = {
             logger: {} as any,
             model: UpdateIdentityPool
         };
