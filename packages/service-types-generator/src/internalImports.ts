@@ -58,7 +58,7 @@ export const IMPORTS: {[key: string]: Import} = {
     },
     'client-dynamodb-v2-node': {
         package: '@aws-sdk/client-dynamodb-v2-node',
-        version: '^0.1.0-preview.2',
+        version: '^0.1.0-preview.3',
     },
     'client-glacier-node': {
         package: '@aws-sdk/client-glacier-node',
