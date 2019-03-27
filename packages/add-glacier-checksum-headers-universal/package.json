@@ -1,6 +1,6 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-universal",
-    "version": "0.1.0-preview.3",
+    "version": "0.1.0-preview.4",
     "scripts": {
         "prepublishOnly": "tsc",
         "pretest": "tsc -p tsconfig.test.json",
@@ -15,10 +15,10 @@
     },
     "license": "Apache-2.0",
     "dependencies": {
-        "@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-browser": "^0.1.0-preview.3",
-        "@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-node": "^0.1.0-preview.3",
-        "@aws-js-sdk-v3-prerelease/is-node": "^0.1.0-preview.3",
-        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-browser": "^0.1.0-preview.4",
+        "@aws-js-sdk-v3-prerelease/add-glacier-checksum-headers-node": "^0.1.0-preview.4",
+        "@aws-js-sdk-v3-prerelease/is-node": "^0.1.0-preview.4",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.4",
         "tslib": "^1.8.0"
     },
     "devDependencies": {

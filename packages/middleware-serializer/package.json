@@ -1,14 +1,14 @@
 {
     "name": "@aws-js-sdk-v3-prerelease/middleware-serializer",
     "description": "Provides the middleware serializer for the AWS SDK",
-    "version": "0.1.0-preview.3",
+    "version": "0.1.0-preview.4",
     "scripts": {
         "prepublishOnly": "tsc",
         "pretest": "tsc -p tsconfig.test.json",
         "test": "jest"
     },
     "dependencies": {
-        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.3",
+        "@aws-js-sdk-v3-prerelease/types": "^0.1.0-preview.4",
         "tslib": "^1.8.0"
     },
     "devDependencies": {
