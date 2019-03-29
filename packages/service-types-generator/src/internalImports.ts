@@ -48,6 +48,14 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/client-cognito-identity-browser',
         version: '^0.1.0-preview.3',
     },
+    'client-direct-connect-browser': {
+        package: '@aws-sdk/client-direct-connect-browser',
+        version: '^0.1.0',
+    },
+    'client-direct-connect-node': {
+        package: '@aws-sdk/client-direct-connect-node',
+        version: '^0.1.0',
+    },
     'client-documentation-generator': {
         package: '@aws-sdk/client-documentation-generator',
         version: '^0.1.0-preview.1',
