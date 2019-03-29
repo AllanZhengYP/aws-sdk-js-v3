@@ -38,7 +38,8 @@ export const ImportModelsCommand: yargs.CommandModule = {
         runtime: {
             alias: ['r'],
             type: 'string',
-            choices: ['node', 'browser'],
+            choices: ['node', 'browser', undefined],
+            default: undefined
         },
         version: {
             alias: ['v'],
@@ -64,11 +65,12 @@ export const ImportModelsCommand: yargs.CommandModule = {
 
         console.log(`Generating ${services.size} SDK packages...`);
         for (const [identifier, {model, smoke}] of services) {
-            console.log(`Generating ${runtime} ${clientModuleIdentifier(model.metadata)} SDK`);
             if (runtime) {
+                console.log(`Generating ${runtime} ${clientModuleIdentifier(model.metadata)} SDK`);
                 ImportClientPackageCommand.handler({ model, runtime, smoke, version });
             } else {
                 for (const runtime of ['node', 'browser']) {
+                    console.log(`Generating ${runtime} ${clientModuleIdentifier(model.metadata)} SDK`);
                     ImportClientPackageCommand.handler({ model, runtime, smoke, version });
                 }
             }
