@@ -64,6 +64,14 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/client-glacier-node',
         version: '^0.1.0-preview.4',
     },
+    'client-iot-1click-devices-service-browser': {
+        package: '@aws-sdk/client-iot-1click-devices-service-browser',
+        version: '^0.1.0',
+    },
+    'client-iot-1click-devices-service-node': {
+        package: '@aws-sdk/client-iot-1click-devices-service-node',
+        version: '^0.1.0',
+    },
     'client-kinesis-browser': {
         package: '@aws-sdk/client-kinesis-browser',
         version: '^0.1.0-preview.3',
