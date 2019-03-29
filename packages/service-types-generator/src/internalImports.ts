@@ -68,6 +68,14 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/client-dynamodb-node',
         version: '^0.1.0-preview.2',
     },
+    'client-fms-browser': {
+        package: '@aws-sdk/client-fms-browser',
+        version: '^0.1.0',
+    },
+    'client-fms-node': {
+        package: '@aws-sdk/client-fms-node',
+        version: '^0.1.0',
+    },
     'client-glacier-node': {
         package: '@aws-sdk/client-glacier-node',
         version: '^0.1.0-preview.4',
