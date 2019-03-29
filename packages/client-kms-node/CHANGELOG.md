@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0 (2019-03-29)
+
+
+### Features
+
+* **kms:** generate node & browser clients ([#211](https://github.com/AllanFly120/aws-sdk-js-v3-private/issues/211)) ([46d6dd6](https://github.com/AllanFly120/aws-sdk-js-v3-private/commit/46d6dd6))
+
+
+
+
+
 # 0.1.0-preview.2 (2019-03-27)
 
 
