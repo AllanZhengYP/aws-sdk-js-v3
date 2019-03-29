@@ -104,6 +104,14 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/client-sqs-node',
         version: '^0.1.0-preview.4',
     },
+    'client-transcribe-browser': {
+        package: '@aws-sdk/client-transcribe-browser',
+        version: '^0.1.0',
+    },
+    'client-transcribe-node': {
+        package: '@aws-sdk/client-transcribe-node',
+        version: '^0.1.0',
+    },
     'client-xray-node': {
         package: '@aws-sdk/client-xray-node',
         version: '^0.1.0-preview.4',
