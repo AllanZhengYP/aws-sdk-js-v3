@@ -116,6 +116,14 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/client-pinpoint-browser',
         version: '^0.1.0-preview.3',
     },
+    'client-robomaker-browser': {
+        package: '@aws-sdk/client-robomaker-browser',
+        version: '^0.1.0',
+    },
+    'client-robomaker-node': {
+        package: '@aws-sdk/client-robomaker-node',
+        version: '^0.1.0',
+    },
     'client-sqs-node': {
         package: '@aws-sdk/client-sqs-node',
         version: '^0.1.0-preview.4',
