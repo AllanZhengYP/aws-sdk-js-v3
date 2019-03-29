@@ -80,6 +80,14 @@ export const IMPORTS: {[key: string]: Import} = {
         package: '@aws-sdk/client-lambda-node',
         version: '^0.1.0-preview.4',
     },
+    'client-mediaconvert-browser': {
+        package: '@aws-sdk/client-mediaconvert-browser',
+        version: '^0.1.0',
+    },
+    'client-mediaconvert-node': {
+        package: '@aws-sdk/client-mediaconvert-node',
+        version: '^0.1.0',
+    },
     'client-pinpoint-browser': {
         package: '@aws-sdk/client-pinpoint-browser',
         version: '^0.1.0-preview.3',
