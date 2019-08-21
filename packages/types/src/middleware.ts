@@ -1,6 +1,7 @@
 import { HttpRequest } from "./http";
 import { OperationModel } from "./protocol";
 import { Logger } from "./logger";
+import { HTTPProtocol } from "./appProtocol";
 
 export interface HandlerArguments<Input extends object> {
   /**
@@ -12,7 +13,8 @@ export interface HandlerArguments<Input extends object> {
 
 export interface SerializeHandlerArguments<
   Input extends object,
-  Stream = Uint8Array
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
 > extends HandlerArguments<Input> {
   /**
    * The user input serialized as an HTTP request.
@@ -20,23 +22,25 @@ export interface SerializeHandlerArguments<
    * During the build phase of the execution of a middleware stack, a built
    * HTTP request may or may not be available.
    */
-  request?: HttpRequest<Stream>;
+  request?: ApplicationProtocol;
 }
 
 export interface FinalizeHandlerArguments<
   Input extends object,
-  Stream = Uint8Array
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
 > extends HandlerArguments<Input> {
   /**
    * The user input serialized as an HTTP request.
    */
-  request: HttpRequest<Stream>;
+  request?: ApplicationProtocol;
 }
 
 export interface BuildHandlerArguments<
   Input extends object,
-  Stream = Uint8Array
-> extends FinalizeHandlerArguments<Input, Stream> {}
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
+> extends FinalizeHandlerArguments<Input, Stream, ApplicationProtocol> {}
 
 export interface Handler<Input extends object, Output extends object> {
   /**
@@ -51,7 +55,8 @@ export interface Handler<Input extends object, Output extends object> {
 export interface SerializeHandler<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
 > {
   /**
    * Asynchronously converts an input object into an output object.
@@ -59,13 +64,16 @@ export interface SerializeHandler<
    * @param args  An object containing a input to the command as well as any
    *              associated or previously generated execution artifacts.
    */
-  (args: SerializeHandlerArguments<Input, Stream>): Promise<Output>;
+  (
+    args: SerializeHandlerArguments<Input, Stream, ApplicationProtocol>
+  ): Promise<Output>;
 }
 
 export interface FinalizeHandler<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
 > {
   /**
    * Asynchronously converts an input object into an output object.
@@ -73,20 +81,27 @@ export interface FinalizeHandler<
    * @param args  An object containing a input to the command as well as any
    *              associated or previously generated execution artifacts.
    */
-  (args: FinalizeHandlerArguments<Input, Stream>): Promise<Output>;
+  (args: FinalizeHandlerArguments<Input, Stream, ApplicationProtocol>): Promise<
+    Output
+  >;
 }
 
 export interface BuildHandler<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
-> extends FinalizeHandler<Input, Output, Stream> {}
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
+> extends FinalizeHandler<Input, Output, Stream, ApplicationProtocol> {}
 
 /**
  * A factory function that creates functions implementing the {Handler}
  * interface.
  */
-export interface Middleware<Input extends object, Output extends object> {
+export interface Middleware<
+  Input extends object,
+  Output extends object,
+  ApplicationProtocol = HTTPProtocol
+> {
   /**
    * @param next The handler to invoke after this middleware has operated on
    * the user input and before this middleware operates on the output.
@@ -106,7 +121,8 @@ export interface Middleware<Input extends object, Output extends object> {
 export interface SerializeMiddleware<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -115,7 +131,7 @@ export interface SerializeMiddleware<
    * @param context Invariant data and functions for use by the handler.
    */
   (
-    next: SerializeHandler<Input, Output, Stream>,
+    next: SerializeHandler<Input, Output, Stream, ApplicationProtocol>,
     context: HandlerExecutionContext
   ): SerializeHandler<Input, Output, Stream>;
 }
@@ -127,7 +143,8 @@ export interface SerializeMiddleware<
 export interface FinalizeMiddleware<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -136,7 +153,7 @@ export interface FinalizeMiddleware<
    * @param context Invariant data and functions for use by the handler.
    */
   (
-    next: FinalizeHandler<Input, Output, Stream>,
+    next: FinalizeHandler<Input, Output, Stream, ApplicationProtocol>,
     context: HandlerExecutionContext
   ): FinalizeHandler<Input, Output, Stream>;
 }
@@ -144,8 +161,9 @@ export interface FinalizeMiddleware<
 export interface BuildMiddleware<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
-> extends FinalizeMiddleware<Input, Output, Stream> {}
+  Stream = Uint8Array,
+  ApplicationProtocol = HTTPProtocol
+> extends FinalizeMiddleware<Input, Output, Stream, ApplicationProtocol> {}
 
 /**
  * A factory function that creates the terminal handler atop which a middleware
