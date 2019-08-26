@@ -12,4 +12,5 @@ export * from "./protocol";
 export * from "./response";
 export * from "./signature";
 export * from "./unmarshaller";
+export * from "./transferProtocol";
 export * from "./util";

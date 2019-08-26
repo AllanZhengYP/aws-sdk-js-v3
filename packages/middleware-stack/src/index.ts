@@ -2,21 +2,20 @@ import {
   BuildHandlerOptions,
   FinalizeHandler,
   FinalizeHandlerOptions,
+  SerializeMiddleware,
   FinalizeMiddleware,
+  BuildMiddleware,
   Handler,
   HandlerExecutionContext,
   HandlerOptions,
   Middleware,
   MiddlewareStack as IMiddlewareStack,
   SerializeHandlerOptions,
-  Step
+  Step,
+  TransferProtocol
 } from "@aws-sdk/types";
 
-interface HandlerListEntry<
-  Input extends object,
-  Output extends object,
-  Stream
-> {
+interface HandlerListEntry<Input extends object, Output extends object> {
   step: Step;
   priority: number;
   middleware: Middleware<Input, Output>;
@@ -26,15 +25,15 @@ interface HandlerListEntry<
 export interface MiddlewareStack<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
-> extends IMiddlewareStack<Input, Output, Stream> {}
+  RequestType
+> extends IMiddlewareStack<Input, Output, RequestType> {}
 
 export class MiddlewareStack<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
+  RequestType
 > {
-  private readonly entries: Array<HandlerListEntry<Input, Output, Stream>> = [];
+  private readonly entries: Array<HandlerListEntry<Input, Output>> = [];
   private sorted: boolean = true;
 
   add(
@@ -43,17 +42,29 @@ export class MiddlewareStack<
   ): void;
 
   add(
-    middleware: Middleware<Input, Output>,
+    middleware: SerializeMiddleware<
+      Input,
+      Output,
+      TransferProtocol<RequestType, any, any>
+    >,
     options: SerializeHandlerOptions
   ): void;
 
   add(
-    middleware: FinalizeMiddleware<Input, Output, Stream>,
+    middleware: FinalizeMiddleware<
+      Input,
+      Output,
+      TransferProtocol<RequestType, any, any>
+    >,
     options: BuildHandlerOptions
   ): void;
 
   add(
-    middleware: FinalizeMiddleware<Input, Output, Stream>,
+    middleware: FinalizeMiddleware<
+      Input,
+      Output,
+      TransferProtocol<RequestType, any, any>
+    >,
     options: FinalizeHandlerOptions
   ): void;
 
@@ -71,17 +82,17 @@ export class MiddlewareStack<
     });
   }
 
-  clone(): IMiddlewareStack<Input, Output, Stream> {
-    const clone = new MiddlewareStack<Input, Output, Stream>();
+  clone(): IMiddlewareStack<Input, Output, RequestType> {
+    const clone = new MiddlewareStack<Input, Output, RequestType>();
     clone.entries.push(...this.entries);
     clone.sorted = this.sorted;
     return clone;
   }
 
   concat<InputType extends Input, OutputType extends Output>(
-    from: MiddlewareStack<InputType, OutputType, Stream>
-  ): MiddlewareStack<InputType, OutputType, Stream> {
-    const clone = new MiddlewareStack<InputType, OutputType, Stream>();
+    from: MiddlewareStack<InputType, OutputType, RequestType>
+  ): MiddlewareStack<InputType, OutputType, RequestType> {
+    const clone = new MiddlewareStack<InputType, OutputType, RequestType>();
     clone.entries.push(...(this.entries as any), ...from.entries);
     clone.sorted = false;
     return clone;
@@ -100,8 +111,8 @@ export class MiddlewareStack<
 
   filter(
     callbackfn: (handlerOptions: HandlerOptions) => boolean
-  ): MiddlewareStack<Input, Output, Stream> {
-    const filtered = new MiddlewareStack<Input, Output, Stream>();
+  ): MiddlewareStack<Input, Output, RequestType> {
+    const filtered = new MiddlewareStack<Input, Output, RequestType>();
     for (const entry of this.entries) {
       const options: HandlerOptions = {
         step: entry.step,
@@ -119,7 +130,11 @@ export class MiddlewareStack<
   }
 
   resolve<InputType extends Input, OutputType extends Output>(
-    handler: FinalizeHandler<InputType, OutputType, Stream>,
+    handler: FinalizeHandler<
+      InputType,
+      OutputType,
+      TransferProtocol<RequestType, any, any>
+    >,
     context: HandlerExecutionContext
   ): Handler<InputType, OutputType> {
     if (!this.sorted) {

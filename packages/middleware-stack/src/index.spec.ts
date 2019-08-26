@@ -7,21 +7,27 @@ import {
   HandlerExecutionContext,
   FinalizeMiddleware,
   FinalizeHandler,
-  BuildMiddleware
+  BuildMiddleware,
+  TransferProtocol
 } from "@aws-sdk/types";
+import { request } from "https";
 
 type input = Array<string>;
 type output = object;
+type protocol = TransferProtocol<any, any, any>;
 
 //return tagged union to make compiler happy
 function getConcatMiddleware(
   message: string
-): Middleware<input, output> | FinalizeMiddleware<input, output> {
-  return (next: Handler<input, output>): Handler<input, output> => {
-    return (args: HandlerArguments<input>): Promise<output> =>
+): Middleware<input, output> | FinalizeMiddleware<input, output, protocol> {
+  return (
+    next: FinalizeHandler<input, output, protocol>
+  ): Handler<input, output> => {
+    return (args: FinalizeHandlerArguments<input, protocol>): Promise<output> =>
       next({
         ...args,
-        input: args.input.concat(message)
+        input: args.input.concat(message),
+        request: args.request!.request
       });
   };
 }
@@ -37,7 +43,7 @@ function shuffle<T>(arr: Array<T>): Array<T> {
 
 describe("MiddlewareStack", () => {
   it("should resolve the stack into a composed handler", async () => {
-    const stack = new MiddlewareStack<input, output>();
+    const stack = new MiddlewareStack<input, output, protocol>();
 
     const middleware = shuffle([
       [getConcatMiddleware("second"), {}],
@@ -64,7 +70,7 @@ describe("MiddlewareStack", () => {
   });
 
   it("should allow cloning", async () => {
-    const stack = new MiddlewareStack<input, output>();
+    const stack = new MiddlewareStack<input, output, protocol>();
     stack.add(getConcatMiddleware("second") as Middleware<input, output>);
     stack.add(getConcatMiddleware("first") as Middleware<input, output>, {
       priority: 100
@@ -72,35 +78,47 @@ describe("MiddlewareStack", () => {
 
     const secondStack = stack.clone();
 
-    let inner = jest.fn(({ input }: FinalizeHandlerArguments<input>) => {
-      expect(input).toEqual(["first", "second"]);
-      return Promise.resolve({});
-    });
+    let inner = jest.fn(
+      ({ input }: FinalizeHandlerArguments<input, protocol>) => {
+        expect(input).toEqual(["first", "second"]);
+        return Promise.resolve({});
+      }
+    );
     await secondStack.resolve(inner, {} as any)({ input: [] });
     expect(inner.mock.calls.length).toBe(1);
   });
 
   it("should allow combining stacks", async () => {
-    const stack = new MiddlewareStack<input, output>();
+    const stack = new MiddlewareStack<input, output, protocol>();
     stack.add(getConcatMiddleware("second") as Middleware<input, output>);
     stack.add(getConcatMiddleware("first") as Middleware<input, output>, {
       priority: 100
     });
 
-    const secondStack = new MiddlewareStack<input, output>();
+    const secondStack = new MiddlewareStack<input, output, protocol>();
     secondStack.add(
-      getConcatMiddleware("fourth") as FinalizeMiddleware<input, output>,
+      getConcatMiddleware("fourth") as FinalizeMiddleware<
+        input,
+        output,
+        protocol
+      >,
       { step: "build" }
     );
     secondStack.add(
-      getConcatMiddleware("third") as FinalizeMiddleware<input, output>,
+      getConcatMiddleware("third") as FinalizeMiddleware<
+        input,
+        output,
+        protocol
+      >,
       { step: "build", priority: 100 }
     );
 
-    let inner = jest.fn(({ input }: FinalizeHandlerArguments<input>) => {
-      expect(input).toEqual(["first", "second", "third", "fourth"]);
-      return Promise.resolve({});
-    });
+    let inner = jest.fn(
+      ({ input }: FinalizeHandlerArguments<input, protocol>) => {
+        expect(input).toEqual(["first", "second", "third", "fourth"]);
+        return Promise.resolve({});
+      }
+    );
     await stack.concat(secondStack).resolve(inner, {} as any)({ input: [] });
 
     expect(inner.mock.calls.length).toBe(1);
@@ -111,7 +129,7 @@ describe("MiddlewareStack", () => {
       input,
       output
     >;
-    const stack = new MiddlewareStack<input, output>();
+    const stack = new MiddlewareStack<input, output, protocol>();
     stack.add(MyMiddleware);
     stack.add(getConcatMiddleware("don't remove me") as Middleware<
       input,
@@ -119,7 +137,7 @@ describe("MiddlewareStack", () => {
     >);
 
     await stack.resolve(
-      ({ input }: FinalizeHandlerArguments<Array<string>>) => {
+      ({ input }: FinalizeHandlerArguments<Array<string>, protocol>) => {
         expect(input.sort()).toEqual(["don't remove me", "remove me!"]);
         return Promise.resolve({});
       },
@@ -129,7 +147,7 @@ describe("MiddlewareStack", () => {
     stack.remove(MyMiddleware);
 
     await stack.resolve(
-      ({ input }: FinalizeHandlerArguments<Array<string>>) => {
+      ({ input }: FinalizeHandlerArguments<Array<string>, protocol>) => {
         expect(input).toEqual(["don't remove me"]);
         return Promise.resolve({});
       },
@@ -138,7 +156,7 @@ describe("MiddlewareStack", () => {
   });
 
   it("should allow the removal of middleware by tag", async () => {
-    const stack = new MiddlewareStack<input, output>();
+    const stack = new MiddlewareStack<input, output, protocol>();
     stack.add(getConcatMiddleware("not removed") as Middleware<input, output>, {
       tags: { foo: true, bar: true }
     });
@@ -147,7 +165,7 @@ describe("MiddlewareStack", () => {
     });
 
     await stack.resolve(
-      ({ input }: FinalizeHandlerArguments<Array<string>>) => {
+      ({ input }: FinalizeHandlerArguments<Array<string>, protocol>) => {
         expect(input.sort()).toEqual(["not removed", "remove me!"]);
         return Promise.resolve({});
       },
@@ -157,7 +175,7 @@ describe("MiddlewareStack", () => {
     stack.remove("baz");
 
     await stack.resolve(
-      ({ input }: FinalizeHandlerArguments<Array<string>>) => {
+      ({ input }: FinalizeHandlerArguments<Array<string>, protocol>) => {
         expect(input).toEqual(["not removed"]);
         return Promise.resolve({});
       },
@@ -166,7 +184,7 @@ describe("MiddlewareStack", () => {
   });
 
   it("should allow filtering of middlewares by middleware options", async () => {
-    const stack = new MiddlewareStack<input, output>();
+    const stack = new MiddlewareStack<input, output, protocol>();
     stack.add(getConcatMiddleware("first") as Middleware<input, output>, {
       priority: 1
     });
@@ -179,11 +197,18 @@ describe("MiddlewareStack", () => {
     stack.add(getConcatMiddleware("fourth") as Middleware<input, output>, {
       step: "serialize"
     });
-    stack.add(getConcatMiddleware("fifth") as BuildMiddleware<input, output>, {
-      step: "build"
-    });
     stack.add(
-      getConcatMiddleware("sixth") as FinalizeMiddleware<input, output>,
+      getConcatMiddleware("fifth") as BuildMiddleware<input, output, protocol>,
+      {
+        step: "build"
+      }
+    );
+    stack.add(
+      getConcatMiddleware("sixth") as FinalizeMiddleware<
+        input,
+        output,
+        protocol
+      >,
       {
         step: "finalize"
       }
@@ -195,10 +220,12 @@ describe("MiddlewareStack", () => {
         middlewareStats.step === "initialize"
       );
     });
-    const handler = jest.fn(({ input }: FinalizeHandlerArguments<input>) => {
-      expect(input).toEqual(["first", "third", "second"]);
-      return Promise.resolve({});
-    });
+    const handler = jest.fn(
+      ({ input }: FinalizeHandlerArguments<input, protocol>) => {
+        expect(input).toEqual(["first", "third", "second"]);
+        return Promise.resolve({});
+      }
+    );
 
     const composed = filteredStack.resolve(handler, {} as any);
     await composed({ input: [] });
@@ -207,7 +234,7 @@ describe("MiddlewareStack", () => {
   });
 
   it("should not allow altering stack that to be filtered", async () => {
-    const stack = new MiddlewareStack<input, output>();
+    const stack = new MiddlewareStack<input, output, protocol>();
     stack.add(getConcatMiddleware("first") as Middleware<input, output>, {
       priority: 1
     });
@@ -221,10 +248,12 @@ describe("MiddlewareStack", () => {
       }
       return true;
     });
-    let inner = jest.fn(({ input }: FinalizeHandlerArguments<input>) => {
-      expect(input).toEqual(["first", "second"]);
-      return Promise.resolve({});
-    });
+    let inner = jest.fn(
+      ({ input }: FinalizeHandlerArguments<input, protocol>) => {
+        expect(input).toEqual(["first", "second"]);
+        return Promise.resolve({});
+      }
+    );
     await filteredStack.resolve(inner, {} as any)({ input: [] });
 
     expect(inner.mock.calls.length).toBe(1);

@@ -1,7 +1,7 @@
 import { HttpRequest } from "./http";
 import { OperationModel } from "./protocol";
 import { Logger } from "./logger";
-import { HTTPProtocol } from "./appProtocol";
+import { TransferProtocol } from "./transferProtocol";
 
 export interface HandlerArguments<Input extends object> {
   /**
@@ -13,8 +13,7 @@ export interface HandlerArguments<Input extends object> {
 
 export interface SerializeHandlerArguments<
   Input extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
+  Protocol extends TransferProtocol<any, any, any>
 > extends HandlerArguments<Input> {
   /**
    * The user input serialized as an HTTP request.
@@ -22,25 +21,23 @@ export interface SerializeHandlerArguments<
    * During the build phase of the execution of a middleware stack, a built
    * HTTP request may or may not be available.
    */
-  request?: ApplicationProtocol;
+  request?: Protocol["request"];
 }
 
 export interface FinalizeHandlerArguments<
   Input extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
+  Protocol extends TransferProtocol<any, any, any>
 > extends HandlerArguments<Input> {
   /**
    * The user input serialized as an HTTP request.
    */
-  request?: ApplicationProtocol;
+  request?: Protocol["request"];
 }
 
 export interface BuildHandlerArguments<
   Input extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
-> extends FinalizeHandlerArguments<Input, Stream, ApplicationProtocol> {}
+  Protocol extends TransferProtocol<any, any, any>
+> extends FinalizeHandlerArguments<Input, Protocol> {}
 
 export interface Handler<Input extends object, Output extends object> {
   /**
@@ -55,8 +52,7 @@ export interface Handler<Input extends object, Output extends object> {
 export interface SerializeHandler<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
+  Protocol extends TransferProtocol<any, any, any>
 > {
   /**
    * Asynchronously converts an input object into an output object.
@@ -64,16 +60,13 @@ export interface SerializeHandler<
    * @param args  An object containing a input to the command as well as any
    *              associated or previously generated execution artifacts.
    */
-  (
-    args: SerializeHandlerArguments<Input, Stream, ApplicationProtocol>
-  ): Promise<Output>;
+  (args: SerializeHandlerArguments<Input, Protocol>): Promise<Output>;
 }
 
 export interface FinalizeHandler<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
+  Protocol extends TransferProtocol<any, any, any>
 > {
   /**
    * Asynchronously converts an input object into an output object.
@@ -81,27 +74,20 @@ export interface FinalizeHandler<
    * @param args  An object containing a input to the command as well as any
    *              associated or previously generated execution artifacts.
    */
-  (args: FinalizeHandlerArguments<Input, Stream, ApplicationProtocol>): Promise<
-    Output
-  >;
+  (args: FinalizeHandlerArguments<Input, Protocol>): Promise<Output>;
 }
 
 export interface BuildHandler<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
-> extends FinalizeHandler<Input, Output, Stream, ApplicationProtocol> {}
+  Protocol extends TransferProtocol<any, any, any>
+> extends FinalizeHandler<Input, Output, Protocol> {}
 
 /**
  * A factory function that creates functions implementing the {Handler}
  * interface.
  */
-export interface Middleware<
-  Input extends object,
-  Output extends object,
-  ApplicationProtocol = HTTPProtocol
-> {
+export interface Middleware<Input extends object, Output extends object> {
   /**
    * @param next The handler to invoke after this middleware has operated on
    * the user input and before this middleware operates on the output.
@@ -121,8 +107,7 @@ export interface Middleware<
 export interface SerializeMiddleware<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
+  Protocol extends TransferProtocol<any, any, any>
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -131,9 +116,9 @@ export interface SerializeMiddleware<
    * @param context Invariant data and functions for use by the handler.
    */
   (
-    next: SerializeHandler<Input, Output, Stream, ApplicationProtocol>,
+    next: SerializeHandler<Input, Output, Protocol>,
     context: HandlerExecutionContext
-  ): SerializeHandler<Input, Output, Stream>;
+  ): SerializeHandler<Input, Output, Protocol>;
 }
 
 /**
@@ -143,8 +128,7 @@ export interface SerializeMiddleware<
 export interface FinalizeMiddleware<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
+  Protocol extends TransferProtocol<any, any, any>
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -153,17 +137,16 @@ export interface FinalizeMiddleware<
    * @param context Invariant data and functions for use by the handler.
    */
   (
-    next: FinalizeHandler<Input, Output, Stream, ApplicationProtocol>,
+    next: FinalizeHandler<Input, Output, Protocol>,
     context: HandlerExecutionContext
-  ): FinalizeHandler<Input, Output, Stream>;
+  ): FinalizeHandler<Input, Output, Protocol>;
 }
 
 export interface BuildMiddleware<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array,
-  ApplicationProtocol = HTTPProtocol
-> extends FinalizeMiddleware<Input, Output, Stream, ApplicationProtocol> {}
+  Protocol extends TransferProtocol<any, any, any>
+> extends FinalizeMiddleware<Input, Output, Protocol> {}
 
 /**
  * A factory function that creates the terminal handler atop which a middleware
@@ -171,11 +154,11 @@ export interface BuildMiddleware<
  */
 export interface Terminalware<
   OutputConstraint extends object,
-  Stream = Uint8Array
+  Protocol extends TransferProtocol<any, any, any>
 > {
   <Input extends object, Output extends OutputConstraint>(
     context: HandlerExecutionContext
-  ): FinalizeHandler<Input, Output, Stream>;
+  ): FinalizeHandler<Input, Output, Protocol>;
 }
 
 export type Step = "initialize" | "serialize" | "build" | "finalize";
@@ -244,7 +227,7 @@ export interface FinalizeHandlerOptions extends HandlerOptions {
 export interface MiddlewareStack<
   Input extends object,
   Output extends object,
-  Stream = Uint8Array
+  RequestType
 > {
   /**
    * Add middleware to the list, optionally specifying a priority and tags.
@@ -259,7 +242,11 @@ export interface MiddlewareStack<
    * optionally specifying a priority and tags.
    */
   add(
-    middleware: Middleware<Input, Output>,
+    middleware: SerializeMiddleware<
+      Input,
+      Output,
+      TransferProtocol<RequestType, any, any>
+    >,
     options: SerializeHandlerOptions
   ): void;
 
@@ -268,7 +255,11 @@ export interface MiddlewareStack<
    * optionally specifying a priority and tags.
    */
   add(
-    middleware: FinalizeMiddleware<Input, Output, Stream>,
+    middleware: FinalizeMiddleware<
+      Input,
+      Output,
+      TransferProtocol<RequestType, any, any>
+    >,
     options: BuildHandlerOptions
   ): void;
 
@@ -277,7 +268,11 @@ export interface MiddlewareStack<
    * optionally specifying a priority and tags.
    */
   add(
-    middleware: FinalizeMiddleware<Input, Output, Stream>,
+    middleware: FinalizeMiddleware<
+      Input,
+      Output,
+      TransferProtocol<RequestType, any, any>
+    >,
     options: FinalizeHandlerOptions
   ): void;
 
@@ -285,7 +280,7 @@ export interface MiddlewareStack<
    * Create a shallow clone of this list. Step bindings and handler priorities
    * and tags are preserved in the copy.
    */
-  clone(): MiddlewareStack<Input, Output, Stream>;
+  clone(): MiddlewareStack<Input, Output, RequestType>;
 
   /**
    * same to clone, but only filter in middlewares when evaluation callback
@@ -293,7 +288,7 @@ export interface MiddlewareStack<
    */
   filter(
     callbackfn: (middlewareStats: HandlerOptions) => boolean
-  ): MiddlewareStack<Input, Output, Stream>;
+  ): MiddlewareStack<Input, Output, RequestType>;
 
   /**
    * Create a list containing the middlewares in this list as well as the
@@ -301,8 +296,8 @@ export interface MiddlewareStack<
    * bindings and handler priorities and tags are preserved in the copy.
    */
   concat<InputType extends Input, OutputType extends Output>(
-    from: MiddlewareStack<InputType, OutputType, Stream>
-  ): MiddlewareStack<InputType, OutputType, Stream>;
+    from: MiddlewareStack<InputType, OutputType, RequestType>
+  ): MiddlewareStack<InputType, OutputType, RequestType>;
 
   /**
    * Removes middleware from the stack.
@@ -325,7 +320,11 @@ export interface MiddlewareStack<
    * will pass through all middleware in the reverse of that order.
    */
   resolve<InputType extends Input, OutputType extends Output>(
-    handler: FinalizeHandler<InputType, OutputType, Stream>,
+    handler: FinalizeHandler<
+      InputType,
+      OutputType,
+      TransferProtocol<RequestType, any, any>
+    >,
     context: HandlerExecutionContext
   ): Handler<InputType, OutputType>;
 }
@@ -340,10 +339,4 @@ export interface HandlerExecutionContext {
    * operation.
    */
   logger: Logger;
-
-  /**
-   * The serialization model for the input, output, and possible errors for
-   * the operation executed by invoking the composed handler.
-   */
-  model: OperationModel;
 }

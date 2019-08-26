@@ -4,62 +4,61 @@ import {
   HttpRequest,
   HttpResponse,
   RequestSerializer,
-  BodyLengthCalculator
+  BodyLengthCalculator,
+  TransferProtocol,
+  HttpOptions
 } from "@aws-sdk/types";
-export interface HTTPConfiguration {
-  urlParser: UrlParser;
-}
+import { Stream } from "stream";
 
-export type Handler<
-  RequestType extends object,
-  ResponseType extends object,
-  HandlerOptions extends object
-> = {
-  destroy?: () => void;
-  handle: (
-    request: RequestType,
-    handlerOptions: HandlerOptions
-  ) => Promise<ResponseType>;
-};
-
-export interface ApplicationProtocol<
-  RequestType extends object,
-  ResponseType extends object,
-  HandlerOptions extends object
-> {
-  resolvedConfig: {
-    handler: Handler<RequestType, ResponseType, HandlerOptions>;
-  };
-  request?: RequestType;
-  response?: ResponseType;
-  setRequest: (serializer: RequestSerializer, input: any) => RequestType;
-}
-
-interface HTTPProtocolConfiguration {
-  bodyLengthChecker?: BodyLengthCalculator;
-  ttl?: number;
-  handler: HttpHandler;
-}
-
-interface HTTPProtocolResolvedConfiguration extends HTTPProtocolConfiguration {
+/**
+ * all entries in resolved in resolved configuration
+ */
+interface HTTPProtocolResolvedConfiguration<StreamType, HttpHandlerOptions> {
   bodyLengthChecker: BodyLengthCalculator;
   ttl: number;
+  maxRedirects: number;
+  handler: HttpHandler<StreamType, HttpHandlerOptions>;
+  keepAlive: boolean;
 }
 
-export class HTTPProtocol<StreamType extends object>
-  implements ApplicationProtocol<HttpRequest, HttpResponse, StreamType> {
-  request?: HttpRequest;
-  response?: HttpResponse;
-  resolvedConfig: HTTPProtocolResolvedConfiguration;
-  constructor(configs: HTTPProtocolConfiguration) {
+/**
+ * When user create a http protocol instances, only handler is required
+ */
+type HTTPProtocolConfiguration<StreamType, HttpHandlerOptions> = Partial<
+  HTTPProtocolResolvedConfiguration<StreamType, HttpHandlerOptions>
+> & {
+  handler: HTTPProtocolResolvedConfiguration<
+    StreamType,
+    HttpHandlerOptions
+  >["handler"];
+};
+
+type HTTPHandlerOptions = HttpOptions;
+
+export class HTTPProtocol<StreamType, HandlerOptions = HTTPHandlerOptions>
+  implements
+    TransferProtocol<
+      HttpRequest<StreamType>,
+      HttpResponse<StreamType>,
+      HandlerOptions
+    > {
+  request?: HttpRequest<StreamType>;
+  response?: HttpResponse<StreamType>;
+  resolvedConfig: HTTPProtocolResolvedConfiguration<StreamType, HandlerOptions>;
+  constructor(configs: HTTPProtocolConfiguration<StreamType, HandlerOptions>) {
     this.resolvedConfig = {
       ttl: configs.ttl || 1000,
       bodyLengthChecker: configs.bodyLengthChecker || (() => undefined),
+      maxRedirects: configs.maxRedirects || 0,
+      keepAlive: configs.keepAlive || true,
       handler: configs.handler
     };
   }
 
-  setRequest(serializer: RequestSerializer, input: any) {
+  setRequest(
+    serializer: RequestSerializer<HttpRequest<StreamType>>,
+    input: any
+  ) {
     this.request = serializer.serialize(input, "http");
     /** Use existing serializer to demonstrate */
     return this.request;

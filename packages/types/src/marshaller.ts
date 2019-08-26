@@ -39,7 +39,7 @@ export interface BodySerializerBuildOptions {
   operation: OperationModel;
 }
 
-export interface RequestSerializer<StreamType = Uint8Array> {
+export interface RequestSerializer<Request> {
   /**
    * Converts the provided `input` into an HTTP request
    *
@@ -47,5 +47,5 @@ export interface RequestSerializer<StreamType = Uint8Array> {
    *                  request.
    * @param input     The user input to serialize.
    */
-  serialize(operation: OperationModel, input: any): HttpRequest<StreamType>;
+  serialize(input: any, transferProtocol?: string): Request;
 }

@@ -15,7 +15,7 @@ export function contentLengthMiddleware(
     args: BuildHandlerArguments<any, any>
   ): Promise<Output> => {
     let request = { ...args.request };
-    const { body, headers } = request;
+    const { body, headers } = request.headers;
     if (
       body &&
       Object.keys(headers)
