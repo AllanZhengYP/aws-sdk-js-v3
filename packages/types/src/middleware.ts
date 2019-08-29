@@ -1,7 +1,7 @@
 import { HttpRequest } from "./http";
 import { OperationModel } from "./protocol";
 import { Logger } from "./logger";
-import { TransferProtocol } from "./transferProtocol";
+import { Protocol } from "./transferProtocol";
 
 export interface HandlerArguments<Input extends object> {
   /**
@@ -13,7 +13,7 @@ export interface HandlerArguments<Input extends object> {
 
 export interface SerializeHandlerArguments<
   Input extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > extends HandlerArguments<Input> {
   /**
    * The user input serialized as an HTTP request.
@@ -26,7 +26,7 @@ export interface SerializeHandlerArguments<
 
 export interface FinalizeHandlerArguments<
   Input extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > extends HandlerArguments<Input> {
   /**
    * The user input serialized as an HTTP request.
@@ -36,7 +36,7 @@ export interface FinalizeHandlerArguments<
 
 export interface BuildHandlerArguments<
   Input extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > extends FinalizeHandlerArguments<Input, Protocol> {}
 
 export interface Handler<Input extends object, Output extends object> {
@@ -52,7 +52,7 @@ export interface Handler<Input extends object, Output extends object> {
 export interface SerializeHandler<
   Input extends object,
   Output extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > {
   /**
    * Asynchronously converts an input object into an output object.
@@ -66,7 +66,7 @@ export interface SerializeHandler<
 export interface FinalizeHandler<
   Input extends object,
   Output extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > {
   /**
    * Asynchronously converts an input object into an output object.
@@ -80,7 +80,7 @@ export interface FinalizeHandler<
 export interface BuildHandler<
   Input extends object,
   Output extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > extends FinalizeHandler<Input, Output, Protocol> {}
 
 /**
@@ -107,7 +107,7 @@ export interface Middleware<Input extends object, Output extends object> {
 export interface SerializeMiddleware<
   Input extends object,
   Output extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -128,7 +128,7 @@ export interface SerializeMiddleware<
 export interface FinalizeMiddleware<
   Input extends object,
   Output extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -145,7 +145,7 @@ export interface FinalizeMiddleware<
 export interface BuildMiddleware<
   Input extends object,
   Output extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > extends FinalizeMiddleware<Input, Output, Protocol> {}
 
 /**
@@ -154,7 +154,7 @@ export interface BuildMiddleware<
  */
 export interface Terminalware<
   OutputConstraint extends object,
-  Protocol extends TransferProtocol<any, any, any>
+  Protocol extends Protocol<any, any, any>
 > {
   <Input extends object, Output extends OutputConstraint>(
     context: HandlerExecutionContext
@@ -245,7 +245,7 @@ export interface MiddlewareStack<
     middleware: SerializeMiddleware<
       Input,
       Output,
-      TransferProtocol<RequestType, any, any>
+      Protocol<RequestType, any, any>
     >,
     options: SerializeHandlerOptions
   ): void;
@@ -258,7 +258,7 @@ export interface MiddlewareStack<
     middleware: FinalizeMiddleware<
       Input,
       Output,
-      TransferProtocol<RequestType, any, any>
+      Protocol<RequestType, any, any>
     >,
     options: BuildHandlerOptions
   ): void;
@@ -271,7 +271,7 @@ export interface MiddlewareStack<
     middleware: FinalizeMiddleware<
       Input,
       Output,
-      TransferProtocol<RequestType, any, any>
+      Protocol<RequestType, any, any>
     >,
     options: FinalizeHandlerOptions
   ): void;
@@ -323,7 +323,7 @@ export interface MiddlewareStack<
     handler: FinalizeHandler<
       InputType,
       OutputType,
-      TransferProtocol<RequestType, any, any>
+      Protocol<RequestType, any, any>
     >,
     context: HandlerExecutionContext
   ): Handler<InputType, OutputType>;
