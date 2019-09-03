@@ -35,7 +35,6 @@
     "@aws-sdk/middleware-serializer": "^0.1.0-preview.4",
     "@aws-sdk/middleware-stack": "^0.1.0-preview.5",
     "@aws-sdk/node-http-handler": "^0.1.0-preview.5",
-    "@aws-sdk/protocol-json-rpc": "^0.1.0-preview.5",
     "@aws-sdk/region-provider": "^0.1.0-preview.4",
     "@aws-sdk/retry-middleware": "^0.1.0-preview.4",
     "@aws-sdk/signature-v4": "^0.1.0-preview.5",
@@ -47,6 +46,9 @@
     "@aws-sdk/util-body-length-node": "^0.1.0-preview.3",
     "@aws-sdk/util-user-agent-node": "^0.1.0-preview.5",
     "@aws-sdk/util-utf8-node": "^0.1.0-preview.2",
+    "@aws-sdk/protocol": "^0.1.0-preview.1",
+    "@aws-sdk/protocol-http": "^0.1.0-preview.1",
+    "@aws-sdk/protocol-json-rpc": "^0.1.0-preview.5",
     "tslib": "^1.8.0"
   },
   "devDependencies": {

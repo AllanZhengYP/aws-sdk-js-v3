@@ -16,20 +16,12 @@ import * as __aws_sdk_url_parser_node from "@aws-sdk/url-parser-node";
 import * as __aws_sdk_util_base64_node from "@aws-sdk/util-base64-node";
 import * as __aws_sdk_util_body_length_node from "@aws-sdk/util-body-length-node";
 import * as __aws_sdk_util_utf8_node from "@aws-sdk/util-utf8-node";
+import { Protocol, TransferHandler } from "@aws-sdk/protocol";
+import { HttpRequest, HttpResponse, HttpHandler } from "@aws-sdk/protocol-http";
+import { JsonRpcProtocol } from "@aws-sdk/protocol-json-rpc";
 import * as _stream from "stream";
-import { OutputTypesUnion } from "./types/OutputTypesUnion";
 
 export interface KinesisConfiguration {
-  /**
-   * The function that will be used to convert a base64-encoded string to a byte array
-   */
-  base64Decoder?: __aws_sdk_types.Decoder;
-
-  /**
-   * The function that will be used to convert binary data to a base64-encoded string
-   */
-  base64Encoder?: __aws_sdk_types.Encoder;
-
   /**
    * The credentials used to sign requests.
    *
@@ -63,9 +55,9 @@ export interface KinesisConfiguration {
   handler?: __aws_sdk_types.Terminalware<any, _stream.Readable>;
 
   /**
-   * The HTTP handler to use
+   * The transfer handler to use
    */
-  httpHandler?: __aws_sdk_types.HttpHandler<_stream.Readable>;
+  httpHandler?: HttpHandler<_stream.Readable>;
 
   /**
    * Whether sockets should be kept open even when there are no outstanding requests so that future requests can forgo having to reestablish a TCP or TLS connection. Defaults to true.
@@ -118,24 +110,14 @@ export interface KinesisConfiguration {
   sslEnabled?: boolean;
 
   /**
-   * A function that converts a stream into an array of bytes.
-   */
-  streamCollector?: __aws_sdk_types.StreamCollector<_stream.Readable>;
-
-  /**
    * The function that will be used to convert strings into HTTP endpoints
    */
   urlParser?: __aws_sdk_types.UrlParser;
 
   /**
-   * The function that will be used to convert a UTF8-encoded string to a byte array
+   *
    */
-  utf8Decoder?: __aws_sdk_types.Decoder;
-
-  /**
-   * The function that will be used to convert binary data to a UTF-8 encoded string
-   */
-  utf8Encoder?: __aws_sdk_types.Encoder;
+  protocol?: Protocol<any, any>;
 }
 
 export interface KinesisResolvableConfiguration extends KinesisConfiguration {
@@ -148,31 +130,10 @@ export interface KinesisResolvableConfiguration extends KinesisConfiguration {
    * A function that can calculate the length of a request body.
    */
   bodyLengthChecker: (body: any) => number | undefined;
-
-  /**
-   * The parser to use when converting HTTP responses to SDK output types
-   */
-  parser: __aws_sdk_types.ResponseParser<_stream.Readable>;
-
-  /**
-   * The serializer to use when converting SDK input to HTTP requests
-   */
-  serializer: __aws_sdk_types.Provider<
-    __aws_sdk_types.RequestSerializer<_stream.Readable>
-  >;
 }
 
-export interface KinesisResolvedConfiguration
-  extends KinesisConfiguration,
-    __aws_sdk_types.ClientResolvedConfigurationBase<
-      OutputTypesUnion,
-      _stream.Readable
-    > {
+export interface KinesisResolvedConfiguration extends KinesisConfiguration {
   _user_injected_http_handler: boolean;
-
-  base64Decoder: __aws_sdk_types.Decoder;
-
-  base64Encoder: __aws_sdk_types.Encoder;
 
   bodyLengthChecker: (body: any) => number | undefined;
 
@@ -182,9 +143,7 @@ export interface KinesisResolvedConfiguration
 
   endpointProvider: any;
 
-  handler: __aws_sdk_types.Terminalware<any, _stream.Readable>;
-
-  httpHandler: __aws_sdk_types.HttpHandler<_stream.Readable>;
+  httpHandler: HttpHandler<_stream.Readable>;
 
   keepAlive: boolean;
 
@@ -192,13 +151,7 @@ export interface KinesisResolvedConfiguration
 
   maxRetries: number;
 
-  parser: __aws_sdk_types.ResponseParser<_stream.Readable>;
-
   region: __aws_sdk_types.Provider<string>;
-
-  serializer: __aws_sdk_types.Provider<
-    __aws_sdk_types.RequestSerializer<_stream.Readable>
-  >;
 
   sha256: __aws_sdk_types.HashConstructor;
 
@@ -208,13 +161,9 @@ export interface KinesisResolvedConfiguration
 
   sslEnabled: boolean;
 
-  streamCollector: __aws_sdk_types.StreamCollector<_stream.Readable>;
-
   urlParser: __aws_sdk_types.UrlParser;
 
-  utf8Decoder: __aws_sdk_types.Decoder;
-
-  utf8Encoder: __aws_sdk_types.Encoder;
+  protocol: Protocol<any, any>;
 }
 
 export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
@@ -292,55 +241,6 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
       return value!;
     }
   },
-  base64Decoder: {
-    defaultValue: __aws_sdk_util_base64_node.fromBase64
-  },
-  base64Encoder: {
-    defaultValue: __aws_sdk_util_base64_node.toBase64
-  },
-  utf8Decoder: {
-    defaultValue: __aws_sdk_util_utf8_node.fromUtf8
-  },
-  utf8Encoder: {
-    defaultValue: __aws_sdk_util_utf8_node.toUtf8
-  },
-  streamCollector: {
-    defaultValue: __aws_sdk_stream_collector_node.streamCollector
-  },
-  serializer: {
-    defaultProvider: (configuration: {
-      base64Encoder: __aws_sdk_types.Encoder;
-      endpoint: __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>;
-      utf8Decoder: __aws_sdk_types.Decoder;
-    }) => {
-      const promisified = configuration
-        .endpoint()
-        .then(
-          endpoint =>
-            new __aws_sdk_protocol_json_rpc.JsonRpcSerializer<_stream.Readable>(
-              endpoint,
-              new __aws_sdk_json_builder.JsonBuilder(
-                configuration.base64Encoder,
-                configuration.utf8Decoder
-              )
-            )
-        );
-      return () => promisified;
-    }
-  },
-  parser: {
-    defaultProvider: (configuration: {
-      base64Decoder: __aws_sdk_types.Decoder;
-      streamCollector: __aws_sdk_types.StreamCollector<_stream.Readable>;
-      utf8Encoder: __aws_sdk_types.Encoder;
-    }) =>
-      new __aws_sdk_protocol_json_rpc.JsonRpcParser(
-        new __aws_sdk_json_parser.JsonParser(configuration.base64Decoder),
-        __aws_sdk_json_error_unmarshaller.jsonErrorUnmarshaller,
-        configuration.streamCollector,
-        configuration.utf8Encoder
-      )
-  },
   keepAlive: {
     defaultValue: true
   },
@@ -351,16 +251,6 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
   httpHandler: {
     defaultProvider: (configuration: { keepAlive: boolean }) =>
       new __aws_sdk_node_http_handler.NodeHttpHandler(configuration)
-  },
-  handler: {
-    defaultProvider: (configuration: {
-      httpHandler: __aws_sdk_types.HttpHandler<_stream.Readable>;
-      parser: __aws_sdk_types.ResponseParser<_stream.Readable>;
-    }) =>
-      __aws_sdk_core_handler.coreHandler<OutputTypesUnion, _stream.Readable>(
-        configuration.httpHandler,
-        configuration.parser
-      )
   },
   bodyLengthChecker: {
     defaultValue: __aws_sdk_util_body_length_node.calculateBodyLength
@@ -403,5 +293,13 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
         sha256: configuration.sha256,
         uriEscapePath: true
       })
+  },
+  protocol: {
+    defaultProvider: (configuration: {
+      httpHandler: TransferHandler<
+        HttpRequest<_stream.Readable>,
+        HttpResponse<_stream.Readable>
+      >;
+    }) => new JsonRpcProtocol(configuration.httpHandler)
   }
 };

@@ -7,7 +7,6 @@ import * as __aws_sdk_json_error_unmarshaller from "@aws-sdk/json-error-unmarsha
 import * as __aws_sdk_json_parser from "@aws-sdk/json-parser";
 import * as __aws_sdk_middleware_content_length from "@aws-sdk/middleware-content-length";
 import * as __aws_sdk_middleware_header_default from "@aws-sdk/middleware-header-default";
-import * as __aws_sdk_middleware_serializer from "@aws-sdk/middleware-serializer";
 import * as __aws_sdk_middleware_stack from "@aws-sdk/middleware-stack";
 import * as __aws_sdk_node_http_handler from "@aws-sdk/node-http-handler";
 import * as __aws_sdk_protocol_json_rpc from "@aws-sdk/protocol-json-rpc";
@@ -26,19 +25,15 @@ import * as _stream from "stream";
 import {
   KinesisConfiguration,
   KinesisResolvedConfiguration,
-  configurationProperties
+  configurationProperties,
+  KinesisResolvableConfiguration
 } from "./KinesisConfiguration";
 import { InputTypesUnion } from "./types/InputTypesUnion";
 import { OutputTypesUnion } from "./types/OutputTypesUnion";
 import { clientVersion, ServiceMetadata } from "./model/ServiceMetadata";
+import { HttpRequest, HttpResponse } from "@aws-sdk/protocol-http";
 
-export class KinesisClient
-  implements
-    __aws_sdk_types.AWSClient<
-      InputTypesUnion,
-      OutputTypesUnion,
-      _stream.Readable
-    > {
+export class KinesisClient {
   readonly config: KinesisResolvedConfiguration;
 
   readonly middlewareStack = new __aws_sdk_middleware_stack.MiddlewareStack<
@@ -52,16 +47,6 @@ export class KinesisClient
       configuration,
       configurationProperties,
       this.middlewareStack
-    );
-    this.middlewareStack.add(
-      __aws_sdk_middleware_serializer.serializerMiddleware(
-        this.config.serializer
-      ),
-      {
-        step: "serialize",
-        priority: 90,
-        tags: { SERIALIZER: true }
-      }
     );
     this.middlewareStack.add(
       __aws_sdk_middleware_content_length.contentLengthMiddleware(
@@ -115,7 +100,10 @@ export class KinesisClient
   }
 
   destroy(): void {
-    if (!this.config._user_injected_http_handler) {
+    if (
+      !this.config._user_injected_http_handler &&
+      typeof this.config.httpHandler.destroy === "function"
+    ) {
       this.config.httpHandler.destroy();
     }
   }
