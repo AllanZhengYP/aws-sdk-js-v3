@@ -2,7 +2,7 @@ import * as __aws_sdk_middleware_stack from "@aws-sdk/middleware-stack";
 import * as __aws_sdk_middleware_serializer from "@aws-sdk/middleware-serializer";
 import * as __aws_sdk_types from "@aws-sdk/types";
 import * as _stream from "stream";
-import { ListStreams } from "../model/operations/ListStreams";
+import { ListStreams } from "../model/serializer/ListStreams";
 import { InputTypesUnion } from "../types/InputTypesUnion";
 import { OutputTypesUnion } from "../types/OutputTypesUnion";
 import { ListStreamsInput } from "../types/ListStreamsInput";
@@ -29,19 +29,7 @@ export class ListStreamsCommand
     _stream.Readable
   >();
 
-  constructor(readonly input: ListStreamsInput) {
-    /**TODO: add serializer & deserializer to commands */
-    // this.middlewareStack.add(
-    //   __aws_sdk_middleware_serializer.serializerMiddleware(
-    //     this.config.protocol
-    //   ),
-    //   {
-    //     step: "serialize",
-    //     priority: 90,
-    //     tags: { SERIALIZER: true }
-    //   }
-    // );
-  }
+  constructor(readonly input: ListStreamsInput) {}
 
   resolveMiddleware(
     clientStack: __aws_sdk_middleware_stack.MiddlewareStack<
@@ -55,9 +43,19 @@ export class ListStreamsCommand
     const stack = clientStack.concat(this.middlewareStack);
 
     const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
-      logger: {} as any,
-      model: this.model
+      logger: {} as any
     };
+    this.middlewareStack.add(
+      __aws_sdk_middleware_serializer.serializerMiddleware(
+        configuration.protocol,
+        ListStreams
+      ) as any,
+      {
+        step: "serialize",
+        priority: 90,
+        tags: { SERIALIZER: true }
+      }
+    );
 
     return stack.resolve(
       handler<ListStreamsInput, ListStreamsOutput>(handlerExecutionContext),
