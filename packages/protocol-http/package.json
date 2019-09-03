@@ -1,5 +1,5 @@
 {
-  "name": "@aws-sdk/protocol-json-rpc",
+  "name": "@aws-sdk/protocol-http",
   "version": "0.1.0-preview.1",
   "scripts": {
     "prepublishOnly": "tsc",
@@ -16,9 +16,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "tslib": "^1.8.0",
-    "@aws-sdk/types": "^0.1.0-preview.4",
-    "@aws-sdk/protocol": "^0.1.0-preview.1",
-    "@aws-sdk/protocol-http": "^0.1.0-preview.1"
+    "@aws-sdk/util-uri-escape": "^0.1.0-preview.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",

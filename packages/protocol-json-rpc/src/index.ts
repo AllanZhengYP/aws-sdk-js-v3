@@ -4,6 +4,7 @@ import {
   ParserDecoratorStack
 } from "@aws-sdk/types";
 import { Protocol, TransferHandler } from "@aws-sdk/protocol";
+import { HttpRequest, HttpResponse } from "@aws-sdk/protocol-http";
 
 export class JsonRpcProtocol<StreamType> extends Protocol<
   HttpRequest<StreamType>,

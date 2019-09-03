@@ -1,6 +1,6 @@
 {
-  "name": "@aws-sdk/protocol-json-rpc",
-  "version": "0.1.0-preview.1",
+  "name": "@aws-sdk/util-uri-escape",
+  "version": "0.1.0-preview.2",
   "scripts": {
     "prepublishOnly": "tsc",
     "pretest": "tsc -p tsconfig.test.json",
@@ -15,14 +15,11 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "tslib": "^1.8.0",
-    "@aws-sdk/types": "^0.1.0-preview.4",
-    "@aws-sdk/protocol": "^0.1.0-preview.1",
-    "@aws-sdk/protocol-http": "^0.1.0-preview.1"
+    "tslib": "^1.8.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
-    "typescript": "~3.4.0",
-    "jest": "^24.7.1"
+    "jest": "^24.7.1",
+    "typescript": "~3.4.0"
   }
 }
