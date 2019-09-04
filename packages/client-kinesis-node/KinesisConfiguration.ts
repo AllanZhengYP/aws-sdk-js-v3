@@ -16,7 +16,7 @@ import * as __aws_sdk_url_parser_node from "@aws-sdk/url-parser-node";
 import * as __aws_sdk_util_base64_node from "@aws-sdk/util-base64-node";
 import * as __aws_sdk_util_body_length_node from "@aws-sdk/util-body-length-node";
 import * as __aws_sdk_util_utf8_node from "@aws-sdk/util-utf8-node";
-import { Protocol, TransferHandler } from "@aws-sdk/protocol";
+import { Protocol, TransferHandler } from "@aws-sdk/types";
 import { HttpRequest, HttpResponse, HttpHandler } from "@aws-sdk/protocol-http";
 import { JsonRpcProtocol } from "@aws-sdk/protocol-json-rpc";
 import * as _stream from "stream";

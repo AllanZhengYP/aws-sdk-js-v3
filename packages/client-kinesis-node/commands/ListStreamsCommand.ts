@@ -2,7 +2,8 @@ import * as __aws_sdk_middleware_stack from "@aws-sdk/middleware-stack";
 import * as __aws_sdk_middleware_serializer from "@aws-sdk/middleware-serializer";
 import * as __aws_sdk_types from "@aws-sdk/types";
 import * as _stream from "stream";
-import { ListStreams } from "../model/serializer/ListStreams";
+import { ListTablesSerializer } from "../model/serializer/ListStreams";
+import { ListTablesDeserializer } from "../model/deserializer/ListStreams";
 import { InputTypesUnion } from "../types/InputTypesUnion";
 import { OutputTypesUnion } from "../types/OutputTypesUnion";
 import { ListStreamsInput } from "../types/ListStreamsInput";
@@ -22,7 +23,6 @@ export class ListStreamsCommand
       KinesisResolvedConfiguration,
       _stream.Readable
     > {
-  readonly model = ListStreams;
   readonly middlewareStack = new __aws_sdk_middleware_stack.MiddlewareStack<
     ListStreamsInput,
     ListStreamsOutput
@@ -46,7 +46,7 @@ export class ListStreamsCommand
     this.middlewareStack.add(
       __aws_sdk_middleware_serializer.serializerMiddleware(
         configuration.protocol,
-        ListStreams
+        ListTablesSerializer
       ),
       {
         step: "serialize",
@@ -57,7 +57,7 @@ export class ListStreamsCommand
     this.middlewareStack.add(
       __aws_sdk_middleware_serializer.serializerMiddleware(
         configuration.protocol,
-        ListStreams
+        ListTablesDeserializer
       ) as any,
       {
         step: "deserialize",
@@ -66,6 +66,6 @@ export class ListStreamsCommand
       }
     );
 
-    return stack.resolve(protocol.handler, handlerExecutionContext);
+    return stack.resolve(protocol.handler.handle, handlerExecutionContext);
   }
 }
