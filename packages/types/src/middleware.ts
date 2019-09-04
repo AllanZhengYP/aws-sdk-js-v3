@@ -1,7 +1,6 @@
 import { HttpRequest } from "./http";
 import { OperationModel } from "./protocol";
 import { Logger } from "./logger";
-import { Protocol } from "./transferProtocol";
 
 export interface HandlerArguments<Input extends object> {
   /**
@@ -11,33 +10,50 @@ export interface HandlerArguments<Input extends object> {
   input: Input;
 }
 
-export interface SerializeHandlerArguments<
-  Input extends object,
-  Protocol extends Protocol<any, any, any>
-> extends HandlerArguments<Input> {
+export interface HandlerOutput<Output extends object>
+  extends DeserializeHandlerOutput<Output> {
+  output: Output;
+}
+
+export interface SerializeHandlerArguments<Input extends object>
+  extends HandlerArguments<Input> {
   /**
-   * The user input serialized as an HTTP request.
+   * The user input serialized as a request object. The request object can be
+   * but not restraint to Http request.
    *
    * During the build phase of the execution of a middleware stack, a built
-   * HTTP request may or may not be available.
+   * request may or may not be available.
    */
-  request?: Protocol["request"];
+  request?: unknown;
 }
 
-export interface FinalizeHandlerArguments<
-  Input extends object,
-  Protocol extends Protocol<any, any, any>
-> extends HandlerArguments<Input> {
+export interface SerializeHandlerOutput<Output extends object>
+  extends HandlerOutput<Output> {}
+
+export interface FinalizeHandlerArguments<Input extends object>
+  extends HandlerArguments<Input> {
   /**
-   * The user input serialized as an HTTP request.
+   * The user input serialized as a request.
    */
-  request?: Protocol["request"];
+  request: unknown;
 }
 
-export interface BuildHandlerArguments<
-  Input extends object,
-  Protocol extends Protocol<any, any, any>
-> extends FinalizeHandlerArguments<Input, Protocol> {}
+export interface FinalizeHandlerOutput<Output extends object>
+  extends HandlerOutput<Output> {}
+
+export interface BuildHandlerArguments<Input extends object>
+  extends FinalizeHandlerArguments<Input> {}
+
+export interface BuildHandlerOutput<Output extends object>
+  extends HandlerOutput<Output> {}
+
+export interface DeserializeHandlerArguments<Input extends object>
+  extends FinalizeHandlerArguments<Input> {}
+
+export interface DeserializeHandlerOutput<Output extends object> {
+  output?: Output;
+  response: unknown;
+}
 
 export interface Handler<Input extends object, Output extends object> {
   /**
@@ -46,42 +62,44 @@ export interface Handler<Input extends object, Output extends object> {
    * @param args  An object containing a input to the command as well as any
    *              associated or previously generated execution artifacts.
    */
-  (args: HandlerArguments<Input>): Promise<Output>;
+  (args: HandlerArguments<Input>): Promise<HandlerOutput<Output>>;
 }
 
-export interface SerializeHandler<
-  Input extends object,
-  Output extends object,
-  Protocol extends Protocol<any, any, any>
-> {
+export interface SerializeHandler<Input extends object, Output extends object> {
   /**
    * Asynchronously converts an input object into an output object.
    *
    * @param args  An object containing a input to the command as well as any
    *              associated or previously generated execution artifacts.
    */
-  (args: SerializeHandlerArguments<Input, Protocol>): Promise<Output>;
+  (args: SerializeHandlerArguments<Input>): Promise<
+    SerializeHandlerOutput<Output>
+  >;
 }
 
-export interface FinalizeHandler<
-  Input extends object,
-  Output extends object,
-  Protocol extends Protocol<any, any, any>
-> {
+export interface FinalizeHandler<Input extends object, Output extends object> {
   /**
    * Asynchronously converts an input object into an output object.
    *
    * @param args  An object containing a input to the command as well as any
    *              associated or previously generated execution artifacts.
    */
-  (args: FinalizeHandlerArguments<Input, Protocol>): Promise<Output>;
+  (args: FinalizeHandlerArguments<Input>): Promise<
+    FinalizeHandlerOutput<Output>
+  >;
 }
 
-export interface BuildHandler<
+export interface BuildHandler<Input extends object, Output extends object>
+  extends FinalizeHandler<Input, Output> {}
+
+export interface DeserializeHandler<
   Input extends object,
-  Output extends object,
-  Protocol extends Protocol<any, any, any>
-> extends FinalizeHandler<Input, Output, Protocol> {}
+  Output extends object
+> {
+  (args: DeserializeHandlerArguments<Input>): Promise<
+    DeserializeHandlerOutput<Output>
+  >;
+}
 
 /**
  * A factory function that creates functions implementing the {Handler}
@@ -106,8 +124,7 @@ export interface Middleware<Input extends object, Output extends object> {
  */
 export interface SerializeMiddleware<
   Input extends object,
-  Output extends object,
-  Protocol extends Protocol<any, any, any>
+  Output extends object
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -116,9 +133,9 @@ export interface SerializeMiddleware<
    * @param context Invariant data and functions for use by the handler.
    */
   (
-    next: SerializeHandler<Input, Output, Protocol>,
+    next: SerializeHandler<Input, Output>,
     context: HandlerExecutionContext
-  ): SerializeHandler<Input, Output, Protocol>;
+  ): SerializeHandler<Input, Output>;
 }
 
 /**
@@ -127,8 +144,7 @@ export interface SerializeMiddleware<
  */
 export interface FinalizeMiddleware<
   Input extends object,
-  Output extends object,
-  Protocol extends Protocol<any, any, any>
+  Output extends object
 > {
   /**
    * @param next The handler to invoke after this middleware has operated on
@@ -137,31 +153,37 @@ export interface FinalizeMiddleware<
    * @param context Invariant data and functions for use by the handler.
    */
   (
-    next: FinalizeHandler<Input, Output, Protocol>,
+    next: FinalizeHandler<Input, Output>,
     context: HandlerExecutionContext
-  ): FinalizeHandler<Input, Output, Protocol>;
+  ): FinalizeHandler<Input, Output>;
 }
 
-export interface BuildMiddleware<
+export interface BuildMiddleware<Input extends object, Output extends object>
+  extends FinalizeMiddleware<Input, Output> {}
+
+export interface DeserializeMiddleware<
   Input extends object,
-  Output extends object,
-  Protocol extends Protocol<any, any, any>
-> extends FinalizeMiddleware<Input, Output, Protocol> {}
+  Output extends object
+> {
+  (next: DeserializeHandler<Input, Output>): DeserializeHandler<Input, Output>;
+}
 
 /**
  * A factory function that creates the terminal handler atop which a middleware
  * stack sits.
  */
-export interface Terminalware<
-  OutputConstraint extends object,
-  Protocol extends Protocol<any, any, any>
-> {
-  <Input extends object, Output extends OutputConstraint>(
+export interface Terminalware {
+  <Input extends object, Output extends object>(
     context: HandlerExecutionContext
-  ): FinalizeHandler<Input, Output, Protocol>;
+  ): DeserializeHandler<Input, Output>;
 }
 
-export type Step = "initialize" | "serialize" | "build" | "finalize";
+export type Step =
+  | "initialize"
+  | "serialize"
+  | "build"
+  | "finalize"
+  | "deserialize";
 
 export interface HandlerOptions {
   /**
@@ -184,6 +206,8 @@ export interface HandlerOptions {
    *      should therefore only be altered as match the recipient's
    *      expectations. Examples of typical finalization tasks include request
    *      signing and injecting hop-by-hop headers.
+   * - deserialize: The response has arrived, the middleware here will deserialize
+   *      the raw response object to structured response
    *
    *      Unlike initialization and build handlers, which are executed once
    *      per operation execution, finalization handlers will be executed for
@@ -224,11 +248,11 @@ export interface FinalizeHandlerOptions extends HandlerOptions {
   step: "finalize";
 }
 
-export interface MiddlewareStack<
-  Input extends object,
-  Output extends object,
-  RequestType
-> {
+export interface DeserializeHandlerOptions extends HandlerOptions {
+  step: "deserialize";
+}
+
+export interface MiddlewareStack<Input extends object, Output extends object> {
   /**
    * Add middleware to the list, optionally specifying a priority and tags.
    */
@@ -242,11 +266,7 @@ export interface MiddlewareStack<
    * optionally specifying a priority and tags.
    */
   add(
-    middleware: SerializeMiddleware<
-      Input,
-      Output,
-      Protocol<RequestType, any, any>
-    >,
+    middleware: SerializeMiddleware<Input, Output>,
     options: SerializeHandlerOptions
   ): void;
 
@@ -255,11 +275,7 @@ export interface MiddlewareStack<
    * optionally specifying a priority and tags.
    */
   add(
-    middleware: FinalizeMiddleware<
-      Input,
-      Output,
-      Protocol<RequestType, any, any>
-    >,
+    middleware: FinalizeMiddleware<Input, Output>,
     options: BuildHandlerOptions
   ): void;
 
@@ -268,19 +284,24 @@ export interface MiddlewareStack<
    * optionally specifying a priority and tags.
    */
   add(
-    middleware: FinalizeMiddleware<
-      Input,
-      Output,
-      Protocol<RequestType, any, any>
-    >,
+    middleware: FinalizeMiddleware<Input, Output>,
     options: FinalizeHandlerOptions
+  ): void;
+
+  /**
+   * Add middleware to the list to be executed during the "deserialize" phase,
+   * optionally specifying a priority and tags.
+   */
+  add(
+    middleware: DeserializeMiddleware<Input, Output>,
+    options: DeserializeHandlerOptions
   ): void;
 
   /**
    * Create a shallow clone of this list. Step bindings and handler priorities
    * and tags are preserved in the copy.
    */
-  clone(): MiddlewareStack<Input, Output, RequestType>;
+  clone(): MiddlewareStack<Input, Output>;
 
   /**
    * same to clone, but only filter in middlewares when evaluation callback
@@ -288,7 +309,7 @@ export interface MiddlewareStack<
    */
   filter(
     callbackfn: (middlewareStats: HandlerOptions) => boolean
-  ): MiddlewareStack<Input, Output, RequestType>;
+  ): MiddlewareStack<Input, Output>;
 
   /**
    * Create a list containing the middlewares in this list as well as the
@@ -296,8 +317,8 @@ export interface MiddlewareStack<
    * bindings and handler priorities and tags are preserved in the copy.
    */
   concat<InputType extends Input, OutputType extends Output>(
-    from: MiddlewareStack<InputType, OutputType, RequestType>
-  ): MiddlewareStack<InputType, OutputType, RequestType>;
+    from: MiddlewareStack<InputType, OutputType>
+  ): MiddlewareStack<InputType, OutputType>;
 
   /**
    * Removes middleware from the stack.
@@ -320,11 +341,7 @@ export interface MiddlewareStack<
    * will pass through all middleware in the reverse of that order.
    */
   resolve<InputType extends Input, OutputType extends Output>(
-    handler: FinalizeHandler<
-      InputType,
-      OutputType,
-      Protocol<RequestType, any, any>
-    >,
+    handler: DeserializeHandler<InputType, OutputType>,
     context: HandlerExecutionContext
   ): Handler<InputType, OutputType>;
 }
