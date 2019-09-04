@@ -1,5 +1,5 @@
 export * from "./abort";
-// export * from "./client";
+export * from "./client";
 export * from "./command";
 export * from "./credentials";
 export * from "./crypto";
@@ -13,4 +13,5 @@ export * from "./response";
 export * from "./signature";
 export * from "./unmarshaller";
 export * from "./parserDecorator";
+export * from "./transfer";
 export * from "./util";

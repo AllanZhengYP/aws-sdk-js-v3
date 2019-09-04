@@ -36,7 +36,6 @@ export interface Command<
   RequestType
 > {
   readonly input: InputType;
-  readonly model: OperationModel;
   readonly middlewareStack: MiddlewareStack<InputType, OutputType>;
   resolveMiddleware(
     stack: MiddlewareStack<ClientInput, ClientOutput>,

@@ -41,7 +41,7 @@ import { HttpRequest } from "./http";
 
 export interface RequestSerializer<Request> {
   /**
-   * Converts the provided `input` into an HTTP request
+   * Converts the provided `input` into a request object
    *
    * @param transferProtocol The protocol as the request to be serialized
    *                          to. Like `RestJson`, `RestXML`

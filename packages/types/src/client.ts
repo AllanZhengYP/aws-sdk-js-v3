@@ -3,7 +3,8 @@ import { Structure } from "./protocol";
 import { Provider, Decoder, Encoder, UrlParser } from "./util";
 // import { StreamCollector, ResponseParser } from "./unmarshaller";
 import { RequestSerializer } from "./marshaller";
-import { HttpEndpoint, HttpHandler } from "./http";
+import { HttpEndpoint } from "./http";
+import { TransferHandler } from "./transfer";
 import { Command } from "./command";
 import { MetadataBearer } from "./response";
 import { Credentials } from "./credentials";
@@ -100,8 +101,7 @@ export interface ClientResolvedConfigurationBase<
   serializer?: Provider<RequestSerializer<StreamType>>;
   // parser?: ResponseParser<StreamType>;
   _user_injected_http_handler?: boolean;
-  httpHandler?: HttpHandler<StreamType>;
-  handler?: Terminalware;
+  httpHandler?: TransferHandler<any, any>;
   md5?: { new (): Hash };
   sha256?: HashConstructor;
 }

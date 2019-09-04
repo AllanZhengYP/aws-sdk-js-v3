@@ -210,8 +210,8 @@ export interface HandlerOptions {
    *      the raw response object to structured response
    *
    *      Unlike initialization and build handlers, which are executed once
-   *      per operation execution, finalization handlers will be executed for
-   *      each HTTP request sent.
+   *      per operation execution, finalization and deserialize handlers will be
+   *      executed foreach HTTP request sent.
    *
    * @default 'initialize'
    */

@@ -18,6 +18,7 @@
   "dependencies": {
     "@aws-sdk/abort-controller": "^0.1.0-preview.4",
     "@aws-sdk/querystring-builder": "^0.1.0-preview.4",
+    "@aws-sdk/protocol-http": "^0.1.0-preview.1",
     "@aws-sdk/types": "^0.1.0-preview.4",
     "tslib": "^1.8.0"
   },

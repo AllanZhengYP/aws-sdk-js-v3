@@ -1,20 +1,19 @@
 import {
   RequestSerializer,
   ResponseParser,
-  ParserDecoratorStack
+  Protocol,
+  TransferHandler
 } from "@aws-sdk/types";
-import { Protocol, TransferHandler } from "@aws-sdk/protocol";
 import { HttpRequest, HttpResponse } from "@aws-sdk/protocol-http";
 
-export class JsonRpcProtocol<StreamType> extends Protocol<
-  HttpRequest<StreamType>,
-  HttpResponse<StreamType>
-> {
+export class JsonRpcProtocol<StreamType>
+  implements Protocol<HttpRequest<StreamType>, HttpResponse<StreamType>> {
   constructor(
-    handler: TransferHandler<HttpRequest<StreamType>, HttpResponse<StreamType>>
-  ) {
-    super(handler);
-  }
+    readonly handler: TransferHandler<
+      HttpRequest<StreamType>,
+      HttpResponse<StreamType>
+    >
+  ) {}
   serialize(
     serializer: RequestSerializer<HttpRequest<StreamType>>,
     input: any
