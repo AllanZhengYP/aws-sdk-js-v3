@@ -12,7 +12,9 @@ import {
   MiddlewareStack as IMiddlewareStack,
   SerializeHandlerOptions,
   Step,
-  TransferProtocol
+  DeserializeMiddleware,
+  DeserializeHandlerOptions,
+  DeserializeHandler
 } from "@aws-sdk/types";
 
 interface HandlerListEntry<Input extends object, Output extends object> {
@@ -22,17 +24,10 @@ interface HandlerListEntry<Input extends object, Output extends object> {
   tags?: { [tag: string]: any };
 }
 
-export interface MiddlewareStack<
-  Input extends object,
-  Output extends object,
-  RequestType
-> extends IMiddlewareStack<Input, Output, RequestType> {}
+export interface MiddlewareStack<Input extends object, Output extends object>
+  extends IMiddlewareStack<Input, Output> {}
 
-export class MiddlewareStack<
-  Input extends object,
-  Output extends object,
-  RequestType
-> {
+export class MiddlewareStack<Input extends object, Output extends object> {
   private readonly entries: Array<HandlerListEntry<Input, Output>> = [];
   private sorted: boolean = true;
 
@@ -42,30 +37,23 @@ export class MiddlewareStack<
   ): void;
 
   add(
-    middleware: SerializeMiddleware<
-      Input,
-      Output,
-      TransferProtocol<RequestType, any, any>
-    >,
+    middleware: SerializeMiddleware<Input, Output>,
     options: SerializeHandlerOptions
   ): void;
 
   add(
-    middleware: FinalizeMiddleware<
-      Input,
-      Output,
-      TransferProtocol<RequestType, any, any>
-    >,
+    middleware: FinalizeMiddleware<Input, Output>,
     options: BuildHandlerOptions
   ): void;
 
   add(
-    middleware: FinalizeMiddleware<
-      Input,
-      Output,
-      TransferProtocol<RequestType, any, any>
-    >,
+    middleware: FinalizeMiddleware<Input, Output>,
     options: FinalizeHandlerOptions
+  ): void;
+
+  add(
+    middleware: DeserializeMiddleware<Input, Output>,
+    options: DeserializeHandlerOptions
   ): void;
 
   add(
@@ -82,17 +70,17 @@ export class MiddlewareStack<
     });
   }
 
-  clone(): IMiddlewareStack<Input, Output, RequestType> {
-    const clone = new MiddlewareStack<Input, Output, RequestType>();
+  clone(): IMiddlewareStack<Input, Output> {
+    const clone = new MiddlewareStack<Input, Output>();
     clone.entries.push(...this.entries);
     clone.sorted = this.sorted;
     return clone;
   }
 
   concat<InputType extends Input, OutputType extends Output>(
-    from: MiddlewareStack<InputType, OutputType, RequestType>
-  ): MiddlewareStack<InputType, OutputType, RequestType> {
-    const clone = new MiddlewareStack<InputType, OutputType, RequestType>();
+    from: MiddlewareStack<InputType, OutputType>
+  ): MiddlewareStack<InputType, OutputType> {
+    const clone = new MiddlewareStack<InputType, OutputType>();
     clone.entries.push(...(this.entries as any), ...from.entries);
     clone.sorted = false;
     return clone;
@@ -111,8 +99,8 @@ export class MiddlewareStack<
 
   filter(
     callbackfn: (handlerOptions: HandlerOptions) => boolean
-  ): MiddlewareStack<Input, Output, RequestType> {
-    const filtered = new MiddlewareStack<Input, Output, RequestType>();
+  ): MiddlewareStack<Input, Output> {
+    const filtered = new MiddlewareStack<Input, Output>();
     for (const entry of this.entries) {
       const options: HandlerOptions = {
         step: entry.step,
@@ -130,11 +118,7 @@ export class MiddlewareStack<
   }
 
   resolve<InputType extends Input, OutputType extends Output>(
-    handler: FinalizeHandler<
-      InputType,
-      OutputType,
-      TransferProtocol<RequestType, any, any>
-    >,
+    handler: DeserializeHandler<InputType, OutputType>,
     context: HandlerExecutionContext
   ): Handler<InputType, OutputType> {
     if (!this.sorted) {
@@ -178,8 +162,9 @@ export class MiddlewareStack<
 }
 
 const stepWeights = {
-  initialize: 4,
-  serialize: 3,
-  build: 2,
-  finalize: 1
+  initialize: 5,
+  serialize: 4,
+  build: 3,
+  finalize: 2,
+  deserialize: 1
 };

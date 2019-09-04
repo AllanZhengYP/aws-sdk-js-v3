@@ -37,9 +37,9 @@ export interface Command<
 > {
   readonly input: InputType;
   readonly model: OperationModel;
-  readonly middlewareStack: MiddlewareStack<InputType, OutputType, RequestType>;
+  readonly middlewareStack: MiddlewareStack<InputType, OutputType>;
   resolveMiddleware(
-    stack: MiddlewareStack<ClientInput, ClientOutput, RequestType>,
+    stack: MiddlewareStack<ClientInput, ClientOutput>,
     configuration: ResolvedConfiguration
   ): Handler<InputType, OutputType>;
 }
