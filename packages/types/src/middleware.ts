@@ -1,5 +1,3 @@
-import { HttpRequest } from "./http";
-import { OperationModel } from "./protocol";
 import { Logger } from "./logger";
 
 export interface HandlerArguments<Input extends object> {
@@ -18,8 +16,9 @@ export interface HandlerOutput<Output extends object>
 export interface SerializeHandlerArguments<Input extends object>
   extends HandlerArguments<Input> {
   /**
-   * The user input serialized as a request object. The request object can be
-   * but not restraint to Http request.
+   * The user input serialized as a request object. The request object is unknown,
+   * so you cannot modify it directly. When work with request, you need to guard its
+   * type to e.g. HttpRequest with 'instanceof' operand
    *
    * During the build phase of the execution of a middleware stack, a built
    * request may or may not be available.
@@ -51,8 +50,16 @@ export interface DeserializeHandlerArguments<Input extends object>
   extends FinalizeHandlerArguments<Input> {}
 
 export interface DeserializeHandlerOutput<Output extends object> {
-  output?: Output;
+  /**
+   * The raw response object from runtime is deserialized to structured output object.
+   * The response object is unknown so you cannot modify it directly. When work with
+   * response, you need to guard its type to e.g. HttpResponse with 'instanceof' operand.
+   *
+   * During the deserialize phase of the execution of a middleware stack, a deserialized
+   * response may or may not be available
+   */
   response: unknown;
+  output?: Output;
 }
 
 export interface Handler<Input extends object, Output extends object> {
