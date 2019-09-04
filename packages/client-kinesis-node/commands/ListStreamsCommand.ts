@@ -25,8 +25,7 @@ export class ListStreamsCommand
   readonly model = ListStreams;
   readonly middlewareStack = new __aws_sdk_middleware_stack.MiddlewareStack<
     ListStreamsInput,
-    ListStreamsOutput,
-    _stream.Readable
+    ListStreamsOutput
   >();
 
   constructor(readonly input: ListStreamsInput) {}
@@ -34,12 +33,11 @@ export class ListStreamsCommand
   resolveMiddleware(
     clientStack: __aws_sdk_middleware_stack.MiddlewareStack<
       InputTypesUnion,
-      OutputTypesUnion,
-      _stream.Readable
+      OutputTypesUnion
     >,
     configuration: KinesisResolvedConfiguration
   ): __aws_sdk_types.Handler<ListStreamsInput, ListStreamsOutput> {
-    const { handler } = configuration;
+    const { protocol } = configuration;
     const stack = clientStack.concat(this.middlewareStack);
 
     const handlerExecutionContext: __aws_sdk_types.HandlerExecutionContext = {
@@ -49,17 +47,25 @@ export class ListStreamsCommand
       __aws_sdk_middleware_serializer.serializerMiddleware(
         configuration.protocol,
         ListStreams
-      ) as any,
+      ),
       {
         step: "serialize",
         priority: 90,
         tags: { SERIALIZER: true }
       }
     );
-
-    return stack.resolve(
-      handler<ListStreamsInput, ListStreamsOutput>(handlerExecutionContext),
-      handlerExecutionContext
+    this.middlewareStack.add(
+      __aws_sdk_middleware_serializer.serializerMiddleware(
+        configuration.protocol,
+        ListStreams
+      ) as any,
+      {
+        step: "deserialize",
+        priority: Infinity,
+        tags: { DESERIALIZER: true }
+      }
     );
+
+    return stack.resolve(protocol.handler, handlerExecutionContext);
   }
 }

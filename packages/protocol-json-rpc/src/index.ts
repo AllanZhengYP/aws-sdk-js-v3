@@ -23,12 +23,8 @@ export class JsonRpcProtocol<StreamType> extends Protocol<
   }
   parse(
     parser: ResponseParser<HttpResponse<StreamType>>,
-    output: HttpResponse<StreamType>,
-    decoratorStack?: ParserDecoratorStack<HttpResponse<StreamType>>
+    output: HttpResponse<StreamType>
   ) {
-    if (decoratorStack) {
-      output = decoratorStack.resolve()(output);
-    }
     return parser(output, "JsonRpc") as any;
   }
 }

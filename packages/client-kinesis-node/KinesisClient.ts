@@ -38,8 +38,7 @@ export class KinesisClient {
 
   readonly middlewareStack = new __aws_sdk_middleware_stack.MiddlewareStack<
     InputTypesUnion,
-    OutputTypesUnion,
-    _stream.Readable
+    OutputTypesUnion
   >();
 
   constructor(configuration: KinesisConfiguration) {
@@ -149,14 +148,14 @@ export class KinesisClient {
     );
     if (cb) {
       handler(command)
-        .then((result: OutputType) => cb(null, result), (err: any) => cb(err))
+        .then(result => cb(null, result.output), (err: any) => cb(err))
         .catch(
           // prevent any errors thrown in the callback from triggering an
           // unhandled promise rejection
           () => {}
         );
     } else {
-      return handler(command);
+      return handler(command).then(result => result.output);
     }
   }
 }

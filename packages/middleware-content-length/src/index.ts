@@ -3,31 +3,35 @@ import {
   BuildHandlerArguments,
   BuildMiddleware,
   BodyLengthCalculator,
-  MetadataBearer
+  MetadataBearer,
+  BuildHandlerOutput
 } from "@aws-sdk/types";
+import { HttpRequest } from "@aws-sdk/protocol-http";
 
 export function contentLengthMiddleware(
   bodyLengthCalculator: BodyLengthCalculator
-): BuildMiddleware<any, any, any> {
+): BuildMiddleware<any, any> {
   return <Output extends MetadataBearer>(
-    next: BuildHandler<any, Output, any>
-  ): BuildHandler<any, Output, any> => async (
-    args: BuildHandlerArguments<any, any>
-  ): Promise<Output> => {
+    next: BuildHandler<any, Output>
+  ): BuildHandler<any, Output> => async (
+    args: BuildHandlerArguments<any>
+  ): Promise<BuildHandlerOutput<Output>> => {
     let request = { ...args.request };
-    const { body, headers } = request.headers;
-    if (
-      body &&
-      Object.keys(headers)
-        .map(str => str.toLowerCase())
-        .indexOf("content-length") === -1
-    ) {
-      const length = bodyLengthCalculator(body);
-      if (length !== undefined) {
-        request.headers = {
-          ...request.headers,
-          "Content-Length": String(length)
-        };
+    if (request instanceof HttpRequest) {
+      const { body, headers } = request;
+      if (
+        body &&
+        Object.keys(headers)
+          .map(str => str.toLowerCase())
+          .indexOf("content-length") === -1
+      ) {
+        const length = bodyLengthCalculator(body);
+        if (length !== undefined) {
+          request.headers = {
+            ...request.headers,
+            "Content-Length": String(length)
+          };
+        }
       }
     }
 

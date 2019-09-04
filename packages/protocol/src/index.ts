@@ -1,13 +1,15 @@
 import {
   RequestSerializer,
   ParserDecoratorStack,
-  ResponseParser
+  ResponseParser,
+  HandlerExecutionContext,
+  FinalizeHandler
 } from "@aws-sdk/types";
 
-export type TransferHandler<RequestType, ResponseType> = {
+export interface TransferHandler<RequestType, ResponseType> {
   destroy?: () => void;
   handle: (request: RequestType, handlerOptions?: any) => Promise<ResponseType>;
-};
+}
 
 export abstract class Protocol<RequestType, ResponseType> {
   constructor(readonly handler: TransferHandler<RequestType, ResponseType>) {}
@@ -17,7 +19,6 @@ export abstract class Protocol<RequestType, ResponseType> {
   ): RequestType;
   abstract parse<T extends ResponseParser<ResponseType>>(
     parser: T,
-    input: ResponseType,
-    decoratorStack?: ParserDecoratorStack<ResponseType>
+    input: ResponseType
   ): ReturnType<T>;
 }

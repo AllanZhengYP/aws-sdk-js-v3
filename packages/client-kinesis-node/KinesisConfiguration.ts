@@ -52,7 +52,7 @@ export interface KinesisConfiguration {
   /**
    * The handler to use as the core of the client's middleware stack
    */
-  handler?: __aws_sdk_types.Terminalware<any, _stream.Readable>;
+  handler?: __aws_sdk_types.Terminalware;
 
   /**
    * The transfer handler to use
