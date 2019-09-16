@@ -7,6 +7,7 @@ import * as __aws_sdk_json_parser from "@aws-sdk/json-parser";
 import * as __aws_sdk_middleware_serializer from "@aws-sdk/middleware-serializer";
 import * as __aws_sdk_node_http_handler from "@aws-sdk/node-http-handler";
 import * as __aws_sdk_protocol_rest from "@aws-sdk/protocol-rest";
+import * as __aws_sdk_http_handler from "@aws-sdk/node-http-handler";
 import * as __aws_sdk_region_provider from "@aws-sdk/region-provider";
 import * as __aws_sdk_signature_v4 from "@aws-sdk/signature-v4";
 import * as __aws_sdk_signing_middleware from "@aws-sdk/signing-middleware";
@@ -36,8 +37,8 @@ export interface RDSDataConfiguration {
    * If no static credentials are supplied, the SDK will attempt to credentials from known environment variables, from shared configuration and credentials files, and from the EC2 Instance Metadata Service, in that order.
    */
   credentials?:
-    | __aws_sdk_types.Credentials
-    | __aws_sdk_types.Provider<__aws_sdk_types.Credentials>;
+  | __aws_sdk_types.Credentials
+  | __aws_sdk_types.Provider<__aws_sdk_types.Credentials>;
 
   /**
    * A function that determines how long (in milliseconds) the SDK should wait before retrying a request
@@ -48,9 +49,9 @@ export interface RDSDataConfiguration {
    * The fully qualified endpoint of the webservice. This is only required when using a custom endpoint (for example, when using a local version of S3).
    */
   endpoint?:
-    | string
-    | __aws_sdk_types.HttpEndpoint
-    | __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>;
+  | string
+  | __aws_sdk_types.HttpEndpoint
+  | __aws_sdk_types.Provider<__aws_sdk_types.HttpEndpoint>;
 
   /**
    * The endpoint provider to call if no endpoint is provided
@@ -164,10 +165,10 @@ export interface RDSDataResolvableConfiguration extends RDSDataConfiguration {
 
 export interface RDSDataResolvedConfiguration
   extends RDSDataConfiguration,
-    __aws_sdk_types.ClientResolvedConfigurationBase<
-      OutputTypesUnion,
-      _stream.Readable
-    > {
+  __aws_sdk_types.ClientResolvedConfigurationBase<
+  OutputTypesUnion,
+  _stream.Readable
+  > {
   _user_injected_http_handler: boolean;
 
   base64Decoder: __aws_sdk_types.Decoder;
@@ -353,7 +354,7 @@ export const configurationProperties: __aws_sdk_types.ConfigurationDefinition<
   },
   httpHandler: {
     defaultProvider: (configuration: { keepAlive: boolean }) =>
-      new __aws_sdk_node_http_handler.NodeHttpHandler(configuration)
+      new __aws_sdk_http_handler.NodeHttpHandler(configuration)
   },
   handler: {
     defaultProvider: (configuration: {
