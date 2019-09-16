@@ -1,3 +1,5 @@
-export function invalidFunction(message: string) {
-  throw new Error(message);
-}
+export const invalidFunction = (message: string) => {
+  return () => {
+    throw new Error(message);
+  };
+};
