@@ -108,6 +108,10 @@ export const IMPORTS: { [key: string]: Import } = {
     package: "@aws-sdk/http-serialization",
     version: "^0.1.0-preview.5"
   },
+  "invalid-dependency": {
+    package: "@aws-sdk/invalid-dependency",
+    version: "^0.1.0-preview.1"
+  },
   "is-array-buffer": {
     package: "@aws-sdk/is-array-buffer",
     version: "^0.1.0-preview.3"
