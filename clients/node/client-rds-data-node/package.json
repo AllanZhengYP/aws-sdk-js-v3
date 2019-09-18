@@ -25,6 +25,7 @@
   },
   "module": "./dist/es/index.js",
   "browser": "./dist/browser/rds-data-browser.js",
+  "sideEffects": false,
   "license": "Apache-2.0",
   "dependencies": {
     "@aws-sdk/config-resolver": "^0.1.0-preview.5",
