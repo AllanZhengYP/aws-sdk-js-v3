@@ -24,7 +24,12 @@
     "url": "https://aws.amazon.com/javascript/"
   },
   "module": "./dist/es/index.js",
-  "browser": "./dist/browser/rds-data-browser.js",
+  "browser": {
+    "runtimeConfig.js": "runtimeConfig.browser.js"
+  },
+  "react-native": {
+    "runtimeConfig.js": "runtimeConfig.browser.js"
+  },
   "sideEffects": false,
   "license": "Apache-2.0",
   "dependencies": {
