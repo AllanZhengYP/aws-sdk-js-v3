@@ -175,6 +175,7 @@ export class TranscribeStreamingClient extends SmithyClient<
 
   constructor(configuration: TranscribeStreamingConfiguration) {
     const _config_0 = {
+      apiVersion: "",
       ...TranscribeStreamingRuntimeConfiguration,
       ...configuration
     };

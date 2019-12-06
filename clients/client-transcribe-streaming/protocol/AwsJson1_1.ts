@@ -83,8 +83,7 @@ export async function startStreamTranscriptionAwsJson1_1Deserialize(
   }
   return Promise.resolve({
     $metadata: deserializeMetadata(output),
-    __type:
-      "com.amazonaws.transcribe.streaming#StartStreamTranscriptionResponse",
+    __type: "StartStreamTranscriptionResponse",
     TranscriptResultStream: context.eventStreamMarshaller.deserialize(
       output.body,
       async event => {
@@ -123,33 +122,52 @@ async function startStreamTranscriptionAwsJson1_1DeserializeError(
   output: IHttpResponse,
   context: SerdeContext
 ): Promise<StartStreamTranscriptionResponse> {
-  let data = await parseBody(output.body, context);
-  const exception = {
+  const data: any = await parseBody(output.body, context);
+  const parsedOutput: any = {
     ...output,
-    data
+    body: data
   };
   let response: any;
-  switch (output.headers["x-amzn-errortype"].split(":")[0]) {
+  let errorCode: String;
+  errorCode = output.headers["x-amzn-errortype"].split(":")[0];
+  switch (errorCode) {
     case "BadRequestException":
-      response = badRequestExceptionDeserialize(exception, context);
-      break;
-    case "LimitExceededException":
-      response = limitExceededExceptionDeserialize(exception, context);
-      break;
-    case "InternalFailureException":
-      response = internalFailureExceptionDeserialize(exception, context);
+    case "com.amazonaws.transcribe.streaming#BadRequestException":
+      response = deserializeAws_restJsonBadRequestExceptionResponse(
+        parsedOutput,
+        context
+      );
       break;
     case "ConflictException":
-      response = conflictExceptionDeserialize(exception, context);
+    case "com.amazonaws.transcribe.streaming#ConflictException":
+      response = deserializeAws_restJsonConflictExceptionResponse(
+        parsedOutput,
+        context
+      );
+      break;
+    case "InternalFailureException":
+    case "com.amazonaws.transcribe.streaming#InternalFailureException":
+      response = deserializeAws_restJsonInternalFailureExceptionResponse(
+        parsedOutput,
+        context
+      );
+      break;
+    case "LimitExceededException":
+    case "com.amazonaws.transcribe.streaming#LimitExceededException":
+      response = deserializeAws_restJsonLimitExceededExceptionResponse(
+        parsedOutput,
+        context
+      );
       break;
     default:
+      errorCode = errorCode || "UnknownError";
       response = {
-        __type: "com.amazon.transcribe.steaming#UnknownException",
-        $name: "UnknownException",
-        $fault: "server"
+        __type: `com.amazonaws.transcribe.streaming#${errorCode}`,
+        $name: errorCode,
+        $fault: "client"
       };
   }
-  return Promise.reject(response);
+  return Promise.reject(Object.assign(new Error(response.__type), response));
 }
 
 const transcriptResultStreamAwsJson1_1Deserialize = (
@@ -159,13 +177,14 @@ const transcriptResultStreamAwsJson1_1Deserialize = (
   return TranscriptResultStream.visit(output, {
     TranscriptEvent: value =>
       transcriptEventAwsJson1_1Deserialize(value, context),
-    ConflictException: value => conflictExceptionDeserialize(value, context),
+    ConflictException: value =>
+      deserializeAws_restJsonConflictExceptionResponse(value, context),
     BadRequestException: value =>
-      badRequestExceptionDeserialize(value, context),
+      deserializeAws_restJsonBadRequestExceptionResponse(value, context),
     InternalFailureException: value =>
-      internalFailureExceptionDeserialize(value, context),
+      deserializeAws_restJsonInternalFailureExceptionResponse(value, context),
     LimitExceededException: value =>
-      limitExceededExceptionDeserialize(value, context),
+      deserializeAws_restJsonLimitExceededExceptionResponse(value, context),
     _: value => value as any
   });
 };
@@ -176,7 +195,7 @@ export function transcriptEventAwsJson1_1Deserialize(
   context: SerdeContext
 ): TranscriptEvent {
   return {
-    __type: "com.amazonaws.transcribe.streaming#TranscriptEvent",
+    __type: "TranscriptEvent",
     Transcript: transcriptAwsJson1_1Deserialize(output.body.Transcript, context)
   };
 }
@@ -269,73 +288,72 @@ const audioEventAwsJson1_1Serialize = (
   return message;
 };
 
-const badRequestExceptionDeserialize = (
+const deserializeAws_restJsonBadRequestExceptionResponse = (
   output: any,
   context: SerdeContext
 ): BadRequestException => {
-  const body = output.body;
-  let exception: any = {
-    __type: "com.amazonaws.transcribe.streaming#BadRequestException",
-    $name: "BadRequestException",
-    $fault: "client"
+  const data: any = output.body;
+  const contents: BadRequestException = {
+    __type: "BadRequestException",
+    $fault: "client",
+    $metadata: deserializeMetadata(output),
+    Message: undefined
   };
-
-  if (body.Message !== undefined) {
-    exception.Message = body.Message;
+  if (data.Message !== undefined) {
+    contents.Message = data.Message;
   }
-
-  return Object.assign(new Error(exception.$name), exception);
+  return contents;
 };
 
-const conflictExceptionDeserialize = (
+const deserializeAws_restJsonConflictExceptionResponse = (
   output: any,
   context: SerdeContext
 ): ConflictException => {
-  const body = output.body;
-  let exception: ConflictException = {
-    __type: "com.amazonaws.transcribe.streaming#ConflictException",
-    $name: "ConflictException",
-    $fault: "client"
+  const data: any = output.body;
+  const contents: ConflictException = {
+    __type: "ConflictException",
+    $fault: "client",
+    $metadata: deserializeMetadata(output),
+    Message: undefined
   };
-
-  if (body.Message !== undefined) {
-    exception.Message = body.Message;
+  if (data.Message !== undefined) {
+    contents.Message = data.Message;
   }
-
-  return Object.assign(new Error(exception.$name), exception);
+  return contents;
 };
 
-const internalFailureExceptionDeserialize = (
+const deserializeAws_restJsonInternalFailureExceptionResponse = (
   output: any,
   context: SerdeContext
 ): InternalFailureException => {
-  const body = output.body;
-  let exception: InternalFailureException = {
-    __type: "com.amazonaws.transcribe.streaming#InternalFailureException",
-    $name: "InternalFailureException",
-    $fault: "server"
+  const data: any = output.body;
+  const contents: InternalFailureException = {
+    __type: "InternalFailureException",
+    $fault: "server",
+    $metadata: deserializeMetadata(output),
+    Message: undefined
   };
-  if (body.Message !== undefined) {
-    exception.Message = body.Message;
+  if (data.Message !== undefined) {
+    contents.Message = data.Message;
   }
-  return Object.assign(new Error(exception.$name), exception);
+  return contents;
 };
 
-const limitExceededExceptionDeserialize = (
+const deserializeAws_restJsonLimitExceededExceptionResponse = (
   output: any,
   context: SerdeContext
 ): LimitExceededException => {
-  const body = output.body;
-  let exception: LimitExceededException = {
-    __type: "com.amazonaws.transcribe.streaming#LimitExceededException",
-    $name: "LimitExceededException",
-    $fault: "client"
+  const data: any = output.body;
+  const contents: LimitExceededException = {
+    __type: "LimitExceededException",
+    $fault: "client",
+    $metadata: deserializeMetadata(output),
+    Message: undefined
   };
-
-  if (body.Message !== undefined) {
-    exception.Message = body.Message;
+  if (data.Message !== undefined) {
+    contents.Message = data.Message;
   }
-  return Object.assign(new Error(exception.$name), exception);
+  return contents;
 };
 
 const deserializeMetadata = (output: IHttpResponse): ResponseMetadata => ({
