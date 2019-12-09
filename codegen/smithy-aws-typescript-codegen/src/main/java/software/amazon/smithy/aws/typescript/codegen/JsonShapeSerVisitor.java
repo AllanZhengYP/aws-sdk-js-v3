@@ -25,6 +25,8 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeIndex;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
+import software.amazon.smithy.model.traits.EventHeaderTrait;
+import software.amazon.smithy.model.traits.EventPayloadTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 import software.amazon.smithy.typescript.codegen.TypeScriptWriter;
@@ -86,6 +88,11 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     public void serializeStructure(GenerationContext context, StructureShape shape) {
+        if (isEvent(shape)) {
+            serializeEvent(context, shape);
+            return;
+        }
+
         TypeScriptWriter writer = context.getWriter();
 
         writer.write("let bodyParams: any = {};");
@@ -124,5 +131,74 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
                 });
             writer.write("_: value => value");
         });
+    }
+
+    private void serializeEvent(GenerationContext context, StructureShape shape) {
+        TypeScriptWriter writer = context.getWriter();
+        ShapeIndex index = context.getModel().getShapeIndex();
+
+        writer.addImport("Message", "Message", "@aws-sdk/types");
+        writer.openBlock("const message: Message = {", "};", () -> {
+            writer.openBlock("headers: {", "},", () -> {
+                writer.write("\":message-type\": { type: \"string\", value: \"event\" },");
+                writer.write("\":event-type\": { type: \"string\", value: \"$L\" }", shape.getId().getName());
+            });
+            writer.write("body: new Uint8Array()");
+        });
+        shape.getAllMembers().forEach((memberName, memberShape) -> {
+            String locationName = memberShape.getTrait(JsonNameTrait.class)
+                    .map(JsonNameTrait::getValue)
+                    .orElse(memberName);
+            writer.openBlock("if (input.$L) {", "}", memberName, () -> {
+                String keyStatement = memberShape.hasTrait(EventHeaderTrait.class)
+                        ? String.format("header.%s", locationName)
+                        : "body";
+                Shape target = index.getShape(memberShape.getTarget()).get();
+                if (memberShape.hasTrait(EventHeaderTrait.class)) {
+                    writer.write(
+                            "message.headers[\"$L\"] = { type: \"$L\", value: $L }", locationName,
+                            getEventHeaderType(memberShape),
+                            target.accept(getMemberVisitor("input." + memberName)));
+                } else {
+                    writer.write("message.body = $L",
+                            //No need to base64 encode the blob in event stream payload
+                            target.isBlobShape() ? "input." + memberName : target.accept(
+                                    getMemberVisitor("input." + memberName))
+                    );
+                }
+            });
+        });
+        writer.write("return message;");
+    }
+
+    private String getEventHeaderType(Shape shape) {
+        switch (shape.getType()) {
+            case BOOLEAN:
+            case BYTE:
+            case SHORT:
+            case INTEGER:
+            case LONG:
+            case STRING:
+            case TIMESTAMP:
+                return shape.getType().toString();
+            case BLOB:
+                return "binary";
+            default:
+                return "binary";
+        }
+
+    }
+
+    private Boolean isEvent(StructureShape shape) {
+        for (String name : shape.getMemberNames()) {
+            if (!shape.getMember(name).isPresent()) {
+                continue;
+            }
+            MemberShape member = shape.getMember(name).get();
+            if (member.hasTrait(EventPayloadTrait.class) || member.hasTrait((EventHeaderTrait.class))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
