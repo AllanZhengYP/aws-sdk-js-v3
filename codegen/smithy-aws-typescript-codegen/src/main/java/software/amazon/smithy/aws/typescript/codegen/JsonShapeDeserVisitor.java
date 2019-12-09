@@ -25,6 +25,8 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeIndex;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
+import software.amazon.smithy.model.traits.EventHeaderTrait;
+import software.amazon.smithy.model.traits.EventPayloadTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 import software.amazon.smithy.typescript.codegen.TypeScriptWriter;
@@ -102,16 +104,31 @@ final class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                     .map(JsonNameTrait::getValue)
                     .orElse(memberName);
             Shape target = context.getModel().getShapeIndex().getShape(memberShape.getTarget()).get();
-
+            String eventLocation = getEventBinding(memberShape);
             // Generate an if statement to set the bodyParam if the member is set.
-            writer.openBlock("if (output.$L !== undefined) {", "}", locationName, () -> {
+            writer.openBlock("if (output.$L !== undefined) {", "}",
+                    eventLocation + locationName, () -> {
                 writer.write("contents.$L = $L;", memberName,
                         // Dispatch to the output value provider for any additional handling.
-                        target.accept(getMemberVisitor("output." + locationName)));
+                        target.accept(getMemberVisitor("output." + eventLocation + locationName)));
             });
         });
 
         writer.write("return contents;");
+    }
+
+    /**
+     * If structure is an event, deserializer need to deser from either
+     * headers or body, depend on eventHeaders trait or eventPayloadTrait.
+     * */
+    private String getEventBinding(MemberShape member) {
+        if (member.hasTrait(EventHeaderTrait.class)) {
+            return "headers.";
+        } else if (member.hasTrait(EventPayloadTrait.class)) {
+            return "body.";
+        } else {
+            return "";
+        }
     }
 
     @Override

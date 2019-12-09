@@ -25,8 +25,7 @@ export class EventDeserializerStream extends Transform {
 
   async _transform(chunk: any, encoding: string, callback: TransformCallback) {
     try {
-      const eventName = Object.keys(chunk)[0];
-      this.push({ [eventName]: await this.deserializer(chunk) });
+      this.push(await this.deserializer(chunk));
       return callback();
     } catch (err) {
       callback(err);
