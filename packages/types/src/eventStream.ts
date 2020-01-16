@@ -1,4 +1,3 @@
-import { RequestSigner } from "./signature";
 import { HttpRequest } from "./http";
 /**
  * An event stream message. The headers and body properties will always be
