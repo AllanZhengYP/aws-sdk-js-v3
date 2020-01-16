@@ -147,6 +147,11 @@ import {
   resolveRegionConfig
 } from "@aws-sdk/config-resolver";
 import {
+  EventStreamSerdeInputConfig,
+  EventStreamSerdeResolvedConfig,
+  resolveEventStreamSerdeConfig
+} from "@aws-sdk/eventstream-serde-config-resolver";
+import {
   BucketEndpointInputConfig,
   BucketEndpointResolvedConfig,
   resolveBucketEndpointConfig
@@ -185,6 +190,7 @@ import {
   SmithyResolvedConfiguration as __SmithyResolvedConfiguration
 } from "@aws-sdk/smithy-client";
 import {
+  EventStreamSerdeProvider,
   RegionInfoProvider,
   Credentials as __Credentials,
   Decoder as __Decoder,
@@ -442,6 +448,11 @@ export interface ClientDefaults
    * Whether to escape request path when signing the request.
    */
   signingEscapePath?: boolean;
+
+  /**
+   * The function that provides necessary utilities for generating and signing event stream
+   */
+  eventStreamSerdeProvider?: EventStreamSerdeProvider;
 }
 
 export type S3ClientConfig = Partial<
@@ -454,7 +465,8 @@ export type S3ClientConfig = Partial<
   RetryInputConfig &
   UserAgentInputConfig &
   BucketEndpointInputConfig &
-  HostHeaderInputConfig;
+  HostHeaderInputConfig &
+  EventStreamSerdeInputConfig;
 
 export type S3ClientResolvedConfig = __SmithyResolvedConfiguration<
   __HttpHandlerOptions
@@ -466,10 +478,15 @@ export type S3ClientResolvedConfig = __SmithyResolvedConfiguration<
   RetryResolvedConfig &
   UserAgentResolvedConfig &
   BucketEndpointResolvedConfig &
-  HostHeaderResolvedConfig;
+  HostHeaderResolvedConfig &
+  EventStreamSerdeResolvedConfig;
 
 /**
- * <p></p>
+ *
+ *          <p></p>
+ *
+ *
+ *
  */
 export class S3Client extends __Client<
   __HttpHandlerOptions,
@@ -491,8 +508,9 @@ export class S3Client extends __Client<
     let _config_5 = resolveUserAgentConfig(_config_4);
     let _config_6 = resolveBucketEndpointConfig(_config_5);
     let _config_7 = resolveHostHeaderConfig(_config_6);
-    super(_config_7);
-    this.config = _config_7;
+    let _config_8 = resolveEventStreamSerdeConfig(_config_7);
+    super(_config_8);
+    this.config = _config_8;
     this.middlewareStack.use(getAwsAuthPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getUserAgentPlugin(this.config));
