@@ -4,13 +4,14 @@ import {
   EventStreamMarshaller,
   EventStreamRequestSigner,
   EventStreamSerdeProvider,
-  EventSigner
+  EventSigner,
+  Provider
 } from "@aws-sdk/types";
 
 export interface EventStreamInputConfig {}
 
 export type EventStreamResolvedConfig = {
-  eventSigner: EventSigner;
+  eventSigner: EventSigner | Provider<EventSigner>;
   eventStreamMarshaller: EventStreamMarshaller;
   eventStreamSigner: EventStreamRequestSigner;
 };

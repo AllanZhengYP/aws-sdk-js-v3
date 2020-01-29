@@ -2,7 +2,8 @@ import {
   Encoder,
   Decoder,
   EventSigner,
-  EventStreamSerdeProvider
+  EventStreamSerdeProvider,
+  Provider
 } from "@aws-sdk/types";
 import { EventStreamRequestSigner } from "./EventStreamSigner";
 import { EventStreamMarshaller } from "./EventStreamMarshaller";
@@ -11,7 +12,7 @@ import { EventStreamMarshaller } from "./EventStreamMarshaller";
 export const eventStreamSerdeProvider: EventStreamSerdeProvider = (options: {
   utf8Encoder: Encoder;
   utf8Decoder: Decoder;
-  eventSigner: EventSigner;
+  eventSigner: EventSigner | Provider<EventSigner>;
 }) => [
   new EventStreamMarshaller(options),
   new EventStreamRequestSigner(options)
