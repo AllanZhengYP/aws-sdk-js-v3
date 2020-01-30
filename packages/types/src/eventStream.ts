@@ -98,5 +98,9 @@ export interface EventStreamRequestSigner {
 }
 
 export interface EventStreamSerdeProvider {
-  (options: any): [EventStreamMarshaller, EventStreamRequestSigner];
+  (options: any): EventStreamMarshaller;
+}
+
+export interface EventStreamSignerProvider {
+  (options: any): EventStreamRequestSigner;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@aws-sdk/middleware-event-stream",
+  "name": "@aws-sdk/eventstream-serde-config-resolver",
   "version": "1.0.0-alpha.0",
   "scripts": {
     "prepublishOnly": "tsc",
@@ -14,13 +14,15 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "tslib": "^1.8.0",
     "@aws-sdk/types": "^1.0.0-alpha.2",
-    "@aws-sdk/protocol-http": "^1.0.0-alpha.3"
+    "tslib": "^1.8.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.12",
     "typescript": "~3.4.0",
     "jest": "^24.7.1"
+  },
+  "engines": {
+    "node": ">= 10.0.0"
   }
 }
