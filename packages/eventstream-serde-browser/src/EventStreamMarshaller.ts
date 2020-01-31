@@ -39,13 +39,24 @@ export class EventStreamMarshaller {
     return ReadableStreamtoIterable(deserialingStream);
   }
 
+  /**
+   * Generate a ReadableStream that serialize events
+   * to event stream binary chunks; Use a pull stream
+   * here to support low connection speed.
+   *
+   * This doesn't work actually on browser currently
+   * because browser doesn't support upload stream.
+   * reference:
+   * * https://bugs.chromium.org/p/chromium/issues/detail?id=688906
+   * * https://bugzilla.mozilla.org/show_bug.cgi?id=1387483
+   *
+   *
+   */
   serialize<T>(
     input: AsyncIterable<T>,
     serializer: (event: T) => Message
   ): ReadableStream {
-    //TODO: sending event stream in request is not yet supported in browser
-    throw new Error(
-      "Sending event stream in request is not yet supported in browser"
-    );
+    throw new Error(`event stream request in browser is not supported
+Reference: https://bugs.chromium.org/p/chromium/issues/detail?id=688906`);
   }
 }
