@@ -39,13 +39,36 @@ export class EventStreamMarshaller {
     return ReadableStreamtoIterable(deserialingStream);
   }
 
+  /**
+   * Generate a ReadableStream that serialize events
+   * to event stream binary chunks; Use a pull stream
+   * here to support low connection speed.
+   *
+   * TODO: add integration test for it function when
+   * any AWS service supports browser eventstream
+   * request.
+   */
   serialize<T>(
     input: AsyncIterable<T>,
     serializer: (event: T) => Message
   ): ReadableStream {
-    //TODO: sending event stream in request is not yet supported in browser
-    throw new Error(
-      "Sending event stream in request is not yet supported in browser"
-    );
+    const inputIterator = input[Symbol.asyncIterator]();
+    const self = this;
+    let generatorDone = false;
+    const stream = new ReadableStream({
+      async pull(controller) {
+        const chunk = await inputIterator.next();
+        if (chunk.done && generatorDone) {
+          controller.close();
+          return;
+        }
+        const payloadBuf = chunk.done
+          ? new Uint8Array(0)
+          : self.eventMarshaller.marshall(serializer(chunk.value));
+        controller.enqueue(payloadBuf);
+        if (chunk.done && !generatorDone) generatorDone = true;
+      }
+    });
+    return stream;
   }
 }
