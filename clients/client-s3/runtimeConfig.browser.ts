@@ -30,5 +30,8 @@ export const ClientDefaultValues: Required<ClientDefaults> = {
   credentialDefaultProvider: invalidFunction("Credential is missing") as any,
   regionDefaultProvider: invalidFunction("Region is missing") as any,
   md5: Md5,
-  streamHasher
+  streamHasher,
+  eventStreamSerdeProvider: invalidFunction(
+    "event stream serde for browser is not available"
+  )
 };
