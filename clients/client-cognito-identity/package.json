@@ -28,7 +28,7 @@
     "@aws-crypto/sha256-browser": "^0.1.0-preview.4",
     "@aws-sdk/config-resolver": "^1.0.0-alpha.10",
     "@aws-sdk/credential-provider-node": "^1.0.0-alpha.5",
-    "@aws-sdk/fetch-http-handler": "^1.0.0-alpha.6",
+    "@aws-sdk/fetch-http-handler": "^1.0.0-alpha.7",
     "@aws-sdk/hash-node": "^1.0.0-alpha.4",
     "@aws-sdk/invalid-dependency": "^1.0.0-alpha.2",
     "@aws-sdk/middleware-content-length": "^1.0.0-alpha.6",
@@ -44,9 +44,10 @@
     "@aws-sdk/smithy-client": "^1.0.0-alpha.5",
     "@aws-sdk/stream-collector-browser": "^1.0.0-alpha.4",
     "@aws-sdk/stream-collector-node": "^1.0.0-alpha.4",
+    "@aws-sdk/stream-collector-rn": "^1.0.0-alpha.0",
     "@aws-sdk/types": "^1.0.0-alpha.4",
     "@aws-sdk/url-parser-browser": "^1.0.0-alpha.4",
-    "@aws-sdk/url-parser-node": "^1.0.0-alpha.4",
+    "@aws-sdk/url-parser-node": "^1.0.0-alpha.5",
     "@aws-sdk/util-base64-browser": "^1.0.0-alpha.2",
     "@aws-sdk/util-base64-node": "^1.0.0-alpha.2",
     "@aws-sdk/util-body-length-browser": "^1.0.0-alpha.2",
@@ -71,5 +72,8 @@
     "name": "AWS SDK for JavaScript Team",
     "url": "https://aws.amazon.com/javascript/"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "react-native": {
+    "./runtimeConfig": "./runtimeConfig.rn"
+  }
 }
