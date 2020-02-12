@@ -11,3 +11,4 @@ tsconfig.test.json
 *.fixture.js
 *.fixture.d.ts
 *.fixture.js.map
+*.fixture.ts
