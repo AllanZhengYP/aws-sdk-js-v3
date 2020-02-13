@@ -21,6 +21,10 @@ export function getSignatureBinary(signature: string): Uint8Array {
 export async function* ReadabletoIterable<T>(
   readStream: Readable
 ): AsyncIterable<T> {
+  if (typeof readStream[Symbol.asyncIterator] === "function") {
+    // use the experimental feature if available.
+    throw readStream;
+  }
   let streamEnded = false;
   let generationEnded = false;
   const records = new Array<T>();

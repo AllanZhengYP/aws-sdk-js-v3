@@ -14,8 +14,12 @@ export function getDeserializingStream(
             return;
           }
 
-          controller.enqueue(await deserializer(value));
-          push();
+          try {
+            controller.enqueue(await deserializer(value));
+            push();
+          } catch (e) {
+            controller.error(e);
+          }
         });
       }
 
