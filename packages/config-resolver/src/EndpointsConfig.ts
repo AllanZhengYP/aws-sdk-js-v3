@@ -23,6 +23,7 @@ export function normalizeEndpoint(
 export interface EndpointsInputConfig {
   /**
    * The fully qualified endpoint of the webservice. This is only required when using a custom endpoint (for example, when using a local version of S3).
+   * Note: you cannot override path or query string because they are generated from commands
    */
   endpoint?: string | Endpoint | Provider<Endpoint>;
 
