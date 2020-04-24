@@ -134,13 +134,14 @@ export async function serializeAws_restJson1_1CreateChannelCommand(
     bodyParams["tags"] = serializeAws_restJson1_1Tags(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -172,13 +173,14 @@ export async function serializeAws_restJson1_1CreateHarvestJobCommand(
     bodyParams["startTime"] = input.StartTime;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -254,13 +256,14 @@ export async function serializeAws_restJson1_1CreateOriginEndpointCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -284,13 +287,14 @@ export async function serializeAws_restJson1_1DeleteChannelCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -314,13 +318,14 @@ export async function serializeAws_restJson1_1DeleteOriginEndpointCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -344,13 +349,14 @@ export async function serializeAws_restJson1_1DescribeChannelCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -374,13 +380,14 @@ export async function serializeAws_restJson1_1DescribeHarvestJobCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -404,13 +411,14 @@ export async function serializeAws_restJson1_1DescribeOriginEndpointCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -429,6 +437,7 @@ export async function serializeAws_restJson1_1ListChannelsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -436,7 +445,7 @@ export async function serializeAws_restJson1_1ListChannelsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -461,6 +470,7 @@ export async function serializeAws_restJson1_1ListHarvestJobsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -468,7 +478,7 @@ export async function serializeAws_restJson1_1ListHarvestJobsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -490,6 +500,7 @@ export async function serializeAws_restJson1_1ListOriginEndpointsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -497,7 +508,7 @@ export async function serializeAws_restJson1_1ListOriginEndpointsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -523,13 +534,14 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     throw new Error("No value provided for input HTTP label: ResourceArn.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -553,13 +565,14 @@ export async function serializeAws_restJson1_1RotateChannelCredentialsCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -600,13 +613,14 @@ export async function serializeAws_restJson1_1RotateIngestEndpointCredentialsCom
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -640,13 +654,14 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -676,6 +691,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     query["tagKeys"] = (input.TagKeys || []).map(_entry => _entry);
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -683,7 +699,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -712,13 +728,14 @@ export async function serializeAws_restJson1_1UpdateChannelCommand(
     bodyParams["description"] = input.Description;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -797,13 +814,14 @@ export async function serializeAws_restJson1_1UpdateOriginEndpointCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

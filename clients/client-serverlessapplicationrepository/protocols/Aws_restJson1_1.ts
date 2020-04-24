@@ -142,13 +142,14 @@ export async function serializeAws_restJson1_1CreateApplicationCommand(
     bodyParams["templateUrl"] = input.TemplateUrl;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -202,13 +203,14 @@ export async function serializeAws_restJson1_1CreateApplicationVersionCommand(
     bodyParams["templateUrl"] = input.TemplateUrl;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -294,13 +296,14 @@ export async function serializeAws_restJson1_1CreateCloudFormationChangeSetComma
     bodyParams["templateId"] = input.TemplateId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -331,13 +334,14 @@ export async function serializeAws_restJson1_1CreateCloudFormationTemplateComman
     bodyParams["semanticVersion"] = input.SemanticVersion;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -363,13 +367,14 @@ export async function serializeAws_restJson1_1DeleteApplicationCommand(
     throw new Error("No value provided for input HTTP label: ApplicationId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -399,6 +404,7 @@ export async function serializeAws_restJson1_1GetApplicationCommand(
     query["semanticVersion"] = input.SemanticVersion;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -406,7 +412,7 @@ export async function serializeAws_restJson1_1GetApplicationCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -432,13 +438,14 @@ export async function serializeAws_restJson1_1GetApplicationPolicyCommand(
     throw new Error("No value provided for input HTTP label: ApplicationId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -476,13 +483,14 @@ export async function serializeAws_restJson1_1GetCloudFormationTemplateCommand(
     throw new Error("No value provided for input HTTP label: TemplateId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -518,6 +526,7 @@ export async function serializeAws_restJson1_1ListApplicationDependenciesCommand
     query["semanticVersion"] = input.SemanticVersion;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -525,7 +534,7 @@ export async function serializeAws_restJson1_1ListApplicationDependenciesCommand
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -558,6 +567,7 @@ export async function serializeAws_restJson1_1ListApplicationVersionsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -565,7 +575,7 @@ export async function serializeAws_restJson1_1ListApplicationVersionsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -584,6 +594,7 @@ export async function serializeAws_restJson1_1ListApplicationsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -591,7 +602,7 @@ export async function serializeAws_restJson1_1ListApplicationsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -627,13 +638,14 @@ export async function serializeAws_restJson1_1PutApplicationPolicyCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -682,13 +694,14 @@ export async function serializeAws_restJson1_1UpdateApplicationCommand(
     bodyParams["readmeUrl"] = input.ReadmeUrl;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PATCH",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

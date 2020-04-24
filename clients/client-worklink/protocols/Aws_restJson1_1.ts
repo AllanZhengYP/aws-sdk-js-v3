@@ -165,13 +165,14 @@ export async function serializeAws_restJson1_1AssociateDomainCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -194,13 +195,14 @@ export async function serializeAws_restJson1_1AssociateWebsiteAuthorizationProvi
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -223,13 +225,14 @@ export async function serializeAws_restJson1_1AssociateWebsiteCertificateAuthori
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -252,13 +255,14 @@ export async function serializeAws_restJson1_1CreateFleetCommand(
     bodyParams["OptimizeForEndUserLocation"] = input.OptimizeForEndUserLocation;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -275,13 +279,14 @@ export async function serializeAws_restJson1_1DeleteFleetCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -298,13 +303,14 @@ export async function serializeAws_restJson1_1DescribeAuditStreamConfigurationCo
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -321,13 +327,14 @@ export async function serializeAws_restJson1_1DescribeCompanyNetworkConfiguratio
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -347,13 +354,14 @@ export async function serializeAws_restJson1_1DescribeDeviceCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -370,13 +378,14 @@ export async function serializeAws_restJson1_1DescribeDevicePolicyConfigurationC
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -396,13 +405,14 @@ export async function serializeAws_restJson1_1DescribeDomainCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -419,13 +429,14 @@ export async function serializeAws_restJson1_1DescribeFleetMetadataCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -442,13 +453,14 @@ export async function serializeAws_restJson1_1DescribeIdentityProviderConfigurat
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -468,13 +480,14 @@ export async function serializeAws_restJson1_1DescribeWebsiteCertificateAuthorit
     bodyParams["WebsiteCaId"] = input.WebsiteCaId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -494,13 +507,14 @@ export async function serializeAws_restJson1_1DisassociateDomainCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -520,13 +534,14 @@ export async function serializeAws_restJson1_1DisassociateWebsiteAuthorizationPr
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -546,13 +561,14 @@ export async function serializeAws_restJson1_1DisassociateWebsiteCertificateAuth
     bodyParams["WebsiteCaId"] = input.WebsiteCaId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -575,13 +591,14 @@ export async function serializeAws_restJson1_1ListDevicesCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -604,13 +621,14 @@ export async function serializeAws_restJson1_1ListDomainsCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -630,13 +648,14 @@ export async function serializeAws_restJson1_1ListFleetsCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -659,13 +678,14 @@ export async function serializeAws_restJson1_1ListWebsiteAuthorizationProvidersC
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -688,13 +708,14 @@ export async function serializeAws_restJson1_1ListWebsiteCertificateAuthoritiesC
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -714,13 +735,14 @@ export async function serializeAws_restJson1_1RestoreDomainAccessCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -740,13 +762,14 @@ export async function serializeAws_restJson1_1RevokeDomainAccessCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -766,13 +789,14 @@ export async function serializeAws_restJson1_1SignOutUserCommand(
     bodyParams["Username"] = input.Username;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -792,13 +816,14 @@ export async function serializeAws_restJson1_1UpdateAuditStreamConfigurationComm
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -830,13 +855,14 @@ export async function serializeAws_restJson1_1UpdateCompanyNetworkConfigurationC
     bodyParams["VpcId"] = input.VpcId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -856,13 +882,14 @@ export async function serializeAws_restJson1_1UpdateDevicePolicyConfigurationCom
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -885,13 +912,14 @@ export async function serializeAws_restJson1_1UpdateDomainMetadataCommand(
     bodyParams["FleetArn"] = input.FleetArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -914,13 +942,14 @@ export async function serializeAws_restJson1_1UpdateFleetMetadataCommand(
     bodyParams["OptimizeForEndUserLocation"] = input.OptimizeForEndUserLocation;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -944,13 +973,14 @@ export async function serializeAws_restJson1_1UpdateIdentityProviderConfiguratio
     bodyParams["IdentityProviderType"] = input.IdentityProviderType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

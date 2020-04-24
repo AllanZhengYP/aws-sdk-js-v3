@@ -70,13 +70,14 @@ export async function serializeAws_restJson1_1CreateTokenCommand(
     bodyParams["scope"] = serializeAws_restJson1_1Scopes(input.scope, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -102,13 +103,14 @@ export async function serializeAws_restJson1_1RegisterClientCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -131,13 +133,14 @@ export async function serializeAws_restJson1_1StartDeviceAuthorizationCommand(
     bodyParams["startUrl"] = input.startUrl;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

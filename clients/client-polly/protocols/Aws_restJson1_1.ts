@@ -100,13 +100,14 @@ export async function serializeAws_restJson1_1DeleteLexiconCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -133,6 +134,7 @@ export async function serializeAws_restJson1_1DescribeVoicesCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -140,7 +142,7 @@ export async function serializeAws_restJson1_1DescribeVoicesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -164,13 +166,14 @@ export async function serializeAws_restJson1_1GetLexiconCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -194,13 +197,14 @@ export async function serializeAws_restJson1_1GetSpeechSynthesisTaskCommand(
     throw new Error("No value provided for input HTTP label: TaskId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -216,6 +220,7 @@ export async function serializeAws_restJson1_1ListLexiconsCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -223,7 +228,7 @@ export async function serializeAws_restJson1_1ListLexiconsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -245,6 +250,7 @@ export async function serializeAws_restJson1_1ListSpeechSynthesisTasksCommand(
     query["Status"] = input.Status;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -252,7 +258,7 @@ export async function serializeAws_restJson1_1ListSpeechSynthesisTasksCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -281,13 +287,14 @@ export async function serializeAws_restJson1_1PutLexiconCommand(
     bodyParams["Content"] = input.Content;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -343,13 +350,14 @@ export async function serializeAws_restJson1_1StartSpeechSynthesisTaskCommand(
     bodyParams["VoiceId"] = input.VoiceId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -396,13 +404,14 @@ export async function serializeAws_restJson1_1SynthesizeSpeechCommand(
     bodyParams["VoiceId"] = input.VoiceId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

@@ -143,13 +143,14 @@ export async function serializeAws_restJson1_1DescribeSavingsPlansOfferingRatesC
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -240,13 +241,14 @@ export async function serializeAws_restJson1_1DescribeSavingsPlansOfferingsComma
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -278,13 +280,14 @@ export async function serializeAws_restJson1_1CreateSavingsPlanCommand(
     bodyParams["upfrontPaymentAmount"] = input.upfrontPaymentAmount;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -313,13 +316,14 @@ export async function serializeAws_restJson1_1DescribeSavingsPlanRatesCommand(
     bodyParams["savingsPlanId"] = input.savingsPlanId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -363,13 +367,14 @@ export async function serializeAws_restJson1_1DescribeSavingsPlansCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -386,13 +391,14 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     bodyParams["resourceArn"] = input.resourceArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -412,13 +418,14 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagMap(input.tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -441,13 +448,14 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

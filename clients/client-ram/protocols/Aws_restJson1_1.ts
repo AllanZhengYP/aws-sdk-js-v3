@@ -153,13 +153,14 @@ export async function serializeAws_restJson1_1AcceptResourceShareInvitationComma
     bodyParams["resourceShareInvitationArn"] = input.resourceShareInvitationArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -191,13 +192,14 @@ export async function serializeAws_restJson1_1AssociateResourceShareCommand(
     bodyParams["resourceShareArn"] = input.resourceShareArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -223,13 +225,14 @@ export async function serializeAws_restJson1_1AssociateResourceSharePermissionCo
     bodyParams["resourceShareArn"] = input.resourceShareArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -273,13 +276,14 @@ export async function serializeAws_restJson1_1CreateResourceShareCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagList(input.tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -298,6 +302,7 @@ export async function serializeAws_restJson1_1DeleteResourceShareCommand(
     query["resourceShareArn"] = input.resourceShareArn;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -305,7 +310,7 @@ export async function serializeAws_restJson1_1DeleteResourceShareCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -337,13 +342,14 @@ export async function serializeAws_restJson1_1DisassociateResourceShareCommand(
     bodyParams["resourceShareArn"] = input.resourceShareArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -366,13 +372,14 @@ export async function serializeAws_restJson1_1DisassociateResourceSharePermissio
     bodyParams["resourceShareArn"] = input.resourceShareArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -385,13 +392,14 @@ export async function serializeAws_restJson1_1EnableSharingWithAwsOrganizationCo
   let resolvedPath = "/enablesharingwithawsorganization";
   let body: any;
   body = "{}";
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -411,13 +419,14 @@ export async function serializeAws_restJson1_1GetPermissionCommand(
     bodyParams["permissionVersion"] = input.permissionVersion;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -446,13 +455,14 @@ export async function serializeAws_restJson1_1GetResourcePoliciesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -492,13 +502,14 @@ export async function serializeAws_restJson1_1GetResourceShareAssociationsComman
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -534,13 +545,14 @@ export async function serializeAws_restJson1_1GetResourceShareInvitationsCommand
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -583,13 +595,14 @@ export async function serializeAws_restJson1_1GetResourceSharesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -612,13 +625,14 @@ export async function serializeAws_restJson1_1ListPendingInvitationResourcesComm
     bodyParams["resourceShareInvitationArn"] = input.resourceShareInvitationArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -641,13 +655,14 @@ export async function serializeAws_restJson1_1ListPermissionsCommand(
     bodyParams["resourceType"] = input.resourceType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -690,13 +705,14 @@ export async function serializeAws_restJson1_1ListPrincipalsCommand(
     bodyParams["resourceType"] = input.resourceType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -719,13 +735,14 @@ export async function serializeAws_restJson1_1ListResourceSharePermissionsComman
     bodyParams["resourceShareArn"] = input.resourceShareArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -768,13 +785,14 @@ export async function serializeAws_restJson1_1ListResourcesCommand(
     bodyParams["resourceType"] = input.resourceType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -790,6 +808,7 @@ export async function serializeAws_restJson1_1PromoteResourceShareCreatedFromPol
     query["resourceShareArn"] = input.resourceShareArn;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -797,7 +816,7 @@ export async function serializeAws_restJson1_1PromoteResourceShareCreatedFromPol
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -817,13 +836,14 @@ export async function serializeAws_restJson1_1RejectResourceShareInvitationComma
     bodyParams["resourceShareInvitationArn"] = input.resourceShareInvitationArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -843,13 +863,14 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagList(input.tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -872,13 +893,14 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -904,13 +926,14 @@ export async function serializeAws_restJson1_1UpdateResourceShareCommand(
     bodyParams["resourceShareArn"] = input.resourceShareArn;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

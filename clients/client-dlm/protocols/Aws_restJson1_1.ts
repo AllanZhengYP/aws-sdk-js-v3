@@ -91,13 +91,14 @@ export async function serializeAws_restJson1_1CreateLifecyclePolicyCommand(
     bodyParams["Tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -121,13 +122,14 @@ export async function serializeAws_restJson1_1DeleteLifecyclePolicyCommand(
     throw new Error("No value provided for input HTTP label: PolicyId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -155,6 +157,7 @@ export async function serializeAws_restJson1_1GetLifecyclePoliciesCommand(
     query["targetTags"] = (input.TargetTags || []).map(_entry => _entry);
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -162,7 +165,7 @@ export async function serializeAws_restJson1_1GetLifecyclePoliciesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -186,13 +189,14 @@ export async function serializeAws_restJson1_1GetLifecyclePolicyCommand(
     throw new Error("No value provided for input HTTP label: PolicyId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -218,13 +222,14 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     throw new Error("No value provided for input HTTP label: ResourceArn.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -255,13 +260,14 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["Tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -291,6 +297,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     query["tagKeys"] = (input.TagKeys || []).map(_entry => _entry);
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -298,7 +305,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -339,13 +346,14 @@ export async function serializeAws_restJson1_1UpdateLifecyclePolicyCommand(
     bodyParams["State"] = input.State;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PATCH",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

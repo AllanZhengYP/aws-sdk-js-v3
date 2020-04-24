@@ -82,13 +82,14 @@ export async function serializeAws_restJson1_1GetDASHStreamingSessionURLCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -135,13 +136,14 @@ export async function serializeAws_restJson1_1GetHLSStreamingSessionURLCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -164,13 +166,14 @@ export async function serializeAws_restJson1_1GetMediaForFragmentListCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -199,13 +202,14 @@ export async function serializeAws_restJson1_1ListFragmentsCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

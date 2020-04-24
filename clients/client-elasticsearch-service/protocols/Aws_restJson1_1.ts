@@ -176,13 +176,14 @@ export async function serializeAws_restJson1_1AddTagsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -199,13 +200,14 @@ export async function serializeAws_restJson1_1CancelElasticsearchServiceSoftware
     bodyParams["DomainName"] = input.DomainName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -298,13 +300,14 @@ export async function serializeAws_restJson1_1CreateElasticsearchDomainCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -328,13 +331,14 @@ export async function serializeAws_restJson1_1DeleteElasticsearchDomainCommand(
     throw new Error("No value provided for input HTTP label: DomainName.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -347,13 +351,14 @@ export async function serializeAws_restJson1_1DeleteElasticsearchServiceRoleComm
   let resolvedPath = "/2015-01-01/es/role";
   let body: any;
   body = "{}";
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -377,13 +382,14 @@ export async function serializeAws_restJson1_1DescribeElasticsearchDomainCommand
     throw new Error("No value provided for input HTTP label: DomainName.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -407,13 +413,14 @@ export async function serializeAws_restJson1_1DescribeElasticsearchDomainConfigC
     throw new Error("No value provided for input HTTP label: DomainName.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -433,13 +440,14 @@ export async function serializeAws_restJson1_1DescribeElasticsearchDomainsComman
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -486,6 +494,7 @@ export async function serializeAws_restJson1_1DescribeElasticsearchInstanceTypeL
     query["domainName"] = input.DomainName;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -493,7 +502,7 @@ export async function serializeAws_restJson1_1DescribeElasticsearchInstanceTypeL
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -515,6 +524,7 @@ export async function serializeAws_restJson1_1DescribeReservedElasticsearchInsta
     query["offeringId"] = input.ReservedElasticsearchInstanceOfferingId;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -522,7 +532,7 @@ export async function serializeAws_restJson1_1DescribeReservedElasticsearchInsta
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -544,6 +554,7 @@ export async function serializeAws_restJson1_1DescribeReservedElasticsearchInsta
     query["reservationId"] = input.ReservedElasticsearchInstanceId;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -551,7 +562,7 @@ export async function serializeAws_restJson1_1DescribeReservedElasticsearchInsta
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -567,6 +578,7 @@ export async function serializeAws_restJson1_1GetCompatibleElasticsearchVersions
     query["domainName"] = input.DomainName;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -574,7 +586,7 @@ export async function serializeAws_restJson1_1GetCompatibleElasticsearchVersions
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -605,6 +617,7 @@ export async function serializeAws_restJson1_1GetUpgradeHistoryCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -612,7 +625,7 @@ export async function serializeAws_restJson1_1GetUpgradeHistoryCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -636,13 +649,14 @@ export async function serializeAws_restJson1_1GetUpgradeStatusCommand(
     throw new Error("No value provided for input HTTP label: DomainName.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -655,13 +669,14 @@ export async function serializeAws_restJson1_1ListDomainNamesCommand(
   let resolvedPath = "/2015-01-01/domain";
   let body: any;
   body = "{}";
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -699,6 +714,7 @@ export async function serializeAws_restJson1_1ListElasticsearchInstanceTypesComm
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -706,7 +722,7 @@ export async function serializeAws_restJson1_1ListElasticsearchInstanceTypesComm
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -725,6 +741,7 @@ export async function serializeAws_restJson1_1ListElasticsearchVersionsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -732,7 +749,7 @@ export async function serializeAws_restJson1_1ListElasticsearchVersionsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -748,6 +765,7 @@ export async function serializeAws_restJson1_1ListTagsCommand(
     query["arn"] = input.ARN;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -755,7 +773,7 @@ export async function serializeAws_restJson1_1ListTagsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -779,13 +797,14 @@ export async function serializeAws_restJson1_1PurchaseReservedElasticsearchInsta
       input.ReservedElasticsearchInstanceOfferingId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -808,13 +827,14 @@ export async function serializeAws_restJson1_1RemoveTagsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -831,13 +851,14 @@ export async function serializeAws_restJson1_1StartElasticsearchServiceSoftwareU
     bodyParams["DomainName"] = input.DomainName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -920,13 +941,14 @@ export async function serializeAws_restJson1_1UpdateElasticsearchDomainConfigCom
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -949,13 +971,14 @@ export async function serializeAws_restJson1_1UpgradeElasticsearchDomainCommand(
     bodyParams["TargetVersion"] = input.TargetVersion;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

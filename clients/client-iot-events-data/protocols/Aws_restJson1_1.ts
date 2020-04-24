@@ -65,13 +65,14 @@ export async function serializeAws_restJson1_1BatchPutMessageCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -91,13 +92,14 @@ export async function serializeAws_restJson1_1BatchUpdateDetectorCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -129,6 +131,7 @@ export async function serializeAws_restJson1_1DescribeDetectorCommand(
     query["keyValue"] = input.keyValue;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -136,7 +139,7 @@ export async function serializeAws_restJson1_1DescribeDetectorCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -174,6 +177,7 @@ export async function serializeAws_restJson1_1ListDetectorsCommand(
     query["stateName"] = input.stateName;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -181,7 +185,7 @@ export async function serializeAws_restJson1_1ListDetectorsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

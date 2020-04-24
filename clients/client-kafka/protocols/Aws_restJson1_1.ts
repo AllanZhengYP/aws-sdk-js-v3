@@ -193,13 +193,14 @@ export async function serializeAws_restJson1_1CreateClusterCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -230,13 +231,14 @@ export async function serializeAws_restJson1_1CreateConfigurationCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -264,6 +266,7 @@ export async function serializeAws_restJson1_1DeleteClusterCommand(
     query["currentVersion"] = input.CurrentVersion;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -271,7 +274,7 @@ export async function serializeAws_restJson1_1DeleteClusterCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -295,13 +298,14 @@ export async function serializeAws_restJson1_1DescribeClusterCommand(
     throw new Error("No value provided for input HTTP label: ClusterArn.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -329,13 +333,14 @@ export async function serializeAws_restJson1_1DescribeClusterOperationCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -359,13 +364,14 @@ export async function serializeAws_restJson1_1DescribeConfigurationCommand(
     throw new Error("No value provided for input HTTP label: Arn.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -401,13 +407,14 @@ export async function serializeAws_restJson1_1DescribeConfigurationRevisionComma
     throw new Error("No value provided for input HTTP label: Revision.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -431,13 +438,14 @@ export async function serializeAws_restJson1_1GetBootstrapBrokersCommand(
     throw new Error("No value provided for input HTTP label: ClusterArn.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -468,6 +476,7 @@ export async function serializeAws_restJson1_1ListClusterOperationsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -475,7 +484,7 @@ export async function serializeAws_restJson1_1ListClusterOperationsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -497,6 +506,7 @@ export async function serializeAws_restJson1_1ListClustersCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -504,7 +514,7 @@ export async function serializeAws_restJson1_1ListClustersCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -535,6 +545,7 @@ export async function serializeAws_restJson1_1ListConfigurationRevisionsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -542,7 +553,7 @@ export async function serializeAws_restJson1_1ListConfigurationRevisionsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -561,6 +572,7 @@ export async function serializeAws_restJson1_1ListConfigurationsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -568,7 +580,7 @@ export async function serializeAws_restJson1_1ListConfigurationsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -599,6 +611,7 @@ export async function serializeAws_restJson1_1ListNodesCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -606,7 +619,7 @@ export async function serializeAws_restJson1_1ListNodesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -632,13 +645,14 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     throw new Error("No value provided for input HTTP label: ResourceArn.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -672,13 +686,14 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -708,6 +723,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     query["tagKeys"] = (input.TagKeys || []).map(_entry => _entry);
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -715,7 +731,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -747,13 +763,14 @@ export async function serializeAws_restJson1_1UpdateBrokerCountCommand(
     bodyParams["targetNumberOfBrokerNodes"] = input.TargetNumberOfBrokerNodes;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -790,13 +807,14 @@ export async function serializeAws_restJson1_1UpdateBrokerStorageCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -831,13 +849,14 @@ export async function serializeAws_restJson1_1UpdateClusterConfigurationCommand(
     bodyParams["currentVersion"] = input.CurrentVersion;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -875,13 +894,14 @@ export async function serializeAws_restJson1_1UpdateMonitoringCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

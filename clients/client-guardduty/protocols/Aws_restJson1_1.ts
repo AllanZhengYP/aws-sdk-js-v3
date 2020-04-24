@@ -285,13 +285,14 @@ export async function serializeAws_restJson1_1AcceptInvitationCommand(
     bodyParams["masterId"] = input.MasterId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -323,13 +324,14 @@ export async function serializeAws_restJson1_1ArchiveFindingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -358,13 +360,14 @@ export async function serializeAws_restJson1_1CreateDetectorCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -417,13 +420,14 @@ export async function serializeAws_restJson1_1CreateFilterCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -470,13 +474,14 @@ export async function serializeAws_restJson1_1CreateIPSetCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -508,13 +513,14 @@ export async function serializeAws_restJson1_1CreateMembersCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -557,13 +563,14 @@ export async function serializeAws_restJson1_1CreatePublishingDestinationCommand
     bodyParams["destinationType"] = input.DestinationType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -595,13 +602,14 @@ export async function serializeAws_restJson1_1CreateSampleFindingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -648,13 +656,14 @@ export async function serializeAws_restJson1_1CreateThreatIntelSetCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -674,13 +683,14 @@ export async function serializeAws_restJson1_1DeclineInvitationsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -704,13 +714,14 @@ export async function serializeAws_restJson1_1DeleteDetectorCommand(
     throw new Error("No value provided for input HTTP label: DetectorId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -746,13 +757,14 @@ export async function serializeAws_restJson1_1DeleteFilterCommand(
     throw new Error("No value provided for input HTTP label: FilterName.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -788,13 +800,14 @@ export async function serializeAws_restJson1_1DeleteIPSetCommand(
     throw new Error("No value provided for input HTTP label: IpSetId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -814,13 +827,14 @@ export async function serializeAws_restJson1_1DeleteInvitationsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -852,13 +866,14 @@ export async function serializeAws_restJson1_1DeleteMembersCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -897,13 +912,14 @@ export async function serializeAws_restJson1_1DeletePublishingDestinationCommand
     throw new Error("No value provided for input HTTP label: DetectorId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -943,13 +959,14 @@ export async function serializeAws_restJson1_1DeleteThreatIntelSetCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -988,13 +1005,14 @@ export async function serializeAws_restJson1_1DescribePublishingDestinationComma
     throw new Error("No value provided for input HTTP label: DetectorId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1018,13 +1036,14 @@ export async function serializeAws_restJson1_1DisassociateFromMasterAccountComma
     throw new Error("No value provided for input HTTP label: DetectorId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1056,13 +1075,14 @@ export async function serializeAws_restJson1_1DisassociateMembersCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1086,13 +1106,14 @@ export async function serializeAws_restJson1_1GetDetectorCommand(
     throw new Error("No value provided for input HTTP label: DetectorId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1128,13 +1149,14 @@ export async function serializeAws_restJson1_1GetFilterCommand(
     throw new Error("No value provided for input HTTP label: FilterName.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1172,13 +1194,14 @@ export async function serializeAws_restJson1_1GetFindingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1218,13 +1241,14 @@ export async function serializeAws_restJson1_1GetFindingsStatisticsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1260,13 +1284,14 @@ export async function serializeAws_restJson1_1GetIPSetCommand(
     throw new Error("No value provided for input HTTP label: IpSetId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1279,13 +1304,14 @@ export async function serializeAws_restJson1_1GetInvitationsCountCommand(
   let resolvedPath = "/invitation/count";
   let body: any;
   body = "{}";
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1309,13 +1335,14 @@ export async function serializeAws_restJson1_1GetMasterAccountCommand(
     throw new Error("No value provided for input HTTP label: DetectorId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1347,13 +1374,14 @@ export async function serializeAws_restJson1_1GetMembersCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1393,13 +1421,14 @@ export async function serializeAws_restJson1_1GetThreatIntelSetCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1437,13 +1466,14 @@ export async function serializeAws_restJson1_1InviteMembersCommand(
     bodyParams["message"] = input.Message;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1462,6 +1492,7 @@ export async function serializeAws_restJson1_1ListDetectorsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1469,7 +1500,7 @@ export async function serializeAws_restJson1_1ListDetectorsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1500,6 +1531,7 @@ export async function serializeAws_restJson1_1ListFiltersCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1507,7 +1539,7 @@ export async function serializeAws_restJson1_1ListFiltersCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1551,13 +1583,14 @@ export async function serializeAws_restJson1_1ListFindingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1588,6 +1621,7 @@ export async function serializeAws_restJson1_1ListIPSetsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1595,7 +1629,7 @@ export async function serializeAws_restJson1_1ListIPSetsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1614,6 +1648,7 @@ export async function serializeAws_restJson1_1ListInvitationsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1621,7 +1656,7 @@ export async function serializeAws_restJson1_1ListInvitationsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1655,6 +1690,7 @@ export async function serializeAws_restJson1_1ListMembersCommand(
     query["onlyAssociated"] = input.OnlyAssociated;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1662,7 +1698,7 @@ export async function serializeAws_restJson1_1ListMembersCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1693,6 +1729,7 @@ export async function serializeAws_restJson1_1ListPublishingDestinationsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1700,7 +1737,7 @@ export async function serializeAws_restJson1_1ListPublishingDestinationsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1726,13 +1763,14 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     throw new Error("No value provided for input HTTP label: ResourceArn.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1763,6 +1801,7 @@ export async function serializeAws_restJson1_1ListThreatIntelSetsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1770,7 +1809,7 @@ export async function serializeAws_restJson1_1ListThreatIntelSetsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1802,13 +1841,14 @@ export async function serializeAws_restJson1_1StartMonitoringMembersCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1840,13 +1880,14 @@ export async function serializeAws_restJson1_1StopMonitoringMembersCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1877,13 +1918,14 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1915,13 +1957,14 @@ export async function serializeAws_restJson1_1UnarchiveFindingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1951,6 +1994,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     query["tagKeys"] = (input.TagKeys || []).map(_entry => _entry);
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1958,7 +2002,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1990,13 +2034,14 @@ export async function serializeAws_restJson1_1UpdateDetectorCommand(
     bodyParams["findingPublishingFrequency"] = input.FindingPublishingFrequency;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2049,13 +2094,14 @@ export async function serializeAws_restJson1_1UpdateFilterCommand(
     bodyParams["rank"] = input.Rank;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2093,13 +2139,14 @@ export async function serializeAws_restJson1_1UpdateFindingsFeedbackCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2146,13 +2193,14 @@ export async function serializeAws_restJson1_1UpdateIPSetCommand(
     bodyParams["name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2201,13 +2249,14 @@ export async function serializeAws_restJson1_1UpdatePublishingDestinationCommand
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2258,13 +2307,14 @@ export async function serializeAws_restJson1_1UpdateThreatIntelSetCommand(
     bodyParams["name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

@@ -70,6 +70,7 @@ export async function serializeAws_restJson1_1CancelChangeSetCommand(
     query["changeSetId"] = input.ChangeSetId;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PATCH",
@@ -77,7 +78,7 @@ export async function serializeAws_restJson1_1CancelChangeSetCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -96,6 +97,7 @@ export async function serializeAws_restJson1_1DescribeChangeSetCommand(
     query["changeSetId"] = input.ChangeSetId;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -103,7 +105,7 @@ export async function serializeAws_restJson1_1DescribeChangeSetCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -122,6 +124,7 @@ export async function serializeAws_restJson1_1DescribeEntityCommand(
     query["entityId"] = input.EntityId;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -129,7 +132,7 @@ export async function serializeAws_restJson1_1DescribeEntityCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -161,13 +164,14 @@ export async function serializeAws_restJson1_1ListChangeSetsCommand(
     bodyParams["Sort"] = serializeAws_restJson1_1Sort(input.Sort, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -202,13 +206,14 @@ export async function serializeAws_restJson1_1ListEntitiesCommand(
     bodyParams["Sort"] = serializeAws_restJson1_1Sort(input.Sort, context);
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -237,13 +242,14 @@ export async function serializeAws_restJson1_1StartChangeSetCommand(
     bodyParams["ClientRequestToken"] = input.ClientRequestToken;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

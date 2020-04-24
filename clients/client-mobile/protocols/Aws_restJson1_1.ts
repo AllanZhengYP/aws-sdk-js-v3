@@ -85,6 +85,7 @@ export async function serializeAws_restJson1_1CreateProjectCommand(
   if (input.contents !== undefined) {
     body = input.contents;
   }
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -92,7 +93,7 @@ export async function serializeAws_restJson1_1CreateProjectCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -116,13 +117,14 @@ export async function serializeAws_restJson1_1DeleteProjectCommand(
     throw new Error("No value provided for input HTTP label: projectId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -146,13 +148,14 @@ export async function serializeAws_restJson1_1DescribeBundleCommand(
     throw new Error("No value provided for input HTTP label: bundleId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -171,6 +174,7 @@ export async function serializeAws_restJson1_1DescribeProjectCommand(
     query["syncFromResources"] = input.syncFromResources.toString();
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -178,7 +182,7 @@ export async function serializeAws_restJson1_1DescribeProjectCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -209,6 +213,7 @@ export async function serializeAws_restJson1_1ExportBundleCommand(
     query["projectId"] = input.projectId;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -216,7 +221,7 @@ export async function serializeAws_restJson1_1ExportBundleCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -240,13 +245,14 @@ export async function serializeAws_restJson1_1ExportProjectCommand(
     throw new Error("No value provided for input HTTP label: projectId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -265,6 +271,7 @@ export async function serializeAws_restJson1_1ListBundlesCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -272,7 +279,7 @@ export async function serializeAws_restJson1_1ListBundlesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -291,6 +298,7 @@ export async function serializeAws_restJson1_1ListProjectsCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -298,7 +306,7 @@ export async function serializeAws_restJson1_1ListProjectsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -317,6 +325,7 @@ export async function serializeAws_restJson1_1UpdateProjectCommand(
   if (input.contents !== undefined) {
     body = input.contents;
   }
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -324,7 +333,7 @@ export async function serializeAws_restJson1_1UpdateProjectCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

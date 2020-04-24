@@ -45,13 +45,14 @@ export async function serializeAws_restJson1_1GetMediaCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

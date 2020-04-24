@@ -486,6 +486,7 @@ export async function serializeAws_restJson1_1AssociatePhoneNumberWithUserComman
     bodyParams["E164PhoneNumber"] = input.E164PhoneNumber;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -493,7 +494,7 @@ export async function serializeAws_restJson1_1AssociatePhoneNumberWithUserComman
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -537,6 +538,7 @@ export async function serializeAws_restJson1_1AssociatePhoneNumbersWithVoiceConn
     bodyParams["ForceAssociate"] = input.ForceAssociate;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -544,7 +546,7 @@ export async function serializeAws_restJson1_1AssociatePhoneNumbersWithVoiceConn
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -588,6 +590,7 @@ export async function serializeAws_restJson1_1AssociatePhoneNumbersWithVoiceConn
     bodyParams["ForceAssociate"] = input.ForceAssociate;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -595,7 +598,7 @@ export async function serializeAws_restJson1_1AssociatePhoneNumbersWithVoiceConn
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -632,6 +635,7 @@ export async function serializeAws_restJson1_1AssociateSigninDelegateGroupsWithA
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -639,7 +643,7 @@ export async function serializeAws_restJson1_1AssociateSigninDelegateGroupsWithA
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -676,6 +680,7 @@ export async function serializeAws_restJson1_1BatchCreateAttendeeCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -683,7 +688,7 @@ export async function serializeAws_restJson1_1BatchCreateAttendeeCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -732,6 +737,7 @@ export async function serializeAws_restJson1_1BatchCreateRoomMembershipCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -739,7 +745,7 @@ export async function serializeAws_restJson1_1BatchCreateRoomMembershipCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -762,6 +768,7 @@ export async function serializeAws_restJson1_1BatchDeletePhoneNumberCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -769,7 +776,7 @@ export async function serializeAws_restJson1_1BatchDeletePhoneNumberCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -804,6 +811,7 @@ export async function serializeAws_restJson1_1BatchSuspendUserCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -811,7 +819,7 @@ export async function serializeAws_restJson1_1BatchSuspendUserCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -846,6 +854,7 @@ export async function serializeAws_restJson1_1BatchUnsuspendUserCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -853,7 +862,7 @@ export async function serializeAws_restJson1_1BatchUnsuspendUserCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -878,6 +887,7 @@ export async function serializeAws_restJson1_1BatchUpdatePhoneNumberCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -885,7 +895,7 @@ export async function serializeAws_restJson1_1BatchUpdatePhoneNumberCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -919,13 +929,14 @@ export async function serializeAws_restJson1_1BatchUpdateUserCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -942,13 +953,14 @@ export async function serializeAws_restJson1_1CreateAccountCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -977,13 +989,14 @@ export async function serializeAws_restJson1_1CreateAttendeeCommand(
     bodyParams["ExternalUserId"] = input.ExternalUserId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1015,13 +1028,14 @@ export async function serializeAws_restJson1_1CreateBotCommand(
     bodyParams["Domain"] = input.Domain;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1055,13 +1069,14 @@ export async function serializeAws_restJson1_1CreateMeetingCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1086,13 +1101,14 @@ export async function serializeAws_restJson1_1CreatePhoneNumberOrderCommand(
     bodyParams["ProductType"] = input.ProductType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1127,13 +1143,14 @@ export async function serializeAws_restJson1_1CreateRoomCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1177,13 +1194,14 @@ export async function serializeAws_restJson1_1CreateRoomMembershipCommand(
     bodyParams["Role"] = input.Role;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1221,6 +1239,7 @@ export async function serializeAws_restJson1_1CreateUserCommand(
     bodyParams["Username"] = input.Username;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1228,7 +1247,7 @@ export async function serializeAws_restJson1_1CreateUserCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1251,13 +1270,14 @@ export async function serializeAws_restJson1_1CreateVoiceConnectorCommand(
     bodyParams["RequireEncryption"] = input.RequireEncryption;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1282,13 +1302,14 @@ export async function serializeAws_restJson1_1CreateVoiceConnectorGroupCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1312,13 +1333,14 @@ export async function serializeAws_restJson1_1DeleteAccountCommand(
     throw new Error("No value provided for input HTTP label: AccountId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1354,13 +1376,14 @@ export async function serializeAws_restJson1_1DeleteAttendeeCommand(
     throw new Error("No value provided for input HTTP label: MeetingId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1396,13 +1419,14 @@ export async function serializeAws_restJson1_1DeleteEventsConfigurationCommand(
     throw new Error("No value provided for input HTTP label: BotId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1426,13 +1450,14 @@ export async function serializeAws_restJson1_1DeleteMeetingCommand(
     throw new Error("No value provided for input HTTP label: MeetingId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1458,13 +1483,14 @@ export async function serializeAws_restJson1_1DeletePhoneNumberCommand(
     throw new Error("No value provided for input HTTP label: PhoneNumberId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1500,13 +1526,14 @@ export async function serializeAws_restJson1_1DeleteRoomCommand(
     throw new Error("No value provided for input HTTP label: RoomId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1555,13 +1582,14 @@ export async function serializeAws_restJson1_1DeleteRoomMembershipCommand(
     throw new Error("No value provided for input HTTP label: RoomId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1589,13 +1617,14 @@ export async function serializeAws_restJson1_1DeleteVoiceConnectorCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1623,13 +1652,14 @@ export async function serializeAws_restJson1_1DeleteVoiceConnectorGroupCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1657,13 +1687,14 @@ export async function serializeAws_restJson1_1DeleteVoiceConnectorOriginationCom
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1692,13 +1723,14 @@ export async function serializeAws_restJson1_1DeleteVoiceConnectorStreamingConfi
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1726,13 +1758,14 @@ export async function serializeAws_restJson1_1DeleteVoiceConnectorTerminationCom
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1772,6 +1805,7 @@ export async function serializeAws_restJson1_1DeleteVoiceConnectorTerminationCre
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1779,7 +1813,7 @@ export async function serializeAws_restJson1_1DeleteVoiceConnectorTerminationCre
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1818,6 +1852,7 @@ export async function serializeAws_restJson1_1DisassociatePhoneNumberFromUserCom
     operation: "disassociate-phone-number"
   };
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1825,7 +1860,7 @@ export async function serializeAws_restJson1_1DisassociatePhoneNumberFromUserCom
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1866,6 +1901,7 @@ export async function serializeAws_restJson1_1DisassociatePhoneNumbersFromVoiceC
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1873,7 +1909,7 @@ export async function serializeAws_restJson1_1DisassociatePhoneNumbersFromVoiceC
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1914,6 +1950,7 @@ export async function serializeAws_restJson1_1DisassociatePhoneNumbersFromVoiceC
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1921,7 +1958,7 @@ export async function serializeAws_restJson1_1DisassociatePhoneNumbersFromVoiceC
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1956,6 +1993,7 @@ export async function serializeAws_restJson1_1DisassociateSigninDelegateGroupsFr
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1963,7 +2001,7 @@ export async function serializeAws_restJson1_1DisassociateSigninDelegateGroupsFr
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -1987,13 +2025,14 @@ export async function serializeAws_restJson1_1GetAccountCommand(
     throw new Error("No value provided for input HTTP label: AccountId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2017,13 +2056,14 @@ export async function serializeAws_restJson1_1GetAccountSettingsCommand(
     throw new Error("No value provided for input HTTP label: AccountId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2059,13 +2099,14 @@ export async function serializeAws_restJson1_1GetAttendeeCommand(
     throw new Error("No value provided for input HTTP label: MeetingId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2101,13 +2142,14 @@ export async function serializeAws_restJson1_1GetBotCommand(
     throw new Error("No value provided for input HTTP label: BotId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2143,13 +2185,14 @@ export async function serializeAws_restJson1_1GetEventsConfigurationCommand(
     throw new Error("No value provided for input HTTP label: BotId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2162,13 +2205,14 @@ export async function serializeAws_restJson1_1GetGlobalSettingsCommand(
   let resolvedPath = "/settings";
   let body: any;
   body = "{}";
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2192,13 +2236,14 @@ export async function serializeAws_restJson1_1GetMeetingCommand(
     throw new Error("No value provided for input HTTP label: MeetingId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2224,13 +2269,14 @@ export async function serializeAws_restJson1_1GetPhoneNumberCommand(
     throw new Error("No value provided for input HTTP label: PhoneNumberId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2258,13 +2304,14 @@ export async function serializeAws_restJson1_1GetPhoneNumberOrderCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2277,13 +2324,14 @@ export async function serializeAws_restJson1_1GetPhoneNumberSettingsCommand(
   let resolvedPath = "/settings/phone-number";
   let body: any;
   body = "{}";
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2319,13 +2367,14 @@ export async function serializeAws_restJson1_1GetRoomCommand(
     throw new Error("No value provided for input HTTP label: RoomId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2361,13 +2410,14 @@ export async function serializeAws_restJson1_1GetUserCommand(
     throw new Error("No value provided for input HTTP label: UserId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2403,13 +2453,14 @@ export async function serializeAws_restJson1_1GetUserSettingsCommand(
     throw new Error("No value provided for input HTTP label: UserId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2437,13 +2488,14 @@ export async function serializeAws_restJson1_1GetVoiceConnectorCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2471,13 +2523,14 @@ export async function serializeAws_restJson1_1GetVoiceConnectorGroupCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2506,13 +2559,14 @@ export async function serializeAws_restJson1_1GetVoiceConnectorLoggingConfigurat
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2540,13 +2594,14 @@ export async function serializeAws_restJson1_1GetVoiceConnectorOriginationComman
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2575,13 +2630,14 @@ export async function serializeAws_restJson1_1GetVoiceConnectorStreamingConfigur
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2609,13 +2665,14 @@ export async function serializeAws_restJson1_1GetVoiceConnectorTerminationComman
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2643,13 +2700,14 @@ export async function serializeAws_restJson1_1GetVoiceConnectorTerminationHealth
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2687,6 +2745,7 @@ export async function serializeAws_restJson1_1InviteUsersCommand(
     bodyParams["UserType"] = input.UserType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2694,7 +2753,7 @@ export async function serializeAws_restJson1_1InviteUsersCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2719,6 +2778,7 @@ export async function serializeAws_restJson1_1ListAccountsCommand(
     query["user-email"] = input.UserEmail;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2726,7 +2786,7 @@ export async function serializeAws_restJson1_1ListAccountsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2757,6 +2817,7 @@ export async function serializeAws_restJson1_1ListAttendeesCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2764,7 +2825,7 @@ export async function serializeAws_restJson1_1ListAttendeesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2795,6 +2856,7 @@ export async function serializeAws_restJson1_1ListBotsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2802,7 +2864,7 @@ export async function serializeAws_restJson1_1ListBotsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2821,6 +2883,7 @@ export async function serializeAws_restJson1_1ListMeetingsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2828,7 +2891,7 @@ export async function serializeAws_restJson1_1ListMeetingsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2847,6 +2910,7 @@ export async function serializeAws_restJson1_1ListPhoneNumberOrdersCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2854,7 +2918,7 @@ export async function serializeAws_restJson1_1ListPhoneNumberOrdersCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2885,6 +2949,7 @@ export async function serializeAws_restJson1_1ListPhoneNumbersCommand(
     query["status"] = input.Status;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2892,7 +2957,7 @@ export async function serializeAws_restJson1_1ListPhoneNumbersCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2935,6 +3000,7 @@ export async function serializeAws_restJson1_1ListRoomMembershipsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2942,7 +3008,7 @@ export async function serializeAws_restJson1_1ListRoomMembershipsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -2976,6 +3042,7 @@ export async function serializeAws_restJson1_1ListRoomsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2983,7 +3050,7 @@ export async function serializeAws_restJson1_1ListRoomsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3020,6 +3087,7 @@ export async function serializeAws_restJson1_1ListUsersCommand(
     query["user-type"] = input.UserType;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3027,7 +3095,7 @@ export async function serializeAws_restJson1_1ListUsersCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3046,6 +3114,7 @@ export async function serializeAws_restJson1_1ListVoiceConnectorGroupsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3053,7 +3122,7 @@ export async function serializeAws_restJson1_1ListVoiceConnectorGroupsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3082,13 +3151,14 @@ export async function serializeAws_restJson1_1ListVoiceConnectorTerminationCrede
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3107,6 +3177,7 @@ export async function serializeAws_restJson1_1ListVoiceConnectorsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3114,7 +3185,7 @@ export async function serializeAws_restJson1_1ListVoiceConnectorsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3153,6 +3224,7 @@ export async function serializeAws_restJson1_1LogoutUserCommand(
     operation: "logout"
   };
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3160,7 +3232,7 @@ export async function serializeAws_restJson1_1LogoutUserCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3205,13 +3277,14 @@ export async function serializeAws_restJson1_1PutEventsConfigurationCommand(
       input.OutboundEventsHTTPSEndpoint;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3250,13 +3323,14 @@ export async function serializeAws_restJson1_1PutVoiceConnectorLoggingConfigurat
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3292,13 +3366,14 @@ export async function serializeAws_restJson1_1PutVoiceConnectorOriginationComman
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3337,13 +3412,14 @@ export async function serializeAws_restJson1_1PutVoiceConnectorStreamingConfigur
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3379,13 +3455,14 @@ export async function serializeAws_restJson1_1PutVoiceConnectorTerminationComman
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3425,6 +3502,7 @@ export async function serializeAws_restJson1_1PutVoiceConnectorTerminationCreden
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3432,7 +3510,7 @@ export async function serializeAws_restJson1_1PutVoiceConnectorTerminationCreden
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3471,6 +3549,7 @@ export async function serializeAws_restJson1_1RegenerateSecurityTokenCommand(
     operation: "regenerate-security-token"
   };
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3478,7 +3557,7 @@ export async function serializeAws_restJson1_1RegenerateSecurityTokenCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3517,6 +3596,7 @@ export async function serializeAws_restJson1_1ResetPersonalPINCommand(
     operation: "reset-personal-pin"
   };
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3524,7 +3604,7 @@ export async function serializeAws_restJson1_1ResetPersonalPINCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3553,6 +3633,7 @@ export async function serializeAws_restJson1_1RestorePhoneNumberCommand(
     operation: "restore"
   };
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3560,7 +3641,7 @@ export async function serializeAws_restJson1_1RestorePhoneNumberCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3596,6 +3677,7 @@ export async function serializeAws_restJson1_1SearchAvailablePhoneNumbersCommand
     query["toll-free-prefix"] = input.TollFreePrefix;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3603,7 +3685,7 @@ export async function serializeAws_restJson1_1SearchAvailablePhoneNumbersCommand
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3632,13 +3714,14 @@ export async function serializeAws_restJson1_1UpdateAccountCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3670,13 +3753,14 @@ export async function serializeAws_restJson1_1UpdateAccountSettingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3717,13 +3801,14 @@ export async function serializeAws_restJson1_1UpdateBotCommand(
     bodyParams["Disabled"] = input.Disabled;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3753,13 +3838,14 @@ export async function serializeAws_restJson1_1UpdateGlobalSettingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3793,13 +3879,14 @@ export async function serializeAws_restJson1_1UpdatePhoneNumberCommand(
     bodyParams["ProductType"] = input.ProductType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3816,13 +3903,14 @@ export async function serializeAws_restJson1_1UpdatePhoneNumberSettingsCommand(
     bodyParams["CallingName"] = input.CallingName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3863,13 +3951,14 @@ export async function serializeAws_restJson1_1UpdateRoomCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3923,13 +4012,14 @@ export async function serializeAws_restJson1_1UpdateRoomMembershipCommand(
     bodyParams["Role"] = input.Role;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -3981,13 +4071,14 @@ export async function serializeAws_restJson1_1UpdateUserCommand(
     bodyParams["UserType"] = input.UserType;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -4031,13 +4122,14 @@ export async function serializeAws_restJson1_1UpdateUserSettingsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -4073,13 +4165,14 @@ export async function serializeAws_restJson1_1UpdateVoiceConnectorCommand(
     bodyParams["RequireEncryption"] = input.RequireEncryption;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -4120,13 +4213,14 @@ export async function serializeAws_restJson1_1UpdateVoiceConnectorGroupCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

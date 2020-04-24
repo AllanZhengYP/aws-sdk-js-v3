@@ -51,13 +51,14 @@ export async function serializeAws_restJson1_1GetPersonalizedRankingCommand(
     bodyParams["userId"] = input.userId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -89,13 +90,14 @@ export async function serializeAws_restJson1_1GetRecommendationsCommand(
     bodyParams["userId"] = input.userId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

@@ -93,6 +93,7 @@ export async function serializeAws_restJson1_1SearchCommand(
     query["stats"] = input.stats;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -100,7 +101,7 @@ export async function serializeAws_restJson1_1SearchCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -125,6 +126,7 @@ export async function serializeAws_restJson1_1SuggestCommand(
     query["suggester"] = input.suggester;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -132,7 +134,7 @@ export async function serializeAws_restJson1_1SuggestCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -153,6 +155,7 @@ export async function serializeAws_restJson1_1UploadDocumentsCommand(
   if (input.documents !== undefined) {
     body = input.documents;
   }
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -160,7 +163,7 @@ export async function serializeAws_restJson1_1UploadDocumentsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

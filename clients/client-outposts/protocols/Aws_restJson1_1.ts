@@ -68,13 +68,14 @@ export async function serializeAws_restJson1_1CreateOutpostCommand(
     bodyParams["SiteId"] = input.SiteId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -98,13 +99,14 @@ export async function serializeAws_restJson1_1GetOutpostCommand(
     throw new Error("No value provided for input HTTP label: OutpostId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -135,6 +137,7 @@ export async function serializeAws_restJson1_1GetOutpostInstanceTypesCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -142,7 +145,7 @@ export async function serializeAws_restJson1_1GetOutpostInstanceTypesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -161,6 +164,7 @@ export async function serializeAws_restJson1_1ListOutpostsCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -168,7 +172,7 @@ export async function serializeAws_restJson1_1ListOutpostsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -187,6 +191,7 @@ export async function serializeAws_restJson1_1ListSitesCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -194,7 +199,7 @@ export async function serializeAws_restJson1_1ListSitesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

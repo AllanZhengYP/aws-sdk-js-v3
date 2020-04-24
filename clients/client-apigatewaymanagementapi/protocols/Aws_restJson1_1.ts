@@ -54,13 +54,14 @@ export async function serializeAws_restJson1_1DeleteConnectionCommand(
     throw new Error("No value provided for input HTTP label: ConnectionId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -86,13 +87,14 @@ export async function serializeAws_restJson1_1GetConnectionCommand(
     throw new Error("No value provided for input HTTP label: ConnectionId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -121,13 +123,14 @@ export async function serializeAws_restJson1_1PostToConnectionCommand(
   if (input.Data !== undefined) {
     body = input.Data;
   }
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

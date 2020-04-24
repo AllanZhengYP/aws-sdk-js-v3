@@ -93,13 +93,14 @@ export async function serializeAws_restJson1_1ConfigureAgentCommand(
     bodyParams["fleetInstanceId"] = input.fleetInstanceId;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -128,6 +129,7 @@ export async function serializeAws_restJson1_1CreateProfilingGroupCommand(
     bodyParams["profilingGroupName"] = input.profilingGroupName;
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -135,7 +137,7 @@ export async function serializeAws_restJson1_1CreateProfilingGroupCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -163,13 +165,14 @@ export async function serializeAws_restJson1_1DeleteProfilingGroupCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -197,13 +200,14 @@ export async function serializeAws_restJson1_1DescribeProfilingGroupCommand(
     );
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -225,6 +229,7 @@ export async function serializeAws_restJson1_1ListProfilingGroupsCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -232,7 +237,7 @@ export async function serializeAws_restJson1_1ListProfilingGroupsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -270,13 +275,14 @@ export async function serializeAws_restJson1_1UpdateProfilingGroupCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -324,6 +330,7 @@ export async function serializeAws_restJson1_1GetProfileCommand(
     ).toString();
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -331,7 +338,7 @@ export async function serializeAws_restJson1_1GetProfileCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -382,6 +389,7 @@ export async function serializeAws_restJson1_1ListProfileTimesCommand(
     ).toString();
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -389,7 +397,7 @@ export async function serializeAws_restJson1_1ListProfileTimesCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -427,6 +435,7 @@ export async function serializeAws_restJson1_1PostAgentProfileCommand(
   if (input.agentProfile !== undefined) {
     body = input.agentProfile;
   }
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -434,7 +443,7 @@ export async function serializeAws_restJson1_1PostAgentProfileCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

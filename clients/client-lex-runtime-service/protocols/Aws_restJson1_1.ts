@@ -97,13 +97,14 @@ export async function serializeAws_restJson1_1DeleteSessionCommand(
     throw new Error("No value provided for input HTTP label: userId.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -155,6 +156,7 @@ export async function serializeAws_restJson1_1GetSessionCommand(
     query["checkpointLabelFilter"] = input.checkpointLabelFilter;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -162,7 +164,7 @@ export async function serializeAws_restJson1_1GetSessionCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -230,13 +232,14 @@ export async function serializeAws_restJson1_1PostContentCommand(
   if (input.inputStream !== undefined) {
     body = input.inputStream;
   }
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -301,13 +304,14 @@ export async function serializeAws_restJson1_1PostTextCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -380,13 +384,14 @@ export async function serializeAws_restJson1_1PutSessionCommand(
     );
   }
   body = JSON.stringify(bodyParams);
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 

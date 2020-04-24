@@ -63,13 +63,14 @@ export async function serializeAws_restJson1_1DeleteObjectCommand(
     throw new Error("No value provided for input HTTP label: Path.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -96,13 +97,14 @@ export async function serializeAws_restJson1_1DescribeObjectCommand(
     throw new Error("No value provided for input HTTP label: Path.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "HEAD",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -132,13 +134,14 @@ export async function serializeAws_restJson1_1GetObjectCommand(
     throw new Error("No value provided for input HTTP label: Path.");
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -160,6 +163,7 @@ export async function serializeAws_restJson1_1ListItemsCommand(
     query["Path"] = input.Path;
   }
   let body: any;
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -167,7 +171,7 @@ export async function serializeAws_restJson1_1ListItemsCommand(
     path: resolvedPath,
     query: query,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
@@ -207,13 +211,14 @@ export async function serializeAws_restJson1_1PutObjectCommand(
   if (input.Body !== undefined) {
     body = input.Body;
   }
+  const endpoint = { ...context.endpoint, path: null, query: null };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
     headers: headers,
     path: resolvedPath,
     body: body,
-    ...context.endpoint
+    ...endpoint
   });
 }
 
