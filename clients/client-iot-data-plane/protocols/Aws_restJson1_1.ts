@@ -61,7 +61,7 @@ export async function serializeAws_restJson1_1DeleteThingShadowCommand(
     throw new Error("No value provided for input HTTP label: thingName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -92,7 +92,7 @@ export async function serializeAws_restJson1_1GetThingShadowCommand(
     throw new Error("No value provided for input HTTP label: thingName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -130,7 +130,7 @@ export async function serializeAws_restJson1_1PublishCommand(
   if (input.payload !== undefined) {
     body = input.payload;
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -165,7 +165,7 @@ export async function serializeAws_restJson1_1UpdateThingShadowCommand(
   if (input.payload !== undefined) {
     body = input.payload;
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

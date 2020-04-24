@@ -70,7 +70,7 @@ export async function serializeAws_restJson1_1CancelChangeSetCommand(
     query["changeSetId"] = input.ChangeSetId;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PATCH",
@@ -97,7 +97,7 @@ export async function serializeAws_restJson1_1DescribeChangeSetCommand(
     query["changeSetId"] = input.ChangeSetId;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -124,7 +124,7 @@ export async function serializeAws_restJson1_1DescribeEntityCommand(
     query["entityId"] = input.EntityId;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -164,7 +164,7 @@ export async function serializeAws_restJson1_1ListChangeSetsCommand(
     bodyParams["Sort"] = serializeAws_restJson1_1Sort(input.Sort, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -206,7 +206,7 @@ export async function serializeAws_restJson1_1ListEntitiesCommand(
     bodyParams["Sort"] = serializeAws_restJson1_1Sort(input.Sort, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -242,7 +242,7 @@ export async function serializeAws_restJson1_1StartChangeSetCommand(
     bodyParams["ClientRequestToken"] = input.ClientRequestToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

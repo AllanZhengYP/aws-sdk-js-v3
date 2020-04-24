@@ -439,7 +439,7 @@ export async function serializeAws_restJson1_1AddFacetToObjectCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -466,7 +466,7 @@ export async function serializeAws_restJson1_1ApplySchemaCommand(
     bodyParams["PublishedSchemaArn"] = input.PublishedSchemaArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -505,7 +505,7 @@ export async function serializeAws_restJson1_1AttachObjectCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -541,7 +541,7 @@ export async function serializeAws_restJson1_1AttachPolicyCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -577,7 +577,7 @@ export async function serializeAws_restJson1_1AttachToIndexCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -633,7 +633,7 @@ export async function serializeAws_restJson1_1AttachTypedLinkCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -666,7 +666,7 @@ export async function serializeAws_restJson1_1BatchReadCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -696,7 +696,7 @@ export async function serializeAws_restJson1_1BatchWriteCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -723,7 +723,7 @@ export async function serializeAws_restJson1_1CreateDirectoryCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -762,7 +762,7 @@ export async function serializeAws_restJson1_1CreateFacetCommand(
     bodyParams["ObjectType"] = input.ObjectType;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -806,7 +806,7 @@ export async function serializeAws_restJson1_1CreateIndexCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -853,7 +853,7 @@ export async function serializeAws_restJson1_1CreateObjectCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -877,7 +877,7 @@ export async function serializeAws_restJson1_1CreateSchemaCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -907,7 +907,7 @@ export async function serializeAws_restJson1_1CreateTypedLinkFacetCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -929,7 +929,7 @@ export async function serializeAws_restJson1_1DeleteDirectoryCommand(
   }
   let resolvedPath = "/amazonclouddirectory/2017-01-11/directory";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -956,7 +956,7 @@ export async function serializeAws_restJson1_1DeleteFacetCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -986,7 +986,7 @@ export async function serializeAws_restJson1_1DeleteObjectCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1008,7 +1008,7 @@ export async function serializeAws_restJson1_1DeleteSchemaCommand(
   }
   let resolvedPath = "/amazonclouddirectory/2017-01-11/schema";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1035,7 +1035,7 @@ export async function serializeAws_restJson1_1DeleteTypedLinkFacetCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1071,7 +1071,7 @@ export async function serializeAws_restJson1_1DetachFromIndexCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1104,7 +1104,7 @@ export async function serializeAws_restJson1_1DetachObjectCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1140,7 +1140,7 @@ export async function serializeAws_restJson1_1DetachPolicyCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1172,7 +1172,7 @@ export async function serializeAws_restJson1_1DetachTypedLinkCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1194,7 +1194,7 @@ export async function serializeAws_restJson1_1DisableDirectoryCommand(
   }
   let resolvedPath = "/amazonclouddirectory/2017-01-11/directory/disable";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1216,7 +1216,7 @@ export async function serializeAws_restJson1_1EnableDirectoryCommand(
   }
   let resolvedPath = "/amazonclouddirectory/2017-01-11/directory/enable";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1240,7 +1240,7 @@ export async function serializeAws_restJson1_1GetAppliedSchemaVersionCommand(
     bodyParams["SchemaArn"] = input.SchemaArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1262,7 +1262,7 @@ export async function serializeAws_restJson1_1GetDirectoryCommand(
   }
   let resolvedPath = "/amazonclouddirectory/2017-01-11/directory/get";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1289,7 +1289,7 @@ export async function serializeAws_restJson1_1GetFacetCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1331,7 +1331,7 @@ export async function serializeAws_restJson1_1GetLinkAttributesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1376,7 +1376,7 @@ export async function serializeAws_restJson1_1GetObjectAttributesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1409,7 +1409,7 @@ export async function serializeAws_restJson1_1GetObjectInformationCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1431,7 +1431,7 @@ export async function serializeAws_restJson1_1GetSchemaAsJsonCommand(
   }
   let resolvedPath = "/amazonclouddirectory/2017-01-11/schema/json";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1458,7 +1458,7 @@ export async function serializeAws_restJson1_1GetTypedLinkFacetInformationComman
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1491,7 +1491,7 @@ export async function serializeAws_restJson1_1ListAppliedSchemaArnsCommand(
     bodyParams["SchemaArn"] = input.SchemaArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1530,7 +1530,7 @@ export async function serializeAws_restJson1_1ListAttachedIndicesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1557,7 +1557,7 @@ export async function serializeAws_restJson1_1ListDevelopmentSchemaArnsCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1587,7 +1587,7 @@ export async function serializeAws_restJson1_1ListDirectoriesCommand(
     bodyParams["state"] = input.state;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1620,7 +1620,7 @@ export async function serializeAws_restJson1_1ListFacetAttributesCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1650,7 +1650,7 @@ export async function serializeAws_restJson1_1ListFacetNamesCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1705,7 +1705,7 @@ export async function serializeAws_restJson1_1ListIncomingTypedLinksCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1752,7 +1752,7 @@ export async function serializeAws_restJson1_1ListIndexCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1782,7 +1782,7 @@ export async function serializeAws_restJson1_1ListManagedSchemaArnsCommand(
     bodyParams["SchemaArn"] = input.SchemaArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1827,7 +1827,7 @@ export async function serializeAws_restJson1_1ListObjectAttributesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1866,7 +1866,7 @@ export async function serializeAws_restJson1_1ListObjectChildrenCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1902,7 +1902,7 @@ export async function serializeAws_restJson1_1ListObjectParentPathsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1945,7 +1945,7 @@ export async function serializeAws_restJson1_1ListObjectParentsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1984,7 +1984,7 @@ export async function serializeAws_restJson1_1ListObjectPoliciesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2039,7 +2039,7 @@ export async function serializeAws_restJson1_1ListOutgoingTypedLinksCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2078,7 +2078,7 @@ export async function serializeAws_restJson1_1ListPolicyAttachmentsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2108,7 +2108,7 @@ export async function serializeAws_restJson1_1ListPublishedSchemaArnsCommand(
     bodyParams["SchemaArn"] = input.SchemaArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2138,7 +2138,7 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     bodyParams["ResourceArn"] = input.ResourceArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2172,7 +2172,7 @@ export async function serializeAws_restJson1_1ListTypedLinkFacetAttributesComman
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2202,7 +2202,7 @@ export async function serializeAws_restJson1_1ListTypedLinkFacetNamesCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2238,7 +2238,7 @@ export async function serializeAws_restJson1_1LookupPolicyCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2271,7 +2271,7 @@ export async function serializeAws_restJson1_1PublishSchemaCommand(
     bodyParams["Version"] = input.Version;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2298,7 +2298,7 @@ export async function serializeAws_restJson1_1PutSchemaFromJsonCommand(
     bodyParams["Document"] = input.Document;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2334,7 +2334,7 @@ export async function serializeAws_restJson1_1RemoveFacetFromObjectCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2361,7 +2361,7 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["Tags"] = serializeAws_restJson1_1TagList(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2391,7 +2391,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2429,7 +2429,7 @@ export async function serializeAws_restJson1_1UpdateFacetCommand(
     bodyParams["ObjectType"] = input.ObjectType;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2470,7 +2470,7 @@ export async function serializeAws_restJson1_1UpdateLinkAttributesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -2508,7 +2508,7 @@ export async function serializeAws_restJson1_1UpdateObjectAttributesCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2535,7 +2535,7 @@ export async function serializeAws_restJson1_1UpdateSchemaCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2578,7 +2578,7 @@ export async function serializeAws_restJson1_1UpdateTypedLinkFacetCommand(
     bodyParams["Name"] = input.Name;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2608,7 +2608,7 @@ export async function serializeAws_restJson1_1UpgradeAppliedSchemaCommand(
     bodyParams["PublishedSchemaArn"] = input.PublishedSchemaArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -2641,7 +2641,7 @@ export async function serializeAws_restJson1_1UpgradePublishedSchemaCommand(
     bodyParams["PublishedSchemaArn"] = input.PublishedSchemaArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",

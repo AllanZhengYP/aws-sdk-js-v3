@@ -64,7 +64,7 @@ export async function serializeAws_restJson1_1AssociateRepositoryCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -97,7 +97,7 @@ export async function serializeAws_restJson1_1DescribeRepositoryAssociationComma
     throw new Error("No value provided for input HTTP label: AssociationArn.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -130,7 +130,7 @@ export async function serializeAws_restJson1_1DisassociateRepositoryCommand(
     throw new Error("No value provided for input HTTP label: AssociationArn.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -168,7 +168,7 @@ export async function serializeAws_restJson1_1ListRepositoryAssociationsCommand(
     query["State"] = (input.States || []).map(_entry => _entry);
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",

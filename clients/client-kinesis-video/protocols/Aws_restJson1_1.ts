@@ -140,7 +140,7 @@ export async function serializeAws_restJson1_1CreateSignalingChannelCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -182,7 +182,7 @@ export async function serializeAws_restJson1_1CreateStreamCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -209,7 +209,7 @@ export async function serializeAws_restJson1_1DeleteSignalingChannelCommand(
     bodyParams["CurrentVersion"] = input.CurrentVersion;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -236,7 +236,7 @@ export async function serializeAws_restJson1_1DeleteStreamCommand(
     bodyParams["StreamARN"] = input.StreamARN;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -263,7 +263,7 @@ export async function serializeAws_restJson1_1DescribeSignalingChannelCommand(
     bodyParams["ChannelName"] = input.ChannelName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -290,7 +290,7 @@ export async function serializeAws_restJson1_1DescribeStreamCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -320,7 +320,7 @@ export async function serializeAws_restJson1_1GetDataEndpointCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -352,7 +352,7 @@ export async function serializeAws_restJson1_1GetSignalingChannelEndpointCommand
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -387,7 +387,7 @@ export async function serializeAws_restJson1_1ListSignalingChannelsCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -422,7 +422,7 @@ export async function serializeAws_restJson1_1ListStreamsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -449,7 +449,7 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     bodyParams["ResourceARN"] = input.ResourceARN;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -479,7 +479,7 @@ export async function serializeAws_restJson1_1ListTagsForStreamCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -506,7 +506,7 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["Tags"] = serializeAws_restJson1_1TagList(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -539,7 +539,7 @@ export async function serializeAws_restJson1_1TagStreamCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -569,7 +569,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -602,7 +602,7 @@ export async function serializeAws_restJson1_1UntagStreamCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -638,7 +638,7 @@ export async function serializeAws_restJson1_1UpdateDataRetentionCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -673,7 +673,7 @@ export async function serializeAws_restJson1_1UpdateSignalingChannelCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -709,7 +709,7 @@ export async function serializeAws_restJson1_1UpdateStreamCommand(
     bodyParams["StreamName"] = input.StreamName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

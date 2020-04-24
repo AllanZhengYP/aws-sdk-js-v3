@@ -80,7 +80,7 @@ export async function serializeAws_restJson1_1DescribeJobExecutionCommand(
     query["includeJobDocument"] = input.includeJobDocument.toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -112,7 +112,7 @@ export async function serializeAws_restJson1_1GetPendingJobExecutionsCommand(
     throw new Error("No value provided for input HTTP label: thingName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -154,7 +154,7 @@ export async function serializeAws_restJson1_1StartNextPendingJobExecutionComman
     bodyParams["stepTimeoutInMinutes"] = input.stepTimeoutInMinutes;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -223,7 +223,7 @@ export async function serializeAws_restJson1_1UpdateJobExecutionCommand(
     bodyParams["stepTimeoutInMinutes"] = input.stepTimeoutInMinutes;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

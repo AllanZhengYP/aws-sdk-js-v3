@@ -265,7 +265,7 @@ export async function serializeAws_restJson1_1AssociateCertificateCommand(
     bodyParams["arn"] = input.Arn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -296,7 +296,7 @@ export async function serializeAws_restJson1_1CancelJobCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -370,7 +370,7 @@ export async function serializeAws_restJson1_1CreateJobCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -429,7 +429,7 @@ export async function serializeAws_restJson1_1CreateJobTemplateCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -471,7 +471,7 @@ export async function serializeAws_restJson1_1CreatePresetCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -518,7 +518,7 @@ export async function serializeAws_restJson1_1CreateQueueCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -549,7 +549,7 @@ export async function serializeAws_restJson1_1DeleteJobTemplateCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -580,7 +580,7 @@ export async function serializeAws_restJson1_1DeletePresetCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -611,7 +611,7 @@ export async function serializeAws_restJson1_1DeleteQueueCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -641,7 +641,7 @@ export async function serializeAws_restJson1_1DescribeEndpointsCommand(
     bodyParams["nextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -672,7 +672,7 @@ export async function serializeAws_restJson1_1DisassociateCertificateCommand(
     throw new Error("No value provided for input HTTP label: Arn.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -703,7 +703,7 @@ export async function serializeAws_restJson1_1GetJobCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -734,7 +734,7 @@ export async function serializeAws_restJson1_1GetJobTemplateCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -765,7 +765,7 @@ export async function serializeAws_restJson1_1GetPresetCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -796,7 +796,7 @@ export async function serializeAws_restJson1_1GetQueueCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -831,7 +831,7 @@ export async function serializeAws_restJson1_1ListJobTemplatesCommand(
     query["order"] = input.Order;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -867,7 +867,7 @@ export async function serializeAws_restJson1_1ListJobsCommand(
     query["status"] = input.Status;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -903,7 +903,7 @@ export async function serializeAws_restJson1_1ListPresetsCommand(
     query["order"] = input.Order;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -936,7 +936,7 @@ export async function serializeAws_restJson1_1ListQueuesCommand(
     query["order"] = input.Order;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -968,7 +968,7 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     throw new Error("No value provided for input HTTP label: Arn.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -998,7 +998,7 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1037,7 +1037,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1099,7 +1099,7 @@ export async function serializeAws_restJson1_1UpdateJobTemplateCommand(
     bodyParams["statusUpdateInterval"] = input.StatusUpdateInterval;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1144,7 +1144,7 @@ export async function serializeAws_restJson1_1UpdatePresetCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1191,7 +1191,7 @@ export async function serializeAws_restJson1_1UpdateQueueCommand(
     bodyParams["status"] = input.Status;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",

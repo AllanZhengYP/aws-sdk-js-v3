@@ -63,7 +63,7 @@ export async function serializeAws_restJson1_1DeleteObjectCommand(
     throw new Error("No value provided for input HTTP label: Path.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -97,7 +97,7 @@ export async function serializeAws_restJson1_1DescribeObjectCommand(
     throw new Error("No value provided for input HTTP label: Path.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "HEAD",
@@ -134,7 +134,7 @@ export async function serializeAws_restJson1_1GetObjectCommand(
     throw new Error("No value provided for input HTTP label: Path.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -163,7 +163,7 @@ export async function serializeAws_restJson1_1ListItemsCommand(
     query["Path"] = input.Path;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -211,7 +211,7 @@ export async function serializeAws_restJson1_1PutObjectCommand(
   if (input.Body !== undefined) {
     body = input.Body;
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",

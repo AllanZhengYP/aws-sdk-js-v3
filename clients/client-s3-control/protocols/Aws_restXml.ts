@@ -170,7 +170,7 @@ export async function serializeAws_restXmlCreateAccessPointCommand(
     bodyNode.addChildNode(node);
   }
   body += bodyNode.toString();
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -252,7 +252,7 @@ export async function serializeAws_restXmlCreateJobCommand(
     bodyNode.addChildNode(node);
   }
   body += bodyNode.toString();
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -286,7 +286,7 @@ export async function serializeAws_restXmlDeleteAccessPointCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -320,7 +320,7 @@ export async function serializeAws_restXmlDeleteAccessPointPolicyCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -342,7 +342,7 @@ export async function serializeAws_restXmlDeletePublicAccessBlockCommand(
   }
   let resolvedPath = "/v20180820/configuration/publicAccessBlock";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -376,7 +376,7 @@ export async function serializeAws_restXmlDescribeJobCommand(
     throw new Error("No value provided for input HTTP label: JobId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -410,7 +410,7 @@ export async function serializeAws_restXmlGetAccessPointCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -444,7 +444,7 @@ export async function serializeAws_restXmlGetAccessPointPolicyCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -478,7 +478,7 @@ export async function serializeAws_restXmlGetAccessPointPolicyStatusCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -500,7 +500,7 @@ export async function serializeAws_restXmlGetPublicAccessBlockCommand(
   }
   let resolvedPath = "/v20180820/configuration/publicAccessBlock";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -532,7 +532,7 @@ export async function serializeAws_restXmlListAccessPointsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -565,7 +565,7 @@ export async function serializeAws_restXmlListJobsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -613,7 +613,7 @@ export async function serializeAws_restXmlPutAccessPointPolicyCommand(
     bodyNode.addChildNode(node);
   }
   body += bodyNode.toString();
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -648,7 +648,7 @@ export async function serializeAws_restXmlPutPublicAccessBlockCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -686,7 +686,7 @@ export async function serializeAws_restXmlUpdateJobPriorityCommand(
     query["priority"] = input.Priority.toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -728,7 +728,7 @@ export async function serializeAws_restXmlUpdateJobStatusCommand(
     query["statusUpdateReason"] = input.StatusUpdateReason;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

@@ -126,7 +126,7 @@ export async function serializeAws_restJson1_1BulkPublishCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -186,7 +186,7 @@ export async function serializeAws_restJson1_1DeleteDatasetCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -246,7 +246,7 @@ export async function serializeAws_restJson1_1DescribeDatasetCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -279,7 +279,7 @@ export async function serializeAws_restJson1_1DescribeIdentityPoolUsageCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -324,7 +324,7 @@ export async function serializeAws_restJson1_1DescribeIdentityUsageCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -357,7 +357,7 @@ export async function serializeAws_restJson1_1GetBulkPublishDetailsCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -390,7 +390,7 @@ export async function serializeAws_restJson1_1GetCognitoEventsCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -423,7 +423,7 @@ export async function serializeAws_restJson1_1GetIdentityPoolConfigurationComman
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -476,7 +476,7 @@ export async function serializeAws_restJson1_1ListDatasetsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -503,7 +503,7 @@ export async function serializeAws_restJson1_1ListIdentityPoolUsageCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -577,7 +577,7 @@ export async function serializeAws_restJson1_1ListRecordsCommand(
     query["syncSessionToken"] = input.SyncSessionToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -632,7 +632,7 @@ export async function serializeAws_restJson1_1RegisterDeviceCommand(
     bodyParams["Token"] = input.Token;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -673,7 +673,7 @@ export async function serializeAws_restJson1_1SetCognitoEventsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -720,7 +720,7 @@ export async function serializeAws_restJson1_1SetIdentityPoolConfigurationComman
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -792,7 +792,7 @@ export async function serializeAws_restJson1_1SubscribeToDatasetCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -864,7 +864,7 @@ export async function serializeAws_restJson1_1UnsubscribeFromDatasetCommand(
     throw new Error("No value provided for input HTTP label: IdentityPoolId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -941,7 +941,7 @@ export async function serializeAws_restJson1_1UpdateRecordsCommand(
     bodyParams["SyncSessionToken"] = input.SyncSessionToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

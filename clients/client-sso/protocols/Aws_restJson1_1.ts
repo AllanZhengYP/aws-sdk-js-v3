@@ -56,7 +56,7 @@ export async function serializeAws_restJson1_1GetRoleCredentialsCommand(
     query["role_name"] = input.roleName;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -89,7 +89,7 @@ export async function serializeAws_restJson1_1ListAccountRolesCommand(
     query["next_token"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -119,7 +119,7 @@ export async function serializeAws_restJson1_1ListAccountsCommand(
     query["next_token"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -142,7 +142,7 @@ export async function serializeAws_restJson1_1LogoutCommand(
   }
   let resolvedPath = "/logout";
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

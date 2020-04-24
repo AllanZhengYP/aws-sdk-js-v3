@@ -78,7 +78,7 @@ export async function serializeAws_restJson1_1AcceptInvitationCommand(
     bodyParams["GraphArn"] = input.GraphArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -98,7 +98,7 @@ export async function serializeAws_restJson1_1CreateGraphCommand(
   let resolvedPath = "/graph";
   let body: any;
   body = "{}";
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -131,7 +131,7 @@ export async function serializeAws_restJson1_1CreateMembersCommand(
     bodyParams["Message"] = input.Message;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -155,7 +155,7 @@ export async function serializeAws_restJson1_1DeleteGraphCommand(
     bodyParams["GraphArn"] = input.GraphArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -185,7 +185,7 @@ export async function serializeAws_restJson1_1DeleteMembersCommand(
     bodyParams["GraphArn"] = input.GraphArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -209,7 +209,7 @@ export async function serializeAws_restJson1_1DisassociateMembershipCommand(
     bodyParams["GraphArn"] = input.GraphArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -239,7 +239,7 @@ export async function serializeAws_restJson1_1GetMembersCommand(
     bodyParams["GraphArn"] = input.GraphArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -266,7 +266,7 @@ export async function serializeAws_restJson1_1ListGraphsCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -293,7 +293,7 @@ export async function serializeAws_restJson1_1ListInvitationsCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -323,7 +323,7 @@ export async function serializeAws_restJson1_1ListMembersCommand(
     bodyParams["NextToken"] = input.NextToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -347,7 +347,7 @@ export async function serializeAws_restJson1_1RejectInvitationCommand(
     bodyParams["GraphArn"] = input.GraphArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

@@ -223,7 +223,7 @@ export async function serializeAws_restJson1_1AbortMultipartUploadCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -266,7 +266,7 @@ export async function serializeAws_restJson1_1AbortVaultLockCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -317,7 +317,7 @@ export async function serializeAws_restJson1_1AddTagsToVaultCommand(
     bodyParams["Tags"] = serializeAws_restJson1_1TagMap(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -380,7 +380,7 @@ export async function serializeAws_restJson1_1CompleteMultipartUploadCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -435,7 +435,7 @@ export async function serializeAws_restJson1_1CompleteVaultLockCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -478,7 +478,7 @@ export async function serializeAws_restJson1_1CreateVaultCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -533,7 +533,7 @@ export async function serializeAws_restJson1_1DeleteArchiveCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -576,7 +576,7 @@ export async function serializeAws_restJson1_1DeleteVaultCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -619,7 +619,7 @@ export async function serializeAws_restJson1_1DeleteVaultAccessPolicyCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -663,7 +663,7 @@ export async function serializeAws_restJson1_1DeleteVaultNotificationsCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -718,7 +718,7 @@ export async function serializeAws_restJson1_1DescribeJobCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -761,7 +761,7 @@ export async function serializeAws_restJson1_1DescribeVaultCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -792,7 +792,7 @@ export async function serializeAws_restJson1_1GetDataRetrievalPolicyCommand(
     throw new Error("No value provided for input HTTP label: accountId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -850,7 +850,7 @@ export async function serializeAws_restJson1_1GetJobOutputCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -893,7 +893,7 @@ export async function serializeAws_restJson1_1GetVaultAccessPolicyCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -936,7 +936,7 @@ export async function serializeAws_restJson1_1GetVaultLockCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -980,7 +980,7 @@ export async function serializeAws_restJson1_1GetVaultNotificationsCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1030,7 +1030,7 @@ export async function serializeAws_restJson1_1InitiateJobCommand(
     body = {};
   }
   body = JSON.stringify(body);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1079,7 +1079,7 @@ export async function serializeAws_restJson1_1InitiateMultipartUploadCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1129,7 +1129,7 @@ export async function serializeAws_restJson1_1InitiateVaultLockCommand(
     body = {};
   }
   body = JSON.stringify(body);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1185,7 +1185,7 @@ export async function serializeAws_restJson1_1ListJobsCommand(
     query["statuscode"] = input.statuscode;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1236,7 +1236,7 @@ export async function serializeAws_restJson1_1ListMultipartUploadsCommand(
     query["marker"] = input.marker;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1300,7 +1300,7 @@ export async function serializeAws_restJson1_1ListPartsCommand(
     query["marker"] = input.marker;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1332,7 +1332,7 @@ export async function serializeAws_restJson1_1ListProvisionedCapacityCommand(
     throw new Error("No value provided for input HTTP label: accountId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1375,7 +1375,7 @@ export async function serializeAws_restJson1_1ListTagsForVaultCommand(
     throw new Error("No value provided for input HTTP label: vaultName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1413,7 +1413,7 @@ export async function serializeAws_restJson1_1ListVaultsCommand(
     query["marker"] = input.marker;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1445,7 +1445,7 @@ export async function serializeAws_restJson1_1PurchaseProvisionedCapacityCommand
     throw new Error("No value provided for input HTTP label: accountId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1499,7 +1499,7 @@ export async function serializeAws_restJson1_1RemoveTagsFromVaultCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1539,7 +1539,7 @@ export async function serializeAws_restJson1_1SetDataRetrievalPolicyCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1589,7 +1589,7 @@ export async function serializeAws_restJson1_1SetVaultAccessPolicyCommand(
     body = {};
   }
   body = JSON.stringify(body);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1643,7 +1643,7 @@ export async function serializeAws_restJson1_1SetVaultNotificationsCommand(
     body = {};
   }
   body = JSON.stringify(body);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1695,7 +1695,7 @@ export async function serializeAws_restJson1_1UploadArchiveCommand(
   if (input.body !== undefined) {
     body = input.body;
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1760,7 +1760,7 @@ export async function serializeAws_restJson1_1UploadMultipartPartCommand(
   if (input.body !== undefined) {
     body = input.body;
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",

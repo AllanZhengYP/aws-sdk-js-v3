@@ -435,7 +435,7 @@ export async function serializeAws_restJson1_1CancelIngestionCommand(
     throw new Error("No value provided for input HTTP label: IngestionId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -519,7 +519,7 @@ export async function serializeAws_restJson1_1CreateDashboardCommand(
     bodyParams["VersionDescription"] = input.VersionDescription;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -598,7 +598,7 @@ export async function serializeAws_restJson1_1CreateDataSetCommand(
     bodyParams["Tags"] = serializeAws_restJson1_1TagList(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -679,7 +679,7 @@ export async function serializeAws_restJson1_1CreateDataSourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -732,7 +732,7 @@ export async function serializeAws_restJson1_1CreateGroupCommand(
     bodyParams["GroupName"] = input.GroupName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -802,7 +802,7 @@ export async function serializeAws_restJson1_1CreateGroupMembershipCommand(
     throw new Error("No value provided for input HTTP label: Namespace.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -865,7 +865,7 @@ export async function serializeAws_restJson1_1CreateIAMPolicyAssignmentCommand(
     bodyParams["PolicyArn"] = input.PolicyArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -925,7 +925,7 @@ export async function serializeAws_restJson1_1CreateIngestionCommand(
     throw new Error("No value provided for input HTTP label: IngestionId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -993,7 +993,7 @@ export async function serializeAws_restJson1_1CreateTemplateCommand(
     bodyParams["VersionDescription"] = input.VersionDescription;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1056,7 +1056,7 @@ export async function serializeAws_restJson1_1CreateTemplateAliasCommand(
     bodyParams["TemplateVersionNumber"] = input.TemplateVersionNumber;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1107,7 +1107,7 @@ export async function serializeAws_restJson1_1DeleteDashboardCommand(
     query["version-number"] = input.VersionNumber.toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1153,7 +1153,7 @@ export async function serializeAws_restJson1_1DeleteDataSetCommand(
     throw new Error("No value provided for input HTTP label: DataSetId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1200,7 +1200,7 @@ export async function serializeAws_restJson1_1DeleteDataSourceCommand(
     throw new Error("No value provided for input HTTP label: DataSourceId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1258,7 +1258,7 @@ export async function serializeAws_restJson1_1DeleteGroupCommand(
     throw new Error("No value provided for input HTTP label: Namespace.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1328,7 +1328,7 @@ export async function serializeAws_restJson1_1DeleteGroupMembershipCommand(
     throw new Error("No value provided for input HTTP label: Namespace.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1388,7 +1388,7 @@ export async function serializeAws_restJson1_1DeleteIAMPolicyAssignmentCommand(
     throw new Error("No value provided for input HTTP label: Namespace.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1437,7 +1437,7 @@ export async function serializeAws_restJson1_1DeleteTemplateCommand(
     query["version-number"] = input.VersionNumber.toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1496,7 +1496,7 @@ export async function serializeAws_restJson1_1DeleteTemplateAliasCommand(
     throw new Error("No value provided for input HTTP label: TemplateId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1554,7 +1554,7 @@ export async function serializeAws_restJson1_1DeleteUserCommand(
     throw new Error("No value provided for input HTTP label: UserName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1614,7 +1614,7 @@ export async function serializeAws_restJson1_1DeleteUserByPrincipalIdCommand(
     throw new Error("No value provided for input HTTP label: PrincipalId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -1668,7 +1668,7 @@ export async function serializeAws_restJson1_1DescribeDashboardCommand(
     query["version-number"] = input.VersionNumber.toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1717,7 +1717,7 @@ export async function serializeAws_restJson1_1DescribeDashboardPermissionsComman
     throw new Error("No value provided for input HTTP label: DashboardId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1762,7 +1762,7 @@ export async function serializeAws_restJson1_1DescribeDataSetCommand(
     throw new Error("No value provided for input HTTP label: DataSetId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1808,7 +1808,7 @@ export async function serializeAws_restJson1_1DescribeDataSetPermissionsCommand(
     throw new Error("No value provided for input HTTP label: DataSetId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1855,7 +1855,7 @@ export async function serializeAws_restJson1_1DescribeDataSourceCommand(
     throw new Error("No value provided for input HTTP label: DataSourceId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1903,7 +1903,7 @@ export async function serializeAws_restJson1_1DescribeDataSourcePermissionsComma
     throw new Error("No value provided for input HTTP label: DataSourceId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1961,7 +1961,7 @@ export async function serializeAws_restJson1_1DescribeGroupCommand(
     throw new Error("No value provided for input HTTP label: Namespace.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2021,7 +2021,7 @@ export async function serializeAws_restJson1_1DescribeIAMPolicyAssignmentCommand
     throw new Error("No value provided for input HTTP label: Namespace.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2081,7 +2081,7 @@ export async function serializeAws_restJson1_1DescribeIngestionCommand(
     throw new Error("No value provided for input HTTP label: IngestionId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2133,7 +2133,7 @@ export async function serializeAws_restJson1_1DescribeTemplateCommand(
     query["version-number"] = input.VersionNumber.toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2192,7 +2192,7 @@ export async function serializeAws_restJson1_1DescribeTemplateAliasCommand(
     throw new Error("No value provided for input HTTP label: TemplateId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2238,7 +2238,7 @@ export async function serializeAws_restJson1_1DescribeTemplatePermissionsCommand
     throw new Error("No value provided for input HTTP label: TemplateId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2296,7 +2296,7 @@ export async function serializeAws_restJson1_1DescribeUserCommand(
     throw new Error("No value provided for input HTTP label: UserName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2360,7 +2360,7 @@ export async function serializeAws_restJson1_1GetDashboardEmbedUrlCommand(
     query["user-arn"] = input.UserArn;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2416,7 +2416,7 @@ export async function serializeAws_restJson1_1ListDashboardVersionsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2457,7 +2457,7 @@ export async function serializeAws_restJson1_1ListDashboardsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2498,7 +2498,7 @@ export async function serializeAws_restJson1_1ListDataSetsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2539,7 +2539,7 @@ export async function serializeAws_restJson1_1ListDataSourcesCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2605,7 +2605,7 @@ export async function serializeAws_restJson1_1ListGroupMembershipsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2658,7 +2658,7 @@ export async function serializeAws_restJson1_1ListGroupsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2717,7 +2717,7 @@ export async function serializeAws_restJson1_1ListIAMPolicyAssignmentsCommand(
     bodyParams["AssignmentStatus"] = input.AssignmentStatus;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2783,7 +2783,7 @@ export async function serializeAws_restJson1_1ListIAMPolicyAssignmentsForUserCom
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2837,7 +2837,7 @@ export async function serializeAws_restJson1_1ListIngestionsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2871,7 +2871,7 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     throw new Error("No value provided for input HTTP label: ResourceArn.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2923,7 +2923,7 @@ export async function serializeAws_restJson1_1ListTemplateAliasesCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -2976,7 +2976,7 @@ export async function serializeAws_restJson1_1ListTemplateVersionsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3017,7 +3017,7 @@ export async function serializeAws_restJson1_1ListTemplatesCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3083,7 +3083,7 @@ export async function serializeAws_restJson1_1ListUserGroupsCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3136,7 +3136,7 @@ export async function serializeAws_restJson1_1ListUsersCommand(
     query["next-token"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -3202,7 +3202,7 @@ export async function serializeAws_restJson1_1RegisterUserCommand(
     bodyParams["UserRole"] = input.UserRole;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3240,7 +3240,7 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["Tags"] = serializeAws_restJson1_1TagList(input.Tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3277,7 +3277,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     query["keys"] = (input.TagKeys || []).map(_entry => _entry);
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -3353,7 +3353,7 @@ export async function serializeAws_restJson1_1UpdateDashboardCommand(
     bodyParams["VersionDescription"] = input.VersionDescription;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -3419,7 +3419,7 @@ export async function serializeAws_restJson1_1UpdateDashboardPermissionsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -3481,7 +3481,7 @@ export async function serializeAws_restJson1_1UpdateDashboardPublishedVersionCom
     throw new Error("No value provided for input HTTP label: VersionNumber.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -3560,7 +3560,7 @@ export async function serializeAws_restJson1_1UpdateDataSetCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -3624,7 +3624,7 @@ export async function serializeAws_restJson1_1UpdateDataSetPermissionsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3704,7 +3704,7 @@ export async function serializeAws_restJson1_1UpdateDataSourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -3770,7 +3770,7 @@ export async function serializeAws_restJson1_1UpdateDataSourcePermissionsCommand
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -3833,7 +3833,7 @@ export async function serializeAws_restJson1_1UpdateGroupCommand(
     bodyParams["Description"] = input.Description;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -3907,7 +3907,7 @@ export async function serializeAws_restJson1_1UpdateIAMPolicyAssignmentCommand(
     bodyParams["PolicyArn"] = input.PolicyArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -3966,7 +3966,7 @@ export async function serializeAws_restJson1_1UpdateTemplateCommand(
     bodyParams["VersionDescription"] = input.VersionDescription;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -4029,7 +4029,7 @@ export async function serializeAws_restJson1_1UpdateTemplateAliasCommand(
     bodyParams["TemplateVersionNumber"] = input.TemplateVersionNumber;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -4093,7 +4093,7 @@ export async function serializeAws_restJson1_1UpdateTemplatePermissionsCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -4159,7 +4159,7 @@ export async function serializeAws_restJson1_1UpdateUserCommand(
     bodyParams["Role"] = input.Role;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",

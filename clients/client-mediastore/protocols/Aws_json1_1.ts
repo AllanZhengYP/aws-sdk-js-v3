@@ -2860,7 +2860,7 @@ const buildHttpRpcRequest = (
   resolvedHostname: string | undefined,
   body: any
 ): __HttpRequest => {
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   const contents: any = {
     protocol: "https",
     method: "POST",

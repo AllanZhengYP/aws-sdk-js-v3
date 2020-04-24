@@ -141,7 +141,7 @@ export async function serializeAws_restJson1_1CancelJobCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -204,7 +204,7 @@ export async function serializeAws_restJson1_1CreateJobCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -260,7 +260,7 @@ export async function serializeAws_restJson1_1CreatePipelineCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -308,7 +308,7 @@ export async function serializeAws_restJson1_1CreatePresetCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -339,7 +339,7 @@ export async function serializeAws_restJson1_1DeletePipelineCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -370,7 +370,7 @@ export async function serializeAws_restJson1_1DeletePresetCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -408,7 +408,7 @@ export async function serializeAws_restJson1_1ListJobsByPipelineCommand(
     query["PageToken"] = input.PageToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -447,7 +447,7 @@ export async function serializeAws_restJson1_1ListJobsByStatusCommand(
     query["PageToken"] = input.PageToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -474,7 +474,7 @@ export async function serializeAws_restJson1_1ListPipelinesCommand(
     query["PageToken"] = input.PageToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -501,7 +501,7 @@ export async function serializeAws_restJson1_1ListPresetsCommand(
     query["PageToken"] = input.PageToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -533,7 +533,7 @@ export async function serializeAws_restJson1_1ReadJobCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -564,7 +564,7 @@ export async function serializeAws_restJson1_1ReadPipelineCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -595,7 +595,7 @@ export async function serializeAws_restJson1_1ReadPresetCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -631,7 +631,7 @@ export async function serializeAws_restJson1_1TestRoleCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -696,7 +696,7 @@ export async function serializeAws_restJson1_1UpdatePipelineCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -735,7 +735,7 @@ export async function serializeAws_restJson1_1UpdatePipelineNotificationsCommand
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -771,7 +771,7 @@ export async function serializeAws_restJson1_1UpdatePipelineStatusCommand(
     bodyParams["Status"] = input.Status;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

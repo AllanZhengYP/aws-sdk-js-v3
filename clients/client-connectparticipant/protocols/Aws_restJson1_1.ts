@@ -61,7 +61,7 @@ export async function serializeAws_restJson1_1CreateParticipantConnectionCommand
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -91,7 +91,7 @@ export async function serializeAws_restJson1_1DisconnectParticipantCommand(
     bodyParams["ClientToken"] = input.ClientToken;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -136,7 +136,7 @@ export async function serializeAws_restJson1_1GetTranscriptCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -172,7 +172,7 @@ export async function serializeAws_restJson1_1SendEventCommand(
     bodyParams["ContentType"] = input.ContentType;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -208,7 +208,7 @@ export async function serializeAws_restJson1_1SendMessageCommand(
     bodyParams["ContentType"] = input.ContentType;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

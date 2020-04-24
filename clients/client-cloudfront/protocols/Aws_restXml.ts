@@ -386,7 +386,7 @@ export async function serializeAws_restXmlCreateCloudFrontOriginAccessIdentityCo
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -418,7 +418,7 @@ export async function serializeAws_restXmlCreateDistributionCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -453,7 +453,7 @@ export async function serializeAws_restXmlCreateDistributionWithTagsCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -486,7 +486,7 @@ export async function serializeAws_restXmlCreateFieldLevelEncryptionConfigComman
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -518,7 +518,7 @@ export async function serializeAws_restXmlCreateFieldLevelEncryptionProfileComma
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -564,7 +564,7 @@ export async function serializeAws_restXmlCreateInvalidationCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -596,7 +596,7 @@ export async function serializeAws_restXmlCreatePublicKeyCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -628,7 +628,7 @@ export async function serializeAws_restXmlCreateStreamingDistributionCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -663,7 +663,7 @@ export async function serializeAws_restXmlCreateStreamingDistributionWithTagsCom
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -698,7 +698,7 @@ export async function serializeAws_restXmlDeleteCloudFrontOriginAccessIdentityCo
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -732,7 +732,7 @@ export async function serializeAws_restXmlDeleteDistributionCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -766,7 +766,7 @@ export async function serializeAws_restXmlDeleteFieldLevelEncryptionConfigComman
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -800,7 +800,7 @@ export async function serializeAws_restXmlDeleteFieldLevelEncryptionProfileComma
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -834,7 +834,7 @@ export async function serializeAws_restXmlDeletePublicKeyCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -868,7 +868,7 @@ export async function serializeAws_restXmlDeleteStreamingDistributionCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -899,7 +899,7 @@ export async function serializeAws_restXmlGetCloudFrontOriginAccessIdentityComma
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -931,7 +931,7 @@ export async function serializeAws_restXmlGetCloudFrontOriginAccessIdentityConfi
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -962,7 +962,7 @@ export async function serializeAws_restXmlGetDistributionCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -993,7 +993,7 @@ export async function serializeAws_restXmlGetDistributionConfigCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1024,7 +1024,7 @@ export async function serializeAws_restXmlGetFieldLevelEncryptionCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1055,7 +1055,7 @@ export async function serializeAws_restXmlGetFieldLevelEncryptionConfigCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1086,7 +1086,7 @@ export async function serializeAws_restXmlGetFieldLevelEncryptionProfileCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1117,7 +1117,7 @@ export async function serializeAws_restXmlGetFieldLevelEncryptionProfileConfigCo
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1163,7 +1163,7 @@ export async function serializeAws_restXmlGetInvalidationCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1194,7 +1194,7 @@ export async function serializeAws_restXmlGetPublicKeyCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1225,7 +1225,7 @@ export async function serializeAws_restXmlGetPublicKeyConfigCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1256,7 +1256,7 @@ export async function serializeAws_restXmlGetStreamingDistributionCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1287,7 +1287,7 @@ export async function serializeAws_restXmlGetStreamingDistributionConfigCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1313,7 +1313,7 @@ export async function serializeAws_restXmlListCloudFrontOriginAccessIdentitiesCo
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1340,7 +1340,7 @@ export async function serializeAws_restXmlListDistributionsCommand(
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1379,7 +1379,7 @@ export async function serializeAws_restXmlListDistributionsByWebACLIdCommand(
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1406,7 +1406,7 @@ export async function serializeAws_restXmlListFieldLevelEncryptionConfigsCommand
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1433,7 +1433,7 @@ export async function serializeAws_restXmlListFieldLevelEncryptionProfilesComman
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1474,7 +1474,7 @@ export async function serializeAws_restXmlListInvalidationsCommand(
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1501,7 +1501,7 @@ export async function serializeAws_restXmlListPublicKeysCommand(
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1528,7 +1528,7 @@ export async function serializeAws_restXmlListStreamingDistributionsCommand(
     query["MaxItems"] = input.MaxItems;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1552,7 +1552,7 @@ export async function serializeAws_restXmlListTagsForResourceCommand(
     query["Resource"] = input.Resource;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1588,7 +1588,7 @@ export async function serializeAws_restXmlTagResourceCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1624,7 +1624,7 @@ export async function serializeAws_restXmlUntagResourceCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -1673,7 +1673,7 @@ export async function serializeAws_restXmlUpdateCloudFrontOriginAccessIdentityCo
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1720,7 +1720,7 @@ export async function serializeAws_restXmlUpdateDistributionCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1767,7 +1767,7 @@ export async function serializeAws_restXmlUpdateFieldLevelEncryptionConfigComman
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1814,7 +1814,7 @@ export async function serializeAws_restXmlUpdateFieldLevelEncryptionProfileComma
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1861,7 +1861,7 @@ export async function serializeAws_restXmlUpdatePublicKeyCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1908,7 +1908,7 @@ export async function serializeAws_restXmlUpdateStreamingDistributionCommand(
     );
     body += contents.toString();
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",

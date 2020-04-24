@@ -221,7 +221,7 @@ export async function serializeAws_restJson1_1CreateMeshCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagList(input.tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -286,7 +286,7 @@ export async function serializeAws_restJson1_1CreateRouteCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagList(input.tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -337,7 +337,7 @@ export async function serializeAws_restJson1_1CreateVirtualNodeCommand(
     bodyParams["virtualNodeName"] = input.virtualNodeName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -388,7 +388,7 @@ export async function serializeAws_restJson1_1CreateVirtualRouterCommand(
     bodyParams["virtualRouterName"] = input.virtualRouterName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -439,7 +439,7 @@ export async function serializeAws_restJson1_1CreateVirtualServiceCommand(
     bodyParams["virtualServiceName"] = input.virtualServiceName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -470,7 +470,7 @@ export async function serializeAws_restJson1_1DeleteMeshCommand(
     throw new Error("No value provided for input HTTP label: meshName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -530,7 +530,7 @@ export async function serializeAws_restJson1_1DeleteRouteCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -576,7 +576,7 @@ export async function serializeAws_restJson1_1DeleteVirtualNodeCommand(
     throw new Error("No value provided for input HTTP label: virtualNodeName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -624,7 +624,7 @@ export async function serializeAws_restJson1_1DeleteVirtualRouterCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -672,7 +672,7 @@ export async function serializeAws_restJson1_1DeleteVirtualServiceCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -703,7 +703,7 @@ export async function serializeAws_restJson1_1DescribeMeshCommand(
     throw new Error("No value provided for input HTTP label: meshName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -763,7 +763,7 @@ export async function serializeAws_restJson1_1DescribeRouteCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -809,7 +809,7 @@ export async function serializeAws_restJson1_1DescribeVirtualNodeCommand(
     throw new Error("No value provided for input HTTP label: virtualNodeName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -857,7 +857,7 @@ export async function serializeAws_restJson1_1DescribeVirtualRouterCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -905,7 +905,7 @@ export async function serializeAws_restJson1_1DescribeVirtualServiceCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -931,7 +931,7 @@ export async function serializeAws_restJson1_1ListMeshesCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -987,7 +987,7 @@ export async function serializeAws_restJson1_1ListRoutesCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1017,7 +1017,7 @@ export async function serializeAws_restJson1_1ListTagsForResourceCommand(
     query["resourceArn"] = input.resourceArn;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1056,7 +1056,7 @@ export async function serializeAws_restJson1_1ListVirtualNodesCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1095,7 +1095,7 @@ export async function serializeAws_restJson1_1ListVirtualRoutersCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1134,7 +1134,7 @@ export async function serializeAws_restJson1_1ListVirtualServicesCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -1163,7 +1163,7 @@ export async function serializeAws_restJson1_1TagResourceCommand(
     bodyParams["tags"] = serializeAws_restJson1_1TagList(input.tags, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1195,7 +1195,7 @@ export async function serializeAws_restJson1_1UntagResourceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1238,7 +1238,7 @@ export async function serializeAws_restJson1_1UpdateMeshCommand(
     bodyParams["spec"] = serializeAws_restJson1_1MeshSpec(input.spec, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1309,7 +1309,7 @@ export async function serializeAws_restJson1_1UpdateRouteCommand(
     bodyParams["spec"] = serializeAws_restJson1_1RouteSpec(input.spec, context);
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1369,7 +1369,7 @@ export async function serializeAws_restJson1_1UpdateVirtualNodeCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1431,7 +1431,7 @@ export async function serializeAws_restJson1_1UpdateVirtualRouterCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -1493,7 +1493,7 @@ export async function serializeAws_restJson1_1UpdateVirtualServiceCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",

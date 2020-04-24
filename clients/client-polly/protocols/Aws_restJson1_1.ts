@@ -100,7 +100,7 @@ export async function serializeAws_restJson1_1DeleteLexiconCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -134,7 +134,7 @@ export async function serializeAws_restJson1_1DescribeVoicesCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -166,7 +166,7 @@ export async function serializeAws_restJson1_1GetLexiconCommand(
     throw new Error("No value provided for input HTTP label: Name.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -197,7 +197,7 @@ export async function serializeAws_restJson1_1GetSpeechSynthesisTaskCommand(
     throw new Error("No value provided for input HTTP label: TaskId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -220,7 +220,7 @@ export async function serializeAws_restJson1_1ListLexiconsCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -250,7 +250,7 @@ export async function serializeAws_restJson1_1ListSpeechSynthesisTasksCommand(
     query["Status"] = input.Status;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -287,7 +287,7 @@ export async function serializeAws_restJson1_1PutLexiconCommand(
     bodyParams["Content"] = input.Content;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -350,7 +350,7 @@ export async function serializeAws_restJson1_1StartSpeechSynthesisTaskCommand(
     bodyParams["VoiceId"] = input.VoiceId;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -404,7 +404,7 @@ export async function serializeAws_restJson1_1SynthesizeSpeechCommand(
     bodyParams["VoiceId"] = input.VoiceId;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

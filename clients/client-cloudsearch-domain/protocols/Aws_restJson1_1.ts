@@ -93,7 +93,7 @@ export async function serializeAws_restJson1_1SearchCommand(
     query["stats"] = input.stats;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -126,7 +126,7 @@ export async function serializeAws_restJson1_1SuggestCommand(
     query["suggester"] = input.suggester;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -155,7 +155,7 @@ export async function serializeAws_restJson1_1UploadDocumentsCommand(
   if (input.documents !== undefined) {
     body = input.documents;
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

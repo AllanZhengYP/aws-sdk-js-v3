@@ -51,7 +51,7 @@ export async function serializeAws_restJson1_1GetPersonalizedRankingCommand(
     bodyParams["userId"] = input.userId;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -90,7 +90,7 @@ export async function serializeAws_restJson1_1GetRecommendationsCommand(
     bodyParams["userId"] = input.userId;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

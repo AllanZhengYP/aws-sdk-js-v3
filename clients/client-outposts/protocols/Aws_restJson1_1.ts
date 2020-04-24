@@ -68,7 +68,7 @@ export async function serializeAws_restJson1_1CreateOutpostCommand(
     bodyParams["SiteId"] = input.SiteId;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -99,7 +99,7 @@ export async function serializeAws_restJson1_1GetOutpostCommand(
     throw new Error("No value provided for input HTTP label: OutpostId.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -137,7 +137,7 @@ export async function serializeAws_restJson1_1GetOutpostInstanceTypesCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -164,7 +164,7 @@ export async function serializeAws_restJson1_1ListOutpostsCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -191,7 +191,7 @@ export async function serializeAws_restJson1_1ListSitesCommand(
     query["NextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",

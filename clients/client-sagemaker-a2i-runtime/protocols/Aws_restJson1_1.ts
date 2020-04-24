@@ -69,7 +69,7 @@ export async function serializeAws_restJson1_1DeleteHumanLoopCommand(
     throw new Error("No value provided for input HTTP label: HumanLoopName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -102,7 +102,7 @@ export async function serializeAws_restJson1_1DescribeHumanLoopCommand(
     throw new Error("No value provided for input HTTP label: HumanLoopName.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -141,7 +141,7 @@ export async function serializeAws_restJson1_1ListHumanLoopsCommand(
     query["SortOrder"] = input.SortOrder;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -185,7 +185,7 @@ export async function serializeAws_restJson1_1StartHumanLoopCommand(
     bodyParams["HumanLoopName"] = input.HumanLoopName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -209,7 +209,7 @@ export async function serializeAws_restJson1_1StopHumanLoopCommand(
     bodyParams["HumanLoopName"] = input.HumanLoopName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

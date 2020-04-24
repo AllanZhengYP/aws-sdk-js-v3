@@ -111,7 +111,7 @@ export async function serializeAws_restJson1_1CreateAssetCommand(
     bodyParams["sourceRoleArn"] = input.SourceRoleArn;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -162,7 +162,7 @@ export async function serializeAws_restJson1_1CreatePackagingConfigurationComman
     bodyParams["packagingGroupId"] = input.PackagingGroupId;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -186,7 +186,7 @@ export async function serializeAws_restJson1_1CreatePackagingGroupCommand(
     bodyParams["id"] = input.Id;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -217,7 +217,7 @@ export async function serializeAws_restJson1_1DeleteAssetCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -248,7 +248,7 @@ export async function serializeAws_restJson1_1DeletePackagingConfigurationComman
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -279,7 +279,7 @@ export async function serializeAws_restJson1_1DeletePackagingGroupCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -310,7 +310,7 @@ export async function serializeAws_restJson1_1DescribeAssetCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -341,7 +341,7 @@ export async function serializeAws_restJson1_1DescribePackagingConfigurationComm
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -372,7 +372,7 @@ export async function serializeAws_restJson1_1DescribePackagingGroupCommand(
     throw new Error("No value provided for input HTTP label: Id.");
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -401,7 +401,7 @@ export async function serializeAws_restJson1_1ListAssetsCommand(
     query["packagingGroupId"] = input.PackagingGroupId;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -431,7 +431,7 @@ export async function serializeAws_restJson1_1ListPackagingConfigurationsCommand
     query["packagingGroupId"] = input.PackagingGroupId;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -458,7 +458,7 @@ export async function serializeAws_restJson1_1ListPackagingGroupsCommand(
     query["nextToken"] = input.NextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",

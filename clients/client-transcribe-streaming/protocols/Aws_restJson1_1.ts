@@ -64,7 +64,7 @@ export async function serializeAws_restJson1_1StartStreamTranscriptionCommand(
     body = {};
   }
   body = JSON.stringify(body);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",

@@ -93,7 +93,7 @@ export async function serializeAws_restJson1_1ConfigureAgentCommand(
     bodyParams["fleetInstanceId"] = input.fleetInstanceId;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -129,7 +129,7 @@ export async function serializeAws_restJson1_1CreateProfilingGroupCommand(
     bodyParams["profilingGroupName"] = input.profilingGroupName;
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
@@ -165,7 +165,7 @@ export async function serializeAws_restJson1_1DeleteProfilingGroupCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "DELETE",
@@ -200,7 +200,7 @@ export async function serializeAws_restJson1_1DescribeProfilingGroupCommand(
     );
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -229,7 +229,7 @@ export async function serializeAws_restJson1_1ListProfilingGroupsCommand(
     query["nextToken"] = input.nextToken;
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -275,7 +275,7 @@ export async function serializeAws_restJson1_1UpdateProfilingGroupCommand(
     );
   }
   body = JSON.stringify(bodyParams);
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "PUT",
@@ -330,7 +330,7 @@ export async function serializeAws_restJson1_1GetProfileCommand(
     ).toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -389,7 +389,7 @@ export async function serializeAws_restJson1_1ListProfileTimesCommand(
     ).toString();
   }
   let body: any;
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "GET",
@@ -435,7 +435,7 @@ export async function serializeAws_restJson1_1PostAgentProfileCommand(
   if (input.agentProfile !== undefined) {
     body = input.agentProfile;
   }
-  const endpoint = { ...context.endpoint, path: null, query: null };
+  const endpoint = { ...context.endpoint, path: undefined, query: undefined };
   return new __HttpRequest({
     protocol: "https",
     method: "POST",
