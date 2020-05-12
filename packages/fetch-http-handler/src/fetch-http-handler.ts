@@ -14,14 +14,6 @@ export interface BrowserHttpOptions {
    * terminated.
    */
   requestTimeout?: number;
-  /**
-   * Buffer the whole response body before returning. This option is useful in the
-   * runtime that doesn't support ReadableStream in response like ReactNative. When
-   * set to true, the response body of http handler will be a Blob instead of
-   * ReadableStream.
-   * This option is only useful in ReactNative.
-   */
-  bufferBody?: boolean;
 }
 
 export class FetchHttpHandler implements HttpHandler {
@@ -80,8 +72,17 @@ export class FetchHttpHandler implements HttpHandler {
           transformedHeaders[pair[0]] = pair[1];
         }
 
+        // todo is this safe? what if different polyfills / libraries conflict
+        //   with eachother, e.g. a polyfilled response.body in a browser with
+        //   native window.ReadableStream.
+        //   can we just check for existence of response.body, as that should be
+        //   guaranteed to be a ReadableStream if it exists?
+        const hasResponseStream =
+          typeof ReadableStream === "function" &&
+          response.body instanceof ReadableStream;
+
         // Return the response with buffered body
-        if (this.httpOptions.bufferBody) {
+        if (!hasResponseStream) {
           return response.blob().then(body => ({
             response: new HttpResponse({
               headers: transformedHeaders,
