@@ -1,3 +1,4 @@
+import "expect-puppeteer";
 import { streamCollector } from "./stream-collector";
 
 describe("streamCollector", () => {
