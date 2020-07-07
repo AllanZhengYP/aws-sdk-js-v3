@@ -1,6 +1,10 @@
 import { HttpRequest } from "@aws-sdk/protocol-http";
+const originalFn = HttpRequest.isInstance;
+HttpRequest.isInstance = jest.fn().mockReturnValue(true) as any;
 import { SignatureV4 } from "./signer";
+
 describe("transcribe streaming", () => {
+  afterAll((HttpRequest.isInstance = originalFn));
   describe("WebSocket request signer", () => {
     const toSign = new HttpRequest({
       headers: {
@@ -16,18 +20,11 @@ describe("transcribe streaming", () => {
         prop2: "B"
       }
     });
-    beforeEach(() => {
-      jest.mock("@aws-sdk/protocol-http");
-      ((HttpRequest as any) as jest.Mock).mockReturnValue({
-        isInstance: () => true
-      });
-    });
+
     it("should invoke base SigV4 signer correctly", async () => {
       expect.assertions(5);
       const mockBaseSigner = {
-        presign: jest
-          .fn()
-          .mockImplementation(request => Promise.resolve(request))
+        presign: jest.fn().mockResolvedValue(toSign)
       };
       const signer = new SignatureV4({ signer: mockBaseSigner as any });
       const signed = await signer.sign(toSign);
