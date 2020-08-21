@@ -29,90 +29,85 @@
     ]
   },
   "shapes": {
-    "com.amazonaws.transcribestreaming#Alternative": {
+    "com.amazonaws.transcribe.streaming#Alternative": {
       "type": "structure",
       "members": {
         "Items": {
-          "target": "com.amazonaws.transcribestreaming#ItemList",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more alternative interpretations of the input audio. </p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#ItemList"
         },
         "Transcript": {
-          "target": "com.amazonaws.transcribestreaming#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The text that was transcribed from the audio.</p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#String"
         }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A list of possible transcriptions for the audio.</p>"
       }
     },
-    "com.amazonaws.transcribestreaming#AlternativeList": {
+    "com.amazonaws.transcribe.streaming#AlternativeList": {
       "type": "list",
       "member": {
-        "target": "com.amazonaws.transcribestreaming#Alternative"
+        "target": "com.amazonaws.transcribe.streaming#Alternative"
       }
     },
-    "com.amazonaws.transcribestreaming#AudioChunk": {
+    "aws.api#ArnNamespace": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[a-z0-9.\\-]{1,63}$",
+        "smithy.api#private": {}
+      }
+    },
+    "com.amazonaws.transcribe.streaming#AudioChunk": {
       "type": "blob"
     },
-    "com.amazonaws.transcribestreaming#AudioEvent": {
+    "com.amazonaws.transcribe.streaming#AudioEvent": {
       "type": "structure",
       "members": {
         "AudioChunk": {
-          "target": "com.amazonaws.transcribestreaming#AudioChunk",
+          "target": "com.amazonaws.transcribe.streaming#AudioChunk",
           "traits": {
-            "smithy.api#documentation": "<p>An audio blob that contains the next part of the audio that you want to transcribe.</p>",
             "smithy.api#eventPayload": {}
           }
         }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Provides a wrapper for the audio chunks that you are sending.</p>"
       }
     },
-    "com.amazonaws.transcribestreaming#AudioStream": {
+    "com.amazonaws.transcribe.streaming#AudioStream": {
       "type": "union",
       "members": {
         "AudioEvent": {
-          "target": "com.amazonaws.transcribestreaming#AudioEvent",
-          "traits": {
-            "smithy.api#documentation": "<p>A blob of audio from your application. You audio stream consists of one or more audio\n      events.</p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#AudioEvent"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Represents the audio stream from your application to Amazon Transcribe.</p>",
         "smithy.api#streaming": {}
       }
     },
-    "com.amazonaws.transcribestreaming#BadRequestException": {
+    "com.amazonaws.transcribe.streaming#BadRequestException": {
       "type": "structure",
       "members": {
         "Message": {
-          "target": "com.amazonaws.transcribestreaming#String"
+          "target": "com.amazonaws.transcribe.streaming#String"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>One or more arguments to the <code>StartStreamTranscription</code> operation was invalid.\n      For example, <code>MediaEncoding</code> was not set to <code>pcm</code> or\n        <code>LanguageCode</code> was not set to a valid code. Check the parameters and try your\n      request again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
       }
     },
-    "com.amazonaws.transcribestreaming#Boolean": {
+    "com.amazonaws.transcribe.streaming#Boolean": {
       "type": "boolean"
     },
-    "com.amazonaws.transcribestreaming#ConflictException": {
+    "aws.api#CloudFormationName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[A-Z][A-Za-z0-9]+$",
+        "smithy.api#private": {}
+      }
+    },
+    "com.amazonaws.transcribe.streaming#ConflictException": {
       "type": "structure",
       "members": {
         "Message": {
-          "target": "com.amazonaws.transcribestreaming#String"
+          "target": "com.amazonaws.transcribe.streaming#String"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A new stream started with the same session ID. The current stream has been\n      terminated.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 409
       }
@@ -120,58 +115,45 @@
     "com.amazonaws.transcribestreaming#Double": {
       "type": "double"
     },
-    "com.amazonaws.transcribestreaming#InternalFailureException": {
+    "com.amazonaws.transcribe.streaming#InternalFailureException": {
       "type": "structure",
       "members": {
         "Message": {
-          "target": "com.amazonaws.transcribestreaming#String"
+          "target": "com.amazonaws.transcribe.streaming#String"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>A problem occurred while processing the audio. Amazon Transcribe terminated processing. Try your\n      request again.</p>",
         "smithy.api#error": "server",
         "smithy.api#httpError": 500
       }
     },
-    "com.amazonaws.transcribestreaming#Item": {
+    "com.amazonaws.transcribe.streaming#Item": {
       "type": "structure",
       "members": {
-        "Content": {
-          "target": "com.amazonaws.transcribestreaming#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The word or punctuation that was recognized in the input audio.</p>"
-          }
+        "Type": {
+          "target": "com.amazonaws.transcribe.streaming#ItemType"
         },
         "EndTime": {
-          "target": "com.amazonaws.transcribestreaming#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>The offset from the beginning of the audio stream to the end of the audio that resulted in\n      the item.</p>"
-          }
+          "target": "com.amazonaws.transcribestreaming#Double"
+        },
+        "VocabularyFilterMatch": {
+          "target": "com.amazonaws.transcribe.streaming#Boolean"
+        },
+        "Content": {
+          "target": "com.amazonaws.transcribe.streaming#String"
         },
         "StartTime": {
-          "target": "com.amazonaws.transcribestreaming#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>The offset from the beginning of the audio stream to the beginning of the audio that\n      resulted in the item.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.transcribestreaming#ItemType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the item. <code>PRONUNCIATION</code> indicates that the item is a word that\n      was recognized in the input audio. <code>PUNCTUATION</code> indicates that the item was\n      interpreted as a pause in the input audio.</p>"
-          }
+          "target": "com.amazonaws.transcribestreaming#Double"
         }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A word or phrase transcribed from the input audio.</p>"
       }
     },
-    "com.amazonaws.transcribestreaming#ItemList": {
+    "com.amazonaws.transcribe.streaming#ItemList": {
       "type": "list",
       "member": {
-        "target": "com.amazonaws.transcribestreaming#Item"
+        "target": "com.amazonaws.transcribe.streaming#Item"
       }
     },
-    "com.amazonaws.transcribestreaming#ItemType": {
+    "com.amazonaws.transcribe.streaming#ItemType": {
       "type": "string",
       "traits": {
         "smithy.api#enum": [
@@ -186,7 +168,7 @@
         ]
       }
     },
-    "com.amazonaws.transcribestreaming#LanguageCode": {
+    "com.amazonaws.transcribe.streaming#LanguageCode": {
       "type": "string",
       "traits": {
         "smithy.api#enum": [
@@ -217,31 +199,38 @@
         ]
       }
     },
-    "com.amazonaws.transcribestreaming#LimitExceededException": {
+    "com.amazonaws.transcribe.streaming#LimitExceededException": {
       "type": "structure",
       "members": {
         "Message": {
-          "target": "com.amazonaws.transcribestreaming#String"
+          "target": "com.amazonaws.transcribe.streaming#String"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>You have exceeded the maximum number of concurrent transcription streams, are starting\n      transcription streams too quickly, or the maximum audio length of 4 hours. Wait until a stream\n      has finished processing, or break your audio stream into smaller chunks and try your request\n      again.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 429
       }
     },
-    "com.amazonaws.transcribestreaming#MediaEncoding": {
+    "com.amazonaws.wolverine.common#MediaEncoding": {
       "type": "string",
       "traits": {
         "smithy.api#enum": [
           {
             "value": "pcm",
             "name": "PCM"
+          },
+          {
+            "value": "ogg-opus",
+            "name": "OGG_OPUS"
+          },
+          {
+            "value": "flac",
+            "name": "FLAC"
           }
         ]
       }
     },
-    "com.amazonaws.transcribestreaming#MediaSampleRateHertz": {
+    "com.amazonaws.transcribe.streaming#MediaSampleRateHertz": {
       "type": "integer",
       "traits": {
         "smithy.api#box": {},
@@ -251,83 +240,273 @@
         }
       }
     },
-    "com.amazonaws.transcribestreaming#RequestId": {
+    "com.amazonaws.wolverine.common#ModelName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+      }
+    },
+    "com.amazonaws.transcribe.streaming#NumberOfChannels": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 2
+        }
+      }
+    },
+    "com.amazonaws.transcribe.streaming#RequestId": {
       "type": "string"
     },
-    "com.amazonaws.transcribestreaming#Result": {
+    "com.amazonaws.transcribe.streaming#Result": {
       "type": "structure",
       "members": {
-        "Alternatives": {
-          "target": "com.amazonaws.transcribestreaming#AlternativeList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of possible transcriptions for the audio. Each alternative typically contains one\n        <code>item</code> that contains the result of the transcription.</p>"
-          }
-        },
-        "EndTime": {
-          "target": "com.amazonaws.transcribestreaming#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>The offset in seconds from the beginning of the audio stream to the end of the\n      result.</p>"
-          }
+        "StartTime": {
+          "target": "com.amazonaws.transcribestreaming#Double"
         },
         "IsPartial": {
-          "target": "com.amazonaws.transcribestreaming#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Amazon Transcribe divides the incoming audio stream into segments at natural points in the audio.\n      Transcription results are returned based on these segments. </p>\n         <p>The <code>IsPartial</code> field is <code>true</code> to indicate that Amazon Transcribe has\n      additional transcription data to send, <code>false</code> to indicate that this is the last\n      transcription result for the segment.</p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#Boolean"
         },
         "ResultId": {
-          "target": "com.amazonaws.transcribestreaming#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the result. </p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#String"
         },
-        "StartTime": {
-          "target": "com.amazonaws.transcribestreaming#Double",
-          "traits": {
-            "smithy.api#documentation": "<p>The offset in seconds from the beginning of the audio stream to the beginning of the\n      result.</p>"
-          }
+        "EndTime": {
+          "target": "com.amazonaws.transcribestreaming#Double"
+        },
+        "Alternatives": {
+          "target": "com.amazonaws.transcribe.streaming#AlternativeList"
+        }
+      }
+    },
+    "com.amazonaws.transcribe.streaming#ResultList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.transcribe.streaming#Result"
+      }
+    },
+    "com.amazonaws.transcribe.streaming#ServiceUnavailableException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.transcribe.streaming#String"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The result of transcribing a portion of the input audio stream. </p>"
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 503
       }
     },
-    "com.amazonaws.transcribestreaming#ResultList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.transcribestreaming#Result"
+    "com.amazonaws.wolverine.common#SessionId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 36,
+          "max": 36
+        },
+        "smithy.api#pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
       }
     },
-    "com.amazonaws.transcribestreaming#SessionId": {
+    "com.amazonaws.transcribe.streaming#SessionId": {
       "type": "string",
       "traits": {
         "smithy.api#pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
       }
     },
-    "com.amazonaws.transcribestreaming#StartStreamTranscription": {
+    "com.amazonaws.transcribe.streaming#Specialty": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "PRIMARYCARE",
+            "name": "PRIMARYCARE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.transcribe.streaming#StartMedicalStreamTranscription": {
       "type": "operation",
       "input": {
-        "target": "com.amazonaws.transcribestreaming#StartStreamTranscriptionRequest"
+        "target": "com.amazonaws.transcribe.streaming#StartMedicalStreamTranscriptionRequest"
       },
       "output": {
-        "target": "com.amazonaws.transcribestreaming#StartStreamTranscriptionResponse"
+        "target": "com.amazonaws.transcribe.streaming#StartMedicalStreamTranscriptionResponse"
       },
       "errors": [
         {
-          "target": "com.amazonaws.transcribestreaming#BadRequestException"
+          "target": "com.amazonaws.transcribe.streaming#BadRequestException"
         },
         {
-          "target": "com.amazonaws.transcribestreaming#ConflictException"
+          "target": "com.amazonaws.transcribe.streaming#ConflictException"
         },
         {
-          "target": "com.amazonaws.transcribestreaming#InternalFailureException"
+          "target": "com.amazonaws.transcribe.streaming#InternalFailureException"
         },
         {
-          "target": "com.amazonaws.transcribestreaming#LimitExceededException"
+          "target": "com.amazonaws.transcribe.streaming#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.transcribe.streaming#ServiceUnavailableException"
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Starts a bidirectional HTTP2 stream where audio is streamed to Amazon Transcribe and the transcription\n      results are streamed to your application.</p>\n         <p>The following are encoded as HTTP2 headers:</p>\n         <ul>\n            <li>\n               <p>x-amzn-transcribe-language-code</p>\n            </li>\n            <li>\n               <p>x-amzn-transcribe-media-encoding</p>\n            </li>\n            <li>\n               <p>x-amzn-transcribe-sample-rate</p>\n            </li>\n            <li>\n               <p>x-amzn-transcribe-session-id</p>\n            </li>\n         </ul>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/medical-stream-transcription",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.transcribe.streaming#StartMedicalStreamTranscriptionRequest": {
+      "type": "structure",
+      "members": {
+        "MediaEncoding": {
+          "target": "com.amazonaws.wolverine.common#MediaEncoding",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-media-encoding",
+            "smithy.api#required": {}
+          }
+        },
+        "VocabularyName": {
+          "target": "com.amazonaws.wolverine.common#VocabularyName",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe.streaming#LanguageCode",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-language-code",
+            "smithy.api#required": {}
+          }
+        },
+        "SessionId": {
+          "target": "com.amazonaws.transcribe.streaming#SessionId",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-session-id"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.transcribe.streaming#Type",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-type",
+            "smithy.api#required": {}
+          }
+        },
+        "MediaSampleRateHertz": {
+          "target": "com.amazonaws.transcribe.streaming#MediaSampleRateHertz",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-sample-rate",
+            "smithy.api#required": {}
+          }
+        },
+        "AudioStream": {
+          "target": "com.amazonaws.transcribe.streaming#AudioStream",
+          "traits": {
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Specialty": {
+          "target": "com.amazonaws.transcribe.streaming#Specialty",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-specialty",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribe.streaming#StartMedicalStreamTranscriptionResponse": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "target": "com.amazonaws.transcribe.streaming#Type",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-type"
+          }
+        },
+        "SessionId": {
+          "target": "com.amazonaws.transcribe.streaming#SessionId",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
+          }
+        },
+        "Specialty": {
+          "target": "com.amazonaws.transcribe.streaming#Specialty",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-medical-specialty"
+          }
+        },
+        "MediaSampleRateHertz": {
+          "target": "com.amazonaws.transcribe.streaming#MediaSampleRateHertz",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate"
+          }
+        },
+        "TranscriptResultStream": {
+          "target": "com.amazonaws.transcribe.streaming#TranscriptResultStream",
+          "traits": {
+            "smithy.api#httpPayload": {}
+          }
+        },
+        "VocabularyName": {
+          "target": "com.amazonaws.wolverine.common#VocabularyName",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+          }
+        },
+        "MediaEncoding": {
+          "target": "com.amazonaws.wolverine.common#MediaEncoding",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe.streaming#LanguageCode",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-language-code"
+          }
+        },
+        "RequestId": {
+          "target": "com.amazonaws.transcribe.streaming#RequestId",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-request-id"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribe.streaming#StartMedicalStreamTranscriptionWebSocket": {
+      "type": "operation"
+    },
+    "com.amazonaws.transcribe.streaming#StartStreamTranscription": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.transcribe.streaming#StartStreamTranscriptionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.transcribe.streaming#StartStreamTranscriptionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.transcribe.streaming#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.transcribe.streaming#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.transcribe.streaming#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.transcribe.streaming#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.transcribe.streaming#ServiceUnavailableException"
+        }
+      ],
+      "traits": {
         "smithy.api#http": {
           "method": "POST",
           "uri": "/stream-transcription",
@@ -335,120 +514,152 @@
         }
       }
     },
-    "com.amazonaws.transcribestreaming#StartStreamTranscriptionRequest": {
+    "com.amazonaws.transcribe.streaming#StartStreamTranscriptionRequest": {
       "type": "structure",
       "members": {
         "AudioStream": {
-          "target": "com.amazonaws.transcribestreaming#AudioStream",
+          "target": "com.amazonaws.transcribe.streaming#AudioStream",
           "traits": {
-            "smithy.api#documentation": "<p>PCM-encoded stream of audio blobs. The audio stream is encoded as an HTTP2 data\n      frame.</p>",
             "smithy.api#httpPayload": {},
             "smithy.api#required": {}
           }
         },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribestreaming#LanguageCode",
+        "VocabularyFilterName": {
+          "target": "com.amazonaws.wolverine.common#VocabularyFilterName",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates the source language used in the input audio stream.</p>",
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-name"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe.streaming#LanguageCode",
+          "traits": {
             "smithy.api#httpHeader": "x-amzn-transcribe-language-code",
             "smithy.api#required": {}
           }
         },
-        "MediaEncoding": {
-          "target": "com.amazonaws.transcribestreaming#MediaEncoding",
+        "VocabularyName": {
+          "target": "com.amazonaws.wolverine.common#VocabularyName",
           "traits": {
-            "smithy.api#documentation": "<p>The encoding used for the input audio. </p>",
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+          }
+        },
+        "VocabularyFilterMethod": {
+          "target": "com.amazonaws.wolverine.common#VocabularyFilterMethod",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-method"
+          }
+        },
+        "MediaEncoding": {
+          "target": "com.amazonaws.wolverine.common#MediaEncoding",
+          "traits": {
             "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding",
             "smithy.api#required": {}
           }
         },
-        "MediaSampleRateHertz": {
-          "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
+        "SessionId": {
+          "target": "com.amazonaws.transcribe.streaming#SessionId",
           "traits": {
-            "smithy.api#documentation": "<p>The sample rate, in Hertz, of the input audio. We suggest that you use 8000 Hz for low\n      quality audio and 16000 Hz for high quality audio.</p>",
+            "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
+          }
+        },
+        "MediaSampleRateHertz": {
+          "target": "com.amazonaws.transcribe.streaming#MediaSampleRateHertz",
+          "traits": {
             "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate",
             "smithy.api#required": {}
           }
-        },
-        "SessionId": {
-          "target": "com.amazonaws.transcribestreaming#SessionId",
-          "traits": {
-            "smithy.api#documentation": "<p>A identifier for the transcription session. Use this parameter when you want to retry a\n      session. If you don't provide a session ID, Amazon Transcribe will generate one for you and return it in\n      the response.</p>",
-            "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
-          }
-        },
-        "VocabularyName": {
-          "target": "com.amazonaws.transcribestreaming#VocabularyName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the vocabulary to use when processing the transcription job.</p>",
-            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
-          }
         }
       }
     },
-    "com.amazonaws.transcribestreaming#StartStreamTranscriptionResponse": {
+    "com.amazonaws.transcribe.streaming#StartStreamTranscriptionResponse": {
       "type": "structure",
       "members": {
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribestreaming#LanguageCode",
+        "VocabularyName": {
+          "target": "com.amazonaws.wolverine.common#VocabularyName",
           "traits": {
-            "smithy.api#documentation": "<p>The language code for the input audio stream.</p>",
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe.streaming#LanguageCode",
+          "traits": {
             "smithy.api#httpHeader": "x-amzn-transcribe-language-code"
           }
         },
-        "MediaEncoding": {
-          "target": "com.amazonaws.transcribestreaming#MediaEncoding",
-          "traits": {
-            "smithy.api#documentation": "<p>The encoding used for the input audio stream.</p>",
-            "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding"
-          }
-        },
         "MediaSampleRateHertz": {
-          "target": "com.amazonaws.transcribestreaming#MediaSampleRateHertz",
+          "target": "com.amazonaws.transcribe.streaming#MediaSampleRateHertz",
           "traits": {
-            "smithy.api#documentation": "<p>The sample rate for the input audio stream. Use 8000 Hz for low quality audio and 16000 Hz\n      for high quality audio.</p>",
             "smithy.api#httpHeader": "x-amzn-transcribe-sample-rate"
           }
         },
-        "RequestId": {
-          "target": "com.amazonaws.transcribestreaming#RequestId",
+        "MediaEncoding": {
+          "target": "com.amazonaws.wolverine.common#MediaEncoding",
           "traits": {
-            "smithy.api#documentation": "<p>An identifier for the streaming transcription.</p>",
+            "smithy.api#httpHeader": "x-amzn-transcribe-media-encoding"
+          }
+        },
+        "VocabularyFilterName": {
+          "target": "com.amazonaws.wolverine.common#VocabularyFilterName",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-name"
+          }
+        },
+        "RequestId": {
+          "target": "com.amazonaws.transcribe.streaming#RequestId",
+          "traits": {
             "smithy.api#httpHeader": "x-amzn-request-id"
           }
         },
-        "SessionId": {
-          "target": "com.amazonaws.transcribestreaming#SessionId",
-          "traits": {
-            "smithy.api#documentation": "<p>An identifier for a specific transcription session.</p>",
-            "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
-          }
-        },
         "TranscriptResultStream": {
-          "target": "com.amazonaws.transcribestreaming#TranscriptResultStream",
+          "target": "com.amazonaws.transcribe.streaming#TranscriptResultStream",
           "traits": {
-            "smithy.api#documentation": "<p>Represents the stream of transcription events from Amazon Transcribe to your application.</p>",
             "smithy.api#httpPayload": {}
           }
         },
-        "VocabularyName": {
-          "target": "com.amazonaws.transcribestreaming#VocabularyName",
+        "SessionId": {
+          "target": "com.amazonaws.transcribe.streaming#SessionId",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the vocabulary used when processing the job.</p>",
-            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-name"
+            "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
+          }
+        },
+        "VocabularyFilterMethod": {
+          "target": "com.amazonaws.wolverine.common#VocabularyFilterMethod",
+          "traits": {
+            "smithy.api#httpHeader": "x-amzn-transcribe-vocabulary-filter-method"
           }
         }
       }
     },
-    "com.amazonaws.transcribestreaming#String": {
+    "com.amazonaws.transcribe.streaming#StartStreamTranscriptionWebSocket": {
+      "type": "operation"
+    },
+    "com.amazonaws.transcribe.streaming#String": {
       "type": "string"
     },
-    "com.amazonaws.transcribestreaming#Transcribe": {
+    "aws.auth#StringList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      },
+      "traits": {
+        "smithy.api#private": {}
+      }
+    },
+    "aws.protocols#StringList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      },
+      "traits": {
+        "smithy.api#private": {}
+      }
+    },
+    "com.amazonaws.transcribe.streaming#Transcribe": {
       "type": "service",
-      "version": "2017-10-26",
+      "version": "2020-08-11",
       "operations": [
         {
-          "target": "com.amazonaws.transcribestreaming#StartStreamTranscription"
+          "target": "com.amazonaws.transcribe.streaming#StartStreamTranscription"
         }
       ],
       "traits": {
@@ -461,79 +672,90 @@
         "aws.auth#sigv4": {
           "name": "transcribe"
         },
-        "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<p>Operations and objects for transcribing streaming speech to text.</p>",
+        "aws.protocols#restJson1": {
+          "http": ["h2"],
+          "eventStreamHttp": ["h2"]
+        },
         "smithy.api#title": "Amazon Transcribe Streaming Service"
       }
     },
-    "com.amazonaws.transcribestreaming#Transcript": {
+    "com.amazonaws.transcribe.streaming#Transcript": {
       "type": "structure",
       "members": {
         "Results": {
-          "target": "com.amazonaws.transcribestreaming#ResultList",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            <a>Result</a> objects that contain the results of transcribing a portion of the\n      input audio stream. The array can be empty.</p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#ResultList"
         }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The transcription in a <a>TranscriptEvent</a>.</p>"
       }
     },
-    "com.amazonaws.transcribestreaming#TranscriptEvent": {
+    "com.amazonaws.transcribe.streaming#TranscriptEvent": {
       "type": "structure",
       "members": {
         "Transcript": {
-          "target": "com.amazonaws.transcribestreaming#Transcript",
-          "traits": {
-            "smithy.api#documentation": "<p>The transcription of the audio stream. The transcription is composed of all of the items\n      in the results list.</p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#Transcript"
         }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Represents a set of transcription results from the server to the client. It contains one\n      or more segments of the transcription.</p>"
       }
     },
-    "com.amazonaws.transcribestreaming#TranscriptResultStream": {
+    "com.amazonaws.transcribe.streaming#TranscriptResultStream": {
       "type": "union",
       "members": {
-        "BadRequestException": {
-          "target": "com.amazonaws.transcribestreaming#BadRequestException",
-          "traits": {
-            "smithy.api#documentation": "<p>A client error occurred when the stream was created. Check the parameters of the request\n      and try your request again.</p>"
-          }
-        },
-        "ConflictException": {
-          "target": "com.amazonaws.transcribestreaming#ConflictException",
-          "traits": {
-            "smithy.api#documentation": "<p>A new stream started with the same session ID. The current stream has been\n      terminated.</p>"
-          }
+        "TranscriptEvent": {
+          "target": "com.amazonaws.transcribe.streaming#TranscriptEvent"
         },
         "InternalFailureException": {
-          "target": "com.amazonaws.transcribestreaming#InternalFailureException",
-          "traits": {
-            "smithy.api#documentation": "<p>A problem occurred while processing the audio. Amazon Transcribe terminated processing.</p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#InternalFailureException"
         },
         "LimitExceededException": {
-          "target": "com.amazonaws.transcribestreaming#LimitExceededException",
-          "traits": {
-            "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits, typically the limit on audio length.\n      Break your audio stream into smaller chunks and try your request again.</p>"
-          }
+          "target": "com.amazonaws.transcribe.streaming#LimitExceededException"
         },
-        "TranscriptEvent": {
-          "target": "com.amazonaws.transcribestreaming#TranscriptEvent",
-          "traits": {
-            "smithy.api#documentation": "<p>A portion of the transcription of the audio stream. Events are sent periodically from\n      Amazon Transcribe to your application. The event can be a partial transcription of a section of the audio\n      stream, or it can be the entire transcription of that portion of the audio stream.\n      </p>"
-          }
+        "ConflictException": {
+          "target": "com.amazonaws.transcribe.streaming#ConflictException"
+        },
+        "BadRequestException": {
+          "target": "com.amazonaws.transcribe.streaming#BadRequestException"
+        },
+        "ServiceUnavailableException": {
+          "target": "com.amazonaws.transcribe.streaming#ServiceUnavailableException"
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Represents the transcription result stream from Amazon Transcribe to your application.</p>",
         "smithy.api#streaming": {}
       }
     },
-    "com.amazonaws.transcribestreaming#VocabularyName": {
+    "com.amazonaws.transcribe.streaming#Type": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CONVERSATION",
+            "name": "CONVERSATION"
+          },
+          {
+            "value": "DICTATION",
+            "name": "DICTATION"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.wolverine.common#VocabularyFilterMethod": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "remove",
+            "name": "REMOVE"
+          },
+          {
+            "value": "mask",
+            "name": "MASK"
+          },
+          {
+            "value": "tag",
+            "name": "TAG"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.wolverine.common#VocabularyFilterName": {
       "type": "string",
       "traits": {
         "smithy.api#length": {
@@ -541,6 +763,429 @@
           "max": 200
         },
         "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+      }
+    },
+    "com.amazonaws.wolverine.common#VocabularyName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+      }
+    },
+    "aws.api#arn": {
+      "type": "structure",
+      "members": {
+        "template": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "absolute": {
+          "target": "smithy.api#Boolean"
+        },
+        "noRegion": {
+          "target": "smithy.api#Boolean"
+        },
+        "noAccount": {
+          "target": "smithy.api#Boolean"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Specifies an ARN template for the resource.",
+        "smithy.api#externalDocumentation": {
+          "Reference": "https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html"
+        },
+        "smithy.api#trait": {
+          "selector": "resource"
+        }
+      }
+    },
+    "aws.api#arnReference": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "target": "smithy.api#String"
+        },
+        "resource": {
+          "target": "smithy.api#String"
+        },
+        "service": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Marks a string as containing an ARN.",
+        "smithy.api#trait": {
+          "selector": "string"
+        }
+      }
+    },
+    "aws.protocols#awsJson1_0": {
+      "type": "structure",
+      "members": {
+        "http": {
+          "target": "aws.protocols#StringList"
+        },
+        "eventStreamHttp": {
+          "target": "aws.protocols#StringList"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "An RPC-based protocol that sends JSON payloads. This protocol does not use HTTP binding traits.",
+        "smithy.api#protocolDefinition": {
+          "traits": ["smithy.api#jsonName"]
+        },
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.protocols#awsJson1_1": {
+      "type": "structure",
+      "members": {
+        "http": {
+          "target": "aws.protocols#StringList"
+        },
+        "eventStreamHttp": {
+          "target": "aws.protocols#StringList"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "An RPC-based protocol that sends JSON payloads. This protocol does not use HTTP binding traits.",
+        "smithy.api#protocolDefinition": {
+          "traits": ["smithy.api#jsonName"]
+        },
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.protocols#awsQuery": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#deprecated": {},
+        "smithy.api#documentation": "An RPC-based protocol that sends query string requests and XML responses. This protocol does not use HTTP binding traits.",
+        "smithy.api#protocolDefinition": {
+          "traits": [
+            "smithy.api#xmlAttribute",
+            "smithy.api#xmlFlattened",
+            "smithy.api#xmlName",
+            "smithy.api#xmlNamespace"
+          ],
+          "noInlineDocumentSupport": true
+        },
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.api#clientDiscoveredEndpoint": {
+      "type": "structure",
+      "members": {
+        "required": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Indicates that the target operation should use the client's endpoint discovery logic.",
+        "smithy.api#trait": {
+          "selector": "operation"
+        }
+      }
+    },
+    "aws.api#clientEndpointDiscovery": {
+      "type": "structure",
+      "members": {
+        "operation": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "Indicates the operation that clients should use to discover endpoints for the service.",
+            "smithy.api#idRef": {
+              "selector": "operation",
+              "failWhenMissing": true
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "error": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "Indicates the error that tells clients that the endpoint they are using is no longer valid. This error MUST be bound to any operation bound to the service which is marked with the aws.api#clientDiscoveredEndpoint trait.",
+            "smithy.api#idRef": {
+              "selector": "structure[trait|error]",
+              "failWhenMissing": true
+            },
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Configures endpoint discovery for the service.",
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.api#clientEndpointDiscoveryId": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "Indicates members of the operation input which should be use to discover endpoints.",
+        "smithy.api#trait": {
+          "selector": "operation[trait|aws.api#clientDiscoveredEndpoint] -[input]-> structure > :test(member[trait|required] > string)"
+        }
+      }
+    },
+    "aws.auth#cognitoUserPools": {
+      "type": "structure",
+      "members": {
+        "providerArns": {
+          "target": "aws.auth#StringList",
+          "traits": {
+            "smithy.api#documentation": "A list of the Amazon Cognito user pool ARNs. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}.",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#authDefinition": {},
+        "smithy.api#documentation": "Configures an Amazon Cognito User Pools auth scheme.",
+        "smithy.api#tags": ["internal"],
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.api#controlPlane": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "Defines a service, resource, or operation as operating on the control plane.",
+        "smithy.api#trait": {
+          "selector": ":test(service, resource, operation)",
+          "conflicts": ["aws.api#dataPlane"]
+        }
+      }
+    },
+    "aws.api#data": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Designates the target as containing data of a known classification level.",
+        "smithy.api#enum": [
+          {
+            "value": "content",
+            "name": "CUSTOMER_CONTENT",
+            "documentation": "Customer content means any software (including machine images), data, text, audio, video or images that customers or any customer end user transfers to AWS for processing, storage or hosting by AWS services in connection with the customer’s accounts and any computational results that customers or any customer end user derive from the foregoing through their use of AWS services."
+          },
+          {
+            "value": "account",
+            "name": "CUSTOMER_ACCOUNT_INFORMATION",
+            "documentation": "Account information means information about customers that customers provide to AWS in connection with the creation or administration of customers’ accounts."
+          },
+          {
+            "value": "usage",
+            "name": "SERVICE_ATTRIBUTES",
+            "documentation": "Service Attributes means service usage data related to a customer’s account, such as resource identifiers, metadata tags, security and access roles, rules, usage policies, permissions, usage statistics, logging data, and analytics."
+          },
+          {
+            "value": "tagging",
+            "name": "TAG_DATA",
+            "documentation": "Designates metadata tags applied to AWS resources."
+          },
+          {
+            "value": "permissions",
+            "name": "PERMISSIONS_DATA",
+            "documentation": "Designates security and access roles, rules, usage policies, and permissions."
+          }
+        ],
+        "smithy.api#trait": {
+          "selector": ":test(simpleType, collection, structure, union, member)"
+        }
+      }
+    },
+    "aws.api#dataPlane": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "Defines a service, resource, or operation as operating on the data plane.",
+        "smithy.api#trait": {
+          "selector": ":test(service, resource, operation)",
+          "conflicts": ["aws.api#controlPlane"]
+        }
+      }
+    },
+    "aws.protocols#ec2Query": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#deprecated": {},
+        "smithy.api#documentation": "An RPC-based protocol that sends Amazon EC2 formatted query string requests and XML responses. This protocol does not use HTTP binding traits.",
+        "smithy.api#protocolDefinition": {
+          "traits": [
+            "aws.protocols#ec2QueryName",
+            "smithy.api#xmlAttribute",
+            "smithy.api#xmlFlattened",
+            "smithy.api#xmlName",
+            "smithy.api#xmlNamespace"
+          ],
+          "noInlineDocumentSupport": true
+        },
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.protocols#ec2QueryName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "Indicates the serialized name of a structure member when that structure is serialized for the input of an EC2 operation.",
+        "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
+        "smithy.api#trait": {
+          "selector": "structure > member"
+        }
+      }
+    },
+    "aws.protocols#restJson1": {
+      "type": "structure",
+      "members": {
+        "http": {
+          "target": "aws.protocols#StringList"
+        },
+        "eventStreamHttp": {
+          "target": "aws.protocols#StringList"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A RESTful protocol that sends JSON in structured payloads.",
+        "smithy.api#protocolDefinition": {
+          "traits": [
+            "smithy.api#cors",
+            "smithy.api#endpoint",
+            "smithy.api#hostLabel",
+            "smithy.api#http",
+            "smithy.api#httpError",
+            "smithy.api#httpHeader",
+            "smithy.api#httpLabel",
+            "smithy.api#httpPayload",
+            "smithy.api#httpPrefixHeaders",
+            "smithy.api#httpQuery",
+            "smithy.api#jsonName",
+            "smithy.api#timestampFormat"
+          ]
+        },
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.protocols#restXml": {
+      "type": "structure",
+      "members": {
+        "http": {
+          "target": "aws.protocols#StringList"
+        },
+        "eventStreamHttp": {
+          "target": "aws.protocols#StringList"
+        },
+        "noErrorWrapping": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#deprecated": {},
+            "smithy.api#documentation": "Disables the serialization wrapping of error properties in an 'Error' XML element."
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#deprecated": {},
+        "smithy.api#documentation": "A RESTful protocol that sends XML in structured payloads.",
+        "smithy.api#protocolDefinition": {
+          "traits": [
+            "smithy.api#httpError",
+            "smithy.api#httpHeader",
+            "smithy.api#httpLabel",
+            "smithy.api#httpPayload",
+            "smithy.api#httpPrefixHeaders",
+            "smithy.api#httpQuery",
+            "smithy.api#xmlAttribute",
+            "smithy.api#xmlFlattened",
+            "smithy.api#xmlName",
+            "smithy.api#xmlNamespace"
+          ],
+          "noInlineDocumentSupport": true
+        },
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.api#service": {
+      "type": "structure",
+      "members": {
+        "sdkId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "arnNamespace": {
+          "target": "aws.api#ArnNamespace"
+        },
+        "cloudFormationName": {
+          "target": "aws.api#CloudFormationName"
+        },
+        "cloudTrailEventSource": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.auth#sigv4": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "The signature version 4 service signing name to use in the credential scope when signing requests. This value SHOULD match the `arnNamespace` property of the `aws.api#service-trait`.",
+            "smithy.api#externalDocumentation": {
+              "Reference": "https://docs.aws.amazon.com/general/latest/gr/sigv4-create-string-to-sign.html"
+            },
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#authDefinition": {
+          "traits": ["aws.auth#unsignedPayload"]
+        },
+        "smithy.api#documentation": "Signature Version 4 is the process to add authentication information to AWS requests sent by HTTP. For security, most requests to AWS must be signed with an access key, which consists of an access key ID and secret access key. These two keys are commonly referred to as your security credentials.",
+        "smithy.api#externalDocumentation": {
+          "Reference": "https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"
+        },
+        "smithy.api#trait": {
+          "selector": "service"
+        }
+      }
+    },
+    "aws.auth#unsignedPayload": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "Indicates that the request payload of a signed request is not to be used as part of the signature.",
+        "smithy.api#trait": {
+          "selector": "operation"
+        }
       }
     }
   }
