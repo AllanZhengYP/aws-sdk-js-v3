@@ -2,7 +2,7 @@ import { ENV_CONFIG_PATH, ENV_CREDENTIALS_PATH } from "@aws-sdk/shared-ini-file-
 import { Credentials } from "@aws-sdk/types";
 import { join, sep } from "path";
 
-import { AssumeRoleParams, ENV_PROFILE, fromIni } from "./";
+import { AssumeRoleParams, ENV_PROFILE, fromIni } from "./fromIni";
 
 jest.mock("fs", () => {
   interface FsModule {
@@ -510,25 +510,11 @@ source_profile = default`.trim()
       expect(await provider()).toEqual(FOO_CREDS);
     });
 
-    it("should reject the promise with a terminal error if no role assumer provided", () => {
-      __addMatcher(
-        join(homedir(), ".aws", "credentials"),
-        `
-[default]
-aws_access_key_id = ${DEFAULT_CREDS.accessKeyId}
-aws_secret_access_key = ${DEFAULT_CREDS.secretAccessKey}
-aws_session_token = ${DEFAULT_CREDS.sessionToken}
+    it("should create new STS client if role assumer is not provided", () => {});
 
-[foo]
-role_arn = arn:aws:iam::123456789:role/foo
-source_profile = bar`.trim()
-      );
+    it("default role assumer STS client should fall back to use calling client's region", () => {});
 
-      return expect(fromIni({ profile: "foo" })()).rejects.toMatchObject({
-        message: "Profile foo requires a role to be assumed, but no role assumption callback was provided.",
-        tryNextLink: false,
-      });
-    });
+    it("default role assumer STS client should fall back to use global region", () => {});
 
     it("should reject the promise if the source profile cannot be found", () => {
       __addMatcher(

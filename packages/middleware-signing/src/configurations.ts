@@ -34,7 +34,7 @@ export interface AwsAuthInputConfig {
 }
 interface PreviouslyResolved {
   credentialDefaultProvider: (input: any) => Provider<Credentials>;
-  region: string | Provider<string>;
+  region: Provider<string>;
   regionInfoProvider: RegionInfoProvider;
   signingName?: string;
   serviceId: string;
@@ -52,7 +52,7 @@ export const resolveAwsAuthConfig = <T>(
 ): T & AwsAuthResolvedConfig => {
   const normalizedCreds = input.credentials
     ? normalizeCredentialProvider(input.credentials)
-    : input.credentialDefaultProvider(input as any);
+    : input.credentialDefaultProvider({ ...input, stsOptions: input });
   const { signingEscapePath = true, systemClockOffset = input.systemClockOffset || 0, sha256 } = input;
   let signer: Provider<RequestSigner>;
   if (input.signer) {
