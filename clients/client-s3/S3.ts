@@ -2470,9 +2470,10 @@ export class S3 extends S3Client {
   }
 
   /**
-   * <p>Returns the default encryption configuration for an Amazon S3 bucket. For information about
-   *          the Amazon S3 default encryption feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon S3 Default Bucket Encryption</a>.</p>
-   *
+   * <p>Returns the default encryption configuration for an Amazon S3 bucket. If the bucket does not
+   *          have a default encryption configuration, GetBucketEncryption returns
+   *          <code>ServerSideEncryptionConfigurationNotFoundError</code>. </p>
+   *          <p>For information about the Amazon S3 default encryption feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon S3 Default Bucket Encryption</a>.</p>
    *          <p> To use this operation, you must have permission to perform the
    *             <code>s3:GetEncryptionConfiguration</code> action. The bucket owner has this permission
    *          by default. The bucket owner can grant this permission to others. For more information
@@ -3768,6 +3769,11 @@ export class S3 extends S3Client {
    *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html">PutObjectTagging</a>
    *                </p>
    *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html">DeleteObjectTagging</a>
+   *                </p>
+   *             </li>
    *          </ul>
    */
   public getObjectTagging(
@@ -3921,8 +3927,12 @@ export class S3 extends S3Client {
   /**
    * <p>This operation is useful to determine if a bucket exists and you have permission to
    *          access it. The operation returns a <code>200 OK</code> if the bucket exists and you have
-   *          permission to access it. Otherwise, the operation might return responses such as <code>404
-   *             Not Found</code> and <code>403 Forbidden</code>. </p>
+   *          permission to access it.</p>
+   *
+   *
+   *          <p>If the bucket does not exist or you do not have permission to access it, the <code>HEAD</code> request
+   *          returns a generic <code>404 Not Found</code> or <code>403 Forbidden</code> code. A message body is not
+   *          included, so you cannot determine the exception beyond these error codes.</p>
    *
    *          <p>To use this operation, you must have permissions to perform the
    *             <code>s3:ListBucket</code> action. The bucket owner has this permission by default and
@@ -3959,7 +3969,9 @@ export class S3 extends S3Client {
    *
    *          <p>A <code>HEAD</code> request has the same options as a <code>GET</code> operation on an
    *          object. The response is identical to the <code>GET</code> response except that there is no
-   *          response body.</p>
+   *          response body. Because of this, if the <code>HEAD</code> request generates an error, it
+   *          returns a generic <code>404 Not Found</code> or <code>403 Forbidden</code> code. It is not
+   *          possible to retrieve the exact exception beyond these error codes.</p>
    *
    *          <p>If you encrypt an object by using server-side encryption with customer-provided
    *          encryption keys (SSE-C) when you store the object in Amazon S3, then when you retrieve the
@@ -3978,17 +3990,20 @@ export class S3 extends S3Client {
    *          <p>For more information about SSE-C, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html">Server-Side Encryption (Using
    *             Customer-Provided Encryption Keys)</a>.</p>
    *          <note>
-   *             <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should
+   *             <ul>
+   *                <li>
+   *                   <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should
    *             not be sent for GET requests if your object uses server-side encryption with CMKs stored
    *             in AWS KMS (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys
    *             (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400 BadRequest
    *             error.</p>
+   *                </li>
+   *                <li>
+   *                   <p>
+   *                The last modified property in this case is the creation date of the object.</p>
+   *                </li>
+   *             </ul>
    *          </note>
-   *
-   *
-   *
-   *
-   *
    *
    *
    *          <p>Request headers are limited to 8 KB in size. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html">Common Request
@@ -4528,7 +4543,8 @@ export class S3 extends S3Client {
    * <p>Returns some or all (up to 1,000) of the objects in a bucket. You can use the request
    *          parameters as selection criteria to return a subset of the objects in a bucket. A <code>200
    *             OK</code> response can contain valid or invalid XML. Make sure to design your
-   *          application to parse the contents of the response and handle it appropriately.</p>
+   *          application to parse the contents of the response and handle it appropriately.
+   *          Objects are returned sorted in an ascending order of the respective key names in the list.</p>
    *
    *          <p>To use this operation, you must have READ access to the bucket.</p>
    *
@@ -5323,7 +5339,8 @@ export class S3 extends S3Client {
   }
 
   /**
-   * <p>Puts a S3 Intelligent-Tiering configuration to the specified bucket.</p>
+   * <p>Puts a S3 Intelligent-Tiering configuration to the specified bucket.
+   *       You can have up to 1,000 S3 Intelligent-Tiering configurations per bucket.</p>
    *          <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings by moving data between access tiers, when access patterns change.</p>
    *          <p>The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent-Tiering storage class. </p>
    *          <p>If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days. For more information, see  <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p>
@@ -5344,6 +5361,65 @@ export class S3 extends S3Client {
    *                <p>
    *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html">ListBucketIntelligentTieringConfigurations</a>
    *                </p>
+   *             </li>
+   *          </ul>
+   *          <note>
+   *             <p>You only need S3 Intelligent-Tiering enabled on a bucket if you want to automatically
+   *             move objects stored in the S3 Intelligent-Tiering storage class to the
+   *             Archive Access or Deep Archive Access tier.</p>
+   *          </note>
+   *
+   *          <p class="title">
+   *             <b>Special Errors</b>
+   *          </p>
+   *          <ul>
+   *             <li>
+   *                <p class="title">
+   *                   <b>HTTP 400 Bad Request Error</b>
+   *                </p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <i>Code:</i> InvalidArgument</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <i>Cause:</i> Invalid Argument</p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *             <li>
+   *                <p class="title">
+   *                   <b>HTTP 400 Bad Request Error</b>
+   *                </p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <i>Code:</i> TooManyConfigurations</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <i>Cause:</i> You are attempting to create a new configuration
+   *                      but have already reached the 1,000-configuration limit. </p>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *             <li>
+   *                <p class="title">
+   *                   <b>HTTP 403 Forbidden Error</b>
+   *                </p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <i>Code:</i> AccessDenied</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <i>Cause:</i> You are not the owner of the specified bucket,
+   *                      or you do not have the <code>s3:PutIntelligentTieringConfiguration</code> bucket
+   *                      permission to set the configuration on the bucket. </p>
+   *                   </li>
+   *                </ul>
    *             </li>
    *          </ul>
    */
@@ -7075,6 +7151,11 @@ export class S3 extends S3Client {
    *             <li>
    *                <p>
    *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html">GetObjectTagging</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html">DeleteObjectTagging</a>
    *                </p>
    *             </li>
    *          </ul>

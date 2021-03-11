@@ -116,6 +116,42 @@
         "smithy.api#documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
       }
     },
+    "com.amazonaws.mediatailor#ConfigurationAliasesRequest": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.mediatailor#__string",
+        "traits": {
+          "smithy.api#documentation": "<p>The dynamic variable that has aliases.</p>"
+        }
+      },
+      "value": {
+        "target": "com.amazonaws.mediatailor#__mapOf__string",
+        "traits": {
+          "smithy.api#documentation": "<p>Map of aliases to the value to be used at request time.</p>"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Predefined aliases for dynamic variables.</p>"
+      }
+    },
+    "com.amazonaws.mediatailor#ConfigurationAliasesResponse": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.mediatailor#__string",
+        "traits": {
+          "smithy.api#documentation": "<p>The dynamic variable that has aliases.</p>"
+        }
+      },
+      "value": {
+        "target": "com.amazonaws.mediatailor#__mapOf__string",
+        "traits": {
+          "smithy.api#documentation": "<p>Map of aliases to the value to be used at request time.</p>"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Predefined aliases for dynamic variables.</p>"
+      }
+    },
     "com.amazonaws.mediatailor#DashConfiguration": {
       "type": "structure",
       "members": {
@@ -253,6 +289,12 @@
             "smithy.api#documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
           }
         },
+        "ConfigurationAliases": {
+          "target": "com.amazonaws.mediatailor#ConfigurationAliasesResponse",
+          "traits": {
+            "smithy.api#documentation": "<p>Predefined aliases for dynamic variables.</p>"
+          }
+        },
         "DashConfiguration": {
           "target": "com.amazonaws.mediatailor#DashConfiguration",
           "traits": {
@@ -362,6 +404,12 @@
           "method": "GET",
           "uri": "/playbackConfigurations",
           "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Items",
+          "pageSize": "MaxResults"
         }
       }
     },
@@ -578,6 +626,12 @@
             "smithy.api#documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
           }
         },
+        "ConfigurationAliases": {
+          "target": "com.amazonaws.mediatailor#ConfigurationAliasesResponse",
+          "traits": {
+            "smithy.api#documentation": "<p>Predefined aliases for dynamic variables.</p>"
+          }
+        },
         "DashConfiguration": {
           "target": "com.amazonaws.mediatailor#DashConfiguration",
           "traits": {
@@ -700,6 +754,12 @@
             "smithy.api#documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
           }
         },
+        "ConfigurationAliases": {
+          "target": "com.amazonaws.mediatailor#ConfigurationAliasesRequest",
+          "traits": {
+            "smithy.api#documentation": "<p>Predefined aliases for dynamic variables.</p>"
+          }
+        },
         "DashConfiguration": {
           "target": "com.amazonaws.mediatailor#DashConfigurationForPut",
           "traits": {
@@ -782,6 +842,12 @@
           "target": "com.amazonaws.mediatailor#CdnConfiguration",
           "traits": {
             "smithy.api#documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
+          }
+        },
+        "ConfigurationAliases": {
+          "target": "com.amazonaws.mediatailor#ConfigurationAliasesResponse",
+          "traits": {
+            "smithy.api#documentation": "<p>Predefined aliases for dynamic variables.</p>"
           }
         },
         "DashConfiguration": {

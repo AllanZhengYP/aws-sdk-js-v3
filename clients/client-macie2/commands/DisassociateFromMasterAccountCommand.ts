@@ -21,7 +21,7 @@ export type DisassociateFromMasterAccountCommandInput = DisassociateFromMasterAc
 export type DisassociateFromMasterAccountCommandOutput = DisassociateFromMasterAccountResponse & __MetadataBearer;
 
 /**
- * <p>Disassociates a member account from its Amazon Macie master account.</p>
+ * <p>(Deprecated) Disassociates a member account from its Amazon Macie administrator account.</p>
  */
 export class DisassociateFromMasterAccountCommand extends $Command<
   DisassociateFromMasterAccountCommandInput,

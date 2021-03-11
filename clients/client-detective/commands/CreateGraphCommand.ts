@@ -22,7 +22,8 @@ export type CreateGraphCommandOutput = CreateGraphResponse & __MetadataBearer;
 
 /**
  * <p>Creates a new behavior graph for the calling account, and sets that account as the
- *          master account. This operation is called by the account that is enabling Detective.</p>
+ *          administrator account. This operation is called by the account that is enabling
+ *          Detective.</p>
  *          <p>Before you try to enable Detective, make sure that your account has been enrolled in
  *          Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable
  *          Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable
@@ -33,9 +34,9 @@ export type CreateGraphCommandOutput = CreateGraphResponse & __MetadataBearer;
  *          <p>
  *             <code>CreateGraph</code> triggers a process to create the corresponding data tables for
  *          the new behavior graph.</p>
- *          <p>An account can only be the master account for one behavior graph within a Region. If the
- *          same account calls <code>CreateGraph</code> with the same master account, it always returns
- *          the same behavior graph ARN. It does not create a new behavior graph.</p>
+ *          <p>An account can only be the administrator account for one behavior graph within a Region.
+ *          If the same account calls <code>CreateGraph</code> with the same administrator account, it
+ *          always returns the same behavior graph ARN. It does not create a new behavior graph.</p>
  */
 export class CreateGraphCommand extends $Command<
   CreateGraphCommandInput,

@@ -267,6 +267,8 @@ export const serializeAws_restJson1CreateFunctionCommand = async (
       input.requestMappingTemplate !== null && { requestMappingTemplate: input.requestMappingTemplate }),
     ...(input.responseMappingTemplate !== undefined &&
       input.responseMappingTemplate !== null && { responseMappingTemplate: input.responseMappingTemplate }),
+    ...(input.syncConfig !== undefined &&
+      input.syncConfig !== null && { syncConfig: serializeAws_restJson1SyncConfig(input.syncConfig, context) }),
   });
   const { hostname, protocol = "https", port } = await context.endpoint();
   return new __HttpRequest({
@@ -1527,6 +1529,8 @@ export const serializeAws_restJson1UpdateFunctionCommand = async (
       input.requestMappingTemplate !== null && { requestMappingTemplate: input.requestMappingTemplate }),
     ...(input.responseMappingTemplate !== undefined &&
       input.responseMappingTemplate !== null && { responseMappingTemplate: input.responseMappingTemplate }),
+    ...(input.syncConfig !== undefined &&
+      input.syncConfig !== null && { syncConfig: serializeAws_restJson1SyncConfig(input.syncConfig, context) }),
   });
   const { hostname, protocol = "https", port } = await context.endpoint();
   return new __HttpRequest({
@@ -5834,6 +5838,10 @@ const deserializeAws_restJson1FunctionConfiguration = (output: any, context: __S
     responseMappingTemplate:
       output.responseMappingTemplate !== undefined && output.responseMappingTemplate !== null
         ? output.responseMappingTemplate
+        : undefined,
+    syncConfig:
+      output.syncConfig !== undefined && output.syncConfig !== null
+        ? deserializeAws_restJson1SyncConfig(output.syncConfig, context)
         : undefined,
   } as any;
 };

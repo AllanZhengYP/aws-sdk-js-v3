@@ -81,6 +81,11 @@ import {
   ListDatabasesCommandOutput,
 } from "./commands/ListDatabasesCommand";
 import {
+  ListEngineVersionsCommand,
+  ListEngineVersionsCommandInput,
+  ListEngineVersionsCommandOutput,
+} from "./commands/ListEngineVersionsCommand";
+import {
   ListNamedQueriesCommand,
   ListNamedQueriesCommandInput,
   ListNamedQueriesCommandOutput,
@@ -427,7 +432,7 @@ export class Athena extends AthenaClient {
   }
 
   /**
-   * <p>Returns a database object for the specfied database and data catalog.</p>
+   * <p>Returns a database object for the specified database and data catalog.</p>
    */
   public getDatabase(args: GetDatabaseCommandInput, options?: __HttpHandlerOptions): Promise<GetDatabaseCommandOutput>;
   public getDatabase(args: GetDatabaseCommandInput, cb: (err: any, data?: GetDatabaseCommandOutput) => void): void;
@@ -712,6 +717,39 @@ export class Athena extends AthenaClient {
     cb?: (err: any, data?: ListDataCatalogsCommandOutput) => void
   ): Promise<ListDataCatalogsCommandOutput> | void {
     const command = new ListDataCatalogsCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
+   * <p>Returns a list of engine versions that are available to choose from, including the
+   *             Auto option.</p>
+   */
+  public listEngineVersions(
+    args: ListEngineVersionsCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<ListEngineVersionsCommandOutput>;
+  public listEngineVersions(
+    args: ListEngineVersionsCommandInput,
+    cb: (err: any, data?: ListEngineVersionsCommandOutput) => void
+  ): void;
+  public listEngineVersions(
+    args: ListEngineVersionsCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: ListEngineVersionsCommandOutput) => void
+  ): void;
+  public listEngineVersions(
+    args: ListEngineVersionsCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEngineVersionsCommandOutput) => void),
+    cb?: (err: any, data?: ListEngineVersionsCommandOutput) => void
+  ): Promise<ListEngineVersionsCommandOutput> | void {
+    const command = new ListEngineVersionsCommand(args);
     if (typeof optionsOrCb === "function") {
       this.send(command, optionsOrCb);
     } else if (typeof cb === "function") {

@@ -212,9 +212,9 @@ export interface AddTagsInput {
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    */
   Tags: Tag[] | undefined;
 }
@@ -847,13 +847,13 @@ export interface OutputDataConfig {
    *             policy with an <code>s3:PutObject</code> permission that only allows objects with
    *             server-side encryption, set the condition key of
    *                 <code>s3:x-amz-server-side-encryption</code> to <code>"aws:kms"</code>. For more
-   *             information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer
+   *             information, see <a href="https://docs.aws.amazon.com/mazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer
    *                 Guide.</i>
    *          </p>
    *         <p>The KMS key policy must grant permission to the IAM role that you specify in your
    *                 <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or
    *                 <code>CreateHyperParameterTuningJob</code> requests. For more information, see
-   *                 <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer
+   *                 <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer
    *                 Guide</i>.</p>
    */
   KmsKeyId?: string;
@@ -1568,40 +1568,62 @@ export interface AnnotationConsolidationConfig {
    *         <ul>
    *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                 <p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox</code>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox</code>
    *                 </p>
    *             </li>
    *          </ul>
@@ -1614,38 +1636,60 @@ export interface AnnotationConsolidationConfig {
    *                 <p>
    *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass</code>
    *                 </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass</code>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass</code>
    *                 </p>
    *             </li>
    *          </ul>
@@ -1656,41 +1700,63 @@ export interface AnnotationConsolidationConfig {
    *         <ul>
    *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel</code>
+   *                </p>
    *             </li>
    *          </ul>
    *         <p>
@@ -1700,41 +1766,63 @@ export interface AnnotationConsolidationConfig {
    *         <ul>
    *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation</code>
+   *                </p>
    *             </li>
    *          </ul>
    *         <p>
@@ -1744,41 +1832,63 @@ export interface AnnotationConsolidationConfig {
    *         <ul>
    *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>rn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass</code>
+   *                </p>
    *             </li>
    *          </ul>
    *         <p>
@@ -1788,41 +1898,63 @@ export interface AnnotationConsolidationConfig {
    *         <ul>
    *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel</code>
+   *                </p>
    *             </li>
    *          </ul>
    *         <p>
@@ -1830,87 +1962,64 @@ export interface AnnotationConsolidationConfig {
    *             and calculates aggregate boundaries, resolving to most-assigned label.</p>
    *         <ul>
    *             <li>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition</code>
+   *                </p>
    *             </li>
-   *          </ul>
-   *
-   *
-   *         <p>
-   *             <b>Named entity recognition</b> - Groups similar selections
-   *             and calculates aggregate boundaries, resolving to most-assigned label.</p>
-   *         <ul>
    *             <li>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition</code>
-   *                 </p>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition</code>
+   *                </p>
    *             </li>
    *          </ul>
    *
@@ -1924,40 +2033,62 @@ export interface AnnotationConsolidationConfig {
    *             label for each video.</p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoMultiClass</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoMultiClass</code>
    *                </p>
    *             </li>
@@ -1970,40 +2101,62 @@ export interface AnnotationConsolidationConfig {
    *             and pedestrians.</p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectDetection</code>
    *                </p>
    *             </li>
@@ -2015,40 +2168,62 @@ export interface AnnotationConsolidationConfig {
    *             workers to track the movement of objects, such as cars, bikes, and pedestrians. </p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VideoObjectTracking</code>
    *                </p>
    *             </li>
@@ -2056,139 +2231,205 @@ export interface AnnotationConsolidationConfig {
    *
    *
    *         <p>
-   *             <b>3D point cloud object detection</b> - Use this task type
+   *             <b>3D Point Cloud Object Detection</b> - Use this task type
    *             when you want workers to classify objects in a 3D point cloud by drawing 3D cuboids
    *             around objects. For example, you can use this task type to ask workers to identify
    *             different types of objects in a point cloud, such as cars, bikes, and
    *             pedestrians.</p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectDetection</code>
    *                </p>
    *             </li>
    *          </ul>
    *         <p>
-   *             <b>3D point cloud object tracking</b> - Use this task type
+   *             <b>3D Point Cloud Object Tracking</b> - Use this task type
    *             when you want workers to draw 3D cuboids around objects that appear in a sequence of 3D
    *             point cloud frames. For example, you can use this task type to ask workers to track the
    *             movement of vehicles across multiple point cloud frames. </p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectTracking</code>
    *                </p>
    *             </li>
    *          </ul>
    *         <p>
-   *             <b>3D point cloud semantic segmentation</b> - Use this task
+   *             <b>3D Point Cloud Semantic Segmentation</b> - Use this task
    *             type when you want workers to create a point-level semantic segmentation masks by
    *             painting objects in a 3D point cloud using different colors where each color is assigned
    *             to one of the classes you specify.</p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudSemanticSegmentation</code>
-   *                 </p>
+   *                </p>
    *             </li>
    *          </ul>
    *
@@ -2201,182 +2442,270 @@ export interface AnnotationConsolidationConfig {
    *             see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html">Verify and Adjust Labels </a>.</p>
    *
    *         <p>
-   *             <b>Semantic segmentation adjustment</b> - Treats each pixel
+   *             <b>Semantic Segmentation Adjustment</b> - Treats each pixel
    *             in an image as a multi-class classification and treats pixel adjusted annotations from
    *             workers as "votes" for the correct label.</p>
    *         <ul>
    *             <li>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation</code>
-   *                 </p>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation</code>
+   *                </p>
    *             </li>
    *          </ul>
    *
    *         <p>
-   *             <b>Semantic segmentation verification</b> - Uses a variant
+   *             <b>Semantic Segmentation Verification</b> - Uses a variant
    *             of the Expectation Maximization approach to estimate the true class of verification
    *             judgment for semantic segmentation labels based on annotations from individual
    *             workers.</p>
    *         <ul>
    *             <li>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation</code>
-   *                 </p>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *
+   *         <p>
+   *             <b>Bounding Box Adjustment</b> - Finds the most similar
+   *             boxes from different workers based on the Jaccard index of the adjusted
+   *             annotations.</p>
+   *         <ul>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox</code>
+   *                </p>
    *             </li>
    *          </ul>
    *         <p>
-   *             <b>Bounding box verification</b> - Uses a variant of the
+   *             <b>Bounding Box Verification</b> - Uses a variant of the
    *             Expectation Maximization approach to estimate the true class of verification judgement
    *             for bounding box labels based on annotations from individual workers.</p>
    *         <ul>
    *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox</code>
+   *                </p>
    *             </li>
-   *          </ul>
-   *
-   *         <p>
-   *             <b>Bounding box adjustment</b> - Finds the most similar
-   *             boxes from different workers based on the Jaccard index of the adjusted
-   *             annotations.</p>
-   *         <ul>
    *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox</code>
+   *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
-   *                     <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
-   *                 <p>
-   *                     <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox</code>
-   *                 </p>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox</code>
+   *                </p>
    *             </li>
    *          </ul>
    *
@@ -2389,40 +2718,62 @@ export interface AnnotationConsolidationConfig {
    *
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectDetection</code>
    *                </p>
    *             </li>
@@ -2433,40 +2784,62 @@ export interface AnnotationConsolidationConfig {
    *             to video frames to track object movement across a sequence of video frames.</p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentVideoObjectTracking</code>
    *                </p>
    *             </li>
@@ -2475,133 +2848,204 @@ export interface AnnotationConsolidationConfig {
    *
    *
    *         <p>
-   *             <b>3D point cloud object detection adjustment</b> - Use this task type
-   *             when you want workers to adjust 3D cuboids around objects in a 3D point cloud. </p>
+   *             <b>3D Point Cloud Object Detection Adjustment</b> - Use this
+   *             task type when you want workers to adjust 3D cuboids around objects in a 3D point cloud. </p>
    *         <ul>
    *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
+   *             </li>
+   *             <li>
    *                 <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection</code>
    *                </p>
    *             </li>
    *          </ul>
    *         <p>
-   *             <b>3D point cloud object tracking adjustment</b> - Use this task type
-   *             when you want workers to adjust 3D cuboids around objects that appear in a sequence of 3D
-   *             point cloud frames.</p>
+   *             <b>3D Point Cloud Object Tracking Adjustment</b> - Use this
+   *             task type when you want workers to adjust 3D cuboids around objects that appear in a
+   *             sequence of 3D point cloud frames.</p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
-   *                 <p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectTracking</code>
    *                </p>
    *             </li>
    *          </ul>
    *         <p>
-   *             <b>3D point cloud semantic segmentation adjustment</b> - Use this task
+   *             <b>3D Point Cloud Semantic Segmentation Adjustment</b> - Use this task
    *             type when you want workers to adjust a point-level semantic segmentation masks using a paint tool.</p>
    *         <ul>
    *             <li>
-   *                 <p>
+   *                <p>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
-   *                 <p>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation</code>
-   *                 </p>
+   *                </p>
    *             </li>
    *          </ul>
    */
@@ -4374,8 +4818,7 @@ export enum RepositoryAccessMode {
 
 /**
  * <p>Specifies whether the model container is in Amazon ECR or a private Docker registry
- *             accessible from your
- *             Amazon Virtual Private Cloud (VPC).</p>
+ *             accessible from your Amazon Virtual Private Cloud (VPC).</p>
  */
 export interface ImageConfig {
   /**
@@ -4406,6 +4849,32 @@ export enum ContainerMode {
   SINGLE_MODEL = "SingleModel",
 }
 
+export enum ModelCacheSetting {
+  DISABLED = "Disabled",
+  ENABLED = "Enabled",
+}
+
+/**
+ * <p>Specifies additional configuration for hosting multi-model endpoints.</p>
+ */
+export interface MultiModelConfig {
+  /**
+   * <p>Whether to cache models for a multi-model endpoint. By default, multi-model endpoints
+   *             cache models so that a model does not have to be loaded into memory each time it is
+   *             invoked. Some use cases do not benefit from model caching. For example, if an endpoint
+   *             hosts a large number of models that are each invoked infrequently, the endpoint might
+   *             perform better if you disable model caching. To disable model caching, set the value of
+   *             this parameter to <code>Disabled</code>.</p>
+   */
+  ModelCacheSetting?: ModelCacheSetting | string;
+}
+
+export namespace MultiModelConfig {
+  export const filterSensitiveLog = (obj: MultiModelConfig): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>Describes the container, as part of model definition.</p>
  */
@@ -4430,22 +4899,20 @@ export interface ContainerDefinition {
   /**
    * <p>The path where inference code is stored. This can be either in Amazon EC2 Container Registry or in a
    *             Docker registry that is accessible from the same VPC that you configure for your
-   *             endpoint. If you are using your
-   *             own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must
-   *             meet Amazon SageMaker requirements. Amazon SageMaker supports both <code>registry/repository[:tag]</code> and
-   *                 <code>registry/repository[@digest]</code> image path formats. For more information,
-   *             see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using
-   *                 Your Own Algorithms with Amazon SageMaker</a>
+   *             endpoint. If you are using your own custom algorithm instead of an algorithm provided by
+   *             Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both
+   *                 <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>
+   *             image path formats. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html">Using Your Own Algorithms with Amazon
+   *                 SageMaker</a>
    *         </p>
    */
   Image?: string;
 
   /**
    * <p>Specifies whether the model container is in Amazon ECR or a private Docker registry
-   *             accessible from your
-   *             Amazon Virtual Private Cloud (VPC). For information about storing containers in a private Docker registry,
-   *             see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html">Use a Private Docker
-   *                 Registry for Real-Time Inference Containers</a>
+   *             accessible from your Amazon Virtual Private Cloud (VPC). For information about storing containers in a
+   *             private Docker registry, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html">Use a
+   *                 Private Docker Registry for Real-Time Inference Containers</a>
    *         </p>
    */
   ImageConfig?: ImageConfig;
@@ -4490,6 +4957,11 @@ export interface ContainerDefinition {
    *             model.</p>
    */
   ModelPackageName?: string;
+
+  /**
+   * <p>Specifies additional configuration for multi-model endpoints.</p>
+   */
+  MultiModelConfig?: MultiModelConfig;
 }
 
 export namespace ContainerDefinition {
@@ -4882,13 +5354,15 @@ export interface InferenceSpecification {
   /**
    * <p>A list of the instance types on which a transformation job can be run or on which an
    *             endpoint can be deployed.</p>
-   *         <p>This parameter is required for unversioned models, and optional for versioned models.</p>
+   *         <p>This parameter is required for unversioned models, and optional for versioned
+   *             models.</p>
    */
   SupportedTransformInstanceTypes?: (TransformInstanceType | string)[];
 
   /**
    * <p>A list of the instance types that are used to generate inferences in real-time.</p>
-   *         <p>This parameter is required for unversioned models, and optional for versioned models.</p>
+   *         <p>This parameter is required for unversioned models, and optional for versioned
+   *             models.</p>
    */
   SupportedRealtimeInferenceInstanceTypes?: (ProductionVariantInstanceType | string)[];
 
@@ -5187,9 +5661,9 @@ export interface CreateAlgorithmInput {
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    */
   Tags?: Tag[];
 }
@@ -5487,9 +5961,9 @@ export interface CreateCodeRepositoryInput {
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    */
   Tags?: Tag[];
 }
@@ -5828,6 +6302,15 @@ export interface InputConfig {
    *             TENSORFLOW.</p>
    */
   Framework: Framework | string | undefined;
+
+  /**
+   * <p>Specifies the framework version to use.</p>
+   *         <p>This API field is only supported for PyTorch framework versions <code>1.4</code>,
+   *             <code>1.5</code>, and <code>1.6</code> for
+   *             cloud instance target devices: <code>ml_c4</code>, <code>ml_c5</code>, <code>ml_m4</code>,
+   *             <code>ml_m5</code>, <code>ml_p2</code>, <code>ml_p3</code>, and <code>ml_g4dn</code>.</p>
+   */
+  FrameworkVersion?: string;
 }
 
 export namespace InputConfig {
@@ -5853,7 +6336,7 @@ export interface TargetPlatform {
    *                 <p>
    *                   <code>ANDROID</code>: Android operating systems. Android API level can be
    *                     specified using the <code>ANDROID_PLATFORM</code> compiler option. For example,
-   *                         <code>"CompilerOptions": {'ANDROID_PLATFORM': 28}</code>
+   *                     <code>"CompilerOptions": {'ANDROID_PLATFORM': 28}</code>
    *                </p>
    *             </li>
    *          </ul>
@@ -5894,7 +6377,7 @@ export interface TargetPlatform {
    *             <li>
    *                 <p>
    *                   <code>NVIDIA</code>: Nvidia graphics processing unit. It also requires
-   *                         <code>gpu-code</code>, <code>trt-ver</code>, <code>cuda-ver</code> compiler
+   *                     <code>gpu-code</code>, <code>trt-ver</code>, <code>cuda-ver</code> compiler
    *                     options</p>
    *             </li>
    *             <li>
@@ -6206,9 +6689,9 @@ export interface CreateCompilationJobRequest {
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    */
   Tags?: Tag[];
 }
@@ -6920,7 +7403,7 @@ export interface SharingSettings {
 
   /**
    * <p>When <code>NotebookOutputOption</code> is <code>Allowed</code>, the Amazon S3 bucket used
-   *          to save the notebook cell output.</p>
+   *          to store the shared notebook snapshots.</p>
    */
   S3OutputPath?: string;
 
@@ -6954,7 +7437,13 @@ export namespace TensorBoardAppSettings {
 }
 
 /**
- * <p>A collection of settings.</p>
+ * <p>A collection of settings that apply to users of Amazon SageMaker Studio. These settings are
+ *      specified when the <a>CreateUserProfile</a> API is called, and as
+ *      <code>DefaultUserSettings</code> when the <a>CreateDomain</a> API is called.</p>
+ *          <p>
+ *             <code>SecurityGroups</code> is aggregated when specified in both calls. For all other
+ *      settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code>
+ *      take precedence over those specified in <code>CreateDomain</code>.</p>
  */
 export interface UserSettings {
   /**
@@ -6964,8 +7453,12 @@ export interface UserSettings {
 
   /**
    * <p>The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.</p>
-   *          <p>Optional when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to <code>PublicInternetOnly</code>.</p>
-   *          <p>Required when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to <code>VpcOnly</code>.</p>
+   *          <p>Optional when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to
+   *          <code>PublicInternetOnly</code>.</p>
+   *          <p>Required when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to
+   *          <code>VpcOnly</code>.</p>
+   *          <p>Amazon SageMaker adds a security group to allow NFS traffic from SageMaker Studio. Therefore, the
+   *          number of security groups that you can specify is one less than the maximum number shown.</p>
    */
   SecurityGroups?: string[];
 
@@ -7134,22 +7627,22 @@ export namespace CreateEdgePackagingJobRequest {
 
 export interface CreateEndpointInput {
   /**
-   * <p>The name of the endpoint.The name must be unique within an AWS Region in your AWS account. The name is case-insensitive in <code>CreateEndpoint</code>,
-   *             but the case is preserved and must be matched in .</p>
+   * <p>The name of the endpoint.The name must be unique within an AWS Region in your AWS
+   *             account. The name is case-insensitive in <code>CreateEndpoint</code>, but the case is
+   *             preserved and must be matched in .</p>
    */
   EndpointName: string | undefined;
 
   /**
-   * <p>The name of an endpoint configuration. For more information, see
-   *             <a>CreateEndpointConfig</a>. </p>
+   * <p>The name of an endpoint configuration. For more information, see <a>CreateEndpointConfig</a>. </p>
    */
   EndpointConfigName: string | undefined;
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    */
   Tags?: Tag[];
 }
@@ -7224,6 +7717,71 @@ export enum ProductionVariantAcceleratorType {
 }
 
 /**
+ * <p>Specifies configuration for a core dump from the model container when the process
+ *             crashes.</p>
+ */
+export interface ProductionVariantCoreDumpConfig {
+  /**
+   * <p>The Amazon S3 bucket to send the core dump to.</p>
+   */
+  DestinationS3Uri: string | undefined;
+
+  /**
+   * <p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the core dump data at rest using
+   *             Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following
+   *             formats: </p>
+   *         <ul>
+   *             <li>
+   *                 <p>// KMS Key ID</p>
+   *                 <p>
+   *                     <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+   *                 </p>
+   *             </li>
+   *             <li>
+   *                 <p>// Amazon Resource Name (ARN) of a KMS Key</p>
+   *                 <p>
+   *                     <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code>
+   *                 </p>
+   *             </li>
+   *             <li>
+   *                 <p>// KMS Key Alias</p>
+   *                 <p>
+   *                     <code>"alias/ExampleAlias"</code>
+   *                 </p>
+   *             </li>
+   *             <li>
+   *                 <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>
+   *                 <p>
+   *                     <code>"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"</code>
+   *                 </p>
+   *             </li>
+   *          </ul>
+   *
+   *         <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must
+   *             include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,
+   *             Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side
+   *             encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket
+   *             policy with an <code>s3:PutObject</code> permission that only allows objects with
+   *             server-side encryption, set the condition key of
+   *             <code>s3:x-amz-server-side-encryption</code> to <code>"aws:kms"</code>. For more
+   *             information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer
+   *                     Guide.</i>
+   *          </p>
+   *         <p>The KMS key policy must grant permission to the IAM role that you specify in your
+   *             <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more information, see
+   *             <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer
+   *                     Guide</i>.</p>
+   */
+  KmsKeyId?: string;
+}
+
+export namespace ProductionVariantCoreDumpConfig {
+  export const filterSensitiveLog = (obj: ProductionVariantCoreDumpConfig): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>Identifies
  *             a model that you want to host and the resources to deploy for hosting
  *             it. If you are deploying multiple models, tell Amazon SageMaker how to distribute
@@ -7267,6 +7825,12 @@ export interface ProductionVariant {
    *                 Inference in Amazon SageMaker</a>.</p>
    */
   AcceleratorType?: ProductionVariantAcceleratorType | string;
+
+  /**
+   * <p>Specifies configuration for a core dump from the model container when the process
+   *             crashes.</p>
+   */
+  CoreDumpConfig?: ProductionVariantCoreDumpConfig;
 }
 
 export namespace ProductionVariant {
@@ -7294,9 +7858,9 @@ export interface CreateEndpointConfigInput {
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    */
   Tags?: Tag[];
 
@@ -7820,7 +8384,8 @@ export namespace HumanLoopActivationConditionsConfig {
  */
 export interface HumanLoopActivationConfig {
   /**
-   * <p>Container structure for defining under what conditions SageMaker creates a human loop.</p>
+   * <p>Container structure for defining under what conditions SageMaker creates a human
+   *          loop.</p>
    */
   HumanLoopActivationConditionsConfig: HumanLoopActivationConditionsConfig | undefined;
 }
@@ -8179,12 +8744,20 @@ export namespace PublicWorkforceTaskPrice {
  */
 export interface HumanLoopConfig {
   /**
-   * <p>Amazon Resource Name (ARN) of a team of workers.</p>
+   * <p>Amazon Resource Name (ARN) of a team of workers. To learn more about the types of
+   *          workforces and work teams you can create and use with Amazon A2I, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-management.html">Create
+   *             and Manage Workforces</a>.</p>
    */
   WorkteamArn: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the human task user interface.</p>
+   *          <p>You can use standard HTML and Crowd HTML Elements to create a custom worker task
+   *          template. You use this template to create a human task UI.</p>
+   *          <p>To learn how to create a custom HTML template, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-custom-templates.html">Create Custom Worker
+   *             Task Template</a>.</p>
+   *          <p>To learn how to create a human task UI, which is a worker task template that can be used
+   *          in a flow definition, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-worker-template-console.html">Create and Delete a Worker Task Templates</a>.</p>
    */
   HumanTaskUiArn: string | undefined;
 
@@ -8212,7 +8785,8 @@ export interface HumanLoopConfig {
   TaskAvailabilityLifetimeInSeconds?: number;
 
   /**
-   * <p>The amount of time that a worker has to complete a task. The default value is 3,600 seconds (1 hour)</p>
+   * <p>The amount of time that a worker has to complete a task. The default value is 3,600
+   *          seconds (1 hour).</p>
    */
   TaskTimeLimitInSeconds?: number;
 
@@ -8557,6 +9131,8 @@ export namespace HumanLoopRequestSource {
 export interface FlowDefinitionOutputConfig {
   /**
    * <p>The Amazon S3 path where the object containing human output will be made available.</p>
+   *          <p>To learn more about the format of Amazon A2I output data, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-output-data.html">Amazon A2I
+   *             Output Data</a>.</p>
    */
   S3OutputPath: string | undefined;
 
@@ -9196,8 +9772,8 @@ export interface CreateHyperParameterTuningJobRequest {
   /**
    * <p>The name of the tuning job. This name is the prefix for the names of all training jobs
    *             that this tuning job launches. The name must be unique within the same AWS account and
-   *             AWS Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z,
-   *             0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.</p>
+   *             AWS Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9,
+   *             and : + = @ _ % - (hyphen). The name is not case sensitive.</p>
    */
   HyperParameterTuningJobName: string | undefined;
 
@@ -9246,9 +9822,9 @@ export interface CreateHyperParameterTuningJobRequest {
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    *         <p>Tags that you specify for the tuning job are also added to all training jobs that the
    *             tuning job launches.</p>
    */
@@ -9378,7 +9954,7 @@ export interface UiConfig {
    * <p>The ARN of the worker task template used to render the worker UI and tools for
    *             labeling job tasks.</p>
    *         <p>Use this parameter when you are creating a labeling job for 3D point cloud and video
-   *             fram labeling jobs. Use your labeling job task type to select one of the following ARN's
+   *             fram labeling jobs. Use your labeling job task type to select one of the following ARNs
    *             and use it with this parameter when you create a labeling job. Replace
    *                 <code>aws-region</code> with the AWS region you are creating your labeling job
    *             in.</p>
@@ -10386,62 +10962,62 @@ export interface HumanTaskConfig {
    *         <ul>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking</code>
+   *                   <code>arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox</code>
    *                </p>
    *             </li>
    *          </ul>
@@ -11011,15 +11587,41 @@ export interface HumanTaskConfig {
   NumberOfHumanWorkersPerDataObject: number | undefined;
 
   /**
-   * <p>The amount of time that a worker has to complete a task.</p>
+   * <p>The amount of time that a worker has to complete a task. </p>
+   *         <p>If you create a custom labeling job, the maximum value for this parameter is 8 hours
+   *             (28,800 seconds).</p>
+   *         <p>If you create a labeling job using a <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task type</a> the maximum
+   *             for this parameter depends on the task type you use:</p>
+   *         <ul>
+   *             <li>
+   *                 <p>For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html">image</a> and
+   *                     <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html">text</a> labeling jobs,
+   *                     the maximum is 8 hours (28,800 seconds).</p>
+   *             </li>
+   *             <li>
+   *                 <p>For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html">3D point cloud</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html">video frame</a> labeling jobs,
+   *                     the maximum is 7 days (604,800 seconds). If you want to change these limits,
+   *                     contact AWS Support.</p>
+   *             </li>
+   *          </ul>
    */
   TaskTimeLimitInSeconds: number | undefined;
 
   /**
-   * <p>The length of time that a task remains available for labeling by human workers.
-   *                 <b>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours
-   *                 (43200)</b>. The default value is 864000 seconds (10 days). For private and vendor workforces, the maximum is as
-   *             listed.</p>
+   * <p>The length of time that a task remains available for labeling by human workers. The
+   *             default and maximum values for this parameter depend on the type of workforce you
+   *             use.</p>
+   *         <ul>
+   *             <li>
+   *                 <p>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds).
+   *                     The default is 6 hours (21,600 seconds).</p>
+   *             </li>
+   *             <li>
+   *                 <p>If you choose a private or vendor workforce, the default value is 10 days
+   *                     (864,000 seconds). For most users, the maximum is also 10 days. If you want to
+   *                     change this limit, contact AWS Support.</p>
+   *             </li>
+   *          </ul>
    */
   TaskAvailabilityLifetimeInSeconds?: number;
 
@@ -11071,7 +11673,25 @@ export namespace LabelingJobDataAttributes {
  */
 export interface LabelingJobS3DataSource {
   /**
-   * <p>The Amazon S3 location of the manifest file that describes the input data objects.</p>
+   * <p>The Amazon S3 location of the manifest file that describes the input data objects. </p>
+   *         <p>The input manifest file referenced in <code>ManifestS3Uri</code> must contain one of
+   *             the following keys: <code>source-ref</code> or <code>source</code>. The value of the
+   *             keys are interpreted as follows:</p>
+   *         <ul>
+   *             <li>
+   *                 <p>
+   *                   <code>source-ref</code>: The source of the object is the Amazon S3 object
+   *                     specified in the value. Use this value when the object is a binary object, such
+   *                     as an image.</p>
+   *             </li>
+   *             <li>
+   *                 <p>
+   *                   <code>source</code>: The source of the object is the value. Use this
+   *                     value when the object is a text value.</p>
+   *             </li>
+   *          </ul>
+   *         <p>If you are a new user of Ground Truth, it is recommended you review <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-input-data-input-manifest.html">Use an Input Manifest File </a> in the Amazon SageMaker Developer Guide to learn how to
+   *             create an input manifest file.</p>
    */
   ManifestS3Uri: string | undefined;
 }
@@ -11103,6 +11723,7 @@ export namespace LabelingJobSnsDataSource {
 
 /**
  * <p>Provides information about the location of input data.</p>
+ *
  *          <p>You must specify at least one of the following: <code>S3DataSource</code> or <code>SnsDataSource</code>.</p>
  *          <p>Use <code>SnsDataSource</code> to specify an SNS input topic
  *     for a streaming labeling job. If you do not specify
@@ -11321,22 +11942,94 @@ export namespace LabelingJobStoppingConditions {
 export interface CreateLabelingJobRequest {
   /**
    * <p>The name of the labeling job. This name is used to identify the job in a list of
-   *             labeling jobs.</p>
+   *             labeling jobs. Labeling job names must be unique within an AWS account and region.
+   *                 <code>LabelingJobName</code> is not case sensitive. For example, Example-job and
+   *             example-job are considered the same labeling job name by Ground Truth.</p>
    */
   LabelingJobName: string | undefined;
 
   /**
    * <p>The attribute name to use for the label in the output manifest file. This is the key
    *             for the key/value pair formed with the label that a worker assigns to the object. The
-   *             name can't end with "-metadata". If you are running a semantic segmentation labeling
-   *             job, the attribute name must end with "-ref". If you are running any other kind of
-   *             labeling job, the attribute name must not end with "-ref".</p>
+   *                 <code>LabelAttributeName</code> must meet the following requirements.</p>
+   *         <ul>
+   *             <li>
+   *                 <p>The name can't end with "-metadata". </p>
+   *             </li>
+   *             <li>
+   *                 <p>If you are using one of the following <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task types</a>,
+   *                     the attribute name <i>must</i> end with "-ref". If the task type
+   *                     you are using is not listed below, the attribute name <i>must
+   *                         not</i> end with "-ref".</p>
+   *                 <ul>
+   *                   <li>
+   *                         <p>Image semantic segmentation (<code>SemanticSegmentation)</code>, and
+   *                             adjustment (<code>AdjustmentSemanticSegmentation</code>) and
+   *                             verification (<code>VerificationSemanticSegmentation</code>) labeling
+   *                             jobs for this task type.</p>
+   *                     </li>
+   *                   <li>
+   *                         <p>Video frame object detection (<code>VideoObjectDetection</code>), and
+   *                             adjustment and verification
+   *                             (<code>AdjustmentVideoObjectDetection</code>) labeling jobs for this
+   *                             task type.</p>
+   *                     </li>
+   *                   <li>
+   *                         <p>Video frame object tracking (<code>VideoObjectTracking</code>), and
+   *                             adjustment and verification (<code>AdjustmentVideoObjectTracking</code>)
+   *                             labeling jobs for this task type.</p>
+   *                     </li>
+   *                   <li>
+   *                         <p>3D point cloud semantic segmentation
+   *                                 (<code>3DPointCloudSemanticSegmentation</code>), and adjustment and
+   *                             verification (<code>Adjustment3DPointCloudSemanticSegmentation</code>)
+   *                             labeling jobs for this task type. </p>
+   *                     </li>
+   *                   <li>
+   *                         <p>3D point cloud object tracking
+   *                                 (<code>3DPointCloudObjectTracking</code>), and adjustment and
+   *                             verification (<code>Adjustment3DPointCloudObjectTracking</code>)
+   *                             labeling jobs for this task type. </p>
+   *                     </li>
+   *                </ul>
+   *             </li>
+   *          </ul>
+   *         <p></p>
+   *         <important>
+   *             <p>If you are creating an adjustment or verification labeling job, you must use a
+   *                     <i>different</i>
+   *                 <code>LabelAttributeName</code> than the one used in the original labeling job. The
+   *                 original labeling job is the Ground Truth labeling job that produced the labels that you
+   *                 want verified or adjusted. To learn more about adjustment and verification labeling
+   *                 jobs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html">Verify and Adjust
+   *                     Labels</a>.</p>
+   *         </important>
    */
   LabelAttributeName: string | undefined;
 
   /**
    * <p>Input data for the labeling job, such as the Amazon S3 location of the data objects and the
    *             location of the manifest file that describes the data objects.</p>
+   *         <p>You must specify at least one of the following: <code>S3DataSource</code> or
+   *                 <code>SnsDataSource</code>. </p>
+   *         <ul>
+   *             <li>
+   *                 <p>Use <code>SnsDataSource</code> to specify an SNS input topic for a streaming
+   *                     labeling job. If you do not specify and SNS input topic ARN, Ground Truth will
+   *                     create a one-time labeling job that stops after all data objects in the input
+   *                     manifest file have been labeled.</p>
+   *             </li>
+   *             <li>
+   *                 <p>Use <code>S3DataSource</code> to specify an input manifest file for both
+   *                     streaming and one-time labeling jobs. Adding an <code>S3DataSource</code> is
+   *                     optional if you use <code>SnsDataSource</code> to create a streaming labeling
+   *                     job.</p>
+   *             </li>
+   *          </ul>
+   *         <p>If you use the Amazon Mechanical Turk workforce, your input data should not include
+   *             confidential information, personal information or protected health information. Use
+   *                 <code>ContentClassifiers</code> to specify that your data is free of personally
+   *             identifiable information and adult content.</p>
    */
   InputConfig: LabelingJobInputConfig | undefined;
 
@@ -11354,9 +12047,10 @@ export interface CreateLabelingJobRequest {
   RoleArn: string | undefined;
 
   /**
-   * <p>The S3 URI of the file that defines the categories used to label the data
-   *             objects.</p>
-   *         <p>For 3D point cloud task types, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html">Create a
+   * <p>The S3 URI of the file, referred to as a <i>label category configuration
+   *                 file</i>, that defines the categories used to label the data objects.</p>
+   *         <p>For 3D point cloud and video frame task types, you can add label category attributes
+   *             and frame attributes to your label category configuration file. To learn how, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html">Create a
    *                 Labeling Category Configuration File for 3D Point Cloud Labeling Jobs</a>. </p>
    *         <p>For all other <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task types</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html">custom
    *                 tasks</a>, your label category configuration file must be a JSON file in the
@@ -11364,50 +12058,38 @@ export interface CreateLabelingJobRequest {
    *                 <code>label_2</code>,<code>...</code>,<code>label_n</code> with your label
    *             categories.</p>
    *         <p>
-   *             <code>{</code>
-   *         </p>
+   *             <code>{ </code>
+   *          </p>
    *         <p>
-   *             <code> "document-version": "2018-11-28"</code>
-   *         </p>
+   *             <code>"document-version": "2018-11-28",</code>
+   *          </p>
    *         <p>
-   *             <code> "labels": [</code>
-   *         </p>
-   *         <p>
-   *             <code>   {</code>
-   *         </p>
-   *         <p>
-   *             <code> "label": "<i>label_1</i>"</code>
-   *         </p>
-   *         <p>
-   *             <code>   },</code>
-   *         </p>
-   *         <p>
-   *             <code>   {</code>
-   *         </p>
-   *         <p>
-   *             <code> "label": "<i>label_2</i>"</code>
-   *         </p>
-   *         <p>
-   *             <code>   },</code>
-   *         </p>
-   *         <p>
-   *             <code>   ...</code>
-   *         </p>
-   *         <p>
-   *             <code>   {</code>
-   *         </p>
-   *         <p>
-   *             <code> "label": "<i>label_n</i>"</code>
-   *         </p>
-   *         <p>
-   *             <code>   }</code>
-   *         </p>
-   *         <p>
-   *             <code> ]</code>
-   *         </p>
+   *             <code>"labels": [{"label": "label_1"},{"label": "label_2"},...{"label":
+   *                 "label_n"}]</code>
+   *          </p>
    *         <p>
    *             <code>}</code>
-   *         </p>
+   *          </p>
+   *         <p>Note the following about the label category configuration file:</p>
+   *         <ul>
+   *             <li>
+   *                 <p>For image classification and text classification (single and multi-label) you
+   *                     must specify at least two label categories. For all other task types, the
+   *                     minimum number of label categories required is one. </p>
+   *             </li>
+   *             <li>
+   *                 <p>Each label category must be unique, you cannot specify duplicate label
+   *                     categories.</p>
+   *             </li>
+   *             <li>
+   *                 <p>If you create a 3D point cloud or video frame adjustment or verification
+   *                     labeling job, you must include <code>auditLabelAttributeName</code> in the label
+   *                     category configuration. Use this parameter to enter the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateLabelingJob.html#sagemaker-CreateLabelingJob-request-LabelAttributeName">
+   *                      <code>LabelAttributeName</code>
+   *                   </a> of the labeling job you want to
+   *                     adjust or verify annotations of.</p>
+   *             </li>
+   *          </ul>
    */
   LabelCategoryConfigS3Uri?: string;
 
@@ -11455,6 +12137,37 @@ export namespace CreateLabelingJobResponse {
   });
 }
 
+export enum InferenceExecutionMode {
+  DIRECT = "Direct",
+  SERIAL = "Serial",
+}
+
+/**
+ * <p>Specifies details about how containers in a multi-container are run.</p>
+ */
+export interface InferenceExecutionConfig {
+  /**
+   * <p>How containers in a multi-container are run. The following values are valid.</p>
+   *         <ul>
+   *             <li>
+   *                 <p>
+   *                   <code>SERIAL</code> - Containers run as a serial pipeline.</p>
+   *             </li>
+   *             <li>
+   *                 <p>
+   *                   <code>DIRECT</code> - Only the individual container that you specify is run.</p>
+   *             </li>
+   *          </ul>
+   */
+  Mode: InferenceExecutionMode | string | undefined;
+}
+
+export namespace InferenceExecutionConfig {
+  export const filterSensitiveLog = (obj: InferenceExecutionConfig): any => ({
+    ...obj,
+  });
+}
+
 export interface CreateModelInput {
   /**
    * <p>The name of the new model.</p>
@@ -11474,6 +12187,11 @@ export interface CreateModelInput {
   Containers?: ContainerDefinition[];
 
   /**
+   * <p>Specifies details of how containers in a multi-container endpoint are called.</p>
+   */
+  InferenceExecutionConfig?: InferenceExecutionConfig;
+
+  /**
    * <p>The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume to access model
    *             artifacts and docker image for deployment on ML compute instances or for batch transform
    *             jobs. Deploying on ML compute instances is part of model hosting. For more information,
@@ -11488,9 +12206,9 @@ export interface CreateModelInput {
 
   /**
    * <p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-   *            different ways, for example, by purpose, owner, or environment. For more information,
-   *            see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                Resources</a>.</p>
+   *             different ways, for example, by purpose, owner, or environment. For more information,
+   *             see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
+   *                 Resources</a>.</p>
    */
   Tags?: Tag[];
 
@@ -11992,175 +12710,6 @@ export interface ModelPackageValidationProfile {
 
 export namespace ModelPackageValidationProfile {
   export const filterSensitiveLog = (obj: ModelPackageValidationProfile): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Specifies batch transform jobs that Amazon SageMaker runs to validate your model package.</p>
- */
-export interface ModelPackageValidationSpecification {
-  /**
-   * <p>The IAM roles to be used for the validation of the model package.</p>
-   */
-  ValidationRole: string | undefined;
-
-  /**
-   * <p>An array of <code>ModelPackageValidationProfile</code> objects, each of which
-   *             specifies a batch transform job that Amazon SageMaker runs to validate your model package.</p>
-   */
-  ValidationProfiles: ModelPackageValidationProfile[] | undefined;
-}
-
-export namespace ModelPackageValidationSpecification {
-  export const filterSensitiveLog = (obj: ModelPackageValidationSpecification): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateModelPackageInput {
-  /**
-   * <p>The name of the model package. The name must have 1 to 63 characters. Valid characters
-   *             are a-z, A-Z, 0-9, and - (hyphen).</p>
-   *         <p>This parameter is required for unversioned models. It is not applicable to versioned
-   *             models.</p>
-   */
-  ModelPackageName?: string;
-
-  /**
-   * <p>The name of the model group that this model version belongs to.</p>
-   *         <p>This parameter is required for versioned models, and does not apply to unversioned
-   *             models.</p>
-   */
-  ModelPackageGroupName?: string;
-
-  /**
-   * <p>A description of the model package.</p>
-   */
-  ModelPackageDescription?: string;
-
-  /**
-   * <p>Specifies details about inference jobs that can be run with models based on this model
-   *             package, including the following:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>The Amazon ECR paths of containers that contain the inference code and model
-   *                     artifacts.</p>
-   *             </li>
-   *             <li>
-   *                 <p>The instance types that the model package supports for transform jobs and
-   *                     real-time endpoints used for inference.</p>
-   *             </li>
-   *             <li>
-   *                 <p>The input and output content formats that the model package supports for
-   *                     inference.</p>
-   *             </li>
-   *          </ul>
-   */
-  InferenceSpecification?: InferenceSpecification;
-
-  /**
-   * <p>Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the
-   *             model package.</p>
-   */
-  ValidationSpecification?: ModelPackageValidationSpecification;
-
-  /**
-   * <p>Details about the algorithm that was used to create the model package.</p>
-   */
-  SourceAlgorithmSpecification?: SourceAlgorithmSpecification;
-
-  /**
-   * <p>Whether to certify the model package for listing on AWS Marketplace.</p>
-   *         <p>This parameter is optional for unversioned models, and does not apply to versioned
-   *             models.</p>
-   */
-  CertifyForMarketplace?: boolean;
-
-  /**
-   * <p>A list of key value pairs associated with the model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                 resources</a> in the <i>AWS General Reference Guide</i>.</p>
-   */
-  Tags?: Tag[];
-
-  /**
-   * <p>Whether the model is approved for deployment.</p>
-   *         <p>This parameter is optional for versioned models, and does not apply to unversioned
-   *             models.</p>
-   *         <p>For versioned models, the value of this parameter must be set to <code>Approved</code>
-   *         to deploy the model.</p>
-   */
-  ModelApprovalStatus?: ModelApprovalStatus | string;
-
-  /**
-   * <p>Metadata properties of the tracking entity, trial, or trial component.</p>
-   */
-  MetadataProperties?: MetadataProperties;
-
-  /**
-   * <p>A structure that contains model metrics reports.</p>
-   */
-  ModelMetrics?: ModelMetrics;
-
-  /**
-   * <p>A unique token that guarantees that the call to this API is idempotent.</p>
-   */
-  ClientToken?: string;
-}
-
-export namespace CreateModelPackageInput {
-  export const filterSensitiveLog = (obj: CreateModelPackageInput): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateModelPackageOutput {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the new model package.</p>
-   */
-  ModelPackageArn: string | undefined;
-}
-
-export namespace CreateModelPackageOutput {
-  export const filterSensitiveLog = (obj: CreateModelPackageOutput): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateModelPackageGroupInput {
-  /**
-   * <p>The name of the model group.</p>
-   */
-  ModelPackageGroupName: string | undefined;
-
-  /**
-   * <p>A description for the model group.</p>
-   */
-  ModelPackageGroupDescription?: string;
-
-  /**
-   * <p>A list of key value pairs associated with the model group. For more information, see
-   *                 <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS
-   *                 resources</a> in the <i>AWS General Reference Guide</i>.</p>
-   */
-  Tags?: Tag[];
-}
-
-export namespace CreateModelPackageGroupInput {
-  export const filterSensitiveLog = (obj: CreateModelPackageGroupInput): any => ({
-    ...obj,
-  });
-}
-
-export interface CreateModelPackageGroupOutput {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the model group.</p>
-   */
-  ModelPackageGroupArn: string | undefined;
-}
-
-export namespace CreateModelPackageGroupOutput {
-  export const filterSensitiveLog = (obj: CreateModelPackageGroupOutput): any => ({
     ...obj,
   });
 }

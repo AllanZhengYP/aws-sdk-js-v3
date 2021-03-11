@@ -29,7 +29,7 @@ export type GenerateServiceLastAccessedDetailsCommandOutput = GenerateServiceLas
  *          role, or policy) was last used in an attempt to access AWS services. Recent activity
  *          usually appears within four hours. IAM reports activity for the last 365 days, or less if
  *          your Region began supporting this feature within the last year. For more information, see
- *             <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period">Regions Where Data Is Tracked</a>.</p>
+ *             <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period">Regions where data is tracked</a>.</p>
  *          <important>
  *             <p>The service last accessed data includes all attempts to access an AWS API, not just
  *             the successful ones. This includes all attempts that were made using the AWS Management Console, the
@@ -37,7 +37,7 @@ export type GenerateServiceLastAccessedDetailsCommandOutput = GenerateServiceLas
  *             in the service last accessed data does not mean that your account has been compromised,
  *             because the request might have been denied. Refer to your CloudTrail logs as the
  *             authoritative source for information about all API calls and whether they were
- *             successful or denied access. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html">Logging IAM Events with
+ *             successful or denied access. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html">Logging IAM events with
  *                CloudTrail</a> in the <i>IAM User Guide</i>.</p>
  *          </important>
  *          <p>The <code>GenerateServiceLastAccessedDetails</code> operation returns a
@@ -71,10 +71,10 @@ export type GenerateServiceLastAccessedDetailsCommandOutput = GenerateServiceLas
  *             resource could access a service. These other policy types include resource-based
  *             policies, access control lists, AWS Organizations policies, IAM permissions boundaries,
  *             and AWS STS assume role policies. It only applies permissions policy logic. For more
- *             about the evaluation of policy types, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics">Evaluating Policies</a> in the <i>IAM User Guide</i>.</p>
+ *             about the evaluation of policy types, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics">Evaluating policies</a> in the <i>IAM User Guide</i>.</p>
  *          </note>
  *          <p>For more information about service and action last accessed data, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html">Reducing
- *             Permissions Using Service Last Accessed Data</a> in the
+ *             permissions using service last accessed data</a> in the
  *             <i>IAM User Guide</i>.</p>
  */
 export class GenerateServiceLastAccessedDetailsCommand extends $Command<

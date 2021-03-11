@@ -1638,15 +1638,15 @@ export namespace ElasticIpStatus {
 /**
  * <p>The connection endpoint for connecting an Amazon Redshift cluster through the proxy.</p>
  */
-export interface SpartaProxyVpcEndpoint {
+export interface VpcEndpoint {
   /**
    * <p>The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.</p>
    */
   VpcEndpointId?: string;
 }
 
-export namespace SpartaProxyVpcEndpoint {
-  export const filterSensitiveLog = (obj: SpartaProxyVpcEndpoint): any => ({
+export namespace VpcEndpoint {
+  export const filterSensitiveLog = (obj: VpcEndpoint): any => ({
     ...obj,
   });
 }
@@ -1668,7 +1668,7 @@ export interface Endpoint {
   /**
    * <p>Describes a connection endpoint.</p>
    */
-  VpcEndpoints?: SpartaProxyVpcEndpoint[];
+  VpcEndpoints?: VpcEndpoint[];
 }
 
 export namespace Endpoint {

@@ -3638,6 +3638,8 @@ const serializeAws_json1_1CreateProjectInput = (input: CreateProjectInput, conte
       }),
     ...(input.cache !== undefined &&
       input.cache !== null && { cache: serializeAws_json1_1ProjectCache(input.cache, context) }),
+    ...(input.concurrentBuildLimit !== undefined &&
+      input.concurrentBuildLimit !== null && { concurrentBuildLimit: input.concurrentBuildLimit }),
     ...(input.description !== undefined && input.description !== null && { description: input.description }),
     ...(input.encryptionKey !== undefined && input.encryptionKey !== null && { encryptionKey: input.encryptionKey }),
     ...(input.environment !== undefined &&
@@ -4257,6 +4259,7 @@ const serializeAws_json1_1S3LogsConfig = (input: S3LogsConfig, context: __SerdeC
 const serializeAws_json1_1S3ReportExportConfig = (input: S3ReportExportConfig, context: __SerdeContext): any => {
   return {
     ...(input.bucket !== undefined && input.bucket !== null && { bucket: input.bucket }),
+    ...(input.bucketOwner !== undefined && input.bucketOwner !== null && { bucketOwner: input.bucketOwner }),
     ...(input.encryptionDisabled !== undefined &&
       input.encryptionDisabled !== null && { encryptionDisabled: input.encryptionDisabled }),
     ...(input.encryptionKey !== undefined && input.encryptionKey !== null && { encryptionKey: input.encryptionKey }),
@@ -4542,6 +4545,8 @@ const serializeAws_json1_1UpdateProjectInput = (input: UpdateProjectInput, conte
       }),
     ...(input.cache !== undefined &&
       input.cache !== null && { cache: serializeAws_json1_1ProjectCache(input.cache, context) }),
+    ...(input.concurrentBuildLimit !== undefined &&
+      input.concurrentBuildLimit !== null && { concurrentBuildLimit: input.concurrentBuildLimit }),
     ...(input.description !== undefined && input.description !== null && { description: input.description }),
     ...(input.encryptionKey !== undefined && input.encryptionKey !== null && { encryptionKey: input.encryptionKey }),
     ...(input.environment !== undefined &&
@@ -5777,6 +5782,10 @@ const deserializeAws_json1_1Project = (output: any, context: __SerdeContext): Pr
       output.cache !== undefined && output.cache !== null
         ? deserializeAws_json1_1ProjectCache(output.cache, context)
         : undefined,
+    concurrentBuildLimit:
+      output.concurrentBuildLimit !== undefined && output.concurrentBuildLimit !== null
+        ? output.concurrentBuildLimit
+        : undefined,
     created:
       output.created !== undefined && output.created !== null ? new Date(Math.round(output.created * 1000)) : undefined,
     description: output.description !== undefined && output.description !== null ? output.description : undefined,
@@ -6303,6 +6312,7 @@ const deserializeAws_json1_1S3LogsConfig = (output: any, context: __SerdeContext
 const deserializeAws_json1_1S3ReportExportConfig = (output: any, context: __SerdeContext): S3ReportExportConfig => {
   return {
     bucket: output.bucket !== undefined && output.bucket !== null ? output.bucket : undefined,
+    bucketOwner: output.bucketOwner !== undefined && output.bucketOwner !== null ? output.bucketOwner : undefined,
     encryptionDisabled:
       output.encryptionDisabled !== undefined && output.encryptionDisabled !== null
         ? output.encryptionDisabled

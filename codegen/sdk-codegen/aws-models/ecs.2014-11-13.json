@@ -1117,7 +1117,7 @@
         "environmentFiles": {
           "target": "com.amazonaws.ecs#EnvironmentFiles",
           "traits": {
-            "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. This\n\t\t\tparameter maps to the <code>--env-file</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <p>You can specify up to ten environment files. The file must have a <code>.env</code>\n\t\t\tfile extension. Each line in an environment file should contain an environment variable\n\t\t\tin <code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored. For more information on the environment variable file\n\t\t\tsyntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default\n\t\t\t\tenvironment variables in file</a>.</p>\n\t\t       <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they are processed from the top down. It is recommended to use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying Environment\n\t\t\t\tVariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>This field is not valid for containers in tasks using the Fargate launch\n\t\t\ttype.</p>"
+            "smithy.api#documentation": "<p>A list of files containing the environment variables to pass to a container. This\n\t\t\tparameter maps to the <code>--env-file</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <p>You can specify up to ten environment files. The file must have a <code>.env</code>\n\t\t\tfile extension. Each line in an environment file should contain an environment variable\n\t\t\tin <code>VARIABLE=VALUE</code> format. Lines beginning with <code>#</code> are treated\n\t\t\tas comments and are ignored. For more information on the environment variable file\n\t\t\tsyntax, see <a href=\"https://docs.docker.com/compose/env-file/\">Declare default\n\t\t\t\tenvironment variables in file</a>.</p>\n\t\t       <p>If there are environment variables specified using the <code>environment</code>\n\t\t\tparameter in a container definition, they take precedence over the variables contained\n\t\t\twithin an environment file. If multiple environment files are specified that contain the\n\t\t\tsame variable, they are processed from the top down. It is recommended to use unique\n\t\t\tvariable names. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html\">Specifying Environment\n\t\t\t\tVariables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
           }
         },
         "mountPoints": {
@@ -7536,6 +7536,24 @@
           "traits": {
             "smithy.api#documentation": "<p>The configuration details for the App Mesh proxy.</p>\n\t\t       <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent\n\t\t\tand at least version 1.26.0-1 of the <code>ecs-init</code> package to enable a proxy\n\t\t\tconfiguration. If your container instances are launched from the Amazon ECS-optimized AMI\n\t\t\tversion <code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
           }
+        },
+        "registeredAt": {
+          "target": "com.amazonaws.ecs#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The Unix timestamp for when the task definition was registered.</p>"
+          }
+        },
+        "deregisteredAt": {
+          "target": "com.amazonaws.ecs#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The Unix timestamp for when the task definition was deregistered.</p>"
+          }
+        },
+        "registeredBy": {
+          "target": "com.amazonaws.ecs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The principal that registered the task definition.</p>"
+          }
         }
       },
       "traits": {
@@ -8144,14 +8162,14 @@
         "name": {
           "target": "com.amazonaws.ecs#String",
           "traits": {
-            "smithy.api#documentation": "<p>An object representing the parameters to update for the Auto Scaling group capacity\n\t\t\tprovider.</p>",
+            "smithy.api#documentation": "<p>The name of the capacity provider to update.</p>",
             "smithy.api#required": {}
           }
         },
         "autoScalingGroupProvider": {
           "target": "com.amazonaws.ecs#AutoScalingGroupProviderUpdate",
           "traits": {
-            "smithy.api#documentation": "<p>The name of the capacity provider to update.</p>",
+            "smithy.api#documentation": "<p>An object representing the parameters to update for the Auto Scaling group capacity\n\t\t\tprovider.</p>",
             "smithy.api#required": {}
           }
         }

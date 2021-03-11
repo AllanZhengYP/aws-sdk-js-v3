@@ -9543,6 +9543,9 @@ const serializeAws_queryModifyGlobalReplicationGroupMessage = (
   if (input.EngineVersion !== undefined && input.EngineVersion !== null) {
     entries["EngineVersion"] = input.EngineVersion;
   }
+  if (input.CacheParameterGroupName !== undefined && input.CacheParameterGroupName !== null) {
+    entries["CacheParameterGroupName"] = input.CacheParameterGroupName;
+  }
   if (input.GlobalReplicationGroupDescription !== undefined && input.GlobalReplicationGroupDescription !== null) {
     entries["GlobalReplicationGroupDescription"] = input.GlobalReplicationGroupDescription;
   }

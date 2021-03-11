@@ -587,7 +587,11 @@ export class AutoScaling extends AutoScalingClient {
   }
 
   /**
-   * <p>Creates an Auto Scaling group with the specified name and attributes. </p>
+   * <p>
+   *             <b>We strongly recommend using a launch template when calling this operation to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.</b>
+   *          </p>
+   *          <p>Creates an Auto Scaling group with
+   *             the specified name and attributes. </p>
    *         <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit,
    *             call the <a>DescribeAccountLimits</a> API. For information about updating
    *             this limit, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html">Amazon EC2 Auto Scaling service
@@ -1453,6 +1457,10 @@ export class AutoScaling extends AutoScalingClient {
 
   /**
    * <p>Describes one or more scaling activities for the specified Auto Scaling group.</p>
+   *         <p>To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the <b>Activity</b> tab of the Auto Scaling group. When scaling events occur,
+   *             you see scaling activity messages in the <b>Activity
+   *                 history</b>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html">Verifying a scaling
+   *                 activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
    */
   public describeScalingActivities(
     args: DescribeScalingActivitiesCommandInput,
@@ -2405,7 +2413,11 @@ export class AutoScaling extends AutoScalingClient {
   }
 
   /**
-   * <p>Updates the configuration for the specified Auto Scaling group.</p>
+   * <p>
+   *             <b>We strongly recommend that all Auto Scaling groups use launch templates to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.</b>
+   *          </p>
+   *          <p>Updates the configuration for
+   *             the specified Auto Scaling group.</p>
    *         <p>To update an Auto Scaling group, specify the name of the group and the parameter that you want
    *             to change. Any parameters that you don't specify are not changed by this update request.
    *             The new settings take effect on any scaling activities after this call returns.

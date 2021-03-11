@@ -124,6 +124,7 @@ export * from "./commands/DescribeValidDBInstanceModificationsCommand";
 export * from "./commands/DownloadDBLogFilePortionCommand";
 export * from "./pagination/DownloadDBLogFilePortionPaginator";
 export * from "./commands/FailoverDBClusterCommand";
+export * from "./commands/FailoverGlobalClusterCommand";
 export * from "./commands/ImportInstallationMediaCommand";
 export * from "./commands/ListTagsForResourceCommand";
 export * from "./commands/ModifyCertificatesCommand";

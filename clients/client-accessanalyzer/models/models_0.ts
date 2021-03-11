@@ -176,7 +176,9 @@ export namespace ServiceQuotaExceededException {
 export interface ThrottlingException extends __SmithyException, $MetadataBearer {
   name: "ThrottlingException";
   $fault: "client";
-  $retryable: {};
+  $retryable: {
+    throttling: true;
+  };
   message: string | undefined;
   /**
    * <p>The seconds to wait to retry.</p>
@@ -449,8 +451,9 @@ export interface CreateAnalyzerRequest {
   analyzerName: string | undefined;
 
   /**
-   * <p>The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create
-   *          only one analyzer per account per Region.</p>
+   * <p>The type of analyzer to create. Only ACCOUNT and ORGANIZATION analyzers are supported.
+   *          You can create only one analyzer per account per Region. You can create up to 5 analyzers
+   *          per organization per Region.</p>
    */
   type: Type | string | undefined;
 
@@ -598,19 +601,21 @@ export interface AnalyzerSummary {
   tags?: { [key: string]: string };
 
   /**
-   * <p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources
-   *          and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing
-   *          trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop
-   *          generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress
-   *          and <code>Failed</code> when the analyzer creation has failed. </p>
+   * <p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors
+   *          supported resources and generates new findings. The analyzer is <code>Disabled</code> when
+   *          a user action, such as removing trusted access for AWS IAM Access Analyzer from AWS
+   *          Organizations, causes the analyzer to stop generating new findings. The status is
+   *             <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code>
+   *          when the analyzer creation has failed. </p>
    */
   status: AnalyzerStatus | string | undefined;
 
   /**
-   * <p>The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the
-   *          creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer
-   *          with organization as the type, this failure can be due to an issue with creating the
-   *          service-linked roles required in the member accounts of the AWS organization.</p>
+   * <p>The <code>statusReason</code> provides more details about the current status of the
+   *          analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status
+   *          is displayed. For an analyzer with organization as the type, this failure can be due to an
+   *          issue with creating the service-linked roles required in the member accounts of the AWS
+   *          organization.</p>
    */
   statusReason?: StatusReason;
 }
@@ -686,6 +691,32 @@ export namespace ListAnalyzersResponse {
 }
 
 /**
+ * <p>Retroactively applies an archive rule.</p>
+ */
+export interface ApplyArchiveRuleRequest {
+  /**
+   * <p>The Amazon resource name (ARN) of the analyzer.</p>
+   */
+  analyzerArn: string | undefined;
+
+  /**
+   * <p>The name of the rule to apply.</p>
+   */
+  ruleName: string | undefined;
+
+  /**
+   * <p>A client token.</p>
+   */
+  clientToken?: string;
+}
+
+export namespace ApplyArchiveRuleRequest {
+  export const filterSensitiveLog = (obj: ApplyArchiveRuleRequest): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>Retrieves an analyzed resource.</p>
  */
 export interface GetAnalyzedResourceRequest {
@@ -712,7 +743,8 @@ export type ResourceType =
   | "AWS::Lambda::Function"
   | "AWS::Lambda::LayerVersion"
   | "AWS::S3::Bucket"
-  | "AWS::SQS::Queue";
+  | "AWS::SQS::Queue"
+  | "AWS::SecretsManager::Secret";
 
 export type FindingStatus = "ACTIVE" | "ARCHIVED" | "RESOLVED";
 
@@ -758,7 +790,8 @@ export interface AnalyzedResource {
   actions?: string[];
 
   /**
-   * <p>Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>
+   * <p>Indicates how the access that generated the finding is granted. This is populated for
+   *          Amazon S3 bucket findings.</p>
    */
   sharedVia?: string[];
 
@@ -823,7 +856,8 @@ export namespace GetFindingRequest {
 }
 
 /**
- * <p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>
+ * <p>Includes details about how the access that generated the finding is granted. This is
+ *          populated for Amazon S3 bucket findings.</p>
  */
 export interface FindingSourceDetail {
   /**
@@ -838,10 +872,11 @@ export namespace FindingSourceDetail {
   });
 }
 
-export type FindingSourceType = "BUCKET_ACL" | "KMS_GRANT" | "POLICY" | "S3_ACCESS_POINT";
+export type FindingSourceType = "BUCKET_ACL" | "POLICY" | "S3_ACCESS_POINT";
 
 /**
- * <p>The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>
+ * <p>The source of the finding. This indicates how the access that generated the finding is
+ *          granted. It is populated for Amazon S3 bucket findings.</p>
  */
 export interface FindingSource {
   /**
@@ -850,7 +885,8 @@ export interface FindingSource {
   type: FindingSourceType | string | undefined;
 
   /**
-   * <p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>
+   * <p>Includes details about how the access that generated the finding is granted. This is
+   *          populated for Amazon S3 bucket findings.</p>
    */
   detail?: FindingSourceDetail;
 }
@@ -933,7 +969,8 @@ export interface Finding {
   error?: string;
 
   /**
-   * <p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>
+   * <p>The sources of the finding. This indicates how the access that generated the finding is
+   *          granted. It is populated for Amazon S3 bucket findings.</p>
    */
   sources?: FindingSource[];
 }
@@ -1170,7 +1207,8 @@ export interface FindingSummary {
   error?: string;
 
   /**
-   * <p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>
+   * <p>The sources of the finding. This indicates how the access that generated the finding is
+   *          granted. It is populated for Amazon S3 bucket findings.</p>
    */
   sources?: FindingSource[];
 }

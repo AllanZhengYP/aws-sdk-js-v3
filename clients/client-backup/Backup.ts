@@ -687,7 +687,7 @@ export class Backup extends BackupClient {
   }
 
   /**
-   * <p>The current feature settings for the AWS Account.</p>
+   * <p>Describes the global settings of the AWS account, including whether it is opted in to cross-account backup.</p>
    */
   public describeGlobalSettings(
     args: DescribeGlobalSettingsCommandInput,
@@ -1820,7 +1820,7 @@ export class Backup extends BackupClient {
   }
 
   /**
-   * <p>Updates the current global settings for the AWS Account. Use the
+   * <p>Updates the current global settings for the AWS account. Use the
    *             <code>DescribeGlobalSettings</code> API to determine the current settings.</p>
    */
   public updateGlobalSettings(
@@ -1861,6 +1861,7 @@ export class Backup extends BackupClient {
    *          days. Therefore, the “expire after days” setting must be 90 days greater than the
    *          “transition to cold after days” setting. The “transition to cold after days” setting cannot
    *          be changed after a backup has been transitioned to cold. </p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   public updateRecoveryPointLifecycle(
     args: UpdateRecoveryPointLifecycleCommandInput,

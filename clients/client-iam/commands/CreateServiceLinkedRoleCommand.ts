@@ -26,7 +26,7 @@ export type CreateServiceLinkedRoleCommandOutput = CreateServiceLinkedRoleRespon
  *          is not broken by an unexpectedly changed or deleted role, which could put your AWS
  *          resources into an unknown state. Allowing the service to control the role helps improve
  *          service stability and proper cleanup when a service and its role are no longer needed. For
- *          more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">Using Service-Linked Roles</a>
+ *          more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html">Using service-linked roles</a>
  *          in the <i>IAM User Guide</i>. </p>
  *          <p>To attach a policy to this service-linked role, you must make the request using the
  *          AWS service that depends on this role.</p>

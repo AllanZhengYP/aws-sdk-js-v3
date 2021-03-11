@@ -24,7 +24,7 @@ export type ListInstanceProfilesForRoleCommandOutput = ListInstanceProfilesForRo
  * <p>Lists the instance profiles that have the specified associated IAM role. If there are
  *          none, the operation returns an empty list. For more information about instance profiles, go
  *          to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About
- *             Instance Profiles</a>.</p>
+ *             instance profiles</a>.</p>
  *          <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
  *          parameters.</p>
  */

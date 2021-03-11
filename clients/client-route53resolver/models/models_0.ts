@@ -1290,8 +1290,9 @@ export namespace DisassociateResolverRuleResponse {
  * 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html">ListResolverRules</a>,
  * 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html">ListResolverRuleAssociations</a>,
  * 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigs.html">ListResolverQueryLogConfigs</a>,
- * 			and
  * 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html">ListResolverQueryLogConfigAssociations</a>),
+ * 			and
+ * 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverDnssecConfigs.html">ListResolverDnssecConfigs</a>),
  * 			an optional specification to return a subset of objects.</p>
  * 		       <p>To filter objects, such as Resolver endpoints or Resolver rules, you specify <code>Name</code> and <code>Values</code>. For example,
  * 			to list only inbound Resolver endpoints, specify <code>Direction</code> for <code>Name</code> and specify <code>INBOUND</code> for <code>Values</code>. </p>
@@ -1534,7 +1535,7 @@ export interface Filter {
    *                   <code>Status</code>: The status of the query logging association. If you specify <code>Status</code> for <code>Name</code>,
    * 				specify the applicable status code for <code>Values</code>: <code>CREATING</code>, <code>CREATED</code>,
    * 				<code>DELETING</code>, or <code>FAILED</code>. For more information, see
-   * 				<a href="https://docs.aws.amazon.com/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status">Status</a>.
+   * 			    <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfigAssociation.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfigAssociation-Status">Status</a>.
    * 				</p>
    * 			         </li>
    *          </ul>
@@ -1551,6 +1552,88 @@ export interface Filter {
 
 export namespace Filter {
   export const filterSensitiveLog = (obj: Filter): any => ({
+    ...obj,
+  });
+}
+
+export interface GetResolverDnssecConfigRequest {
+  /**
+   * <p>The ID of the virtual private cloud (VPC) for the DNSSEC validation status.</p>
+   */
+  ResourceId: string | undefined;
+}
+
+export namespace GetResolverDnssecConfigRequest {
+  export const filterSensitiveLog = (obj: GetResolverDnssecConfigRequest): any => ({
+    ...obj,
+  });
+}
+
+export enum ResolverDNSSECValidationStatus {
+  Disabled = "DISABLED",
+  Disabling = "DISABLING",
+  Enabled = "ENABLED",
+  Enabling = "ENABLING",
+}
+
+/**
+ * <p>A complex type that contains information about a configuration for DNSSEC validation.</p>
+ */
+export interface ResolverDnssecConfig {
+  /**
+   * <p>The ID for a configuration for DNSSEC validation.</p>
+   */
+  Id?: string;
+
+  /**
+   * <p>The owner account ID of the virtual private cloud (VPC) for a configuration for DNSSEC validation.</p>
+   */
+  OwnerId?: string;
+
+  /**
+   * <p>The ID of the virtual private cloud (VPC) that you're configuring the DNSSEC validation status for.</p>
+   */
+  ResourceId?: string;
+
+  /**
+   * <p>The validation status for a DNSSEC configuration. The status can be one of the following:</p>
+   * 		       <ul>
+   *             <li>
+   *                <p>
+   *                   <b>ENABLING:</b> DNSSEC validation is being enabled but is not complete.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <b>ENABLED:</b> DNSSEC validation is enabled.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <b>DISABLING:</b> DNSSEC validation is being disabled but is not complete.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <b>DISABLED</b> DNSSEC validation is disabled.</p>
+   *             </li>
+   *          </ul>
+   */
+  ValidationStatus?: ResolverDNSSECValidationStatus | string;
+}
+
+export namespace ResolverDnssecConfig {
+  export const filterSensitiveLog = (obj: ResolverDnssecConfig): any => ({
+    ...obj,
+  });
+}
+
+export interface GetResolverDnssecConfigResponse {
+  /**
+   * <p>The information about a configuration for DNSSEC validation.</p>
+   */
+  ResolverDNSSECConfig?: ResolverDnssecConfig;
+}
+
+export namespace GetResolverDnssecConfigResponse {
+  export const filterSensitiveLog = (obj: GetResolverDnssecConfigResponse): any => ({
     ...obj,
   });
 }
@@ -1729,7 +1812,7 @@ export namespace GetResolverRuleAssociationResponse {
 
 export interface GetResolverRulePolicyRequest {
   /**
-   * <p>The ID of the Resolver rule policy that you want to get information about.</p>
+   * <p>The ID of the Resolver rule that you want to get the Resolver rule policy for.</p>
    */
   Arn: string | undefined;
 }
@@ -1742,7 +1825,7 @@ export namespace GetResolverRulePolicyRequest {
 
 export interface GetResolverRulePolicyResponse {
   /**
-   * <p>Information about the Resolver rule policy that you specified in a <code>GetResolverRulePolicy</code> request.</p>
+   * <p>The Resolver rule policy for the rule that you specified in a <code>GetResolverRulePolicy</code> request.</p>
    */
   ResolverRulePolicy?: string;
 }
@@ -1855,6 +1938,60 @@ export interface IpAddressResponse {
 
 export namespace IpAddressResponse {
   export const filterSensitiveLog = (obj: IpAddressResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface ListResolverDnssecConfigsRequest {
+  /**
+   * <p>
+   *             <i>Optional</i>: An integer that specifies the maximum number of DNSSEC configuration results that you want Amazon Route 53 to return.
+   * 			If you don't specify a value for <code>MaxResults</code>, Route 53 returns up to 100 configuration per page.</p>
+   */
+  MaxResults?: number;
+
+  /**
+   * <p>(Optional) If the current AWS account has more than <code>MaxResults</code> DNSSEC configurations, use <code>NextToken</code>
+   * 			to get the second and subsequent pages of results.</p>
+   * 		       <p>For the first <code>ListResolverDnssecConfigs</code> request, omit this value.</p>
+   * 		       <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value
+   * 			for <code>NextToken</code> in the request.</p>
+   */
+  NextToken?: string;
+
+  /**
+   * <p>An optional specification to return a subset of objects.</p>
+   */
+  Filters?: Filter[];
+}
+
+export namespace ListResolverDnssecConfigsRequest {
+  export const filterSensitiveLog = (obj: ListResolverDnssecConfigsRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface ListResolverDnssecConfigsResponse {
+  /**
+   * <p>If a response includes the last of the DNSSEC configurations that are associated with the current AWS account,
+   * 			<code>NextToken</code> doesn't appear in the response.</p>
+   * 		       <p>If a response doesn't include the last of the configurations, you can get more configurations by submitting another
+   * 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html">ListResolverDnssecConfigs</a>
+   * 			request. Get the value of <code>NextToken</code> that Amazon Route 53 returned in the previous response and include it in
+   * 			<code>NextToken</code> in the next request.</p>
+   */
+  NextToken?: string;
+
+  /**
+   * <p>An array that contains one
+   * 			<a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html">ResolverDnssecConfig</a> element
+   * 			for each configuration for DNSSEC validation that is associated with the current AWS account.</p>
+   */
+  ResolverDnssecConfigs?: ResolverDnssecConfig[];
+}
+
+export namespace ListResolverDnssecConfigsResponse {
+  export const filterSensitiveLog = (obj: ListResolverDnssecConfigsResponse): any => ({
     ...obj,
   });
 }
@@ -2502,13 +2639,13 @@ export namespace PutResolverQueryLogConfigPolicyResponse {
 
 export interface PutResolverRulePolicyRequest {
   /**
-   * <p>The Amazon Resource Name (ARN) of the account that you want to share rules with.</p>
+   * <p>The Amazon Resource Name (ARN) of the rule that you want to share with another account.</p>
    */
   Arn: string | undefined;
 
   /**
    * <p>An AWS Identity and Access Management policy statement that lists the rules that you want to share with another AWS account and the operations that you want the account
-   * 			to be able to perform. You can specify the following operations in the <code>Actions</code> section of the statement:</p>
+   * 			to be able to perform. You can specify the following operations in the <code>Action</code> section of the statement:</p>
    * 			      <ul>
    *             <li>
    *                <p>
@@ -2537,8 +2674,8 @@ export interface PutResolverRulePolicyRequest {
    *             </li>
    *          </ul>
    *
-   * 		       <p>In the <code>Resource</code> section of the statement, you specify the ARNs for the rules that you want to share with the account that you
-   * 			specified in <code>Arn</code>. </p>
+   * 		       <p>In the <code>Resource</code> section of the statement, specify the ARN for the rule that you want to share with another account. Specify the same ARN
+   * 			that you specified in <code>Arn</code>.</p>
    */
   ResolverRulePolicy: string | undefined;
 }
@@ -2708,6 +2845,43 @@ export interface UntagResourceResponse {}
 
 export namespace UntagResourceResponse {
   export const filterSensitiveLog = (obj: UntagResourceResponse): any => ({
+    ...obj,
+  });
+}
+
+export enum Validation {
+  DISABLE = "DISABLE",
+  ENABLE = "ENABLE",
+}
+
+export interface UpdateResolverDnssecConfigRequest {
+  /**
+   * <p>The ID of the virtual private cloud (VPC) that you're updating the DNSSEC validation status for.</p>
+   */
+  ResourceId: string | undefined;
+
+  /**
+   * <p>The new value that you are specifying for DNSSEC validation for the VPC. The value can be <code>ENABLE</code>
+   * 			or <code>DISABLE</code>. Be aware that it can take time for a validation status change to be completed.</p>
+   */
+  Validation: Validation | string | undefined;
+}
+
+export namespace UpdateResolverDnssecConfigRequest {
+  export const filterSensitiveLog = (obj: UpdateResolverDnssecConfigRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface UpdateResolverDnssecConfigResponse {
+  /**
+   * <p>A complex type that contains settings for the specified DNSSEC configuration.</p>
+   */
+  ResolverDNSSECConfig?: ResolverDnssecConfig;
+}
+
+export namespace UpdateResolverDnssecConfigResponse {
+  export const filterSensitiveLog = (obj: UpdateResolverDnssecConfigResponse): any => ({
     ...obj,
   });
 }

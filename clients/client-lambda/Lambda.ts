@@ -429,8 +429,12 @@ export class Lambda extends LambdaClient {
    *             </li>
    *             <li>
    *                <p>
-   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon
-   *           MSK</a>
+   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon MSK</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html">Using AWS Lambda with Self-Managed Apache Kafka</a>
    *                </p>
    *             </li>
    *          </ul>
@@ -615,8 +619,7 @@ export class Lambda extends LambdaClient {
   /**
    * <p>Deletes an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html">event source
    *       mapping</a>. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.</p>
-   *          <p>When you delete an event source mapping, it enters a <code>Deleting</code> state and might not be completely
-   *       deleted for several seconds.</p>
+   *          <p>When you delete an event source mapping, it enters a <code>Deleting</code> state and might not be completely deleted for several seconds.</p>
    */
   public deleteEventSourceMapping(
     args: DeleteEventSourceMappingCommandInput,
@@ -938,8 +941,7 @@ export class Lambda extends LambdaClient {
   }
 
   /**
-   * <p>Returns details about an event source mapping. You can get the identifier of a mapping from the output of
-   *       <a>ListEventSourceMappings</a>.</p>
+   * <p>Returns details about an event source mapping. You can get the identifier of a mapping from the output of <a>ListEventSourceMappings</a>.</p>
    */
   public getEventSourceMapping(
     args: GetEventSourceMappingCommandInput,
@@ -2128,8 +2130,7 @@ export class Lambda extends LambdaClient {
   }
 
   /**
-   * <p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and
-   *       resume later from the same location.</p>
+   * <p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p>
    *          <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p>
    *          <ul>
    *             <li>

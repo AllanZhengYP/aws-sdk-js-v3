@@ -32,7 +32,7 @@ export type ListPoliciesGrantingServiceAccessCommandOutput = ListPoliciesGrantin
  *             could access a service. These other policy types include resource-based policies, access
  *             control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS
  *             assume role policies. It only applies permissions policy logic. For more about the
- *             evaluation of policy types, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics">Evaluating Policies</a> in the <i>IAM User Guide</i>.</p>
+ *             evaluation of policy types, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics">Evaluating policies</a> in the <i>IAM User Guide</i>.</p>
  *          </note>
  *          <p>The list of policies returned by the operation depends on the ARN of the identity that
  *          you provide.</p>
@@ -59,7 +59,7 @@ export type ListPoliciesGrantingServiceAccessCommandOutput = ListPoliciesGrantin
  *          <p>For each managed policy, this operation returns the ARN and policy name. For each inline
  *          policy, it returns the policy name and the entity to which it is attached. Inline policies
  *          do not have an ARN. For more information about these policy types, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html">Managed
- *             Policies and Inline Policies</a> in the
+ *             policies and inline policies</a> in the
  *          <i>IAM User Guide</i>.</p>
  *          <p>Policies that are attached to users and roles as permissions boundaries are not
  *          returned. To view which managed policy is currently used to set the permissions boundary

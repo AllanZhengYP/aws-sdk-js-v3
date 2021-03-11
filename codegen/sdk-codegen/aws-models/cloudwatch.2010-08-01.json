@@ -156,10 +156,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "CompositeAlarm"
+            "value": "CompositeAlarm",
+            "name": "CompositeAlarm"
           },
           {
-            "value": "MetricAlarm"
+            "value": "MetricAlarm",
+            "name": "MetricAlarm"
           }
         ]
       }
@@ -270,13 +272,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "PENDING_TRAINING"
+            "value": "PENDING_TRAINING",
+            "name": "PENDING_TRAINING"
           },
           {
-            "value": "TRAINED_INSUFFICIENT_DATA"
+            "value": "TRAINED_INSUFFICIENT_DATA",
+            "name": "TRAINED_INSUFFICIENT_DATA"
           },
           {
-            "value": "TRAINED"
+            "value": "TRAINED",
+            "name": "TRAINED"
           }
         ]
       }
@@ -301,25 +306,32 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "GreaterThanOrEqualToThreshold"
+            "value": "GreaterThanOrEqualToThreshold",
+            "name": "GreaterThanOrEqualToThreshold"
           },
           {
-            "value": "GreaterThanThreshold"
+            "value": "GreaterThanThreshold",
+            "name": "GreaterThanThreshold"
           },
           {
-            "value": "LessThanThreshold"
+            "value": "LessThanThreshold",
+            "name": "LessThanThreshold"
           },
           {
-            "value": "LessThanOrEqualToThreshold"
+            "value": "LessThanOrEqualToThreshold",
+            "name": "LessThanOrEqualToThreshold"
           },
           {
-            "value": "LessThanLowerOrGreaterThanUpperThreshold"
+            "value": "LessThanLowerOrGreaterThanUpperThreshold",
+            "name": "LessThanLowerOrGreaterThanUpperThreshold"
           },
           {
-            "value": "LessThanLowerThreshold"
+            "value": "LessThanLowerThreshold",
+            "name": "LessThanLowerThreshold"
           },
           {
-            "value": "GreaterThanUpperThreshold"
+            "value": "GreaterThanUpperThreshold",
+            "name": "GreaterThanUpperThreshold"
           }
         ]
       }
@@ -1758,8 +1770,17 @@
           "traits": {
             "smithy.api#documentation": "<p>The maximum number of data points the request should return before paginating. If you omit\n\t\t\tthis, the default of 100,800 is used.</p>"
           }
+        },
+        "LabelOptions": {
+          "target": "com.amazonaws.cloudwatch#LabelOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>This structure includes the <code>Timezone</code> parameter, which you can use\n\t\t\tto specify your time zone so that the labels of returned data display the \n\t\t\tcorrect time\n\t\t\tfor your time zone. </p>"
+          }
         }
       }
+    },
+    "com.amazonaws.cloudwatch#GetMetricDataLabelTimezone": {
+      "type": "string"
     },
     "com.amazonaws.cloudwatch#GetMetricDataMaxDatapoints": {
       "type": "integer",
@@ -2066,13 +2087,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ConfigurationUpdate"
+            "value": "ConfigurationUpdate",
+            "name": "ConfigurationUpdate"
           },
           {
-            "value": "StateUpdate"
+            "value": "StateUpdate",
+            "name": "StateUpdate"
           },
           {
-            "value": "Action"
+            "value": "Action",
+            "name": "Action"
           }
         ]
       }
@@ -2446,6 +2470,20 @@
         "smithy.api#documentation": "<p>The value of an input parameter is bad or out-of-range.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.cloudwatch#LabelOptions": {
+      "type": "structure",
+      "members": {
+        "Timezone": {
+          "target": "com.amazonaws.cloudwatch#GetMetricDataLabelTimezone",
+          "traits": {
+            "smithy.api#documentation": "<p>The time zone to use for metric data return in this operation. \n\t\t\tThe format is <code>+</code> or <code>-</code> followed by four digits. \n\t\t\tThe first two digits indicate the number of hours ahead or behind of UTC, and \n\t\t\tthe final two digits are the number of minutes. For example, +0130 indicates a time zone that is 1 hour \n\t\t\tand 30 minutes ahead of UTC. The default is +0000. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This structure includes the <code>Timezone</code> parameter, which you can use\n\t\t\tto specify your time zone so that the labels that are associated with returned metrics display the \n\t\t\tcorrect time\n\t\t\tfor your time zone. </p>\n\t\t       <p>The <code>Timezone</code> value affects a label only if you have a time-based\n\t\tdynamic expression in the label. For more information about dynamic expressions in labels, \n\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html\">Using Dynamic Labels</a>.</p>"
       }
     },
     "com.amazonaws.cloudwatch#LastModified": {
@@ -2949,7 +2987,7 @@
         "Label": {
           "target": "com.amazonaws.cloudwatch#MetricLabel",
           "traits": {
-            "smithy.api#documentation": "<p>A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know\n\t\t\twhat the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch \n\t\t\tgenerates a default.</p>"
+            "smithy.api#documentation": "<p>A human-readable label for this metric or expression. This is especially useful \n\t\t\tif this is an expression, so that you know\n\t\t\twhat the value represents. If the metric or expression is shown in a \n\t\t\tCloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch \n\t\t\tgenerates a default.</p>\n\t\t       <p>You can put dynamic expressions into a label, so that it is more descriptive. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html\">Using Dynamic Labels</a>.</p>"
           }
         },
         "ReturnData": {
@@ -3852,85 +3890,112 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Seconds"
+            "value": "Seconds",
+            "name": "Seconds"
           },
           {
-            "value": "Microseconds"
+            "value": "Microseconds",
+            "name": "Microseconds"
           },
           {
-            "value": "Milliseconds"
+            "value": "Milliseconds",
+            "name": "Milliseconds"
           },
           {
-            "value": "Bytes"
+            "value": "Bytes",
+            "name": "Bytes"
           },
           {
-            "value": "Kilobytes"
+            "value": "Kilobytes",
+            "name": "Kilobytes"
           },
           {
-            "value": "Megabytes"
+            "value": "Megabytes",
+            "name": "Megabytes"
           },
           {
-            "value": "Gigabytes"
+            "value": "Gigabytes",
+            "name": "Gigabytes"
           },
           {
-            "value": "Terabytes"
+            "value": "Terabytes",
+            "name": "Terabytes"
           },
           {
-            "value": "Bits"
+            "value": "Bits",
+            "name": "Bits"
           },
           {
-            "value": "Kilobits"
+            "value": "Kilobits",
+            "name": "Kilobits"
           },
           {
-            "value": "Megabits"
+            "value": "Megabits",
+            "name": "Megabits"
           },
           {
-            "value": "Gigabits"
+            "value": "Gigabits",
+            "name": "Gigabits"
           },
           {
-            "value": "Terabits"
+            "value": "Terabits",
+            "name": "Terabits"
           },
           {
-            "value": "Percent"
+            "value": "Percent",
+            "name": "Percent"
           },
           {
-            "value": "Count"
+            "value": "Count",
+            "name": "Count"
           },
           {
-            "value": "Bytes/Second"
+            "value": "Bytes/Second",
+            "name": "Bytes_Second"
           },
           {
-            "value": "Kilobytes/Second"
+            "value": "Kilobytes/Second",
+            "name": "Kilobytes_Second"
           },
           {
-            "value": "Megabytes/Second"
+            "value": "Megabytes/Second",
+            "name": "Megabytes_Second"
           },
           {
-            "value": "Gigabytes/Second"
+            "value": "Gigabytes/Second",
+            "name": "Gigabytes_Second"
           },
           {
-            "value": "Terabytes/Second"
+            "value": "Terabytes/Second",
+            "name": "Terabytes_Second"
           },
           {
-            "value": "Bits/Second"
+            "value": "Bits/Second",
+            "name": "Bits_Second"
           },
           {
-            "value": "Kilobits/Second"
+            "value": "Kilobits/Second",
+            "name": "Kilobits_Second"
           },
           {
-            "value": "Megabits/Second"
+            "value": "Megabits/Second",
+            "name": "Megabits_Second"
           },
           {
-            "value": "Gigabits/Second"
+            "value": "Gigabits/Second",
+            "name": "Gigabits_Second"
           },
           {
-            "value": "Terabits/Second"
+            "value": "Terabits/Second",
+            "name": "Terabits_Second"
           },
           {
-            "value": "Count/Second"
+            "value": "Count/Second",
+            "name": "Count_Second"
           },
           {
-            "value": "None"
+            "value": "None",
+            "name": "None"
           }
         ]
       }
@@ -3961,13 +4026,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "OK"
+            "value": "OK",
+            "name": "OK"
           },
           {
-            "value": "ALARM"
+            "value": "ALARM",
+            "name": "ALARM"
           },
           {
-            "value": "INSUFFICIENT_DATA"
+            "value": "INSUFFICIENT_DATA",
+            "name": "INSUFFICIENT_DATA"
           }
         ]
       }
@@ -3977,19 +4045,24 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "SampleCount"
+            "value": "SampleCount",
+            "name": "SampleCount"
           },
           {
-            "value": "Average"
+            "value": "Average",
+            "name": "Average"
           },
           {
-            "value": "Sum"
+            "value": "Sum",
+            "name": "Sum"
           },
           {
-            "value": "Minimum"
+            "value": "Minimum",
+            "name": "Minimum"
           },
           {
-            "value": "Maximum"
+            "value": "Maximum",
+            "name": "Maximum"
           }
         ]
       }

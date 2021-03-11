@@ -917,7 +917,7 @@ export const deserializeAws_restJson1DeleteChannelCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<DeleteChannelCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
+  if (output.statusCode !== 204 && output.statusCode >= 300) {
     return deserializeAws_restJson1DeleteChannelCommandError(output, context);
   }
   const contents: DeleteChannelCommandOutput = {
@@ -1075,7 +1075,7 @@ export const deserializeAws_restJson1DeleteStreamKeyCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
 ): Promise<DeleteStreamKeyCommandOutput> => {
-  if (output.statusCode !== 200 && output.statusCode >= 300) {
+  if (output.statusCode !== 204 && output.statusCode >= 300) {
     return deserializeAws_restJson1DeleteStreamKeyCommandError(output, context);
   }
   const contents: DeleteStreamKeyCommandOutput = {
@@ -1563,6 +1563,14 @@ const deserializeAws_restJson1ListChannelsCommandError = async (
     case "com.amazonaws.ivs#AccessDeniedException":
       response = {
         ...(await deserializeAws_restJson1AccessDeniedExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ConflictException":
+    case "com.amazonaws.ivs#ConflictException":
+      response = {
+        ...(await deserializeAws_restJson1ConflictExceptionResponse(parsedOutput, context)),
         name: errorCode,
         $metadata: deserializeMetadata(output),
       };
@@ -2575,10 +2583,7 @@ const deserializeAws_restJson1_Stream = (output: any, context: __SerdeContext): 
     channelArn: output.channelArn !== undefined && output.channelArn !== null ? output.channelArn : undefined,
     health: output.health !== undefined && output.health !== null ? output.health : undefined,
     playbackUrl: output.playbackUrl !== undefined && output.playbackUrl !== null ? output.playbackUrl : undefined,
-    startTime:
-      output.startTime !== undefined && output.startTime !== null
-        ? new Date(Math.round(output.startTime * 1000))
-        : undefined,
+    startTime: output.startTime !== undefined && output.startTime !== null ? new Date(output.startTime) : undefined,
     state: output.state !== undefined && output.state !== null ? output.state : undefined,
     viewerCount: output.viewerCount !== undefined && output.viewerCount !== null ? output.viewerCount : undefined,
   } as any;
@@ -2644,10 +2649,7 @@ const deserializeAws_restJson1StreamSummary = (output: any, context: __SerdeCont
   return {
     channelArn: output.channelArn !== undefined && output.channelArn !== null ? output.channelArn : undefined,
     health: output.health !== undefined && output.health !== null ? output.health : undefined,
-    startTime:
-      output.startTime !== undefined && output.startTime !== null
-        ? new Date(Math.round(output.startTime * 1000))
-        : undefined,
+    startTime: output.startTime !== undefined && output.startTime !== null ? new Date(output.startTime) : undefined,
     state: output.state !== undefined && output.state !== null ? output.state : undefined,
     viewerCount: output.viewerCount !== undefined && output.viewerCount !== null ? output.viewerCount : undefined,
   } as any;

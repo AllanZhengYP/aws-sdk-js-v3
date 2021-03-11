@@ -20,8 +20,6 @@ import {
   LaunchTemplateEnclaveOptionsRequest,
   LaunchTemplateHibernationOptionsRequest,
   LaunchTemplateIamInstanceProfileSpecificationRequest,
-  LaunchTemplateInstanceMarketOptionsRequest,
-  LaunchTemplateLicenseConfigurationRequest,
   MarketType,
   ReservedInstancesListing,
   ResourceType,
@@ -44,6 +42,82 @@ import {
   VpcPeeringConnection,
   _InstanceType,
 } from "./models_0";
+
+/**
+ * <p>The options for Spot Instances.</p>
+ */
+export interface LaunchTemplateSpotMarketOptionsRequest {
+  /**
+   * <p>The maximum hourly price you're willing to pay for the Spot Instances.</p>
+   */
+  MaxPrice?: string;
+
+  /**
+   * <p>The Spot Instance request type.</p>
+   */
+  SpotInstanceType?: SpotInstanceType | string;
+
+  /**
+   * <p>The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).</p>
+   */
+  BlockDurationMinutes?: number;
+
+  /**
+   * <p>The end date of the request.
+   *             For a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached.
+   *             If the request is persistent, it remains active until it is canceled or this date and time is reached.
+   *             The default end date is 7 days from the current date.</p>
+   */
+  ValidUntil?: Date;
+
+  /**
+   * <p>The behavior when a Spot Instance is interrupted. The default is <code>terminate</code>.</p>
+   */
+  InstanceInterruptionBehavior?: InstanceInterruptionBehavior | string;
+}
+
+export namespace LaunchTemplateSpotMarketOptionsRequest {
+  export const filterSensitiveLog = (obj: LaunchTemplateSpotMarketOptionsRequest): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>The market (purchasing) option for the instances.</p>
+ */
+export interface LaunchTemplateInstanceMarketOptionsRequest {
+  /**
+   * <p>The market type.</p>
+   */
+  MarketType?: MarketType | string;
+
+  /**
+   * <p>The options for Spot Instances.</p>
+   */
+  SpotOptions?: LaunchTemplateSpotMarketOptionsRequest;
+}
+
+export namespace LaunchTemplateInstanceMarketOptionsRequest {
+  export const filterSensitiveLog = (obj: LaunchTemplateInstanceMarketOptionsRequest): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Describes a license configuration.</p>
+ */
+export interface LaunchTemplateLicenseConfigurationRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the license configuration.</p>
+   */
+  LicenseConfigurationArn?: string;
+}
+
+export namespace LaunchTemplateLicenseConfigurationRequest {
+  export const filterSensitiveLog = (obj: LaunchTemplateLicenseConfigurationRequest): any => ({
+    ...obj,
+  });
+}
 
 export type LaunchTemplateInstanceMetadataEndpointState = "disabled" | "enabled";
 
@@ -340,7 +414,7 @@ export interface RequestLaunchTemplateData {
   EbsOptimized?: boolean;
 
   /**
-   * <p>The IAM instance profile.</p>
+   * <p>The name or Amazon Resource Name (ARN) of an IAM instance profile.</p>
    */
   IamInstanceProfile?: LaunchTemplateIamInstanceProfileSpecificationRequest;
 
@@ -785,7 +859,7 @@ export interface LaunchTemplateBlockDeviceMapping {
   Ebs?: LaunchTemplateEbsBlockDevice;
 
   /**
-   * <p>Suppresses the specified device included in the block device mapping of the AMI.</p>
+   * <p>To omit the device from the block device mapping, specify an empty string.</p>
    */
   NoDevice?: string;
 }
@@ -2839,7 +2913,7 @@ export interface NetworkInterface {
   PrivateIpAddresses?: NetworkInterfacePrivateIpAddress[];
 
   /**
-   * <p>The ID of the entity that launched the instance on your behalf (for example, AWS Management Console or Auto Scaling).</p>
+   * <p>The alias or AWS account ID of the principal or service that created the network interface.</p>
    */
   RequesterId?: string;
 
@@ -3603,6 +3677,31 @@ export interface CreateSnapshotRequest {
   Description?: string;
 
   /**
+   * <p>The Amazon Resource Name (ARN) of the AWS Outpost on which to create a local
+   *   	snapshot.</p>
+   *   	      <ul>
+   *             <li>
+   *   			          <p>To create a snapshot of a volume in a Region, omit this parameter. The snapshot
+   *   				is created in the same Region as the volume.</p>
+   *   		        </li>
+   *             <li>
+   *   			          <p>To create a snapshot of a volume on an Outpost and store the snapshot in the
+   *   				Region, omit this parameter. The snapshot is created in the Region for the
+   *   				Outpost.</p>
+   *   		        </li>
+   *             <li>
+   *   			          <p>To create a snapshot of a volume on an Outpost and store the snapshot on an
+   *   			Outpost, specify the ARN of the destination Outpost. The snapshot must be created on
+   *   			the same Outpost as the volume.</p>
+   *   		        </li>
+   *          </ul>
+   *   	      <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot">
+   *   		Creating local snapshots from volumes on an Outpost</a> in the
+   *   		<i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   */
+  OutpostArn?: string;
+
+  /**
    * <p>The ID of the EBS volume.</p>
    */
   VolumeId: string | undefined;
@@ -3709,6 +3808,12 @@ export interface Snapshot {
   OwnerAlias?: string;
 
   /**
+   * <p>The ARN of the AWS Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html">EBS Local Snapshot on Outposts</a> in the
+   *   		<i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   */
+  OutpostArn?: string;
+
+  /**
    * <p>Any tags assigned to the snapshot.</p>
    */
   Tags?: Tag[];
@@ -3753,6 +3858,31 @@ export interface CreateSnapshotsRequest {
    * <p>The instance to specify which volumes should be included in the snapshots.</p>
    */
   InstanceSpecification: InstanceSpecification | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the AWS Outpost on which to create the local
+   *   		snapshots.</p>
+   *   	      <ul>
+   *             <li>
+   *   			          <p>To create snapshots from an instance in a Region, omit this parameter. The
+   *   				snapshots are created in the same Region as the instance.</p>
+   *   		        </li>
+   *             <li>
+   *   			          <p>To create snapshots from an instance on an Outpost and store the snapshots
+   *   				in the Region, omit this parameter. The snapshots are created in the Region
+   *   				for the Outpost.</p>
+   *   		        </li>
+   *             <li>
+   *   			          <p>To create snapshots from an instance on an Outpost and store the snapshots
+   *   				on an Outpost, specify the ARN of the destination Outpost. The snapshots must
+   *   				be created on the same Outpost as the instance.</p>
+   *   		        </li>
+   *          </ul>
+   *   	      <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot">
+   *   		Creating multi-volume local snapshots from instances on an Outpost</a> in the
+   *   		<i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   */
+  OutpostArn?: string;
 
   /**
    * <p>Tags to apply to every snapshot specified by the instance.</p>
@@ -3833,6 +3963,12 @@ export interface SnapshotInfo {
    * <p>Snapshot id that can be used to describe this snapshot.</p>
    */
   SnapshotId?: string;
+
+  /**
+   * <p>The ARN of the AWS Outpost on which the snapshot is stored. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html">EBS Local Snapshot on Outposts</a> in the
+   *   		<i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   */
+  OutpostArn?: string;
 }
 
 export namespace SnapshotInfo {
@@ -8559,52 +8695,6 @@ export interface DeleteNetworkInsightsAnalysisRequest {
 
 export namespace DeleteNetworkInsightsAnalysisRequest {
   export const filterSensitiveLog = (obj: DeleteNetworkInsightsAnalysisRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteNetworkInsightsAnalysisResult {
-  /**
-   * <p>The ID of the network insights analysis.</p>
-   */
-  NetworkInsightsAnalysisId?: string;
-}
-
-export namespace DeleteNetworkInsightsAnalysisResult {
-  export const filterSensitiveLog = (obj: DeleteNetworkInsightsAnalysisResult): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteNetworkInsightsPathRequest {
-  /**
-   * <p>Checks whether you have the required permissions for the action, without actually making the request,
-   *    and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
-   *    Otherwise, it is <code>UnauthorizedOperation</code>.</p>
-   */
-  DryRun?: boolean;
-
-  /**
-   * <p>The ID of the path.</p>
-   */
-  NetworkInsightsPathId: string | undefined;
-}
-
-export namespace DeleteNetworkInsightsPathRequest {
-  export const filterSensitiveLog = (obj: DeleteNetworkInsightsPathRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DeleteNetworkInsightsPathResult {
-  /**
-   * <p>The ID of the path.</p>
-   */
-  NetworkInsightsPathId?: string;
-}
-
-export namespace DeleteNetworkInsightsPathResult {
-  export const filterSensitiveLog = (obj: DeleteNetworkInsightsPathResult): any => ({
     ...obj,
   });
 }

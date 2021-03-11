@@ -6,6 +6,9 @@
       "version": "2019-11-01",
       "operations": [
         {
+          "target": "com.amazonaws.accessanalyzer#ApplyArchiveRule"
+        },
+        {
           "target": "com.amazonaws.accessanalyzer#GetAnalyzedResource"
         },
         {
@@ -43,14 +46,15 @@
           "sdkId": "AccessAnalyzer",
           "arnNamespace": "access-analyzer",
           "cloudFormationName": "AccessAnalyzer",
-          "cloudTrailEventSource": "access-analyzer.amazonaws.com"
+          "cloudTrailEventSource": "access-analyzer.amazonaws.com",
+          "endpointPrefix": "access-analyzer"
         },
         "aws.auth#sigv4": {
           "name": "access-analyzer"
         },
         "aws.protocols#restJson1": {},
         "smithy.api#cors": {},
-        "smithy.api#documentation": "<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify\n         any policies that grant access to an external principal. It does this by using logic-based\n         reasoning to analyze resource-based policies in your AWS environment. An external principal\n         can be another AWS account, a root user, an IAM user or role, a federated user, an AWS\n         service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can\n         call programmatically. For general information about Access Analyzer, see the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">AWS IAM Access Analyzer section of the IAM User Guide</a>.</p>\n         <p>To start using Access Analyzer, you first need to create an analyzer.</p>",
+        "smithy.api#documentation": "<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify\n         any policies that grant access to an external principal. It does this by using logic-based\n         reasoning to analyze resource-based policies in your AWS environment. An external principal\n         can be another AWS account, a root user, an IAM user or role, a federated user, an AWS\n         service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can\n         call programmatically. For general information about Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">AWS IAM Access Analyzer</a> in the <b>IAM User Guide</b>.</p>\n         <p>To start using Access Analyzer, you first need to create an analyzer.</p>",
         "smithy.api#paginated": {
           "inputToken": "nextToken",
           "outputToken": "nextToken",
@@ -135,7 +139,7 @@
         "sharedVia": {
           "target": "com.amazonaws.accessanalyzer#SharedViaList",
           "traits": {
-            "smithy.api#documentation": "<p>Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+            "smithy.api#documentation": "<p>Indicates how the access that generated the finding is granted. This is populated for\n         Amazon S3 bucket findings.</p>"
           }
         },
         "status": {
@@ -227,7 +231,8 @@
           "absolute": false,
           "noAccount": false,
           "noRegion": false
-        }
+        },
+        "smithy.api#noReplace": {}
       }
     },
     "com.amazonaws.accessanalyzer#AnalyzerArn": {
@@ -241,16 +246,20 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ACTIVE"
+            "value": "ACTIVE",
+            "name": "ACTIVE"
           },
           {
-            "value": "CREATING"
+            "value": "CREATING",
+            "name": "CREATING"
           },
           {
-            "value": "DISABLED"
+            "value": "DISABLED",
+            "name": "DISABLED"
           },
           {
-            "value": "FAILED"
+            "value": "FAILED",
+            "name": "FAILED"
           }
         ]
       }
@@ -307,14 +316,14 @@
         "status": {
           "target": "com.amazonaws.accessanalyzer#AnalyzerStatus",
           "traits": {
-            "smithy.api#documentation": "<p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources\n         and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing\n         trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop\n         generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress\n         and <code>Failed</code> when the analyzer creation has failed. </p>",
+            "smithy.api#documentation": "<p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors\n         supported resources and generates new findings. The analyzer is <code>Disabled</code> when\n         a user action, such as removing trusted access for AWS IAM Access Analyzer from AWS\n         Organizations, causes the analyzer to stop generating new findings. The status is\n            <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code>\n         when the analyzer creation has failed. </p>",
             "smithy.api#required": {}
           }
         },
         "statusReason": {
           "target": "com.amazonaws.accessanalyzer#StatusReason",
           "traits": {
-            "smithy.api#documentation": "<p>The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the\n         creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer\n         with organization as the type, this failure can be due to an issue with creating the\n         service-linked roles required in the member accounts of the AWS organization.</p>"
+            "smithy.api#documentation": "<p>The <code>statusReason</code> provides more details about the current status of the\n         analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status\n         is displayed. For an analyzer with organization as the type, this failure can be due to an\n         issue with creating the service-linked roles required in the member accounts of the AWS\n         organization.</p>"
           }
         }
       },
@@ -326,6 +335,67 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.accessanalyzer#AnalyzerSummary"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ApplyArchiveRule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#ApplyArchiveRuleRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retroactively applies the archive rule to existing findings that meet the archive rule\n         criteria.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/archive-rule",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#ApplyArchiveRuleRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerArn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the analyzer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule to apply.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A client token.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retroactively applies an archive rule.</p>"
       }
     },
     "com.amazonaws.accessanalyzer#ArchiveRule": {
@@ -359,7 +429,8 @@
           "absolute": false,
           "noAccount": false,
           "noRegion": false
-        }
+        },
+        "smithy.api#noReplace": {}
       }
     },
     "com.amazonaws.accessanalyzer#ArchiveRuleSummary": {
@@ -494,7 +565,7 @@
         "type": {
           "target": "com.amazonaws.accessanalyzer#Type",
           "traits": {
-            "smithy.api#documentation": "<p>The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create\n         only one analyzer per account per Region.</p>",
+            "smithy.api#documentation": "<p>The type of analyzer to create. Only ACCOUNT and ORGANIZATION analyzers are supported.\n         You can create only one analyzer per account per Region. You can create up to 5 analyzers\n         per organization per Region.</p>",
             "smithy.api#required": {}
           }
         },
@@ -565,7 +636,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive\n         findings that meet the criteria you define when you create the rule.</p>",
+        "smithy.api#documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive\n         new findings that meet the criteria you define when you create the rule.</p>",
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/analyzer/{analyzerName}/archive-rule",
@@ -666,7 +737,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Deletes the specified analyzer. When you delete an analyzer, Access Analyzer is disabled\n         for the account in the current or specific Region. All findings that were generated by the\n         analyzer are deleted. You cannot undo this action.</p>",
+        "smithy.api#documentation": "<p>Deletes the specified analyzer. When you delete an analyzer, Access Analyzer is disabled\n         for the account or organization in the current or specific Region. All findings that were\n         generated by the analyzer are deleted. You cannot undo this action.</p>",
         "smithy.api#http": {
           "method": "DELETE",
           "uri": "/analyzer/{analyzerName}",
@@ -864,7 +935,7 @@
         "sources": {
           "target": "com.amazonaws.accessanalyzer#FindingSourceList",
           "traits": {
-            "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+            "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is\n         granted. It is populated for Amazon S3 bucket findings.</p>"
           }
         }
       },
@@ -894,12 +965,12 @@
         "detail": {
           "target": "com.amazonaws.accessanalyzer#FindingSourceDetail",
           "traits": {
-            "smithy.api#documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+            "smithy.api#documentation": "<p>Includes details about how the access that generated the finding is granted. This is\n         populated for Amazon S3 bucket findings.</p>"
           }
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+        "smithy.api#documentation": "<p>The source of the finding. This indicates how the access that generated the finding is\n         granted. It is populated for Amazon S3 bucket findings.</p>"
       }
     },
     "com.amazonaws.accessanalyzer#FindingSourceDetail": {
@@ -913,7 +984,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+        "smithy.api#documentation": "<p>Includes details about how the access that generated the finding is granted. This is\n         populated for Amazon S3 bucket findings.</p>"
       }
     },
     "com.amazonaws.accessanalyzer#FindingSourceList": {
@@ -927,16 +998,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "POLICY"
+            "value": "POLICY",
+            "name": "POLICY"
           },
           {
-            "value": "BUCKET_ACL"
+            "value": "BUCKET_ACL",
+            "name": "BUCKET_ACL"
           },
           {
-            "value": "S3_ACCESS_POINT"
-          },
-          {
-            "value": "KMS_GRANT"
+            "value": "S3_ACCESS_POINT",
+            "name": "S3_ACCESS_POINT"
           }
         ]
       }
@@ -946,13 +1017,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ACTIVE"
+            "value": "ACTIVE",
+            "name": "ACTIVE"
           },
           {
-            "value": "ARCHIVED"
+            "value": "ARCHIVED",
+            "name": "ARCHIVED"
           },
           {
-            "value": "RESOLVED"
+            "value": "RESOLVED",
+            "name": "RESOLVED"
           }
         ]
       }
@@ -962,10 +1036,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ACTIVE"
+            "value": "ACTIVE",
+            "name": "ACTIVE"
           },
           {
-            "value": "ARCHIVED"
+            "value": "ARCHIVED",
+            "name": "ARCHIVED"
           }
         ]
       }
@@ -1062,7 +1138,7 @@
         "sources": {
           "target": "com.amazonaws.accessanalyzer#FindingSourceList",
           "traits": {
-            "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+            "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is\n         granted. It is populated for Amazon S3 bucket findings.</p>"
           }
         }
       },
@@ -1241,7 +1317,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Retrieves information about an archive rule.</p>",
+        "smithy.api#documentation": "<p>Retrieves information about an archive rule.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">Access Analyzer filter keys</a> in the <b>IAM User\n         Guide</b>.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
@@ -1702,7 +1778,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer.</p>",
+        "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">Access Analyzer filter keys</a> in the <b>IAM User\n         Guide</b>.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/finding",
@@ -1854,10 +1930,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ASC"
+            "value": "ASC",
+            "name": "ASC"
           },
           {
-            "value": "DESC"
+            "value": "DESC",
+            "name": "DESC"
           }
         ]
       }
@@ -1876,16 +1954,20 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "AWS_SERVICE_ACCESS_DISABLED"
+            "value": "AWS_SERVICE_ACCESS_DISABLED",
+            "name": "AWS_SERVICE_ACCESS_DISABLED"
           },
           {
-            "value": "DELEGATED_ADMINISTRATOR_DEREGISTERED"
+            "value": "DELEGATED_ADMINISTRATOR_DEREGISTERED",
+            "name": "DELEGATED_ADMINISTRATOR_DEREGISTERED"
           },
           {
-            "value": "ORGANIZATION_DELETED"
+            "value": "ORGANIZATION_DELETED",
+            "name": "ORGANIZATION_DELETED"
           },
           {
-            "value": "SERVICE_LINKED_ROLE_CREATION_FAILED"
+            "value": "SERVICE_LINKED_ROLE_CREATION_FAILED",
+            "name": "SERVICE_LINKED_ROLE_CREATION_FAILED"
           }
         ]
       }
@@ -1931,22 +2013,32 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "AWS::S3::Bucket"
+            "value": "AWS::S3::Bucket",
+            "name": "AWS_S3_BUCKET"
           },
           {
-            "value": "AWS::IAM::Role"
+            "value": "AWS::IAM::Role",
+            "name": "AWS_IAM_ROLE"
           },
           {
-            "value": "AWS::SQS::Queue"
+            "value": "AWS::SQS::Queue",
+            "name": "AWS_SQS_QUEUE"
           },
           {
-            "value": "AWS::Lambda::Function"
+            "value": "AWS::Lambda::Function",
+            "name": "AWS_LAMBDA_FUNCTION"
           },
           {
-            "value": "AWS::Lambda::LayerVersion"
+            "value": "AWS::Lambda::LayerVersion",
+            "name": "AWS_LAMBDA_LAYERVERSION"
           },
           {
-            "value": "AWS::KMS::Key"
+            "value": "AWS::KMS::Key",
+            "name": "AWS_KMS_KEY"
+          },
+          {
+            "value": "AWS::SecretsManager::Secret",
+            "name": "AWS_SECRETSMANAGER_SECRET"
           }
         ]
       }
@@ -2176,7 +2268,9 @@
         "smithy.api#documentation": "<p>Throttling limit exceeded error.</p>",
         "smithy.api#error": "client",
         "smithy.api#httpError": 429,
-        "smithy.api#retryable": {}
+        "smithy.api#retryable": {
+          "throttling": true
+        }
       }
     },
     "com.amazonaws.accessanalyzer#Timestamp": {
@@ -2193,10 +2287,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ACCOUNT"
+            "value": "ACCOUNT",
+            "name": "ACCOUNT"
           },
           {
-            "value": "ORGANIZATION"
+            "value": "ORGANIZATION",
+            "name": "ORGANIZATION"
           }
         ]
       }

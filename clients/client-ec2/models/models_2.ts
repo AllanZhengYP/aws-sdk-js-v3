@@ -3,6 +3,8 @@ import {
   AccountAttributeName,
   ActiveInstance,
   Address,
+  AddressAttribute,
+  AddressAttributeName,
   AllocationState,
   AllowsMultipleInstanceTypes,
   AssociationStatus,
@@ -65,6 +67,52 @@ import {
   TransitGatewayRoute,
   TransitGatewayRouteTable,
 } from "./models_1";
+
+export interface DeleteNetworkInsightsAnalysisResult {
+  /**
+   * <p>The ID of the network insights analysis.</p>
+   */
+  NetworkInsightsAnalysisId?: string;
+}
+
+export namespace DeleteNetworkInsightsAnalysisResult {
+  export const filterSensitiveLog = (obj: DeleteNetworkInsightsAnalysisResult): any => ({
+    ...obj,
+  });
+}
+
+export interface DeleteNetworkInsightsPathRequest {
+  /**
+   * <p>Checks whether you have the required permissions for the action, without actually making the request,
+   *    and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+   *    Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+   */
+  DryRun?: boolean;
+
+  /**
+   * <p>The ID of the path.</p>
+   */
+  NetworkInsightsPathId: string | undefined;
+}
+
+export namespace DeleteNetworkInsightsPathRequest {
+  export const filterSensitiveLog = (obj: DeleteNetworkInsightsPathRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface DeleteNetworkInsightsPathResult {
+  /**
+   * <p>The ID of the path.</p>
+   */
+  NetworkInsightsPathId?: string;
+}
+
+export namespace DeleteNetworkInsightsPathResult {
+  export const filterSensitiveLog = (obj: DeleteNetworkInsightsPathResult): any => ({
+    ...obj,
+  });
+}
 
 /**
  * <p>Contains the parameters for DeleteNetworkInterface.</p>
@@ -1421,60 +1469,7 @@ export namespace DescribeAccountAttributesResult {
 
 /**
  * <p>A filter name and value pair that is used to return a more specific list of results from a describe operation.
- *          Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.
- *          The filters supported by a describe operation are documented with the describe operation. For example:</p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>DescribeAvailabilityZones</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeImages</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeInstances</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeKeyPairs</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeSecurityGroups</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeSnapshots</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeSubnets</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeTags</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeVolumes</a>
- *                </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DescribeVpcs</a>
- *                </p>
- *             </li>
- *          </ul>
+ *          Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.</p>
  */
 export interface Filter {
   /**
@@ -1583,6 +1578,59 @@ export interface DescribeAddressesResult {
 
 export namespace DescribeAddressesResult {
   export const filterSensitiveLog = (obj: DescribeAddressesResult): any => ({
+    ...obj,
+  });
+}
+
+export interface DescribeAddressesAttributeRequest {
+  /**
+   * <p>[EC2-VPC] The allocation IDs.</p>
+   */
+  AllocationIds?: string[];
+
+  /**
+   * <p>The attribute of the IP address.</p>
+   */
+  Attribute?: AddressAttributeName | string;
+
+  /**
+   * <p>The token for the next page of results.</p>
+   */
+  NextToken?: string;
+
+  /**
+   * <p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>
+   */
+  MaxResults?: number;
+
+  /**
+   * <p>Checks whether you have the required permissions for the action, without actually making the request,
+   *    and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
+   *    Otherwise, it is <code>UnauthorizedOperation</code>.</p>
+   */
+  DryRun?: boolean;
+}
+
+export namespace DescribeAddressesAttributeRequest {
+  export const filterSensitiveLog = (obj: DescribeAddressesAttributeRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface DescribeAddressesAttributeResult {
+  /**
+   * <p>Information about the IP addresses.</p>
+   */
+  Addresses?: AddressAttribute[];
+
+  /**
+   * <p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>
+   */
+  NextToken?: string;
+}
+
+export namespace DescribeAddressesAttributeResult {
+  export const filterSensitiveLog = (obj: DescribeAddressesAttributeResult): any => ({
     ...obj,
   });
 }
@@ -4034,7 +4082,7 @@ export interface ExportImageTask {
   StatusMessage?: string;
 
   /**
-   * <p>Any tags assigned to the image being exported.</p>
+   * <p>Any tags assigned to the export image task.</p>
    */
   Tags?: Tag[];
 }
@@ -5058,7 +5106,9 @@ export interface FleetData {
   ValidUntil?: Date;
 
   /**
-   * <p>Indicates whether EC2 Fleet should replace unhealthy instances.</p>
+   * <p>Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported only for
+   *          fleets of type <code>maintain</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks">EC2 Fleet
+   *             health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>
    */
   ReplaceUnhealthyInstances?: boolean;
 
@@ -6482,6 +6532,7 @@ export interface LaunchPermission {
 
   /**
    * <p>The AWS account ID.</p>
+   *          <p>Constraints: Up to 10 000 account IDs can be specified in a single request.</p>
    */
   UserId?: string;
 }
@@ -6630,15 +6681,15 @@ export interface DescribeImagesRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>owner-alias</code> - The owner alias, from an Amazon-maintained list
-   *           (<code>amazon</code> | <code>aws-marketplace</code>).
-   *           This is not the user-configured AWS account alias set using the IAM console.
-   *           We recommend that you use the related parameter instead of this filter.</p>
+   *                   <code>owner-alias</code> - The owner alias (<code>amazon</code> | <code>aws-marketplace</code>).
+   *         	The valid aliases are defined in an Amazon-maintained list. This is not the AWS account alias that can be
+   *         	set using the IAM console. We recommend that you use the <b>Owner</b>
+   *         	request parameter instead of this filter.</p>
    *             </li>
    *             <li>
-   *                <p>
-   *                   <code>owner-id</code> - The AWS account ID of the owner. We recommend that
-   *           you use the related parameter instead of this filter.</p>
+   *       	        <p>
+   *                   <code>owner-id</code> - The AWS account ID of the owner. We recommend that you use the
+   *       		<b>Owner</b> request parameter instead of this filter.</p>
    *             </li>
    *             <li>
    *                <p>
@@ -9834,98 +9885,4 @@ export namespace FpgaDeviceInfo {
   export const filterSensitiveLog = (obj: FpgaDeviceInfo): any => ({
     ...obj,
   });
-}
-
-/**
- * <p>Describes the FPGAs for the instance type.</p>
- */
-export interface FpgaInfo {
-  /**
-   * <p>Describes the FPGAs for the instance type.</p>
-   */
-  Fpgas?: FpgaDeviceInfo[];
-
-  /**
-   * <p>The total memory of all FPGA accelerators for the instance type.</p>
-   */
-  TotalFpgaMemoryInMiB?: number;
-}
-
-export namespace FpgaInfo {
-  export const filterSensitiveLog = (obj: FpgaInfo): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Describes the memory available to the GPU accelerator.</p>
- */
-export interface GpuDeviceMemoryInfo {
-  /**
-   * <p>The size of the memory available to the GPU accelerator, in MiB.</p>
-   */
-  SizeInMiB?: number;
-}
-
-export namespace GpuDeviceMemoryInfo {
-  export const filterSensitiveLog = (obj: GpuDeviceMemoryInfo): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Describes the GPU accelerators for the instance type.</p>
- */
-export interface GpuDeviceInfo {
-  /**
-   * <p>The name of the GPU accelerator.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The manufacturer of the GPU accelerator.</p>
-   */
-  Manufacturer?: string;
-
-  /**
-   * <p>The number of GPUs for the instance type.</p>
-   */
-  Count?: number;
-
-  /**
-   * <p>Describes the memory available to the GPU accelerator.</p>
-   */
-  MemoryInfo?: GpuDeviceMemoryInfo;
-}
-
-export namespace GpuDeviceInfo {
-  export const filterSensitiveLog = (obj: GpuDeviceInfo): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Describes the GPU accelerators for the instance type.</p>
- */
-export interface GpuInfo {
-  /**
-   * <p>Describes the GPU accelerators for the instance type.</p>
-   */
-  Gpus?: GpuDeviceInfo[];
-
-  /**
-   * <p>The total size of the memory for the GPU accelerators for the instance type, in MiB.</p>
-   */
-  TotalGpuMemoryInMiB?: number;
-}
-
-export namespace GpuInfo {
-  export const filterSensitiveLog = (obj: GpuInfo): any => ({
-    ...obj,
-  });
-}
-
-export enum InstanceTypeHypervisor {
-  NITRO = "nitro",
-  XEN = "xen",
 }

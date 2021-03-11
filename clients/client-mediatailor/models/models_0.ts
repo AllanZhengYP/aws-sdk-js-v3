@@ -173,6 +173,11 @@ export interface PlaybackConfiguration {
   CdnConfiguration?: CdnConfiguration;
 
   /**
+   * <p>Predefined aliases for dynamic variables.</p>
+   */
+  ConfigurationAliases?: { [key: string]: { [key: string]: string } };
+
+  /**
    * <p>The configuration for DASH content. </p>
    */
   DashConfiguration?: DashConfiguration;
@@ -352,6 +357,11 @@ export interface GetPlaybackConfigurationResponse {
   CdnConfiguration?: CdnConfiguration;
 
   /**
+   * <p>Predefined aliases for dynamic variables.</p>
+   */
+  ConfigurationAliases?: { [key: string]: { [key: string]: string } };
+
+  /**
    * <p>The configuration for DASH content. </p>
    */
   DashConfiguration?: DashConfiguration;
@@ -512,6 +522,11 @@ export interface PutPlaybackConfigurationRequest {
   CdnConfiguration?: CdnConfiguration;
 
   /**
+   * <p>Predefined aliases for dynamic variables.</p>
+   */
+  ConfigurationAliases?: { [key: string]: { [key: string]: string } };
+
+  /**
    * <p>The configuration for DASH content. </p>
    */
   DashConfiguration?: DashConfigurationForPut;
@@ -583,6 +598,11 @@ export interface PutPlaybackConfigurationResponse {
    * <p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>
    */
   CdnConfiguration?: CdnConfiguration;
+
+  /**
+   * <p>Predefined aliases for dynamic variables.</p>
+   */
+  ConfigurationAliases?: { [key: string]: { [key: string]: string } };
 
   /**
    * <p>The configuration for DASH content. </p>

@@ -32,7 +32,7 @@ export type GetServiceLastAccessedDetailsCommandOutput = GetServiceLastAccessedD
  *             resource could access a service. These other policy types include resource-based
  *             policies, access control lists, AWS Organizations policies, IAM permissions boundaries,
  *             and AWS STS assume role policies. It only applies permissions policy logic. For more
- *             about the evaluation of policy types, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics">Evaluating Policies</a> in the <i>IAM User Guide</i>.</p>
+ *             about the evaluation of policy types, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics">Evaluating policies</a> in the <i>IAM User Guide</i>.</p>
  *          </note>
  *          <p>For each service that the resource could access using permissions policies, the
  *          operation returns details about the most recent access attempt. If there was no attempt,
@@ -71,7 +71,7 @@ export type GetServiceLastAccessedDetailsCommandOutput = GetServiceLastAccessedD
  *          access attempt for each tracked action within a service. Otherwise, this operation returns
  *          only service data.</p>
  *          <p>For more information about service and action last accessed data, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html">Reducing
- *             Permissions Using Service Last Accessed Data</a> in the
+ *             permissions using service last accessed data</a> in the
  *             <i>IAM User Guide</i>.</p>
  */
 export class GetServiceLastAccessedDetailsCommand extends $Command<

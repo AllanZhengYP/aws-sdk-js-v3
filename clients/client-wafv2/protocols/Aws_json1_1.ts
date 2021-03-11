@@ -93,6 +93,7 @@ import {
 import { UpdateRuleGroupCommandInput, UpdateRuleGroupCommandOutput } from "../commands/UpdateRuleGroupCommand";
 import { UpdateWebACLCommandInput, UpdateWebACLCommandOutput } from "../commands/UpdateWebACLCommand";
 import {
+  All,
   AllQueryArguments,
   AllowAction,
   AndStatement,
@@ -162,6 +163,8 @@ import {
   IPSetForwardedIPConfig,
   IPSetReferenceStatement,
   IPSetSummary,
+  JsonBody,
+  JsonMatchPattern,
   ListAvailableManagedRuleGroupsRequest,
   ListAvailableManagedRuleGroupsResponse,
   ListIPSetsRequest,
@@ -4641,6 +4644,10 @@ const deserializeAws_json1_1WAFUnavailableEntityExceptionResponse = async (
   return contents;
 };
 
+const serializeAws_json1_1All = (input: All, context: __SerdeContext): any => {
+  return {};
+};
+
 const serializeAws_json1_1AllowAction = (input: AllowAction, context: __SerdeContext): any => {
   return {};
 };
@@ -4894,6 +4901,8 @@ const serializeAws_json1_1FieldToMatch = (input: FieldToMatch, context: __SerdeC
         AllQueryArguments: serializeAws_json1_1AllQueryArguments(input.AllQueryArguments, context),
       }),
     ...(input.Body !== undefined && input.Body !== null && { Body: serializeAws_json1_1Body(input.Body, context) }),
+    ...(input.JsonBody !== undefined &&
+      input.JsonBody !== null && { JsonBody: serializeAws_json1_1JsonBody(input.JsonBody, context) }),
     ...(input.Method !== undefined &&
       input.Method !== null && { Method: serializeAws_json1_1Method(input.Method, context) }),
     ...(input.QueryString !== undefined &&
@@ -5045,6 +5054,39 @@ const serializeAws_json1_1IPSetReferenceStatement = (input: IPSetReferenceStatem
         IPSetForwardedIPConfig: serializeAws_json1_1IPSetForwardedIPConfig(input.IPSetForwardedIPConfig, context),
       }),
   };
+};
+
+const serializeAws_json1_1JsonBody = (input: JsonBody, context: __SerdeContext): any => {
+  return {
+    ...(input.InvalidFallbackBehavior !== undefined &&
+      input.InvalidFallbackBehavior !== null && { InvalidFallbackBehavior: input.InvalidFallbackBehavior }),
+    ...(input.MatchPattern !== undefined &&
+      input.MatchPattern !== null && {
+        MatchPattern: serializeAws_json1_1JsonMatchPattern(input.MatchPattern, context),
+      }),
+    ...(input.MatchScope !== undefined && input.MatchScope !== null && { MatchScope: input.MatchScope }),
+  };
+};
+
+const serializeAws_json1_1JsonMatchPattern = (input: JsonMatchPattern, context: __SerdeContext): any => {
+  return {
+    ...(input.All !== undefined && input.All !== null && { All: serializeAws_json1_1All(input.All, context) }),
+    ...(input.IncludedPaths !== undefined &&
+      input.IncludedPaths !== null && {
+        IncludedPaths: serializeAws_json1_1JsonPointerPaths(input.IncludedPaths, context),
+      }),
+  };
+};
+
+const serializeAws_json1_1JsonPointerPaths = (input: string[], context: __SerdeContext): any => {
+  return input
+    .filter((e: any) => e != null)
+    .map((entry) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return entry;
+    });
 };
 
 const serializeAws_json1_1ListAvailableManagedRuleGroupsRequest = (
@@ -5605,6 +5647,10 @@ const serializeAws_json1_1XssMatchStatement = (input: XssMatchStatement, context
   };
 };
 
+const deserializeAws_json1_1All = (output: any, context: __SerdeContext): All => {
+  return {} as any;
+};
+
 const deserializeAws_json1_1AllowAction = (output: any, context: __SerdeContext): AllowAction => {
   return {} as any;
 };
@@ -5827,6 +5873,10 @@ const deserializeAws_json1_1FieldToMatch = (output: any, context: __SerdeContext
         : undefined,
     Body:
       output.Body !== undefined && output.Body !== null ? deserializeAws_json1_1Body(output.Body, context) : undefined,
+    JsonBody:
+      output.JsonBody !== undefined && output.JsonBody !== null
+        ? deserializeAws_json1_1JsonBody(output.JsonBody, context)
+        : undefined,
     Method:
       output.Method !== undefined && output.Method !== null
         ? deserializeAws_json1_1Method(output.Method, context)
@@ -6132,6 +6182,41 @@ const deserializeAws_json1_1IPSetSummary = (output: any, context: __SerdeContext
     LockToken: output.LockToken !== undefined && output.LockToken !== null ? output.LockToken : undefined,
     Name: output.Name !== undefined && output.Name !== null ? output.Name : undefined,
   } as any;
+};
+
+const deserializeAws_json1_1JsonBody = (output: any, context: __SerdeContext): JsonBody => {
+  return {
+    InvalidFallbackBehavior:
+      output.InvalidFallbackBehavior !== undefined && output.InvalidFallbackBehavior !== null
+        ? output.InvalidFallbackBehavior
+        : undefined,
+    MatchPattern:
+      output.MatchPattern !== undefined && output.MatchPattern !== null
+        ? deserializeAws_json1_1JsonMatchPattern(output.MatchPattern, context)
+        : undefined,
+    MatchScope: output.MatchScope !== undefined && output.MatchScope !== null ? output.MatchScope : undefined,
+  } as any;
+};
+
+const deserializeAws_json1_1JsonMatchPattern = (output: any, context: __SerdeContext): JsonMatchPattern => {
+  return {
+    All: output.All !== undefined && output.All !== null ? deserializeAws_json1_1All(output.All, context) : undefined,
+    IncludedPaths:
+      output.IncludedPaths !== undefined && output.IncludedPaths !== null
+        ? deserializeAws_json1_1JsonPointerPaths(output.IncludedPaths, context)
+        : undefined,
+  } as any;
+};
+
+const deserializeAws_json1_1JsonPointerPaths = (output: any, context: __SerdeContext): string[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return entry;
+    });
 };
 
 const deserializeAws_json1_1ListAvailableManagedRuleGroupsResponse = (

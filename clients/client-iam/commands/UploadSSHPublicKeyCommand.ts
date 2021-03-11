@@ -25,7 +25,7 @@ export type UploadSSHPublicKeyCommandOutput = UploadSSHPublicKeyResponse & __Met
  *          <p>The SSH public key uploaded by this operation can be used only for authenticating the
  *          associated IAM user to an AWS CodeCommit repository. For more information about using SSH keys to
  *          authenticate to an AWS CodeCommit repository, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html">Set up AWS CodeCommit for SSH
- *             Connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
+ *             connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
  */
 export class UploadSSHPublicKeyCommand extends $Command<
   UploadSSHPublicKeyCommandInput,

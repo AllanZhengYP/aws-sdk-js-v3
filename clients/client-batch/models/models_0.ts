@@ -38,7 +38,7 @@ export interface ArrayPropertiesDetail {
   size?: number;
 
   /**
-   * <p>The job index within the array that is associated with this job. This parameter is returned for array job
+   * <p>The job index within the array that's associated with this job. This parameter is returned for array job
    *    children.</p>
    */
   index?: number;
@@ -60,8 +60,8 @@ export interface ArrayPropertiesSummary {
   size?: number;
 
   /**
-   * <p>The job index within the array that is associated with this job. This parameter is returned for children of
-   *    array jobs.</p>
+   * <p>The job index within the array that's associated with this job. This parameter is returned for children of array
+   *    jobs.</p>
    */
   index?: number;
 }
@@ -104,7 +104,7 @@ export namespace NetworkInterface {
 }
 
 /**
- * <p>An object representing the details of a container that is part of a job attempt.</p>
+ * <p>An object representing the details of a container that's part of a job attempt.</p>
  */
 export interface AttemptContainerDetail {
   /**
@@ -113,7 +113,7 @@ export interface AttemptContainerDetail {
   containerInstanceArn?: string;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the job attempt. Each container attempt receives a task
+   * <p>The Amazon Resource Name (ARN) of the Amazon ECS task that's associated with the job attempt. Each container attempt receives a task
    *    ARN when they reach the <code>STARTING</code> status.</p>
    */
   taskArn?: string;
@@ -181,6 +181,9 @@ export namespace AttemptDetail {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>CancelJob</code>.</p>
+ */
 export interface CancelJobRequest {
   /**
    * <p>The AWS Batch job ID of the job to cancel.</p>
@@ -211,7 +214,7 @@ export namespace CancelJobResponse {
 
 /**
  * <p>These errors are usually caused by a client action, such as using an action or resource on behalf of a user that
- *    doesn't have permissions to use the action or resource, or specifying an identifier that isn't valid.</p>
+ *    doesn't have permissions to use the action or resource, or specifying an identifier that's not valid.</p>
  */
 export interface ClientException extends __SmithyException, $MetadataBearer {
   name: "ClientException";
@@ -276,7 +279,7 @@ export interface Ec2Configuration {
    *             <dd>
    *                <p>
    *                   <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami">Amazon
-   *        Linux</a>−Default for all non-GPU, non-AWS-Graviton instance families. Amazon Linux is reaching the
+   *        Linux</a>−Default for all non-GPU, non-AWS Graviton instance families. Amazon Linux is reaching the
    *       end-of-life of standard support. For more information, see <a href="http://aws.amazon.com/amazon-linux-ami/">Amazon
    *        Linux AMI</a>.</p>
    *             </dd>
@@ -341,12 +344,17 @@ export enum CRType {
 }
 
 /**
- * <p>An object representing an AWS Batch compute resource.</p>
+ * <p>An object representing an AWS Batch compute resource. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the
+ *     <i>AWS Batch User Guide</i>.</p>
  */
 export interface ComputeResource {
   /**
    * <p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>, or
    *     <code>FARGATE_SPOT</code>. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the
+   *     <i>AWS Batch User Guide</i>.</p>
+   *
+   *          <p> If you choose <code>SPOT</code>, you must also specify an Amazon EC2 Spot Fleet role with the
+   *     <code>spotIamFleetRole</code> parameter. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html">Amazon EC2 Spot Fleet role</a> in the
    *     <i>AWS Batch User Guide</i>.</p>
    */
   type: CRType | string | undefined;
@@ -399,10 +407,10 @@ export interface ComputeResource {
   minvCpus?: number;
 
   /**
-   * <p>The maximum number of Amazon EC2 vCPUs that an environment can reach.</p>
+   * <p>The maximum number of Amazon EC2 vCPUs that a compute environment can reach.</p>
    *          <note>
    *             <p>With both <code>BEST_FIT_PROGRESSIVE</code> and <code>SPOT_CAPACITY_OPTIMIZED</code> allocation strategies,
-   *     AWS Batch may need to go above <code>maxvCpus</code> to meet your capacity requirements. In this event, AWS Batch will
+   *     AWS Batch might need to go above <code>maxvCpus</code> to meet your capacity requirements. In this event, AWS Batch will
    *     never go above <code>maxvCpus</code> by more than a single instance (e.g., no more than a single instance from among
    *     those specified in your compute environment).</p>
    *          </note>
@@ -419,10 +427,10 @@ export interface ComputeResource {
   desiredvCpus?: number;
 
   /**
-   * <p>The instances types that may be launched. You can specify instance families to launch any instance type within
+   * <p>The instances types that can be launched. You can specify instance families to launch any instance type within
    *    those families (for example, <code>c5</code> or <code>p3</code>), or you can specify specific sizes within a family
-   *    (such as <code>c5.8xlarge</code>). You can also choose <code>optimal</code> to select instance types (from the C, M,
-   *    and R instance families) on the fly that match the demand of your job queues.</p>
+   *    (such as <code>c5.8xlarge</code>). You can also choose <code>optimal</code> to select instance types (from the C4,
+   *    M4, and R4 instance families) on the fly that match the demand of your job queues.</p>
    *          <note>
    *             <p>This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.</p>
    *          </note>
@@ -430,6 +438,12 @@ export interface ComputeResource {
    *             <p>When you create a compute environment, the instance types that you select for the compute environment must
    *     share the same architecture. For example, you can't mix x86 and ARM instances in the same compute
    *     environment.</p>
+   *          </note>
+   *
+   *          <note>
+   *             <p>Currently, <code>optimal</code> uses instance types from the C4, M4, and R4 instance families. In Regions that
+   *     don't have instance types from those instance families, instance types from the C5, M5. and R5 instance families are
+   *     used.</p>
    *          </note>
    */
   instanceTypes?: string[];
@@ -472,7 +486,7 @@ export interface ComputeResource {
   securityGroupIds?: string[];
 
   /**
-   * <p>The Amazon EC2 key pair that is used for instances launched in the compute environment. You can use this key pair to
+   * <p>The Amazon EC2 key pair that's used for instances launched in the compute environment. You can use this key pair to
    *    log in to your instances with SSH.</p>
    *          <note>
    *             <p>This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.</p>
@@ -498,11 +512,14 @@ export interface ComputeResource {
 
   /**
    * <p>Key-value pair tags to be applied to EC2 resources that are launched in the compute environment. For AWS Batch,
-   *    these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, {
-   *    "Name": "AWS Batch Instance - C4OnDemand" }. This is helpful for recognizing your AWS Batch instances in the Amazon EC2
-   *    console. These tags can not be updated or removed after the compute environment has been created; any changes require
-   *    creating a new compute environment and removing the old compute environment. These tags are not seen when using the
-   *    AWS Batch <code>ListTagsForResource</code> API operation.</p>
+   *    these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value−for
+   *    example, { "Name": "AWS Batch Instance - C4OnDemand" }. This is helpful for recognizing your AWS Batch instances in the
+   *    Amazon EC2 console. These tags can't be updated or removed after the compute environment has been created; any changes
+   *    require creating a new compute environment and removing the old compute environment. These tags are not seen when
+   *    using the AWS Batch <code>ListTagsForResource</code> API operation.</p>
+   *          <note>
+   *             <p>This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.</p>
+   *          </note>
    */
   tags?: { [key: string]: string };
 
@@ -521,7 +538,7 @@ export interface ComputeResource {
   /**
    * <p>The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that
    *    instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must
-   *    be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and
+   *    be less than 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and
    *    never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand
    *    price.</p>
    *          <note>
@@ -559,8 +576,8 @@ export interface ComputeResource {
   launchTemplate?: LaunchTemplateSpecification;
 
   /**
-   * <p>Provides information used to select Amazon Machine Images (AMIs) for instances in the compute environment. If
-   *     <code>Ec2Configuration</code> isn't specified, the default is <code>ECS_AL1</code>.</p>
+   * <p>Provides information used to select Amazon Machine Images (AMIs) for EC2 instances in the compute environment.
+   *    If <code>Ec2Configuration</code> isn't specified, the default is <code>ECS_AL1</code>.</p>
    *          <note>
    *             <p>This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.</p>
    *          </note>
@@ -584,6 +601,9 @@ export enum CEType {
   UNMANAGED = "UNMANAGED",
 }
 
+/**
+ * <p>Contains the parameters for <code>CreateComputeEnvironment</code>.</p>
+ */
 export interface CreateComputeEnvironmentRequest {
   /**
    * <p>The name for your compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and
@@ -601,6 +621,13 @@ export interface CreateComputeEnvironmentRequest {
   /**
    * <p>The state of the compute environment. If the state is <code>ENABLED</code>, then the compute environment accepts
    *    jobs from a queue and can scale out automatically based on queues.</p>
+   *          <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated
+   *    job queue on the compute resources within the environment. If the compute environment is managed, then it can scale
+   *    its instances out or in automatically, based on the job queue demand.</p>
+   *          <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler doesn't attempt to place jobs within the
+   *    environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed
+   *    compute environments in the <code>DISABLED</code> state don't scale out. However, they scale in to
+   *     <code>minvCpus</code> value after instances become idle.</p>
    */
   state?: CEState | string;
 
@@ -612,13 +639,14 @@ export interface CreateComputeEnvironmentRequest {
   computeResources?: ComputeResource;
 
   /**
-   * <p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your
-   *    behalf.</p>
+   * <p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. For
+   *    more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html">AWS Batch service
+   *     IAM role</a> in the <i>AWS Batch User Guide</i>.</p>
    *          <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN
    *    (this is recommended) or prefix the role name with the path.</p>
    *          <note>
-   *             <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path
-   *     prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN doesn't use the
+   *             <p>Depending on how you created your AWS Batch service role, its ARN might contain the <code>service-role</code>
+   *     path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN doesn't use the
    *      <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service
    *     role when you create compute environments.</p>
    *          </note>
@@ -643,7 +671,8 @@ export namespace CreateComputeEnvironmentRequest {
 
 export interface CreateComputeEnvironmentResponse {
   /**
-   * <p>The name of the compute environment.</p>
+   * <p>The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and
+   *  underscores are allowed.</p>
    */
   computeEnvironmentName?: string;
 
@@ -662,7 +691,14 @@ export namespace CreateComputeEnvironmentResponse {
 /**
  * <p>The order in which compute environments are tried for job placement within a queue. Compute environments are
  *    tried in ascending order. For example, if two compute environments are associated with a job queue, the compute
- *    environment with a lower order integer value is tried for job placement first.</p>
+ *    environment with a lower order integer value is tried for job placement first. Compute environments must be in the
+ *     <code>VALID</code> state before you can associate them with a job queue. All of the compute environments must be
+ *    either EC2 (<code>EC2</code> or <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>);
+ *    EC2 and Fargate compute environments can't be mixed.</p>
+ *          <note>
+ *             <p>All compute environments that are associated with a job queue must share the same architecture. AWS Batch doesn't
+ *     support mixing compute environment architecture types in a single job queue.</p>
+ *          </note>
  */
 export interface ComputeEnvironmentOrder {
   /**
@@ -689,9 +725,13 @@ export enum JQState {
   ENABLED = "ENABLED",
 }
 
+/**
+ * <p>Contains the parameters for <code>CreateJobQueue</code>.</p>
+ */
 export interface CreateJobQueueRequest {
   /**
-   * <p>The name of the job queue.</p>
+   * <p>The name of the job queue. Up to 128 letters (uppercase and lowercase), numbers, and underscores are
+   *    allowed.</p>
    */
   jobQueueName: string | undefined;
 
@@ -706,7 +746,9 @@ export interface CreateJobQueueRequest {
    * <p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the
    *     <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is
    *    determined in descending order. For example, a job queue with a priority value of <code>10</code> is given scheduling
-   *    preference over a job queue with a priority value of <code>1</code>.</p>
+   *    preference over a job queue with a priority value of <code>1</code>. All of the compute environments must be either
+   *    EC2 (<code>EC2</code> or <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>); EC2 and
+   *    Fargate compute environments cannot be mixed.</p>
    */
   priority: number | undefined;
 
@@ -717,13 +759,17 @@ export interface CreateJobQueueRequest {
    *    environments with a job queue. All of the compute environments must be either EC2 (<code>EC2</code> or
    *     <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>); EC2 and Fargate compute
    *    environments can't be mixed.</p>
+   *          <note>
+   *             <p>All compute environments that are associated with a job queue must share the same architecture. AWS Batch doesn't
+   *     support mixing compute environment architecture types in a single job queue.</p>
+   *          </note>
    */
   computeEnvironmentOrder: ComputeEnvironmentOrder[] | undefined;
 
   /**
    * <p>The tags that you apply to the job queue to help you categorize and organize your resources. Each tag consists
-   *    of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General
-   *    Reference</i>.</p>
+   *    of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html">Tagging your AWS Batch resources</a> in
+   *     <i>AWS Batch User Guide</i>.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -752,6 +798,9 @@ export namespace CreateJobQueueResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>DeleteComputeEnvironment</code>.</p>
+ */
 export interface DeleteComputeEnvironmentRequest {
   /**
    * <p>The name or Amazon Resource Name (ARN) of the compute environment to delete.</p>
@@ -773,6 +822,9 @@ export namespace DeleteComputeEnvironmentResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>DeleteJobQueue</code>.</p>
+ */
 export interface DeleteJobQueueRequest {
   /**
    * <p>The short name or full Amazon Resource Name (ARN) of the queue to delete.</p>
@@ -815,6 +867,9 @@ export namespace DeregisterJobDefinitionResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>DescribeComputeEnvironments</code>.</p>
+ */
 export interface DescribeComputeEnvironmentsRequest {
   /**
    * <p>A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries.</p>
@@ -838,7 +893,7 @@ export interface DescribeComputeEnvironmentsRequest {
    *    continues from the end of the previous results that returned the <code>nextToken</code> value. This value is
    *     <code>null</code> when there are no more results to return.</p>
    *          <note>
-   *             <p>This token should be treated as an opaque identifier that is only used to
+   *             <p>This token should be treated as an opaque identifier that's only used to
    *  retrieve the next items in a list and not for other programmatic purposes.</p>
    *          </note>
    */
@@ -865,7 +920,8 @@ export enum CEStatus {
  */
 export interface ComputeEnvironmentDetail {
   /**
-   * <p>The name of the compute environment.</p>
+   * <p>The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and
+   *  underscores are allowed.</p>
    */
   computeEnvironmentName: string | undefined;
 
@@ -885,9 +941,9 @@ export interface ComputeEnvironmentDetail {
   tags?: { [key: string]: string };
 
   /**
-   * <p>The type of compute environment: <code>EC2</code>, <code>SPOT</code>, <code>FARGATE</code>, or
-   *     <code>FARGATE_SPOT</code>. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the
-   *     <i>AWS Batch User Guide</i>.</p>
+   * <p>The type of the compute environment: <code>MANAGED</code> or <code>UNMANAGED</code>. For more information, see
+   *     <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in
+   *    the <i>AWS Batch User Guide</i>.</p>
    */
   type?: CEType | string;
 
@@ -898,7 +954,7 @@ export interface ComputeEnvironmentDetail {
    *    its instances out or in automatically, based on the job queue demand.</p>
    *          <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler doesn't attempt to place jobs within the
    *    environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed
-   *    compute environments in the <code>DISABLED</code> state do not scale out. However, they scale in to
+   *    compute environments in the <code>DISABLED</code> state don't scale out. However, they scale in to
    *     <code>minvCpus</code> value after instances become idle.</p>
    */
   state?: CEState | string;
@@ -915,13 +971,15 @@ export interface ComputeEnvironmentDetail {
   statusReason?: string;
 
   /**
-   * <p>The compute resources defined for the compute environment.</p>
+   * <p>The compute resources defined for the compute environment. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in the
+   *     <i>AWS Batch User Guide</i>.</p>
    */
   computeResources?: ComputeResource;
 
   /**
    * <p>The service role associated with the compute environment that allows AWS Batch to make calls to AWS API
-   *    operations on your behalf.</p>
+   *    operations on your behalf. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html">AWS Batch service IAM role</a> in the
+   *     <i>AWS Batch User Guide</i>.</p>
    */
   serviceRole?: string;
 }
@@ -953,6 +1011,9 @@ export namespace DescribeComputeEnvironmentsResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>DescribeJobDefinitions</code>.</p>
+ */
 export interface DescribeJobDefinitionsRequest {
   /**
    * <p>A list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.</p>
@@ -986,7 +1047,7 @@ export interface DescribeJobDefinitionsRequest {
    *    from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code>
    *    when there are no more results to return.</p>
    *          <note>
-   *             <p>This token should be treated as an opaque identifier that is only used to
+   *             <p>This token should be treated as an opaque identifier that's only used to
    *  retrieve the next items in a list and not for other programmatic purposes.</p>
    *          </note>
    */
@@ -1177,9 +1238,33 @@ export interface LinuxParameters {
    *     <code>0</code> causes swapping not to happen unless absolutely necessary. A <code>swappiness</code> value of
    *     <code>100</code> causes pages to be swapped very aggressively. Accepted values are whole numbers between
    *     <code>0</code> and <code>100</code>. If the <code>swappiness</code> parameter isn't specified, a default value of
-   *     <code>60</code> is used. If a value isn't specified for <code>maxSwap</code> then this parameter is ignored. This
-   *    parameter maps to the <code>--memory-swappiness</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker
-   *     run</a>.</p>
+   *     <code>60</code> is used. If a value isn't specified for <code>maxSwap</code> then this parameter is ignored.
+   *    If <code>maxSwap</code> is set to 0, the
+   *    container doesn't use swap. This parameter maps to the <code>--memory-swappiness</code> option to
+   *     <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
+   *
+   *          <p>Consider the following when you use a per-container swap configuration.</p>
+   *          <ul>
+   *             <li>
+   *                <p>Swap space must be enabled and allocated on the container instance for the containers to use.</p>
+   *                <note>
+   *                   <p>The Amazon ECS optimized AMIs don't have swap enabled by default. You must enable swap on the instance to use this
+   *       feature. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-swap-volumes.html">Instance Store Swap Volumes</a> in the
+   *        <i>Amazon EC2 User Guide for Linux Instances</i> or <a href="http://aws.amazon.com/premiumsupport/knowledge-center/ec2-memory-swap-file/">How do I allocate memory to work as swap space in an
+   *        Amazon EC2 instance by using a swap file?</a>
+   *                   </p>
+   *                </note>
+   *             </li>
+   *             <li>
+   *                <p>The swap space parameters are only supported for job definitions using EC2 resources.</p>
+   *             </li>
+   *             <li>
+   *                <p>If the <code>maxSwap</code> and <code>swappiness</code> parameters are omitted from a job definition, each
+   *      container will have a default <code>swappiness</code> value of 60 and the total swap usage will be limited to two
+   *      times the memory reservation of the container.</p>
+   *             </li>
+   *          </ul>
+   *
    *          <note>
    *             <p>This parameter isn't applicable to jobs running on Fargate resources and shouldn't be provided.</p>
    *          </note>
@@ -1296,8 +1381,8 @@ export interface LogConfiguration {
    *             </dd>
    *          </dl>
    *          <note>
-   *             <p>If you have a custom driver that isn't listed earlier that you want to work with the Amazon ECS container agent, you
-   *     can fork the Amazon ECS container agent project that is <a href="https://github.com/aws/amazon-ecs-agent">available on
+   *             <p>If you have a custom driver that'sn't listed earlier that you want to work with the Amazon ECS container agent, you
+   *     can fork the Amazon ECS container agent project that's <a href="https://github.com/aws/amazon-ecs-agent">available on
    *      GitHub</a> and customize it to work with that driver. We encourage you to submit pull requests for changes that
    *     you want to have included. However, Amazon Web Services doesn't currently support running modified copies of this
    *     software.</p>
@@ -1331,7 +1416,7 @@ export namespace LogConfiguration {
 }
 
 /**
- * <p>Details on a Docker volume mount point that is used in a job's container properties. This parameter maps to
+ * <p>Details on a Docker volume mount point that's used in a job's container properties. This parameter maps to
  *     <code>Volumes</code> in the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api_v1.19/#create-a-container">Create a
  *     container</a> section of the Docker Remote API and the <code>--volume</code> option to docker run.</p>
  */
@@ -1411,57 +1496,57 @@ export interface ResourceRequirement {
    *        <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. You must specify at least
    *       4 MiB of memory for a job. This is required but can be specified in several places for multi-node parallel (MNP)
    *       jobs. It must be specified for each node at least once. This parameter maps to <code>Memory</code> in the
-   *       <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. You must specify at least 4 MiB of memory for a job.</p>
+   *       <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--memory</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p>
    *                <note>
    *                   <p>If you're trying to maximize your resource utilization by providing your jobs as much memory as possible for
    *        a particular instance type, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html">Memory
    *         Management</a> in the <i>AWS Batch User Guide</i>.</p>
    *                </note>
-   *                <p>For jobs running on Fargate resources, then <code>value</code> is the hard limit (in GiB), represented in
-   *       decimal form, and must match one of the supported values (0.5 and whole numbers between 1 and 30, inclusive) and
-   *       the <code>VCPU</code> values must be one of the values supported for that memory value.</p>
+   *                <p>For jobs running on Fargate resources, then <code>value</code> is the hard limit (in MiB), and must match
+   *       one of the supported values and the <code>VCPU</code> values must be one of the values supported for that memory
+   *       value.</p>
    *                <dl>
-   *                   <dt>value = 0.5</dt>
+   *                   <dt>value = 512</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 0.25</p>
    *                      </dd>
-   *                   <dt>value = 1</dt>
+   *                   <dt>value = 1024</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 0.25 or 0.5</p>
    *                      </dd>
-   *                   <dt>value = 2</dt>
+   *                   <dt>value = 2048</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 0.25, 0.5, or 1</p>
    *                      </dd>
-   *                   <dt>value = 3</dt>
+   *                   <dt>value = 3072</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 0.5, or 1</p>
    *                      </dd>
-   *                   <dt>value = 4</dt>
+   *                   <dt>value = 4096</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 0.5, 1, or 2</p>
    *                      </dd>
-   *                   <dt>value = 5, 6, or 7</dt>
+   *                   <dt>value = 5120, 6144, or 7168</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 1 or 2</p>
    *                      </dd>
-   *                   <dt>value = 8</dt>
+   *                   <dt>value = 8192</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 1, 2, or 4</p>
    *                      </dd>
-   *                   <dt>value = 9, 10, 11, 12, 13, 14, 15, or 16</dt>
+   *                   <dt>value = 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 2 or 4</p>
    *                      </dd>
-   *                   <dt>value = 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, or 30</dt>
+   *                   <dt>value = 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</dt>
    *                   <dd>
    *                         <p>
    *                            <code>VCPU</code> = 4</p>
@@ -1472,9 +1557,9 @@ export interface ResourceRequirement {
    *             <dd>
    *                <p>The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the
    *       <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>--cpu-shares</code> option to
-   *        <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. You must
-   *       specify at least one vCPU. This is required but can be specified in several places; it must be specified for each
-   *       node at least once.</p>
+   *        <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. For EC2
+   *       resources, you must specify at least one vCPU. This is required but can be specified in several places; it must be
+   *       specified for each node at least once.</p>
    *                <p>For jobs running on Fargate resources, then <code>value</code> must match one of the supported values and
    *       the <code>MEMORY</code> values must be one of the values supported for that VCPU value. The supported values are
    *       0.25, 0.5, 1, 2, and 4</p>
@@ -1482,27 +1567,28 @@ export interface ResourceRequirement {
    *                   <dt>value = 0.25</dt>
    *                   <dd>
    *                         <p>
-   *                            <code>MEMORY</code> = 0.5, 1, or 2</p>
+   *                            <code>MEMORY</code> = 512, 1024, or 2048</p>
    *                      </dd>
    *                   <dt>value = 0.5</dt>
    *                   <dd>
    *                         <p>
-   *                            <code>MEMORY</code> = 1, 2, 3, or 4</p>
+   *                            <code>MEMORY</code> = 1024, 2048, 3072, or 4096</p>
    *                      </dd>
    *                   <dt>value = 1</dt>
    *                   <dd>
    *                         <p>
-   *                            <code>MEMORY</code> = 2, 3, 4, 5, 6, 7, or 8</p>
+   *                            <code>MEMORY</code> = 2048, 3072, 4096, 5120, 6144, 7168, or 8192</p>
    *                      </dd>
    *                   <dt>value = 2</dt>
    *                   <dd>
    *                         <p>
-   *                            <code>MEMORY</code> = 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, or 16</p>
+   *                            <code>MEMORY</code> = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384</p>
    *                      </dd>
    *                   <dt>value = 4</dt>
    *                   <dd>
    *                         <p>
-   *                            <code>MEMORY</code> = 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, or 30</p>
+   *                            <code>MEMORY</code> = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456,
+   *      20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720</p>
    *                      </dd>
    *                </dl>
    *             </dd>
@@ -1559,7 +1645,7 @@ export namespace Ulimit {
  */
 export interface Host {
   /**
-   * <p>The path on the host container instance that is presented to the container. If this parameter is empty, then the
+   * <p>The path on the host container instance that's presented to the container. If this parameter is empty, then the
    *    Docker daemon has assigned a host path for you. If this parameter contains a file location, then the data volume
    *    persists at the specified location on the host container instance until you delete it manually. If the source path
    *    location does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the
@@ -1607,7 +1693,7 @@ export namespace Volume {
 }
 
 /**
- * <p>Container properties are used in job definitions to describe the container that is launched as part of a
+ * <p>Container properties are used in job definitions to describe the container that's launched as part of a
  *    job.</p>
  */
 export interface ContainerProperties {
@@ -1684,7 +1770,7 @@ export interface ContainerProperties {
   memory?: number;
 
   /**
-   * <p>The command that is passed to the container. This parameter maps to <code>Cmd</code> in the
+   * <p>The command that's passed to the container. This parameter maps to <code>Cmd</code> in the
    *    <a href="https://docs.docker.com/engine/api/v1.23/#create-a-container">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.23/">Docker Remote API</a> and the <code>COMMAND</code> parameter to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. For more information, see <a href="https://docs.docker.com/engine/reference/builder/#cmd">https://docs.docker.com/engine/reference/builder/#cmd</a>.</p>
    */
   command?: string[];
@@ -1842,7 +1928,7 @@ export interface NodeRangeProperty {
    * <p>The range of nodes, using node index values. A range of <code>0:3</code> indicates nodes with index values of
    *     <code>0</code> through <code>3</code>. If the starting range value is omitted (<code>:n</code>), then <code>0</code>
    *    is used to start the range. If the ending range value is omitted (<code>n:</code>), then the highest possible node
-   *    index is used to end the range. Your accumulative node ranges must account for all nodes (<code>0:n</code>). You may
+   *    index is used to end the range. Your accumulative node ranges must account for all nodes (<code>0:n</code>). You can
    *    nest node ranges, for example <code>0:10</code> and <code>4:5</code>, in which case the <code>4:5</code> range
    *    properties override the <code>0:10</code> properties.</p>
    */
@@ -1942,7 +2028,7 @@ export namespace EvaluateOnExit {
  */
 export interface RetryStrategy {
   /**
-   * <p>The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10
+   * <p>The number of times to move a job to the <code>RUNNABLE</code> status. You can specify between 1 and 10
    *    attempts. If the value of <code>attempts</code> is greater than one, the job is retried on failure the same number of
    *    attempts as the value.</p>
    */
@@ -2088,6 +2174,9 @@ export namespace DescribeJobDefinitionsResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>DescribeJobQueues</code>.</p>
+ */
 export interface DescribeJobQueuesRequest {
   /**
    * <p>A list of up to 100 queue names or full queue Amazon Resource Name (ARN) entries.</p>
@@ -2110,7 +2199,7 @@ export interface DescribeJobQueuesRequest {
    *    end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when
    *    there are no more results to return.</p>
    *          <note>
-   *             <p>This token should be treated as an opaque identifier that is only used to
+   *             <p>This token should be treated as an opaque identifier that's only used to
    *  retrieve the next items in a list and not for other programmatic purposes.</p>
    *          </note>
    */
@@ -2164,7 +2253,12 @@ export interface JobQueueDetail {
   statusReason?: string;
 
   /**
-   * <p>The priority of the job queue.</p>
+   * <p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the
+   *     <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is
+   *    determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling
+   *    preference over a job queue with a priority value of <code>1</code>. All of the compute environments must be either
+   *    EC2 (<code>EC2</code> or <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>); EC2 and
+   *    Fargate compute environments cannot be mixed.</p>
    */
   priority: number | undefined;
 
@@ -2175,7 +2269,8 @@ export interface JobQueueDetail {
   computeEnvironmentOrder: ComputeEnvironmentOrder[] | undefined;
 
   /**
-   * <p>The tags applied to the job queue.</p>
+   * <p>The tags applied to the job queue. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html">Tagging your AWS Batch resources</a> in
+   *     <i>AWS Batch User Guide</i>.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -2206,6 +2301,9 @@ export namespace DescribeJobQueuesResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>DescribeJobs</code>.</p>
+ */
 export interface DescribeJobsRequest {
   /**
    * <p>A list of up to 100 job IDs.</p>
@@ -2220,7 +2318,7 @@ export namespace DescribeJobsRequest {
 }
 
 /**
- * <p>An object representing the details of a container that is part of a job.</p>
+ * <p>An object representing the details of a container that's part of a job.</p>
  */
 export interface ContainerDetail {
   /**
@@ -2251,7 +2349,7 @@ export interface ContainerDetail {
   memory?: number;
 
   /**
-   * <p>The command that is passed to the container.</p>
+   * <p>The command that's passed to the container.</p>
    */
   command?: string[];
 
@@ -2336,8 +2434,8 @@ export interface ContainerDetail {
   containerInstanceArn?: string;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the Amazon ECS task that is associated with the container job. Each container attempt receives a
-   *    task ARN when they reach the <code>STARTING</code> status.</p>
+   * <p>The Amazon Resource Name (ARN) of the Amazon ECS task that's associated with the container job. Each container attempt receives a task
+   *    ARN when they reach the <code>STARTING</code> status.</p>
    */
   taskArn?: string;
 
@@ -2383,7 +2481,7 @@ export interface ContainerDetail {
    *    For more information on the options for different supported log drivers, see <a href="https://docs.docker.com/engine/admin/logging/overview/">Configure logging drivers</a> in the Docker
    *    documentation.</p>
    *          <note>
-   *             <p>AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the <a>LogConfiguration</a> data type). Additional log drivers may be available in future releases of the Amazon ECS
+   *             <p>AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the <a>LogConfiguration</a> data type). Additional log drivers might be available in future releases of the Amazon ECS
    *     container agent.</p>
    *          </note>
    *          <p>This parameter requires version 1.18 of the Docker Remote API or greater on your
@@ -2504,7 +2602,7 @@ export interface JobDetail {
   /**
    * <p>The current status for the job.</p>
    *          <note>
-   *             <p>If your jobs do not progress to <code>STARTING</code>, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable">Jobs Stuck in RUNNABLE Status</a> in
+   *             <p>If your jobs don't progress to <code>STARTING</code>, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable">Jobs Stuck in RUNNABLE Status</a> in
    *     the troubleshooting section of the <i>AWS Batch User Guide</i>.</p>
    *          </note>
    */
@@ -2552,7 +2650,7 @@ export interface JobDetail {
   dependsOn?: JobDependency[];
 
   /**
-   * <p>The job definition that is used by this job.</p>
+   * <p>The job definition that's used by this job.</p>
    */
   jobDefinition: string | undefined;
 
@@ -2568,7 +2666,7 @@ export interface JobDetail {
   container?: ContainerDetail;
 
   /**
-   * <p>An object representing the details of a node that is associated with a multi-node parallel job.</p>
+   * <p>An object representing the details of a node that's associated with a multi-node parallel job.</p>
    */
   nodeDetails?: NodeDetails;
 
@@ -2629,6 +2727,9 @@ export namespace DescribeJobsResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>ListJobs</code>.</p>
+ */
 export interface ListJobsRequest {
   /**
    * <p>The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.</p>
@@ -2669,7 +2770,7 @@ export interface ListJobsRequest {
    *    end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when
    *    there are no more results to return.</p>
    *          <note>
-   *             <p>This token should be treated as an opaque identifier that is only used to
+   *             <p>This token should be treated as an opaque identifier that's only used to
    *  retrieve the next items in a list and not for other programmatic purposes.</p>
    *          </note>
    */
@@ -2705,7 +2806,7 @@ export namespace ContainerSummary {
 }
 
 /**
- * <p>An object representing the properties of a node that is associated with a multi-node parallel job.</p>
+ * <p>An object representing the properties of a node that's associated with a multi-node parallel job.</p>
  */
 export interface NodePropertiesSummary {
   /**
@@ -2780,7 +2881,7 @@ export interface JobSummary {
   stoppedAt?: number;
 
   /**
-   * <p>An object representing the details of the container that is associated with the job.</p>
+   * <p>An object representing the details of the container that's associated with the job.</p>
    */
   container?: ContainerSummary;
 
@@ -2856,6 +2957,9 @@ export enum JobDefinitionType {
   Multinode = "multinode",
 }
 
+/**
+ * <p>Contains the parameters for <code>RegisterJobDefinition</code>.</p>
+ */
 export interface RegisterJobDefinitionRequest {
   /**
    * <p>The name of the job definition to register. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and
@@ -2904,8 +3008,8 @@ export interface RegisterJobDefinitionRequest {
   nodeProperties?: NodeProperties;
 
   /**
-   * <p>The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that
-   *    is specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is
+   * <p>The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that's
+   *    specified during a <a>SubmitJob</a> operation overrides the retry strategy defined here. If a job is
    *    terminated due to a timeout, it isn't retried.</p>
    */
   retryStrategy?: RetryStrategy;
@@ -2921,7 +3025,7 @@ export interface RegisterJobDefinitionRequest {
   /**
    * <p>The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates
    *    your jobs if they have not finished. If a job is terminated due to a timeout, it isn't retried. The minimum value for
-   *    the timeout is 60 seconds. Any timeout configuration that is specified during a <a>SubmitJob</a> operation
+   *    the timeout is 60 seconds. Any timeout configuration that's specified during a <a>SubmitJob</a> operation
    *    overrides the timeout configuration defined here. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html">Job Timeouts</a> in the
    *    <i>AWS Batch User Guide</i>.</p>
    */
@@ -3041,7 +3145,7 @@ export namespace ContainerOverrides {
 }
 
 /**
- * <p>Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API
+ * <p>Object representing any node overrides to a job definition that's used in a <a>SubmitJob</a> API
  *    operation.</p>
  */
 export interface NodePropertyOverride {
@@ -3066,7 +3170,7 @@ export namespace NodePropertyOverride {
 }
 
 /**
- * <p>Object representing any node overrides to a job definition that is used in a <a>SubmitJob</a> API
+ * <p>Object representing any node overrides to a job definition that's used in a <a>SubmitJob</a> API
  *    operation.</p>
  *          <note>
  *             <p>This isn't applicable to jobs running on Fargate resources and shouldn't be provided; use
@@ -3106,6 +3210,9 @@ export namespace NodeOverrides {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>SubmitJob</code>.</p>
+ */
 export interface SubmitJobRequest {
   /**
    * <p>The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase),
@@ -3151,7 +3258,7 @@ export interface SubmitJobRequest {
 
   /**
    * <p>A list of container overrides in JSON format that specify the name of a container in the specified job
-   *    definition and the overrides it should receive. You can override the default command for a container (that is
+   *    definition and the overrides it should receive. You can override the default command for a container (that's
    *    specified in the job definition or the Docker image) with a <code>command</code> override. You can also override
    *    existing environment variables (that are specified in the job definition or Docker image) on a container or add new
    *    environment variables to it with an <code>environment</code> override.</p>
@@ -3259,6 +3366,9 @@ export namespace TagResourceResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>TerminateJob</code>.</p>
+ */
 export interface TerminateJobRequest {
   /**
    * <p>The AWS Batch job ID of the job to terminate.</p>
@@ -3315,19 +3425,27 @@ export namespace UntagResourceResponse {
 }
 
 /**
- * <p>An object representing the attributes of a compute environment that can be updated.</p>
+ * <p>An object representing the attributes of a compute environment that can be updated. For more information, see
+ *     <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute Environments</a> in
+ *    the <i>AWS Batch User Guide</i>.</p>
  */
 export interface ComputeResourceUpdate {
   /**
    * <p>The minimum number of Amazon EC2 vCPUs that an environment should maintain.</p>
    *          <note>
-   *             <p>This parameter isnt applicable to jobs running on Fargate resources, and shouldn't be specified.</p>
+   *             <p>This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.</p>
    *          </note>
    */
   minvCpus?: number;
 
   /**
    * <p>The maximum number of Amazon EC2 vCPUs that an environment can reach.</p>
+   *          <note>
+   *             <p>With both <code>BEST_FIT_PROGRESSIVE</code> and <code>SPOT_CAPACITY_OPTIMIZED</code> allocation strategies,
+   *     AWS Batch might need to go above <code>maxvCpus</code> to meet your capacity requirements. In this event, AWS Batch will
+   *     never go above <code>maxvCpus</code> by more than a single instance (e.g., no more than a single instance from among
+   *     those specified in your compute environment).</p>
+   *          </note>
    */
   maxvCpus?: number;
 
@@ -3350,7 +3468,7 @@ export interface ComputeResourceUpdate {
   /**
    * <p>The Amazon EC2 security groups associated with instances launched in the compute environment. This parameter is
    *    required for Fargate compute resources, where it can contain up to 5 security groups. This can't be specified for
-   *    EC2 compute resources. Providing an empty list is handled as if this parameter wasn't specified and no changeis
+   *    EC2 compute resources. Providing an empty list is handled as if this parameter wasn't specified and no change is
    *    made.</p>
    */
   securityGroupIds?: string[];
@@ -3362,6 +3480,9 @@ export namespace ComputeResourceUpdate {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>UpdateComputeEnvironment</code>.</p>
+ */
 export interface UpdateComputeEnvironmentRequest {
   /**
    * <p>The name or full Amazon Resource Name (ARN) of the compute environment to update.</p>
@@ -3371,18 +3492,27 @@ export interface UpdateComputeEnvironmentRequest {
   /**
    * <p>The state of the compute environment. Compute environments in the <code>ENABLED</code> state can accept jobs
    *    from a queue and scale in or out automatically based on the workload demand of its associated queues.</p>
+   *          <p>If the state is <code>ENABLED</code>, then the AWS Batch scheduler can attempt to place jobs from an associated
+   *    job queue on the compute resources within the environment. If the compute environment is managed, then it can scale
+   *    its instances out or in automatically, based on the job queue demand.</p>
+   *          <p>If the state is <code>DISABLED</code>, then the AWS Batch scheduler doesn't attempt to place jobs within the
+   *    environment. Jobs in a <code>STARTING</code> or <code>RUNNING</code> state continue to progress normally. Managed
+   *    compute environments in the <code>DISABLED</code> state don't scale out. However, they scale in to
+   *     <code>minvCpus</code> value after instances become idle.</p>
    */
   state?: CEState | string;
 
   /**
-   * <p>Details of the compute resources managed by the compute environment. Required for a managed compute
-   *    environment.</p>
+   * <p>Details of the compute resources managed by the compute environment. Required for a managed compute environment.
+   *    For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html">Compute
+   *     Environments</a> in the <i>AWS Batch User Guide</i>.</p>
    */
   computeResources?: ComputeResourceUpdate;
 
   /**
-   * <p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your
-   *    behalf.</p>
+   * <p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. For
+   *    more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html">AWS Batch service
+   *     IAM role</a> in the <i>AWS Batch User Guide</i>.</p>
    *          <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN
    *    (this is recommended) or prefix the role name with the path.</p>
    *          <note>
@@ -3403,7 +3533,8 @@ export namespace UpdateComputeEnvironmentRequest {
 
 export interface UpdateComputeEnvironmentResponse {
   /**
-   * <p>The name of the compute environment.</p>
+   * <p>The name of the compute environment. Up to 128 letters (uppercase and lowercase), numbers, hyphens, and
+   *  underscores are allowed.</p>
    */
   computeEnvironmentName?: string;
 
@@ -3419,6 +3550,9 @@ export namespace UpdateComputeEnvironmentResponse {
   });
 }
 
+/**
+ * <p>Contains the parameters for <code>UpdateJobQueue</code>.</p>
+ */
 export interface UpdateJobQueueRequest {
   /**
    * <p>The name or the Amazon Resource Name (ARN) of the job queue.</p>
@@ -3436,15 +3570,22 @@ export interface UpdateJobQueueRequest {
    * <p>The priority of the job queue. Job queues with a higher priority (or a higher integer value for the
    *     <code>priority</code> parameter) are evaluated first when associated with the same compute environment. Priority is
    *    determined in descending order, for example, a job queue with a priority value of <code>10</code> is given scheduling
-   *    preference over a job queue with a priority value of <code>1</code>.</p>
+   *    preference over a job queue with a priority value of <code>1</code>. All of the compute environments must be either
+   *    EC2 (<code>EC2</code> or <code>SPOT</code>) or Fargate (<code>FARGATE</code> or <code>FARGATE_SPOT</code>); EC2 and
+   *    Fargate compute environments cannot be mixed.</p>
    */
   priority?: number;
 
   /**
    * <p>Details the set of compute environments mapped to a job queue and their order relative to each other. This is
-   *    one of the parameters used by the job scheduler to determine which compute environment should run a given job. All of
+   *    one of the parameters used by the job scheduler to determine which compute environment should run a given job.
+   *    Compute environments must be in the <code>VALID</code> state before you can associate them with a job queue. All of
    *    the compute environments must be either EC2 (<code>EC2</code> or <code>SPOT</code>) or Fargate
    *     (<code>FARGATE</code> or <code>FARGATE_SPOT</code>); EC2 and Fargate compute environments can't be mixed.</p>
+   *          <note>
+   *             <p>All compute environments that are associated with a job queue must share the same architecture. AWS Batch doesn't
+   *     support mixing compute environment architecture types in a single job queue.</p>
+   *          </note>
    */
   computeEnvironmentOrder?: ComputeEnvironmentOrder[];
 }

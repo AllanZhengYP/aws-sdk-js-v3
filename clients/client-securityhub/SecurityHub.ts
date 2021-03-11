@@ -397,32 +397,7 @@ export class SecurityHub extends SecurityHubClient {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <code>Confidence</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Criticality</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
    *                   <code>Note</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>RelatedFindings</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Severity</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>Types</code>
    *                </p>
    *             </li>
    *             <li>
@@ -438,6 +413,38 @@ export class SecurityHub extends SecurityHubClient {
    *             <li>
    *                <p>
    *                   <code>Workflow</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <code>BatchImportFindings</code> can be used to update the following finding fields and
+   *          objects only if they have not been updated using <code>BatchUpdateFindings</code>. After
+   *          they are updated using <code>BatchUpdateFindings</code>, these fields cannot be updated
+   *          using <code>BatchImportFindings</code>.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Confidence</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Criticality</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>RelatedFindings</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Severity</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Types</code>
    *                </p>
    *             </li>
    *          </ul>
@@ -960,8 +967,11 @@ export class SecurityHub extends SecurityHubClient {
   }
 
   /**
-   * <p>Returns information about the available products that you can subscribe to and integrate
-   *          with Security Hub in order to consolidate findings.</p>
+   * <p>Returns information about product integrations in Security Hub.</p>
+   *          <p>You can optionally provide an integration ARN. If you provide an integration ARN, then
+   *          the results only include that integration.</p>
+   *          <p>If you do not provide an integration ARN, then the results include all of the available
+   *          product integrations. </p>
    */
   public describeProducts(
     args: DescribeProductsCommandInput,

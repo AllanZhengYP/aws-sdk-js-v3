@@ -140,6 +140,7 @@ import {
   S3AccessControlPolicy,
   S3BucketDestination,
   S3CopyObjectOperation,
+  S3DeleteObjectTaggingOperation,
   S3Grant,
   S3Grantee,
   S3InitiateRestoreObjectOperation,
@@ -4433,6 +4434,12 @@ const serializeAws_restXmlJobOperation = (input: JobOperation, context: __SerdeC
     );
     bodyNode.addChildNode(node);
   }
+  if (input.S3DeleteObjectTagging !== undefined && input.S3DeleteObjectTagging !== null) {
+    const node = serializeAws_restXmlS3DeleteObjectTaggingOperation(input.S3DeleteObjectTagging, context).withName(
+      "S3DeleteObjectTagging"
+    );
+    bodyNode.addChildNode(node);
+  }
   if (input.S3InitiateRestoreObject !== undefined && input.S3InitiateRestoreObject !== null) {
     const node = serializeAws_restXmlS3InitiateRestoreObjectOperation(input.S3InitiateRestoreObject, context).withName(
       "S3InitiateRestoreObject"
@@ -4908,6 +4915,14 @@ const serializeAws_restXmlS3CopyObjectOperation = (input: S3CopyObjectOperation,
       .withName("ObjectLockRetainUntilDate");
     bodyNode.addChildNode(node);
   }
+  return bodyNode;
+};
+
+const serializeAws_restXmlS3DeleteObjectTaggingOperation = (
+  input: S3DeleteObjectTaggingOperation,
+  context: __SerdeContext
+): any => {
+  const bodyNode = new __XmlNode("S3DeleteObjectTaggingOperation");
   return bodyNode;
 };
 
@@ -5749,6 +5764,7 @@ const deserializeAws_restXmlJobOperation = (output: any, context: __SerdeContext
     S3PutObjectCopy: undefined,
     S3PutObjectAcl: undefined,
     S3PutObjectTagging: undefined,
+    S3DeleteObjectTagging: undefined,
     S3InitiateRestoreObject: undefined,
     S3PutObjectLegalHold: undefined,
     S3PutObjectRetention: undefined,
@@ -5765,6 +5781,12 @@ const deserializeAws_restXmlJobOperation = (output: any, context: __SerdeContext
   if (output["S3PutObjectTagging"] !== undefined) {
     contents.S3PutObjectTagging = deserializeAws_restXmlS3SetObjectTaggingOperation(
       output["S3PutObjectTagging"],
+      context
+    );
+  }
+  if (output["S3DeleteObjectTagging"] !== undefined) {
+    contents.S3DeleteObjectTagging = deserializeAws_restXmlS3DeleteObjectTaggingOperation(
+      output["S3DeleteObjectTagging"],
       context
     );
   }
@@ -6288,6 +6310,14 @@ const deserializeAws_restXmlS3CopyObjectOperation = (output: any, context: __Ser
   if (output["ObjectLockRetainUntilDate"] !== undefined) {
     contents.ObjectLockRetainUntilDate = new Date(output["ObjectLockRetainUntilDate"]);
   }
+  return contents;
+};
+
+const deserializeAws_restXmlS3DeleteObjectTaggingOperation = (
+  output: any,
+  context: __SerdeContext
+): S3DeleteObjectTaggingOperation => {
+  let contents: any = {};
   return contents;
 };
 

@@ -20,14 +20,12 @@ import {
   ResourceType,
   SpotInstanceType,
   Subnet,
-  SubnetIpv6CidrBlockAssociation,
   Tag,
   TagSpecification,
   Tenancy,
   TransitGatewayAssociationState,
   TransitGatewayAttachmentResourceType,
   TransitGatewayAttachmentState,
-  TransitGatewayMulticastDomainAssociations,
   TransitGatewayPeeringAttachment,
   TransitGatewayVpcAttachment,
   UserIdGroupPair,
@@ -81,14 +79,106 @@ import {
   EventInformation,
   FastSnapshotRestoreStateCode,
   Filter,
-  FpgaInfo,
-  GpuInfo,
+  FpgaDeviceInfo,
   IdFormat,
-  InstanceTypeHypervisor,
   PermissionGroup,
   ProductCode,
   VirtualizationType,
 } from "./models_2";
+
+/**
+ * <p>Describes the FPGAs for the instance type.</p>
+ */
+export interface FpgaInfo {
+  /**
+   * <p>Describes the FPGAs for the instance type.</p>
+   */
+  Fpgas?: FpgaDeviceInfo[];
+
+  /**
+   * <p>The total memory of all FPGA accelerators for the instance type.</p>
+   */
+  TotalFpgaMemoryInMiB?: number;
+}
+
+export namespace FpgaInfo {
+  export const filterSensitiveLog = (obj: FpgaInfo): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Describes the memory available to the GPU accelerator.</p>
+ */
+export interface GpuDeviceMemoryInfo {
+  /**
+   * <p>The size of the memory available to the GPU accelerator, in MiB.</p>
+   */
+  SizeInMiB?: number;
+}
+
+export namespace GpuDeviceMemoryInfo {
+  export const filterSensitiveLog = (obj: GpuDeviceMemoryInfo): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Describes the GPU accelerators for the instance type.</p>
+ */
+export interface GpuDeviceInfo {
+  /**
+   * <p>The name of the GPU accelerator.</p>
+   */
+  Name?: string;
+
+  /**
+   * <p>The manufacturer of the GPU accelerator.</p>
+   */
+  Manufacturer?: string;
+
+  /**
+   * <p>The number of GPUs for the instance type.</p>
+   */
+  Count?: number;
+
+  /**
+   * <p>Describes the memory available to the GPU accelerator.</p>
+   */
+  MemoryInfo?: GpuDeviceMemoryInfo;
+}
+
+export namespace GpuDeviceInfo {
+  export const filterSensitiveLog = (obj: GpuDeviceInfo): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Describes the GPU accelerators for the instance type.</p>
+ */
+export interface GpuInfo {
+  /**
+   * <p>Describes the GPU accelerators for the instance type.</p>
+   */
+  Gpus?: GpuDeviceInfo[];
+
+  /**
+   * <p>The total size of the memory for the GPU accelerators for the instance type, in MiB.</p>
+   */
+  TotalGpuMemoryInMiB?: number;
+}
+
+export namespace GpuInfo {
+  export const filterSensitiveLog = (obj: GpuInfo): any => ({
+    ...obj,
+  });
+}
+
+export enum InstanceTypeHypervisor {
+  NITRO = "nitro",
+  XEN = "xen",
+}
 
 /**
  * <p>Describes the Inference accelerators for the instance type.</p>
@@ -3129,7 +3219,7 @@ export interface DescribeNetworkInterfacesRequest {
    * 		          </li>
    *             <li>
    * 		             <p>
-   *                   <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p>
+   *                   <code>requester-id</code> - The alias or AWS account ID of the principal or service that created the network interface.</p>
    * 		          </li>
    *             <li>
    * 		             <p>
@@ -5262,7 +5352,7 @@ export interface DescribeSecurityGroupsRequest {
    *             <li>
    *                 <p>
    *                   <code>egress.ip-permission.group-name</code> - The name of a security group
-   *                     that has been referenced in an outbound security group rule.</p>
+   *                     that is referenced in an outbound security group rule.</p>
    *             </li>
    *             <li>
    *                 <p>
@@ -5277,7 +5367,7 @@ export interface DescribeSecurityGroupsRequest {
    *                 <p>
    *                   <code>egress.ip-permission.protocol</code> - The IP protocol for an
    *                     outbound security group rule (<code>tcp</code> | <code>udp</code> |
-   *                         <code>icmp</code> or a protocol number).</p>
+   *                         <code>icmp</code>, a protocol number, or -1 for all protocols).</p>
    *             </li>
    *             <li>
    *                 <p>
@@ -5299,24 +5389,24 @@ export interface DescribeSecurityGroupsRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                     <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security
+   *                   <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security
    *                     group rule.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                     <code>ip-permission.from-port</code> - For an inbound rule, the start of port
+   *                   <code>ip-permission.from-port</code> - For an inbound rule, the start of port
    *                     range for the TCP and UDP protocols, or an ICMP type number.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                     <code>ip-permission.group-id</code> - The ID of a security group that has been
+   *                   <code>ip-permission.group-id</code> - The ID of a security group that has been
    *                     referenced in an inbound security group rule.</p>
    *             </li>
    *             <li>
-   * 				           <p>
-   *                     <code>ip-permission.group-name</code> - The name of a security group that has
-   *                     been referenced in an inbound security group rule.</p>
-   * 			         </li>
+   * 			            <p>
+   *                   <code>ip-permission.group-name</code> - The name of a security group that is
+   *                     referenced in an inbound security group rule.</p>
+   * 	           </li>
    *             <li>
    *                <p>
    *                   <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security
@@ -5328,18 +5418,18 @@ export interface DescribeSecurityGroupsRequest {
    *             </li>
    *             <li>
    *                <p>
-   *                     <code>ip-permission.protocol</code> - The IP protocol for an inbound security
-   *                     group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a
-   *                     protocol number).</p>
+   *                   <code>ip-permission.protocol</code> - The IP protocol for an inbound security
+   *                 group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code>, a
+   *                 protocol number, or -1 for all protocols).</p>
    *             </li>
    *             <li>
    *                <p>
-   *                     <code>ip-permission.to-port</code> - For an inbound rule, the end of port range
+   *                   <code>ip-permission.to-port</code> - For an inbound rule, the end of port range
    *                     for the TCP and UDP protocols, or an ICMP code.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                     <code>ip-permission.user-id</code> - The ID of an AWS account that has been
+   *                   <code>ip-permission.user-id</code> - The ID of an AWS account that has been
    *                     referenced in an inbound security group rule.</p>
    *             </li>
    *             <li>
@@ -10102,6 +10192,11 @@ export interface DescribeVpcEndpointServicesRequest {
    *                   <code>service-name</code> - The name of the service.</p>
    *             </li>
    *             <li>
+   *                 <p>
+   *                   <code>service-type</code> - The type of service (<code>Interface</code> |
+   *                         <code>Gateway</code>).</p>
+   *             </li>
+   *             <li>
    *         		     <p>
    *                   <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>
    *         	   </li>
@@ -11349,100 +11444,6 @@ export interface DisassociateIamInstanceProfileResult {
 
 export namespace DisassociateIamInstanceProfileResult {
   export const filterSensitiveLog = (obj: DisassociateIamInstanceProfileResult): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateRouteTableRequest {
-  /**
-   * <p>The association ID representing the current association between the route table and subnet or gateway.</p>
-   */
-  AssociationId: string | undefined;
-
-  /**
-   * <p>Checks whether you have the required permissions for the action, without actually making the request,
-   *    and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
-   *    Otherwise, it is <code>UnauthorizedOperation</code>.</p>
-   */
-  DryRun?: boolean;
-}
-
-export namespace DisassociateRouteTableRequest {
-  export const filterSensitiveLog = (obj: DisassociateRouteTableRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateSubnetCidrBlockRequest {
-  /**
-   * <p>The association ID for the CIDR block.</p>
-   */
-  AssociationId: string | undefined;
-}
-
-export namespace DisassociateSubnetCidrBlockRequest {
-  export const filterSensitiveLog = (obj: DisassociateSubnetCidrBlockRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateSubnetCidrBlockResult {
-  /**
-   * <p>Information about the IPv6 CIDR block association.</p>
-   */
-  Ipv6CidrBlockAssociation?: SubnetIpv6CidrBlockAssociation;
-
-  /**
-   * <p>The ID of the subnet.</p>
-   */
-  SubnetId?: string;
-}
-
-export namespace DisassociateSubnetCidrBlockResult {
-  export const filterSensitiveLog = (obj: DisassociateSubnetCidrBlockResult): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateTransitGatewayMulticastDomainRequest {
-  /**
-   * <p>The ID of the transit gateway multicast domain.</p>
-   */
-  TransitGatewayMulticastDomainId?: string;
-
-  /**
-   * <p>The ID of the attachment.</p>
-   */
-  TransitGatewayAttachmentId?: string;
-
-  /**
-   * <p>The IDs of the subnets;</p>
-   */
-  SubnetIds?: string[];
-
-  /**
-   * <p>Checks whether you have the required permissions for the action, without actually making the request,
-   *    and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
-   *    Otherwise, it is <code>UnauthorizedOperation</code>.</p>
-   */
-  DryRun?: boolean;
-}
-
-export namespace DisassociateTransitGatewayMulticastDomainRequest {
-  export const filterSensitiveLog = (obj: DisassociateTransitGatewayMulticastDomainRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateTransitGatewayMulticastDomainResult {
-  /**
-   * <p>Information about the association.</p>
-   */
-  Associations?: TransitGatewayMulticastDomainAssociations;
-}
-
-export namespace DisassociateTransitGatewayMulticastDomainResult {
-  export const filterSensitiveLog = (obj: DisassociateTransitGatewayMulticastDomainResult): any => ({
     ...obj,
   });
 }

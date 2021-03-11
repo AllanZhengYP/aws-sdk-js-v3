@@ -1,5 +1,6 @@
 import { ConfigServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConfigServiceClient";
-import { SelectResourceConfigRequest, SelectResourceConfigResponse } from "../models/models_0";
+import { SelectResourceConfigRequest } from "../models/models_0";
+import { SelectResourceConfigResponse } from "../models/models_1";
 import {
   deserializeAws_json1_1SelectResourceConfigCommand,
   serializeAws_json1_1SelectResourceConfigCommand,

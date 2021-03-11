@@ -18,6 +18,7 @@ import { GetTableMetadataCommandInput, GetTableMetadataCommandOutput } from "./c
 import { GetWorkGroupCommandInput, GetWorkGroupCommandOutput } from "./commands/GetWorkGroupCommand";
 import { ListDataCatalogsCommandInput, ListDataCatalogsCommandOutput } from "./commands/ListDataCatalogsCommand";
 import { ListDatabasesCommandInput, ListDatabasesCommandOutput } from "./commands/ListDatabasesCommand";
+import { ListEngineVersionsCommandInput, ListEngineVersionsCommandOutput } from "./commands/ListEngineVersionsCommand";
 import { ListNamedQueriesCommandInput, ListNamedQueriesCommandOutput } from "./commands/ListNamedQueriesCommand";
 import {
   ListQueryExecutionsCommandInput,
@@ -107,6 +108,7 @@ export type ServiceInputTypes =
   | GetWorkGroupCommandInput
   | ListDataCatalogsCommandInput
   | ListDatabasesCommandInput
+  | ListEngineVersionsCommandInput
   | ListNamedQueriesCommandInput
   | ListQueryExecutionsCommandInput
   | ListTableMetadataCommandInput
@@ -137,6 +139,7 @@ export type ServiceOutputTypes =
   | GetWorkGroupCommandOutput
   | ListDataCatalogsCommandOutput
   | ListDatabasesCommandOutput
+  | ListEngineVersionsCommandOutput
   | ListNamedQueriesCommandOutput
   | ListQueryExecutionsCommandOutput
   | ListTableMetadataCommandOutput

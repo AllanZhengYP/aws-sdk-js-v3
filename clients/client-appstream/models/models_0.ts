@@ -29,6 +29,8 @@ export namespace AccessEndpoint {
 export enum Action {
   CLIPBOARD_COPY_FROM_LOCAL_DEVICE = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
   CLIPBOARD_COPY_TO_LOCAL_DEVICE = "CLIPBOARD_COPY_TO_LOCAL_DEVICE",
+  DOMAIN_PASSWORD_SIGNIN = "DOMAIN_PASSWORD_SIGNIN",
+  DOMAIN_SMART_CARD_SIGNIN = "DOMAIN_SMART_CARD_SIGNIN",
   FILE_DOWNLOAD = "FILE_DOWNLOAD",
   FILE_UPLOAD = "FILE_UPLOAD",
   PRINTING_TO_LOCAL_DEVICE = "PRINTING_TO_LOCAL_DEVICE",
@@ -732,6 +734,9 @@ export interface CreateFleetRequest {
    * <p>The instance type to use when launching fleet instances. The following instance types are available:</p>
    *         <ul>
    *             <li>
+   *                <p>stream.standard.small</p>
+   *             </li>
+   *             <li>
    *                <p>stream.standard.medium</p>
    *             </li>
    *             <li>
@@ -955,6 +960,8 @@ export enum FleetErrorCode {
   DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME = "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME",
   DOMAIN_JOIN_NERR_PASSWORD_EXPIRED = "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED",
   DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED = "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED",
+  FLEET_INSTANCE_PROVISIONING_FAILURE = "FLEET_INSTANCE_PROVISIONING_FAILURE",
+  FLEET_STOPPED = "FLEET_STOPPED",
   IAM_SERVICE_ROLE_IS_MISSING = "IAM_SERVICE_ROLE_IS_MISSING",
   IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION",
   IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION = "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION",
@@ -1038,6 +1045,9 @@ export interface Fleet {
   /**
    * <p>The instance type to use when launching fleet instances. The following instance types are available:</p>
    *         <ul>
+   *             <li>
+   *                <p>stream.standard.small</p>
+   *             </li>
    *             <li>
    *                <p>stream.standard.medium</p>
    *             </li>
@@ -1293,6 +1303,9 @@ export interface CreateImageBuilderRequest {
   /**
    * <p>The instance type to use when launching the image builder. The following instance types are available:</p>
    *         <ul>
+   *             <li>
+   *                <p>stream.standard.small</p>
+   *             </li>
    *             <li>
    *                <p>stream.standard.medium</p>
    *             </li>
@@ -1578,6 +1591,9 @@ export interface ImageBuilder {
   /**
    * <p>The instance type for the image builder. The following instance types are available:</p>
    *             <ul>
+   *             <li>
+   *                <p>stream.standard.small</p>
+   *             </li>
    *             <li>
    *                <p>stream.standard.medium</p>
    *             </li>
@@ -2053,7 +2069,7 @@ export interface CreateStreamingURLRequest {
 
   /**
    * <p>The name of the application to launch after the session starts. This is the name that you specified
-   *             as <b>Name</b> in the Image Assistant.</p>
+   *             as <b>Name</b> in the Image Assistant. If your fleet is enabled for the <b>Desktop</b> stream view, you can also choose to launch directly to the operating system desktop. To do so, specify <b>Desktop</b>.</p>
    */
   ApplicationId?: string;
 
@@ -2283,8 +2299,10 @@ export namespace ImagePermissions {
 export enum ImageState {
   AVAILABLE = "AVAILABLE",
   COPYING = "COPYING",
+  CREATING = "CREATING",
   DELETING = "DELETING",
   FAILED = "FAILED",
+  IMPORTING = "IMPORTING",
   PENDING = "PENDING",
 }
 
@@ -3663,6 +3681,9 @@ export interface UpdateFleetRequest {
   /**
    * <p>The instance type to use when launching fleet instances. The following instance types are available:</p>
    *         <ul>
+   *             <li>
+   *                <p>stream.standard.small</p>
+   *             </li>
    *             <li>
    *                <p>stream.standard.medium</p>
    *             </li>

@@ -12,6 +12,7 @@ import {
   ContainerServicePowerName,
   DomainEntry,
   InputOrigin,
+  IpAddressType,
   KeyPair,
   MetricDatapoint,
   MetricName,
@@ -26,6 +27,22 @@ import {
   TreatMissingData,
 } from "./models_0";
 import { SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+
+export interface GetKeyPairsRequest {
+  /**
+   * <p>The token to advance to the next page of results from your request.</p>
+   *          <p>To get a page token, perform an initial <code>GetKeyPairs</code> request. If your results
+   *       are paginated, the response will return a next page token that you can specify as the page
+   *       token in a subsequent request.</p>
+   */
+  pageToken?: string;
+}
+
+export namespace GetKeyPairsRequest {
+  export const filterSensitiveLog = (obj: GetKeyPairsRequest): any => ({
+    ...obj,
+  });
+}
 
 export interface GetKeyPairsResult {
   /**
@@ -369,6 +386,14 @@ export interface LoadBalancer {
    *       are listed below.</p>
    */
   configurationOptions?: { [key: string]: string };
+
+  /**
+   * <p>The IP address type of the load balancer.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   */
+  ipAddressType?: IpAddressType | string;
 }
 
 export namespace LoadBalancer {
@@ -1095,8 +1120,8 @@ export interface LoadBalancerTlsCertificate {
    *                   </b> - One or more of the
    *           domain names in the certificate request was reported as an unsafe domain by <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the
    *           problem, search for your domain name on the <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your domain
-   *           is reported as suspicious, see <a href="https://www.google.com/webmasters/hacked/?hl=en">Google Help for Hacked
-   *             Websites</a> to learn what you can do.</p>
+   *           is reported as suspicious, see <a href="https://developers.google.com/web/fundamentals/security/hacked">Google Help for
+   *             Hacked Websites</a> to learn what you can do.</p>
    *                <p>If you believe that the result is a false positive, notify the organization that is
    *           reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and
    *           cannot remove your domain from a block list itself. After you correct the problem and the
@@ -3307,6 +3332,53 @@ export interface SendContactMethodVerificationResult {
 
 export namespace SendContactMethodVerificationResult {
   export const filterSensitiveLog = (obj: SendContactMethodVerificationResult): any => ({
+    ...obj,
+  });
+}
+
+export interface SetIpAddressTypeRequest {
+  /**
+   * <p>The resource type.</p>
+   *          <p>The possible values are <code>Distribution</code>, <code>Instance</code>, and
+   *         <code>LoadBalancer</code>.</p>
+   *          <note>
+   *             <p>Distribution-related APIs are available only in the N. Virginia (<code>us-east-1</code>)
+   *         AWS Region. Set your AWS Region configuration to <code>us-east-1</code> to create, view,
+   *         or edit distributions.</p>
+   *          </note>
+   */
+  resourceType: ResourceType | string | undefined;
+
+  /**
+   * <p>The name of the resource for which to set the IP address type.</p>
+   */
+  resourceName: string | undefined;
+
+  /**
+   * <p>The IP address type to set for the specified resource.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   */
+  ipAddressType: IpAddressType | string | undefined;
+}
+
+export namespace SetIpAddressTypeRequest {
+  export const filterSensitiveLog = (obj: SetIpAddressTypeRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface SetIpAddressTypeResult {
+  /**
+   * <p>An array of objects that describe the result of the action, such as the status of the
+   *       request, the timestamp of the request, and the resources affected by the request.</p>
+   */
+  operations?: Operation[];
+}
+
+export namespace SetIpAddressTypeResult {
+  export const filterSensitiveLog = (obj: SetIpAddressTypeResult): any => ({
     ...obj,
   });
 }

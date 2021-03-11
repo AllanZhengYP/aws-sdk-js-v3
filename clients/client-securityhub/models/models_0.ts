@@ -148,6 +148,466 @@ export namespace AccountDetails {
 }
 
 /**
+ * <p>Provided if <code>CallerType</code> is <code>domain</code>. It provides information
+ *          about the DNS domain that issued the API call.</p>
+ */
+export interface AwsApiCallActionDomainDetails {
+  /**
+   * <p>The name of the DNS domain that issued the API call.</p>
+   */
+  Domain?: string;
+}
+
+export namespace AwsApiCallActionDomainDetails {
+  export const filterSensitiveLog = (obj: AwsApiCallActionDomainDetails): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Information about a city.</p>
+ */
+export interface City {
+  /**
+   * <p>The name of the city.</p>
+   */
+  CityName?: string;
+}
+
+export namespace City {
+  export const filterSensitiveLog = (obj: City): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Information about a country.</p>
+ */
+export interface Country {
+  /**
+   * <p>The 2-letter ISO 3166 country code for the country.</p>
+   */
+  CountryCode?: string;
+
+  /**
+   * <p>The name of the country.</p>
+   */
+  CountryName?: string;
+}
+
+export namespace Country {
+  export const filterSensitiveLog = (obj: Country): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides the latitude and longitude coordinates of a location.</p>
+ */
+export interface GeoLocation {
+  /**
+   * <p>The longitude of the location.</p>
+   */
+  Lon?: number;
+
+  /**
+   * <p>The latitude of the location.</p>
+   */
+  Lat?: number;
+}
+
+export namespace GeoLocation {
+  export const filterSensitiveLog = (obj: GeoLocation): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides information about an internet provider.</p>
+ */
+export interface IpOrganizationDetails {
+  /**
+   * <p>The Autonomous System Number (ASN) of the internet provider</p>
+   */
+  Asn?: number;
+
+  /**
+   * <p>The name of the organization that registered the ASN.</p>
+   */
+  AsnOrg?: string;
+
+  /**
+   * <p>The ISP information for the internet provider.</p>
+   */
+  Isp?: string;
+
+  /**
+   * <p>The name of the internet provider.</p>
+   */
+  Org?: string;
+}
+
+export namespace IpOrganizationDetails {
+  export const filterSensitiveLog = (obj: IpOrganizationDetails): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>For <code>AwsApiAction</code>, <code>NetworkConnectionAction</code>, and
+ *             <code>PortProbeAction</code>, <code>RemoteIpDetails</code> provides information about
+ *          the remote IP address that was involved in the action.</p>
+ */
+export interface ActionRemoteIpDetails {
+  /**
+   * <p>The IP address.</p>
+   */
+  IpAddressV4?: string;
+
+  /**
+   * <p>The internet service provider (ISP) organization associated with the remote IP
+   *          address.</p>
+   */
+  Organization?: IpOrganizationDetails;
+
+  /**
+   * <p>The country where the remote IP address is located.</p>
+   */
+  Country?: Country;
+
+  /**
+   * <p>The city where the remote IP address is located.</p>
+   */
+  City?: City;
+
+  /**
+   * <p>The coordinates of the location of the remote IP address.</p>
+   */
+  GeoLocation?: GeoLocation;
+}
+
+export namespace ActionRemoteIpDetails {
+  export const filterSensitiveLog = (obj: ActionRemoteIpDetails): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provided if <code>ActionType</code> is <code>AWS_API_CALL</code>. It provides details
+ *          about the API call that was detected.</p>
+ */
+export interface AwsApiCallAction {
+  /**
+   * <p>The name of the API method that was issued.</p>
+   */
+  Api?: string;
+
+  /**
+   * <p>The name of the AWS service that the API method belongs to.</p>
+   */
+  ServiceName?: string;
+
+  /**
+   * <p>Indicates whether the API call originated from a remote IP address
+   *             (<code>remoteip</code>) or from a DNS domain (<code>domain</code>).</p>
+   */
+  CallerType?: string;
+
+  /**
+   * <p>Provided if <code>CallerType</code> is <code>remoteIp</code>. Provides information about
+   *          the remote IP address that the API call originated from.</p>
+   */
+  RemoteIpDetails?: ActionRemoteIpDetails;
+
+  /**
+   * <p>Provided if <code>CallerType</code> is <code>domain</code>. Provides information about
+   *          the DNS domain that the API call originated from.</p>
+   */
+  DomainDetails?: AwsApiCallActionDomainDetails;
+
+  /**
+   * <p>Identifies the resources that were affected by the API call.</p>
+   */
+  AffectedResources?: { [key: string]: string };
+
+  /**
+   * <p>An ISO8601-formatted timestamp that indicates when the API call was first
+   *          observed.</p>
+   */
+  FirstSeen?: string;
+
+  /**
+   * <p>An ISO8601-formatted timestamp that indicates when the API call was most recently
+   *          observed.</p>
+   */
+  LastSeen?: string;
+}
+
+export namespace AwsApiCallAction {
+  export const filterSensitiveLog = (obj: AwsApiCallAction): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provided if <code>ActionType</code> is <code>DNS_REQUEST</code>. It provides details
+ *          about the DNS request that was detected.</p>
+ */
+export interface DnsRequestAction {
+  /**
+   * <p>The DNS domain that is associated with the DNS request.</p>
+   */
+  Domain?: string;
+
+  /**
+   * <p>The protocol that was used for the DNS request.</p>
+   */
+  Protocol?: string;
+
+  /**
+   * <p>Indicates whether the DNS request was blocked.</p>
+   */
+  Blocked?: boolean;
+}
+
+export namespace DnsRequestAction {
+  export const filterSensitiveLog = (obj: DnsRequestAction): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>For <code>NetworkConnectionAction</code> and <code>PortProbeDetails</code>,
+ *             <code>LocalPortDetails</code> provides information about the local port that was
+ *          involved in the action.</p>
+ */
+export interface ActionLocalPortDetails {
+  /**
+   * <p>The number of the port.</p>
+   */
+  Port?: number;
+
+  /**
+   * <p>The port name of the local connection.</p>
+   */
+  PortName?: string;
+}
+
+export namespace ActionLocalPortDetails {
+  export const filterSensitiveLog = (obj: ActionLocalPortDetails): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides information about the remote port that was involved in an attempted network
+ *          connection.</p>
+ */
+export interface ActionRemotePortDetails {
+  /**
+   * <p>The number of the port.</p>
+   */
+  Port?: number;
+
+  /**
+   * <p>The port name of the remote connection.</p>
+   */
+  PortName?: string;
+}
+
+export namespace ActionRemotePortDetails {
+  export const filterSensitiveLog = (obj: ActionRemotePortDetails): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provided if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. It provides
+ *          details about the attempted network connection that was detected.</p>
+ */
+export interface NetworkConnectionAction {
+  /**
+   * <p>The direction of the network connection request (<code>IN</code> or
+   *          <code>OUT</code>).</p>
+   */
+  ConnectionDirection?: string;
+
+  /**
+   * <p>Information about the remote IP address that issued the network connection
+   *          request.</p>
+   */
+  RemoteIpDetails?: ActionRemoteIpDetails;
+
+  /**
+   * <p>Information about the port on the remote IP address.</p>
+   */
+  RemotePortDetails?: ActionRemotePortDetails;
+
+  /**
+   * <p>Information about the port on the EC2 instance.</p>
+   */
+  LocalPortDetails?: ActionLocalPortDetails;
+
+  /**
+   * <p>The protocol used to make the network connection request.</p>
+   */
+  Protocol?: string;
+
+  /**
+   * <p>Indicates whether the network connection attempt was blocked.</p>
+   */
+  Blocked?: boolean;
+}
+
+export namespace NetworkConnectionAction {
+  export const filterSensitiveLog = (obj: NetworkConnectionAction): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides information about the IP address where the scanned port is located.</p>
+ */
+export interface ActionLocalIpDetails {
+  /**
+   * <p>The IP address.</p>
+   */
+  IpAddressV4?: string;
+}
+
+export namespace ActionLocalIpDetails {
+  export const filterSensitiveLog = (obj: ActionLocalIpDetails): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>A port scan that was part of the port probe. For each scan, PortProbeDetails provides
+ *          information about the local IP address and port that were scanned, and the remote IP
+ *          address that the scan originated from.</p>
+ */
+export interface PortProbeDetail {
+  /**
+   * <p>Provides information about the port that was scanned.</p>
+   */
+  LocalPortDetails?: ActionLocalPortDetails;
+
+  /**
+   * <p>Provides information about the IP address where the scanned port is located.</p>
+   */
+  LocalIpDetails?: ActionLocalIpDetails;
+
+  /**
+   * <p>Provides information about the remote IP address that performed the scan.</p>
+   */
+  RemoteIpDetails?: ActionRemoteIpDetails;
+}
+
+export namespace PortProbeDetail {
+  export const filterSensitiveLog = (obj: PortProbeDetail): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provided if <code>ActionType</code> is <code>PORT_PROBE</code>. It provides details
+ *          about the attempted port probe that was detected.</p>
+ */
+export interface PortProbeAction {
+  /**
+   * <p>Information about the ports affected by the port probe.</p>
+   */
+  PortProbeDetails?: PortProbeDetail[];
+
+  /**
+   * <p>Indicates whether the port probe was blocked.</p>
+   */
+  Blocked?: boolean;
+}
+
+export namespace PortProbeAction {
+  export const filterSensitiveLog = (obj: PortProbeAction): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides details about one of the following actions that affects or that was taken on a resource:</p>
+ *          <ul>
+ *             <li>
+ *                <p>A remote IP address issued an AWS API call</p>
+ *             </li>
+ *             <li>
+ *                <p>A DNS request was received</p>
+ *             </li>
+ *             <li>
+ *                <p>A remote IP address attempted to connect to an EC2 instance</p>
+ *             </li>
+ *             <li>
+ *                <p>A remote IP address attempted a port probe on an EC2 instance</p>
+ *             </li>
+ *          </ul>
+ */
+export interface Action {
+  /**
+   * <p>The type of action that was detected. The possible action types are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>NETWORK_CONNECTION</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>AWS_API_CALL</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DNS_REQUEST</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PORT_PROBE</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   */
+  ActionType?: string;
+
+  /**
+   * <p>Included if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. Provides details
+   *          about the network connection that was detected.</p>
+   */
+  NetworkConnectionAction?: NetworkConnectionAction;
+
+  /**
+   * <p>Included if <code>ActionType</code> is <code>AWS_API_CALL</code>. Provides details about
+   *          the API call that was detected. </p>
+   */
+  AwsApiCallAction?: AwsApiCallAction;
+
+  /**
+   * <p>Included if <code>ActionType</code> is <code>DNS_REQUEST</code>. Provides details about
+   *          the DNS request that was detected. </p>
+   */
+  DnsRequestAction?: DnsRequestAction;
+
+  /**
+   * <p>Included if <code>ActionType</code> is <code>PORT_PROBE</code>. Provides details about
+   *          the port probe that was detected. </p>
+   */
+  PortProbeAction?: PortProbeAction;
+}
+
+export namespace Action {
+  export const filterSensitiveLog = (obj: Action): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>An <code>ActionTarget</code> object.</p>
  */
 export interface ActionTarget {
@@ -2585,6 +3045,45 @@ export namespace AwsEc2NetworkInterfaceAttachment {
 }
 
 /**
+ * <p>Provides information about an IPV6 address that is associated with the network
+ *          interface.</p>
+ */
+export interface AwsEc2NetworkInterfaceIpV6AddressDetail {
+  /**
+   * <p>The IPV6 address.</p>
+   */
+  IpV6Address?: string;
+}
+
+export namespace AwsEc2NetworkInterfaceIpV6AddressDetail {
+  export const filterSensitiveLog = (obj: AwsEc2NetworkInterfaceIpV6AddressDetail): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides information about a private IPv4 address that is with the network
+ *          interface.</p>
+ */
+export interface AwsEc2NetworkInterfacePrivateIpAddressDetail {
+  /**
+   * <p>The IP address.</p>
+   */
+  PrivateIpAddress?: string;
+
+  /**
+   * <p>The private DNS name for the IP address.</p>
+   */
+  PrivateDnsName?: string;
+}
+
+export namespace AwsEc2NetworkInterfacePrivateIpAddressDetail {
+  export const filterSensitiveLog = (obj: AwsEc2NetworkInterfacePrivateIpAddressDetail): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>A security group associated with the network interface.</p>
  */
 export interface AwsEc2NetworkInterfaceSecurityGroup {
@@ -2628,6 +3127,26 @@ export interface AwsEc2NetworkInterfaceDetails {
    * <p>Indicates whether traffic to or from the instance is validated.</p>
    */
   SourceDestCheck?: boolean;
+
+  /**
+   * <p>The IPv6 addresses associated with the network interface.</p>
+   */
+  IpV6Addresses?: AwsEc2NetworkInterfaceIpV6AddressDetail[];
+
+  /**
+   * <p>The private IPv4 addresses associated with the network interface.</p>
+   */
+  PrivateIpAddresses?: AwsEc2NetworkInterfacePrivateIpAddressDetail[];
+
+  /**
+   * <p>The public DNS name of the network interface.</p>
+   */
+  PublicDnsName?: string;
+
+  /**
+   * <p>The address of the Elastic IP address bound to the network interface.</p>
+   */
+  PublicIp?: string;
 }
 
 export namespace AwsEc2NetworkInterfaceDetails {
@@ -5054,7 +5573,7 @@ export interface AwsRdsDbClusterSnapshotDetails {
   SnapshotCreateTime?: string;
 
   /**
-   * <p></p>
+   * <p>The name of the database engine that you want to use for this DB instance.</p>
    */
   Engine?: string;
 
@@ -5191,16 +5710,16 @@ export namespace AwsRdsDbInstanceAssociatedRole {
 }
 
 /**
- * <p></p>
+ * <p>Provides information about a parameter group for a DB instance.</p>
  */
 export interface AwsRdsDbParameterGroup {
   /**
-   * <p></p>
+   * <p>The name of the parameter group.</p>
    */
   DbParameterGroupName?: string;
 
   /**
-   * <p></p>
+   * <p>The status of parameter updates.</p>
    */
   ParameterApplyStatus?: string;
 }
@@ -5321,16 +5840,16 @@ export namespace AwsRdsDbInstanceEndpoint {
 }
 
 /**
- * <p></p>
+ * <p>An option group membership.</p>
  */
 export interface AwsRdsDbOptionGroupMembership {
   /**
-   * <p></p>
+   * <p>The name of the option group.</p>
    */
   OptionGroupName?: string;
 
   /**
-   * <p></p>
+   * <p>The status of the option group membership.</p>
    */
   Status?: string;
 }
@@ -5363,16 +5882,16 @@ export namespace AwsRdsPendingCloudWatchLogsExports {
 }
 
 /**
- * <p></p>
+ * <p>A processor feature.</p>
  */
 export interface AwsRdsDbProcessorFeature {
   /**
-   * <p></p>
+   * <p>The name of the processor feature.</p>
    */
   Name?: string;
 
   /**
-   * <p></p>
+   * <p>The value of the processor feature.</p>
    */
   Value?: string;
 }
@@ -5384,81 +5903,81 @@ export namespace AwsRdsDbProcessorFeature {
 }
 
 /**
- * <p></p>
+ * <p>Changes to a DB instance that are currently pending.</p>
  */
 export interface AwsRdsDbPendingModifiedValues {
   /**
-   * <p></p>
+   * <p>The new DB instance class for the DB instance.</p>
    */
   DbInstanceClass?: string;
 
   /**
-   * <p></p>
+   * <p>The new value of the allocated storage for the DB instance.</p>
    */
   AllocatedStorage?: number;
 
   /**
-   * <p></p>
+   * <p>The new master user password for the DB instance.</p>
    */
   MasterUserPassword?: string;
 
   /**
-   * <p></p>
+   * <p>The new port for the DB instance.</p>
    */
   Port?: number;
 
   /**
-   * <p></p>
+   * <p>The new backup retention period for the DB instance.</p>
    */
   BackupRetentionPeriod?: number;
 
   /**
-   * <p></p>
+   * <p>Indicates that a single Availability Zone DB instance is changing to a multiple Availability Zone deployment.</p>
    */
   MultiAZ?: boolean;
 
   /**
-   * <p></p>
+   * <p>The new engine version for the DB instance.</p>
    */
   EngineVersion?: string;
 
   /**
-   * <p></p>
+   * <p>The new license model value for the DB instance.</p>
    */
   LicenseModel?: string;
 
   /**
-   * <p></p>
+   * <p>The new provisioned IOPS value for the DB instance.</p>
    */
   Iops?: number;
 
   /**
-   * <p></p>
+   * <p>The new DB instance identifier for the DB instance.</p>
    */
   DbInstanceIdentifier?: string;
 
   /**
-   * <p></p>
+   * <p>The new storage type for the DB instance.</p>
    */
   StorageType?: string;
 
   /**
-   * <p></p>
+   * <p>The new CA certificate identifier for the DB instance.</p>
    */
   CaCertificateIdentifier?: string;
 
   /**
-   * <p></p>
+   * <p>The name of the new subnet group for the DB instance.</p>
    */
   DbSubnetGroupName?: string;
 
   /**
-   * <p></p>
+   * <p>A list of log types that are being enabled or disabled.</p>
    */
   PendingCloudWatchLogsExports?: AwsRdsPendingCloudWatchLogsExports;
 
   /**
-   * <p></p>
+   * <p>Processor features that are being updated.</p>
    */
   ProcessorFeatures?: AwsRdsDbProcessorFeature[];
 }
@@ -5859,141 +6378,141 @@ export namespace AwsRdsDbInstanceDetails {
 }
 
 /**
- * <p></p>
+ * <p>Provides details about an Amazon RDS DB cluster snapshot.</p>
  */
 export interface AwsRdsDbSnapshotDetails {
   /**
-   * <p></p>
+   * <p>The name or ARN of the DB snapshot that is used to restore the DB instance.</p>
    */
   DbSnapshotIdentifier?: string;
 
   /**
-   * <p></p>
+   * <p>A name for the DB instance.</p>
    */
   DbInstanceIdentifier?: string;
 
   /**
-   * <p></p>
+   * <p>When the snapshot was taken in Coordinated Universal Time (UTC).</p>
    */
   SnapshotCreateTime?: string;
 
   /**
-   * <p></p>
+   * <p>The name of the database engine to use for this DB instance.</p>
    */
   Engine?: string;
 
   /**
-   * <p></p>
+   * <p>The amount of storage (in gigabytes) to be initially allocated for the database instance.</p>
    */
   AllocatedStorage?: number;
 
   /**
-   * <p></p>
+   * <p>The status of this DB snapshot.</p>
    */
   Status?: string;
 
   /**
-   * <p></p>
+   * <p>The port that the database engine was listening on at the time of the snapshot.</p>
    */
   Port?: number;
 
   /**
-   * <p></p>
+   * <p>Specifies the name of the Availability Zone in which the DB instance was located at the time of the DB snapshot.</p>
    */
   AvailabilityZone?: string;
 
   /**
-   * <p></p>
+   * <p>The VPC ID associated with the DB snapshot.</p>
    */
   VpcId?: string;
 
   /**
-   * <p></p>
+   * <p>Specifies the time in Coordinated Universal Time (UTC) when the DB instance, from which the snapshot was taken, was created.</p>
    */
   InstanceCreateTime?: string;
 
   /**
-   * <p></p>
+   * <p>The master user name for the DB snapshot.</p>
    */
   MasterUsername?: string;
 
   /**
-   * <p></p>
+   * <p>The version of the database engine.</p>
    */
   EngineVersion?: string;
 
   /**
-   * <p></p>
+   * <p>License model information for the restored DB instance.</p>
    */
   LicenseModel?: string;
 
   /**
-   * <p></p>
+   * <p>The type of the DB snapshot.</p>
    */
   SnapshotType?: string;
 
   /**
-   * <p></p>
+   * <p>The provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.</p>
    */
   Iops?: number;
 
   /**
-   * <p></p>
+   * <p>The option group name for the DB snapshot.</p>
    */
   OptionGroupName?: string;
 
   /**
-   * <p></p>
+   * <p>The percentage of the estimated data that has been transferred.</p>
    */
   PercentProgress?: number;
 
   /**
-   * <p></p>
+   * <p>The AWS Region that the DB snapshot was created in or copied from.</p>
    */
   SourceRegion?: string;
 
   /**
-   * <p></p>
+   * <p>The DB snapshot ARN that the DB snapshot was copied from.</p>
    */
   SourceDbSnapshotIdentifier?: string;
 
   /**
-   * <p></p>
+   * <p>The storage type associated with the DB snapshot.</p>
    */
   StorageType?: string;
 
   /**
-   * <p></p>
+   * <p>The ARN from the key store with which to associate the instance for TDE encryption.</p>
    */
   TdeCredentialArn?: string;
 
   /**
-   * <p></p>
+   * <p>Whether the DB snapshot is encrypted.</p>
    */
   Encrypted?: boolean;
 
   /**
-   * <p></p>
+   * <p>If <code>Encrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB snapshot.</p>
    */
   KmsKeyId?: string;
 
   /**
-   * <p></p>
+   * <p>The time zone of the DB snapshot.</p>
    */
   Timezone?: string;
 
   /**
-   * <p></p>
+   * <p>Whether mapping of IAM accounts to database accounts is enabled.</p>
    */
   IamDatabaseAuthenticationEnabled?: boolean;
 
   /**
-   * <p></p>
+   * <p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>
    */
   ProcessorFeatures?: AwsRdsDbProcessorFeature[];
 
   /**
-   * <p></p>
+   * <p>The identifier for the source DB instance.</p>
    */
   DbiResourceId?: string;
 }
@@ -7578,6 +8097,173 @@ export namespace AwsSqsQueueDetails {
 }
 
 /**
+ * <p>Provides the details about the compliance status for a patch.</p>
+ */
+export interface AwsSsmComplianceSummary {
+  /**
+   * <p>The current patch compliance status.</p>
+   *          <p>The possible status values are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>COMPLIANT</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NON_COMPLIANT</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>UNSPECIFIED_DATA</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   */
+  Status?: string;
+
+  /**
+   * <p>For the patches that are compliant, the number that have a severity of
+   *             <code>CRITICAL</code>.</p>
+   */
+  CompliantCriticalCount?: number;
+
+  /**
+   * <p>For the patches that are compliant, the number that have a severity of
+   *          <code>HIGH</code>.</p>
+   */
+  CompliantHighCount?: number;
+
+  /**
+   * <p>For the patches that are compliant, the number that have a severity of
+   *             <code>MEDIUM</code>.</p>
+   */
+  CompliantMediumCount?: number;
+
+  /**
+   * <p>The type of execution that was used determine compliance.</p>
+   */
+  ExecutionType?: string;
+
+  /**
+   * <p>For the patch items that are noncompliant, the number of items that have a severity of
+   *             <code>CRITICAL</code>.</p>
+   */
+  NonCompliantCriticalCount?: number;
+
+  /**
+   * <p>For the patches that are compliant, the number that have a severity of
+   *             <code>INFORMATIONAL</code>.</p>
+   */
+  CompliantInformationalCount?: number;
+
+  /**
+   * <p>For the patches that are noncompliant, the number that have a severity of
+   *             <code>INFORMATIONAL</code>.</p>
+   */
+  NonCompliantInformationalCount?: number;
+
+  /**
+   * <p>For the patches that are compliant, the number that have a severity of
+   *             <code>UNSPECIFIED</code>.</p>
+   */
+  CompliantUnspecifiedCount?: number;
+
+  /**
+   * <p>For the patches that are noncompliant, the number that have a severity of
+   *             <code>LOW</code>.</p>
+   */
+  NonCompliantLowCount?: number;
+
+  /**
+   * <p>For the patches that are noncompliant, the number that have a severity of
+   *             <code>HIGH</code>.</p>
+   */
+  NonCompliantHighCount?: number;
+
+  /**
+   * <p>For the patches that are compliant, the number that have a severity of
+   *          <code>LOW</code>.</p>
+   */
+  CompliantLowCount?: number;
+
+  /**
+   * <p>The type of resource for which the compliance was determined. For
+   *             <code>AwsSsmPatchCompliance</code>, <code>ComplianceType</code> is <code>Patch</code>. </p>
+   */
+  ComplianceType?: string;
+
+  /**
+   * <p>The identifier of the patch baseline. The patch baseline lists the patches that are
+   *          approved for installation.</p>
+   */
+  PatchBaselineId?: string;
+
+  /**
+   * <p>The highest severity for the patches.</p>
+   */
+  OverallSeverity?: string;
+
+  /**
+   * <p>For the patches that are noncompliant, the number that have a severity of
+   *             <code>MEDIUM</code>.</p>
+   */
+  NonCompliantMediumCount?: number;
+
+  /**
+   * <p>For the patches that are noncompliant, the number that have a severity of
+   *             <code>UNSPECIFIED</code>.</p>
+   */
+  NonCompliantUnspecifiedCount?: number;
+
+  /**
+   * <p>The identifier of the patch group for which compliance was determined. A patch group
+   *          uses tags to group EC2 instances that should have the same patch compliance.</p>
+   */
+  PatchGroup?: string;
+}
+
+export namespace AwsSsmComplianceSummary {
+  export const filterSensitiveLog = (obj: AwsSsmComplianceSummary): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides details about the compliance for a patch.</p>
+ */
+export interface AwsSsmPatch {
+  /**
+   * <p>The compliance status details for the patch.</p>
+   */
+  ComplianceSummary?: AwsSsmComplianceSummary;
+}
+
+export namespace AwsSsmPatch {
+  export const filterSensitiveLog = (obj: AwsSsmPatch): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides information about the state of a patch on an instance based on the patch
+ *          baseline that was used to patch the instance.</p>
+ */
+export interface AwsSsmPatchComplianceDetails {
+  /**
+   * <p>Information about the status of a patch.</p>
+   */
+  Patch?: AwsSsmPatch;
+}
+
+export namespace AwsSsmPatchComplianceDetails {
+  export const filterSensitiveLog = (obj: AwsSsmPatchComplianceDetails): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>Details about the action that CloudFront or AWS WAF takes when a web request matches the
  *          conditions in the rule. </p>
  */
@@ -7874,12 +8560,12 @@ export interface ResourceDetails {
   AwsIamPolicy?: AwsIamPolicyDetails;
 
   /**
-   * <p></p>
+   * <p>Provides information about a version 2 stage for Amazon API Gateway.</p>
    */
   AwsApiGatewayV2Stage?: AwsApiGatewayV2StageDetails;
 
   /**
-   * <p></p>
+   * <p>Provides information about a version 2 API in Amazon API Gateway.</p>
    */
   AwsApiGatewayV2Api?: AwsApiGatewayV2ApiDetails;
 
@@ -7889,37 +8575,42 @@ export interface ResourceDetails {
   AwsDynamoDbTable?: AwsDynamoDbTableDetails;
 
   /**
-   * <p></p>
+   * <p>Provides information about a version 1 Amazon API Gateway stage.</p>
    */
   AwsApiGatewayStage?: AwsApiGatewayStageDetails;
 
   /**
-   * <p></p>
+   * <p>Provides information about a REST API in version 1 of Amazon API Gateway.</p>
    */
   AwsApiGatewayRestApi?: AwsApiGatewayRestApiDetails;
 
   /**
-   * <p></p>
+   * <p>Provides details about a CloudTrail trail.</p>
    */
   AwsCloudTrailTrail?: AwsCloudTrailTrailDetails;
 
   /**
-   * <p></p>
+   * <p>Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.</p>
+   */
+  AwsSsmPatchCompliance?: AwsSsmPatchComplianceDetails;
+
+  /**
+   * <p>Provides details about an AWS Certificate Manager (ACM) certificate.</p>
    */
   AwsCertificateManagerCertificate?: AwsCertificateManagerCertificateDetails;
 
   /**
-   * <p></p>
+   * <p>Contains details about an Amazon Redshift cluster.</p>
    */
   AwsRedshiftCluster?: AwsRedshiftClusterDetails;
 
   /**
-   * <p></p>
+   * <p>contains details about a Classic Load Balancer.</p>
    */
   AwsElbLoadBalancer?: AwsElbLoadBalancerDetails;
 
   /**
-   * <p></p>
+   * <p>Contains details about an IAM group.</p>
    */
   AwsIamGroup?: AwsIamGroupDetails;
 
@@ -8043,7 +8734,7 @@ export interface Resource {
   Region?: string;
 
   /**
-   * <p></p>
+   * <p>Identifies the role of the resource in the finding. A resource is either the actor or target of the finding activity,</p>
    */
   ResourceRole?: string;
 
@@ -8075,9 +8766,9 @@ export enum SeverityLabel {
 
 /**
  * <p>The severity of the finding.</p>
- *          <p>The finding provider can provide the initial severity, but cannot update it after that.
- *          The severity can only be updated by a master account. It cannot be updated by a member
- *          account.</p>
+ *          <p>The finding provider can provide the initial severity. The finding provider can only
+ *          update the severity if it has not been updated using
+ *          <code>BatchUpdateFindings</code>.</p>
  *          <p>The finding must have either <code>Label</code> or <code>Normalized</code> populated. If
  *          only one of these attributes is populated, then Security Hub automatically populates the other
  *          one. If neither attribute is populated, then the finding is invalid. <code>Label</code> is
@@ -8425,6 +9116,21 @@ export interface Workflow {
    *             <li>
    *                <p>
    *                   <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>
+   *                <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or
+   *                   <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <code>RecordState</code> changes from <code>ARCHIVED</code> to
+   *                         <code>ACTIVE</code>.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <code>ComplianceStatus</code> changes from <code>PASSED</code> to either
+   *                         <code>WARNING</code>, <code>FAILED</code>, or
+   *                      <code>NOT_AVAILABLE</code>.</p>
+   *                   </li>
+   *                </ul>
    *             </li>
    *             <li>
    *                <p>
@@ -8684,6 +9390,11 @@ export interface AwsSecurityFinding {
    *          compliance standard.</p>
    */
   PatchSummary?: PatchSummary;
+
+  /**
+   * <p>Provides details about an action that affects or that was taken on a resource.</p>
+   */
+  Action?: Action;
 }
 
 export namespace AwsSecurityFinding {
@@ -9384,6 +10095,17 @@ export interface AwsSecurityFindingFilters {
    *             <li>
    *                <p>
    *                   <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>
+   *                <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or
+   *                   <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>,
+   *                         <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p>
+   *                   </li>
+   *                </ul>
    *             </li>
    *             <li>
    *                <p>
@@ -9511,7 +10233,30 @@ export interface StandardsSubscription {
   StandardsInput: { [key: string]: string } | undefined;
 
   /**
-   * <p>The status of the standards subscription.</p>
+   * <p>The status of the standard subscription.</p>
+   *          <p>The status values are as follows:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PENDING</code> - Standard is in the process of being enabled.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>READY</code> - Standard is enabled.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INCOMPLETE</code> - Standard could not be enabled completely. Some controls may not be available.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DELETING</code> - Standard is in the process of being disabled.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAILED</code> - Standard could not be disabled.</p>
+   *             </li>
+   *          </ul>
    */
   StandardsStatus: StandardsStatus | string | undefined;
 }
@@ -9757,6 +10502,19 @@ export interface WorkflowUpdate {
    *             <li>
    *                <p>
    *                   <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>
+   *                <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or
+   *                   <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>The record state changes from <code>ARCHIVED</code> to
+   *                      <code>ACTIVE</code>.</p>
+   *                   </li>
+   *                   <li>
+   *                      <p>The compliance status changes from <code>PASSED</code> to either
+   *                         <code>WARNING</code>, <code>FAILED</code>, or
+   *                      <code>NOT_AVAILABLE</code>.</p>
+   *                   </li>
+   *                </ul>
    *             </li>
    *             <li>
    *                <p>
@@ -10349,6 +11107,11 @@ export interface DescribeProductsRequest {
    * <p>The maximum number of results to return.</p>
    */
   MaxResults?: number;
+
+  /**
+   * <p>The ARN of the integration to return.</p>
+   */
+  ProductArn?: string;
 }
 
 export namespace DescribeProductsRequest {
@@ -10656,274 +11419,6 @@ export interface DisableImportFindingsForProductRequest {
 
 export namespace DisableImportFindingsForProductRequest {
   export const filterSensitiveLog = (obj: DisableImportFindingsForProductRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableImportFindingsForProductResponse {}
-
-export namespace DisableImportFindingsForProductResponse {
-  export const filterSensitiveLog = (obj: DisableImportFindingsForProductResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableOrganizationAdminAccountRequest {
-  /**
-   * <p>The AWS account identifier of the Security Hub administrator account.</p>
-   */
-  AdminAccountId: string | undefined;
-}
-
-export namespace DisableOrganizationAdminAccountRequest {
-  export const filterSensitiveLog = (obj: DisableOrganizationAdminAccountRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableOrganizationAdminAccountResponse {}
-
-export namespace DisableOrganizationAdminAccountResponse {
-  export const filterSensitiveLog = (obj: DisableOrganizationAdminAccountResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableSecurityHubRequest {}
-
-export namespace DisableSecurityHubRequest {
-  export const filterSensitiveLog = (obj: DisableSecurityHubRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisableSecurityHubResponse {}
-
-export namespace DisableSecurityHubResponse {
-  export const filterSensitiveLog = (obj: DisableSecurityHubResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateFromMasterAccountRequest {}
-
-export namespace DisassociateFromMasterAccountRequest {
-  export const filterSensitiveLog = (obj: DisassociateFromMasterAccountRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateFromMasterAccountResponse {}
-
-export namespace DisassociateFromMasterAccountResponse {
-  export const filterSensitiveLog = (obj: DisassociateFromMasterAccountResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateMembersRequest {
-  /**
-   * <p>The account IDs of the member accounts to disassociate from the master account.</p>
-   */
-  AccountIds: string[] | undefined;
-}
-
-export namespace DisassociateMembersRequest {
-  export const filterSensitiveLog = (obj: DisassociateMembersRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface DisassociateMembersResponse {}
-
-export namespace DisassociateMembersResponse {
-  export const filterSensitiveLog = (obj: DisassociateMembersResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableImportFindingsForProductRequest {
-  /**
-   * <p>The ARN of the product to enable the integration for.</p>
-   */
-  ProductArn: string | undefined;
-}
-
-export namespace EnableImportFindingsForProductRequest {
-  export const filterSensitiveLog = (obj: EnableImportFindingsForProductRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableImportFindingsForProductResponse {
-  /**
-   * <p>The ARN of your subscription to the product to enable integrations for.</p>
-   */
-  ProductSubscriptionArn?: string;
-}
-
-export namespace EnableImportFindingsForProductResponse {
-  export const filterSensitiveLog = (obj: EnableImportFindingsForProductResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableOrganizationAdminAccountRequest {
-  /**
-   * <p>The AWS account identifier of the account to designate as the Security Hub administrator
-   *          account.</p>
-   */
-  AdminAccountId: string | undefined;
-}
-
-export namespace EnableOrganizationAdminAccountRequest {
-  export const filterSensitiveLog = (obj: EnableOrganizationAdminAccountRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableOrganizationAdminAccountResponse {}
-
-export namespace EnableOrganizationAdminAccountResponse {
-  export const filterSensitiveLog = (obj: EnableOrganizationAdminAccountResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableSecurityHubRequest {
-  /**
-   * <p>The tags to add to the hub resource when you enable Security Hub.</p>
-   */
-  Tags?: { [key: string]: string };
-
-  /**
-   * <p>Whether to enable the security standards that Security Hub has designated as automatically
-   *          enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set
-   *          to <code>true</code>. To not enable the automatically enabled standards, set
-   *             <code>EnableDefaultStandards</code> to <code>false</code>.</p>
-   */
-  EnableDefaultStandards?: boolean;
-}
-
-export namespace EnableSecurityHubRequest {
-  export const filterSensitiveLog = (obj: EnableSecurityHubRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface EnableSecurityHubResponse {}
-
-export namespace EnableSecurityHubResponse {
-  export const filterSensitiveLog = (obj: EnableSecurityHubResponse): any => ({
-    ...obj,
-  });
-}
-
-export interface GetEnabledStandardsRequest {
-  /**
-   * <p>The list of the standards subscription ARNs for the standards to retrieve.</p>
-   */
-  StandardsSubscriptionArns?: string[];
-
-  /**
-   * <p>The token that is required for pagination. On your first call to the
-   *             <code>GetEnabledStandards</code> operation, set the value of this parameter to
-   *             <code>NULL</code>.</p>
-   *          <p>For subsequent calls to the operation, to continue listing data, set the value of this
-   *          parameter to the value returned from the previous response.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return in the response.</p>
-   */
-  MaxResults?: number;
-}
-
-export namespace GetEnabledStandardsRequest {
-  export const filterSensitiveLog = (obj: GetEnabledStandardsRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface GetEnabledStandardsResponse {
-  /**
-   * <p>The list of <code>StandardsSubscriptions</code> objects that include information about
-   *          the enabled standards.</p>
-   */
-  StandardsSubscriptions?: StandardsSubscription[];
-
-  /**
-   * <p>The pagination token to use to request the next page of results.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace GetEnabledStandardsResponse {
-  export const filterSensitiveLog = (obj: GetEnabledStandardsResponse): any => ({
-    ...obj,
-  });
-}
-
-export enum SortOrder {
-  ASCENDING = "asc",
-  DESCENDING = "desc",
-}
-
-/**
- * <p>A collection of finding attributes used to sort findings.</p>
- */
-export interface SortCriterion {
-  /**
-   * <p>The finding attribute used to sort findings.</p>
-   */
-  Field?: string;
-
-  /**
-   * <p>The order used to sort findings.</p>
-   */
-  SortOrder?: SortOrder | string;
-}
-
-export namespace SortCriterion {
-  export const filterSensitiveLog = (obj: SortCriterion): any => ({
-    ...obj,
-  });
-}
-
-export interface GetFindingsRequest {
-  /**
-   * <p>The finding attributes used to define a condition to filter the returned
-   *          findings.</p>
-   *          <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to
-   *          20 filter values.</p>
-   *          <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To
-   *          search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>
-   */
-  Filters?: AwsSecurityFindingFilters;
-
-  /**
-   * <p>The finding attributes used to sort the list of returned findings.</p>
-   */
-  SortCriteria?: SortCriterion[];
-
-  /**
-   * <p>The token that is required for pagination. On your first call to the
-   *             <code>GetFindings</code> operation, set the value of this parameter to
-   *          <code>NULL</code>.</p>
-   *          <p>For subsequent calls to the operation, to continue listing data, set the value of this
-   *          parameter to the value returned from the previous response.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of findings to return.</p>
-   */
-  MaxResults?: number;
-}
-
-export namespace GetFindingsRequest {
-  export const filterSensitiveLog = (obj: GetFindingsRequest): any => ({
     ...obj,
   });
 }

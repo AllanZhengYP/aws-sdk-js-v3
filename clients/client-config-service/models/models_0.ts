@@ -426,6 +426,9 @@ export enum ResourceType {
   ManagedRuleSetV2 = "AWS::WAFv2::ManagedRuleSet",
   NatGateway = "AWS::EC2::NatGateway",
   NetworkAcl = "AWS::EC2::NetworkAcl",
+  NetworkFirewallFirewall = "AWS::NetworkFirewall::Firewall",
+  NetworkFirewallFirewallPolicy = "AWS::NetworkFirewall::FirewallPolicy",
+  NetworkFirewallRuleGroup = "AWS::NetworkFirewall::RuleGroup",
   NetworkInterface = "AWS::EC2::NetworkInterface",
   PatchCompliance = "AWS::SSM::PatchCompliance",
   Pipeline = "AWS::CodePipeline::Pipeline",
@@ -715,6 +718,8 @@ export namespace NoSuchConfigurationAggregatorException {
 
 /**
  * <p>The requested action is not valid.</p>
+ * 		       <p>For PutStoredQuery, you will see this exception if there are missing required fields or if the input value fails the validation, or if you are trying to create more than 300 queries.</p>
+ * 		       <p>For GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will see this exception if there are missing required fields or if the input value fails the validation.</p>
  */
 export interface ValidationException extends __SmithyException, $MetadataBearer {
   name: "ValidationException";
@@ -1743,7 +1748,7 @@ export interface ConfigurationItem {
   configurationItemMD5Hash?: string;
 
   /**
-   * <p>accoun</p>
+   * <p>Amazon Resource Name (ARN) associated with the resource.</p>
    */
   arn?: string;
 
@@ -1885,7 +1890,7 @@ export interface RecordingGroup {
    * 			resources for which AWS Config records configuration changes (for
    * 			example, <code>AWS::EC2::Instance</code> or
    * 				<code>AWS::CloudTrail::Trail</code>).</p>
-   * 		       <p>Before you can set this option to <code>true</code>, you must
+   * 		       <p>To record all configuration changes, you must
    * 			set the <code>allSupported</code> option to
    * 			<code>false</code>.</p>
    * 		       <p>If you set this option to <code>true</code>, when AWS Config
@@ -1997,6 +2002,7 @@ export namespace ConfigurationRecorderStatus {
 
 export enum ConformancePackComplianceType {
   COMPLIANT = "COMPLIANT",
+  INSUFFICIENT_DATA = "INSUFFICIENT_DATA",
   NON_COMPLIANT = "NON_COMPLIANT",
 }
 
@@ -2085,12 +2091,18 @@ export interface ConformancePackDetail {
   ConformancePackId: string | undefined;
 
   /**
-   * <p>Conformance pack template that is used to create a pack. The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".</p>
+   * <p>Amazon S3 bucket where AWS Config stores conformance pack templates. </p>
+   * 	        <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3Bucket?: string;
 
   /**
    * <p>The prefix for the Amazon S3 bucket.</p>
+   * 		       <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3KeyPrefix?: string;
 
@@ -2618,8 +2630,25 @@ export namespace NoSuchOrganizationConfigRuleException {
 }
 
 /**
- * <p>For PutConfigAggregator API, no permission to call EnableAWSServiceAccess API.</p>
- * 		       <p>For all OrganizationConfigRule and OrganizationConformancePack APIs, AWS Config throws an exception if APIs are called from member accounts. All APIs must be called from organization master account.</p>
+ * <p>For <code>PutConfigurationAggregator</code> API, you can see this exception for the following reasons:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>No permission to call <code>EnableAWSServiceAccess</code> API</p>
+ *             </li>
+ *             <li>
+ *                <p>The configuration aggregator cannot be updated because your AWS Organization management account or the delegated administrator role changed.
+ * 				Delete this aggregator and create a new one with the current AWS Organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>The configuration aggregator is associated with a previous AWS Organization and AWS Config cannot aggregate data with current AWS Organization.
+ * 				Delete this aggregator and create a new one with the current AWS Organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>You are not a registered delegated administrator for AWS Config with permissions to call <code>ListDelegatedAdministrators</code> API.
+ * 			Ensure that the management account registers delagated administrator for AWS Config service principle name before the delegated administrator creates an aggregator.</p>
+ *             </li>
+ *          </ul>
+ * 		       <p>For all <code>OrganizationConfigRule</code> and <code>OrganizationConformancePack</code> APIs, AWS Config throws an exception if APIs are called from member accounts. All APIs must be called from organization master account.</p>
  */
 export interface OrganizationAccessDeniedException extends __SmithyException, $MetadataBearer {
   name: "OrganizationAccessDeniedException";
@@ -2947,6 +2976,45 @@ export namespace NoSuchRetentionConfigurationException {
   });
 }
 
+export interface DeleteStoredQueryRequest {
+  /**
+   * <p>The name of the query that you want to delete.</p>
+   */
+  QueryName: string | undefined;
+}
+
+export namespace DeleteStoredQueryRequest {
+  export const filterSensitiveLog = (obj: DeleteStoredQueryRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface DeleteStoredQueryResponse {}
+
+export namespace DeleteStoredQueryResponse {
+  export const filterSensitiveLog = (obj: DeleteStoredQueryResponse): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>You have specified a resource that does not exist.</p>
+ */
+export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
+  name: "ResourceNotFoundException";
+  $fault: "client";
+  /**
+   * <p>Error executing the command</p>
+   */
+  message?: string;
+}
+
+export namespace ResourceNotFoundException {
+  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>The input for the <a>DeliverConfigSnapshot</a>
  * 			action.</p>
@@ -3011,6 +3079,12 @@ export interface DeliveryChannel {
    * <p>The prefix for the specified Amazon S3 bucket.</p>
    */
   s3KeyPrefix?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) customer managed key (CMK) used to encrypt objects delivered by AWS Config.
+   * 			Must belong to the same Region as the destination S3 bucket.</p>
+   */
+  s3KmsKeyArn?: string;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which
@@ -4236,13 +4310,18 @@ export interface OrganizationConformancePack {
   OrganizationConformancePackArn: string | undefined;
 
   /**
-   * <p>Location of an Amazon S3 bucket where AWS Config can
-   * 			deliver evaluation results and conformance pack template that is used to create a pack. </p>
+   * <p>Amazon S3 bucket where AWS Config stores conformance pack templates.  </p>
+   * 		       <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3Bucket?: string;
 
   /**
    * <p>Any folder structure you want to add to an Amazon S3 bucket.</p>
+   * 		       <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3KeyPrefix?: string;
 
@@ -4653,7 +4732,7 @@ export interface RemediationConfiguration {
 
   /**
    * <p>The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5.</p>
-   * 		       <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptsSeconds as 50 seconds,
+   * 		       <p>For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptSeconds as 50 seconds,
    *
    * 			AWS Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.</p>
    */
@@ -4661,7 +4740,7 @@ export interface RemediationConfiguration {
 
   /**
    * <p>Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds. </p>
-   * 		       <p>For example, if you specify RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5,
+   * 		       <p>For example, if you specify RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5,
    * 		AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception.</p>
    */
   RetryAttemptSeconds?: number;
@@ -5085,6 +5164,42 @@ export interface EvaluationResult {
 
 export namespace EvaluationResult {
   export const filterSensitiveLog = (obj: EvaluationResult): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Identifies an AWS resource and indicates whether it complies with the AWS Config rule that it was evaluated against.</p>
+ */
+export interface ExternalEvaluation {
+  /**
+   * <p>The evaluated compliance resource type. AWS Config accepts <code>AWS::::Account</code> resource type.</p>
+   */
+  ComplianceResourceType: string | undefined;
+
+  /**
+   * <p>The evaluated compliance resource ID. AWS Config accepts only AWS account ID.</p>
+   */
+  ComplianceResourceId: string | undefined;
+
+  /**
+   * <p>The compliance of the AWS resource. The valid values are <code>COMPLIANT, NON_COMPLIANT, </code> and <code>NOT_APPLICABLE</code>.</p>
+   */
+  ComplianceType: ComplianceType | string | undefined;
+
+  /**
+   * <p>Supplementary information about the reason of compliance. For example, this task was completed on a specific date.</p>
+   */
+  Annotation?: string;
+
+  /**
+   * <p>The time when the compliance was recorded. </p>
+   */
+  OrderingTimestamp: Date | undefined;
+}
+
+export namespace ExternalEvaluation {
+  export const filterSensitiveLog = (obj: ExternalEvaluation): any => ({
     ...obj,
   });
 }
@@ -6373,6 +6488,75 @@ export namespace InvalidTimeRangeException {
   });
 }
 
+export interface GetStoredQueryRequest {
+  /**
+   * <p>The name of the query.</p>
+   */
+  QueryName: string | undefined;
+}
+
+export namespace GetStoredQueryRequest {
+  export const filterSensitiveLog = (obj: GetStoredQueryRequest): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Provides the details of a stored query.</p>
+ */
+export interface StoredQuery {
+  /**
+   * <p>The ID of the query.</p>
+   */
+  QueryId?: string;
+
+  /**
+   * <p>Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.</p>
+   */
+  QueryArn?: string;
+
+  /**
+   * <p>The name of the query.</p>
+   */
+  QueryName: string | undefined;
+
+  /**
+   * <p>A unique description for the query.</p>
+   */
+  Description?: string;
+
+  /**
+   * <p>The expression of the query. For example, <code>SELECT
+   * 			resourceId,
+   * 			resourceType,
+   * 			supplementaryConfiguration.BucketVersioningConfiguration.status
+   * 			WHERE
+   * 			resourceType = 'AWS::S3::Bucket'
+   * 			AND supplementaryConfiguration.BucketVersioningConfiguration.status = 'Off'.</code>
+   *          </p>
+   */
+  Expression?: string;
+}
+
+export namespace StoredQuery {
+  export const filterSensitiveLog = (obj: StoredQuery): any => ({
+    ...obj,
+  });
+}
+
+export interface GetStoredQueryResponse {
+  /**
+   * <p>Returns a <code>StoredQuery</code> object.</p>
+   */
+  StoredQuery?: StoredQuery;
+}
+
+export namespace GetStoredQueryResponse {
+  export const filterSensitiveLog = (obj: GetStoredQueryResponse): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>Your Amazon S3 bucket policy does not permit AWS Config to
  * 			write to it.</p>
@@ -6520,6 +6704,24 @@ export namespace InvalidS3KeyPrefixException {
 }
 
 /**
+ * <p>The specified Amazon KMS Key ARN is not valid.</p>
+ */
+export interface InvalidS3KmsKeyArnException extends __SmithyException, $MetadataBearer {
+  name: "InvalidS3KmsKeyArnException";
+  $fault: "client";
+  /**
+   * <p>Error executing the command</p>
+   */
+  message?: string;
+}
+
+export namespace InvalidS3KmsKeyArnException {
+  export const filterSensitiveLog = (obj: InvalidS3KmsKeyArnException): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>The specified Amazon SNS topic does not exist.</p>
  */
 export interface InvalidSNSTopicARNException extends __SmithyException, $MetadataBearer {
@@ -6608,7 +6810,7 @@ export interface ListAggregateDiscoveredResourcesRequest {
   Filters?: ResourceFilters;
 
   /**
-   * <p>The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.</p>
+   * <p>The maximum number of resource identifiers returned on each page. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.</p>
    */
   Limit?: number;
 
@@ -6753,6 +6955,75 @@ export namespace ListDiscoveredResourcesResponse {
   });
 }
 
+export interface ListStoredQueriesRequest {
+  /**
+   * <p>The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.</p>
+   */
+  NextToken?: string;
+
+  /**
+   * <p>The maximum number of results to be returned with a single call.</p>
+   */
+  MaxResults?: number;
+}
+
+export namespace ListStoredQueriesRequest {
+  export const filterSensitiveLog = (obj: ListStoredQueriesRequest): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Returns details of a specific query. </p>
+ */
+export interface StoredQueryMetadata {
+  /**
+   * <p>The ID of the query. </p>
+   */
+  QueryId: string | undefined;
+
+  /**
+   * <p>Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.</p>
+   */
+  QueryArn: string | undefined;
+
+  /**
+   * <p>The name of the query.</p>
+   */
+  QueryName: string | undefined;
+
+  /**
+   * <p>A unique description for the query.</p>
+   */
+  Description?: string;
+}
+
+export namespace StoredQueryMetadata {
+  export const filterSensitiveLog = (obj: StoredQueryMetadata): any => ({
+    ...obj,
+  });
+}
+
+export interface ListStoredQueriesResponse {
+  /**
+   * <p>A list of <code>StoredQueryMetadata</code> objects.</p>
+   */
+  StoredQueryMetadata?: StoredQueryMetadata[];
+
+  /**
+   * <p>If the previous paginated request didn't return all of the remaining results, the response object's <code>NextToken</code> parameter value is set to a token.
+   * 			To retrieve the next set of results, call this action again and assign that token to the request object's <code>NextToken</code> parameter.
+   * 			If there are no remaining results, the previous response object's <code>NextToken</code> parameter is set to <code>null</code>. </p>
+   */
+  NextToken?: string;
+}
+
+export namespace ListStoredQueriesResponse {
+  export const filterSensitiveLog = (obj: ListStoredQueriesResponse): any => ({
+    ...obj,
+  });
+}
+
 export interface ListTagsForResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>
@@ -6813,24 +7084,6 @@ export interface ListTagsForResourceResponse {
 
 export namespace ListTagsForResourceResponse {
   export const filterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have specified a resource that does not exist.</p>
- */
-export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
-  name: "ResourceNotFoundException";
-  $fault: "client";
-  /**
-   * <p>Error executing the command</p>
-   */
-  message?: string;
-}
-
-export namespace ResourceNotFoundException {
-  export const filterSensitiveLog = (obj: ResourceNotFoundException): any => ({
     ...obj,
   });
 }
@@ -7215,12 +7468,18 @@ export interface PutConformancePackRequest {
   TemplateBody?: string;
 
   /**
-   * <p>AWS Config stores intermediate files while processing conformance pack template.</p>
+   * <p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p>
+   * 		       <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3Bucket?: string;
 
   /**
    * <p>The prefix for the Amazon S3 bucket. </p>
+   * 		       <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3KeyPrefix?: string;
 
@@ -7327,6 +7586,32 @@ export namespace PutEvaluationsResponse {
   });
 }
 
+export interface PutExternalEvaluationRequest {
+  /**
+   * <p>The name of the AWS Config rule.</p>
+   */
+  ConfigRuleName: string | undefined;
+
+  /**
+   * <p>An <code>ExternalEvaluation</code> object that provides details about compliance.</p>
+   */
+  ExternalEvaluation: ExternalEvaluation | undefined;
+}
+
+export namespace PutExternalEvaluationRequest {
+  export const filterSensitiveLog = (obj: PutExternalEvaluationRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface PutExternalEvaluationResponse {}
+
+export namespace PutExternalEvaluationResponse {
+  export const filterSensitiveLog = (obj: PutExternalEvaluationResponse): any => ({
+    ...obj,
+  });
+}
+
 export interface PutOrganizationConfigRuleRequest {
   /**
    * <p>The name that you assign to an organization config rule.</p>
@@ -7390,15 +7675,18 @@ export interface PutOrganizationConformancePackRequest {
   TemplateBody?: string;
 
   /**
-   * <p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config
-   * 			stores intermediate files while processing conformance pack template. </p>
-   * 		       <p>The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".
-   * 			For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html">Permissions for cross account bucket access</a>.</p>
+   * <p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p>
+   * 		       <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3Bucket?: string;
 
   /**
    * <p>The prefix for the Amazon S3 bucket.</p>
+   * 		       <note>
+   *             <p>This field is optional.</p>
+   *          </note>
    */
   DeliveryS3KeyPrefix?: string;
 
@@ -7574,6 +7862,76 @@ export namespace PutRetentionConfigurationResponse {
   });
 }
 
+export interface PutStoredQueryRequest {
+  /**
+   * <p>A list of <code>StoredQuery</code> objects.
+   * 			The mandatory fields are <code>QueryName</code> and <code>Expression</code>.</p>
+   * 		       <note>
+   *             <p>When you are creating a query, you must provide a query name and an expression.
+   * 			When you are updating a query, you must provide a query name but updating the description is optional.</p>
+   *          </note>
+   */
+  StoredQuery: StoredQuery | undefined;
+
+  /**
+   * <p>A list of <code>Tags</code> object.</p>
+   */
+  Tags?: Tag[];
+}
+
+export namespace PutStoredQueryRequest {
+  export const filterSensitiveLog = (obj: PutStoredQueryRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface PutStoredQueryResponse {
+  /**
+   * <p>Amazon Resource Name (ARN) of the query.
+   * 			For example, arn:partition:service:region:account-id:resource-type/resource-name/resource-id.</p>
+   */
+  QueryArn?: string;
+}
+
+export namespace PutStoredQueryResponse {
+  export const filterSensitiveLog = (obj: PutStoredQueryResponse): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Two users are trying to modify the same query at the same time. Wait for a moment and try again.</p>
+ */
+export interface ResourceConcurrentModificationException extends __SmithyException, $MetadataBearer {
+  name: "ResourceConcurrentModificationException";
+  $fault: "client";
+  message?: string;
+}
+
+export namespace ResourceConcurrentModificationException {
+  export const filterSensitiveLog = (obj: ResourceConcurrentModificationException): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>You have reached the limit of the number of tags you can use. You have more than 50 tags.</p>
+ */
+export interface TooManyTagsException extends __SmithyException, $MetadataBearer {
+  name: "TooManyTagsException";
+  $fault: "client";
+  /**
+   * <p>Error executing the command</p>
+   */
+  message?: string;
+}
+
+export namespace TooManyTagsException {
+  export const filterSensitiveLog = (obj: TooManyTagsException): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>Details about the query.</p>
  */
@@ -7665,182 +8023,6 @@ export interface SelectResourceConfigRequest {
 
 export namespace SelectResourceConfigRequest {
   export const filterSensitiveLog = (obj: SelectResourceConfigRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface SelectResourceConfigResponse {
-  /**
-   * <p>Returns the results for the SQL query.</p>
-   */
-  Results?: string[];
-
-  /**
-   * <p>Returns the <code>QueryInfo</code> object.</p>
-   */
-  QueryInfo?: QueryInfo;
-
-  /**
-   * <p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. </p>
-   */
-  NextToken?: string;
-}
-
-export namespace SelectResourceConfigResponse {
-  export const filterSensitiveLog = (obj: SelectResourceConfigResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface StartConfigRulesEvaluationRequest {
-  /**
-   * <p>The list of names of AWS Config rules that you want to run
-   * 			evaluations for.</p>
-   */
-  ConfigRuleNames?: string[];
-}
-
-export namespace StartConfigRulesEvaluationRequest {
-  export const filterSensitiveLog = (obj: StartConfigRulesEvaluationRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The output when you start the evaluation for the specified AWS
- * 			Config rule.</p>
- */
-export interface StartConfigRulesEvaluationResponse {}
-
-export namespace StartConfigRulesEvaluationResponse {
-  export const filterSensitiveLog = (obj: StartConfigRulesEvaluationResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The input for the <a>StartConfigurationRecorder</a>
- * 			action.</p>
- */
-export interface StartConfigurationRecorderRequest {
-  /**
-   * <p>The name of the recorder object that records each configuration
-   * 			change made to the resources.</p>
-   */
-  ConfigurationRecorderName: string | undefined;
-}
-
-export namespace StartConfigurationRecorderRequest {
-  export const filterSensitiveLog = (obj: StartConfigurationRecorderRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface StartRemediationExecutionRequest {
-  /**
-   * <p>The list of names of AWS Config rules that you want to run remediation execution for.</p>
-   */
-  ConfigRuleName: string | undefined;
-
-  /**
-   * <p>A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. </p>
-   */
-  ResourceKeys: ResourceKey[] | undefined;
-}
-
-export namespace StartRemediationExecutionRequest {
-  export const filterSensitiveLog = (obj: StartRemediationExecutionRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface StartRemediationExecutionResponse {
-  /**
-   * <p>Returns a failure message. For example, the resource is already compliant.</p>
-   */
-  FailureMessage?: string;
-
-  /**
-   * <p>For resources that have failed to start execution, the API returns a resource key object.</p>
-   */
-  FailedItems?: ResourceKey[];
-}
-
-export namespace StartRemediationExecutionResponse {
-  export const filterSensitiveLog = (obj: StartRemediationExecutionResponse): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The input for the <a>StopConfigurationRecorder</a> action.</p>
- */
-export interface StopConfigurationRecorderRequest {
-  /**
-   * <p>The name of the recorder object that records each configuration change made to the resources.</p>
-   */
-  ConfigurationRecorderName: string | undefined;
-}
-
-export namespace StopConfigurationRecorderRequest {
-  export const filterSensitiveLog = (obj: StopConfigurationRecorderRequest): any => ({
-    ...obj,
-  });
-}
-
-export interface TagResourceRequest {
-  /**
-   * <p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>
-   */
-  ResourceArn: string | undefined;
-
-  /**
-   * <p>An array of tag object.</p>
-   */
-  Tags: Tag[] | undefined;
-}
-
-export namespace TagResourceRequest {
-  export const filterSensitiveLog = (obj: TagResourceRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>You have reached the limit of the number of tags you can use. You have more than 50 tags.</p>
- */
-export interface TooManyTagsException extends __SmithyException, $MetadataBearer {
-  name: "TooManyTagsException";
-  $fault: "client";
-  /**
-   * <p>Error executing the command</p>
-   */
-  message?: string;
-}
-
-export namespace TooManyTagsException {
-  export const filterSensitiveLog = (obj: TooManyTagsException): any => ({
-    ...obj,
-  });
-}
-
-export interface UntagResourceRequest {
-  /**
-   * <p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>
-   */
-  ResourceArn: string | undefined;
-
-  /**
-   * <p>The keys of the tags to be removed.</p>
-   */
-  TagKeys: string[] | undefined;
-}
-
-export namespace UntagResourceRequest {
-  export const filterSensitiveLog = (obj: UntagResourceRequest): any => ({
     ...obj,
   });
 }

@@ -15,10 +15,6 @@ import {
   Endpoint,
   EsamSettings,
   FrameCaptureSettings,
-  H264AdaptiveQuantization,
-  H264CodecLevel,
-  H264CodecProfile,
-  H264DynamicSubGop,
   Hdr10Metadata,
   HopDestination,
   Id3Insertion,
@@ -39,6 +35,50 @@ import {
 } from "./models_0";
 import { SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
 import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
+
+export enum H264AdaptiveQuantization {
+  AUTO = "AUTO",
+  HIGH = "HIGH",
+  HIGHER = "HIGHER",
+  LOW = "LOW",
+  MAX = "MAX",
+  MEDIUM = "MEDIUM",
+  OFF = "OFF",
+}
+
+export enum H264CodecLevel {
+  AUTO = "AUTO",
+  LEVEL_1 = "LEVEL_1",
+  LEVEL_1_1 = "LEVEL_1_1",
+  LEVEL_1_2 = "LEVEL_1_2",
+  LEVEL_1_3 = "LEVEL_1_3",
+  LEVEL_2 = "LEVEL_2",
+  LEVEL_2_1 = "LEVEL_2_1",
+  LEVEL_2_2 = "LEVEL_2_2",
+  LEVEL_3 = "LEVEL_3",
+  LEVEL_3_1 = "LEVEL_3_1",
+  LEVEL_3_2 = "LEVEL_3_2",
+  LEVEL_4 = "LEVEL_4",
+  LEVEL_4_1 = "LEVEL_4_1",
+  LEVEL_4_2 = "LEVEL_4_2",
+  LEVEL_5 = "LEVEL_5",
+  LEVEL_5_1 = "LEVEL_5_1",
+  LEVEL_5_2 = "LEVEL_5_2",
+}
+
+export enum H264CodecProfile {
+  BASELINE = "BASELINE",
+  HIGH = "HIGH",
+  HIGH_10BIT = "HIGH_10BIT",
+  HIGH_422 = "HIGH_422",
+  HIGH_422_10BIT = "HIGH_422_10BIT",
+  MAIN = "MAIN",
+}
+
+export enum H264DynamicSubGop {
+  ADAPTIVE = "ADAPTIVE",
+  STATIC = "STATIC",
+}
 
 export enum H264EntropyEncoding {
   CABAC = "CABAC",
@@ -130,6 +170,11 @@ export enum H264RateControlMode {
 export enum H264RepeatPps {
   DISABLED = "DISABLED",
   ENABLED = "ENABLED",
+}
+
+export enum H264ScanTypeConversionMode {
+  INTERLACED = "INTERLACED",
+  INTERLACED_OPTIMIZE = "INTERLACED_OPTIMIZE",
 }
 
 export enum H264SceneChangeDetect {
@@ -324,6 +369,11 @@ export interface H264Settings {
   RepeatPps?: H264RepeatPps | string;
 
   /**
+   * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+   */
+  ScanTypeConversionMode?: H264ScanTypeConversionMode | string;
+
+  /**
    * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
    */
   SceneChangeDetect?: H264SceneChangeDetect | string;
@@ -503,6 +553,11 @@ export enum H265SampleAdaptiveOffsetFilterMode {
   ADAPTIVE = "ADAPTIVE",
   DEFAULT = "DEFAULT",
   OFF = "OFF",
+}
+
+export enum H265ScanTypeConversionMode {
+  INTERLACED = "INTERLACED",
+  INTERLACED_OPTIMIZE = "INTERLACED_OPTIMIZE",
 }
 
 export enum H265SceneChangeDetect {
@@ -702,6 +757,11 @@ export interface H265Settings {
   SampleAdaptiveOffsetFilterMode?: H265SampleAdaptiveOffsetFilterMode | string;
 
   /**
+   * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+   */
+  ScanTypeConversionMode?: H265ScanTypeConversionMode | string;
+
+  /**
    * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default. If this output uses QVBR, choose Transition detection (TRANSITION_DETECTION) for further video quality improvement. For more information about QVBR, see https://docs.aws.amazon.com/console/mediaconvert/cbr-vbr-qvbr.
    */
   SceneChangeDetect?: H265SceneChangeDetect | string;
@@ -828,6 +888,11 @@ export enum Mpeg2QualityTuningLevel {
 export enum Mpeg2RateControlMode {
   CBR = "CBR",
   VBR = "VBR",
+}
+
+export enum Mpeg2ScanTypeConversionMode {
+  INTERLACED = "INTERLACED",
+  INTERLACED_OPTIMIZE = "INTERLACED_OPTIMIZE",
 }
 
 export enum Mpeg2SceneChangeDetect {
@@ -981,9 +1046,14 @@ export interface Mpeg2Settings {
   QualityTuningLevel?: Mpeg2QualityTuningLevel | string;
 
   /**
-   * Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr).
+   * Use Rate control mode (Mpeg2RateControlMode) to specify whether the bitrate is variable (vbr) or constant (cbr).
    */
   RateControlMode?: Mpeg2RateControlMode | string;
+
+  /**
+   * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+   */
+  ScanTypeConversionMode?: Mpeg2ScanTypeConversionMode | string;
 
   /**
    * Enable this setting to insert I-frames at scene changes that the service automatically detects. This improves video quality and is enabled by default.
@@ -1058,6 +1128,11 @@ export enum ProresParControl {
   SPECIFIED = "SPECIFIED",
 }
 
+export enum ProresScanTypeConversionMode {
+  INTERLACED = "INTERLACED",
+  INTERLACED_OPTIMIZE = "INTERLACED_OPTIMIZE",
+}
+
 export enum ProresSlowPal {
   DISABLED = "DISABLED",
   ENABLED = "ENABLED",
@@ -1073,7 +1148,7 @@ export enum ProresTelecine {
  */
 export interface ProresSettings {
   /**
-   * Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output.
+   * Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to use for this output.
    */
   CodecProfile?: ProresCodecProfile | string;
 
@@ -1118,6 +1193,11 @@ export interface ProresSettings {
   ParNumerator?: number;
 
   /**
+   * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+   */
+  ScanTypeConversionMode?: ProresScanTypeConversionMode | string;
+
+  /**
    * Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.
    */
   SlowPal?: ProresSlowPal | string;
@@ -1148,6 +1228,11 @@ export enum Vc3FramerateConversionAlgorithm {
 export enum Vc3InterlaceMode {
   INTERLACED = "INTERLACED",
   PROGRESSIVE = "PROGRESSIVE",
+}
+
+export enum Vc3ScanTypeConversionMode {
+  INTERLACED = "INTERLACED",
+  INTERLACED_OPTIMIZE = "INTERLACED_OPTIMIZE",
 }
 
 export enum Vc3SlowPal {
@@ -1194,6 +1279,11 @@ export interface Vc3Settings {
    * Optional. Choose the scan line type for this output. If you don't specify a value, MediaConvert will create a progressive output.
    */
   InterlaceMode?: Vc3InterlaceMode | string;
+
+  /**
+   * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+   */
+  ScanTypeConversionMode?: Vc3ScanTypeConversionMode | string;
 
   /**
    * Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.
@@ -1429,7 +1519,7 @@ export interface VideoCodecSettings {
   Av1Settings?: Av1Settings;
 
   /**
-   * Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936.
+   * Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
    */
   AvcIntraSettings?: AvcIntraSettings;
 
@@ -2042,7 +2132,7 @@ export interface Output {
   OutputSettings?: OutputSettings;
 
   /**
-   * Use Preset (Preset) to specifiy a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.
+   * Use Preset (Preset) to specify a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.
    */
   Preset?: string;
 

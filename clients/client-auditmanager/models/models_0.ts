@@ -858,6 +858,13 @@ export enum FrameworkType {
 export interface AssessmentFrameworkMetadata {
   /**
    * <p>
+   *    The Amazon Resource Name (ARN) of the framework.
+   * </p>
+   */
+  arn?: string;
+
+  /**
+   * <p>
    * The unique identified for the specified framework.
    * </p>
    */
@@ -1703,7 +1710,7 @@ export interface BatchImportEvidenceToAssessmentControlError {
 
   /**
    * <p>
-   *   The error message returned by the <code>BatchImportEvidenceToAssessmentControlError</code> API.
+   *   The error message returned by the <code>BatchImportEvidenceToAssessmentControl</code> API.
    * </p>
    */
   errorMessage?: string;
@@ -1877,6 +1884,13 @@ export interface CreateAssessmentFrameworkRequest {
    * </p>
    */
   controlSets: CreateAssessmentFrameworkControlSet[] | undefined;
+
+  /**
+   * <p>
+   *    The tags associated with the framework.
+   * </p>
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace CreateAssessmentFrameworkRequest {
@@ -2074,7 +2088,7 @@ export interface Control {
 
   /**
    * <p>
-   *    The data mapping sources for the specified control.
+   *    The data source that determines from where AWS Audit Manager collects evidence for the control.
    * </p>
    */
   controlSources?: string;
@@ -2258,6 +2272,13 @@ export interface Framework {
    * </p>
    */
   lastUpdatedBy?: string;
+
+  /**
+   * <p>
+   *          The tags associated with the framework.
+   *       </p>
+   */
+  tags?: { [key: string]: string };
 }
 
 export namespace Framework {
@@ -2426,7 +2447,7 @@ export interface CreateControlRequest {
 
   /**
    * <p>
-   *  The data source that determines from where AWS Audit Manager collects evidence for the control.
+   *    The data mapping sources for the specified control.
    * </p>
    */
   controlMappingSources: CreateControlMappingSource[] | undefined;
@@ -4565,7 +4586,7 @@ export interface UpdateControlRequest {
 
   /**
    * <p>
-   *    The data source that determines from where AWS Audit Manager collects evidence for the control.
+   *    The data mapping sources for the specified control.
    * </p>
    */
   controlMappingSources: ControlMappingSource[] | undefined;

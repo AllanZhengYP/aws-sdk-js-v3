@@ -6,8 +6,11 @@ import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
  */
 export interface AdvancedBackupSetting {
   /**
-   * <p>The type of AWS resource to be backed up. For VSS Windows backups, the only supported
-   *          resource type is Amazon EC2.</p>
+   * <p>Specifies an object containing resource type and backup options. The only supported
+   *          resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see
+   *          the <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html">sample
+   *             CloudFormation template to enable Windows VSS</a> in the <i>AWS Backup User
+   *             Guide</i>.</p>
    *          <p>Valid values: <code>EC2</code>.</p>
    */
   ResourceType?: string;
@@ -191,8 +194,12 @@ export interface BackupJob {
   BackupSizeInBytes?: number;
 
   /**
-   * <p>Specifies the IAM role ARN used to create the target recovery point; for example,
-   *             <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>
+   * <p>Specifies the IAM role ARN used to create the target recovery point.
+   *          IAM roles other than the default role must include either <code>AWSBackup</code>
+   *          or <code>AwsBackup</code> in the role name.
+   *          For example,
+   *             <code>arn:aws:iam::123456789012:role/AWSBackupRDSAccess</code>.
+   *          Role names without those strings lack permissions to perform backup jobs.</p>
    */
   IamRoleArn?: string;
 
@@ -261,6 +268,7 @@ export namespace BackupJob {
  *          days. Therefore, on the console, the “expire after days” setting must be 90 days greater
  *          than the “transition to cold after days” setting. The “transition to cold after days”
  *          setting cannot be changed after a backup has been transitioned to cold.</p>
+ * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
  */
 export interface Lifecycle {
   /**
@@ -293,6 +301,7 @@ export interface CopyAction {
    *          days. Therefore, on the console, the “expire after days” setting must be 90 days greater
    *          than the “transition to cold after days” setting. The “transition to cold after days”
    *          setting cannot be changed after a backup has been transitioned to cold.</p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 
@@ -350,6 +359,7 @@ export interface BackupRule {
    *          days. Therefore, the “expire after days” setting must be 90 days greater than the
    *          “transition to cold after days” setting. The “transition to cold after days” setting cannot
    *          be changed after a backup has been transitioned to cold. </p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 
@@ -447,6 +457,7 @@ export interface BackupRuleInput {
    *          days. Therefore, the “expire after days” setting must be 90 days greater than the
    *          “transition to cold after days” setting. The “transition to cold after days” setting cannot
    *          be changed after a backup has been transitioned to cold. </p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 
@@ -647,7 +658,7 @@ export interface BackupSelection {
   /**
    * <p>An array of conditions used to specify a set of resources to assign to a backup plan;
    *          for example, <code>"StringEquals": {"ec2:ResourceTag/Department":
-   *          "accounting"</code>.</p>
+   *          "accounting"</code>. Assigns the backup plan to every resource with at least one matching tag.</p>
    */
   ListOfTags?: Condition[];
 }
@@ -781,6 +792,7 @@ export namespace BackupVaultListMember {
  *          days. Therefore, the “expire after days” setting must be 90 days greater than the
  *          “transition to cold after days” setting. The “transition to cold after days” setting cannot
  *          be changed after a backup has been transitioned to cold.</p>
+ * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
  */
 export interface CalculatedLifecycle {
   /**
@@ -1133,7 +1145,7 @@ export interface CreateBackupVaultInput {
   /**
    * <p>The name of a logical container where backups are stored. Backup vaults are identified
    *          by names that are unique to the account used to create them and the AWS Region where they
-   *          are created. They consist of lowercase letters, numbers, and hyphens.</p>
+   *          are created. They consist of letters, numbers, and hyphens.</p>
    */
   BackupVaultName: string | undefined;
 
@@ -1651,10 +1663,10 @@ export interface DescribeGlobalSettingsOutput {
   GlobalSettings?: { [key: string]: string };
 
   /**
-   * <p>The date and time that the global settings was last updated. This update is in Unix format and
-   *          Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to
-   *          milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018
-   *          12:11:30.087 AM.</p>
+   * <p>The date and time that the global settings were last updated. This update is in Unix
+   *          format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is
+   *          accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January
+   *          26, 2018 12:11:30.087 AM.</p>
    */
   LastUpdateTime?: Date;
 }
@@ -1837,6 +1849,7 @@ export interface DescribeRecoveryPointOutput {
    *          minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than
    *          the “transition to cold after days” setting. The “transition to cold after days” setting
    *          cannot be changed after a backup has been transitioned to cold. </p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 
@@ -2396,6 +2409,10 @@ export interface GetSupportedResourceTypesOutput {
    *             </li>
    *             <li>
    *                <p>
+   *                   <code>Aurora</code> for Amazon Aurora</p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>Storage Gateway</code> for AWS Storage Gateway</p>
    *             </li>
    *          </ul>
@@ -2477,6 +2494,10 @@ export interface ListBackupJobsInput {
    *             </li>
    *             <li>
    *                <p>
+   *                   <code>Aurora</code> for Amazon Aurora</p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>Storage Gateway</code> for AWS Storage Gateway</p>
    *             </li>
    *          </ul>
@@ -2485,6 +2506,7 @@ export interface ListBackupJobsInput {
 
   /**
    * <p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p>
+   *          <p>If used from an AWS Organizations management account, passing <code>*</code> returns all jobs across the organization.</p>
    */
   ByAccountId?: string;
 }
@@ -2805,6 +2827,10 @@ export interface ListCopyJobsInput {
    *             </li>
    *             <li>
    *                <p>
+   *                   <code>Aurora</code> for Amazon Aurora</p>
+   *             </li>
+   *             <li>
+   *                <p>
    *                   <code>Storage Gateway</code> for AWS Storage Gateway</p>
    *             </li>
    *          </ul>
@@ -3072,6 +3098,7 @@ export interface RecoveryPointByBackupVault {
    *          days. Therefore, the “expire after days” setting must be 90 days greater than the
    *          “transition to cold after days” setting. The “transition to cold after days” setting cannot
    *          be changed after a backup has been transitioned to cold. </p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 
@@ -3498,12 +3525,15 @@ export interface StartBackupJobInput {
   IdempotencyToken?: string;
 
   /**
-   * <p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.</p>
+   * <p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional, and the default is 8 hours.</p>
    */
   StartWindowMinutes?: number;
 
   /**
-   * <p>A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.</p>
+   * <p>A value in minutes during which a successfully started backup must complete, or else AWS
+   *          Backup will cancel the job. This value is optional. This value begins counting down from
+   *          when the backup was scheduled. It does not add additional time for
+   *             <code>StartWindowMinutes</code>, or if the backup started later than scheduled.</p>
    */
   CompleteWindowMinutes?: number;
 
@@ -3515,6 +3545,7 @@ export interface StartBackupJobInput {
    *          days. Therefore, the “expire after days” setting must be 90 days greater than the
    *          “transition to cold after days” setting. The “transition to cold after days” setting cannot
    *          be changed after a backup has been transitioned to cold. </p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 
@@ -3553,7 +3584,7 @@ export interface StartBackupJobOutput {
   RecoveryPointArn?: string;
 
   /**
-   * <p>The date and time that a backup job is started, in Unix format and Coordinated Universal
+   * <p>The date and time that a backup job is created, in Unix format and Coordinated Universal
    *          Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For
    *          example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087
    *          AM.</p>
@@ -3605,6 +3636,7 @@ export interface StartCopyJobInput {
    *          days. Therefore, on the console, the “expire after days” setting must be 90 days greater
    *          than the “transition to cold after days” setting. The “transition to cold after days”
    *          setting cannot be changed after a backup has been transitioned to cold.</p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 }
@@ -3622,7 +3654,7 @@ export interface StartCopyJobOutput {
   CopyJobId?: string;
 
   /**
-   * <p>The date and time that a copy job is started, in Unix format and Coordinated Universal Time (UTC).
+   * <p>The date and time that a copy job is created, in Unix format and Coordinated Universal Time (UTC).
    *          The value of <code>CreationDate</code> is accurate to milliseconds.
    *          For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>
    */
@@ -3685,10 +3717,10 @@ export interface StartRestoreJobInput {
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>ItemsToRestore </code>: A serialized list of up to five strings
+   *                   <code>ItemsToRestore </code>: An array of one to five strings
    *             where each string is a file path. Use <code>ItemsToRestore</code> to restore
    *             specific files or directories rather than the entire file system. This parameter is
-   *             optional.</p>
+   *             optional. For example, <code>"itemsToRestore":"[\"/my.test\"]"</code>.</p>
    *             </li>
    *          </ul>
    */
@@ -3728,6 +3760,10 @@ export interface StartRestoreJobInput {
    *             <li>
    *                <p>
    *                   <code>RDS</code> for Amazon Relational Database Service</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Aurora</code> for Amazon Aurora</p>
    *             </li>
    *             <li>
    *                <p>
@@ -3936,6 +3972,7 @@ export interface UpdateRecoveryPointLifecycleOutput {
    *          days. Therefore, the “expire after days” setting must be 90 days greater than the
    *          “transition to cold after days” setting. The “transition to cold after days” setting cannot
    *          be changed after a backup has been transitioned to cold. </p>
+   * 		       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>
    */
   Lifecycle?: Lifecycle;
 

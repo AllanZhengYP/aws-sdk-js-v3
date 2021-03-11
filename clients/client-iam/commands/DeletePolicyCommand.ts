@@ -25,7 +25,7 @@ export type DeletePolicyCommandOutput = __MetadataBearer;
  *          <ul>
  *             <li>
  *                <p>Detach the policy from all users, groups, and roles that the policy is attached
- *                to, using the <a>DetachUserPolicy</a>, <a>DetachGroupPolicy</a>, or <a>DetachRolePolicy</a> API operations. To list all the users,
+ *                to, using <a>DetachUserPolicy</a>, <a>DetachGroupPolicy</a>, or <a>DetachRolePolicy</a>. To list all the users,
  *                groups, and roles that a policy is attached to, use <a>ListEntitiesForPolicy</a>.</p>
  *             </li>
  *             <li>
@@ -37,11 +37,11 @@ export type DeletePolicyCommandOutput = __MetadataBearer;
  *             </li>
  *             <li>
  *                <p>Delete the policy (this automatically deletes the policy's default version) using
- *                this API.</p>
+ *                this operation.</p>
  *             </li>
  *          </ul>
- *          <p>For information about managed policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline
- *             Policies</a> in the <i>IAM User Guide</i>.</p>
+ *          <p>For information about managed policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed policies and inline
+ *             policies</a> in the <i>IAM User Guide</i>.</p>
  */
 export class DeletePolicyCommand extends $Command<
   DeletePolicyCommandInput,

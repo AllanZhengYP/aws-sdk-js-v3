@@ -2,10 +2,20 @@ import { SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
 import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Specifies that AWS WAF should allow requests.</p>
+ * <p>Inspect all of the elements that AWS WAF has parsed and extracted from the web request JSON body that are within the <a>JsonBody</a>
+ *             <code>MatchScope</code>. This is used with the <a>FieldToMatch</a> option <code>JsonBody</code>.  </p>
+ *         <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
+ */
+export interface All {}
+
+export namespace All {
+  export const filterSensitiveLog = (obj: All): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Specifies that AWS WAF should allow requests.</p>
  *            <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>
  */
 export interface AllowAction {}
@@ -17,11 +27,8 @@ export namespace AllowAction {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>All query arguments of a web request. </p>
- *            <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
+ * <p>All query arguments of a web request. </p>
+ *           <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
  */
 export interface AllQueryArguments {}
 
@@ -32,11 +39,8 @@ export namespace AllQueryArguments {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The body of a web request. This immediately follows the request headers.</p>
- *            <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
+ * <p>The body of a web request. This immediately follows the request headers.</p>
+ *           <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
  */
 export interface Body {}
 
@@ -46,12 +50,94 @@ export namespace Body {
   });
 }
 
+export enum BodyParsingFallbackBehavior {
+  EVALUATE_AS_STRING = "EVALUATE_AS_STRING",
+  MATCH = "MATCH",
+  NO_MATCH = "NO_MATCH",
+}
+
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The HTTP method of a web request. The method indicates the type of operation that the request is asking the origin to perform. </p>
- *            <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
+ * <p>The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. This is used with the <a>FieldToMatch</a> option <code>JsonBody</code>. </p>
+ */
+export interface JsonMatchPattern {
+  /**
+   * <p>Match all of the elements. See also <code>MatchScope</code> in <a>JsonBody</a>. </p>
+   *         <p>You must specify either this setting or the <code>IncludedPaths</code> setting, but not both.</p>
+   */
+  All?: All;
+
+  /**
+   * <p>Match only the specified include paths. See also <code>MatchScope</code> in <a>JsonBody</a>. </p>
+   *          <p>Provide the include paths using JSON Pointer syntax. For example, <code>"IncludedPaths": ["/dogs/0/name", "/dogs/1/name"]</code>. For information about this syntax, see the Internet Engineering Task Force (IETF) documentation
+   *        <a href="https://tools.ietf.org/html/rfc6901">JavaScript Object Notation (JSON) Pointer</a>. </p>
+   *          <p>You must specify either this setting or the <code>All</code> setting, but not both.</p>
+   *          <note>
+   *             <p>Don't use this option to include all paths. Instead, use the <code>All</code> setting. </p>
+   *          </note>
+   */
+  IncludedPaths?: string[];
+}
+
+export namespace JsonMatchPattern {
+  export const filterSensitiveLog = (obj: JsonMatchPattern): any => ({
+    ...obj,
+  });
+}
+
+export enum JsonMatchScope {
+  ALL = "ALL",
+  KEY = "KEY",
+  VALUE = "VALUE",
+}
+
+/**
+ * <p>The body of a web request, inspected as JSON. The body immediately follows the request headers. This is used in the <a>FieldToMatch</a> specification.</p>
+ *          <p>Use the specifications in this object to indicate which parts of the JSON body to inspect using the rule's inspection criteria. AWS WAF inspects only the parts of the JSON that result from the matches that you indicate.  </p>
+ */
+export interface JsonBody {
+  /**
+   * <p>The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. </p>
+   */
+  MatchPattern: JsonMatchPattern | undefined;
+
+  /**
+   * <p>The parts of the JSON to match against using the <code>MatchPattern</code>. If you specify <code>All</code>, AWS WAF matches against keys and values. </p>
+   */
+  MatchScope: JsonMatchScope | string | undefined;
+
+  /**
+   * <p>The inspection behavior to fall back to if the JSON in the request body is invalid. For AWS WAF, invalid JSON is any content
+   *   that isn't complete syntactical JSON, content whose root node isn't an object or an array, and duplicate keys in the content. </p>
+   *          <p>You can specify the following fallback behaviors:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>MATCH</code> - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. This option applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string. </p>
+   *             </li>
+   *          </ul>
+   *          <p>If you don't provide this setting, when AWS WAF encounters invalid JSON, it parses and inspects what it can, up to the first
+   *   invalid JSON that it encounters. </p>
+   */
+  InvalidFallbackBehavior?: BodyParsingFallbackBehavior | string;
+}
+
+export namespace JsonBody {
+  export const filterSensitiveLog = (obj: JsonBody): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>The HTTP method of a web request. The method indicates the type of operation that the request is asking the origin to perform. </p>
+ *           <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
  */
 export interface Method {}
 
@@ -62,11 +148,8 @@ export namespace Method {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The query string of a web request. This is the part of a URL that appears after a <code>?</code> character, if any.</p>
- *            <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
+ * <p>The query string of a web request. This is the part of a URL that appears after a <code>?</code> character, if any.</p>
+ *           <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
  */
 export interface QueryString {}
 
@@ -77,11 +160,8 @@ export namespace QueryString {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>One of the headers in a web request, identified by name, for example, <code>User-Agent</code> or <code>Referer</code>. This setting isn't case sensitive.</p>
- *            <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
+ * <p>One of the headers in a web request, identified by name, for example, <code>User-Agent</code> or <code>Referer</code>. This setting isn't case sensitive.</p>
+ *           <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
  */
 export interface SingleHeader {
   /**
@@ -97,10 +177,7 @@ export namespace SingleHeader {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>One query argument in a web request, identified by name, for example <i>UserName</i> or <i>SalesRegion</i>. The name can be up to 30 characters long and isn't case sensitive. </p>
+ * <p>One query argument in a web request, identified by name, for example <i>UserName</i> or <i>SalesRegion</i>. The name can be up to 30 characters long and isn't case sensitive. </p>
  */
 export interface SingleQueryArgument {
   /**
@@ -116,10 +193,7 @@ export namespace SingleQueryArgument {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The path component of the URI of a web request. This is the part of a web request that identifies a resource, for example, <code>/images/daily-ad.jpg</code>.</p>
+ * <p>The path component of the URI of a web request. This is the part of a web request that identifies a resource, for example, <code>/images/daily-ad.jpg</code>.</p>
  *          <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
  */
 export interface UriPath {}
@@ -131,10 +205,7 @@ export namespace UriPath {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The part of a web request that you want AWS WAF to inspect. Include the single <code>FieldToMatch</code> type that you want to inspect, with additional specifications as needed, according to the type. You specify a single request component in <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than one component of a web request, create a separate rule statement for each component.</p>
+ * <p>The part of a web request that you want AWS WAF to inspect. Include the single <code>FieldToMatch</code> type that you want to inspect, with additional specifications as needed, according to the type. You specify a single request component in <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than one component of a web request, create a separate rule statement for each component.</p>
  */
 export interface FieldToMatch {
   /**
@@ -144,7 +215,7 @@ export interface FieldToMatch {
 
   /**
    * <p>Inspect a single query argument. Provide the name of the query argument to inspect, such as <i>UserName</i> or <i>SalesRegion</i>. The name can be up to 30 characters long and isn't case sensitive. </p>
-   *            <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
+   *           <p>This is used only to indicate the web request component for AWS WAF to inspect, in the <a>FieldToMatch</a> specification. </p>
    */
   SingleQueryArgument?: SingleQueryArgument;
 
@@ -164,7 +235,7 @@ export interface FieldToMatch {
   QueryString?: QueryString;
 
   /**
-   * <p>Inspect the request body, which immediately follows the request headers. This is the part of a request that contains any
+   * <p>Inspect the request body as plain text. The request body immediately follows the request headers. This is the part of a request that contains any
    *          additional data that you want to send to your web server as the HTTP request body, such as data from a form. </p>
    *          <p>Note that only the first 8 KB (8192 bytes) of the request body are forwarded to AWS WAF for inspection by the underlying host service. If you don't need to inspect more than 8 KB, you can guarantee that you don't allow additional bytes in by combining a statement that inspects the body of the web request, such as <a>ByteMatchStatement</a> or <a>RegexPatternSetReferenceStatement</a>, with a <a>SizeConstraintStatement</a> that enforces an 8 KB size limit on the body of the request. AWS WAF doesn't support inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.</p>
    */
@@ -174,6 +245,13 @@ export interface FieldToMatch {
    * <p>Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. </p>
    */
   Method?: Method;
+
+  /**
+   * <p>Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any
+   *          additional data that you want to send to your web server as the HTTP request body, such as data from a form. </p>
+   *          <p>Note that only the first 8 KB (8192 bytes) of the request body are forwarded to AWS WAF for inspection by the underlying host service. If you don't need to inspect more than 8 KB, you can guarantee that you don't allow additional bytes in by combining a statement that inspects the body of the web request, such as <a>ByteMatchStatement</a> or <a>RegexPatternSetReferenceStatement</a>, with a <a>SizeConstraintStatement</a> that enforces an 8 KB size limit on the body of the request. AWS WAF doesn't support inspecting the entire contents of web requests whose bodies exceed the 8 KB limit.</p>
+   */
+  JsonBody?: JsonBody;
 }
 
 export namespace FieldToMatch {
@@ -200,10 +278,7 @@ export enum TextTransformationType {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection.
+ * <p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection.
  *          </p>
  */
 export interface TextTransformation {
@@ -316,10 +391,7 @@ export namespace TextTransformation {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement that defines a string match search for AWS WAF to apply to web requests. The byte match statement provides the bytes to search for, the location in requests that you want AWS WAF to search, and other settings. The bytes to search for are typically a string that corresponds with ASCII characters. In the AWS WAF console and the developer guide, this is refered to as a string match statement.</p>
+ * <p>A rule statement that defines a string match search for AWS WAF to apply to web requests. The byte match statement provides the bytes to search for, the location in requests that you want AWS WAF to search, and other settings. The bytes to search for are typically a string that corresponds with ASCII characters. In the AWS WAF console and the developer guide, this is refered to as a string match statement.</p>
  */
 export interface ByteMatchStatement {
   /**
@@ -705,10 +777,12 @@ export interface ForwardedIPConfig {
    *          <p>You can specify the following fallback behaviors:</p>
    *          <ul>
    *             <li>
-   *                <p>MATCH - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p>
+   *                <p>
+   *                   <code>MATCH</code> - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p>
    *             </li>
    *             <li>
-   *                <p>NO_MATCH - Treat the web request as not matching the rule statement.</p>
+   *                <p>
+   *                   <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p>
    *             </li>
    *          </ul>
    */
@@ -722,10 +796,7 @@ export namespace ForwardedIPConfig {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement used to identify web requests based on country of origin.  </p>
+ * <p>A rule statement used to identify web requests based on country of origin.  </p>
  */
 export interface GeoMatchStatement {
   /**
@@ -785,10 +856,12 @@ export interface IPSetForwardedIPConfig {
    *          <p>You can specify the following fallback behaviors:</p>
    *          <ul>
    *             <li>
-   *                <p>MATCH - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p>
+   *                <p>
+   *                   <code>MATCH</code> - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p>
    *             </li>
    *             <li>
-   *                <p>NO_MATCH - Treat the web request as not matching the rule statement.</p>
+   *                <p>
+   *                   <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p>
    *             </li>
    *          </ul>
    */
@@ -819,10 +892,7 @@ export namespace IPSetForwardedIPConfig {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement used to detect web requests coming from particular IP addresses or address ranges. To use this, create an <a>IPSet</a> that specifies the addresses you want to detect, then use the ARN of that set in this statement. To create an IP set, see <a>CreateIPSet</a>.</p>
+ * <p>A rule statement used to detect web requests coming from particular IP addresses or address ranges. To use this, create an <a>IPSet</a> that specifies the addresses you want to detect, then use the ARN of that set in this statement. To create an IP set, see <a>CreateIPSet</a>.</p>
  *          <p>Each IP set rule statement references an IP set. You create and maintain the set independent of your rules. This allows you to use the single set in multiple rules. When you update the referenced set, AWS WAF automatically updates all rules that reference it.</p>
  */
 export interface IPSetReferenceStatement {
@@ -848,10 +918,7 @@ export namespace IPSetReferenceStatement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Specifies a single rule to exclude from the rule group. Excluding a rule overrides
+ * <p>Specifies a single rule to exclude from the rule group. Excluding a rule overrides
  *          its action setting for the rule group in the web ACL, setting it to <code>COUNT</code>.
  *          This effectively excludes the rule from acting on web requests.  </p>
  */
@@ -869,10 +936,7 @@ export namespace ExcludedRule {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>
+ * <p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>
  *          <p>You can't nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>
  */
 export interface ManagedRuleGroupStatement {
@@ -904,10 +968,7 @@ export enum RateBasedStatementAggregateKeyType {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement used to search web request components for matches with regular expressions. To use this, create a <a>RegexPatternSet</a> that specifies the expressions that you want to detect, then use the ARN of that set in this statement. A web request matches the pattern set rule statement if the request component matches any of the patterns in the set. To create a regex pattern set, see <a>CreateRegexPatternSet</a>.</p>
+ * <p>A rule statement used to search web request components for matches with regular expressions. To use this, create a <a>RegexPatternSet</a> that specifies the expressions that you want to detect, then use the ARN of that set in this statement. A web request matches the pattern set rule statement if the request component matches any of the patterns in the set. To create a regex pattern set, see <a>CreateRegexPatternSet</a>.</p>
  *          <p>Each regex pattern set rule statement references a regex pattern set. You create and maintain the set independent of your rules. This allows you to use the single set in multiple rules. When you update the referenced set, AWS WAF automatically updates all rules that reference it.</p>
  */
 export interface RegexPatternSetReferenceStatement {
@@ -936,10 +997,7 @@ export namespace RegexPatternSetReferenceStatement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>
+ * <p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>
  *          <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>
  */
 export interface RuleGroupReferenceStatement {
@@ -970,10 +1028,7 @@ export enum ComparisonOperator {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>
+ * <p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>
  *          <p>If you configure AWS WAF to inspect the request body, AWS WAF inspects only the first 8192 bytes (8 KB). If the request body for your web requests never exceeds 8192 bytes, you can create a size constraint condition and block requests that have a request body greater than 8192 bytes.</p>
  *          <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>
  */
@@ -1008,10 +1063,7 @@ export namespace SizeConstraintStatement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Attackers sometimes insert malicious SQL code into web requests in an effort to extract data from your database. To allow or block web requests that appear to contain malicious SQL code, create one or more SQL injection match conditions. An SQL injection match condition identifies the part of web requests, such as the URI or the query string, that you want AWS WAF to inspect. Later in the process, when you create a web ACL, you specify whether to allow or block requests that appear to contain malicious SQL code.</p>
+ * <p>Attackers sometimes insert malicious SQL code into web requests in an effort to extract data from your database. To allow or block web requests that appear to contain malicious SQL code, create one or more SQL injection match conditions. An SQL injection match condition identifies the part of web requests, such as the URI or the query string, that you want AWS WAF to inspect. Later in the process, when you create a web ACL, you specify whether to allow or block requests that appear to contain malicious SQL code.</p>
  */
 export interface SqliMatchStatement {
   /**
@@ -1034,10 +1086,7 @@ export namespace SqliMatchStatement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rule statement that defines a cross-site scripting (XSS) match search for AWS WAF to apply to web requests.
+ * <p>A rule statement that defines a cross-site scripting (XSS) match search for AWS WAF to apply to web requests.
  *          XSS attacks are those where the attacker uses vulnerabilities in a benign website as a vehicle to inject malicious
  *          client-site scripts into other legitimate web browsers.
  *          The XSS match statement provides the location in requests that you want AWS WAF to search and text transformations
@@ -1140,6 +1189,7 @@ export namespace WAFInvalidOperationException {
 
 export enum ParameterExceptionField {
   AND_STATEMENT = "AND_STATEMENT",
+  BODY_PARSING_FALLBACK_BEHAVIOR = "BODY_PARSING_FALLBACK_BEHAVIOR",
   BYTE_MATCH_STATEMENT = "BYTE_MATCH_STATEMENT",
   DEFAULT_ACTION = "DEFAULT_ACTION",
   ENTITY_LIMIT = "ENTITY_LIMIT",
@@ -1155,6 +1205,8 @@ export enum ParameterExceptionField {
   IP_SET = "IP_SET",
   IP_SET_FORWARDED_IP_CONFIG = "IP_SET_FORWARDED_IP_CONFIG",
   IP_SET_REFERENCE_STATEMENT = "IP_SET_REFERENCE_STATEMENT",
+  JSON_MATCH_PATTERN = "JSON_MATCH_PATTERN",
+  JSON_MATCH_SCOPE = "JSON_MATCH_SCOPE",
   MANAGED_RULE_SET = "MANAGED_RULE_SET",
   MANAGED_RULE_SET_STATEMENT = "MANAGED_RULE_SET_STATEMENT",
   METRIC_NAME = "METRIC_NAME",
@@ -1248,10 +1300,7 @@ export namespace WAFUnavailableEntityException {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Specifies that AWS WAF should block requests.</p>
+ * <p>Specifies that AWS WAF should block requests.</p>
  *            <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>
  */
 export interface BlockAction {}
@@ -1263,10 +1312,7 @@ export namespace BlockAction {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Specifies that AWS WAF should count requests.</p>
+ * <p>Specifies that AWS WAF should count requests.</p>
  *            <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>
  */
 export interface CountAction {}
@@ -1278,10 +1324,7 @@ export namespace CountAction {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The action that AWS WAF should take on a web request when it matches a rule's statement. Settings at the web ACL level can override the rule action setting. </p>
+ * <p>The action that AWS WAF should take on a web request when it matches a rule's statement. Settings at the web ACL level can override the rule action setting. </p>
  */
 export interface RuleAction {
   /**
@@ -1307,10 +1350,7 @@ export namespace RuleAction {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Specifies that AWS WAF should do nothing. This is generally used to try out a rule without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>. </p>
+ * <p>Specifies that AWS WAF should do nothing. This is generally used to try out a rule without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>. </p>
  *            <p>This is used only in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>
  */
 export interface NoneAction {}
@@ -1354,10 +1394,7 @@ export namespace OverrideAction {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>
+ * <p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>
  */
 export interface VisibilityConfig {
   /**
@@ -1456,10 +1493,7 @@ export enum IPAddressVersion {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *         <p>A tag associated with an AWS resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing or other management. Typically, the tag key represents a category, such as "environment", and the tag value represents a
+ * <p>A tag associated with an AWS resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing or other management. Typically, the tag key represents a category, such as "environment", and the tag value represents a
  *   specific value within that category, such as "test," "development," or "production". Or you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource.</p>
  *         <p>You can tag the AWS resources that you manage through AWS WAF: web ACLs, rule groups, IP
  *   sets, and regex pattern sets. You can't manage or view tags through the AWS WAF console. </p>
@@ -1503,7 +1537,7 @@ export interface CreateIPSetRequest {
   Scope: Scope | string | undefined;
 
   /**
-   * <p>A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.</p>
+   * <p>A description of the IP set that helps with identification. </p>
    */
   Description?: string;
 
@@ -1548,10 +1582,7 @@ export namespace CreateIPSetRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>High-level information about an <a>IPSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage an <code>IPSet</code>, and the ARN, that you provide to the <a>IPSetReferenceStatement</a> to use the address set in a <a>Rule</a>.</p>
+ * <p>High-level information about an <a>IPSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage an <code>IPSet</code>, and the ARN, that you provide to the <a>IPSetReferenceStatement</a> to use the address set in a <a>Rule</a>.</p>
  */
 export interface IPSetSummary {
   /**
@@ -1565,7 +1596,7 @@ export interface IPSetSummary {
   Id?: string;
 
   /**
-   * <p>A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.</p>
+   * <p>A description of the IP set that helps with identification. </p>
    */
   Description?: string;
 
@@ -1660,10 +1691,7 @@ export namespace WAFTagOperationInternalErrorException {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A single regular expression. This is used in a <a>RegexPatternSet</a>.</p>
+ * <p>A single regular expression. This is used in a <a>RegexPatternSet</a>.</p>
  */
 export interface Regex {
   /**
@@ -1699,7 +1727,7 @@ export interface CreateRegexPatternSetRequest {
   Scope: Scope | string | undefined;
 
   /**
-   * <p>A description of the set that helps with identification. You cannot change the description of a set after you create it.</p>
+   * <p>A description of the set that helps with identification. </p>
    */
   Description?: string;
 
@@ -1721,10 +1749,7 @@ export namespace CreateRegexPatternSetRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>High-level information about a <a>RegexPatternSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RegexPatternSet</code>, and the ARN, that you provide to the <a>RegexPatternSetReferenceStatement</a> to use the pattern set in a <a>Rule</a>.</p>
+ * <p>High-level information about a <a>RegexPatternSet</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RegexPatternSet</code>, and the ARN, that you provide to the <a>RegexPatternSetReferenceStatement</a> to use the pattern set in a <a>Rule</a>.</p>
  */
 export interface RegexPatternSetSummary {
   /**
@@ -1738,7 +1763,7 @@ export interface RegexPatternSetSummary {
   Id?: string;
 
   /**
-   * <p>A description of the set that helps with identification. You cannot change the description of a set after you create it.</p>
+   * <p>A description of the set that helps with identification. </p>
    */
   Description?: string;
 
@@ -1773,10 +1798,7 @@ export namespace CreateRegexPatternSetResponse {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>High-level information about a <a>RuleGroup</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RuleGroup</code>, and the ARN, that you provide to the <a>RuleGroupReferenceStatement</a> to use the rule group in a <a>Rule</a>.</p>
+ * <p>High-level information about a <a>RuleGroup</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>RuleGroup</code>, and the ARN, that you provide to the <a>RuleGroupReferenceStatement</a> to use the rule group in a <a>Rule</a>.</p>
  */
 export interface RuleGroupSummary {
   /**
@@ -1790,7 +1812,7 @@ export interface RuleGroupSummary {
   Id?: string;
 
   /**
-   * <p>A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.</p>
+   * <p>A description of the rule group that helps with identification. </p>
    */
   Description?: string;
 
@@ -1825,10 +1847,7 @@ export namespace CreateRuleGroupResponse {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>In a <a>WebACL</a>, this is the action that you want AWS WAF
+ * <p>In a <a>WebACL</a>, this is the action that you want AWS WAF
  *          to perform when a web request doesn't match any of the rules in the <code>WebACL</code>. The default action must be a terminating action, so count is not allowed.</p>
  */
 export interface DefaultAction {
@@ -1850,10 +1869,7 @@ export namespace DefaultAction {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>High-level information about a <a>WebACL</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>WebACL</code>, and the ARN, that you provide to operations like <a>AssociateWebACL</a>.</p>
+ * <p>High-level information about a <a>WebACL</a>, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a <code>WebACL</code>, and the ARN, that you provide to operations like <a>AssociateWebACL</a>.</p>
  */
 export interface WebACLSummary {
   /**
@@ -1867,7 +1883,7 @@ export interface WebACLSummary {
   Id?: string;
 
   /**
-   * <p>A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.</p>
+   * <p>A description of the Web ACL that helps with identification. </p>
    */
   Description?: string;
 
@@ -2203,10 +2219,7 @@ export namespace DescribeManagedRuleGroupRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>High-level information about a <a>Rule</a>, returned by operations like <a>DescribeManagedRuleGroup</a>. This provides information like the ID, that you can use to retrieve and manage a <code>RuleGroup</code>, and the ARN, that you provide to the <a>RuleGroupReferenceStatement</a> to use the rule group in a <a>Rule</a>.</p>
+ * <p>High-level information about a <a>Rule</a>, returned by operations like <a>DescribeManagedRuleGroup</a>. This provides information like the ID, that you can use to retrieve and manage a <code>RuleGroup</code>, and the ARN, that you provide to the <a>RuleGroupReferenceStatement</a> to use the rule group in a <a>Rule</a>.</p>
  */
 export interface RuleSummary {
   /**
@@ -2215,10 +2228,7 @@ export interface RuleSummary {
   Name?: string;
 
   /**
-   * <note>
-   *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
-   *          </note>
-   *          <p>The action that AWS WAF should take on a web request when it matches a rule's statement. Settings at the web ACL level can override the rule action setting. </p>
+   * <p>The action that AWS WAF should take on a web request when it matches a rule's statement. Settings at the web ACL level can override the rule action setting. </p>
    */
   Action?: RuleAction;
 }
@@ -2326,10 +2336,7 @@ export namespace GetIPSetRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Contains one or more IP addresses or blocks of IP addresses specified in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports any CIDR range. For information about CIDR notation, see the Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless
+ * <p>Contains one or more IP addresses or blocks of IP addresses specified in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports any CIDR range. For information about CIDR notation, see the Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless
  *             Inter-Domain Routing</a>. </p>
  *          <p>AWS WAF assigns an ARN to each <code>IPSet</code> that you create. To use an IP set in a rule, you provide the ARN to the <a>Rule</a> statement <a>IPSetReferenceStatement</a>. </p>
  */
@@ -2350,7 +2357,7 @@ export interface IPSet {
   ARN: string | undefined;
 
   /**
-   * <p>A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.</p>
+   * <p>A description of the IP set that helps with identification. </p>
    */
   Description?: string;
 
@@ -2421,10 +2428,7 @@ export namespace GetLoggingConfigurationRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL resource, for
+ * <p>Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL resource, for
  *          logging from AWS WAF.
  *          As part of the association, you can specify parts of the standard logging fields to keep out of the logs.
  *          </p>
@@ -2540,10 +2544,7 @@ export namespace GetRateBasedStatementManagedKeysRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The set of IP addresses that are currently blocked for a rate-based statement.</p>
+ * <p>The set of IP addresses that are currently blocked for a rate-based statement.</p>
  */
 export interface RateBasedStatementManagedKeysIPSet {
   IPAddressVersion?: IPAddressVersion | string;
@@ -2610,10 +2611,7 @@ export namespace GetRegexPatternSetRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Contains one or more regular expressions. </p>
+ * <p>Contains one or more regular expressions. </p>
  *          <p>AWS WAF assigns an ARN to each <code>RegexPatternSet</code> that you create. To use a set in a rule, you provide the ARN to the <a>Rule</a> statement <a>RegexPatternSetReferenceStatement</a>. </p>
  */
 export interface RegexPatternSet {
@@ -2633,7 +2631,7 @@ export interface RegexPatternSet {
   ARN?: string;
 
   /**
-   * <p>A description of the set that helps with identification. You cannot change the description of a set after you create it.</p>
+   * <p>A description of the set that helps with identification. </p>
    */
   Description?: string;
 
@@ -2700,10 +2698,7 @@ export namespace GetRuleGroupRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>In a <a>GetSampledRequests</a> request, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range
+ * <p>In a <a>GetSampledRequests</a> request, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range
  *          for which you want AWS WAF to return a sample of web requests.</p>
  *          <p>You must specify the times in Coordinated Universal Time (UTC) format. UTC format includes the special designator, <code>Z</code>. For example, <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours.</p>
  *          <p>In a <a>GetSampledRequests</a> response, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range
@@ -2759,7 +2754,7 @@ export interface GetSampledRequestsRequest {
 
   /**
    * <p>The start date and time and the end date and time of the range for which you want <code>GetSampledRequests</code> to return a
-   *           sample of requests. You must specify the times in Coordinated Universal Time (UTC) format. UTC format includes the special designator, <code>Z</code>. For example, <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours.</p>
+   *           sample of requests. You must specify the times in Coordinated Universal Time (UTC) format. UTC format includes the special designator, <code>Z</code>. For example, <code>"2016-09-27T14:50Z"</code>. You can specify any time range in the previous three hours. If you specify a start time that's earlier than three hours ago, AWS WAF sets it to three hours ago.</p>
    */
   TimeWindow: TimeWindow | undefined;
 
@@ -2778,10 +2773,7 @@ export namespace GetSampledRequestsRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Part of the response from <a>GetSampledRequests</a>. This is a complex type that
+ * <p>Part of the response from <a>GetSampledRequests</a>. This is a complex type that
  *          appears as <code>Headers</code> in the response syntax. <code>HTTPHeader</code> contains the names and values of
  *          all of the headers that appear in one of the web requests. </p>
  */
@@ -2804,10 +2796,7 @@ export namespace HTTPHeader {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Part of the response from <a>GetSampledRequests</a>.  This is a complex type that
+ * <p>Part of the response from <a>GetSampledRequests</a>.  This is a complex type that
  *          appears as <code>Request</code> in the response syntax. <code>HTTPRequest</code> contains information about
  *          one of the web requests. </p>
  */
@@ -2862,10 +2851,7 @@ export namespace HTTPRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>Represents a single sampled web request. The response from <a>GetSampledRequests</a> includes a <code>SampledHTTPRequests</code> complex type that
+ * <p>Represents a single sampled web request. The response from <a>GetSampledRequests</a> includes a <code>SampledHTTPRequests</code> complex type that
  *          appears as <code>SampledRequests</code> in the response syntax. <code>SampledHTTPRequests</code> contains an array of <code>SampledHTTPRequest</code> objects.</p>
  */
 export interface SampledHTTPRequest {
@@ -2970,19 +2956,13 @@ export namespace GetWebACLRequest {
  */
 export interface FirewallManagerStatement {
   /**
-   * <note>
-   *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
-   *          </note>
-   *          <p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>
+   * <p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>
    *          <p>You can't nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>
    */
   ManagedRuleGroupStatement?: ManagedRuleGroupStatement;
 
   /**
-   * <note>
-   *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
-   *          </note>
-   *          <p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>
+   * <p>A rule statement used to run the rules that are defined in a <a>RuleGroup</a>. To use this, create a rule group with your rules, then provide the ARN of the rule group in this statement.</p>
    *          <p>You cannot nest a <code>RuleGroupReferenceStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>
    */
   RuleGroupReferenceStatement?: RuleGroupReferenceStatement;
@@ -3032,10 +3012,7 @@ export interface FirewallManagerRuleGroup {
   OverrideAction: OverrideAction | undefined;
 
   /**
-   * <note>
-   *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
-   *          </note>
-   *          <p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>
+   * <p>Defines and enables Amazon CloudWatch metrics and web request sample collection.  </p>
    */
   VisibilityConfig: VisibilityConfig | undefined;
 }
@@ -3096,10 +3073,7 @@ export namespace ListAvailableManagedRuleGroupsRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include AWS Managed Rules rule groups, which are free of charge to AWS WAF customers, and AWS Marketplace managed rule groups, which you can subscribe to through AWS Marketplace. </p>
+ * <p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include AWS Managed Rules rule groups, which are free of charge to AWS WAF customers, and AWS Marketplace managed rule groups, which you can subscribe to through AWS Marketplace. </p>
  */
 export interface ManagedRuleGroupSummary {
   /**
@@ -3433,10 +3407,7 @@ export namespace ListTagsForResourceRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *         <p>The collection of tagging definitions for an AWS resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing or other management. Typically, the tag key represents a category, such as "environment", and the tag value represents a
+ * <p>The collection of tagging definitions for an AWS resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing or other management. Typically, the tag key represents a category, such as "environment", and the tag value represents a
  *   specific value within that category, such as "test," "development," or "production". Or you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource.</p>
  *         <p>You can tag the AWS resources that you manage through AWS WAF: web ACLs, rule groups, IP
  *   sets, and regex pattern sets. You can't manage or view tags through the AWS WAF console. </p>
@@ -3739,7 +3710,7 @@ export interface UpdateIPSetRequest {
   Id: string | undefined;
 
   /**
-   * <p>A description of the IP set that helps with identification. You cannot change the description of an IP set after you create it.</p>
+   * <p>A description of the IP set that helps with identification. </p>
    */
   Description?: string;
 
@@ -3817,7 +3788,7 @@ export interface UpdateRegexPatternSetRequest {
   Id: string | undefined;
 
   /**
-   * <p>A description of the set that helps with identification. You cannot change the description of a set after you create it.</p>
+   * <p>A description of the set that helps with identification. </p>
    */
   Description?: string;
 
@@ -3878,10 +3849,7 @@ export namespace UpdateWebACLResponse {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>The processing guidance for a <a>Rule</a>, used by AWS WAF to determine whether a web request matches the rule. </p>
+ * <p>The processing guidance for a <a>Rule</a>, used by AWS WAF to determine whether a web request matches the rule. </p>
  */
 export interface Statement {
   /**
@@ -3979,10 +3947,7 @@ export namespace Statement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A logical rule statement used to negate the results of another rule statement. You provide one <a>Statement</a> within the <code>NotStatement</code>.</p>
+ * <p>A logical rule statement used to negate the results of another rule statement. You provide one <a>Statement</a> within the <code>NotStatement</code>.</p>
  */
 export interface NotStatement {
   /**
@@ -3998,10 +3963,7 @@ export namespace NotStatement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests.</p>
+ * <p>A rate-based rule tracks the rate of requests for each originating IP address, and triggers the rule action when the rate exceeds a limit that you specify on the number of requests in any 5-minute time span. You can use this to put a temporary block on requests from an IP address that is sending excessive requests.</p>
  *          <p>When the rule action triggers, AWS WAF blocks additional requests from the IP address until the request rate falls below the limit.</p>
  *          <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts requests that match the nested statement. For example, based on recent requests that you have seen from an attacker, you might create a rate-based rule with a nested AND rule statement that contains the following nested statements:</p>
  *          <ul>
@@ -4059,10 +4021,7 @@ export namespace RateBasedStatement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A single rule, which you can use in a <a>WebACL</a> or <a>RuleGroup</a> to identify
+ * <p>A single rule, which you can use in a <a>WebACL</a> or <a>RuleGroup</a> to identify
  *          web requests that you want to allow, block, or count.
  *          Each rule includes one top-level <a>Statement</a> that AWS WAF uses to identify matching
  *          web requests, and parameters that govern how AWS WAF handles them. </p>
@@ -4130,10 +4089,7 @@ export namespace Rule {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A logical rule statement used to combine other rule statements with AND logic. You provide more than one <a>Statement</a> within the <code>AndStatement</code>. </p>
+ * <p>A logical rule statement used to combine other rule statements with AND logic. You provide more than one <a>Statement</a> within the <code>AndStatement</code>. </p>
  */
 export interface AndStatement {
   /**
@@ -4149,10 +4105,7 @@ export namespace AndStatement {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p>A logical rule statement used to combine other rule statements with OR logic. You provide more than one <a>Statement</a> within the <code>OrStatement</code>. </p>
+ * <p>A logical rule statement used to combine other rule statements with OR logic. You provide more than one <a>Statement</a> within the <code>OrStatement</code>. </p>
  */
 export interface OrStatement {
   /**
@@ -4231,7 +4184,7 @@ export interface CreateRuleGroupRequest {
   Capacity: number | undefined;
 
   /**
-   * <p>A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.</p>
+   * <p>A description of the rule group that helps with identification. </p>
    */
   Description?: string;
 
@@ -4286,7 +4239,7 @@ export interface CreateWebACLRequest {
   DefaultAction: DefaultAction | undefined;
 
   /**
-   * <p>A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.</p>
+   * <p>A description of the Web ACL that helps with identification. </p>
    */
   Description?: string;
 
@@ -4316,10 +4269,7 @@ export namespace CreateWebACLRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p> A rule group defines a collection of rules to inspect and control web requests that you can use in a <a>WebACL</a>. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. </p>
+ * <p> A rule group defines a collection of rules to inspect and control web requests that you can use in a <a>WebACL</a>. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. </p>
  */
 export interface RuleGroup {
   /**
@@ -4354,7 +4304,7 @@ export interface RuleGroup {
   ARN: string | undefined;
 
   /**
-   * <p>A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.</p>
+   * <p>A description of the rule group that helps with identification. </p>
    */
   Description?: string;
 
@@ -4404,7 +4354,7 @@ export interface UpdateRuleGroupRequest {
   Id: string | undefined;
 
   /**
-   * <p>A description of the rule group that helps with identification. You cannot change the description of a rule group after you create it.</p>
+   * <p>A description of the rule group that helps with identification. </p>
    */
   Description?: string;
 
@@ -4464,7 +4414,7 @@ export interface UpdateWebACLRequest {
   DefaultAction: DefaultAction | undefined;
 
   /**
-   * <p>A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.</p>
+   * <p>A description of the Web ACL that helps with identification. </p>
    */
   Description?: string;
 
@@ -4494,10 +4444,7 @@ export namespace UpdateWebACLRequest {
 }
 
 /**
- * <note>
- *             <p>This is the latest version of <b>AWS WAF</b>, named AWS WAFV2, released in November, 2019. For information, including how to migrate your AWS WAF resources from the prior release, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>.  </p>
- *          </note>
- *          <p> A Web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the Web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a Web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a Web ACL with one or more AWS resources to protect. The resources can be Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AWS AppSync GraphQL API.  </p>
+ * <p> A Web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the Web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a Web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a Web ACL with one or more AWS resources to protect. The resources can be Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AWS AppSync GraphQL API.  </p>
  */
 export interface WebACL {
   /**
@@ -4521,7 +4468,7 @@ export interface WebACL {
   DefaultAction: DefaultAction | undefined;
 
   /**
-   * <p>A description of the Web ACL that helps with identification. You cannot change the description of a Web ACL after you create it.</p>
+   * <p>A description of the Web ACL that helps with identification. </p>
    */
   Description?: string;
 

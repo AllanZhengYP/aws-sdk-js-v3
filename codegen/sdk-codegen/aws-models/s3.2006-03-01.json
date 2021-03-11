@@ -648,7 +648,8 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "CSV"
+            "value": "CSV",
+            "name": "CSV"
           }
         ]
       }
@@ -658,10 +659,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ARCHIVE_ACCESS"
+            "value": "ARCHIVE_ACCESS",
+            "name": "ARCHIVE_ACCESS"
           },
           {
-            "value": "DEEP_ARCHIVE_ACCESS"
+            "value": "DEEP_ARCHIVE_ACCESS",
+            "name": "DEEP_ARCHIVE_ACCESS"
           }
         ]
       }
@@ -694,10 +697,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Suspended"
+            "value": "Suspended",
+            "name": "Suspended"
           }
         ]
       }
@@ -723,16 +728,20 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "private"
+            "value": "private",
+            "name": "private"
           },
           {
-            "value": "public-read"
+            "value": "public-read",
+            "name": "public_read"
           },
           {
-            "value": "public-read-write"
+            "value": "public-read-write",
+            "name": "public_read_write"
           },
           {
-            "value": "authenticated-read"
+            "value": "authenticated-read",
+            "name": "authenticated_read"
           }
         ]
       }
@@ -762,79 +771,104 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "af-south-1"
+            "value": "af-south-1",
+            "name": "af_south_1"
           },
           {
-            "value": "ap-east-1"
+            "value": "ap-east-1",
+            "name": "ap_east_1"
           },
           {
-            "value": "ap-northeast-1"
+            "value": "ap-northeast-1",
+            "name": "ap_northeast_1"
           },
           {
-            "value": "ap-northeast-2"
+            "value": "ap-northeast-2",
+            "name": "ap_northeast_2"
           },
           {
-            "value": "ap-northeast-3"
+            "value": "ap-northeast-3",
+            "name": "ap_northeast_3"
           },
           {
-            "value": "ap-south-1"
+            "value": "ap-south-1",
+            "name": "ap_south_1"
           },
           {
-            "value": "ap-southeast-1"
+            "value": "ap-southeast-1",
+            "name": "ap_southeast_1"
           },
           {
-            "value": "ap-southeast-2"
+            "value": "ap-southeast-2",
+            "name": "ap_southeast_2"
           },
           {
-            "value": "ca-central-1"
+            "value": "ca-central-1",
+            "name": "ca_central_1"
           },
           {
-            "value": "cn-north-1"
+            "value": "cn-north-1",
+            "name": "cn_north_1"
           },
           {
-            "value": "cn-northwest-1"
+            "value": "cn-northwest-1",
+            "name": "cn_northwest_1"
           },
           {
-            "value": "EU"
+            "value": "EU",
+            "name": "EU"
           },
           {
-            "value": "eu-central-1"
+            "value": "eu-central-1",
+            "name": "eu_central_1"
           },
           {
-            "value": "eu-north-1"
+            "value": "eu-north-1",
+            "name": "eu_north_1"
           },
           {
-            "value": "eu-south-1"
+            "value": "eu-south-1",
+            "name": "eu_south_1"
           },
           {
-            "value": "eu-west-1"
+            "value": "eu-west-1",
+            "name": "eu_west_1"
           },
           {
-            "value": "eu-west-2"
+            "value": "eu-west-2",
+            "name": "eu_west_2"
           },
           {
-            "value": "eu-west-3"
+            "value": "eu-west-3",
+            "name": "eu_west_3"
           },
           {
-            "value": "me-south-1"
+            "value": "me-south-1",
+            "name": "me_south_1"
           },
           {
-            "value": "sa-east-1"
+            "value": "sa-east-1",
+            "name": "sa_east_1"
           },
           {
-            "value": "us-east-2"
+            "value": "us-east-2",
+            "name": "us_east_2"
           },
           {
-            "value": "us-gov-east-1"
+            "value": "us-gov-east-1",
+            "name": "us_gov_east_1"
           },
           {
-            "value": "us-gov-west-1"
+            "value": "us-gov-west-1",
+            "name": "us_gov_west_1"
           },
           {
-            "value": "us-west-1"
+            "value": "us-west-1",
+            "name": "us_west_1"
           },
           {
-            "value": "us-west-2"
+            "value": "us-west-2",
+            "name": "us_west_2"
           }
         ]
       }
@@ -855,13 +889,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "FULL_CONTROL"
+            "value": "FULL_CONTROL",
+            "name": "FULL_CONTROL"
           },
           {
-            "value": "READ"
+            "value": "READ",
+            "name": "READ"
           },
           {
-            "value": "WRITE"
+            "value": "WRITE",
+            "name": "WRITE"
           }
         ]
       }
@@ -874,10 +911,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Suspended"
+            "value": "Suspended",
+            "name": "Suspended"
           }
         ]
       }
@@ -1275,13 +1314,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "NONE"
+            "value": "NONE",
+            "name": "NONE"
           },
           {
-            "value": "GZIP"
+            "value": "GZIP",
+            "name": "GZIP"
           },
           {
-            "value": "BZIP2"
+            "value": "BZIP2",
+            "name": "BZIP2"
           }
         ]
       }
@@ -1298,7 +1340,7 @@
         "KeyPrefixEquals": {
           "target": "com.amazonaws.s3#KeyPrefixEquals",
           "traits": {
-            "smithy.api#documentation": "<p>The object key name prefix when the redirect is applied. For example, to redirect\n         requests for <code>ExamplePage.html</code>, the key prefix will be\n            <code>ExamplePage.html</code>. To redirect request for all pages with the prefix\n            <code>docs/</code>, the key prefix will be <code>/docs</code>, which identifies all\n         objects in the <code>docs/</code> folder. Required when the parent element\n            <code>Condition</code> is specified and sibling <code>HttpErrorCodeReturnedEquals</code>\n         is not specified. If both conditions are specified, both must be true for the redirect to\n         be applied.</p>"
+            "smithy.api#documentation": "<p>The object key name prefix when the redirect is applied. For example, to redirect\n         requests for <code>ExamplePage.html</code>, the key prefix will be\n            <code>ExamplePage.html</code>. To redirect request for all pages with the prefix\n            <code>docs/</code>, the key prefix will be <code>/docs</code>, which identifies all\n         objects in the <code>docs/</code> folder. Required when the parent element\n            <code>Condition</code> is specified and sibling <code>HttpErrorCodeReturnedEquals</code>\n         is not specified. If both conditions are specified, both must be true for the redirect to\n         be applied.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         }
       },
@@ -1733,13 +1775,13 @@
         "ETag": {
           "target": "com.amazonaws.s3#ETag",
           "traits": {
-            "smithy.api#documentation": "<p>Returns the ETag of the new object. The ETag reflects only changes to the contents of an\n         object, not its metadata. The source and destination ETag is identical for a successfully\n         copied object.</p>"
+            "smithy.api#documentation": "<p>Returns the ETag of the new object. The ETag reflects only changes to the contents of an\n         object, not its metadata. The source and destination ETag is identical for a successfully\n         copied non-multipart object.</p>"
           }
         },
         "LastModified": {
           "target": "com.amazonaws.s3#LastModified",
           "traits": {
-            "smithy.api#documentation": "<p>Returns the date that the object was last modified.</p>"
+            "smithy.api#documentation": "<p>Creation date of the object.</p>"
           }
         }
       },
@@ -2826,10 +2868,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -2983,7 +3027,7 @@
         "Key": {
           "target": "com.amazonaws.s3#ObjectKey",
           "traits": {
-            "smithy.api#documentation": "<p>Name of the object key.</p>",
+            "smithy.api#documentation": "<p>The key that identifies the object in the bucket from which to remove all tags.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -3243,7 +3287,8 @@
         "smithy.api#documentation": "<p>Requests Amazon S3 to encode the object keys in the response and specifies the encoding\n         method to use. An object key may contain any Unicode character; however, XML 1.0 parser\n         cannot parse some characters, such as characters with an ASCII value from 0 to 10. For\n         characters that are not supported in XML 1.0, you can add this parameter to request that\n         Amazon S3 encode the keys in the response.</p>",
         "smithy.api#enum": [
           {
-            "value": "url"
+            "value": "url",
+            "name": "url"
           }
         ]
       }
@@ -3337,7 +3382,7 @@
         "Key": {
           "target": "com.amazonaws.s3#ObjectKey",
           "traits": {
-            "smithy.api#documentation": "<p>The object key name to use when a 4XX class error occurs.</p>",
+            "smithy.api#documentation": "<p>The object key name to use when a 4XX class error occurs.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>",
             "smithy.api#required": {}
           }
         }
@@ -3437,10 +3482,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -3453,10 +3500,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -3484,7 +3533,8 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "SQL"
+            "value": "SQL",
+            "name": "SQL"
           }
         ]
       }
@@ -3548,10 +3598,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "prefix"
+            "value": "prefix",
+            "name": "prefix"
           },
           {
-            "value": "suffix"
+            "value": "suffix",
+            "name": "suffix"
           }
         ]
       }
@@ -3778,7 +3830,7 @@
         "target": "com.amazonaws.s3#GetBucketEncryptionOutput"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Returns the default encryption configuration for an Amazon S3 bucket. For information about\n         the Amazon S3 default encryption feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html\">Amazon S3 Default Bucket Encryption</a>.</p>\n\n         <p> To use this operation, you must have permission to perform the\n            <code>s3:GetEncryptionConfiguration</code> action. The bucket owner has this permission\n         by default. The bucket owner can grant this permission to others. For more information\n         about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>\n         <p>The following operations are related to <code>GetBucketEncryption</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html\">PutBucketEncryption</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html\">DeleteBucketEncryption</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>Returns the default encryption configuration for an Amazon S3 bucket. If the bucket does not\n         have a default encryption configuration, GetBucketEncryption returns\n         <code>ServerSideEncryptionConfigurationNotFoundError</code>. </p>\n         <p>For information about the Amazon S3 default encryption feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html\">Amazon S3 Default Bucket Encryption</a>.</p>\n         <p> To use this operation, you must have permission to perform the\n            <code>s3:GetEncryptionConfiguration</code> action. The bucket owner has this permission\n         by default. The bucket owner can grant this permission to others. For more information\n         about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>\n         <p>The following operations are related to <code>GetBucketEncryption</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html\">PutBucketEncryption</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html\">DeleteBucketEncryption</a>\n               </p>\n            </li>\n         </ul>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/{Bucket}?encryption",
@@ -4845,7 +4897,7 @@
         "LastModified": {
           "target": "com.amazonaws.s3#LastModified",
           "traits": {
-            "smithy.api#documentation": "<p>Last modified date of the object</p>",
+            "smithy.api#documentation": "<p>Creation date of the object.</p>",
             "smithy.api#httpHeader": "Last-Modified"
           }
         },
@@ -5138,14 +5190,14 @@
         "SSECustomerAlgorithm": {
           "target": "com.amazonaws.s3#SSECustomerAlgorithm",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the algorithm to use to when encrypting the object (for example,\n         AES256).</p>",
+            "smithy.api#documentation": "<p>Specifies the algorithm to use to when decrypting the object (for example,\n         AES256).</p>",
             "smithy.api#httpHeader": "x-amz-server-side-encryption-customer-algorithm"
           }
         },
         "SSECustomerKey": {
           "target": "com.amazonaws.s3#SSECustomerKey",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This\n         value is used to store the object and then it is discarded; Amazon S3 does not store the\n         encryption key. The key must be appropriate for use with the algorithm specified in the\n            <code>x-amz-server-side-encryption-customer-algorithm</code> header.</p>",
+            "smithy.api#documentation": "<p>Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data. This\n         value is used to decrypt the object when recovering it and must match the one used when \n         storing the data. The key must be appropriate for use with the algorithm specified in the\n            <code>x-amz-server-side-encryption-customer-algorithm</code> header.</p>",
             "smithy.api#httpHeader": "x-amz-server-side-encryption-customer-key"
           }
         },
@@ -5257,7 +5309,7 @@
         "target": "com.amazonaws.s3#GetObjectTaggingOutput"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Returns the tag-set of an object. You send the GET request against the tagging\n         subresource associated with the object.</p>\n\n         <p>To use this operation, you must have permission to perform the\n            <code>s3:GetObjectTagging</code> action. By default, the GET operation returns\n         information about current version of an object. For a versioned bucket, you can have\n         multiple versions of an object in your bucket. To retrieve tags of any other version, use\n         the versionId query parameter. You also need permission for the\n            <code>s3:GetObjectVersionTagging</code> action.</p>\n\n         <p> By default, the bucket owner has this permission and can grant this permission to\n         others.</p>\n\n         <p> For information about the Amazon S3 object tagging feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</p>\n\n         <p>The following operation is related to <code>GetObjectTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html\">PutObjectTagging</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>Returns the tag-set of an object. You send the GET request against the tagging\n         subresource associated with the object.</p>\n\n         <p>To use this operation, you must have permission to perform the\n            <code>s3:GetObjectTagging</code> action. By default, the GET operation returns\n         information about current version of an object. For a versioned bucket, you can have\n         multiple versions of an object in your bucket. To retrieve tags of any other version, use\n         the versionId query parameter. You also need permission for the\n            <code>s3:GetObjectVersionTagging</code> action.</p>\n\n         <p> By default, the bucket owner has this permission and can grant this permission to\n         others.</p>\n\n         <p> For information about the Amazon S3 object tagging feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</p>\n\n         <p>The following operation is related to <code>GetObjectTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html\">PutObjectTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html\">DeleteObjectTagging</a>\n               </p>\n            </li>\n         </ul>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/{Bucket}/{Key+}?tagging",
@@ -5315,6 +5367,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
             "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+          }
+        },
+        "RequestPayer": {
+          "target": "com.amazonaws.s3#RequestPayer",
+          "traits": {
+            "smithy.api#httpHeader": "x-amz-request-payer"
           }
         }
       }
@@ -5548,11 +5606,11 @@
       },
       "errors": [
         {
-          "target": "com.amazonaws.s3#NoSuchBucket"
+          "target": "com.amazonaws.s3#NotFound"
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>This operation is useful to determine if a bucket exists and you have permission to\n         access it. The operation returns a <code>200 OK</code> if the bucket exists and you have\n         permission to access it. Otherwise, the operation might return responses such as <code>404\n            Not Found</code> and <code>403 Forbidden</code>. </p>\n\n         <p>To use this operation, you must have permissions to perform the\n            <code>s3:ListBucket</code> action. The bucket owner has this permission by default and\n         can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>",
+        "smithy.api#documentation": "<p>This operation is useful to determine if a bucket exists and you have permission to\n         access it. The operation returns a <code>200 OK</code> if the bucket exists and you have\n         permission to access it.</p>\n      \n      \n         <p>If the bucket does not exist or you do not have permission to access it, the <code>HEAD</code> request\n         returns a generic <code>404 Not Found</code> or <code>403 Forbidden</code> code. A message body is not \n         included, so you cannot determine the exception beyond these error codes.</p>\n\n         <p>To use this operation, you must have permissions to perform the\n            <code>s3:ListBucket</code> action. The bucket owner has this permission by default and\n         can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>",
         "smithy.api#http": {
           "method": "HEAD",
           "uri": "/{Bucket}",
@@ -5565,6 +5623,23 @@
                 "state": "success",
                 "matcher": {
                   "success": true
+                }
+              },
+              {
+                "state": "retry",
+                "matcher": {
+                  "errorType": "NotFound"
+                }
+              }
+            ],
+            "minDelay": 5
+          },
+          "BucketNotExists": {
+            "acceptors": [
+              {
+                "state": "success",
+                "matcher": {
+                  "errorType": "NotFound"
                 }
               }
             ],
@@ -5603,11 +5678,11 @@
       },
       "errors": [
         {
-          "target": "com.amazonaws.s3#NoSuchKey"
+          "target": "com.amazonaws.s3#NotFound"
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>The HEAD operation retrieves metadata from an object without returning the object\n         itself. This operation is useful if you're only interested in an object's metadata. To use\n         HEAD, you must have READ access to the object.</p>\n\n         <p>A <code>HEAD</code> request has the same options as a <code>GET</code> operation on an\n         object. The response is identical to the <code>GET</code> response except that there is no\n         response body.</p>\n\n         <p>If you encrypt an object by using server-side encryption with customer-provided\n         encryption keys (SSE-C) when you store the object in Amazon S3, then when you retrieve the\n         metadata from the object, you must use the following headers:</p>\n         <ul>\n            <li>\n               <p>x-amz-server-side-encryption-customer-algorithm</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key-MD5</p>\n            </li>\n         </ul>\n         <p>For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption (Using\n            Customer-Provided Encryption Keys)</a>.</p>\n         <note>\n            <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should\n            not be sent for GET requests if your object uses server-side encryption with CMKs stored\n            in AWS KMS (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys\n            (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400 BadRequest\n            error.</p>\n         </note>\n\n\n\n\n\n\n\n         <p>Request headers are limited to 8 KB in size. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html\">Common Request\n            Headers</a>.</p>\n         <p>Consider the following when using request headers:</p>\n         <ul>\n            <li>\n               <p> Consideration 1 – If both of the <code>If-Match</code> and\n                  <code>If-Unmodified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-Match</code> condition evaluates to <code>true</code>, and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Unmodified-Since</code> condition evaluates to\n                     <code>false</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns <code>200 OK</code> and the data requested.</p>\n            </li>\n            <li>\n               <p> Consideration 2 – If both of the <code>If-None-Match</code> and\n                  <code>If-Modified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-None-Match</code> condition evaluates to <code>false</code>,\n                     and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Modified-Since</code> condition evaluates to\n                     <code>true</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns the <code>304 Not Modified</code> response code.</p>\n            </li>\n         </ul>\n\n         <p>For more information about conditional requests, see <a href=\"https://tools.ietf.org/html/rfc7232\">RFC 7232</a>.</p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You need the <code>s3:GetObject</code> permission for this operation. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions\n            in a Policy</a>. If the object you request does not exist, the error Amazon S3 returns\n         depends on whether you also have the s3:ListBucket permission.</p>\n         <ul>\n            <li>\n               <p>If you have the <code>s3:ListBucket</code> permission on the bucket, Amazon S3 returns\n               an HTTP status code 404 (\"no such key\") error.</p>\n            </li>\n            <li>\n               <p>If you don’t have the <code>s3:ListBucket</code> permission, Amazon S3 returns an HTTP\n               status code 403 (\"access denied\") error.</p>\n            </li>\n         </ul>\n\n         <p>The following operation is related to <code>HeadObject</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>The HEAD operation retrieves metadata from an object without returning the object\n         itself. This operation is useful if you're only interested in an object's metadata. To use\n         HEAD, you must have READ access to the object.</p>\n\n         <p>A <code>HEAD</code> request has the same options as a <code>GET</code> operation on an\n         object. The response is identical to the <code>GET</code> response except that there is no\n         response body. Because of this, if the <code>HEAD</code> request generates an error, it\n         returns a generic <code>404 Not Found</code> or <code>403 Forbidden</code> code. It is not \n         possible to retrieve the exact exception beyond these error codes.</p>\n\n         <p>If you encrypt an object by using server-side encryption with customer-provided\n         encryption keys (SSE-C) when you store the object in Amazon S3, then when you retrieve the\n         metadata from the object, you must use the following headers:</p>\n         <ul>\n            <li>\n               <p>x-amz-server-side-encryption-customer-algorithm</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key</p>\n            </li>\n            <li>\n               <p>x-amz-server-side-encryption-customer-key-MD5</p>\n            </li>\n         </ul>\n         <p>For more information about SSE-C, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption (Using\n            Customer-Provided Encryption Keys)</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Encryption request headers, like <code>x-amz-server-side-encryption</code>, should\n            not be sent for GET requests if your object uses server-side encryption with CMKs stored\n            in AWS KMS (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys\n            (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400 BadRequest\n            error.</p>\n               </li>\n               <li>\n                  <p>\n               The last modified property in this case is the creation date of the object.</p> \n               </li>\n            </ul>\n         </note>\n\n\n         <p>Request headers are limited to 8 KB in size. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html\">Common Request\n            Headers</a>.</p>\n         <p>Consider the following when using request headers:</p>\n         <ul>\n            <li>\n               <p> Consideration 1 – If both of the <code>If-Match</code> and\n                  <code>If-Unmodified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-Match</code> condition evaluates to <code>true</code>, and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Unmodified-Since</code> condition evaluates to\n                     <code>false</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns <code>200 OK</code> and the data requested.</p>\n            </li>\n            <li>\n               <p> Consideration 2 – If both of the <code>If-None-Match</code> and\n                  <code>If-Modified-Since</code> headers are present in the request as\n               follows:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>If-None-Match</code> condition evaluates to <code>false</code>,\n                     and;</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>If-Modified-Since</code> condition evaluates to\n                     <code>true</code>;</p>\n                  </li>\n               </ul>\n               <p>Then Amazon S3 returns the <code>304 Not Modified</code> response code.</p>\n            </li>\n         </ul>\n\n         <p>For more information about conditional requests, see <a href=\"https://tools.ietf.org/html/rfc7232\">RFC 7232</a>.</p>\n\n         <p>\n            <b>Permissions</b>\n         </p>\n         <p>You need the <code>s3:GetObject</code> permission for this operation. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html\">Specifying Permissions\n            in a Policy</a>. If the object you request does not exist, the error Amazon S3 returns\n         depends on whether you also have the s3:ListBucket permission.</p>\n         <ul>\n            <li>\n               <p>If you have the <code>s3:ListBucket</code> permission on the bucket, Amazon S3 returns\n               an HTTP status code 404 (\"no such key\") error.</p>\n            </li>\n            <li>\n               <p>If you don’t have the <code>s3:ListBucket</code> permission, Amazon S3 returns an HTTP\n               status code 403 (\"access denied\") error.</p>\n            </li>\n         </ul>\n\n         <p>The following operation is related to <code>HeadObject</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n         </ul>",
         "smithy.api#http": {
           "method": "HEAD",
           "uri": "/{Bucket}/{Key+}",
@@ -5620,6 +5695,23 @@
                 "state": "success",
                 "matcher": {
                   "success": true
+                }
+              },
+              {
+                "state": "retry",
+                "matcher": {
+                  "errorType": "NotFound"
+                }
+              }
+            ],
+            "minDelay": 5
+          },
+          "ObjectNotExists": {
+            "acceptors": [
+              {
+                "state": "success",
+                "matcher": {
+                  "errorType": "NotFound"
                 }
               }
             ],
@@ -5669,7 +5761,7 @@
         "LastModified": {
           "target": "com.amazonaws.s3#LastModified",
           "traits": {
-            "smithy.api#documentation": "<p>Last modified date of the object</p>",
+            "smithy.api#documentation": "<p>Creation date of the object.</p>",
             "smithy.api#httpHeader": "Last-Modified"
           }
         },
@@ -5976,7 +6068,7 @@
         "Suffix": {
           "target": "com.amazonaws.s3#Suffix",
           "traits": {
-            "smithy.api#documentation": "<p>A suffix that is appended to a request that is for a directory on the website endpoint\n         (for example,if the suffix is index.html and you make a request to samplebucket/images/ the\n         data that is returned will be for the object with the key name images/index.html) The\n         suffix must not be empty and must not include a slash character.</p>",
+            "smithy.api#documentation": "<p>A suffix that is appended to a request that is for a directory on the website endpoint\n         (for example,if the suffix is index.html and you make a request to samplebucket/images/ the\n         data that is returned will be for the object with the key name images/index.html) The\n         suffix must not be empty and must not include a slash character.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>",
             "smithy.api#required": {}
           }
         }
@@ -6045,10 +6137,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ARCHIVE_ACCESS"
+            "value": "ARCHIVE_ACCESS",
+            "name": "ARCHIVE_ACCESS"
           },
           {
-            "value": "DEEP_ARCHIVE_ACCESS"
+            "value": "DEEP_ARCHIVE_ACCESS",
+            "name": "DEEP_ARCHIVE_ACCESS"
           }
         ]
       }
@@ -6127,7 +6221,7 @@
         "Prefix": {
           "target": "com.amazonaws.s3#Prefix",
           "traits": {
-            "smithy.api#documentation": "<p>An object key name prefix that identifies the subset of objects to which the rule\n         applies.</p>"
+            "smithy.api#documentation": "<p>An object key name prefix that identifies the subset of objects to which the rule\n         applies.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         },
         "Tag": {
@@ -6152,10 +6246,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -6293,13 +6389,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "CSV"
+            "value": "CSV",
+            "name": "CSV"
           },
           {
-            "value": "ORC"
+            "value": "ORC",
+            "name": "ORC"
           },
           {
-            "value": "Parquet"
+            "value": "Parquet",
+            "name": "Parquet"
           }
         ]
       }
@@ -6309,10 +6408,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Daily"
+            "value": "Daily",
+            "name": "Daily"
           },
           {
-            "value": "Weekly"
+            "value": "Weekly",
+            "name": "Weekly"
           }
         ]
       }
@@ -6325,10 +6426,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "All"
+            "value": "All",
+            "name": "All"
           },
           {
-            "value": "Current"
+            "value": "Current",
+            "name": "Current"
           }
         ]
       }
@@ -6338,37 +6441,48 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Size"
+            "value": "Size",
+            "name": "Size"
           },
           {
-            "value": "LastModifiedDate"
+            "value": "LastModifiedDate",
+            "name": "LastModifiedDate"
           },
           {
-            "value": "StorageClass"
+            "value": "StorageClass",
+            "name": "StorageClass"
           },
           {
-            "value": "ETag"
+            "value": "ETag",
+            "name": "ETag"
           },
           {
-            "value": "IsMultipartUploaded"
+            "value": "IsMultipartUploaded",
+            "name": "IsMultipartUploaded"
           },
           {
-            "value": "ReplicationStatus"
+            "value": "ReplicationStatus",
+            "name": "ReplicationStatus"
           },
           {
-            "value": "EncryptionStatus"
+            "value": "EncryptionStatus",
+            "name": "EncryptionStatus"
           },
           {
-            "value": "ObjectLockRetainUntilDate"
+            "value": "ObjectLockRetainUntilDate",
+            "name": "ObjectLockRetainUntilDate"
           },
           {
-            "value": "ObjectLockMode"
+            "value": "ObjectLockMode",
+            "name": "ObjectLockMode"
           },
           {
-            "value": "ObjectLockLegalHoldStatus"
+            "value": "ObjectLockLegalHoldStatus",
+            "name": "ObjectLockLegalHoldStatus"
           },
           {
-            "value": "IntelligentTieringAccessTier"
+            "value": "IntelligentTieringAccessTier",
+            "name": "IntelligentTieringAccessTier"
           }
         ]
       }
@@ -6592,7 +6706,7 @@
           "target": "com.amazonaws.s3#Prefix",
           "traits": {
             "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>Prefix identifying one or more objects to which the rule applies. This is\n         No longer used; use <code>Filter</code> instead.</p>"
+            "smithy.api#documentation": "<p>Prefix identifying one or more objects to which the rule applies. This is\n         No longer used; use <code>Filter</code> instead.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         },
         "Filter": {
@@ -6660,7 +6774,7 @@
         "Prefix": {
           "target": "com.amazonaws.s3#Prefix",
           "traits": {
-            "smithy.api#documentation": "<p>Prefix identifying one or more objects to which the rule applies.</p>"
+            "smithy.api#documentation": "<p>Prefix identifying one or more objects to which the rule applies.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         },
         "Tag": {
@@ -7408,7 +7522,7 @@
         "CommonPrefixes": {
           "target": "com.amazonaws.s3#CommonPrefixList",
           "traits": {
-            "smithy.api#documentation": "<p>All of the keys rolled up in a common prefix count as a single return when calculating\n         the number of returns. </p>\n\n         <p>A response can contain CommonPrefixes only if you specify a delimiter.</p>\n\n         <p>CommonPrefixes contains all (if there are any) keys between Prefix and the next\n         occurrence of the string specified by the delimiter.</p>\n\n         <p> CommonPrefixes lists keys that act like subdirectories in the directory specified by\n         Prefix.</p>\n\n         <p>For example, if the prefix is notes/ and the delimiter is a slash (/) as in\n         notes/summer/july, the common prefix is notes/summer/. All of the keys that roll up into a\n         common prefix count as a single return when calculating the number of returns.</p>",
+            "smithy.api#documentation": "<p>All of the keys (up to 1,000) rolled up in a common prefix count as a single return when calculating\n         the number of returns. </p>\n\n         <p>A response can contain CommonPrefixes only if you specify a delimiter.</p>\n\n         <p>CommonPrefixes contains all (if there are any) keys between Prefix and the next\n         occurrence of the string specified by the delimiter.</p>\n\n         <p> CommonPrefixes lists keys that act like subdirectories in the directory specified by\n         Prefix.</p>\n\n         <p>For example, if the prefix is notes/ and the delimiter is a slash (/) as in\n         notes/summer/july, the common prefix is notes/summer/. All of the keys that roll up into a\n         common prefix count as a single return when calculating the number of returns.</p>",
             "smithy.api#xmlFlattened": {}
           }
         },
@@ -7495,7 +7609,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Returns some or all (up to 1,000) of the objects in a bucket. You can use the request\n         parameters as selection criteria to return a subset of the objects in a bucket. A <code>200\n            OK</code> response can contain valid or invalid XML. Make sure to design your\n         application to parse the contents of the response and handle it appropriately.</p>\n\n         <p>To use this operation, you must have READ access to the bucket.</p>\n\n         <p>To use this operation in an AWS Identity and Access Management (IAM) policy, you must\n         have permissions to perform the <code>s3:ListBucket</code> action. The bucket owner has\n         this permission by default and can grant this permission to others. For more information\n         about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>\n         <important>\n            <p>This section describes the latest revision of the API. We recommend that you use this\n            revised API for application development. For backward compatibility, Amazon S3 continues to\n            support the prior version of this API, <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html\">ListObjects</a>.</p>\n         </important>\n\n         <p>To get a list of your buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html\">ListBuckets</a>.</p>\n\n         <p>The following operations are related to <code>ListObjectsV2</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">CreateBucket</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>Returns some or all (up to 1,000) of the objects in a bucket. You can use the request\n         parameters as selection criteria to return a subset of the objects in a bucket. A <code>200\n            OK</code> response can contain valid or invalid XML. Make sure to design your\n         application to parse the contents of the response and handle it appropriately. \n         Objects are returned sorted in an ascending order of the respective key names in the list.</p>\n\n         <p>To use this operation, you must have READ access to the bucket.</p>\n\n         <p>To use this operation in an AWS Identity and Access Management (IAM) policy, you must\n         have permissions to perform the <code>s3:ListBucket</code> action. The bucket owner has\n         this permission by default and can grant this permission to others. For more information\n         about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\">Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html\">Managing Access Permissions to Your Amazon S3\n            Resources</a>.</p>\n         <important>\n            <p>This section describes the latest revision of the API. We recommend that you use this\n            revised API for application development. For backward compatibility, Amazon S3 continues to\n            support the prior version of this API, <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html\">ListObjects</a>.</p>\n         </important>\n\n         <p>To get a list of your buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html\">ListBuckets</a>.</p>\n\n         <p>The following operations are related to <code>ListObjectsV2</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html\">CreateBucket</a>\n               </p>\n            </li>\n         </ul>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/{Bucket}?list-type=2",
@@ -7551,7 +7665,7 @@
         "CommonPrefixes": {
           "target": "com.amazonaws.s3#CommonPrefixList",
           "traits": {
-            "smithy.api#documentation": "<p>All of the keys rolled up into a common prefix count as a single return when calculating\n         the number of returns.</p>\n\n         <p>A response can contain <code>CommonPrefixes</code> only if you specify a\n         delimiter.</p>\n\n         <p>\n            <code>CommonPrefixes</code> contains all (if there are any) keys between\n            <code>Prefix</code> and the next occurrence of the string specified by a\n         delimiter.</p>\n\n         <p>\n            <code>CommonPrefixes</code> lists keys that act like subdirectories in the directory\n         specified by <code>Prefix</code>.</p>\n\n         <p>For example, if the prefix is <code>notes/</code> and the delimiter is a slash\n            (<code>/</code>) as in <code>notes/summer/july</code>, the common prefix is\n            <code>notes/summer/</code>. All of the keys that roll up into a common prefix count as a\n         single return when calculating the number of returns. </p>",
+            "smithy.api#documentation": "<p>All of the keys (up to 1,000) rolled up into a common prefix count as a single return when calculating\n         the number of returns.</p>\n\n         <p>A response can contain <code>CommonPrefixes</code> only if you specify a\n         delimiter.</p>\n\n         <p>\n            <code>CommonPrefixes</code> contains all (if there are any) keys between\n            <code>Prefix</code> and the next occurrence of the string specified by a\n         delimiter.</p>\n\n         <p>\n            <code>CommonPrefixes</code> lists keys that act like subdirectories in the directory\n         specified by <code>Prefix</code>.</p>\n\n         <p>For example, if the prefix is <code>notes/</code> and the delimiter is a slash\n            (<code>/</code>) as in <code>notes/summer/july</code>, the common prefix is\n            <code>notes/summer/</code>. All of the keys that roll up into a common prefix count as a\n         single return when calculating the number of returns. </p>",
             "smithy.api#xmlFlattened": {}
           }
         },
@@ -7564,7 +7678,7 @@
         "KeyCount": {
           "target": "com.amazonaws.s3#KeyCount",
           "traits": {
-            "smithy.api#documentation": "<p>KeyCount is the number of keys returned with this request. KeyCount will always be less\n         than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than\n         equals 50 keys </p>"
+            "smithy.api#documentation": "<p>KeyCount is the number of keys returned with this request. KeyCount will always be less\n         than or equals to MaxKeys field. Say you ask for 50 keys, your result will include less than\n         equals 50 keys </p>"
           }
         },
         "ContinuationToken": {
@@ -7877,10 +7991,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -7890,10 +8006,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -7930,10 +8048,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "COPY"
+            "value": "COPY",
+            "name": "COPY"
           },
           {
-            "value": "REPLACE"
+            "value": "REPLACE",
+            "name": "REPLACE"
           }
         ]
       }
@@ -8068,10 +8188,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -8217,6 +8339,14 @@
         "target": "com.amazonaws.s3#NoncurrentVersionTransition"
       }
     },
+    "com.amazonaws.s3#NotFound": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The specified content does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
     "com.amazonaws.s3#NotificationConfiguration": {
       "type": "structure",
       "members": {
@@ -8281,7 +8411,7 @@
         "LastModified": {
           "target": "com.amazonaws.s3#LastModified",
           "traits": {
-            "smithy.api#documentation": "<p>The date the Object was Last Modified</p>"
+            "smithy.api#documentation": "<p>Creation date of the object.</p>"
           }
         },
         "ETag": {
@@ -8326,25 +8456,32 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "private"
+            "value": "private",
+            "name": "private"
           },
           {
-            "value": "public-read"
+            "value": "public-read",
+            "name": "public_read"
           },
           {
-            "value": "public-read-write"
+            "value": "public-read-write",
+            "name": "public_read_write"
           },
           {
-            "value": "authenticated-read"
+            "value": "authenticated-read",
+            "name": "authenticated_read"
           },
           {
-            "value": "aws-exec-read"
+            "value": "aws-exec-read",
+            "name": "aws_exec_read"
           },
           {
-            "value": "bucket-owner-read"
+            "value": "bucket-owner-read",
+            "name": "bucket_owner_read"
           },
           {
-            "value": "bucket-owner-full-control"
+            "value": "bucket-owner-full-control",
+            "name": "bucket_owner_full_control"
           }
         ]
       }
@@ -8355,7 +8492,7 @@
         "Key": {
           "target": "com.amazonaws.s3#ObjectKey",
           "traits": {
-            "smithy.api#documentation": "<p>Key name of the object to delete.</p>",
+            "smithy.api#documentation": "<p>Key name of the object.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>",
             "smithy.api#required": {}
           }
         },
@@ -8415,7 +8552,8 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           }
         ]
       }
@@ -8442,10 +8580,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "ON"
+            "value": "ON",
+            "name": "ON"
           },
           {
-            "value": "OFF"
+            "value": "OFF",
+            "name": "OFF"
           }
         ]
       }
@@ -8455,10 +8595,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "GOVERNANCE"
+            "value": "GOVERNANCE",
+            "name": "GOVERNANCE"
           },
           {
-            "value": "COMPLIANCE"
+            "value": "COMPLIANCE",
+            "name": "COMPLIANCE"
           }
         ]
       }
@@ -8494,10 +8636,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "GOVERNANCE"
+            "value": "GOVERNANCE",
+            "name": "GOVERNANCE"
           },
           {
-            "value": "COMPLIANCE"
+            "value": "COMPLIANCE",
+            "name": "COMPLIANCE"
           }
         ]
       }
@@ -8533,10 +8677,12 @@
         "smithy.api#documentation": "<p>The container element for object ownership for a bucket's ownership controls.</p>\n         <p>BucketOwnerPreferred - Objects uploaded to the bucket change ownership to the bucket\n         owner if the objects are uploaded with the <code>bucket-owner-full-control</code> canned\n         ACL.</p>\n         <p>ObjectWriter - The uploading account will own the object if the object is uploaded with\n         the <code>bucket-owner-full-control</code> canned ACL.</p>",
         "smithy.api#enum": [
           {
-            "value": "BucketOwnerPreferred"
+            "value": "BucketOwnerPreferred",
+            "name": "BucketOwnerPreferred"
           },
           {
-            "value": "ObjectWriter"
+            "value": "ObjectWriter",
+            "name": "ObjectWriter"
           }
         ]
       }
@@ -8546,28 +8692,36 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "STANDARD"
+            "value": "STANDARD",
+            "name": "STANDARD"
           },
           {
-            "value": "REDUCED_REDUNDANCY"
+            "value": "REDUCED_REDUNDANCY",
+            "name": "REDUCED_REDUNDANCY"
           },
           {
-            "value": "GLACIER"
+            "value": "GLACIER",
+            "name": "GLACIER"
           },
           {
-            "value": "STANDARD_IA"
+            "value": "STANDARD_IA",
+            "name": "STANDARD_IA"
           },
           {
-            "value": "ONEZONE_IA"
+            "value": "ONEZONE_IA",
+            "name": "ONEZONE_IA"
           },
           {
-            "value": "INTELLIGENT_TIERING"
+            "value": "INTELLIGENT_TIERING",
+            "name": "INTELLIGENT_TIERING"
           },
           {
-            "value": "DEEP_ARCHIVE"
+            "value": "DEEP_ARCHIVE",
+            "name": "DEEP_ARCHIVE"
           },
           {
-            "value": "OUTPOSTS"
+            "value": "OUTPOSTS",
+            "name": "OUTPOSTS"
           }
         ]
       }
@@ -8642,7 +8796,8 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "STANDARD"
+            "value": "STANDARD",
+            "name": "STANDARD"
           }
         ]
       }
@@ -8706,7 +8861,8 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Destination"
+            "value": "Destination",
+            "name": "Destination"
           }
         ]
       }
@@ -8807,10 +8963,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Requester"
+            "value": "Requester",
+            "name": "Requester"
           },
           {
-            "value": "BucketOwner"
+            "value": "BucketOwner",
+            "name": "BucketOwner"
           }
         ]
       }
@@ -8820,19 +8978,24 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "FULL_CONTROL"
+            "value": "FULL_CONTROL",
+            "name": "FULL_CONTROL"
           },
           {
-            "value": "WRITE"
+            "value": "WRITE",
+            "name": "WRITE"
           },
           {
-            "value": "WRITE_ACP"
+            "value": "WRITE_ACP",
+            "name": "WRITE_ACP"
           },
           {
-            "value": "READ"
+            "value": "READ",
+            "name": "READ"
           },
           {
-            "value": "READ_ACP"
+            "value": "READ_ACP",
+            "name": "READ_ACP"
           }
         ]
       }
@@ -8907,10 +9070,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "http"
+            "value": "http",
+            "name": "http"
           },
           {
-            "value": "https"
+            "value": "https",
+            "name": "https"
           }
         ]
       }
@@ -9239,7 +9404,7 @@
         "target": "com.amazonaws.s3#PutBucketIntelligentTieringConfigurationRequest"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Puts a S3 Intelligent-Tiering configuration to the specified bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings by moving data between access tiers, when access patterns change.</p>\n         <p>The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent-Tiering storage class. </p>\n         <p>If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days. For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>PutBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>Puts a S3 Intelligent-Tiering configuration to the specified bucket.\n      You can have up to 1,000 S3 Intelligent-Tiering configurations per bucket.</p>\n         <p>The S3 Intelligent-Tiering storage class is designed to optimize storage costs by automatically moving data to the most cost-effective storage access tier, without additional operational overhead. S3 Intelligent-Tiering delivers automatic cost savings by moving data between access tiers, when access patterns change.</p>\n         <p>The S3 Intelligent-Tiering storage class is suitable for objects larger than 128 KB that you plan to store for at least 30 days. If the size of an object is less than 128 KB, it is not eligible for auto-tiering. Smaller objects can be stored, but they are always charged at the frequent access tier rates in the S3 Intelligent-Tiering storage class. </p>\n         <p>If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days. For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access\">Storage class for automatically optimizing frequently and infrequently accessed objects</a>.</p> \n         <p>Operations related to\n            <code>PutBucketIntelligentTieringConfiguration</code> include: </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html\">DeleteBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html\">GetBucketIntelligentTieringConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html\">ListBucketIntelligentTieringConfigurations</a>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>You only need S3 Intelligent-Tiering enabled on a bucket if you want to automatically\n            move objects stored in the S3 Intelligent-Tiering storage class to the\n            Archive Access or Deep Archive Access tier.</p>\n         </note>\n      \n         <p class=\"title\">\n            <b>Special Errors</b>\n         </p>\n         <ul>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 400 Bad Request Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> InvalidArgument</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> Invalid Argument</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 400 Bad Request Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> TooManyConfigurations</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> You are attempting to create a new configuration\n                     but have already reached the 1,000-configuration limit. </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p class=\"title\">\n                  <b>HTTP 403 Forbidden Error</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code:</i> AccessDenied</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause:</i> You are not the owner of the specified bucket,\n                     or you do not have the <code>s3:PutIntelligentTieringConfiguration</code> bucket\n                     permission to set the configuration on the bucket. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/{Bucket}?intelligent-tiering",
@@ -9701,7 +9866,7 @@
         "ContentMD5": {
           "target": "com.amazonaws.s3#ContentMD5",
           "traits": {
-            "smithy.api#documentation": "<p>>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a\n         message integrity check to verify that the request body was not corrupted in transit. For\n         more information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC\n         1864</a>.</p>\n         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>",
+            "smithy.api#documentation": "<p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a\n         message integrity check to verify that the request body was not corrupted in transit. For\n         more information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC\n         1864</a>.</p>\n         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>",
             "smithy.api#httpHeader": "Content-MD5"
           }
         },
@@ -10591,7 +10756,7 @@
         "target": "com.amazonaws.s3#PutObjectTaggingOutput"
       },
       "traits": {
-        "smithy.api#documentation": "<p>Sets the supplied tag-set to an object that already exists in a bucket.</p>\n         <p>A tag is a key-value pair. You can associate tags with an object by sending a PUT\n         request against the tagging subresource that is associated with the object. You can\n         retrieve tags by sending a GET request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html\">GetObjectTagging</a>.</p>\n\n         <p>For tagging-related restrictions related to characters and encodings, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">Tag\n            Restrictions</a>. Note that Amazon S3 limits the maximum number of tags to 10 tags per\n         object.</p>\n\n         <p>To use this operation, you must have permission to perform the\n            <code>s3:PutObjectTagging</code> action. By default, the bucket owner has this\n         permission and can grant this permission to others.</p>\n\n         <p>To put tags of any other version, use the <code>versionId</code> query parameter. You\n         also need permission for the <code>s3:PutObjectVersionTagging</code> action.</p>\n\n         <p>For information about the Amazon S3 object tagging feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</p>\n\n\n         <p class=\"title\">\n            <b>Special Errors</b>\n         </p>\n         <ul>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: InvalidTagError </i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: The tag provided was not a valid tag. This error can occur\n                        if the tag did not pass input validation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: MalformedXMLError </i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: The XML provided does not match the schema.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: OperationAbortedError </i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: A conflicting conditional operation is currently in\n                        progress against this resource. Please try again.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: InternalError</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: The service was unable to apply the provided tag to the\n                        object.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n      \n\n\n\n\n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html\">GetObjectTagging</a>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#documentation": "<p>Sets the supplied tag-set to an object that already exists in a bucket.</p>\n         <p>A tag is a key-value pair. You can associate tags with an object by sending a PUT\n         request against the tagging subresource that is associated with the object. You can\n         retrieve tags by sending a GET request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html\">GetObjectTagging</a>.</p>\n\n         <p>For tagging-related restrictions related to characters and encodings, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">Tag\n            Restrictions</a>. Note that Amazon S3 limits the maximum number of tags to 10 tags per\n         object.</p>\n\n         <p>To use this operation, you must have permission to perform the\n            <code>s3:PutObjectTagging</code> action. By default, the bucket owner has this\n         permission and can grant this permission to others.</p>\n\n         <p>To put tags of any other version, use the <code>versionId</code> query parameter. You\n         also need permission for the <code>s3:PutObjectVersionTagging</code> action.</p>\n\n         <p>For information about the Amazon S3 object tagging feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</p>\n\n\n         <p class=\"title\">\n            <b>Special Errors</b>\n         </p>\n         <ul>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: InvalidTagError </i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: The tag provided was not a valid tag. This error can occur\n                        if the tag did not pass input validation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: MalformedXMLError </i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: The XML provided does not match the schema.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: OperationAbortedError </i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: A conflicting conditional operation is currently in\n                        progress against this resource. Please try again.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <ul>\n                  <li>\n                     <p>\n                        <i>Code: InternalError</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>Cause: The service was unable to apply the provided tag to the\n                        object.</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n      \n\n\n\n\n         <p class=\"title\">\n            <b>Related Resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html\">GetObjectTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html\">DeleteObjectTagging</a>\n               </p>\n            </li>\n         </ul>",
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/{Bucket}/{Key+}?tagging",
@@ -10658,6 +10823,12 @@
           "traits": {
             "smithy.api#documentation": "<p>The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
             "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+          }
+        },
+        "RequestPayer": {
+          "target": "com.amazonaws.s3#RequestPayer",
+          "traits": {
+            "smithy.api#httpHeader": "x-amz-request-payer"
           }
         }
       }
@@ -10821,13 +10992,13 @@
         "ReplaceKeyPrefixWith": {
           "target": "com.amazonaws.s3#ReplaceKeyPrefixWith",
           "traits": {
-            "smithy.api#documentation": "<p>The object key prefix to use in the redirect request. For example, to redirect requests\n         for all pages with prefix <code>docs/</code> (objects in the <code>docs/</code> folder) to\n            <code>documents/</code>, you can set a condition block with <code>KeyPrefixEquals</code>\n         set to <code>docs/</code> and in the Redirect set <code>ReplaceKeyPrefixWith</code> to\n            <code>/documents</code>. Not required if one of the siblings is present. Can be present\n         only if <code>ReplaceKeyWith</code> is not provided.</p>"
+            "smithy.api#documentation": "<p>The object key prefix to use in the redirect request. For example, to redirect requests\n         for all pages with prefix <code>docs/</code> (objects in the <code>docs/</code> folder) to\n            <code>documents/</code>, you can set a condition block with <code>KeyPrefixEquals</code>\n         set to <code>docs/</code> and in the Redirect set <code>ReplaceKeyPrefixWith</code> to\n            <code>/documents</code>. Not required if one of the siblings is present. Can be present\n         only if <code>ReplaceKeyWith</code> is not provided.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         },
         "ReplaceKeyWith": {
           "target": "com.amazonaws.s3#ReplaceKeyWith",
           "traits": {
-            "smithy.api#documentation": "<p>The specific object key to use in the redirect request. For example, redirect request to\n            <code>error.html</code>. Not required if one of the siblings is present. Can be present\n         only if <code>ReplaceKeyPrefixWith</code> is not provided.</p>"
+            "smithy.api#documentation": "<p>The specific object key to use in the redirect request. For example, redirect request to\n            <code>error.html</code>. Not required if one of the siblings is present. Can be present\n         only if <code>ReplaceKeyPrefixWith</code> is not provided.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         }
       },
@@ -10885,10 +11056,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -10936,7 +11109,7 @@
           "target": "com.amazonaws.s3#Prefix",
           "traits": {
             "smithy.api#deprecated": {},
-            "smithy.api#documentation": "<p>An object key name prefix that identifies the object or objects to which the rule\n         applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket,\n         specify an empty string. </p>"
+            "smithy.api#documentation": "<p>An object key name prefix that identifies the object or objects to which the rule\n         applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket,\n         specify an empty string. </p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         },
         "Filter": {
@@ -11004,7 +11177,7 @@
         "Prefix": {
           "target": "com.amazonaws.s3#Prefix",
           "traits": {
-            "smithy.api#documentation": "<p>An object key name prefix that identifies the subset of objects to which the rule\n         applies.</p>"
+            "smithy.api#documentation": "<p>An object key name prefix that identifies the subset of objects to which the rule\n         applies.</p>\n         <important>\n            <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using \n         XML requests. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints\">\n            XML related object key constraints</a>.</p>\n         </important>"
           }
         },
         "Tag": {
@@ -11029,10 +11202,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -11048,16 +11223,20 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "COMPLETE"
+            "value": "COMPLETE",
+            "name": "COMPLETE"
           },
           {
-            "value": "PENDING"
+            "value": "PENDING",
+            "name": "PENDING"
           },
           {
-            "value": "FAILED"
+            "value": "FAILED",
+            "name": "FAILED"
           },
           {
-            "value": "REPLICA"
+            "value": "REPLICA",
+            "name": "REPLICA"
           }
         ]
       }
@@ -11089,10 +11268,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -11117,7 +11298,8 @@
         "smithy.api#documentation": "<p>If present, indicates that the requester was successfully charged for the\n         request.</p>",
         "smithy.api#enum": [
           {
-            "value": "requester"
+            "value": "requester",
+            "name": "requester"
           }
         ]
       }
@@ -11128,7 +11310,8 @@
         "smithy.api#documentation": "<p>Confirms that the requester knows that they will be charged for the request. Bucket\n         owners need not specify this parameter in their requests. For information about downloading\n         objects from requester pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html\">Downloading Objects in\n            Requestor Pays Buckets</a> in the <i>Amazon S3 Developer Guide</i>.</p>",
         "smithy.api#enum": [
           {
-            "value": "requester"
+            "value": "requester",
+            "name": "requester"
           }
         ]
       }
@@ -11178,7 +11361,10 @@
       "type": "string"
     },
     "com.amazonaws.s3#ResponseExpires": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "http-date"
+      }
     },
     "com.amazonaws.s3#Restore": {
       "type": "string"
@@ -11706,10 +11892,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "AES256"
+            "value": "AES256",
+            "name": "AES256"
           },
           {
-            "value": "aws:kms"
+            "value": "aws:kms",
+            "name": "aws_kms"
           }
         ]
       }
@@ -11824,10 +12012,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Enabled"
+            "value": "Enabled",
+            "name": "Enabled"
           },
           {
-            "value": "Disabled"
+            "value": "Disabled",
+            "name": "Disabled"
           }
         ]
       }
@@ -11884,28 +12074,36 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "STANDARD"
+            "value": "STANDARD",
+            "name": "STANDARD"
           },
           {
-            "value": "REDUCED_REDUNDANCY"
+            "value": "REDUCED_REDUNDANCY",
+            "name": "REDUCED_REDUNDANCY"
           },
           {
-            "value": "STANDARD_IA"
+            "value": "STANDARD_IA",
+            "name": "STANDARD_IA"
           },
           {
-            "value": "ONEZONE_IA"
+            "value": "ONEZONE_IA",
+            "name": "ONEZONE_IA"
           },
           {
-            "value": "INTELLIGENT_TIERING"
+            "value": "INTELLIGENT_TIERING",
+            "name": "INTELLIGENT_TIERING"
           },
           {
-            "value": "GLACIER"
+            "value": "GLACIER",
+            "name": "GLACIER"
           },
           {
-            "value": "DEEP_ARCHIVE"
+            "value": "DEEP_ARCHIVE",
+            "name": "DEEP_ARCHIVE"
           },
           {
-            "value": "OUTPOSTS"
+            "value": "OUTPOSTS",
+            "name": "OUTPOSTS"
           }
         ]
       }
@@ -11951,7 +12149,8 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "V_1"
+            "value": "V_1",
+            "name": "V_1"
           }
         ]
       }
@@ -12019,10 +12218,12 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "COPY"
+            "value": "COPY",
+            "name": "COPY"
           },
           {
-            "value": "REPLACE"
+            "value": "REPLACE",
+            "name": "REPLACE"
           }
         ]
       }
@@ -12070,13 +12271,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "Standard"
+            "value": "Standard",
+            "name": "Standard"
           },
           {
-            "value": "Bulk"
+            "value": "Bulk",
+            "name": "Bulk"
           },
           {
-            "value": "Expedited"
+            "value": "Expedited",
+            "name": "Expedited"
           }
         ]
       }
@@ -12189,19 +12393,24 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "GLACIER"
+            "value": "GLACIER",
+            "name": "GLACIER"
           },
           {
-            "value": "STANDARD_IA"
+            "value": "STANDARD_IA",
+            "name": "STANDARD_IA"
           },
           {
-            "value": "ONEZONE_IA"
+            "value": "ONEZONE_IA",
+            "name": "ONEZONE_IA"
           },
           {
-            "value": "INTELLIGENT_TIERING"
+            "value": "INTELLIGENT_TIERING",
+            "name": "INTELLIGENT_TIERING"
           },
           {
-            "value": "DEEP_ARCHIVE"
+            "value": "DEEP_ARCHIVE",
+            "name": "DEEP_ARCHIVE"
           }
         ]
       }
@@ -12211,13 +12420,16 @@
       "traits": {
         "smithy.api#enum": [
           {
-            "value": "CanonicalUser"
+            "value": "CanonicalUser",
+            "name": "CanonicalUser"
           },
           {
-            "value": "AmazonCustomerByEmail"
+            "value": "AmazonCustomerByEmail",
+            "name": "AmazonCustomerByEmail"
           },
           {
-            "value": "Group"
+            "value": "Group",
+            "name": "Group"
           }
         ]
       }

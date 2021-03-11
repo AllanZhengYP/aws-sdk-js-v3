@@ -92,6 +92,8 @@ export const serializeAws_restJson1CreateMembersCommand = async (
   body = JSON.stringify({
     ...(input.Accounts !== undefined &&
       input.Accounts !== null && { Accounts: serializeAws_restJson1AccountList(input.Accounts, context) }),
+    ...(input.DisableEmailNotification !== undefined &&
+      input.DisableEmailNotification !== null && { DisableEmailNotification: input.DisableEmailNotification }),
     ...(input.GraphArn !== undefined && input.GraphArn !== null && { GraphArn: input.GraphArn }),
     ...(input.Message !== undefined && input.Message !== null && { Message: input.Message }),
   });
@@ -1357,9 +1359,7 @@ const deserializeAws_restJson1Graph = (output: any, context: __SerdeContext): Gr
   return {
     Arn: output.Arn !== undefined && output.Arn !== null ? output.Arn : undefined,
     CreatedTime:
-      output.CreatedTime !== undefined && output.CreatedTime !== null
-        ? new Date(Math.round(output.CreatedTime * 1000))
-        : undefined,
+      output.CreatedTime !== undefined && output.CreatedTime !== null ? new Date(output.CreatedTime) : undefined,
   } as any;
 };
 
@@ -1377,14 +1377,14 @@ const deserializeAws_restJson1GraphList = (output: any, context: __SerdeContext)
 const deserializeAws_restJson1MemberDetail = (output: any, context: __SerdeContext): MemberDetail => {
   return {
     AccountId: output.AccountId !== undefined && output.AccountId !== null ? output.AccountId : undefined,
+    AdministratorId:
+      output.AdministratorId !== undefined && output.AdministratorId !== null ? output.AdministratorId : undefined,
     DisabledReason:
       output.DisabledReason !== undefined && output.DisabledReason !== null ? output.DisabledReason : undefined,
     EmailAddress: output.EmailAddress !== undefined && output.EmailAddress !== null ? output.EmailAddress : undefined,
     GraphArn: output.GraphArn !== undefined && output.GraphArn !== null ? output.GraphArn : undefined,
     InvitedTime:
-      output.InvitedTime !== undefined && output.InvitedTime !== null
-        ? new Date(Math.round(output.InvitedTime * 1000))
-        : undefined,
+      output.InvitedTime !== undefined && output.InvitedTime !== null ? new Date(output.InvitedTime) : undefined,
     MasterId: output.MasterId !== undefined && output.MasterId !== null ? output.MasterId : undefined,
     PercentOfGraphUtilization:
       output.PercentOfGraphUtilization !== undefined && output.PercentOfGraphUtilization !== null
@@ -1392,13 +1392,11 @@ const deserializeAws_restJson1MemberDetail = (output: any, context: __SerdeConte
         : undefined,
     PercentOfGraphUtilizationUpdatedTime:
       output.PercentOfGraphUtilizationUpdatedTime !== undefined && output.PercentOfGraphUtilizationUpdatedTime !== null
-        ? new Date(Math.round(output.PercentOfGraphUtilizationUpdatedTime * 1000))
+        ? new Date(output.PercentOfGraphUtilizationUpdatedTime)
         : undefined,
     Status: output.Status !== undefined && output.Status !== null ? output.Status : undefined,
     UpdatedTime:
-      output.UpdatedTime !== undefined && output.UpdatedTime !== null
-        ? new Date(Math.round(output.UpdatedTime * 1000))
-        : undefined,
+      output.UpdatedTime !== undefined && output.UpdatedTime !== null ? new Date(output.UpdatedTime) : undefined,
   } as any;
 };
 

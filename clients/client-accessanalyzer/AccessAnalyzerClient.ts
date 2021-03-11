@@ -1,3 +1,4 @@
+import { ApplyArchiveRuleCommandInput, ApplyArchiveRuleCommandOutput } from "./commands/ApplyArchiveRuleCommand";
 import { CreateAnalyzerCommandInput, CreateAnalyzerCommandOutput } from "./commands/CreateAnalyzerCommand";
 import { CreateArchiveRuleCommandInput, CreateArchiveRuleCommandOutput } from "./commands/CreateArchiveRuleCommand";
 import { DeleteAnalyzerCommandInput, DeleteAnalyzerCommandOutput } from "./commands/DeleteAnalyzerCommand";
@@ -77,6 +78,7 @@ import {
 } from "@aws-sdk/types";
 
 export type ServiceInputTypes =
+  | ApplyArchiveRuleCommandInput
   | CreateAnalyzerCommandInput
   | CreateArchiveRuleCommandInput
   | DeleteAnalyzerCommandInput
@@ -97,6 +99,7 @@ export type ServiceInputTypes =
   | UpdateFindingsCommandInput;
 
 export type ServiceOutputTypes =
+  | ApplyArchiveRuleCommandOutput
   | CreateAnalyzerCommandOutput
   | CreateArchiveRuleCommandOutput
   | DeleteAnalyzerCommandOutput
@@ -236,7 +239,7 @@ export type AccessAnalyzerClientResolvedConfig = __SmithyResolvedConfiguration<_
  *          reasoning to analyze resource-based policies in your AWS environment. An external principal
  *          can be another AWS account, a root user, an IAM user or role, a federated user, an AWS
  *          service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can
- *          call programmatically. For general information about Access Analyzer, see the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">AWS IAM Access Analyzer section of the IAM User Guide</a>.</p>
+ *          call programmatically. For general information about Access Analyzer, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">AWS IAM Access Analyzer</a> in the <b>IAM User Guide</b>.</p>
  *          <p>To start using Access Analyzer, you first need to create an analyzer.</p>
  */
 export class AccessAnalyzerClient extends __Client<

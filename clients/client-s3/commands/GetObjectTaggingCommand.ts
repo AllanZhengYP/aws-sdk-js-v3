@@ -44,6 +44,11 @@ export type GetObjectTaggingCommandOutput = GetObjectTaggingOutput & __MetadataB
  *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html">PutObjectTagging</a>
  *                </p>
  *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html">DeleteObjectTagging</a>
+ *                </p>
+ *             </li>
  *          </ul>
  */
 export class GetObjectTaggingCommand extends $Command<

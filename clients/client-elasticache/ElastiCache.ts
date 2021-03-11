@@ -784,7 +784,9 @@ export class ElastiCache extends ElastiCacheClient {
    *             Using Global Datastore for Redis, you can create cross-region
    *             read replica clusters for ElastiCache for Redis to enable low-latency reads
    *             and disaster recovery across regions. For more information,
-   *             see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p>
+   *
+   *             see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p>
+   *
    *          <ul>
    *             <li>
    *                <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p>
@@ -829,10 +831,18 @@ export class ElastiCache extends ElastiCacheClient {
    *         <p>A Redis (cluster mode disabled) replication group is a collection of clusters,
    *             where one of the clusters is a read/write primary and the others are read-only replicas.
    *             Writes to the primary are asynchronously propagated to the replicas.</p>
-   *         <p>A Redis (cluster mode enabled) replication group is a collection of 1 to 90 node groups (shards).
-   *             Each node group (shard) has one read/write primary node and up to 5 read-only replica nodes.
-   *             Writes to the primary are asynchronously propagated to the replicas.
-   *             Redis (cluster mode enabled) replication groups partition the data across node groups (shards).</p>
+   *         <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups).
+   *             Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.
+   *
+   *         </p>
+   *         <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between
+   *             83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase.
+   *             Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see
+   *             <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html">Creating a Subnet Group</a>. For versions below 5.0.6,
+   *             the limit is 250 per cluster.</p>
+   *         <p>To request a limit increase, see
+   *             <a href="https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html">AWS Service Limits</a>
+   *             and choose the limit type <b>Nodes per cluster per instance type</b>. </p>
    *         <p>When a Redis (cluster mode disabled) replication group has been successfully created,
    *             you can add one or more read replicas to it, up to a total of 5 read replicas.
    *             If you need to increase or decrease the number of node groups (console: shards),
@@ -1049,7 +1059,14 @@ export class ElastiCache extends ElastiCacheClient {
    *                 <p>Redis (cluster mode enabled) clusters</p>
    *             </li>
    *             <li>
+   *                 <p>Redis (cluster mode disabled) clusters</p>
+   *             </li>
+   *             <li>
+   *
    *                 <p>A cluster that is the last read replica of a replication group</p>
+   *             </li>
+   *             <li>
+   *                 <p>A cluster that is the primary node of a replication group</p>
    *             </li>
    *             <li>
    *                 <p>A node group (shard) that has Multi-AZ mode enabled</p>
@@ -1094,7 +1111,7 @@ export class ElastiCache extends ElastiCacheClient {
   /**
    * <p>Deletes the specified cache parameter
    *             group. You cannot delete a cache parameter group if it is associated with any cache
-   *             clusters.</p>
+   *             clusters. You cannot delete the default cache parameter groups in your account.</p>
    */
   public deleteCacheParameterGroup(
     args: DeleteCacheParameterGroupCommandInput,
@@ -1163,7 +1180,7 @@ export class ElastiCache extends ElastiCacheClient {
   /**
    * <p>Deletes a cache subnet group.</p>
    *         <note>
-   *             <p>You cannot delete a cache subnet group if it is associated with any clusters.</p>
+   *             <p>You cannot delete a default cache subnet group or one that is associated with any clusters.</p>
    *          </note>
    */
   public deleteCacheSubnetGroup(
@@ -1345,7 +1362,7 @@ export class ElastiCache extends ElastiCacheClient {
   }
 
   /**
-   * <p>For Redis engine version 6.x onwards: Deletes a ser group. The user group must first be disassociated from the replcation group before it can be deleted. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>. </p>
+   * <p>For Redis engine version 6.x onwards: Deletes a user group. The user group must first be disassociated from the replication group before it can be deleted. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>. </p>
    */
   public deleteUserGroup(
     args: DeleteUserGroupCommandInput,
@@ -2064,7 +2081,7 @@ export class ElastiCache extends ElastiCacheClient {
   }
 
   /**
-   * <p>Dynamically increases the number of replics in a Redis (cluster mode disabled) replication group or the number of
+   * <p>Dynamically increases the number of replicas in a Redis (cluster mode disabled) replication group or the number of
    *             replica nodes in one or more node groups (shards) of a Redis (cluster mode enabled) replication group. This operation
    *             is performed with no cluster down time.</p>
    */
@@ -2355,7 +2372,7 @@ export class ElastiCache extends ElastiCacheClient {
 
   /**
    * <p>Modifies a replication group's shards (node groups) by allowing you to
-   *             add shards, remove shards, or rebalance the keyspaces among exisiting shards.</p>
+   *             add shards, remove shards, or rebalance the keyspaces among existing shards.</p>
    */
   public modifyReplicationGroupShardConfiguration(
     args: ModifyReplicationGroupShardConfigurationCommandInput,
@@ -2448,7 +2465,9 @@ export class ElastiCache extends ElastiCacheClient {
 
   /**
    * <p>Allows you to purchase a reserved
-   *             cache node offering.</p>
+   *             cache node offering. Reserved nodes are not eligible for cancellation and are non-refundable. For more information,
+   *             see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/reserved-nodes.html">Managing Costs with Reserved Nodes</a> for Redis or
+   *             <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/reserved-nodes.html">Managing Costs with Reserved Nodes</a> for Memcached.</p>
    */
   public purchaseReservedCacheNodesOffering(
     args: PurchaseReservedCacheNodesOfferingCommandInput,

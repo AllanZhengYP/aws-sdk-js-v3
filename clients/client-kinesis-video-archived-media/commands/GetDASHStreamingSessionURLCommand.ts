@@ -49,8 +49,7 @@ export type GetDASHStreamingSessionURLCommandOutput = GetDASHStreamingSessionURL
  *                     Advanced Video Coding (AVC) for H.264 format and HEVC for H.265 format. For more
  *                     information, see <a href="https://www.iso.org/standard/55980.html">MPEG-4
  *                         specification ISO/IEC 14496-15</a>. For information about adapting
- *                     stream data to a given format, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html">NAL Adaptation
- *                     Flags</a>.</p>
+ *                     stream data to a given format, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html">NAL Adaptation Flags</a>.</p>
  *             </li>
  *             <li>
  *                 <p>The audio track (if present) of each fragment must contain codec private data
@@ -101,13 +100,13 @@ export type GetDASHStreamingSessionURLCommandOutput = GetDASHStreamingSessionURL
  *                 <ul>
  *                   <li>
  *                         <p>
- *                         <b>GetDASHManifest:</b> Retrieves an MPEG
- *                             DASH manifest, which contains the metadata for the media that you want
- *                             to playback.</p>
+ *                             <b>GetDASHManifest:</b> Retrieves an MPEG DASH
+ *                             manifest, which contains the metadata for the media that you want to
+ *                             playback.</p>
  *                     </li>
  *                   <li>
  *                         <p>
- *                         <b>GetMP4InitFragment:</b> Retrieves the MP4
+ *                             <b>GetMP4InitFragment:</b> Retrieves the MP4
  *                             initialization fragment. The media player typically loads the
  *                             initialization fragment before loading any media fragments. This
  *                             fragment contains the "<code>fytp</code>" and "<code>moov</code>" MP4
@@ -120,7 +119,7 @@ export type GetDASHStreamingSessionURLCommandOutput = GetDASHStreamingSessionURL
  *                     </li>
  *                   <li>
  *                         <p>
- *                         <b>GetMP4MediaFragment:</b> Retrieves MP4
+ *                             <b>GetMP4MediaFragment:</b> Retrieves MP4
  *                             media fragments. These fragments contain the "<code>moof</code>" and
  *                                 "<code>mdat</code>" MP4 atoms and their child atoms, containing the
  *                             encoded fragment's media frames and their timestamps. </p>
@@ -144,8 +143,7 @@ export type GetDASHStreamingSessionURLCommandOutput = GetDASHStreamingSessionURL
  *                <li>
  *                     <p>A streaming session URL should not be shared between players. The service
  *                         might throttle a session if multiple media players are sharing it. For
- *                         connection limits, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html">Kinesis Video
- *                             Streams Limits</a>.</p>
+ *                         connection limits, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html">Kinesis Video Streams Limits</a>.</p>
  *                 </li>
  *                <li>
  *                     <p>A Kinesis video stream can have a maximum of ten active MPEG-DASH
@@ -164,8 +162,7 @@ export type GetDASHStreamingSessionURLCommandOutput = GetDASHStreamingSessionURL
  *         </note>
  *         <p>You can monitor the amount of data that the media player consumes by monitoring the
  *                 <code>GetMP4MediaFragment.OutgoingBytes</code> Amazon CloudWatch metric. For
- *             information about using CloudWatch to monitor Kinesis Video Streams, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html">Monitoring
- *                 Kinesis Video Streams</a>. For pricing information, see <a href="https://aws.amazon.com/kinesis/video-streams/pricing/">Amazon Kinesis Video
+ *             information about using CloudWatch to monitor Kinesis Video Streams, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html">Monitoring Kinesis Video Streams</a>. For pricing information, see <a href="https://aws.amazon.com/kinesis/video-streams/pricing/">Amazon Kinesis Video
  *                 Streams Pricing</a> and <a href="https://aws.amazon.com/pricing/">AWS
  *                 Pricing</a>. Charges for both HLS sessions and outgoing AWS data apply.</p>
  *         <p>For more information about HLS, see <a href="https://developer.apple.com/streaming/">HTTP Live Streaming</a> on the
@@ -178,14 +175,14 @@ export type GetDASHStreamingSessionURLCommandOutput = GetDASHStreamingSessionURL
  *             <ul>
  *                <li>
  *                     <p>
- *                      <code>x-amz-ErrorType</code> HTTP header – contains a more specific error
+ *                         <code>x-amz-ErrorType</code> HTTP header – contains a more specific error
  *                         type in addition to what the HTTP status code provides. </p>
  *                 </li>
  *                <li>
  *                     <p>
- *                      <code>x-amz-RequestId</code> HTTP header – if you want to report an issue
- *                         to AWS, the support team can better diagnose the problem if given the
- *                         Request Id.</p>
+ *                         <code>x-amz-RequestId</code> HTTP header – if you want to report an issue to
+ *                         AWS, the support team can better diagnose the problem if given the Request
+ *                         Id.</p>
  *                 </li>
  *             </ul>
  *             <p>Both the HTTP status code and the ErrorType header can be utilized to make

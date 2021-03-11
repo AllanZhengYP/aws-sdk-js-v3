@@ -21,11 +21,11 @@ export type DisableRuleCommandInput = DisableRuleRequest;
 export type DisableRuleCommandOutput = __MetadataBearer;
 
 /**
- * <p>Disables the specified rule. A disabled rule won't match any events, and won't
- *             self-trigger if it has a schedule expression.</p>
+ * <p>Disables the specified rule. A disabled rule won't match any events, and won't self-trigger if it has a
+ *       schedule expression.</p>
  *
- *         <p>When you disable a rule, incoming events might continue to match to the disabled
- *             rule. Allow a short period of time for changes to take effect.</p>
+ *          <p>When you disable a rule, incoming events might continue to match to the disabled rule. Allow a short period
+ *       of time for changes to take effect.</p>
  */
 export class DisableRuleCommand extends $Command<
   DisableRuleCommandInput,

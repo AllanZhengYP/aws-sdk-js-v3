@@ -20,6 +20,7 @@ export * from "./commands/ListDatabasesCommand";
 export * from "./pagination/ListDatabasesPaginator";
 export * from "./commands/ListDataCatalogsCommand";
 export * from "./pagination/ListDataCatalogsPaginator";
+export * from "./commands/ListEngineVersionsCommand";
 export * from "./commands/ListNamedQueriesCommand";
 export * from "./pagination/ListNamedQueriesPaginator";
 export * from "./commands/ListQueryExecutionsCommand";

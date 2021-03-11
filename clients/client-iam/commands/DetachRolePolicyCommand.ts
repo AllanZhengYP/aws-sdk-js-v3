@@ -23,8 +23,8 @@ export type DetachRolePolicyCommandOutput = __MetadataBearer;
 /**
  * <p>Removes the specified managed policy from the specified role.</p>
  *          <p>A role can also have inline policies embedded with it. To delete an inline policy, use
- *          the <a>DeleteRolePolicy</a> API. For information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
- *             Policies and Inline Policies</a> in the
+ *          <a>DeleteRolePolicy</a>. For information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
+ *             policies and inline policies</a> in the
  *          <i>IAM User Guide</i>.</p>
  */
 export class DetachRolePolicyCommand extends $Command<

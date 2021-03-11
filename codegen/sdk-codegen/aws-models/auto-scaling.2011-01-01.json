@@ -133,6 +133,18 @@
           "traits": {
             "smithy.api#documentation": "<p>The details about the activity.</p>"
           }
+        },
+        "AutoScalingGroupState": {
+          "target": "com.amazonaws.autoscaling#AutoScalingGroupState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the Auto Scaling group, which is either <code>InService</code> or\n                <code>Deleted</code>.</p>"
+          }
+        },
+        "AutoScalingGroupARN": {
+          "target": "com.amazonaws.autoscaling#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>"
+          }
         }
       },
       "traits": {
@@ -580,6 +592,15 @@
         }
       }
     },
+    "com.amazonaws.autoscaling#AutoScalingGroupState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 32
+        }
+      }
+    },
     "com.amazonaws.autoscaling#AutoScalingGroups": {
       "type": "list",
       "member": {
@@ -637,7 +658,7 @@
         "LifecycleState": {
           "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
           "traits": {
-            "smithy.api#documentation": "<p>The lifecycle state for the instance.</p>",
+            "smithy.api#documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used.\n            For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance\n                lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>\n        <p>Valid Values: <code>Pending</code> | <code>Pending:Wait</code> |\n                <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> |\n                <code>Terminating</code> | <code>Terminating:Wait</code> |\n                <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code>\n            | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code>\n         </p>",
             "smithy.api#required": {}
           }
         },
@@ -1061,7 +1082,7 @@
         "DeviceName": {
           "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
           "traits": {
-            "smithy.api#documentation": "<p>The device name exposed to the EC2 instance (for example, <code>/dev/sdh</code> or\n                <code>xvdh</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device Naming on Linux\n                Instances</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances</i>.</p>",
+            "smithy.api#documentation": "<p>The device name exposed to the EC2 instance (for example, <code>/dev/sdh</code> or\n                <code>xvdh</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html\">Device Naming on Linux\n                Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -1231,7 +1252,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Creates an Auto Scaling group with the specified name and attributes. </p>\n        <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit,\n            call the <a>DescribeAccountLimits</a> API. For information about updating\n            this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling service\n                quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>For introductory exercises for creating an Auto Scaling group, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html\">Getting started with\n                Amazon EC2 Auto Scaling</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html\">Tutorial: Set up a\n                scaled and load-balanced application</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html\">Auto Scaling\n                groups</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Every Auto Scaling group has three size parameters (<code>DesiredCapacity</code>,\n                <code>MaxSize</code>, and <code>MinSize</code>). Usually, you set these sizes based\n            on a specific number of instances. However, if you configure a mixed instances policy\n            that defines weights for the instance types, you must specify these sizes with the same\n            units that you use for weighting instances.</p>"
+        "smithy.api#documentation": "<p>\n            <b>We strongly recommend using a launch template when calling this operation to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.</b>\n         </p> \n         <p>Creates an Auto Scaling group with\n            the specified name and attributes. </p>\n        <p>If you exceed your maximum limit of Auto Scaling groups, the call fails. To query this limit,\n            call the <a>DescribeAccountLimits</a> API. For information about updating\n            this limit, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html\">Amazon EC2 Auto Scaling service\n                quotas</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>For introductory exercises for creating an Auto Scaling group, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/GettingStartedTutorial.html\">Getting started with\n                Amazon EC2 Auto Scaling</a> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-register-lbs-with-asg.html\">Tutorial: Set up a\n                scaled and load-balanced application</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html\">Auto Scaling\n                groups</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Every Auto Scaling group has three size parameters (<code>DesiredCapacity</code>,\n                <code>MaxSize</code>, and <code>MinSize</code>). Usually, you set these sizes based\n            on a specific number of instances. However, if you configure a mixed instances policy\n            that defines weights for the instance types, you must specify these sizes with the same\n            units that you use for weighting instances.</p>"
       }
     },
     "com.amazonaws.autoscaling#CreateAutoScalingGroupType": {
@@ -1253,7 +1274,7 @@
         "LaunchTemplate": {
           "target": "com.amazonaws.autoscaling#LaunchTemplateSpecification",
           "traits": {
-            "smithy.api#documentation": "<p>Parameters used to specify the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html\">launch\n                template</a> and version to use to launch instances. </p>\n        <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or\n                <code>MixedInstancesPolicy</code>) or a launch configuration\n                (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>\n        <note>\n            <p>The launch template that is specified must be configured for use with an Auto Scaling\n                group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch\n                    template for an Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        </note>"
+            "smithy.api#documentation": "<p>Parameters used to specify the launch template and version to use to launch instances. </p>\n        <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or\n                <code>MixedInstancesPolicy</code>) or a launch configuration\n                (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>\n        <note>\n            <p>The launch template that is specified must be configured for use with an Auto Scaling\n                group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch\n                    template for an Auto Scaling group</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        </note>"
           }
         },
         "MixedInstancesPolicy": {
@@ -1425,7 +1446,7 @@
         "SecurityGroups": {
           "target": "com.amazonaws.autoscaling#SecurityGroups",
           "traits": {
-            "smithy.api#documentation": "<p>A list that contains the security groups to assign to the instances in the Auto Scaling\n            group.</p>\n        <p>[EC2-VPC] Specify the security group IDs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud\n                User Guide</i>.</p>\n        <p>[EC2-Classic] Specify either the security group names or the security group IDs. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security\n                Groups</a> in the <i>Amazon EC2 User Guide for Linux\n            Instances</i>.</p>"
+            "smithy.api#documentation": "<p>A list that contains the security groups to assign to the instances in the Auto Scaling\n            group.</p>\n        <p>[EC2-VPC] Specify the security group IDs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud\n                User Guide</i>.</p>\n        <p>[EC2-Classic] Specify either the security group names or the security group IDs. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security\n                Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
           }
         },
         "ClassicLinkVPCId": {
@@ -1443,7 +1464,7 @@
         "UserData": {
           "target": "com.amazonaws.autoscaling#XmlStringUserData",
           "traits": {
-            "smithy.api#documentation": "<p>The Base64-encoded user data to make available to the launched EC2 instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user\n                data</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+            "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and\n                user data</a> (Windows). If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
           }
         },
         "InstanceId": {
@@ -1455,7 +1476,7 @@
         "InstanceType": {
           "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the instance type of the EC2 instance.</p>\n        <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                Instance Types</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances.</i>\n         </p>\n        <p>If you do not specify <code>InstanceId</code>, you must specify\n                <code>InstanceType</code>.</p>"
+            "smithy.api#documentation": "<p>Specifies the instance type of the EC2 instance.</p>\n        <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <p>If you do not specify <code>InstanceId</code>, you must specify\n                <code>InstanceType</code>.</p>"
           }
         },
         "KernelId": {
@@ -1473,7 +1494,7 @@
         "BlockDeviceMappings": {
           "target": "com.amazonaws.autoscaling#BlockDeviceMappings",
           "traits": {
-            "smithy.api#documentation": "<p>A block device mapping, which specifies the block devices for the instance. You can\n            specify virtual devices and EBS volumes. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block Device\n                Mapping</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances</i>.</p>"
+            "smithy.api#documentation": "<p>A block device mapping, which specifies the block devices for the instance. You can\n            specify virtual devices and EBS volumes. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block Device\n                Mapping</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
           }
         },
         "InstanceMonitoring": {
@@ -1497,7 +1518,7 @@
         "EbsOptimized": {
           "target": "com.amazonaws.autoscaling#EbsOptimized",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). The optimization provides dedicated\n            throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O\n            performance. This optimization is not available with all instance types. Additional fees\n            are incurred when you enable EBS optimization for an instance type that is not\n            EBS-optimized by default. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon EBS-Optimized\n                Instances</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances</i>.</p>\n        <p>The default value is <code>false</code>.</p>"
+            "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). The optimization provides dedicated\n            throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O\n            performance. This optimization is not available with all instance types. Additional fees\n            are incurred when you enable EBS optimization for an instance type that is not\n            EBS-optimized by default. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon EBS-Optimized\n                Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <p>The default value is <code>false</code>.</p>"
           }
         },
         "AssociatePublicIpAddress": {
@@ -1509,7 +1530,7 @@
         "PlacementTenancy": {
           "target": "com.amazonaws.autoscaling#XmlStringMaxLen64",
           "traits": {
-            "smithy.api#documentation": "<p>The tenancy of the instance. An instance with <code>dedicated</code> tenancy runs on\n            isolated, single-tenant hardware and can only be launched into a VPC.</p>\n        <p>To launch dedicated instances into a shared tenancy VPC (a VPC with the instance\n            placement tenancy attribute set to <code>default</code>), you must set the value of this\n            parameter to <code>dedicated</code>.</p>\n        <p>If you specify <code>PlacementTenancy</code>, you must specify at least one subnet for\n                <code>VPCZoneIdentifier</code> when you create your group.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html\">Configuring instance tenancy with Amazon EC2 Auto Scaling</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Valid Values: <code>default</code> | <code>dedicated</code>\n        </p>"
+            "smithy.api#documentation": "<p>The tenancy of the instance. An instance with <code>dedicated</code> tenancy runs on\n            isolated, single-tenant hardware and can only be launched into a VPC.</p>\n        <p>To launch dedicated instances into a shared tenancy VPC (a VPC with the instance\n            placement tenancy attribute set to <code>default</code>), you must set the value of this\n            parameter to <code>dedicated</code>.</p>\n        <p>If you specify <code>PlacementTenancy</code>, you must specify at least one subnet for\n                <code>VPCZoneIdentifier</code> when you create your group.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html\">Configuring\n                instance tenancy with Amazon EC2 Auto Scaling</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>Valid Values: <code>default</code> | <code>dedicated</code>\n        </p>"
           }
         },
         "MetadataOptions": {
@@ -2525,7 +2546,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Describes one or more scaling activities for the specified Auto Scaling group.</p>",
+        "smithy.api#documentation": "<p>Describes one or more scaling activities for the specified Auto Scaling group.</p>\n        <p>To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the <b>Activity</b> tab of the Auto Scaling group. When scaling events occur,\n            you see scaling activity messages in the <b>Activity\n                history</b>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html\">Verifying a scaling\n                activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>",
         "smithy.api#paginated": {
           "inputToken": "NextToken",
           "outputToken": "NextToken",
@@ -2547,6 +2568,12 @@
           "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
           "traits": {
             "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>"
+          }
+        },
+        "IncludeDeletedGroups": {
+          "target": "com.amazonaws.autoscaling#IncludeDeletedGroups",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether to include scaling activity from deleted Auto Scaling groups.</p>"
           }
         },
         "MaxRecords": {
@@ -2907,7 +2934,7 @@
         "VolumeType": {
           "target": "com.amazonaws.autoscaling#BlockDeviceEbsVolumeType",
           "traits": {
-            "smithy.api#documentation": "<p>The volume type, which can be <code>standard</code> for Magnetic, <code>io1</code> for\n            Provisioned IOPS SSD, <code>gp2</code> for General Purpose SSD, <code>st1</code> for\n            Throughput Optimized HDD, or <code>sc1</code> for Cold HDD. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon\n                EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances</i>.</p>\n        <p>Valid Values: <code>standard</code> | <code>io1</code> | <code>gp2</code> |\n                <code>st1</code> | <code>sc1</code>\n         </p>"
+            "smithy.api#documentation": "<p>The volume type, which can be <code>standard</code> for Magnetic, <code>io1</code> for\n            Provisioned IOPS SSD, <code>gp2</code> for General Purpose SSD, <code>st1</code> for\n            Throughput Optimized HDD, or <code>sc1</code> for Cold HDD. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon\n                EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n        <p>Valid Values: <code>standard</code> | <code>io1</code> | <code>gp2</code> |\n                <code>st1</code> | <code>sc1</code>\n         </p>"
           }
         },
         "DeleteOnTermination": {
@@ -2925,7 +2952,7 @@
         "Encrypted": {
           "target": "com.amazonaws.autoscaling#BlockDeviceEbsEncrypted",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the volume should be encrypted. Encrypted EBS volumes can only be\n            attached to instances that support Amazon EBS encryption. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>. If your AMI uses encrypted volumes, you can also\n            only launch it on supported instance types.</p>\n        <note>\n            <p>If you are creating a volume from a snapshot, you cannot specify an encryption\n                value. Volumes that are created from encrypted snapshots are automatically\n                encrypted, and volumes that are created from unencrypted snapshots are automatically\n                unencrypted. By default, encrypted snapshots use the AWS managed CMK that is used\n                for EBS encryption, but you can specify a custom CMK when you create the snapshot.\n                The ability to encrypt a snapshot during copying also allows you to apply a new CMK\n                to an already-encrypted snapshot. Volumes restored from the\n                resulting copy are only accessible using the new CMK.</p>\n            <p>Enabling <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">encryption by default</a> results in all EBS volumes being encrypted with\n                the AWS managed CMK or a customer managed CMK, whether or not the snapshot was\n                encrypted.</p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Using Encryption with EBS-Backed\n                AMIs</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>\n            and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html\">Required\n                CMK key policy for use with encrypted volumes</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+            "smithy.api#documentation": "<p>Specifies whether the volume should be encrypted. Encrypted EBS volumes can only be\n            attached to instances that support Amazon EBS encryption. For more information, see\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>. If your AMI uses encrypted volumes, you can also\n            only launch it on supported instance types.</p>\n        <note>\n            <p>If you are creating a volume from a snapshot, you cannot specify an encryption\n                value. Volumes that are created from encrypted snapshots are automatically\n                encrypted, and volumes that are created from unencrypted snapshots are automatically\n                unencrypted. By default, encrypted snapshots use the AWS managed CMK that is used\n                for EBS encryption, but you can specify a custom CMK when you create the snapshot.\n                The ability to encrypt a snapshot during copying also allows you to apply a new CMK\n                to an already-encrypted snapshot. Volumes restored from the\n                resulting copy are only accessible using the new CMK.</p>\n            <p>Enabling <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">encryption by default</a> results in all EBS volumes being encrypted with\n                the AWS managed CMK or a customer managed CMK, whether or not the snapshot was\n                encrypted.</p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Using Encryption with EBS-Backed\n                AMIs</a> in the <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html\">Required\n                CMK key policy for use with encrypted volumes</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
           }
         }
       },
@@ -3251,6 +3278,12 @@
         "smithy.api#box": {}
       }
     },
+    "com.amazonaws.autoscaling#IncludeDeletedGroups": {
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
     "com.amazonaws.autoscaling#Instance": {
       "type": "structure",
       "members": {
@@ -3277,7 +3310,7 @@
         "LifecycleState": {
           "target": "com.amazonaws.autoscaling#LifecycleState",
           "traits": {
-            "smithy.api#documentation": "<p>A description of the current lifecycle state. The <code>Quarantined</code> state is\n            not used.</p>",
+            "smithy.api#documentation": "<p>A description of the current lifecycle state. The <code>Quarantined</code> state is\n            not used. For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance\n                lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>",
             "smithy.api#required": {}
           }
         },
@@ -3376,7 +3409,7 @@
         "HttpPutResponseHopLimit": {
           "target": "com.amazonaws.autoscaling#InstanceMetadataHttpPutResponseHopLimit",
           "traits": {
-            "smithy.api#documentation": "<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the\n            number, the further instance metadata requests can travel.</p>\n        <p>Default: 1</p>\n        <p>Possible values: Integers from 1 to 64</p>"
+            "smithy.api#documentation": "<p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the\n            number, the further instance metadata requests can travel.</p>\n        <p>Default: 1</p>"
           }
         },
         "HttpEndpoint": {
@@ -3651,19 +3684,19 @@
         "ClassicLinkVPCSecurityGroups": {
           "target": "com.amazonaws.autoscaling#ClassicLinkVPCSecurityGroups",
           "traits": {
-            "smithy.api#documentation": "<p>The IDs of one or more security groups for the VPC specified in\n                <code>ClassicLinkVPCId</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink\">Linking EC2-Classic instances to a VPC</a> in the\n                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+            "smithy.api#documentation": "<p>The IDs of one or more security groups for the VPC specified in\n                <code>ClassicLinkVPCId</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html\">ClassicLink</a> in the\n                <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink\">Linking EC2-Classic\n                instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
           }
         },
         "UserData": {
           "target": "com.amazonaws.autoscaling#XmlStringUserData",
           "traits": {
-            "smithy.api#documentation": "<p>The Base64-encoded user data to make available to the launched EC2 instances. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user\n                data</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
+            "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance metadata and user data</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html\">Instance metadata and\n                user data</a> (Windows). If you are using a command line tool, base64-encoding\n            is performed for you, and you can load the text from a file. Otherwise, you must provide\n            base64-encoded text. User data is limited to 16 KB.</p>"
           }
         },
         "InstanceType": {
           "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
           "traits": {
-            "smithy.api#documentation": "<p>The instance type for the instances.</p>\n        <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                Instance Types</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances.</i>\n         </p>",
+            "smithy.api#documentation": "<p>The instance type for the instances.</p>\n        <p>For information about available instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes\">Available\n                Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
             "smithy.api#required": {}
           }
         },
@@ -3682,7 +3715,7 @@
         "BlockDeviceMappings": {
           "target": "com.amazonaws.autoscaling#BlockDeviceMappings",
           "traits": {
-            "smithy.api#documentation": "<p>A block device mapping, which specifies the block devices for the instance. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block Device\n                Mapping</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances</i>.</p>"
+            "smithy.api#documentation": "<p>A block device mapping, which specifies the block devices for the instance. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html\">Block Device\n                Mapping</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
           }
         },
         "InstanceMonitoring": {
@@ -3713,7 +3746,7 @@
         "EbsOptimized": {
           "target": "com.amazonaws.autoscaling#EbsOptimized",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon\n                EBS-Optimized Instances</a> in the <i>Amazon EC2 User Guide for Linux\n                Instances</i>.</p>"
+            "smithy.api#documentation": "<p>Specifies whether the launch configuration is optimized for EBS I/O\n            (<code>true</code>) or not (<code>false</code>). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon\n                EBS-Optimized Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>"
           }
         },
         "AssociatePublicIpAddress": {
@@ -3857,7 +3890,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Describes an override for a launch template. The maximum number of instance types that\n            can be associated with an Auto Scaling group is 20. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html\">Configuring overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+        "smithy.api#documentation": "<p>Describes an override for a launch template. The maximum number of instance types that\n            can be associated with an Auto Scaling group is 40. The maximum number of distinct launch\n            templates you can define for an Auto Scaling group is 20. For more information about configuring\n            overrides, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html\">Configuring\n                overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
       }
     },
     "com.amazonaws.autoscaling#LaunchTemplateSpecification": {
@@ -3878,7 +3911,7 @@
         "Version": {
           "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
           "traits": {
-            "smithy.api#documentation": "<p>The version number, <code>$Latest</code>, or <code>$Default</code>. To get the version number, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplateVersions.html\">DescribeLaunchTemplateVersions</a> API operation. New launch template versions\n            can be created using the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplateVersion.html\">CreateLaunchTemplateVersion</a> API. If the value is <code>$Latest</code>,\n            Amazon EC2 Auto Scaling selects the latest version of the launch template when launching instances. If\n            the value is <code>$Default</code>, Amazon EC2 Auto Scaling selects the default version of the launch\n            template when launching instances. The default value is <code>$Default</code>.</p>"
+            "smithy.api#documentation": "<p>The version number, <code>$Latest</code>, or <code>$Default</code>. To get the version\n            number, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplateVersions.html\">DescribeLaunchTemplateVersions</a> API operation. New launch template versions\n            can be created using the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplateVersion.html\">CreateLaunchTemplateVersion</a> API. If the value is <code>$Latest</code>,\n            Amazon EC2 Auto Scaling selects the latest version of the launch template when launching instances. If\n            the value is <code>$Default</code>, Amazon EC2 Auto Scaling selects the default version of the launch\n            template when launching instances. The default value is <code>$Default</code>.</p>"
           }
         }
       },
@@ -5955,7 +5988,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Updates the configuration for the specified Auto Scaling group.</p>\n        <p>To update an Auto Scaling group, specify the name of the group and the parameter that you want\n            to change. Any parameters that you don't specify are not changed by this update request.\n            The new settings take effect on any scaling activities after this call returns.\n            </p>\n        <p>If you associate a new launch configuration or template with an Auto Scaling group, all new\n            instances will get the updated configuration. Existing instances continue to run with\n            the configuration that they were originally launched with. When you update a group to\n            specify a mixed instances policy instead of a launch configuration or template, existing\n            instances may be replaced to match the new purchasing options that you specified in the\n            policy. For example, if the group currently has 100% On-Demand capacity and the policy\n            specifies 50% Spot capacity, this means that half of your instances will be gradually\n            terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches\n            new instances before terminating the old ones, so that updating your group does not\n            compromise the performance or availability of your application.</p>\n        <p>Note the following about changing <code>DesiredCapacity</code>, <code>MaxSize</code>,\n            or <code>MinSize</code>:</p>\n        <ul>\n            <li>\n                <p>If a scale-in activity occurs as a result of a new\n                        <code>DesiredCapacity</code> value that is lower than the current size of\n                    the group, the Auto Scaling group uses its termination policy to determine which\n                    instances to terminate.</p>\n            </li>\n            <li>\n                <p>If you specify a new value for <code>MinSize</code> without specifying a value\n                    for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger\n                    than the current size of the group, this sets the group's\n                        <code>DesiredCapacity</code> to the new <code>MinSize</code> value.</p>\n            </li>\n            <li>\n                <p>If you specify a new value for <code>MaxSize</code> without specifying a value\n                    for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller\n                    than the current size of the group, this sets the group's\n                        <code>DesiredCapacity</code> to the new <code>MaxSize</code> value.</p>\n            </li>\n         </ul>\n        <p>To see which parameters have been set, call the <a>DescribeAutoScalingGroups</a> API. To view the scaling policies for an Auto Scaling\n            group, call the <a>DescribePolicies</a> API. If the group has scaling\n            policies, you can update them by calling the <a>PutScalingPolicy</a>\n            API.</p>"
+        "smithy.api#documentation": "<p>\n            <b>We strongly recommend that all Auto Scaling groups use launch templates to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.</b>\n         </p> \n         <p>Updates the configuration for\n            the specified Auto Scaling group.</p>\n        <p>To update an Auto Scaling group, specify the name of the group and the parameter that you want\n            to change. Any parameters that you don't specify are not changed by this update request.\n            The new settings take effect on any scaling activities after this call returns.\n            </p>\n        <p>If you associate a new launch configuration or template with an Auto Scaling group, all new\n            instances will get the updated configuration. Existing instances continue to run with\n            the configuration that they were originally launched with. When you update a group to\n            specify a mixed instances policy instead of a launch configuration or template, existing\n            instances may be replaced to match the new purchasing options that you specified in the\n            policy. For example, if the group currently has 100% On-Demand capacity and the policy\n            specifies 50% Spot capacity, this means that half of your instances will be gradually\n            terminated and relaunched as Spot Instances. When replacing instances, Amazon EC2 Auto Scaling launches\n            new instances before terminating the old ones, so that updating your group does not\n            compromise the performance or availability of your application.</p>\n        <p>Note the following about changing <code>DesiredCapacity</code>, <code>MaxSize</code>,\n            or <code>MinSize</code>:</p>\n        <ul>\n            <li>\n                <p>If a scale-in activity occurs as a result of a new\n                        <code>DesiredCapacity</code> value that is lower than the current size of\n                    the group, the Auto Scaling group uses its termination policy to determine which\n                    instances to terminate.</p>\n            </li>\n            <li>\n                <p>If you specify a new value for <code>MinSize</code> without specifying a value\n                    for <code>DesiredCapacity</code>, and the new <code>MinSize</code> is larger\n                    than the current size of the group, this sets the group's\n                        <code>DesiredCapacity</code> to the new <code>MinSize</code> value.</p>\n            </li>\n            <li>\n                <p>If you specify a new value for <code>MaxSize</code> without specifying a value\n                    for <code>DesiredCapacity</code>, and the new <code>MaxSize</code> is smaller\n                    than the current size of the group, this sets the group's\n                        <code>DesiredCapacity</code> to the new <code>MaxSize</code> value.</p>\n            </li>\n         </ul>\n        <p>To see which parameters have been set, call the <a>DescribeAutoScalingGroups</a> API. To view the scaling policies for an Auto Scaling\n            group, call the <a>DescribePolicies</a> API. If the group has scaling\n            policies, you can update them by calling the <a>PutScalingPolicy</a>\n            API.</p>"
       }
     },
     "com.amazonaws.autoscaling#UpdateAutoScalingGroupType": {

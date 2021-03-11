@@ -27,8 +27,13 @@ export type ListPoliciesCommandOutput = ListPoliciesResponse & __MetadataBearer;
  *             <code>Scope</code> to <code>AWS</code>.</p>
  *          <p>You can paginate the results using the <code>MaxItems</code> and <code>Marker</code>
  *          parameters.</p>
- *          <p>For more information about managed policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline
- *             Policies</a> in the <i>IAM User Guide</i>.</p>
+ *          <p>For more information about managed policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed policies and inline
+ *             policies</a> in the <i>IAM User Guide</i>.</p>
+ *          <note>
+ *             <p>IAM resource-listing operations return a subset of the available
+ *    attributes for the resource. For example, this operation does not return tags, even though they are an attribute of the returned object. To view all of the information for a customer manged policy, see
+ *                <a>GetPolicy</a>.</p>
+ *          </note>
  */
 export class ListPoliciesCommand extends $Command<
   ListPoliciesCommandInput,

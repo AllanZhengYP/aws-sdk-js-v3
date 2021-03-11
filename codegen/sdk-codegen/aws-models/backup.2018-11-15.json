@@ -44,7 +44,7 @@
         "ResourceType": {
           "target": "com.amazonaws.backup#ResourceType",
           "traits": {
-            "smithy.api#documentation": "<p>The type of AWS resource to be backed up. For VSS Windows backups, the only supported\n         resource type is Amazon EC2.</p>\n         <p>Valid values: <code>EC2</code>.</p>"
+            "smithy.api#documentation": "<p>Specifies an object containing resource type and backup options. The only supported\n         resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see\n         the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html\">sample\n            CloudFormation template to enable Windows VSS</a> in the <i>AWS Backup User\n            Guide</i>.</p>\n         <p>Valid values: <code>EC2</code>.</p>"
           }
         },
         "BackupOptions": {
@@ -181,7 +181,7 @@
         "IamRoleArn": {
           "target": "com.amazonaws.backup#IAMRoleArn",
           "traits": {
-            "smithy.api#documentation": "<p>Specifies the IAM role ARN used to create the target recovery point; for example,\n            <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>"
+            "smithy.api#documentation": "<p>Specifies the IAM role ARN used to create the target recovery point. \n         IAM roles other than the default role must include either <code>AWSBackup</code>\n         or <code>AwsBackup</code> in the role name. \n         For example,\n            <code>arn:aws:iam::123456789012:role/AWSBackupRDSAccess</code>.\n         Role names without those strings lack permissions to perform backup jobs.</p>"
           }
         },
         "CreatedBy": {
@@ -494,7 +494,7 @@
         "Lifecycle": {
           "target": "com.amazonaws.backup#Lifecycle",
           "traits": {
-            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>"
+            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
           }
         },
         "RecoveryPointTags": {
@@ -558,7 +558,7 @@
         "Lifecycle": {
           "target": "com.amazonaws.backup#Lifecycle",
           "traits": {
-            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup will transition and expire backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>"
+            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup will transition and expire backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
           }
         },
         "RecoveryPointTags": {
@@ -622,7 +622,7 @@
         "ListOfTags": {
           "target": "com.amazonaws.backup#ListOfTags",
           "traits": {
-            "smithy.api#documentation": "<p>An array of conditions used to specify a set of resources to assign to a backup plan;\n         for example, <code>\"StringEquals\": {\"ec2:ResourceTag/Department\":\n         \"accounting\"</code>.</p>"
+            "smithy.api#documentation": "<p>An array of conditions used to specify a set of resources to assign to a backup plan;\n         for example, <code>\"StringEquals\": {\"ec2:ResourceTag/Department\":\n         \"accounting\"</code>. Assigns the backup plan to every resource with at least one matching tag.</p>"
           }
         }
       },
@@ -841,7 +841,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which\n         are used to specify a lifecycle for a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold.</p>"
+        "smithy.api#documentation": "<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which\n         are used to specify a lifecycle for a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold.</p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
       }
     },
     "com.amazonaws.backup#Condition": {
@@ -1257,7 +1257,7 @@
         "BackupVaultName": {
           "target": "com.amazonaws.backup#BackupVaultName",
           "traits": {
-            "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+            "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of letters, numbers, and hyphens.</p>",
             "smithy.api#httpLabel": {},
             "smithy.api#required": {}
           }
@@ -2141,7 +2141,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>The current feature settings for the AWS Account.</p>",
+        "smithy.api#documentation": "<p>Describes the global settings of the AWS account, including whether it is opted in to cross-account backup.</p>",
         "smithy.api#http": {
           "method": "GET",
           "uri": "/global-settings",
@@ -2165,7 +2165,7 @@
         "LastUpdateTime": {
           "target": "com.amazonaws.backup#timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time that the global settings was last updated. This update is in Unix format and\n         Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to\n         milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018\n         12:11:30.087 AM.</p>"
+            "smithy.api#documentation": "<p>The date and time that the global settings were last updated. This update is in Unix\n         format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is\n         accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January\n         26, 2018 12:11:30.087 AM.</p>"
           }
         }
       }
@@ -2375,7 +2375,7 @@
         "Lifecycle": {
           "target": "com.amazonaws.backup#Lifecycle",
           "traits": {
-            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups that are transitioned to cold storage must be stored in cold storage for a\n         minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than\n         the “transition to cold after days” setting. The “transition to cold after days” setting\n         cannot be changed after a backup has been transitioned to cold. </p>"
+            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups that are transitioned to cold storage must be stored in cold storage for a\n         minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than\n         the “transition to cold after days” setting. The “transition to cold after days” setting\n         cannot be changed after a backup has been transitioned to cold. </p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
           }
         },
         "EncryptionKeyArn": {
@@ -3181,7 +3181,7 @@
         "ResourceTypes": {
           "target": "com.amazonaws.backup#ResourceTypes",
           "traits": {
-            "smithy.api#documentation": "<p>Contains a string with the supported AWS resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>Contains a string with the supported AWS resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -3281,7 +3281,7 @@
         }
       },
       "traits": {
-        "smithy.api#documentation": "<p>Contains an array of <code>Transition</code> objects specifying how long in days before\n         a recovery point transitions to cold storage or is deleted.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, on the console, the “expire after days” setting must be 90 days greater\n         than the “transition to cold after days” setting. The “transition to cold after days”\n         setting cannot be changed after a backup has been transitioned to cold.</p>"
+        "smithy.api#documentation": "<p>Contains an array of <code>Transition</code> objects specifying how long in days before\n         a recovery point transitions to cold storage or is deleted.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, on the console, the “expire after days” setting must be 90 days greater\n         than the “transition to cold after days” setting. The “transition to cold after days”\n         setting cannot be changed after a backup has been transitioned to cold.</p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
       }
     },
     "com.amazonaws.backup#LimitExceededException": {
@@ -3397,14 +3397,14 @@
         "ByResourceType": {
           "target": "com.amazonaws.backup#ResourceType",
           "traits": {
-            "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>",
             "smithy.api#httpQuery": "resourceType"
           }
         },
         "ByAccountId": {
           "target": "com.amazonaws.backup#AccountId",
           "traits": {
-            "smithy.api#documentation": "<p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p>",
+            "smithy.api#documentation": "<p>The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.</p>\n         <p>If used from an AWS Organizations management account, passing <code>*</code> returns all jobs across the organization.</p>",
             "smithy.api#httpQuery": "accountId"
           }
         }
@@ -3892,7 +3892,7 @@
         "ByResourceType": {
           "target": "com.amazonaws.backup#ResourceType",
           "traits": {
-            "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>",
             "smithy.api#httpQuery": "resourceType"
           }
         },
@@ -4665,7 +4665,7 @@
         "Lifecycle": {
           "target": "com.amazonaws.backup#Lifecycle",
           "traits": {
-            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>"
+            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
           }
         },
         "EncryptionKeyArn": {
@@ -5076,19 +5076,19 @@
         "StartWindowMinutes": {
           "target": "com.amazonaws.backup#WindowMinutes",
           "traits": {
-            "smithy.api#documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional.</p>"
+            "smithy.api#documentation": "<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional, and the default is 8 hours.</p>"
           }
         },
         "CompleteWindowMinutes": {
           "target": "com.amazonaws.backup#WindowMinutes",
           "traits": {
-            "smithy.api#documentation": "<p>A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.</p>"
+            "smithy.api#documentation": "<p>A value in minutes during which a successfully started backup must complete, or else AWS\n         Backup will cancel the job. This value is optional. This value begins counting down from\n         when the backup was scheduled. It does not add additional time for\n            <code>StartWindowMinutes</code>, or if the backup started later than scheduled.</p>"
           }
         },
         "Lifecycle": {
           "target": "com.amazonaws.backup#Lifecycle",
           "traits": {
-            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup will transition and expire backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>"
+            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup will transition and expire backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
           }
         },
         "RecoveryPointTags": {
@@ -5123,7 +5123,7 @@
         "CreationDate": {
           "target": "com.amazonaws.backup#timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time that a backup job is started, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+            "smithy.api#documentation": "<p>The date and time that a backup job is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
           }
         }
       }
@@ -5217,7 +5217,7 @@
         "CreationDate": {
           "target": "com.amazonaws.backup#timestamp",
           "traits": {
-            "smithy.api#documentation": "<p>The date and time that a copy job is started, in Unix format and Coordinated Universal Time (UTC). \n         The value of <code>CreationDate</code> is accurate to milliseconds. \n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+            "smithy.api#documentation": "<p>The date and time that a copy job is created, in Unix format and Coordinated Universal Time (UTC). \n         The value of <code>CreationDate</code> is accurate to milliseconds. \n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
           }
         }
       }
@@ -5267,7 +5267,7 @@
         "Metadata": {
           "target": "com.amazonaws.backup#Metadata",
           "traits": {
-            "smithy.api#documentation": "<p>A set of metadata key-value pairs. Contains information, such as a resource name,\n         required to restore a recovery point.</p>\n         <p> You can get configuration metadata about a resource at the time it was backed up by\n         calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those\n         provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a\n         resource. For example, you might need to provide a new resource name if the original\n         already exists.</p>\n         <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed\n               up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Encrypted</code>:  A Boolean value that, if true, specifies that the\n               file system is encrypted. If <code>KmsKeyId</code> is specified,\n               <code>Encrypted</code> must be set to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the\n               restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceMode</code>: Specifies the throughput mode of the file\n               system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationToken</code>: A user-supplied value that ensures the\n               uniqueness (idempotency) of the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>newFileSystem</code>:  A Boolean value that, if true, specifies that\n               the recovery point is restored to a new Amazon EFS file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ItemsToRestore </code>: A serialized list of up to five strings\n            where each string is a file path. Use <code>ItemsToRestore</code> to restore\n            specific files or directories rather than the entire file system. This parameter is\n            optional.</p>\n            </li>\n         </ul>",
+            "smithy.api#documentation": "<p>A set of metadata key-value pairs. Contains information, such as a resource name,\n         required to restore a recovery point.</p>\n         <p> You can get configuration metadata about a resource at the time it was backed up by\n         calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those\n         provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a\n         resource. For example, you might need to provide a new resource name if the original\n         already exists.</p>\n         <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed\n               up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Encrypted</code>:  A Boolean value that, if true, specifies that the\n               file system is encrypted. If <code>KmsKeyId</code> is specified,\n               <code>Encrypted</code> must be set to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the\n               restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceMode</code>: Specifies the throughput mode of the file\n               system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationToken</code>: A user-supplied value that ensures the\n               uniqueness (idempotency) of the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>newFileSystem</code>:  A Boolean value that, if true, specifies that\n               the recovery point is restored to a new Amazon EFS file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ItemsToRestore </code>: An array of one to five strings\n            where each string is a file path. Use <code>ItemsToRestore</code> to restore\n            specific files or directories rather than the entire file system. This parameter is\n            optional. For example, <code>\"itemsToRestore\":\"[\\\"/my.test\\\"]\"</code>.</p>\n            </li>\n         </ul>",
             "smithy.api#required": {}
           }
         },
@@ -5287,7 +5287,7 @@
         "ResourceType": {
           "target": "com.amazonaws.backup#ResourceType",
           "traits": {
-            "smithy.api#documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>"
+            "smithy.api#documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>"
           }
         }
       }
@@ -5601,7 +5601,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Updates the current global settings for the AWS Account. Use the\n            <code>DescribeGlobalSettings</code> API to determine the current settings.</p>",
+        "smithy.api#documentation": "<p>Updates the current global settings for the AWS account. Use the\n            <code>DescribeGlobalSettings</code> API to determine the current settings.</p>",
         "smithy.api#http": {
           "method": "PUT",
           "uri": "/global-settings",
@@ -5643,7 +5643,7 @@
         }
       ],
       "traits": {
-        "smithy.api#documentation": "<p>Sets the transition lifecycle of a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>",
+        "smithy.api#documentation": "<p>Sets the transition lifecycle of a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>",
         "smithy.api#http": {
           "method": "POST",
           "uri": "/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}",
@@ -5697,7 +5697,7 @@
         "Lifecycle": {
           "target": "com.amazonaws.backup#Lifecycle",
           "traits": {
-            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>"
+            "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n\t\t       <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
           }
         },
         "CalculatedLifecycle": {

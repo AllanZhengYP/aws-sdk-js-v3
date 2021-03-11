@@ -143,6 +143,14 @@ export namespace ConnectorAuthenticationException {
   });
 }
 
+export interface CustomerProfilesMetadata {}
+
+export namespace CustomerProfilesMetadata {
+  export const filterSensitiveLog = (obj: CustomerProfilesMetadata): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>
  *   The connector metadata specific to Datadog.
@@ -198,6 +206,16 @@ export interface GoogleAnalyticsMetadata {
 
 export namespace GoogleAnalyticsMetadata {
   export const filterSensitiveLog = (obj: GoogleAnalyticsMetadata): any => ({
+    ...obj,
+  });
+}
+
+export interface HoneycodeMetadata {
+  oAuthScopes?: string[];
+}
+
+export namespace HoneycodeMetadata {
+  export const filterSensitiveLog = (obj: HoneycodeMetadata): any => ({
     ...obj,
   });
 }
@@ -530,6 +548,9 @@ export interface ConnectorMetadata {
    *     </p>
    */
   Upsolver?: UpsolverMetadata;
+
+  CustomerProfiles?: CustomerProfilesMetadata;
+  Honeycode?: HoneycodeMetadata;
 }
 
 export namespace ConnectorMetadata {
@@ -540,11 +561,14 @@ export namespace ConnectorMetadata {
 
 export enum ConnectorType {
   AMPLITUDE = "Amplitude",
+  CUSTOMERPROFILES = "CustomerProfiles",
   DATADOG = "Datadog",
   DYNATRACE = "Dynatrace",
   EVENTBRIDGE = "EventBridge",
   GOOGLEANALYTICS = "Googleanalytics",
+  HONEYCODE = "Honeycode",
   INFORNEXUS = "Infornexus",
+  LOOKOUTMETRICS = "LookoutMetrics",
   MARKETO = "Marketo",
   REDSHIFT = "Redshift",
   S3 = "S3",
@@ -1329,6 +1353,14 @@ export namespace GoogleAnalyticsConnectorProfileProperties {
   });
 }
 
+export interface HoneycodeConnectorProfileProperties {}
+
+export namespace HoneycodeConnectorProfileProperties {
+  export const filterSensitiveLog = (obj: HoneycodeConnectorProfileProperties): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>
  *   The connector-specific profile properties required by Infor Nexus.
@@ -1639,6 +1671,7 @@ export interface ConnectorProfileProperties {
    */
   GoogleAnalytics?: GoogleAnalyticsConnectorProfileProperties;
 
+  Honeycode?: HoneycodeConnectorProfileProperties;
   /**
    * <p>
    *   The connector-specific properties required by Infor Nexus.
@@ -1885,6 +1918,24 @@ export namespace GoogleAnalyticsConnectorProfileCredentials {
   export const filterSensitiveLog = (obj: GoogleAnalyticsConnectorProfileCredentials): any => ({
     ...obj,
     ...(obj.clientSecret && { clientSecret: SENSITIVE_STRING }),
+    ...(obj.accessToken && { accessToken: SENSITIVE_STRING }),
+  });
+}
+
+export interface HoneycodeConnectorProfileCredentials {
+  accessToken?: string;
+  refreshToken?: string;
+  /**
+   * <p>
+   *  Used by select connectors for which the OAuth workflow is supported, such as Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
+   * </p>
+   */
+  oAuthRequest?: ConnectorOAuthRequest;
+}
+
+export namespace HoneycodeConnectorProfileCredentials {
+  export const filterSensitiveLog = (obj: HoneycodeConnectorProfileCredentials): any => ({
+    ...obj,
     ...(obj.accessToken && { accessToken: SENSITIVE_STRING }),
   });
 }
@@ -2289,6 +2340,7 @@ export interface ConnectorProfileCredentials {
    */
   GoogleAnalytics?: GoogleAnalyticsConnectorProfileCredentials;
 
+  Honeycode?: HoneycodeConnectorProfileCredentials;
   /**
    * <p>
    *   The connector-specific credentials required when using Infor Nexus.
@@ -2374,6 +2426,7 @@ export namespace ConnectorProfileCredentials {
     ...(obj.GoogleAnalytics && {
       GoogleAnalytics: GoogleAnalyticsConnectorProfileCredentials.filterSensitiveLog(obj.GoogleAnalytics),
     }),
+    ...(obj.Honeycode && { Honeycode: HoneycodeConnectorProfileCredentials.filterSensitiveLog(obj.Honeycode) }),
     ...(obj.InforNexus && { InforNexus: InforNexusConnectorProfileCredentials.filterSensitiveLog(obj.InforNexus) }),
     ...(obj.Marketo && { Marketo: MarketoConnectorProfileCredentials.filterSensitiveLog(obj.Marketo) }),
     ...(obj.Redshift && { Redshift: RedshiftConnectorProfileCredentials.filterSensitiveLog(obj.Redshift) }),
@@ -2543,6 +2596,17 @@ export namespace ValidationException {
   });
 }
 
+export interface CustomerProfilesDestinationProperties {
+  domainName: string | undefined;
+  objectTypeName?: string;
+}
+
+export namespace CustomerProfilesDestinationProperties {
+  export const filterSensitiveLog = (obj: CustomerProfilesDestinationProperties): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>
  *   The settings that determine how Amazon AppFlow handles an error when placing data in the destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details.
@@ -2602,6 +2666,31 @@ export interface EventBridgeDestinationProperties {
 
 export namespace EventBridgeDestinationProperties {
   export const filterSensitiveLog = (obj: EventBridgeDestinationProperties): any => ({
+    ...obj,
+  });
+}
+
+export interface HoneycodeDestinationProperties {
+  object: string | undefined;
+  /**
+   * <p>
+   *   The settings that determine how Amazon AppFlow handles an error when placing data in the destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details.
+   *
+   * </p>
+   */
+  errorHandlingConfig?: ErrorHandlingConfig;
+}
+
+export namespace HoneycodeDestinationProperties {
+  export const filterSensitiveLog = (obj: HoneycodeDestinationProperties): any => ({
+    ...obj,
+  });
+}
+
+export interface LookoutMetricsDestinationProperties {}
+
+export namespace LookoutMetricsDestinationProperties {
+  export const filterSensitiveLog = (obj: LookoutMetricsDestinationProperties): any => ({
     ...obj,
   });
 }
@@ -2953,12 +3042,16 @@ export interface DestinationConnectorProperties {
    */
   EventBridge?: EventBridgeDestinationProperties;
 
+  LookoutMetrics?: LookoutMetricsDestinationProperties;
   /**
    * <p>
    *       The properties required to query Upsolver.
    *     </p>
    */
   Upsolver?: UpsolverDestinationProperties;
+
+  Honeycode?: HoneycodeDestinationProperties;
+  CustomerProfiles?: CustomerProfilesDestinationProperties;
 }
 
 export namespace DestinationConnectorProperties {
@@ -3570,10 +3663,19 @@ export interface ScheduledTriggerProperties {
 
   /**
    * <p>
-   * Specifies the time zone used when referring to the date and time of a scheduled-triggered flow.
+   *   Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as <code>America/New_York</code>.
    * </p>
    */
   timezone?: string;
+
+  /**
+   * <p>
+   * Specifies the optional offset that is added to the time interval for a schedule-triggered flow.
+   * </p>
+   */
+  scheduleOffset?: number;
+
+  firstExecutionFrom?: Date;
 }
 
 export namespace ScheduledTriggerProperties {
@@ -3910,6 +4012,10 @@ export interface DescribeConnectorsRequest {
    * <p>
    *   The type of connector, such as Salesforce, Amplitude, and so on.
    * </p>
+   *          <note>
+   *             <p>
+   *                <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination.  </p>
+   *          </note>
    */
   connectorTypes?: (ConnectorType | string)[];
 
@@ -4261,6 +4367,20 @@ export interface ExecutionRecord {
    * </p>
    */
   lastUpdatedAt?: Date;
+
+  /**
+   * <p>
+   * The timestamp that determines the first new or updated record to be transferred in the flow run.
+   * </p>
+   */
+  dataPullStartTime?: Date;
+
+  /**
+   * <p>
+   * The timestamp that indicates the last new or updated record to be transferred in the flow run.
+   * </p>
+   */
+  dataPullEndTime?: Date;
 }
 
 export namespace ExecutionRecord {

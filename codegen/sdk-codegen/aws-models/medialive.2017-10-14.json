@@ -2566,6 +2566,13 @@
             "smithy.api#documentation": "A collection of key-value pairs.",
             "smithy.api#jsonName": "tags"
           }
+        },
+        "Vpc": {
+          "target": "com.amazonaws.medialive#VpcOutputSettings",
+          "traits": {
+            "smithy.api#documentation": "Settings for VPC output",
+            "smithy.api#jsonName": "vpc"
+          }
         }
       },
       "traits": {
@@ -2754,6 +2761,13 @@
             "smithy.api#documentation": "A collection of key-value pairs.",
             "smithy.api#jsonName": "tags"
           }
+        },
+        "Vpc": {
+          "target": "com.amazonaws.medialive#VpcOutputSettings",
+          "traits": {
+            "smithy.api#documentation": "Settings for VPC output",
+            "smithy.api#jsonName": "vpc"
+          }
         }
       },
       "traits": {
@@ -2923,6 +2937,13 @@
           "traits": {
             "smithy.api#documentation": "A collection of key-value pairs.",
             "smithy.api#jsonName": "tags"
+          }
+        },
+        "Vpc": {
+          "target": "com.amazonaws.medialive#VpcOutputSettings",
+          "traits": {
+            "smithy.api#documentation": "Settings for VPC output",
+            "smithy.api#jsonName": "vpc"
           }
         }
       },
@@ -3357,6 +3378,88 @@
         "smithy.api#documentation": "Placeholder documentation for CreateMultiplexResponse"
       }
     },
+    "com.amazonaws.medialive#CreatePartnerInput": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.medialive#CreatePartnerInputRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.medialive#CreatePartnerInputResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.medialive#BadGatewayException"
+        },
+        {
+          "target": "com.amazonaws.medialive#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.medialive#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.medialive#GatewayTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.medialive#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.medialive#TooManyRequestsException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "Create a partner input",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/prod/inputs/{InputId}/partners",
+          "code": 201
+        }
+      }
+    },
+    "com.amazonaws.medialive#CreatePartnerInputRequest": {
+      "type": "structure",
+      "members": {
+        "InputId": {
+          "target": "com.amazonaws.medialive#__string",
+          "traits": {
+            "smithy.api#documentation": "Unique ID of the input.",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "RequestId": {
+          "target": "com.amazonaws.medialive#__string",
+          "traits": {
+            "smithy.api#documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries.",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#jsonName": "requestId"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.medialive#Tags",
+          "traits": {
+            "smithy.api#documentation": "A collection of key-value pairs.",
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "A request to create a partner input"
+      }
+    },
+    "com.amazonaws.medialive#CreatePartnerInputResponse": {
+      "type": "structure",
+      "members": {
+        "Input": {
+          "target": "com.amazonaws.medialive#Input",
+          "traits": {
+            "smithy.api#jsonName": "input"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Placeholder documentation for CreatePartnerInputResponse"
+      }
+    },
     "com.amazonaws.medialive#CreateTags": {
       "type": "operation",
       "input": {
@@ -3576,6 +3679,13 @@
           "traits": {
             "smithy.api#documentation": "A collection of key-value pairs.",
             "smithy.api#jsonName": "tags"
+          }
+        },
+        "Vpc": {
+          "target": "com.amazonaws.medialive#VpcOutputSettings",
+          "traits": {
+            "smithy.api#documentation": "Settings for VPC output",
+            "smithy.api#jsonName": "vpc"
           }
         }
       },
@@ -4574,6 +4684,13 @@
             "smithy.api#documentation": "A collection of key-value pairs.",
             "smithy.api#jsonName": "tags"
           }
+        },
+        "Vpc": {
+          "target": "com.amazonaws.medialive#VpcOutputSettings",
+          "traits": {
+            "smithy.api#documentation": "Settings for VPC output",
+            "smithy.api#jsonName": "vpc"
+          }
         }
       },
       "traits": {
@@ -5043,6 +5160,13 @@
           "traits": {
             "smithy.api#documentation": "Settings for the input devices.",
             "smithy.api#jsonName": "inputDevices"
+          }
+        },
+        "InputPartnerIds": {
+          "target": "com.amazonaws.medialive#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "A list of IDs for all Inputs which are partners of this one.",
+            "smithy.api#jsonName": "inputPartnerIds"
           }
         },
         "InputSourceType": {
@@ -7431,6 +7555,13 @@
         "smithy.api#documentation": "Frame Capture Group Settings"
       }
     },
+    "com.amazonaws.medialive#FrameCaptureHlsSettings": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "Frame Capture Hls Settings"
+      }
+    },
     "com.amazonaws.medialive#FrameCaptureIntervalUnit": {
       "type": "string",
       "traits": {
@@ -7469,8 +7600,7 @@
           "target": "com.amazonaws.medialive#__integerMin1Max3600000",
           "traits": {
             "smithy.api#documentation": "The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.",
-            "smithy.api#jsonName": "captureInterval",
-            "smithy.api#required": {}
+            "smithy.api#jsonName": "captureInterval"
           }
         },
         "CaptureIntervalUnits": {
@@ -9870,6 +10000,12 @@
             "smithy.api#jsonName": "fmp4HlsSettings"
           }
         },
+        "FrameCaptureHlsSettings": {
+          "target": "com.amazonaws.medialive#FrameCaptureHlsSettings",
+          "traits": {
+            "smithy.api#jsonName": "frameCaptureHlsSettings"
+          }
+        },
         "StandardHlsSettings": {
           "target": "com.amazonaws.medialive#StandardHlsSettings",
           "traits": {
@@ -10074,6 +10210,13 @@
           "traits": {
             "smithy.api#documentation": "Settings for the input devices.",
             "smithy.api#jsonName": "inputDevices"
+          }
+        },
+        "InputPartnerIds": {
+          "target": "com.amazonaws.medialive#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "A list of IDs for all Inputs which are partners of this one.",
+            "smithy.api#jsonName": "inputPartnerIds"
           }
         },
         "InputSourceType": {
@@ -13510,6 +13653,9 @@
         },
         {
           "target": "com.amazonaws.medialive#CreateMultiplexProgram"
+        },
+        {
+          "target": "com.amazonaws.medialive#CreatePartnerInput"
         },
         {
           "target": "com.amazonaws.medialive#CreateTags"
@@ -17127,6 +17273,13 @@
             "smithy.api#documentation": "A collection of key-value pairs.",
             "smithy.api#jsonName": "tags"
           }
+        },
+        "Vpc": {
+          "target": "com.amazonaws.medialive#VpcOutputSettings",
+          "traits": {
+            "smithy.api#documentation": "Settings for VPC output",
+            "smithy.api#jsonName": "vpc"
+          }
         }
       },
       "traits": {
@@ -17579,6 +17732,13 @@
           "traits": {
             "smithy.api#documentation": "A collection of key-value pairs.",
             "smithy.api#jsonName": "tags"
+          }
+        },
+        "Vpc": {
+          "target": "com.amazonaws.medialive#VpcOutputSettings",
+          "traits": {
+            "smithy.api#documentation": "Settings for VPC output",
+            "smithy.api#jsonName": "vpc"
           }
         }
       },
@@ -19361,6 +19521,36 @@
       },
       "traits": {
         "smithy.api#documentation": "Video Selector Settings"
+      }
+    },
+    "com.amazonaws.medialive#VpcOutputSettings": {
+      "type": "structure",
+      "members": {
+        "PublicAddressAllocationIds": {
+          "target": "com.amazonaws.medialive#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "List of public address allocation ids to associate with ENIs that will be created in Output VPC.\nMust specify one for SINGLE_PIPELINE, two for STANDARD channels",
+            "smithy.api#jsonName": "publicAddressAllocationIds"
+          }
+        },
+        "SecurityGroupIds": {
+          "target": "com.amazonaws.medialive#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.\nIf none are specified then the VPC default security group will be used",
+            "smithy.api#jsonName": "securityGroupIds"
+          }
+        },
+        "SubnetIds": {
+          "target": "com.amazonaws.medialive#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "A list of VPC subnet IDs from the same VPC.\nIf STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).",
+            "smithy.api#jsonName": "subnetIds",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The properties for a private VPC Output\nWhen this property is specified, the output egress addresses will be created in a user specified VPC"
       }
     },
     "com.amazonaws.medialive#WavCodingMode": {

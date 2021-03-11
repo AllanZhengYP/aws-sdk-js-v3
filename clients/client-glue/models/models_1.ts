@@ -698,6 +698,29 @@ export namespace GetMLTransformRequest {
 }
 
 /**
+ * <p>A structure containing the column name and column importance score for a column. </p>
+ *
+ * 	        <p>Column importance helps you understand how columns contribute to your model, by identifying which columns in your records are more important than others.</p>
+ */
+export interface ColumnImportance {
+  /**
+   * <p>The name of a column.</p>
+   */
+  ColumnName?: string;
+
+  /**
+   * <p>The column importance score for the column, as a decimal.</p>
+   */
+  Importance?: number;
+}
+
+export namespace ColumnImportance {
+  export const filterSensitiveLog = (obj: ColumnImportance): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p>
  *
  * 	        <p>For more information, see <a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a> in Wikipedia.</p>
@@ -772,6 +795,11 @@ export interface FindMatchesMetrics {
    * 	        <p>For more information, see <a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a> in Wikipedia.</p>
    */
   ConfusionMatrix?: ConfusionMatrix;
+
+  /**
+   * <p>A list of <code>ColumnImportance</code> structures containing column importance metrics, sorted in order of descending importance.</p>
+   */
+  ColumnImportances?: ColumnImportance[];
 }
 
 export namespace FindMatchesMetrics {
@@ -1642,6 +1670,8 @@ export interface GetPartitionsRequest {
    * <p>The maximum number of partitions to return in a single response.</p>
    */
   MaxResults?: number;
+
+  ExcludeColumnSchema?: boolean;
 }
 
 export namespace GetPartitionsRequest {
@@ -2051,8 +2081,18 @@ export namespace GetSchemaByDefinitionResponse {
   });
 }
 
+/**
+ * <p>A structure containing the schema version information.</p>
+ */
 export interface SchemaVersionNumber {
+  /**
+   * <p>The latest version available for the schema.</p>
+   */
   LatestVersion?: boolean;
+
+  /**
+   * <p>The version number of the schema.</p>
+   */
   VersionNumber?: number;
 }
 

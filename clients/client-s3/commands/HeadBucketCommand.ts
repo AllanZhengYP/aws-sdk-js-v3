@@ -24,8 +24,12 @@ export type HeadBucketCommandOutput = __MetadataBearer;
 /**
  * <p>This operation is useful to determine if a bucket exists and you have permission to
  *          access it. The operation returns a <code>200 OK</code> if the bucket exists and you have
- *          permission to access it. Otherwise, the operation might return responses such as <code>404
- *             Not Found</code> and <code>403 Forbidden</code>. </p>
+ *          permission to access it.</p>
+ *
+ *
+ *          <p>If the bucket does not exist or you do not have permission to access it, the <code>HEAD</code> request
+ *          returns a generic <code>404 Not Found</code> or <code>403 Forbidden</code> code. A message body is not
+ *          included, so you cannot determine the exception beyond these error codes.</p>
  *
  *          <p>To use this operation, you must have permissions to perform the
  *             <code>s3:ListBucket</code> action. The bucket owner has this permission by default and

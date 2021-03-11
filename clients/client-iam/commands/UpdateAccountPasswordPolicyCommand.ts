@@ -1,5 +1,5 @@
 import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { UpdateAccountPasswordPolicyRequest } from "../models/models_0";
+import { UpdateAccountPasswordPolicyRequest } from "../models/models_1";
 import {
   deserializeAws_queryUpdateAccountPasswordPolicyCommand,
   serializeAws_queryUpdateAccountPasswordPolicyCommand,
@@ -34,8 +34,8 @@ export type UpdateAccountPasswordPolicyCommandOutput = __MetadataBearer;
  *                </li>
  *             </ul>
  *          </note>
- *          <p> For more information about using a password policy, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html">Managing an IAM Password
- *             Policy</a> in the <i>IAM User Guide</i>.</p>
+ *          <p> For more information about using a password policy, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html">Managing an IAM password
+ *             policy</a> in the <i>IAM User Guide</i>.</p>
  */
 export class UpdateAccountPasswordPolicyCommand extends $Command<
   UpdateAccountPasswordPolicyCommandInput,

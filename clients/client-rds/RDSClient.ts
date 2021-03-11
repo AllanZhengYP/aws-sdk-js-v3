@@ -280,6 +280,10 @@ import {
 } from "./commands/DownloadDBLogFilePortionCommand";
 import { FailoverDBClusterCommandInput, FailoverDBClusterCommandOutput } from "./commands/FailoverDBClusterCommand";
 import {
+  FailoverGlobalClusterCommandInput,
+  FailoverGlobalClusterCommandOutput,
+} from "./commands/FailoverGlobalClusterCommand";
+import {
   ImportInstallationMediaCommandInput,
   ImportInstallationMediaCommandOutput,
 } from "./commands/ImportInstallationMediaCommand";
@@ -559,6 +563,7 @@ export type ServiceInputTypes =
   | DescribeValidDBInstanceModificationsCommandInput
   | DownloadDBLogFilePortionCommandInput
   | FailoverDBClusterCommandInput
+  | FailoverGlobalClusterCommandInput
   | ImportInstallationMediaCommandInput
   | ListTagsForResourceCommandInput
   | ModifyCertificatesCommandInput
@@ -693,6 +698,7 @@ export type ServiceOutputTypes =
   | DescribeValidDBInstanceModificationsCommandOutput
   | DownloadDBLogFilePortionCommandOutput
   | FailoverDBClusterCommandOutput
+  | FailoverGlobalClusterCommandOutput
   | ImportInstallationMediaCommandOutput
   | ListTagsForResourceCommandOutput
   | ModifyCertificatesCommandOutput

@@ -7499,6 +7499,7 @@ const serializeAws_json1_1CreateAddressBookRequest = (
     ClientRequestToken: input.ClientRequestToken ?? generateIdempotencyToken(),
     ...(input.Description !== undefined && input.Description !== null && { Description: input.Description }),
     ...(input.Name !== undefined && input.Name !== null && { Name: input.Name }),
+    ...(input.Tags !== undefined && input.Tags !== null && { Tags: serializeAws_json1_1TagList(input.Tags, context) }),
   };
 };
 
@@ -7542,6 +7543,7 @@ const serializeAws_json1_1CreateConferenceProviderRequest = (
       }),
     ...(input.PSTNDialIn !== undefined &&
       input.PSTNDialIn !== null && { PSTNDialIn: serializeAws_json1_1PSTNDialIn(input.PSTNDialIn, context) }),
+    ...(input.Tags !== undefined && input.Tags !== null && { Tags: serializeAws_json1_1TagList(input.Tags, context) }),
   };
 };
 
@@ -7558,6 +7560,7 @@ const serializeAws_json1_1CreateContactRequest = (input: CreateContactRequest, c
       }),
     ...(input.SipAddresses !== undefined &&
       input.SipAddresses !== null && { SipAddresses: serializeAws_json1_1SipAddressList(input.SipAddresses, context) }),
+    ...(input.Tags !== undefined && input.Tags !== null && { Tags: serializeAws_json1_1TagList(input.Tags, context) }),
   };
 };
 
@@ -7583,6 +7586,7 @@ const serializeAws_json1_1CreateGatewayGroupRequest = (
     ClientRequestToken: input.ClientRequestToken ?? generateIdempotencyToken(),
     ...(input.Description !== undefined && input.Description !== null && { Description: input.Description }),
     ...(input.Name !== undefined && input.Name !== null && { Name: input.Name }),
+    ...(input.Tags !== undefined && input.Tags !== null && { Tags: serializeAws_json1_1TagList(input.Tags, context) }),
   };
 };
 
@@ -7635,6 +7639,7 @@ const serializeAws_json1_1CreateNetworkProfileRequest = (
     ...(input.NextPassword !== undefined && input.NextPassword !== null && { NextPassword: input.NextPassword }),
     ...(input.SecurityType !== undefined && input.SecurityType !== null && { SecurityType: input.SecurityType }),
     ...(input.Ssid !== undefined && input.Ssid !== null && { Ssid: input.Ssid }),
+    ...(input.Tags !== undefined && input.Tags !== null && { Tags: serializeAws_json1_1TagList(input.Tags, context) }),
     ...(input.TrustAnchors !== undefined &&
       input.TrustAnchors !== null && {
         TrustAnchors: serializeAws_json1_1TrustAnchorList(input.TrustAnchors, context),
@@ -8240,6 +8245,7 @@ const serializeAws_json1_1RegisterAVSDeviceRequest = (
       input.DeviceSerialNumber !== null && { DeviceSerialNumber: input.DeviceSerialNumber }),
     ...(input.ProductId !== undefined && input.ProductId !== null && { ProductId: input.ProductId }),
     ...(input.RoomArn !== undefined && input.RoomArn !== null && { RoomArn: input.RoomArn }),
+    ...(input.Tags !== undefined && input.Tags !== null && { Tags: serializeAws_json1_1TagList(input.Tags, context) }),
     ...(input.UserCode !== undefined && input.UserCode !== null && { UserCode: input.UserCode }),
   };
 };

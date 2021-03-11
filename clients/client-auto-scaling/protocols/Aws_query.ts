@@ -5496,6 +5496,9 @@ const serializeAws_queryDescribeScalingActivitiesType = (
   if (input.AutoScalingGroupName !== undefined && input.AutoScalingGroupName !== null) {
     entries["AutoScalingGroupName"] = input.AutoScalingGroupName;
   }
+  if (input.IncludeDeletedGroups !== undefined && input.IncludeDeletedGroups !== null) {
+    entries["IncludeDeletedGroups"] = input.IncludeDeletedGroups;
+  }
   if (input.MaxRecords !== undefined && input.MaxRecords !== null) {
     entries["MaxRecords"] = input.MaxRecords;
   }
@@ -6727,6 +6730,8 @@ const deserializeAws_queryActivity = (output: any, context: __SerdeContext): Act
     StatusMessage: undefined,
     Progress: undefined,
     Details: undefined,
+    AutoScalingGroupState: undefined,
+    AutoScalingGroupARN: undefined,
   };
   if (output["ActivityId"] !== undefined) {
     contents.ActivityId = output["ActivityId"];
@@ -6757,6 +6762,12 @@ const deserializeAws_queryActivity = (output: any, context: __SerdeContext): Act
   }
   if (output["Details"] !== undefined) {
     contents.Details = output["Details"];
+  }
+  if (output["AutoScalingGroupState"] !== undefined) {
+    contents.AutoScalingGroupState = output["AutoScalingGroupState"];
+  }
+  if (output["AutoScalingGroupARN"] !== undefined) {
+    contents.AutoScalingGroupARN = output["AutoScalingGroupARN"];
   }
   return contents;
 };

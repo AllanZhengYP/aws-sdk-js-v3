@@ -2292,6 +2292,36 @@ export enum ChannelState {
 }
 
 /**
+ * The properties for a private VPC Output
+ * When this property is specified, the output egress addresses will be created in a user specified VPC
+ */
+export interface VpcOutputSettings {
+  /**
+   * List of public address allocation ids to associate with ENIs that will be created in Output VPC.
+   * Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+   */
+  PublicAddressAllocationIds?: string[];
+
+  /**
+   * A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
+   * If none are specified then the VPC default security group will be used
+   */
+  SecurityGroupIds?: string[];
+
+  /**
+   * A list of VPC subnet IDs from the same VPC.
+   * If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+   */
+  SubnetIds: string[] | undefined;
+}
+
+export namespace VpcOutputSettings {
+  export const filterSensitiveLog = (obj: VpcOutputSettings): any => ({
+    ...obj,
+  });
+}
+
+/**
  * Placeholder documentation for ChannelSummary
  */
 export interface ChannelSummary {
@@ -2366,6 +2396,11 @@ export interface ChannelSummary {
    * A collection of key-value pairs.
    */
   Tags?: { [key: string]: string };
+
+  /**
+   * Settings for VPC output
+   */
+  Vpc?: VpcOutputSettings;
 }
 
 export namespace ChannelSummary {
@@ -2557,6 +2592,11 @@ export interface Input {
    * Settings for the input devices.
    */
   InputDevices?: InputDeviceSettings[];
+
+  /**
+   * A list of IDs for all Inputs which are partners of this one.
+   */
+  InputPartnerIds?: string[];
 
   /**
    * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
@@ -3949,6 +3989,17 @@ export namespace Fmp4HlsSettings {
   });
 }
 
+/**
+ * Frame Capture Hls Settings
+ */
+export interface FrameCaptureHlsSettings {}
+
+export namespace FrameCaptureHlsSettings {
+  export const filterSensitiveLog = (obj: FrameCaptureHlsSettings): any => ({
+    ...obj,
+  });
+}
+
 export enum M3u8NielsenId3Behavior {
   NO_PASSTHROUGH = "NO_PASSTHROUGH",
   PASSTHROUGH = "PASSTHROUGH",
@@ -4099,6 +4150,11 @@ export interface HlsSettings {
    * Fmp4 Hls Settings
    */
   Fmp4HlsSettings?: Fmp4HlsSettings;
+
+  /**
+   * Frame Capture Hls Settings
+   */
+  FrameCaptureHlsSettings?: FrameCaptureHlsSettings;
 
   /**
    * Standard Hls Settings
@@ -5348,83 +5404,6 @@ export interface UdpGroupSettings {
 
 export namespace UdpGroupSettings {
   export const filterSensitiveLog = (obj: UdpGroupSettings): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Output Group Settings
- */
-export interface OutputGroupSettings {
-  /**
-   * Archive Group Settings
-   */
-  ArchiveGroupSettings?: ArchiveGroupSettings;
-
-  /**
-   * Frame Capture Group Settings
-   */
-  FrameCaptureGroupSettings?: FrameCaptureGroupSettings;
-
-  /**
-   * Hls Group Settings
-   */
-  HlsGroupSettings?: HlsGroupSettings;
-
-  /**
-   * Media Package Group Settings
-   */
-  MediaPackageGroupSettings?: MediaPackageGroupSettings;
-
-  /**
-   * Ms Smooth Group Settings
-   */
-  MsSmoothGroupSettings?: MsSmoothGroupSettings;
-
-  /**
-   * Multiplex Group Settings
-   */
-  MultiplexGroupSettings?: MultiplexGroupSettings;
-
-  /**
-   * Rtmp Group Settings
-   */
-  RtmpGroupSettings?: RtmpGroupSettings;
-
-  /**
-   * Udp Group Settings
-   */
-  UdpGroupSettings?: UdpGroupSettings;
-}
-
-export namespace OutputGroupSettings {
-  export const filterSensitiveLog = (obj: OutputGroupSettings): any => ({
-    ...obj,
-  });
-}
-
-/**
- * Output groups for this Live Event. Output groups contain information about where streams should be distributed.
- */
-export interface OutputGroup {
-  /**
-   * Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed.
-   */
-  Name?: string;
-
-  /**
-   * Settings associated with the output group.
-   */
-  OutputGroupSettings: OutputGroupSettings | undefined;
-
-  /**
-   * Placeholder documentation for __listOfOutput
-   */
-  Outputs: Output[] | undefined;
-}
-
-export namespace OutputGroup {
-  export const filterSensitiveLog = (obj: OutputGroup): any => ({
     ...obj,
   });
 }

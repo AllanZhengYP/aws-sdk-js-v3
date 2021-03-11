@@ -22,7 +22,7 @@ export type CreateArchiveRuleCommandOutput = __MetadataBearer;
 
 /**
  * <p>Creates an archive rule for the specified analyzer. Archive rules automatically archive
- *          findings that meet the criteria you define when you create the rule.</p>
+ *          new findings that meet the criteria you define when you create the rule.</p>
  */
 export class CreateArchiveRuleCommand extends $Command<
   CreateArchiveRuleCommandInput,

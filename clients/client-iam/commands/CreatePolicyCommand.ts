@@ -21,10 +21,10 @@ export type CreatePolicyCommandOutput = CreatePolicyResponse & __MetadataBearer;
  * <p>Creates a new managed policy for your AWS account.</p>
  *          <p>This operation creates a policy version with a version identifier of <code>v1</code> and
  *          sets v1 as the policy's default version. For more information about policy versions, see
- *             <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for Managed Policies</a> in the
+ *             <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html">Versioning for managed policies</a> in the
  *          <i>IAM User Guide</i>.</p>
- *          <p>For more information about managed policies in general, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline
- *             Policies</a> in the <i>IAM User Guide</i>.</p>
+ *          <p>For more information about managed policies in general, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed policies and inline
+ *             policies</a> in the <i>IAM User Guide</i>.</p>
  */
 export class CreatePolicyCommand extends $Command<
   CreatePolicyCommandInput,

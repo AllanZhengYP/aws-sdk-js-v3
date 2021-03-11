@@ -1,5 +1,5 @@
 import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { UpdateServerCertificateRequest } from "../models/models_0";
+import { UpdateServerCertificateRequest } from "../models/models_1";
 import {
   deserializeAws_queryUpdateServerCertificateCommand,
   serializeAws_queryUpdateServerCertificateCommand,
@@ -24,12 +24,12 @@ export type UpdateServerCertificateCommandOutput = __MetadataBearer;
  * <p>Updates the name and/or the path of the specified server certificate stored in
  *          IAM.</p>
  *          <p>For more information about working with server certificates, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">Working with
- *             Server Certificates</a> in the <i>IAM User Guide</i>. This topic
+ *             server certificates</a> in the <i>IAM User Guide</i>. This topic
  *          also includes a list of AWS services that can use the server certificates that you manage
  *          with IAM.</p>
  *          <important>
  *             <p>You should understand the implications of changing a server certificate's path or
- *             name. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts">Renaming a Server Certificate</a> in the
+ *             name. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts">Renaming a server certificate</a> in the
  *             <i>IAM User Guide</i>.</p>
  *          </important>
  *          <note>
@@ -40,7 +40,7 @@ export type UpdateServerCertificateCommandOutput = __MetadataBearer;
  *             permission to update the <code>ProductionCert</code> group, but not the
  *                <code>ProdCert</code> certificate, then the update fails. For more information about
  *             permissions, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html">Access
- *                Management</a> in the <i>IAM User Guide</i>.</p>
+ *                management</a> in the <i>IAM User Guide</i>.</p>
  *          </note>
  */
 export class UpdateServerCertificateCommand extends $Command<

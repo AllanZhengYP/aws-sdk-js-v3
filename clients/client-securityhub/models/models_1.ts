@@ -6,7 +6,276 @@ import {
   NoteUpdate,
   RecordState,
   Result,
+  StandardsSubscription,
 } from "./models_0";
+
+export interface DisableImportFindingsForProductResponse {}
+
+export namespace DisableImportFindingsForProductResponse {
+  export const filterSensitiveLog = (obj: DisableImportFindingsForProductResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface DisableOrganizationAdminAccountRequest {
+  /**
+   * <p>The AWS account identifier of the Security Hub administrator account.</p>
+   */
+  AdminAccountId: string | undefined;
+}
+
+export namespace DisableOrganizationAdminAccountRequest {
+  export const filterSensitiveLog = (obj: DisableOrganizationAdminAccountRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface DisableOrganizationAdminAccountResponse {}
+
+export namespace DisableOrganizationAdminAccountResponse {
+  export const filterSensitiveLog = (obj: DisableOrganizationAdminAccountResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface DisableSecurityHubRequest {}
+
+export namespace DisableSecurityHubRequest {
+  export const filterSensitiveLog = (obj: DisableSecurityHubRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface DisableSecurityHubResponse {}
+
+export namespace DisableSecurityHubResponse {
+  export const filterSensitiveLog = (obj: DisableSecurityHubResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface DisassociateFromMasterAccountRequest {}
+
+export namespace DisassociateFromMasterAccountRequest {
+  export const filterSensitiveLog = (obj: DisassociateFromMasterAccountRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface DisassociateFromMasterAccountResponse {}
+
+export namespace DisassociateFromMasterAccountResponse {
+  export const filterSensitiveLog = (obj: DisassociateFromMasterAccountResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface DisassociateMembersRequest {
+  /**
+   * <p>The account IDs of the member accounts to disassociate from the master account.</p>
+   */
+  AccountIds: string[] | undefined;
+}
+
+export namespace DisassociateMembersRequest {
+  export const filterSensitiveLog = (obj: DisassociateMembersRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface DisassociateMembersResponse {}
+
+export namespace DisassociateMembersResponse {
+  export const filterSensitiveLog = (obj: DisassociateMembersResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface EnableImportFindingsForProductRequest {
+  /**
+   * <p>The ARN of the product to enable the integration for.</p>
+   */
+  ProductArn: string | undefined;
+}
+
+export namespace EnableImportFindingsForProductRequest {
+  export const filterSensitiveLog = (obj: EnableImportFindingsForProductRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface EnableImportFindingsForProductResponse {
+  /**
+   * <p>The ARN of your subscription to the product to enable integrations for.</p>
+   */
+  ProductSubscriptionArn?: string;
+}
+
+export namespace EnableImportFindingsForProductResponse {
+  export const filterSensitiveLog = (obj: EnableImportFindingsForProductResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface EnableOrganizationAdminAccountRequest {
+  /**
+   * <p>The AWS account identifier of the account to designate as the Security Hub administrator
+   *          account.</p>
+   */
+  AdminAccountId: string | undefined;
+}
+
+export namespace EnableOrganizationAdminAccountRequest {
+  export const filterSensitiveLog = (obj: EnableOrganizationAdminAccountRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface EnableOrganizationAdminAccountResponse {}
+
+export namespace EnableOrganizationAdminAccountResponse {
+  export const filterSensitiveLog = (obj: EnableOrganizationAdminAccountResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface EnableSecurityHubRequest {
+  /**
+   * <p>The tags to add to the hub resource when you enable Security Hub.</p>
+   */
+  Tags?: { [key: string]: string };
+
+  /**
+   * <p>Whether to enable the security standards that Security Hub has designated as automatically
+   *          enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set
+   *          to <code>true</code>. To not enable the automatically enabled standards, set
+   *             <code>EnableDefaultStandards</code> to <code>false</code>.</p>
+   */
+  EnableDefaultStandards?: boolean;
+}
+
+export namespace EnableSecurityHubRequest {
+  export const filterSensitiveLog = (obj: EnableSecurityHubRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface EnableSecurityHubResponse {}
+
+export namespace EnableSecurityHubResponse {
+  export const filterSensitiveLog = (obj: EnableSecurityHubResponse): any => ({
+    ...obj,
+  });
+}
+
+export interface GetEnabledStandardsRequest {
+  /**
+   * <p>The list of the standards subscription ARNs for the standards to retrieve.</p>
+   */
+  StandardsSubscriptionArns?: string[];
+
+  /**
+   * <p>The token that is required for pagination. On your first call to the
+   *             <code>GetEnabledStandards</code> operation, set the value of this parameter to
+   *             <code>NULL</code>.</p>
+   *          <p>For subsequent calls to the operation, to continue listing data, set the value of this
+   *          parameter to the value returned from the previous response.</p>
+   */
+  NextToken?: string;
+
+  /**
+   * <p>The maximum number of results to return in the response.</p>
+   */
+  MaxResults?: number;
+}
+
+export namespace GetEnabledStandardsRequest {
+  export const filterSensitiveLog = (obj: GetEnabledStandardsRequest): any => ({
+    ...obj,
+  });
+}
+
+export interface GetEnabledStandardsResponse {
+  /**
+   * <p>The list of <code>StandardsSubscriptions</code> objects that include information about
+   *          the enabled standards.</p>
+   */
+  StandardsSubscriptions?: StandardsSubscription[];
+
+  /**
+   * <p>The pagination token to use to request the next page of results.</p>
+   */
+  NextToken?: string;
+}
+
+export namespace GetEnabledStandardsResponse {
+  export const filterSensitiveLog = (obj: GetEnabledStandardsResponse): any => ({
+    ...obj,
+  });
+}
+
+export enum SortOrder {
+  ASCENDING = "asc",
+  DESCENDING = "desc",
+}
+
+/**
+ * <p>A collection of finding attributes used to sort findings.</p>
+ */
+export interface SortCriterion {
+  /**
+   * <p>The finding attribute used to sort findings.</p>
+   */
+  Field?: string;
+
+  /**
+   * <p>The order used to sort findings.</p>
+   */
+  SortOrder?: SortOrder | string;
+}
+
+export namespace SortCriterion {
+  export const filterSensitiveLog = (obj: SortCriterion): any => ({
+    ...obj,
+  });
+}
+
+export interface GetFindingsRequest {
+  /**
+   * <p>The finding attributes used to define a condition to filter the returned
+   *          findings.</p>
+   *          <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to
+   *          20 filter values.</p>
+   *          <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To
+   *          search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>
+   */
+  Filters?: AwsSecurityFindingFilters;
+
+  /**
+   * <p>The finding attributes used to sort the list of returned findings.</p>
+   */
+  SortCriteria?: SortCriterion[];
+
+  /**
+   * <p>The token that is required for pagination. On your first call to the
+   *             <code>GetFindings</code> operation, set the value of this parameter to
+   *          <code>NULL</code>.</p>
+   *          <p>For subsequent calls to the operation, to continue listing data, set the value of this
+   *          parameter to the value returned from the previous response.</p>
+   */
+  NextToken?: string;
+
+  /**
+   * <p>The maximum number of findings to return.</p>
+   */
+  MaxResults?: number;
+}
+
+export namespace GetFindingsRequest {
+  export const filterSensitiveLog = (obj: GetFindingsRequest): any => ({
+    ...obj,
+  });
+}
 
 export interface GetFindingsResponse {
   /**

@@ -449,7 +449,7 @@ export interface DeleteIntegrationRequest {
   /**
    * <p>The URI of the S3 bucket or any other type of data source.</p>
    */
-  Uri?: string;
+  Uri: string | undefined;
 }
 
 export namespace DeleteIntegrationRequest {
@@ -721,7 +721,7 @@ export interface GetIntegrationRequest {
   /**
    * <p>The URI of the S3 bucket or any other type of data source.</p>
    */
-  Uri?: string;
+  Uri: string | undefined;
 }
 
 export namespace GetIntegrationRequest {

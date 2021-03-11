@@ -1,5 +1,6 @@
 export * from "./AccessAnalyzerClient";
 export * from "./AccessAnalyzer";
+export * from "./commands/ApplyArchiveRuleCommand";
 export * from "./commands/CreateAnalyzerCommand";
 export * from "./commands/CreateArchiveRuleCommand";
 export * from "./commands/DeleteAnalyzerCommand";

@@ -14,7 +14,7 @@ import {
   DBSnapshot,
   DBSnapshotAttributesResult,
   DBSubnetGroup,
-  EventCategoriesMap,
+  EngineDefaults,
   EventSubscription,
   ExportTask,
   Filter,
@@ -32,6 +32,65 @@ import {
 } from "./models_0";
 import { SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
 import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
+
+export interface DescribeEngineDefaultParametersResult {
+  /**
+   * <p>
+   *             Contains the result of a successful invocation of the <code>DescribeEngineDefaultParameters</code> action.
+   *         </p>
+   */
+  EngineDefaults?: EngineDefaults;
+}
+
+export namespace DescribeEngineDefaultParametersResult {
+  export const filterSensitiveLog = (obj: DescribeEngineDefaultParametersResult): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p></p>
+ */
+export interface DescribeEventCategoriesMessage {
+  /**
+   * <p>The type of source that is generating the events.</p>
+   *          <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code>
+   *          </p>
+   */
+  SourceType?: string;
+
+  /**
+   * <p>This parameter isn't currently supported.</p>
+   */
+  Filters?: Filter[];
+}
+
+export namespace DescribeEventCategoriesMessage {
+  export const filterSensitiveLog = (obj: DescribeEventCategoriesMessage): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Contains the results of a successful invocation of the <code>DescribeEventCategories</code> operation.</p>
+ */
+export interface EventCategoriesMap {
+  /**
+   * <p>The source type that the returned categories belong to</p>
+   */
+  SourceType?: string;
+
+  /**
+   * <p>The event categories for the specified source type</p>
+   */
+  EventCategories?: string[];
+}
+
+export namespace EventCategoriesMap {
+  export const filterSensitiveLog = (obj: EventCategoriesMap): any => ({
+    ...obj,
+  });
+}
 
 /**
  * <p>Data returned from the <code>DescribeEventCategories</code> operation.</p>
@@ -548,6 +607,65 @@ export namespace InstallationMediaMessage {
 export interface DescribeOptionGroupOptionsMessage {
   /**
    * <p>A required parameter. Options available for the given engine name are described.</p>
+   *          <p>Valid Values:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>mariadb</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mysql</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se2</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se1</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>postgres</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ex</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-web</code>
+   *                </p>
+   *             </li>
+   *          </ul>
    */
   EngineName: string | undefined;
 
@@ -842,6 +960,65 @@ export interface DescribeOptionGroupsMessage {
 
   /**
    * <p>Filters the list of option groups to only include groups associated with a specific database engine.</p>
+   *          <p>Valid Values:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>mariadb</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mysql</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se2</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se1</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>postgres</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ex</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-web</code>
+   *                </p>
+   *             </li>
+   *          </ul>
    */
   EngineName?: string;
 
@@ -888,6 +1065,78 @@ export namespace OptionGroups {
 export interface DescribeOrderableDBInstanceOptionsMessage {
   /**
    * <p>The name of the engine to retrieve DB instance options for.</p>
+   *          <p>Valid Values:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora)</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>aurora-postgresql</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mariadb</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mysql</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se2</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se1</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>postgres</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ex</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-web</code>
+   *                </p>
+   *             </li>
+   *          </ul>
    */
   Engine: string | undefined;
 
@@ -2096,6 +2345,50 @@ export namespace FailoverDBClusterResult {
   });
 }
 
+export interface FailoverGlobalClusterMessage {
+  /**
+   * <p>Identifier of the Aurora global database (<a>GlobalCluster</a>)
+   *     that should be failed over. The identifier is the unique key assigned by
+   *     the user when the Aurora global database was created. In other words,
+   *     it's the name of the Aurora global database that you want to fail over. </p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Must match the identifier of an existing
+   *       <a>GlobalCluster</a> (Aurora global database).</p>
+   *             </li>
+   *          </ul>
+   */
+  GlobalClusterIdentifier: string | undefined;
+
+  /**
+   * <p>Identifier of the secondary Aurora DB cluster that you want to promote to primary for the Aurora
+   *        global database (<a>GlobalCluster</a>.) Use the Amazon Resource Name (ARN) for the identifier so that
+   *        Aurora can locate the cluster in its AWS Region.
+   *  </p>
+   */
+  TargetDbClusterIdentifier: string | undefined;
+}
+
+export namespace FailoverGlobalClusterMessage {
+  export const filterSensitiveLog = (obj: FailoverGlobalClusterMessage): any => ({
+    ...obj,
+  });
+}
+
+export interface FailoverGlobalClusterResult {
+  /**
+   * <p>A data type representing an Aurora global database.</p>
+   */
+  GlobalCluster?: GlobalCluster;
+}
+
+export namespace FailoverGlobalClusterResult {
+  export const filterSensitiveLog = (obj: FailoverGlobalClusterResult): any => ({
+    ...obj,
+  });
+}
+
 export interface ImportInstallationMediaMessage {
   /**
    * <p>The identifier of the custom Availability Zone (AZ) to import the installation media to.</p>
@@ -2665,11 +2958,14 @@ export interface ModifyDBClusterMessage {
   CopyTagsToSnapshot?: boolean;
 
   /**
-   * <p>A value that indicates whether to enable write operations to be forwarded
-   *       from this cluster to the primary cluster in an Aurora global database. The
-   *       resulting changes are replicated back to this cluster. This parameter only
-   *       applies to DB clusters that are secondary clusters in an Aurora global database.
-   *       By default, Aurora disallows write operations for secondary clusters.</p>
+   * <p>A value that indicates whether to enable this DB cluster to forward write operations to the primary cluster of an
+   *       Aurora global database (<a>GlobalCluster</a>). By default, write operations are not allowed on Aurora DB clusters that
+   *       are secondary clusters in an Aurora global database.</p>
+   *          <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter
+   *       enabled, a secondary cluster can forward writes to the current primary cluster and the resulting changes are replicated back to
+   *       this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the primary is
+   *       demoted by the <a>FailoverGlobalCluster</a> API operation, but it does nothing until then.
+   *     </p>
    */
   EnableGlobalWriteForwarding?: boolean;
 }
@@ -2927,7 +3223,7 @@ export interface ModifyDBInstanceMessage {
    *
    *           If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC.
    *           For more information, see
-   *           <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC">Updating the VPC for a DB Instance</a>
+   *           <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC">Working with a DB instance in a VPC</a>
    *           in the <i>Amazon RDS User Guide.</i>
    *          </p>
    *          <p>Changing the subnet group causes an outage during the change.
@@ -3149,7 +3445,10 @@ export interface ModifyDBInstanceMessage {
    *             new DB parameter group in the DB parameter group family for the new engine version must
    *             be specified. The new DB parameter group can be the default for that DB parameter group
    *             family.</p>
-   *          <p>For information about valid engine versions, see <code>CreateDBInstance</code>, or call <code>DescribeDBEngineVersions</code>.</p>
+   *          <p>If you specify only a major version, Amazon RDS will update the DB instance to the
+   *           default minor version if the current minor version is lower.
+   *           For information about valid engine versions, see <code>CreateDBInstance</code>,
+   *           or call <code>DescribeDBEngineVersions</code>.</p>
    */
   EngineVersion?: string;
 
@@ -3209,7 +3508,7 @@ export interface ModifyDBInstanceMessage {
 
   /**
    * <p>
-   *             Indicates that the DB instance should be associated with the specified option group.
+   *             A value that indicates the DB instance should be associated with the specified option group.
    *             Changing this parameter doesn't result in an outage except in the following case and the change
    *             is applied during the next maintenance window
    *             unless the <code>ApplyImmediately</code> parameter is enabled
@@ -3487,6 +3786,10 @@ export interface ModifyDBInstanceMessage {
 
   /**
    * <p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>
+   *         <p>For more information about this setting, including limitations that apply to it, see
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling">
+   *                 Managing capacity automatically with Amazon RDS storage autoscaling</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
    */
   MaxAllocatedStorage?: number;
 
@@ -3530,6 +3833,24 @@ export interface ModifyDBInstanceMessage {
    *             in the <i>Amazon RDS User Guide</i>.</p>
    */
   ReplicaMode?: ReplicaMode | string;
+
+  /**
+   * <p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>
+   *         <p>A <i>CoIP</i> provides local or external connectivity to resources in
+   *             your Outpost subnets through your on-premises network. For some use cases, a CoIP can
+   *             provide lower latency for connections to the DB instance from outside of its virtual
+   *             private cloud (VPC) on your local network.</p>
+   *         <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
+   *         <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a>
+   *             in the <i>AWS Outposts User Guide</i>.</p>
+   */
+  EnableCustomerOwnedIp?: boolean;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the recovery point in AWS Backup.</p>
+   */
+  AwsBackupRecoveryPointArn?: string;
 }
 
 export namespace ModifyDBInstanceMessage {
@@ -3837,7 +4158,7 @@ export interface ModifyDBSnapshotMessage {
    *         <p>You can specify this parameter when you upgrade an Oracle DB snapshot.
    *             The same option group considerations apply when upgrading a DB snapshot as when upgrading a DB instance.
    *             For more information, see
-   *             <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG">Option Group Considerations</a> in the <i>Amazon RDS User Guide.</i>
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG">Option group considerations</a> in the <i>Amazon RDS User Guide.</i>
    *         </p>
    */
   OptionGroupName?: string;
@@ -4095,6 +4416,36 @@ export interface ModifyGlobalClusterMessage {
    *       </p>
    */
   DeletionProtection?: boolean;
+
+  /**
+   * <p>The version number of the database engine to which you want to upgrade.
+   *           Changing this parameter results in an outage. The change is applied during
+   *           the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p>
+   *          <p>To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the following command:</p>
+   *          <p>
+   *             <code>aws rds describe-db-engine-versions --engine aurora --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'</code>
+   *          </p>
+   *          <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use the following command:</p>
+   *          <p>
+   *             <code>aws rds describe-db-engine-versions --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'</code>
+   *          </p>
+   *          <p>To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:</p>
+   *          <p>
+   *             <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'</code>
+   *          </p>
+   */
+  EngineVersion?: string;
+
+  /**
+   * <p>A value that indicates whether major version upgrades are allowed.</p>
+   *          <p>Constraints: You must allow major version upgrades when specifying a value for the
+   *                 <code>EngineVersion</code> parameter that is a different major version than the DB
+   *             cluster's current version.</p>
+   *          <p>If you upgrade the major version of a global database, the cluster and DB instance parameter
+   *         groups are set to the default parameter groups for the new version. Apply any custom parameter
+   *         groups after completing the upgrade.</p>
+   */
+  AllowMajorVersionUpgrade?: boolean;
 }
 
 export namespace ModifyGlobalClusterMessage {
@@ -6018,6 +6369,19 @@ export interface RestoreDBInstanceFromDBSnapshotMessage {
    *         </p>
    */
   DeletionProtection?: boolean;
+
+  /**
+   * <p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>
+   *         <p>A <i>CoIP</i> provides local or external connectivity to resources in
+   *             your Outpost subnets through your on-premises network. For some use cases, a CoIP can
+   *             provide lower latency for connections to the DB instance from outside of its virtual
+   *             private cloud (VPC) on your local network.</p>
+   *         <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
+   *         <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a>
+   *             in the <i>AWS Outposts User Guide</i>.</p>
+   */
+  EnableCustomerOwnedIp?: boolean;
 }
 
 export namespace RestoreDBInstanceFromDBSnapshotMessage {
@@ -6485,6 +6849,10 @@ export interface RestoreDBInstanceFromS3Message {
 
   /**
    * <p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>
+   *         <p>For more information about this setting, including limitations that apply to it, see
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling">
+   *                 Managing capacity automatically with Amazon RDS storage autoscaling</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
    */
   MaxAllocatedStorage?: number;
 }
@@ -6875,6 +7243,10 @@ export interface RestoreDBInstanceToPointInTimeMessage {
 
   /**
    * <p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>
+   *          <p>For more information about this setting, including limitations that apply to it, see
+   *           <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling">
+   *               Managing capacity automatically with Amazon RDS storage autoscaling</a>
+   *           in the <i>Amazon RDS User Guide</i>.</p>
    */
   MaxAllocatedStorage?: number;
 
@@ -6883,6 +7255,19 @@ export interface RestoreDBInstanceToPointInTimeMessage {
    *             <code>arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.</p>
    */
   SourceDBInstanceAutomatedBackupsArn?: string;
+
+  /**
+   * <p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>
+   *         <p>A <i>CoIP</i> provides local or external connectivity to resources in
+   *             your Outpost subnets through your on-premises network. For some use cases, a CoIP can
+   *             provide lower latency for connections to the DB instance from outside of its virtual
+   *             private cloud (VPC) on your local network.</p>
+   *         <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
+   *         <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a>
+   *             in the <i>AWS Outposts User Guide</i>.</p>
+   */
+  EnableCustomerOwnedIp?: boolean;
 }
 
 export namespace RestoreDBInstanceToPointInTimeMessage {

@@ -346,11 +346,11 @@ export class S3Control extends S3ControlClient {
   }
 
   /**
-   * <p>S3 Batch Operations performs large-scale Batch Operations on Amazon S3 objects. Batch Operations can run a
-   *          single operation or action on lists of Amazon S3 objects that you specify. For more information,
+   * <p>You can use S3 Batch Operations to perform large-scale batch operations on Amazon S3 objects. Batch Operations can run a
+   *          single operation on lists of Amazon S3 objects that you specify. For more information,
    *          see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html">S3 Batch Operations</a> in the
    *             <i>Amazon Simple Storage Service Developer Guide</i>.</p>
-   *          <p>This operation creates an S3 Batch Operations job.</p>
+   *          <p>This operation creates a S3 Batch Operations job.</p>
    *          <p></p>
    *          <p>Related actions include:</p>
    *          <ul>
@@ -372,6 +372,11 @@ export class S3Control extends S3ControlClient {
    *             <li>
    *                <p>
    *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html">UpdateJobStatus</a>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html">JobOperation</a>
    *                </p>
    *             </li>
    *          </ul>
@@ -571,8 +576,7 @@ export class S3Control extends S3ControlClient {
    *          others.</p>
    *          <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html#API_control_DeleteBucketLifecycleConfiguration_Examples">Examples</a> section.</p>
    *
-   *          <p>For more information about object expiration, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions">
-   *          Elements to Describe Lifecycle Actions</a>.</p>
+   *          <p>For more information about object expiration, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions">Elements to Describe Lifecycle Actions</a>.</p>
    *          <p>Related actions include:</p>
    *          <ul>
    *             <li>
@@ -641,8 +645,7 @@ export class S3Control extends S3ControlClient {
    *          even if the policy explicitly denies the root user the ability to perform this action.</p>
    *          </important>
    *
-   *          <p>For more information about bucket policies, see <a href=" https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User
-   *             Policies</a>. </p>
+   *          <p>For more information about bucket policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html">Using Bucket Policies and User Policies</a>. </p>
    *
    *          <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples">Examples</a> section.</p>
    *
@@ -850,12 +853,13 @@ export class S3Control extends S3ControlClient {
 
   /**
    * <p>Deletes the Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see
-   *          <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with Amazon S3 Storage Lens</a> in the
+   *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
+   *             activity and usage with Amazon S3 Storage Lens </a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <note>
    *             <p>To use this action,
    *          you must have permission to perform the <code>s3:DeleteStorageLensConfiguration</code> action. For more
-   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM">Setting permissions to use Amazon S3 Storage Lens</a> in the
+   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          </note>
    */
@@ -890,12 +894,13 @@ export class S3Control extends S3ControlClient {
 
   /**
    * <p>Deletes the Amazon S3 Storage Lens configuration tags. For more information about S3 Storage Lens, see
-   *          <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with Amazon S3 Storage Lens</a> in the
+   *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
+   *             activity and usage with Amazon S3 Storage Lens </a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <note>
    *             <p>To use this action,
    *          you must have permission to perform the <code>s3:DeleteStorageLensConfigurationTagging</code> action. For more
-   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM">Setting permissions to use Amazon S3 Storage Lens</a> in the
+   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          </note>
    */
@@ -1178,10 +1183,8 @@ export class S3Control extends S3ControlClient {
    *
    *          <p>To use this operation, you must have permission to perform the <code>s3-outposts:GetLifecycleConfiguration</code> action.
    *          The Outposts bucket owner has this permission, by default. The bucket owner can grant this permission to others. For more
-   *          information about permissions, see
-   *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions
-   *             Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">Managing Access
-   *                Permissions to Your Amazon S3 Resources</a>.</p>
+   *          information about permissions, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources">Permissions
+   *             Related to Bucket Subresource Operations</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">Managing Access Permissions to Your Amazon S3 Resources</a>.</p>
    *
    *          <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples">Examples</a> section.</p>
    *
@@ -1493,12 +1496,13 @@ export class S3Control extends S3ControlClient {
 
   /**
    * <p>Gets the Amazon S3 Storage Lens configuration. For more information, see
-   *          <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with Amazon S3 Storage Lens</a> in the
+   *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
+   *             activity and usage with Amazon S3 Storage Lens </a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <note>
    *             <p>To use this action,
    *          you must have permission to perform the <code>s3:GetStorageLensConfiguration</code> action. For more
-   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM">Setting permissions to use Amazon S3 Storage Lens</a> in the
+   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          </note>
    */
@@ -1533,12 +1537,12 @@ export class S3Control extends S3ControlClient {
 
   /**
    * <p>Gets the tags of Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see
-   *          <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with Amazon S3 Storage Lens</a> in the
-   *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
+   *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
+   *             activity and usage with Amazon S3 Storage Lens </a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <note>
    *             <p>To use this action,
    *          you must have permission to perform the <code>s3:GetStorageLensConfigurationTagging</code> action. For more
-   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM">Setting permissions to use Amazon S3 Storage Lens</a> in the
+   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          </note>
    */
@@ -1717,12 +1721,13 @@ export class S3Control extends S3ControlClient {
 
   /**
    * <p>Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see
-   *          <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with Amazon S3 Storage Lens</a> in the
+   *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
+   *             activity and usage with Amazon S3 Storage Lens </a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <note>
    *             <p>To use this action,
    *          you must have permission to perform the <code>s3:ListStorageLensConfigurations</code> action. For more
-   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM">Setting permissions to use Amazon S3 Storage Lens</a> in the
+   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          </note>
    */
@@ -1943,8 +1948,8 @@ export class S3Control extends S3ControlClient {
    *
    *          <note>
    *             <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites
-   *          the old value. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html">Using Cost Allocation in Amazon S3
-   *             Bucket Tags</a>.</p>
+   *          the old value. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html">
+   *             Using Cost Allocation in Amazon S3 Bucket Tags</a>.</p>
    *          </note>
    *          <p>To use this operation, you must have permissions to perform the
    *             <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this
@@ -2184,12 +2189,12 @@ export class S3Control extends S3ControlClient {
   }
 
   /**
-   * <p>Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with
+   * <p>Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with
    *             Amazon S3 Storage Lens</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <note>
    *             <p>To use this action,
    *          you must have permission to perform the <code>s3:PutStorageLensConfiguration</code> action. For more
-   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM">Setting permissions to use Amazon S3 Storage Lens</a> in the
+   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          </note>
    */
@@ -2224,12 +2229,13 @@ export class S3Control extends S3ControlClient {
 
   /**
    * <p>Put or replace tags on an existing Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see
-   *          <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Working with Amazon S3 Storage Lens</a> in the
+   *          <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html">Assessing your storage
+   *             activity and usage with Amazon S3 Storage Lens </a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          <note>
    *             <p>To use this action,
    *          you must have permission to perform the <code>s3:PutStorageLensConfigurationTagging</code> action. For more
-   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html#storage_lens_IAM">Setting permissions to use Amazon S3 Storage Lens</a> in the
+   *          information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html">Setting permissions to use Amazon S3 Storage Lens</a> in the
    *          <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    *          </note>
    */

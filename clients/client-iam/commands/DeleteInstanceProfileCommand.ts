@@ -28,7 +28,7 @@ export type DeleteInstanceProfileCommandOutput = __MetadataBearer;
  *             profile you are about to delete. Deleting a role or instance profile that is associated
  *             with a running instance will break any applications running on the instance.</p>
  *          </important>
- *          <p>For more information about instance profiles, go to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About Instance Profiles</a>.</p>
+ *          <p>For more information about instance profiles, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html">About instance profiles</a>.</p>
  */
 export class DeleteInstanceProfileCommand extends $Command<
   DeleteInstanceProfileCommandInput,

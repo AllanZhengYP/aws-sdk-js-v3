@@ -560,7 +560,6 @@ import {
   SnapshotScheduleQuotaExceededFault,
   SnapshotSortingEntity,
   SourceNotFoundFault,
-  SpartaProxyVpcEndpoint,
   Subnet,
   SubscriptionAlreadyExistFault,
   SubscriptionCategoryNotFoundFault,
@@ -585,6 +584,7 @@ import {
   UsageLimitAlreadyExistsFault,
   UsageLimitList,
   UsageLimitNotFoundFault,
+  VpcEndpoint,
   VpcSecurityGroupMembership,
 } from "../models/models_0";
 import {
@@ -15159,9 +15159,9 @@ const deserializeAws_queryEndpoint = (output: any, context: __SerdeContext): End
   if (output.VpcEndpoints === "") {
     contents.VpcEndpoints = [];
   }
-  if (output["VpcEndpoints"] !== undefined && output["VpcEndpoints"]["SpartaProxyVpcEndpoint"] !== undefined) {
-    contents.VpcEndpoints = deserializeAws_querySpartaProxyVpcEndpointList(
-      __getArrayIfSingleItem(output["VpcEndpoints"]["SpartaProxyVpcEndpoint"]),
+  if (output["VpcEndpoints"] !== undefined && output["VpcEndpoints"]["VpcEndpoint"] !== undefined) {
+    contents.VpcEndpoints = deserializeAws_queryVpcEndpointsList(
+      __getArrayIfSingleItem(output["VpcEndpoints"]["VpcEndpoint"]),
       context
     );
   }
@@ -17914,30 +17914,6 @@ const deserializeAws_querySourceNotFoundFault = (output: any, context: __SerdeCo
   return contents;
 };
 
-const deserializeAws_querySpartaProxyVpcEndpoint = (output: any, context: __SerdeContext): SpartaProxyVpcEndpoint => {
-  let contents: any = {
-    VpcEndpointId: undefined,
-  };
-  if (output["VpcEndpointId"] !== undefined) {
-    contents.VpcEndpointId = output["VpcEndpointId"];
-  }
-  return contents;
-};
-
-const deserializeAws_querySpartaProxyVpcEndpointList = (
-  output: any,
-  context: __SerdeContext
-): SpartaProxyVpcEndpoint[] => {
-  return (output || [])
-    .filter((e: any) => e != null)
-    .map((entry: any) => {
-      if (entry === null) {
-        return null as any;
-      }
-      return deserializeAws_querySpartaProxyVpcEndpoint(entry, context);
-    });
-};
-
 const deserializeAws_querySubnet = (output: any, context: __SerdeContext): Subnet => {
   let contents: any = {
     SubnetIdentifier: undefined,
@@ -18489,6 +18465,27 @@ const deserializeAws_queryUsageLimits = (output: any, context: __SerdeContext): 
         return null as any;
       }
       return deserializeAws_queryUsageLimit(entry, context);
+    });
+};
+
+const deserializeAws_queryVpcEndpoint = (output: any, context: __SerdeContext): VpcEndpoint => {
+  let contents: any = {
+    VpcEndpointId: undefined,
+  };
+  if (output["VpcEndpointId"] !== undefined) {
+    contents.VpcEndpointId = output["VpcEndpointId"];
+  }
+  return contents;
+};
+
+const deserializeAws_queryVpcEndpointsList = (output: any, context: __SerdeContext): VpcEndpoint[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return deserializeAws_queryVpcEndpoint(entry, context);
     });
 };
 

@@ -960,6 +960,65 @@ export namespace Address {
   });
 }
 
+/**
+ * <p>The status of an updated pointer (PTR) record for an Elastic IP address.</p>
+ */
+export interface PtrUpdateStatus {
+  /**
+   * <p>The value for the PTR record update.</p>
+   */
+  Value?: string;
+
+  /**
+   * <p>The status of the PTR record update.</p>
+   */
+  Status?: string;
+
+  /**
+   * <p>The reason for the PTR record update.</p>
+   */
+  Reason?: string;
+}
+
+export namespace PtrUpdateStatus {
+  export const filterSensitiveLog = (obj: PtrUpdateStatus): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>The attributes associated with an Elastic IP address.</p>
+ */
+export interface AddressAttribute {
+  /**
+   * <p>The public IP address.</p>
+   */
+  PublicIp?: string;
+
+  /**
+   * <p>[EC2-VPC] The allocation ID.</p>
+   */
+  AllocationId?: string;
+
+  /**
+   * <p>The pointer (PTR) record for the IP address.</p>
+   */
+  PtrRecord?: string;
+
+  /**
+   * <p>The updated PTR record for the IP address.</p>
+   */
+  PtrRecordUpdate?: PtrUpdateStatus;
+}
+
+export namespace AddressAttribute {
+  export const filterSensitiveLog = (obj: AddressAttribute): any => ({
+    ...obj,
+  });
+}
+
+export type AddressAttributeName = "domain-name";
+
 export interface AdvertiseByoipCidrRequest {
   /**
    * <p>The address range, in CIDR notation. This must be the exact range that you provisioned.
@@ -1442,9 +1501,11 @@ export namespace ApplySecurityGroupsToClientVpnTargetNetworkResult {
 
 export interface AssignIpv6AddressesRequest {
   /**
-   * <p>The number of IPv6 addresses to assign to the network interface. Amazon EC2
-   *             automatically selects the IPv6 addresses from the subnet range. You can't use this
-   *             option if specifying specific IPv6 addresses.</p>
+   * <p>The number of additional IPv6 addresses to assign to the network interface.
+   *     		The specified number of IPv6 addresses are assigned in addition to the
+   *     		existing IPv6 addresses that are already assigned to the network interface.
+   *     		Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You
+   *     		can't use this option if specifying specific IPv6 addresses.</p>
    */
   Ipv6AddressCount?: number;
 
@@ -1467,7 +1528,8 @@ export namespace AssignIpv6AddressesRequest {
 
 export interface AssignIpv6AddressesResult {
   /**
-   * <p>The IPv6 addresses assigned to the network interface.</p>
+   * <p>The new IPv6 addresses assigned to the network interface. Existing IPv6 addresses
+   *         	that were assigned to the network interface before the request are not included.</p>
    */
   AssignedIpv6Addresses?: string[];
 
@@ -1556,12 +1618,16 @@ export interface AssociateAddressRequest {
   AllocationId?: string;
 
   /**
-   * <p>The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. The operation fails if you specify an instance ID unless exactly one network interface is attached.</p>
+   * <p>The ID of the instance. The instance must have exactly one attached network interface.
+   *       For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both.
+   *       For EC2-Classic, you must specify an instance ID and the instance must be in the running
+   *       state.</p>
    */
   InstanceId?: string;
 
   /**
-   * <p>The Elastic IP address to associate with the instance. This is required for EC2-Classic.</p>
+   * <p>[EC2-Classic] The Elastic IP address to associate with the instance. This is required for
+   *       EC2-Classic.</p>
    */
   PublicIp?: string;
 
@@ -1740,7 +1806,7 @@ export interface AssociateEnclaveCertificateIamRoleResult {
 
   /**
    * <p>The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored. The
-   * 			object key is formatted as follows:  <code>certificate_arn</code>/<code>role_arn</code>.</p>
+   * 			object key is formatted as follows:  <code>role_arn</code>/<code>certificate_arn</code>.</p>
    */
   CertificateS3ObjectKey?: string;
 
@@ -3789,8 +3855,8 @@ export namespace CopyFpgaImageResult {
 export interface CopyImageRequest {
   /**
    * <p>Unique, case-sensitive identifier you provide to ensure
-   * 				idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to Ensure Idempotency</a> in the
-   * 			  <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   *        idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring idempotency</a>
+   *        in the <i>Amazon EC2 API Reference</i>.</p>
    */
   ClientToken?: string;
 
@@ -3849,6 +3915,19 @@ export interface CopyImageRequest {
   SourceRegion: string | undefined;
 
   /**
+   * <p>The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only
+   *   		specify this parameter when copying an AMI from an AWS Region to an Outpost.
+   *   		The AMI must be in the Region of the destination Outpost. You cannot copy an
+   *   		AMI from an Outpost to a Region, from one Outpost to another, or within the same
+   *   		Outpost.</p>
+   *
+   *   	      <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis">
+   *   		Copying AMIs from an AWS Region to an Outpost</a> in the
+   *   		<i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   */
+  DestinationOutpostArn?: string;
+
+  /**
    * <p>Checks whether you have the required permissions for the action, without actually making the request,
    *        and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>.
    *        Otherwise, it is <code>UnauthorizedOperation</code>.</p>
@@ -3883,6 +3962,18 @@ export interface CopySnapshotRequest {
    * <p>A description for the EBS snapshot.</p>
    */
   Description?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot. Only
+   * 		specify this parameter when copying a snapshot from an AWS Region to an Outpost.
+   * 		The snapshot must be in the Region for the destination Outpost. You cannot copy a
+   * 		snapshot from an Outpost to a Region, from one Outpost to another, or within the same
+   * 		Outpost.</p>
+   *   	      <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots">
+   *   		Copying snapshots from an AWS Region to an Outpost</a> in the
+   *   		<i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   */
+  DestinationOutpostArn?: string;
 
   /**
    * <p>The destination Region to use in the <code>PresignedUrl</code> parameter of a snapshot
@@ -6334,7 +6425,9 @@ export interface CreateFleetRequest {
   ValidUntil?: Date;
 
   /**
-   * <p>Indicates whether EC2 Fleet should replace unhealthy instances.</p>
+   * <p>Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported only for
+   *          fleets of type <code>maintain</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks">EC2 Fleet
+   *             health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>
    */
   ReplaceUnhealthyInstances?: boolean;
 
@@ -6894,6 +6987,11 @@ export interface EbsBlockDevice {
   Throughput?: number;
 
   /**
+   * <p>The ARN of the Outpost on which the snapshot is stored.</p>
+   */
+  OutpostArn?: string;
+
+  /**
    * <p>Indicates whether the encryption state of an EBS volume is changed while being
    *             restored from a backing snapshot.
    *             The effect of setting the encryption state to <code>true</code> depends on
@@ -6957,7 +7055,9 @@ export namespace BlockDeviceMapping {
 
 export interface CreateImageRequest {
   /**
-   * <p>The block device mappings. This parameter cannot be used to modify the encryption status of existing volumes or snapshots. To create an AMI with encrypted snapshots, use the <a>CopyImage</a> action.</p>
+   * <p>The block device mappings. This parameter cannot be used to modify the encryption
+   *    		status of existing volumes or snapshots. To create an AMI with encrypted snapshots,
+   *    		use the <a>CopyImage</a> action.</p>
    */
   BlockDeviceMappings?: BlockDeviceMapping[];
 
@@ -7034,7 +7134,7 @@ export type ContainerFormat = "ova";
 export type DiskImageFormat = "RAW" | "VHD" | "VMDK";
 
 /**
- * <p>Describes an instance export task.</p>
+ * <p>Describes an export instance task.</p>
  */
 export interface ExportToS3TaskSpecification {
   /**
@@ -7077,7 +7177,7 @@ export interface CreateInstanceExportTaskRequest {
   Description?: string;
 
   /**
-   * <p>The format and location for an instance export task.</p>
+   * <p>The format and location for an export instance task.</p>
    */
   ExportToS3Task: ExportToS3TaskSpecification | undefined;
 
@@ -7092,7 +7192,7 @@ export interface CreateInstanceExportTaskRequest {
   TargetEnvironment: ExportEnvironment | string | undefined;
 
   /**
-   * <p>The tags to apply to the instance export task during creation.</p>
+   * <p>The tags to apply to the export instance task during creation.</p>
    */
   TagSpecifications?: TagSpecification[];
 }
@@ -7104,7 +7204,7 @@ export namespace CreateInstanceExportTaskRequest {
 }
 
 /**
- * <p>Describes the format and location for an instance export task.</p>
+ * <p>Describes the format and location for the export task.</p>
  */
 export interface ExportToS3Task {
   /**
@@ -7161,7 +7261,7 @@ export namespace InstanceExportDetails {
 export type ExportTaskState = "active" | "cancelled" | "cancelling" | "completed";
 
 /**
- * <p>Describes an instance export task.</p>
+ * <p>Describes an export instance task.</p>
  */
 export interface ExportTask {
   /**
@@ -7208,7 +7308,7 @@ export namespace ExportTask {
 
 export interface CreateInstanceExportTaskResult {
   /**
-   * <p>Information about the instance export task.</p>
+   * <p>Information about the export instance task.</p>
    */
   ExportTask?: ExportTask;
 }
@@ -7384,9 +7484,8 @@ export interface LaunchTemplateEbsBlockDeviceRequest {
    *         <p>For <code>io1</code> and <code>io2</code> volumes, we guarantee 64,000 IOPS
    *             only for <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Instances built on the Nitro System</a>. Other instance families guarantee performance up
    *             to 32,000 IOPS.</p>
-   *         <p>This parameter is required for <code>io1</code> and <code>io2</code> volumes.
-   *             The default for <code>gp3</code> volumes is 3,000 IOPS.
-   *             This parameter is not supported for <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>
+   *         <p>This parameter is supported for <code>io1</code>, <code>io2</code>, and <code>gp3</code> volumes only. This parameter is not supported for
+   *             <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>
    */
   Iops?: number;
 
@@ -7402,10 +7501,8 @@ export interface LaunchTemplateEbsBlockDeviceRequest {
   SnapshotId?: string;
 
   /**
-   * <p>The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.
-   *             If you specify a snapshot, the default is the snapshot size. You can specify a volume
-   *             size that is equal to or larger than the snapshot size.</p>
-   *         <p>The following are the supported volumes sizes for each volume type:</p>
+   * <p>The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. The following
+   *             are the supported volumes sizes for each volume type:</p>
    *         <ul>
    *             <li>
    *                <p>
@@ -7428,7 +7525,7 @@ export interface LaunchTemplateEbsBlockDeviceRequest {
   VolumeSize?: number;
 
   /**
-   * <p>The volume type. The default is <code>gp2</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS volume types</a> in the
+   * <p>The volume type. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon EBS volume types</a> in the
    *             <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
    */
   VolumeType?: VolumeType | string;
@@ -7456,7 +7553,10 @@ export interface LaunchTemplateBlockDeviceMappingRequest {
   DeviceName?: string;
 
   /**
-   * <p>The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.</p>
+   * <p>The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0.
+   *             An instance type with 2 available instance store volumes can specify mappings for ephemeral0
+   *             and ephemeral1. The number of available instance store volumes depends on the instance type.
+   *             After you connect to the instance, you must mount the volume.</p>
    */
   VirtualName?: string;
 
@@ -7466,7 +7566,7 @@ export interface LaunchTemplateBlockDeviceMappingRequest {
   Ebs?: LaunchTemplateEbsBlockDeviceRequest;
 
   /**
-   * <p>Suppresses the specified device included in the block device mapping of the AMI.</p>
+   * <p>To omit the device from the block device mapping, specify an empty string.</p>
    */
   NoDevice?: string;
 }
@@ -7689,79 +7789,3 @@ export type MarketType = "spot";
 export type InstanceInterruptionBehavior = "hibernate" | "stop" | "terminate";
 
 export type SpotInstanceType = "one-time" | "persistent";
-
-/**
- * <p>The options for Spot Instances.</p>
- */
-export interface LaunchTemplateSpotMarketOptionsRequest {
-  /**
-   * <p>The maximum hourly price you're willing to pay for the Spot Instances.</p>
-   */
-  MaxPrice?: string;
-
-  /**
-   * <p>The Spot Instance request type.</p>
-   */
-  SpotInstanceType?: SpotInstanceType | string;
-
-  /**
-   * <p>The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).</p>
-   */
-  BlockDurationMinutes?: number;
-
-  /**
-   * <p>The end date of the request.
-   *             For a one-time request, the request remains active until all instances launch, the request is canceled, or this date is reached.
-   *             If the request is persistent, it remains active until it is canceled or this date and time is reached.
-   *             The default end date is 7 days from the current date.</p>
-   */
-  ValidUntil?: Date;
-
-  /**
-   * <p>The behavior when a Spot Instance is interrupted. The default is <code>terminate</code>.</p>
-   */
-  InstanceInterruptionBehavior?: InstanceInterruptionBehavior | string;
-}
-
-export namespace LaunchTemplateSpotMarketOptionsRequest {
-  export const filterSensitiveLog = (obj: LaunchTemplateSpotMarketOptionsRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The market (purchasing) option for the instances.</p>
- */
-export interface LaunchTemplateInstanceMarketOptionsRequest {
-  /**
-   * <p>The market type.</p>
-   */
-  MarketType?: MarketType | string;
-
-  /**
-   * <p>The options for Spot Instances.</p>
-   */
-  SpotOptions?: LaunchTemplateSpotMarketOptionsRequest;
-}
-
-export namespace LaunchTemplateInstanceMarketOptionsRequest {
-  export const filterSensitiveLog = (obj: LaunchTemplateInstanceMarketOptionsRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Describes a license configuration.</p>
- */
-export interface LaunchTemplateLicenseConfigurationRequest {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the license configuration.</p>
-   */
-  LicenseConfigurationArn?: string;
-}
-
-export namespace LaunchTemplateLicenseConfigurationRequest {
-  export const filterSensitiveLog = (obj: LaunchTemplateLicenseConfigurationRequest): any => ({
-    ...obj,
-  });
-}

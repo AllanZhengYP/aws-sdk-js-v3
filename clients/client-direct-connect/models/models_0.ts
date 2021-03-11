@@ -2764,7 +2764,7 @@ export interface DescribeDirectConnectGatewayAssociationsRequest {
   nextToken?: string;
 
   /**
-   * <p>The ID of the virtual private gateway.</p>
+   * <p>The ID of the virtual private gateway or transit gateway.</p>
    */
   virtualGatewayId?: string;
 }

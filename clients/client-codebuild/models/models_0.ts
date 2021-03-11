@@ -242,7 +242,7 @@ export enum StatusType {
 
 /**
  * <p>Represents a resolved build artifact. A resolve artifact is an artifact that is built and
- *             deployed to the destination, such as Amazon Simple Storage Service (Amazon S3).</p>
+ *             deployed to the destination, such as Amazon S3.</p>
  */
 export interface ResolvedArtifact {
   /**
@@ -748,7 +748,7 @@ export interface ProjectEnvironment {
   privilegedMode?: boolean;
 
   /**
-   * <p>The ARN of the Amazon Simple Storage Service (Amazon S3) bucket, path prefix, and object key that contains the PEM-encoded
+   * <p>The ARN of the Amazon S3 bucket, path prefix, and object key that contains the PEM-encoded
    *             certificate for the build project. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate">certificate</a> in the
    *                 <i>AWS CodeBuild User Guide</i>.</p>
    */
@@ -1083,7 +1083,7 @@ export interface BuildBatchPhase {
 
   /**
    * <p>Additional information about the batch build phase. Especially to help troubleshoot a
-   *             failed btach build.</p>
+   *             failed batch build.</p>
    */
   contexts?: PhaseContext[];
 }
@@ -1238,7 +1238,7 @@ export interface ProjectSource {
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p>
+   *                   <code>S3</code>: The source code is in an Amazon S3 input bucket.</p>
    *             </li>
    *          </ul>
    */
@@ -1260,7 +1260,7 @@ export interface ProjectSource {
    *                         <code>https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name></code>).</p>
    *             </li>
    *             <li>
-   *                 <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, one of the following. </p>
+   *                 <p>For source code in an Amazon S3 input bucket, one of the following. </p>
    *                 <ul>
    *                   <li>
    *                         <p>The path to the ZIP file that contains the source code (for example,
@@ -1338,7 +1338,9 @@ export interface ProjectSource {
    * <p> Set to true to report the status of a build's start and finish to your source
    *             provider. This option is valid only when your source provider is GitHub, GitHub
    *             Enterprise, or Bitbucket. If this is set and you use a different source provider, an
-   *             invalidInputException is thrown. </p>
+   *             <code>invalidInputException</code> is thrown. </p>
+   *             <p>To be able to report the build status to the source provider, the user associated with the source provider must
+   * have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p>
    *         <note>
    *             <p> The status of a build triggered by a webhook is always reported to your source
    *                 provider. </p>
@@ -1403,7 +1405,7 @@ export interface ProjectSourceVersion {
    *                     commit ID is used.</p>
    *             </li>
    *             <li>
-   *                 <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP
+   *                 <p>For Amazon S3: the version ID of the object that represents the build input ZIP
    *                     file to use.</p>
    *             </li>
    *          </ul>
@@ -1494,7 +1496,7 @@ export interface BuildBatch {
    *                 <p>For AWS CodePipeline, the source revision provided by AWS CodePipeline.</p>
    *             </li>
    *             <li>
-   *                 <p>For Amazon Simple Storage Service (Amazon S3), this does not apply.</p>
+   *                 <p>For Amazon S3, this does not apply.</p>
    *             </li>
    *          </ul>
    */
@@ -1544,7 +1546,7 @@ export interface BuildBatch {
    *           commit ID is used.</p>
    *             </li>
    *             <li>
-   *                <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP
+   *                <p>For Amazon S3: the version ID of the object that represents the build input ZIP
    *           file to use.</p>
    *             </li>
    *          </ul>
@@ -2059,7 +2061,7 @@ export interface Build {
    *                 <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p>
    *             </li>
    *             <li>
-   *                 <p> For Amazon Simple Storage Service (Amazon S3), this does not apply. </p>
+   *                 <p> For Amazon S3, this does not apply. </p>
    *             </li>
    *          </ul>
    */
@@ -2108,7 +2110,7 @@ export interface Build {
    *                     commit ID is used.</p>
    *             </li>
    *             <li>
-   *                 <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP
+   *                 <p>For Amazon S3: the version ID of the object that represents the build input ZIP
    *                     file to use.</p>
    *             </li>
    *          </ul>
@@ -2297,7 +2299,7 @@ export interface ProjectArtifacts {
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>S3</code>: The build project stores build output in Amazon Simple Storage Service (Amazon S3).</p>
+   *                   <code>S3</code>: The build project stores build output in Amazon S3.</p>
    *             </li>
    *          </ul>
    */
@@ -2469,7 +2471,7 @@ export interface ProjectArtifacts {
 
   /**
    * <p> Set to true if you do not want your output artifacts encrypted. This option is valid
-   *             only if your artifacts type is Amazon Simple Storage Service (Amazon S3). If this is set with another artifacts type, an
+   *             only if your artifacts type is Amazon S3. If this is set with another artifacts type, an
    *             invalidInputException is thrown. </p>
    */
   encryptionDisabled?: boolean;
@@ -2498,8 +2500,6 @@ export interface ProjectBadge {
 
   /**
    * <p>The publicly-accessible URL through which you can access the build badge for your
-   *             project. </p>
-   *         <p>The publicly accessible URL through which you can access the build badge for your
    *             project. </p>
    */
   badgeRequestUrl?: string;
@@ -2770,14 +2770,15 @@ export interface Project {
    *           commit ID is used.</p>
    *             </li>
    *             <li>
-   *                <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP
+   *                <p>For Amazon S3: the version ID of the object that represents the build input ZIP
    *           file to use.</p>
    *             </li>
    *          </ul>
    *          <p>If <code>sourceVersion</code> is specified at the build level, then that version
    *       takes precedence over this <code>sourceVersion</code> (at the project level). </p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample
-   *       with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>
+   *       with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>.
+   *     </p>
    */
   sourceVersion?: string;
 
@@ -2833,7 +2834,8 @@ export interface Project {
    *         service role has permission to that key. </p>
    *          </note>
    *          <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using
-   *         the format <code>alias/<alias-name></code>).</p>
+   *         the format <code>alias/<alias-name></code>).
+   *     </p>
    */
   encryptionKey?: string;
 
@@ -2887,10 +2889,18 @@ export interface Project {
   fileSystemLocations?: ProjectFileSystemLocation[];
 
   /**
-   * <p>A <a>ProjectBuildBatchConfig</a> object that defines the batch build
+   * <p>A <a>ProjectBuildBatchConfig</a>
+   *  object that defines the batch build
    *             options for the project.</p>
    */
   buildBatchConfig?: ProjectBuildBatchConfig;
+
+  /**
+   * <p>The maximum number of concurrent builds that are allowed for this project.</p>
+   *          <p>New builds are only started if the current number of builds is less than or equal to this limit.
+   *   If the current build count meets this limit, new builds are throttled and are not run.</p>
+   */
+  concurrentBuildLimit?: number;
 }
 
 export namespace Project {
@@ -2950,6 +2960,12 @@ export interface S3ReportExportConfig {
    * <p> The name of the S3 bucket where the raw data of a report are exported. </p>
    */
   bucket?: string;
+
+  /**
+   * <p>The AWS account identifier of the owner of the Amazon S3 bucket. This allows report data to be exported to an Amazon S3 bucket
+   *         that is owned by an account other than the account running the build.</p>
+   */
+  bucketOwner?: string;
 
   /**
    * <p> The path to the exported report's raw data results. </p>
@@ -3033,50 +3049,76 @@ export enum ReportType {
 }
 
 /**
- * <p> A series of reports. Each report contains information about the results from running
- *             a series of test cases. You specify the test cases for a report group in the buildspec
- *             for a build project using one or more paths to the test case files. </p>
+ * <p>A series of reports. Each report contains information about the results from running a
+ *             series of test cases. You specify the test cases for a report group in the buildspec for
+ *             a build project using one or more paths to the test case files. </p>
  */
 export interface ReportGroup {
   /**
-   * <p> The ARN of a <code>ReportGroup</code>. </p>
+   * <p>The ARN of the <code>ReportGroup</code>.
+   *     </p>
    */
   arn?: string;
 
   /**
-   * <p> The name of a <code>ReportGroup</code>. </p>
+   * <p>The name of the <code>ReportGroup</code>.
+   *     </p>
    */
   name?: string;
 
   /**
-   * <p> The type of the <code>ReportGroup</code>. The one valid value is <code>TEST</code>.
-   *         </p>
+   * <p>The type of the <code>ReportGroup</code>. This can be one of the following
+   *             values:</p>
+   *          <dl>
+   *             <dt>CODE_COVERAGE</dt>
+   *             <dd>
+   *                <p>The report group contains code coverage reports.</p>
+   *             </dd>
+   *             <dt>TEST</dt>
+   *             <dd>
+   *                <p>The report group contains test reports.</p>
+   *             </dd>
+   *          </dl>
    */
   type?: ReportType | string;
 
   /**
-   * <p> Information about the destination where the raw data of this <code>ReportGroup</code>
+   * <p>Information about the destination where the raw data of this <code>ReportGroup</code>
    *             is exported. </p>
    */
   exportConfig?: ReportExportConfig;
 
   /**
-   * <p> The date and time this <code>ReportGroup</code> was created. </p>
+   * <p>The date and time this <code>ReportGroup</code> was created. </p>
    */
   created?: Date;
 
   /**
-   * <p> The date and time this <code>ReportGroup</code> was last modified. </p>
+   * <p>The date and time this <code>ReportGroup</code> was last modified. </p>
    */
   lastModified?: Date;
 
   /**
-   * <p> A list of tag key and value pairs associated with this report group. </p>
+   * <p>A list of tag key and value pairs associated with this report group. </p>
    *         <p>These tags are available for use by AWS services that support AWS CodeBuild report group
    *       tags.</p>
    */
   tags?: Tag[];
 
+  /**
+   * <p>The status of the report group. This property is read-only.</p>
+   *          <p>This can be one of the following values:</p>
+   *          <dl>
+   *             <dt>ACTIVE</dt>
+   *             <dd>
+   *                <p>The report group is active.</p>
+   *             </dd>
+   *             <dt>DELETING</dt>
+   *             <dd>
+   *                <p>The report group is in the process of being deleted.</p>
+   *             </dd>
+   *          </dl>
+   */
   status?: ReportGroupStatusType | string;
 }
 
@@ -3219,15 +3261,15 @@ export interface Report {
 
   /**
    * <p>The type of the report that was run.</p>
-   *         <dl>
+   *          <dl>
    *             <dt>CODE_COVERAGE</dt>
    *             <dd>
-   *                     <p>A code coverage report.</p>
-   *                 </dd>
+   *                <p>A code coverage report.</p>
+   *             </dd>
    *             <dt>TEST</dt>
    *             <dd>
-   *                     <p>A test report.</p>
-   *                 </dd>
+   *                <p>A test report.</p>
+   *             </dd>
    *          </dl>
    */
   type?: ReportType | string;
@@ -3376,14 +3418,15 @@ export interface CreateProjectInput {
    *           commit ID is used.</p>
    *             </li>
    *             <li>
-   *                <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP
+   *                <p>For Amazon S3: the version ID of the object that represents the build input ZIP
    *           file to use.</p>
    *             </li>
    *          </ul>
    *          <p>If <code>sourceVersion</code> is specified at the build level, then that version takes
    *             precedence over this <code>sourceVersion</code> (at the project level). </p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample
-   *                 with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>
+   *                 with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>.
+   *     </p>
    */
   sourceVersion?: string;
 
@@ -3407,7 +3450,7 @@ export interface CreateProjectInput {
 
   /**
    * <p>Stores recently used information so that it can be quickly accessed at a later
-   *             time.</p>
+   *         time.</p>
    */
   cache?: ProjectCache;
 
@@ -3441,7 +3484,8 @@ export interface CreateProjectInput {
    *         service role has permission to that key. </p>
    *          </note>
    *          <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using
-   *         the format <code>alias/<alias-name></code>).</p>
+   *         the format <code>alias/<alias-name></code>).
+   *     </p>
    */
   encryptionKey?: string;
 
@@ -3459,7 +3503,7 @@ export interface CreateProjectInput {
 
   /**
    * <p>Set this to true to generate a publicly accessible URL for your project's build
-   *             badge.</p>
+   *         badge.</p>
    */
   badgeEnabled?: boolean;
 
@@ -3479,10 +3523,18 @@ export interface CreateProjectInput {
   fileSystemLocations?: ProjectFileSystemLocation[];
 
   /**
-   * <p>A <a>ProjectBuildBatchConfig</a> object that defines the batch build options
+   * <p>A <a>ProjectBuildBatchConfig</a>
+   *  object that defines the batch build options
    *             for the project.</p>
    */
   buildBatchConfig?: ProjectBuildBatchConfig;
+
+  /**
+   * <p>The maximum number of concurrent builds that are allowed for this project.</p>
+   *          <p>New builds are only started if the current number of builds is less than or equal to this limit.
+   *   If the current build count meets this limit, new builds are throttled and are not run.</p>
+   */
+  concurrentBuildLimit?: number;
 }
 
 export namespace CreateProjectInput {
@@ -3746,8 +3798,8 @@ export interface DeleteReportGroupInput {
   /**
    * <p>If <code>true</code>, deletes any reports that belong to a report group before deleting
    *             the report group. </p>
-   *         <p>If <code>false</code>, you must delete any reports in the report group. Use <a href="https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html">ListReportsForReportGroup</a> to get the reports in a report group. Use <a href="https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html">DeleteReport</a> to delete the reports. If you call
-   *                 <code>DeleteReportGroup</code> for a report group that contains one or more reports,
+   *          <p>If <code>false</code>, you must delete any reports in the report group. Use <a href="https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html">ListReportsForReportGroup</a> to get the reports in a report group. Use <a href="https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html">DeleteReport</a> to delete the reports. If you call
+   *       <code>DeleteReportGroup</code> for a report group that contains one or more reports,
    *             an exception is thrown. </p>
    */
   deleteReports?: boolean;
@@ -4175,8 +4227,80 @@ export enum ReportGroupTrendFieldType {
 }
 
 export interface GetReportGroupTrendInput {
+  /**
+   * <p>The ARN of the report group that contains the reports to analyze.</p>
+   */
   reportGroupArn: string | undefined;
+
+  /**
+   * <p>The number of reports to analyze. This operation always retrieves the most recent
+   *             reports.</p>
+   *         <p>If this parameter is omitted, the most recent 100 reports are analyzed.</p>
+   */
   numOfReports?: number;
+
+  /**
+   * <p>The test report value to accumulate. This must be one of the following values:</p>
+   *          <dl>
+   *             <dt>Test reports:</dt>
+   *             <dd>
+   *                     <dl>
+   *                   <dt>DURATION</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the test run times for the specified
+   *                                     reports.</p>
+   *                             </dd>
+   *                   <dt>PASS_RATE</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the percentage of tests that passed for the
+   *                                     specified test reports.</p>
+   *                             </dd>
+   *                   <dt>TOTAL</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the total number of tests for the specified test
+   *                                     reports.</p>
+   *                             </dd>
+   *                </dl>
+   *                 </dd>
+   *          </dl>
+   *          <dl>
+   *             <dt>Code coverage reports:</dt>
+   *             <dd>
+   *                     <dl>
+   *                   <dt>BRANCH_COVERAGE</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the branch coverage percentages for the specified
+   *                                     test reports.</p>
+   *                             </dd>
+   *                   <dt>BRANCHES_COVERED</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the branches covered values for the specified test
+   *                                     reports.</p>
+   *                             </dd>
+   *                   <dt>BRANCHES_MISSED</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the branches missed values for the specified test
+   *                                     reports.</p>
+   *                             </dd>
+   *                   <dt>LINE_COVERAGE</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the line coverage percentages for the specified
+   *                                     test reports.</p>
+   *                             </dd>
+   *                   <dt>LINES_COVERED</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the lines covered values for the specified test
+   *                                     reports.</p>
+   *                             </dd>
+   *                   <dt>LINES_MISSED</dt>
+   *                   <dd>
+   *                                 <p>Accumulate the lines not covered values for the specified test
+   *                                     reports.</p>
+   *                             </dd>
+   *                </dl>
+   *                 </dd>
+   *          </dl>
+   */
   trendField: ReportGroupTrendFieldType | string | undefined;
 }
 
@@ -4186,8 +4310,18 @@ export namespace GetReportGroupTrendInput {
   });
 }
 
+/**
+ * <p>Contains the unmodified data for the report. For more information, see .</p>
+ */
 export interface ReportWithRawData {
+  /**
+   * <p>The ARN of the report.</p>
+   */
   reportArn?: string;
+
+  /**
+   * <p>The value of the requested data field from the report.</p>
+   */
   data?: string;
 }
 
@@ -4197,9 +4331,24 @@ export namespace ReportWithRawData {
   });
 }
 
+/**
+ * <p>Contains trend statistics for a set of reports. The actual values depend on the type of
+ *             trend being collected. For more information, see .</p>
+ */
 export interface ReportGroupTrendStats {
+  /**
+   * <p>Contains the average of all values analyzed.</p>
+   */
   average?: string;
+
+  /**
+   * <p>Contains the maximum value analyzed.</p>
+   */
   max?: string;
+
+  /**
+   * <p>Contains the minimum value analyzed.</p>
+   */
   min?: string;
 }
 
@@ -4210,7 +4359,14 @@ export namespace ReportGroupTrendStats {
 }
 
 export interface GetReportGroupTrendOutput {
+  /**
+   * <p>Contains the accumulated trend data.</p>
+   */
   stats?: ReportGroupTrendStats;
+
+  /**
+   * <p>An array that contains the raw data for each report.</p>
+   */
   rawData?: ReportWithRawData[];
 }
 
@@ -4515,7 +4671,9 @@ export interface ListBuildsForProjectInput {
   projectName: string | undefined;
 
   /**
-   * <p>The order to list build IDs. Valid values include:</p>
+   * <p>The order to list results in. The results are sorted by build number, not the build
+   *             identifier.</p>
+   *         <p>Valid values include:</p>
    *         <ul>
    *             <li>
    *                 <p>
@@ -4528,6 +4686,8 @@ export interface ListBuildsForProjectInput {
    *                     ID.</p>
    *             </li>
    *          </ul>
+   *         <p>If the project has more than 100 builds, setting the sort order will result in an
+   *             error. </p>
    */
   sortOrder?: SortOrderType | string;
 
@@ -5404,7 +5564,7 @@ export interface StartBuildInput {
    *                         branch's HEAD commit ID is used. If not specified, the default branch's HEAD
    *                         commit ID is used.</p>
    *                 </dd>
-   *             <dt>Amazon Simple Storage Service (Amazon S3)</dt>
+   *             <dt>Amazon S3</dt>
    *             <dd>
    *                     <p>The version ID of the object that represents the build input ZIP file to
    *                         use.</p>
@@ -5490,7 +5650,9 @@ export interface StartBuildInput {
   /**
    * <p> Set to true to report to your source provider the status of a build's start and
    *             completion. If you use this option with a source provider other than GitHub, GitHub
-   *             Enterprise, or Bitbucket, an invalidInputException is thrown. </p>
+   *             Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p>
+   *             <p>To be able to report the build status to the source provider, the user associated with the source provider must
+   * have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p>
    *         <note>
    *             <p> The status of a build triggered by a webhook is always reported to your source
    *                 provider. </p>
@@ -5678,7 +5840,7 @@ export interface StartBuildBatchInput {
    *                         branch's HEAD commit ID is used. If not specified, the default branch's HEAD
    *                         commit ID is used.</p>
    *                 </dd>
-   *             <dt>Amazon Simple Storage Service (Amazon S3)</dt>
+   *             <dt>Amazon S3</dt>
    *             <dd>
    *                     <p>The version ID of the object that represents the build input ZIP file to
    *                         use.</p>
@@ -5957,9 +6119,9 @@ export namespace StopBuildBatchOutput {
 export interface UpdateProjectInput {
   /**
    * <p>The name of the build project.</p>
-   *         <note>
+   *          <note>
    *             <p>You cannot change a build project's name.</p>
-   *         </note>
+   *          </note>
    */
   name: string | undefined;
 
@@ -5970,7 +6132,7 @@ export interface UpdateProjectInput {
 
   /**
    * <p>Information to be changed about the build input source code for the build
-   *             project.</p>
+   *     project.</p>
    */
   source?: ProjectSource;
 
@@ -5981,47 +6143,48 @@ export interface UpdateProjectInput {
 
   /**
    * <p> A version of the build input to be built for this project. If not specified, the
-   *             latest version is used. If specified, it must be one of: </p>
-   *         <ul>
+   *     latest version is used. If specified, it must be one of: </p>
+   *          <ul>
    *             <li>
-   *                 <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+   *                <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
    *             </li>
    *             <li>
-   *                 <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
-   *                     corresponds to the version of the source code you want to build. If a pull
-   *                     request ID is specified, it must use the format <code>pr/pull-request-ID</code>
-   *                     (for example <code>pr/25</code>). If a branch name is specified, the branch's
-   *                     HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is
-   *                     used.</p>
+   *                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
+   *             corresponds to the version of the source code you want to build. If a pull
+   *             request ID is specified, it must use the format <code>pr/pull-request-ID</code>
+   *             (for example <code>pr/25</code>). If a branch name is specified, the branch's
+   *             HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is
+   *             used.</p>
    *             </li>
    *             <li>
-   *                 <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the
-   *                     version of the source code you want to build. If a branch name is specified, the
-   *                     branch's HEAD commit ID is used. If not specified, the default branch's HEAD
-   *                     commit ID is used.</p>
+   *                <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the
+   *             version of the source code you want to build. If a branch name is specified, the
+   *             branch's HEAD commit ID is used. If not specified, the default branch's HEAD
+   *             commit ID is used.</p>
    *             </li>
    *             <li>
-   *                 <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP
-   *                     file to use.</p>
+   *                <p>For Amazon S3: the version ID of the object that represents the build input ZIP
+   *             file to use.</p>
    *             </li>
    *          </ul>
-   *         <p> If <code>sourceVersion</code> is specified at the build level, then that version
-   *             takes precedence over this <code>sourceVersion</code> (at the project level). </p>
-   *         <p> For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample
-   *                 with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>
+   *          <p> If <code>sourceVersion</code> is specified at the build level, then that version
+   *     takes precedence over this <code>sourceVersion</code> (at the project level). </p>
+   *          <p> For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html">Source Version Sample
+   *         with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>.
+   *     </p>
    */
   sourceVersion?: string;
 
   /**
    * <p> An array of <code>ProjectSourceVersion</code> objects. If
-   *                 <code>secondarySourceVersions</code> is specified at the build level, then they take
-   *             over these <code>secondarySourceVersions</code> (at the project level). </p>
+   *       <code>secondarySourceVersions</code> is specified at the build level, then they take
+   *     over these <code>secondarySourceVersions</code> (at the project level). </p>
    */
   secondarySourceVersions?: ProjectSourceVersion[];
 
   /**
    * <p>Information to be changed about the build output artifacts for the build
-   *             project.</p>
+   *         project.</p>
    */
   artifacts?: ProjectArtifacts;
 
@@ -6032,7 +6195,7 @@ export interface UpdateProjectInput {
 
   /**
    * <p>Stores recently used information so that it can be quickly accessed at a later
-   *             time.</p>
+   *       time.</p>
    */
   cache?: ProjectCache;
 
@@ -6043,13 +6206,13 @@ export interface UpdateProjectInput {
 
   /**
    * <p>The replacement ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent
-   *             AWS services on behalf of the AWS account.</p>
+   *     AWS services on behalf of the AWS account.</p>
    */
   serviceRole?: string;
 
   /**
    * <p>The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before
-   *             timing out any related build that did not get marked as completed.</p>
+   *       timing out any related build that did not get marked as completed.</p>
    */
   timeoutInMinutes?: number;
 
@@ -6060,19 +6223,20 @@ export interface UpdateProjectInput {
 
   /**
    * <p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output
-   *             artifacts.</p>
-   *         <note>
+   *     artifacts.</p>
+   *          <note>
    *             <p> You can use a cross-account KMS key to encrypt the build output artifacts if your
-   *                 service role has permission to that key. </p>
-   *         </note>
-   *         <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using
-   *             the format <code>alias/<alias-name></code>).</p>
+   *         service role has permission to that key. </p>
+   *          </note>
+   *          <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using
+   *     the format <code>alias/<alias-name></code>).
+   *     </p>
    */
   encryptionKey?: string;
 
   /**
    * <p>An updated list of tag key and value pairs associated with this build project.</p>
-   *         <p>These tags are available for use by AWS services that support AWS CodeBuild build project
+   *          <p>These tags are available for use by AWS services that support AWS CodeBuild build project
    *       tags.</p>
    */
   tags?: Tag[];
@@ -6084,13 +6248,13 @@ export interface UpdateProjectInput {
 
   /**
    * <p>Set this to true to generate a publicly accessible URL for your project's build
-   *             badge.</p>
+   *       badge.</p>
    */
   badgeEnabled?: boolean;
 
   /**
    * <p> Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs,
-   *             logs in an S3 bucket, or both. </p>
+   *     logs in an S3 bucket, or both. </p>
    */
   logsConfig?: LogsConfig;
 
@@ -6107,6 +6271,14 @@ export interface UpdateProjectInput {
    * <p>Contains configuration information about a batch build project.</p>
    */
   buildBatchConfig?: ProjectBuildBatchConfig;
+
+  /**
+   * <p>The maximum number of concurrent builds that are allowed for this project.</p>
+   *          <p>New builds are only started if the current number of builds is less than or equal to this limit.
+   *   If the current build count meets this limit, new builds are throttled and are not run.</p>
+   *          <p>To remove this limit, set this value to -1.</p>
+   */
+  concurrentBuildLimit?: number;
 }
 
 export namespace UpdateProjectInput {

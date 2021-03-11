@@ -117,6 +117,7 @@ import {
   InvalidNextToken,
   InvalidParameterCombinationException,
   InvalidParameterValueException,
+  LabelOptions,
   LimitExceededException,
   LimitExceededFault,
   ListDashboardsInput,
@@ -3193,6 +3194,13 @@ const serializeAws_queryGetMetricDataInput = (input: GetMetricDataInput, context
   if (input.MaxDatapoints !== undefined && input.MaxDatapoints !== null) {
     entries["MaxDatapoints"] = input.MaxDatapoints;
   }
+  if (input.LabelOptions !== undefined && input.LabelOptions !== null) {
+    const memberEntries = serializeAws_queryLabelOptions(input.LabelOptions, context);
+    Object.entries(memberEntries).forEach(([key, value]) => {
+      const loc = `LabelOptions.${key}`;
+      entries[loc] = value;
+    });
+  }
   return entries;
 };
 
@@ -3276,6 +3284,14 @@ const serializeAws_queryInsightRuleNames = (input: string[], context: __SerdeCon
     }
     entries[`member.${counter}`] = entry;
     counter++;
+  }
+  return entries;
+};
+
+const serializeAws_queryLabelOptions = (input: LabelOptions, context: __SerdeContext): any => {
+  const entries: any = {};
+  if (input.Timezone !== undefined && input.Timezone !== null) {
+    entries["Timezone"] = input.Timezone;
   }
   return entries;
 };

@@ -57,7 +57,8 @@
     "@aws-sdk/util-user-agent-node": "3.8.0",
     "@aws-sdk/util-utf8-browser": "3.6.1",
     "@aws-sdk/util-utf8-node": "3.6.1",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "uuid": "^3.0.0"
   },
   "devDependencies": {
     "@aws-sdk/client-documentation-generator": "3.6.1",

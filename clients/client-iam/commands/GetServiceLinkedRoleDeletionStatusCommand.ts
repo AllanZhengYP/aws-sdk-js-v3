@@ -25,7 +25,7 @@ export type GetServiceLinkedRoleDeletionStatusCommandOutput = GetServiceLinkedRo
   __MetadataBearer;
 
 /**
- * <p>Retrieves the status of your service-linked role deletion. After you use the <a>DeleteServiceLinkedRole</a> API operation to submit a service-linked role for
+ * <p>Retrieves the status of your service-linked role deletion. After you use <a>DeleteServiceLinkedRole</a> to submit a service-linked role for
  *          deletion, you can use the <code>DeletionTaskId</code> parameter in
  *             <code>GetServiceLinkedRoleDeletionStatus</code> to check the status of the deletion. If
  *          the deletion fails, this operation returns the reason that it failed, if that information

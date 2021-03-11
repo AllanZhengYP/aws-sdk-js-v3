@@ -23,7 +23,7 @@ export type DeleteServerCertificateCommandOutput = __MetadataBearer;
 /**
  * <p>Deletes the specified server certificate.</p>
  *          <p>For more information about working with server certificates, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html">Working with
- *             Server Certificates</a> in the <i>IAM User Guide</i>. This topic
+ *             server certificates</a> in the <i>IAM User Guide</i>. This topic
  *          also includes a list of AWS services that can use the server certificates that you manage
  *          with IAM.</p>
  *          <important>
@@ -32,7 +32,7 @@ export type DeleteServerCertificateCommandOutput = __MetadataBearer;
  *             doesn't detect the deletion of bound certificates, it may continue to use the
  *             certificates. This could cause Elastic Load Balancing to stop accepting traffic. We
  *             recommend that you remove the reference to the certificate from Elastic Load Balancing
- *             before using this command to delete the certificate. For more information, go to <a href="https://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html">DeleteLoadBalancerListeners</a> in the <i>Elastic Load Balancing API
+ *             before using this command to delete the certificate. For more information, see <a href="https://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html">DeleteLoadBalancerListeners</a> in the <i>Elastic Load Balancing API
  *                Reference</i>.</p>
  *          </important>
  */

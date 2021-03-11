@@ -1090,9 +1090,14 @@ export enum AudioLanguageCodeControl {
  */
 export interface OutputChannelMapping {
   /**
-   * List of input channels
+   * Use this setting to specify your remix values when they are integers, such as -10, 0, or 4.
    */
   InputChannels?: number[];
+
+  /**
+   * Use this setting to specify your remix values when they have a decimal component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.
+   */
+  InputChannelsFineTune?: number[];
 }
 
 export namespace OutputChannelMapping {
@@ -1102,11 +1107,11 @@ export namespace OutputChannelMapping {
 }
 
 /**
- * Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification).
+ * Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel, in dB. Specify remix values to indicate how much of the content from your input audio channel you want in your output audio channels. Each instance of the InputChannels or InputChannelsFineTune array specifies these values for one output channel. Use one instance of this array for each output channel. In the console, each array corresponds to a column in the graphical depiction of the mapping matrix. The rows of the graphical matrix correspond to input channels. Valid values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification). Use InputChannels or InputChannelsFineTune to specify your remix values. Don't use both.
  */
 export interface ChannelMapping {
   /**
-   * List of output channels
+   * In your JSON job specification, include one child of OutputChannels for each audio channel that you want in your output. Each child should contain one instance of InputChannels or InputChannelsFineTune.
    */
   OutputChannels?: OutputChannelMapping[];
 }
@@ -1122,17 +1127,17 @@ export namespace ChannelMapping {
  */
 export interface RemixSettings {
   /**
-   * Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification).
+   * Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel, in dB. Specify remix values to indicate how much of the content from your input audio channel you want in your output audio channels. Each instance of the InputChannels or InputChannelsFineTune array specifies these values for one output channel. Use one instance of this array for each output channel. In the console, each array corresponds to a column in the graphical depiction of the mapping matrix. The rows of the graphical matrix correspond to input channels. Valid values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification). Use InputChannels or InputChannelsFineTune to specify your remix values. Don't use both.
    */
   ChannelMapping?: ChannelMapping;
 
   /**
-   * Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different.
+   * Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different. If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.
    */
   ChannelsIn?: number;
 
   /**
-   * Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)
+   * Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.
    */
   ChannelsOut?: number;
 }
@@ -2163,6 +2168,7 @@ export enum CaptionSourceType {
   SCC = "SCC",
   SCTE20 = "SCTE20",
   SMI = "SMI",
+  SMPTE_TT = "SMPTE_TT",
   SRT = "SRT",
   STL = "STL",
   TELETEXT = "TELETEXT",
@@ -4241,6 +4247,11 @@ export enum CmfcAudioDuration {
   MATCH_VIDEO_DURATION = "MATCH_VIDEO_DURATION",
 }
 
+export enum CmfcIFrameOnlyManifest {
+  EXCLUDE = "EXCLUDE",
+  INCLUDE = "INCLUDE",
+}
+
 export enum CmfcScte35Esam {
   INSERT = "INSERT",
   NONE = "NONE",
@@ -4259,6 +4270,11 @@ export interface CmfcSettings {
    * Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.
    */
   AudioDuration?: CmfcAudioDuration | string;
+
+  /**
+   * Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).
+   */
+  IFrameOnlyManifest?: CmfcIFrameOnlyManifest | string;
 
   /**
    * Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT to put SCTE-35 markers in this output at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
@@ -5102,7 +5118,7 @@ export interface HlsSettings {
   AudioTrackType?: HlsAudioTrackType | string;
 
   /**
-   * When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS manifest
+   * Choose Include (INCLUDE) to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).
    */
   IFrameOnlyManifest?: HlsIFrameOnlyManifest | string;
 
@@ -5269,7 +5285,29 @@ export namespace Av1Settings {
 export enum AvcIntraClass {
   CLASS_100 = "CLASS_100",
   CLASS_200 = "CLASS_200",
+  CLASS_4K_2K = "CLASS_4K_2K",
   CLASS_50 = "CLASS_50",
+}
+
+export enum AvcIntraUhdQualityTuningLevel {
+  MULTI_PASS = "MULTI_PASS",
+  SINGLE_PASS = "SINGLE_PASS",
+}
+
+/**
+ * Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object isn't allowed.
+ */
+export interface AvcIntraUhdSettings {
+  /**
+   * Optional. Use Quality tuning level (qualityTuningLevel) to choose how many transcoding passes MediaConvert does with your video. When you choose Multi-pass (MULTI_PASS), your video quality is better and your output bitrate is more accurate. That is, the actual bitrate of your output is closer to the target bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS), your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).
+   */
+  QualityTuningLevel?: AvcIntraUhdQualityTuningLevel | string;
+}
+
+export namespace AvcIntraUhdSettings {
+  export const filterSensitiveLog = (obj: AvcIntraUhdSettings): any => ({
+    ...obj,
+  });
 }
 
 export enum AvcIntraFramerateControl {
@@ -5291,6 +5329,11 @@ export enum AvcIntraInterlaceMode {
   TOP_FIELD = "TOP_FIELD",
 }
 
+export enum AvcIntraScanTypeConversionMode {
+  INTERLACED = "INTERLACED",
+  INTERLACED_OPTIMIZE = "INTERLACED_OPTIMIZE",
+}
+
 export enum AvcIntraSlowPal {
   DISABLED = "DISABLED",
   ENABLED = "ENABLED",
@@ -5302,13 +5345,18 @@ export enum AvcIntraTelecine {
 }
 
 /**
- * Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936.
+ * Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
  */
 export interface AvcIntraSettings {
   /**
-   * Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality.
+   * Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2 chroma subsampling.
    */
   AvcIntraClass?: AvcIntraClass | string;
+
+  /**
+   * Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object isn't allowed.
+   */
+  AvcIntraUhdSettings?: AvcIntraUhdSettings;
 
   /**
    * If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.
@@ -5334,6 +5382,11 @@ export interface AvcIntraSettings {
    * Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.
    */
   InterlaceMode?: AvcIntraInterlaceMode | string;
+
+  /**
+   * Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).
+   */
+  ScanTypeConversionMode?: AvcIntraScanTypeConversionMode | string;
 
   /**
    * Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.
@@ -5394,48 +5447,4 @@ export namespace FrameCaptureSettings {
   export const filterSensitiveLog = (obj: FrameCaptureSettings): any => ({
     ...obj,
   });
-}
-
-export enum H264AdaptiveQuantization {
-  AUTO = "AUTO",
-  HIGH = "HIGH",
-  HIGHER = "HIGHER",
-  LOW = "LOW",
-  MAX = "MAX",
-  MEDIUM = "MEDIUM",
-  OFF = "OFF",
-}
-
-export enum H264CodecLevel {
-  AUTO = "AUTO",
-  LEVEL_1 = "LEVEL_1",
-  LEVEL_1_1 = "LEVEL_1_1",
-  LEVEL_1_2 = "LEVEL_1_2",
-  LEVEL_1_3 = "LEVEL_1_3",
-  LEVEL_2 = "LEVEL_2",
-  LEVEL_2_1 = "LEVEL_2_1",
-  LEVEL_2_2 = "LEVEL_2_2",
-  LEVEL_3 = "LEVEL_3",
-  LEVEL_3_1 = "LEVEL_3_1",
-  LEVEL_3_2 = "LEVEL_3_2",
-  LEVEL_4 = "LEVEL_4",
-  LEVEL_4_1 = "LEVEL_4_1",
-  LEVEL_4_2 = "LEVEL_4_2",
-  LEVEL_5 = "LEVEL_5",
-  LEVEL_5_1 = "LEVEL_5_1",
-  LEVEL_5_2 = "LEVEL_5_2",
-}
-
-export enum H264CodecProfile {
-  BASELINE = "BASELINE",
-  HIGH = "HIGH",
-  HIGH_10BIT = "HIGH_10BIT",
-  HIGH_422 = "HIGH_422",
-  HIGH_422_10BIT = "HIGH_422_10BIT",
-  MAIN = "MAIN",
-}
-
-export enum H264DynamicSubGop {
-  ADAPTIVE = "ADAPTIVE",
-  STATIC = "STATIC",
 }

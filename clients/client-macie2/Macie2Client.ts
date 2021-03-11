@@ -47,6 +47,10 @@ import {
   DisableOrganizationAdminAccountCommandOutput,
 } from "./commands/DisableOrganizationAdminAccountCommand";
 import {
+  DisassociateFromAdministratorAccountCommandInput,
+  DisassociateFromAdministratorAccountCommandOutput,
+} from "./commands/DisassociateFromAdministratorAccountCommand";
+import {
   DisassociateFromMasterAccountCommandInput,
   DisassociateFromMasterAccountCommandOutput,
 } from "./commands/DisassociateFromMasterAccountCommand";
@@ -56,6 +60,10 @@ import {
   EnableOrganizationAdminAccountCommandInput,
   EnableOrganizationAdminAccountCommandOutput,
 } from "./commands/EnableOrganizationAdminAccountCommand";
+import {
+  GetAdministratorAccountCommandInput,
+  GetAdministratorAccountCommandOutput,
+} from "./commands/GetAdministratorAccountCommand";
 import {
   GetBucketStatisticsCommandInput,
   GetBucketStatisticsCommandOutput,
@@ -203,10 +211,12 @@ export type ServiceInputTypes =
   | DescribeOrganizationConfigurationCommandInput
   | DisableMacieCommandInput
   | DisableOrganizationAdminAccountCommandInput
+  | DisassociateFromAdministratorAccountCommandInput
   | DisassociateFromMasterAccountCommandInput
   | DisassociateMemberCommandInput
   | EnableMacieCommandInput
   | EnableOrganizationAdminAccountCommandInput
+  | GetAdministratorAccountCommandInput
   | GetBucketStatisticsCommandInput
   | GetClassificationExportConfigurationCommandInput
   | GetCustomDataIdentifierCommandInput
@@ -256,10 +266,12 @@ export type ServiceOutputTypes =
   | DescribeOrganizationConfigurationCommandOutput
   | DisableMacieCommandOutput
   | DisableOrganizationAdminAccountCommandOutput
+  | DisassociateFromAdministratorAccountCommandOutput
   | DisassociateFromMasterAccountCommandOutput
   | DisassociateMemberCommandOutput
   | EnableMacieCommandOutput
   | EnableOrganizationAdminAccountCommandOutput
+  | GetAdministratorAccountCommandOutput
   | GetBucketStatisticsCommandOutput
   | GetClassificationExportConfigurationCommandOutput
   | GetCustomDataIdentifierCommandOutput

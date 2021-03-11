@@ -154,6 +154,30 @@ export namespace BatchGetQueryExecutionInput {
 }
 
 /**
+ * <p>The Athena engine version for running queries.</p>
+ */
+export interface EngineVersion {
+  /**
+   * <p>The engine version requested by the user. Possible values are determined by the output of <code>ListEngineVersions</code>, including Auto. The default is Auto.</p>
+   */
+  SelectedEngineVersion?: string;
+
+  /**
+   * <p>Read only. The engine version on which the query runs. If the user requests
+   *             a valid engine version other than Auto, the effective engine version is the same as the
+   *             engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a <code>CreateWorkGroup</code> or <code>UpdateWorkGroup</code> operation, the
+   *             <code>EffectiveEngineVersion</code> field is ignored.</p>
+   */
+  EffectiveEngineVersion?: string;
+}
+
+export namespace EngineVersion {
+  export const filterSensitiveLog = (obj: EngineVersion): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>The database and data catalog context in which the query execution occurs.</p>
  */
 export interface QueryExecutionContext {
@@ -187,8 +211,8 @@ export enum EncryptionOption {
 export interface EncryptionConfiguration {
   /**
    * <p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys
-   *                 (<code>SSE-S3</code>), server-side encryption with KMS-managed keys
-   *                 (<code>SSE-KMS</code>), or client-side encryption with KMS-managed keys (CSE-KMS) is
+   *             (<code>SSE-S3</code>), server-side encryption with KMS-managed keys
+   *             (<code>SSE-KMS</code>), or client-side encryption with KMS-managed keys (CSE-KMS) is
    *             used.</p>
    *         <p>If a query runs in a workgroup and the workgroup overrides client-side settings, then
    *             the workgroup's setting for encryption is used. It specifies whether query results must
@@ -410,6 +434,11 @@ export interface QueryExecution {
    * <p>The name of the workgroup in which the query ran.</p>
    */
   WorkGroup?: string;
+
+  /**
+   * <p>The engine version that executed the query.</p>
+   */
+  EngineVersion?: EngineVersion;
 }
 
 export namespace QueryExecution {
@@ -470,7 +499,7 @@ export namespace BatchGetQueryExecutionOutput {
  *             define. For example, you can use tags to categorize Athena workgroups or data catalogs
  *             by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to
  *             search and filter workgroups or data catalogs in your account. For best practices, see
- *                 <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode
+ *             <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode
  *             characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use
  *             letters and numbers representable in UTF-8, and the following characters: + - = . _ : /
  *             @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you
@@ -513,9 +542,14 @@ export interface CreateDataCatalogInput {
   Name: string | undefined;
 
   /**
-   * <p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,
-   *                 <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive
-   *             metastore.</p>
+   * <p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog or
+   *                 <code>HIVE</code> for an external hive metastore.</p>
+   *         <note>
+   *             <p>Do not use the <code>GLUE</code> type. This refers to the
+   *                     <code>AwsDataCatalog</code> that already exists in your account, of which you
+   *                 can have only one. Specifying the <code>GLUE</code> type will result in an
+   *                     <code>INVALID_INPUT</code> error.</p>
+   *         </note>
    */
   Type: DataCatalogType | string | undefined;
 
@@ -563,9 +597,6 @@ export interface CreateDataCatalogInput {
    *                      </p>
    *                     </li>
    *                </ul>
-   *             </li>
-   *             <li>
-   *                 <p>The <code>GLUE</code> type has no parameters.</p>
    *             </li>
    *          </ul>
    */
@@ -664,9 +695,9 @@ export interface WorkGroupConfiguration {
    *             query results are stored and the encryption option, if any, used for query results. To
    *             run the query, you must specify the query results location using one of the ways: either
    *             in the workgroup using this setting, or for individual queries (client-side), using
-   *                 <a>ResultConfiguration$OutputLocation</a>. If none of them is set, Athena
+   *             <a>ResultConfiguration$OutputLocation</a>. If none of them is set, Athena
    *             issues an error that no output location is provided. For more information, see <a href="https://docs.aws.amazon.com/athena/latest/ug/querying.html">Query
-   *             Results</a>.</p>
+   *                 Results</a>.</p>
    */
   ResultConfiguration?: ResultConfiguration;
 
@@ -696,6 +727,12 @@ export interface WorkGroupConfiguration {
    *             in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    */
   RequesterPaysEnabled?: boolean;
+
+  /**
+   * <p>The engine version that all queries running on
+   *             the workgroup use. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>
+   */
+  EngineVersion?: EngineVersion;
 }
 
 export namespace WorkGroupConfiguration {
@@ -795,7 +832,7 @@ export interface DeleteWorkGroupInput {
 
   /**
    * <p>The option to delete the workgroup and its contents even if the workgroup contains any
-   *             named queries.</p>
+   *             named queries or query executions.</p>
    */
   RecursiveDeleteOption?: boolean;
 }
@@ -919,9 +956,10 @@ export interface DataCatalog {
   Description?: string;
 
   /**
-   * <p>The type of data catalog: <code>LAMBDA</code> for a federated catalog,
-   *                 <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive
-   *             metastore.</p>
+   * <p>The type of data catalog: <code>LAMBDA</code> for a federated catalog or
+   *                 <code>HIVE</code> for an external hive metastore. <code>GLUE</code> refers to the
+   *                 <code>AwsDataCatalog</code> that already exists in your account, of which you can
+   *             have only one.</p>
    */
   Type: DataCatalogType | string | undefined;
 
@@ -964,9 +1002,6 @@ export interface DataCatalog {
    *                      </p>
    *                     </li>
    *                </ul>
-   *             </li>
-   *             <li>
-   *                 <p>The <code>GLUE</code> type has no parameters.</p>
    *             </li>
    *          </ul>
    */
@@ -1530,6 +1565,46 @@ export namespace ListDataCatalogsOutput {
   });
 }
 
+export interface ListEngineVersionsInput {
+  /**
+   * <p>A token generated by the Athena service that specifies where to continue pagination if
+   *             a previous request was truncated. To obtain the next set of pages, pass in the
+   *             <code>NextToken</code> from the response object of the previous page call.</p>
+   */
+  NextToken?: string;
+
+  /**
+   * <p>The maximum number of engine versions to return in this request.</p>
+   */
+  MaxResults?: number;
+}
+
+export namespace ListEngineVersionsInput {
+  export const filterSensitiveLog = (obj: ListEngineVersionsInput): any => ({
+    ...obj,
+  });
+}
+
+export interface ListEngineVersionsOutput {
+  /**
+   * <p>A list of engine versions that are available to choose from.</p>
+   */
+  EngineVersions?: EngineVersion[];
+
+  /**
+   * <p>A token generated by the Athena service that specifies where to continue pagination if
+   *             a previous request was truncated. To obtain the next set of pages, pass in the
+   *             <code>NextToken</code> from the response object of the previous page call.</p>
+   */
+  NextToken?: string;
+}
+
+export namespace ListEngineVersionsOutput {
+  export const filterSensitiveLog = (obj: ListEngineVersionsOutput): any => ({
+    ...obj,
+  });
+}
+
 export interface ListNamedQueriesInput {
   /**
    * <p>A token generated by the Athena service that specifies where to continue pagination if
@@ -1742,7 +1817,7 @@ export interface ListWorkGroupsInput {
   /**
    * <p>A token generated by the Athena service that specifies where to continue pagination if
    *             a previous request was truncated. To obtain the next set of pages, pass in the
-   *                 <code>NextToken</code> from the response object of the previous page call.</p>
+   *             <code>NextToken</code> from the response object of the previous page call.</p>
    */
   NextToken?: string;
 
@@ -1782,6 +1857,11 @@ export interface WorkGroupSummary {
    * <p>The workgroup creation date and time.</p>
    */
   CreationTime?: Date;
+
+  /**
+   * <p>The engine version setting for all queries on the workgroup. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>
+   */
+  EngineVersion?: EngineVersion;
 }
 
 export namespace WorkGroupSummary {
@@ -1792,15 +1872,15 @@ export namespace WorkGroupSummary {
 
 export interface ListWorkGroupsOutput {
   /**
-   * <p>The list of workgroups, including their names, descriptions, creation times, and
-   *             states.</p>
+   * <p>A list of <a>WorkGroupSummary</a> objects that include the names, descriptions, creation times, and
+   *             states for each workgroup.</p>
    */
   WorkGroups?: WorkGroupSummary[];
 
   /**
    * <p>A token generated by the Athena service that specifies where to continue pagination if
    *             a previous request was truncated. To obtain the next set of pages, pass in the
-   *                 <code>NextToken</code> from the response object of the previous page call.</p>
+   *             <code>NextToken</code> from the response object of the previous page call.</p>
    */
   NextToken?: string;
 }
@@ -1978,8 +2058,13 @@ export interface UpdateDataCatalogInput {
 
   /**
    * <p>Specifies the type of data catalog to update. Specify <code>LAMBDA</code> for a
-   *             federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an
-   *             external hive metastore.</p>
+   *             federated catalog or <code>HIVE</code> for an external hive metastore.</p>
+   *         <note>
+   *             <p>Do not use the <code>GLUE</code> type. This refers to the
+   *                     <code>AwsDataCatalog</code> that already exists in your account, of which you
+   *                 can have only one. Specifying the <code>GLUE</code> type will result in an
+   *                     <code>INVALID_INPUT</code> error.</p>
+   *         </note>
    */
   Type: DataCatalogType | string | undefined;
 
@@ -2027,9 +2112,6 @@ export interface UpdateDataCatalogInput {
    *                      </p>
    *                     </li>
    *                </ul>
-   *             </li>
-   *             <li>
-   *                 <p>The <code>GLUE</code> type has no parameters.</p>
    *             </li>
    *          </ul>
    */
@@ -2147,6 +2229,11 @@ export interface WorkGroupConfigurationUpdates {
    *             in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    */
   RequesterPaysEnabled?: boolean;
+
+  /**
+   * <p>The engine version requested when a workgroup is updated. After the update, all queries on the workgroup run on the requested engine version. If no value was previously set, the default is Auto. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>
+   */
+  EngineVersion?: EngineVersion;
 }
 
 export namespace WorkGroupConfigurationUpdates {

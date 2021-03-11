@@ -22,7 +22,8 @@ export namespace BatchDeleteWorldsRequest {
 
 export interface BatchDeleteWorldsResponse {
   /**
-   * <p>A list of unprocessed worlds associated with the call. These worlds were not deleted.</p>
+   * <p>A list of unprocessed worlds associated with the call. These worlds were not
+   *          deleted.</p>
    */
   unprocessedWorlds?: string[];
 }
@@ -49,8 +50,8 @@ export namespace InternalServerException {
 }
 
 /**
- * <p>A parameter specified in a request is not valid, is unsupported, or cannot be used.
- *          The returned message provides an explanation of the error value.</p>
+ * <p>A parameter specified in a request is not valid, is unsupported, or cannot be used. The
+ *          returned message provides an explanation of the error value.</p>
  */
 export interface InvalidParameterException extends __SmithyException, $MetadataBearer {
   name: "InvalidParameterException";
@@ -97,12 +98,10 @@ export namespace BatchDescribeSimulationJobRequest {
  */
 export interface ComputeResponse {
   /**
-   * <p>The simulation unit limit. Your simulation is allocated CPU and memory
-   *         proportional to the supplied simulation unit limit. A simulation
-   *         unit is 1 vcpu and 2GB of memory. You are only billed
-   *         for the SU utilization you consume up to the maximim value provided.
-   *         The default is 15.
-   *         </p>
+   * <p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to
+   *          the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are
+   *          only billed for the SU utilization you consume up to the maximim value provided. The
+   *          default is 15. </p>
    */
   simulationUnitLimit?: number;
 }
@@ -189,6 +188,7 @@ export enum SimulationJobErrorCode {
   SimulationApplicationCrash = "SimulationApplicationCrash",
   SimulationApplicationVersionMismatchedEtag = "SimulationApplicationVersionMismatchedEtag",
   SubnetIpLimitExceeded = "SubnetIpLimitExceeded",
+  UploadContentMismatchError = "UploadContentMismatchError",
   WrongRegionRobotApplication = "WrongRegionRobotApplication",
   WrongRegionS3Bucket = "WrongRegionS3Bucket",
   WrongRegionS3Output = "WrongRegionS3Output",
@@ -263,7 +263,8 @@ export namespace OutputLocation {
  */
 export interface PortMapping {
   /**
-   * <p>The port number on the simulation job instance to use as a remote connection point. </p>
+   * <p>The port number on the simulation job instance to use as a remote connection point.
+   *          </p>
    */
   jobPort: number | undefined;
 
@@ -325,17 +326,74 @@ export interface LaunchConfig {
   portForwardingConfig?: PortForwardingConfig;
 
   /**
-   * <p>Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>,
-   *         AWS RoboMaker will configure a connection so you can interact with your application as it is
-   *        running in the simulation. You must configure and luanch the component. It must have a graphical
-   *        user interface.
-   *        </p>
+   * <p>Boolean indicating whether a streaming session will be configured for the application.
+   *          If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with
+   *          your application as it is running in the simulation. You must configure and launch the
+   *          component. It must have a graphical user interface. </p>
    */
   streamUI?: boolean;
 }
 
 export namespace LaunchConfig {
   export const filterSensitiveLog = (obj: LaunchConfig): any => ({
+    ...obj,
+  });
+}
+
+export enum UploadBehavior {
+  UPLOAD_ON_TERMINATE = "UPLOAD_ON_TERMINATE",
+  UPLOAD_ROLLING_AUTO_REMOVE = "UPLOAD_ROLLING_AUTO_REMOVE",
+}
+
+/**
+ * <p>Provides upload configuration information. Files are uploaded from the simulation job to
+ *          a location you specify. </p>
+ */
+export interface UploadConfiguration {
+  /**
+   * <p>A prefix that specifies where files will be uploaded in Amazon S3.
+   *         It is appended to the simulation output location to determine the final path.
+   *        </p>
+   *          <p>
+   *         For example, if your simulation output location is <code>s3://my-bucket</code> and your upload
+   *         configuration name is <code>robot-test</code>, your files will be uploaded to
+   *         <code>s3://my-bucket/<simid>/<runid>/robot-test</code>.
+   *       </p>
+   */
+  name: string | undefined;
+
+  /**
+   * <p> Specifies the path of the file(s) to upload. Standard Unix glob matching rules are
+   *          accepted, with the addition of <code>**</code> as a <i>super asterisk</i>.
+   *          For example, specifying <code>/var/log/**.log</code> causes all .log files in the
+   *             <code>/var/log</code> directory tree to be collected. For more examples, see <a href="https://github.com/gobwas/glob">Glob Library</a>. </p>
+   */
+  path: string | undefined;
+
+  /**
+   * <p>Specifies how to upload the files:</p>
+   *          <dl>
+   *             <dt>UPLOAD_ON_TERMINATE</dt>
+   *             <dd>
+   *                <p>Matching files are uploaded once the simulation enters the
+   *                      <code>TERMINATING</code> state. Matching files are not uploaded until all of
+   *                   your code (including tools) have stopped. </p>
+   *                <p>If there is a problem uploading a file, the upload is retried. If problems
+   *                   persist, no further upload attempts will be made.</p>
+   *             </dd>
+   *             <dt>UPLOAD_ROLLING_AUTO_REMOVE</dt>
+   *             <dd>
+   *                <p>Matching files are uploaded as they are created. They are deleted after they
+   *                   are uploaded. The specified path is checked every 5 seconds. A final check is made
+   *                   when all of your code (including tools) have stopped. </p>
+   *             </dd>
+   *          </dl>
+   */
+  uploadBehavior: UploadBehavior | string | undefined;
+}
+
+export namespace UploadConfiguration {
+  export const filterSensitiveLog = (obj: UploadConfiguration): any => ({
     ...obj,
   });
 }
@@ -358,6 +416,19 @@ export interface RobotApplicationConfig {
    * <p>The launch configuration for the robot application.</p>
    */
   launchConfig: LaunchConfig | undefined;
+
+  /**
+   * <p>The upload configurations for the robot application.</p>
+   */
+  uploadConfigurations?: UploadConfiguration[];
+
+  /**
+   * <p>A Boolean indicating whether to use default upload configurations. By default,
+   *             <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application
+   *          terminates and all ROS topics will be recorded.</p>
+   *          <p>If you set this value, you must specify an <code>outputLocation</code>. </p>
+   */
+  useDefaultUploadConfigurations?: boolean;
 }
 
 export namespace RobotApplicationConfig {
@@ -402,9 +473,22 @@ export interface SimulationApplicationConfig {
   launchConfig: LaunchConfig | undefined;
 
   /**
+   * <p>Information about upload configurations for the simulation application.</p>
+   */
+  uploadConfigurations?: UploadConfiguration[];
+
+  /**
    * <p>A list of world configurations.</p>
    */
   worldConfigs?: WorldConfig[];
+
+  /**
+   * <p>A Boolean indicating whether to use default upload configurations. By default,
+   *             <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application
+   *          terminates and all ROS topics will be recorded.</p>
+   *          <p>If you set this value, you must specify an <code>outputLocation</code>. </p>
+   */
+  useDefaultUploadConfigurations?: boolean;
 }
 
 export namespace SimulationApplicationConfig {
@@ -477,12 +561,14 @@ export interface SimulationJob {
   status?: SimulationJobStatus | string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job was last started.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job was last
+   *          started.</p>
    */
   lastStartedAt?: Date;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -527,7 +613,8 @@ export interface SimulationJob {
   loggingConfig?: LoggingConfig;
 
   /**
-   * <p>The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.</p>
+   * <p>The maximum simulation job duration in seconds. The value must be 8 days (691,200
+   *          seconds) or less.</p>
    */
   maxJobDurationInSeconds?: number;
 
@@ -537,10 +624,9 @@ export interface SimulationJob {
   simulationTimeMillis?: number;
 
   /**
-   * <p>The IAM role that allows the simulation instance to call the AWS APIs that
-   *          are specified in its associated policies on your behalf. This is how credentials are passed in to your
-   *          simulation job.
-   *       </p>
+   * <p>The IAM role that allows the simulation instance to call the AWS APIs that are specified
+   *          in its associated policies on your behalf. This is how credentials are passed in to your
+   *          simulation job. </p>
    */
   iamRole?: string;
 
@@ -560,7 +646,8 @@ export interface SimulationJob {
   dataSources?: DataSource[];
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the simulation job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the simulation
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 
@@ -627,25 +714,20 @@ export interface BatchPolicy {
    * <p>The amount of time, in seconds, to wait for the batch to complete.
    *
    *       </p>
-   *          <p>If a batch times out, and there are pending requests that
-   *       were failing due to an internal failure (like <code>InternalServiceError</code>),
-   *       they will be moved to the
-   *       failed list and the batch status will be <code>Failed</code>.
-   *       If the pending requests were failing for any other reason,
-   *       the failed pending requests will be moved to the failed list
-   *       and the batch status will be <code>TimedOut</code>.
-   *       </p>
+   *          <p>If a batch times out, and there are pending requests that were failing due to an
+   *          internal failure (like <code>InternalServiceError</code>), they will be moved to the failed
+   *          list and the batch status will be <code>Failed</code>. If the pending requests were failing
+   *          for any other reason, the failed pending requests will be moved to the failed list and the
+   *          batch status will be <code>TimedOut</code>. </p>
    */
   timeoutInSeconds?: number;
 
   /**
-   * <p>The number of active simulation jobs create as part of the batch that
-   *          can be in an active state at the same time.
-   *       </p>
+   * <p>The number of active simulation jobs create as part of the batch that can be in an
+   *          active state at the same time. </p>
    *          <p>Active states include: <code>Pending</code>,<code>Preparing</code>,
    *          <code>Running</code>, <code>Restarting</code>, <code>RunningFailed</code> and
-   *          <code>Terminating</code>. All other states are terminal states.
-   *       </p>
+   *             <code>Terminating</code>. All other states are terminal states. </p>
    */
   maxConcurrency?: number;
 }
@@ -766,12 +848,10 @@ export namespace CancelWorldGenerationJobResponse {
  */
 export interface Compute {
   /**
-   * <p>The simulation unit limit. Your simulation is allocated CPU and memory
-   *         proportional to the supplied simulation unit limit. A simulation
-   *         unit is 1 vcpu and 2GB of memory. You are only billed
-   *         for the SU utilization you consume up to the maximim value provided.
-   *         The default is 15.
-   *         </p>
+   * <p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to
+   *          the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are
+   *          only billed for the SU utilization you consume up to the maximim value provided. The
+   *          default is 15. </p>
    */
   simulationUnitLimit?: number;
 }
@@ -807,7 +887,8 @@ export interface DeploymentLaunchConfig {
   packageName: string | undefined;
 
   /**
-   * <p>The deployment pre-launch file. This file will be executed prior to the launch file.</p>
+   * <p>The deployment pre-launch file. This file will be executed prior to the launch
+   *          file.</p>
    */
   preLaunchFile?: string;
 
@@ -817,12 +898,14 @@ export interface DeploymentLaunchConfig {
   launchFile: string | undefined;
 
   /**
-   * <p>The deployment post-launch file. This file will be executed after the launch file.</p>
+   * <p>The deployment post-launch file. This file will be executed after the launch
+   *          file.</p>
    */
   postLaunchFile?: string;
 
   /**
-   * <p>An array of key/value pairs specifying environment variables for the robot application</p>
+   * <p>An array of key/value pairs specifying environment variables for the robot
+   *          application</p>
    */
   environmentVariables?: { [key: string]: string };
 }
@@ -901,7 +984,7 @@ export interface DeploymentConfig {
 
   /**
    * <p>The amount of time, in seconds, to wait for deployment to a single robot to complete.
-   *         Choose a time between 1 minute and 7 days. The default is 5 hours.</p>
+   *          Choose a time between 1 minute and 7 days. The default is 5 hours.</p>
    */
   robotDeploymentTimeoutInSeconds?: number;
 
@@ -924,7 +1007,8 @@ export interface CreateDeploymentJobRequest {
   deploymentConfig?: DeploymentConfig;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -939,7 +1023,8 @@ export interface CreateDeploymentJobRequest {
   deploymentApplicationConfigs: DeploymentApplicationConfig[] | undefined;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the deployment job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the deployment
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -1013,11 +1098,9 @@ export interface CreateDeploymentJobResponse {
    *          <dl>
    *             <dt>BadPermissionError</dt>
    *             <dd>
-   *                <p>AWS Greengrass requires a service-level role permission to access
-   *                   other services. The role must include the
-   *                   <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor">
-   *                      <code>AWSGreengrassResourceAccessRolePolicy</code>
-   *                      managed policy</a>.
+   *                <p>AWS Greengrass requires a service-level role permission to access other
+   *                   services. The role must include the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor">
+   *                      <code>AWSGreengrassResourceAccessRolePolicy</code> managed policy</a>.
    *                </p>
    *             </dd>
    *             <dt>ExtractingBundleFailure</dt>
@@ -1026,8 +1109,8 @@ export interface CreateDeploymentJobResponse {
    *             </dd>
    *             <dt>FailureThresholdBreached</dt>
    *             <dd>
-   *                <p>The percentage of robots that could not be updated exceeded the percentage
-   *                   set for the deployment.</p>
+   *                <p>The percentage of robots that could not be updated exceeded the percentage set
+   *                   for the deployment.</p>
    *             </dd>
    *             <dt>GreengrassDeploymentFailed</dt>
    *             <dd>
@@ -1039,17 +1122,19 @@ export interface CreateDeploymentJobResponse {
    *             </dd>
    *             <dt>InternalServerError</dt>
    *             <dd>
-   *                <p>An internal error has occurred. Retry your request, but if the problem persists,
-   *                   contact us with details.</p>
+   *                <p>An internal error has occurred. Retry your request, but if the problem
+   *                   persists, contact us with details.</p>
    *             </dd>
    *             <dt>MissingRobotApplicationArchitecture</dt>
    *             <dd>
-   *                <p>The robot application does not have a source that matches the architecture of the robot.</p>
+   *                <p>The robot application does not have a source that matches the architecture of
+   *                   the robot.</p>
    *             </dd>
    *             <dt>MissingRobotDeploymentResource</dt>
    *             <dd>
-   *                <p>One or more of the resources specified for the robot application are missing. For
-   *                example, does the robot application have the correct launch package and launch file?</p>
+   *                <p>One or more of the resources specified for the robot application are missing.
+   *                   For example, does the robot application have the correct launch package and launch
+   *                   file?</p>
    *             </dd>
    *             <dt>PostLaunchFileFailure</dt>
    *             <dd>
@@ -1066,8 +1151,8 @@ export interface CreateDeploymentJobResponse {
    *             </dd>
    *             <dt>RobotDeploymentNoResponse</dt>
    *             <dd>
-   *                <p>There is no response from the robot. It might not be powered on or
-   *                connected to the internet.</p>
+   *                <p>There is no response from the robot. It might not be powered on or connected to
+   *                   the internet.</p>
    *             </dd>
    *          </dl>
    */
@@ -1096,8 +1181,8 @@ export namespace CreateDeploymentJobResponse {
 }
 
 /**
- * <p>The request uses the same client token as a previous, but non-identical request.
- *          Do not reuse a client token with different requests, unless the requests are identical. </p>
+ * <p>The request uses the same client token as a previous, but non-identical request. Do not
+ *          reuse a client token with different requests, unless the requests are identical. </p>
  */
 export interface IdempotentParameterMismatchException extends __SmithyException, $MetadataBearer {
   name: "IdempotentParameterMismatchException";
@@ -1329,7 +1414,8 @@ export interface CreateRobotApplicationRequest {
   robotSoftwareSuite: RobotSoftwareSuite | undefined;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the robot application.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the robot
+   *          application.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -1398,7 +1484,8 @@ export interface CreateRobotApplicationResponse {
   robotSoftwareSuite?: RobotSoftwareSuite;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the robot application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the robot application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -1426,8 +1513,8 @@ export interface CreateRobotApplicationVersionRequest {
   application: string | undefined;
 
   /**
-   * <p>The current revision id for the robot application. If you provide a value and it
-   *         matches the latest revision ID, a new version will be created.</p>
+   * <p>The current revision id for the robot application. If you provide a value and it matches
+   *          the latest revision ID, a new version will be created.</p>
    */
   currentRevisionId?: string;
 }
@@ -1465,7 +1552,8 @@ export interface CreateRobotApplicationVersionResponse {
   robotSoftwareSuite?: RobotSoftwareSuite;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the robot application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the robot application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -1559,7 +1647,8 @@ export interface CreateSimulationApplicationRequest {
   renderingEngine?: RenderingEngine;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the simulation application.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the simulation
+   *          application.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -1607,7 +1696,8 @@ export interface CreateSimulationApplicationResponse {
   renderingEngine?: RenderingEngine;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -1636,7 +1726,7 @@ export interface CreateSimulationApplicationVersionRequest {
 
   /**
    * <p>The current revision id for the simulation application. If you provide a value and it
-   *         matches the latest revision ID, a new version will be created.</p>
+   *          matches the latest revision ID, a new version will be created.</p>
    */
   currentRevisionId?: string;
 }
@@ -1684,7 +1774,8 @@ export interface CreateSimulationApplicationVersionResponse {
   renderingEngine?: RenderingEngine;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -1727,9 +1818,9 @@ export namespace DataSourceConfig {
 }
 
 /**
- * <p>If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security
- *         group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one
- *         security group and two subnet IDs.</p>
+ * <p>If your simulation job accesses resources in a VPC, you provide this parameter
+ *          identifying the list of security group IDs and subnet IDs. These must belong to the same
+ *          VPC. You must provide at least one security group and two subnet IDs.</p>
  */
 export interface VPCConfig {
   /**
@@ -1756,7 +1847,8 @@ export namespace VPCConfig {
 
 export interface CreateSimulationJobRequest {
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -1771,17 +1863,16 @@ export interface CreateSimulationJobRequest {
   loggingConfig?: LoggingConfig;
 
   /**
-   * <p>The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds.
-   *          When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to
-   *          <code>Completed</code>.</p>
+   * <p>The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When
+   *             <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will
+   *          transition to <code>Completed</code>.</p>
    */
   maxJobDurationInSeconds: number | undefined;
 
   /**
-   * <p>The IAM role name that allows the simulation instance to call the AWS APIs that
-   *          are specified in its associated policies on your behalf. This is how credentials are passed in to your
-   *          simulation job.
-   *       </p>
+   * <p>The IAM role name that allows the simulation instance to call the AWS APIs that are
+   *          specified in its associated policies on your behalf. This is how credentials are passed in
+   *          to your simulation job. </p>
    */
   iamRole: string | undefined;
 
@@ -1811,25 +1902,25 @@ export interface CreateSimulationJobRequest {
   simulationApplications?: SimulationApplicationConfig[];
 
   /**
-   * <p>Specify data sources to mount read-only files from S3 into your simulation. These files are
-   *         available under <code>/opt/robomaker/datasources/data_source_name</code>.
-   *       </p>
+   * <p>Specify data sources to mount read-only files from S3 into your simulation. These files
+   *          are available under <code>/opt/robomaker/datasources/data_source_name</code>. </p>
    *          <note>
    *             <p>There is a limit of 100 files and a combined size of 25GB for all
-   *             <code>DataSourceConfig</code> objects.
-   *          </p>
+   *                <code>DataSourceConfig</code> objects. </p>
    *          </note>
    */
   dataSources?: DataSourceConfig[];
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the simulation job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the simulation
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 
   /**
-   * <p>If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs.
-   *          These must belong to the same VPC. You must provide at least one security group and one subnet ID. </p>
+   * <p>If your simulation job accesses resources in a VPC, you provide this parameter
+   *          identifying the list of security group IDs and subnet IDs. These must belong to the same
+   *          VPC. You must provide at least one security group and one subnet ID. </p>
    */
   vpcConfig?: VPCConfig;
 
@@ -1857,12 +1948,14 @@ export interface CreateSimulationJobResponse {
   status?: SimulationJobStatus | string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job was last started.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job was last
+   *          started.</p>
    */
   lastStartedAt?: Date;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -1916,11 +2009,13 @@ export interface CreateSimulationJobResponse {
    *             </dd>
    *             <dt>InvalidBundleRobotApplication</dt>
    *             <dd>
-   *                <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p>
+   *                <p>Robot bundle cannot be extracted (invalid format, bundling error, or other
+   *                   issue).</p>
    *             </dd>
    *             <dt>InvalidBundleSimulationApplication</dt>
    *             <dd>
-   *                <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p>
+   *                <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other
+   *                   issue).</p>
    *             </dd>
    *             <dt>RobotApplicationVersionMismatchedEtag</dt>
    *             <dd>
@@ -1928,14 +2023,16 @@ export interface CreateSimulationJobResponse {
    *             </dd>
    *             <dt>SimulationApplicationVersionMismatchedEtag</dt>
    *             <dd>
-   *                <p>Etag for SimulationApplication does not match value during version creation.</p>
+   *                <p>Etag for SimulationApplication does not match value during version
+   *                   creation.</p>
    *             </dd>
    *          </dl>
    */
   failureCode?: SimulationJobErrorCode | string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -1950,8 +2047,7 @@ export interface CreateSimulationJobResponse {
   loggingConfig?: LoggingConfig;
 
   /**
-   * <p>The maximum simulation job duration in seconds.
-   *       </p>
+   * <p>The maximum simulation job duration in seconds. </p>
    */
   maxJobDurationInSeconds?: number;
 
@@ -1961,8 +2057,8 @@ export interface CreateSimulationJobResponse {
   simulationTimeMillis?: number;
 
   /**
-   * <p>The IAM role that allows the simulation job to call the AWS APIs that
-   *          are specified in its associated policies on your behalf.</p>
+   * <p>The IAM role that allows the simulation job to call the AWS APIs that are specified in
+   *          its associated policies on your behalf.</p>
    */
   iamRole?: string;
 
@@ -2033,15 +2129,15 @@ export interface SimulationJobRequest {
   loggingConfig?: LoggingConfig;
 
   /**
-   * <p>The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.</p>
+   * <p>The maximum simulation job duration in seconds. The value must be 8 days (691,200
+   *          seconds) or less.</p>
    */
   maxJobDurationInSeconds: number | undefined;
 
   /**
-   * <p>The IAM role name that allows the simulation instance to call the AWS APIs that
-   *          are specified in its associated policies on your behalf. This is how credentials are passed in to your
-   *          simulation job.
-   *       </p>
+   * <p>The IAM role name that allows the simulation instance to call the AWS APIs that are
+   *          specified in its associated policies on your behalf. This is how credentials are passed in
+   *          to your simulation job. </p>
    */
   iamRole?: string;
 
@@ -2061,7 +2157,8 @@ export interface SimulationJobRequest {
   failureBehavior?: FailureBehavior | string;
 
   /**
-   * <p>Boolean indicating whether to use default simulation tool applications.</p>
+   * <p>A Boolean indicating whether to use default applications in the simulation job. Default
+   *          applications include Gazebo, rqt, rviz and terminal access. </p>
    */
   useDefaultApplications?: boolean;
 
@@ -2076,21 +2173,19 @@ export interface SimulationJobRequest {
   simulationApplications?: SimulationApplicationConfig[];
 
   /**
-   * <p>Specify data sources to mount read-only files from S3 into your simulation. These files are
-   *         available under <code>/opt/robomaker/datasources/data_source_name</code>.
-   *       </p>
+   * <p>Specify data sources to mount read-only files from S3 into your simulation. These files
+   *          are available under <code>/opt/robomaker/datasources/data_source_name</code>. </p>
    *          <note>
    *             <p>There is a limit of 100 files and a combined size of 25GB for all
-   *             <code>DataSourceConfig</code> objects.
-   *          </p>
+   *                <code>DataSourceConfig</code> objects. </p>
    *          </note>
    */
   dataSources?: DataSourceConfig[];
 
   /**
-   * <p>If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security
-   *         group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one
-   *         security group and two subnet IDs.</p>
+   * <p>If your simulation job accesses resources in a VPC, you provide this parameter
+   *          identifying the list of security group IDs and subnet IDs. These must belong to the same
+   *          VPC. You must provide at least one security group and two subnet IDs.</p>
    */
   vpcConfig?: VPCConfig;
 
@@ -2100,7 +2195,8 @@ export interface SimulationJobRequest {
   compute?: Compute;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the simulation job request.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the simulation job
+   *          request.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -2113,7 +2209,8 @@ export namespace SimulationJobRequest {
 
 export interface CreateWorldExportJobRequest {
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -2128,12 +2225,14 @@ export interface CreateWorldExportJobRequest {
   outputLocation: OutputLocation | undefined;
 
   /**
-   * <p>The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.</p>
+   * <p>The IAM role that the world export process uses to access the Amazon S3 bucket and put
+   *          the export.</p>
    */
   iamRole: string | undefined;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world export job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world export
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -2181,8 +2280,7 @@ export interface CreateWorldExportJobResponse {
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The world export job completed.
-   *                </p>
+   *                <p>The world export job completed. </p>
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
@@ -2215,14 +2313,12 @@ export interface CreateWorldExportJobResponse {
    *             </dd>
    *             <dt>LimitExceeded</dt>
    *             <dd>
-   *                 <p>The requested resource exceeds the maximum number allowed, or the number of concurrent
-   *                       stream requests exceeds the maximum number allowed.
-   *                 </p>
+   *                <p>The requested resource exceeds the maximum number allowed, or the number of
+   *                   concurrent stream requests exceeds the maximum number allowed. </p>
    *             </dd>
    *             <dt>ResourceNotFound</dt>
    *             <dd>
-   *                 <p>The specified resource could not be found.
-   *                 </p>
+   *                <p>The specified resource could not be found. </p>
    *             </dd>
    *             <dt>RequestThrottled</dt>
    *             <dd>
@@ -2234,19 +2330,17 @@ export interface CreateWorldExportJobResponse {
    *             </dd>
    *             <dt>AllWorldGenerationFailed</dt>
    *             <dd>
-   *                 <p>All of the worlds in the world generation job failed. This can happen if your
-   *                     <code>worldCount</code> is greater than 50 or less than 1.
-   *                 </p>
+   *                <p>All of the worlds in the world generation job failed. This can happen if your
+   *                      <code>worldCount</code> is greater than 50 or less than 1. </p>
    *             </dd>
    *          </dl>
-   *          <p>For more information about troubleshooting WorldForge, see
-   *             <a href="https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html">Troubleshooting Simulation WorldForge</a>.
-   *         </p>
+   *          <p>For more information about troubleshooting WorldForge, see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html">Troubleshooting Simulation WorldForge</a>. </p>
    */
   failureCode?: WorldExportJobErrorCode | string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -2256,14 +2350,14 @@ export interface CreateWorldExportJobResponse {
   outputLocation?: OutputLocation;
 
   /**
-   * <p>The IAM role that the world export process uses to access the Amazon S3 bucket and
-   *         put the export.
-   *       </p>
+   * <p>The IAM role that the world export process uses to access the Amazon S3 bucket and put
+   *          the export. </p>
    */
   iamRole?: string;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world export job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world export
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -2275,15 +2369,13 @@ export namespace CreateWorldExportJobResponse {
 }
 
 /**
- * <p>The number of worlds that will be created. You can configure the number
- *         of unique floorplans and the number of unique interiors for each floor plan. For example,
- *         if you want 1 world with 20 unique interiors, you set <code>floorplanCount = 1</code>
- *         and <code>interiorCountPerFloorplan = 20</code>. This will result in 20 worlds
- *         (<code>floorplanCount</code> * <code>interiorCountPerFloorplan)</code>.
- *       </p>
- *          <p>If you set <code>floorplanCount = 4</code> and <code>interiorCountPerFloorplan = 5</code>,
- *         there will be 20 worlds with 5 unique floor plans.
- *       </p>
+ * <p>The number of worlds that will be created. You can configure the number of unique
+ *          floorplans and the number of unique interiors for each floor plan. For example, if you want
+ *          1 world with 20 unique interiors, you set <code>floorplanCount = 1</code> and
+ *             <code>interiorCountPerFloorplan = 20</code>. This will result in 20 worlds
+ *             (<code>floorplanCount</code> * <code>interiorCountPerFloorplan)</code>. </p>
+ *          <p>If you set <code>floorplanCount = 4</code> and <code>interiorCountPerFloorplan =
+ *             5</code>, there will be 20 worlds with 5 unique floor plans. </p>
  */
 export interface WorldCount {
   /**
@@ -2305,12 +2397,14 @@ export namespace WorldCount {
 
 export interface CreateWorldGenerationJobRequest {
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
   /**
-   * <p>The Amazon Resource Name (arn) of the world template describing the worlds you want to create.</p>
+   * <p>The Amazon Resource Name (arn) of the world template describing the worlds you want to
+   *          create.</p>
    */
   template: string | undefined;
 
@@ -2320,12 +2414,14 @@ export interface CreateWorldGenerationJobRequest {
   worldCount: WorldCount | undefined;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world generator job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world generator
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the generated
+   *          worlds.</p>
    */
   worldTags?: { [key: string]: string };
 }
@@ -2374,13 +2470,12 @@ export interface CreateWorldGenerationJobResponse {
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The world generator job completed.
-   *                </p>
+   *                <p>The world generator job completed. </p>
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
-   *                <p>The world generator job failed. See <code>failureCode</code> for more information.
-   *                </p>
+   *                <p>The world generator job failed. See <code>failureCode</code> for more
+   *                   information. </p>
    *             </dd>
    *             <dt>PartialFailed</dt>
    *             <dd>
@@ -2399,7 +2494,8 @@ export interface CreateWorldGenerationJobResponse {
   status?: WorldGenerationJobStatus | string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the world generator job was created.</p>
+   * <p>The time, in milliseconds since the epoch, when the world generator job was
+   *          created.</p>
    */
   createdAt?: Date;
 
@@ -2412,14 +2508,12 @@ export interface CreateWorldGenerationJobResponse {
    *             </dd>
    *             <dt>LimitExceeded</dt>
    *             <dd>
-   *                 <p>The requested resource exceeds the maximum number allowed, or the number of concurrent
-   *                       stream requests exceeds the maximum number allowed.
-   *                 </p>
+   *                <p>The requested resource exceeds the maximum number allowed, or the number of
+   *                   concurrent stream requests exceeds the maximum number allowed. </p>
    *             </dd>
    *             <dt>ResourceNotFound</dt>
    *             <dd>
-   *                 <p>The specified resource could not be found.
-   *                 </p>
+   *                <p>The specified resource could not be found. </p>
    *             </dd>
    *             <dt>RequestThrottled</dt>
    *             <dd>
@@ -2434,7 +2528,8 @@ export interface CreateWorldGenerationJobResponse {
   failureCode?: WorldGenerationJobErrorCode | string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -2449,12 +2544,14 @@ export interface CreateWorldGenerationJobResponse {
   worldCount?: WorldCount;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world generator job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world generator
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the generated
+   *          worlds.</p>
    */
   worldTags?: { [key: string]: string };
 }
@@ -2488,7 +2585,8 @@ export namespace TemplateLocation {
 
 export interface CreateWorldTemplateRequest {
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -2508,7 +2606,8 @@ export interface CreateWorldTemplateRequest {
   templateLocation?: TemplateLocation;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world template.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world
+   *          template.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -2526,7 +2625,8 @@ export interface CreateWorldTemplateResponse {
   arn?: string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -2541,7 +2641,8 @@ export interface CreateWorldTemplateResponse {
   name?: string;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world template.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world
+   *          template.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -2813,14 +2914,16 @@ export interface ProgressDetail {
   currentProgress?: RobotDeploymentStep | string;
 
   /**
-   * <p>Precentage of the step that is done. This currently only applies to the <code>Downloading/Extracting</code>
-   *         step of the deployment. It is empty for other steps.</p>
+   * <p>Precentage of the step that is done. This currently only applies to the
+   *             <code>Downloading/Extracting</code> step of the deployment. It is empty for other
+   *          steps.</p>
    */
   percentDone?: number;
 
   /**
    * <p>Estimated amount of time in seconds remaining in the step. This currently only applies
-   *         to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.</p>
+   *          to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other
+   *          steps.</p>
    */
   estimatedTimeRemainingSeconds?: number;
 
@@ -3188,7 +3291,8 @@ export interface DescribeRobotApplicationResponse {
   revisionId?: string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the robot application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the robot application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -3264,7 +3368,8 @@ export interface DescribeSimulationApplicationResponse {
   revisionId?: string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -3310,12 +3415,14 @@ export interface DescribeSimulationJobResponse {
   status?: SimulationJobStatus | string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job was last started.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job was last
+   *          started.</p>
    */
   lastStartedAt?: Date;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -3369,11 +3476,13 @@ export interface DescribeSimulationJobResponse {
    *             </dd>
    *             <dt>InvalidBundleRobotApplication</dt>
    *             <dd>
-   *                <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p>
+   *                <p>Robot bundle cannot be extracted (invalid format, bundling error, or other
+   *                   issue).</p>
    *             </dd>
    *             <dt>InvalidBundleSimulationApplication</dt>
    *             <dd>
-   *                <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p>
+   *                <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other
+   *                   issue).</p>
    *             </dd>
    *             <dt>RobotApplicationVersionMismatchedEtag</dt>
    *             <dd>
@@ -3381,20 +3490,22 @@ export interface DescribeSimulationJobResponse {
    *             </dd>
    *             <dt>SimulationApplicationVersionMismatchedEtag</dt>
    *             <dd>
-   *                <p>Etag for SimulationApplication does not match value during version creation.</p>
+   *                <p>Etag for SimulationApplication does not match value during version
+   *                   creation.</p>
    *             </dd>
    *          </dl>
    */
   failureCode?: SimulationJobErrorCode | string;
 
   /**
-   * <p>Details about why the simulation job failed. For more information
-   *          about troubleshooting, see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html">Troubleshooting</a>.</p>
+   * <p>Details about why the simulation job failed. For more information about troubleshooting,
+   *          see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html">Troubleshooting</a>.</p>
    */
   failureReason?: string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -3409,7 +3520,8 @@ export interface DescribeSimulationJobResponse {
   loggingConfig?: LoggingConfig;
 
   /**
-   * <p>The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or less.</p>
+   * <p>The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or
+   *          less.</p>
    */
   maxJobDurationInSeconds?: number;
 
@@ -3419,8 +3531,8 @@ export interface DescribeSimulationJobResponse {
   simulationTimeMillis?: number;
 
   /**
-   * <p>The IAM role that allows the simulation instance to call the AWS APIs that
-   *          are specified in its associated policies on your behalf.</p>
+   * <p>The IAM role that allows the simulation instance to call the AWS APIs that are specified
+   *          in its associated policies on your behalf.</p>
    */
   iamRole?: string;
 
@@ -3489,7 +3601,8 @@ export interface SimulationJobSummary {
   arn?: string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -3591,18 +3704,18 @@ export interface DescribeSimulationJobBatchResponse {
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
-   *                <p>The simulation job batch failed. One or more simulation job requests could not be completed
-   *                 due to an internal failure (like <code>InternalServiceError</code>).
-   *                 See <code>failureCode</code> and <code>failureReason</code> for more information.</p>
+   *                <p>The simulation job batch failed. One or more simulation job requests could not
+   *                   be completed due to an internal failure (like <code>InternalServiceError</code>).
+   *                   See <code>failureCode</code> and <code>failureReason</code> for more
+   *                   information.</p>
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The simulation batch job completed. A batch is complete when (1) there are
-   *                no pending simulation job requests in the batch and none of the
-   *                failed simulation job requests are due to <code>InternalServiceError</code> and (2)
-   *                   when all created simulation jobs have reached a terminal state (for example,
-   *                   <code>Completed</code> or <code>Failed</code>).
-   *                </p>
+   *                <p>The simulation batch job completed. A batch is complete when (1) there are no
+   *                   pending simulation job requests in the batch and none of the failed simulation job
+   *                   requests are due to <code>InternalServiceError</code> and (2) when all created
+   *                   simulation jobs have reached a terminal state (for example, <code>Completed</code>
+   *                   or <code>Failed</code>). </p>
    *             </dd>
    *             <dt>Canceled</dt>
    *             <dd>
@@ -3619,11 +3732,10 @@ export interface DescribeSimulationJobBatchResponse {
    *             <dt>TimingOut</dt>
    *             <dd>
    *                <p>The simulation job batch is timing out.</p>
-   *                <p>If a batch timing out, and there are pending requests that
-   *                   were failing due to an internal failure (like <code>InternalServiceError</code>),
-   *                   the batch status will be <code>Failed</code>. If there are no such failing request,
-   *                   the batch status will be <code>TimedOut</code>.
-   *                </p>
+   *                <p>If a batch timing out, and there are pending requests that were failing due to
+   *                   an internal failure (like <code>InternalServiceError</code>), the batch status
+   *                   will be <code>Failed</code>. If there are no such failing request, the batch
+   *                   status will be <code>TimedOut</code>. </p>
    *             </dd>
    *             <dt>TimedOut</dt>
    *             <dd>
@@ -3634,17 +3746,20 @@ export interface DescribeSimulationJobBatchResponse {
   status?: SimulationJobBatchStatus | string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job batch was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job batch was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job batch was created.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job batch was
+   *          created.</p>
    */
   createdAt?: Date;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -3664,16 +3779,14 @@ export interface DescribeSimulationJobBatchResponse {
   failureReason?: string;
 
   /**
-   * <p>A list of failed create simulation job requests. The request failed to
-   *          be created into a simulation job. Failed requests do not
-   *          have a simulation job ID.
-   *       </p>
+   * <p>A list of failed create simulation job requests. The request failed to be created into a
+   *          simulation job. Failed requests do not have a simulation job ID. </p>
    */
   failedRequests?: FailedCreateSimulationJobRequest[];
 
   /**
-   * <p>A list of pending simulation job requests. These requests have
-   *       not yet been created into simulation jobs.</p>
+   * <p>A list of pending simulation job requests. These requests have not yet been created into
+   *          simulation jobs.</p>
    */
   pendingRequests?: SimulationJobRequest[];
 
@@ -3683,7 +3796,8 @@ export interface DescribeSimulationJobBatchResponse {
   createdRequests?: SimulationJobSummary[];
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the simulation job batch.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the simulation job
+   *          batch.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -3714,7 +3828,8 @@ export interface DescribeWorldResponse {
   arn?: string;
 
   /**
-   * <p>The Amazon Resource Name (arn) of the world generation job that generated the world.</p>
+   * <p>The Amazon Resource Name (arn) of the world generation job that generated the
+   *          world.</p>
    */
   generationJob?: string;
 
@@ -3772,14 +3887,12 @@ export interface DescribeWorldExportJobResponse {
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The world export job completed.
-   *                </p>
+   *                <p>The world export job completed. </p>
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
-   *                <p>The world export job failed. See <code>failureCode</code> and <code>failureReason</code>
-   *                 for more information.
-   *                </p>
+   *                <p>The world export job failed. See <code>failureCode</code> and
+   *                      <code>failureReason</code> for more information. </p>
    *             </dd>
    *             <dt>Canceled</dt>
    *             <dd>
@@ -3807,14 +3920,12 @@ export interface DescribeWorldExportJobResponse {
    *             </dd>
    *             <dt>LimitExceeded</dt>
    *             <dd>
-   *                 <p>The requested resource exceeds the maximum number allowed, or the number of concurrent
-   *                       stream requests exceeds the maximum number allowed.
-   *                 </p>
+   *                <p>The requested resource exceeds the maximum number allowed, or the number of
+   *                   concurrent stream requests exceeds the maximum number allowed. </p>
    *             </dd>
    *             <dt>ResourceNotFound</dt>
    *             <dd>
-   *                 <p>The specified resource could not be found.
-   *                 </p>
+   *                <p>The specified resource could not be found. </p>
    *             </dd>
    *             <dt>RequestThrottled</dt>
    *             <dd>
@@ -3834,7 +3945,8 @@ export interface DescribeWorldExportJobResponse {
   failureReason?: string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -3849,12 +3961,14 @@ export interface DescribeWorldExportJobResponse {
   outputLocation?: OutputLocation;
 
   /**
-   * <p>The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.</p>
+   * <p>The IAM role that the world export process uses to access the Amazon S3 bucket and put
+   *          the export.</p>
    */
   iamRole?: string;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world export job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world export
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -3891,14 +4005,12 @@ export interface WorldFailure {
    *             </dd>
    *             <dt>LimitExceeded</dt>
    *             <dd>
-   *                 <p>The requested resource exceeds the maximum number allowed, or the number of concurrent
-   *                       stream requests exceeds the maximum number allowed.
-   *                 </p>
+   *                <p>The requested resource exceeds the maximum number allowed, or the number of
+   *                   concurrent stream requests exceeds the maximum number allowed. </p>
    *             </dd>
    *             <dt>ResourceNotFound</dt>
    *             <dd>
-   *                 <p>The specified resource could not be found.
-   *                 </p>
+   *                <p>The specified resource could not be found. </p>
    *             </dd>
    *             <dt>RequestThrottled</dt>
    *             <dd>
@@ -3913,9 +4025,8 @@ export interface WorldFailure {
   failureCode?: WorldGenerationJobErrorCode | string;
 
   /**
-   * <p>The sample reason why the world failed. World errors are aggregated. A sample is used
-   *         as the <code>sampleFailureReason</code>.
-   *       </p>
+   * <p>The sample reason why the world failed. World errors are aggregated. A sample is used as
+   *          the <code>sampleFailureReason</code>. </p>
    */
   sampleFailureReason?: string;
 
@@ -3997,13 +4108,12 @@ export interface DescribeWorldGenerationJobResponse {
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The world generation job completed.
-   *                </p>
+   *                <p>The world generation job completed. </p>
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
-   *                <p>The world generation job failed. See <code>failureCode</code> for more information.
-   *                </p>
+   *                <p>The world generation job failed. See <code>failureCode</code> for more
+   *                   information. </p>
    *             </dd>
    *             <dt>PartialFailed</dt>
    *             <dd>
@@ -4022,7 +4132,8 @@ export interface DescribeWorldGenerationJobResponse {
   status?: WorldGenerationJobStatus | string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the world generation job was created.</p>
+   * <p>The time, in milliseconds since the epoch, when the world generation job was
+   *          created.</p>
    */
   createdAt?: Date;
 
@@ -4035,14 +4146,12 @@ export interface DescribeWorldGenerationJobResponse {
    *             </dd>
    *             <dt>LimitExceeded</dt>
    *             <dd>
-   *                 <p>The requested resource exceeds the maximum number allowed, or the number of concurrent
-   *                       stream requests exceeds the maximum number allowed.
-   *                 </p>
+   *                <p>The requested resource exceeds the maximum number allowed, or the number of
+   *                   concurrent stream requests exceeds the maximum number allowed. </p>
    *             </dd>
    *             <dt>ResourceNotFound</dt>
    *             <dd>
-   *                 <p>The specified resource could not be found.
-   *                 </p>
+   *                <p>The specified resource could not be found. </p>
    *             </dd>
    *             <dt>RequestThrottled</dt>
    *             <dd>
@@ -4062,7 +4171,8 @@ export interface DescribeWorldGenerationJobResponse {
   failureReason?: string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -4082,12 +4192,14 @@ export interface DescribeWorldGenerationJobResponse {
   finishedWorldsSummary?: FinishedWorldsSummary;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world generation job.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world generation
+   *          job.</p>
    */
   tags?: { [key: string]: string };
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the generated
+   *          worlds.</p>
    */
   worldTags?: { [key: string]: string };
 }
@@ -4118,7 +4230,8 @@ export interface DescribeWorldTemplateResponse {
   arn?: string;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -4133,12 +4246,14 @@ export interface DescribeWorldTemplateResponse {
   createdAt?: Date;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the world template was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the world template was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the world template.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the world
+   *          template.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -4245,31 +4360,30 @@ export namespace GetWorldTemplateBodyResponse {
 export interface ListDeploymentJobsRequest {
   /**
    * <p>Optional filters to limit results.</p>
-   *          <p>The filter names <code>status</code> and <code>fleetName</code> are supported.
-   *          When filtering, you must use the complete value of the filtered item. You can use up to three filters,
-   *          but they must be for the same named item. For example, if you are looking for items with the status
-   *          <code>InProgress</code> or the status <code>Pending</code>.</p>
+   *          <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When
+   *          filtering, you must use the complete value of the filtered item. You can use up to three
+   *          filters, but they must be for the same named item. For example, if you are looking for
+   *          items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>
    */
   filters?: Filter[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListDeploymentJobs</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListDeploymentJobs</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListDeploymentJobs</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListDeploymentJobs</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 200. If this parameter is not used, then <code>ListDeploymentJobs</code>
-   *          returns up to 200 results and a <code>nextToken</code> value if applicable. </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code>
+   *          value. This value can be between 1 and 200. If this parameter is not used, then
+   *             <code>ListDeploymentJobs</code> returns up to 200 results and a <code>nextToken</code>
+   *          value if applicable. </p>
    */
   maxResults?: number;
 }
@@ -4287,12 +4401,11 @@ export interface ListDeploymentJobsResponse {
   deploymentJobs?: DeploymentJob[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListDeploymentJobs</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListDeploymentJobs</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4305,34 +4418,33 @@ export namespace ListDeploymentJobsResponse {
 
 export interface ListFleetsRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListFleets</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListFleets</code> again and assign that token to the
+   *          request object's <code>nextToken</code> parameter. If there are no remaining results, the
+   *          previous response object's NextToken parameter is set to null. </p>
    *          <note>
    *             <p>This token should be treated as an opaque identifier that is only used to retrieve
-   *          the next items in a list and not for other programmatic purposes.</p>
+   *             the next items in a list and not for other programmatic purposes.</p>
    *          </note>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListFleets</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListFleets</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 200. If this parameter is not used, then <code>ListFleets</code>
-   *          returns up to 200 results and a <code>nextToken</code> value if applicable. </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListFleets</code> request with the returned <code>nextToken</code> value.
+   *          This value can be between 1 and 200. If this parameter is not used, then
+   *             <code>ListFleets</code> returns up to 200 results and a <code>nextToken</code> value if
+   *          applicable. </p>
    */
   maxResults?: number;
 
   /**
    * <p>Optional filters to limit results.</p>
-   *          <p>The filter name <code>name</code> is supported.
-   *          When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>
+   *          <p>The filter name <code>name</code> is supported. When filtering, you must use the
+   *          complete value of the filtered item. You can use up to three filters.</p>
    */
   filters?: Filter[];
 }
@@ -4350,12 +4462,11 @@ export interface ListFleetsResponse {
   fleetDetails?: Fleet[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListFleets</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListFleets</code> again and assign that token to the
+   *          request object's <code>nextToken</code> parameter. If there are no remaining results, the
+   *          previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4373,30 +4484,29 @@ export interface ListRobotApplicationsRequest {
   versionQualifier?: string;
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListRobotApplications</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListRobotApplications</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListRobotApplications</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListRobotApplications</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code>
-   *          returns up to 100 results and a <code>nextToken</code> value if applicable. </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListRobotApplications</code> request with the returned <code>nextToken</code>
+   *          value. This value can be between 1 and 100. If this parameter is not used, then
+   *             <code>ListRobotApplications</code> returns up to 100 results and a
+   *             <code>nextToken</code> value if applicable. </p>
    */
   maxResults?: number;
 
   /**
    * <p>Optional filters to limit results.</p>
-   *             <p>The filter name <code>name</code> is supported.
-   *          When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>
+   *          <p>The filter name <code>name</code> is supported. When filtering, you must use the
+   *          complete value of the filtered item. You can use up to three filters.</p>
    */
   filters?: Filter[];
 }
@@ -4427,7 +4537,8 @@ export interface RobotApplicationSummary {
   version?: string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the robot application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the robot application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -4450,12 +4561,11 @@ export interface ListRobotApplicationsResponse {
   robotApplicationSummaries?: RobotApplicationSummary[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListRobotApplications</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListRobotApplications</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4468,32 +4578,31 @@ export namespace ListRobotApplicationsResponse {
 
 export interface ListRobotsRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListRobots</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListRobots</code> again and assign that token to the
+   *          request object's <code>nextToken</code> parameter. If there are no remaining results, the
+   *          previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListRobots</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListRobots</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 200. If this parameter is not used, then <code>ListRobots</code>
-   *          returns up to 200 results and a <code>nextToken</code> value if applicable. </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListRobots</code> request with the returned <code>nextToken</code> value.
+   *          This value can be between 1 and 200. If this parameter is not used, then
+   *             <code>ListRobots</code> returns up to 200 results and a <code>nextToken</code> value if
+   *          applicable. </p>
    */
   maxResults?: number;
 
   /**
    * <p>Optional filters to limit results.</p>
-   *          <p>The filter names <code>status</code> and <code>fleetName</code> are supported.
-   *          When filtering, you must use the complete value of the filtered item. You can use up to three filters,
-   *          but they must be for the same named item. For example, if you are looking for items with the status
-   *          <code>Registered</code> or the status <code>Available</code>.</p>
+   *          <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When
+   *          filtering, you must use the complete value of the filtered item. You can use up to three
+   *          filters, but they must be for the same named item. For example, if you are looking for
+   *          items with the status <code>Registered</code> or the status <code>Available</code>.</p>
    */
   filters?: Filter[];
 }
@@ -4511,12 +4620,11 @@ export interface ListRobotsResponse {
   robots?: Robot[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListRobots</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListRobots</code> again and assign that token to the
+   *          request object's <code>nextToken</code> parameter. If there are no remaining results, the
+   *          previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4534,30 +4642,29 @@ export interface ListSimulationApplicationsRequest {
   versionQualifier?: string;
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListSimulationApplications</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListSimulationApplications</code> again and assign that
+   *          token to the request object's <code>nextToken</code> parameter. If there are no remaining
+   *          results, the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListSimulationApplications</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListSimulationApplications</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code>
-   *          returns up to 100 results and a <code>nextToken</code> value if applicable. </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListSimulationApplications</code> request with the returned
+   *             <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is
+   *          not used, then <code>ListSimulationApplications</code> returns up to 100 results and a
+   *             <code>nextToken</code> value if applicable. </p>
    */
   maxResults?: number;
 
   /**
    * <p>Optional list of filters to limit results.</p>
-   *          <p>The filter name <code>name</code> is supported.  When filtering, you must use the complete
-   *         value of the filtered item. You can use up to three filters.</p>
+   *          <p>The filter name <code>name</code> is supported. When filtering, you must use the
+   *          complete value of the filtered item. You can use up to three filters.</p>
    */
   filters?: Filter[];
 }
@@ -4588,7 +4695,8 @@ export interface SimulationApplicationSummary {
   version?: string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -4616,12 +4724,11 @@ export interface ListSimulationApplicationsResponse {
   simulationApplicationSummaries?: SimulationApplicationSummary[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListSimulationApplications</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListSimulationApplications</code> again and assign that
+   *          token to the request object's <code>nextToken</code> parameter. If there are no remaining
+   *          results, the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4634,22 +4741,20 @@ export namespace ListSimulationApplicationsResponse {
 
 export interface ListSimulationJobBatchesRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListSimulationJobBatches</code> again and assign that token
+   *          to the request object's <code>nextToken</code> parameter. If there are no remaining
+   *          results, the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListSimulationJobBatches</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListSimulationJobBatches</code> request with the returned
-   *          <code>nextToken</code> value.
-   *       </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListSimulationJobBatches</code> request with the returned
+   *             <code>nextToken</code> value. </p>
    */
   maxResults?: number;
 
@@ -4675,12 +4780,14 @@ export interface SimulationJobBatchSummary {
   arn?: string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job batch was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job batch was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job batch was created.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job batch was
+   *          created.</p>
    */
   createdAt?: Date;
 
@@ -4697,18 +4804,18 @@ export interface SimulationJobBatchSummary {
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
-   *                <p>The simulation job batch failed. One or more simulation job requests could not be completed
-   *                 due to an internal failure (like <code>InternalServiceError</code>).
-   *                 See <code>failureCode</code> and <code>failureReason</code> for more information.</p>
+   *                <p>The simulation job batch failed. One or more simulation job requests could not
+   *                   be completed due to an internal failure (like <code>InternalServiceError</code>).
+   *                   See <code>failureCode</code> and <code>failureReason</code> for more
+   *                   information.</p>
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The simulation batch job completed. A batch is complete when (1) there are
-   *                no pending simulation job requests in the batch and none of the
-   *                failed simulation job requests are due to <code>InternalServiceError</code> and (2)
-   *                   when all created simulation jobs have reached a terminal state (for example,
-   *                   <code>Completed</code> or <code>Failed</code>).
-   *                </p>
+   *                <p>The simulation batch job completed. A batch is complete when (1) there are no
+   *                   pending simulation job requests in the batch and none of the failed simulation job
+   *                   requests are due to <code>InternalServiceError</code> and (2) when all created
+   *                   simulation jobs have reached a terminal state (for example, <code>Completed</code>
+   *                   or <code>Failed</code>). </p>
    *             </dd>
    *             <dt>Canceled</dt>
    *             <dd>
@@ -4725,11 +4832,10 @@ export interface SimulationJobBatchSummary {
    *             <dt>TimingOut</dt>
    *             <dd>
    *                <p>The simulation job batch is timing out.</p>
-   *                <p>If a batch timing out, and there are pending requests that
-   *                   were failing due to an internal failure (like <code>InternalServiceError</code>),
-   *                   the batch status will be <code>Failed</code>. If there are no such failing request,
-   *                   the batch status will be <code>TimedOut</code>.
-   *                </p>
+   *                <p>If a batch timing out, and there are pending requests that were failing due to
+   *                   an internal failure (like <code>InternalServiceError</code>), the batch status
+   *                   will be <code>Failed</code>. If there are no such failing request, the batch
+   *                   status will be <code>TimedOut</code>. </p>
    *             </dd>
    *             <dt>TimedOut</dt>
    *             <dd>
@@ -4768,12 +4874,11 @@ export interface ListSimulationJobBatchesResponse {
   simulationJobBatchSummaries?: SimulationJobBatchSummary[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListSimulationJobBatches</code> again and assign that token
+   *          to the request object's <code>nextToken</code> parameter. If there are no remaining
+   *          results, the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4786,33 +4891,32 @@ export namespace ListSimulationJobBatchesResponse {
 
 export interface ListSimulationJobsRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListSimulationJobs</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListSimulationJobs</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListSimulationJobs</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListSimulationJobs</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 1000. If this parameter is not used, then <code>ListSimulationJobs</code>
-   *          returns up to 1000 results and a <code>nextToken</code> value if applicable. </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code>
+   *          value. This value can be between 1 and 1000. If this parameter is not used, then
+   *             <code>ListSimulationJobs</code> returns up to 1000 results and a <code>nextToken</code>
+   *          value if applicable. </p>
    */
   maxResults?: number;
 
   /**
    * <p>Optional filters to limit results.</p>
-   *          <p>The filter names <code>status</code> and <code>simulationApplicationName</code>
-   *         and <code>robotApplicationName</code> are supported.
-   *          When filtering, you must use the complete value of the filtered item. You can use up to three filters,
-   *          but they must be for the same named item. For example, if you are looking for items with the status
-   *          <code>Preparing</code> or the status <code>Running</code>.</p>
+   *          <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and
+   *             <code>robotApplicationName</code> are supported. When filtering, you must use the
+   *          complete value of the filtered item. You can use up to three filters, but they must be for
+   *          the same named item. For example, if you are looking for items with the status
+   *             <code>Preparing</code> or the status <code>Running</code>.</p>
    */
   filters?: Filter[];
 }
@@ -4830,12 +4934,11 @@ export interface ListSimulationJobsResponse {
   simulationJobSummaries: SimulationJobSummary[] | undefined;
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListSimulationJobs</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListSimulationJobs</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4874,29 +4977,28 @@ export namespace ListTagsForResourceResponse {
 
 export interface ListWorldExportJobsRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorldExportJobs</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorldExportJobs</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListWorldExportJobs</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListWorldExportJobs</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldExportJobs</code>
-   *          returns up to 100 results and a <code>nextToken</code> value if applicable.
-   *       </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListWorldExportJobs</code> request with the returned <code>nextToken</code>
+   *          value. This value can be between 1 and 100. If this parameter is not used, then
+   *             <code>ListWorldExportJobs</code> returns up to 100 results and a <code>nextToken</code>
+   *          value if applicable. </p>
    */
   maxResults?: number;
 
   /**
-   * <p>Optional filters to limit results. You can use <code>generationJobId</code> and <code>templateId</code>.</p>
+   * <p>Optional filters to limit results. You can use <code>generationJobId</code> and
+   *             <code>templateId</code>.</p>
    */
   filters?: Filter[];
 }
@@ -4929,8 +5031,7 @@ export interface WorldExportJobSummary {
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The world export job completed.
-   *                </p>
+   *                <p>The world export job completed. </p>
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
@@ -4973,12 +5074,11 @@ export interface ListWorldExportJobsResponse {
   worldExportJobSummaries: WorldExportJobSummary[] | undefined;
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorldExportJobsRequest</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorldExportJobsRequest</code> again and assign that
+   *          token to the request object's <code>nextToken</code> parameter. If there are no remaining
+   *          results, the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -4991,29 +5091,28 @@ export namespace ListWorldExportJobsResponse {
 
 export interface ListWorldGenerationJobsRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorldGenerationJobsRequest</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorldGenerationJobsRequest</code> again and assign that
+   *          token to the request object's <code>nextToken</code> parameter. If there are no remaining
+   *          results, the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListWorldGeneratorJobs</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListWorldGeneratorJobs</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldGeneratorJobs</code>
-   *          returns up to 100 results and a <code>nextToken</code> value if applicable.
-   *       </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListWorldGeneratorJobs</code> request with the returned
+   *             <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is
+   *          not used, then <code>ListWorldGeneratorJobs</code> returns up to 100 results and a
+   *             <code>nextToken</code> value if applicable. </p>
    */
   maxResults?: number;
 
   /**
-   * <p>Optional filters to limit results. You can use <code>status</code> and <code>templateId</code>.</p>
+   * <p>Optional filters to limit results. You can use <code>status</code> and
+   *             <code>templateId</code>.</p>
    */
   filters?: Filter[];
 }
@@ -5039,7 +5138,8 @@ export interface WorldGenerationJobSummary {
   template?: string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the world generator job was created.</p>
+   * <p>The time, in milliseconds since the epoch, when the world generator job was
+   *          created.</p>
    */
   createdAt?: Date;
 
@@ -5056,13 +5156,12 @@ export interface WorldGenerationJobSummary {
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The world generator job completed.
-   *                </p>
+   *                <p>The world generator job completed. </p>
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
-   *                <p>The world generator job failed. See <code>failureCode</code> for more information.
-   *                </p>
+   *                <p>The world generator job failed. See <code>failureCode</code> for more
+   *                   information. </p>
    *             </dd>
    *             <dt>PartialFailed</dt>
    *             <dd>
@@ -5109,12 +5208,11 @@ export interface ListWorldGenerationJobsResponse {
   worldGenerationJobSummaries: WorldGenerationJobSummary[] | undefined;
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorldGeneratorJobsRequest</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorldGeneratorJobsRequest</code> again and assign that
+   *          token to the request object's <code>nextToken</code> parameter. If there are no remaining
+   *          results, the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -5127,24 +5225,22 @@ export namespace ListWorldGenerationJobsResponse {
 
 export interface ListWorldsRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorlds</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorlds</code> again and assign that token to the
+   *          request object's <code>nextToken</code> parameter. If there are no remaining results, the
+   *          previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListWorlds</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListWorlds</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 100. If this parameter is not used, then <code>ListWorlds</code>
-   *          returns up to 100 results and a <code>nextToken</code> value if applicable.
-   *       </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListWorlds</code> request with the returned <code>nextToken</code> value.
+   *          This value can be between 1 and 100. If this parameter is not used, then
+   *             <code>ListWorlds</code> returns up to 100 results and a <code>nextToken</code> value if
+   *          applicable. </p>
    */
   maxResults?: number;
 
@@ -5198,12 +5294,11 @@ export interface ListWorldsResponse {
   worldSummaries?: WorldSummary[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorlds</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorlds</code> again and assign that token to the
+   *          request object's <code>nextToken</code> parameter. If there are no remaining results, the
+   *          previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -5216,24 +5311,22 @@ export namespace ListWorldsResponse {
 
 export interface ListWorldTemplatesRequest {
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorldTemplates</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorldTemplates</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 
   /**
    * <p>When this parameter is used, <code>ListWorldTemplates</code> only returns
-   *          <code>maxResults</code> results in a single page along with a <code>nextToken</code> response
-   *          element. The remaining results of the initial request
-   *          can be seen by sending another <code>ListWorldTemplates</code> request with the returned
-   *          <code>nextToken</code> value.
-   *          This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldTemplates</code>
-   *          returns up to 100 results and a <code>nextToken</code> value if applicable.
-   *       </p>
+   *             <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+   *          response element. The remaining results of the initial request can be seen by sending
+   *          another <code>ListWorldTemplates</code> request with the returned <code>nextToken</code>
+   *          value. This value can be between 1 and 100. If this parameter is not used, then
+   *             <code>ListWorldTemplates</code> returns up to 100 results and a <code>nextToken</code>
+   *          value if applicable. </p>
    */
   maxResults?: number;
 }
@@ -5282,12 +5375,11 @@ export interface ListWorldTemplatesResponse {
   templateSummaries?: TemplateSummary[];
 
   /**
-   * <p>If the previous paginated request did not return all of the remaining results,
-   *         the response object's <code>nextToken</code> parameter value is set to a token. To retrieve
-   *         the next set of results, call <code>ListWorldTemplates</code> again and assign that token
-   *         to the request object's <code>nextToken</code> parameter. If there are no remaining results,
-   *         the previous response object's NextToken parameter is set to null.
-   *       </p>
+   * <p>If the previous paginated request did not return all of the remaining results, the
+   *          response object's <code>nextToken</code> parameter value is set to a token. To retrieve the
+   *          next set of results, call <code>ListWorldTemplates</code> again and assign that token to
+   *          the request object's <code>nextToken</code> parameter. If there are no remaining results,
+   *          the previous response object's NextToken parameter is set to null. </p>
    */
   nextToken?: string;
 }
@@ -5357,7 +5449,8 @@ export namespace RestartSimulationJobResponse {
 
 export interface StartSimulationJobBatchRequest {
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -5372,7 +5465,8 @@ export interface StartSimulationJobBatchRequest {
   createSimulationJobRequests: SimulationJobRequest[] | undefined;
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the deployment job batch.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the deployment job
+   *          batch.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -5402,18 +5496,18 @@ export interface StartSimulationJobBatchResponse {
    *             </dd>
    *             <dt>Failed</dt>
    *             <dd>
-   *                <p>The simulation job batch failed. One or more simulation job requests could not be completed
-   *                 due to an internal failure (like <code>InternalServiceError</code>).
-   *                 See <code>failureCode</code> and <code>failureReason</code> for more information.</p>
+   *                <p>The simulation job batch failed. One or more simulation job requests could not
+   *                   be completed due to an internal failure (like <code>InternalServiceError</code>).
+   *                   See <code>failureCode</code> and <code>failureReason</code> for more
+   *                   information.</p>
    *             </dd>
    *             <dt>Completed</dt>
    *             <dd>
-   *                <p>The simulation batch job completed. A batch is complete when (1) there are
-   *                no pending simulation job requests in the batch and none of the
-   *                failed simulation job requests are due to <code>InternalServiceError</code> and (2)
-   *                   when all created simulation jobs have reached a terminal state (for example,
-   *                   <code>Completed</code> or <code>Failed</code>).
-   *                </p>
+   *                <p>The simulation batch job completed. A batch is complete when (1) there are no
+   *                   pending simulation job requests in the batch and none of the failed simulation job
+   *                   requests are due to <code>InternalServiceError</code> and (2) when all created
+   *                   simulation jobs have reached a terminal state (for example, <code>Completed</code>
+   *                   or <code>Failed</code>). </p>
    *             </dd>
    *             <dt>Canceled</dt>
    *             <dd>
@@ -5430,11 +5524,10 @@ export interface StartSimulationJobBatchResponse {
    *             <dt>TimingOut</dt>
    *             <dd>
    *                <p>The simulation job batch is timing out.</p>
-   *                <p>If a batch timing out, and there are pending requests that
-   *                   were failing due to an internal failure (like <code>InternalServiceError</code>),
-   *                   the batch status will be <code>Failed</code>. If there are no such failing request,
-   *                   the batch status will be <code>TimedOut</code>.
-   *                </p>
+   *                <p>If a batch timing out, and there are pending requests that were failing due to
+   *                   an internal failure (like <code>InternalServiceError</code>), the batch status
+   *                   will be <code>Failed</code>. If there are no such failing request, the batch
+   *                   status will be <code>TimedOut</code>. </p>
    *             </dd>
    *             <dt>TimedOut</dt>
    *             <dd>
@@ -5445,12 +5538,14 @@ export interface StartSimulationJobBatchResponse {
   status?: SimulationJobBatchStatus | string;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation job batch was created.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation job batch was
+   *          created.</p>
    */
   createdAt?: Date;
 
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -5470,16 +5565,14 @@ export interface StartSimulationJobBatchResponse {
   failureReason?: string;
 
   /**
-   * <p>A list of failed simulation job requests. The request failed to
-   *          be created into a simulation job. Failed requests do not
-   *          have a simulation job ID.
-   *       </p>
+   * <p>A list of failed simulation job requests. The request failed to be created into a
+   *          simulation job. Failed requests do not have a simulation job ID. </p>
    */
   failedRequests?: FailedCreateSimulationJobRequest[];
 
   /**
-   * <p>A list of pending simulation job requests. These requests have
-   *          not yet been created into simulation jobs.</p>
+   * <p>A list of pending simulation job requests. These requests have not yet been created into
+   *          simulation jobs.</p>
    */
   pendingRequests?: SimulationJobRequest[];
 
@@ -5489,7 +5582,8 @@ export interface StartSimulationJobBatchResponse {
   createdRequests?: SimulationJobSummary[];
 
   /**
-   * <p>A map that contains tag keys and tag values that are attached to the deployment job batch.</p>
+   * <p>A map that contains tag keys and tag values that are attached to the deployment job
+   *          batch.</p>
    */
   tags?: { [key: string]: string };
 }
@@ -5502,7 +5596,8 @@ export namespace StartSimulationJobBatchResponse {
 
 export interface SyncDeploymentJobRequest {
   /**
-   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *          request.</p>
    */
   clientRequestToken?: string;
 
@@ -5594,11 +5689,13 @@ export interface SyncDeploymentJobResponse {
    *             </dd>
    *             <dt>InvalidBundleRobotApplication</dt>
    *             <dd>
-   *                <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p>
+   *                <p>Robot bundle cannot be extracted (invalid format, bundling error, or other
+   *                   issue).</p>
    *             </dd>
    *             <dt>InvalidBundleSimulationApplication</dt>
    *             <dd>
-   *                <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p>
+   *                <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other
+   *                   issue).</p>
    *             </dd>
    *             <dt>RobotApplicationVersionMismatchedEtag</dt>
    *             <dd>
@@ -5606,7 +5703,8 @@ export interface SyncDeploymentJobResponse {
    *             </dd>
    *             <dt>SimulationApplicationVersionMismatchedEtag</dt>
    *             <dd>
-   *                <p>Etag for SimulationApplication does not match value during version creation.</p>
+   *                <p>Etag for SimulationApplication does not match value during version
+   *                   creation.</p>
    *             </dd>
    *          </dl>
    */
@@ -5652,12 +5750,14 @@ export namespace TagResourceResponse {
 
 export interface UntagResourceRequest {
   /**
-   * <p>The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.</p>
+   * <p>The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing
+   *          tags.</p>
    */
   resourceArn: string | undefined;
 
   /**
-   * <p>A map that contains tag keys and tag values that will be unattached from the resource.</p>
+   * <p>A map that contains tag keys and tag values that will be unattached from the
+   *          resource.</p>
    */
   tagKeys: string[] | undefined;
 }
@@ -5731,7 +5831,8 @@ export interface UpdateRobotApplicationResponse {
   robotSoftwareSuite?: RobotSoftwareSuite;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the robot application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the robot application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -5822,7 +5923,8 @@ export interface UpdateSimulationApplicationResponse {
   renderingEngine?: RenderingEngine;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the simulation application was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the simulation application was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 
@@ -5883,7 +5985,8 @@ export interface UpdateWorldTemplateResponse {
   createdAt?: Date;
 
   /**
-   * <p>The time, in milliseconds since the epoch, when the world template was last updated.</p>
+   * <p>The time, in milliseconds since the epoch, when the world template was last
+   *          updated.</p>
    */
   lastUpdatedAt?: Date;
 }

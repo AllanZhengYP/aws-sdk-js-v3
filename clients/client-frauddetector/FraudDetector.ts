@@ -494,7 +494,7 @@ export class FraudDetector extends FraudDetectorClient {
   /**
    * <p>Deletes an entity type.</p>
    * 	        <p>You cannot delete an entity type that is included in an event type.</p>
-   * 	        <p>When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   * 	        <p>When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteEntityType(
     args: DeleteEntityTypeCommandInput,
@@ -527,7 +527,7 @@ export class FraudDetector extends FraudDetectorClient {
 
   /**
    * <p>Deletes the specified event.</p>
-   * 	        <p>When you delete an event, Amazon Fraud Detector permanently deletes that event from the evaluation history, and the event data is no longer stored in Amazon Fraud Detector.</p>
+   * 	        <p>When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteEvent(args: DeleteEventCommandInput, options?: __HttpHandlerOptions): Promise<DeleteEventCommandOutput>;
   public deleteEvent(args: DeleteEventCommandInput, cb: (err: any, data?: DeleteEventCommandOutput) => void): void;
@@ -555,7 +555,7 @@ export class FraudDetector extends FraudDetectorClient {
   /**
    * <p>Deletes an event type.</p>
    * 	        <p>You cannot delete an event type that is used in a detector or a model.</p>
-   * 	        <p>When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   * 	        <p>When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteEventType(
     args: DeleteEventTypeCommandInput,
@@ -624,7 +624,7 @@ export class FraudDetector extends FraudDetectorClient {
    * 	        <p>You cannot delete labels that are included in an event type in Amazon Fraud Detector.</p>
    *          <p>You cannot delete a label assigned to an event ID. You must first delete the relevant event ID.</p>
    *
-   *          <p>When you delete a label, Amazon Fraud Detector permanently deletes that label from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   *          <p>When you delete a label, Amazon Fraud Detector permanently deletes that label and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteLabel(args: DeleteLabelCommandInput, options?: __HttpHandlerOptions): Promise<DeleteLabelCommandOutput>;
   public deleteLabel(args: DeleteLabelCommandInput, cb: (err: any, data?: DeleteLabelCommandOutput) => void): void;
@@ -652,7 +652,7 @@ export class FraudDetector extends FraudDetectorClient {
   /**
    * <p>Deletes a model.</p>
    * 	        <p>You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.</p>
-   * 	        <p> When you delete a model, Amazon Fraud Detector permanently deletes that model from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   * 	        <p> When you delete a model, Amazon Fraud Detector permanently deletes that model and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteModel(args: DeleteModelCommandInput, options?: __HttpHandlerOptions): Promise<DeleteModelCommandOutput>;
   public deleteModel(args: DeleteModelCommandInput, cb: (err: any, data?: DeleteModelCommandOutput) => void): void;
@@ -680,7 +680,7 @@ export class FraudDetector extends FraudDetectorClient {
   /**
    * <p>Deletes a model version.</p>
    * 	        <p>You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.</p>
-   * 	        <p> When you delete a model version, Amazon Fraud Detector permanently deletes that model version from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   * 	        <p> When you delete a model version, Amazon Fraud Detector permanently deletes that model version and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteModelVersion(
     args: DeleteModelVersionCommandInput,
@@ -714,7 +714,7 @@ export class FraudDetector extends FraudDetectorClient {
   /**
    * <p>Deletes an outcome.</p>
    * 	        <p>You cannot delete an outcome that is used in a rule version.</p>
-   * 	        <p>When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   * 	        <p>When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteOutcome(
     args: DeleteOutcomeCommandInput,
@@ -747,7 +747,7 @@ export class FraudDetector extends FraudDetectorClient {
 
   /**
    * <p>Deletes the rule. You cannot delete a rule if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.</p>
-   * 	  	     <p>When you delete a rule, Amazon Fraud Detector permanently deletes that rule from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   * 	  	     <p>When you delete a rule, Amazon Fraud Detector permanently deletes that rule and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteRule(args: DeleteRuleCommandInput, options?: __HttpHandlerOptions): Promise<DeleteRuleCommandOutput>;
   public deleteRule(args: DeleteRuleCommandInput, cb: (err: any, data?: DeleteRuleCommandOutput) => void): void;
@@ -776,7 +776,7 @@ export class FraudDetector extends FraudDetectorClient {
    * <p>Deletes a variable.</p>
    * 	        <p>You can't delete variables that are included in an event type in Amazon Fraud Detector.</p>
    * 	        <p>Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can't delete these variables manually.</p>
-   * 	        <p>When you delete a variable, Amazon Fraud Detector permanently deletes that variable from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>
+   * 	        <p>When you delete a variable, Amazon Fraud Detector permanently deletes that variable and the data is no longer stored in Amazon Fraud Detector.</p>
    */
   public deleteVariable(
     args: DeleteVariableCommandInput,

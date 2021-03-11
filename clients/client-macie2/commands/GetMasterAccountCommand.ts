@@ -21,7 +21,7 @@ export type GetMasterAccountCommandInput = GetMasterAccountRequest;
 export type GetMasterAccountCommandOutput = GetMasterAccountResponse & __MetadataBearer;
 
 /**
- * <p>Retrieves information about the Amazon Macie master account for an account.</p>
+ * <p>(Deprecated) Retrieves information about the Amazon Macie administrator account for an account.</p>
  */
 export class GetMasterAccountCommand extends $Command<
   GetMasterAccountCommandInput,

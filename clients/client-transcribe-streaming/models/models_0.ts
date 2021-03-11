@@ -79,7 +79,7 @@ export namespace Alternative {
  */
 export interface AudioEvent {
   /**
-   * <p>An audio blob that contains the next part of the audio that you want to transcribe.</p>
+   * <p>An audio blob that contains the next part of the audio that you want to transcribe. The maximum audio chunk size is 32 KB.</p>
    */
   AudioChunk?: Uint8Array;
 }
@@ -98,7 +98,7 @@ export type AudioStream = AudioStream.AudioEventMember | AudioStream.$UnknownMem
 export namespace AudioStream {
   /**
    * <p>A blob of audio from your application. You audio stream consists of one or more audio
-   *       events.</p>
+   *       events. For information on audio encoding formats, see <a>input</a>. For more information on stream encoding, see <a>event-stream</a>.</p>
    */
   export interface AudioEventMember {
     AudioEvent: AudioEvent;
@@ -215,6 +215,45 @@ export enum MediaEncoding {
 }
 
 /**
+ * <p>The medical entity identified as personal health information.</p>
+ */
+export interface MedicalEntity {
+  /**
+   * <p>The start time of the speech that was identified as a medical entity.</p>
+   */
+  StartTime?: number;
+
+  /**
+   * <p>The end time of the speech that was identified as a medical entity.</p>
+   */
+  EndTime?: number;
+
+  /**
+   * <p>The type of personal health information of the medical entity.</p>
+   */
+  Category?: string;
+
+  /**
+   * <p>The word or words in the transcription output that have been identified as a
+   *             medical entity.</p>
+   */
+  Content?: string;
+
+  /**
+   * <p>A value between zero and one that Amazon Transcribe Medical assigned to the personal health information
+   *             that it identified in the source audio. Larger values indicate that Amazon Transcribe Medical has higher
+   *             confidence in the personal health information that it identified.</p>
+   */
+  Confidence?: number;
+}
+
+export namespace MedicalEntity {
+  export const filterSensitiveLog = (obj: MedicalEntity): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>A word or punctuation that is transcribed from the input audio.</p>
  */
 export interface MedicalItem {
@@ -244,8 +283,8 @@ export interface MedicalItem {
   Content?: string;
 
   /**
-   * <p>A value between 0 and 1 for an item that is a confidence score that Amazon Transcribe Medical
-   *             assigns to each word that it transcribes.</p>
+   * <p>A value between 0 and 1 for an item that is a confidence score that Amazon Transcribe Medical assigns to
+   *             each word that it transcribes.</p>
    */
   Confidence?: number;
 
@@ -276,16 +315,25 @@ export interface MedicalAlternative {
   Transcript?: string;
 
   /**
-   * <p>A list of objects that contains words and punctuation marks that represents one or more
-   *             interpretations of the input audio.</p>
+   * <p>A list of objects that contains words and punctuation marks that represents one or
+   *             more interpretations of the input audio.</p>
    */
   Items?: MedicalItem[];
+
+  /**
+   * <p>Contains the medical entities identified as personal health information in the transcription output.</p>
+   */
+  Entities?: MedicalEntity[];
 }
 
 export namespace MedicalAlternative {
   export const filterSensitiveLog = (obj: MedicalAlternative): any => ({
     ...obj,
   });
+}
+
+export enum MedicalContentIdentificationType {
+  PHI = "PHI",
 }
 
 /**
@@ -609,8 +657,8 @@ export enum Type {
 
 export interface StartMedicalStreamTranscriptionRequest {
   /**
-   * <p> Indicates the source language used in the input audio stream. For Amazon Transcribe Medical,
-   *             this is US English (en-US). </p>
+   * <p> Indicates the source language used in the input audio stream. For Amazon Transcribe Medical, this is US
+   *             English (en-US). </p>
    */
   LanguageCode: LanguageCode | string | undefined;
 
@@ -637,7 +685,9 @@ export interface StartMedicalStreamTranscriptionRequest {
   Specialty: Specialty | string | undefined;
 
   /**
-   * <p>The type of input audio. Choose <code>DICTATION</code> for a provider dictating patient notes. Choose <code>CONVERSATION</code> for a dialogue between a patient and one or more medical professionanls.</p>
+   * <p>The type of input audio. Choose <code>DICTATION</code> for a provider dictating
+   *             patient notes. Choose <code>CONVERSATION</code> for a dialogue between a patient and one
+   *             or more medical professionanls.</p>
    */
   Type: Type | string | undefined;
 
@@ -673,6 +723,12 @@ export interface StartMedicalStreamTranscriptionRequest {
    * <p>The number of channels that are in your audio stream.</p>
    */
   NumberOfChannels?: number;
+
+  /**
+   * <p>Set this field to <code>PHI</code> to identify personal health information in the
+   *             transcription output.</p>
+   */
+  ContentIdentificationType?: MedicalContentIdentificationType | string;
 }
 
 export namespace StartMedicalStreamTranscriptionRequest {
@@ -689,8 +745,8 @@ export interface StartMedicalStreamTranscriptionResponse {
   RequestId?: string;
 
   /**
-   * <p>The language code for the response transcript. For Amazon Transcribe Medical, this is US
-   *             English (en-US).</p>
+   * <p>The language code for the response transcript. For Amazon Transcribe Medical, this is US English
+   *             (en-US).</p>
    */
   LanguageCode?: LanguageCode | string;
 
@@ -744,6 +800,12 @@ export interface StartMedicalStreamTranscriptionResponse {
    * <p>The number of channels identified in the stream.</p>
    */
   NumberOfChannels?: number;
+
+  /**
+   * <p>If the value is <code>PHI</code>, indicates that you've configured your stream to
+   *             identify personal health information.</p>
+   */
+  ContentIdentificationType?: MedicalContentIdentificationType | string;
 }
 
 export namespace StartMedicalStreamTranscriptionResponse {

@@ -60,6 +60,11 @@ import {
   DisassociateResolverRuleCommandOutput,
 } from "./commands/DisassociateResolverRuleCommand";
 import {
+  GetResolverDnssecConfigCommand,
+  GetResolverDnssecConfigCommandInput,
+  GetResolverDnssecConfigCommandOutput,
+} from "./commands/GetResolverDnssecConfigCommand";
+import {
   GetResolverEndpointCommand,
   GetResolverEndpointCommandInput,
   GetResolverEndpointCommandOutput,
@@ -94,6 +99,11 @@ import {
   GetResolverRulePolicyCommandInput,
   GetResolverRulePolicyCommandOutput,
 } from "./commands/GetResolverRulePolicyCommand";
+import {
+  ListResolverDnssecConfigsCommand,
+  ListResolverDnssecConfigsCommandInput,
+  ListResolverDnssecConfigsCommandOutput,
+} from "./commands/ListResolverDnssecConfigsCommand";
 import {
   ListResolverEndpointIpAddressesCommand,
   ListResolverEndpointIpAddressesCommandInput,
@@ -145,6 +155,11 @@ import {
   UntagResourceCommandInput,
   UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
+import {
+  UpdateResolverDnssecConfigCommand,
+  UpdateResolverDnssecConfigCommandInput,
+  UpdateResolverDnssecConfigCommandOutput,
+} from "./commands/UpdateResolverDnssecConfigCommand";
 import {
   UpdateResolverEndpointCommand,
   UpdateResolverEndpointCommandInput,
@@ -659,6 +674,38 @@ export class Route53Resolver extends Route53ResolverClient {
   }
 
   /**
+   * <p>Gets DNSSEC validation information for a specified resource.</p>
+   */
+  public getResolverDnssecConfig(
+    args: GetResolverDnssecConfigCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<GetResolverDnssecConfigCommandOutput>;
+  public getResolverDnssecConfig(
+    args: GetResolverDnssecConfigCommandInput,
+    cb: (err: any, data?: GetResolverDnssecConfigCommandOutput) => void
+  ): void;
+  public getResolverDnssecConfig(
+    args: GetResolverDnssecConfigCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: GetResolverDnssecConfigCommandOutput) => void
+  ): void;
+  public getResolverDnssecConfig(
+    args: GetResolverDnssecConfigCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResolverDnssecConfigCommandOutput) => void),
+    cb?: (err: any, data?: GetResolverDnssecConfigCommandOutput) => void
+  ): Promise<GetResolverDnssecConfigCommandOutput> | void {
+    const command = new GetResolverDnssecConfigCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
    * <p>Gets information about a specified Resolver endpoint, such as whether it's an inbound or an outbound Resolver endpoint, and the
    * 			current status of the endpoint.</p>
    */
@@ -857,8 +904,8 @@ export class Route53Resolver extends Route53ResolverClient {
   }
 
   /**
-   * <p>Gets information about a Resolver rule policy. A Resolver rule policy specifies the Resolver operations and resources
-   * 			that you want to allow another AWS account to be able to use. </p>
+   * <p>Gets information about the Resolver rule policy for a specified rule. A Resolver rule policy includes the rule that you want to share
+   * 			with another account, the account that you want to share the rule with, and the Resolver operations that you want to allow the account to use. </p>
    */
   public getResolverRulePolicy(
     args: GetResolverRulePolicyCommandInput,
@@ -879,6 +926,38 @@ export class Route53Resolver extends Route53ResolverClient {
     cb?: (err: any, data?: GetResolverRulePolicyCommandOutput) => void
   ): Promise<GetResolverRulePolicyCommandOutput> | void {
     const command = new GetResolverRulePolicyCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
+   * <p>Lists the configurations for DNSSEC validation that are associated with the current AWS account.</p>
+   */
+  public listResolverDnssecConfigs(
+    args: ListResolverDnssecConfigsCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<ListResolverDnssecConfigsCommandOutput>;
+  public listResolverDnssecConfigs(
+    args: ListResolverDnssecConfigsCommandInput,
+    cb: (err: any, data?: ListResolverDnssecConfigsCommandOutput) => void
+  ): void;
+  public listResolverDnssecConfigs(
+    args: ListResolverDnssecConfigsCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: ListResolverDnssecConfigsCommandOutput) => void
+  ): void;
+  public listResolverDnssecConfigs(
+    args: ListResolverDnssecConfigsCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListResolverDnssecConfigsCommandOutput) => void),
+    cb?: (err: any, data?: ListResolverDnssecConfigsCommandOutput) => void
+  ): Promise<ListResolverDnssecConfigsCommandOutput> | void {
+    const command = new ListResolverDnssecConfigsCommand(args);
     if (typeof optionsOrCb === "function") {
       this.send(command, optionsOrCb);
     } else if (typeof cb === "function") {
@@ -1150,8 +1229,8 @@ export class Route53Resolver extends Route53ResolverClient {
   }
 
   /**
-   * <p>Specifies an AWS account that you want to share rules with, the Resolver rules that you want to share, and the operations that you want
-   * 			the account to be able to perform on those rules.</p>
+   * <p>Specifies an AWS rule that you want to share with another account, the account that you want to share the rule with,
+   * 			and the operations that you want the account to be able to perform on the rule.</p>
    */
   public putResolverRulePolicy(
     args: PutResolverRulePolicyCommandInput,
@@ -1230,6 +1309,38 @@ export class Route53Resolver extends Route53ResolverClient {
     cb?: (err: any, data?: UntagResourceCommandOutput) => void
   ): Promise<UntagResourceCommandOutput> | void {
     const command = new UntagResourceCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
+   * <p>Updates an existing DNSSEC validation configuration. If there is no existing DNSSEC validation configuration, one is created.</p>
+   */
+  public updateResolverDnssecConfig(
+    args: UpdateResolverDnssecConfigCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<UpdateResolverDnssecConfigCommandOutput>;
+  public updateResolverDnssecConfig(
+    args: UpdateResolverDnssecConfigCommandInput,
+    cb: (err: any, data?: UpdateResolverDnssecConfigCommandOutput) => void
+  ): void;
+  public updateResolverDnssecConfig(
+    args: UpdateResolverDnssecConfigCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: UpdateResolverDnssecConfigCommandOutput) => void
+  ): void;
+  public updateResolverDnssecConfig(
+    args: UpdateResolverDnssecConfigCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResolverDnssecConfigCommandOutput) => void),
+    cb?: (err: any, data?: UpdateResolverDnssecConfigCommandOutput) => void
+  ): Promise<UpdateResolverDnssecConfigCommandOutput> | void {
+    const command = new UpdateResolverDnssecConfigCommand(args);
     if (typeof optionsOrCb === "function") {
       this.send(command, optionsOrCb);
     } else if (typeof cb === "function") {

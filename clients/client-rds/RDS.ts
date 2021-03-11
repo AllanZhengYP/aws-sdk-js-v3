@@ -430,6 +430,11 @@ import {
   FailoverDBClusterCommandOutput,
 } from "./commands/FailoverDBClusterCommand";
 import {
+  FailoverGlobalClusterCommand,
+  FailoverGlobalClusterCommandInput,
+  FailoverGlobalClusterCommandOutput,
+} from "./commands/FailoverGlobalClusterCommand";
+import {
   ImportInstallationMediaCommand,
   ImportInstallationMediaCommandInput,
   ImportInstallationMediaCommandOutput,
@@ -1258,8 +1263,7 @@ export class RDS extends RDSClient {
    *         <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>
    *         <p>For more information about RDS on VMware, see the
    *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
-   *                 <i>RDS on VMware User Guide.</i>
-   *             </a>
+   *                 RDS on VMware User Guide.</a>
    *          </p>
    */
   public createCustomAvailabilityZone(
@@ -1874,8 +1878,7 @@ export class RDS extends RDSClient {
    *         <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>
    *         <p>For more information about RDS on VMware, see the
    *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
-   *                 <i>RDS on VMware User Guide.</i>
-   *             </a>
+   *                 RDS on VMware User Guide.</a>
    *          </p>
    */
   public deleteCustomAvailabilityZone(
@@ -2562,8 +2565,7 @@ export class RDS extends RDSClient {
    *         <p>A custom AZ is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>
    *         <p>For more information about RDS on VMware, see the
    *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
-   *                 <i>RDS on VMware User Guide.</i>
-   *             </a>
+   *                 RDS on VMware User Guide.</a>
    *          </p>
    */
   public describeCustomAvailabilityZones(
@@ -3789,8 +3791,8 @@ export class RDS extends RDSClient {
   }
 
   /**
-   * <p>Returns a list of the source AWS Regions where the current AWS Region can create a
-   *             read replica or copy a DB snapshot from. This API action supports pagination.</p>
+   * <p>Returns a list of the source AWS Regions where the current AWS Region can create a read replica,
+   *          copy a DB snapshot from, or replicate automated backups from. This API action supports pagination.</p>
    */
   public describeSourceRegions(
     args: DescribeSourceRegionsCommandInput,
@@ -3924,6 +3926,52 @@ export class RDS extends RDSClient {
     cb?: (err: any, data?: FailoverDBClusterCommandOutput) => void
   ): Promise<FailoverDBClusterCommandOutput> | void {
     const command = new FailoverDBClusterCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
+   * <p>Initiates the failover process for an Aurora global database (<a>GlobalCluster</a>).</p>
+   *          <p>A failover for an Aurora global database promotes one of secondary read-only DB clusters to be
+   *        the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words,
+   *      the role of the current primary DB cluster and the selected (target) DB cluster are switched. The selected
+   *      secondary DB cluster assumes full read/write capabilities for the Aurora global database.</p>
+   *          <p>For more information about failing over an Amazon Aurora global database, see
+   *       <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.managed-failover">Managed planned failover for Amazon Aurora global
+   *         databases</a> in the <i>Amazon Aurora User Guide.</i>
+   *          </p>
+   *          <note>
+   *             <p>This action applies to <a>GlobalCluster</a> (Aurora global databases) only. Use this action only on
+   *        healthy Aurora global databases with running Aurora DB clusters and no Region-wide outages, to test disaster recovery scenarios or to
+   *         reconfigure your Aurora global database topology.
+   *        </p>
+   *          </note>
+   */
+  public failoverGlobalCluster(
+    args: FailoverGlobalClusterCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<FailoverGlobalClusterCommandOutput>;
+  public failoverGlobalCluster(
+    args: FailoverGlobalClusterCommandInput,
+    cb: (err: any, data?: FailoverGlobalClusterCommandOutput) => void
+  ): void;
+  public failoverGlobalCluster(
+    args: FailoverGlobalClusterCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: FailoverGlobalClusterCommandOutput) => void
+  ): void;
+  public failoverGlobalCluster(
+    args: FailoverGlobalClusterCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: FailoverGlobalClusterCommandOutput) => void),
+    cb?: (err: any, data?: FailoverGlobalClusterCommandOutput) => void
+  ): Promise<FailoverGlobalClusterCommandOutput> | void {
+    const command = new FailoverGlobalClusterCommand(args);
     if (typeof optionsOrCb === "function") {
       this.send(command, optionsOrCb);
     } else if (typeof cb === "function") {

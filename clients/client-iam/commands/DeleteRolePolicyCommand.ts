@@ -25,7 +25,7 @@ export type DeleteRolePolicyCommandOutput = __MetadataBearer;
  *          <p>A role can also have managed policies attached to it. To detach a managed policy from a
  *          role, use <a>DetachRolePolicy</a>. For more information about policies, refer to
  *             <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
- *             Policies and Inline Policies</a> in the
+ *             policies and inline policies</a> in the
  *          <i>IAM User Guide</i>.</p>
  */
 export class DeleteRolePolicyCommand extends $Command<

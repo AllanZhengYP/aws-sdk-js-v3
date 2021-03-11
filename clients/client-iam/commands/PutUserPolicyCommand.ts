@@ -26,15 +26,15 @@ export type PutUserPolicyCommandOutput = __MetadataBearer;
  *          <p>An IAM user can also have a managed policy attached to it. To attach a managed policy
  *          to a user, use <a>AttachUserPolicy</a>. To create a new managed policy, use
  *             <a>CreatePolicy</a>. For information about policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed
- *             Policies and Inline Policies</a> in the
+ *             policies and inline policies</a> in the
  *          <i>IAM User Guide</i>.</p>
- *          <p>For information about limits on the number of inline policies that you can embed in a
- *          user, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html">Limitations on IAM Entities</a> in the
- *          <i>IAM User Guide</i>.</p>
+ *          <p>For information about the maximum number of inline policies that you can embed in a
+ *          user, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html">IAM
+ *             and STS quotas</a> in the <i>IAM User Guide</i>.</p>
  *          <note>
  *             <p>Because policy documents can be large, you should use POST rather than GET when
  *             calling <code>PutUserPolicy</code>. For general information about using the Query API
- *             with IAM, go to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making Query Requests</a> in the
+ *             with IAM, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html">Making query requests</a> in the
  *                <i>IAM User Guide</i>.</p>
  *          </note>
  */

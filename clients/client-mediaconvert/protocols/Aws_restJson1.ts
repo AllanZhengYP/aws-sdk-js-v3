@@ -50,6 +50,7 @@ import {
   Av1Settings,
   AvailBlanking,
   AvcIntraSettings,
+  AvcIntraUhdSettings,
   BurninDestinationSettings,
   CaptionDescription,
   CaptionDescriptionPreset,
@@ -3442,6 +3443,17 @@ const deserializeAws_restJson1TooManyRequestsExceptionResponse = async (
   return contents;
 };
 
+const serializeAws_restJson1__listOf__doubleMinNegative60Max6 = (input: number[], context: __SerdeContext): any => {
+  return input
+    .filter((e: any) => e != null)
+    .map((entry) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return entry;
+    });
+};
+
 const serializeAws_restJson1__listOf__integerMin1Max2147483647 = (input: number[], context: __SerdeContext): any => {
   return input
     .filter((e: any) => e != null)
@@ -4095,6 +4107,10 @@ const serializeAws_restJson1AvailBlanking = (input: AvailBlanking, context: __Se
 const serializeAws_restJson1AvcIntraSettings = (input: AvcIntraSettings, context: __SerdeContext): any => {
   return {
     ...(input.AvcIntraClass !== undefined && input.AvcIntraClass !== null && { avcIntraClass: input.AvcIntraClass }),
+    ...(input.AvcIntraUhdSettings !== undefined &&
+      input.AvcIntraUhdSettings !== null && {
+        avcIntraUhdSettings: serializeAws_restJson1AvcIntraUhdSettings(input.AvcIntraUhdSettings, context),
+      }),
     ...(input.FramerateControl !== undefined &&
       input.FramerateControl !== null && { framerateControl: input.FramerateControl }),
     ...(input.FramerateConversionAlgorithm !== undefined &&
@@ -4106,8 +4122,17 @@ const serializeAws_restJson1AvcIntraSettings = (input: AvcIntraSettings, context
     ...(input.FramerateNumerator !== undefined &&
       input.FramerateNumerator !== null && { framerateNumerator: input.FramerateNumerator }),
     ...(input.InterlaceMode !== undefined && input.InterlaceMode !== null && { interlaceMode: input.InterlaceMode }),
+    ...(input.ScanTypeConversionMode !== undefined &&
+      input.ScanTypeConversionMode !== null && { scanTypeConversionMode: input.ScanTypeConversionMode }),
     ...(input.SlowPal !== undefined && input.SlowPal !== null && { slowPal: input.SlowPal }),
     ...(input.Telecine !== undefined && input.Telecine !== null && { telecine: input.Telecine }),
+  };
+};
+
+const serializeAws_restJson1AvcIntraUhdSettings = (input: AvcIntraUhdSettings, context: __SerdeContext): any => {
+  return {
+    ...(input.QualityTuningLevel !== undefined &&
+      input.QualityTuningLevel !== null && { qualityTuningLevel: input.QualityTuningLevel }),
   };
 };
 
@@ -4366,6 +4391,8 @@ const serializeAws_restJson1CmafGroupSettings = (input: CmafGroupSettings, conte
 const serializeAws_restJson1CmfcSettings = (input: CmfcSettings, context: __SerdeContext): any => {
   return {
     ...(input.AudioDuration !== undefined && input.AudioDuration !== null && { audioDuration: input.AudioDuration }),
+    ...(input.IFrameOnlyManifest !== undefined &&
+      input.IFrameOnlyManifest !== null && { iFrameOnlyManifest: input.IFrameOnlyManifest }),
     ...(input.Scte35Esam !== undefined && input.Scte35Esam !== null && { scte35Esam: input.Scte35Esam }),
     ...(input.Scte35Source !== undefined && input.Scte35Source !== null && { scte35Source: input.Scte35Source }),
   };
@@ -4801,6 +4828,8 @@ const serializeAws_restJson1H264Settings = (input: H264Settings, context: __Serd
     ...(input.RateControlMode !== undefined &&
       input.RateControlMode !== null && { rateControlMode: input.RateControlMode }),
     ...(input.RepeatPps !== undefined && input.RepeatPps !== null && { repeatPps: input.RepeatPps }),
+    ...(input.ScanTypeConversionMode !== undefined &&
+      input.ScanTypeConversionMode !== null && { scanTypeConversionMode: input.ScanTypeConversionMode }),
     ...(input.SceneChangeDetect !== undefined &&
       input.SceneChangeDetect !== null && { sceneChangeDetect: input.SceneChangeDetect }),
     ...(input.Slices !== undefined && input.Slices !== null && { slices: input.Slices }),
@@ -4889,6 +4918,8 @@ const serializeAws_restJson1H265Settings = (input: H265Settings, context: __Serd
       input.SampleAdaptiveOffsetFilterMode !== null && {
         sampleAdaptiveOffsetFilterMode: input.SampleAdaptiveOffsetFilterMode,
       }),
+    ...(input.ScanTypeConversionMode !== undefined &&
+      input.ScanTypeConversionMode !== null && { scanTypeConversionMode: input.ScanTypeConversionMode }),
     ...(input.SceneChangeDetect !== undefined &&
       input.SceneChangeDetect !== null && { sceneChangeDetect: input.SceneChangeDetect }),
     ...(input.Slices !== undefined && input.Slices !== null && { slices: input.Slices }),
@@ -5554,6 +5585,8 @@ const serializeAws_restJson1Mpeg2Settings = (input: Mpeg2Settings, context: __Se
       input.QualityTuningLevel !== null && { qualityTuningLevel: input.QualityTuningLevel }),
     ...(input.RateControlMode !== undefined &&
       input.RateControlMode !== null && { rateControlMode: input.RateControlMode }),
+    ...(input.ScanTypeConversionMode !== undefined &&
+      input.ScanTypeConversionMode !== null && { scanTypeConversionMode: input.ScanTypeConversionMode }),
     ...(input.SceneChangeDetect !== undefined &&
       input.SceneChangeDetect !== null && { sceneChangeDetect: input.SceneChangeDetect }),
     ...(input.SlowPal !== undefined && input.SlowPal !== null && { slowPal: input.SlowPal }),
@@ -5772,6 +5805,13 @@ const serializeAws_restJson1OutputChannelMapping = (input: OutputChannelMapping,
       input.InputChannels !== null && {
         inputChannels: serializeAws_restJson1__listOf__integerMinNegative60Max6(input.InputChannels, context),
       }),
+    ...(input.InputChannelsFineTune !== undefined &&
+      input.InputChannelsFineTune !== null && {
+        inputChannelsFineTune: serializeAws_restJson1__listOf__doubleMinNegative60Max6(
+          input.InputChannelsFineTune,
+          context
+        ),
+      }),
   };
 };
 
@@ -5879,6 +5919,8 @@ const serializeAws_restJson1ProresSettings = (input: ProresSettings, context: __
     ...(input.ParDenominator !== undefined &&
       input.ParDenominator !== null && { parDenominator: input.ParDenominator }),
     ...(input.ParNumerator !== undefined && input.ParNumerator !== null && { parNumerator: input.ParNumerator }),
+    ...(input.ScanTypeConversionMode !== undefined &&
+      input.ScanTypeConversionMode !== null && { scanTypeConversionMode: input.ScanTypeConversionMode }),
     ...(input.SlowPal !== undefined && input.SlowPal !== null && { slowPal: input.SlowPal }),
     ...(input.Telecine !== undefined && input.Telecine !== null && { telecine: input.Telecine }),
   };
@@ -6076,6 +6118,8 @@ const serializeAws_restJson1Vc3Settings = (input: Vc3Settings, context: __SerdeC
     ...(input.FramerateNumerator !== undefined &&
       input.FramerateNumerator !== null && { framerateNumerator: input.FramerateNumerator }),
     ...(input.InterlaceMode !== undefined && input.InterlaceMode !== null && { interlaceMode: input.InterlaceMode }),
+    ...(input.ScanTypeConversionMode !== undefined &&
+      input.ScanTypeConversionMode !== null && { scanTypeConversionMode: input.ScanTypeConversionMode }),
     ...(input.SlowPal !== undefined && input.SlowPal !== null && { slowPal: input.SlowPal }),
     ...(input.Telecine !== undefined && input.Telecine !== null && { telecine: input.Telecine }),
     ...(input.Vc3Class !== undefined && input.Vc3Class !== null && { vc3Class: input.Vc3Class }),
@@ -6259,6 +6303,17 @@ const serializeAws_restJson1WavSettings = (input: WavSettings, context: __SerdeC
     ...(input.Format !== undefined && input.Format !== null && { format: input.Format }),
     ...(input.SampleRate !== undefined && input.SampleRate !== null && { sampleRate: input.SampleRate }),
   };
+};
+
+const deserializeAws_restJson1__listOf__doubleMinNegative60Max6 = (output: any, context: __SerdeContext): number[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return entry;
+    });
 };
 
 const deserializeAws_restJson1__listOf__integerMin1Max2147483647 = (output: any, context: __SerdeContext): number[] => {
@@ -7053,6 +7108,10 @@ const deserializeAws_restJson1AvcIntraSettings = (output: any, context: __SerdeC
   return {
     AvcIntraClass:
       output.avcIntraClass !== undefined && output.avcIntraClass !== null ? output.avcIntraClass : undefined,
+    AvcIntraUhdSettings:
+      output.avcIntraUhdSettings !== undefined && output.avcIntraUhdSettings !== null
+        ? deserializeAws_restJson1AvcIntraUhdSettings(output.avcIntraUhdSettings, context)
+        : undefined,
     FramerateControl:
       output.framerateControl !== undefined && output.framerateControl !== null ? output.framerateControl : undefined,
     FramerateConversionAlgorithm:
@@ -7069,8 +7128,21 @@ const deserializeAws_restJson1AvcIntraSettings = (output: any, context: __SerdeC
         : undefined,
     InterlaceMode:
       output.interlaceMode !== undefined && output.interlaceMode !== null ? output.interlaceMode : undefined,
+    ScanTypeConversionMode:
+      output.scanTypeConversionMode !== undefined && output.scanTypeConversionMode !== null
+        ? output.scanTypeConversionMode
+        : undefined,
     SlowPal: output.slowPal !== undefined && output.slowPal !== null ? output.slowPal : undefined,
     Telecine: output.telecine !== undefined && output.telecine !== null ? output.telecine : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1AvcIntraUhdSettings = (output: any, context: __SerdeContext): AvcIntraUhdSettings => {
+  return {
+    QualityTuningLevel:
+      output.qualityTuningLevel !== undefined && output.qualityTuningLevel !== null
+        ? output.qualityTuningLevel
+        : undefined,
   } as any;
 };
 
@@ -7364,6 +7436,10 @@ const deserializeAws_restJson1CmfcSettings = (output: any, context: __SerdeConte
   return {
     AudioDuration:
       output.audioDuration !== undefined && output.audioDuration !== null ? output.audioDuration : undefined,
+    IFrameOnlyManifest:
+      output.iFrameOnlyManifest !== undefined && output.iFrameOnlyManifest !== null
+        ? output.iFrameOnlyManifest
+        : undefined,
     Scte35Esam: output.scte35Esam !== undefined && output.scte35Esam !== null ? output.scte35Esam : undefined,
     Scte35Source: output.scte35Source !== undefined && output.scte35Source !== null ? output.scte35Source : undefined,
   } as any;
@@ -7913,6 +7989,10 @@ const deserializeAws_restJson1H264Settings = (output: any, context: __SerdeConte
     RateControlMode:
       output.rateControlMode !== undefined && output.rateControlMode !== null ? output.rateControlMode : undefined,
     RepeatPps: output.repeatPps !== undefined && output.repeatPps !== null ? output.repeatPps : undefined,
+    ScanTypeConversionMode:
+      output.scanTypeConversionMode !== undefined && output.scanTypeConversionMode !== null
+        ? output.scanTypeConversionMode
+        : undefined,
     SceneChangeDetect:
       output.sceneChangeDetect !== undefined && output.sceneChangeDetect !== null
         ? output.sceneChangeDetect
@@ -8026,6 +8106,10 @@ const deserializeAws_restJson1H265Settings = (output: any, context: __SerdeConte
     SampleAdaptiveOffsetFilterMode:
       output.sampleAdaptiveOffsetFilterMode !== undefined && output.sampleAdaptiveOffsetFilterMode !== null
         ? output.sampleAdaptiveOffsetFilterMode
+        : undefined,
+    ScanTypeConversionMode:
+      output.scanTypeConversionMode !== undefined && output.scanTypeConversionMode !== null
+        ? output.scanTypeConversionMode
         : undefined,
     SceneChangeDetect:
       output.sceneChangeDetect !== undefined && output.sceneChangeDetect !== null
@@ -8948,6 +9032,10 @@ const deserializeAws_restJson1Mpeg2Settings = (output: any, context: __SerdeCont
         : undefined,
     RateControlMode:
       output.rateControlMode !== undefined && output.rateControlMode !== null ? output.rateControlMode : undefined,
+    ScanTypeConversionMode:
+      output.scanTypeConversionMode !== undefined && output.scanTypeConversionMode !== null
+        ? output.scanTypeConversionMode
+        : undefined,
     SceneChangeDetect:
       output.sceneChangeDetect !== undefined && output.sceneChangeDetect !== null
         ? output.sceneChangeDetect
@@ -9178,6 +9266,10 @@ const deserializeAws_restJson1OutputChannelMapping = (output: any, context: __Se
       output.inputChannels !== undefined && output.inputChannels !== null
         ? deserializeAws_restJson1__listOf__integerMinNegative60Max6(output.inputChannels, context)
         : undefined,
+    InputChannelsFineTune:
+      output.inputChannelsFineTune !== undefined && output.inputChannelsFineTune !== null
+        ? deserializeAws_restJson1__listOf__doubleMinNegative60Max6(output.inputChannelsFineTune, context)
+        : undefined,
   } as any;
 };
 
@@ -9329,6 +9421,10 @@ const deserializeAws_restJson1ProresSettings = (output: any, context: __SerdeCon
     ParDenominator:
       output.parDenominator !== undefined && output.parDenominator !== null ? output.parDenominator : undefined,
     ParNumerator: output.parNumerator !== undefined && output.parNumerator !== null ? output.parNumerator : undefined,
+    ScanTypeConversionMode:
+      output.scanTypeConversionMode !== undefined && output.scanTypeConversionMode !== null
+        ? output.scanTypeConversionMode
+        : undefined,
     SlowPal: output.slowPal !== undefined && output.slowPal !== null ? output.slowPal : undefined,
     Telecine: output.telecine !== undefined && output.telecine !== null ? output.telecine : undefined,
   } as any;
@@ -9616,6 +9712,10 @@ const deserializeAws_restJson1Vc3Settings = (output: any, context: __SerdeContex
         : undefined,
     InterlaceMode:
       output.interlaceMode !== undefined && output.interlaceMode !== null ? output.interlaceMode : undefined,
+    ScanTypeConversionMode:
+      output.scanTypeConversionMode !== undefined && output.scanTypeConversionMode !== null
+        ? output.scanTypeConversionMode
+        : undefined,
     SlowPal: output.slowPal !== undefined && output.slowPal !== null ? output.slowPal : undefined,
     Telecine: output.telecine !== undefined && output.telecine !== null ? output.telecine : undefined,
     Vc3Class: output.vc3Class !== undefined && output.vc3Class !== null ? output.vc3Class : undefined,

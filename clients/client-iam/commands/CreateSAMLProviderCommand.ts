@@ -37,8 +37,8 @@ export type CreateSAMLProviderCommandOutput = CreateSAMLProviderResponse & __Met
  *             <p> This operation requires <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.</p>
  *          </note>
  *          <p> For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html">Enabling SAML 2.0
- *             Federated Users to Access the AWS Management Console</a> and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html">About SAML 2.0-based
- *             Federation</a> in the <i>IAM User Guide</i>.</p>
+ *             federated users to access the AWS Management Console</a> and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html">About SAML 2.0-based
+ *             federation</a> in the <i>IAM User Guide</i>.</p>
  */
 export class CreateSAMLProviderCommand extends $Command<
   CreateSAMLProviderCommandInput,

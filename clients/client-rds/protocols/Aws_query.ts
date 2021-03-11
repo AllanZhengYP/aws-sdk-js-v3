@@ -280,6 +280,10 @@ import {
 } from "../commands/DownloadDBLogFilePortionCommand";
 import { FailoverDBClusterCommandInput, FailoverDBClusterCommandOutput } from "../commands/FailoverDBClusterCommand";
 import {
+  FailoverGlobalClusterCommandInput,
+  FailoverGlobalClusterCommandOutput,
+} from "../commands/FailoverGlobalClusterCommand";
+import {
   ImportInstallationMediaCommandInput,
   ImportInstallationMediaCommandOutput,
 } from "../commands/ImportInstallationMediaCommand";
@@ -444,6 +448,7 @@ import {
   CertificateMessage,
   CertificateNotFoundFault,
   CharacterSet,
+  ClusterPendingModifiedValues,
   ConnectionPoolConfigurationInfo,
   CopyDBClusterParameterGroupMessage,
   CopyDBClusterParameterGroupResult,
@@ -628,18 +633,16 @@ import {
   DescribeEngineDefaultClusterParametersMessage,
   DescribeEngineDefaultClusterParametersResult,
   DescribeEngineDefaultParametersMessage,
-  DescribeEngineDefaultParametersResult,
-  DescribeEventCategoriesMessage,
   DomainMembership,
   DomainNotFoundFault,
   EC2SecurityGroup,
   Endpoint,
   EngineDefaults,
-  EventCategoriesMap,
   EventSubscription,
   EventSubscriptionQuotaExceededFault,
   ExportTask,
   ExportTaskNotFoundFault,
+  FailoverState,
   Filter,
   GlobalCluster,
   GlobalClusterAlreadyExistsFault,
@@ -723,6 +726,8 @@ import {
   DBParameterGroupNameMessage,
   DBProxyTargetAlreadyRegisteredFault,
   DBUpgradeDependencyFailureFault,
+  DescribeEngineDefaultParametersResult,
+  DescribeEventCategoriesMessage,
   DescribeEventSubscriptionsMessage,
   DescribeEventsMessage,
   DescribeExportTasksMessage,
@@ -741,6 +746,7 @@ import {
   DownloadDBLogFilePortionDetails,
   DownloadDBLogFilePortionMessage,
   Event,
+  EventCategoriesMap,
   EventCategoriesMessage,
   EventSubscriptionsMessage,
   EventsMessage,
@@ -748,6 +754,8 @@ import {
   ExportTasksMessage,
   FailoverDBClusterMessage,
   FailoverDBClusterResult,
+  FailoverGlobalClusterMessage,
+  FailoverGlobalClusterResult,
   GlobalClustersMessage,
   IamRoleMissingPermissionsFault,
   IamRoleNotFoundFault,
@@ -2256,6 +2264,22 @@ export const serializeAws_queryFailoverDBClusterCommand = async (
   body = buildFormUrlencodedString({
     ...serializeAws_queryFailoverDBClusterMessage(input, context),
     Action: "FailoverDBCluster",
+    Version: "2014-10-31",
+  });
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_queryFailoverGlobalClusterCommand = async (
+  input: FailoverGlobalClusterCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "content-type": "application/x-www-form-urlencoded",
+  };
+  let body: any;
+  body = buildFormUrlencodedString({
+    ...serializeAws_queryFailoverGlobalClusterMessage(input, context),
+    Action: "FailoverGlobalCluster",
     Version: "2014-10-31",
   });
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
@@ -8842,6 +8866,84 @@ const deserializeAws_queryFailoverDBClusterCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_queryFailoverGlobalClusterCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<FailoverGlobalClusterCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_queryFailoverGlobalClusterCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_queryFailoverGlobalClusterResult(data.FailoverGlobalClusterResult, context);
+  const response: FailoverGlobalClusterCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_queryFailoverGlobalClusterCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<FailoverGlobalClusterCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadQueryErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    case "DBClusterNotFoundFault":
+    case "com.amazonaws.rds#DBClusterNotFoundFault":
+      response = {
+        ...(await deserializeAws_queryDBClusterNotFoundFaultResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "GlobalClusterNotFoundFault":
+    case "com.amazonaws.rds#GlobalClusterNotFoundFault":
+      response = {
+        ...(await deserializeAws_queryGlobalClusterNotFoundFaultResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidDBClusterStateFault":
+    case "com.amazonaws.rds#InvalidDBClusterStateFault":
+      response = {
+        ...(await deserializeAws_queryInvalidDBClusterStateFaultResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidGlobalClusterStateFault":
+    case "com.amazonaws.rds#InvalidGlobalClusterStateFault":
+      response = {
+        ...(await deserializeAws_queryInvalidGlobalClusterStateFaultResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.Error.code || parsedBody.Error.Code || errorCode;
+      response = {
+        ...parsedBody.Error,
+        name: `${errorCode}`,
+        message: parsedBody.Error.message || parsedBody.Error.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_queryImportInstallationMediaCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -10214,6 +10316,22 @@ const deserializeAws_queryModifyGlobalClusterCommandError = async (
     case "com.amazonaws.rds#GlobalClusterNotFoundFault":
       response = {
         ...(await deserializeAws_queryGlobalClusterNotFoundFaultResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidDBClusterStateFault":
+    case "com.amazonaws.rds#InvalidDBClusterStateFault":
+      response = {
+        ...(await deserializeAws_queryInvalidDBClusterStateFaultResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidDBInstanceStateFault":
+    case "com.amazonaws.rds#InvalidDBInstanceStateFault":
+      response = {
+        ...(await deserializeAws_queryInvalidDBInstanceStateFaultResponse(parsedOutput, context)),
         name: errorCode,
         $metadata: deserializeMetadata(output),
       };
@@ -15621,6 +15739,9 @@ const serializeAws_queryCreateDBInstanceMessage = (input: CreateDBInstanceMessag
   if (input.MaxAllocatedStorage !== undefined && input.MaxAllocatedStorage !== null) {
     entries["MaxAllocatedStorage"] = input.MaxAllocatedStorage;
   }
+  if (input.EnableCustomerOwnedIp !== undefined && input.EnableCustomerOwnedIp !== null) {
+    entries["EnableCustomerOwnedIp"] = input.EnableCustomerOwnedIp;
+  }
   return entries;
 };
 
@@ -17289,6 +17410,20 @@ const serializeAws_queryFailoverDBClusterMessage = (input: FailoverDBClusterMess
   return entries;
 };
 
+const serializeAws_queryFailoverGlobalClusterMessage = (
+  input: FailoverGlobalClusterMessage,
+  context: __SerdeContext
+): any => {
+  const entries: any = {};
+  if (input.GlobalClusterIdentifier !== undefined && input.GlobalClusterIdentifier !== null) {
+    entries["GlobalClusterIdentifier"] = input.GlobalClusterIdentifier;
+  }
+  if (input.TargetDbClusterIdentifier !== undefined && input.TargetDbClusterIdentifier !== null) {
+    entries["TargetDbClusterIdentifier"] = input.TargetDbClusterIdentifier;
+  }
+  return entries;
+};
+
 const serializeAws_queryFilter = (input: Filter, context: __SerdeContext): any => {
   const entries: any = {};
   if (input.Name !== undefined && input.Name !== null) {
@@ -17750,6 +17885,12 @@ const serializeAws_queryModifyDBInstanceMessage = (input: ModifyDBInstanceMessag
   if (input.ReplicaMode !== undefined && input.ReplicaMode !== null) {
     entries["ReplicaMode"] = input.ReplicaMode;
   }
+  if (input.EnableCustomerOwnedIp !== undefined && input.EnableCustomerOwnedIp !== null) {
+    entries["EnableCustomerOwnedIp"] = input.EnableCustomerOwnedIp;
+  }
+  if (input.AwsBackupRecoveryPointArn !== undefined && input.AwsBackupRecoveryPointArn !== null) {
+    entries["AwsBackupRecoveryPointArn"] = input.AwsBackupRecoveryPointArn;
+  }
   return entries;
 };
 
@@ -17935,6 +18076,12 @@ const serializeAws_queryModifyGlobalClusterMessage = (
   }
   if (input.DeletionProtection !== undefined && input.DeletionProtection !== null) {
     entries["DeletionProtection"] = input.DeletionProtection;
+  }
+  if (input.EngineVersion !== undefined && input.EngineVersion !== null) {
+    entries["EngineVersion"] = input.EngineVersion;
+  }
+  if (input.AllowMajorVersionUpgrade !== undefined && input.AllowMajorVersionUpgrade !== null) {
+    entries["AllowMajorVersionUpgrade"] = input.AllowMajorVersionUpgrade;
   }
   return entries;
 };
@@ -18767,6 +18914,9 @@ const serializeAws_queryRestoreDBInstanceFromDBSnapshotMessage = (
   if (input.DeletionProtection !== undefined && input.DeletionProtection !== null) {
     entries["DeletionProtection"] = input.DeletionProtection;
   }
+  if (input.EnableCustomerOwnedIp !== undefined && input.EnableCustomerOwnedIp !== null) {
+    entries["EnableCustomerOwnedIp"] = input.EnableCustomerOwnedIp;
+  }
   return entries;
 };
 
@@ -19049,6 +19199,9 @@ const serializeAws_queryRestoreDBInstanceToPointInTimeMessage = (
   }
   if (input.SourceDBInstanceAutomatedBackupsArn !== undefined && input.SourceDBInstanceAutomatedBackupsArn !== null) {
     entries["SourceDBInstanceAutomatedBackupsArn"] = input.SourceDBInstanceAutomatedBackupsArn;
+  }
+  if (input.EnableCustomerOwnedIp !== undefined && input.EnableCustomerOwnedIp !== null) {
+    entries["EnableCustomerOwnedIp"] = input.EnableCustomerOwnedIp;
   }
   return entries;
 };
@@ -19657,6 +19810,38 @@ const deserializeAws_queryCharacterSet = (output: any, context: __SerdeContext):
   return contents;
 };
 
+const deserializeAws_queryClusterPendingModifiedValues = (
+  output: any,
+  context: __SerdeContext
+): ClusterPendingModifiedValues => {
+  let contents: any = {
+    PendingCloudwatchLogsExports: undefined,
+    DBClusterIdentifier: undefined,
+    MasterUserPassword: undefined,
+    IAMDatabaseAuthenticationEnabled: undefined,
+    EngineVersion: undefined,
+  };
+  if (output["PendingCloudwatchLogsExports"] !== undefined) {
+    contents.PendingCloudwatchLogsExports = deserializeAws_queryPendingCloudwatchLogsExports(
+      output["PendingCloudwatchLogsExports"],
+      context
+    );
+  }
+  if (output["DBClusterIdentifier"] !== undefined) {
+    contents.DBClusterIdentifier = output["DBClusterIdentifier"];
+  }
+  if (output["MasterUserPassword"] !== undefined) {
+    contents.MasterUserPassword = output["MasterUserPassword"];
+  }
+  if (output["IAMDatabaseAuthenticationEnabled"] !== undefined) {
+    contents.IAMDatabaseAuthenticationEnabled = output["IAMDatabaseAuthenticationEnabled"] == "true";
+  }
+  if (output["EngineVersion"] !== undefined) {
+    contents.EngineVersion = output["EngineVersion"];
+  }
+  return contents;
+};
+
 const deserializeAws_queryConnectionPoolConfigurationInfo = (
   output: any,
   context: __SerdeContext
@@ -20085,6 +20270,7 @@ const deserializeAws_queryDBCluster = (output: any, context: __SerdeContext): DB
     TagList: undefined,
     GlobalWriteForwardingStatus: undefined,
     GlobalWriteForwardingRequested: undefined,
+    PendingModifiedValues: undefined,
   };
   if (output["AllocatedStorage"] !== undefined) {
     contents.AllocatedStorage = parseInt(output["AllocatedStorage"]);
@@ -20322,6 +20508,12 @@ const deserializeAws_queryDBCluster = (output: any, context: __SerdeContext): DB
   }
   if (output["GlobalWriteForwardingRequested"] !== undefined) {
     contents.GlobalWriteForwardingRequested = output["GlobalWriteForwardingRequested"] == "true";
+  }
+  if (output["PendingModifiedValues"] !== undefined) {
+    contents.PendingModifiedValues = deserializeAws_queryClusterPendingModifiedValues(
+      output["PendingModifiedValues"],
+      context
+    );
   }
   return contents;
 };
@@ -20883,6 +21075,7 @@ const deserializeAws_queryDBClusterSnapshot = (output: any, context: __SerdeCont
     DBClusterIdentifier: undefined,
     SnapshotCreateTime: undefined,
     Engine: undefined,
+    EngineMode: undefined,
     AllocatedStorage: undefined,
     Status: undefined,
     Port: undefined,
@@ -20920,6 +21113,9 @@ const deserializeAws_queryDBClusterSnapshot = (output: any, context: __SerdeCont
   }
   if (output["Engine"] !== undefined) {
     contents.Engine = output["Engine"];
+  }
+  if (output["EngineMode"] !== undefined) {
+    contents.EngineMode = output["EngineMode"];
   }
   if (output["AllocatedStorage"] !== undefined) {
     contents.AllocatedStorage = parseInt(output["AllocatedStorage"]);
@@ -21319,6 +21515,8 @@ const deserializeAws_queryDBInstance = (output: any, context: __SerdeContext): D
     MaxAllocatedStorage: undefined,
     TagList: undefined,
     DBInstanceAutomatedBackupsReplications: undefined,
+    CustomerOwnedIpEnabled: undefined,
+    AwsBackupRecoveryPointArn: undefined,
   };
   if (output["DBInstanceIdentifier"] !== undefined) {
     contents.DBInstanceIdentifier = output["DBInstanceIdentifier"];
@@ -21601,6 +21799,12 @@ const deserializeAws_queryDBInstance = (output: any, context: __SerdeContext): D
       __getArrayIfSingleItem(output["DBInstanceAutomatedBackupsReplications"]["DBInstanceAutomatedBackupsReplication"]),
       context
     );
+  }
+  if (output["CustomerOwnedIpEnabled"] !== undefined) {
+    contents.CustomerOwnedIpEnabled = output["CustomerOwnedIpEnabled"] == "true";
+  }
+  if (output["AwsBackupRecoveryPointArn"] !== undefined) {
+    contents.AwsBackupRecoveryPointArn = output["AwsBackupRecoveryPointArn"];
   }
   return contents;
 };
@@ -23800,6 +24004,37 @@ const deserializeAws_queryFailoverDBClusterResult = (output: any, context: __Ser
   return contents;
 };
 
+const deserializeAws_queryFailoverGlobalClusterResult = (
+  output: any,
+  context: __SerdeContext
+): FailoverGlobalClusterResult => {
+  let contents: any = {
+    GlobalCluster: undefined,
+  };
+  if (output["GlobalCluster"] !== undefined) {
+    contents.GlobalCluster = deserializeAws_queryGlobalCluster(output["GlobalCluster"], context);
+  }
+  return contents;
+};
+
+const deserializeAws_queryFailoverState = (output: any, context: __SerdeContext): FailoverState => {
+  let contents: any = {
+    Status: undefined,
+    FromDbClusterArn: undefined,
+    ToDbClusterArn: undefined,
+  };
+  if (output["Status"] !== undefined) {
+    contents.Status = output["Status"];
+  }
+  if (output["FromDbClusterArn"] !== undefined) {
+    contents.FromDbClusterArn = output["FromDbClusterArn"];
+  }
+  if (output["ToDbClusterArn"] !== undefined) {
+    contents.ToDbClusterArn = output["ToDbClusterArn"];
+  }
+  return contents;
+};
+
 const deserializeAws_queryFeatureNameList = (output: any, context: __SerdeContext): string[] => {
   return (output || [])
     .filter((e: any) => e != null)
@@ -23823,6 +24058,7 @@ const deserializeAws_queryGlobalCluster = (output: any, context: __SerdeContext)
     StorageEncrypted: undefined,
     DeletionProtection: undefined,
     GlobalClusterMembers: undefined,
+    FailoverState: undefined,
   };
   if (output["GlobalClusterIdentifier"] !== undefined) {
     contents.GlobalClusterIdentifier = output["GlobalClusterIdentifier"];
@@ -23862,6 +24098,9 @@ const deserializeAws_queryGlobalCluster = (output: any, context: __SerdeContext)
       __getArrayIfSingleItem(output["GlobalClusterMembers"]["GlobalClusterMember"]),
       context
     );
+  }
+  if (output["FailoverState"] !== undefined) {
+    contents.FailoverState = deserializeAws_queryFailoverState(output["FailoverState"], context);
   }
   return contents;
 };
@@ -25590,6 +25829,7 @@ const deserializeAws_queryPendingModifiedValues = (output: any, context: __Serde
     DBSubnetGroupName: undefined,
     PendingCloudwatchLogsExports: undefined,
     ProcessorFeatures: undefined,
+    IAMDatabaseAuthenticationEnabled: undefined,
   };
   if (output["DBInstanceClass"] !== undefined) {
     contents.DBInstanceClass = output["DBInstanceClass"];
@@ -25644,6 +25884,9 @@ const deserializeAws_queryPendingModifiedValues = (output: any, context: __Serde
       __getArrayIfSingleItem(output["ProcessorFeatures"]["ProcessorFeature"]),
       context
     );
+  }
+  if (output["IAMDatabaseAuthenticationEnabled"] !== undefined) {
+    contents.IAMDatabaseAuthenticationEnabled = output["IAMDatabaseAuthenticationEnabled"] == "true";
   }
   return contents;
 };
@@ -26813,6 +27056,9 @@ const deserializeAws_queryUpgradeTarget = (output: any, context: __SerdeContext)
     Description: undefined,
     AutoUpgrade: undefined,
     IsMajorVersionUpgrade: undefined,
+    SupportedEngineModes: undefined,
+    SupportsParallelQuery: undefined,
+    SupportsGlobalDatabases: undefined,
   };
   if (output["Engine"] !== undefined) {
     contents.Engine = output["Engine"];
@@ -26828,6 +27074,21 @@ const deserializeAws_queryUpgradeTarget = (output: any, context: __SerdeContext)
   }
   if (output["IsMajorVersionUpgrade"] !== undefined) {
     contents.IsMajorVersionUpgrade = output["IsMajorVersionUpgrade"] == "true";
+  }
+  if (output.SupportedEngineModes === "") {
+    contents.SupportedEngineModes = [];
+  }
+  if (output["SupportedEngineModes"] !== undefined && output["SupportedEngineModes"]["member"] !== undefined) {
+    contents.SupportedEngineModes = deserializeAws_queryEngineModeList(
+      __getArrayIfSingleItem(output["SupportedEngineModes"]["member"]),
+      context
+    );
+  }
+  if (output["SupportsParallelQuery"] !== undefined) {
+    contents.SupportsParallelQuery = output["SupportsParallelQuery"] == "true";
+  }
+  if (output["SupportsGlobalDatabases"] !== undefined) {
+    contents.SupportsGlobalDatabases = output["SupportsGlobalDatabases"] == "true";
   }
   return contents;
 };

@@ -21,8 +21,8 @@ export type ListPartnerEventSourcesCommandInput = ListPartnerEventSourcesRequest
 export type ListPartnerEventSourcesCommandOutput = ListPartnerEventSourcesResponse & __MetadataBearer;
 
 /**
- * <p>An SaaS partner can use this operation to list all the partner event source names that
- *             they have created. This operation is not used by AWS customers.</p>
+ * <p>An SaaS partner can use this operation to list all the partner event source names that they have created. This
+ *       operation is not used by AWS customers.</p>
  */
 export class ListPartnerEventSourcesCommand extends $Command<
   ListPartnerEventSourcesCommandInput,

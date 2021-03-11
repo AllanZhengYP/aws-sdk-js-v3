@@ -41,6 +41,10 @@ import {
   DisassociateResolverRuleCommandOutput,
 } from "../commands/DisassociateResolverRuleCommand";
 import {
+  GetResolverDnssecConfigCommandInput,
+  GetResolverDnssecConfigCommandOutput,
+} from "../commands/GetResolverDnssecConfigCommand";
+import {
   GetResolverEndpointCommandInput,
   GetResolverEndpointCommandOutput,
 } from "../commands/GetResolverEndpointCommand";
@@ -65,6 +69,10 @@ import {
   GetResolverRulePolicyCommandInput,
   GetResolverRulePolicyCommandOutput,
 } from "../commands/GetResolverRulePolicyCommand";
+import {
+  ListResolverDnssecConfigsCommandInput,
+  ListResolverDnssecConfigsCommandOutput,
+} from "../commands/ListResolverDnssecConfigsCommand";
 import {
   ListResolverEndpointIpAddressesCommandInput,
   ListResolverEndpointIpAddressesCommandOutput,
@@ -101,6 +109,10 @@ import {
 import { TagResourceCommandInput, TagResourceCommandOutput } from "../commands/TagResourceCommand";
 import { UntagResourceCommandInput, UntagResourceCommandOutput } from "../commands/UntagResourceCommand";
 import {
+  UpdateResolverDnssecConfigCommandInput,
+  UpdateResolverDnssecConfigCommandOutput,
+} from "../commands/UpdateResolverDnssecConfigCommand";
+import {
   UpdateResolverEndpointCommandInput,
   UpdateResolverEndpointCommandOutput,
 } from "../commands/UpdateResolverEndpointCommand";
@@ -132,6 +144,8 @@ import {
   DisassociateResolverRuleRequest,
   DisassociateResolverRuleResponse,
   Filter,
+  GetResolverDnssecConfigRequest,
+  GetResolverDnssecConfigResponse,
   GetResolverEndpointRequest,
   GetResolverEndpointResponse,
   GetResolverQueryLogConfigAssociationRequest,
@@ -156,6 +170,8 @@ import {
   IpAddressResponse,
   IpAddressUpdate,
   LimitExceededException,
+  ListResolverDnssecConfigsRequest,
+  ListResolverDnssecConfigsResponse,
   ListResolverEndpointIpAddressesRequest,
   ListResolverEndpointIpAddressesResponse,
   ListResolverEndpointsRequest,
@@ -174,6 +190,7 @@ import {
   PutResolverQueryLogConfigPolicyResponse,
   PutResolverRulePolicyRequest,
   PutResolverRulePolicyResponse,
+  ResolverDnssecConfig,
   ResolverEndpoint,
   ResolverQueryLogConfig,
   ResolverQueryLogConfigAssociation,
@@ -192,6 +209,8 @@ import {
   UnknownResourceException,
   UntagResourceRequest,
   UntagResourceResponse,
+  UpdateResolverDnssecConfigRequest,
+  UpdateResolverDnssecConfigResponse,
   UpdateResolverEndpointRequest,
   UpdateResolverEndpointResponse,
   UpdateResolverRuleRequest,
@@ -364,6 +383,19 @@ export const serializeAws_json1_1DisassociateResolverRuleCommand = async (
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
+export const serializeAws_json1_1GetResolverDnssecConfigCommand = async (
+  input: GetResolverDnssecConfigCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "content-type": "application/x-amz-json-1.1",
+    "x-amz-target": "Route53Resolver.GetResolverDnssecConfig",
+  };
+  let body: any;
+  body = JSON.stringify(serializeAws_json1_1GetResolverDnssecConfigRequest(input, context));
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
 export const serializeAws_json1_1GetResolverEndpointCommand = async (
   input: GetResolverEndpointCommandInput,
   context: __SerdeContext
@@ -452,6 +484,19 @@ export const serializeAws_json1_1GetResolverRulePolicyCommand = async (
   };
   let body: any;
   body = JSON.stringify(serializeAws_json1_1GetResolverRulePolicyRequest(input, context));
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_json1_1ListResolverDnssecConfigsCommand = async (
+  input: ListResolverDnssecConfigsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "content-type": "application/x-amz-json-1.1",
+    "x-amz-target": "Route53Resolver.ListResolverDnssecConfigs",
+  };
+  let body: any;
+  body = JSON.stringify(serializeAws_json1_1ListResolverDnssecConfigsRequest(input, context));
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
@@ -595,6 +640,19 @@ export const serializeAws_json1_1UntagResourceCommand = async (
   };
   let body: any;
   body = JSON.stringify(serializeAws_json1_1UntagResourceRequest(input, context));
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_json1_1UpdateResolverDnssecConfigCommand = async (
+  input: UpdateResolverDnssecConfigCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "content-type": "application/x-amz-json-1.1",
+    "x-amz-target": "Route53Resolver.UpdateResolverDnssecConfig",
+  };
+  let body: any;
+  body = JSON.stringify(serializeAws_json1_1UpdateResolverDnssecConfigRequest(input, context));
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
@@ -1800,6 +1858,100 @@ const deserializeAws_json1_1DisassociateResolverRuleCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_json1_1GetResolverDnssecConfigCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<GetResolverDnssecConfigCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_json1_1GetResolverDnssecConfigCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_json1_1GetResolverDnssecConfigResponse(data, context);
+  const response: GetResolverDnssecConfigCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_json1_1GetResolverDnssecConfigCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<GetResolverDnssecConfigCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    case "AccessDeniedException":
+    case "com.amazonaws.route53resolver#AccessDeniedException":
+      response = {
+        ...(await deserializeAws_json1_1AccessDeniedExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InternalServiceErrorException":
+    case "com.amazonaws.route53resolver#InternalServiceErrorException":
+      response = {
+        ...(await deserializeAws_json1_1InternalServiceErrorExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidParameterException":
+    case "com.amazonaws.route53resolver#InvalidParameterException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidParameterExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidRequestException":
+    case "com.amazonaws.route53resolver#InvalidRequestException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidRequestExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ResourceNotFoundException":
+    case "com.amazonaws.route53resolver#ResourceNotFoundException":
+      response = {
+        ...(await deserializeAws_json1_1ResourceNotFoundExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ThrottlingException":
+    case "com.amazonaws.route53resolver#ThrottlingException":
+      response = {
+        ...(await deserializeAws_json1_1ThrottlingExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.code || parsedBody.Code || errorCode;
+      response = {
+        ...parsedBody,
+        name: `${errorCode}`,
+        message: parsedBody.message || parsedBody.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_json1_1GetResolverEndpointCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -2357,6 +2509,100 @@ const deserializeAws_json1_1GetResolverRulePolicyCommandError = async (
     case "com.amazonaws.route53resolver#UnknownResourceException":
       response = {
         ...(await deserializeAws_json1_1UnknownResourceExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.code || parsedBody.Code || errorCode;
+      response = {
+        ...parsedBody,
+        name: `${errorCode}`,
+        message: parsedBody.message || parsedBody.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
+export const deserializeAws_json1_1ListResolverDnssecConfigsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ListResolverDnssecConfigsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_json1_1ListResolverDnssecConfigsCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_json1_1ListResolverDnssecConfigsResponse(data, context);
+  const response: ListResolverDnssecConfigsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_json1_1ListResolverDnssecConfigsCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ListResolverDnssecConfigsCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    case "AccessDeniedException":
+    case "com.amazonaws.route53resolver#AccessDeniedException":
+      response = {
+        ...(await deserializeAws_json1_1AccessDeniedExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InternalServiceErrorException":
+    case "com.amazonaws.route53resolver#InternalServiceErrorException":
+      response = {
+        ...(await deserializeAws_json1_1InternalServiceErrorExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidNextTokenException":
+    case "com.amazonaws.route53resolver#InvalidNextTokenException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidNextTokenExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidParameterException":
+    case "com.amazonaws.route53resolver#InvalidParameterException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidParameterExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidRequestException":
+    case "com.amazonaws.route53resolver#InvalidRequestException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidRequestExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ThrottlingException":
+    case "com.amazonaws.route53resolver#ThrottlingException":
+      response = {
+        ...(await deserializeAws_json1_1ThrottlingExceptionResponse(parsedOutput, context)),
         name: errorCode,
         $metadata: deserializeMetadata(output),
       };
@@ -3364,6 +3610,100 @@ const deserializeAws_json1_1UntagResourceCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_json1_1UpdateResolverDnssecConfigCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<UpdateResolverDnssecConfigCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_json1_1UpdateResolverDnssecConfigCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_json1_1UpdateResolverDnssecConfigResponse(data, context);
+  const response: UpdateResolverDnssecConfigCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_json1_1UpdateResolverDnssecConfigCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<UpdateResolverDnssecConfigCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    case "AccessDeniedException":
+    case "com.amazonaws.route53resolver#AccessDeniedException":
+      response = {
+        ...(await deserializeAws_json1_1AccessDeniedExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InternalServiceErrorException":
+    case "com.amazonaws.route53resolver#InternalServiceErrorException":
+      response = {
+        ...(await deserializeAws_json1_1InternalServiceErrorExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidParameterException":
+    case "com.amazonaws.route53resolver#InvalidParameterException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidParameterExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidRequestException":
+    case "com.amazonaws.route53resolver#InvalidRequestException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidRequestExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ResourceNotFoundException":
+    case "com.amazonaws.route53resolver#ResourceNotFoundException":
+      response = {
+        ...(await deserializeAws_json1_1ResourceNotFoundExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ThrottlingException":
+    case "com.amazonaws.route53resolver#ThrottlingException":
+      response = {
+        ...(await deserializeAws_json1_1ThrottlingExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.code || parsedBody.Code || errorCode;
+      response = {
+        ...parsedBody,
+        name: `${errorCode}`,
+        message: parsedBody.message || parsedBody.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_json1_1UpdateResolverEndpointCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -3943,6 +4283,15 @@ const serializeAws_json1_1FilterValues = (input: string[], context: __SerdeConte
     });
 };
 
+const serializeAws_json1_1GetResolverDnssecConfigRequest = (
+  input: GetResolverDnssecConfigRequest,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.ResourceId !== undefined && input.ResourceId !== null && { ResourceId: input.ResourceId }),
+  };
+};
+
 const serializeAws_json1_1GetResolverEndpointRequest = (
   input: GetResolverEndpointRequest,
   context: __SerdeContext
@@ -4033,6 +4382,18 @@ const serializeAws_json1_1IpAddressUpdate = (input: IpAddressUpdate, context: __
     ...(input.Ip !== undefined && input.Ip !== null && { Ip: input.Ip }),
     ...(input.IpId !== undefined && input.IpId !== null && { IpId: input.IpId }),
     ...(input.SubnetId !== undefined && input.SubnetId !== null && { SubnetId: input.SubnetId }),
+  };
+};
+
+const serializeAws_json1_1ListResolverDnssecConfigsRequest = (
+  input: ListResolverDnssecConfigsRequest,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.Filters !== undefined &&
+      input.Filters !== null && { Filters: serializeAws_json1_1Filters(input.Filters, context) }),
+    ...(input.MaxResults !== undefined && input.MaxResults !== null && { MaxResults: input.MaxResults }),
+    ...(input.NextToken !== undefined && input.NextToken !== null && { NextToken: input.NextToken }),
   };
 };
 
@@ -4230,6 +4591,16 @@ const serializeAws_json1_1UntagResourceRequest = (input: UntagResourceRequest, c
   };
 };
 
+const serializeAws_json1_1UpdateResolverDnssecConfigRequest = (
+  input: UpdateResolverDnssecConfigRequest,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.ResourceId !== undefined && input.ResourceId !== null && { ResourceId: input.ResourceId }),
+    ...(input.Validation !== undefined && input.Validation !== null && { Validation: input.Validation }),
+  };
+};
+
 const serializeAws_json1_1UpdateResolverEndpointRequest = (
   input: UpdateResolverEndpointRequest,
   context: __SerdeContext
@@ -4403,6 +4774,18 @@ const deserializeAws_json1_1DisassociateResolverRuleResponse = (
   } as any;
 };
 
+const deserializeAws_json1_1GetResolverDnssecConfigResponse = (
+  output: any,
+  context: __SerdeContext
+): GetResolverDnssecConfigResponse => {
+  return {
+    ResolverDNSSECConfig:
+      output.ResolverDNSSECConfig !== undefined && output.ResolverDNSSECConfig !== null
+        ? deserializeAws_json1_1ResolverDnssecConfig(output.ResolverDNSSECConfig, context)
+        : undefined,
+  } as any;
+};
+
 const deserializeAws_json1_1GetResolverEndpointResponse = (
   output: any,
   context: __SerdeContext
@@ -4568,6 +4951,19 @@ const deserializeAws_json1_1LimitExceededException = (output: any, context: __Se
   } as any;
 };
 
+const deserializeAws_json1_1ListResolverDnssecConfigsResponse = (
+  output: any,
+  context: __SerdeContext
+): ListResolverDnssecConfigsResponse => {
+  return {
+    NextToken: output.NextToken !== undefined && output.NextToken !== null ? output.NextToken : undefined,
+    ResolverDnssecConfigs:
+      output.ResolverDnssecConfigs !== undefined && output.ResolverDnssecConfigs !== null
+        ? deserializeAws_json1_1ResolverDnssecConfigList(output.ResolverDnssecConfigs, context)
+        : undefined,
+  } as any;
+};
+
 const deserializeAws_json1_1ListResolverEndpointIpAddressesResponse = (
   output: any,
   context: __SerdeContext
@@ -4692,6 +5088,30 @@ const deserializeAws_json1_1PutResolverRulePolicyResponse = (
   return {
     ReturnValue: output.ReturnValue !== undefined && output.ReturnValue !== null ? output.ReturnValue : undefined,
   } as any;
+};
+
+const deserializeAws_json1_1ResolverDnssecConfig = (output: any, context: __SerdeContext): ResolverDnssecConfig => {
+  return {
+    Id: output.Id !== undefined && output.Id !== null ? output.Id : undefined,
+    OwnerId: output.OwnerId !== undefined && output.OwnerId !== null ? output.OwnerId : undefined,
+    ResourceId: output.ResourceId !== undefined && output.ResourceId !== null ? output.ResourceId : undefined,
+    ValidationStatus:
+      output.ValidationStatus !== undefined && output.ValidationStatus !== null ? output.ValidationStatus : undefined,
+  } as any;
+};
+
+const deserializeAws_json1_1ResolverDnssecConfigList = (
+  output: any,
+  context: __SerdeContext
+): ResolverDnssecConfig[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return deserializeAws_json1_1ResolverDnssecConfig(entry, context);
+    });
 };
 
 const deserializeAws_json1_1ResolverEndpoint = (output: any, context: __SerdeContext): ResolverEndpoint => {
@@ -4967,6 +5387,18 @@ const deserializeAws_json1_1UnknownResourceException = (
 
 const deserializeAws_json1_1UntagResourceResponse = (output: any, context: __SerdeContext): UntagResourceResponse => {
   return {} as any;
+};
+
+const deserializeAws_json1_1UpdateResolverDnssecConfigResponse = (
+  output: any,
+  context: __SerdeContext
+): UpdateResolverDnssecConfigResponse => {
+  return {
+    ResolverDNSSECConfig:
+      output.ResolverDNSSECConfig !== undefined && output.ResolverDNSSECConfig !== null
+        ? deserializeAws_json1_1ResolverDnssecConfig(output.ResolverDNSSECConfig, context)
+        : undefined,
+  } as any;
 };
 
 const deserializeAws_json1_1UpdateResolverEndpointResponse = (

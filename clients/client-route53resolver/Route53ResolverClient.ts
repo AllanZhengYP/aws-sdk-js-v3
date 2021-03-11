@@ -41,6 +41,10 @@ import {
   DisassociateResolverRuleCommandOutput,
 } from "./commands/DisassociateResolverRuleCommand";
 import {
+  GetResolverDnssecConfigCommandInput,
+  GetResolverDnssecConfigCommandOutput,
+} from "./commands/GetResolverDnssecConfigCommand";
+import {
   GetResolverEndpointCommandInput,
   GetResolverEndpointCommandOutput,
 } from "./commands/GetResolverEndpointCommand";
@@ -65,6 +69,10 @@ import {
   GetResolverRulePolicyCommandInput,
   GetResolverRulePolicyCommandOutput,
 } from "./commands/GetResolverRulePolicyCommand";
+import {
+  ListResolverDnssecConfigsCommandInput,
+  ListResolverDnssecConfigsCommandOutput,
+} from "./commands/ListResolverDnssecConfigsCommand";
 import {
   ListResolverEndpointIpAddressesCommandInput,
   ListResolverEndpointIpAddressesCommandOutput,
@@ -100,6 +108,10 @@ import {
 } from "./commands/PutResolverRulePolicyCommand";
 import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import {
+  UpdateResolverDnssecConfigCommandInput,
+  UpdateResolverDnssecConfigCommandOutput,
+} from "./commands/UpdateResolverDnssecConfigCommand";
 import {
   UpdateResolverEndpointCommandInput,
   UpdateResolverEndpointCommandOutput,
@@ -169,6 +181,7 @@ export type ServiceInputTypes =
   | DisassociateResolverEndpointIpAddressCommandInput
   | DisassociateResolverQueryLogConfigCommandInput
   | DisassociateResolverRuleCommandInput
+  | GetResolverDnssecConfigCommandInput
   | GetResolverEndpointCommandInput
   | GetResolverQueryLogConfigAssociationCommandInput
   | GetResolverQueryLogConfigCommandInput
@@ -176,6 +189,7 @@ export type ServiceInputTypes =
   | GetResolverRuleAssociationCommandInput
   | GetResolverRuleCommandInput
   | GetResolverRulePolicyCommandInput
+  | ListResolverDnssecConfigsCommandInput
   | ListResolverEndpointIpAddressesCommandInput
   | ListResolverEndpointsCommandInput
   | ListResolverQueryLogConfigAssociationsCommandInput
@@ -187,6 +201,7 @@ export type ServiceInputTypes =
   | PutResolverRulePolicyCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateResolverDnssecConfigCommandInput
   | UpdateResolverEndpointCommandInput
   | UpdateResolverRuleCommandInput;
 
@@ -203,6 +218,7 @@ export type ServiceOutputTypes =
   | DisassociateResolverEndpointIpAddressCommandOutput
   | DisassociateResolverQueryLogConfigCommandOutput
   | DisassociateResolverRuleCommandOutput
+  | GetResolverDnssecConfigCommandOutput
   | GetResolverEndpointCommandOutput
   | GetResolverQueryLogConfigAssociationCommandOutput
   | GetResolverQueryLogConfigCommandOutput
@@ -210,6 +226,7 @@ export type ServiceOutputTypes =
   | GetResolverRuleAssociationCommandOutput
   | GetResolverRuleCommandOutput
   | GetResolverRulePolicyCommandOutput
+  | ListResolverDnssecConfigsCommandOutput
   | ListResolverEndpointIpAddressesCommandOutput
   | ListResolverEndpointsCommandOutput
   | ListResolverQueryLogConfigAssociationsCommandOutput
@@ -221,6 +238,7 @@ export type ServiceOutputTypes =
   | PutResolverRulePolicyCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateResolverDnssecConfigCommandOutput
   | UpdateResolverEndpointCommandOutput
   | UpdateResolverRuleCommandOutput;
 

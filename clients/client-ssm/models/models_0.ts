@@ -565,9 +565,56 @@ export enum AssociationSyncCompliance {
 }
 
 /**
+ * <p>The combination of AWS Regions and accounts targeted by the current Automation
+ *    execution.</p>
+ */
+export interface TargetLocation {
+  /**
+   * <p>The AWS accounts targeted by the current Automation execution.</p>
+   */
+  Accounts?: string[];
+
+  /**
+   * <p>The AWS Regions targeted by the current Automation execution.</p>
+   */
+  Regions?: string[];
+
+  /**
+   * <p>The maximum number of AWS accounts and AWS regions allowed to run the Automation
+   *    concurrently.</p>
+   */
+  TargetLocationMaxConcurrency?: string;
+
+  /**
+   * <p>The maximum number of errors allowed before the system stops queueing additional Automation
+   *    executions for the currently running Automation.</p>
+   */
+  TargetLocationMaxErrors?: string;
+
+  /**
+   * <p>The Automation execution role used by the currently running Automation. If not specified,
+   *    the default value is <code>AWS-SystemsManager-AutomationExecutionRole</code>.</p>
+   */
+  ExecutionRoleName?: string;
+}
+
+export namespace TargetLocation {
+  export const filterSensitiveLog = (obj: TargetLocation): any => ({
+    ...obj,
+  });
+}
+
+/**
  * <p>An array of search criteria that targets instances using a Key,Value combination that you
- *    specify.
- *    </p>
+ *    specify.</p>
+ *          <note>
+ *             <p> One or more targets must be specified for maintenance window Run Command-type tasks.
+ *     Depending on the task, targets are optional for other maintenance window task types (Automation,
+ *     AWS Lambda, and AWS Step Functions). For more information about running tasks that do not
+ *     specify targets, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html">Registering
+ *      maintenance window tasks without targets</a> in the
+ *     <i>AWS Systems Manager User Guide</i>.</p>
+ *          </note>
  *          <p>Supported formats include the following.</p>
  *          <ul>
  *             <li>
@@ -812,6 +859,13 @@ export interface CreateAssociationRequest {
    *    expressions.</p>
    */
   ApplyOnlyAtCronInterval?: boolean;
+
+  /**
+   * <p>A location is a combination of AWS Regions and AWS accounts where you want to run the
+   *    association. Use this action to create an association in multiple Regions and multiple
+   *    accounts.</p>
+   */
+  TargetLocations?: TargetLocation[];
 }
 
 export namespace CreateAssociationRequest {
@@ -1026,6 +1080,12 @@ export interface AssociationDescription {
    *    expressions.</p>
    */
   ApplyOnlyAtCronInterval?: boolean;
+
+  /**
+   * <p>The combination of AWS Regions and AWS accounts where you want to run the
+   *    association.</p>
+   */
+  TargetLocations?: TargetLocation[];
 }
 
 export namespace AssociationDescription {
@@ -1277,6 +1337,11 @@ export interface CreateAssociationBatchRequestEntry {
    *    expressions.</p>
    */
   ApplyOnlyAtCronInterval?: boolean;
+
+  /**
+   * <p>Use this action to create an association in multiple Regions and multiple accounts.</p>
+   */
+  TargetLocations?: TargetLocation[];
 }
 
 export namespace CreateAssociationBatchRequestEntry {
@@ -1422,6 +1487,7 @@ export enum DocumentType {
   ApplicationConfigurationSchema = "ApplicationConfigurationSchema",
   Automation = "Automation",
   ChangeCalendar = "ChangeCalendar",
+  ChangeTemplate = "Automation.ChangeTemplate",
   Command = "Command",
   DeploymentStrategy = "DeploymentStrategy",
   Package = "Package",
@@ -1642,6 +1708,39 @@ export enum PlatformType {
   WINDOWS = "Windows",
 }
 
+export enum ReviewStatus {
+  APPROVED = "APPROVED",
+  NOT_REVIEWED = "NOT_REVIEWED",
+  PENDING = "PENDING",
+  REJECTED = "REJECTED",
+}
+
+/**
+ * <p>Information about the result of a document review request.</p>
+ */
+export interface ReviewInformation {
+  /**
+   * <p>The time that the reviewer took action on the document review request.</p>
+   */
+  ReviewedTime?: Date;
+
+  /**
+   * <p>The current status of the document review request.</p>
+   */
+  Status?: ReviewStatus | string;
+
+  /**
+   * <p>The reviewer assigned to take action on the document review request.</p>
+   */
+  Reviewer?: string;
+}
+
+export namespace ReviewInformation {
+  export const filterSensitiveLog = (obj: ReviewInformation): any => ({
+    ...obj,
+  });
+}
+
 export enum DocumentStatus {
   Active = "Active",
   Creating = "Creating",
@@ -1776,6 +1875,31 @@ export interface DocumentDescription {
    *     <code>ApplicationConfigurationSchema</code> document.</p>
    */
   Requires?: DocumentRequires[];
+
+  /**
+   * <p>The user in your organization who created the document.</p>
+   */
+  Author?: string;
+
+  /**
+   * <p>Details about the review of a document.</p>
+   */
+  ReviewInformation?: ReviewInformation[];
+
+  /**
+   * <p>The version of the document currently approved for use in the organization.</p>
+   */
+  ApprovedVersion?: string;
+
+  /**
+   * <p>The version of the document that is currently under review.</p>
+   */
+  PendingReviewVersion?: string;
+
+  /**
+   * <p>The current status of the review.</p>
+   */
+  ReviewStatus?: ReviewStatus | string;
 }
 
 export namespace DocumentDescription {
@@ -1908,7 +2032,7 @@ export interface CreateMaintenanceWindowRequest {
 
   /**
    * <p>The time zone that the scheduled maintenance window executions are based on, in Internet
-   *    Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or
+   *    Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
    *    "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time
    *     Zone Database</a> on the IANA website.</p>
    */
@@ -1920,7 +2044,7 @@ export interface CreateMaintenanceWindowRequest {
    *          <p>For example, the following cron expression schedules a maintenance window to run on the
    *    third Tuesday of every month at 11:30 PM.</p>
    *          <p>
-   *             <code>cron(0 30 23 ? * TUE#3 *)</code>
+   *             <code>cron(30 23 ? * TUE#3 *)</code>
    *          </p>
    *          <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days
    *    later.</p>
@@ -2106,6 +2230,12 @@ export interface CreateOpsItemRequest {
   Description: string | undefined;
 
   /**
+   * <p>The type of OpsItem to create. Currently, the only valid values are
+   *     <code>/aws/changerequest</code> and <code>/aws/issue</code>.</p>
+   */
+  OpsItemType?: string;
+
+  /**
    * <p>Operational data is custom data that provides useful reference details about the OpsItem.
    *    For example, you can specify log files, error strings, license keys, troubleshooting tips, or
    *    other relevant data. You enter operational data as key-value pairs. The key has a maximum length
@@ -2183,6 +2313,30 @@ export interface CreateOpsItemRequest {
    * <p>Specify a severity to assign to an OpsItem.</p>
    */
   Severity?: string;
+
+  /**
+   * <p>The time a runbook workflow started. Currently reported only for the OpsItem type
+   *     <code>/aws/changerequest</code>.</p>
+   */
+  ActualStartTime?: Date;
+
+  /**
+   * <p>The time a runbook workflow ended. Currently reported only for the OpsItem type
+   *     <code>/aws/changerequest</code>.</p>
+   */
+  ActualEndTime?: Date;
+
+  /**
+   * <p>The time specified in a change request for a runbook workflow to start. Currently supported
+   *    only for the OpsItem type <code>/aws/changerequest</code>.</p>
+   */
+  PlannedStartTime?: Date;
+
+  /**
+   * <p>The time specified in a change request for a runbook workflow to end. Currently supported
+   *    only for the OpsItem type <code>/aws/changerequest</code>.</p>
+   */
+  PlannedEndTime?: Date;
 }
 
 export namespace CreateOpsItemRequest {
@@ -2257,11 +2411,11 @@ export namespace OpsItemLimitExceededException {
 }
 
 /**
- * <p>Metadata to assign to an AppManager application.</p>
+ * <p>Metadata to assign to an Application Manager application.</p>
  */
 export interface MetadataValue {
   /**
-   * <p>Metadata value to assign to an AppManager application.</p>
+   * <p>Metadata value to assign to an Application Manager application.</p>
    */
   Value?: string;
 }
@@ -2274,12 +2428,12 @@ export namespace MetadataValue {
 
 export interface CreateOpsMetadataRequest {
   /**
-   * <p>A resource ID for a new AppManager application.</p>
+   * <p>A resource ID for a new Application Manager application.</p>
    */
   ResourceId: string | undefined;
 
   /**
-   * <p>Metadata for a new AppManager application. </p>
+   * <p>Metadata for a new Application Manager application. </p>
    */
   Metadata?: { [key: string]: MetadataValue };
 }
@@ -2334,7 +2488,7 @@ export namespace OpsMetadataInvalidArgumentException {
 }
 
 /**
- * <p>Your account reached the maximum number of OpsMetadata objects allowed by AppManager. The
+ * <p>Your account reached the maximum number of OpsMetadata objects allowed by Application Manager. The
  *    maximum is 200 OpsMetadata objects. Delete one or more OpsMetadata object and try again.</p>
  */
 export interface OpsMetadataLimitExceededException extends __SmithyException, $MetadataBearer {
@@ -2464,13 +2618,14 @@ export interface PatchRule {
   /**
    * <p>The number of days after the release date of each patch matched by the rule that the patch
    *    is marked as approved in the patch baseline. For example, a value of <code>7</code> means that
-   *    patches are approved seven days after they are released. Not supported on Ubuntu Server.</p>
+   *    patches are approved seven days after they are released. Not supported on Debian Server or Ubuntu
+   *    Server.</p>
    */
   ApproveAfterDays?: number;
 
   /**
    * <p>The cutoff date for auto approval of released patches. Any patches released on or before
-   *    this date are installed automatically. Not supported on Ubuntu Server.</p>
+   *    this date are installed automatically. Not supported on Debian Server or Ubuntu Server.</p>
    *          <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,
    *    <code>2020-12-31</code>.</p>
    */
@@ -2547,14 +2702,18 @@ export interface PatchSource {
    *             <code>[main]</code>
    *          </p>
    *          <p>
-   *             <code>cachedir=/var/cache/yum/$basesearch$releasever</code>
+   *             <code>name=MyCustomRepository</code>
    *          </p>
    *          <p>
-   *             <code>keepcache=0</code>
+   *             <code>baseurl=https://my-custom-repository</code>
    *          </p>
    *          <p>
-   *             <code>debuglevel=2</code>
+   *             <code>enabled=1</code>
    *          </p>
+   *          <note>
+   *             <p>For information about other options available for your yum repository configuration, see
+   *      <a href="https://man7.org/linux/man-pages/man5/dnf.conf.5.html">dnf.conf(5)</a>.</p>
+   *          </note>
    */
   Configuration: string | undefined;
 }
@@ -2597,8 +2756,8 @@ export interface CreatePatchBaselineRequest {
   ApprovedPatches?: string[];
 
   /**
-   * <p>Defines the compliance level for approved patches. This means that if an approved patch is
-   *    reported as missing, this is the severity of the compliance violation. The default value is
+   * <p>Defines the compliance level for approved patches. When an approved patch is reported as
+   *   missing, this value describes the severity of the compliance violation.  The default value is
    *    UNSPECIFIED.</p>
    */
   ApprovedPatchesComplianceLevel?: PatchComplianceLevel | string;
@@ -4128,11 +4287,13 @@ export namespace DescribeAssociationExecutionTargetsResult {
 }
 
 export enum AutomationExecutionFilterKey {
+  AUTOMATION_SUBTYPE = "AutomationSubtype",
   AUTOMATION_TYPE = "AutomationType",
   CURRENT_ACTION = "CurrentAction",
   DOCUMENT_NAME_PREFIX = "DocumentNamePrefix",
   EXECUTION_ID = "ExecutionId",
   EXECUTION_STATUS = "ExecutionStatus",
+  OPS_ITEM_ID = "OpsItemId",
   PARENT_EXECUTION_ID = "ParentExecutionId",
   START_TIME_AFTER = "StartTimeAfter",
   START_TIME_BEFORE = "StartTimeBefore",
@@ -4146,9 +4307,7 @@ export enum AutomationExecutionFilterKey {
  */
 export interface AutomationExecutionFilter {
   /**
-   * <p>One or more keys to limit the results. Valid filter keys include the following:
-   *    DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction,
-   *    StartTimeBefore, StartTimeAfter, TargetResourceGroup.</p>
+   * <p>One or more keys to limit the results.</p>
    */
   Key: AutomationExecutionFilterKey | string | undefined;
 
@@ -4190,14 +4349,28 @@ export namespace DescribeAutomationExecutionsRequest {
 }
 
 export enum AutomationExecutionStatus {
+  APPROVED = "Approved",
   CANCELLED = "Cancelled",
   CANCELLING = "Cancelling",
+  CHANGE_CALENDAR_OVERRIDE_APPROVED = "ChangeCalendarOverrideApproved",
+  CHANGE_CALENDAR_OVERRIDE_REJECTED = "ChangeCalendarOverrideRejected",
+  COMPLETED_WITH_FAILURE = "CompletedWithFailure",
+  COMPLETED_WITH_SUCCESS = "CompletedWithSuccess",
   FAILED = "Failed",
   INPROGRESS = "InProgress",
   PENDING = "Pending",
+  PENDING_APPROVAL = "PendingApproval",
+  PENDING_CHANGE_CALENDAR_OVERRIDE = "PendingChangeCalendarOverride",
+  REJECTED = "Rejected",
+  RUNBOOK_INPROGRESS = "RunbookInProgress",
+  SCHEDULED = "Scheduled",
   SUCCESS = "Success",
   TIMEDOUT = "TimedOut",
   WAITING = "Waiting",
+}
+
+export enum AutomationSubtype {
+  ChangeRequest = "ChangeRequest",
 }
 
 export enum AutomationType {
@@ -4228,6 +4401,71 @@ export interface ResolvedTargets {
 
 export namespace ResolvedTargets {
   export const filterSensitiveLog = (obj: ResolvedTargets): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>Information about an Automation runbook (Automation document) used in a runbook workflow in
+ *    Change Manager.</p>
+ *          <note>
+ *             <p>The Automation runbooks specified for the runbook workflow can't run until all required
+ *     approvals for the change request have been received.</p>
+ *          </note>
+ */
+export interface Runbook {
+  /**
+   * <p>The name of the Automation runbook (Automation document) used in a runbook workflow.</p>
+   */
+  DocumentName: string | undefined;
+
+  /**
+   * <p>The version of the Automation runbook (Automation document) used in a
+   *    runbook workflow.</p>
+   */
+  DocumentVersion?: string;
+
+  /**
+   * <p>The key-value map of execution parameters, which were supplied when calling
+   *     <code>StartChangeRequestExecution</code>.</p>
+   */
+  Parameters?: { [key: string]: string[] };
+
+  /**
+   * <p>The name of the parameter used as the target resource for the rate-controlled
+   *    runbook workflow. Required if you specify <code>Targets</code>. </p>
+   */
+  TargetParameterName?: string;
+
+  /**
+   * <p>A key-value mapping to target resources that the Runbook operation performs tasks on.
+   *    Required if you specify <code>TargetParameterName</code>.</p>
+   */
+  Targets?: Target[];
+
+  /**
+   * <p>The <code>MaxConcurrency</code> value specified by the user when the operation started,
+   *    indicating the maximum number of resources that the runbook operation can run on at the same
+   *    time.</p>
+   */
+  MaxConcurrency?: string;
+
+  /**
+   * <p>The <code>MaxErrors</code> value specified by the user when the execution started,
+   *    indicating the maximum number of errors that can occur during the operation before the updates
+   *    are stopped or rolled back.</p>
+   */
+  MaxErrors?: string;
+
+  /**
+   * <p>Information about the AWS Regions and accounts targeted by the current Runbook
+   *    operation.</p>
+   */
+  TargetLocations?: TargetLocation[];
+}
+
+export namespace Runbook {
+  export const filterSensitiveLog = (obj: Runbook): any => ({
     ...obj,
   });
 }
@@ -4349,6 +4587,42 @@ export interface AutomationExecutionMetadata {
    *     <i>AWS Systems Manager User Guide</i>. </p>
    */
   AutomationType?: AutomationType | string;
+
+  /**
+   * <p>The subtype of the Automation operation. Currently, the only supported value is
+   *     <code>ChangeRequest</code>.</p>
+   */
+  AutomationSubtype?: AutomationSubtype | string;
+
+  /**
+   * <p>The date and time the Automation operation is scheduled to start.</p>
+   */
+  ScheduledTime?: Date;
+
+  /**
+   * <p>Information about the Automation runbooks (Automation documents) that are run during a
+   *    runbook workflow in Change Manager.</p>
+   *          <note>
+   *             <p>The Automation runbooks specified for the runbook workflow can't run until all required
+   *     approvals for the change request have been received.</p>
+   *          </note>
+   */
+  Runbooks?: Runbook[];
+
+  /**
+   * <p>The ID of an OpsItem that is created to represent a Change Manager change request.</p>
+   */
+  OpsItemId?: string;
+
+  /**
+   * <p>The ID of a State Manager association used in the Automation operation.</p>
+   */
+  AssociationId?: string;
+
+  /**
+   * <p>The name of the Change Manager change request.</p>
+   */
+  ChangeRequestName?: string;
 }
 
 export namespace AutomationExecutionMetadata {
@@ -4513,45 +4787,6 @@ export interface FailureDetails {
 
 export namespace FailureDetails {
   export const filterSensitiveLog = (obj: FailureDetails): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The combination of AWS Regions and accounts targeted by the current Automation
- *    execution.</p>
- */
-export interface TargetLocation {
-  /**
-   * <p>The AWS accounts targeted by the current Automation execution.</p>
-   */
-  Accounts?: string[];
-
-  /**
-   * <p>The AWS Regions targeted by the current Automation execution.</p>
-   */
-  Regions?: string[];
-
-  /**
-   * <p>The maximum number of AWS accounts and AWS regions allowed to run the Automation
-   *    concurrently </p>
-   */
-  TargetLocationMaxConcurrency?: string;
-
-  /**
-   * <p>The maximum number of errors allowed before the system stops queueing additional Automation
-   *    executions for the currently running Automation. </p>
-   */
-  TargetLocationMaxErrors?: string;
-
-  /**
-   * <p>The Automation execution role used by the currently running Automation.</p>
-   */
-  ExecutionRoleName?: string;
-}
-
-export namespace TargetLocation {
-  export const filterSensitiveLog = (obj: TargetLocation): any => ({
     ...obj,
   });
 }
@@ -4970,6 +5205,18 @@ export interface DescribeDocumentPermissionRequest {
    *    <i>Share</i>.</p>
    */
   PermissionType: DocumentPermissionType | string | undefined;
+
+  /**
+   * <p>The maximum number of items to return for this call. The call also returns a token that you
+   *    can specify in a subsequent call to get the next set of results.</p>
+   */
+  MaxResults?: number;
+
+  /**
+   * <p>The token for the next set of items to return. (You received this token from a previous
+   *    call.)</p>
+   */
+  NextToken?: string;
 }
 
 export namespace DescribeDocumentPermissionRequest {
@@ -4990,6 +5237,12 @@ export interface DescribeDocumentPermissionResponse {
    *    account.</p>
    */
   AccountSharingInfoList?: AccountSharingInfo[];
+
+  /**
+   * <p>The token for the next set of items to return. Use this token to get the next set of
+   *    results.</p>
+   */
+  NextToken?: string;
 }
 
 export namespace DescribeDocumentPermissionResponse {
@@ -5365,6 +5618,13 @@ export interface InstanceInformationStringFilter {
    * <p>The filter key name to describe your instances. For example:</p>
    *          <p>"InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag
    *    Key"</p>
+   *          <important>
+   *             <p>
+   *                <code>Tag key</code> is not a valid filter. You must specify either <code>tag-key</code> or
+   *      <code>tag:keyname</code> and a string. Here are some valid examples: tag-key, tag:123, tag:al!,
+   *     tag:Windows. Here are some <i>invalid</i> examples: tag-keys, Tag Key, tag:,
+   *     tagKey, abc:keyname.</p>
+   *          </important>
    */
   Key: string | undefined;
 
@@ -5505,7 +5765,7 @@ export interface InstanceInformation {
   PingStatus?: PingStatus | string;
 
   /**
-   * <p>The date and time when agent last pinged Systems Manager service. </p>
+   * <p>The date and time when the agent last pinged the Systems Manager service. </p>
    */
   LastPingDateTime?: Date;
 
@@ -7149,8 +7409,16 @@ export namespace DescribeMaintenanceWindowTasksResult {
 }
 
 export enum OpsItemFilterKey {
+  ACTUAL_END_TIME = "ActualEndTime",
+  ACTUAL_START_TIME = "ActualStartTime",
   AUTOMATION_ID = "AutomationId",
   CATEGORY = "Category",
+  CHANGE_REQUEST_APPROVER_ARN = "ChangeRequestByApproverArn",
+  CHANGE_REQUEST_APPROVER_NAME = "ChangeRequestByApproverName",
+  CHANGE_REQUEST_REQUESTER_ARN = "ChangeRequestByRequesterArn",
+  CHANGE_REQUEST_REQUESTER_NAME = "ChangeRequestByRequesterName",
+  CHANGE_REQUEST_TARGETS_RESOURCE_GROUP = "ChangeRequestByTargetsResourceGroup",
+  CHANGE_REQUEST_TEMPLATE = "ChangeRequestByTemplate",
   CREATED_BY = "CreatedBy",
   CREATED_TIME = "CreatedTime",
   LAST_MODIFIED_TIME = "LastModifiedTime",
@@ -7158,6 +7426,9 @@ export enum OpsItemFilterKey {
   OPERATIONAL_DATA_KEY = "OperationalDataKey",
   OPERATIONAL_DATA_VALUE = "OperationalDataValue",
   OPSITEM_ID = "OpsItemId",
+  OPSITEM_TYPE = "OpsItemType",
+  PLANNED_END_TIME = "PlannedEndTime",
+  PLANNED_START_TIME = "PlannedStartTime",
   PRIORITY = "Priority",
   RESOURCE_ID = "ResourceId",
   SEVERITY = "Severity",
@@ -7280,9 +7551,24 @@ export namespace DescribeOpsItemsRequest {
 }
 
 export enum OpsItemStatus {
+  APPROVED = "Approved",
+  CANCELLED = "Cancelled",
+  CANCELLING = "Cancelling",
+  CHANGE_CALENDAR_OVERRIDE_APPROVED = "ChangeCalendarOverrideApproved",
+  CHANGE_CALENDAR_OVERRIDE_REJECTED = "ChangeCalendarOverrideRejected",
+  COMPLETED_WITH_FAILURE = "CompletedWithFailure",
+  COMPLETED_WITH_SUCCESS = "CompletedWithSuccess",
+  FAILED = "Failed",
   IN_PROGRESS = "InProgress",
   OPEN = "Open",
+  PENDING = "Pending",
+  PENDING_APPROVAL = "PendingApproval",
+  PENDING_CHANGE_CALENDAR_OVERRIDE = "PendingChangeCalendarOverride",
+  REJECTED = "Rejected",
   RESOLVED = "Resolved",
+  RUNBOOK_IN_PROGRESS = "RunbookInProgress",
+  SCHEDULED = "Scheduled",
+  TIMED_OUT = "TimedOut",
 }
 
 /**
@@ -7350,6 +7636,36 @@ export interface OpsItemSummary {
    * <p>A list of OpsItems by severity.</p>
    */
   Severity?: string;
+
+  /**
+   * <p>The type of OpsItem. Currently, the only valid values are <code>/aws/changerequest</code>
+   *    and <code>/aws/issue</code>.</p>
+   */
+  OpsItemType?: string;
+
+  /**
+   * <p>The time a runbook workflow started. Currently reported only for the OpsItem type
+   *     <code>/aws/changerequest</code>.</p>
+   */
+  ActualStartTime?: Date;
+
+  /**
+   * <p>The time a runbook workflow ended. Currently reported only for the OpsItem type
+   *     <code>/aws/changerequest</code>.</p>
+   */
+  ActualEndTime?: Date;
+
+  /**
+   * <p>The time specified in a change request for a runbook workflow to start. Currently supported
+   *    only for the OpsItem type <code>/aws/changerequest</code>.</p>
+   */
+  PlannedStartTime?: Date;
+
+  /**
+   * <p>The time specified in a change request for a runbook workflow to end. Currently supported
+   *    only for the OpsItem type <code>/aws/changerequest</code>.</p>
+   */
+  PlannedEndTime?: Date;
 }
 
 export namespace OpsItemSummary {
@@ -7707,112 +8023,6 @@ export interface DescribePatchBaselinesResult {
 
 export namespace DescribePatchBaselinesResult {
   export const filterSensitiveLog = (obj: DescribePatchBaselinesResult): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribePatchGroupsRequest {
-  /**
-   * <p>The maximum number of patch groups to return (per page).</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>One or more filters. Use a filter to return a more specific list of results.</p>
-   *          <p>For <code>DescribePatchGroups</code>,valid filter keys include the following:</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>NAME_PREFIX</code>: The name of the patch group. Wildcards (*) are accepted.</p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>OPERATING_SYSTEM</code>: The supported operating system type to return results for.
-   *      For valid operating system values, see <a>GetDefaultPatchBaselineRequest$OperatingSystem</a> in <a>CreatePatchBaseline</a>.</p>
-   *                <p>Examples:</p>
-   *                <ul>
-   *                   <li>
-   *                      <p>
-   *                         <code>--filters Key=NAME_PREFIX,Values=MyPatchGroup*</code>
-   *                      </p>
-   *                   </li>
-   *                   <li>
-   *                      <p>
-   *                         <code>--filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2</code>
-   *                      </p>
-   *                   </li>
-   *                </ul>
-   *             </li>
-   *          </ul>
-   */
-  Filters?: PatchOrchestratorFilter[];
-
-  /**
-   * <p>The token for the next set of items to return. (You received this token from a previous
-   *    call.)</p>
-   */
-  NextToken?: string;
-}
-
-export namespace DescribePatchGroupsRequest {
-  export const filterSensitiveLog = (obj: DescribePatchGroupsRequest): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>The mapping between a patch group and the patch baseline the patch group is registered
- *    with.</p>
- */
-export interface PatchGroupPatchBaselineMapping {
-  /**
-   * <p>The name of the patch group registered with the patch baseline.</p>
-   */
-  PatchGroup?: string;
-
-  /**
-   * <p>The patch baseline the patch group is registered with.</p>
-   */
-  BaselineIdentity?: PatchBaselineIdentity;
-}
-
-export namespace PatchGroupPatchBaselineMapping {
-  export const filterSensitiveLog = (obj: PatchGroupPatchBaselineMapping): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribePatchGroupsResult {
-  /**
-   * <p>Each entry in the array contains:</p>
-   *          <p>PatchGroup: string (between 1 and 256 characters, Regex:
-   *    ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)</p>
-   *          <p>PatchBaselineIdentity: A PatchBaselineIdentity element. </p>
-   */
-  Mappings?: PatchGroupPatchBaselineMapping[];
-
-  /**
-   * <p>The token to use when requesting the next set of items. If there are no additional items to
-   *    return, the string is empty.</p>
-   */
-  NextToken?: string;
-}
-
-export namespace DescribePatchGroupsResult {
-  export const filterSensitiveLog = (obj: DescribePatchGroupsResult): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribePatchGroupStateRequest {
-  /**
-   * <p>The name of the patch group whose patch snapshot should be retrieved.</p>
-   */
-  PatchGroup: string | undefined;
-}
-
-export namespace DescribePatchGroupStateRequest {
-  export const filterSensitiveLog = (obj: DescribePatchGroupStateRequest): any => ({
     ...obj,
   });
 }

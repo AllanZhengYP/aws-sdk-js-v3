@@ -679,10 +679,6 @@ import {
   CreateModelExplainabilityJobDefinitionResponse,
   CreateModelInput,
   CreateModelOutput,
-  CreateModelPackageGroupInput,
-  CreateModelPackageGroupOutput,
-  CreateModelPackageInput,
-  CreateModelPackageOutput,
   CustomImage,
   DataCaptureConfig,
   DataCatalogConfig,
@@ -711,6 +707,7 @@ import {
   HyperParameterTuningJobObjective,
   HyperParameterTuningJobWarmStartConfig,
   ImageConfig,
+  InferenceExecutionConfig,
   InferenceSpecification,
   InputConfig,
   IntegerParameterRange,
@@ -741,7 +738,6 @@ import {
   ModelMetrics,
   ModelPackageContainerDefinition,
   ModelPackageValidationProfile,
-  ModelPackageValidationSpecification,
   ModelQuality,
   MonitoringClusterConfig,
   MonitoringConstraintsResource,
@@ -753,6 +749,7 @@ import {
   MonitoringS3Output,
   MonitoringStatisticsResource,
   MonitoringStoppingCondition,
+  MultiModelConfig,
   OfflineStoreConfig,
   OnlineStoreConfig,
   OnlineStoreSecurityConfig,
@@ -762,6 +759,7 @@ import {
   ParameterRanges,
   ParentHyperParameterTuningJob,
   ProductionVariant,
+  ProductionVariantCoreDumpConfig,
   ProductionVariantInstanceType,
   PublicWorkforceTaskPrice,
   ResourceConfig,
@@ -801,6 +799,10 @@ import {
   VpcConfig,
 } from "../models/models_0";
 import {
+  CreateModelPackageGroupInput,
+  CreateModelPackageGroupOutput,
+  CreateModelPackageInput,
+  CreateModelPackageOutput,
   CreateModelQualityJobDefinitionRequest,
   CreateModelQualityJobDefinitionResponse,
   CreateMonitoringScheduleRequest,
@@ -989,12 +991,7 @@ import {
   DesiredWeightAndCapacity,
   Device,
   DeviceFleetSummary,
-  DeviceStats,
-  DeviceSummary,
-  DisableSagemakerServicecatalogPortfolioInput,
-  DisableSagemakerServicecatalogPortfolioOutput,
   EdgeModel,
-  EdgeModelSummary,
   ExperimentConfig,
   ExperimentSource,
   FinalHyperParameterTuningJobObjectiveMetric,
@@ -1008,6 +1005,7 @@ import {
   ModelDigests,
   ModelPackageStatusDetails,
   ModelPackageStatusItem,
+  ModelPackageValidationSpecification,
   ModelQualityAppSpecification,
   ModelQualityBaselineConfig,
   ModelQualityJobInput,
@@ -1062,10 +1060,15 @@ import {
   Workteam,
 } from "../models/models_1";
 import {
+  DeviceStats,
+  DeviceSummary,
+  DisableSagemakerServicecatalogPortfolioInput,
+  DisableSagemakerServicecatalogPortfolioOutput,
   DisassociateTrialComponentRequest,
   DisassociateTrialComponentResponse,
   DomainDetails,
   EdgeModelStat,
+  EdgeModelSummary,
   EdgePackagingJobSummary,
   EnableSagemakerServicecatalogPortfolioInput,
   EnableSagemakerServicecatalogPortfolioOutput,
@@ -1307,15 +1310,18 @@ import {
   UpdateTrialRequest,
   UpdateTrialResponse,
   UpdateUserProfileRequest,
+  UserProfileDetails,
+  VariantProperty,
+} from "../models/models_2";
+import {
+  SearchExpression,
+  SearchRequest,
   UpdateUserProfileResponse,
   UpdateWorkforceRequest,
   UpdateWorkforceResponse,
   UpdateWorkteamRequest,
   UpdateWorkteamResponse,
-  UserProfileDetails,
-  VariantProperty,
-} from "../models/models_2";
-import { SearchExpression, SearchRequest } from "../models/models_3";
+} from "../models/models_3";
 import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
 import { LazyJsonString as __LazyJsonString, SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
 import {
@@ -17158,6 +17164,10 @@ const serializeAws_json1_1ContainerDefinition = (input: ContainerDefinition, con
     ...(input.ModelDataUrl !== undefined && input.ModelDataUrl !== null && { ModelDataUrl: input.ModelDataUrl }),
     ...(input.ModelPackageName !== undefined &&
       input.ModelPackageName !== null && { ModelPackageName: input.ModelPackageName }),
+    ...(input.MultiModelConfig !== undefined &&
+      input.MultiModelConfig !== null && {
+        MultiModelConfig: serializeAws_json1_1MultiModelConfig(input.MultiModelConfig, context),
+      }),
   };
 };
 
@@ -17841,6 +17851,10 @@ const serializeAws_json1_1CreateModelInput = (input: CreateModelInput, context: 
       input.EnableNetworkIsolation !== null && { EnableNetworkIsolation: input.EnableNetworkIsolation }),
     ...(input.ExecutionRoleArn !== undefined &&
       input.ExecutionRoleArn !== null && { ExecutionRoleArn: input.ExecutionRoleArn }),
+    ...(input.InferenceExecutionConfig !== undefined &&
+      input.InferenceExecutionConfig !== null && {
+        InferenceExecutionConfig: serializeAws_json1_1InferenceExecutionConfig(input.InferenceExecutionConfig, context),
+      }),
     ...(input.ModelName !== undefined && input.ModelName !== null && { ModelName: input.ModelName }),
     ...(input.PrimaryContainer !== undefined &&
       input.PrimaryContainer !== null && {
@@ -18052,6 +18066,8 @@ const serializeAws_json1_1CreatePresignedDomainUrlRequest = (
 ): any => {
   return {
     ...(input.DomainId !== undefined && input.DomainId !== null && { DomainId: input.DomainId }),
+    ...(input.ExpiresInSeconds !== undefined &&
+      input.ExpiresInSeconds !== null && { ExpiresInSeconds: input.ExpiresInSeconds }),
     ...(input.SessionExpirationDurationInSeconds !== undefined &&
       input.SessionExpirationDurationInSeconds !== null && {
         SessionExpirationDurationInSeconds: input.SessionExpirationDurationInSeconds,
@@ -19934,6 +19950,15 @@ const serializeAws_json1_1ImageDeletePropertyList = (input: string[], context: _
     });
 };
 
+const serializeAws_json1_1InferenceExecutionConfig = (
+  input: InferenceExecutionConfig,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.Mode !== undefined && input.Mode !== null && { Mode: input.Mode }),
+  };
+};
+
 const serializeAws_json1_1InferenceSpecification = (input: InferenceSpecification, context: __SerdeContext): any => {
   return {
     ...(input.Containers !== undefined &&
@@ -19970,6 +19995,8 @@ const serializeAws_json1_1InputConfig = (input: InputConfig, context: __SerdeCon
     ...(input.DataInputConfig !== undefined &&
       input.DataInputConfig !== null && { DataInputConfig: input.DataInputConfig }),
     ...(input.Framework !== undefined && input.Framework !== null && { Framework: input.Framework }),
+    ...(input.FrameworkVersion !== undefined &&
+      input.FrameworkVersion !== null && { FrameworkVersion: input.FrameworkVersion }),
     ...(input.S3Uri !== undefined && input.S3Uri !== null && { S3Uri: input.S3Uri }),
   };
 };
@@ -21862,6 +21889,13 @@ const serializeAws_json1_1MonitoringStoppingCondition = (
   };
 };
 
+const serializeAws_json1_1MultiModelConfig = (input: MultiModelConfig, context: __SerdeContext): any => {
+  return {
+    ...(input.ModelCacheSetting !== undefined &&
+      input.ModelCacheSetting !== null && { ModelCacheSetting: input.ModelCacheSetting }),
+  };
+};
+
 const serializeAws_json1_1NestedFilters = (input: NestedFilters, context: __SerdeContext): any => {
   return {
     ...(input.Filters !== undefined &&
@@ -22260,6 +22294,10 @@ const serializeAws_json1_1ProductionVariant = (input: ProductionVariant, context
   return {
     ...(input.AcceleratorType !== undefined &&
       input.AcceleratorType !== null && { AcceleratorType: input.AcceleratorType }),
+    ...(input.CoreDumpConfig !== undefined &&
+      input.CoreDumpConfig !== null && {
+        CoreDumpConfig: serializeAws_json1_1ProductionVariantCoreDumpConfig(input.CoreDumpConfig, context),
+      }),
     ...(input.InitialInstanceCount !== undefined &&
       input.InitialInstanceCount !== null && { InitialInstanceCount: input.InitialInstanceCount }),
     ...(input.InitialVariantWeight !== undefined &&
@@ -22267,6 +22305,17 @@ const serializeAws_json1_1ProductionVariant = (input: ProductionVariant, context
     ...(input.InstanceType !== undefined && input.InstanceType !== null && { InstanceType: input.InstanceType }),
     ...(input.ModelName !== undefined && input.ModelName !== null && { ModelName: input.ModelName }),
     ...(input.VariantName !== undefined && input.VariantName !== null && { VariantName: input.VariantName }),
+  };
+};
+
+const serializeAws_json1_1ProductionVariantCoreDumpConfig = (
+  input: ProductionVariantCoreDumpConfig,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.DestinationS3Uri !== undefined &&
+      input.DestinationS3Uri !== null && { DestinationS3Uri: input.DestinationS3Uri }),
+    ...(input.KmsKeyId !== undefined && input.KmsKeyId !== null && { KmsKeyId: input.KmsKeyId }),
   };
 };
 
@@ -24770,6 +24819,10 @@ const deserializeAws_json1_1ContainerDefinition = (output: any, context: __Serde
     ModelDataUrl: output.ModelDataUrl !== undefined && output.ModelDataUrl !== null ? output.ModelDataUrl : undefined,
     ModelPackageName:
       output.ModelPackageName !== undefined && output.ModelPackageName !== null ? output.ModelPackageName : undefined,
+    MultiModelConfig:
+      output.MultiModelConfig !== undefined && output.MultiModelConfig !== null
+        ? deserializeAws_json1_1MultiModelConfig(output.MultiModelConfig, context)
+        : undefined,
   } as any;
 };
 
@@ -26768,6 +26821,10 @@ const deserializeAws_json1_1DescribeModelOutput = (output: any, context: __Serde
         : undefined,
     ExecutionRoleArn:
       output.ExecutionRoleArn !== undefined && output.ExecutionRoleArn !== null ? output.ExecutionRoleArn : undefined,
+    InferenceExecutionConfig:
+      output.InferenceExecutionConfig !== undefined && output.InferenceExecutionConfig !== null
+        ? deserializeAws_json1_1InferenceExecutionConfig(output.InferenceExecutionConfig, context)
+        : undefined,
     ModelArn: output.ModelArn !== undefined && output.ModelArn !== null ? output.ModelArn : undefined,
     ModelName: output.ModelName !== undefined && output.ModelName !== null ? output.ModelName : undefined,
     PrimaryContainer:
@@ -29026,6 +29083,15 @@ const deserializeAws_json1_1ImageVersions = (output: any, context: __SerdeContex
     });
 };
 
+const deserializeAws_json1_1InferenceExecutionConfig = (
+  output: any,
+  context: __SerdeContext
+): InferenceExecutionConfig => {
+  return {
+    Mode: output.Mode !== undefined && output.Mode !== null ? output.Mode : undefined,
+  } as any;
+};
+
 const deserializeAws_json1_1InferenceSpecification = (output: any, context: __SerdeContext): InferenceSpecification => {
   return {
     Containers:
@@ -29057,6 +29123,8 @@ const deserializeAws_json1_1InputConfig = (output: any, context: __SerdeContext)
     DataInputConfig:
       output.DataInputConfig !== undefined && output.DataInputConfig !== null ? output.DataInputConfig : undefined,
     Framework: output.Framework !== undefined && output.Framework !== null ? output.Framework : undefined,
+    FrameworkVersion:
+      output.FrameworkVersion !== undefined && output.FrameworkVersion !== null ? output.FrameworkVersion : undefined,
     S3Uri: output.S3Uri !== undefined && output.S3Uri !== null ? output.S3Uri : undefined,
   } as any;
 };
@@ -31185,6 +31253,15 @@ const deserializeAws_json1_1MonitoringStoppingCondition = (
   } as any;
 };
 
+const deserializeAws_json1_1MultiModelConfig = (output: any, context: __SerdeContext): MultiModelConfig => {
+  return {
+    ModelCacheSetting:
+      output.ModelCacheSetting !== undefined && output.ModelCacheSetting !== null
+        ? output.ModelCacheSetting
+        : undefined,
+  } as any;
+};
+
 const deserializeAws_json1_1NetworkConfig = (output: any, context: __SerdeContext): NetworkConfig => {
   return {
     EnableInterContainerTrafficEncryption:
@@ -32083,6 +32160,10 @@ const deserializeAws_json1_1ProductionVariant = (output: any, context: __SerdeCo
   return {
     AcceleratorType:
       output.AcceleratorType !== undefined && output.AcceleratorType !== null ? output.AcceleratorType : undefined,
+    CoreDumpConfig:
+      output.CoreDumpConfig !== undefined && output.CoreDumpConfig !== null
+        ? deserializeAws_json1_1ProductionVariantCoreDumpConfig(output.CoreDumpConfig, context)
+        : undefined,
     InitialInstanceCount:
       output.InitialInstanceCount !== undefined && output.InitialInstanceCount !== null
         ? output.InitialInstanceCount
@@ -32094,6 +32175,17 @@ const deserializeAws_json1_1ProductionVariant = (output: any, context: __SerdeCo
     InstanceType: output.InstanceType !== undefined && output.InstanceType !== null ? output.InstanceType : undefined,
     ModelName: output.ModelName !== undefined && output.ModelName !== null ? output.ModelName : undefined,
     VariantName: output.VariantName !== undefined && output.VariantName !== null ? output.VariantName : undefined,
+  } as any;
+};
+
+const deserializeAws_json1_1ProductionVariantCoreDumpConfig = (
+  output: any,
+  context: __SerdeContext
+): ProductionVariantCoreDumpConfig => {
+  return {
+    DestinationS3Uri:
+      output.DestinationS3Uri !== undefined && output.DestinationS3Uri !== null ? output.DestinationS3Uri : undefined,
+    KmsKeyId: output.KmsKeyId !== undefined && output.KmsKeyId !== null ? output.KmsKeyId : undefined,
   } as any;
 };
 

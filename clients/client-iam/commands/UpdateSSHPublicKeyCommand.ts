@@ -1,5 +1,5 @@
 import { IAMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IAMClient";
-import { UpdateSSHPublicKeyRequest } from "../models/models_0";
+import { UpdateSSHPublicKeyRequest } from "../models/models_1";
 import {
   deserializeAws_queryUpdateSSHPublicKeyCommand,
   serializeAws_queryUpdateSSHPublicKeyCommand,
@@ -27,7 +27,7 @@ export type UpdateSSHPublicKeyCommandOutput = __MetadataBearer;
  *          <p>The SSH public key affected by this operation is used only for authenticating the
  *          associated IAM user to an AWS CodeCommit repository. For more information about using SSH keys to
  *          authenticate to an AWS CodeCommit repository, see <a href="https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html">Set up AWS CodeCommit for SSH
- *             Connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
+ *             connections</a> in the <i>AWS CodeCommit User Guide</i>.</p>
  */
 export class UpdateSSHPublicKeyCommand extends $Command<
   UpdateSSHPublicKeyCommandInput,

@@ -130,8 +130,8 @@ export class Batch extends BatchClient {
    *    within the environment. This is based on the compute resource specification that you define or the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">launch template</a> that you
    *    specify when you create the compute environment. You can choose either to use EC2 On-Demand Instances and EC2 Spot
    *    Instances, or to use Fargate and Fargate Spot capacity in your managed compute environment. You can optionally
-   *    set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage
-   *    of the On-Demand price.</p>
+   *    set a maximum price so that Spot Instances only launch when the Spot Instance price is less than a specified
+   *    percentage of the On-Demand price.</p>
    *          <note>
    *             <p>Multi-node parallel jobs are not supported on Spot Instances.</p>
    *          </note>
@@ -139,7 +139,7 @@ export class Batch extends BatchClient {
    *    with how you configure your compute resources. For example, you can use custom AMI. However, you need to verify that
    *    your AMI meets the Amazon ECS container instance AMI specification. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html">container instance AMIs</a> in the
    *     <i>Amazon Elastic Container Service Developer Guide</i>. After you have created your unmanaged compute environment, you can use the
-   *     <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that is associated with it. Then,
+   *     <a>DescribeComputeEnvironments</a> operation to find the Amazon ECS cluster that's associated with it. Then,
    *    manually launch your container instances into that Amazon ECS cluster. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html">Launching an Amazon ECS
    *     container instance</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
    *          <note>
@@ -266,7 +266,10 @@ export class Batch extends BatchClient {
   }
 
   /**
-   * <p>Deletes the specified job queue. You must first disable submissions for a queue with the <a>UpdateJobQueue</a> operation. All jobs in the queue are terminated when you delete a job queue.</p>
+   * <p>Deletes the specified job queue. You must first disable submissions for a queue with the <a>UpdateJobQueue</a> operation. All jobs in the queue are
+   *    eventually terminated when
+   *    you delete a job queue. The jobs are
+   *    terminated at a rate of about 16 jobs each second.</p>
    *          <p>It's not necessary to disassociate compute environments from a queue before submitting a
    *     <code>DeleteJobQueue</code> request.</p>
    */

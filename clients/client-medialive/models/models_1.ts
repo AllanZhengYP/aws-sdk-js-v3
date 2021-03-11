@@ -1,4 +1,5 @@
 import {
+  ArchiveGroupSettings,
   AudioDescription,
   BatchFailedResultModel,
   BatchSuccessfulResultModel,
@@ -10,6 +11,8 @@ import {
   ChannelSummary,
   DeviceSettingsSyncState,
   DeviceUpdateStatus,
+  FrameCaptureGroupSettings,
+  HlsGroupSettings,
   Input,
   InputAttachment,
   InputClass,
@@ -38,6 +41,9 @@ import {
   LogLevel,
   MediaConnectFlow,
   MediaConnectFlowRequest,
+  MediaPackageGroupSettings,
+  MsSmoothGroupSettings,
+  MultiplexGroupSettings,
   MultiplexOutputDestination,
   MultiplexProgramPipelineDetail,
   MultiplexProgramSummary,
@@ -46,13 +52,93 @@ import {
   Offering,
   OfferingDurationUnits,
   OfferingType,
+  Output,
   OutputDestination,
-  OutputGroup,
   ReservationResourceSpecification,
+  RtmpGroupSettings,
+  UdpGroupSettings,
+  VpcOutputSettings,
 } from "./models_0";
 import { SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
 import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
 import { Readable } from "stream";
+
+/**
+ * Output Group Settings
+ */
+export interface OutputGroupSettings {
+  /**
+   * Archive Group Settings
+   */
+  ArchiveGroupSettings?: ArchiveGroupSettings;
+
+  /**
+   * Frame Capture Group Settings
+   */
+  FrameCaptureGroupSettings?: FrameCaptureGroupSettings;
+
+  /**
+   * Hls Group Settings
+   */
+  HlsGroupSettings?: HlsGroupSettings;
+
+  /**
+   * Media Package Group Settings
+   */
+  MediaPackageGroupSettings?: MediaPackageGroupSettings;
+
+  /**
+   * Ms Smooth Group Settings
+   */
+  MsSmoothGroupSettings?: MsSmoothGroupSettings;
+
+  /**
+   * Multiplex Group Settings
+   */
+  MultiplexGroupSettings?: MultiplexGroupSettings;
+
+  /**
+   * Rtmp Group Settings
+   */
+  RtmpGroupSettings?: RtmpGroupSettings;
+
+  /**
+   * Udp Group Settings
+   */
+  UdpGroupSettings?: UdpGroupSettings;
+}
+
+export namespace OutputGroupSettings {
+  export const filterSensitiveLog = (obj: OutputGroupSettings): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * Output groups for this Live Event. Output groups contain information about where streams should be distributed.
+ */
+export interface OutputGroup {
+  /**
+   * Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed.
+   */
+  Name?: string;
+
+  /**
+   * Settings associated with the output group.
+   */
+  OutputGroupSettings: OutputGroupSettings | undefined;
+
+  /**
+   * Placeholder documentation for __listOfOutput
+   */
+  Outputs: Output[] | undefined;
+}
+
+export namespace OutputGroup {
+  export const filterSensitiveLog = (obj: OutputGroup): any => ({
+    ...obj,
+  });
+}
 
 /**
  * Runtime details of a pipeline when a channel is running.
@@ -908,7 +994,7 @@ export interface FrameCaptureSettings {
   /**
    * The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.
    */
-  CaptureInterval: number | undefined;
+  CaptureInterval?: number;
 
   /**
    * Unit for the frame capture interval.
@@ -3013,6 +3099,11 @@ export interface Channel {
    * A collection of key-value pairs.
    */
   Tags?: { [key: string]: string };
+
+  /**
+   * Settings for VPC output
+   */
+  Vpc?: VpcOutputSettings;
 }
 
 export namespace Channel {
@@ -3091,6 +3182,11 @@ export interface CreateChannelRequest {
    * A collection of key-value pairs.
    */
   Tags?: { [key: string]: string };
+
+  /**
+   * Settings for VPC output
+   */
+  Vpc?: VpcOutputSettings;
 }
 
 export namespace CreateChannelRequest {
@@ -3681,6 +3777,49 @@ export namespace CreateMultiplexProgramResponse {
 }
 
 /**
+ * A request to create a partner input
+ */
+export interface CreatePartnerInputRequest {
+  /**
+   * Unique ID of the input.
+   */
+  InputId: string | undefined;
+
+  /**
+   * Unique identifier of the request to ensure the request is handled
+   * exactly once in case of retries.
+   */
+  RequestId?: string;
+
+  /**
+   * A collection of key-value pairs.
+   */
+  Tags?: { [key: string]: string };
+}
+
+export namespace CreatePartnerInputRequest {
+  export const filterSensitiveLog = (obj: CreatePartnerInputRequest): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * Placeholder documentation for CreatePartnerInputResponse
+ */
+export interface CreatePartnerInputResponse {
+  /**
+   * Placeholder documentation for Input
+   */
+  Input?: Input;
+}
+
+export namespace CreatePartnerInputResponse {
+  export const filterSensitiveLog = (obj: CreatePartnerInputResponse): any => ({
+    ...obj,
+  });
+}
+
+/**
  * Placeholder documentation for CreateTagsRequest
  */
 export interface CreateTagsRequest {
@@ -3802,6 +3941,11 @@ export interface DeleteChannelResponse {
    * A collection of key-value pairs.
    */
   Tags?: { [key: string]: string };
+
+  /**
+   * Settings for VPC output
+   */
+  Vpc?: VpcOutputSettings;
 }
 
 export namespace DeleteChannelResponse {
@@ -4264,6 +4408,11 @@ export interface DescribeChannelResponse {
    * A collection of key-value pairs.
    */
   Tags?: { [key: string]: string };
+
+  /**
+   * Settings for VPC output
+   */
+  Vpc?: VpcOutputSettings;
 }
 
 export namespace DescribeChannelResponse {
@@ -4322,6 +4471,11 @@ export interface DescribeInputResponse {
    * Settings for the input devices.
    */
   InputDevices?: InputDeviceSettings[];
+
+  /**
+   * A list of IDs for all Inputs which are partners of this one.
+   */
+  InputPartnerIds?: string[];
 
   /**
    * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
@@ -5673,6 +5827,11 @@ export interface StartChannelResponse {
    * A collection of key-value pairs.
    */
   Tags?: { [key: string]: string };
+
+  /**
+   * Settings for VPC output
+   */
+  Vpc?: VpcOutputSettings;
 }
 
 export namespace StartChannelResponse {
@@ -5859,6 +6018,11 @@ export interface StopChannelResponse {
    * A collection of key-value pairs.
    */
   Tags?: { [key: string]: string };
+
+  /**
+   * Settings for VPC output
+   */
+  Vpc?: VpcOutputSettings;
 }
 
 export namespace StopChannelResponse {

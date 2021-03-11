@@ -119,7 +119,7 @@ export interface GetClipOutput {
   /**
    * <p>Traditional MP4 file that contains the media clip from the specified video stream. The
    *             output will contain the first 100 MB or the first 200 fragments from the specified start
-   *             timestamp. For more information, see <a href="Kinesis Video Streams Limits">Kinesis
+   *             timestamp. For more information, see <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html">Kinesis
    *                 Video Streams Limits</a>. </p>
    */
   Payload?: Readable | ReadableStream | Blob;
@@ -228,12 +228,12 @@ export namespace NotAuthorizedException {
 
 /**
  * <p>
- *             <code>GetMedia</code> throws this error when Kinesis Video Streams can't find the
- *             stream that you specified.</p>
+ *             <code>GetMedia</code> throws this error when Kinesis Video Streams can't find the stream
+ *             that you specified.</p>
  *         <p>
- *             <code>GetHLSStreamingSessionURL</code> and <code>GetDASHStreamingSessionURL</code>
- *             throw this error if a session with a <code>PlaybackMode</code> of <code>ON_DEMAND</code>
- *             or <code>LIVE_REPLAY</code>is requested for a stream that has no fragments within the
+ *             <code>GetHLSStreamingSessionURL</code> and <code>GetDASHStreamingSessionURL</code> throw
+ *             this error if a session with a <code>PlaybackMode</code> of <code>ON_DEMAND</code> or
+ *                 <code>LIVE_REPLAY</code>is requested for a stream that has no fragments within the
  *             requested time range, or if a session with a <code>PlaybackMode</code> of
  *                 <code>LIVE</code> is requested for a stream that has no fragments within the last 30
  *             seconds.</p>
@@ -406,14 +406,14 @@ export interface GetDASHStreamingSessionURLInput {
    *         <ul>
    *             <li>
    *                 <p>
-   *                   <b>
-   *                      <code>LIVE</code>
-   *                   </b>: For sessions of this type,
-   *                     the MPEG-DASH manifest is continually updated with the latest fragments as they
-   *                     become available. We recommend that the media player retrieve a new manifest on
-   *                     a one-second interval. When this type of session is played in a media player,
-   *                     the user interface typically displays a "live" notification, with no scrubber
-   *                     control for choosing the position in the playback window to display.</p>
+   *                     <b>
+   *                         <code>LIVE</code>
+   *                     </b>: For sessions of this type, the MPEG-DASH manifest is continually
+   *                     updated with the latest fragments as they become available. We recommend that
+   *                     the media player retrieve a new manifest on a one-second interval. When this
+   *                     type of session is played in a media player, the user interface typically
+   *                     displays a "live" notification, with no scrubber control for choosing the
+   *                     position in the playback window to display.</p>
    *                 <note>
    *                     <p>In <code>LIVE</code> mode, the newest available fragments are included in
    *                         an MPEG-DASH manifest, even if there is a gap between fragments (that is, if
@@ -427,31 +427,30 @@ export interface GetDASHStreamingSessionURLInput {
    *             </li>
    *             <li>
    *                 <p>
-   *                   <b>
-   *                      <code>LIVE_REPLAY</code>
-   *                   </b>: For sessions of
-   *                     this type, the MPEG-DASH manifest is updated similarly to how it is updated for
-   *                         <code>LIVE</code> mode except that it starts by including fragments from a
-   *                     given start time. Instead of fragments being added as they are ingested,
-   *                     fragments are added as the duration of the next fragment elapses. For example,
-   *                     if the fragments in the session are two seconds long, then a new fragment is
-   *                     added to the manifest every two seconds. This mode is useful to be able to start
-   *                     playback from when an event is detected and continue live streaming media that
-   *                     has not yet been ingested as of the time of the session creation. This mode is
-   *                     also useful to stream previously archived media without being limited by the
-   *                     1,000 fragment limit in the <code>ON_DEMAND</code> mode. </p>
+   *                     <b>
+   *                         <code>LIVE_REPLAY</code>
+   *                     </b>: For sessions of this type, the MPEG-DASH manifest is updated
+   *                     similarly to how it is updated for <code>LIVE</code> mode except that it starts
+   *                     by including fragments from a given start time. Instead of fragments being added
+   *                     as they are ingested, fragments are added as the duration of the next fragment
+   *                     elapses. For example, if the fragments in the session are two seconds long, then
+   *                     a new fragment is added to the manifest every two seconds. This mode is useful
+   *                     to be able to start playback from when an event is detected and continue live
+   *                     streaming media that has not yet been ingested as of the time of the session
+   *                     creation. This mode is also useful to stream previously archived media without
+   *                     being limited by the 1,000 fragment limit in the <code>ON_DEMAND</code> mode.
+   *                 </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <b>
-   *                      <code>ON_DEMAND</code>
-   *                   </b>: For sessions of this
-   *                     type, the MPEG-DASH manifest contains all the fragments for the session, up to
-   *                     the number that is specified in <code>MaxMediaPlaylistFragmentResults</code>.
-   *                     The manifest must be retrieved only once for each session. When this type of
-   *                     session is played in a media player, the user interface typically displays a
-   *                     scrubber control for choosing the position in the playback window to
-   *                     display.</p>
+   *                     <b>
+   *                         <code>ON_DEMAND</code>
+   *                     </b>: For sessions of this type, the MPEG-DASH manifest contains all the
+   *                     fragments for the session, up to the number that is specified in
+   *                         <code>MaxMediaPlaylistFragmentResults</code>. The manifest must be retrieved
+   *                     only once for each session. When this type of session is played in a media
+   *                     player, the user interface typically displays a scrubber control for choosing
+   *                     the position in the playback window to display.</p>
    *             </li>
    *          </ul>
    *         <p>In all playback modes, if <code>FragmentSelectorType</code> is
@@ -700,14 +699,14 @@ export interface GetHLSStreamingSessionURLInput {
    *         <ul>
    *             <li>
    *                 <p>
-   *                   <b>
-   *                      <code>LIVE</code>
-   *                   </b>: For sessions of this type,
-   *                     the HLS media playlist is continually updated with the latest fragments as they
-   *                     become available. We recommend that the media player retrieve a new playlist on
-   *                     a one-second interval. When this type of session is played in a media player,
-   *                     the user interface typically displays a "live" notification, with no scrubber
-   *                     control for choosing the position in the playback window to display.</p>
+   *                     <b>
+   *                         <code>LIVE</code>
+   *                     </b>: For sessions of this type, the HLS media playlist is continually
+   *                     updated with the latest fragments as they become available. We recommend that
+   *                     the media player retrieve a new playlist on a one-second interval. When this
+   *                     type of session is played in a media player, the user interface typically
+   *                     displays a "live" notification, with no scrubber control for choosing the
+   *                     position in the playback window to display.</p>
    *                 <note>
    *                     <p>In <code>LIVE</code> mode, the newest available fragments are included in
    *                         an HLS media playlist, even if there is a gap between fragments (that is, if
@@ -721,31 +720,30 @@ export interface GetHLSStreamingSessionURLInput {
    *             </li>
    *             <li>
    *                 <p>
-   *                   <b>
-   *                      <code>LIVE_REPLAY</code>
-   *                   </b>: For sessions of
-   *                     this type, the HLS media playlist is updated similarly to how it is updated for
-   *                         <code>LIVE</code> mode except that it starts by including fragments from a
-   *                     given start time. Instead of fragments being added as they are ingested,
-   *                     fragments are added as the duration of the next fragment elapses. For example,
-   *                     if the fragments in the session are two seconds long, then a new fragment is
-   *                     added to the media playlist every two seconds. This mode is useful to be able to
-   *                     start playback from when an event is detected and continue live streaming media
-   *                     that has not yet been ingested as of the time of the session creation. This mode
-   *                     is also useful to stream previously archived media without being limited by the
-   *                     1,000 fragment limit in the <code>ON_DEMAND</code> mode. </p>
+   *                     <b>
+   *                         <code>LIVE_REPLAY</code>
+   *                     </b>: For sessions of this type, the HLS media playlist is updated
+   *                     similarly to how it is updated for <code>LIVE</code> mode except that it starts
+   *                     by including fragments from a given start time. Instead of fragments being added
+   *                     as they are ingested, fragments are added as the duration of the next fragment
+   *                     elapses. For example, if the fragments in the session are two seconds long, then
+   *                     a new fragment is added to the media playlist every two seconds. This mode is
+   *                     useful to be able to start playback from when an event is detected and continue
+   *                     live streaming media that has not yet been ingested as of the time of the
+   *                     session creation. This mode is also useful to stream previously archived media
+   *                     without being limited by the 1,000 fragment limit in the <code>ON_DEMAND</code>
+   *                     mode. </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <b>
-   *                      <code>ON_DEMAND</code>
-   *                   </b>: For sessions of this
-   *                     type, the HLS media playlist contains all the fragments for the session, up to
-   *                     the number that is specified in <code>MaxMediaPlaylistFragmentResults</code>.
-   *                     The playlist must be retrieved only once for each session. When this type of
-   *                     session is played in a media player, the user interface typically displays a
-   *                     scrubber control for choosing the position in the playback window to
-   *                     display.</p>
+   *                     <b>
+   *                         <code>ON_DEMAND</code>
+   *                     </b>: For sessions of this type, the HLS media playlist contains all the
+   *                     fragments for the session, up to the number that is specified in
+   *                         <code>MaxMediaPlaylistFragmentResults</code>. The playlist must be retrieved
+   *                     only once for each session. When this type of session is played in a media
+   *                     player, the user interface typically displays a scrubber control for choosing
+   *                     the position in the playback window to display.</p>
    *             </li>
    *          </ul>
    *         <p>In all playback modes, if <code>FragmentSelectorType</code> is
@@ -799,19 +797,19 @@ export interface GetHLSStreamingSessionURLInput {
    *         <ul>
    *             <li>
    *                 <p>
-   *                   <code>ALWAYS</code>: a discontinuity marker is placed between every fragment
-   *                     in the HLS media playlist. It is recommended to use a value of
-   *                         <code>ALWAYS</code> if the fragment timestamps are not accurate.</p>
+   *                     <code>ALWAYS</code>: a discontinuity marker is placed between every fragment in
+   *                     the HLS media playlist. It is recommended to use a value of <code>ALWAYS</code>
+   *                     if the fragment timestamps are not accurate.</p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>NEVER</code>: no discontinuity markers are placed anywhere. It is
+   *                     <code>NEVER</code>: no discontinuity markers are placed anywhere. It is
    *                     recommended to use a value of <code>NEVER</code> to ensure the media player
    *                     timeline most accurately maps to the producer timestamps. </p>
    *             </li>
    *             <li>
    *                 <p>
-   *                   <code>ON_DISCONTIUNITY</code>: a discontinuity marker is placed between
+   *                     <code>ON_DISCONTIUNITY</code>: a discontinuity marker is placed between
    *                     fragments that have a gap or overlap of more than 50 milliseconds. For most
    *                     playback scenarios, it is recommended to use a value of
    *                         <code>ON_DISCONTINUITY</code> so that the media player timeline is only
@@ -894,9 +892,14 @@ export namespace GetHLSStreamingSessionURLOutput {
 
 export interface GetMediaForFragmentListInput {
   /**
-   * <p>The name of the stream from which to retrieve fragment media.</p>
+   * <p>The name of the stream from which to retrieve fragment media. Specify either this parameter or the <code>StreamARN</code> parameter.</p>
    */
-  StreamName: string | undefined;
+  StreamName?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the stream from which to retrieve fragment media. Specify either this parameter or the <code>StreamName</code> parameter.</p>
+   */
+  StreamARN?: string;
 
   /**
    * <p>A list of the numbers of fragments for which to retrieve media. You retrieve these
@@ -919,9 +922,9 @@ export interface GetMediaForFragmentListOutput {
 
   /**
    * <p>The payload that Kinesis Video Streams returns is a sequence of chunks from the
-   *             specified stream. For information about the chunks, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html">PutMedia</a>. The chunks that
-   *             Kinesis Video Streams returns in the <code>GetMediaForFragmentList</code> call also
-   *             include the following additional Matroska (MKV) tags: </p>
+   *             specified stream. For information about the chunks, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html">PutMedia</a>. The chunks that Kinesis Video Streams returns in the
+   *                 <code>GetMediaForFragmentList</code> call also include the following additional
+   *             Matroska (MKV) tags: </p>
    *         <ul>
    *             <li>
    *                 <p>AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the
@@ -1030,9 +1033,14 @@ export namespace FragmentSelector {
 
 export interface ListFragmentsInput {
   /**
-   * <p>The name of the stream from which to retrieve a fragment list.</p>
+   * <p>The name of the stream from which to retrieve a fragment list. Specify either this parameter or the <code>StreamARN</code> parameter.</p>
    */
-  StreamName: string | undefined;
+  StreamName?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the stream from which to retrieve a fragment list. Specify either this parameter or the <code>StreamName</code> parameter.</p>
+   */
+  StreamARN?: string;
 
   /**
    * <p>The total number of fragments to return. If the total number of fragments available is

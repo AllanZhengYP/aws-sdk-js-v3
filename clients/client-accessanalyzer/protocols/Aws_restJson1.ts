@@ -1,3 +1,4 @@
+import { ApplyArchiveRuleCommandInput, ApplyArchiveRuleCommandOutput } from "../commands/ApplyArchiveRuleCommand";
 import { CreateAnalyzerCommandInput, CreateAnalyzerCommandOutput } from "../commands/CreateAnalyzerCommand";
 import { CreateArchiveRuleCommandInput, CreateArchiveRuleCommandOutput } from "../commands/CreateArchiveRuleCommand";
 import { DeleteAnalyzerCommandInput, DeleteAnalyzerCommandOutput } from "../commands/DeleteAnalyzerCommand";
@@ -59,6 +60,32 @@ import {
   SerdeContext as __SerdeContext,
 } from "@aws-sdk/types";
 import { v4 as generateIdempotencyToken } from "uuid";
+
+export const serializeAws_restJson1ApplyArchiveRuleCommand = async (
+  input: ApplyArchiveRuleCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: any = {
+    "content-type": "application/json",
+  };
+  let resolvedPath = "/archive-rule";
+  let body: any;
+  body = JSON.stringify({
+    ...(input.analyzerArn !== undefined && input.analyzerArn !== null && { analyzerArn: input.analyzerArn }),
+    clientToken: input.clientToken ?? generateIdempotencyToken(),
+    ...(input.ruleName !== undefined && input.ruleName !== null && { ruleName: input.ruleName }),
+  });
+  const { hostname, protocol = "https", port } = await context.endpoint();
+  return new __HttpRequest({
+    protocol,
+    hostname,
+    port,
+    method: "PUT",
+    headers,
+    path: resolvedPath,
+    body,
+  });
+};
 
 export const serializeAws_restJson1CreateAnalyzerCommand = async (
   input: CreateAnalyzerCommandInput,
@@ -627,6 +654,89 @@ export const serializeAws_restJson1UpdateFindingsCommand = async (
     path: resolvedPath,
     body,
   });
+};
+
+export const deserializeAws_restJson1ApplyArchiveRuleCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ApplyArchiveRuleCommandOutput> => {
+  if (output.statusCode !== 200 && output.statusCode >= 300) {
+    return deserializeAws_restJson1ApplyArchiveRuleCommandError(output, context);
+  }
+  const contents: ApplyArchiveRuleCommandOutput = {
+    $metadata: deserializeMetadata(output),
+  };
+  await collectBody(output.body, context);
+  return Promise.resolve(contents);
+};
+
+const deserializeAws_restJson1ApplyArchiveRuleCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ApplyArchiveRuleCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    case "AccessDeniedException":
+    case "com.amazonaws.accessanalyzer#AccessDeniedException":
+      response = {
+        ...(await deserializeAws_restJson1AccessDeniedExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InternalServerException":
+    case "com.amazonaws.accessanalyzer#InternalServerException":
+      response = {
+        ...(await deserializeAws_restJson1InternalServerExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ResourceNotFoundException":
+    case "com.amazonaws.accessanalyzer#ResourceNotFoundException":
+      response = {
+        ...(await deserializeAws_restJson1ResourceNotFoundExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ThrottlingException":
+    case "com.amazonaws.accessanalyzer#ThrottlingException":
+      response = {
+        ...(await deserializeAws_restJson1ThrottlingExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "ValidationException":
+    case "com.amazonaws.accessanalyzer#ValidationException":
+      response = {
+        ...(await deserializeAws_restJson1ValidationExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.code || parsedBody.Code || errorCode;
+      response = {
+        ...parsedBody,
+        name: `${errorCode}`,
+        message: parsedBody.message || parsedBody.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
 };
 
 export const deserializeAws_restJson1CreateAnalyzerCommand = async (
@@ -2308,7 +2418,9 @@ const deserializeAws_restJson1ThrottlingExceptionResponse = async (
   const contents: ThrottlingException = {
     name: "ThrottlingException",
     $fault: "client",
-    $retryable: {},
+    $retryable: {
+      throttling: true,
+    },
     $metadata: deserializeMetadata(parsedOutput),
     message: undefined,
     retryAfterSeconds: undefined,

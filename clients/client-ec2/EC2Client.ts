@@ -499,6 +499,10 @@ import {
   DescribeAccountAttributesCommandInput,
   DescribeAccountAttributesCommandOutput,
 } from "./commands/DescribeAccountAttributesCommand";
+import {
+  DescribeAddressesAttributeCommandInput,
+  DescribeAddressesAttributeCommandOutput,
+} from "./commands/DescribeAddressesAttributeCommand";
 import { DescribeAddressesCommandInput, DescribeAddressesCommandOutput } from "./commands/DescribeAddressesCommand";
 import {
   DescribeAggregateIdFormatCommandInput,
@@ -1114,6 +1118,10 @@ import { ImportKeyPairCommandInput, ImportKeyPairCommandOutput } from "./command
 import { ImportSnapshotCommandInput, ImportSnapshotCommandOutput } from "./commands/ImportSnapshotCommand";
 import { ImportVolumeCommandInput, ImportVolumeCommandOutput } from "./commands/ImportVolumeCommand";
 import {
+  ModifyAddressAttributeCommandInput,
+  ModifyAddressAttributeCommandOutput,
+} from "./commands/ModifyAddressAttributeCommand";
+import {
   ModifyAvailabilityZoneGroupCommandInput,
   ModifyAvailabilityZoneGroupCommandOutput,
 } from "./commands/ModifyAvailabilityZoneGroupCommand";
@@ -1345,6 +1353,10 @@ import {
   RequestSpotInstancesCommandInput,
   RequestSpotInstancesCommandOutput,
 } from "./commands/RequestSpotInstancesCommand";
+import {
+  ResetAddressAttributeCommandInput,
+  ResetAddressAttributeCommandOutput,
+} from "./commands/ResetAddressAttributeCommand";
 import {
   ResetEbsDefaultKmsKeyIdCommandInput,
   ResetEbsDefaultKmsKeyIdCommandOutput,
@@ -1657,6 +1669,7 @@ export type ServiceInputTypes =
   | DeregisterTransitGatewayMulticastGroupMembersCommandInput
   | DeregisterTransitGatewayMulticastGroupSourcesCommandInput
   | DescribeAccountAttributesCommandInput
+  | DescribeAddressesAttributeCommandInput
   | DescribeAddressesCommandInput
   | DescribeAggregateIdFormatCommandInput
   | DescribeAvailabilityZonesCommandInput
@@ -1833,6 +1846,7 @@ export type ServiceInputTypes =
   | ImportKeyPairCommandInput
   | ImportSnapshotCommandInput
   | ImportVolumeCommandInput
+  | ModifyAddressAttributeCommandInput
   | ModifyAvailabilityZoneGroupCommandInput
   | ModifyCapacityReservationCommandInput
   | ModifyClientVpnEndpointCommandInput
@@ -1903,6 +1917,7 @@ export type ServiceInputTypes =
   | ReportInstanceStatusCommandInput
   | RequestSpotFleetCommandInput
   | RequestSpotInstancesCommandInput
+  | ResetAddressAttributeCommandInput
   | ResetEbsDefaultKmsKeyIdCommandInput
   | ResetFpgaImageAttributeCommandInput
   | ResetImageAttributeCommandInput
@@ -2096,6 +2111,7 @@ export type ServiceOutputTypes =
   | DeregisterTransitGatewayMulticastGroupMembersCommandOutput
   | DeregisterTransitGatewayMulticastGroupSourcesCommandOutput
   | DescribeAccountAttributesCommandOutput
+  | DescribeAddressesAttributeCommandOutput
   | DescribeAddressesCommandOutput
   | DescribeAggregateIdFormatCommandOutput
   | DescribeAvailabilityZonesCommandOutput
@@ -2272,6 +2288,7 @@ export type ServiceOutputTypes =
   | ImportKeyPairCommandOutput
   | ImportSnapshotCommandOutput
   | ImportVolumeCommandOutput
+  | ModifyAddressAttributeCommandOutput
   | ModifyAvailabilityZoneGroupCommandOutput
   | ModifyCapacityReservationCommandOutput
   | ModifyClientVpnEndpointCommandOutput
@@ -2342,6 +2359,7 @@ export type ServiceOutputTypes =
   | ReportInstanceStatusCommandOutput
   | RequestSpotFleetCommandOutput
   | RequestSpotInstancesCommandOutput
+  | ResetAddressAttributeCommandOutput
   | ResetEbsDefaultKmsKeyIdCommandOutput
   | ResetFpgaImageAttributeCommandOutput
   | ResetImageAttributeCommandOutput
@@ -2488,9 +2506,12 @@ export type EC2ClientResolvedConfig = __SmithyResolvedConfiguration<__HttpHandle
 
 /**
  * <fullname>Amazon Elastic Compute Cloud</fullname>
- *          <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS cloud.
- *           Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and
- *           deploy applications faster.</p>
+ *          <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS Cloud.
+ *           Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications
+ *           faster. Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the
+ *           AWS Cloud where you can launch AWS resources in a virtual network that you've defined. Amazon Elastic Block Store
+ *           (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available
+ *           and reliable storage volumes that can be attached to any running instance and used like a hard drive.</p>
  *          <p>To learn more, see the following resources:</p>
  *          <ul>
  *             <li>
@@ -2498,7 +2519,7 @@ export type EC2ClientResolvedConfig = __SmithyResolvedConfiguration<__HttpHandle
  *                </p>
  *             </li>
  *             <li>
- *                <p>Amazon EBS: <a href="http://aws.amazon.com/ebs">Amazon EBS product page</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html">Amazon EBS documentation</a>
+ *                <p>Amazon EBS: <a href="http://aws.amazon.com/ebs">Amazon EBS product page</a>, <a href="http://aws.amazon.com/documentation/ebs">Amazon EBS documentation</a>
  *                </p>
  *             </li>
  *             <li>

@@ -26,7 +26,9 @@ export type CreateGlobalReplicationGroupCommandOutput = CreateGlobalReplicationG
  *             Using Global Datastore for Redis, you can create cross-region
  *             read replica clusters for ElastiCache for Redis to enable low-latency reads
  *             and disaster recovery across regions. For more information,
- *             see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters.html">Replication Across Regions Using Global Datastore</a>. </p>
+ *
+ *             see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p>
+ *
  *          <ul>
  *             <li>
  *                <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p>

@@ -21,8 +21,7 @@ export type DescribeEventSourceCommandInput = DescribeEventSourceRequest;
 export type DescribeEventSourceCommandOutput = DescribeEventSourceResponse & __MetadataBearer;
 
 /**
- * <p>This operation lists details about a partner event source that is shared with your
- *             account.</p>
+ * <p>This operation lists details about a partner event source that is shared with your account.</p>
  */
 export class DescribeEventSourceCommand extends $Command<
   DescribeEventSourceCommandInput,

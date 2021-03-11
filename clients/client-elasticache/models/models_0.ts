@@ -1098,7 +1098,7 @@ export interface NodeGroupConfiguration {
   ReplicaAvailabilityZones?: string[];
 
   /**
-   * <p>The output ARN of the primary node.</p>
+   * <p>The outpost ARN of the primary node.</p>
    */
   PrimaryOutpostArn?: string;
 
@@ -1227,7 +1227,8 @@ export interface Snapshot {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -1337,7 +1338,8 @@ export interface Snapshot {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -1803,7 +1805,8 @@ export interface CreateCacheClusterMessage {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -1913,7 +1916,8 @@ export interface CreateCacheClusterMessage {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -2071,51 +2075,6 @@ export interface CreateCacheClusterMessage {
    *             the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum
    *             maintenance window is a 60 minute period.
    *             Valid values for <code>ddd</code> are:</p>
-   *
-   *          <p>Specifies the weekly time range during which maintenance
-   *    on the cluster is performed. It is specified as a range in
-   *    the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum
-   *    maintenance window is a 60 minute period.</p>
-   *          <p>Valid values for <code>ddd</code> are:</p>
-   *          <ul>
-   *             <li>
-   *                <p>
-   *                   <code>sun</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>mon</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>tue</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>wed</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>thu</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>fri</code>
-   *                </p>
-   *             </li>
-   *             <li>
-   *                <p>
-   *                   <code>sat</code>
-   *                </p>
-   *             </li>
-   *          </ul>
-   *          <p>Example: <code>sun:23:00-mon:01:30</code>
-   *          </p>
    */
   PreferredMaintenanceWindow?: string;
 
@@ -2234,7 +2193,8 @@ export namespace CreateCacheClusterMessage {
  * 						               </p>
  *
  * 						               <note>
- *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+ *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+ *                         </p>
  *                      </note>
  *
  *
@@ -2344,7 +2304,8 @@ export namespace CreateCacheClusterMessage {
  *
  * 						               </p>
  * 						               <note>
- *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+ *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+ *                         </p>
  *                      </note>
  * 					                <p>
  *                         <b>R5 node types:</b>
@@ -2613,8 +2574,7 @@ export interface CacheCluster {
   CacheClusterId?: string;
 
   /**
-   * <p>Represents a Memcached cluster endpoint which, if Automatic Discovery is enabled on
-   *             the cluster, can be used by an application to connect to any node in the cluster.
+   * <p>Represents a Memcached cluster endpoint which can be used by an application to connect to any node in the cluster.
    *             The configuration endpoint will always have <code>.cfg</code> in it.</p>
    *         <p>Example: <code>mem-3.9dvc4r<u>.cfg</u>.usw2.cache.amazonaws.com:11211</code>
    *          </p>
@@ -2655,7 +2615,8 @@ export interface CacheCluster {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -2765,7 +2726,8 @@ export interface CacheCluster {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -3599,7 +3561,7 @@ export interface CreateGlobalReplicationGroupMessage {
   /**
    * <p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix
    *             to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions.  </p>
-   *         <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html">Using the AWS CLI with Global Datastores </a>.</p>
+   *         <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html">Using the AWS CLI with Global Datastores </a>.</p>
    */
   GlobalReplicationGroupIdSuffix: string | undefined;
 
@@ -3747,6 +3709,9 @@ export interface GlobalReplicationGroup {
    * <p>A flag that enables in-transit encryption when set to true.
    *
    *             You cannot modify the value of <code>TransitEncryptionEnabled</code> after the cluster is created. To enable in-transit encryption on a cluster you must set <code>TransitEncryptionEnabled</code> to true when you create a cluster. </p>
+   *         <p>
+   *             <b>Required:</b>
+   *             Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p>
    */
   TransitEncryptionEnabled?: boolean;
 
@@ -3963,7 +3928,8 @@ export interface CreateReplicationGroupMessage {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -4073,7 +4039,8 @@ export interface CreateReplicationGroupMessage {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -4151,7 +4118,7 @@ export interface CreateReplicationGroupMessage {
   CacheNodeType?: string;
 
   /**
-   * <p>The name of the cache engine to be used for the clusters in this replication group.</p>
+   * <p>The name of the cache engine to be used for the clusters in this replication group. Must be Redis.</p>
    */
   Engine?: string;
 
@@ -4172,9 +4139,7 @@ export interface CreateReplicationGroupMessage {
    * <p>The name of the parameter group to associate with this replication group.
    *             If this argument is omitted, the default cache parameter group for the specified engine is
    *             used.</p>
-   *         <note>
-   *             <p>If you are restoring to an engine version that is different than the original, you must specify the default version of that version. For example, <code>CacheParameterGroupName=default.redis4.0</code>.</p>
-   *          </note>
+   *
    *         <p>If you are running Redis version 3.2.4 or later, only one node group (shard), and want to use a default parameter group,
    *             we recommend that you specify the parameter group by name. </p>
    *         <ul>
@@ -4607,22 +4572,22 @@ export interface CreateUserMessage {
   UserName: string | undefined;
 
   /**
-   * <p>Must be Redis. </p>
+   * <p>The current supported value is Redis. </p>
    */
   Engine: string | undefined;
 
   /**
-   * <p>Passwords used for this user account. You can create up to two passwords for each user.</p>
+   * <p>Passwords used for this user. You can create up to two passwords for each user.</p>
    */
   Passwords?: string[];
 
   /**
-   * <p>Access permissions string used for this user account.</p>
+   * <p>Access permissions string used for this user.</p>
    */
   AccessString: string | undefined;
 
   /**
-   * <p>Indicates a password is not required for this user account.</p>
+   * <p>Indicates a password is not required for this user.</p>
    */
   NoPasswordRequired?: boolean;
 }
@@ -4691,12 +4656,12 @@ export interface User {
   Status?: string;
 
   /**
-   * <p>Must be Redis. </p>
+   * <p>The current supported value is Redis.</p>
    */
   Engine?: string;
 
   /**
-   * <p>Access permissions string used for this user account.</p>
+   * <p>Access permissions string used for this user.</p>
    */
   AccessString?: string;
 
@@ -4711,7 +4676,7 @@ export interface User {
   Authentication?: Authentication;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the user account.</p>
+   * <p>The Amazon Resource Name (ARN) of the user.</p>
    */
   ARN?: string;
 }
@@ -4759,7 +4724,7 @@ export interface CreateUserGroupMessage {
   UserGroupId: string | undefined;
 
   /**
-   * <p>Must be Redis. </p>
+   * <p>The current supported value is Redis. </p>
    */
   Engine: string | undefined;
 
@@ -4795,7 +4760,7 @@ export namespace DefaultUserRequired {
  */
 export interface UserGroupPendingChanges {
   /**
-   * <p>The list of user group IDs ro remove.</p>
+   * <p>The list of user IDs to remove.</p>
    */
   UserIdsToRemove?: string[];
 
@@ -4823,7 +4788,7 @@ export interface UserGroup {
   Status?: string;
 
   /**
-   * <p>Must be Redis. </p>
+   * <p>The current supported value is Redis. </p>
    */
   Engine?: string;
 
@@ -6334,7 +6299,8 @@ export interface DescribeReservedCacheNodesMessage {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -6444,7 +6410,8 @@ export interface DescribeReservedCacheNodesMessage {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -6632,7 +6599,8 @@ export interface ReservedCacheNode {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -6742,7 +6710,8 @@ export interface ReservedCacheNode {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -6956,7 +6925,8 @@ export interface DescribeReservedCacheNodesOfferingsMessage {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -7066,7 +7036,8 @@ export interface DescribeReservedCacheNodesOfferingsMessage {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -7227,7 +7198,8 @@ export interface ReservedCacheNodesOffering {
    * 						               </p>
    *
    * 						               <note>
-   *                         <p>At this time, M6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    *
    *
@@ -7337,7 +7309,8 @@ export interface ReservedCacheNodesOffering {
    *
    * 						               </p>
    * 						               <note>
-   *                         <p>At this time, R6g node types are available in the following regions: us-east-1, us-west-2, us-east-2, eu-central-1, eu-west-1 and ap-northeast-1.</p>
+   *                         <p>For region availability, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion">Supported Node Types</a>
+   *                         </p>
    *                      </note>
    * 					                <p>
    *                         <b>R5 node types:</b>
@@ -8820,7 +8793,7 @@ export interface ModifyCacheClusterMessage {
    *             </li>
    *          </ul>
    *         <p>
-   *             For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a>
+   *             For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a>
    *          </p>
    */
   AuthTokenUpdateStrategy?: AuthTokenUpdateStrategyType | string;
@@ -9006,6 +8979,11 @@ export interface ModifyGlobalReplicationGroupMessage {
    * <p>The upgraded version of the cache engine to be run on the clusters in the Global Datastore. </p>
    */
   EngineVersion?: string;
+
+  /**
+   * <p>The name of the cache parameter group to use with the Global datastore. It must be compatible with the major engine version used by the Global datastore.</p>
+   */
+  CacheParameterGroupName?: string;
 
   /**
    * <p>A description of the Global Datastore</p>
@@ -9262,7 +9240,7 @@ export interface ModifyReplicationGroupMessage {
    *             </li>
    *          </ul>
    *             <p>
-   *                 For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a>
+   *                 For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a>
    *          </p>
    */
   AuthTokenUpdateStrategy?: AuthTokenUpdateStrategyType | string;
@@ -9385,7 +9363,7 @@ export interface ModifyUserMessage {
   UserId: string | undefined;
 
   /**
-   * <p>Access permissions string used for this user account.</p>
+   * <p>Access permissions string used for this user.</p>
    */
   AccessString?: string;
 
@@ -9395,12 +9373,12 @@ export interface ModifyUserMessage {
   AppendAccessString?: string;
 
   /**
-   * <p>The passwords belonging to the user account. You are allowed up to two.</p>
+   * <p>The passwords belonging to the user. You are allowed up to two.</p>
    */
   Passwords?: string[];
 
   /**
-   * <p>Indicates no password is required for the user account.</p>
+   * <p>Indicates no password is required for the user.</p>
    */
   NoPasswordRequired?: boolean;
 }

@@ -151,7 +151,7 @@ export interface SpotProvisioningSpecification {
   /**
    * <p>The defined duration for Spot Instances (also known as Spot blocks) in minutes. When
    *          specified, the Spot Instance does not terminate before the defined duration expires, and
-   *          defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240,
+   *          defined duration pricing for Spot Instances applies. Valid values are 60, 120, 180, 240,
    *          300, or 360. The duration period starts as soon as a Spot Instance receives its instance
    *          ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and
    *          provides a Spot Instance termination notice, which gives the instance a two-minute warning
@@ -231,7 +231,8 @@ export namespace AddInstanceFleetOutput {
 }
 
 /**
- * <p>This exception occurs when there is an internal failure in the EMR service.</p>
+ * <p>This exception occurs when there is an internal failure in the Amazon EMR
+ *          service.</p>
  */
 export interface InternalServerException extends __SmithyException, $MetadataBearer {
   name: "InternalServerException";
@@ -667,7 +668,7 @@ export namespace KeyValue {
 export interface HadoopJarStepConfig {
   /**
    * <p>A list of Java properties that are set when the step runs. You can use these properties
-   *          to pass key value pairs to your main function.</p>
+   *          to pass key-value pairs to your main function.</p>
    */
   Properties?: KeyValue[];
 
@@ -1595,7 +1596,7 @@ export interface CreateStudioInput {
   Name: string | undefined;
 
   /**
-   * <p>A detailed description of the Studio.</p>
+   * <p>A detailed description of the Amazon EMR Studio.</p>
    */
   Description?: string;
 
@@ -1612,7 +1613,7 @@ export interface CreateStudioInput {
   VpcId: string | undefined;
 
   /**
-   * <p>A list of subnet IDs to associate with the Studio. The subnets must belong to the VPC
+   * <p>A list of subnet IDs to associate with the Amazon EMR Studio. A Studio can have a maximum of 5 subnets. The subnets must belong to the VPC
    *          specified by <code>VpcId</code>. Studio users can create a Workspace in any of the
    *          specified subnets.</p>
    */
@@ -1625,7 +1626,7 @@ export interface CreateStudioInput {
   ServiceRole: string | undefined;
 
   /**
-   * <p>The IAM user role that will be assumed by users and groups logged in to a Studio. The
+   * <p>The IAM user role that will be assumed by users and groups logged in to an Amazon EMR Studio. The
    *          permissions attached to this IAM role can be scoped down for each user or group using
    *          session policies.</p>
    */
@@ -1646,13 +1647,13 @@ export interface CreateStudioInput {
   EngineSecurityGroupId: string | undefined;
 
   /**
-   * <p>The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A
+   * <p>The default Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files. A
    *          Studio user can select an alternative Amazon S3 location when creating a Workspace.</p>
    */
-  DefaultS3Location?: string;
+  DefaultS3Location: string | undefined;
 
   /**
-   * <p>A list of tags to associate with the Studio. Tags are user-defined key-value pairs that
+   * <p>A list of tags to associate with the Amazon EMR Studio. Tags are user-defined key-value pairs that
    *          consist of a required key string with a maximum of 128 characters, and an optional value
    *          string with a maximum of 256 characters.</p>
    */
@@ -1702,13 +1703,13 @@ export interface CreateStudioSessionMappingInput {
   IdentityId?: string;
 
   /**
-   * <p>The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
+   * <p>The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
    *          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>
    */
   IdentityName?: string;
 
   /**
-   * <p>Specifies whether the identity to map to the Studio is a user or a group.</p>
+   * <p>Specifies whether the identity to map to the Amazon EMR Studio is a user or a group.</p>
    */
   IdentityType: IdentityType | string | undefined;
 
@@ -1774,14 +1775,14 @@ export interface DeleteStudioSessionMappingInput {
   IdentityId?: string;
 
   /**
-   * <p>The name of the user name or group to remove from the Studio. For more information, see
-   *             <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
+   * <p>The name of the user name or group to remove from the Amazon EMR Studio. For more information, see
+   *             <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
    *          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>
    */
   IdentityName?: string;
 
   /**
-   * <p>Specifies whether the identity to delete from the Studio is a user or a group.</p>
+   * <p>Specifies whether the identity to delete from the Amazon EMR Studio is a user or a group.</p>
    */
   IdentityType: IdentityType | string | undefined;
 }
@@ -1930,7 +1931,7 @@ export interface InstanceGroupDetail {
   InstanceRole: InstanceRoleType | string | undefined;
 
   /**
-   * <p>The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>.
+   * <p>The bid price for each EC2 Spot Instance as defined by <code>InstanceType</code>.
    *          Expressed in USD. If neither <code>BidPrice</code> nor
    *             <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,
    *             <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>
@@ -2798,33 +2799,33 @@ export namespace DescribeStudioInput {
  */
 export interface Studio {
   /**
-   * <p>The ID of the EMR Studio.</p>
+   * <p>The ID of the Amazon EMR Studio.</p>
    */
   StudioId?: string;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the EMR Studio.</p>
+   * <p>The Amazon Resource Name (ARN) of the Amazon EMR Studio.</p>
    */
   StudioArn?: string;
 
   /**
-   * <p>The name of the EMR Studio.</p>
+   * <p>The name of the Amazon EMR Studio.</p>
    */
   Name?: string;
 
   /**
-   * <p>The detailed description of the EMR Studio.</p>
+   * <p>The detailed description of the Amazon EMR Studio.</p>
    */
   Description?: string;
 
   /**
-   * <p>Specifies whether the Studio authenticates users using single sign-on (SSO) or
+   * <p>Specifies whether the Amazon EMR Studio authenticates users using single sign-on (SSO) or
    *          IAM.</p>
    */
   AuthMode?: AuthMode | string;
 
   /**
-   * <p>The ID of the VPC associated with the EMR Studio.</p>
+   * <p>The ID of the VPC associated with the Amazon EMR Studio.</p>
    */
   VpcId?: string;
 
@@ -3010,7 +3011,7 @@ export interface GetStudioSessionMappingInput {
   IdentityId?: string;
 
   /**
-   * <p>The name of the user or group to fetch. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
+   * <p>The name of the user or group to fetch. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
    *          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>
    */
   IdentityName?: string;
@@ -3043,13 +3044,13 @@ export interface SessionMappingDetail {
   IdentityId?: string;
 
   /**
-   * <p>The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API
+   * <p>The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API
    *          Reference</i>.</p>
    */
   IdentityName?: string;
 
   /**
-   * <p>Specifies whether the identity mapped to the Studio is a user or a group.</p>
+   * <p>Specifies whether the identity mapped to the Amazon EMR Studio is a user or a group.</p>
    */
   IdentityType?: IdentityType | string;
 
@@ -4114,7 +4115,7 @@ export interface StudioSummary {
   VpcId?: string;
 
   /**
-   * <p>The detailed description of the EMR Studio.</p>
+   * <p>The detailed description of the Amazon EMR Studio.</p>
    */
   Description?: string;
 
@@ -4194,13 +4195,13 @@ export interface SessionMappingSummary {
   IdentityId?: string;
 
   /**
-   * <p>The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API
+   * <p>The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API
    *          Reference</i>.</p>
    */
   IdentityName?: string;
 
   /**
-   * <p>Specifies whether the identity mapped to the Studio is a user or a group.</p>
+   * <p>Specifies whether the identity mapped to the Amazon EMR Studio is a user or a group.</p>
    */
   IdentityType?: IdentityType | string;
 
@@ -4225,7 +4226,7 @@ export namespace SessionMappingSummary {
 export interface ListStudioSessionMappingsOutput {
   /**
    * <p>A list of session mapping summary objects. Each object includes session mapping details
-   *          such as creation time, identity type (user or group), and Studio ID.</p>
+   *          such as creation time, identity type (user or group), and Amazon EMR Studio ID.</p>
    */
   SessionMappings?: SessionMappingSummary[];
 
@@ -4366,7 +4367,7 @@ export interface PutAutoScalingPolicyOutput {
   AutoScalingPolicy?: AutoScalingPolicyDescription;
 
   /**
-   * <p>The Amazon Resource Name of the cluster.</p>
+   * <p>The Amazon Resource Name (ARN) of the cluster.</p>
    */
   ClusterArn?: string;
 }
@@ -4494,7 +4495,7 @@ export namespace RemoveTagsOutput {
 }
 
 /**
- * <p>The list of supported product configurations which allow user-supplied arguments. EMR
+ * <p>The list of supported product configurations that allow user-supplied arguments. EMR
  *          accepts these arguments and forwards them to the corresponding installation script as
  *          bootstrap action arguments.</p>
  */
@@ -4521,12 +4522,12 @@ export namespace SupportedProductConfig {
  */
 export interface RunJobFlowOutput {
   /**
-   * <p>An unique identifier for the job flow.</p>
+   * <p>A unique identifier for the job flow.</p>
    */
   JobFlowId?: string;
 
   /**
-   * <p>The Amazon Resource Name of the cluster.</p>
+   * <p>The Amazon Resource Name (ARN) of the cluster.</p>
    */
   ClusterArn?: string;
 }
@@ -4687,9 +4688,42 @@ export namespace TerminateJobFlowsInput {
   });
 }
 
+export interface UpdateStudioInput {
+  /**
+   * <p>The ID of the Amazon EMR Studio to update.</p>
+   */
+  StudioId: string | undefined;
+
+  /**
+   * <p>A descriptive name for the Amazon EMR Studio.</p>
+   */
+  Name?: string;
+
+  /**
+   * <p>A detailed description to assign to the Amazon EMR Studio.</p>
+   */
+  Description?: string;
+
+  /**
+   * <p>A list of subnet IDs to associate with the Amazon EMR Studio. The list can include new subnet IDs, but must also include all of the subnet IDs previously associated with the Studio. The list order does not matter. A Studio can have a maximum of 5 subnets. The subnets must belong to the same VPC as the Studio. </p>
+   */
+  SubnetIds?: string[];
+
+  /**
+   * <p>A default Amazon S3 location to back up Workspaces and notebook files for the Amazon EMR Studio. A Studio user can select an alternative Amazon S3 location when creating a Workspace.</p>
+   */
+  DefaultS3Location?: string;
+}
+
+export namespace UpdateStudioInput {
+  export const filterSensitiveLog = (obj: UpdateStudioInput): any => ({
+    ...obj,
+  });
+}
+
 export interface UpdateStudioSessionMappingInput {
   /**
-   * <p>The ID of the EMR Studio.</p>
+   * <p>The ID of the Amazon EMR Studio.</p>
    */
   StudioId: string | undefined;
 
@@ -4701,7 +4735,7 @@ export interface UpdateStudioSessionMappingInput {
   IdentityId?: string;
 
   /**
-   * <p>The name of the user or group to update. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
+   * <p>The name of the user or group to update. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
    *          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>
    */
   IdentityName?: string;
@@ -5036,7 +5070,7 @@ export interface InstanceGroupConfig {
   InstanceRole: InstanceRoleType | string | undefined;
 
   /**
-   * <p>The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>.
+   * <p>The bid price for each EC2 Spot Instance as defined by <code>InstanceType</code>.
    *          Expressed in USD. If neither <code>BidPrice</code> nor
    *             <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,
    *             <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>
@@ -5394,8 +5428,8 @@ export interface InstanceFleet {
 
   /**
    * <p>The target capacity of Spot units for the instance fleet, which determines how many Spot
-   *          instances to provision. When the instance fleet launches, Amazon EMR tries to provision
-   *          Spot instances as specified by <a>InstanceTypeConfig</a>. Each instance
+   *          Instances to provision. When the instance fleet launches, Amazon EMR tries to provision
+   *          Spot Instances as specified by <a>InstanceTypeConfig</a>. Each instance
    *          configuration has a specified <code>WeightedCapacity</code>. When a Spot instance is
    *          provisioned, the <code>WeightedCapacity</code> units count toward the target capacity.
    *          Amazon EMR provisions instances until the target capacity is totally fulfilled, even if
@@ -5405,7 +5439,7 @@ export interface InstanceFleet {
    *          capacity is exceeded by 3 units. You can use <a>InstanceFleet$ProvisionedSpotCapacity</a> to determine the Spot capacity units
    *          that have been provisioned for the instance fleet.</p>
    *          <note>
-   *             <p>If not specified or set to 0, only On-Demand instances are provisioned for the
+   *             <p>If not specified or set to 0, only On-Demand Instances are provisioned for the
    *             instance fleet. At least one of <code>TargetSpotCapacity</code> and
    *                <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance
    *             fleet, only one of <code>TargetSpotCapacity</code> and
@@ -5460,7 +5494,7 @@ export interface InstanceFleetConfig {
   Name?: string;
 
   /**
-   * <p>The node type that the instance fleet hosts. Valid values are MASTER,CORE,and
+   * <p>The node type that the instance fleet hosts. Valid values are MASTER, CORE, and
    *          TASK.</p>
    */
   InstanceFleetType: InstanceFleetType | string | undefined;
@@ -5942,7 +5976,7 @@ export interface RunJobFlowInput {
    *                <p>"mapr-m7" - launch the cluster using MapR M7 Edition.</p>
    *             </li>
    *             <li>
-   *                <p>"hunk" - launch the cluster with the Hunk Big Data Analtics Platform.</p>
+   *                <p>"hunk" - launch the cluster with the Hunk Big Data Analytics Platform.</p>
    *             </li>
    *             <li>
    *                <p>"hue"- launch the cluster with Hue installed.</p>

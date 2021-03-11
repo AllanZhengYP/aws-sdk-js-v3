@@ -29,10 +29,10 @@ export type AttachRolePolicyCommandOutput = __MetadataBearer;
  *             is created at the same time as the role, using <a>CreateRole</a>. You can
  *             update a role's trust policy using <a>UpdateAssumeRolePolicy</a>.</p>
  *          </note>
- *          <p>Use this API to attach a <i>managed</i> policy to a role. To embed an
+ *          <p>Use this operation to attach a <i>managed</i> policy to a role. To embed an
  *          inline policy in a role, use <a>PutRolePolicy</a>. For more information about
- *          policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed Policies and Inline
- *             Policies</a> in the <i>IAM User Guide</i>.</p>
+ *          policies, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed policies and inline
+ *             policies</a> in the <i>IAM User Guide</i>.</p>
  */
 export class AttachRolePolicyCommand extends $Command<
   AttachRolePolicyCommandInput,

@@ -4387,8 +4387,6 @@ export interface ContainerDefinition {
    * 			same variable, they are processed from the top down. It is recommended to use unique
    * 			variable names. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html">Specifying Environment
    * 				Variables</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
-   * 		       <p>This field is not valid for containers in tasks using the Fargate launch
-   * 			type.</p>
    */
   environmentFiles?: EnvironmentFile[];
 
@@ -5490,6 +5488,21 @@ export interface TaskDefinition {
    * 			container agent and <code>ecs-init</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
    */
   proxyConfiguration?: ProxyConfiguration;
+
+  /**
+   * <p>The Unix timestamp for when the task definition was registered.</p>
+   */
+  registeredAt?: Date;
+
+  /**
+   * <p>The Unix timestamp for when the task definition was deregistered.</p>
+   */
+  deregisteredAt?: Date;
+
+  /**
+   * <p>The principal that registered the task definition.</p>
+   */
+  registeredBy?: string;
 }
 
 export namespace TaskDefinition {
@@ -8716,13 +8729,13 @@ export namespace AutoScalingGroupProviderUpdate {
 
 export interface UpdateCapacityProviderRequest {
   /**
-   * <p>An object representing the parameters to update for the Auto Scaling group capacity
-   * 			provider.</p>
+   * <p>The name of the capacity provider to update.</p>
    */
   name: string | undefined;
 
   /**
-   * <p>The name of the capacity provider to update.</p>
+   * <p>An object representing the parameters to update for the Auto Scaling group capacity
+   * 			provider.</p>
    */
   autoScalingGroupProvider: AutoScalingGroupProviderUpdate | undefined;
 }

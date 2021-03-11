@@ -112,9 +112,16 @@ import {
 import {
   AccessDeniedException,
   AccountDetails,
+  Action,
+  ActionLocalIpDetails,
+  ActionLocalPortDetails,
+  ActionRemoteIpDetails,
+  ActionRemotePortDetails,
   ActionTarget,
   AdminAccount,
   AvailabilityZone,
+  AwsApiCallAction,
+  AwsApiCallActionDomainDetails,
   AwsApiGatewayAccessLogSettings,
   AwsApiGatewayCanarySettings,
   AwsApiGatewayEndpointConfiguration,
@@ -169,6 +176,8 @@ import {
   AwsEc2InstanceDetails,
   AwsEc2NetworkInterfaceAttachment,
   AwsEc2NetworkInterfaceDetails,
+  AwsEc2NetworkInterfaceIpV6AddressDetail,
+  AwsEc2NetworkInterfacePrivateIpAddressDetail,
   AwsEc2NetworkInterfaceSecurityGroup,
   AwsEc2SecurityGroupDetails,
   AwsEc2SecurityGroupIpPermission,
@@ -274,21 +283,29 @@ import {
   AwsSnsTopicDetails,
   AwsSnsTopicSubscription,
   AwsSqsQueueDetails,
+  AwsSsmComplianceSummary,
+  AwsSsmPatch,
+  AwsSsmPatchComplianceDetails,
   AwsWafWebAclDetails,
   AwsWafWebAclRule,
   BatchUpdateFindingsUnprocessedFinding,
   CidrBlockAssociation,
+  City,
   Compliance,
   ContainerDetails,
+  Country,
   Cvss,
   DateFilter,
   DateRange,
+  DnsRequestAction,
+  GeoLocation,
   ImportFindingsError,
   IntegrationType,
   InternalException,
   InvalidAccessException,
   InvalidInputException,
   IpFilter,
+  IpOrganizationDetails,
   Ipv6CidrBlockAssociation,
   KeywordFilter,
   LimitExceededException,
@@ -296,6 +313,7 @@ import {
   Malware,
   MapFilter,
   Network,
+  NetworkConnectionAction,
   NetworkHeader,
   NetworkPathComponent,
   NetworkPathComponentDetails,
@@ -303,6 +321,8 @@ import {
   NoteUpdate,
   NumberFilter,
   PatchSummary,
+  PortProbeAction,
+  PortProbeDetail,
   PortRange,
   ProcessDetails,
   Product,
@@ -317,7 +337,6 @@ import {
   Severity,
   SeverityUpdate,
   SoftwarePackage,
-  SortCriterion,
   Standard,
   StandardsControl,
   StandardsSubscription,
@@ -333,7 +352,7 @@ import {
   Workflow,
   WorkflowUpdate,
 } from "../models/models_0";
-import { Insight, InsightResultValue, InsightResults, Invitation, Member } from "../models/models_1";
+import { Insight, InsightResultValue, InsightResults, Invitation, Member, SortCriterion } from "../models/models_1";
 import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
 import {
   SmithyException as __SmithyException,
@@ -808,6 +827,7 @@ export const serializeAws_restJson1DescribeProductsCommand = async (
   const query: any = {
     ...(input.NextToken !== undefined && { NextToken: input.NextToken }),
     ...(input.MaxResults !== undefined && { MaxResults: input.MaxResults.toString() }),
+    ...(input.ProductArn !== undefined && { ProductArn: input.ProductArn }),
   };
   let body: any;
   const { hostname, protocol = "https", port } = await context.endpoint();
@@ -5810,6 +5830,66 @@ const serializeAws_restJson1AccountIdList = (input: string[], context: __SerdeCo
     });
 };
 
+const serializeAws_restJson1Action = (input: Action, context: __SerdeContext): any => {
+  return {
+    ...(input.ActionType !== undefined && input.ActionType !== null && { ActionType: input.ActionType }),
+    ...(input.AwsApiCallAction !== undefined &&
+      input.AwsApiCallAction !== null && {
+        AwsApiCallAction: serializeAws_restJson1AwsApiCallAction(input.AwsApiCallAction, context),
+      }),
+    ...(input.DnsRequestAction !== undefined &&
+      input.DnsRequestAction !== null && {
+        DnsRequestAction: serializeAws_restJson1DnsRequestAction(input.DnsRequestAction, context),
+      }),
+    ...(input.NetworkConnectionAction !== undefined &&
+      input.NetworkConnectionAction !== null && {
+        NetworkConnectionAction: serializeAws_restJson1NetworkConnectionAction(input.NetworkConnectionAction, context),
+      }),
+    ...(input.PortProbeAction !== undefined &&
+      input.PortProbeAction !== null && {
+        PortProbeAction: serializeAws_restJson1PortProbeAction(input.PortProbeAction, context),
+      }),
+  };
+};
+
+const serializeAws_restJson1ActionLocalIpDetails = (input: ActionLocalIpDetails, context: __SerdeContext): any => {
+  return {
+    ...(input.IpAddressV4 !== undefined && input.IpAddressV4 !== null && { IpAddressV4: input.IpAddressV4 }),
+  };
+};
+
+const serializeAws_restJson1ActionLocalPortDetails = (input: ActionLocalPortDetails, context: __SerdeContext): any => {
+  return {
+    ...(input.Port !== undefined && input.Port !== null && { Port: input.Port }),
+    ...(input.PortName !== undefined && input.PortName !== null && { PortName: input.PortName }),
+  };
+};
+
+const serializeAws_restJson1ActionRemoteIpDetails = (input: ActionRemoteIpDetails, context: __SerdeContext): any => {
+  return {
+    ...(input.City !== undefined && input.City !== null && { City: serializeAws_restJson1City(input.City, context) }),
+    ...(input.Country !== undefined &&
+      input.Country !== null && { Country: serializeAws_restJson1Country(input.Country, context) }),
+    ...(input.GeoLocation !== undefined &&
+      input.GeoLocation !== null && { GeoLocation: serializeAws_restJson1GeoLocation(input.GeoLocation, context) }),
+    ...(input.IpAddressV4 !== undefined && input.IpAddressV4 !== null && { IpAddressV4: input.IpAddressV4 }),
+    ...(input.Organization !== undefined &&
+      input.Organization !== null && {
+        Organization: serializeAws_restJson1IpOrganizationDetails(input.Organization, context),
+      }),
+  };
+};
+
+const serializeAws_restJson1ActionRemotePortDetails = (
+  input: ActionRemotePortDetails,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.Port !== undefined && input.Port !== null && { Port: input.Port }),
+    ...(input.PortName !== undefined && input.PortName !== null && { PortName: input.PortName }),
+  };
+};
+
 const serializeAws_restJson1ArnList = (input: string[], context: __SerdeContext): any => {
   return input
     .filter((e: any) => e != null)
@@ -5837,6 +5917,37 @@ const serializeAws_restJson1AvailabilityZones = (input: AvailabilityZone[], cont
       }
       return serializeAws_restJson1AvailabilityZone(entry, context);
     });
+};
+
+const serializeAws_restJson1AwsApiCallAction = (input: AwsApiCallAction, context: __SerdeContext): any => {
+  return {
+    ...(input.AffectedResources !== undefined &&
+      input.AffectedResources !== null && {
+        AffectedResources: serializeAws_restJson1FieldMap(input.AffectedResources, context),
+      }),
+    ...(input.Api !== undefined && input.Api !== null && { Api: input.Api }),
+    ...(input.CallerType !== undefined && input.CallerType !== null && { CallerType: input.CallerType }),
+    ...(input.DomainDetails !== undefined &&
+      input.DomainDetails !== null && {
+        DomainDetails: serializeAws_restJson1AwsApiCallActionDomainDetails(input.DomainDetails, context),
+      }),
+    ...(input.FirstSeen !== undefined && input.FirstSeen !== null && { FirstSeen: input.FirstSeen }),
+    ...(input.LastSeen !== undefined && input.LastSeen !== null && { LastSeen: input.LastSeen }),
+    ...(input.RemoteIpDetails !== undefined &&
+      input.RemoteIpDetails !== null && {
+        RemoteIpDetails: serializeAws_restJson1ActionRemoteIpDetails(input.RemoteIpDetails, context),
+      }),
+    ...(input.ServiceName !== undefined && input.ServiceName !== null && { ServiceName: input.ServiceName }),
+  };
+};
+
+const serializeAws_restJson1AwsApiCallActionDomainDetails = (
+  input: AwsApiCallActionDomainDetails,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.Domain !== undefined && input.Domain !== null && { Domain: input.Domain }),
+  };
 };
 
 const serializeAws_restJson1AwsApiGatewayAccessLogSettings = (
@@ -7084,8 +7195,21 @@ const serializeAws_restJson1AwsEc2NetworkInterfaceDetails = (
       input.Attachment !== null && {
         Attachment: serializeAws_restJson1AwsEc2NetworkInterfaceAttachment(input.Attachment, context),
       }),
+    ...(input.IpV6Addresses !== undefined &&
+      input.IpV6Addresses !== null && {
+        IpV6Addresses: serializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressList(input.IpV6Addresses, context),
+      }),
     ...(input.NetworkInterfaceId !== undefined &&
       input.NetworkInterfaceId !== null && { NetworkInterfaceId: input.NetworkInterfaceId }),
+    ...(input.PrivateIpAddresses !== undefined &&
+      input.PrivateIpAddresses !== null && {
+        PrivateIpAddresses: serializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressList(
+          input.PrivateIpAddresses,
+          context
+        ),
+      }),
+    ...(input.PublicDnsName !== undefined && input.PublicDnsName !== null && { PublicDnsName: input.PublicDnsName }),
+    ...(input.PublicIp !== undefined && input.PublicIp !== null && { PublicIp: input.PublicIp }),
     ...(input.SecurityGroups !== undefined &&
       input.SecurityGroups !== null && {
         SecurityGroups: serializeAws_restJson1AwsEc2NetworkInterfaceSecurityGroupList(input.SecurityGroups, context),
@@ -7093,6 +7217,55 @@ const serializeAws_restJson1AwsEc2NetworkInterfaceDetails = (
     ...(input.SourceDestCheck !== undefined &&
       input.SourceDestCheck !== null && { SourceDestCheck: input.SourceDestCheck }),
   };
+};
+
+const serializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressDetail = (
+  input: AwsEc2NetworkInterfaceIpV6AddressDetail,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.IpV6Address !== undefined && input.IpV6Address !== null && { IpV6Address: input.IpV6Address }),
+  };
+};
+
+const serializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressList = (
+  input: AwsEc2NetworkInterfaceIpV6AddressDetail[],
+  context: __SerdeContext
+): any => {
+  return input
+    .filter((e: any) => e != null)
+    .map((entry) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return serializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressDetail(entry, context);
+    });
+};
+
+const serializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressDetail = (
+  input: AwsEc2NetworkInterfacePrivateIpAddressDetail,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.PrivateDnsName !== undefined &&
+      input.PrivateDnsName !== null && { PrivateDnsName: input.PrivateDnsName }),
+    ...(input.PrivateIpAddress !== undefined &&
+      input.PrivateIpAddress !== null && { PrivateIpAddress: input.PrivateIpAddress }),
+  };
+};
+
+const serializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressList = (
+  input: AwsEc2NetworkInterfacePrivateIpAddressDetail[],
+  context: __SerdeContext
+): any => {
+  return input
+    .filter((e: any) => e != null)
+    .map((entry) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return serializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressDetail(entry, context);
+    });
 };
 
 const serializeAws_restJson1AwsEc2NetworkInterfaceSecurityGroup = (
@@ -9535,6 +9708,8 @@ const serializeAws_restJson1AwsSecretsManagerSecretRotationRules = (
 
 const serializeAws_restJson1AwsSecurityFinding = (input: AwsSecurityFinding, context: __SerdeContext): any => {
   return {
+    ...(input.Action !== undefined &&
+      input.Action !== null && { Action: serializeAws_restJson1Action(input.Action, context) }),
     ...(input.AwsAccountId !== undefined && input.AwsAccountId !== null && { AwsAccountId: input.AwsAccountId }),
     ...(input.Compliance !== undefined &&
       input.Compliance !== null && { Compliance: serializeAws_restJson1Compliance(input.Compliance, context) }),
@@ -10047,6 +10222,70 @@ const serializeAws_restJson1AwsSqsQueueDetails = (input: AwsSqsQueueDetails, con
   };
 };
 
+const serializeAws_restJson1AwsSsmComplianceSummary = (
+  input: AwsSsmComplianceSummary,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.ComplianceType !== undefined &&
+      input.ComplianceType !== null && { ComplianceType: input.ComplianceType }),
+    ...(input.CompliantCriticalCount !== undefined &&
+      input.CompliantCriticalCount !== null && { CompliantCriticalCount: input.CompliantCriticalCount }),
+    ...(input.CompliantHighCount !== undefined &&
+      input.CompliantHighCount !== null && { CompliantHighCount: input.CompliantHighCount }),
+    ...(input.CompliantInformationalCount !== undefined &&
+      input.CompliantInformationalCount !== null && { CompliantInformationalCount: input.CompliantInformationalCount }),
+    ...(input.CompliantLowCount !== undefined &&
+      input.CompliantLowCount !== null && { CompliantLowCount: input.CompliantLowCount }),
+    ...(input.CompliantMediumCount !== undefined &&
+      input.CompliantMediumCount !== null && { CompliantMediumCount: input.CompliantMediumCount }),
+    ...(input.CompliantUnspecifiedCount !== undefined &&
+      input.CompliantUnspecifiedCount !== null && { CompliantUnspecifiedCount: input.CompliantUnspecifiedCount }),
+    ...(input.ExecutionType !== undefined && input.ExecutionType !== null && { ExecutionType: input.ExecutionType }),
+    ...(input.NonCompliantCriticalCount !== undefined &&
+      input.NonCompliantCriticalCount !== null && { NonCompliantCriticalCount: input.NonCompliantCriticalCount }),
+    ...(input.NonCompliantHighCount !== undefined &&
+      input.NonCompliantHighCount !== null && { NonCompliantHighCount: input.NonCompliantHighCount }),
+    ...(input.NonCompliantInformationalCount !== undefined &&
+      input.NonCompliantInformationalCount !== null && {
+        NonCompliantInformationalCount: input.NonCompliantInformationalCount,
+      }),
+    ...(input.NonCompliantLowCount !== undefined &&
+      input.NonCompliantLowCount !== null && { NonCompliantLowCount: input.NonCompliantLowCount }),
+    ...(input.NonCompliantMediumCount !== undefined &&
+      input.NonCompliantMediumCount !== null && { NonCompliantMediumCount: input.NonCompliantMediumCount }),
+    ...(input.NonCompliantUnspecifiedCount !== undefined &&
+      input.NonCompliantUnspecifiedCount !== null && {
+        NonCompliantUnspecifiedCount: input.NonCompliantUnspecifiedCount,
+      }),
+    ...(input.OverallSeverity !== undefined &&
+      input.OverallSeverity !== null && { OverallSeverity: input.OverallSeverity }),
+    ...(input.PatchBaselineId !== undefined &&
+      input.PatchBaselineId !== null && { PatchBaselineId: input.PatchBaselineId }),
+    ...(input.PatchGroup !== undefined && input.PatchGroup !== null && { PatchGroup: input.PatchGroup }),
+    ...(input.Status !== undefined && input.Status !== null && { Status: input.Status }),
+  };
+};
+
+const serializeAws_restJson1AwsSsmPatch = (input: AwsSsmPatch, context: __SerdeContext): any => {
+  return {
+    ...(input.ComplianceSummary !== undefined &&
+      input.ComplianceSummary !== null && {
+        ComplianceSummary: serializeAws_restJson1AwsSsmComplianceSummary(input.ComplianceSummary, context),
+      }),
+  };
+};
+
+const serializeAws_restJson1AwsSsmPatchComplianceDetails = (
+  input: AwsSsmPatchComplianceDetails,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.Patch !== undefined &&
+      input.Patch !== null && { Patch: serializeAws_restJson1AwsSsmPatch(input.Patch, context) }),
+  };
+};
+
 const serializeAws_restJson1AwsWafWebAclDetails = (input: AwsWafWebAclDetails, context: __SerdeContext): any => {
   return {
     ...(input.DefaultAction !== undefined && input.DefaultAction !== null && { DefaultAction: input.DefaultAction }),
@@ -10109,6 +10348,12 @@ const serializeAws_restJson1CidrBlockAssociationList = (
     });
 };
 
+const serializeAws_restJson1City = (input: City, context: __SerdeContext): any => {
+  return {
+    ...(input.CityName !== undefined && input.CityName !== null && { CityName: input.CityName }),
+  };
+};
+
 const serializeAws_restJson1Compliance = (input: Compliance, context: __SerdeContext): any => {
   return {
     ...(input.RelatedRequirements !== undefined &&
@@ -10129,6 +10374,13 @@ const serializeAws_restJson1ContainerDetails = (input: ContainerDetails, context
     ...(input.ImageName !== undefined && input.ImageName !== null && { ImageName: input.ImageName }),
     ...(input.LaunchedAt !== undefined && input.LaunchedAt !== null && { LaunchedAt: input.LaunchedAt }),
     ...(input.Name !== undefined && input.Name !== null && { Name: input.Name }),
+  };
+};
+
+const serializeAws_restJson1Country = (input: Country, context: __SerdeContext): any => {
+  return {
+    ...(input.CountryCode !== undefined && input.CountryCode !== null && { CountryCode: input.CountryCode }),
+    ...(input.CountryName !== undefined && input.CountryName !== null && { CountryName: input.CountryName }),
   };
 };
 
@@ -10178,6 +10430,14 @@ const serializeAws_restJson1DateRange = (input: DateRange, context: __SerdeConte
   };
 };
 
+const serializeAws_restJson1DnsRequestAction = (input: DnsRequestAction, context: __SerdeContext): any => {
+  return {
+    ...(input.Blocked !== undefined && input.Blocked !== null && { Blocked: input.Blocked }),
+    ...(input.Domain !== undefined && input.Domain !== null && { Domain: input.Domain }),
+    ...(input.Protocol !== undefined && input.Protocol !== null && { Protocol: input.Protocol }),
+  };
+};
+
 const serializeAws_restJson1FieldMap = (input: { [key: string]: string }, context: __SerdeContext): any => {
   return Object.entries(input).reduce((acc: { [key: string]: string }, [key, value]: [string, any]) => {
     if (value === null) {
@@ -10188,6 +10448,13 @@ const serializeAws_restJson1FieldMap = (input: { [key: string]: string }, contex
       [key]: value,
     };
   }, {});
+};
+
+const serializeAws_restJson1GeoLocation = (input: GeoLocation, context: __SerdeContext): any => {
+  return {
+    ...(input.Lat !== undefined && input.Lat !== null && { Lat: input.Lat }),
+    ...(input.Lon !== undefined && input.Lon !== null && { Lon: input.Lon }),
+  };
 };
 
 const serializeAws_restJson1IpFilter = (input: IpFilter, context: __SerdeContext): any => {
@@ -10205,6 +10472,15 @@ const serializeAws_restJson1IpFilterList = (input: IpFilter[], context: __SerdeC
       }
       return serializeAws_restJson1IpFilter(entry, context);
     });
+};
+
+const serializeAws_restJson1IpOrganizationDetails = (input: IpOrganizationDetails, context: __SerdeContext): any => {
+  return {
+    ...(input.Asn !== undefined && input.Asn !== null && { Asn: input.Asn }),
+    ...(input.AsnOrg !== undefined && input.AsnOrg !== null && { AsnOrg: input.AsnOrg }),
+    ...(input.Isp !== undefined && input.Isp !== null && { Isp: input.Isp }),
+    ...(input.Org !== undefined && input.Org !== null && { Org: input.Org }),
+  };
 };
 
 const serializeAws_restJson1Ipv6CidrBlockAssociation = (
@@ -10315,6 +10591,30 @@ const serializeAws_restJson1Network = (input: Network, context: __SerdeContext):
     ...(input.SourceIpV6 !== undefined && input.SourceIpV6 !== null && { SourceIpV6: input.SourceIpV6 }),
     ...(input.SourceMac !== undefined && input.SourceMac !== null && { SourceMac: input.SourceMac }),
     ...(input.SourcePort !== undefined && input.SourcePort !== null && { SourcePort: input.SourcePort }),
+  };
+};
+
+const serializeAws_restJson1NetworkConnectionAction = (
+  input: NetworkConnectionAction,
+  context: __SerdeContext
+): any => {
+  return {
+    ...(input.Blocked !== undefined && input.Blocked !== null && { Blocked: input.Blocked }),
+    ...(input.ConnectionDirection !== undefined &&
+      input.ConnectionDirection !== null && { ConnectionDirection: input.ConnectionDirection }),
+    ...(input.LocalPortDetails !== undefined &&
+      input.LocalPortDetails !== null && {
+        LocalPortDetails: serializeAws_restJson1ActionLocalPortDetails(input.LocalPortDetails, context),
+      }),
+    ...(input.Protocol !== undefined && input.Protocol !== null && { Protocol: input.Protocol }),
+    ...(input.RemoteIpDetails !== undefined &&
+      input.RemoteIpDetails !== null && {
+        RemoteIpDetails: serializeAws_restJson1ActionRemoteIpDetails(input.RemoteIpDetails, context),
+      }),
+    ...(input.RemotePortDetails !== undefined &&
+      input.RemotePortDetails !== null && {
+        RemotePortDetails: serializeAws_restJson1ActionRemotePortDetails(input.RemotePortDetails, context),
+      }),
   };
 };
 
@@ -10429,6 +10729,44 @@ const serializeAws_restJson1PatchSummary = (input: PatchSummary, context: __Serd
       input.OperationStartTime !== null && { OperationStartTime: input.OperationStartTime }),
     ...(input.RebootOption !== undefined && input.RebootOption !== null && { RebootOption: input.RebootOption }),
   };
+};
+
+const serializeAws_restJson1PortProbeAction = (input: PortProbeAction, context: __SerdeContext): any => {
+  return {
+    ...(input.Blocked !== undefined && input.Blocked !== null && { Blocked: input.Blocked }),
+    ...(input.PortProbeDetails !== undefined &&
+      input.PortProbeDetails !== null && {
+        PortProbeDetails: serializeAws_restJson1PortProbeDetailList(input.PortProbeDetails, context),
+      }),
+  };
+};
+
+const serializeAws_restJson1PortProbeDetail = (input: PortProbeDetail, context: __SerdeContext): any => {
+  return {
+    ...(input.LocalIpDetails !== undefined &&
+      input.LocalIpDetails !== null && {
+        LocalIpDetails: serializeAws_restJson1ActionLocalIpDetails(input.LocalIpDetails, context),
+      }),
+    ...(input.LocalPortDetails !== undefined &&
+      input.LocalPortDetails !== null && {
+        LocalPortDetails: serializeAws_restJson1ActionLocalPortDetails(input.LocalPortDetails, context),
+      }),
+    ...(input.RemoteIpDetails !== undefined &&
+      input.RemoteIpDetails !== null && {
+        RemoteIpDetails: serializeAws_restJson1ActionRemoteIpDetails(input.RemoteIpDetails, context),
+      }),
+  };
+};
+
+const serializeAws_restJson1PortProbeDetailList = (input: PortProbeDetail[], context: __SerdeContext): any => {
+  return input
+    .filter((e: any) => e != null)
+    .map((entry) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return serializeAws_restJson1PortProbeDetail(entry, context);
+    });
 };
 
 const serializeAws_restJson1PortRange = (input: PortRange, context: __SerdeContext): any => {
@@ -10679,6 +11017,10 @@ const serializeAws_restJson1ResourceDetails = (input: ResourceDetails, context: 
     ...(input.AwsSqsQueue !== undefined &&
       input.AwsSqsQueue !== null && {
         AwsSqsQueue: serializeAws_restJson1AwsSqsQueueDetails(input.AwsSqsQueue, context),
+      }),
+    ...(input.AwsSsmPatchCompliance !== undefined &&
+      input.AwsSsmPatchCompliance !== null && {
+        AwsSsmPatchCompliance: serializeAws_restJson1AwsSsmPatchComplianceDetails(input.AwsSsmPatchCompliance, context),
       }),
     ...(input.AwsWafWebAcl !== undefined &&
       input.AwsWafWebAcl !== null && {
@@ -11005,6 +11347,76 @@ const serializeAws_restJson1WorkflowUpdate = (input: WorkflowUpdate, context: __
   };
 };
 
+const deserializeAws_restJson1Action = (output: any, context: __SerdeContext): Action => {
+  return {
+    ActionType: output.ActionType !== undefined && output.ActionType !== null ? output.ActionType : undefined,
+    AwsApiCallAction:
+      output.AwsApiCallAction !== undefined && output.AwsApiCallAction !== null
+        ? deserializeAws_restJson1AwsApiCallAction(output.AwsApiCallAction, context)
+        : undefined,
+    DnsRequestAction:
+      output.DnsRequestAction !== undefined && output.DnsRequestAction !== null
+        ? deserializeAws_restJson1DnsRequestAction(output.DnsRequestAction, context)
+        : undefined,
+    NetworkConnectionAction:
+      output.NetworkConnectionAction !== undefined && output.NetworkConnectionAction !== null
+        ? deserializeAws_restJson1NetworkConnectionAction(output.NetworkConnectionAction, context)
+        : undefined,
+    PortProbeAction:
+      output.PortProbeAction !== undefined && output.PortProbeAction !== null
+        ? deserializeAws_restJson1PortProbeAction(output.PortProbeAction, context)
+        : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1ActionLocalIpDetails = (output: any, context: __SerdeContext): ActionLocalIpDetails => {
+  return {
+    IpAddressV4: output.IpAddressV4 !== undefined && output.IpAddressV4 !== null ? output.IpAddressV4 : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1ActionLocalPortDetails = (
+  output: any,
+  context: __SerdeContext
+): ActionLocalPortDetails => {
+  return {
+    Port: output.Port !== undefined && output.Port !== null ? output.Port : undefined,
+    PortName: output.PortName !== undefined && output.PortName !== null ? output.PortName : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1ActionRemoteIpDetails = (output: any, context: __SerdeContext): ActionRemoteIpDetails => {
+  return {
+    City:
+      output.City !== undefined && output.City !== null
+        ? deserializeAws_restJson1City(output.City, context)
+        : undefined,
+    Country:
+      output.Country !== undefined && output.Country !== null
+        ? deserializeAws_restJson1Country(output.Country, context)
+        : undefined,
+    GeoLocation:
+      output.GeoLocation !== undefined && output.GeoLocation !== null
+        ? deserializeAws_restJson1GeoLocation(output.GeoLocation, context)
+        : undefined,
+    IpAddressV4: output.IpAddressV4 !== undefined && output.IpAddressV4 !== null ? output.IpAddressV4 : undefined,
+    Organization:
+      output.Organization !== undefined && output.Organization !== null
+        ? deserializeAws_restJson1IpOrganizationDetails(output.Organization, context)
+        : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1ActionRemotePortDetails = (
+  output: any,
+  context: __SerdeContext
+): ActionRemotePortDetails => {
+  return {
+    Port: output.Port !== undefined && output.Port !== null ? output.Port : undefined,
+    PortName: output.PortName !== undefined && output.PortName !== null ? output.PortName : undefined,
+  } as any;
+};
+
 const deserializeAws_restJson1ActionTarget = (output: any, context: __SerdeContext): ActionTarget => {
   return {
     ActionTargetArn:
@@ -11059,6 +11471,37 @@ const deserializeAws_restJson1AvailabilityZones = (output: any, context: __Serde
       }
       return deserializeAws_restJson1AvailabilityZone(entry, context);
     });
+};
+
+const deserializeAws_restJson1AwsApiCallAction = (output: any, context: __SerdeContext): AwsApiCallAction => {
+  return {
+    AffectedResources:
+      output.AffectedResources !== undefined && output.AffectedResources !== null
+        ? deserializeAws_restJson1FieldMap(output.AffectedResources, context)
+        : undefined,
+    Api: output.Api !== undefined && output.Api !== null ? output.Api : undefined,
+    CallerType: output.CallerType !== undefined && output.CallerType !== null ? output.CallerType : undefined,
+    DomainDetails:
+      output.DomainDetails !== undefined && output.DomainDetails !== null
+        ? deserializeAws_restJson1AwsApiCallActionDomainDetails(output.DomainDetails, context)
+        : undefined,
+    FirstSeen: output.FirstSeen !== undefined && output.FirstSeen !== null ? output.FirstSeen : undefined,
+    LastSeen: output.LastSeen !== undefined && output.LastSeen !== null ? output.LastSeen : undefined,
+    RemoteIpDetails:
+      output.RemoteIpDetails !== undefined && output.RemoteIpDetails !== null
+        ? deserializeAws_restJson1ActionRemoteIpDetails(output.RemoteIpDetails, context)
+        : undefined,
+    ServiceName: output.ServiceName !== undefined && output.ServiceName !== null ? output.ServiceName : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1AwsApiCallActionDomainDetails = (
+  output: any,
+  context: __SerdeContext
+): AwsApiCallActionDomainDetails => {
+  return {
+    Domain: output.Domain !== undefined && output.Domain !== null ? output.Domain : undefined,
+  } as any;
 };
 
 const deserializeAws_restJson1AwsApiGatewayAccessLogSettings = (
@@ -12381,10 +12824,21 @@ const deserializeAws_restJson1AwsEc2NetworkInterfaceDetails = (
       output.Attachment !== undefined && output.Attachment !== null
         ? deserializeAws_restJson1AwsEc2NetworkInterfaceAttachment(output.Attachment, context)
         : undefined,
+    IpV6Addresses:
+      output.IpV6Addresses !== undefined && output.IpV6Addresses !== null
+        ? deserializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressList(output.IpV6Addresses, context)
+        : undefined,
     NetworkInterfaceId:
       output.NetworkInterfaceId !== undefined && output.NetworkInterfaceId !== null
         ? output.NetworkInterfaceId
         : undefined,
+    PrivateIpAddresses:
+      output.PrivateIpAddresses !== undefined && output.PrivateIpAddresses !== null
+        ? deserializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressList(output.PrivateIpAddresses, context)
+        : undefined,
+    PublicDnsName:
+      output.PublicDnsName !== undefined && output.PublicDnsName !== null ? output.PublicDnsName : undefined,
+    PublicIp: output.PublicIp !== undefined && output.PublicIp !== null ? output.PublicIp : undefined,
     SecurityGroups:
       output.SecurityGroups !== undefined && output.SecurityGroups !== null
         ? deserializeAws_restJson1AwsEc2NetworkInterfaceSecurityGroupList(output.SecurityGroups, context)
@@ -12392,6 +12846,55 @@ const deserializeAws_restJson1AwsEc2NetworkInterfaceDetails = (
     SourceDestCheck:
       output.SourceDestCheck !== undefined && output.SourceDestCheck !== null ? output.SourceDestCheck : undefined,
   } as any;
+};
+
+const deserializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressDetail = (
+  output: any,
+  context: __SerdeContext
+): AwsEc2NetworkInterfaceIpV6AddressDetail => {
+  return {
+    IpV6Address: output.IpV6Address !== undefined && output.IpV6Address !== null ? output.IpV6Address : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressList = (
+  output: any,
+  context: __SerdeContext
+): AwsEc2NetworkInterfaceIpV6AddressDetail[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return deserializeAws_restJson1AwsEc2NetworkInterfaceIpV6AddressDetail(entry, context);
+    });
+};
+
+const deserializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressDetail = (
+  output: any,
+  context: __SerdeContext
+): AwsEc2NetworkInterfacePrivateIpAddressDetail => {
+  return {
+    PrivateDnsName:
+      output.PrivateDnsName !== undefined && output.PrivateDnsName !== null ? output.PrivateDnsName : undefined,
+    PrivateIpAddress:
+      output.PrivateIpAddress !== undefined && output.PrivateIpAddress !== null ? output.PrivateIpAddress : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressList = (
+  output: any,
+  context: __SerdeContext
+): AwsEc2NetworkInterfacePrivateIpAddressDetail[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return deserializeAws_restJson1AwsEc2NetworkInterfacePrivateIpAddressDetail(entry, context);
+    });
 };
 
 const deserializeAws_restJson1AwsEc2NetworkInterfaceSecurityGroup = (
@@ -15032,6 +15535,10 @@ const deserializeAws_restJson1AwsSecretsManagerSecretRotationRules = (
 
 const deserializeAws_restJson1AwsSecurityFinding = (output: any, context: __SerdeContext): AwsSecurityFinding => {
   return {
+    Action:
+      output.Action !== undefined && output.Action !== null
+        ? deserializeAws_restJson1Action(output.Action, context)
+        : undefined,
     AwsAccountId: output.AwsAccountId !== undefined && output.AwsAccountId !== null ? output.AwsAccountId : undefined,
     Compliance:
       output.Compliance !== undefined && output.Compliance !== null
@@ -15560,6 +16067,93 @@ const deserializeAws_restJson1AwsSqsQueueDetails = (output: any, context: __Serd
   } as any;
 };
 
+const deserializeAws_restJson1AwsSsmComplianceSummary = (
+  output: any,
+  context: __SerdeContext
+): AwsSsmComplianceSummary => {
+  return {
+    ComplianceType:
+      output.ComplianceType !== undefined && output.ComplianceType !== null ? output.ComplianceType : undefined,
+    CompliantCriticalCount:
+      output.CompliantCriticalCount !== undefined && output.CompliantCriticalCount !== null
+        ? output.CompliantCriticalCount
+        : undefined,
+    CompliantHighCount:
+      output.CompliantHighCount !== undefined && output.CompliantHighCount !== null
+        ? output.CompliantHighCount
+        : undefined,
+    CompliantInformationalCount:
+      output.CompliantInformationalCount !== undefined && output.CompliantInformationalCount !== null
+        ? output.CompliantInformationalCount
+        : undefined,
+    CompliantLowCount:
+      output.CompliantLowCount !== undefined && output.CompliantLowCount !== null
+        ? output.CompliantLowCount
+        : undefined,
+    CompliantMediumCount:
+      output.CompliantMediumCount !== undefined && output.CompliantMediumCount !== null
+        ? output.CompliantMediumCount
+        : undefined,
+    CompliantUnspecifiedCount:
+      output.CompliantUnspecifiedCount !== undefined && output.CompliantUnspecifiedCount !== null
+        ? output.CompliantUnspecifiedCount
+        : undefined,
+    ExecutionType:
+      output.ExecutionType !== undefined && output.ExecutionType !== null ? output.ExecutionType : undefined,
+    NonCompliantCriticalCount:
+      output.NonCompliantCriticalCount !== undefined && output.NonCompliantCriticalCount !== null
+        ? output.NonCompliantCriticalCount
+        : undefined,
+    NonCompliantHighCount:
+      output.NonCompliantHighCount !== undefined && output.NonCompliantHighCount !== null
+        ? output.NonCompliantHighCount
+        : undefined,
+    NonCompliantInformationalCount:
+      output.NonCompliantInformationalCount !== undefined && output.NonCompliantInformationalCount !== null
+        ? output.NonCompliantInformationalCount
+        : undefined,
+    NonCompliantLowCount:
+      output.NonCompliantLowCount !== undefined && output.NonCompliantLowCount !== null
+        ? output.NonCompliantLowCount
+        : undefined,
+    NonCompliantMediumCount:
+      output.NonCompliantMediumCount !== undefined && output.NonCompliantMediumCount !== null
+        ? output.NonCompliantMediumCount
+        : undefined,
+    NonCompliantUnspecifiedCount:
+      output.NonCompliantUnspecifiedCount !== undefined && output.NonCompliantUnspecifiedCount !== null
+        ? output.NonCompliantUnspecifiedCount
+        : undefined,
+    OverallSeverity:
+      output.OverallSeverity !== undefined && output.OverallSeverity !== null ? output.OverallSeverity : undefined,
+    PatchBaselineId:
+      output.PatchBaselineId !== undefined && output.PatchBaselineId !== null ? output.PatchBaselineId : undefined,
+    PatchGroup: output.PatchGroup !== undefined && output.PatchGroup !== null ? output.PatchGroup : undefined,
+    Status: output.Status !== undefined && output.Status !== null ? output.Status : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1AwsSsmPatch = (output: any, context: __SerdeContext): AwsSsmPatch => {
+  return {
+    ComplianceSummary:
+      output.ComplianceSummary !== undefined && output.ComplianceSummary !== null
+        ? deserializeAws_restJson1AwsSsmComplianceSummary(output.ComplianceSummary, context)
+        : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1AwsSsmPatchComplianceDetails = (
+  output: any,
+  context: __SerdeContext
+): AwsSsmPatchComplianceDetails => {
+  return {
+    Patch:
+      output.Patch !== undefined && output.Patch !== null
+        ? deserializeAws_restJson1AwsSsmPatch(output.Patch, context)
+        : undefined,
+  } as any;
+};
+
 const deserializeAws_restJson1AwsWafWebAclDetails = (output: any, context: __SerdeContext): AwsWafWebAclDetails => {
   return {
     DefaultAction:
@@ -15667,6 +16261,12 @@ const deserializeAws_restJson1CidrBlockAssociationList = (
     });
 };
 
+const deserializeAws_restJson1City = (output: any, context: __SerdeContext): City => {
+  return {
+    CityName: output.CityName !== undefined && output.CityName !== null ? output.CityName : undefined,
+  } as any;
+};
+
 const deserializeAws_restJson1Compliance = (output: any, context: __SerdeContext): Compliance => {
   return {
     RelatedRequirements:
@@ -15687,6 +16287,13 @@ const deserializeAws_restJson1ContainerDetails = (output: any, context: __SerdeC
     ImageName: output.ImageName !== undefined && output.ImageName !== null ? output.ImageName : undefined,
     LaunchedAt: output.LaunchedAt !== undefined && output.LaunchedAt !== null ? output.LaunchedAt : undefined,
     Name: output.Name !== undefined && output.Name !== null ? output.Name : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1Country = (output: any, context: __SerdeContext): Country => {
+  return {
+    CountryCode: output.CountryCode !== undefined && output.CountryCode !== null ? output.CountryCode : undefined,
+    CountryName: output.CountryName !== undefined && output.CountryName !== null ? output.CountryName : undefined,
   } as any;
 };
 
@@ -15738,6 +16345,14 @@ const deserializeAws_restJson1DateRange = (output: any, context: __SerdeContext)
   } as any;
 };
 
+const deserializeAws_restJson1DnsRequestAction = (output: any, context: __SerdeContext): DnsRequestAction => {
+  return {
+    Blocked: output.Blocked !== undefined && output.Blocked !== null ? output.Blocked : undefined,
+    Domain: output.Domain !== undefined && output.Domain !== null ? output.Domain : undefined,
+    Protocol: output.Protocol !== undefined && output.Protocol !== null ? output.Protocol : undefined,
+  } as any;
+};
+
 const deserializeAws_restJson1FieldMap = (output: any, context: __SerdeContext): { [key: string]: string } => {
   return Object.entries(output).reduce((acc: { [key: string]: string }, [key, value]: [string, any]) => {
     if (value === null) {
@@ -15748,6 +16363,13 @@ const deserializeAws_restJson1FieldMap = (output: any, context: __SerdeContext):
       [key]: value,
     };
   }, {});
+};
+
+const deserializeAws_restJson1GeoLocation = (output: any, context: __SerdeContext): GeoLocation => {
+  return {
+    Lat: output.Lat !== undefined && output.Lat !== null ? output.Lat : undefined,
+    Lon: output.Lon !== undefined && output.Lon !== null ? output.Lon : undefined,
+  } as any;
 };
 
 const deserializeAws_restJson1ImportFindingsError = (output: any, context: __SerdeContext): ImportFindingsError => {
@@ -15878,6 +16500,15 @@ const deserializeAws_restJson1IpFilterList = (output: any, context: __SerdeConte
       }
       return deserializeAws_restJson1IpFilter(entry, context);
     });
+};
+
+const deserializeAws_restJson1IpOrganizationDetails = (output: any, context: __SerdeContext): IpOrganizationDetails => {
+  return {
+    Asn: output.Asn !== undefined && output.Asn !== null ? output.Asn : undefined,
+    AsnOrg: output.AsnOrg !== undefined && output.AsnOrg !== null ? output.AsnOrg : undefined,
+    Isp: output.Isp !== undefined && output.Isp !== null ? output.Isp : undefined,
+    Org: output.Org !== undefined && output.Org !== null ? output.Org : undefined,
+  } as any;
 };
 
 const deserializeAws_restJson1Ipv6CidrBlockAssociation = (
@@ -16019,6 +16650,32 @@ const deserializeAws_restJson1Network = (output: any, context: __SerdeContext): 
   } as any;
 };
 
+const deserializeAws_restJson1NetworkConnectionAction = (
+  output: any,
+  context: __SerdeContext
+): NetworkConnectionAction => {
+  return {
+    Blocked: output.Blocked !== undefined && output.Blocked !== null ? output.Blocked : undefined,
+    ConnectionDirection:
+      output.ConnectionDirection !== undefined && output.ConnectionDirection !== null
+        ? output.ConnectionDirection
+        : undefined,
+    LocalPortDetails:
+      output.LocalPortDetails !== undefined && output.LocalPortDetails !== null
+        ? deserializeAws_restJson1ActionLocalPortDetails(output.LocalPortDetails, context)
+        : undefined,
+    Protocol: output.Protocol !== undefined && output.Protocol !== null ? output.Protocol : undefined,
+    RemoteIpDetails:
+      output.RemoteIpDetails !== undefined && output.RemoteIpDetails !== null
+        ? deserializeAws_restJson1ActionRemoteIpDetails(output.RemoteIpDetails, context)
+        : undefined,
+    RemotePortDetails:
+      output.RemotePortDetails !== undefined && output.RemotePortDetails !== null
+        ? deserializeAws_restJson1ActionRemotePortDetails(output.RemotePortDetails, context)
+        : undefined,
+  } as any;
+};
+
 const deserializeAws_restJson1NetworkHeader = (output: any, context: __SerdeContext): NetworkHeader => {
   return {
     Destination:
@@ -16142,6 +16799,44 @@ const deserializeAws_restJson1PatchSummary = (output: any, context: __SerdeConte
         : undefined,
     RebootOption: output.RebootOption !== undefined && output.RebootOption !== null ? output.RebootOption : undefined,
   } as any;
+};
+
+const deserializeAws_restJson1PortProbeAction = (output: any, context: __SerdeContext): PortProbeAction => {
+  return {
+    Blocked: output.Blocked !== undefined && output.Blocked !== null ? output.Blocked : undefined,
+    PortProbeDetails:
+      output.PortProbeDetails !== undefined && output.PortProbeDetails !== null
+        ? deserializeAws_restJson1PortProbeDetailList(output.PortProbeDetails, context)
+        : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1PortProbeDetail = (output: any, context: __SerdeContext): PortProbeDetail => {
+  return {
+    LocalIpDetails:
+      output.LocalIpDetails !== undefined && output.LocalIpDetails !== null
+        ? deserializeAws_restJson1ActionLocalIpDetails(output.LocalIpDetails, context)
+        : undefined,
+    LocalPortDetails:
+      output.LocalPortDetails !== undefined && output.LocalPortDetails !== null
+        ? deserializeAws_restJson1ActionLocalPortDetails(output.LocalPortDetails, context)
+        : undefined,
+    RemoteIpDetails:
+      output.RemoteIpDetails !== undefined && output.RemoteIpDetails !== null
+        ? deserializeAws_restJson1ActionRemoteIpDetails(output.RemoteIpDetails, context)
+        : undefined,
+  } as any;
+};
+
+const deserializeAws_restJson1PortProbeDetailList = (output: any, context: __SerdeContext): PortProbeDetail[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return deserializeAws_restJson1PortProbeDetail(entry, context);
+    });
 };
 
 const deserializeAws_restJson1PortRange = (output: any, context: __SerdeContext): PortRange => {
@@ -16435,6 +17130,10 @@ const deserializeAws_restJson1ResourceDetails = (output: any, context: __SerdeCo
     AwsSqsQueue:
       output.AwsSqsQueue !== undefined && output.AwsSqsQueue !== null
         ? deserializeAws_restJson1AwsSqsQueueDetails(output.AwsSqsQueue, context)
+        : undefined,
+    AwsSsmPatchCompliance:
+      output.AwsSsmPatchCompliance !== undefined && output.AwsSsmPatchCompliance !== null
+        ? deserializeAws_restJson1AwsSsmPatchComplianceDetails(output.AwsSsmPatchCompliance, context)
         : undefined,
     AwsWafWebAcl:
       output.AwsWafWebAcl !== undefined && output.AwsWafWebAcl !== null

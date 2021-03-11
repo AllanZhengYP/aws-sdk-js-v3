@@ -619,6 +619,7 @@ export enum OperationType {
   ReleaseStaticIp = "ReleaseStaticIp",
   ResetDistributionCache = "ResetDistributionCache",
   SendContactMethodVerification = "SendContactMethodVerification",
+  SetIpAddressType = "SetIpAddressType",
   StartInstance = "StartInstance",
   StartRelationalDatabase = "StartRelationalDatabase",
   StopInstance = "StopInstance",
@@ -731,8 +732,9 @@ export namespace AllocateStaticIpResult {
  * <p>Lightsail throws this exception when user input does not conform to the validation rules
  *       of an input field.</p>
  *          <note>
- *             <p>Domain-related APIs are only available in the N. Virginia (us-east-1) Region. Please set
- *         your AWS Region configuration to us-east-1 to create, view, or edit these resources.</p>
+ *             <p>Domain and distribution APIs are only available in the N. Virginia
+ *           (<code>us-east-1</code>) AWS Region. Please set your AWS Region configuration to
+ *           <code>us-east-1</code> to create, view, or edit these resources.</p>
  *          </note>
  */
 export interface InvalidInputException extends __SmithyException, $MetadataBearer {
@@ -1394,16 +1396,14 @@ export interface CacheBehaviorPerPath {
    *                   <b>
    *                      <code>cache</code>
    *                   </b> - This behavior caches the
-   *           specified path.
-   *           </p>
+   *           specified path. </p>
    *             </li>
    *             <li>
    *                <p>
    *                   <b>
    *                      <code>dont-cache</code>
    *                   </b> - This behavior doesn't cache
-   *           the specified path.
-   *           </p>
+   *           the specified path. </p>
    *             </li>
    *          </ul>
    */
@@ -1899,8 +1899,8 @@ export interface Certificate {
    *                   </b> - One or more of the
    *           domain names in the certificate request was reported as an unsafe domain by <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the
    *           problem, search for your domain name on the <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your domain
-   *           is reported as suspicious, see <a href="https://www.google.com/webmasters/hacked/?hl=en">Google Help for Hacked
-   *             Websites</a> to learn what you can do.</p>
+   *           is reported as suspicious, see <a href="https://developers.google.com/web/fundamentals/security/hacked">Google Help for
+   *             Hacked Websites</a> to learn what you can do.</p>
    *                <p>If you believe that the result is a false positive, notify the organization that is
    *           reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and
    *           cannot remove your domain from a block list itself. After you correct the problem and the
@@ -2073,9 +2073,15 @@ export interface PortInfo {
    *                </p>
    *             </li>
    *             <li>
-   *                <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code>
-   *           (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP
-   *           Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *                <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the
+   *             <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP
+   *           code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *             </li>
+   *             <li>
+   *                <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as
+   *           the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6
+   *           code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet
+   *             Control Message Protocol for IPv6</a>.</p>
    *             </li>
    *          </ul>
    */
@@ -2090,9 +2096,15 @@ export interface PortInfo {
    *                </p>
    *             </li>
    *             <li>
-   *                <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code>
-   *           (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP
-   *           Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *                <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the
+   *             <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP
+   *           code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *             </li>
+   *             <li>
+   *                <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as
+   *           the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6
+   *           code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet
+   *             Control Message Protocol for IPv6</a>.</p>
    *             </li>
    *          </ul>
    */
@@ -2138,8 +2150,12 @@ export interface PortInfo {
   protocol?: NetworkProtocol | string;
 
   /**
-   * <p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to
-   *       an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p>
+   * <p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to
+   *       connect to an instance through the ports, and the protocol.</p>
+   *          <note>
+   *             <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to
+   *         connect to an instance.</p>
+   *          </note>
    *          <p>Examples:</p>
    *          <ul>
    *             <li>
@@ -2155,6 +2171,19 @@ export interface PortInfo {
    *         Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>
    */
   cidrs?: string[];
+
+  /**
+   * <p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to
+   *       connect to an instance through the ports, and the protocol. Only devices with an IPv6 address
+   *       can connect to an instance through IPv6; otherwise, IPv4 should be used.</p>
+   *          <note>
+   *             <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to
+   *         an instance.</p>
+   *          </note>
+   *          <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless
+   *         Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>
+   */
+  ipv6Cidrs?: string[];
 
   /**
    * <p>An alias that defines access for a preconfigured range of IP addresses.</p>
@@ -2483,30 +2512,31 @@ export namespace ContainerImage {
 export interface ContainerServiceHealthCheckConfig {
   /**
    * <p>The number of consecutive health checks successes required before moving the container to
-   *       the <code>Healthy</code> state.</p>
+   *       the <code>Healthy</code> state. The default value is <code>2</code>.</p>
    */
   healthyThreshold?: number;
 
   /**
    * <p>The number of consecutive health check failures required before moving the container to
-   *       the <code>Unhealthy</code> state.</p>
+   *       the <code>Unhealthy</code> state. The default value is <code>2</code>.</p>
    */
   unhealthyThreshold?: number;
 
   /**
    * <p>The amount of time, in seconds, during which no response means a failed health check. You
-   *       may specify between 2 and 60 seconds.</p>
+   *       can specify between 2 and 60 seconds. The default value is <code>2</code>.</p>
    */
   timeoutSeconds?: number;
 
   /**
    * <p>The approximate interval, in seconds, between health checks of an individual container.
-   *       You may specify between 5 and 300 seconds.</p>
+   *       You can specify between 5 and 300 seconds. The default value is <code>5</code>.</p>
    */
   intervalSeconds?: number;
 
   /**
-   * <p>The path on the container on which to perform the health check.</p>
+   * <p>The path on the container on which to perform the health check. The default value is
+   *         <code>/</code>.</p>
    */
   path?: string;
 
@@ -3159,25 +3189,34 @@ export interface InstanceEntry {
 
   /**
    * <p>The port configuration to use for the new Amazon EC2 instance.</p>
+   *
    *          <p>The following configuration options are available:</p>
    *          <ul>
    *             <li>
    *                <p>
    *                   <code>DEFAULT</code> - Use the default firewall settings from the Lightsail instance
-   *           blueprint.</p>
+   *           blueprint. If this is specified, then IPv4 and IPv6 will be configured for the new
+   *           instance that is created in Amazon EC2.</p>
    *             </li>
    *             <li>
    *                <p>
    *                   <code>INSTANCE</code> - Use the configured firewall settings from the source
-   *           Lightsail instance.</p>
+   *           Lightsail instance. If this is specified, the new instance that is created in Amazon EC2 will
+   *           be configured to match the configuration of the source Lightsail instance. For example,
+   *           if the source instance is configured for dual-stack (IPv4 and IPv6), then IPv4 and IPv6
+   *           will be configured for the new instance that is created in Amazon EC2. If the source instance
+   *           is configured for IPv4 only, then only IPv4 will be configured for the new instance that
+   *           is created in Amazon EC2.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>NONE</code> - Use the default Amazon EC2 security group.</p>
+   *                   <code>NONE</code> - Use the default Amazon EC2 security group. If this is specified, then
+   *           only IPv4 will be configured for the new instance that is created in Amazon EC2.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>CLOSED</code> - All ports closed.</p>
+   *                   <code>CLOSED</code> - All ports closed. If this is specified, then only IPv4 will be
+   *           configured for the new instance that is created in Amazon EC2.</p>
    *             </li>
    *          </ul>
    *          <note>
@@ -3712,6 +3751,11 @@ export namespace CreateDiskSnapshotResult {
   });
 }
 
+export enum IpAddressType {
+  DUALSTACK = "dualstack",
+  IPV4 = "ipv4",
+}
+
 export enum OriginProtocolPolicyEnum {
   HTTPOnly = "http-only",
   HTTPSOnly = "https-only",
@@ -3784,6 +3828,16 @@ export interface CreateDistributionRequest {
    *       IDs that you can specify.</p>
    */
   bundleId: string | undefined;
+
+  /**
+   * <p>The IP address type for the distribution.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   *
+   *          <p>The default value is <code>dualstack</code>.</p>
+   */
+  ipAddressType?: IpAddressType | string;
 
   /**
    * <p>The tag keys and optional values to add to the distribution during create.</p>
@@ -3940,6 +3994,14 @@ export interface LightsailDistribution {
    *       bundle.</p>
    */
   ableToUpdateBundle?: boolean;
+
+  /**
+   * <p>The IP address type of the distribution.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   */
+  ipAddressType?: IpAddressType | string;
 
   /**
    * <p>The tag keys and optional values for the resource. For more information about tags in
@@ -4214,6 +4276,16 @@ export interface CreateInstancesRequest {
    * <p>An array of objects representing the add-ons to enable for the new instance.</p>
    */
   addOns?: AddOnRequest[];
+
+  /**
+   * <p>The IP address type for the instance.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   *
+   *          <p>The default value is <code>dualstack</code>.</p>
+   */
+  ipAddressType?: IpAddressType | string;
 }
 
 export namespace CreateInstancesRequest {
@@ -4304,6 +4376,16 @@ export interface CreateInstancesFromSnapshotRequest {
    * <p>An array of objects representing the add-ons to enable for the new instance.</p>
    */
   addOns?: AddOnRequest[];
+
+  /**
+   * <p>The IP address type for the instance.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   *
+   *          <p>The default value is <code>dualstack</code>.</p>
+   */
+  ipAddressType?: IpAddressType | string;
 
   /**
    * <p>The name of the source instance from which the source automatic snapshot was
@@ -4573,6 +4655,16 @@ export interface CreateLoadBalancerRequest {
    *          <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
    */
   tags?: Tag[];
+
+  /**
+   * <p>The IP address type for the load balancer.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   *
+   *          <p>The default value is <code>dualstack</code>.</p>
+   */
+  ipAddressType?: IpAddressType | string;
 }
 
 export namespace CreateLoadBalancerRequest {
@@ -4652,7 +4744,7 @@ export namespace CreateLoadBalancerTlsCertificateResult {
 
 export interface CreateRelationalDatabaseRequest {
   /**
-   * <p>The name to use for your new database.</p>
+   * <p>The name to use for your new Lightsail database resource.</p>
    *          <p>Constraints:</p>
    *          <ul>
    *             <li>
@@ -5941,7 +6033,7 @@ export interface DiskSnapshot {
   state?: DiskSnapshotState | string;
 
   /**
-   * <p>The progress of the disk snapshot operation.</p>
+   * <p>The progress of the snapshot.</p>
    */
   progress?: string;
 
@@ -7641,9 +7733,15 @@ export interface InstancePortInfo {
    *                </p>
    *             </li>
    *             <li>
-   *                <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code>
-   *           (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP
-   *           Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *                <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the
+   *             <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP
+   *           code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *             </li>
+   *             <li>
+   *                <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as
+   *           the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6
+   *           code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet
+   *             Control Message Protocol for IPv6</a>.</p>
    *             </li>
    *          </ul>
    */
@@ -7658,9 +7756,15 @@ export interface InstancePortInfo {
    *                </p>
    *             </li>
    *             <li>
-   *                <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code>
-   *           (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP
-   *           Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *                <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the
+   *             <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP
+   *           code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *             </li>
+   *             <li>
+   *                <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as
+   *           the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6
+   *           code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet
+   *             Control Message Protocol for IPv6</a>.</p>
    *             </li>
    *          </ul>
    */
@@ -7730,12 +7834,29 @@ export interface InstancePortInfo {
   accessDirection?: AccessDirection | string;
 
   /**
-   * <p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to
-   *       an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p>
+   * <p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to
+   *       connect to an instance through the ports, and the protocol.</p>
+   *          <note>
+   *             <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to
+   *         connect to an instance.</p>
+   *          </note>
    *          <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless
    *         Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>
    */
   cidrs?: string[];
+
+  /**
+   * <p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to
+   *       connect to an instance through the ports, and the protocol. Only devices with an IPv6 address
+   *       can connect to an instance through IPv6; otherwise, IPv4 should be used.</p>
+   *          <note>
+   *             <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to
+   *         an instance.</p>
+   *          </note>
+   *          <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless
+   *         Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>
+   */
+  ipv6Cidrs?: string[];
 
   /**
    * <p>An alias that defines access for a preconfigured range of IP addresses.</p>
@@ -7875,9 +7996,17 @@ export interface Instance {
   publicIpAddress?: string;
 
   /**
-   * <p>The IPv6 address of the instance.</p>
+   * <p>The IPv6 addresses of the instance.</p>
    */
-  ipv6Address?: string;
+  ipv6Addresses?: string[];
+
+  /**
+   * <p>The IP address type of the instance.</p>
+   *
+   *          <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for
+   *       IPv4 and IPv6.</p>
+   */
+  ipAddressType?: IpAddressType | string;
 
   /**
    * <p>The size of the vCPU and the amount of RAM for the instance.</p>
@@ -8417,9 +8546,15 @@ export interface InstancePortState {
    *                </p>
    *             </li>
    *             <li>
-   *                <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code>
-   *           (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP
-   *           Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *                <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the
+   *             <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP
+   *           code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *             </li>
+   *             <li>
+   *                <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as
+   *           the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6
+   *           code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet
+   *             Control Message Protocol for IPv6</a>.</p>
    *             </li>
    *          </ul>
    */
@@ -8434,9 +8569,15 @@ export interface InstancePortState {
    *                </p>
    *             </li>
    *             <li>
-   *                <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code>
-   *           (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP
-   *           Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *                <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the
+   *             <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP
+   *           code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p>
+   *             </li>
+   *             <li>
+   *                <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as
+   *           the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6
+   *           code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet
+   *             Control Message Protocol for IPv6</a>.</p>
    *             </li>
    *          </ul>
    */
@@ -8490,12 +8631,29 @@ export interface InstancePortState {
   state?: PortState | string;
 
   /**
-   * <p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to
-   *       an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p>
+   * <p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to
+   *       connect to an instance through the ports, and the protocol.</p>
+   *          <note>
+   *             <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to
+   *         connect to an instance.</p>
+   *          </note>
    *          <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless
    *         Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>
    */
   cidrs?: string[];
+
+  /**
+   * <p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to
+   *       connect to an instance through the ports, and the protocol. Only devices with an IPv6 address
+   *       can connect to an instance through IPv6; otherwise, IPv4 should be used.</p>
+   *          <note>
+   *             <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to
+   *         an instance.</p>
+   *          </note>
+   *          <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless
+   *         Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>
+   */
+  ipv6Cidrs?: string[];
 
   /**
    * <p>An alias that defines access for a preconfigured range of IP addresses.</p>
@@ -8633,6 +8791,10 @@ export interface InstanceSnapshot {
 
   /**
    * <p>The progress of the snapshot.</p>
+   *          <note>
+   *             <p>This is populated only for disk snapshots, and is <code>null</code> for instance
+   *         snapshots.</p>
+   *          </note>
    */
   progress?: string;
 
@@ -8782,22 +8944,6 @@ export interface GetKeyPairResult {
 
 export namespace GetKeyPairResult {
   export const filterSensitiveLog = (obj: GetKeyPairResult): any => ({
-    ...obj,
-  });
-}
-
-export interface GetKeyPairsRequest {
-  /**
-   * <p>The token to advance to the next page of results from your request.</p>
-   *          <p>To get a page token, perform an initial <code>GetKeyPairs</code> request. If your results
-   *       are paginated, the response will return a next page token that you can specify as the page
-   *       token in a subsequent request.</p>
-   */
-  pageToken?: string;
-}
-
-export namespace GetKeyPairsRequest {
-  export const filterSensitiveLog = (obj: GetKeyPairsRequest): any => ({
     ...obj,
   });
 }

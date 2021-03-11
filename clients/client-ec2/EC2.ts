@@ -774,6 +774,11 @@ import {
   DescribeAccountAttributesCommandOutput,
 } from "./commands/DescribeAccountAttributesCommand";
 import {
+  DescribeAddressesAttributeCommand,
+  DescribeAddressesAttributeCommandInput,
+  DescribeAddressesAttributeCommandOutput,
+} from "./commands/DescribeAddressesAttributeCommand";
+import {
   DescribeAddressesCommand,
   DescribeAddressesCommandInput,
   DescribeAddressesCommandOutput,
@@ -1646,6 +1651,11 @@ import {
   ImportVolumeCommandOutput,
 } from "./commands/ImportVolumeCommand";
 import {
+  ModifyAddressAttributeCommand,
+  ModifyAddressAttributeCommandInput,
+  ModifyAddressAttributeCommandOutput,
+} from "./commands/ModifyAddressAttributeCommand";
+import {
   ModifyAvailabilityZoneGroupCommand,
   ModifyAvailabilityZoneGroupCommandInput,
   ModifyAvailabilityZoneGroupCommandOutput,
@@ -1988,6 +1998,11 @@ import {
   RequestSpotInstancesCommandOutput,
 } from "./commands/RequestSpotInstancesCommand";
 import {
+  ResetAddressAttributeCommand,
+  ResetAddressAttributeCommandInput,
+  ResetAddressAttributeCommandOutput,
+} from "./commands/ResetAddressAttributeCommand";
+import {
   ResetEbsDefaultKmsKeyIdCommand,
   ResetEbsDefaultKmsKeyIdCommandInput,
   ResetEbsDefaultKmsKeyIdCommandOutput,
@@ -2136,9 +2151,12 @@ import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
 
 /**
  * <fullname>Amazon Elastic Compute Cloud</fullname>
- *          <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS cloud.
- *           Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and
- *           deploy applications faster.</p>
+ *          <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS Cloud.
+ *           Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications
+ *           faster. Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the
+ *           AWS Cloud where you can launch AWS resources in a virtual network that you've defined. Amazon Elastic Block Store
+ *           (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available
+ *           and reliable storage volumes that can be attached to any running instance and used like a hard drive.</p>
  *          <p>To learn more, see the following resources:</p>
  *          <ul>
  *             <li>
@@ -2146,7 +2164,7 @@ import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
  *                </p>
  *             </li>
  *             <li>
- *                <p>Amazon EBS: <a href="http://aws.amazon.com/ebs">Amazon EBS product page</a>, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html">Amazon EBS documentation</a>
+ *                <p>Amazon EBS: <a href="http://aws.amazon.com/ebs">Amazon EBS product page</a>, <a href="http://aws.amazon.com/documentation/ebs">Amazon EBS documentation</a>
  *                </p>
  *             </li>
  *             <li>
@@ -3670,10 +3688,28 @@ export class EC2 extends EC2Client {
   }
 
   /**
-   * <p>Initiates the copy of an AMI from the specified source Region to the current Region. You specify the destination Region by using its endpoint when making the request.</p>
-   *          <p>Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots
-   *        remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted
-   *        copy of an encrypted backing snapshot.</p>
+   * <p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a
+   *    		Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one
+   *    		Outpost to another, or within the same Outpost.</p>
+   *
+   *      	   <p>To copy an AMI from one Region to another, specify the source Region using the
+   *      		<b>SourceRegion</b> parameter, and specify the
+   *      		destination Region using its endpoint. Copies of encrypted backing snapshots for
+   *      		the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted,
+   *      		unless you set <code>Encrypted</code> during the copy operation. You cannot
+   *      		create an unencrypted copy of an encrypted backing snapshot.</p>
+   *
+   *    	     <p>To copy an AMI from a Region to an Outpost, specify the source Region using the
+   *    		<b>SourceRegion</b> parameter, and specify the
+   *    		ARN of the destination Outpost using <b>DestinationOutpostArn</b>.
+   *    		Backing snapshots copied to an Outpost are encrypted by default using the default
+   *    		encryption key for the Region, or a different key that you specify in the request using
+   *    		<b>KmsKeyId</b>. Outposts do not support unencrypted
+   *    		snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami">
+   *    			Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   *
+   *
+   *          <p></p>
    *          <p>For more information about the prerequisites and limits when copying an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a>
    *         in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
    */
@@ -3701,15 +3737,25 @@ export class EC2 extends EC2Client {
   }
 
   /**
-   * <p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the
-   *       snapshot within the same Region or from one Region to another. You can use the snapshot to
-   *       create EBS volumes or Amazon Machine Images (AMIs).</p>
-   *          <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain
-   *       unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted
-   *       snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a
-   *       different CMK.</p>
-   *          <p>To copy an encrypted snapshot that has been shared from another account, you must have
-   *       permissions for the CMK used to encrypt the snapshot.</p>
+   * <p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy a
+   *       snapshot within the same Region, from one Region to another, or from a Region to an Outpost.
+   *       You can't copy a snapshot from an Outpost to a Region, from one Outpost to another, or within
+   *       the same Outpost.</p>
+   *          <p>You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs).</p>
+   *
+   *
+   *          <p>When copying snapshots to a Region, copies of encrypted EBS snapshots remain encrypted.
+   *     	Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the
+   *     	snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS)
+   *     	customer master key (CMK); however, you can specify a different CMK. To copy an encrypted
+   *     	snapshot that has been shared from another account, you must have permissions for the CMK
+   *     	used to encrypt the snapshot.</p>
+   *
+   *   	      <p>Snapshots copied to an Outpost are encrypted by default using the default
+   *   		encryption key for the Region, or a different key that you specify in the request using
+   *   		<b>KmsKeyId</b>. Outposts do not support unencrypted
+   *   		snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami">
+   *   			Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
    *          <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not
    *       be used for any purpose.</p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html">Copying an Amazon EBS snapshot</a> in the
@@ -4265,8 +4311,15 @@ export class EC2 extends EC2Client {
   }
 
   /**
-   * <p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.</p>
-   *          <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes.</p>
+   * <p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance
+   *      	that is either running or stopped.</p>
+   *
+   *
+   *
+   *
+   *    	     <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the
+   *      	new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI,
+   *      	the instance automatically launches with those additional volumes.</p>
    *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Creating Amazon EBS-Backed Linux AMIs</a>
    * 				in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
    */
@@ -5004,8 +5057,15 @@ export class EC2 extends EC2Client {
 
   /**
    * <p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for
-   *       backups, to make copies of EBS volumes, and to save data before shutting down an
-   *       instance.</p>
+   *   	backups, to make copies of EBS volumes, and to save data before shutting down an
+   *   	instance.</p>
+   *
+   *
+   *          <p>You can create snapshots of volumes in a Region and volumes on an Outpost. If you
+   *     	create a snapshot of a volume in a Region, the snapshot must be stored in the same
+   *     	Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot
+   *     	can be stored on the same Outpost as the volume, or in the Region for that Outpost.</p>
+   *
    *          <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the
    *       source volume are propagated to the snapshot.</p>
    *          <p>You can take a snapshot of an attached volume that is in use. However, snapshots only
@@ -5059,6 +5119,12 @@ export class EC2 extends EC2Client {
    *     Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot
    *     each that is crash-consistent across the instance. Boot volumes can be excluded by changing the
    *     parameters. </p>
+   *
+   *          <p>You can create multi-volume snapshots of instances in a Region and instances on an
+   *   	Outpost. If you create snapshots from an instance in a Region, the snapshots must be stored
+   *   	in the same Region as the instance. If you create snapshots from an instance on an Outpost,
+   *   	the snapshots can be stored on the same Outpost as the instance, or in the Region for that
+   *   	Outpost.</p>
    */
   public createSnapshots(
     args: CreateSnapshotsCommandInput,
@@ -7620,9 +7686,31 @@ export class EC2 extends EC2Client {
   }
 
   /**
-   * <p>Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes
-   *             the endpoint routes in the route tables that were associated with the endpoint. Deleting
-   *             an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.</p>
+   * <p>Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints.  </p>
+   *         <ul>
+   *             <li>
+   *                <p>Gateway endpoint,</p>
+   *             </li>
+   *             <li>
+   *                <p>Gateway Load Balancer endpoint,</p>
+   *             </li>
+   *             <li>
+   *                <p>Interface endpoint</p>
+   *             </li>
+   *          </ul>
+   *         <p>The following rules apply when you delete a VPC endpoint:</p>
+   *         <ul>
+   *             <li>
+   *                 <p>When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.</p>
+   *             </li>
+   *             <li>
+   *                 <p>When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces. </p>
+   *                 <p>You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.</p>
+   *             </li>
+   *             <li>
+   *                 <p>When you delete an interface endpoint, we delete the  endpoint network interfaces.</p>
+   *             </li>
+   *          </ul>
    */
   public deleteVpcEndpoints(
     args: DeleteVpcEndpointsCommandInput,
@@ -8091,6 +8179,38 @@ export class EC2 extends EC2Client {
     cb?: (err: any, data?: DescribeAddressesCommandOutput) => void
   ): Promise<DescribeAddressesCommandOutput> | void {
     const command = new DescribeAddressesCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
+   * <p>Describes the attributes of the specified Elastic IP addresses. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.</p>
+   */
+  public describeAddressesAttribute(
+    args: DescribeAddressesAttributeCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<DescribeAddressesAttributeCommandOutput>;
+  public describeAddressesAttribute(
+    args: DescribeAddressesAttributeCommandInput,
+    cb: (err: any, data?: DescribeAddressesAttributeCommandOutput) => void
+  ): void;
+  public describeAddressesAttribute(
+    args: DescribeAddressesAttributeCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: DescribeAddressesAttributeCommandOutput) => void
+  ): void;
+  public describeAddressesAttribute(
+    args: DescribeAddressesAttributeCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAddressesAttributeCommandOutput) => void),
+    cb?: (err: any, data?: DescribeAddressesAttributeCommandOutput) => void
+  ): Promise<DescribeAddressesAttributeCommandOutput> | void {
+    const command = new DescribeAddressesAttributeCommand(args);
     if (typeof optionsOrCb === "function") {
       this.send(command, optionsOrCb);
     } else if (typeof cb === "function") {
@@ -12069,13 +12189,13 @@ export class EC2 extends EC2Client {
 
   /**
    * <p>Describes available services to which you can create a VPC endpoint.</p>
-   *         <p>When the service provider  and the consumer have different accounts  multiple
+   *         <p>When the service provider and the consumer have different accounts in multiple
    *             Availability Zones, and the consumer views the VPC endpoint service information, the
    *             response only includes the common Availability Zones. For example, when the service
    *             provider account uses <code>us-east-1a</code> and <code>us-east-1c</code> and the
-   *             consumer uses <code>us-east-1a</code> and us-east-1a and us-east-1b, the response
-   *             includes the VPC endpoint services in the common Availability Zone,
-   *                 <code>us-east-1a</code>.</p>
+   *             consumer uses <code>us-east-1a</code> and <code>us-east-1b</code>, the response includes
+   *             the VPC endpoint services in the common Availability Zone,
+   *             <code>us-east-1a</code>.</p>
    */
   public describeVpcEndpointServices(
     args: DescribeVpcEndpointServicesCommandInput,
@@ -14257,6 +14377,38 @@ export class EC2 extends EC2Client {
   }
 
   /**
+   * <p>Modifies an attribute of the specified Elastic IP address. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.</p>
+   */
+  public modifyAddressAttribute(
+    args: ModifyAddressAttributeCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<ModifyAddressAttributeCommandOutput>;
+  public modifyAddressAttribute(
+    args: ModifyAddressAttributeCommandInput,
+    cb: (err: any, data?: ModifyAddressAttributeCommandOutput) => void
+  ): void;
+  public modifyAddressAttribute(
+    args: ModifyAddressAttributeCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: ModifyAddressAttributeCommandOutput) => void
+  ): void;
+  public modifyAddressAttribute(
+    args: ModifyAddressAttributeCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ModifyAddressAttributeCommandOutput) => void),
+    cb?: (err: any, data?: ModifyAddressAttributeCommandOutput) => void
+  ): Promise<ModifyAddressAttributeCommandOutput> | void {
+    const command = new ModifyAddressAttributeCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
    * <p>Changes the opt-in status of the Local Zone and Wavelength Zone group for your
    *       account.</p>
    *          <p>Use <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html">
@@ -16208,14 +16360,27 @@ export class EC2 extends EC2Client {
    *         <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html">Creating your
    *         own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
    *          <note>
-   *             <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p>
+   *             <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers
+   *          	the AMI in a single request, so you don't have to register the AMI yourself.</p>
    *          </note>
    *
-   *          <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from
-   *       a snapshot of a root device volume. You specify the snapshot using the block device mapping.
-   *       For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html">Launching a Linux instance from
-   *         a backup</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   *          <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration.
+   *        If you make changes to an image, deregister the previous image and register the new image.</p>
    *
+   *          <p>
+   *             <b>Register a snapshot of a root device volume</b>
+   *          </p>
+   *          <p>You can use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from
+   *        a snapshot of a root device volume. You specify the snapshot using a block device mapping.
+   *        You can't set the encryption state of the volume using the block device mapping. If the
+   *        snapshot is encrypted, or encryption by default is enabled, the root volume of an instance
+   *        launched from the AMI is encrypted.</p>
+   *          <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot">Create a Linux AMI from a snapshot</a> and <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html">Use encryption with EBS-backed AMIs</a>
+   *        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+   *
+   *          <p>
+   *             <b>AWS Marketplace product codes</b>
+   *          </p>
    *          <p>If any snapshots have AWS Marketplace product codes, they are copied to the new
    *       AMI.</p>
    *          <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE
@@ -16240,8 +16405,6 @@ export class EC2 extends EC2Client {
    *       code, the Reserved Instance will not be applied to the On-Demand Instance. For information
    *       about how to obtain the platform details and billing information of an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html">Obtaining billing
    *         information</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
-   *          <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration.
-   *        If you make changes to an image, deregister the previous image and register the new image.</p>
    */
   public registerImage(
     args: RegisterImageCommandInput,
@@ -16950,6 +17113,38 @@ export class EC2 extends EC2Client {
     cb?: (err: any, data?: RequestSpotInstancesCommandOutput) => void
   ): Promise<RequestSpotInstancesCommandOutput> | void {
     const command = new RequestSpotInstancesCommand(args);
+    if (typeof optionsOrCb === "function") {
+      this.send(command, optionsOrCb);
+    } else if (typeof cb === "function") {
+      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
+      this.send(command, optionsOrCb || {}, cb);
+    } else {
+      return this.send(command, optionsOrCb);
+    }
+  }
+
+  /**
+   * <p>Resets the attribute of the specified IP address. For requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS">Using reverse DNS for email applications</a>.</p>
+   */
+  public resetAddressAttribute(
+    args: ResetAddressAttributeCommandInput,
+    options?: __HttpHandlerOptions
+  ): Promise<ResetAddressAttributeCommandOutput>;
+  public resetAddressAttribute(
+    args: ResetAddressAttributeCommandInput,
+    cb: (err: any, data?: ResetAddressAttributeCommandOutput) => void
+  ): void;
+  public resetAddressAttribute(
+    args: ResetAddressAttributeCommandInput,
+    options: __HttpHandlerOptions,
+    cb: (err: any, data?: ResetAddressAttributeCommandOutput) => void
+  ): void;
+  public resetAddressAttribute(
+    args: ResetAddressAttributeCommandInput,
+    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResetAddressAttributeCommandOutput) => void),
+    cb?: (err: any, data?: ResetAddressAttributeCommandOutput) => void
+  ): Promise<ResetAddressAttributeCommandOutput> | void {
+    const command = new ResetAddressAttributeCommand(args);
     if (typeof optionsOrCb === "function") {
       this.send(command, optionsOrCb);
     } else if (typeof cb === "function") {

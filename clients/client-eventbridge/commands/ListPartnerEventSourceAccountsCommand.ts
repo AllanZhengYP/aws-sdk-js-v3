@@ -21,9 +21,8 @@ export type ListPartnerEventSourceAccountsCommandInput = ListPartnerEventSourceA
 export type ListPartnerEventSourceAccountsCommandOutput = ListPartnerEventSourceAccountsResponse & __MetadataBearer;
 
 /**
- * <p>An SaaS partner can use this operation to display the AWS account ID that a particular
- *             partner event source name is associated with. This operation is not used by AWS
- *             customers.</p>
+ * <p>An SaaS partner can use this operation to display the AWS account ID that a particular partner event source
+ *       name is associated with. This operation is not used by AWS customers.</p>
  */
 export class ListPartnerEventSourceAccountsCommand extends $Command<
   ListPartnerEventSourceAccountsCommandInput,

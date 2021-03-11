@@ -577,6 +577,12 @@
           "traits": {
             "smithy.api#documentation": "<p>\n      The connector metadata specific to Upsolver.\n    </p>"
           }
+        },
+        "CustomerProfiles": {
+          "target": "com.amazonaws.appflow#CustomerProfilesMetadata"
+        },
+        "Honeycode": {
+          "target": "com.amazonaws.appflow#HoneycodeMetadata"
         }
       },
       "traits": {
@@ -810,6 +816,9 @@
             "smithy.api#documentation": "<p>\n  The connector-specific credentials required when using Google Analytics.\n</p>"
           }
         },
+        "Honeycode": {
+          "target": "com.amazonaws.appflow#HoneycodeConnectorProfileCredentials"
+        },
         "InforNexus": {
           "target": "com.amazonaws.appflow#InforNexusConnectorProfileCredentials",
           "traits": {
@@ -935,6 +944,9 @@
           "traits": {
             "smithy.api#documentation": "<p>\n  The connector-specific properties required Google Analytics.\n</p>"
           }
+        },
+        "Honeycode": {
+          "target": "com.amazonaws.appflow#HoneycodeConnectorProfileProperties"
         },
         "InforNexus": {
           "target": "com.amazonaws.appflow#InforNexusConnectorProfileProperties",
@@ -1093,8 +1105,20 @@
             "name": "EVENTBRIDGE"
           },
           {
+            "value": "LookoutMetrics",
+            "name": "LOOKOUTMETRICS"
+          },
+          {
             "value": "Upsolver",
             "name": "UPSOLVER"
+          },
+          {
+            "value": "Honeycode",
+            "name": "HONEYCODE"
+          },
+          {
+            "value": "CustomerProfiles",
+            "name": "CUSTOMERPROFILES"
           }
         ]
       }
@@ -1319,6 +1343,24 @@
         },
         "smithy.api#pattern": "\\S+"
       }
+    },
+    "com.amazonaws.appflow#CustomerProfilesDestinationProperties": {
+      "type": "structure",
+      "members": {
+        "domainName": {
+          "target": "com.amazonaws.appflow#DomainName",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "objectTypeName": {
+          "target": "com.amazonaws.appflow#ObjectTypeName"
+        }
+      }
+    },
+    "com.amazonaws.appflow#CustomerProfilesMetadata": {
+      "type": "structure",
+      "members": {}
     },
     "com.amazonaws.appflow#DataPullMode": {
       "type": "string",
@@ -1765,7 +1807,7 @@
         "connectorTypes": {
           "target": "com.amazonaws.appflow#ConnectorTypeList",
           "traits": {
-            "smithy.api#documentation": "<p>\n  The type of connector, such as Salesforce, Amplitude, and so on.\n</p>"
+            "smithy.api#documentation": "<p>\n  The type of connector, such as Salesforce, Amplitude, and so on.\n</p>\n         <note>\n            <p>\n               <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination.  </p>\n         </note>"
           }
         },
         "nextToken": {
@@ -2048,11 +2090,20 @@
             "smithy.api#documentation": "<p>\n      The properties required to query Amazon EventBridge.\n    </p>"
           }
         },
+        "LookoutMetrics": {
+          "target": "com.amazonaws.appflow#LookoutMetricsDestinationProperties"
+        },
         "Upsolver": {
           "target": "com.amazonaws.appflow#UpsolverDestinationProperties",
           "traits": {
             "smithy.api#documentation": "<p>\n      The properties required to query Upsolver.\n    </p>"
           }
+        },
+        "Honeycode": {
+          "target": "com.amazonaws.appflow#HoneycodeDestinationProperties"
+        },
+        "CustomerProfiles": {
+          "target": "com.amazonaws.appflow#CustomerProfilesDestinationProperties"
         }
       },
       "traits": {
@@ -2139,6 +2190,16 @@
       "type": "list",
       "member": {
         "target": "com.amazonaws.appflow#DestinationFlowConfig"
+      }
+    },
+    "com.amazonaws.appflow#DomainName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 64
+        },
+        "smithy.api#pattern": "\\S+"
       }
     },
     "com.amazonaws.appflow#DynatraceConnectorOperator": {
@@ -2428,6 +2489,18 @@
           "target": "com.amazonaws.appflow#Date",
           "traits": {
             "smithy.api#documentation": "<p>\n  Specifies the time of the most recent update.\n</p>"
+          }
+        },
+        "dataPullStartTime": {
+          "target": "com.amazonaws.appflow#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>\nThe timestamp that determines the first new or updated record to be transferred in the flow run. \n</p>"
+          }
+        },
+        "dataPullEndTime": {
+          "target": "com.amazonaws.appflow#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>\nThe timestamp that indicates the last new or updated record to be transferred in the flow run.\n</p>"
           }
         }
       },
@@ -2810,6 +2883,46 @@
           "max": 128
         },
         "smithy.api#pattern": "\\S+"
+      }
+    },
+    "com.amazonaws.appflow#HoneycodeConnectorProfileCredentials": {
+      "type": "structure",
+      "members": {
+        "accessToken": {
+          "target": "com.amazonaws.appflow#AccessToken"
+        },
+        "refreshToken": {
+          "target": "com.amazonaws.appflow#RefreshToken"
+        },
+        "oAuthRequest": {
+          "target": "com.amazonaws.appflow#ConnectorOAuthRequest"
+        }
+      }
+    },
+    "com.amazonaws.appflow#HoneycodeConnectorProfileProperties": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appflow#HoneycodeDestinationProperties": {
+      "type": "structure",
+      "members": {
+        "object": {
+          "target": "com.amazonaws.appflow#Object",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "errorHandlingConfig": {
+          "target": "com.amazonaws.appflow#ErrorHandlingConfig"
+        }
+      }
+    },
+    "com.amazonaws.appflow#HoneycodeMetadata": {
+      "type": "structure",
+      "members": {
+        "oAuthScopes": {
+          "target": "com.amazonaws.appflow#OAuthScopeList"
+        }
       }
     },
     "com.amazonaws.appflow#IdFieldNameList": {
@@ -3233,6 +3346,10 @@
         "smithy.api#box": {}
       }
     },
+    "com.amazonaws.appflow#LookoutMetricsDestinationProperties": {
+      "type": "structure",
+      "members": {}
+    },
     "com.amazonaws.appflow#MarketoConnectorOperator": {
       "type": "string",
       "traits": {
@@ -3437,6 +3554,16 @@
         "smithy.api#length": {
           "min": 0,
           "max": 512
+        },
+        "smithy.api#pattern": "\\S+"
+      }
+    },
+    "com.amazonaws.appflow#ObjectTypeName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 255
         },
         "smithy.api#pattern": "\\S+"
       }
@@ -4344,6 +4471,15 @@
         ]
       }
     },
+    "com.amazonaws.appflow#ScheduleOffset": {
+      "type": "long",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0,
+          "max": 36000
+        }
+      }
+    },
     "com.amazonaws.appflow#ScheduledTriggerProperties": {
       "type": "structure",
       "members": {
@@ -4375,8 +4511,18 @@
         "timezone": {
           "target": "com.amazonaws.appflow#Timezone",
           "traits": {
-            "smithy.api#documentation": "<p>\nSpecifies the time zone used when referring to the date and time of a scheduled-triggered flow. \n</p>"
+            "smithy.api#documentation": "<p>\n  Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as <code>America/New_York</code>.\n</p>"
           }
+        },
+        "scheduleOffset": {
+          "target": "com.amazonaws.appflow#ScheduleOffset",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>\nSpecifies the optional offset that is added to the time interval for a schedule-triggered flow. \n</p>"
+          }
+        },
+        "firstExecutionFrom": {
+          "target": "com.amazonaws.appflow#Date"
         }
       },
       "traits": {

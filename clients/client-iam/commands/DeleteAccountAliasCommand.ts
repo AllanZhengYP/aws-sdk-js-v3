@@ -23,7 +23,7 @@ export type DeleteAccountAliasCommandOutput = __MetadataBearer;
 /**
  * <p> Deletes the specified AWS account alias. For information about using an AWS account
  *          alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an
- *             Alias for Your AWS Account ID</a> in the
+ *             alias for your AWS account ID</a> in the
  *          <i>IAM User Guide</i>.</p>
  */
 export class DeleteAccountAliasCommand extends $Command<

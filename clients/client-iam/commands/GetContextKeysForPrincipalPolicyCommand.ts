@@ -29,7 +29,7 @@ export type GetContextKeysForPrincipalPolicyCommandOutput = GetContextKeysForPol
  *          strings. If you want to include <i>only</i> a list of policies by string, use
  *             <a>GetContextKeysForCustomPolicy</a> instead.</p>
  *          <p>
- *             <b>Note:</b> This API discloses information about the permissions
+ *             <b>Note:</b> This operation discloses information about the permissions
  *          granted to other users. If you do not want users to see other user's permissions, then
  *          consider allowing them to use <a>GetContextKeysForCustomPolicy</a>
  *          instead.</p>

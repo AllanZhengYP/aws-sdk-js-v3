@@ -22,9 +22,10 @@ export type GetBucketEncryptionCommandInput = GetBucketEncryptionRequest;
 export type GetBucketEncryptionCommandOutput = GetBucketEncryptionOutput & __MetadataBearer;
 
 /**
- * <p>Returns the default encryption configuration for an Amazon S3 bucket. For information about
- *          the Amazon S3 default encryption feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon S3 Default Bucket Encryption</a>.</p>
- *
+ * <p>Returns the default encryption configuration for an Amazon S3 bucket. If the bucket does not
+ *          have a default encryption configuration, GetBucketEncryption returns
+ *          <code>ServerSideEncryptionConfigurationNotFoundError</code>. </p>
+ *          <p>For information about the Amazon S3 default encryption feature, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html">Amazon S3 Default Bucket Encryption</a>.</p>
  *          <p> To use this operation, you must have permission to perform the
  *             <code>s3:GetEncryptionConfiguration</code> action. The bucket owner has this permission
  *          by default. The bucket owner can grant this permission to others. For more information

@@ -21,8 +21,8 @@ export type ListReplaysCommandInput = ListReplaysRequest;
 export type ListReplaysCommandOutput = ListReplaysResponse & __MetadataBearer;
 
 /**
- * <p>Lists your replays. You can either list all the replays or you can provide a prefix to
- *             match to the replay names. Filter parameters are exclusive.</p>
+ * <p>Lists your replays. You can either list all the replays or you can provide a prefix to match to the replay
+ *       names. Filter parameters are exclusive.</p>
  */
 export class ListReplaysCommand extends $Command<
   ListReplaysCommandInput,

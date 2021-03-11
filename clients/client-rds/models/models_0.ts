@@ -1285,16 +1285,6 @@ export interface CopyDBClusterParameterGroupMessage {
    *             <li>
    *                <p>Must specify a valid DB cluster parameter group.</p>
    *             </li>
-   *             <li>
-   *                <p>If the source DB cluster parameter group is in the same AWS Region as the copy,
-   *                 specify a valid DB parameter group identifier, for example
-   *                 <code>my-db-cluster-param-group</code>, or a valid ARN.</p>
-   *             </li>
-   *             <li>
-   *                <p>If the source DB parameter group is in a different AWS Region than the copy,
-   *                 specify a valid DB cluster parameter group ARN, for example
-   *                 <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p>
-   *             </li>
    *          </ul>
    */
   SourceDBClusterParameterGroupIdentifier: string | undefined;
@@ -1597,9 +1587,14 @@ export interface DBClusterSnapshot {
   SnapshotCreateTime?: Date;
 
   /**
-   * <p>Specifies the name of the database engine.</p>
+   * <p>Specifies the name of the database engine for this DB cluster snapshot.</p>
    */
   Engine?: string;
+
+  /**
+   * <p>Provides the engine mode of the database engine for this DB cluster snapshot.</p>
+   */
+  EngineMode?: string;
 
   /**
    * <p>Specifies the allocated storage size in gibibytes (GiB).</p>
@@ -1627,7 +1622,7 @@ export interface DBClusterSnapshot {
   ClusterCreateTime?: Date;
 
   /**
-   * <p>Provides the master username for the DB cluster snapshot.</p>
+   * <p>Provides the master username for this DB cluster snapshot.</p>
    */
   MasterUsername?: string;
 
@@ -1803,10 +1798,6 @@ export interface CopyDBParameterGroupMessage {
    *          <ul>
    *             <li>
    *                <p>Must specify a valid DB parameter group.</p>
-   *             </li>
-   *             <li>
-   *                <p>Must specify a valid DB parameter group identifier, for example
-   *                 <code>my-db-param-group</code>, or a valid ARN.</p>
    *             </li>
    *          </ul>
    */
@@ -2073,7 +2064,7 @@ export interface CopyDBSnapshotMessage {
    *             If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server,
    *             you must specify this option when copying across AWS Regions.
    *             For more information, see
-   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options">Option Group Considerations</a> in the <i>Amazon RDS User Guide.</i>
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options">Option group considerations</a> in the <i>Amazon RDS User Guide.</i>
    *         </p>
    */
   OptionGroupName?: string;
@@ -2810,8 +2801,7 @@ export namespace CreateCustomAvailabilityZoneMessage {
  * <p>Information about the virtual private network (VPN) between the VMware vSphere cluster and the AWS website.</p>
  *         <p>For more information about RDS on VMware, see the
  *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
- *                 <i>RDS on VMware User Guide.</i>
- *             </a>
+ *                 RDS on VMware User Guide.</a>
  *          </p>
  */
 export interface VpnDetails {
@@ -2857,8 +2847,7 @@ export namespace VpnDetails {
  * <p>A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>
  *         <p>For more information about RDS on VMware, see the
  *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
- *                 <i>RDS on VMware User Guide.</i>
- *             </a>
+ *                 RDS on VMware User Guide.</a>
  *          </p>
  */
 export interface CustomAvailabilityZone {
@@ -2897,8 +2886,7 @@ export interface CreateCustomAvailabilityZoneResult {
    * <p>A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>
    *         <p>For more information about RDS on VMware, see the
    *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
-   *                 <i>RDS on VMware User Guide.</i>
-   *             </a>
+   *                 RDS on VMware User Guide.</a>
    *          </p>
    */
   CustomAvailabilityZone?: CustomAvailabilityZone;
@@ -3325,14 +3313,13 @@ export interface CreateDBClusterMessage {
    *         <p>
    *             <b>Aurora PostgreSQL</b>
    *         </p>
-   *         <p>Possible values are <code>postgresql</code> and <code>upgrade</code>.
+   *         <p>Possible value is <code>postgresql</code>.
    *         </p>
    */
   EnableCloudwatchLogsExports?: string[];
 
   /**
-   * <p>The DB engine mode of the DB cluster, either <code>provisioned</code>
-   *             <code>serverless</code>,
+   * <p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>,
    *             <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p>
    *         <p>The <code>parallelquery</code> engine mode isn't required for Aurora MySQL version 1.23 and higher 1.x versions,
    *             and version 2.09 and higher 2.x versions.</p>
@@ -3425,11 +3412,14 @@ export interface CreateDBClusterMessage {
   DomainIAMRoleName?: string;
 
   /**
-   * <p>A value that indicates whether to enable write operations to be forwarded
-   *       from this cluster to the primary cluster in an Aurora global database. The
-   *       resulting changes are replicated back to this cluster. This parameter only
-   *       applies to DB clusters that are secondary clusters in an Aurora global database.
-   *       By default, Aurora disallows write operations for secondary clusters.</p>
+   * <p>A value that indicates whether to enable this DB cluster to forward write operations to the primary cluster of an
+   *       Aurora global database (<a>GlobalCluster</a>). By default, write operations are not allowed on Aurora DB clusters that
+   *       are secondary clusters in an Aurora global database.</p>
+   *          <p>You can set this value only on Aurora DB clusters that are members of an Aurora global database. With this parameter
+   *       enabled, a secondary cluster can forward writes to the current primary cluster and the resulting changes are replicated back to
+   *       this cluster. For the primary DB cluster of an Aurora global database, this value is used immediately if the
+   *         primary is demoted by the <a>FailoverGlobalCluster</a> API operation, but it does nothing until then.
+   *     </p>
    */
   EnableGlobalWriteForwarding?: boolean;
 }
@@ -3578,6 +3568,64 @@ export enum WriteForwardingStatus {
   ENABLED = "enabled",
   ENABLING = "enabling",
   UNKNOWN = "unknown",
+}
+
+/**
+ * <p>A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.</p>
+ */
+export interface PendingCloudwatchLogsExports {
+  /**
+   * <p>Log types that are in the process of being deactivated. After they are deactivated, these log types aren't exported to CloudWatch Logs.</p>
+   */
+  LogTypesToEnable?: string[];
+
+  /**
+   * <p>Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.</p>
+   */
+  LogTypesToDisable?: string[];
+}
+
+export namespace PendingCloudwatchLogsExports {
+  export const filterSensitiveLog = (obj: PendingCloudwatchLogsExports): any => ({
+    ...obj,
+  });
+}
+
+/**
+ * <p>This data type is used as a response element in the <code>ModifyDBCluster</code> operation and
+ *             contains changes that will be applied during the next maintenance window.</p>
+ */
+export interface ClusterPendingModifiedValues {
+  /**
+   * <p>A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.</p>
+   */
+  PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
+
+  /**
+   * <p>The DBClusterIdentifier value for the DB cluster.</p>
+   */
+  DBClusterIdentifier?: string;
+
+  /**
+   * <p>The master credentials for the DB cluster.</p>
+   */
+  MasterUserPassword?: string;
+
+  /**
+   * <p>A value that indicates whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.</p>
+   */
+  IAMDatabaseAuthenticationEnabled?: boolean;
+
+  /**
+   * <p>The database engine version.</p>
+   */
+  EngineVersion?: string;
+}
+
+export namespace ClusterPendingModifiedValues {
+  export const filterSensitiveLog = (obj: ClusterPendingModifiedValues): any => ({
+    ...obj,
+  });
 }
 
 /**
@@ -3954,6 +4002,12 @@ export interface DBCluster {
    *       before using the write forwarding feature for this cluster.</p>
    */
   GlobalWriteForwardingRequested?: boolean;
+
+  /**
+   * <p>A value that specifies that changes to the DB cluster are pending. This element is only included when changes are pending.
+   *           Specific changes are identified by subelements.</p>
+   */
+  PendingModifiedValues?: ClusterPendingModifiedValues;
 }
 
 export namespace DBCluster {
@@ -4077,7 +4131,7 @@ export namespace DomainNotFoundFault {
 }
 
 /**
- * <p></p>
+ * <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster. </p>
  */
 export interface GlobalClusterNotFoundFault extends __SmithyException, $MetadataBearer {
   name: "GlobalClusterNotFoundFault";
@@ -4124,7 +4178,7 @@ export namespace InvalidDBSubnetGroupStateFault {
 }
 
 /**
- * <p></p>
+ * <p>The global cluster is in an invalid state and can't perform the requested operation. </p>
  */
 export interface InvalidGlobalClusterStateFault extends __SmithyException, $MetadataBearer {
   name: "InvalidGlobalClusterStateFault";
@@ -4550,7 +4604,8 @@ export interface CreateDBInstanceMessage {
    *          <p>
    *             <b>PostgreSQL</b>
    *          </p>
-   *          <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, the default "postgres" database is created in the DB instance.</p>
+   *          <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, a database named <code>postgres</code>
+   *           is created in the DB instance.</p>
    *          <p>Constraints:</p>
    *          <ul>
    *             <li>
@@ -4583,17 +4638,39 @@ export interface CreateDBInstanceMessage {
    *          </p>
    *          <p>Not applicable. Must be null.</p>
    *          <p>
-   *             <b>Amazon Aurora</b>
+   *             <b>Amazon Aurora MySQL</b>
    *          </p>
-   *          <p>The name of the database to create when the primary instance of the DB cluster is created.
-   *         If this parameter isn't specified, no database is created in the DB instance.</p>
+   *          <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is
+   *           created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created
+   *           in the DB cluster.</p>
    *          <p>Constraints:</p>
    *          <ul>
    *             <li>
-   *                <p>Must contain 1 to 64 letters or numbers.</p>
+   *               <p>It must contain 1 to 64 alphanumeric characters.</p>
    *             </li>
    *             <li>
-   *                <p>Can't be a word reserved by the specified database engine</p>
+   *               <p>It can't be a word reserved by the database engine.</p>
+   *             </li>
+   *          </ul>
+   *          <p>
+   *             <b>Amazon Aurora PostgreSQL</b>
+   *          </p>
+   *          <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is
+   *           created. If this parameter isn't specified for an Aurora PostgreSQL DB cluster,
+   *           a database named <code>postgres</code> is created in the DB cluster.</p>
+   *          <p>Constraints:</p>
+   *          <ul>
+   *             <li>
+   *               <p>It must contain 1 to 63 alphanumeric characters.</p>
+   *             </li>
+   *             <li>
+   *               <p>It must begin with a letter or an underscore.
+   *                   Subsequent characters can be letters, underscores, or digits
+   *                   (0 to 9).</p>
+   *             </li>
+   *             <li>
+   *               <p>It can't be a word reserved by the
+   *                   database engine.</p>
    *             </li>
    *          </ul>
    */
@@ -5009,8 +5086,7 @@ export interface CreateDBInstanceMessage {
    *                 in.</p>
    *             <p>For more information about RDS on VMware, see the
    *               <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
-   *                   <i>RDS on VMware User Guide.</i>
-   *                </a>
+   *                   RDS on VMware User Guide.</a>
    *             </p>
    *          </note>
    */
@@ -5229,7 +5305,7 @@ export interface CreateDBInstanceMessage {
    *             <b>PostgreSQL</b>
    *          </p>
    *
-   *          <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions">Supported PostgreSQL Database Versions</a> in the
+   *          <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts">Amazon RDS for PostgreSQL versions and extensions</a> in the
    *           <i>Amazon RDS User Guide.</i>
    *          </p>
    */
@@ -5260,7 +5336,7 @@ export interface CreateDBInstanceMessage {
   Iops?: number;
 
   /**
-   * <p>Indicates that the DB instance should be associated with the specified option group.</p>
+   * <p>A value that indicates that the DB instance should be associated with the specified option group.</p>
    *          <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group. Also, that option group can't be removed from a DB instance once it is associated with a DB instance</p>
    */
   OptionGroupName?: string;
@@ -5499,7 +5575,8 @@ export interface CreateDBInstanceMessage {
    *         <p>
    *             <b>Oracle</b>
    *         </p>
-   *         <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, and <code>trace</code>.
+   *         <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, <code>trace</code>, and
+   *             <code>oemagent</code>.
    *         </p>
    *         <p>
    *             <b>PostgreSQL</b>
@@ -5533,8 +5610,26 @@ export interface CreateDBInstanceMessage {
 
   /**
    * <p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>
+   *         <p>For more information about this setting, including limitations that apply to it, see
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling">
+   *                 Managing capacity automatically with Amazon RDS storage autoscaling</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
    */
   MaxAllocatedStorage?: number;
+
+  /**
+   * <p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS
+   *             on Outposts DB instance.</p>
+   *         <p>A <i>CoIP</i> provides local or external connectivity to resources in
+   *             your Outpost subnets through your on-premises network. For some use cases, a CoIP can
+   *             provide lower latency for connections to the DB instance from outside of its virtual
+   *             private cloud (VPC) on your local network.</p>
+   *         <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
+   *         <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a>
+   *             in the <i>AWS Outposts User Guide</i>.</p>
+   */
+  EnableCustomerOwnedIp?: boolean;
 }
 
 export namespace CreateDBInstanceMessage {
@@ -5858,70 +5953,44 @@ export namespace OptionGroupMembership {
 }
 
 /**
- * <p>A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.</p>
- */
-export interface PendingCloudwatchLogsExports {
-  /**
-   * <p>Log types that are in the process of being deactivated. After they are deactivated, these log types aren't exported to CloudWatch Logs.</p>
-   */
-  LogTypesToEnable?: string[];
-
-  /**
-   * <p>Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.</p>
-   */
-  LogTypesToDisable?: string[];
-}
-
-export namespace PendingCloudwatchLogsExports {
-  export const filterSensitiveLog = (obj: PendingCloudwatchLogsExports): any => ({
-    ...obj,
-  });
-}
-
-/**
  * <p>
- *         This data type is used as a response element in the <code>ModifyDBInstance</code> action.
- *         </p>
+ *         This data type is used as a response element in the <code>ModifyDBInstance</code> operation and
+ *           contains changes that will be applied during the next maintenance window.
+ *        </p>
  */
 export interface PendingModifiedValues {
   /**
-   * <p>
-   *         Contains the new <code>DBInstanceClass</code> for the DB instance
-   *           that will be applied or is currently being applied.
-   *         </p>
+   * <p>The name of the compute and memory capacity class for the DB instance.</p>
    */
   DBInstanceClass?: string;
 
   /**
-   * <p>
-   *         Contains the new <code>AllocatedStorage</code> size for the DB instance
-   *           that will be applied or is currently being applied.
-   *         </p>
+   * <p>The allocated storage size for the DB instance specified in gibibytes .</p>
    */
   AllocatedStorage?: number;
 
   /**
-   * <p>Contains the pending or currently-in-progress change of the master credentials for the DB instance.</p>
+   * <p>The master credentials for the DB instance.</p>
    */
   MasterUserPassword?: string;
 
   /**
-   * <p>Specifies the pending port for the DB instance.</p>
+   * <p>The port for the DB instance.</p>
    */
   Port?: number;
 
   /**
-   * <p>Specifies the pending number of days for which automated backups are retained.</p>
+   * <p>The number of days for which automated backups are retained.</p>
    */
   BackupRetentionPeriod?: number;
 
   /**
-   * <p>Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.</p>
+   * <p>A value that indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.</p>
    */
   MultiAZ?: boolean;
 
   /**
-   * <p>Indicates the database engine version.</p>
+   * <p>The database engine version.</p>
    */
   EngineVersion?: string;
 
@@ -5934,31 +6003,27 @@ export interface PendingModifiedValues {
   LicenseModel?: string;
 
   /**
-   * <p>Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.</p>
+   * <p>The Provisioned IOPS value for the DB instance.</p>
    */
   Iops?: number;
 
   /**
-   * <p>
-   *             Contains the new <code>DBInstanceIdentifier</code> for the DB instance
-   *             that will be applied or is currently being applied.
-   *         </p>
+   * <p>The  database identifier for the DB instance.</p>
    */
   DBInstanceIdentifier?: string;
 
   /**
-   * <p>Specifies the storage type to be associated with the DB instance.</p>
+   * <p>The storage type of the DB instance.</p>
    */
   StorageType?: string;
 
   /**
-   * <p>Specifies the identifier of the CA certificate for the DB instance.</p>
+   * <p>The identifier of the CA certificate for the DB instance.</p>
    */
   CACertificateIdentifier?: string;
 
   /**
-   * <p>The new DB subnet group for the DB instance.
-   *         </p>
+   * <p>The DB subnet group for the DB instance.</p>
    */
   DBSubnetGroupName?: string;
 
@@ -5972,6 +6037,11 @@ export interface PendingModifiedValues {
    *             of the DB instance.</p>
    */
   ProcessorFeatures?: ProcessorFeature[];
+
+  /**
+   * <p>Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.</p>
+   */
+  IAMDatabaseAuthenticationEnabled?: boolean;
 }
 
 export namespace PendingModifiedValues {
@@ -6130,7 +6200,7 @@ export interface DBInstance {
   PreferredMaintenanceWindow?: string;
 
   /**
-   * <p>Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.</p>
+   * <p>A value that specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.</p>
    */
   PendingModifiedValues?: PendingModifiedValues;
 
@@ -6150,7 +6220,7 @@ export interface DBInstance {
   EngineVersion?: string;
 
   /**
-   * <p>Indicates that minor version patches are applied automatically.</p>
+   * <p>A value that indicates that minor version patches are applied automatically.</p>
    */
   AutoMinorVersionUpgrade?: boolean;
 
@@ -6421,6 +6491,24 @@ export interface DBInstance {
    * <p>The list of replicated automated backups associated with the DB instance.</p>
    */
   DBInstanceAutomatedBackupsReplications?: DBInstanceAutomatedBackupsReplication[];
+
+  /**
+   * <p>Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on Outposts DB instance.</p>
+   *         <p>A <i>CoIP </i>provides local or external connectivity to resources in
+   *             your Outpost subnets through your on-premises network. For some use cases, a CoIP can
+   *             provide lower latency for connections to the DB instance from outside of its virtual
+   *             private cloud (VPC) on your local network.</p>
+   *         <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
+   *         <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a>
+   *             in the <i>AWS Outposts User Guide</i>.</p>
+   */
+  CustomerOwnedIpEnabled?: boolean;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the recovery point in AWS Backup.</p>
+   */
+  AwsBackupRecoveryPointArn?: string;
 }
 
 export namespace DBInstance {
@@ -6759,8 +6847,8 @@ export interface CreateDBInstanceReadReplicaMessage {
    * <p>The AWS KMS key identifier for an encrypted read replica.</p>
    *         <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p>
    *         <p>If you create an encrypted read replica in the same AWS Region as the source DB
-   *             instance, then you do not have to specify a value for this parameter. The read replica
-   *             is encrypted with the same AWS KMS CMK as the source DB instance.</p>
+   *             instance, then do not specify a value for this parameter. A read replica in the same Region
+   *             is always encrypted with the same AWS KMS CMK as the source DB instance.</p>
    *         <p>If you create an encrypted read replica in a different AWS Region, then you must
    *             specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to
    *             the AWS Region that they are created in, and you can't use CMKs from one
@@ -6930,6 +7018,10 @@ export interface CreateDBInstanceReadReplicaMessage {
 
   /**
    * <p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>
+   *         <p>For more information about this setting, including limitations that apply to it, see
+   *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling">
+   *                 Managing capacity automatically with Amazon RDS storage autoscaling</a>
+   *             in the <i>Amazon RDS User Guide</i>.</p>
    */
   MaxAllocatedStorage?: number;
 }
@@ -7881,6 +7973,59 @@ export namespace CreateGlobalClusterMessage {
   });
 }
 
+export enum FailoverStatus {
+  CANCELLING = "cancelling",
+  FAILING_OVER = "failing-over",
+  PENDING = "pending",
+}
+
+/**
+ * <p>Contains the state of scheduled or in-process failover operations on an
+ *       Aurora global database (<a>GlobalCluster</a>). This Data type is empty unless a failover
+ *       operation is scheduled or is currently underway on the Aurora global database. </p>
+ */
+export interface FailoverState {
+  /**
+   * <p>The current status of the Aurora global database (<a>GlobalCluster</a>). Possible values are as follows:
+   *     </p>
+   *          <ul>
+   *             <li>
+   *                <p>pending  A request to fail over the Aurora global database (<a>GlobalCluster</a>) has been received by the service. The
+   *         <code>GlobalCluster</code>'s primary DB cluster and the specified secondary DB cluster are being verified before the failover
+   *         process can start.</p>
+   *             </li>
+   *             <li>
+   *                <p>failing-over  This status covers the range of Aurora internal operations that take place during the failover process, such
+   *         as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB, and synchronizing replicas. </p>
+   *             </li>
+   *             <li>
+   *                <p>cancelling  The request to fail over the Aurora global database (<a>GlobalCluster</a>) was cancelled and the primary
+   *         Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states.
+   *       </p>
+   *             </li>
+   *          </ul>
+   */
+  Status?: FailoverStatus | string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being demoted, and which is associated with this
+   *        state. </p>
+   */
+  FromDbClusterArn?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being promoted, and which is associated
+   *      with this state.</p>
+   */
+  ToDbClusterArn?: string;
+}
+
+export namespace FailoverState {
+  export const filterSensitiveLog = (obj: FailoverState): any => ({
+    ...obj,
+  });
+}
+
 /**
  * <p>
  *         A data structure with information about any primary and
@@ -7995,6 +8140,13 @@ export interface GlobalCluster {
    *       </p>
    */
   GlobalClusterMembers?: GlobalClusterMember[];
+
+  /**
+   * <p>A data object containing all properties for the current state of an in-process or pending failover process for this Aurora global database.
+   *       This object is empty unless the <a>FailoverGlobalCluster</a> API operation has been called on this Aurora global database (<a>GlobalCluster</a>).
+   *     </p>
+   */
+  FailoverState?: FailoverState;
 }
 
 export namespace GlobalCluster {
@@ -8017,7 +8169,7 @@ export namespace CreateGlobalClusterResult {
 }
 
 /**
- * <p></p>
+ * <p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global database identifier (unique name) to create a new global database cluster.</p>
  */
 export interface GlobalClusterAlreadyExistsFault extends __SmithyException, $MetadataBearer {
   name: "GlobalClusterAlreadyExistsFault";
@@ -8032,7 +8184,7 @@ export namespace GlobalClusterAlreadyExistsFault {
 }
 
 /**
- * <p></p>
+ * <p>The number of global database clusters for this account is already at the maximum allowed.</p>
  */
 export interface GlobalClusterQuotaExceededFault extends __SmithyException, $MetadataBearer {
   name: "GlobalClusterQuotaExceededFault";
@@ -8071,6 +8223,65 @@ export interface CreateOptionGroupMessage {
 
   /**
    * <p>Specifies the name of the engine that this option group should be associated with.</p>
+   *          <p>Valid Values:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>mariadb</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mysql</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se2</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se1</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>postgres</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ex</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-web</code>
+   *                </p>
+   *             </li>
+   *          </ul>
    */
   EngineName: string | undefined;
 
@@ -8127,8 +8338,7 @@ export interface DeleteCustomAvailabilityZoneResult {
    * <p>A custom Availability Zone (AZ) is an on-premises AZ that is integrated with a VMware vSphere cluster.</p>
    *         <p>For more information about RDS on VMware, see the
    *             <a href="https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html">
-   *                 <i>RDS on VMware User Guide.</i>
-   *             </a>
+   *                 RDS on VMware User Guide.</a>
    *          </p>
    */
   CustomAvailabilityZone?: CustomAvailabilityZone;
@@ -10277,9 +10487,24 @@ export interface UpgradeTarget {
   AutoUpgrade?: boolean;
 
   /**
-   * <p>A value that indicates whether a database engine is upgraded to a major version.</p>
+   * <p>A value that indicates whether upgrading to the target version requires upgrading the major version of the database engine.</p>
    */
   IsMajorVersionUpgrade?: boolean;
+
+  /**
+   * <p>A list of the supported DB engine modes for the target engine version.</p>
+   */
+  SupportedEngineModes?: string[];
+
+  /**
+   * <p>A value that indicates whether you can use Aurora parallel query with the target engine version.</p>
+   */
+  SupportsParallelQuery?: boolean;
+
+  /**
+   * <p>A value that indicates whether you can use Aurora global databases with the target engine version.</p>
+   */
+  SupportsGlobalDatabases?: boolean;
 }
 
 export namespace UpgradeTarget {
@@ -10439,6 +10664,78 @@ export namespace DBEngineVersionMessage {
 export interface DescribeDBEngineVersionsMessage {
   /**
    * <p>The database engine to return.</p>
+   *          <p>Valid Values:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora)</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>aurora-postgresql</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mariadb</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>mysql</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se2</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se1</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>oracle-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>postgres</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ee</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-se</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-ex</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>sqlserver-web</code>
+   *                </p>
+   *             </li>
+   *          </ul>
    */
   Engine?: string;
 
@@ -10581,26 +10878,23 @@ export interface DescribeDBInstanceAutomatedBackupsMessage {
    *                   </li>
    *                   <li>
    *                      <p>
-   *                         <code>retained</code> - automated backups for deleted instances</p>
+   *                         <code>retained</code> - automated backups for deleted instances and after backup replication is stopped</p>
    *                   </li>
    *                   <li>
    *                      <p>
-   *                         <code>creating</code> - automated backups that are waiting
-   * 			        for the first automated snapshot to be available</p>
+   *                         <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available</p>
    *                   </li>
    *                </ul>
    * 			         </li>
    *             <li>
    *                <p>
-   * 		                <code>db-instance-id</code> - Accepts DB instance identifiers and
-   * 		        Amazon Resource Names (ARNs) for DB instances. The results list includes only information about
-   * 		        the DB instance automated backupss identified by these ARNs.</p>
+   * 		                <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs).
+   * 		        The results list includes only information about the DB instance automated backups identified by these ARNs.</p>
    * 		          </li>
    *             <li>
    *                <p>
-   * 		                <code>dbi-resource-id</code> - Accepts DB instance resource identifiers and DB
-   * 		        Amazon Resource Names (ARNs) for DB instances. The results list includes only information about
-   * 		        the DB instance resources identified by these ARNs.</p>
+   * 		                <code>dbi-resource-id</code> - Accepts DB resource identifiers and Amazon Resource Names (ARNs).
+   * 		        The results list includes only information about the DB instance resources identified by these ARNs.</p>
    * 		          </li>
    *          </ul>
    * 		       <p>Returns all resources by default. The status for each resource is specified in the response.</p>
@@ -11965,65 +12259,6 @@ export interface DescribeEngineDefaultParametersMessage {
 
 export namespace DescribeEngineDefaultParametersMessage {
   export const filterSensitiveLog = (obj: DescribeEngineDefaultParametersMessage): any => ({
-    ...obj,
-  });
-}
-
-export interface DescribeEngineDefaultParametersResult {
-  /**
-   * <p>
-   *             Contains the result of a successful invocation of the <code>DescribeEngineDefaultParameters</code> action.
-   *         </p>
-   */
-  EngineDefaults?: EngineDefaults;
-}
-
-export namespace DescribeEngineDefaultParametersResult {
-  export const filterSensitiveLog = (obj: DescribeEngineDefaultParametersResult): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p></p>
- */
-export interface DescribeEventCategoriesMessage {
-  /**
-   * <p>The type of source that is generating the events.</p>
-   *          <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code>
-   *          </p>
-   */
-  SourceType?: string;
-
-  /**
-   * <p>This parameter isn't currently supported.</p>
-   */
-  Filters?: Filter[];
-}
-
-export namespace DescribeEventCategoriesMessage {
-  export const filterSensitiveLog = (obj: DescribeEventCategoriesMessage): any => ({
-    ...obj,
-  });
-}
-
-/**
- * <p>Contains the results of a successful invocation of the <code>DescribeEventCategories</code> operation.</p>
- */
-export interface EventCategoriesMap {
-  /**
-   * <p>The source type that the returned categories belong to</p>
-   */
-  SourceType?: string;
-
-  /**
-   * <p>The event categories for the specified source type</p>
-   */
-  EventCategories?: string[];
-}
-
-export namespace EventCategoriesMap {
-  export const filterSensitiveLog = (obj: EventCategoriesMap): any => ({
     ...obj,
   });
 }

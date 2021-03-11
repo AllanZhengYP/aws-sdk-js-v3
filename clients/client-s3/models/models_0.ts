@@ -425,12 +425,12 @@ export interface CopyObjectResult {
   /**
    * <p>Returns the ETag of the new object. The ETag reflects only changes to the contents of an
    *          object, not its metadata. The source and destination ETag is identical for a successfully
-   *          copied object.</p>
+   *          copied non-multipart object.</p>
    */
   ETag?: string;
 
   /**
-   * <p>Returns the date that the object was last modified.</p>
+   * <p>Creation date of the object.</p>
    */
   LastModified?: Date;
 }
@@ -3554,7 +3554,12 @@ export namespace DeleteObjectsOutput {
  */
 export interface ObjectIdentifier {
   /**
-   * <p>Key name of the object to delete.</p>
+   * <p>Key name of the object.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   Key: string | undefined;
 
@@ -3660,7 +3665,7 @@ export interface DeleteObjectTaggingRequest {
   Bucket: string | undefined;
 
   /**
-   * <p>Name of the object key.</p>
+   * <p>The key that identifies the object in the bucket from which to remove all tags.</p>
    */
   Key: string | undefined;
 
@@ -4291,6 +4296,11 @@ export interface IntelligentTieringFilter {
   /**
    * <p>An object key name prefix that identifies the subset of objects to which the rule
    *          applies.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   Prefix?: string;
 
@@ -4742,6 +4752,11 @@ export type LifecycleRuleFilter =
 export namespace LifecycleRuleFilter {
   /**
    * <p>Prefix identifying one or more objects to which the rule applies.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   export interface PrefixMember {
     Prefix: string;
@@ -4908,6 +4923,11 @@ export interface LifecycleRule {
    *
    * <p>Prefix identifying one or more objects to which the rule applies. This is
    *          No longer used; use <code>Filter</code> instead.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   Prefix?: string;
 
@@ -5933,6 +5953,11 @@ export namespace ReplicationRuleFilter {
   /**
    * <p>An object key name prefix that identifies the subset of objects to which the rule
    *          applies.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   export interface PrefixMember {
     Prefix: string;
@@ -6112,6 +6137,11 @@ export interface ReplicationRule {
    * <p>An object key name prefix that identifies the object or objects to which the rule
    *          applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket,
    *          specify an empty string. </p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   Prefix?: string;
 
@@ -6344,6 +6374,11 @@ export namespace GetBucketVersioningRequest {
 export interface ErrorDocument {
   /**
    * <p>The object key name to use when a 4XX class error occurs.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   Key: string | undefined;
 }
@@ -6363,6 +6398,11 @@ export interface IndexDocument {
    *          (for example,if the suffix is index.html and you make a request to samplebucket/images/ the
    *          data that is returned will be for the object with the key name images/index.html) The
    *          suffix must not be empty and must not include a slash character.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   Suffix: string | undefined;
 }
@@ -6423,6 +6463,11 @@ export interface Condition {
    *             <code>Condition</code> is specified and sibling <code>HttpErrorCodeReturnedEquals</code>
    *          is not specified. If both conditions are specified, both must be true for the redirect to
    *          be applied.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   KeyPrefixEquals?: string;
 }
@@ -6462,6 +6507,11 @@ export interface Redirect {
    *          set to <code>docs/</code> and in the Redirect set <code>ReplaceKeyPrefixWith</code> to
    *             <code>/documents</code>. Not required if one of the siblings is present. Can be present
    *          only if <code>ReplaceKeyWith</code> is not provided.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   ReplaceKeyPrefixWith?: string;
 
@@ -6469,6 +6519,11 @@ export interface Redirect {
    * <p>The specific object key to use in the redirect request. For example, redirect request to
    *             <code>error.html</code>. Not required if one of the siblings is present. Can be present
    *          only if <code>ReplaceKeyPrefixWith</code> is not provided.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   ReplaceKeyWith?: string;
 }
@@ -6588,7 +6643,7 @@ export interface GetObjectOutput {
   Restore?: string;
 
   /**
-   * <p>Last modified date of the object</p>
+   * <p>Creation date of the object.</p>
    */
   LastModified?: Date;
 
@@ -6830,15 +6885,15 @@ export interface GetObjectRequest {
   VersionId?: string;
 
   /**
-   * <p>Specifies the algorithm to use to when encrypting the object (for example,
+   * <p>Specifies the algorithm to use to when decrypting the object (for example,
    *          AES256).</p>
    */
   SSECustomerAlgorithm?: string;
 
   /**
-   * <p>Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This
-   *          value is used to store the object and then it is discarded; Amazon S3 does not store the
-   *          encryption key. The key must be appropriate for use with the algorithm specified in the
+   * <p>Specifies the customer-provided encryption key for Amazon S3 used to encrypt the data. This
+   *          value is used to decrypt the object when recovering it and must match the one used when
+   *          storing the data. The key must be appropriate for use with the algorithm specified in the
    *             <code>x-amz-server-side-encryption-customer-algorithm</code> header.</p>
    */
   SSECustomerKey?: string;
@@ -7248,6 +7303,14 @@ export interface GetObjectTaggingRequest {
    * <p>The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>
    */
   ExpectedBucketOwner?: string;
+
+  /**
+   * <p>Confirms that the requester knows that they will be charged for the request. Bucket
+   *          owners need not specify this parameter in their requests. For information about downloading
+   *          objects from requester pays buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html">Downloading Objects in
+   *             Requestor Pays Buckets</a> in the <i>Amazon S3 Developer Guide</i>.</p>
+   */
+  RequestPayer?: RequestPayer | string;
 }
 
 export namespace GetObjectTaggingRequest {
@@ -7421,15 +7484,15 @@ export namespace HeadBucketRequest {
 }
 
 /**
- * <p>The specified bucket does not exist.</p>
+ * <p>The specified content does not exist.</p>
  */
-export interface NoSuchBucket extends __SmithyException, $MetadataBearer {
-  name: "NoSuchBucket";
+export interface NotFound extends __SmithyException, $MetadataBearer {
+  name: "NotFound";
   $fault: "client";
 }
 
-export namespace NoSuchBucket {
-  export const filterSensitiveLog = (obj: NoSuchBucket): any => ({
+export namespace NotFound {
+  export const filterSensitiveLog = (obj: NotFound): any => ({
     ...obj,
   });
 }
@@ -7480,7 +7543,7 @@ export interface HeadObjectOutput {
   ArchiveStatus?: ArchiveStatus | string;
 
   /**
-   * <p>Last modified date of the object</p>
+   * <p>Creation date of the object.</p>
    */
   LastModified?: Date;
 
@@ -8326,7 +8389,7 @@ export interface _Object {
   Key?: string;
 
   /**
-   * <p>The date the Object was Last Modified</p>
+   * <p>Creation date of the object.</p>
    */
   LastModified?: Date;
 
@@ -8429,7 +8492,7 @@ export interface ListObjectsOutput {
   MaxKeys?: number;
 
   /**
-   * <p>All of the keys rolled up in a common prefix count as a single return when calculating
+   * <p>All of the keys (up to 1,000) rolled up in a common prefix count as a single return when calculating
    *          the number of returns. </p>
    *
    *          <p>A response can contain CommonPrefixes only if you specify a delimiter.</p>
@@ -8515,6 +8578,20 @@ export namespace ListObjectsRequest {
   });
 }
 
+/**
+ * <p>The specified bucket does not exist.</p>
+ */
+export interface NoSuchBucket extends __SmithyException, $MetadataBearer {
+  name: "NoSuchBucket";
+  $fault: "client";
+}
+
+export namespace NoSuchBucket {
+  export const filterSensitiveLog = (obj: NoSuchBucket): any => ({
+    ...obj,
+  });
+}
+
 export interface ListObjectsV2Output {
   /**
    * <p>Set to false if all of the results were returned. Set to true if more keys are available
@@ -8556,7 +8633,7 @@ export interface ListObjectsV2Output {
   MaxKeys?: number;
 
   /**
-   * <p>All of the keys rolled up into a common prefix count as a single return when calculating
+   * <p>All of the keys (up to 1,000) rolled up into a common prefix count as a single return when calculating
    *          the number of returns.</p>
    *
    *          <p>A response can contain <code>CommonPrefixes</code> only if you specify a
@@ -8591,7 +8668,7 @@ export interface ListObjectsV2Output {
 
   /**
    * <p>KeyCount is the number of keys returned with this request. KeyCount will always be less
-   *          than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than
+   *          than or equals to MaxKeys field. Say you ask for 50 keys, your result will include less than
    *          equals 50 keys </p>
    */
   KeyCount?: number;
@@ -9658,7 +9735,7 @@ export interface PutBucketRequestPaymentRequest {
   Bucket: string | undefined;
 
   /**
-   * <p>>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
+   * <p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
    *          message integrity check to verify that the request body was not corrupted in transit. For
    *          more information, see <a href="http://www.ietf.org/rfc/rfc1864.txt">RFC
    *          1864</a>.</p>
@@ -10512,6 +10589,14 @@ export interface PutObjectTaggingRequest {
    * <p>The account id of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>
    */
   ExpectedBucketOwner?: string;
+
+  /**
+   * <p>Confirms that the requester knows that they will be charged for the request. Bucket
+   *          owners need not specify this parameter in their requests. For information about downloading
+   *          objects from requester pays buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html">Downloading Objects in
+   *             Requestor Pays Buckets</a> in the <i>Amazon S3 Developer Guide</i>.</p>
+   */
+  RequestPayer?: RequestPayer | string;
 }
 
 export namespace PutObjectTaggingRequest {
@@ -10602,38 +10687,5 @@ export interface GlacierJobParameters {
 export namespace GlacierJobParameters {
   export const filterSensitiveLog = (obj: GlacierJobParameters): any => ({
     ...obj,
-  });
-}
-
-/**
- * <p>Contains the type of server-side encryption used.</p>
- */
-export interface Encryption {
-  /**
-   * <p>The server-side encryption algorithm used when storing job results in Amazon S3 (for example,
-   *          AES256, aws:kms).</p>
-   */
-  EncryptionType: ServerSideEncryption | string | undefined;
-
-  /**
-   * <p>If the encryption type is <code>aws:kms</code>, this optional value specifies the ID of
-   *          the symmetric customer managed AWS KMS CMK to use for encryption of job results. Amazon S3 only
-   *          supports symmetric CMKs. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and
-   *             Asymmetric Keys</a> in the <i>AWS Key Management Service Developer
-   *             Guide</i>.</p>
-   */
-  KMSKeyId?: string;
-
-  /**
-   * <p>If the encryption type is <code>aws:kms</code>, this optional value can be used to
-   *          specify the encryption context for the restore results.</p>
-   */
-  KMSContext?: string;
-}
-
-export namespace Encryption {
-  export const filterSensitiveLog = (obj: Encryption): any => ({
-    ...obj,
-    ...(obj.KMSKeyId && { KMSKeyId: SENSITIVE_STRING }),
   });
 }

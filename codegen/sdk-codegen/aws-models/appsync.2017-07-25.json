@@ -1023,6 +1023,9 @@
             "smithy.api#documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value\n         is 2018-05-29. </p>",
             "smithy.api#required": {}
           }
+        },
+        "syncConfig": {
+          "target": "com.amazonaws.appsync#SyncConfig"
         }
       }
     },
@@ -2066,6 +2069,9 @@
           "traits": {
             "smithy.api#documentation": "<p>The version of the request mapping template. Currently only the 2018-05-29 version of\n         the template is supported.</p>"
           }
+        },
+        "syncConfig": {
+          "target": "com.amazonaws.appsync#SyncConfig"
         }
       },
       "traits": {
@@ -4441,6 +4447,9 @@
             "smithy.api#documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value\n         is 2018-05-29. </p>",
             "smithy.api#required": {}
           }
+        },
+        "syncConfig": {
+          "target": "com.amazonaws.appsync#SyncConfig"
         }
       }
     },

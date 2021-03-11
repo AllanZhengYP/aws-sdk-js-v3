@@ -23,8 +23,8 @@ export type DeactivateMFADeviceCommandOutput = __MetadataBearer;
 /**
  * <p>Deactivates the specified MFA device and removes it from association with the user name
  *          for which it was originally enabled.</p>
- *          <p>For more information about creating and working with virtual MFA devices, go to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html">Enabling a Virtual
- *             Multi-factor Authentication (MFA) Device</a> in the
+ *          <p>For more information about creating and working with virtual MFA devices, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html">Enabling a virtual
+ *             multi-factor authentication (MFA) device</a> in the
  *             <i>IAM User Guide</i>.</p>
  */
 export class DeactivateMFADeviceCommand extends $Command<

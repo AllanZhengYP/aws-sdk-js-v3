@@ -3182,6 +3182,7 @@ export namespace UpdateModelVersionResult {
 export enum ModelVersionStatus {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE",
+  TRAINING_CANCELLED = "TRAINING_CANCELLED",
 }
 
 export interface UpdateModelVersionStatusRequest {

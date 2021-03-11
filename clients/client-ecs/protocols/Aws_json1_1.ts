@@ -9745,6 +9745,10 @@ const deserializeAws_json1_1TaskDefinition = (output: any, context: __SerdeConte
         ? deserializeAws_json1_1ContainerDefinitions(output.containerDefinitions, context)
         : undefined,
     cpu: output.cpu !== undefined && output.cpu !== null ? output.cpu : undefined,
+    deregisteredAt:
+      output.deregisteredAt !== undefined && output.deregisteredAt !== null
+        ? new Date(Math.round(output.deregisteredAt * 1000))
+        : undefined,
     executionRoleArn:
       output.executionRoleArn !== undefined && output.executionRoleArn !== null ? output.executionRoleArn : undefined,
     family: output.family !== undefined && output.family !== null ? output.family : undefined,
@@ -9764,6 +9768,11 @@ const deserializeAws_json1_1TaskDefinition = (output: any, context: __SerdeConte
       output.proxyConfiguration !== undefined && output.proxyConfiguration !== null
         ? deserializeAws_json1_1ProxyConfiguration(output.proxyConfiguration, context)
         : undefined,
+    registeredAt:
+      output.registeredAt !== undefined && output.registeredAt !== null
+        ? new Date(Math.round(output.registeredAt * 1000))
+        : undefined,
+    registeredBy: output.registeredBy !== undefined && output.registeredBy !== null ? output.registeredBy : undefined,
     requiresAttributes:
       output.requiresAttributes !== undefined && output.requiresAttributes !== null
         ? deserializeAws_json1_1RequiresAttributes(output.requiresAttributes, context)

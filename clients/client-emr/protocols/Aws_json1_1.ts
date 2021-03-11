@@ -115,6 +115,7 @@ import {
   StopNotebookExecutionCommandOutput,
 } from "../commands/StopNotebookExecutionCommand";
 import { TerminateJobFlowsCommandInput, TerminateJobFlowsCommandOutput } from "../commands/TerminateJobFlowsCommand";
+import { UpdateStudioCommandInput, UpdateStudioCommandOutput } from "../commands/UpdateStudioCommand";
 import {
   UpdateStudioSessionMappingCommandInput,
   UpdateStudioSessionMappingCommandOutput,
@@ -295,6 +296,7 @@ import {
   SupportedProductConfig,
   Tag,
   TerminateJobFlowsInput,
+  UpdateStudioInput,
   UpdateStudioSessionMappingInput,
   VolumeSpecification,
 } from "../models/models_0";
@@ -890,6 +892,19 @@ export const serializeAws_json1_1TerminateJobFlowsCommand = async (
   };
   let body: any;
   body = JSON.stringify(serializeAws_json1_1TerminateJobFlowsInput(input, context));
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_json1_1UpdateStudioCommand = async (
+  input: UpdateStudioCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "content-type": "application/x-amz-json-1.1",
+    "x-amz-target": "ElasticMapReduce.UpdateStudio",
+  };
+  let body: any;
+  body = JSON.stringify(serializeAws_json1_1UpdateStudioInput(input, context));
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
@@ -3525,6 +3540,65 @@ const deserializeAws_json1_1TerminateJobFlowsCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_json1_1UpdateStudioCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<UpdateStudioCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_json1_1UpdateStudioCommandError(output, context);
+  }
+  await collectBody(output.body, context);
+  const response: UpdateStudioCommandOutput = {
+    $metadata: deserializeMetadata(output),
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_json1_1UpdateStudioCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<UpdateStudioCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    case "InternalServerException":
+    case "com.amazonaws.emr#InternalServerException":
+      response = {
+        ...(await deserializeAws_json1_1InternalServerExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidRequestException":
+    case "com.amazonaws.emr#InvalidRequestException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidRequestExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.code || parsedBody.Code || errorCode;
+      response = {
+        ...parsedBody,
+        name: `${errorCode}`,
+        message: parsedBody.message || parsedBody.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_json1_1UpdateStudioSessionMappingCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -5047,6 +5121,18 @@ const serializeAws_json1_1TerminateJobFlowsInput = (input: TerminateJobFlowsInpu
   return {
     ...(input.JobFlowIds !== undefined &&
       input.JobFlowIds !== null && { JobFlowIds: serializeAws_json1_1XmlStringList(input.JobFlowIds, context) }),
+  };
+};
+
+const serializeAws_json1_1UpdateStudioInput = (input: UpdateStudioInput, context: __SerdeContext): any => {
+  return {
+    ...(input.DefaultS3Location !== undefined &&
+      input.DefaultS3Location !== null && { DefaultS3Location: input.DefaultS3Location }),
+    ...(input.Description !== undefined && input.Description !== null && { Description: input.Description }),
+    ...(input.Name !== undefined && input.Name !== null && { Name: input.Name }),
+    ...(input.StudioId !== undefined && input.StudioId !== null && { StudioId: input.StudioId }),
+    ...(input.SubnetIds !== undefined &&
+      input.SubnetIds !== null && { SubnetIds: serializeAws_json1_1SubnetIdList(input.SubnetIds, context) }),
   };
 };
 

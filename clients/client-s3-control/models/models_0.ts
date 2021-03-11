@@ -523,6 +523,11 @@ export namespace BadRequestException {
 export interface JobManifestLocation {
   /**
    * <p>The Amazon Resource Name (ARN) for a manifest object.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   ObjectArn: string | undefined;
 
@@ -602,7 +607,7 @@ export namespace JobManifest {
  */
 export interface LambdaInvokeOperation {
   /**
-   * <p>The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke for each object in the manifest.</p>
+   * <p>The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke on every object in the manifest.</p>
    */
   FunctionArn?: string;
 }
@@ -613,24 +618,48 @@ export namespace LambdaInvokeOperation {
   });
 }
 
+/**
+ * <p>Contains no configuration parameters because the DELETE Object tagging API only accepts the bucket name and key name as parameters, which are defined in the job's manifest.</p>
+ */
+export interface S3DeleteObjectTaggingOperation {}
+
+export namespace S3DeleteObjectTaggingOperation {
+  export const filterSensitiveLog = (obj: S3DeleteObjectTaggingOperation): any => ({
+    ...obj,
+  });
+}
+
 export enum S3GlacierJobTier {
   BULK = "BULK",
   STANDARD = "STANDARD",
 }
 
 /**
- * <p>Contains the configuration parameters for an Initiate Glacier Restore job.
- *          S3 Batch Operations passes each value through to the underlying POST Object restore API. For
+ * <p>Contains the configuration parameters for an S3 Initiate Restore Object job.
+ *          S3 Batch Operations passes every object to the underlying POST Object restore API. For
  *          more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request">RestoreObject</a>.</p>
  */
 export interface S3InitiateRestoreObjectOperation {
   /**
-   * <p></p>
+   * <p>This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive object remains available in Amazon S3.
+   *          S3 Initiate Restore Object jobs that
+   *          target S3 Glacier and S3 Glacier Deep Archive objects require <code>ExpirationInDays</code> set to 1
+   *          or greater.</p>
+   *          <p>Conversely, do <i>not</i> set <code>ExpirationInDays</code> when
+   *          creating S3 Initiate Restore Object jobs that target
+   *          S3 Intelligent-Tiering Archive Access and Deep Archive Access tier objects. Objects in
+   *          S3 Intelligent-Tiering archive access tiers are not subject to restore expiry, so
+   *          specifying <code>ExpirationInDays</code> results in restore request failure.</p>
+   *          <p>S3 Batch Operations jobs can operate either on S3 Glacier and S3 Glacier Deep Archive storage class
+   *          objects or on S3 Intelligent-Tiering Archive Access and Deep Archive Access storage tier
+   *          objects, but not both types in the same job. If you need to restore objects of both types
+   *          you <i>must</i> create separate Batch Operations jobs. </p>
    */
   ExpirationInDays?: number;
 
   /**
-   * <p></p>
+   * <p>S3 Batch Operations supports <code>STANDARD</code> and <code>BULK</code> retrieval tiers,
+   *          but not the <code>EXPEDITED</code> retrieval tier.</p>
    */
   GlacierJobTier?: S3GlacierJobTier | string;
 }
@@ -776,7 +805,7 @@ export namespace S3AccessControlPolicy {
 }
 
 /**
- * <p>Contains the configuration parameters for a Set Object ACL operation. S3 Batch Operations passes each value through to the underlying PUT Object acl API.
+ * <p>Contains the configuration parameters for a Set Object ACL operation. S3 Batch Operations passes every object to the underlying PUT Object acl API.
  *          For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html">PUT Object acl</a>.</p>
  */
 export interface S3SetObjectAclOperation {
@@ -909,7 +938,7 @@ export enum S3StorageClass {
 }
 
 /**
- * <p>Contains the configuration parameters for a PUT Copy object operation. S3 Batch Operations passes each value through to the underlying PUT Copy object
+ * <p>Contains the configuration parameters for a PUT Copy object operation. S3 Batch Operations passes every object to the underlying PUT Copy object
  *          API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html">PUT Object - Copy</a>.</p>
  */
 export interface S3CopyObjectOperation {
@@ -1026,7 +1055,7 @@ export namespace S3ObjectLockLegalHold {
 
 /**
  * <p>Contains the configuration for an S3 Object Lock legal hold operation that an
- *          S3 Batch Operations job passes each object through to the underlying
+ *          S3 Batch Operations job passes every object to the underlying
  *             <code>PutObjectLegalHold</code> API. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html">Using
  *             S3 Object Lock legal hold with S3 Batch Operations</a> in the
  *             <i>Amazon Simple Storage Service Developer Guide</i>.</p>
@@ -1076,7 +1105,7 @@ export namespace S3Retention {
 
 /**
  * <p>Contains the configuration parameters for the Object Lock retention action for an
- *          S3 Batch Operations job. Batch Operations passes each value through to the underlying
+ *          S3 Batch Operations job. Batch Operations passes every object to the underlying
  *             <code>PutObjectRetention</code> API. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html">Using
  *             S3 Object Lock retention with S3 Batch Operations</a> in the
  *             <i>Amazon Simple Storage Service Developer Guide</i>.</p>
@@ -1103,7 +1132,7 @@ export namespace S3SetObjectRetentionOperation {
 }
 
 /**
- * <p>Contains the configuration parameters for a Set Object Tagging operation. S3 Batch Operations passes each value through to the underlying PUT Object tagging API.
+ * <p>Contains the configuration parameters for a Set Object Tagging operation. S3 Batch Operations passes every object to the underlying PUT Object tagging API.
  *          For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html">PUT Object tagging</a>.</p>
  */
 export interface S3SetObjectTaggingOperation {
@@ -1120,39 +1149,44 @@ export namespace S3SetObjectTaggingOperation {
 }
 
 /**
- * <p>The operation that you want this job to perform on each object listed in the manifest.
+ * <p>The operation that you want this job to perform on every object listed in the manifest.
  *          For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Operations</a> in the
  *             <i>Amazon Simple Storage Service Developer Guide</i>.</p>
  */
 export interface JobOperation {
   /**
-   * <p>Directs the specified job to invoke an AWS Lambda function on each object in the manifest.</p>
+   * <p>Directs the specified job to invoke an AWS Lambda function on every object in the manifest.</p>
    */
   LambdaInvoke?: LambdaInvokeOperation;
 
   /**
-   * <p>Directs the specified job to run a PUT Copy object call on each object in the manifest.</p>
+   * <p>Directs the specified job to run a PUT Copy object call on every object in the manifest.</p>
    */
   S3PutObjectCopy?: S3CopyObjectOperation;
 
   /**
-   * <p>Directs the specified job to run a PUT Object acl call on each object in the manifest.</p>
+   * <p>Directs the specified job to run a PUT Object acl call on every object in the manifest.</p>
    */
   S3PutObjectAcl?: S3SetObjectAclOperation;
 
   /**
-   * <p>Directs the specified job to run a PUT Object tagging call on each object in the manifest.</p>
+   * <p>Directs the specified job to run a PUT Object tagging call on every object in the manifest.</p>
    */
   S3PutObjectTagging?: S3SetObjectTaggingOperation;
 
   /**
-   * <p>Directs the specified job to run an Initiate Glacier Restore call on each object in the manifest.</p>
+   * <p>Directs the specified job to execute a DELETE Object tagging call on every object in the manifest.</p>
+   */
+  S3DeleteObjectTagging?: S3DeleteObjectTaggingOperation;
+
+  /**
+   * <p>Directs the specified job to initiate restore requests for every archived object in the manifest.</p>
    */
   S3InitiateRestoreObject?: S3InitiateRestoreObjectOperation;
 
   /**
    * <p>Contains the configuration for an S3 Object Lock legal hold operation that an
-   *          S3 Batch Operations job passes each object through to the underlying
+   *          S3 Batch Operations job passes every object to the underlying
    *             <code>PutObjectLegalHold</code> API. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html">Using
    *             S3 Object Lock legal hold with S3 Batch Operations</a> in the
    *             <i>Amazon Simple Storage Service Developer Guide</i>.</p>
@@ -1161,7 +1195,7 @@ export interface JobOperation {
 
   /**
    * <p>Contains the configuration parameters for the Object Lock retention action for an
-   *          S3 Batch Operations job. Batch Operations passes each value through to the underlying
+   *          S3 Batch Operations job. Batch Operations passes every object to the underlying
    *             <code>PutObjectRetention</code> API. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html">Using
    *             S3 Object Lock retention with S3 Batch Operations</a> in the
    *             <i>Amazon Simple Storage Service Developer Guide</i>.</p>
@@ -1234,7 +1268,7 @@ export interface CreateJobRequest {
   ConfirmationRequired?: boolean;
 
   /**
-   * <p>The operation that you want this job to perform on each object listed in the manifest.
+   * <p>The operation that you want this job to perform on every object listed in the manifest.
    *          For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Operations</a> in the
    *             <i>Amazon Simple Storage Service Developer Guide</i>.</p>
    */
@@ -1267,7 +1301,7 @@ export interface CreateJobRequest {
 
   /**
    * <p>The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role
-   *          that Batch Operations will use to run this job's operation on each object in the
+   *          that Batch Operations will use to run this job's operation on every object in the
    *          manifest.</p>
    */
   RoleArn: string | undefined;
@@ -1564,7 +1598,7 @@ export namespace DeleteStorageLensConfigurationTaggingResult {
 
 export interface DescribeJobRequest {
   /**
-   * <p></p>
+   * <p>The AWS account ID associated with the S3 Batch Operations job.</p>
    */
   AccountId?: string;
 
@@ -2025,6 +2059,11 @@ export namespace LifecycleRuleAndOperator {
 export interface LifecycleRuleFilter {
   /**
    * <p>Prefix identifying one or more objects to which the rule applies.</p>
+   *          <important>
+   *             <p>Replacement must be made for object keys containing special characters (such as carriage returns) when using
+   *          XML requests. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints">
+   *             XML related object key constraints</a>.</p>
+   *          </important>
    */
   Prefix?: string;
 
@@ -2491,6 +2530,9 @@ export namespace S3BucketDestination {
 export interface StorageLensDataExport {
   /**
    * <p>A container for the bucket where the S3 Storage Lens metrics export will be located.</p>
+   *          <note>
+   *             <p>This bucket must be located in the same Region as the storage lens configuration. </p>
+   *          </note>
    */
   S3BucketDestination: S3BucketDestination | undefined;
 }
@@ -2753,7 +2795,7 @@ export namespace InvalidRequestException {
 
 export interface ListJobsRequest {
   /**
-   * <p></p>
+   * <p>The AWS account ID associated with the S3 Batch Operations job.</p>
    */
   AccountId?: string;
 
@@ -2781,6 +2823,7 @@ export namespace ListJobsRequest {
 
 export enum OperationName {
   LambdaInvoke = "LambdaInvoke",
+  S3DeleteObjectTagging = "S3DeleteObjectTagging",
   S3InitiateRestoreObject = "S3InitiateRestoreObject",
   S3PutObjectAcl = "S3PutObjectAcl",
   S3PutObjectCopy = "S3PutObjectCopy",
@@ -2804,7 +2847,7 @@ export interface JobListDescriptor {
   Description?: string;
 
   /**
-   * <p>The operation that the specified job is configured to run on each object listed in the manifest.</p>
+   * <p>The operation that the specified job is configured to run on every object listed in the manifest.</p>
    */
   Operation?: OperationName | string;
 
@@ -3292,7 +3335,7 @@ export namespace PutStorageLensConfigurationTaggingResult {
 
 export interface UpdateJobPriorityRequest {
   /**
-   * <p></p>
+   * <p>The AWS account ID associated with the S3 Batch Operations job.</p>
    */
   AccountId?: string;
 
@@ -3353,7 +3396,7 @@ export enum RequestedJobStatus {
 
 export interface UpdateJobStatusRequest {
   /**
-   * <p></p>
+   * <p>The AWS account ID associated with the S3 Batch Operations job.</p>
    */
   AccountId?: string;
 

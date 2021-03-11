@@ -4163,6 +4163,7 @@ const serializeAws_json1_1PutEventsRequestEntry = (input: PutEventsRequestEntry,
       input.Resources !== null && { Resources: serializeAws_json1_1EventResourceList(input.Resources, context) }),
     ...(input.Source !== undefined && input.Source !== null && { Source: input.Source }),
     ...(input.Time !== undefined && input.Time !== null && { Time: Math.round(input.Time.getTime() / 1000) }),
+    ...(input.TraceHeader !== undefined && input.TraceHeader !== null && { TraceHeader: input.TraceHeader }),
   };
 };
 

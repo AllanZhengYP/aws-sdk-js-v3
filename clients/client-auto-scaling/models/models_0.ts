@@ -86,6 +86,17 @@ export interface Activity {
    * <p>The details about the activity.</p>
    */
   Details?: string;
+
+  /**
+   * <p>The state of the Auto Scaling group, which is either <code>InService</code> or
+   *                 <code>Deleted</code>.</p>
+   */
+  AutoScalingGroupState?: string;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>
+   */
+  AutoScalingGroupARN?: string;
 }
 
 export namespace Activity {
@@ -559,7 +570,8 @@ export interface LaunchTemplateSpecification {
   LaunchTemplateName?: string;
 
   /**
-   * <p>The version number, <code>$Latest</code>, or <code>$Default</code>. To get the version number, use the Amazon EC2 <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplateVersions.html">DescribeLaunchTemplateVersions</a> API operation. New launch template versions
+   * <p>The version number, <code>$Latest</code>, or <code>$Default</code>. To get the version
+   *             number, use the Amazon EC2 <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplateVersions.html">DescribeLaunchTemplateVersions</a> API operation. New launch template versions
    *             can be created using the Amazon EC2 <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplateVersion.html">CreateLaunchTemplateVersion</a> API. If the value is <code>$Latest</code>,
    *             Amazon EC2 Auto Scaling selects the latest version of the launch template when launching instances. If
    *             the value is <code>$Default</code>, Amazon EC2 Auto Scaling selects the default version of the launch
@@ -751,7 +763,10 @@ export namespace InstancesDistribution {
 
 /**
  * <p>Describes an override for a launch template. The maximum number of instance types that
- *             can be associated with an Auto Scaling group is 20. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html">Configuring overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>
+ *             can be associated with an Auto Scaling group is 40. The maximum number of distinct launch
+ *             templates you can define for an Auto Scaling group is 20. For more information about configuring
+ *             overrides, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html">Configuring
+ *                 overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>
  */
 export interface LaunchTemplateOverrides {
   /**
@@ -904,8 +919,7 @@ export interface CreateAutoScalingGroupType {
   LaunchConfigurationName?: string;
 
   /**
-   * <p>Parameters used to specify the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html">launch
-   *                 template</a> and version to use to launch instances. </p>
+   * <p>Parameters used to specify the launch template and version to use to launch instances. </p>
    *         <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or
    *                 <code>MixedInstancesPolicy</code>) or a launch configuration
    *                 (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>
@@ -1137,8 +1151,7 @@ export interface Ebs {
    *             Provisioned IOPS SSD, <code>gp2</code> for General Purpose SSD, <code>st1</code> for
    *             Throughput Optimized HDD, or <code>sc1</code> for Cold HDD. For more information, see
    *                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html">Amazon
-   *                 EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances</i>.</p>
+   *                 EBS Volume Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    *         <p>Valid Values: <code>standard</code> | <code>io1</code> | <code>gp2</code> |
    *                 <code>st1</code> | <code>sc1</code>
    *          </p>
@@ -1180,8 +1193,7 @@ export interface Ebs {
    *                 encrypted.</p>
    *         </note>
    *         <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html">Using Encryption with EBS-Backed
-   *                 AMIs</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>
-   *             and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html">Required
+   *                 AMIs</a> in the <i>Amazon EC2 User Guide for Linux Instances</i> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html">Required
    *                 CMK key policy for use with encrypted volumes</a> in the
    *                 <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
    */
@@ -1208,8 +1220,7 @@ export interface BlockDeviceMapping {
   /**
    * <p>The device name exposed to the EC2 instance (for example, <code>/dev/sdh</code> or
    *                 <code>xvdh</code>). For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/device_naming.html">Device Naming on Linux
-   *                 Instances</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances</i>.</p>
+   *                 Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    */
   DeviceName: string | undefined;
 
@@ -1288,7 +1299,6 @@ export interface InstanceMetadataOptions {
    * <p>The desired HTTP PUT response hop limit for instance metadata requests. The larger the
    *             number, the further instance metadata requests can travel.</p>
    *         <p>Default: 1</p>
-   *         <p>Possible values: Integers from 1 to 64</p>
    */
   HttpPutResponseHopLimit?: number;
 
@@ -1338,8 +1348,7 @@ export interface CreateLaunchConfigurationType {
    *                 User Guide</i>.</p>
    *         <p>[EC2-Classic] Specify either the security group names or the security group IDs. For
    *             more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Amazon EC2 Security
-   *                 Groups</a> in the <i>Amazon EC2 User Guide for Linux
-   *             Instances</i>.</p>
+   *                 Groups</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    */
   SecurityGroups?: string[];
 
@@ -1363,9 +1372,11 @@ export interface CreateLaunchConfigurationType {
   ClassicLinkVPCSecurityGroups?: string[];
 
   /**
-   * <p>The Base64-encoded user data to make available to the launched EC2 instances. For more
-   *             information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance metadata and user
-   *                 data</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
+   * <p>The user data to make available to the launched EC2 instances. For more information,
+   *             see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance metadata and user data</a> (Linux) and <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html">Instance metadata and
+   *                 user data</a> (Windows). If you are using a command line tool, base64-encoding
+   *             is performed for you, and you can load the text from a file. Otherwise, you must provide
+   *             base64-encoded text. User data is limited to 16 KB.</p>
    */
   UserData?: string;
 
@@ -1386,9 +1397,7 @@ export interface CreateLaunchConfigurationType {
   /**
    * <p>Specifies the instance type of the EC2 instance.</p>
    *         <p>For information about available instance types, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes">Available
-   *                 Instance Types</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances.</i>
-   *          </p>
+   *                 Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    *         <p>If you do not specify <code>InstanceId</code>, you must specify
    *                 <code>InstanceType</code>.</p>
    */
@@ -1407,8 +1416,7 @@ export interface CreateLaunchConfigurationType {
   /**
    * <p>A block device mapping, which specifies the block devices for the instance. You can
    *             specify virtual devices and EBS volumes. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html">Block Device
-   *                 Mapping</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances</i>.</p>
+   *                 Mapping</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    */
   BlockDeviceMappings?: BlockDeviceMapping[];
 
@@ -1454,8 +1462,7 @@ export interface CreateLaunchConfigurationType {
    *             performance. This optimization is not available with all instance types. Additional fees
    *             are incurred when you enable EBS optimization for an instance type that is not
    *             EBS-optimized by default. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html">Amazon EBS-Optimized
-   *                 Instances</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances</i>.</p>
+   *                 Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    *         <p>The default value is <code>false</code>.</p>
    */
   EbsOptimized?: boolean;
@@ -1486,8 +1493,9 @@ export interface CreateLaunchConfigurationType {
    *             parameter to <code>dedicated</code>.</p>
    *         <p>If you specify <code>PlacementTenancy</code>, you must specify at least one subnet for
    *                 <code>VPCZoneIdentifier</code> when you create your group.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html">Configuring instance tenancy with Amazon EC2 Auto Scaling</a> in the
-   *                 <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+   *         <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-dedicated-instances.html">Configuring
+   *                 instance tenancy with Amazon EC2 Auto Scaling</a> in the
+   *             <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
    *         <p>Valid Values: <code>default</code> | <code>dedicated</code>
    *         </p>
    */
@@ -1878,7 +1886,8 @@ export interface Instance {
 
   /**
    * <p>A description of the current lifecycle state. The <code>Quarantined</code> state is
-   *             not used.</p>
+   *             not used. For information about lifecycle states, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html">Instance
+   *                 lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>
    */
   LifecycleState: LifecycleState | string | undefined;
 
@@ -2197,7 +2206,15 @@ export interface AutoScalingInstanceDetails {
   AvailabilityZone: string | undefined;
 
   /**
-   * <p>The lifecycle state for the instance.</p>
+   * <p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used.
+   *             For information about lifecycle states, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html">Instance
+   *                 lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>
+   *         <p>Valid Values: <code>Pending</code> | <code>Pending:Wait</code> |
+   *                 <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> |
+   *                 <code>Terminating</code> | <code>Terminating:Wait</code> |
+   *                 <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code>
+   *             | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code>
+   *          </p>
    */
   LifecycleState: string | undefined;
 
@@ -2519,24 +2536,24 @@ export interface LaunchConfiguration {
    * <p>The IDs of one or more security groups for the VPC specified in
    *                 <code>ClassicLinkVPCId</code>.</p>
    *         <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html">ClassicLink</a> in the
-   *                 <i>Amazon EC2 User Guide for Linux Instances</i> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink">Linking EC2-Classic instances to a VPC</a> in the
-   *                 <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+   *                 <i>Amazon EC2 User Guide for Linux Instances</i> and <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink">Linking EC2-Classic
+   *                 instances to a VPC</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
    */
   ClassicLinkVPCSecurityGroups?: string[];
 
   /**
-   * <p>The Base64-encoded user data to make available to the launched EC2 instances. For more
-   *             information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance metadata and user
-   *                 data</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
+   * <p>The user data to make available to the launched EC2 instances. For more information,
+   *             see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance metadata and user data</a> (Linux) and <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html">Instance metadata and
+   *                 user data</a> (Windows). If you are using a command line tool, base64-encoding
+   *             is performed for you, and you can load the text from a file. Otherwise, you must provide
+   *             base64-encoded text. User data is limited to 16 KB.</p>
    */
   UserData?: string;
 
   /**
    * <p>The instance type for the instances.</p>
    *         <p>For information about available instance types, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes">Available
-   *                 Instance Types</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances.</i>
-   *          </p>
+   *                 Instance Types</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    */
   InstanceType: string | undefined;
 
@@ -2553,8 +2570,7 @@ export interface LaunchConfiguration {
   /**
    * <p>A block device mapping, which specifies the block devices for the instance. For more
    *             information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html">Block Device
-   *                 Mapping</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances</i>.</p>
+   *                 Mapping</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    */
   BlockDeviceMappings?: BlockDeviceMapping[];
 
@@ -2591,8 +2607,7 @@ export interface LaunchConfiguration {
   /**
    * <p>Specifies whether the launch configuration is optimized for EBS I/O
    *             (<code>true</code>) or not (<code>false</code>). For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html">Amazon
-   *                 EBS-Optimized Instances</a> in the <i>Amazon EC2 User Guide for Linux
-   *                 Instances</i>.</p>
+   *                 EBS-Optimized Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
    */
   EbsOptimized?: boolean;
 
@@ -3646,6 +3661,11 @@ export interface DescribeScalingActivitiesType {
    * <p>The name of the Auto Scaling group.</p>
    */
   AutoScalingGroupName?: string;
+
+  /**
+   * <p>Indicates whether to include scaling activity from deleted Auto Scaling groups.</p>
+   */
+  IncludeDeletedGroups?: boolean;
 
   /**
    * <p>The maximum number of items to return with this call. The default value is

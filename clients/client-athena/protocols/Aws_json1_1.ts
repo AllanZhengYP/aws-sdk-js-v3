@@ -18,6 +18,7 @@ import { GetTableMetadataCommandInput, GetTableMetadataCommandOutput } from "../
 import { GetWorkGroupCommandInput, GetWorkGroupCommandOutput } from "../commands/GetWorkGroupCommand";
 import { ListDataCatalogsCommandInput, ListDataCatalogsCommandOutput } from "../commands/ListDataCatalogsCommand";
 import { ListDatabasesCommandInput, ListDatabasesCommandOutput } from "../commands/ListDatabasesCommand";
+import { ListEngineVersionsCommandInput, ListEngineVersionsCommandOutput } from "../commands/ListEngineVersionsCommand";
 import { ListNamedQueriesCommandInput, ListNamedQueriesCommandOutput } from "../commands/ListNamedQueriesCommand";
 import {
   ListQueryExecutionsCommandInput,
@@ -62,6 +63,7 @@ import {
   DeleteWorkGroupInput,
   DeleteWorkGroupOutput,
   EncryptionConfiguration,
+  EngineVersion,
   GetDataCatalogInput,
   GetDataCatalogOutput,
   GetDatabaseInput,
@@ -82,6 +84,8 @@ import {
   ListDataCatalogsOutput,
   ListDatabasesInput,
   ListDatabasesOutput,
+  ListEngineVersionsInput,
+  ListEngineVersionsOutput,
   ListNamedQueriesInput,
   ListNamedQueriesOutput,
   ListQueryExecutionsInput,
@@ -355,6 +359,19 @@ export const serializeAws_json1_1ListDataCatalogsCommand = async (
   };
   let body: any;
   body = JSON.stringify(serializeAws_json1_1ListDataCatalogsInput(input, context));
+  return buildHttpRpcRequest(context, headers, "/", undefined, body);
+};
+
+export const serializeAws_json1_1ListEngineVersionsCommand = async (
+  input: ListEngineVersionsCommandInput,
+  context: __SerdeContext
+): Promise<__HttpRequest> => {
+  const headers: __HeaderBag = {
+    "content-type": "application/x-amz-json-1.1",
+    "x-amz-target": "AmazonAthena.ListEngineVersions",
+  };
+  let body: any;
+  body = JSON.stringify(serializeAws_json1_1ListEngineVersionsInput(input, context));
   return buildHttpRpcRequest(context, headers, "/", undefined, body);
 };
 
@@ -1579,6 +1596,68 @@ const deserializeAws_json1_1ListDataCatalogsCommandError = async (
   return Promise.reject(Object.assign(new Error(message), response));
 };
 
+export const deserializeAws_json1_1ListEngineVersionsCommand = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ListEngineVersionsCommandOutput> => {
+  if (output.statusCode >= 300) {
+    return deserializeAws_json1_1ListEngineVersionsCommandError(output, context);
+  }
+  const data: any = await parseBody(output.body, context);
+  let contents: any = {};
+  contents = deserializeAws_json1_1ListEngineVersionsOutput(data, context);
+  const response: ListEngineVersionsCommandOutput = {
+    $metadata: deserializeMetadata(output),
+    ...contents,
+  };
+  return Promise.resolve(response);
+};
+
+const deserializeAws_json1_1ListEngineVersionsCommandError = async (
+  output: __HttpResponse,
+  context: __SerdeContext
+): Promise<ListEngineVersionsCommandOutput> => {
+  const parsedOutput: any = {
+    ...output,
+    body: await parseBody(output.body, context),
+  };
+  let response: __SmithyException & __MetadataBearer & { [key: string]: any };
+  let errorCode: string = "UnknownError";
+  errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+  switch (errorCode) {
+    case "InternalServerException":
+    case "com.amazonaws.athena#InternalServerException":
+      response = {
+        ...(await deserializeAws_json1_1InternalServerExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    case "InvalidRequestException":
+    case "com.amazonaws.athena#InvalidRequestException":
+      response = {
+        ...(await deserializeAws_json1_1InvalidRequestExceptionResponse(parsedOutput, context)),
+        name: errorCode,
+        $metadata: deserializeMetadata(output),
+      };
+      break;
+    default:
+      const parsedBody = parsedOutput.body;
+      errorCode = parsedBody.code || parsedBody.Code || errorCode;
+      response = {
+        ...parsedBody,
+        name: `${errorCode}`,
+        message: parsedBody.message || parsedBody.Message || errorCode,
+        $fault: "client",
+        $metadata: deserializeMetadata(output),
+      } as any;
+  }
+  const message = response.message || response.Message || errorCode;
+  response.message = message;
+  delete response.Message;
+  return Promise.reject(Object.assign(new Error(message), response));
+};
+
 export const deserializeAws_json1_1ListNamedQueriesCommand = async (
   output: __HttpResponse,
   context: __SerdeContext
@@ -2459,6 +2538,15 @@ const serializeAws_json1_1EncryptionConfiguration = (input: EncryptionConfigurat
   };
 };
 
+const serializeAws_json1_1EngineVersion = (input: EngineVersion, context: __SerdeContext): any => {
+  return {
+    ...(input.EffectiveEngineVersion !== undefined &&
+      input.EffectiveEngineVersion !== null && { EffectiveEngineVersion: input.EffectiveEngineVersion }),
+    ...(input.SelectedEngineVersion !== undefined &&
+      input.SelectedEngineVersion !== null && { SelectedEngineVersion: input.SelectedEngineVersion }),
+  };
+};
+
 const serializeAws_json1_1GetDatabaseInput = (input: GetDatabaseInput, context: __SerdeContext): any => {
   return {
     ...(input.CatalogName !== undefined && input.CatalogName !== null && { CatalogName: input.CatalogName }),
@@ -2517,6 +2605,13 @@ const serializeAws_json1_1ListDatabasesInput = (input: ListDatabasesInput, conte
 };
 
 const serializeAws_json1_1ListDataCatalogsInput = (input: ListDataCatalogsInput, context: __SerdeContext): any => {
+  return {
+    ...(input.MaxResults !== undefined && input.MaxResults !== null && { MaxResults: input.MaxResults }),
+    ...(input.NextToken !== undefined && input.NextToken !== null && { NextToken: input.NextToken }),
+  };
+};
+
+const serializeAws_json1_1ListEngineVersionsInput = (input: ListEngineVersionsInput, context: __SerdeContext): any => {
   return {
     ...(input.MaxResults !== undefined && input.MaxResults !== null && { MaxResults: input.MaxResults }),
     ...(input.NextToken !== undefined && input.NextToken !== null && { NextToken: input.NextToken }),
@@ -2741,6 +2836,10 @@ const serializeAws_json1_1WorkGroupConfiguration = (input: WorkGroupConfiguratio
       input.EnforceWorkGroupConfiguration !== null && {
         EnforceWorkGroupConfiguration: input.EnforceWorkGroupConfiguration,
       }),
+    ...(input.EngineVersion !== undefined &&
+      input.EngineVersion !== null && {
+        EngineVersion: serializeAws_json1_1EngineVersion(input.EngineVersion, context),
+      }),
     ...(input.PublishCloudWatchMetricsEnabled !== undefined &&
       input.PublishCloudWatchMetricsEnabled !== null && {
         PublishCloudWatchMetricsEnabled: input.PublishCloudWatchMetricsEnabled,
@@ -2764,6 +2863,10 @@ const serializeAws_json1_1WorkGroupConfigurationUpdates = (
     ...(input.EnforceWorkGroupConfiguration !== undefined &&
       input.EnforceWorkGroupConfiguration !== null && {
         EnforceWorkGroupConfiguration: input.EnforceWorkGroupConfiguration,
+      }),
+    ...(input.EngineVersion !== undefined &&
+      input.EngineVersion !== null && {
+        EngineVersion: serializeAws_json1_1EngineVersion(input.EngineVersion, context),
       }),
     ...(input.PublishCloudWatchMetricsEnabled !== undefined &&
       input.PublishCloudWatchMetricsEnabled !== null && {
@@ -2975,6 +3078,30 @@ const deserializeAws_json1_1EncryptionConfiguration = (
   } as any;
 };
 
+const deserializeAws_json1_1EngineVersion = (output: any, context: __SerdeContext): EngineVersion => {
+  return {
+    EffectiveEngineVersion:
+      output.EffectiveEngineVersion !== undefined && output.EffectiveEngineVersion !== null
+        ? output.EffectiveEngineVersion
+        : undefined,
+    SelectedEngineVersion:
+      output.SelectedEngineVersion !== undefined && output.SelectedEngineVersion !== null
+        ? output.SelectedEngineVersion
+        : undefined,
+  } as any;
+};
+
+const deserializeAws_json1_1EngineVersionsList = (output: any, context: __SerdeContext): EngineVersion[] => {
+  return (output || [])
+    .filter((e: any) => e != null)
+    .map((entry: any) => {
+      if (entry === null) {
+        return null as any;
+      }
+      return deserializeAws_json1_1EngineVersion(entry, context);
+    });
+};
+
 const deserializeAws_json1_1GetDatabaseOutput = (output: any, context: __SerdeContext): GetDatabaseOutput => {
   return {
     Database:
@@ -3078,6 +3205,19 @@ const deserializeAws_json1_1ListDataCatalogsOutput = (output: any, context: __Se
     DataCatalogsSummary:
       output.DataCatalogsSummary !== undefined && output.DataCatalogsSummary !== null
         ? deserializeAws_json1_1DataCatalogSummaryList(output.DataCatalogsSummary, context)
+        : undefined,
+    NextToken: output.NextToken !== undefined && output.NextToken !== null ? output.NextToken : undefined,
+  } as any;
+};
+
+const deserializeAws_json1_1ListEngineVersionsOutput = (
+  output: any,
+  context: __SerdeContext
+): ListEngineVersionsOutput => {
+  return {
+    EngineVersions:
+      output.EngineVersions !== undefined && output.EngineVersions !== null
+        ? deserializeAws_json1_1EngineVersionsList(output.EngineVersions, context)
         : undefined,
     NextToken: output.NextToken !== undefined && output.NextToken !== null ? output.NextToken : undefined,
   } as any;
@@ -3195,6 +3335,10 @@ const deserializeAws_json1_1ParametersMap = (output: any, context: __SerdeContex
 
 const deserializeAws_json1_1QueryExecution = (output: any, context: __SerdeContext): QueryExecution => {
   return {
+    EngineVersion:
+      output.EngineVersion !== undefined && output.EngineVersion !== null
+        ? deserializeAws_json1_1EngineVersion(output.EngineVersion, context)
+        : undefined,
     Query: output.Query !== undefined && output.Query !== null ? output.Query : undefined,
     QueryExecutionContext:
       output.QueryExecutionContext !== undefined && output.QueryExecutionContext !== null
@@ -3545,6 +3689,10 @@ const deserializeAws_json1_1WorkGroupConfiguration = (output: any, context: __Se
       output.EnforceWorkGroupConfiguration !== undefined && output.EnforceWorkGroupConfiguration !== null
         ? output.EnforceWorkGroupConfiguration
         : undefined,
+    EngineVersion:
+      output.EngineVersion !== undefined && output.EngineVersion !== null
+        ? deserializeAws_json1_1EngineVersion(output.EngineVersion, context)
+        : undefined,
     PublishCloudWatchMetricsEnabled:
       output.PublishCloudWatchMetricsEnabled !== undefined && output.PublishCloudWatchMetricsEnabled !== null
         ? output.PublishCloudWatchMetricsEnabled
@@ -3578,6 +3726,10 @@ const deserializeAws_json1_1WorkGroupSummary = (output: any, context: __SerdeCon
         ? new Date(Math.round(output.CreationTime * 1000))
         : undefined,
     Description: output.Description !== undefined && output.Description !== null ? output.Description : undefined,
+    EngineVersion:
+      output.EngineVersion !== undefined && output.EngineVersion !== null
+        ? deserializeAws_json1_1EngineVersion(output.EngineVersion, context)
+        : undefined,
     Name: output.Name !== undefined && output.Name !== null ? output.Name : undefined,
     State: output.State !== undefined && output.State !== null ? output.State : undefined,
   } as any;

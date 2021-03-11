@@ -24,8 +24,8 @@ export type SimulatePrincipalPolicyCommandOutput = SimulatePolicyResponse & __Me
  * <p>Simulate how a set of IAM policies attached to an IAM entity works with a list of
  *          API operations and AWS resources to determine the policies' effective permissions. The
  *          entity can be an IAM user, group, or role. If you specify a user, then the simulation
- *          also includes all of the policies that are attached to groups that the user belongs
- *          to.</p>
+ *          also includes all of the policies that are attached to groups that the user belongs to. You
+ *          can simulate resources that don't exist in your account.</p>
  *          <p>You can optionally include a list of one or more additional policies specified as
  *          strings to include in the simulation. If you want to simulate only policies specified as
  *          strings, use <a>SimulateCustomPolicy</a> instead.</p>
@@ -34,7 +34,7 @@ export type SimulatePrincipalPolicyCommandOutput = SimulatePolicyResponse & __Me
  *          <p>The simulation does not perform the API operations; it only checks the authorization to
  *          determine if the simulated policies allow or deny the operations.</p>
  *          <p>
- *             <b>Note:</b> This API discloses information about the permissions
+ *             <b>Note:</b> This operation discloses information about the permissions
  *          granted to other users. If you do not want users to see other user's permissions, then
  *          consider allowing them to use <a>SimulateCustomPolicy</a> instead.</p>
  *          <p>Context keys are variables maintained by AWS and its services that provide details
@@ -43,6 +43,8 @@ export type SimulatePrincipalPolicyCommandOutput = SimulatePolicyResponse & __Me
  *          policies require for correct simulation, use <a>GetContextKeysForPrincipalPolicy</a>.</p>
  *          <p>If the output is long, you can use the <code>MaxItems</code> and <code>Marker</code>
  *          parameters to paginate the results.</p>
+ *          <p>For more information about using the policy simulator, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html">Testing IAM policies with
+ *             the IAM policy simulator </a>in the <i>IAM User Guide</i>.</p>
  */
 export class SimulatePrincipalPolicyCommand extends $Command<
   SimulatePrincipalPolicyCommandInput,

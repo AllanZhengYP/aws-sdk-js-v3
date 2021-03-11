@@ -175,6 +175,10 @@ export const serializeAws_restJson1PutPlaybackConfigurationCommand = async (
       input.CdnConfiguration !== null && {
         CdnConfiguration: serializeAws_restJson1CdnConfiguration(input.CdnConfiguration, context),
       }),
+    ...(input.ConfigurationAliases !== undefined &&
+      input.ConfigurationAliases !== null && {
+        ConfigurationAliases: serializeAws_restJson1ConfigurationAliasesRequest(input.ConfigurationAliases, context),
+      }),
     ...(input.DashConfiguration !== undefined &&
       input.DashConfiguration !== null && {
         DashConfiguration: serializeAws_restJson1DashConfigurationForPut(input.DashConfiguration, context),
@@ -337,6 +341,7 @@ export const deserializeAws_restJson1GetPlaybackConfigurationCommand = async (
     AvailSuppression: undefined,
     Bumper: undefined,
     CdnConfiguration: undefined,
+    ConfigurationAliases: undefined,
     DashConfiguration: undefined,
     HlsConfiguration: undefined,
     LivePreRollConfiguration: undefined,
@@ -363,6 +368,12 @@ export const deserializeAws_restJson1GetPlaybackConfigurationCommand = async (
   }
   if (data.CdnConfiguration !== undefined && data.CdnConfiguration !== null) {
     contents.CdnConfiguration = deserializeAws_restJson1CdnConfiguration(data.CdnConfiguration, context);
+  }
+  if (data.ConfigurationAliases !== undefined && data.ConfigurationAliases !== null) {
+    contents.ConfigurationAliases = deserializeAws_restJson1ConfigurationAliasesResponse(
+      data.ConfigurationAliases,
+      context
+    );
   }
   if (data.DashConfiguration !== undefined && data.DashConfiguration !== null) {
     contents.DashConfiguration = deserializeAws_restJson1DashConfiguration(data.DashConfiguration, context);
@@ -560,6 +571,7 @@ export const deserializeAws_restJson1PutPlaybackConfigurationCommand = async (
     AvailSuppression: undefined,
     Bumper: undefined,
     CdnConfiguration: undefined,
+    ConfigurationAliases: undefined,
     DashConfiguration: undefined,
     HlsConfiguration: undefined,
     LivePreRollConfiguration: undefined,
@@ -586,6 +598,12 @@ export const deserializeAws_restJson1PutPlaybackConfigurationCommand = async (
   }
   if (data.CdnConfiguration !== undefined && data.CdnConfiguration !== null) {
     contents.CdnConfiguration = deserializeAws_restJson1CdnConfiguration(data.CdnConfiguration, context);
+  }
+  if (data.ConfigurationAliases !== undefined && data.ConfigurationAliases !== null) {
+    contents.ConfigurationAliases = deserializeAws_restJson1ConfigurationAliasesResponse(
+      data.ConfigurationAliases,
+      context
+    );
   }
   if (data.DashConfiguration !== undefined && data.DashConfiguration !== null) {
     contents.DashConfiguration = deserializeAws_restJson1DashConfiguration(data.DashConfiguration, context);
@@ -824,6 +842,24 @@ const serializeAws_restJson1CdnConfiguration = (input: CdnConfiguration, context
   };
 };
 
+const serializeAws_restJson1ConfigurationAliasesRequest = (
+  input: { [key: string]: { [key: string]: string } },
+  context: __SerdeContext
+): any => {
+  return Object.entries(input).reduce(
+    (acc: { [key: string]: { [key: string]: string } }, [key, value]: [string, any]) => {
+      if (value === null) {
+        return acc;
+      }
+      return {
+        ...acc,
+        [key]: serializeAws_restJson1__mapOf__string(value, context),
+      };
+    },
+    {}
+  );
+};
+
 const serializeAws_restJson1DashConfigurationForPut = (
   input: DashConfigurationForPut,
   context: __SerdeContext
@@ -918,6 +954,24 @@ const deserializeAws_restJson1CdnConfiguration = (output: any, context: __SerdeC
   } as any;
 };
 
+const deserializeAws_restJson1ConfigurationAliasesResponse = (
+  output: any,
+  context: __SerdeContext
+): { [key: string]: { [key: string]: string } } => {
+  return Object.entries(output).reduce(
+    (acc: { [key: string]: { [key: string]: string } }, [key, value]: [string, any]) => {
+      if (value === null) {
+        return acc;
+      }
+      return {
+        ...acc,
+        [key]: deserializeAws_restJson1__mapOf__string(value, context),
+      };
+    },
+    {}
+  );
+};
+
 const deserializeAws_restJson1DashConfiguration = (output: any, context: __SerdeContext): DashConfiguration => {
   return {
     ManifestEndpointPrefix:
@@ -986,6 +1040,10 @@ const deserializeAws_restJson1PlaybackConfiguration = (output: any, context: __S
     CdnConfiguration:
       output.CdnConfiguration !== undefined && output.CdnConfiguration !== null
         ? deserializeAws_restJson1CdnConfiguration(output.CdnConfiguration, context)
+        : undefined,
+    ConfigurationAliases:
+      output.ConfigurationAliases !== undefined && output.ConfigurationAliases !== null
+        ? deserializeAws_restJson1ConfigurationAliasesResponse(output.ConfigurationAliases, context)
         : undefined,
     DashConfiguration:
       output.DashConfiguration !== undefined && output.DashConfiguration !== null
