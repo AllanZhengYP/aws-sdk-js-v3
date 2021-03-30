@@ -16,6 +16,24 @@ import { CredentialProvider } from "@aws-sdk/types";
 export const ENV_IMDS_DISABLED = "AWS_EC2_METADATA_DISABLED";
 
 /**
+ * Default credential provider's configuration that is passed to each individual provider.
+ *
+ * @see fromEnv                 The function used to source credentials from
+ *                              environment variables
+ * @see fromSSO                 The function used to source credentials from
+ *                              resolved SSO token cache
+ * @see fromIni                 The function used to source credentials from INI
+ *                              files
+ * @see fromProcess             The function used to sources credentials from
+ *                              credential_process in INI files
+ * @see fromInstanceMetadata    The function used to source credentials from the
+ *                              EC2 Instance Metadata Service
+ * @see fromContainerMetadata   The function used to source credentials from the
+ *                              ECS Container Metadata Service
+ */
+export interface DefaultProviderInit extends FromIniInit, FromProcessInit, FromSSOInit, RemoteProviderInit {}
+
+/**
  * Creates a credential provider that will attempt to find credentials from the
  * following sources (listed in order of precedence):
  *   * Environment variables exposed via `process.env`
@@ -45,9 +63,7 @@ export const ENV_IMDS_DISABLED = "AWS_EC2_METADATA_DISABLED";
  * @see fromContainerMetadata   The function used to source credentials from the
  *                              ECS Container Metadata Service
  */
-export const defaultProvider = (
-  init: FromIniInit & RemoteProviderInit & FromProcessInit & FromSSOInit = {}
-): CredentialProvider => {
+export const defaultProvider = (init: DefaultProviderInit = {}): CredentialProvider => {
   const options = { profile: process.env[ENV_PROFILE], ...init };
   if (!options.loadedConfig) options.loadedConfig = loadSharedConfigFiles(init);
   const providers = [fromSSO(options), fromIni(options), fromProcess(options), remoteProvider(options)];

@@ -1,4 +1,4 @@
-import { Credentials, Provider } from "@aws-sdk/types";
+import { Credentials } from "@aws-sdk/types";
 
 import { AssumeRoleCommand, AssumeRoleCommandInput } from "./commands/AssumeRoleCommand";
 import {
@@ -30,7 +30,7 @@ const decorateDefaultRegion = (region: STSClientConfig["region"]): STSClientConf
 /**
  * The default role assumer that used by credential providers when STS.AssumeRole API is needed.
  */
-const getDefaultAssumer = (stsOptions: STSClientConfig): RoleAssumer => {
+export const getDefaultAssumer = (stsOptions: Pick<STSClientConfig, "logger" | "region">): RoleAssumer => {
   let stsClient: STSClient;
   return async (sourceCreds, params) => {
     if (!stsClient) {
@@ -59,7 +59,9 @@ type RoleAssumerWithWebIdentity = (params: AssumeRoleWithWebIdentityCommandInput
 /**
  * The default role assumer that used by credential providers when STS.AssumeRole API is needed.
  */
-const getDefaultAssumerWithWebIdentity = (stsOptions: STSClientConfig): RoleAssumerWithWebIdentity => {
+export const getDefaultAssumerWithWebIdentity = (
+  stsOptions: Pick<STSClientConfig, "logger" | "region">
+): RoleAssumerWithWebIdentity => {
   let stsClient: STSClient;
   return async (params) => {
     if (!stsClient) {
@@ -67,6 +69,7 @@ const getDefaultAssumerWithWebIdentity = (stsOptions: STSClientConfig): RoleAssu
       stsClient = new STSClient({
         logger,
         region: decorateDefaultRegion(stsOptions.region),
+        credentials: {} as any,
       });
     }
     const { Credentials } = await stsClient.send(new AssumeRoleWithWebIdentityCommand(params));
@@ -82,21 +85,21 @@ const getDefaultAssumerWithWebIdentity = (stsOptions: STSClientConfig): RoleAssu
   };
 };
 
-type DefaultCredentialProvider = (input: any) => Provider<Credentials>;
+// type DefaultCredentialProvider = (input: any) => Provider<Credentials>;
 
-/**
- * The default credential providers depend STS client to assume role with desired API: sts:assumeRole,
- * sts:assumeRoleWithWebIdentity, etc. This function decorates the default credential provider with role assumers which
- * encapsulates the process of calling STS commands. This can only be imported by AWS client packages to avoid circular
- * dependencies.
- *
- * @internal
- */
-export const decorateDefaultCredentialProvider = (provider: DefaultCredentialProvider): DefaultCredentialProvider => (
-  input: any
-) =>
-  provider({
-    roleAssumer: getDefaultAssumer(input),
-    roleAssumerWithWebIdentity: getDefaultAssumerWithWebIdentity(input),
-    ...input,
-  });
+// /**
+//  * The default credential providers depend STS client to assume role with desired API: sts:assumeRole,
+//  * sts:assumeRoleWithWebIdentity, etc. This function decorates the default credential provider with role assumers which
+//  * encapsulates the process of calling STS commands. This can only be imported by AWS client packages to avoid circular
+//  * dependencies.
+//  *
+//  * @internal
+//  */
+// export const decorateDefaultCredentialProvider = (provider: DefaultCredentialProvider): DefaultCredentialProvider => (
+//   input: any
+// ) =>
+//   provider({
+//     roleAssumer: getDefaultAssumer(input),
+//     roleAssumerWithWebIdentity: getDefaultAssumerWithWebIdentity(input),
+//     ...input,
+//   });

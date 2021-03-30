@@ -12,4 +12,6 @@ export const ClientSharedValues = {
   regionInfoProvider: defaultRegionInfoProvider,
   serviceId: "STS",
   urlParser: parseUrl,
+  roleAssumer: () => ({} as any),
+  roleAssumerWithWebIdentity: () => ({} as any),
 };

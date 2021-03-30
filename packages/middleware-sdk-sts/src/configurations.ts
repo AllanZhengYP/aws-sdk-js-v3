@@ -1,4 +1,3 @@
-import type { DefaultProviderInit } from "@aws-sdk/credential-provider-node";
 import { memoize } from "@aws-sdk/property-provider";
 import { SignatureV4 } from "@aws-sdk/signature-v4";
 import { Credentials, HashConstructor, Provider, RegionInfo, RegionInfoProvider, RequestSigner } from "@aws-sdk/types";
@@ -6,11 +5,11 @@ import { Credentials, HashConstructor, Provider, RegionInfo, RegionInfoProvider,
 // 5 minutes buffer time the refresh the credential before it really expires
 const CREDENTIAL_EXPIRE_WINDOW = 300000;
 
-export interface AwsAuthInputConfig extends Partial<DefaultProviderInit> {
+export interface StsAuthInputConfig {
   /**
    * The credentials used to sign requests.
    */
-  credentials?: Credentials | Provider<Credentials>;
+  credentials: Credentials | Provider<Credentials>;
 
   /**
    * The signer to use when signing requests.
@@ -34,26 +33,23 @@ export interface AwsAuthInputConfig extends Partial<DefaultProviderInit> {
   signingRegion?: string;
 }
 interface PreviouslyResolved {
-  credentialDefaultProvider: (input: any) => Provider<Credentials>;
   region: string | Provider<string>;
   regionInfoProvider: RegionInfoProvider;
   signingName?: string;
   serviceId: string;
   sha256: HashConstructor;
 }
-export interface AwsAuthResolvedConfig {
+export interface StsAuthResolvedConfig {
   credentials: Provider<Credentials>;
   signer: Provider<RequestSigner>;
   signingEscapePath: boolean;
   systemClockOffset: number;
 }
 
-export const resolveAwsAuthConfig = <T>(
-  input: T & AwsAuthInputConfig & PreviouslyResolved
-): T & AwsAuthResolvedConfig => {
-  const normalizedCreds = input.credentials
-    ? normalizeCredentialProvider(input.credentials)
-    : input.credentialDefaultProvider(input as any);
+export const resolveStsAuthConfig = <T>(
+  input: T & StsAuthInputConfig & PreviouslyResolved
+): T & StsAuthResolvedConfig => {
+  const normalizedCreds = normalizeCredentialProvider(input.credentials);
   const { signingEscapePath = true, systemClockOffset = input.systemClockOffset || 0, sha256 } = input;
   let signer: Provider<RequestSigner>;
   if (input.signer) {
