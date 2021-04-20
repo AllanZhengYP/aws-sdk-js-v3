@@ -68,14 +68,13 @@ export class SdkClientTocPlugin extends RendererComponent {
   }
 
   private isClient(model: DeclarationReflection): boolean {
-    const { extendedTypes = [] } = model;
+    const getBaseClass = (model: DeclarationReflection): ReferenceType => model?.extendedTypes?.[0] as ReferenceType;
     return (
       model.kindOf(ReflectionKind.Class) &&
-      model.getFullName() !== "Client" && // Exclude the Smithy Client class.
-      (model.name.endsWith("Client") /* Modular client like S3Client */ ||
-        extendedTypes.filter((reference) => (reference as ReferenceType).name === `${model.name}Client`).length > 0) &&
-      /* Filter out other client classes that not sourced from the same directory as current client. e.g. STS, SSO */
-      this.belongsToClientPackage(model)
+      /* Bare-bone client like S3Client extends __Client */
+      (getBaseClass(model)?.name === "__Client" ||
+        /* Aggregated client like S3 extends S3Client */
+        getBaseClass(getBaseClass(model)?.reflection as DeclarationReflection)?.name === "__Client")
     );
   }
 
@@ -166,7 +165,11 @@ export class SdkClientTocPlugin extends RendererComponent {
     while (projectModel.constructor.name !== "ProjectReflection" && !projectModel.kindOf(ReflectionKind.SomeModule)) {
       projectModel = projectModel.parent as ProjectReflection;
     }
-    const clientsDirectory = getCurrentClientDirectory({ project: projectModel as ProjectReflection });
-    return dirname(clientsDirectory?.files.find((file) => file.name.endsWith("Client.ts")).fullFileName);
+    // const clientsDirectory = (projectModel as ProjectReflection).directory.directories["clients"].directories;
+    // const dir = Object.values(clientsDirectory).filter((directory) =>
+    //   directory?.files.find((file) => file.name.endsWith("Client.ts"))
+    // )[0];
+    // return dirname(dir?.files.find((file) => file.name.endsWith("Client.ts")).fullFileName);
+    return dirname(projectModel.getSymbolFromReflection(projectModel).getName());
   }
 }
