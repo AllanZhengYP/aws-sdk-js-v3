@@ -41,3 +41,12 @@ dist
 
 /verdaccio/*
 !/verdaccio/config.yaml
+
+# Yarn2 specific: https://next.yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
