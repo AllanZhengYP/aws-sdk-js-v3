@@ -7,6 +7,7 @@ import {
   RoleAssumer,
   RoleAssumerWithWebIdentity,
 } from "./defaultStsRoleAssumers";
+export { RoleAssumer, RoleAssumerWithWebIdentity } from "./defaultStsRoleAssumers";
 import { STSClient, STSClientConfig } from "./STSClient";
 
 /**

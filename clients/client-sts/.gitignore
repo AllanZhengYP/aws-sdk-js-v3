@@ -6,5 +6,6 @@
 *.tsbuildinfo
 *.tgz
 *.log
+api.d.ts
 package-lock.json
 
