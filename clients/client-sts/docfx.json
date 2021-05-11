@@ -1,0 +1,12 @@
+{
+  "build": {
+    "content": [
+      {
+        "files": ["**/*.yml"],
+        "src": "temp",
+        "dest": "client-sts"
+      }
+    ],
+    "dest": "_site"
+  }
+}
