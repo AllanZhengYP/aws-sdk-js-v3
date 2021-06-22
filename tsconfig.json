@@ -29,7 +29,7 @@
   "exclude": ["node_modules/", "**/*.spec.ts"],
   "typedocOptions": {
     // "entryPoints": ["packages", "lib"],
-    "packages": ["lib/*"],
+    "packages": ["packages/credential-provider-*"],
     "readme": "README.md",
     // "mode": "modules",
     "out": "docs",
