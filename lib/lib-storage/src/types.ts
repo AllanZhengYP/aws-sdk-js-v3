@@ -39,7 +39,7 @@ export interface Configuration {
   tags: Tag[];
 }
 
-export interface Options extends Partial<Configuration> {
+export interface Options<T extends Partial<S3Client>> extends Partial<Configuration> {
   /**
    * This is the data that is uploaded.
    */
@@ -49,5 +49,5 @@ export interface Options extends Partial<Configuration> {
    * A service client.
    * This the target where we upload data.
    */
-  client: ServiceClients;
+  client: T;
 }

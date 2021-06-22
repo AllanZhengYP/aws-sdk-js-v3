@@ -4,6 +4,7 @@ import {
   CreateMultipartUploadCommand,
   PutObjectCommandInput,
   PutObjectTaggingCommand,
+  S3Client,
   ServiceOutputTypes,
   Tag,
   UploadPartCommand,
@@ -21,7 +22,7 @@ export interface RawDataPart {
 
 const MIN_PART_SIZE = 1024 * 1024 * 5;
 
-export class Upload extends EventEmitter {
+export class Upload<T extends Partial<S3Client>> extends EventEmitter {
   /**
    * S3 multipart upload does not allow more than 10000 parts.
    */
@@ -33,7 +34,7 @@ export class Upload extends EventEmitter {
   private leavePartsOnError = false;
   private tags: Tag[] = [];
 
-  private client: ServiceClients;
+  private client: Partial<ServiceClients>;
   private params: PutObjectCommandInput;
 
   // used for reporting progress.
@@ -49,7 +50,7 @@ export class Upload extends EventEmitter {
 
   uploadEvent?: string;
 
-  constructor(options: Options) {
+  constructor(options: Options<T>) {
     super();
 
     // set defaults from options.
@@ -95,6 +96,7 @@ export class Upload extends EventEmitter {
       }
 
       try {
+        // @ts-ignore
         const partResult = await this.client.send(
           new UploadPartCommand({
             ...this.params,
@@ -132,7 +134,7 @@ export class Upload extends EventEmitter {
   }
 
   async __doMultipartUpload(): Promise<ServiceOutputTypes> {
-    const createMultipartUploadResult = await this.client.send(new CreateMultipartUploadCommand(this.params));
+    const createMultipartUploadResult = await this.client.send!(new CreateMultipartUploadCommand(this.params));
     this.uploadId = createMultipartUploadResult.UploadId;
 
     // Set up data input chunks.
@@ -151,7 +153,7 @@ export class Upload extends EventEmitter {
     }
 
     this.uploadedParts.sort((a, b) => a.PartNumber! - b.PartNumber!);
-    const completeMultipartUpload = await this.client.send(
+    const completeMultipartUpload = await this.client.send!(
       new CompleteMultipartUploadCommand({
         ...this.params,
         UploadId: this.uploadId,
@@ -163,7 +165,7 @@ export class Upload extends EventEmitter {
 
     // Add tags to the object after it's completed the upload.
     if (this.tags.length) {
-      await this.client.send(
+      await this.client.send!(
         new PutObjectTaggingCommand({
           ...this.params,
           Tagging: {
