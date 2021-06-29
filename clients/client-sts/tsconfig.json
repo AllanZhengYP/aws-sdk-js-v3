@@ -17,15 +17,16 @@
   },
   "typedocOptions": {
     "exclude": ["**/node_modules/**", "**/*.spec.ts", "**/protocols/*.ts", "**/e2e/*.ts", "**/endpoints.ts"],
-    "excludeNotExported": true,
-    "excludePrivate": true,
+    "entryPoints": ["./api.d.ts", "../../node_modules/@aws-sdk/types"],
     "hideGenerator": true,
-    "ignoreCompilerErrors": true,
-    "includeDeclarations": true,
-    "stripInternal": true,
+    "excludeInternal": true,
+    "excludePrivate": true,
+    "disableSources": true,
+    "disableOutputCheck": true,
     "readme": "./README.md",
     "out": "./docs",
-    "theme": "minimal",
-    "plugin": "none"
+    "theme": "default",
+    "plugin": ["typedoc-plugin-not-exported"],
+    "name": "STS Client - AWS SDK for JavaScript v3"
   }
 }
