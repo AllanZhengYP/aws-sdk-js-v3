@@ -25,6 +25,10 @@ import {
   EndpointWithHostLabelOperationCommandOutput,
 } from "./commands/EndpointWithHostLabelOperationCommand";
 import { GreetingWithErrorsCommandInput, GreetingWithErrorsCommandOutput } from "./commands/GreetingWithErrorsCommand";
+import {
+  HostWithPathOperationCommandInput,
+  HostWithPathOperationCommandOutput,
+} from "./commands/HostWithPathOperationCommand";
 import { HttpEnumPayloadCommandInput, HttpEnumPayloadCommandOutput } from "./commands/HttpEnumPayloadCommand";
 import { HttpPayloadTraitsCommandInput, HttpPayloadTraitsCommandOutput } from "./commands/HttpPayloadTraitsCommand";
 import {
@@ -114,7 +118,7 @@ import {
   TimestampFormatHeadersCommandInput,
   TimestampFormatHeadersCommandOutput,
 } from "./commands/TimestampFormatHeadersCommand";
-import { ClientDefaultValues as __ClientDefaultValues } from "./runtimeConfig";
+import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
 import {
   EndpointsInputConfig,
   EndpointsResolvedConfig,
@@ -168,6 +172,7 @@ export type ServiceInputTypes =
   | EndpointOperationCommandInput
   | EndpointWithHostLabelOperationCommandInput
   | GreetingWithErrorsCommandInput
+  | HostWithPathOperationCommandInput
   | HttpEnumPayloadCommandInput
   | HttpPayloadTraitsCommandInput
   | HttpPayloadTraitsWithMediaTypeCommandInput
@@ -214,6 +219,7 @@ export type ServiceOutputTypes =
   | EndpointOperationCommandOutput
   | EndpointWithHostLabelOperationCommandOutput
   | GreetingWithErrorsCommandOutput
+  | HostWithPathOperationCommandOutput
   | HttpEnumPayloadCommandOutput
   | HttpPayloadTraitsCommandOutput
   | HttpPayloadTraitsWithMediaTypeCommandOutput
@@ -391,10 +397,7 @@ export class RestJsonProtocolClient extends __Client<
   readonly config: RestJsonProtocolClientResolvedConfig;
 
   constructor(configuration: RestJsonProtocolClientConfig) {
-    let _config_0 = {
-      ...__ClientDefaultValues,
-      ...configuration,
-    };
+    let _config_0 = __getRuntimeConfig(configuration);
     let _config_1 = resolveRegionConfig(_config_0);
     let _config_2 = resolveEndpointsConfig(_config_1);
     let _config_3 = resolveRetryConfig(_config_2);
