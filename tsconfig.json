@@ -29,7 +29,13 @@
   "exclude": ["node_modules/", "**/*.spec.ts"],
   "typedocOptions": {
     // "entryPoints": ["packages", "lib"],
-    "packages": ["packages/credential-provider-*"],
+    "packages": [
+      "packages/credential-provider-ini",
+      "packages/credential-provider-process",
+      "packages/credential-provider-sso",
+      "packages/credential-cognito-identity",
+      "packages/types"
+    ],
     "readme": "README.md",
     // "mode": "modules",
     "out": "docs",
