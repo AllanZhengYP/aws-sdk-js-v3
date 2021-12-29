@@ -129,3 +129,9 @@ export type UserAgentPair = [name: string, version?: string];
  * agent.
  */
 export type UserAgent = UserAgentPair[];
+
+export type DefaultsMode = "legacy" | "standard" | "cross-region" | "in-region" | "mobile" | "auto";
+export interface DefaultsFromMode {
+  retryMode?: string;
+  connectTimeout?: number;
+}

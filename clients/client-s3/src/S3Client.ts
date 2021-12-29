@@ -48,6 +48,7 @@ import {
 import {
   Credentials as __Credentials,
   Decoder as __Decoder,
+  DefaultsMode as __DefaultsMode,
   Encoder as __Encoder,
   EventStreamSerdeProvider as __EventStreamSerdeProvider,
   Hash as __Hash,
@@ -647,6 +648,8 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    * @internal
    */
   md5?: __HashConstructor;
+
+  defaultsMode?: Provider<__DefaultsMode>;
 }
 
 type S3ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
