@@ -21,17 +21,30 @@ export interface LoadedConfigSelectors<T> {
   /**
    * Default value or getter
    */
-  default: FromStaticConfig<T>;
+  default?: FromStaticConfig<T>;
+  /**
+   * Async function providing default value.
+   * This config overwrites the value from `default` config
+   */
+  defaultProvider?: Provider<T>;
 }
 
 export const loadConfig = <T = string>(
-  { environmentVariableSelector, configFileSelector, default: defaultValue }: LoadedConfigSelectors<T>,
+  selectors: LoadedConfigSelectors<T>,
   configuration: LocalConfigOptions = {}
-): Provider<T> =>
-  memoize(
+): Provider<T> => {
+  if (
+    !Object.prototype.hasOwnProperty.call(selectors, "default") &&
+    !Object.prototype.hasOwnProperty.call(selectors, "defaultProvider")
+  ) {
+    throw new Error("Cannot infer default value");
+  }
+  const { environmentVariableSelector, configFileSelector, default: defaultValue, defaultProvider } = selectors;
+  return memoize(
     chain(
       fromEnv(environmentVariableSelector),
       fromSharedConfigFiles(configFileSelector, configuration),
-      fromStatic(defaultValue)
+      defaultProvider ? defaultProvider : fromStatic(defaultValue!)
     )
   );
+};
