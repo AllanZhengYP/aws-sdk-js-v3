@@ -2,9 +2,13 @@
 import packageInfo from "../package.json"; // eslint-disable-line
 
 import { Sha256 } from "@aws-crypto/sha256-browser";
-import { DEFAULT_USE_DUALSTACK_ENDPOINT, DEFAULT_USE_FIPS_ENDPOINT } from "@aws-sdk/config-resolver";
+import {
+  DEFAULT_USE_DUALSTACK_ENDPOINT,
+  DEFAULT_USE_FIPS_ENDPOINT,
+  loadConfigsForDefaultMode,
+} from "@aws-sdk/config-resolver";
 import { eventStreamSerdeProvider } from "@aws-sdk/eventstream-serde-browser";
-import { FetchHttpHandler, streamCollector } from "@aws-sdk/fetch-http-handler";
+import { FetchHttpHandler as RequestHandler, streamCollector } from "@aws-sdk/fetch-http-handler";
 import { blobHasher as streamHasher } from "@aws-sdk/hash-blob-browser";
 import { invalidProvider } from "@aws-sdk/invalid-dependency";
 import { Md5 } from "@aws-sdk/md5-js";
@@ -15,16 +19,25 @@ import { defaultUserAgent } from "@aws-sdk/util-user-agent-browser";
 import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8-browser";
 import { S3ClientConfig } from "./S3Client";
 import { getRuntimeConfig as getSharedRuntimeConfig } from "./runtimeConfig.shared";
+import { DefaultsMode, Provider, ResolvedDefaultsMode } from "@aws-sdk/types";
+
+// Move to util-defaults-mode-browser package
+export declare const resolveDefaultsModeConfig: (
+  defaultsMode?: Provider<DefaultsMode>
+) => Provider<ResolvedDefaultsMode>;
 
 /**
  * @internal
  */
 export const getRuntimeConfig = (config: S3ClientConfig) => {
+  const defaultsMode = resolveDefaultsModeConfig(config?.defaultsMode);
+  const defaultConfig = () => defaultsMode().then(loadConfigsForDefaultMode);
   const clientSharedValues = getSharedRuntimeConfig(config);
   return {
     ...clientSharedValues,
     ...config,
     runtime: "browser",
+    defaultsMode: defaultsMode,
     base64Decoder: config?.base64Decoder ?? fromBase64,
     base64Encoder: config?.base64Encoder ?? toBase64,
     bodyLengthChecker: config?.bodyLengthChecker ?? calculateBodyLength,
@@ -37,7 +50,7 @@ export const getRuntimeConfig = (config: S3ClientConfig) => {
     maxAttempts: config?.maxAttempts ?? DEFAULT_MAX_ATTEMPTS,
     md5: config?.md5 ?? Md5,
     region: config?.region ?? invalidProvider("Region is missing"),
-    requestHandler: config?.requestHandler ?? new FetchHttpHandler(),
+    requestHandler: config?.requestHandler ?? new RequestHandler(defaultConfig as any),
     retryMode: config?.retryMode ?? (() => Promise.resolve(DEFAULT_RETRY_MODE)),
     sha256: config?.sha256 ?? Sha256,
     streamCollector: config?.streamCollector ?? streamCollector,

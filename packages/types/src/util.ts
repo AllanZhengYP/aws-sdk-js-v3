@@ -131,7 +131,9 @@ export type UserAgentPair = [name: string, version?: string];
 export type UserAgent = UserAgentPair[];
 
 export type DefaultsMode = "legacy" | "standard" | "cross-region" | "in-region" | "mobile" | "auto";
-export interface DefaultsFromMode {
+export type ResolvedDefaultsMode = Exclude<DefaultsMode, "auto">;
+export interface DefaultsModeConfigs {
   retryMode?: string;
-  connectTimeout?: number;
+  connectionTimeout?: number;
+  requestTimeout?: number;
 }
