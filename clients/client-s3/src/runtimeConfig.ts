@@ -33,8 +33,7 @@ export const getRuntimeConfig = (config: S3ClientConfig) => {
   const defaultsMode = resolveDefaultsModeConfig(
     config?.defaultsMode ?? loadNodeConfig(NODE_DEFAULTS_MODE_CONFIG_OPTIONS)
   );
-  const defaultConfig = () => defaultsMode().then(loadConfigsForDefaultMode);
-  // TODO: load default configs from the defaults mode
+  const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
   const clientSharedValues = getSharedRuntimeConfig(config);
   return {
     ...clientSharedValues,
@@ -53,12 +52,12 @@ export const getRuntimeConfig = (config: S3ClientConfig) => {
     maxAttempts: config?.maxAttempts ?? loadNodeConfig(NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
     md5: config?.md5 ?? Hash.bind(null, "md5"),
     region: config?.region ?? loadNodeConfig(NODE_REGION_CONFIG_OPTIONS, NODE_REGION_CONFIG_FILE_OPTIONS),
-    requestHandler: config?.requestHandler ?? new RequestHandler(defaultConfig),
+    requestHandler: config?.requestHandler ?? new RequestHandler(defaultConfigProvider),
     retryMode:
       config?.retryMode ??
       loadNodeConfig({
         ...NODE_RETRY_MODE_CONFIG_OPTIONS,
-        defaultProvider: async () => (await defaultConfig()).retryMode,
+        defaultProvider: async () => (await defaultConfigProvider()).retryMode,
       }),
     sha256: config?.sha256 ?? Hash.bind(null, "sha256"),
     streamCollector: config?.streamCollector ?? streamCollector,

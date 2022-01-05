@@ -649,7 +649,7 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    */
   md5?: __HashConstructor;
 
-  defaultsMode?: Provider<__DefaultsMode>;
+  defaultsMode?: __DefaultsMode | Provider<__DefaultsMode>;
 }
 
 type S3ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &

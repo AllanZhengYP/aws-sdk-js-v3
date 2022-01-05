@@ -6,6 +6,7 @@ const defaultConfig: DefaultsModeConfigs = {
   connectionTimeout: 3000,
   requestTimeout: 3000,
 };
+
 export const loadConfigsForDefaultMode = (mode: ResolvedDefaultsMode): DefaultsModeConfigs => {
   switch (mode) {
     case "legacy":

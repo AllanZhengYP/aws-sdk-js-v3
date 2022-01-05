@@ -18,7 +18,6 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@aws-sdk/node-config-provider": "3.40.0",
     "@aws-sdk/types": "3.40.0",
     "tslib": "^2.3.0"
   },

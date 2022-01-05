@@ -12,26 +12,21 @@ import { FetchHttpHandler as RequestHandler, streamCollector } from "@aws-sdk/fe
 import { blobHasher as streamHasher } from "@aws-sdk/hash-blob-browser";
 import { invalidProvider } from "@aws-sdk/invalid-dependency";
 import { Md5 } from "@aws-sdk/md5-js";
-import { DEFAULT_MAX_ATTEMPTS, DEFAULT_RETRY_MODE } from "@aws-sdk/middleware-retry";
+import { DEFAULT_MAX_ATTEMPTS } from "@aws-sdk/middleware-retry";
 import { fromBase64, toBase64 } from "@aws-sdk/util-base64-browser";
 import { calculateBodyLength } from "@aws-sdk/util-body-length-browser";
+import { resolveDefaultsModeConfig } from "@aws-sdk/util-defaults-mode-browser";
 import { defaultUserAgent } from "@aws-sdk/util-user-agent-browser";
 import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8-browser";
 import { S3ClientConfig } from "./S3Client";
 import { getRuntimeConfig as getSharedRuntimeConfig } from "./runtimeConfig.shared";
-import { DefaultsMode, Provider, ResolvedDefaultsMode } from "@aws-sdk/types";
-
-// Move to util-defaults-mode-browser package
-export declare const resolveDefaultsModeConfig: (
-  defaultsMode?: Provider<DefaultsMode>
-) => Provider<ResolvedDefaultsMode>;
 
 /**
  * @internal
  */
 export const getRuntimeConfig = (config: S3ClientConfig) => {
   const defaultsMode = resolveDefaultsModeConfig(config?.defaultsMode);
-  const defaultConfig = () => defaultsMode().then(loadConfigsForDefaultMode);
+  const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
   const clientSharedValues = getSharedRuntimeConfig(config);
   return {
     ...clientSharedValues,
@@ -50,8 +45,8 @@ export const getRuntimeConfig = (config: S3ClientConfig) => {
     maxAttempts: config?.maxAttempts ?? DEFAULT_MAX_ATTEMPTS,
     md5: config?.md5 ?? Md5,
     region: config?.region ?? invalidProvider("Region is missing"),
-    requestHandler: config?.requestHandler ?? new RequestHandler(defaultConfig as any),
-    retryMode: config?.retryMode ?? (async () => (await defaultConfig()).retryMode),
+    requestHandler: config?.requestHandler ?? new RequestHandler(defaultConfigProvider),
+    retryMode: config?.retryMode ?? (async () => (await defaultConfigProvider()).retryMode),
     sha256: config?.sha256 ?? Sha256,
     streamCollector: config?.streamCollector ?? streamCollector,
     streamHasher: config?.streamHasher ?? streamHasher,
