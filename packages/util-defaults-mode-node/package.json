@@ -21,6 +21,7 @@
     "@aws-sdk/credential-provider-imds": "3.46.0",
     "@aws-sdk/config-resolver": "3.46.0",
     "@aws-sdk/node-config-provider": "3.46.0",
+    "@aws-sdk/property-provider": "3.46.0",
     "@aws-sdk/types": "3.46.0",
     "tslib": "^2.3.0"
   },

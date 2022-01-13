@@ -1,3 +1,4 @@
+import { memoize } from "@aws-sdk/property-provider";
 import type { DefaultsMode, ResolvedDefaultsMode } from "@aws-sdk/smithy-client";
 import type { Provider } from "@aws-sdk/types";
 import { parse } from "bowser";
@@ -19,9 +20,10 @@ export interface ResolveDefaultsModeConfigOptions {
  * @default "legacy"
  * @internal
  */
-export const resolveDefaultsModeConfig =
-  ({ defaultsMode }: ResolveDefaultsModeConfigOptions): Provider<ResolvedDefaultsMode> =>
-  async () => {
+export const resolveDefaultsModeConfig = ({
+  defaultsMode,
+}: ResolveDefaultsModeConfigOptions): Provider<ResolvedDefaultsMode> =>
+  memoize(async () => {
     const mode = typeof defaultsMode === "function" ? await defaultsMode() : defaultsMode;
     switch (mode?.toLowerCase()) {
       case "auto":
@@ -39,7 +41,7 @@ export const resolveDefaultsModeConfig =
           `Invalid parameter for "defaultsMode", expect ${DEFAULTS_MODE_OPTIONS.join(", ")}, got ${mode}`
         );
     }
-  };
+  });
 
 const isMobileBrowser = (): boolean => {
   const parsedUA =

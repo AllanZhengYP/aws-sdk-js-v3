@@ -1,6 +1,7 @@
 import { NODE_REGION_CONFIG_OPTIONS } from "@aws-sdk/config-resolver";
 import { getInstanceMetadataEndpoint, httpRequest } from "@aws-sdk/credential-provider-imds";
 import { loadConfig } from "@aws-sdk/node-config-provider";
+import { memoize } from "@aws-sdk/property-provider";
 import type { DefaultsMode, ResolvedDefaultsMode } from "@aws-sdk/smithy-client";
 import type { Provider } from "@aws-sdk/types";
 
@@ -29,12 +30,11 @@ export interface ResolveDefaultsModeConfigOptions {
  * @default "legacy"
  * @internal
  */
-export const resolveDefaultsModeConfig =
-  ({
-    region = loadConfig(NODE_REGION_CONFIG_OPTIONS),
-    defaultsMode = loadConfig(NODE_DEFAULTS_MODE_CONFIG_OPTIONS),
-  }: ResolveDefaultsModeConfigOptions): Provider<ResolvedDefaultsMode> =>
-  async () => {
+export const resolveDefaultsModeConfig = ({
+  region = loadConfig(NODE_REGION_CONFIG_OPTIONS),
+  defaultsMode = loadConfig(NODE_DEFAULTS_MODE_CONFIG_OPTIONS),
+}: ResolveDefaultsModeConfigOptions): Provider<ResolvedDefaultsMode> =>
+  memoize(async () => {
     const mode = typeof defaultsMode === "function" ? await defaultsMode() : defaultsMode;
     switch (mode?.toLowerCase()) {
       case "auto":
@@ -52,7 +52,7 @@ export const resolveDefaultsModeConfig =
           `Invalid parameter for "defaultsMode", expect ${DEFAULTS_MODE_OPTIONS.join(", ")}, got ${mode}`
         );
     }
-  };
+  });
 
 const resolveNodeDefaultsModeAuto = async (clientRegion?: string | Provider<string>): Promise<ResolvedDefaultsMode> => {
   if (clientRegion) {
