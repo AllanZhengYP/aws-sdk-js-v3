@@ -1,7 +1,8 @@
 import { NODE_REGION_CONFIG_OPTIONS } from "@aws-sdk/config-resolver";
 import { getInstanceMetadataEndpoint, httpRequest } from "@aws-sdk/credential-provider-imds";
 import { loadConfig } from "@aws-sdk/node-config-provider";
-import { DefaultsMode, Provider, ResolvedDefaultsMode } from "@aws-sdk/types";
+import type { DefaultsMode, ResolvedDefaultsMode } from "@aws-sdk/smithy-client";
+import type { Provider } from "@aws-sdk/types";
 
 import {
   AWS_DEFAULT_REGION_ENV,

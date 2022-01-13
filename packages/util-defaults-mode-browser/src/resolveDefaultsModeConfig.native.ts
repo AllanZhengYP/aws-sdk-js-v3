@@ -1,4 +1,5 @@
-import { DefaultsMode, Provider, ResolvedDefaultsMode } from "@aws-sdk/types";
+import type { DefaultsMode, ResolvedDefaultsMode } from "@aws-sdk/smithy-client";
+import type { Provider } from "@aws-sdk/types";
 
 import { DEFAULTS_MODE_OPTIONS } from "./constants";
 

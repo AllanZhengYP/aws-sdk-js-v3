@@ -20,13 +20,16 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.model.node.Node;
 import software.amazon.smithy.model.node.NumberNode;
 import software.amazon.smithy.model.node.ObjectNode;
 import software.amazon.smithy.model.node.StringNode;
-import software.amazon.smithy.typescript.codegen.TypeScriptDependency;
 import software.amazon.smithy.typescript.codegen.TypeScriptWriter;
 import software.amazon.smithy.utils.IoUtils;
 import software.amazon.smithy.utils.SmithyInternalApi;
@@ -37,6 +40,24 @@ import software.amazon.smithy.utils.SmithyInternalApi;
 @SmithyInternalApi
 final class DefaultsModeConfigGenerator {
 
+    static final String DEFAULTS_MODE_DOC_INTRODUCTION = "Option determining how certain default configuration options "
+    + "are resolved in the SDK. It can be one of the value listed below:\n";
+
+    static final String INTERNAL_INTERFACES_BLOCK = ""
+    + "/**\n"
+    + " * @internal\n"
+    + " */\n"
+    + "export type ResolvedDefaultsMode = Exclude<DefaultsMode, \"auto\">;\n"
+    + "\n"
+    + "/**\n"
+    + " * @internal\n"
+    + " */\n"
+    + "export interface DefaultsModeConfigs {\n"
+    + "  retryMode?: string;\n"
+    + "  connectionTimeout?: number;\n"
+    + "  requestTimeout?: number;\n"
+    + "}\n";
+
     private DefaultsModeConfigGenerator() {}
 
     public static void main(String[] args) throws IOException {
@@ -45,15 +66,12 @@ final class DefaultsModeConfigGenerator {
         String defaultsConfigJson = IoUtils.readUtf8Resource(DefaultsModeConfigGenerator.class,
                 "sdk-default-configuration.json");
         ObjectNode defaultsConfigData = Node.parse(defaultsConfigJson).expectObjectNode();
-
-        writer.addImport("DefaultsModeConfigs", "DefaultsModeConfigs", TypeScriptDependency.AWS_SDK_TYPES.packageName);
-        writer.addImport("ResolvedDefaultsMode", "ResolvedDefaultsMode",
-                TypeScriptDependency.AWS_SDK_TYPES.packageName);
         ObjectNode baseNode = defaultsConfigData.expectObjectMember("base");
         ObjectNode modesNode = defaultsConfigData.expectObjectMember("modes");
 
+        writer.writeDocs("@internal");
         writer.openBlock(
-            "export const loadConfigsForDefaultMode = (mode: ResolvedDefaultsMode): DefaultsModeConfigs => {", "}",
+            "export const loadConfigsForDefaultMode = (mode: ResolvedDefaultsMode): DefaultsModeConfigs => {", "}\n",
             () -> {
                 writer.openBlock("switch (mode) {", "}", () -> {
                     modesNode.getMembers().forEach((name, mode) -> {
@@ -63,11 +81,27 @@ final class DefaultsModeConfigGenerator {
                         defaultsMode.useWriter(writer);
                         writer.dedent();
                     });
-                    writer.openBlock("default:", "", () -> {
-                        writer.write("return {};");
-                    });
+                    writer.write("default:");
+                    writer.indent().write("return {};").dedent();
                 });
         });
+
+        ObjectNode docNode = defaultsConfigData.expectObjectMember("documentation").expectObjectMember("modes");
+        List<String> defaultsModes = new LinkedList<String>();
+        String defaultsModeDoc = DEFAULTS_MODE_DOC_INTRODUCTION;
+        for (Entry<StringNode, Node> map : docNode.getMembers().entrySet()) {
+            String modeName = map.getKey().getValue();
+            String doc = map.getValue().expectStringNode().getValue();
+            defaultsModes.add(modeName);
+            defaultsModeDoc += String.format("* `\"%s\"`: %s\n", modeName, doc);
+        }
+        defaultsModeDoc += "\n@default \"legacy\"";
+        writer.writeDocs(defaultsModeDoc);
+        writer.write("export type DefaultsMode = $L;\n",
+                String.join(" | ", defaultsModes.stream().map((mod) -> {
+                        return "\"" + mod + "\""; }).collect(Collectors.toList())));
+        writer.write(INTERNAL_INTERFACES_BLOCK);
+
         outputPath.toFile().createNewFile();
         Files.write(outputPath, writer.toString().getBytes(StandardCharsets.UTF_8));
     }

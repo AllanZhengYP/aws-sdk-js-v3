@@ -114,5 +114,4 @@ tasks.register("generate-default-configs-provider", JavaExec::class) {
 // Run the `buildSdk` automatically.
 tasks["build"]
         .dependsOn(tasks["generate-smithy-build"])
-        .dependsOn(tasks["generate-default-configs-provider"])
         .finalizedBy(tasks["buildSdk"])
