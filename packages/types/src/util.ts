@@ -167,7 +167,7 @@ export type ResolvedDefaultsMode = Exclude<DefaultsMode, "auto">;
  * @internal
  */
 export interface DefaultsModeConfigs {
-  retryMode: string;
-  connectionTimeout: number;
-  requestTimeout: number;
+  retryMode?: string;
+  connectionTimeout?: number;
+  requestTimeout?: number;
 }
