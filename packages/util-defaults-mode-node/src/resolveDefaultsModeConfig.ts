@@ -33,7 +33,7 @@ export interface ResolveDefaultsModeConfigOptions {
 export const resolveDefaultsModeConfig = ({
   region = loadConfig(NODE_REGION_CONFIG_OPTIONS),
   defaultsMode = loadConfig(NODE_DEFAULTS_MODE_CONFIG_OPTIONS),
-}: ResolveDefaultsModeConfigOptions): Provider<ResolvedDefaultsMode> =>
+}: ResolveDefaultsModeConfigOptions = {}): Provider<ResolvedDefaultsMode> =>
   memoize(async () => {
     const mode = typeof defaultsMode === "function" ? await defaultsMode() : defaultsMode;
     switch (mode?.toLowerCase()) {
@@ -58,6 +58,9 @@ const resolveNodeDefaultsModeAuto = async (clientRegion?: string | Provider<stri
   if (clientRegion) {
     const resolvedRegion = typeof clientRegion === "function" ? await clientRegion() : clientRegion;
     const inferredRegion = await inferPhysicalRegion();
+    if (!inferredRegion) {
+      return "standard";
+    }
     if (resolvedRegion === inferredRegion) {
       return "in-region";
     } else {

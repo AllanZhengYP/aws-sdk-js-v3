@@ -20,7 +20,7 @@ export interface ResolveDefaultsModeConfigOptions {
  */
 export const resolveDefaultsModeConfig = ({
   defaultsMode,
-}: ResolveDefaultsModeConfigOptions): Provider<ResolvedDefaultsMode> =>
+}: ResolveDefaultsModeConfigOptions = {}): Provider<ResolvedDefaultsMode> =>
   memoize(async () => {
     const mode = typeof defaultsMode === "function" ? await defaultsMode() : defaultsMode;
     switch (mode?.toLowerCase()) {
