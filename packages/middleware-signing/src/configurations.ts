@@ -76,7 +76,7 @@ export interface SigV4AuthInputConfig {
 }
 
 interface PreviouslyResolved {
-  credentialDefaultProvider: (input: any) => Provider<Credentials>;
+  credentialDefaultProvider: (input: any) => MemoizedProvider<Credentials>;
   region: string | Provider<string>;
   regionInfoProvider: RegionInfoProvider;
   signingName?: string;
@@ -87,7 +87,7 @@ interface PreviouslyResolved {
 }
 
 interface SigV4PreviouslyResolved {
-  credentialDefaultProvider: (input: any) => Provider<Credentials>;
+  credentialDefaultProvider: (input: any) => MemoizedProvider<Credentials>;
   region: string | Provider<string>;
   signingName: string;
   sha256: HashConstructor;
@@ -97,6 +97,8 @@ interface SigV4PreviouslyResolved {
 export interface AwsAuthResolvedConfig {
   /**
    * Resolved value for input config {@link AwsAuthInputConfig.credentials}
+   * This provider MAY memoize the loaded credentials for certain period.
+   * See {@link MemoizedProvider} for more information.
    */
   credentials: MemoizedProvider<Credentials>;
   /**
