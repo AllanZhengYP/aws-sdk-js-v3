@@ -2,7 +2,7 @@
   "name": "@aws-sdk/util-stream-browser",
   "version": "3.55.0",
   "scripts": {
-    "build": "concurrently 'yarn:build:es' 'yarn:build:types'",
+    "build": "concurrently 'pnpm:build:es' 'pnpm:build:types'",
     "build:es": "tsc -p tsconfig.es.json",
     "build:types": "tsc -p tsconfig.types.json",
     "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
