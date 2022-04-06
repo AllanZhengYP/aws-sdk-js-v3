@@ -129,6 +129,9 @@
       "**/@aws-sdk/client-sso/**"
     ]
   },
+  "engines": {
+    "pnpm": ">=7"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
@@ -142,5 +145,5 @@
     ],
     "**/*.{ts,js,md,json}": "prettier --write"
   },
-  "packageManager": "yarn@1.22.17"
+  "packageManager": "pnpm@7.0.0-rc.2"
 }
