@@ -13,7 +13,7 @@
     "test": "yarn test:unit",
     "test:unit": "ts-mocha test/**/*.spec.ts"
   },
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "types": "./dist-types/index.d.ts",
   "module": "./dist-es/index.js",
   "sideEffects": false,
@@ -84,7 +84,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "author": {
     "name": "AWS SDK for JavaScript Team",

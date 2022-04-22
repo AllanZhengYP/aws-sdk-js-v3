@@ -17,7 +17,7 @@
     "url": "https://aws.amazon.com/javascript/"
   },
   "license": "Apache-2.0",
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "types": "./dist-types/index.d.ts",
   "dependencies": {
@@ -53,7 +53,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/node-http-handler",
   "repository": {

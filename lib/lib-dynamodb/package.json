@@ -2,7 +2,7 @@
   "name": "@aws-sdk/lib-dynamodb",
   "version": "3.75.0",
   "description": "The document client simplifies working with items in Amazon DynamoDB by abstracting away the notion of attribute values.",
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "types": "./dist-types/index.d.ts",
   "scripts": {
@@ -51,7 +51,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/lib/lib-dynamodb",
   "repository": {

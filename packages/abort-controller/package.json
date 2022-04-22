@@ -2,7 +2,7 @@
   "name": "@aws-sdk/abort-controller",
   "version": "3.55.0",
   "description": "A simple abort controller library",
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "types": "./dist-types/index.d.ts",
   "scripts": {
@@ -34,7 +34,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/abort-controller",
   "repository": {

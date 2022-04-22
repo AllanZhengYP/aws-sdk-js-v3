@@ -9,7 +9,7 @@
     "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
     "test": "jest"
   },
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "types": "./dist-types/index.d.ts",
   "author": {
@@ -46,7 +46,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-defaults-mode-node",
   "repository": {

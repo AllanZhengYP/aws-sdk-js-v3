@@ -16,7 +16,7 @@
     "url": "https://aws.amazon.com/javascript/"
   },
   "license": "Apache-2.0",
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "dependencies": {
     "tslib": "^2.3.1"
@@ -33,7 +33,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-hex-encoding",
   "repository": {

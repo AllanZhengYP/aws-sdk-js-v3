@@ -11,7 +11,7 @@
     "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
     "clean": "rimraf ./dist-* && rimraf *.tsbuildinfo"
   },
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "types": "./dist-types/index.d.ts",
   "module": "./dist-es/index.js",
   "sideEffects": false,
@@ -76,7 +76,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "author": {
     "name": "AWS SDK for JavaScript Team",

@@ -2,7 +2,7 @@
   "name": "@aws-sdk/util-base64-browser",
   "version": "3.58.0",
   "description": "A pure JS Base64 <-> UInt8Array converter",
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "scripts": {
     "build": "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
@@ -39,7 +39,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/util-base64-browser",
   "repository": {

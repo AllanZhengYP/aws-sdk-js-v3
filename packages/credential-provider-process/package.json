@@ -2,7 +2,7 @@
   "name": "@aws-sdk/credential-provider-process",
   "version": "3.75.0",
   "description": "AWS credential provider that sources credential_process from ~/.aws/credentials and ~/.aws/config",
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "scripts": {
     "build": "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
@@ -49,7 +49,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/credential-provider-process",
   "repository": {

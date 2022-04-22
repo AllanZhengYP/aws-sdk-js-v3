@@ -2,7 +2,7 @@
   "name": "@aws-sdk/credential-providers",
   "version": "3.75.0",
   "description": "A collection of credential providers, without requiring service clients like STS, Cognito",
-  "main": "./dist-cjs/index.js",
+  "main": "./dist-node-cjs-min/index.js",
   "module": "./dist-es/index.js",
   "browser": "./dist-es/index.web.js",
   "react-native": "./dist-es/index.web.js",
@@ -62,7 +62,7 @@
     }
   },
   "files": [
-    "dist-*"
+    "dist-node-cjs-min"
   ],
   "homepage": "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/credential-providers",
   "repository": {
