@@ -60,7 +60,7 @@ export type QueryParameterBag = Record<string, string | Array<string> | null>;
 export interface Endpoint {
   protocol: string;
   hostname: string;
-  port?: number;
+  port: string;
   path: string;
   query?: QueryParameterBag;
 }
