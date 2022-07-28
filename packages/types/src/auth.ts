@@ -1,9 +1,16 @@
 import { Provider } from "./util";
 
+export interface Identity {
+  /**
+   * A {Date} when the identity or credential will no longer be accepted.
+   */
+  readonly expiration?: Date;
+}
+
 /**
  * An object representing temporary or permanent AWS credentials.
  */
-export interface Credentials {
+export interface Credentials extends Identity {
   /**
    * AWS access key ID
    */
@@ -19,11 +26,14 @@ export interface Credentials {
    * present for temporary credentials.
    */
   readonly sessionToken?: string;
-
-  /**
-   * A {Date} when these credentials will no longer be accepted.
-   */
-  readonly expiration?: Date;
 }
 
 export type CredentialProvider = Provider<Credentials>;
+
+/**
+ * Authentication schemes represent a way that the service will authenticate the customer’s identity.
+ */
+export interface AuthScheme {
+  name: string; // eg. SigV4
+  properties: Record<string, unknown>;
+}
