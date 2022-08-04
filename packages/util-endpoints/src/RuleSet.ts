@@ -18,12 +18,12 @@ interface ParameterBase {
 }
 
 export interface StringParameter extends ParameterBase {
-  type: "string";
+  type: "String";
   default?: string;
 }
 
 export interface BooleanParameter extends ParameterBase {
-  type: "boolean";
+  type: "Boolean";
   default?: boolean;
 }
 
@@ -46,13 +46,13 @@ export interface Condition extends EndpointFunction {
 
 export interface Endpoint {
   url: string | Reference | EndpointFunction;
-  properties?: Record<string, Record<string, EndpointProperty>>;
+  properties?: Record<string, EndpointProperty>;
   headers?: Record<string, (string | Reference | EndpointFunction)[]>;
 }
 
 export type TemplateString = string;
 
-export type EndpointProperty = TemplateString | boolean | EndpointProperty[];
+export type EndpointProperty = TemplateString | boolean | EndpointProperty[] | { [name: string]: EndpointProperty };
 
 export interface ErrorRule {
   type: "error";
@@ -73,4 +73,4 @@ export interface EndpointFunction {
   argv: FunctionArg[];
 }
 
-export type FunctionArg = string | boolean | FunctionArg[] | Reference | EndpointFunction;
+export type FunctionArg = number | string | boolean | FunctionArg[] | Reference | EndpointFunction;

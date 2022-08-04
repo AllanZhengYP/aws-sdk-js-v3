@@ -9,4 +9,4 @@ export interface EndpointV2 {
   headers: Record<string, string>;
 }
 
-export type EndpointParameters = { [name: string]: string | boolean };
+export type EndpointParameters = { [name: string]: undefined | string | boolean };
