@@ -25,7 +25,7 @@ export const endpointProvider = (
   }
   // validate input params have expected types
   for (const [name, paramValue] of Object.entries(params)) {
-    if (model.parameters[name] && model.parameters[name].type !== typeof paramValue) {
+    if (model.parameters[name] && model.parameters[name].type.toLowerCase() !== typeof paramValue) {
       throw new Error(
         `Endpoint parameter ${name} has wrong type, expected "${
           model.parameters[name].type

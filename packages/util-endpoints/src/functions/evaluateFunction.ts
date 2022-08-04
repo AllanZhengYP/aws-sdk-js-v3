@@ -50,7 +50,7 @@ export const resolveFunctionArgv = (
   functionArgvModel: FunctionArg[]
 ): ResolvedFunctionArg[] =>
   functionArgvModel.map((arg) => {
-    if (typeof arg === "boolean") {
+    if (typeof arg === "boolean" || typeof arg === "number") {
       return arg;
     } else if (typeof arg === "string") {
       // TODO: replace template string
