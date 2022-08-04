@@ -1,8 +1,11 @@
 import { AuthScheme } from "./auth";
 
-export interface HttpEndpoint {
+export interface EndpointV2 {
   url: URL;
-  authSchemes: AuthScheme[];
+  attributes: {
+    [key: string]: any;
+    authSchemes?: AuthScheme[];
+  };
   headers: Record<string, string>;
 }
 

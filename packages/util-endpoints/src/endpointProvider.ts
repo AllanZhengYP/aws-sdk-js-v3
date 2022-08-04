@@ -1,4 +1,4 @@
-import { EndpointParameters, HttpEndpoint, Logger } from "@aws-sdk/types";
+import { EndpointParameters, EndpointV2, Logger } from "@aws-sdk/types";
 
 import { constructEndpoint } from "./constructEndpoint";
 import { isSet } from "./functions/builtIns";
@@ -16,7 +16,7 @@ export const endpointProvider = (
   params: EndpointParameters,
   model: RuleSet,
   context: EndpointProviderContext = {}
-): HttpEndpoint => {
+): EndpointV2 => {
   // set default values to params
   for (const [name, parameterModel] of Object.entries(model.parameters)) {
     if (parameterModel.default && !isSet(params, [name])) {
@@ -76,10 +76,10 @@ const evaluateRule = (
   params: EndpointParametersAndAssignments,
   ruleModel: Rule | Function,
   context: EndpointProviderContext = {}
-): HttpEndpoint | undefined => {
+): EndpointV2 | undefined => {
   if (isFunction(ruleModel)) {
     const res = evaluateFunction(params, ruleModel);
-    return res as HttpEndpoint; // TODO: validate res
+    return res as EndpointV2; // TODO: validate res
   } else {
     if (ruleModel.documentation) {
       context?.logger?.debug(ruleModel.documentation);
@@ -99,7 +99,7 @@ const evaluateRule = (
 const evaluateEndpointRule = (
   params: EndpointParametersAndAssignments,
   endpointRule: EndpointRule
-): HttpEndpoint | undefined => {
+): EndpointV2 | undefined => {
   const [pass, assignedParams] = evaluateConditions(params, endpointRule.conditions);
   if (!pass) {
     return;
@@ -109,10 +109,7 @@ const evaluateEndpointRule = (
   }
 };
 
-const evaluateErrorRule = (
-  params: EndpointParametersAndAssignments,
-  errorRule: ErrorRule
-): HttpEndpoint | undefined => {
+const evaluateErrorRule = (params: EndpointParametersAndAssignments, errorRule: ErrorRule): EndpointV2 | undefined => {
   const [pass, assignedParams] = evaluateConditions(params, errorRule.conditions);
   if (!pass) {
     return;
@@ -124,7 +121,7 @@ const evaluateTreeRule = (
   params: EndpointParametersAndAssignments,
   treeRule: TreeRule,
   context: EndpointProviderContext = {}
-): HttpEndpoint | undefined => {
+): EndpointV2 | undefined => {
   const [pass, assignedParams] = evaluateConditions(params, treeRule.conditions);
   if (!pass) {
     return;

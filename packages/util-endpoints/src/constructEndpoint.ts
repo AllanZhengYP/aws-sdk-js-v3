@@ -1,5 +1,5 @@
 import { isValidHostname } from "@aws-sdk/protocol-http";
-import { HttpEndpoint } from "@aws-sdk/types";
+import { EndpointV2 } from "@aws-sdk/types";
 
 import { evaluateFunction } from "./functions/evaluateFunction";
 import { resolveReferenceValue } from "./resolveReferenceValue";
@@ -9,7 +9,7 @@ import { EndpointParametersAndAssignments } from "./types";
 export const constructEndpoint = (
   params: EndpointParametersAndAssignments,
   endpointRule: EndpointRule
-): HttpEndpoint | undefined => {
+): EndpointV2 | undefined => {
   if (!endpointRule.endpoint) {
     return;
   }
@@ -17,7 +17,9 @@ export const constructEndpoint = (
 
   return {
     url,
-    authSchemes: [], //TODO
+    attributes: {
+      authSchemes: [], //TODO
+    },
     headers: {}, //TODO
   };
 };
