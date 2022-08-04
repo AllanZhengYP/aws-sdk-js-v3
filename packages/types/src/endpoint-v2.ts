@@ -5,3 +5,5 @@ export interface HttpEndpoint {
   authSchemes: AuthScheme[];
   headers: Record<string, string>;
 }
+
+export type EndpointParameters = { [name: string]: string | boolean };
