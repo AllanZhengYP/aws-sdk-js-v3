@@ -3,7 +3,8 @@ import { SignatureV4MultiRegion } from "@aws-sdk/signature-v4-multi-region";
 import { Logger as __Logger } from "@aws-sdk/types";
 import { parseUrl } from "@aws-sdk/url-parser";
 
-import { defaultRegionInfoProvider } from "./endpoints";
+// import { defaultRegionInfoProvider } from "./endpoint/endpoints";
+import { defaultEndpointResolver } from "./endpoint/endpointResolver";
 import { S3ClientConfig } from "./S3Client";
 
 /**
@@ -13,7 +14,8 @@ export const getRuntimeConfig = (config: S3ClientConfig) => ({
   apiVersion: "2006-03-01",
   disableHostPrefix: config?.disableHostPrefix ?? false,
   logger: config?.logger ?? ({} as __Logger),
-  regionInfoProvider: config?.regionInfoProvider ?? defaultRegionInfoProvider,
+  // regionInfoProvider: config?.regionInfoProvider ?? defaultRegionInfoProvider,
+  endpointProvider: config?.endpointProvider ?? defaultEndpointResolver,
   serviceId: config?.serviceId ?? "S3",
   signerConstructor: config?.signerConstructor ?? SignatureV4MultiRegion,
   signingEscapePath: config?.signingEscapePath ?? false,

@@ -66,6 +66,7 @@ import {
   StreamHasher as __StreamHasher,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
+  EndpointV2 as __EndpointV2,
 } from "@aws-sdk/types";
 import { Readable } from "stream";
 
@@ -318,6 +319,7 @@ import {
   WriteGetObjectResponseCommandInput,
   WriteGetObjectResponseCommandOutput,
 } from "./commands/WriteGetObjectResponseCommand";
+import { EndpointParameters } from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
 
 export type ServiceInputTypes =
@@ -619,11 +621,15 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
    */
   credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
 
+  // /**
+  //  * Fetch related hostname, signing name or signing region with given region.
+  //  * @internal
+  //  */
+  // regionInfoProvider?: RegionInfoProvider;
   /**
-   * Fetch related hostname, signing name or signing region with given region.
    * @internal
    */
-  regionInfoProvider?: RegionInfoProvider;
+  endpointProvider?: (input: EndpointParameters) => __EndpointV2;
 
   /**
    * Whether to escape request path when signing the request.
