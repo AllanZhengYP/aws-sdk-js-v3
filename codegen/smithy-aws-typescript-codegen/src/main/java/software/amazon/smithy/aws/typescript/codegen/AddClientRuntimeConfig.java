@@ -83,10 +83,6 @@ public final class AddClientRuntimeConfig implements TypeScriptIntegration {
                 .write("retryMode?: string | __Provider<string>;\n");
         writer.writeDocs("Optional logger for logging debug/info/warn/error.")
                 .write("logger?: __Logger;\n");
-        writer.writeDocs("Enables IPv6/IPv4 dualstack endpoint.")
-                .write("useDualstackEndpoint?: boolean | __Provider<boolean>;\n");
-        writer.writeDocs("Enables FIPS compatible endpoints.")
-                .write("useFipsEndpoint?: boolean | __Provider<boolean>;\n");
     }
 
     @Override
