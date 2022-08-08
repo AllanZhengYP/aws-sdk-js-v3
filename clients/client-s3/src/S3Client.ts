@@ -1,22 +1,16 @@
 // smithy-typescript generated code
-import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
+import { RegionInputConfig, RegionResolvedConfig, resolveRegionConfig } from "@aws-sdk/config-resolver";
+import { EndpointInputConfig, EndpointResolvedConfig, resolveEndpointConfig } from "@aws-sdk/middleware-endpoint";
 import {
   EventStreamSerdeInputConfig,
   EventStreamSerdeResolvedConfig,
   resolveEventStreamSerdeConfig,
 } from "@aws-sdk/eventstream-serde-config-resolver";
-import {
-  BucketEndpointInputConfig,
-  BucketEndpointResolvedConfig,
-  resolveBucketEndpointConfig,
-} from "@aws-sdk/middleware-bucket-endpoint";
+// import {
+//   BucketEndpointInputConfig,
+//   BucketEndpointResolvedConfig,
+//   resolveBucketEndpointConfig,
+// } from "@aws-sdk/middleware-bucket-endpoint";
 import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
 import { getAddExpectContinuePlugin } from "@aws-sdk/middleware-expect-continue";
 import {
@@ -61,7 +55,7 @@ import {
   Logger as __Logger,
   Provider as __Provider,
   Provider,
-  RegionInfoProvider,
+  // RegionInfoProvider,
   StreamCollector as __StreamCollector,
   StreamHasher as __StreamHasher,
   UrlParser as __UrlParser,
@@ -626,10 +620,6 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   //  * @internal
   //  */
   // regionInfoProvider?: RegionInfoProvider;
-  /**
-   * @internal
-   */
-  endpointProvider?: (input: EndpointParameters) => __EndpointV2;
 
   /**
    * Whether to escape request path when signing the request.
@@ -687,11 +677,11 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
 type S3ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
   ClientDefaults &
   RegionInputConfig &
-  EndpointsInputConfig &
+  EndpointInputConfig<EndpointParameters> &
   RetryInputConfig &
   HostHeaderInputConfig &
   AwsAuthInputConfig &
-  BucketEndpointInputConfig &
+  // BucketEndpointInputConfig &
   UserAgentInputConfig &
   EventStreamSerdeInputConfig;
 /**
@@ -702,11 +692,11 @@ export interface S3ClientConfig extends S3ClientConfigType {}
 type S3ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
   Required<ClientDefaults> &
   RegionResolvedConfig &
-  EndpointsResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
   RetryResolvedConfig &
   HostHeaderResolvedConfig &
   AwsAuthResolvedConfig &
-  BucketEndpointResolvedConfig &
+  // BucketEndpointResolvedConfig &
   UserAgentResolvedConfig &
   EventStreamSerdeResolvedConfig;
 /**
@@ -731,12 +721,12 @@ export class S3Client extends __Client<
   constructor(configuration: S3ClientConfig) {
     const _config_0 = __getRuntimeConfig(configuration);
     const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+    const _config_2 = resolveEndpointConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
     const _config_4 = resolveHostHeaderConfig(_config_3);
     const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveBucketEndpointConfig(_config_5);
-    const _config_7 = resolveUserAgentConfig(_config_6);
+    // const _config_6 = resolveBucketEndpointConfig(_config_5);
+    const _config_7 = resolveUserAgentConfig(_config_5);
     const _config_8 = resolveEventStreamSerdeConfig(_config_7);
     super(_config_8);
     this.config = _config_8;
