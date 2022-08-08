@@ -3,6 +3,7 @@ import { AuthScheme } from "./auth";
 export interface EndpointV2 {
   url: URL;
   attributes: {
+    // TODO: can be optional?
     [key: string]: any;
     authSchemes?: AuthScheme[];
   };
