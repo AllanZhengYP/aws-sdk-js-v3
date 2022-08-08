@@ -16,7 +16,7 @@ type MapToTypeArray<T extends any[]> = T extends []
   ? [MapToType<First>, ...MapToTypeArray<Rest>]
   : never;
 
-export const parseFunctionArgs = <P extends any[]>(fnName: string, args: any[], ...argTypes: P): MapToTypeArray<P> => {
+export const validateArgTypes = <P extends any[]>(fnName: string, args: any[], ...argTypes: P): MapToTypeArray<P> => {
   if (args.length < argTypes.length) {
     throw new Error(`Function "${fnName}" expects "${argTypes.length}" parameters, got ${args.length}`);
   }
@@ -24,16 +24,16 @@ export const parseFunctionArgs = <P extends any[]>(fnName: string, args: any[], 
     const arg = args[i];
     const expectedType = argTypes[i];
     if (expectedType === "boolean" && typeof arg !== "boolean") {
-      throw new Error(`Expect ${i + 1}th paramter of function "${fnName}" to be type "boolean", but got value ${arg}`);
+      throw new Error(`Expect ${i + 1}th parameter of function "${fnName}" to be type "boolean", but got value ${arg}`);
     }
     if (expectedType === "number" && typeof arg !== "number") {
-      throw new Error(`Expect ${i + 1}th paramter of function "${fnName}" to be type "number", but got value ${arg}`);
+      throw new Error(`Expect ${i + 1}th parameter of function "${fnName}" to be type "number", but got value ${arg}`);
     }
     if (expectedType === "array" && !(arg instanceof Array)) {
-      throw new Error(`Expect ${i + 1}th paramter of function "${fnName}" to be type "array", but got value ${arg}`);
+      throw new Error(`Expect ${i + 1}th parameter of function "${fnName}" to be type "array", but got value ${arg}`);
     }
     if (expectedType === "object" && !(arg instanceof Object)) {
-      throw new Error(`Expect ${i + 1}th paramter of function "${fnName}" to be type "object", but got value ${arg}`);
+      throw new Error(`Expect ${i + 1}th parameter of function "${fnName}" to be type "object", but got value ${arg}`);
     }
   }
   return args as MapToTypeArray<P>;

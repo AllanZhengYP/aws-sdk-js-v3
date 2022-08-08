@@ -3,8 +3,9 @@ import { HttpEndpoint } from "@aws-sdk/types";
 
 import { evaluateFunction } from "./functions/evaluateFunction";
 import { resolveReferenceValue } from "./resolveReferenceValue";
-import { EndpointRule, Function, Reference, TemplateString } from "./RuleSet";
+import { EndpointFunction, EndpointRule, Reference, TemplateString } from "./RuleSet";
 import { EndpointParametersAndAssignments } from "./types";
+import { isEndpointFunction, isReference } from "./utils";
 
 export const constructEndpoint = (
   params: EndpointParametersAndAssignments,
@@ -22,15 +23,15 @@ export const constructEndpoint = (
   };
 };
 
-const isFunction = (model: any): model is Function => typeof model["fn"] === "string";
-const isReference = (model: any): model is Reference => typeof model["ref"] === "string";
-
-const populateURL = (params: EndpointParametersAndAssignments, model: TemplateString | Reference | Function): URL => {
+const populateURL = (
+  params: EndpointParametersAndAssignments,
+  model: TemplateString | Reference | EndpointFunction
+): URL => {
   let template: TemplateString = "";
   if (typeof model === "string") {
     template = model;
-  } else if (isFunction(model)) {
-    // TODO: validate function returns an string. Might be guarantteed by model
+  } else if (isEndpointFunction(model)) {
+    // TODO: validate function returns an string. Might be guaranteed by model
     template = evaluateFunction(params, model) as string;
   } else if (isReference(model)) {
     // TODO: ditto

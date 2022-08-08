@@ -9,17 +9,17 @@ import {
   PartitionOutputsModel,
   ResolvedFunctionArg,
 } from "../types";
-import { parseFunctionArgs } from "./validateFunctionArgs";
+import { validateArgTypes } from "./validateArgTypes";
 
 export const isSet = (params: EndpointParametersAndAssignments, argv: ResolvedFunctionArg[]): boolean => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [arg0] = parseFunctionArgs("isSet", argv, "string" as const);
+  const [arg0] = validateArgTypes("isSet", argv, "string" as const);
   return Object.hasOwnProperty.call(params, arg0);
 };
 
 export const not = (argv: ResolvedFunctionArg[]): boolean => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [arg0] = parseFunctionArgs("not", argv, "boolean" as const);
+  const [arg0] = validateArgTypes("not", argv, "boolean" as const);
   return !arg0;
 };
 
@@ -32,7 +32,7 @@ export const not = (argv: ResolvedFunctionArg[]): boolean => {
  */
 export const getAttr = (params: Obj | Arr, argv: ResolvedFunctionArg[]): ResolvedFunctionArg => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [path] = parseFunctionArgs("getAttr", argv, "string" as const);
+  const [path] = validateArgTypes("getAttr", argv, "string" as const);
   const pathComponents = path.split(".");
   let pointer = params;
   for (const pathComponent of pathComponents) {
@@ -62,7 +62,7 @@ const constructPartition = (name: string, model: PartitionOutputsModel): Partiti
 
 export const getPartition = (argv: ResolvedFunctionArg[]): Partition | undefined => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [region] = parseFunctionArgs("getPartition", argv, "string" as const);
+  const [region] = validateArgTypes("getPartition", argv, "string" as const);
   for (const { regions, id, outputs } of partitionModel.partitions) {
     if (Object.keys(regions).includes(region)) {
       return constructPartition(id, outputs);
@@ -80,7 +80,7 @@ export const getPartition = (argv: ResolvedFunctionArg[]): Partition | undefined
 
 export const parseArn = (argv: ResolvedFunctionArg[]): ARN | undefined => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [arn] = parseFunctionArgs("parseArn", argv, "string" as const);
+  const [arn] = validateArgTypes("parseArn", argv, "string" as const);
   if (validate(arn)) {
     return parse(arn);
   }
@@ -88,7 +88,7 @@ export const parseArn = (argv: ResolvedFunctionArg[]): ARN | undefined => {
 
 export const substring = (argv: ResolvedFunctionArg[]): string | undefined => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [input, start, stop, reverse] = parseFunctionArgs(
+  const [input, start, stop, reverse] = validateArgTypes(
     "substring",
     argv,
     "string" as const,
@@ -109,33 +109,33 @@ export const substring = (argv: ResolvedFunctionArg[]): string | undefined => {
 
 export const stringEquals = (argv: ResolvedFunctionArg[]): boolean => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [value1, value2] = parseFunctionArgs("stringEquals", argv, "string" as const, "string" as const);
+  const [value1, value2] = validateArgTypes("stringEquals", argv, "string" as const, "string" as const);
   return value1 === value2;
 };
 
 export const isValidHostLabel = (argv: ResolvedFunctionArg[]): boolean => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [value, allowSubDomains] = parseFunctionArgs("isValidHostLabel", argv, "string" as const, "boolean" as const);
+  const [value, allowSubDomains] = validateArgTypes("isValidHostLabel", argv, "string" as const, "boolean" as const);
   // TODO: implement it
   return true;
 };
 
 export const uriEncode = (argv: ResolvedFunctionArg[]): string => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [component] = parseFunctionArgs("uriEncode", argv, "string" as const);
+  const [component] = validateArgTypes("uriEncode", argv, "string" as const);
   // TODO: implement it
   return component;
 };
 
 export const parseURL = (argv: ResolvedFunctionArg[]): URL | undefined => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [urlString] = parseFunctionArgs("paseURL", argv, "string" as const);
+  const [urlString] = validateArgTypes("paseURL", argv, "string" as const);
   // TODO: implement it
   return new URL(urlString);
 };
 
 export const booleanEquals = (argv: ResolvedFunctionArg[]): boolean => {
   // TODO: maybe we don't need to validate them because model guatanttees valid.
-  const [bool1, bool2] = parseFunctionArgs("booleanEquals", argv, "boolean" as const, "boolean" as const);
+  const [bool1, bool2] = validateArgTypes("booleanEquals", argv, "boolean" as const, "boolean" as const);
   return bool1 === bool2;
 };

@@ -1,3 +1,4 @@
+// TODO: generate this file from partitions.json file
 import type { PartitionModel } from "../types";
 
 export const partitionModel: PartitionModel = {
