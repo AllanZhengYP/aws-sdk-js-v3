@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
+// import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
 import { getThrow200ExceptionsPlugin } from "@aws-sdk/middleware-sdk-s3";
 import { getSerdePlugin } from "@aws-sdk/middleware-serde";
 import { getSsecPlugin } from "@aws-sdk/middleware-ssec";
@@ -183,9 +183,19 @@ export class CompleteMultipartUploadCommand extends $Command<
     options?: __HttpHandlerOptions
   ): Handler<CompleteMultipartUploadCommandInput, CompleteMultipartUploadCommandOutput> {
     this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+    /**
+    TODO:
+    this.middlewareStack.use(getEndpointPlugin(configuration, {
+      region: { type: "builtInParams", name: "region" },
+      forcePathStyle: { type: "clientContextParams", name: "forcePathStyle" },
+      someStaticValue: { type: "staticParams", value: "value" },
+      Bucket: { type: "contextParams", name: "Bucket" }
+    }));
+     */
+
     this.middlewareStack.use(getThrow200ExceptionsPlugin(configuration));
     this.middlewareStack.use(getSsecPlugin(configuration));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
+    // this.middlewareStack.use(getBucketEndpointPlugin(configuration));
 
     const stack = clientStack.concat(this.middlewareStack);
 

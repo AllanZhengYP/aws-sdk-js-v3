@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
+// import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
 import { getSerdePlugin } from "@aws-sdk/middleware-serde";
 import { getSsecPlugin } from "@aws-sdk/middleware-ssec";
 import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
@@ -114,8 +114,18 @@ export class ListPartsCommand extends $Command<ListPartsCommandInput, ListPartsC
     options?: __HttpHandlerOptions
   ): Handler<ListPartsCommandInput, ListPartsCommandOutput> {
     this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+    /**
+    TODO:
+    this.middlewareStack.use(getEndpointPlugin(configuration, {
+      region: { type: "builtInParams", name: "region" },
+      forcePathStyle: { type: "clientContextParams", name: "forcePathStyle" },
+      someStaticValue: { type: "staticParams", value: "value" },
+      Bucket: { type: "contextParams", name: "Bucket" }
+    }));
+     */
+
     this.middlewareStack.use(getSsecPlugin(configuration));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
+    // this.middlewareStack.use(getBucketEndpointPlugin(configuration));
 
     const stack = clientStack.concat(this.middlewareStack);
 

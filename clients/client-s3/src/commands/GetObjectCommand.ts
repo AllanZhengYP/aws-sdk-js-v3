@@ -1,5 +1,5 @@
 // smithy-typescript generated code
-import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
+// import { getBucketEndpointPlugin } from "@aws-sdk/middleware-bucket-endpoint";
 import { getFlexibleChecksumsPlugin } from "@aws-sdk/middleware-flexible-checksums";
 import { getSerdePlugin } from "@aws-sdk/middleware-serde";
 import { getSsecPlugin } from "@aws-sdk/middleware-ssec";
@@ -244,8 +244,18 @@ export class GetObjectCommand extends $Command<GetObjectCommandInput, GetObjectC
     options?: __HttpHandlerOptions
   ): Handler<GetObjectCommandInput, GetObjectCommandOutput> {
     this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+    /**
+    TODO:
+    this.middlewareStack.use(getEndpointPlugin(configuration, {
+      region: { type: "builtInParams", name: "region" },
+      forcePathStyle: { type: "clientContextParams", name: "forcePathStyle" },
+      someStaticValue: { type: "staticParams", value: "value" },
+      Bucket: { type: "contextParams", name: "Bucket" }
+    }));
+     */
+
     this.middlewareStack.use(getSsecPlugin(configuration));
-    this.middlewareStack.use(getBucketEndpointPlugin(configuration));
+    // this.middlewareStack.use(getBucketEndpointPlugin(configuration));
     this.middlewareStack.use(
       getFlexibleChecksumsPlugin(configuration, {
         input: this.input,

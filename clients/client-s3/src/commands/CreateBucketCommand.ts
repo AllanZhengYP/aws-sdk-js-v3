@@ -214,6 +214,16 @@ export class CreateBucketCommand extends $Command<
     options?: __HttpHandlerOptions
   ): Handler<CreateBucketCommandInput, CreateBucketCommandOutput> {
     this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+    /**
+    TODO:
+    this.middlewareStack.use(getEndpointPlugin(configuration, {
+      region: { type: "builtInParams", name: "region" },
+      forcePathStyle: { type: "clientContextParams", name: "forcePathStyle" },
+      someStaticValue: { type: "staticParams", value: "value" },
+      Bucket: { type: "contextParams", name: "Bucket" }
+    }));
+     */
+
     this.middlewareStack.use(getLocationConstraintPlugin(configuration));
 
     const stack = clientStack.concat(this.middlewareStack);
