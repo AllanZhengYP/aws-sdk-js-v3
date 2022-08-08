@@ -1,8 +1,9 @@
 import { isValidHostname } from "@aws-sdk/protocol-http";
 import { EndpointV2 } from "@aws-sdk/types";
 
-import { evaluateFunction } from "./functions/evaluateFunction";
+import { evaluateFunction, resolveFunctionArgv } from "./functions/evaluateFunction";
 import { resolveReferenceValue } from "./resolveReferenceValue";
+import { resolveTemplateString } from "./resolveTemplateString";
 import { EndpointFunction, EndpointRule, Reference, TemplateString } from "./RuleSet";
 import { EndpointParametersAndAssignments } from "./types";
 import { isEndpointFunction, isReference } from "./utils";
@@ -15,13 +16,16 @@ export const constructEndpoint = (
     return;
   }
   const url = populateURL(params, endpointRule.endpoint!.url);
-
   return {
     url,
-    attributes: {
-      authSchemes: [], //TODO
-    },
-    headers: {}, //TODO
+    attributes: endpointRule.endpoint.properties ?? {},
+    headers: Object.entries(endpointRule.endpoint.headers ?? {})
+      // Cast the resolved header values to string. This should be guaranteed by model.
+      .map(([name, value]) => [name, resolveFunctionArgv(params, value)] as [string, string[]])
+      .reduce((acc, [name, value]) => {
+        acc[name] = value;
+        return acc;
+      }, {} as Record<string, string[]>),
   };
 };
 
@@ -39,12 +43,8 @@ const populateURL = (
     // TODO: ditto
     template = resolveReferenceValue(params, model) as string;
   }
-  Object.entries(params)
-    .filter(([, value]) => typeof value === "string")
-    .forEach(([key, value]) => {
-      template = template.replace(`{${key}}`, value as string);
-    });
-  const url = new URL(template);
+  const urlStr = resolveTemplateString(params, template);
+  const url = new URL(urlStr);
   if (isValidHostname(url.hostname)) {
     return url;
   } else {

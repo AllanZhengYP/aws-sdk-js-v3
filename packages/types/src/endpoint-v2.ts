@@ -7,7 +7,7 @@ export interface EndpointV2 {
     [key: string]: any;
     authSchemes?: AuthScheme[];
   };
-  headers: Record<string, string>;
+  headers: Record<string, string[]>;
 }
 
 export type EndpointParameters = { [name: string]: undefined | string | boolean };
