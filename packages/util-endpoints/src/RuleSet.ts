@@ -2,7 +2,7 @@ export interface RuleSet {
   version: string;
   serviceId: string;
   parameters: Record<string, Parameter>;
-  rules: (Rule | Function)[];
+  rules: (Rule | EndpointFunction)[];
 }
 
 export type Parameter = StringParameter | BooleanParameter;
@@ -40,14 +40,14 @@ export interface Reference {
   ref: string;
 }
 
-export interface Condition extends Function {
+export interface Condition extends EndpointFunction {
   assign?: string;
 }
 
 export interface Endpoint {
-  url: string | Reference | Function;
+  url: string | Reference | EndpointFunction;
   properties?: Record<string, Record<string, EndpointProperty>>;
-  headers?: Record<string, (string | Reference | Function)[]>;
+  headers?: Record<string, (string | Reference | EndpointFunction)[]>;
 }
 
 export type TemplateString = string;
@@ -57,7 +57,7 @@ export type EndpointProperty = TemplateString | boolean | EndpointProperty[];
 export interface ErrorRule {
   type: "error";
   conditions: Condition[];
-  error: TemplateString | Reference | Function;
+  error: TemplateString | Reference | EndpointFunction;
   documentation?: string;
 }
 
@@ -68,9 +68,9 @@ export interface TreeRule {
   documentation?: string;
 }
 
-export interface Function {
+export interface EndpointFunction {
   fn: string;
   argv: FunctionArg[];
 }
 
-export type FunctionArg = string | boolean | FunctionArg[] | Reference | Function;
+export type FunctionArg = string | boolean | FunctionArg[] | Reference | EndpointFunction;

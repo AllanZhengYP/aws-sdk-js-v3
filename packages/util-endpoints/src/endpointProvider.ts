@@ -3,8 +3,9 @@ import { EndpointParameters, HttpEndpoint, Logger } from "@aws-sdk/types";
 import { constructEndpoint } from "./constructEndpoint";
 import { isSet } from "./functions/builtIns";
 import { evaluateFunction } from "./functions/evaluateFunction";
-import { Condition, EndpointRule, ErrorRule, Function, Parameter, Rule, RuleSet, TreeRule } from "./RuleSet";
+import { Condition, EndpointFunction, EndpointRule, ErrorRule, Rule, RuleSet, TreeRule } from "./RuleSet";
 import { EndpointParametersAndAssignments, ResolvedFunctionArg } from "./types";
+import { isEndpointFunction } from "./utils";
 
 const EMPTY_RESULT = undefined;
 const EXHAUSTED_RULE_ERROR_MSG = "Exhaused all rules in tree rule without match";
@@ -41,7 +42,7 @@ export const endpointProvider = (
   }
   // evaluate rules
   for (const ruleModel of model.rules) {
-    if (!isFunction(ruleModel) && ruleModel.documentation) {
+    if (!isEndpointFunction(ruleModel) && ruleModel.documentation) {
       context?.logger?.debug(ruleModel.documentation);
     }
     const endpoint = evaluateRule(params, ruleModel, context);
@@ -51,8 +52,6 @@ export const endpointProvider = (
   }
   throw new Error(EXHAUSTED_RULE_ERROR_MSG);
 };
-
-const isFunction = (rule: any): rule is Function => typeof rule["fn"] === "string";
 
 const evaluateConditions = (
   params: EndpointParametersAndAssignments,
@@ -74,10 +73,10 @@ const evaluateConditions = (
 
 const evaluateRule = (
   params: EndpointParametersAndAssignments,
-  ruleModel: Rule | Function,
+  ruleModel: Rule | EndpointFunction,
   context: EndpointProviderContext = {}
 ): HttpEndpoint | undefined => {
-  if (isFunction(ruleModel)) {
+  if (isEndpointFunction(ruleModel)) {
     const res = evaluateFunction(params, ruleModel);
     return res as HttpEndpoint; // TODO: validate res
   } else {

@@ -1,6 +1,7 @@
 import { resolveReferenceValue } from "../resolveReferenceValue";
-import { Function, FunctionArg } from "../RuleSet";
+import { EndpointFunction, FunctionArg } from "../RuleSet";
 import { EndpointParametersAndAssignments, ResolvedFunctionArg } from "../types";
+import { isEndpointFunction } from "../utils";
 import {
   booleanEquals,
   getAttr,
@@ -15,7 +16,7 @@ import {
   uriEncode,
 } from "./builtIns";
 
-export const evaluateFunction = (params: EndpointParametersAndAssignments, functionModel: Function): any => {
+export const evaluateFunction = (params: EndpointParametersAndAssignments, functionModel: EndpointFunction): any => {
   const resolvedArgv = resolveFunctionArgv(params, functionModel.argv);
   switch (functionModel.fn) {
     case "isSet":
@@ -57,11 +58,9 @@ export const resolveFunctionArgv = (
       return arg;
     } else if (arg instanceof Array) {
       return resolveFunctionArgv(params, arg);
-    } else if (isFuntion(arg)) {
+    } else if (isEndpointFunction(arg)) {
       return evaluateFunction(params, arg);
     } else {
       return resolveReferenceValue(params, arg);
     }
   });
-
-const isFuntion = (input: any): input is Function => typeof input["fn"] === "string";
