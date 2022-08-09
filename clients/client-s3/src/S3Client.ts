@@ -22,7 +22,12 @@ import {
 import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
 import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
 import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import { getValidateBucketNamePlugin } from "@aws-sdk/middleware-sdk-s3";
+import {
+  getValidateBucketNamePlugin,
+  S3InputConfig,
+  S3ResolvedConfig,
+  resolveS3Config,
+} from "@aws-sdk/middleware-sdk-s3";
 import {
   AwsAuthInputConfig,
   AwsAuthResolvedConfig,
@@ -682,6 +687,7 @@ type S3ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
   HostHeaderInputConfig &
   AwsAuthInputConfig &
   // BucketEndpointInputConfig &
+  S3InputConfig &
   UserAgentInputConfig &
   EventStreamSerdeInputConfig;
 /**
@@ -697,6 +703,7 @@ type S3ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOpt
   HostHeaderResolvedConfig &
   AwsAuthResolvedConfig &
   // BucketEndpointResolvedConfig &
+  S3ResolvedConfig &
   UserAgentResolvedConfig &
   EventStreamSerdeResolvedConfig;
 /**
@@ -726,7 +733,8 @@ export class S3Client extends __Client<
     const _config_4 = resolveHostHeaderConfig(_config_3);
     const _config_5 = resolveAwsAuthConfig(_config_4);
     // const _config_6 = resolveBucketEndpointConfig(_config_5);
-    const _config_7 = resolveUserAgentConfig(_config_5);
+    const _config_6 = resolveS3Config(_config_5);
+    const _config_7 = resolveUserAgentConfig(_config_6);
     const _config_8 = resolveEventStreamSerdeConfig(_config_7);
     super(_config_8);
     this.config = _config_8;
