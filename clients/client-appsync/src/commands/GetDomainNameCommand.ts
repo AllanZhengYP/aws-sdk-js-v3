@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import {
-  GetDomainNameRequest,
-  GetDomainNameRequestFilterSensitiveLog,
-  GetDomainNameResponse,
-  GetDomainNameResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDomainNameCommand,
-  serializeAws_restJson1GetDomainNameCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDomainNameRequest, GetDomainNameResponse } from "../models/models_0";
+import { GetDomainName$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDomainNameCommand}.
+ */
 export interface GetDomainNameCommandInput extends GetDomainNameRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDomainNameCommand}.
+ */
 export interface GetDomainNameCommandOutput extends GetDomainNameResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,71 @@ export interface GetDomainNameCommandOutput extends GetDomainNameResponse, __Met
  * ```javascript
  * import { AppSyncClient, GetDomainNameCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, GetDomainNameCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // GetDomainNameRequest
+ *   domainName: "STRING_VALUE", // required
+ * };
  * const command = new GetDomainNameCommand(input);
  * const response = await client.send(command);
+ * // { // GetDomainNameResponse
+ * //   domainNameConfig: { // DomainNameConfig
+ * //     domainName: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     certificateArn: "STRING_VALUE",
+ * //     appsyncDomainName: "STRING_VALUE",
+ * //     hostedZoneId: "STRING_VALUE",
+ * //     tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     domainNameArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDomainNameCommandInput - {@link GetDomainNameCommandInput}
+ * @returns {@link GetDomainNameCommandOutput}
  * @see {@link GetDomainNameCommandInput} for command's `input` shape.
  * @see {@link GetDomainNameCommandOutput} for command's `response` shape.
  * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to perform this operation on this resource.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class GetDomainNameCommand extends $Command<
-  GetDomainNameCommandInput,
-  GetDomainNameCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDomainNameCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDomainNameCommandInput, GetDomainNameCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "GetDomainNameCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDomainNameRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetDomainNameResponseFilterSensitiveLog,
+export class GetDomainNameCommand extends command<GetDomainNameCommandInput, GetDomainNameCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDomainName",
+  GetDomainName$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDomainNameRequest;
+      output: GetDomainNameResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDomainNameCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDomainNameCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDomainNameCommandOutput> {
-    return deserializeAws_restJson1GetDomainNameCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDomainNameCommandInput;
+      output: GetDomainNameCommandOutput;
+    };
+  };
 }

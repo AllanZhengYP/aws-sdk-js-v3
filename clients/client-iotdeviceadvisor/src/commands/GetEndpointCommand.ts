@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IotDeviceAdvisorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IotDeviceAdvisorClient";
-import {
-  GetEndpointRequest,
-  GetEndpointRequestFilterSensitiveLog,
-  GetEndpointResponse,
-  GetEndpointResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetEndpointCommand,
-  serializeAws_restJson1GetEndpointCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetEndpointRequest, GetEndpointResponse } from "../models/models_0";
+import { GetEndpoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetEndpointCommand}.
+ */
 export interface GetEndpointCommandInput extends GetEndpointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetEndpointCommand}.
+ */
 export interface GetEndpointCommandOutput extends GetEndpointResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,59 @@ export interface GetEndpointCommandOutput extends GetEndpointResponse, __Metadat
  * ```javascript
  * import { IotDeviceAdvisorClient, GetEndpointCommand } from "@aws-sdk/client-iotdeviceadvisor"; // ES Modules import
  * // const { IotDeviceAdvisorClient, GetEndpointCommand } = require("@aws-sdk/client-iotdeviceadvisor"); // CommonJS import
+ * // import type { IotDeviceAdvisorClientConfig } from "@aws-sdk/client-iotdeviceadvisor";
+ * const config = {}; // type is IotDeviceAdvisorClientConfig
  * const client = new IotDeviceAdvisorClient(config);
+ * const input = { // GetEndpointRequest
+ *   thingArn: "STRING_VALUE",
+ *   certificateArn: "STRING_VALUE",
+ *   deviceRoleArn: "STRING_VALUE",
+ *   authenticationMethod: "X509ClientCertificate" || "SignatureVersion4",
+ * };
  * const command = new GetEndpointCommand(input);
  * const response = await client.send(command);
+ * // { // GetEndpointResponse
+ * //   endpoint: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetEndpointCommandInput - {@link GetEndpointCommandInput}
+ * @returns {@link GetEndpointCommandOutput}
  * @see {@link GetEndpointCommandInput} for command's `input` shape.
  * @see {@link GetEndpointCommandOutput} for command's `response` shape.
  * @see {@link IotDeviceAdvisorClientResolvedConfig | config} for IotDeviceAdvisorClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Sends an Internal Failure exception.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Sends a Resource Not Found exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Sends a validation exception.</p>
+ *
+ * @throws {@link IotDeviceAdvisorServiceException}
+ * <p>Base exception class for all service exceptions from IotDeviceAdvisor service.</p>
+ *
+ *
+ * @public
  */
-export class GetEndpointCommand extends $Command<
-  GetEndpointCommandInput,
-  GetEndpointCommandOutput,
-  IotDeviceAdvisorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetEndpointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IotDeviceAdvisorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetEndpointCommandInput, GetEndpointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IotDeviceAdvisorClient";
-    const commandName = "GetEndpointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetEndpointRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetEndpointResponseFilterSensitiveLog,
+export class GetEndpointCommand extends command<GetEndpointCommandInput, GetEndpointCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetEndpoint",
+  GetEndpoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetEndpointRequest;
+      output: GetEndpointResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetEndpointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetEndpointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetEndpointCommandOutput> {
-    return deserializeAws_restJson1GetEndpointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetEndpointCommandInput;
+      output: GetEndpointCommandOutput;
+    };
+  };
 }

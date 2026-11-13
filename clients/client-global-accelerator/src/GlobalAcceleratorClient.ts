@@ -1,211 +1,278 @@
 // smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  DefaultsMode,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
   BodyLengthCalculator as __BodyLengthCalculator,
-  Credentials as __Credentials,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultGlobalAcceleratorHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AddCustomRoutingEndpointsCommandInput,
   AddCustomRoutingEndpointsCommandOutput,
 } from "./commands/AddCustomRoutingEndpointsCommand";
-import { AdvertiseByoipCidrCommandInput, AdvertiseByoipCidrCommandOutput } from "./commands/AdvertiseByoipCidrCommand";
-import {
+import type { AddEndpointsCommandInput, AddEndpointsCommandOutput } from "./commands/AddEndpointsCommand";
+import type {
+  AdvertiseByoipCidrCommandInput,
+  AdvertiseByoipCidrCommandOutput,
+} from "./commands/AdvertiseByoipCidrCommand";
+import type {
   AllowCustomRoutingTrafficCommandInput,
   AllowCustomRoutingTrafficCommandOutput,
 } from "./commands/AllowCustomRoutingTrafficCommand";
-import { CreateAcceleratorCommandInput, CreateAcceleratorCommandOutput } from "./commands/CreateAcceleratorCommand";
-import {
+import type {
+  CreateAcceleratorCommandInput,
+  CreateAcceleratorCommandOutput,
+} from "./commands/CreateAcceleratorCommand";
+import type {
+  CreateCrossAccountAttachmentCommandInput,
+  CreateCrossAccountAttachmentCommandOutput,
+} from "./commands/CreateCrossAccountAttachmentCommand";
+import type {
   CreateCustomRoutingAcceleratorCommandInput,
   CreateCustomRoutingAcceleratorCommandOutput,
 } from "./commands/CreateCustomRoutingAcceleratorCommand";
-import {
+import type {
   CreateCustomRoutingEndpointGroupCommandInput,
   CreateCustomRoutingEndpointGroupCommandOutput,
 } from "./commands/CreateCustomRoutingEndpointGroupCommand";
-import {
+import type {
   CreateCustomRoutingListenerCommandInput,
   CreateCustomRoutingListenerCommandOutput,
 } from "./commands/CreateCustomRoutingListenerCommand";
-import {
+import type {
   CreateEndpointGroupCommandInput,
   CreateEndpointGroupCommandOutput,
 } from "./commands/CreateEndpointGroupCommand";
-import { CreateListenerCommandInput, CreateListenerCommandOutput } from "./commands/CreateListenerCommand";
-import { DeleteAcceleratorCommandInput, DeleteAcceleratorCommandOutput } from "./commands/DeleteAcceleratorCommand";
-import {
+import type { CreateListenerCommandInput, CreateListenerCommandOutput } from "./commands/CreateListenerCommand";
+import type {
+  DeleteAcceleratorCommandInput,
+  DeleteAcceleratorCommandOutput,
+} from "./commands/DeleteAcceleratorCommand";
+import type {
+  DeleteCrossAccountAttachmentCommandInput,
+  DeleteCrossAccountAttachmentCommandOutput,
+} from "./commands/DeleteCrossAccountAttachmentCommand";
+import type {
   DeleteCustomRoutingAcceleratorCommandInput,
   DeleteCustomRoutingAcceleratorCommandOutput,
 } from "./commands/DeleteCustomRoutingAcceleratorCommand";
-import {
+import type {
   DeleteCustomRoutingEndpointGroupCommandInput,
   DeleteCustomRoutingEndpointGroupCommandOutput,
 } from "./commands/DeleteCustomRoutingEndpointGroupCommand";
-import {
+import type {
   DeleteCustomRoutingListenerCommandInput,
   DeleteCustomRoutingListenerCommandOutput,
 } from "./commands/DeleteCustomRoutingListenerCommand";
-import {
+import type {
   DeleteEndpointGroupCommandInput,
   DeleteEndpointGroupCommandOutput,
 } from "./commands/DeleteEndpointGroupCommand";
-import { DeleteListenerCommandInput, DeleteListenerCommandOutput } from "./commands/DeleteListenerCommand";
-import {
+import type { DeleteListenerCommandInput, DeleteListenerCommandOutput } from "./commands/DeleteListenerCommand";
+import type {
   DenyCustomRoutingTrafficCommandInput,
   DenyCustomRoutingTrafficCommandOutput,
 } from "./commands/DenyCustomRoutingTrafficCommand";
-import {
+import type {
   DeprovisionByoipCidrCommandInput,
   DeprovisionByoipCidrCommandOutput,
 } from "./commands/DeprovisionByoipCidrCommand";
-import {
+import type {
   DescribeAcceleratorAttributesCommandInput,
   DescribeAcceleratorAttributesCommandOutput,
 } from "./commands/DescribeAcceleratorAttributesCommand";
-import {
+import type {
   DescribeAcceleratorCommandInput,
   DescribeAcceleratorCommandOutput,
 } from "./commands/DescribeAcceleratorCommand";
-import {
+import type {
+  DescribeCrossAccountAttachmentCommandInput,
+  DescribeCrossAccountAttachmentCommandOutput,
+} from "./commands/DescribeCrossAccountAttachmentCommand";
+import type {
   DescribeCustomRoutingAcceleratorAttributesCommandInput,
   DescribeCustomRoutingAcceleratorAttributesCommandOutput,
 } from "./commands/DescribeCustomRoutingAcceleratorAttributesCommand";
-import {
+import type {
   DescribeCustomRoutingAcceleratorCommandInput,
   DescribeCustomRoutingAcceleratorCommandOutput,
 } from "./commands/DescribeCustomRoutingAcceleratorCommand";
-import {
+import type {
   DescribeCustomRoutingEndpointGroupCommandInput,
   DescribeCustomRoutingEndpointGroupCommandOutput,
 } from "./commands/DescribeCustomRoutingEndpointGroupCommand";
-import {
+import type {
   DescribeCustomRoutingListenerCommandInput,
   DescribeCustomRoutingListenerCommandOutput,
 } from "./commands/DescribeCustomRoutingListenerCommand";
-import {
+import type {
   DescribeEndpointGroupCommandInput,
   DescribeEndpointGroupCommandOutput,
 } from "./commands/DescribeEndpointGroupCommand";
-import { DescribeListenerCommandInput, DescribeListenerCommandOutput } from "./commands/DescribeListenerCommand";
-import { ListAcceleratorsCommandInput, ListAcceleratorsCommandOutput } from "./commands/ListAcceleratorsCommand";
-import { ListByoipCidrsCommandInput, ListByoipCidrsCommandOutput } from "./commands/ListByoipCidrsCommand";
-import {
+import type { DescribeListenerCommandInput, DescribeListenerCommandOutput } from "./commands/DescribeListenerCommand";
+import type { ListAcceleratorsCommandInput, ListAcceleratorsCommandOutput } from "./commands/ListAcceleratorsCommand";
+import type { ListByoipCidrsCommandInput, ListByoipCidrsCommandOutput } from "./commands/ListByoipCidrsCommand";
+import type {
+  ListCrossAccountAttachmentsCommandInput,
+  ListCrossAccountAttachmentsCommandOutput,
+} from "./commands/ListCrossAccountAttachmentsCommand";
+import type {
+  ListCrossAccountResourceAccountsCommandInput,
+  ListCrossAccountResourceAccountsCommandOutput,
+} from "./commands/ListCrossAccountResourceAccountsCommand";
+import type {
+  ListCrossAccountResourcesCommandInput,
+  ListCrossAccountResourcesCommandOutput,
+} from "./commands/ListCrossAccountResourcesCommand";
+import type {
   ListCustomRoutingAcceleratorsCommandInput,
   ListCustomRoutingAcceleratorsCommandOutput,
 } from "./commands/ListCustomRoutingAcceleratorsCommand";
-import {
+import type {
   ListCustomRoutingEndpointGroupsCommandInput,
   ListCustomRoutingEndpointGroupsCommandOutput,
 } from "./commands/ListCustomRoutingEndpointGroupsCommand";
-import {
+import type {
   ListCustomRoutingListenersCommandInput,
   ListCustomRoutingListenersCommandOutput,
 } from "./commands/ListCustomRoutingListenersCommand";
-import {
+import type {
   ListCustomRoutingPortMappingsByDestinationCommandInput,
   ListCustomRoutingPortMappingsByDestinationCommandOutput,
 } from "./commands/ListCustomRoutingPortMappingsByDestinationCommand";
-import {
+import type {
   ListCustomRoutingPortMappingsCommandInput,
   ListCustomRoutingPortMappingsCommandOutput,
 } from "./commands/ListCustomRoutingPortMappingsCommand";
-import { ListEndpointGroupsCommandInput, ListEndpointGroupsCommandOutput } from "./commands/ListEndpointGroupsCommand";
-import { ListListenersCommandInput, ListListenersCommandOutput } from "./commands/ListListenersCommand";
-import {
+import type {
+  ListEndpointGroupsCommandInput,
+  ListEndpointGroupsCommandOutput,
+} from "./commands/ListEndpointGroupsCommand";
+import type { ListListenersCommandInput, ListListenersCommandOutput } from "./commands/ListListenersCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { ProvisionByoipCidrCommandInput, ProvisionByoipCidrCommandOutput } from "./commands/ProvisionByoipCidrCommand";
-import {
+import type {
+  ProvisionByoipCidrCommandInput,
+  ProvisionByoipCidrCommandOutput,
+} from "./commands/ProvisionByoipCidrCommand";
+import type {
   RemoveCustomRoutingEndpointsCommandInput,
   RemoveCustomRoutingEndpointsCommandOutput,
 } from "./commands/RemoveCustomRoutingEndpointsCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { RemoveEndpointsCommandInput, RemoveEndpointsCommandOutput } from "./commands/RemoveEndpointsCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateAcceleratorAttributesCommandInput,
   UpdateAcceleratorAttributesCommandOutput,
 } from "./commands/UpdateAcceleratorAttributesCommand";
-import { UpdateAcceleratorCommandInput, UpdateAcceleratorCommandOutput } from "./commands/UpdateAcceleratorCommand";
-import {
+import type {
+  UpdateAcceleratorCommandInput,
+  UpdateAcceleratorCommandOutput,
+} from "./commands/UpdateAcceleratorCommand";
+import type {
+  UpdateCrossAccountAttachmentCommandInput,
+  UpdateCrossAccountAttachmentCommandOutput,
+} from "./commands/UpdateCrossAccountAttachmentCommand";
+import type {
   UpdateCustomRoutingAcceleratorAttributesCommandInput,
   UpdateCustomRoutingAcceleratorAttributesCommandOutput,
 } from "./commands/UpdateCustomRoutingAcceleratorAttributesCommand";
-import {
+import type {
   UpdateCustomRoutingAcceleratorCommandInput,
   UpdateCustomRoutingAcceleratorCommandOutput,
 } from "./commands/UpdateCustomRoutingAcceleratorCommand";
-import {
+import type {
   UpdateCustomRoutingListenerCommandInput,
   UpdateCustomRoutingListenerCommandOutput,
 } from "./commands/UpdateCustomRoutingListenerCommand";
-import {
+import type {
   UpdateEndpointGroupCommandInput,
   UpdateEndpointGroupCommandOutput,
 } from "./commands/UpdateEndpointGroupCommand";
-import { UpdateListenerCommandInput, UpdateListenerCommandOutput } from "./commands/UpdateListenerCommand";
-import { WithdrawByoipCidrCommandInput, WithdrawByoipCidrCommandOutput } from "./commands/WithdrawByoipCidrCommand";
+import type { UpdateListenerCommandInput, UpdateListenerCommandOutput } from "./commands/UpdateListenerCommand";
+import type {
+  WithdrawByoipCidrCommandInput,
+  WithdrawByoipCidrCommandOutput,
+} from "./commands/WithdrawByoipCidrCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AddCustomRoutingEndpointsCommandInput
+  | AddEndpointsCommandInput
   | AdvertiseByoipCidrCommandInput
   | AllowCustomRoutingTrafficCommandInput
   | CreateAcceleratorCommandInput
+  | CreateCrossAccountAttachmentCommandInput
   | CreateCustomRoutingAcceleratorCommandInput
   | CreateCustomRoutingEndpointGroupCommandInput
   | CreateCustomRoutingListenerCommandInput
   | CreateEndpointGroupCommandInput
   | CreateListenerCommandInput
   | DeleteAcceleratorCommandInput
+  | DeleteCrossAccountAttachmentCommandInput
   | DeleteCustomRoutingAcceleratorCommandInput
   | DeleteCustomRoutingEndpointGroupCommandInput
   | DeleteCustomRoutingListenerCommandInput
@@ -215,6 +282,7 @@ export type ServiceInputTypes =
   | DeprovisionByoipCidrCommandInput
   | DescribeAcceleratorAttributesCommandInput
   | DescribeAcceleratorCommandInput
+  | DescribeCrossAccountAttachmentCommandInput
   | DescribeCustomRoutingAcceleratorAttributesCommandInput
   | DescribeCustomRoutingAcceleratorCommandInput
   | DescribeCustomRoutingEndpointGroupCommandInput
@@ -223,6 +291,9 @@ export type ServiceInputTypes =
   | DescribeListenerCommandInput
   | ListAcceleratorsCommandInput
   | ListByoipCidrsCommandInput
+  | ListCrossAccountAttachmentsCommandInput
+  | ListCrossAccountResourceAccountsCommandInput
+  | ListCrossAccountResourcesCommandInput
   | ListCustomRoutingAcceleratorsCommandInput
   | ListCustomRoutingEndpointGroupsCommandInput
   | ListCustomRoutingListenersCommandInput
@@ -233,10 +304,12 @@ export type ServiceInputTypes =
   | ListTagsForResourceCommandInput
   | ProvisionByoipCidrCommandInput
   | RemoveCustomRoutingEndpointsCommandInput
+  | RemoveEndpointsCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
   | UpdateAcceleratorAttributesCommandInput
   | UpdateAcceleratorCommandInput
+  | UpdateCrossAccountAttachmentCommandInput
   | UpdateCustomRoutingAcceleratorAttributesCommandInput
   | UpdateCustomRoutingAcceleratorCommandInput
   | UpdateCustomRoutingListenerCommandInput
@@ -244,17 +317,23 @@ export type ServiceInputTypes =
   | UpdateListenerCommandInput
   | WithdrawByoipCidrCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AddCustomRoutingEndpointsCommandOutput
+  | AddEndpointsCommandOutput
   | AdvertiseByoipCidrCommandOutput
   | AllowCustomRoutingTrafficCommandOutput
   | CreateAcceleratorCommandOutput
+  | CreateCrossAccountAttachmentCommandOutput
   | CreateCustomRoutingAcceleratorCommandOutput
   | CreateCustomRoutingEndpointGroupCommandOutput
   | CreateCustomRoutingListenerCommandOutput
   | CreateEndpointGroupCommandOutput
   | CreateListenerCommandOutput
   | DeleteAcceleratorCommandOutput
+  | DeleteCrossAccountAttachmentCommandOutput
   | DeleteCustomRoutingAcceleratorCommandOutput
   | DeleteCustomRoutingEndpointGroupCommandOutput
   | DeleteCustomRoutingListenerCommandOutput
@@ -264,6 +343,7 @@ export type ServiceOutputTypes =
   | DeprovisionByoipCidrCommandOutput
   | DescribeAcceleratorAttributesCommandOutput
   | DescribeAcceleratorCommandOutput
+  | DescribeCrossAccountAttachmentCommandOutput
   | DescribeCustomRoutingAcceleratorAttributesCommandOutput
   | DescribeCustomRoutingAcceleratorCommandOutput
   | DescribeCustomRoutingEndpointGroupCommandOutput
@@ -272,6 +352,9 @@ export type ServiceOutputTypes =
   | DescribeListenerCommandOutput
   | ListAcceleratorsCommandOutput
   | ListByoipCidrsCommandOutput
+  | ListCrossAccountAttachmentsCommandOutput
+  | ListCrossAccountResourceAccountsCommandOutput
+  | ListCrossAccountResourcesCommandOutput
   | ListCustomRoutingAcceleratorsCommandOutput
   | ListCustomRoutingEndpointGroupsCommandOutput
   | ListCustomRoutingListenersCommandOutput
@@ -282,10 +365,12 @@ export type ServiceOutputTypes =
   | ListTagsForResourceCommandOutput
   | ProvisionByoipCidrCommandOutput
   | RemoveCustomRoutingEndpointsCommandOutput
+  | RemoveEndpointsCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
   | UpdateAcceleratorAttributesCommandOutput
   | UpdateAcceleratorCommandOutput
+  | UpdateCrossAccountAttachmentCommandOutput
   | UpdateCustomRoutingAcceleratorAttributesCommandOutput
   | UpdateCustomRoutingAcceleratorCommandOutput
   | UpdateCustomRoutingListenerCommandOutput
@@ -293,18 +378,21 @@ export type ServiceOutputTypes =
   | UpdateListenerCommandOutput
   | WithdrawByoipCidrCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -355,25 +443,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -386,75 +465,119 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
   /**
-   * The {@link DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
    */
-  defaultsMode?: DefaultsMode | Provider<DefaultsMode>;
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type GlobalAcceleratorClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of GlobalAcceleratorClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type GlobalAcceleratorClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of GlobalAcceleratorClient class constructor that set the region, credentials and other options.
  */
 export interface GlobalAcceleratorClientConfig extends GlobalAcceleratorClientConfigType {}
 
-type GlobalAcceleratorClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of GlobalAcceleratorClient class. This is resolved and normalized from the {@link GlobalAcceleratorClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type GlobalAcceleratorClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of GlobalAcceleratorClient class. This is resolved and normalized from the {@link GlobalAcceleratorClientConfig | constructor configuration interface}.
  */
 export interface GlobalAcceleratorClientResolvedConfig extends GlobalAcceleratorClientResolvedConfigType {}
 
 /**
  * <fullname>Global Accelerator</fullname>
- * 	        <p>This is the <i>Global Accelerator API Reference</i>. This guide is for developers who need detailed information about
+ *          <p>This is the <i>Global Accelerator API Reference</i>. This guide is for developers who need detailed information about
  * 		    Global Accelerator API actions, data types, and errors. For more information about Global Accelerator features, see the
  * 	    	<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html">Global Accelerator Developer Guide</a>.</p>
- * 	        <p>Global Accelerator is a service in which you create <i>accelerators</i> to improve the performance
+ *          <p>Global Accelerator is a service in which you create <i>accelerators</i> to improve the performance
  * 			of your applications for local and global users. Depending on the type of accelerator you choose, you can
  * 			gain additional benefits. </p>
- * 		       <ul>
+ *          <ul>
  *             <li>
  *                <p>By using a standard accelerator, you can improve availability of your internet applications
  * 			    that are used by a global audience. With a standard accelerator, Global Accelerator directs traffic to optimal endpoints over the Amazon Web Services
@@ -465,28 +588,23 @@ export interface GlobalAcceleratorClientResolvedConfig extends GlobalAccelerator
  * 				can use application logic to directly map one or more users to a specific endpoint among many endpoints.</p>
  *             </li>
  *          </ul>
- * 		       <important>
- * 		          <p>Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the
+ *          <important>
+ *             <p>Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the
  * 		    	US West (Oregon) Region to create, update, or otherwise work with accelerators.  That is, for example, specify <code>--region us-west-2</code>
- * 		    	on AWS CLI commands.</p>
- * 		       </important>
- *
- *
- * 		       <p>By default, Global Accelerator provides you with static IP addresses that you associate with your accelerator. The static IP addresses
+ * 		    	on Amazon Web Services CLI commands.</p>
+ *          </important>
+ *          <p>By default, Global Accelerator provides you with static IP addresses that you associate with your accelerator. The static IP addresses
  * 			are anycast from the Amazon Web Services edge network. For IPv4, Global Accelerator provides two static IPv4 addresses. For dual-stack,
  * 			Global Accelerator provides a total of four addresses: two static IPv4 addresses and two static IPv6 addresses.
  * 			With a standard accelerator for IPv4, instead of using the addresses that Global Accelerator provides, you can configure
- * 			these entry points to be IPv4 addresses from your own IP address ranges that you bring toGlobal Accelerator (BYOIP). </p>
- *
- *
- * 	        <p>For a standard accelerator,
+ * 			these entry points to be IPv4 addresses from your own IP address ranges that you bring to Global Accelerator (BYOIP). </p>
+ *          <p>For a standard accelerator,
  * 	        they distribute incoming application traffic across multiple endpoint resources in multiple Amazon Web Services Regions , which increases
  * 			the availability of your applications. Endpoints for standard accelerators can be Network Load Balancers, Application Load Balancers,
  * 	    	Amazon EC2 instances, or Elastic IP addresses that are located in one Amazon Web Services Region or multiple Amazon Web Services Regions. For custom routing
  * 	        accelerators, you map traffic that arrives to the static IP addresses to specific Amazon EC2 servers in endpoints that
  * 			are virtual private cloud (VPC) subnets.</p>
- *
- * 		       <important>
+ *          <important>
  *             <p>The static IP addresses remain assigned to your accelerator for as long as it exists, even if you
  * 				disable the accelerator and it no longer accepts or routes traffic. However, when you
  * 					<i>delete</i> an accelerator, you lose the static IP addresses that
@@ -494,12 +612,13 @@ export interface GlobalAcceleratorClientResolvedConfig extends GlobalAccelerator
  * 				IAM policies like tag-based permissions with Global Accelerator to limit the users who have
  * 				permissions to delete an accelerator. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/access-control-manage-access-tag-policies.html">Tag-based policies</a>.</p>
  *          </important>
- * 	        <p>For standard accelerators, Global Accelerator uses the Amazon Web Services global network to route traffic to the optimal regional endpoint based
+ *          <p>For standard accelerators, Global Accelerator uses the Amazon Web Services global network to route traffic to the optimal regional endpoint based
  * 			on health, client location, and policies that you configure. The service reacts instantly to
  * 			changes in health or configuration to ensure that internet traffic from clients is always
  * 			directed to healthy endpoints.</p>
- * 		       <p>For more information about understanding and using Global Accelerator, see the
+ *          <p>For more information about understanding and using Global Accelerator, see the
  * 			<a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html">Global Accelerator Developer Guide</a>.</p>
+ * @public
  */
 export class GlobalAcceleratorClient extends __Client<
   __HttpHandlerOptions,
@@ -512,23 +631,36 @@ export class GlobalAcceleratorClient extends __Client<
    */
   readonly config: GlobalAcceleratorClientResolvedConfig;
 
-  constructor(configuration: GlobalAcceleratorClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<GlobalAcceleratorClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
     this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultGlobalAcceleratorHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: GlobalAcceleratorClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

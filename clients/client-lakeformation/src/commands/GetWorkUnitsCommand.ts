@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
-  GetWorkUnitsRequest,
-  GetWorkUnitsRequestFilterSensitiveLog,
-  GetWorkUnitsResponse,
-  GetWorkUnitsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetWorkUnitsCommand,
-  serializeAws_restJson1GetWorkUnitsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetWorkUnitsRequest, GetWorkUnitsResponse } from "../models/models_0";
+import { GetWorkUnits$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetWorkUnitsCommand}.
+ */
 export interface GetWorkUnitsCommandInput extends GetWorkUnitsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetWorkUnitsCommand}.
+ */
 export interface GetWorkUnitsCommandOutput extends GetWorkUnitsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,72 @@ export interface GetWorkUnitsCommandOutput extends GetWorkUnitsResponse, __Metad
  * ```javascript
  * import { LakeFormationClient, GetWorkUnitsCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, GetWorkUnitsCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // GetWorkUnitsRequest
+ *   NextToken: "STRING_VALUE",
+ *   PageSize: Number("int"),
+ *   QueryId: "STRING_VALUE", // required
+ * };
  * const command = new GetWorkUnitsCommand(input);
  * const response = await client.send(command);
+ * // { // GetWorkUnitsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   QueryId: "STRING_VALUE", // required
+ * //   WorkUnitRanges: [ // WorkUnitRangeList // required
+ * //     { // WorkUnitRange
+ * //       WorkUnitIdMax: Number("long"), // required
+ * //       WorkUnitIdMin: Number("long"), // required
+ * //       WorkUnitToken: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetWorkUnitsCommandInput - {@link GetWorkUnitsCommandInput}
+ * @returns {@link GetWorkUnitsCommandOutput}
  * @see {@link GetWorkUnitsCommandInput} for command's `input` shape.
  * @see {@link GetWorkUnitsCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link ExpiredException} (client fault)
+ *  <p>Contains details about an error where the query request expired.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link WorkUnitsNotReadyYetException} (client fault)
+ *  <p>Contains details about an error related to work units not being ready.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class GetWorkUnitsCommand extends $Command<
-  GetWorkUnitsCommandInput,
-  GetWorkUnitsCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetWorkUnitsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetWorkUnitsCommandInput, GetWorkUnitsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "GetWorkUnitsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetWorkUnitsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetWorkUnitsResponseFilterSensitiveLog,
+export class GetWorkUnitsCommand extends command<GetWorkUnitsCommandInput, GetWorkUnitsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetWorkUnits",
+  GetWorkUnits$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorkUnitsRequest;
+      output: GetWorkUnitsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetWorkUnitsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetWorkUnitsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetWorkUnitsCommandOutput> {
-    return deserializeAws_restJson1GetWorkUnitsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetWorkUnitsCommandInput;
+      output: GetWorkUnitsCommandOutput;
+    };
+  };
 }

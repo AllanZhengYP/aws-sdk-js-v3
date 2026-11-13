@@ -1,870 +1,981 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import type {
+  ActivationOverrideBehavior,
+  AllowedOperation,
+  CheckoutType,
+  DigitalSignatureMethod,
+  EntitlementDataUnit,
+  EntitlementUnit,
+  GrantStatus,
+  GrantType,
+  InventoryFilterCondition,
+  LicenseAssetGroupStatus,
+  LicenseConfigurationStatus,
+  LicenseConversionTaskStatus,
+  LicenseCountingType,
+  LicenseDeletionStatus,
+  LicenseStatus,
+  ProductCodeType,
+  ReceivedStatus,
+  RenewType,
+  ReportFrequencyType,
+  ReportType,
+  ResourceType,
+  TokenType,
+} from "./enums";
 
-import { LicenseManagerServiceException as __BaseException } from "./LicenseManagerServiceException";
-
+/**
+ * @public
+ */
 export interface AcceptGrantRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the grant.</p>
+   * @public
    */
   GrantArn: string | undefined;
 }
 
-export enum GrantStatus {
-  ACTIVE = "ACTIVE",
-  DELETED = "DELETED",
-  DISABLED = "DISABLED",
-  FAILED_WORKFLOW = "FAILED_WORKFLOW",
-  PENDING_ACCEPT = "PENDING_ACCEPT",
-  PENDING_DELETE = "PENDING_DELETE",
-  PENDING_WORKFLOW = "PENDING_WORKFLOW",
-  REJECTED = "REJECTED",
-  WORKFLOW_COMPLETED = "WORKFLOW_COMPLETED",
-}
-
+/**
+ * @public
+ */
 export interface AcceptGrantResponse {
   /**
    * <p>Grant ARN.</p>
+   * @public
    */
-  GrantArn?: string;
+  GrantArn?: string | undefined;
 
   /**
    * <p>Grant status.</p>
+   * @public
    */
-  Status?: GrantStatus | string;
+  Status?: GrantStatus | undefined;
 
   /**
    * <p>Grant version.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
 /**
- * <p>Access to resource denied.</p>
+ * <p>Matching rule statement.</p>
+ * @public
  */
-export class AccessDeniedException extends __BaseException {
-  readonly name: "AccessDeniedException" = "AccessDeniedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface MatchingRuleStatement {
   /**
-   * @internal
+   * <p>Key to match.</p>
+   *          <p>The following keys and are supported when the RuleStatement type
+   *          is <code>Instance</code>:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Platform</code> - The name of the platform.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>EC2BillingProduct</code> - The billing product code.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *                Possible values are: <code>windows-server-enterprise</code> |
+   *                <code>windows-byol</code> |
+   *                <code>rhel</code> |
+   *                <code>rhel-byol</code> |
+   *                <code>rhel-high-availability</code> |
+   *                <code>ubuntu-pro</code> |
+   *                <code>suse-linux</code> |
+   *                <code>sql-server-standard</code> |
+   *                <code>sql-server-enterprise</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MarketPlaceProductCode</code> - The Marketplace product code.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>AMIId</code> - The ID of the AMI.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>InstanceType</code> - The instance type.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>InstanceId</code> - The ID of the instance.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>HostId</code> - The ID of the host.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>AccountId</code> - The ID of the account.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following keys and are supported when the RuleStatement type
+   *          is <code>License</code>:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>LicenseArn</code> - The ARN of a Managed Entitlement License.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ProductSKU</code> - The productSKU of the license.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Issuer</code> - The issuer of the license.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>Beneficiary</code> - The beneficiary of the license.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>LicenseStatus</code> - The status of the license.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>HomeRegion</code> - The home region of the license.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *          </ul>
+   *          <p>The following keys and are supported when the RuleStatement type
+   *          is <code>License Configuration</code>:
+   *       </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>LicenseConfigurationArn</code> - The ARN of a self-managed license configuration.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>AccountId</code> - The account of the license configuration.
+   *                Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.
+   *             </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
-    super({
-      name: "AccessDeniedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AccessDeniedException.prototype);
-    this.Message = opts.Message;
-  }
+  KeyToMatch: string | undefined;
+
+  /**
+   * <p>Constraint.</p>
+   * @public
+   */
+  Constraint: string | undefined;
+
+  /**
+   * <p>Value to match.</p>
+   * @public
+   */
+  ValueToMatch: string[] | undefined;
 }
 
 /**
- * <p>The Amazon Web Services user account does not have permission to perform the action. Check the IAM
- *          policy associated with this account.</p>
+ * <p>Rule statement that uses a script to evaluate license asset conditions.</p>
+ * @public
  */
-export class AuthorizationException extends __BaseException {
-  readonly name: "AuthorizationException" = "AuthorizationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface ScriptRuleStatement {
   /**
-   * @internal
+   * <p>Key name to match against in the script rule evaluation.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<AuthorizationException, __BaseException>) {
-    super({
-      name: "AuthorizationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AuthorizationException.prototype);
-    this.Message = opts.Message;
-  }
+  KeyToMatch: string | undefined;
+
+  /**
+   * <p>Script code used to evaluate the rule condition.</p>
+   * @public
+   */
+  Script: string | undefined;
 }
 
 /**
- * <p>One or more parameter values are not valid.</p>
+ * <p>AND rule statement.</p>
+ * @public
  */
-export class InvalidParameterValueException extends __BaseException {
-  readonly name: "InvalidParameterValueException" = "InvalidParameterValueException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface AndRuleStatement {
   /**
-   * @internal
+   * <p>Matching rule statements.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidParameterValueException, __BaseException>) {
-    super({
-      name: "InvalidParameterValueException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidParameterValueException.prototype);
-    this.Message = opts.Message;
-  }
+  MatchingRuleStatements?: MatchingRuleStatement[] | undefined;
+
+  /**
+   * <p>Script rule statements.</p>
+   * @public
+   */
+  ScriptRuleStatements?: ScriptRuleStatement[] | undefined;
 }
 
 /**
- * <p>Too many requests have been submitted. Try again after a brief wait.</p>
+ * <p>Asset.</p>
+ * @public
  */
-export class RateLimitExceededException extends __BaseException {
-  readonly name: "RateLimitExceededException" = "RateLimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface Asset {
   /**
-   * @internal
+   * <p>Amazon Resource Name (ARN) of the asset.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<RateLimitExceededException, __BaseException>) {
-    super({
-      name: "RateLimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, RateLimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
+  AssetArn?: string | undefined;
 
-/**
- * <p>Your resource limits have been exceeded.</p>
- */
-export class ResourceLimitExceededException extends __BaseException {
-  readonly name: "ResourceLimitExceededException" = "ResourceLimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
   /**
-   * @internal
+   * <p>Latest asset discovery time.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<ResourceLimitExceededException, __BaseException>) {
-    super({
-      name: "ResourceLimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceLimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The server experienced an internal error. Try again.</p>
- */
-export class ServerInternalException extends __BaseException {
-  readonly name: "ServerInternalException" = "ServerInternalException";
-  readonly $fault: "server" = "server";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServerInternalException, __BaseException>) {
-    super({
-      name: "ServerInternalException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServerInternalException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The provided input is not valid. Try your request again.</p>
- */
-export class ValidationException extends __BaseException {
-  readonly name: "ValidationException" = "ValidationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ValidationException, __BaseException>) {
-    super({
-      name: "ValidationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ValidationException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum AllowedOperation {
-  CHECKOUT_BORROW_LICENSE = "CheckoutBorrowLicense",
-  CHECKOUT_LICENSE = "CheckoutLicense",
-  CHECK_IN_LICENSE = "CheckInLicense",
-  CREATE_GRANT = "CreateGrant",
-  CREATE_TOKEN = "CreateToken",
-  EXTEND_CONSUMPTION_LICENSE = "ExtendConsumptionLicense",
-  LIST_PURCHASED_LICENSES = "ListPurchasedLicenses",
+  LatestAssetDiscoveryTime?: Date | undefined;
 }
 
 /**
  * <p>Describes automated discovery.</p>
+ * @public
  */
 export interface AutomatedDiscoveryInformation {
   /**
    * <p>Time that automated discovery last ran.</p>
+   * @public
    */
-  LastRunTime?: Date;
+  LastRunTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CheckInLicenseRequest {
   /**
    * <p>License consumption token.</p>
+   * @public
    */
   LicenseConsumptionToken: string | undefined;
 
   /**
    * <p>License beneficiary.</p>
+   * @public
    */
-  Beneficiary?: string;
+  Beneficiary?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CheckInLicenseResponse {}
 
 /**
- * <p>There was a conflict processing the request. Try your request again.</p>
- */
-export class ConflictException extends __BaseException {
-  readonly name: "ConflictException" = "ConflictException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ConflictException, __BaseException>) {
-    super({
-      name: "ConflictException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConflictException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The resource cannot be found.</p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
  * <p>Describes key/value pairs.</p>
+ * @public
  */
 export interface Metadata {
   /**
    * <p>The key name.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The value.</p>
+   * @public
    */
-  Value?: string;
-}
-
-export enum DigitalSignatureMethod {
-  JWT_PS384 = "JWT_PS384",
-}
-
-export enum EntitlementDataUnit {
-  BITS = "Bits",
-  BITS_PER_SECOND = "Bits/Second",
-  BYTES = "Bytes",
-  BYTES_PER_SECOND = "Bytes/Second",
-  COUNT = "Count",
-  COUNT_PER_SECOND = "Count/Second",
-  GIGABITS = "Gigabits",
-  GIGABITS_PER_SECOND = "Gigabits/Second",
-  GIGABYTES = "Gigabytes",
-  GIGABYTES_PER_SECOND = "Gigabytes/Second",
-  KILOBITS = "Kilobits",
-  KILOBITS_PER_SECOND = "Kilobits/Second",
-  KILOBYTES = "Kilobytes",
-  KILOBYTES_PER_SECOND = "Kilobytes/Second",
-  MEGABITS = "Megabits",
-  MEGABITS_PER_SECOND = "Megabits/Second",
-  MEGABYTES = "Megabytes",
-  MEGABYTES_PER_SECOND = "Megabytes/Second",
-  MICROSECONDS = "Microseconds",
-  MILLISECONDS = "Milliseconds",
-  NONE = "None",
-  PERCENT = "Percent",
-  SECONDS = "Seconds",
-  TERABITS = "Terabits",
-  TERABITS_PER_SECOND = "Terabits/Second",
-  TERABYTES = "Terabytes",
-  TERABYTES_PER_SECOND = "Terabytes/Second",
+  Value?: string | undefined;
 }
 
 /**
  * <p>Data associated with an entitlement resource.</p>
+ * @public
  */
 export interface EntitlementData {
   /**
    * <p>Entitlement data name.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Entitlement data value.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * <p>Entitlement data unit.</p>
+   * @public
    */
-  Unit: EntitlementDataUnit | string | undefined;
+  Unit: EntitlementDataUnit | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CheckoutBorrowLicenseRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license. The license must use the borrow consumption configuration.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
    * <p>License entitlements. Partial checkouts are not supported.</p>
+   * @public
    */
   Entitlements: EntitlementData[] | undefined;
 
   /**
    * <p>Digital signature method. The possible value is JSON Web Signature (JWS) algorithm PS384.
    *          For more information, see <a href="https://tools.ietf.org/html/rfc7518#section-3.5">RFC 7518 Digital Signature with RSASSA-PSS</a>.</p>
+   * @public
    */
-  DigitalSignatureMethod: DigitalSignatureMethod | string | undefined;
+  DigitalSignatureMethod: DigitalSignatureMethod | undefined;
 
   /**
    * <p>Node ID.</p>
+   * @public
    */
-  NodeId?: string;
+  NodeId?: string | undefined;
 
   /**
    * <p>Information about constraints.</p>
+   * @public
    */
-  CheckoutMetadata?: Metadata[];
+  CheckoutMetadata?: Metadata[] | undefined;
 
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CheckoutBorrowLicenseResponse {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
-  LicenseArn?: string;
+  LicenseArn?: string | undefined;
 
   /**
    * <p>License consumption token.</p>
+   * @public
    */
-  LicenseConsumptionToken?: string;
+  LicenseConsumptionToken?: string | undefined;
 
   /**
    * <p>Allowed license entitlements.</p>
+   * @public
    */
-  EntitlementsAllowed?: EntitlementData[];
+  EntitlementsAllowed?: EntitlementData[] | undefined;
 
   /**
    * <p>Node ID.</p>
+   * @public
    */
-  NodeId?: string;
+  NodeId?: string | undefined;
 
   /**
    * <p>Signed token.</p>
+   * @public
    */
-  SignedToken?: string;
+  SignedToken?: string | undefined;
 
   /**
    * <p>Date and time at which the license checkout is issued.</p>
+   * @public
    */
-  IssuedAt?: string;
+  IssuedAt?: string | undefined;
 
   /**
    * <p>Date and time at which the license checkout expires.</p>
+   * @public
    */
-  Expiration?: string;
+  Expiration?: string | undefined;
 
   /**
    * <p>Information about constraints.</p>
+   * @public
    */
-  CheckoutMetadata?: Metadata[];
+  CheckoutMetadata?: Metadata[] | undefined;
 }
 
 /**
- * <p>The entitlement is not allowed.</p>
+ * @public
  */
-export class EntitlementNotAllowedException extends __BaseException {
-  readonly name: "EntitlementNotAllowedException" = "EntitlementNotAllowedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<EntitlementNotAllowedException, __BaseException>) {
-    super({
-      name: "EntitlementNotAllowedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, EntitlementNotAllowedException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>There are no entitlements found for this license, or the entitlement maximum count is reached.</p>
- */
-export class NoEntitlementsAllowedException extends __BaseException {
-  readonly name: "NoEntitlementsAllowedException" = "NoEntitlementsAllowedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<NoEntitlementsAllowedException, __BaseException>) {
-    super({
-      name: "NoEntitlementsAllowedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, NoEntitlementsAllowedException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>This is not the correct Region for the resource. Try again.</p>
- */
-export class RedirectException extends __BaseException {
-  readonly name: "RedirectException" = "RedirectException";
-  readonly $fault: "client" = "client";
-  Location?: string;
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<RedirectException, __BaseException>) {
-    super({
-      name: "RedirectException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, RedirectException.prototype);
-    this.Location = opts.Location;
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The digital signature method is unsupported. Try your request again.</p>
- */
-export class UnsupportedDigitalSignatureMethodException extends __BaseException {
-  readonly name: "UnsupportedDigitalSignatureMethodException" = "UnsupportedDigitalSignatureMethodException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<UnsupportedDigitalSignatureMethodException, __BaseException>) {
-    super({
-      name: "UnsupportedDigitalSignatureMethodException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, UnsupportedDigitalSignatureMethodException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum CheckoutType {
-  PERPETUAL = "PERPETUAL",
-  PROVISIONAL = "PROVISIONAL",
-}
-
 export interface CheckoutLicenseRequest {
   /**
    * <p>Product SKU.</p>
+   * @public
    */
   ProductSKU: string | undefined;
 
   /**
    * <p>Checkout type.</p>
+   * @public
    */
-  CheckoutType: CheckoutType | string | undefined;
+  CheckoutType: CheckoutType | undefined;
 
   /**
    * <p>Key fingerprint identifying the license.</p>
+   * @public
    */
   KeyFingerprint: string | undefined;
 
   /**
    * <p>License entitlements.</p>
+   * @public
    */
   Entitlements: EntitlementData[] | undefined;
 
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 
   /**
    * <p>License beneficiary.</p>
+   * @public
    */
-  Beneficiary?: string;
+  Beneficiary?: string | undefined;
 
   /**
    * <p>Node ID.</p>
+   * @public
    */
-  NodeId?: string;
+  NodeId?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CheckoutLicenseResponse {
   /**
    * <p>Checkout type.</p>
+   * @public
    */
-  CheckoutType?: CheckoutType | string;
+  CheckoutType?: CheckoutType | undefined;
 
   /**
    * <p>License consumption token.</p>
+   * @public
    */
-  LicenseConsumptionToken?: string;
+  LicenseConsumptionToken?: string | undefined;
 
   /**
    * <p>Allowed license entitlements.</p>
+   * @public
    */
-  EntitlementsAllowed?: EntitlementData[];
+  EntitlementsAllowed?: EntitlementData[] | undefined;
 
   /**
    * <p>Signed token.</p>
+   * @public
    */
-  SignedToken?: string;
+  SignedToken?: string | undefined;
 
   /**
    * <p>Node ID.</p>
+   * @public
    */
-  NodeId?: string;
+  NodeId?: string | undefined;
 
   /**
    * <p>Date and time at which the license checkout is issued.</p>
+   * @public
    */
-  IssuedAt?: string;
+  IssuedAt?: string | undefined;
 
   /**
    * <p>Date and time at which the license checkout expires.</p>
+   * @public
    */
-  Expiration?: string;
+  Expiration?: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the checkout license.</p>
+   * @public
    */
-  LicenseArn?: string;
+  LicenseArn?: string | undefined;
 }
 
+/**
+ * <p>The options you can specify when you create a grant or a new version of a grant, such as
+ *          activation override behavior. For more information, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html">Granted licenses in License Manager</a> in the <i>License Manager User Guide</i>.</p>
+ * @public
+ */
+export interface Options {
+  /**
+   * <p>An activation option for your grant that determines the behavior of activating a grant.
+   *          Activation options can only be used with granted licenses sourced from the Amazon Web Services Marketplace. Additionally, the operation must activate the grant. For the
+   *             <code>CreateGrantVersion</code> operation, specify <code>ACTIVE</code> for the
+   *             <code>Status</code> parameter. For the <code>CreateGrant</code> operation, specify
+   *             <code>ACTIVE</code> for the <code>DesiredStatus</code> option.</p>
+   *          <ul>
+   *             <li>
+   *                <p>As a license administrator, you can optionally specify an
+   *                   <code>ActivationOverrideBehavior</code> when activating a grant.</p>
+   *             </li>
+   *             <li>
+   *                <p>As a grantor, you can optionally specify an
+   *                   <code>ActivationOverrideBehavior</code> when you activate a grant for a grantee
+   *                account in your organization.</p>
+   *             </li>
+   *             <li>
+   *                <p>As a grantee, if the grantor creating the distributed grant doesn’t specify an
+   *                   <code>ActivationOverrideBehavior</code>, you can optionally specify one when you
+   *                are activating the grant.</p>
+   *             </li>
+   *          </ul>
+   *          <dl>
+   *             <dt>DISTRIBUTED_GRANTS_ONLY</dt>
+   *             <dd>
+   *                <p>Use this value to activate a grant without replacing any member account’s
+   *                   active grants for the same product.</p>
+   *             </dd>
+   *             <dt>ALL_GRANTS_PERMITTED_BY_ISSUER</dt>
+   *             <dd>
+   *                <p>Use this value to activate a grant and disable other active grants in any
+   *                   member accounts for the same product. This action will also replace their
+   *                   previously activated grants with this activated grant.</p>
+   *             </dd>
+   *          </dl>
+   * @public
+   */
+  ActivationOverrideBehavior?: ActivationOverrideBehavior | undefined;
+
+  /**
+   * <p>The status of the grant after License Manager creates it. The only supported value is
+   *             <code>ACTIVE</code>. Specify <code>ACTIVE</code> to create and activate the grant in one
+   *          request.</p>
+   *          <p>You can specify this option only for the <code>CreateGrant</code> operation, and only
+   *          when the grant principal is an organization or an organizational unit (OU). To change the
+   *          status of an existing grant, use the <code>Status</code> parameter of the
+   *             <code>CreateGrantVersion</code> operation.</p>
+   * @public
+   */
+  DesiredStatus?: GrantStatus | undefined;
+}
+
+/**
+ * <p>Details about the tags for a resource. For more information about tagging support in
+ *          License Manager, see the <a href="https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p>
+ * @public
+ */
+export interface Tag {
+  /**
+   * <p>The tag key.</p>
+   * @public
+   */
+  Key?: string | undefined;
+
+  /**
+   * <p>The tag value.</p>
+   * @public
+   */
+  Value?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateGrantRequest {
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 
   /**
    * <p>Grant name.</p>
+   * @public
    */
   GrantName: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
-   * <p>The grant principals.</p>
+   * <p>The grant principals. You can specify one of the following as an Amazon Resource Name
+   *          (ARN):</p>
+   *          <ul>
+   *             <li>
+   *                <p>An Amazon Web Services account, which includes only the account specified.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>An organizational unit (OU), which includes all accounts in the OU.</p>
+   *             </li>
+   *          </ul>
+   *          <ul>
+   *             <li>
+   *                <p>An organization, which will include all accounts across your organization.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
   Principals: string[] | undefined;
 
   /**
    * <p>Home Region of the grant.</p>
+   * @public
    */
   HomeRegion: string | undefined;
 
   /**
    * <p>Allowed operations for the grant.</p>
+   * @public
    */
-  AllowedOperations: (AllowedOperation | string)[] | undefined;
+  AllowedOperations: AllowedOperation[] | undefined;
+
+  /**
+   * <p>Tags to add to the grant. For more information about tagging support in
+   *          License Manager, see the <a href="https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>The type of grant to create. For more information about each type, see the preceding
+   *          description of this operation. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>BuyerGrant</code> - The default grant type if you don't specify a value.
+   *                Conveys the entitlement to use the license.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DelegateGrant</code> - Gives the grantee read-only visibility into the
+   *                licenses and grants that you have distributed to buyers, with no entitlement to use
+   *                them.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  GrantType?: GrantType | undefined;
+
+  /**
+   * <p>The options for the grant: the status to set after creation, and how activating the
+   *          grant affects other active grants for the same product.</p>
+   * @public
+   */
+  Options?: Options | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateGrantResponse {
   /**
    * <p>Grant ARN.</p>
+   * @public
    */
-  GrantArn?: string;
+  GrantArn?: string | undefined;
 
   /**
    * <p>Grant status.</p>
+   * @public
    */
-  Status?: GrantStatus | string;
+  Status?: GrantStatus | undefined;
 
   /**
    * <p>Grant version.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateGrantVersionRequest {
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the grant.</p>
+   * @public
    */
   GrantArn: string | undefined;
 
   /**
    * <p>Grant name.</p>
+   * @public
    */
-  GrantName?: string;
+  GrantName?: string | undefined;
 
   /**
    * <p>Allowed operations for the grant.</p>
+   * @public
    */
-  AllowedOperations?: (AllowedOperation | string)[];
+  AllowedOperations?: AllowedOperation[] | undefined;
 
   /**
    * <p>Grant status.</p>
+   * @public
    */
-  Status?: GrantStatus | string;
+  Status?: GrantStatus | undefined;
 
   /**
    * <p>Grant status reason.</p>
+   * @public
    */
-  StatusReason?: string;
+  StatusReason?: string | undefined;
 
   /**
    * <p>Current version of the grant.</p>
+   * @public
    */
-  SourceVersion?: string;
+  SourceVersion?: string | undefined;
+
+  /**
+   * <p>The options specified for the grant.</p>
+   * @public
+   */
+  Options?: Options | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateGrantVersionResponse {
   /**
    * <p>Grant ARN.</p>
+   * @public
    */
-  GrantArn?: string;
+  GrantArn?: string | undefined;
 
   /**
    * <p>Grant status.</p>
+   * @public
    */
-  Status?: GrantStatus | string;
+  Status?: GrantStatus | undefined;
 
   /**
    * <p>New version of the grant.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
 /**
  * <p>Details about a borrow configuration.</p>
+ * @public
  */
 export interface BorrowConfiguration {
   /**
    * <p>Indicates whether early check-ins are allowed.</p>
+   * @public
    */
   AllowEarlyCheckIn: boolean | undefined;
 
   /**
    * <p>Maximum time for the borrow configuration, in minutes.</p>
+   * @public
    */
   MaxTimeToLiveInMinutes: number | undefined;
 }
 
 /**
  * <p>Details about a provisional configuration.</p>
+ * @public
  */
 export interface ProvisionalConfiguration {
   /**
    * <p>Maximum time for the provisional configuration, in minutes.</p>
+   * @public
    */
   MaxTimeToLiveInMinutes: number | undefined;
 }
 
-export enum RenewType {
-  MONTHLY = "Monthly",
-  NONE = "None",
-  WEEKLY = "Weekly",
-}
-
 /**
  * <p>Details about a consumption configuration.</p>
+ * @public
  */
 export interface ConsumptionConfiguration {
   /**
    * <p>Renewal frequency.</p>
+   * @public
    */
-  RenewType?: RenewType | string;
+  RenewType?: RenewType | undefined;
 
   /**
    * <p>Details about a provisional configuration.</p>
+   * @public
    */
-  ProvisionalConfiguration?: ProvisionalConfiguration;
+  ProvisionalConfiguration?: ProvisionalConfiguration | undefined;
 
   /**
    * <p>Details about a borrow configuration.</p>
+   * @public
    */
-  BorrowConfiguration?: BorrowConfiguration;
-}
-
-export enum EntitlementUnit {
-  BITS = "Bits",
-  BITS_PER_SECOND = "Bits/Second",
-  BYTES = "Bytes",
-  BYTES_PER_SECOND = "Bytes/Second",
-  COUNT = "Count",
-  COUNT_PER_SECOND = "Count/Second",
-  GIGABITS = "Gigabits",
-  GIGABITS_PER_SECOND = "Gigabits/Second",
-  GIGABYTES = "Gigabytes",
-  GIGABYTES_PER_SECOND = "Gigabytes/Second",
-  KILOBITS = "Kilobits",
-  KILOBITS_PER_SECOND = "Kilobits/Second",
-  KILOBYTES = "Kilobytes",
-  KILOBYTES_PER_SECOND = "Kilobytes/Second",
-  MEGABITS = "Megabits",
-  MEGABITS_PER_SECOND = "Megabits/Second",
-  MEGABYTES = "Megabytes",
-  MEGABYTES_PER_SECOND = "Megabytes/Second",
-  MICROSECONDS = "Microseconds",
-  MILLISECONDS = "Milliseconds",
-  NONE = "None",
-  PERCENT = "Percent",
-  SECONDS = "Seconds",
-  TERABITS = "Terabits",
-  TERABITS_PER_SECOND = "Terabits/Second",
-  TERABYTES = "Terabytes",
-  TERABYTES_PER_SECOND = "Terabytes/Second",
+  BorrowConfiguration?: BorrowConfiguration | undefined;
 }
 
 /**
  * <p>Describes a resource entitled for use with a license.</p>
+ * @public
  */
 export interface Entitlement {
   /**
    * <p>Entitlement name.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Entitlement resource. Use only if the unit is None.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * <p>Maximum entitlement count. Use if the unit is not None.</p>
+   * @public
    */
-  MaxCount?: number;
+  MaxCount?: number | undefined;
 
   /**
    * <p>Indicates whether overages are allowed.</p>
+   * @public
    */
-  Overage?: boolean;
+  Overage?: boolean | undefined;
 
   /**
    * <p>Entitlement unit.</p>
+   * @public
    */
-  Unit: EntitlementUnit | string | undefined;
+  Unit: EntitlementUnit | undefined;
 
   /**
    * <p>Indicates whether check-ins are allowed.</p>
+   * @public
    */
-  AllowCheckIn?: boolean;
+  AllowCheckIn?: boolean | undefined;
 }
 
 /**
  * <p>Details about the issuer of a license.</p>
+ * @public
  */
 export interface Issuer {
   /**
    * <p>Issuer name.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify,
    *          and support the RSASSA-PSS SHA-256 signing algorithm.</p>
+   * @public
    */
-  SignKey?: string;
+  SignKey?: string | undefined;
 }
 
 /**
  * <p>Describes a time range, in ISO8601-UTC format.</p>
+ * @public
  */
 export interface DatetimeRange {
   /**
    * <p>Start of the time range.</p>
+   * @public
    */
   Begin: string | undefined;
 
   /**
    * <p>End of the time range.</p>
+   * @public
    */
-  End?: string;
+  End?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLicenseRequest {
   /**
    * <p>License name.</p>
+   * @public
    */
   LicenseName: string | undefined;
 
   /**
    * <p>Product name.</p>
+   * @public
    */
   ProductName: string | undefined;
 
   /**
    * <p>Product SKU.</p>
+   * @public
    */
   ProductSKU: string | undefined;
 
   /**
    * <p>License issuer.</p>
+   * @public
    */
   Issuer: Issuer | undefined;
 
   /**
    * <p>Home Region for the license.</p>
+   * @public
    */
   HomeRegion: string | undefined;
 
   /**
    * <p>Date and time range during which the license is valid, in ISO8601-UTC format.</p>
+   * @public
    */
   Validity: DatetimeRange | undefined;
 
   /**
    * <p>License entitlements.</p>
+   * @public
    */
   Entitlements: Entitlement[] | undefined;
 
   /**
    * <p>License beneficiary.</p>
+   * @public
    */
   Beneficiary: string | undefined;
 
@@ -872,80 +983,357 @@ export interface CreateLicenseRequest {
    * <p>Configuration for consumption of the license. Choose a provisional configuration for workloads
    *           running with continuous connectivity. Choose a borrow configuration for workloads with offline
    *           usage.</p>
+   * @public
    */
   ConsumptionConfiguration: ConsumptionConfiguration | undefined;
 
   /**
    * <p>Information about the license.</p>
+   * @public
    */
-  LicenseMetadata?: Metadata[];
+  LicenseMetadata?: Metadata[] | undefined;
 
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
+   */
+  ClientToken: string | undefined;
+
+  /**
+   * <p>Tags to add to the license. For more information about tagging support in
+   *          License Manager, see the <a href="https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html">TagResource</a> operation.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateLicenseResponse {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
+   */
+  LicenseArn?: string | undefined;
+
+  /**
+   * <p>License status.</p>
+   * @public
+   */
+  Status?: LicenseStatus | undefined;
+
+  /**
+   * <p>License version.</p>
+   * @public
+   */
+  Version?: string | undefined;
+}
+
+/**
+ * <p>License asset group configuration.</p>
+ * @public
+ */
+export interface LicenseAssetGroupConfiguration {
+  /**
+   * <p>License Asset Group Configuration Usage dimension.</p>
+   * @public
+   */
+  UsageDimension?: string | undefined;
+}
+
+/**
+ * <p>License asset group property.</p>
+ * @public
+ */
+export interface LicenseAssetGroupProperty {
+  /**
+   * <p>Property key.</p>
+   * @public
+   */
+  Key: string | undefined;
+
+  /**
+   * <p>Property value.</p>
+   * @public
+   */
+  Value: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateLicenseAssetGroupRequest {
+  /**
+   * <p>License asset group name.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>License asset group description.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>License asset group configurations.</p>
+   * @public
+   */
+  LicenseAssetGroupConfigurations: LicenseAssetGroupConfiguration[] | undefined;
+
+  /**
+   * <p>ARNs of associated license asset rulesets.</p>
+   * @public
+   */
+  AssociatedLicenseAssetRulesetARNs: string[] | undefined;
+
+  /**
+   * <p>License asset group properties.</p>
+   * @public
+   */
+  Properties?: LicenseAssetGroupProperty[] | undefined;
+
+  /**
+   * <p>Tags to add to the license asset group.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 }
 
-export enum LicenseStatus {
-  AVAILABLE = "AVAILABLE",
-  DEACTIVATED = "DEACTIVATED",
-  DELETED = "DELETED",
-  EXPIRED = "EXPIRED",
-  PENDING_AVAILABLE = "PENDING_AVAILABLE",
-  PENDING_DELETE = "PENDING_DELETE",
-  SUSPENDED = "SUSPENDED",
+/**
+ * @public
+ */
+export interface CreateLicenseAssetGroupResponse {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset group.</p>
+   * @public
+   */
+  LicenseAssetGroupArn: string | undefined;
+
+  /**
+   * <p>License asset group status.</p>
+   * @public
+   */
+  Status: string | undefined;
 }
 
-export interface CreateLicenseResponse {
+/**
+ * <p>OR rule statement.</p>
+ * @public
+ */
+export interface OrRuleStatement {
   /**
-   * <p>Amazon Resource Name (ARN) of the license.</p>
+   * <p>Matching rule statements.</p>
+   * @public
    */
-  LicenseArn?: string;
+  MatchingRuleStatements?: MatchingRuleStatement[] | undefined;
 
   /**
-   * <p>License status.</p>
+   * <p>Script rule statements.</p>
+   * @public
    */
-  Status?: LicenseStatus | string;
-
-  /**
-   * <p>License version.</p>
-   */
-  Version?: string;
+  ScriptRuleStatements?: ScriptRuleStatement[] | undefined;
 }
 
-export enum LicenseCountingType {
-  CORE = "Core",
-  INSTANCE = "Instance",
-  SOCKET = "Socket",
-  VCPU = "vCPU",
+/**
+ * <p>Instance rule statement.</p>
+ * @public
+ */
+export interface InstanceRuleStatement {
+  /**
+   * <p>AND rule statement.</p>
+   * @public
+   */
+  AndRuleStatement?: AndRuleStatement | undefined;
+
+  /**
+   * <p>OR rule statement.</p>
+   * @public
+   */
+  OrRuleStatement?: OrRuleStatement | undefined;
+
+  /**
+   * <p>Matching rule statement.</p>
+   * @public
+   */
+  MatchingRuleStatement?: MatchingRuleStatement | undefined;
+
+  /**
+   * <p>Script rule statement.</p>
+   * @public
+   */
+  ScriptRuleStatement?: ScriptRuleStatement | undefined;
+}
+
+/**
+ * <p>License configuration rule statement.</p>
+ * @public
+ */
+export interface LicenseConfigurationRuleStatement {
+  /**
+   * <p>AND rule statement.</p>
+   * @public
+   */
+  AndRuleStatement?: AndRuleStatement | undefined;
+
+  /**
+   * <p>OR rule statement.</p>
+   * @public
+   */
+  OrRuleStatement?: OrRuleStatement | undefined;
+
+  /**
+   * <p>Matching rule statement.</p>
+   * @public
+   */
+  MatchingRuleStatement?: MatchingRuleStatement | undefined;
+}
+
+/**
+ * <p>License rule statement.</p>
+ * @public
+ */
+export interface LicenseRuleStatement {
+  /**
+   * <p>AND rule statement.</p>
+   * @public
+   */
+  AndRuleStatement?: AndRuleStatement | undefined;
+
+  /**
+   * <p>OR rule statement.</p>
+   * @public
+   */
+  OrRuleStatement?: OrRuleStatement | undefined;
+
+  /**
+   * <p>Matching rule statement.</p>
+   * @public
+   */
+  MatchingRuleStatement?: MatchingRuleStatement | undefined;
+}
+
+/**
+ * <p>Rule statement.</p>
+ * @public
+ */
+export interface RuleStatement {
+  /**
+   * <p>License configuration rule statement.</p>
+   * @public
+   */
+  LicenseConfigurationRuleStatement?: LicenseConfigurationRuleStatement | undefined;
+
+  /**
+   * <p>License rule statement.</p>
+   * @public
+   */
+  LicenseRuleStatement?: LicenseRuleStatement | undefined;
+
+  /**
+   * <p>Instance rule statement.</p>
+   * @public
+   */
+  InstanceRuleStatement?: InstanceRuleStatement | undefined;
+}
+
+/**
+ * <p>License asset rule.</p>
+ * @public
+ */
+export interface LicenseAssetRule {
+  /**
+   * <p>Rule statement.</p>
+   * @public
+   */
+  RuleStatement: RuleStatement | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateLicenseAssetRulesetRequest {
+  /**
+   * <p>License asset ruleset name.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>License asset ruleset description.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>License asset rules.</p>
+   * @public
+   */
+  Rules: LicenseAssetRule[] | undefined;
+
+  /**
+   * <p>Tags to add to the license asset ruleset.</p>
+   * @public
+   */
+  Tags?: Tag[] | undefined;
+
+  /**
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
+   */
+  ClientToken: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateLicenseAssetRulesetResponse {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+   * @public
+   */
+  LicenseAssetRulesetArn: string | undefined;
 }
 
 /**
  * <p>Describes product information filters.</p>
+ * @public
  */
 export interface ProductInformationFilter {
   /**
    * <p>Filter name.</p>
+   * @public
    */
   ProductInformationFilterName: string | undefined;
 
   /**
    * <p>Filter value.</p>
+   * @public
    */
-  ProductInformationFilterValue?: string[];
+  ProductInformationFilterValue?: string[] | undefined;
 
   /**
    * <p>Logical operator.</p>
+   * @public
    */
   ProductInformationFilterComparator: string | undefined;
 }
 
 /**
  * <p>Describes product information for a license configuration.</p>
+ * @public
  */
 export interface ProductInformation {
   /**
    * <p>Resource type. The possible values are <code>SSM_MANAGED</code> | <code>RDS</code>.</p>
+   * @public
    */
   ResourceType: string | undefined;
 
@@ -1007,7 +1395,8 @@ export interface ProductInformation {
    *                <p>
    *                   <code>Engine Edition</code> - The edition of the database engine.
    *                Logical operator is <code>EQUALS</code>.
-   *                Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p>
+   *                Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>
+   *             	| <code>db2-se</code> | <code>db2-ae</code>.</p>
    *             </li>
    *             <li>
    *                <p>
@@ -1020,51 +1409,45 @@ export interface ProductInformation {
    *                <code>olap</code>.</p>
    *             </li>
    *          </ul>
+   * @public
    */
   ProductInformationFilterList: ProductInformationFilter[] | undefined;
 }
 
 /**
- * <p>Details about a tag for a license configuration.</p>
+ * @public
  */
-export interface Tag {
-  /**
-   * <p>Tag key.</p>
-   */
-  Key?: string;
-
-  /**
-   * <p>Tag value.</p>
-   */
-  Value?: string;
-}
-
 export interface CreateLicenseConfigurationRequest {
   /**
    * <p>Name of the license configuration.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Description of the license configuration.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Dimension used to track the license inventory.</p>
+   * @public
    */
-  LicenseCountingType: LicenseCountingType | string | undefined;
+  LicenseCountingType: LicenseCountingType | undefined;
 
   /**
    * <p>Number of licenses managed by the license configuration.</p>
+   * @public
    */
-  LicenseCount?: number;
+  LicenseCount?: number | undefined;
 
   /**
    * <p>Indicates whether hard or soft license enforcement is used. Exceeding a hard limit
    *          blocks the launch of new instances.</p>
+   * @public
    */
-  LicenseCountHardLimit?: boolean;
+  LicenseCountHardLimit?: boolean | undefined;
 
   /**
    * <p>License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules
@@ -1080,8 +1463,6 @@ export interface CreateLicenseConfigurationRequest {
    *             <li>
    *                <p>
    *                   <code>Instances</code> dimension: <code>allowedTenancy</code> |
-   *                <code>maximumCores</code> | <code>minimumCores</code> |
-   *                <code>maximumSockets</code> | <code>minimumSockets</code> |
    *                <code>maximumVcpus</code> | <code>minimumVcpus</code>
    *                </p>
    *             </li>
@@ -1104,109 +1485,176 @@ export interface CreateLicenseConfigurationRequest {
    *          values for <code>allowedTenancy</code> are <code>EC2-Default</code>, <code>EC2-DedicatedHost</code>, and
    *          <code>EC2-DedicatedInstance</code>. The possible values for <code>honorVcpuOptimization</code> are
    *          <code>True</code> and <code>False</code>.</p>
+   * @public
    */
-  LicenseRules?: string[];
+  LicenseRules?: string[] | undefined;
 
   /**
    * <p>Tags to add to the license configuration.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
    * <p>When true, disassociates a resource when software is uninstalled.</p>
+   * @public
    */
-  DisassociateWhenNotFound?: boolean;
+  DisassociateWhenNotFound?: boolean | undefined;
 
   /**
    * <p>Product information.</p>
+   * @public
    */
-  ProductInformationList?: ProductInformation[];
+  ProductInformationList?: ProductInformation[] | undefined;
+
+  /**
+   * <p>License configuration expiry.</p>
+   * @public
+   */
+  LicenseExpiry?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLicenseConfigurationResponse {
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * @public
    */
-  LicenseConfigurationArn?: string;
+  LicenseConfigurationArn?: string | undefined;
+}
+
+/**
+ * <p>A list item that contains a product code.</p>
+ * @public
+ */
+export interface ProductCodeListItem {
+  /**
+   * <p>The product code ID</p>
+   * @public
+   */
+  ProductCodeId: string | undefined;
+
+  /**
+   * <p>The product code type</p>
+   * @public
+   */
+  ProductCodeType: ProductCodeType | undefined;
 }
 
 /**
  * <p>Information about a license type conversion task.</p>
+ * @public
  */
 export interface LicenseConversionContext {
   /**
    * <p>The Usage operation value that corresponds to the license type you are converting your resource from.  For more information about which platforms correspond to which usage operation values see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html#billing-info">Sample data: usage operation by platform
    *       </a>
    *          </p>
+   * @public
    */
-  UsageOperation?: string;
+  UsageOperation?: string | undefined;
+
+  /**
+   * <p>Product codes referred to in the license conversion process.</p>
+   * @public
+   */
+  ProductCodes?: ProductCodeListItem[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLicenseConversionTaskForResourceRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the resource you are converting the license type for.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>Information that identifies the license type you are converting from.
-   *          For the structure of the source license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the AWS CLI</a> in the <i>License Manager User Guide</i>.</p>
+   *
+   *          For the structure of the source license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
+   * @public
    */
   SourceLicenseContext: LicenseConversionContext | undefined;
 
   /**
-   * <p>Information that identifies the license type you are converting to. For the structure of the destination license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the AWS CLI</a> in the <i>License Manager User Guide</i>.</p>
+   * <p>Information that identifies the license type you are converting to. For the structure of the destination license, see <a href="https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli">Convert a license type using the CLI </a> in the <i>License Manager User Guide</i>.</p>
+   * @public
    */
   DestinationLicenseContext: LicenseConversionContext | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLicenseConversionTaskForResourceResponse {
   /**
    * <p>The ID of the created license type conversion task.</p>
+   * @public
    */
-  LicenseConversionTaskId?: string;
+  LicenseConversionTaskId?: string | undefined;
 }
 
 /**
  * <p>Details of the license configuration that this generator reports on.</p>
+ * @public
  */
 export interface ReportContext {
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration that this generator reports on.</p>
+   * @public
    */
-  licenseConfigurationArns: string[] | undefined;
-}
+  licenseConfigurationArns?: string[] | undefined;
 
-export enum ReportFrequencyType {
-  DAY = "DAY",
-  MONTH = "MONTH",
-  WEEK = "WEEK",
+  /**
+   * <p>Amazon Resource Names (ARNs) of the license asset groups to include in the report.</p>
+   * @public
+   */
+  licenseAssetGroupArns?: string[] | undefined;
+
+  /**
+   * <p>Start date for the report data collection period.</p>
+   * @public
+   */
+  reportStartDate?: Date | undefined;
+
+  /**
+   * <p>End date for the report data collection period.</p>
+   * @public
+   */
+  reportEndDate?: Date | undefined;
 }
 
 /**
  * <p>Details about how frequently reports are generated.</p>
+ * @public
  */
 export interface ReportFrequency {
   /**
    * <p>Number of times within the frequency period that a report is generated.
    *          The only supported value is <code>1</code>.</p>
+   * @public
    */
-  value?: number;
+  value?: number | undefined;
 
   /**
    * <p>Time period between each report. The period can be daily, weekly, or monthly.</p>
+   * @public
    */
-  period?: ReportFrequencyType | string;
+  period?: ReportFrequencyType | undefined;
 }
 
-export enum ReportType {
-  LICENSE_CONFIGURATION_SUMMARY_REPORT = "LicenseConfigurationSummaryReport",
-  LICENSE_CONFIGURATION_USAGE_REPORT = "LicenseConfigurationUsageReport",
-}
-
+/**
+ * @public
+ */
 export interface CreateLicenseManagerReportGeneratorRequest {
   /**
    * <p>Name of the report generator.</p>
+   * @public
    */
   ReportGeneratorName: string | undefined;
 
@@ -1220,80 +1668,101 @@ export interface CreateLicenseManagerReportGeneratorRequest {
    *                <p>Resource report - Reports the tracked licenses and resource consumption for a license configuration.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Type: (ReportType | string)[] | undefined;
+  Type: ReportType[] | undefined;
 
   /**
    * <p>Defines the type of license configuration the report generator tracks.</p>
+   * @public
    */
   ReportContext: ReportContext | undefined;
 
   /**
    * <p>Frequency by which reports are generated.  Reports can be generated daily, monthly, or weekly.</p>
+   * @public
    */
   ReportFrequency: ReportFrequency | undefined;
 
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 
   /**
    * <p>Description of the report generator.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Tags to add to the report generator.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLicenseManagerReportGeneratorResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the new report generator.</p>
+   * @public
    */
-  LicenseManagerReportGeneratorArn?: string;
+  LicenseManagerReportGeneratorArn?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLicenseVersionRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
    * <p>License name.</p>
+   * @public
    */
   LicenseName: string | undefined;
 
   /**
    * <p>Product name.</p>
+   * @public
    */
   ProductName: string | undefined;
 
   /**
    * <p>License issuer.</p>
+   * @public
    */
   Issuer: Issuer | undefined;
 
   /**
    * <p>Home Region of the license.</p>
+   * @public
    */
   HomeRegion: string | undefined;
 
   /**
    * <p>Date and time range during which the license is valid, in ISO8601-UTC format.</p>
+   * @public
    */
   Validity: DatetimeRange | undefined;
 
   /**
    * <p>Information about the license.</p>
+   * @public
    */
-  LicenseMetadata?: Metadata[];
+  LicenseMetadata?: Metadata[] | undefined;
 
   /**
    * <p>License entitlements.</p>
+   * @public
    */
   Entitlements: Entitlement[] | undefined;
 
@@ -1301,899 +1770,1443 @@ export interface CreateLicenseVersionRequest {
    * <p>Configuration for consumption of the license. Choose a provisional configuration for workloads
    *          running with continuous connectivity. Choose a borrow configuration for workloads with offline
    *          usage.</p>
+   * @public
    */
   ConsumptionConfiguration: ConsumptionConfiguration | undefined;
 
   /**
    * <p>License status.</p>
+   * @public
    */
-  Status: LicenseStatus | string | undefined;
+  Status: LicenseStatus | undefined;
 
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 
   /**
    * <p>Current version of the license.</p>
+   * @public
    */
-  SourceVersion?: string;
+  SourceVersion?: string | undefined;
+
+  /**
+   * <p>Specifies whether to reset the license usage for the new license version. If you don't specify a value, the license usage is not reset.</p>
+   * @public
+   */
+  ResetUsage?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLicenseVersionResponse {
   /**
    * <p>License ARN.</p>
+   * @public
    */
-  LicenseArn?: string;
+  LicenseArn?: string | undefined;
 
   /**
    * <p>New version of the license.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 
   /**
    * <p>License status.</p>
+   * @public
    */
-  Status?: LicenseStatus | string;
+  Status?: LicenseStatus | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateTokenRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the
    *           JWT token.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the IAM roles to embed in the token.
    *          License Manager does not check whether the roles are in use.</p>
+   * @public
    */
-  RoleArns?: string[];
+  RoleArns?: string[] | undefined;
 
   /**
    * <p>Token expiration, in days, counted from token creation. The default is 365 days.</p>
+   * @public
    */
-  ExpirationInDays?: number;
+  ExpirationInDays?: number | undefined;
 
   /**
    * <p>Data specified by the caller to be included in the JWT token. The data is mapped
    *           to the amr claim of the JWT token.</p>
+   * @public
    */
-  TokenProperties?: string[];
+  TokenProperties?: string[] | undefined;
 
   /**
    * <p>Idempotency token, valid for 10 minutes.</p>
+   * @public
    */
   ClientToken: string | undefined;
 }
 
-export enum TokenType {
-  REFRESH_TOKEN = "REFRESH_TOKEN",
-}
-
+/**
+ * @public
+ */
 export interface CreateTokenResponse {
   /**
    * <p>Token ID.</p>
+   * @public
    */
-  TokenId?: string;
+  TokenId?: string | undefined;
 
   /**
    * <p>Token type.</p>
+   * @public
    */
-  TokenType?: TokenType | string;
+  TokenType?: TokenType | undefined;
 
   /**
    * <p>Refresh token, encoded as a JWT token.</p>
+   * @public
    */
-  Token?: string;
+  Token?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteGrantRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the grant.</p>
+   * @public
    */
   GrantArn: string | undefined;
 
   /**
    * <p>The Status reason for the delete request.</p>
+   * @public
    */
-  StatusReason?: string;
+  StatusReason?: string | undefined;
 
   /**
    * <p>Current version of the grant.</p>
+   * @public
    */
   Version: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteGrantResponse {
   /**
    * <p>Grant ARN.</p>
+   * @public
    */
-  GrantArn?: string;
+  GrantArn?: string | undefined;
 
   /**
    * <p>Grant status.</p>
+   * @public
    */
-  Status?: GrantStatus | string;
+  Status?: GrantStatus | undefined;
 
   /**
    * <p>Grant version.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteLicenseRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
    * <p>Current version of the license.</p>
+   * @public
    */
   SourceVersion: string | undefined;
 }
 
-export enum LicenseDeletionStatus {
-  DELETED = "DELETED",
-  PENDING_DELETE = "PENDING_DELETE",
-}
-
+/**
+ * @public
+ */
 export interface DeleteLicenseResponse {
   /**
    * <p>License status.</p>
+   * @public
    */
-  Status?: LicenseDeletionStatus | string;
+  Status?: LicenseDeletionStatus | undefined;
 
   /**
    * <p>Date when the license is deleted.</p>
+   * @public
    */
-  DeletionDate?: string;
+  DeletionDate?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteLicenseAssetGroupRequest {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset group.</p>
+   * @public
+   */
+  LicenseAssetGroupArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteLicenseAssetGroupResponse {
+  /**
+   * <p>License asset group status.</p>
+   * @public
+   */
+  Status: LicenseAssetGroupStatus | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteLicenseAssetRulesetRequest {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+   * @public
+   */
+  LicenseAssetRulesetArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DeleteLicenseAssetRulesetResponse {}
+
+/**
+ * @public
+ */
 export interface DeleteLicenseConfigurationRequest {
   /**
    * <p>ID of the license configuration.</p>
+   * @public
    */
   LicenseConfigurationArn: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteLicenseConfigurationResponse {}
 
+/**
+ * @public
+ */
 export interface DeleteLicenseManagerReportGeneratorRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the report generator to be deleted.</p>
+   * @public
    */
   LicenseManagerReportGeneratorArn: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteLicenseManagerReportGeneratorResponse {}
 
+/**
+ * @public
+ */
 export interface DeleteTokenRequest {
   /**
    * <p>Token ID.</p>
+   * @public
    */
   TokenId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteTokenResponse {}
 
+/**
+ * @public
+ */
 export interface ExtendLicenseConsumptionRequest {
   /**
    * <p>License consumption token.</p>
+   * @public
    */
   LicenseConsumptionToken: string | undefined;
 
   /**
    * <p>Checks whether you have the required permissions for the action, without actually making the request. Provides an error response if you do not have the required permissions.</p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ExtendLicenseConsumptionResponse {
   /**
    * <p>License consumption token.</p>
+   * @public
    */
-  LicenseConsumptionToken?: string;
+  LicenseConsumptionToken?: string | undefined;
 
   /**
    * <p>Date and time at which the license consumption expires.</p>
+   * @public
    */
-  Expiration?: string;
+  Expiration?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetAccessTokenRequest {
   /**
    * <p>Refresh token, encoded as a JWT token.</p>
+   * @public
    */
   Token: string | undefined;
 
   /**
    * <p>Token properties to validate against those present in the JWT token.</p>
+   * @public
    */
-  TokenProperties?: string[];
+  TokenProperties?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetAccessTokenResponse {
   /**
    * <p>Temporary access token.</p>
+   * @public
    */
-  AccessToken?: string;
+  AccessToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetGrantRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the grant.</p>
+   * @public
    */
   GrantArn: string | undefined;
 
   /**
    * <p>Grant version.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
 /**
  * <p>Describes a grant.</p>
+ * @public
  */
 export interface Grant {
   /**
    * <p>Amazon Resource Name (ARN) of the grant.</p>
+   * @public
    */
   GrantArn: string | undefined;
 
   /**
    * <p>Grant name.</p>
+   * @public
    */
   GrantName: string | undefined;
 
   /**
    * <p>Parent ARN.</p>
+   * @public
    */
   ParentArn: string | undefined;
 
   /**
    * <p>License ARN.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
    * <p>The grantee principal ARN.</p>
+   * @public
    */
   GranteePrincipalArn: string | undefined;
 
   /**
    * <p>Home Region of the grant.</p>
+   * @public
    */
   HomeRegion: string | undefined;
 
   /**
    * <p>Grant status.</p>
+   * @public
    */
-  GrantStatus: GrantStatus | string | undefined;
+  GrantStatus: GrantStatus | undefined;
 
   /**
    * <p>Grant status reason.</p>
+   * @public
    */
-  StatusReason?: string;
+  StatusReason?: string | undefined;
 
   /**
    * <p>Grant version.</p>
+   * @public
    */
   Version: string | undefined;
 
   /**
    * <p>Granted operations.</p>
+   * @public
    */
-  GrantedOperations: (AllowedOperation | string)[] | undefined;
+  GrantedOperations: AllowedOperation[] | undefined;
+
+  /**
+   * <p>The options specified for the grant.</p>
+   * @public
+   */
+  Options?: Options | undefined;
+
+  /**
+   * <p>The type of the grant. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>BuyerGrant</code> - Grants the entitlement to use the license.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DelegateGrant</code> - Gives the grantee read-only visibility into the
+   *                licenses and grants distributed to buyers, with no entitlement to use them.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  GrantType?: GrantType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetGrantResponse {
   /**
    * <p>Grant details.</p>
+   * @public
    */
-  Grant?: Grant;
+  Grant?: Grant | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
    * <p>License version.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
 /**
  * <p>Details associated with the issuer of a license.</p>
+ * @public
  */
 export interface IssuerDetails {
   /**
    * <p>Issuer name.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify,
    *          and support the RSASSA-PSS SHA-256 signing algorithm.</p>
+   * @public
    */
-  SignKey?: string;
+  SignKey?: string | undefined;
 
   /**
    * <p>Issuer key fingerprint.</p>
+   * @public
    */
-  KeyFingerprint?: string;
+  KeyFingerprint?: string | undefined;
 }
 
 /**
  * <p>Software license that is managed in License Manager.</p>
+ * @public
  */
 export interface License {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
-  LicenseArn?: string;
+  LicenseArn?: string | undefined;
 
   /**
    * <p>License name.</p>
+   * @public
    */
-  LicenseName?: string;
+  LicenseName?: string | undefined;
 
   /**
    * <p>Product name.</p>
+   * @public
    */
-  ProductName?: string;
+  ProductName?: string | undefined;
 
   /**
    * <p>Product SKU.</p>
+   * @public
    */
-  ProductSKU?: string;
+  ProductSKU?: string | undefined;
 
   /**
    * <p>License issuer.</p>
+   * @public
    */
-  Issuer?: IssuerDetails;
+  Issuer?: IssuerDetails | undefined;
 
   /**
    * <p>Home Region of the license.</p>
+   * @public
    */
-  HomeRegion?: string;
+  HomeRegion?: string | undefined;
 
   /**
    * <p>License status.</p>
+   * @public
    */
-  Status?: LicenseStatus | string;
+  Status?: LicenseStatus | undefined;
 
   /**
    * <p>Date and time range during which the license is valid, in ISO8601-UTC format.</p>
+   * @public
    */
-  Validity?: DatetimeRange;
+  Validity?: DatetimeRange | undefined;
 
   /**
    * <p>License beneficiary.</p>
+   * @public
    */
-  Beneficiary?: string;
+  Beneficiary?: string | undefined;
 
   /**
    * <p>License entitlements.</p>
+   * @public
    */
-  Entitlements?: Entitlement[];
+  Entitlements?: Entitlement[] | undefined;
 
   /**
    * <p>Configuration for consumption of the license.</p>
+   * @public
    */
-  ConsumptionConfiguration?: ConsumptionConfiguration;
+  ConsumptionConfiguration?: ConsumptionConfiguration | undefined;
 
   /**
    * <p>License metadata.</p>
+   * @public
    */
-  LicenseMetadata?: Metadata[];
+  LicenseMetadata?: Metadata[] | undefined;
 
   /**
    * <p>License creation time.</p>
+   * @public
    */
-  CreateTime?: string;
+  CreateTime?: string | undefined;
 
   /**
    * <p>License version.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseResponse {
   /**
    * <p>License details.</p>
+   * @public
    */
-  License?: License;
+  License?: License | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetLicenseAssetGroupRequest {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset group.</p>
+   * @public
+   */
+  LicenseAssetGroupArn: string | undefined;
+}
+
+/**
+ * <p>License asset group.</p>
+ * @public
+ */
+export interface LicenseAssetGroup {
+  /**
+   * <p>License asset group name.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>License asset group description.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>License asset group configurations.</p>
+   * @public
+   */
+  LicenseAssetGroupConfigurations?: LicenseAssetGroupConfiguration[] | undefined;
+
+  /**
+   * <p>ARNs of associated license asset rulesets.</p>
+   * @public
+   */
+  AssociatedLicenseAssetRulesetARNs: string[] | undefined;
+
+  /**
+   * <p>License asset group properties.</p>
+   * @public
+   */
+  Properties?: LicenseAssetGroupProperty[] | undefined;
+
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset group.</p>
+   * @public
+   */
+  LicenseAssetGroupArn: string | undefined;
+
+  /**
+   * <p>License asset group status.</p>
+   * @public
+   */
+  Status: LicenseAssetGroupStatus | undefined;
+
+  /**
+   * <p>License asset group status message.</p>
+   * @public
+   */
+  StatusMessage?: string | undefined;
+
+  /**
+   * <p>Latest usage analysis time.</p>
+   * @public
+   */
+  LatestUsageAnalysisTime?: Date | undefined;
+
+  /**
+   * <p>Latest resource discovery time.</p>
+   * @public
+   */
+  LatestResourceDiscoveryTime?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetLicenseAssetGroupResponse {
+  /**
+   * <p>License asset group.</p>
+   * @public
+   */
+  LicenseAssetGroup: LicenseAssetGroup | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetLicenseAssetRulesetRequest {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+   * @public
+   */
+  LicenseAssetRulesetArn: string | undefined;
+}
+
+/**
+ * <p>License asset ruleset.</p>
+ * @public
+ */
+export interface LicenseAssetRuleset {
+  /**
+   * <p>License asset ruleset name.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>License asset ruleset description.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>License asset rules.</p>
+   * @public
+   */
+  Rules: LicenseAssetRule[] | undefined;
+
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+   * @public
+   */
+  LicenseAssetRulesetArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetLicenseAssetRulesetResponse {
+  /**
+   * <p>License asset ruleset.</p>
+   * @public
+   */
+  LicenseAssetRuleset: LicenseAssetRuleset | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetLicenseConfigurationRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * @public
    */
   LicenseConfigurationArn: string | undefined;
 }
 
-export enum ResourceType {
-  EC2_AMI = "EC2_AMI",
-  EC2_HOST = "EC2_HOST",
-  EC2_INSTANCE = "EC2_INSTANCE",
-  RDS = "RDS",
-  SYSTEMS_MANAGER_MANAGED_INSTANCE = "SYSTEMS_MANAGER_MANAGED_INSTANCE",
-}
-
 /**
  * <p>Details about license consumption.</p>
+ * @public
  */
 export interface ConsumedLicenseSummary {
   /**
    * <p>Resource type of the resource consuming a license.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
+  ResourceType?: ResourceType | undefined;
 
   /**
    * <p>Number of licenses consumed by the resource.</p>
+   * @public
    */
-  ConsumedLicenses?: number;
+  ConsumedLicenses?: number | undefined;
 }
 
 /**
  * <p>Summary information about a managed resource.</p>
+ * @public
  */
 export interface ManagedResourceSummary {
   /**
    * <p>Type of resource associated with a license.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
+  ResourceType?: ResourceType | undefined;
 
   /**
    * <p>Number of resources associated with licenses.</p>
+   * @public
    */
-  AssociationCount?: number;
+  AssociationCount?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseConfigurationResponse {
   /**
    * <p>Unique ID for the license configuration.</p>
+   * @public
    */
-  LicenseConfigurationId?: string;
+  LicenseConfigurationId?: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * @public
    */
-  LicenseConfigurationArn?: string;
+  LicenseConfigurationArn?: string | undefined;
 
   /**
    * <p>Name of the license configuration.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>Description of the license configuration.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Dimension for which the licenses are counted.</p>
+   * @public
    */
-  LicenseCountingType?: LicenseCountingType | string;
+  LicenseCountingType?: LicenseCountingType | undefined;
 
   /**
    * <p>License rules.</p>
+   * @public
    */
-  LicenseRules?: string[];
+  LicenseRules?: string[] | undefined;
 
   /**
    * <p>Number of available licenses.</p>
+   * @public
    */
-  LicenseCount?: number;
+  LicenseCount?: number | undefined;
 
   /**
    * <p>Sets the number of available licenses as a hard limit.</p>
+   * @public
    */
-  LicenseCountHardLimit?: boolean;
+  LicenseCountHardLimit?: boolean | undefined;
 
   /**
    * <p>Number of licenses assigned to resources.</p>
+   * @public
    */
-  ConsumedLicenses?: number;
+  ConsumedLicenses?: number | undefined;
 
   /**
    * <p>License configuration status.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>Account ID of the owner of the license configuration.</p>
+   * @public
    */
-  OwnerAccountId?: string;
+  OwnerAccountId?: string | undefined;
 
   /**
    * <p>Summaries of the licenses consumed by resources.</p>
+   * @public
    */
-  ConsumedLicenseSummaryList?: ConsumedLicenseSummary[];
+  ConsumedLicenseSummaryList?: ConsumedLicenseSummary[] | undefined;
 
   /**
    * <p>Summaries of the managed resources.</p>
+   * @public
    */
-  ManagedResourceSummaryList?: ManagedResourceSummary[];
+  ManagedResourceSummaryList?: ManagedResourceSummary[] | undefined;
 
   /**
    * <p>Tags for the license configuration.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
    * <p>Product information.</p>
+   * @public
    */
-  ProductInformationList?: ProductInformation[];
+  ProductInformationList?: ProductInformation[] | undefined;
 
   /**
    * <p>Automated discovery information.</p>
+   * @public
    */
-  AutomatedDiscoveryInformation?: AutomatedDiscoveryInformation;
+  AutomatedDiscoveryInformation?: AutomatedDiscoveryInformation | undefined;
 
   /**
    * <p>When true, disassociates a resource when software is uninstalled.</p>
+   * @public
    */
-  DisassociateWhenNotFound?: boolean;
+  DisassociateWhenNotFound?: boolean | undefined;
+
+  /**
+   * <p>License Expiry.</p>
+   * @public
+   */
+  LicenseExpiry?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseConversionTaskRequest {
   /**
    * <p>ID of the license type conversion task to retrieve information on.</p>
+   * @public
    */
   LicenseConversionTaskId: string | undefined;
 }
 
-export enum LicenseConversionTaskStatus {
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  SUCCEEDED = "SUCCEEDED",
-}
-
+/**
+ * @public
+ */
 export interface GetLicenseConversionTaskResponse {
   /**
    * <p>ID of the license type conversion task.</p>
+   * @public
    */
-  LicenseConversionTaskId?: string;
+  LicenseConversionTaskId?: string | undefined;
 
   /**
    * <p>Amazon Resource Names (ARN) of the resources the license conversion task is associated with.</p>
+   * @public
    */
-  ResourceArn?: string;
+  ResourceArn?: string | undefined;
 
   /**
    * <p>Information about the license type converted from.</p>
+   * @public
    */
-  SourceLicenseContext?: LicenseConversionContext;
+  SourceLicenseContext?: LicenseConversionContext | undefined;
 
   /**
    * <p>Information about the license type converted to.</p>
+   * @public
    */
-  DestinationLicenseContext?: LicenseConversionContext;
+  DestinationLicenseContext?: LicenseConversionContext | undefined;
 
   /**
    * <p>The status message for the conversion task.</p>
+   * @public
    */
-  StatusMessage?: string;
+  StatusMessage?: string | undefined;
 
   /**
    * <p>Status of the license type conversion task.</p>
+   * @public
    */
-  Status?: LicenseConversionTaskStatus | string;
+  Status?: LicenseConversionTaskStatus | undefined;
 
   /**
    * <p>Time at which the license type conversion task was started .</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>Amount of time to complete the license type conversion.</p>
+   * @public
    */
-  LicenseConversionTime?: Date;
+  LicenseConversionTime?: Date | undefined;
 
   /**
    * <p>Time at which the license type conversion task was completed.</p>
+   * @public
    */
-  EndTime?: Date;
+  EndTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseManagerReportGeneratorRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the report generator.</p>
+   * @public
    */
   LicenseManagerReportGeneratorArn: string | undefined;
 }
 
 /**
  * <p>Details of the S3 bucket that report generator reports are published to.</p>
+ * @public
  */
 export interface S3Location {
   /**
    * <p>Name of the S3 bucket reports are published to.</p>
+   * @public
    */
-  bucket?: string;
+  bucket?: string | undefined;
 
   /**
    * <p>Prefix of the S3 bucket reports are published to.</p>
+   * @public
    */
-  keyPrefix?: string;
+  keyPrefix?: string | undefined;
 }
 
 /**
  * <p>Describe the details of a report generator.</p>
+ * @public
  */
 export interface ReportGenerator {
   /**
    * <p>Name of the report generator.</p>
+   * @public
    */
-  ReportGeneratorName?: string;
+  ReportGeneratorName?: string | undefined;
 
   /**
    * <p>Type of reports that are generated.</p>
+   * @public
    */
-  ReportType?: (ReportType | string)[];
+  ReportType?: ReportType[] | undefined;
 
   /**
    * <p>License configuration type for this generator.</p>
+   * @public
    */
-  ReportContext?: ReportContext;
+  ReportContext?: ReportContext | undefined;
 
   /**
    * <p>Details about how frequently reports are generated.</p>
+   * @public
    */
-  ReportFrequency?: ReportFrequency;
+  ReportFrequency?: ReportFrequency | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the report generator.</p>
+   * @public
    */
-  LicenseManagerReportGeneratorArn?: string;
+  LicenseManagerReportGeneratorArn?: string | undefined;
 
   /**
    * <p>Status of the last report generation attempt.</p>
+   * @public
    */
-  LastRunStatus?: string;
+  LastRunStatus?: string | undefined;
 
   /**
    * <p>Failure message for the last report generation attempt.</p>
+   * @public
    */
-  LastRunFailureReason?: string;
+  LastRunFailureReason?: string | undefined;
 
   /**
    * <p>Time the last report was generated at.</p>
+   * @public
    */
-  LastReportGenerationTime?: string;
+  LastReportGenerationTime?: string | undefined;
 
   /**
    * <p>The Amazon Web Services account ID used to create the report generator.</p>
+   * @public
    */
-  ReportCreatorAccount?: string;
+  ReportCreatorAccount?: string | undefined;
 
   /**
    * <p>Description of the report generator.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Details of the S3 bucket that report generator reports are published to.</p>
+   * @public
    */
-  S3Location?: S3Location;
+  S3Location?: S3Location | undefined;
 
   /**
    * <p>Time the report was created.</p>
+   * @public
    */
-  CreateTime?: string;
+  CreateTime?: string | undefined;
 
   /**
    * <p>Tags associated with the report generator.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseManagerReportGeneratorResponse {
   /**
    * <p>A report generator that creates periodic reports about your license configurations.</p>
+   * @public
    */
-  ReportGenerator?: ReportGenerator;
+  ReportGenerator?: ReportGenerator | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseUsageRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 }
 
 /**
  * <p>Usage associated with an entitlement resource.</p>
+ * @public
  */
 export interface EntitlementUsage {
   /**
    * <p>Entitlement usage name.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Resource usage consumed.</p>
+   * @public
    */
   ConsumedValue: string | undefined;
 
   /**
    * <p>Maximum entitlement usage count.</p>
+   * @public
    */
-  MaxCount?: string;
+  MaxCount?: string | undefined;
 
   /**
    * <p>Entitlement usage unit.</p>
+   * @public
    */
-  Unit: EntitlementDataUnit | string | undefined;
+  Unit: EntitlementDataUnit | undefined;
 }
 
 /**
  * <p>Describes the entitlement usage associated with a license.</p>
+ * @public
  */
 export interface LicenseUsage {
   /**
    * <p>License entitlement usages.</p>
+   * @public
    */
-  EntitlementUsages?: EntitlementUsage[];
+  EntitlementUsages?: EntitlementUsage[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLicenseUsageResponse {
   /**
    * <p>License usage details.</p>
+   * @public
    */
-  LicenseUsage?: LicenseUsage;
+  LicenseUsage?: LicenseUsage | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServiceSettingsRequest {}
 
 /**
  * <p>Configuration information for Organizations.</p>
+ * @public
  */
 export interface OrganizationConfiguration {
   /**
    * <p>Enables Organizations integration.</p>
+   * @public
    */
   EnableIntegration: boolean | undefined;
 }
 
+/**
+ * <p>Status information for cross-account discovery service.</p>
+ * @public
+ */
+export interface CrossAccountDiscoveryServiceStatus {
+  /**
+   * <p>Status message for cross-account discovery service.</p>
+   * @public
+   */
+  Message?: string | undefined;
+}
+
+/**
+ * <p>Status information for a specific region.</p>
+ * @public
+ */
+export interface RegionStatus {
+  /**
+   * <p>Status value for the region.</p>
+   * @public
+   */
+  Status?: string | undefined;
+}
+
+/**
+ * <p>Status information for cross-region discovery.</p>
+ * @public
+ */
+export interface CrossRegionDiscoveryStatus {
+  /**
+   * <p>Map of region status messages for cross-region discovery.</p>
+   * @public
+   */
+  Message?: Record<string, RegionStatus> | undefined;
+}
+
+/**
+ * <p>Overall service status information for License Manager.</p>
+ * @public
+ */
+export interface ServiceStatus {
+  /**
+   * <p>Status of cross-account discovery service.</p>
+   * @public
+   */
+  CrossAccountDiscovery?: CrossAccountDiscoveryServiceStatus | undefined;
+
+  /**
+   * <p>Status of cross-region discovery service.</p>
+   * @public
+   */
+  CrossRegionDiscovery?: CrossRegionDiscoveryStatus | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetServiceSettingsResponse {
   /**
    * <p>Regional S3 bucket path for storing reports, license trail event data, discovery data,
    *          and so on.</p>
+   * @public
    */
-  S3BucketArn?: string;
+  S3BucketArn?: string | undefined;
 
   /**
    * <p>SNS topic configured to receive notifications from License Manager.</p>
+   * @public
    */
-  SnsTopicArn?: string;
+  SnsTopicArn?: string | undefined;
 
   /**
    * <p>Indicates whether Organizations is integrated with License Manager for
    *          cross-account discovery.</p>
+   * @public
    */
-  OrganizationConfiguration?: OrganizationConfiguration;
+  OrganizationConfiguration?: OrganizationConfiguration | undefined;
 
   /**
    * <p>Indicates whether cross-account discovery is enabled.</p>
+   * @public
    */
-  EnableCrossAccountsDiscovery?: boolean;
+  EnableCrossAccountsDiscovery?: boolean | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the resource share. The License Manager management account
    *          provides member accounts with access to this share.</p>
+   * @public
    */
-  LicenseManagerResourceShareArn?: string;
+  LicenseManagerResourceShareArn?: string | undefined;
+
+  /**
+   * <p>Cross region discovery home region.</p>
+   * @public
+   */
+  CrossRegionDiscoveryHomeRegion?: string | undefined;
+
+  /**
+   * <p>Cross region discovery source regions.</p>
+   * @public
+   */
+  CrossRegionDiscoverySourceRegions?: string[] | undefined;
+
+  /**
+   * <p>Service status.</p>
+   * @public
+   */
+  ServiceStatus?: ServiceStatus | undefined;
 }
 
 /**
- * <p>The request uses too many filters or too many filter values.</p>
+ * @public
  */
-export class FilterLimitExceededException extends __BaseException {
-  readonly name: "FilterLimitExceededException" = "FilterLimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface ListAssetsForLicenseAssetGroupRequest {
   /**
-   * @internal
+   * <p>Amazon Resource Name (ARN) of the license asset group.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<FilterLimitExceededException, __BaseException>) {
-    super({
-      name: "FilterLimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, FilterLimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
+  LicenseAssetGroupArn: string | undefined;
+
+  /**
+   * <p>Asset type. The possible values are <code>Instance</code> | <code>License</code> | <code>LicenseConfiguration</code>.</p>
+   * @public
+   */
+  AssetType: string | undefined;
+
+  /**
+   * <p>Maximum number of results to return in a single call.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListAssetsForLicenseAssetGroupResponse {
+  /**
+   * <p>Assets.</p>
+   * @public
+   */
+  Assets?: Asset[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListAssociationsForLicenseConfigurationRequest {
   /**
    * <p>Amazon Resource Name (ARN) of a license configuration.</p>
+   * @public
    */
   LicenseConfigurationArn: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes an association with a license configuration.</p>
+ * @public
  */
 export interface LicenseConfigurationAssociation {
   /**
    * <p>Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
-  ResourceArn?: string;
+  ResourceArn?: string | undefined;
 
   /**
    * <p>Type of server resource.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
+  ResourceType?: ResourceType | undefined;
 
   /**
    * <p>ID of the Amazon Web Services account that owns the resource consuming licenses.</p>
+   * @public
    */
-  ResourceOwnerId?: string;
+  ResourceOwnerId?: string | undefined;
 
   /**
    * <p>Time when the license configuration was associated with the resource.</p>
+   * @public
    */
-  AssociationTime?: Date;
+  AssociationTime?: Date | undefined;
 
   /**
    * <p>Scope of AMI associations. The possible value is <code>cross-account</code>.</p>
+   * @public
    */
-  AmiAssociationScope?: string;
+  AmiAssociationScope?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListAssociationsForLicenseConfigurationResponse {
   /**
    * <p>Information about the associations for the license configuration.</p>
+   * @public
    */
-  LicenseConfigurationAssociations?: LicenseConfigurationAssociation[];
+  LicenseConfigurationAssociations?: LicenseConfigurationAssociation[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>A filter name and value pair that is used to return more specific results from a
  *          describe operation. Filters can be used to match a set of resources by specific criteria,
  *          such as tags, attributes, or IDs.</p>
+ * @public
  */
 export interface Filter {
   /**
    * <p>Name of the filter. Filter names are case-sensitive.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
-   * <p>Filter values. Filter values are case-sensitive.</p>
+   * <p>The value of the filter, which is case-sensitive. You can only specify one value for the filter.</p>
+   * @public
    */
-  Values?: string[];
+  Values?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListDistributedGrantsRequest {
   /**
    * <p>Amazon Resource Names (ARNs) of the grants.</p>
+   * @public
    */
-  GrantArns?: string[];
+  GrantArns?: string[] | undefined;
 
   /**
    * <p>Filters to scope the results. The following filters are supported:</p>
@@ -2224,121 +3237,255 @@ export interface ListDistributedGrantsRequest {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListDistributedGrantsResponse {
   /**
    * <p>Distributed grant details.</p>
+   * @public
    */
-  Grants?: Grant[];
+  Grants?: Grant[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListFailuresForLicenseConfigurationOperationsRequest {
   /**
    * <p>Amazon Resource Name of the license configuration.</p>
+   * @public
    */
   LicenseConfigurationArn: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Describes the failure of a license operation.</p>
+ * @public
  */
 export interface LicenseOperationFailure {
   /**
    * <p>Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
-  ResourceArn?: string;
+  ResourceArn?: string | undefined;
 
   /**
    * <p>Resource type.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
+  ResourceType?: ResourceType | undefined;
 
   /**
    * <p>Error message.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 
   /**
    * <p>Failure time.</p>
+   * @public
    */
-  FailureTime?: Date;
+  FailureTime?: Date | undefined;
 
   /**
    * <p>Name of the operation.</p>
+   * @public
    */
-  OperationName?: string;
+  OperationName?: string | undefined;
 
   /**
    * <p>ID of the Amazon Web Services account that owns the resource.</p>
+   * @public
    */
-  ResourceOwnerId?: string;
+  ResourceOwnerId?: string | undefined;
 
   /**
    * <p>The requester is "License Manager Automated Discovery".</p>
+   * @public
    */
-  OperationRequestedBy?: string;
+  OperationRequestedBy?: string | undefined;
 
   /**
    * <p>Reserved.</p>
+   * @public
    */
-  MetadataList?: Metadata[];
+  MetadataList?: Metadata[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListFailuresForLicenseConfigurationOperationsResponse {
   /**
    * <p>License configuration operations that failed.</p>
+   * @public
    */
-  LicenseOperationFailureList?: LicenseOperationFailure[];
+  LicenseOperationFailureList?: LicenseOperationFailure[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export interface ListLicenseConfigurationsRequest {
+/**
+ * @public
+ */
+export interface ListLicenseAssetGroupsRequest {
   /**
-   * <p>Amazon Resource Names (ARN) of the license configurations.</p>
+   * <p>Filters to scope the results. Following filters are supported</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>LicenseAssetRulesetArn</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  LicenseConfigurationArns?: string[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListLicenseAssetGroupsResponse {
+  /**
+   * <p>License asset groups.</p>
+   * @public
+   */
+  LicenseAssetGroups?: LicenseAssetGroup[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListLicenseAssetRulesetsRequest {
+  /**
+   * <p>Filters to scope the results. Following filters are supported</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Name</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Filters?: Filter[] | undefined;
+
+  /**
+   * <p>Specifies whether to show License Manager managed license asset rulesets.</p>
+   * @public
+   */
+  ShowAWSManagedLicenseAssetRulesets?: boolean | undefined;
+
+  /**
+   * <p>Maximum number of results to return in a single call.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListLicenseAssetRulesetsResponse {
+  /**
+   * <p>License asset rulesets.</p>
+   * @public
+   */
+  LicenseAssetRulesets?: LicenseAssetRuleset[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListLicenseConfigurationsRequest {
+  /**
+   * <p>Amazon Resource Names (ARN) of the license configurations.</p>
+   * @public
+   */
+  LicenseConfigurationArns?: string[] | undefined;
+
+  /**
+   * <p>Maximum number of results to return in a single call.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 
   /**
    * <p>Filters to scope the results. The following filters and logical operators
@@ -2347,22 +3494,20 @@ export interface ListLicenseConfigurationsRequest {
    *             <li>
    *                <p>
    *                   <code>licenseCountingType</code> - The dimension for which licenses are counted.
-   *                Possible values are <code>vCPU</code> | <code>Instance</code> | <code>Core</code> | <code>Socket</code>.
-   *                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
+   *                Possible values are <code>vCPU</code> | <code>Instance</code> | <code>Core</code> | <code>Socket</code>.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>enforceLicenseCount</code> - A Boolean value that indicates whether hard license enforcement is used.
-   *                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
+   *                   <code>enforceLicenseCount</code> - A Boolean value that indicates whether hard license enforcement is used.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>usagelimitExceeded</code> - A Boolean value that indicates whether the available licenses have been exceeded.
-   *                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
+   *                   <code>usagelimitExceeded</code> - A Boolean value that indicates whether the available licenses have been exceeded.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 }
 
 /**
@@ -2371,183 +3516,281 @@ export interface ListLicenseConfigurationsRequest {
  *          type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy,
  *          Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM
  *          must be associated with a host), and the number of licenses purchased and used.</p>
+ * @public
  */
 export interface LicenseConfiguration {
   /**
    * <p>Unique ID of the license configuration.</p>
+   * @public
    */
-  LicenseConfigurationId?: string;
+  LicenseConfigurationId?: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * @public
    */
-  LicenseConfigurationArn?: string;
+  LicenseConfigurationArn?: string | undefined;
 
   /**
    * <p>Name of the license configuration.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>Description of the license configuration.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Dimension to use to track the license inventory.</p>
+   * @public
    */
-  LicenseCountingType?: LicenseCountingType | string;
+  LicenseCountingType?: LicenseCountingType | undefined;
 
   /**
    * <p>License rules.</p>
+   * @public
    */
-  LicenseRules?: string[];
+  LicenseRules?: string[] | undefined;
 
   /**
    * <p>Number of licenses managed by the license configuration.</p>
+   * @public
    */
-  LicenseCount?: number;
+  LicenseCount?: number | undefined;
 
   /**
    * <p>Number of available licenses as a hard limit.</p>
+   * @public
    */
-  LicenseCountHardLimit?: boolean;
+  LicenseCountHardLimit?: boolean | undefined;
 
   /**
    * <p>When true, disassociates a resource when software is uninstalled.</p>
+   * @public
    */
-  DisassociateWhenNotFound?: boolean;
+  DisassociateWhenNotFound?: boolean | undefined;
 
   /**
    * <p>Number of licenses consumed. </p>
+   * @public
    */
-  ConsumedLicenses?: number;
+  ConsumedLicenses?: number | undefined;
 
   /**
    * <p>Status of the license configuration.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>Account ID of the license configuration's owner.</p>
+   * @public
    */
-  OwnerAccountId?: string;
+  OwnerAccountId?: string | undefined;
 
   /**
    * <p>Summaries for licenses consumed by various resources.</p>
+   * @public
    */
-  ConsumedLicenseSummaryList?: ConsumedLicenseSummary[];
+  ConsumedLicenseSummaryList?: ConsumedLicenseSummary[] | undefined;
 
   /**
    * <p>Summaries for managed resources.</p>
+   * @public
    */
-  ManagedResourceSummaryList?: ManagedResourceSummary[];
+  ManagedResourceSummaryList?: ManagedResourceSummary[] | undefined;
 
   /**
    * <p>Product information.</p>
+   * @public
    */
-  ProductInformationList?: ProductInformation[];
+  ProductInformationList?: ProductInformation[] | undefined;
 
   /**
    * <p>Automated discovery information.</p>
+   * @public
    */
-  AutomatedDiscoveryInformation?: AutomatedDiscoveryInformation;
+  AutomatedDiscoveryInformation?: AutomatedDiscoveryInformation | undefined;
+
+  /**
+   * <p>License configuration expiry time in Unix timestamp format.</p>
+   * @public
+   */
+  LicenseExpiry?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseConfigurationsResponse {
   /**
    * <p>Information about the license configurations.</p>
+   * @public
    */
-  LicenseConfigurations?: LicenseConfiguration[];
+  LicenseConfigurations?: LicenseConfiguration[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
-export interface ListLicenseConversionTasksRequest {
+/**
+ * @public
+ */
+export interface ListLicenseConfigurationsForOrganizationRequest {
   /**
-   * <p>Token for the next set of results.</p>
+   * <p>License configuration ARNs.</p>
+   * @public
    */
-  NextToken?: string;
+  LicenseConfigurationArns?: string[] | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Filters to scope the results.</p>
+   * @public
+   */
+  Filters?: Filter[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListLicenseConfigurationsForOrganizationResponse {
+  /**
+   * <p>License configurations.</p>
+   * @public
+   */
+  LicenseConfigurations?: LicenseConfiguration[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListLicenseConversionTasksRequest {
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Maximum number of results to return in a single call.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
 
   /**
    * <p>
    *          Filters to scope the results. Valid filters are <code>ResourceArns</code> and <code>Status</code>.
    *       </p>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 }
 
 /**
  * <p>Information about a license type conversion task.</p>
+ * @public
  */
 export interface LicenseConversionTask {
   /**
    * <p>The ID of the license type conversion task.</p>
+   * @public
    */
-  LicenseConversionTaskId?: string;
+  LicenseConversionTaskId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the resource associated with the license type
    *          conversion task.</p>
+   * @public
    */
-  ResourceArn?: string;
+  ResourceArn?: string | undefined;
 
   /**
    * <p>Information about the license type this conversion task converted from.</p>
+   * @public
    */
-  SourceLicenseContext?: LicenseConversionContext;
+  SourceLicenseContext?: LicenseConversionContext | undefined;
 
   /**
    * <p>Information about the license type this conversion task converted to.</p>
+   * @public
    */
-  DestinationLicenseContext?: LicenseConversionContext;
+  DestinationLicenseContext?: LicenseConversionContext | undefined;
 
   /**
    * <p>The status of the conversion task.</p>
+   * @public
    */
-  Status?: LicenseConversionTaskStatus | string;
+  Status?: LicenseConversionTaskStatus | undefined;
 
   /**
    * <p>The status message for the conversion task.</p>
+   * @public
    */
-  StatusMessage?: string;
+  StatusMessage?: string | undefined;
 
   /**
    * <p>The time the conversion task was started at.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The time the usage operation value of the resource was changed.</p>
+   * @public
    */
-  LicenseConversionTime?: Date;
+  LicenseConversionTime?: Date | undefined;
 
   /**
    * <p>The time the conversion task was completed.</p>
+   * @public
    */
-  EndTime?: Date;
+  EndTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseConversionTasksResponse {
   /**
    * <p>Information about the license configuration tasks for your account.</p>
+   * @public
    */
-  LicenseConversionTasks?: LicenseConversionTask[];
+  LicenseConversionTasks?: LicenseConversionTask[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseManagerReportGeneratorsRequest {
   /**
    * <p>Filters to scope the results. The following filters are supported: </p>
@@ -2558,37 +3801,49 @@ export interface ListLicenseManagerReportGeneratorsRequest {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseManagerReportGeneratorsResponse {
   /**
    * <p>A report generator that creates periodic reports about your license configurations.</p>
+   * @public
    */
-  ReportGenerators?: ReportGenerator[];
+  ReportGenerators?: ReportGenerator[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicensesRequest {
   /**
    * <p>Amazon Resource Names (ARNs) of the licenses.</p>
+   * @public
    */
-  LicenseArns?: string[];
+  LicenseArns?: string[] | undefined;
 
   /**
    * <p>Filters to scope the results. The following filters are supported:</p>
@@ -2614,110 +3869,147 @@ export interface ListLicensesRequest {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicensesResponse {
   /**
    * <p>License details.</p>
+   * @public
    */
-  Licenses?: License[];
+  Licenses?: License[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseSpecificationsForResourceRequest {
   /**
    * <p>Amazon Resource Name (ARN) of a resource that has an associated license configuration.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Details for associating a license configuration with a resource.</p>
+ * @public
  */
 export interface LicenseSpecification {
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * @public
    */
   LicenseConfigurationArn: string | undefined;
 
   /**
    * <p>Scope of AMI associations. The possible value is <code>cross-account</code>.</p>
+   * @public
    */
-  AmiAssociationScope?: string;
+  AmiAssociationScope?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseSpecificationsForResourceResponse {
   /**
    * <p>License configurations associated with a resource.</p>
+   * @public
    */
-  LicenseSpecifications?: LicenseSpecification[];
+  LicenseSpecifications?: LicenseSpecification[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseVersionsRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
   LicenseArn: string | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLicenseVersionsResponse {
   /**
    * <p>License details.</p>
+   * @public
    */
-  Licenses?: License[];
+  Licenses?: License[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListReceivedGrantsRequest {
   /**
    * <p>Amazon Resource Names (ARNs) of the grants.</p>
+   * @public
    */
-  GrantArns?: string[];
+  GrantArns?: string[] | undefined;
 
   /**
    * <p>Filters to scope the results. The following filters are supported:</p>
@@ -2748,37 +4040,107 @@ export interface ListReceivedGrantsRequest {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListReceivedGrantsResponse {
   /**
    * <p>Received grant details.</p>
+   * @public
    */
-  Grants?: Grant[];
+  Grants?: Grant[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface ListReceivedGrantsForOrganizationRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the received license.</p>
+   * @public
+   */
+  LicenseArn: string | undefined;
+
+  /**
+   * <p>Filters to scope the results. The following filters are supported:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ParentArn</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>GranteePrincipalArn</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Filters?: Filter[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Maximum number of results to return in a single call.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListReceivedGrantsForOrganizationResponse {
+  /**
+   * <p>Lists the grants the organization has received.</p>
+   * @public
+   */
+  Grants?: Grant[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListReceivedLicensesRequest {
   /**
    * <p>Amazon Resource Names (ARNs) of the licenses.</p>
+   * @public
    */
-  LicenseArns?: string[];
+  LicenseArns?: string[] | undefined;
 
   /**
    * <p>Filters to scope the results. The following filters are supported:</p>
@@ -2809,203 +4171,268 @@ export interface ListReceivedLicensesRequest {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
-}
-
-export enum ReceivedStatus {
-  ACTIVE = "ACTIVE",
-  DELETED = "DELETED",
-  DISABLED = "DISABLED",
-  FAILED_WORKFLOW = "FAILED_WORKFLOW",
-  PENDING_ACCEPT = "PENDING_ACCEPT",
-  PENDING_WORKFLOW = "PENDING_WORKFLOW",
-  REJECTED = "REJECTED",
-  WORKFLOW_COMPLETED = "WORKFLOW_COMPLETED",
+  MaxResults?: number | undefined;
 }
 
 /**
  * <p>Metadata associated with received licenses and grants.</p>
+ * @public
  */
 export interface ReceivedMetadata {
   /**
    * <p>Received status.</p>
+   * @public
    */
-  ReceivedStatus?: ReceivedStatus | string;
+  ReceivedStatus?: ReceivedStatus | undefined;
 
   /**
    * <p>Received status reason.</p>
+   * @public
    */
-  ReceivedStatusReason?: string;
+  ReceivedStatusReason?: string | undefined;
 
   /**
    * <p>Allowed operations.</p>
+   * @public
    */
-  AllowedOperations?: (AllowedOperation | string)[];
+  AllowedOperations?: AllowedOperation[] | undefined;
+
+  /**
+   * <p>The type of the grant through which the license was received. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>BuyerGrant</code> - Grants you the entitlement to use the license.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DelegateGrant</code> - Gives you read-only visibility into the licenses and
+   *                grants distributed to buyers, with no entitlement to use them.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  GrantType?: GrantType | undefined;
 }
 
 /**
  * <p>Describes a license that is granted to a grantee.</p>
+ * @public
  */
 export interface GrantedLicense {
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
-  LicenseArn?: string;
+  LicenseArn?: string | undefined;
 
   /**
    * <p>License name.</p>
+   * @public
    */
-  LicenseName?: string;
+  LicenseName?: string | undefined;
 
   /**
    * <p>Product name.</p>
+   * @public
    */
-  ProductName?: string;
+  ProductName?: string | undefined;
 
   /**
    * <p>Product SKU.</p>
+   * @public
    */
-  ProductSKU?: string;
+  ProductSKU?: string | undefined;
 
   /**
    * <p>Granted license issuer.</p>
+   * @public
    */
-  Issuer?: IssuerDetails;
+  Issuer?: IssuerDetails | undefined;
 
   /**
    * <p>Home Region of the granted license.</p>
+   * @public
    */
-  HomeRegion?: string;
+  HomeRegion?: string | undefined;
 
   /**
    * <p>Granted license status.</p>
+   * @public
    */
-  Status?: LicenseStatus | string;
+  Status?: LicenseStatus | undefined;
 
   /**
    * <p>Date and time range during which the granted license is valid, in ISO8601-UTC format.</p>
+   * @public
    */
-  Validity?: DatetimeRange;
+  Validity?: DatetimeRange | undefined;
 
   /**
    * <p>Granted license beneficiary.</p>
+   * @public
    */
-  Beneficiary?: string;
+  Beneficiary?: string | undefined;
 
   /**
    * <p>License entitlements.</p>
+   * @public
    */
-  Entitlements?: Entitlement[];
+  Entitlements?: Entitlement[] | undefined;
 
   /**
    * <p>Configuration for consumption of the license.</p>
+   * @public
    */
-  ConsumptionConfiguration?: ConsumptionConfiguration;
+  ConsumptionConfiguration?: ConsumptionConfiguration | undefined;
 
   /**
    * <p>Granted license metadata.</p>
+   * @public
    */
-  LicenseMetadata?: Metadata[];
+  LicenseMetadata?: Metadata[] | undefined;
 
   /**
    * <p>Creation time of the granted license.</p>
+   * @public
    */
-  CreateTime?: string;
+  CreateTime?: string | undefined;
 
   /**
    * <p>Version of the granted license.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 
   /**
    * <p>Granted license received metadata.</p>
+   * @public
    */
-  ReceivedMetadata?: ReceivedMetadata;
-}
-
-export interface ListReceivedLicensesResponse {
-  /**
-   * <p>Received license details.</p>
-   */
-  Licenses?: GrantedLicense[];
-
-  /**
-   * <p>Token for the next set of results.</p>
-   */
-  NextToken?: string;
+  ReceivedMetadata?: ReceivedMetadata | undefined;
 }
 
 /**
- * <p>A dependency required to run the API is missing.</p>
+ * @public
  */
-export class FailedDependencyException extends __BaseException {
-  readonly name: "FailedDependencyException" = "FailedDependencyException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  ErrorCode?: string;
+export interface ListReceivedLicensesResponse {
   /**
-   * @internal
+   * <p>Received license details.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<FailedDependencyException, __BaseException>) {
-    super({
-      name: "FailedDependencyException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, FailedDependencyException.prototype);
-    this.Message = opts.Message;
-    this.ErrorCode = opts.ErrorCode;
-  }
+  Licenses?: GrantedLicense[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
-export enum InventoryFilterCondition {
-  BEGINS_WITH = "BEGINS_WITH",
-  CONTAINS = "CONTAINS",
-  EQUALS = "EQUALS",
-  NOT_EQUALS = "NOT_EQUALS",
+/**
+ * @public
+ */
+export interface ListReceivedLicensesForOrganizationRequest {
+  /**
+   * <p>Filters to scope the results. The following filters are supported:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>Beneficiary</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ProductSKU</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Filters?: Filter[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Maximum number of results to return in a single call.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListReceivedLicensesForOrganizationResponse {
+  /**
+   * <p>Lists the licenses the organization has received.</p>
+   * @public
+   */
+  Licenses?: GrantedLicense[] | undefined;
+
+  /**
+   * <p>Token for the next set of results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>An inventory filter.</p>
+ * @public
  */
 export interface InventoryFilter {
   /**
    * <p>Name of the filter.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Condition of the filter.</p>
+   * @public
    */
-  Condition: InventoryFilterCondition | string | undefined;
+  Condition: InventoryFilterCondition | undefined;
 
   /**
    * <p>Value of the filter.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListResourceInventoryRequest {
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Filters to scope the results. The following filters and logical operators
@@ -3047,76 +4474,137 @@ export interface ListResourceInventoryRequest {
    *                <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: InventoryFilter[];
+  Filters?: InventoryFilter[] | undefined;
 }
 
 /**
  * <p>Details about a resource.</p>
+ * @public
  */
 export interface ResourceInventory {
   /**
    * <p>ID of the resource.</p>
+   * @public
    */
-  ResourceId?: string;
+  ResourceId?: string | undefined;
 
   /**
    * <p>Type of resource.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
+  ResourceType?: ResourceType | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
-  ResourceArn?: string;
+  ResourceArn?: string | undefined;
 
   /**
    * <p>Platform of the resource.</p>
+   * @public
    */
-  Platform?: string;
+  Platform?: string | undefined;
 
   /**
    * <p>Platform version of the resource in the inventory.</p>
+   * @public
    */
-  PlatformVersion?: string;
+  PlatformVersion?: string | undefined;
 
   /**
    * <p>ID of the account that owns the resource.</p>
+   * @public
    */
-  ResourceOwningAccountId?: string;
+  ResourceOwningAccountId?: string | undefined;
+
+  /**
+   * <p>List of Marketplace product codes associated with the resource.</p>
+   * @public
+   */
+  MarketplaceProductCodes?: string[] | undefined;
+
+  /**
+   * <p>Usage operation value that corresponds to the license type for billing purposes.</p>
+   * @public
+   */
+  UsageOperation?: string | undefined;
+
+  /**
+   * <p>Amazon Machine Image (AMI) ID associated with the resource.</p>
+   * @public
+   */
+  AmiId?: string | undefined;
+
+  /**
+   * <p>Dedicated Host ID where the resource is running.</p>
+   * @public
+   */
+  HostId?: string | undefined;
+
+  /**
+   * <p>Region where the resource is located.</p>
+   * @public
+   */
+  Region?: string | undefined;
+
+  /**
+   * <p>EC2 instance type of the resource.</p>
+   * @public
+   */
+  InstanceType?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListResourceInventoryResponse {
   /**
    * <p>Information about the resources.</p>
+   * @public
    */
-  ResourceInventoryList?: ResourceInventory[];
+  ResourceInventoryList?: ResourceInventory[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
-   * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * <p>Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>Information about the tags.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTokensRequest {
   /**
    * <p>Token IDs.</p>
+   * @public
    */
-  TokenIds?: string[];
+  TokenIds?: string[] | undefined;
 
   /**
    * <p>Filters to scope the results. The following filter is supported:</p>
@@ -3127,87 +4615,109 @@ export interface ListTokensRequest {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
 /**
  * <p>Describes a token.</p>
+ * @public
  */
 export interface TokenData {
   /**
    * <p>Token ID.</p>
+   * @public
    */
-  TokenId?: string;
+  TokenId?: string | undefined;
 
   /**
    * <p>Type of token generated. The supported value is <code>REFRESH_TOKEN</code>.</p>
+   * @public
    */
-  TokenType?: string;
+  TokenType?: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the license.</p>
+   * @public
    */
-  LicenseArn?: string;
+  LicenseArn?: string | undefined;
 
   /**
    * <p>Token expiration time, in ISO8601-UTC format.</p>
+   * @public
    */
-  ExpirationTime?: string;
+  ExpirationTime?: string | undefined;
 
   /**
    * <p>Data specified by the caller.</p>
+   * @public
    */
-  TokenProperties?: string[];
+  TokenProperties?: string[] | undefined;
 
   /**
    * <p>Amazon Resource Names (ARN) of the roles included in the token.</p>
+   * @public
    */
-  RoleArns?: string[];
+  RoleArns?: string[] | undefined;
 
   /**
    * <p>Token status. The possible values are <code>AVAILABLE</code> and <code>DELETED</code>.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTokensResponse {
   /**
    * <p>Received token details.</p>
+   * @public
    */
-  Tokens?: TokenData[];
+  Tokens?: TokenData[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListUsageForLicenseConfigurationRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * @public
    */
   LicenseConfigurationArn: string | undefined;
 
   /**
    * <p>Maximum number of results to return in a single call.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Filters to scope the results. The following filters and logical operators
@@ -3215,186 +4725,383 @@ export interface ListUsageForLicenseConfigurationRequest {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <code>resourceArn</code> - The ARN of the license configuration resource.
-   *                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
+   *                   <code>resourceArn</code> - The ARN of the license configuration resource.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | <code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>).
-   *                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
+   *                   <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> |
+   *             	<code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>).</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>resourceAccount</code> - The ID of the account that owns the resource.
-   *                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
+   *                   <code>resourceAccount</code> - The ID of the account that owns the resource.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 }
 
 /**
  * <p>Details about the usage of a resource associated with a license configuration.</p>
+ * @public
  */
 export interface LicenseConfigurationUsage {
   /**
    * <p>Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
-  ResourceArn?: string;
+  ResourceArn?: string | undefined;
 
   /**
    * <p>Type of resource.</p>
+   * @public
    */
-  ResourceType?: ResourceType | string;
+  ResourceType?: ResourceType | undefined;
 
   /**
    * <p>Status of the resource.</p>
+   * @public
    */
-  ResourceStatus?: string;
+  ResourceStatus?: string | undefined;
 
   /**
    * <p>ID of the account that owns the resource.</p>
+   * @public
    */
-  ResourceOwnerId?: string;
+  ResourceOwnerId?: string | undefined;
 
   /**
    * <p>Time when the license configuration was initially associated with the resource.</p>
+   * @public
    */
-  AssociationTime?: Date;
+  AssociationTime?: Date | undefined;
 
   /**
    * <p>Number of licenses consumed by the resource.</p>
+   * @public
    */
-  ConsumedLicenses?: number;
+  ConsumedLicenses?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListUsageForLicenseConfigurationResponse {
   /**
    * <p>Information about the license configurations.</p>
+   * @public
    */
-  LicenseConfigurationUsageList?: LicenseConfigurationUsage[];
+  LicenseConfigurationUsageList?: LicenseConfigurationUsage[] | undefined;
 
   /**
    * <p>Token for the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RejectGrantRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the grant.</p>
+   * @public
    */
   GrantArn: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RejectGrantResponse {
   /**
    * <p>Grant ARN.</p>
+   * @public
    */
-  GrantArn?: string;
+  GrantArn?: string | undefined;
 
   /**
    * <p>Grant status.</p>
+   * @public
    */
-  Status?: GrantStatus | string;
+  Status?: GrantStatus | undefined;
 
   /**
    * <p>Grant version.</p>
+   * @public
    */
-  Version?: string;
+  Version?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
-   * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * <p>Amazon Resource Name (ARN) of the resource. The following examples provide an example
+   *          ARN for each supported resource in License Manager:</p>
+   *          <ul>
+   *             <li>
+   *                <p>Licenses -
+   *                   <code>arn:aws:license-manager::111122223333:license:l-EXAMPLE2da7646d6861033667f20e895</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Grants -
+   *                   <code>arn:aws:license-manager::111122223333:grant:g-EXAMPLE7b19f4a0ab73679b0beb52707</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>License configurations -
+   *                   <code>arn:aws:license-manager:us-east-1:111122223333:license-configuration:lic-EXAMPLE6a788d4c8acd4264ff0ecf2ed2d</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Report generators -
+   *                   <code>arn:aws:license-manager:us-east-1:111122223333:report-generator:r-EXAMPLE825b4a4f8fe5a3e0c88824e5fc6</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>One or more tags.</p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
-   * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * <p>Amazon Resource Name (ARN) of the resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>Keys identifying the tags to remove.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
 
-export enum LicenseConfigurationStatus {
-  AVAILABLE = "AVAILABLE",
-  DISABLED = "DISABLED",
+/**
+ * @public
+ */
+export interface UpdateLicenseAssetGroupRequest {
+  /**
+   * <p>License asset group name.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>License asset group description.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>License asset group configurations.</p>
+   * @public
+   */
+  LicenseAssetGroupConfigurations?: LicenseAssetGroupConfiguration[] | undefined;
+
+  /**
+   * <p>ARNs of associated license asset rulesets.</p>
+   * @public
+   */
+  AssociatedLicenseAssetRulesetARNs: string[] | undefined;
+
+  /**
+   * <p>License asset group properties.</p>
+   * @public
+   */
+  Properties?: LicenseAssetGroupProperty[] | undefined;
+
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset group.</p>
+   * @public
+   */
+  LicenseAssetGroupArn: string | undefined;
+
+  /**
+   * <p>License asset group status. The possible values are <code>ACTIVE</code> | <code>DISABLED</code>.</p>
+   * @public
+   */
+  Status?: LicenseAssetGroupStatus | undefined;
+
+  /**
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
+   */
+  ClientToken: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface UpdateLicenseAssetGroupResponse {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset group.</p>
+   * @public
+   */
+  LicenseAssetGroupArn: string | undefined;
+
+  /**
+   * <p>License asset group status.</p>
+   * @public
+   */
+  Status: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateLicenseAssetRulesetRequest {
+  /**
+   * <p>License asset ruleset name.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>License asset ruleset description.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>License asset rules.</p>
+   * @public
+   */
+  Rules: LicenseAssetRule[] | undefined;
+
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+   * @public
+   */
+  LicenseAssetRulesetArn: string | undefined;
+
+  /**
+   * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
+   */
+  ClientToken: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateLicenseAssetRulesetResponse {
+  /**
+   * <p>Amazon Resource Name (ARN) of the license asset ruleset.</p>
+   * @public
+   */
+  LicenseAssetRulesetArn: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface UpdateLicenseConfigurationRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the license configuration.</p>
+   * @public
    */
   LicenseConfigurationArn: string | undefined;
 
   /**
    * <p>New status of the license configuration.</p>
+   * @public
    */
-  LicenseConfigurationStatus?: LicenseConfigurationStatus | string;
+  LicenseConfigurationStatus?: LicenseConfigurationStatus | undefined;
 
   /**
    * <p>New license rule. The only rule that you can add after you create a license
    *           configuration is licenseAffinityToHost.</p>
+   * @public
    */
-  LicenseRules?: string[];
+  LicenseRules?: string[] | undefined;
 
   /**
    * <p>New number of licenses managed by the license configuration.</p>
+   * @public
    */
-  LicenseCount?: number;
+  LicenseCount?: number | undefined;
 
   /**
    * <p>New hard limit of the number of available licenses.</p>
+   * @public
    */
-  LicenseCountHardLimit?: boolean;
+  LicenseCountHardLimit?: boolean | undefined;
 
   /**
    * <p>New name of the license configuration.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>New description of the license configuration.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>New product information.</p>
+   * @public
    */
-  ProductInformationList?: ProductInformation[];
+  ProductInformationList?: ProductInformation[] | undefined;
 
   /**
    * <p>When true, disassociates a resource when software is uninstalled.</p>
+   * @public
    */
-  DisassociateWhenNotFound?: boolean;
+  DisassociateWhenNotFound?: boolean | undefined;
+
+  /**
+   * <p>License configuration expiry time.</p>
+   * @public
+   */
+  LicenseExpiry?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateLicenseConfigurationResponse {}
 
+/**
+ * @public
+ */
 export interface UpdateLicenseManagerReportGeneratorRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the report generator to update.</p>
+   * @public
    */
   LicenseManagerReportGeneratorArn: string | undefined;
 
   /**
    * <p>Name of the report generator.</p>
+   * @public
    */
   ReportGeneratorName: string | undefined;
 
@@ -3408,1090 +5115,104 @@ export interface UpdateLicenseManagerReportGeneratorRequest {
    *                <p>Resource report - Reports the tracked licenses and resource consumption for a license configuration.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Type: (ReportType | string)[] | undefined;
+  Type: ReportType[] | undefined;
 
   /**
    * <p>The report context.</p>
+   * @public
    */
   ReportContext: ReportContext | undefined;
 
   /**
    * <p>Frequency by which reports are generated.</p>
+   * @public
    */
   ReportFrequency: ReportFrequency | undefined;
 
   /**
    * <p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+   * @public
    */
   ClientToken: string | undefined;
 
   /**
    * <p>Description of the report generator.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateLicenseManagerReportGeneratorResponse {}
 
 /**
- * <p>License Manager cannot allocate a license to a resource because of its state. </p>
- *          <p>For example, you cannot allocate a license to an instance in the process of shutting
- *          down.</p>
+ * @public
  */
-export class InvalidResourceStateException extends __BaseException {
-  readonly name: "InvalidResourceStateException" = "InvalidResourceStateException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidResourceStateException, __BaseException>) {
-    super({
-      name: "InvalidResourceStateException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidResourceStateException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>You do not have enough licenses available to support a new resource launch.</p>
- */
-export class LicenseUsageException extends __BaseException {
-  readonly name: "LicenseUsageException" = "LicenseUsageException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<LicenseUsageException, __BaseException>) {
-    super({
-      name: "LicenseUsageException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LicenseUsageException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface UpdateLicenseSpecificationsForResourceRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the Amazon Web Services resource.</p>
+   * @public
    */
   ResourceArn: string | undefined;
 
   /**
    * <p>ARNs of the license configurations to add.</p>
+   * @public
    */
-  AddLicenseSpecifications?: LicenseSpecification[];
+  AddLicenseSpecifications?: LicenseSpecification[] | undefined;
 
   /**
    * <p>ARNs of the license configurations to remove.</p>
+   * @public
    */
-  RemoveLicenseSpecifications?: LicenseSpecification[];
+  RemoveLicenseSpecifications?: LicenseSpecification[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateLicenseSpecificationsForResourceResponse {}
 
+/**
+ * @public
+ */
 export interface UpdateServiceSettingsRequest {
   /**
    * <p>Amazon Resource Name (ARN) of the Amazon S3 bucket where the License Manager information is stored.</p>
+   * @public
    */
-  S3BucketArn?: string;
+  S3BucketArn?: string | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager alerts.</p>
+   * @public
    */
-  SnsTopicArn?: string;
+  SnsTopicArn?: string | undefined;
 
   /**
    * <p>Enables integration with Organizations for cross-account discovery.</p>
+   * @public
    */
-  OrganizationConfiguration?: OrganizationConfiguration;
+  OrganizationConfiguration?: OrganizationConfiguration | undefined;
 
   /**
    * <p>Activates cross-account discovery.</p>
+   * @public
    */
-  EnableCrossAccountsDiscovery?: boolean;
+  EnableCrossAccountsDiscovery?: boolean | undefined;
+
+  /**
+   * <p>Cross region discovery enabled source regions.</p>
+   * @public
+   */
+  EnabledDiscoverySourceRegions?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateServiceSettingsResponse {}
-
-/**
- * @internal
- */
-export const AcceptGrantRequestFilterSensitiveLog = (obj: AcceptGrantRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AcceptGrantResponseFilterSensitiveLog = (obj: AcceptGrantResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutomatedDiscoveryInformationFilterSensitiveLog = (obj: AutomatedDiscoveryInformation): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CheckInLicenseRequestFilterSensitiveLog = (obj: CheckInLicenseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CheckInLicenseResponseFilterSensitiveLog = (obj: CheckInLicenseResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const MetadataFilterSensitiveLog = (obj: Metadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EntitlementDataFilterSensitiveLog = (obj: EntitlementData): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CheckoutBorrowLicenseRequestFilterSensitiveLog = (obj: CheckoutBorrowLicenseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CheckoutBorrowLicenseResponseFilterSensitiveLog = (obj: CheckoutBorrowLicenseResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CheckoutLicenseRequestFilterSensitiveLog = (obj: CheckoutLicenseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CheckoutLicenseResponseFilterSensitiveLog = (obj: CheckoutLicenseResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateGrantRequestFilterSensitiveLog = (obj: CreateGrantRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateGrantResponseFilterSensitiveLog = (obj: CreateGrantResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateGrantVersionRequestFilterSensitiveLog = (obj: CreateGrantVersionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateGrantVersionResponseFilterSensitiveLog = (obj: CreateGrantVersionResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const BorrowConfigurationFilterSensitiveLog = (obj: BorrowConfiguration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ProvisionalConfigurationFilterSensitiveLog = (obj: ProvisionalConfiguration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConsumptionConfigurationFilterSensitiveLog = (obj: ConsumptionConfiguration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EntitlementFilterSensitiveLog = (obj: Entitlement): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const IssuerFilterSensitiveLog = (obj: Issuer): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DatetimeRangeFilterSensitiveLog = (obj: DatetimeRange): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseRequestFilterSensitiveLog = (obj: CreateLicenseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseResponseFilterSensitiveLog = (obj: CreateLicenseResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ProductInformationFilterFilterSensitiveLog = (obj: ProductInformationFilter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ProductInformationFilterSensitiveLog = (obj: ProductInformation): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagFilterSensitiveLog = (obj: Tag): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseConfigurationRequestFilterSensitiveLog = (obj: CreateLicenseConfigurationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseConfigurationResponseFilterSensitiveLog = (obj: CreateLicenseConfigurationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseConversionContextFilterSensitiveLog = (obj: LicenseConversionContext): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseConversionTaskForResourceRequestFilterSensitiveLog = (
-  obj: CreateLicenseConversionTaskForResourceRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseConversionTaskForResourceResponseFilterSensitiveLog = (
-  obj: CreateLicenseConversionTaskForResourceResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReportContextFilterSensitiveLog = (obj: ReportContext): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReportFrequencyFilterSensitiveLog = (obj: ReportFrequency): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseManagerReportGeneratorRequestFilterSensitiveLog = (
-  obj: CreateLicenseManagerReportGeneratorRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseManagerReportGeneratorResponseFilterSensitiveLog = (
-  obj: CreateLicenseManagerReportGeneratorResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseVersionRequestFilterSensitiveLog = (obj: CreateLicenseVersionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLicenseVersionResponseFilterSensitiveLog = (obj: CreateLicenseVersionResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateTokenRequestFilterSensitiveLog = (obj: CreateTokenRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateTokenResponseFilterSensitiveLog = (obj: CreateTokenResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteGrantRequestFilterSensitiveLog = (obj: DeleteGrantRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteGrantResponseFilterSensitiveLog = (obj: DeleteGrantResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteLicenseRequestFilterSensitiveLog = (obj: DeleteLicenseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteLicenseResponseFilterSensitiveLog = (obj: DeleteLicenseResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteLicenseConfigurationRequestFilterSensitiveLog = (obj: DeleteLicenseConfigurationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteLicenseConfigurationResponseFilterSensitiveLog = (obj: DeleteLicenseConfigurationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteLicenseManagerReportGeneratorRequestFilterSensitiveLog = (
-  obj: DeleteLicenseManagerReportGeneratorRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteLicenseManagerReportGeneratorResponseFilterSensitiveLog = (
-  obj: DeleteLicenseManagerReportGeneratorResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteTokenRequestFilterSensitiveLog = (obj: DeleteTokenRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteTokenResponseFilterSensitiveLog = (obj: DeleteTokenResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ExtendLicenseConsumptionRequestFilterSensitiveLog = (obj: ExtendLicenseConsumptionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ExtendLicenseConsumptionResponseFilterSensitiveLog = (obj: ExtendLicenseConsumptionResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAccessTokenRequestFilterSensitiveLog = (obj: GetAccessTokenRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAccessTokenResponseFilterSensitiveLog = (obj: GetAccessTokenResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetGrantRequestFilterSensitiveLog = (obj: GetGrantRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GrantFilterSensitiveLog = (obj: Grant): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetGrantResponseFilterSensitiveLog = (obj: GetGrantResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseRequestFilterSensitiveLog = (obj: GetLicenseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const IssuerDetailsFilterSensitiveLog = (obj: IssuerDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseFilterSensitiveLog = (obj: License): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseResponseFilterSensitiveLog = (obj: GetLicenseResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseConfigurationRequestFilterSensitiveLog = (obj: GetLicenseConfigurationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConsumedLicenseSummaryFilterSensitiveLog = (obj: ConsumedLicenseSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ManagedResourceSummaryFilterSensitiveLog = (obj: ManagedResourceSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseConfigurationResponseFilterSensitiveLog = (obj: GetLicenseConfigurationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseConversionTaskRequestFilterSensitiveLog = (obj: GetLicenseConversionTaskRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseConversionTaskResponseFilterSensitiveLog = (obj: GetLicenseConversionTaskResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseManagerReportGeneratorRequestFilterSensitiveLog = (
-  obj: GetLicenseManagerReportGeneratorRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const S3LocationFilterSensitiveLog = (obj: S3Location): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReportGeneratorFilterSensitiveLog = (obj: ReportGenerator): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseManagerReportGeneratorResponseFilterSensitiveLog = (
-  obj: GetLicenseManagerReportGeneratorResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseUsageRequestFilterSensitiveLog = (obj: GetLicenseUsageRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EntitlementUsageFilterSensitiveLog = (obj: EntitlementUsage): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseUsageFilterSensitiveLog = (obj: LicenseUsage): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLicenseUsageResponseFilterSensitiveLog = (obj: GetLicenseUsageResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServiceSettingsRequestFilterSensitiveLog = (obj: GetServiceSettingsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const OrganizationConfigurationFilterSensitiveLog = (obj: OrganizationConfiguration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServiceSettingsResponseFilterSensitiveLog = (obj: GetServiceSettingsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListAssociationsForLicenseConfigurationRequestFilterSensitiveLog = (
-  obj: ListAssociationsForLicenseConfigurationRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseConfigurationAssociationFilterSensitiveLog = (obj: LicenseConfigurationAssociation): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListAssociationsForLicenseConfigurationResponseFilterSensitiveLog = (
-  obj: ListAssociationsForLicenseConfigurationResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const FilterFilterSensitiveLog = (obj: Filter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListDistributedGrantsRequestFilterSensitiveLog = (obj: ListDistributedGrantsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListDistributedGrantsResponseFilterSensitiveLog = (obj: ListDistributedGrantsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListFailuresForLicenseConfigurationOperationsRequestFilterSensitiveLog = (
-  obj: ListFailuresForLicenseConfigurationOperationsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseOperationFailureFilterSensitiveLog = (obj: LicenseOperationFailure): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListFailuresForLicenseConfigurationOperationsResponseFilterSensitiveLog = (
-  obj: ListFailuresForLicenseConfigurationOperationsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseConfigurationsRequestFilterSensitiveLog = (obj: ListLicenseConfigurationsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseConfigurationFilterSensitiveLog = (obj: LicenseConfiguration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseConfigurationsResponseFilterSensitiveLog = (obj: ListLicenseConfigurationsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseConversionTasksRequestFilterSensitiveLog = (obj: ListLicenseConversionTasksRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseConversionTaskFilterSensitiveLog = (obj: LicenseConversionTask): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseConversionTasksResponseFilterSensitiveLog = (obj: ListLicenseConversionTasksResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseManagerReportGeneratorsRequestFilterSensitiveLog = (
-  obj: ListLicenseManagerReportGeneratorsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseManagerReportGeneratorsResponseFilterSensitiveLog = (
-  obj: ListLicenseManagerReportGeneratorsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicensesRequestFilterSensitiveLog = (obj: ListLicensesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicensesResponseFilterSensitiveLog = (obj: ListLicensesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseSpecificationsForResourceRequestFilterSensitiveLog = (
-  obj: ListLicenseSpecificationsForResourceRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseSpecificationFilterSensitiveLog = (obj: LicenseSpecification): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseSpecificationsForResourceResponseFilterSensitiveLog = (
-  obj: ListLicenseSpecificationsForResourceResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseVersionsRequestFilterSensitiveLog = (obj: ListLicenseVersionsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLicenseVersionsResponseFilterSensitiveLog = (obj: ListLicenseVersionsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListReceivedGrantsRequestFilterSensitiveLog = (obj: ListReceivedGrantsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListReceivedGrantsResponseFilterSensitiveLog = (obj: ListReceivedGrantsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListReceivedLicensesRequestFilterSensitiveLog = (obj: ListReceivedLicensesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReceivedMetadataFilterSensitiveLog = (obj: ReceivedMetadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GrantedLicenseFilterSensitiveLog = (obj: GrantedLicense): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListReceivedLicensesResponseFilterSensitiveLog = (obj: ListReceivedLicensesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InventoryFilterFilterSensitiveLog = (obj: InventoryFilter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListResourceInventoryRequestFilterSensitiveLog = (obj: ListResourceInventoryRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ResourceInventoryFilterSensitiveLog = (obj: ResourceInventory): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListResourceInventoryResponseFilterSensitiveLog = (obj: ListResourceInventoryResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsForResourceRequestFilterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsForResourceResponseFilterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTokensRequestFilterSensitiveLog = (obj: ListTokensRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TokenDataFilterSensitiveLog = (obj: TokenData): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTokensResponseFilterSensitiveLog = (obj: ListTokensResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListUsageForLicenseConfigurationRequestFilterSensitiveLog = (
-  obj: ListUsageForLicenseConfigurationRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LicenseConfigurationUsageFilterSensitiveLog = (obj: LicenseConfigurationUsage): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListUsageForLicenseConfigurationResponseFilterSensitiveLog = (
-  obj: ListUsageForLicenseConfigurationResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RejectGrantRequestFilterSensitiveLog = (obj: RejectGrantRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RejectGrantResponseFilterSensitiveLog = (obj: RejectGrantResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagResourceRequestFilterSensitiveLog = (obj: TagResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagResourceResponseFilterSensitiveLog = (obj: TagResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UntagResourceRequestFilterSensitiveLog = (obj: UntagResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UntagResourceResponseFilterSensitiveLog = (obj: UntagResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateLicenseConfigurationRequestFilterSensitiveLog = (obj: UpdateLicenseConfigurationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateLicenseConfigurationResponseFilterSensitiveLog = (obj: UpdateLicenseConfigurationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateLicenseManagerReportGeneratorRequestFilterSensitiveLog = (
-  obj: UpdateLicenseManagerReportGeneratorRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateLicenseManagerReportGeneratorResponseFilterSensitiveLog = (
-  obj: UpdateLicenseManagerReportGeneratorResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateLicenseSpecificationsForResourceRequestFilterSensitiveLog = (
-  obj: UpdateLicenseSpecificationsForResourceRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateLicenseSpecificationsForResourceResponseFilterSensitiveLog = (
-  obj: UpdateLicenseSpecificationsForResourceResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateServiceSettingsRequestFilterSensitiveLog = (obj: UpdateServiceSettingsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateServiceSettingsResponseFilterSensitiveLog = (obj: UpdateServiceSettingsResponse): any => ({
-  ...obj,
-});

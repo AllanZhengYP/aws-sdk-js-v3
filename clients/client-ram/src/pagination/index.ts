@@ -1,16 +1,16 @@
-export * from "./GetResourcePoliciesPaginator";
-
-export * from "./GetResourceShareAssociationsPaginator";
-
-export * from "./GetResourceShareInvitationsPaginator";
-
-export * from "./GetResourceSharesPaginator";
 // smithy-typescript generated code
 export * from "./Interfaces";
+export * from "./GetResourcePoliciesPaginator";
+export * from "./GetResourceShareAssociationsPaginator";
+export * from "./GetResourceShareInvitationsPaginator";
+export * from "./GetResourceSharesPaginator";
 export * from "./ListPendingInvitationResourcesPaginator";
-export * from "./ListPermissionVersionsPaginator";
+export * from "./ListPermissionAssociationsPaginator";
 export * from "./ListPermissionsPaginator";
+export * from "./ListPermissionVersionsPaginator";
 export * from "./ListPrincipalsPaginator";
+export * from "./ListReplacePermissionAssociationsWorkPaginator";
+export * from "./ListResourcesPaginator";
 export * from "./ListResourceSharePermissionsPaginator";
 export * from "./ListResourceTypesPaginator";
-export * from "./ListResourcesPaginator";
+export * from "./ListSourceAssociationsPaginator";

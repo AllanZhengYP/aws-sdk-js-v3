@@ -1,34 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DisableApplicationLayerAutomaticResponseRequest,
-  DisableApplicationLayerAutomaticResponseRequestFilterSensitiveLog,
   DisableApplicationLayerAutomaticResponseResponse,
-  DisableApplicationLayerAutomaticResponseResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DisableApplicationLayerAutomaticResponseCommand,
-  serializeAws_json1_1DisableApplicationLayerAutomaticResponseCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, ShieldClientResolvedConfig } from "../ShieldClient";
+import { DisableApplicationLayerAutomaticResponse$ } from "../schemas/schemas_0";
 
-export interface DisableApplicationLayerAutomaticResponseCommandInput
-  extends DisableApplicationLayerAutomaticResponseRequest {}
-export interface DisableApplicationLayerAutomaticResponseCommandOutput
-  extends DisableApplicationLayerAutomaticResponseResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableApplicationLayerAutomaticResponseCommand}.
+ */
+export interface DisableApplicationLayerAutomaticResponseCommandInput extends DisableApplicationLayerAutomaticResponseRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableApplicationLayerAutomaticResponseCommand}.
+ */
+export interface DisableApplicationLayerAutomaticResponseCommandOutput extends DisableApplicationLayerAutomaticResponseResponse, __MetadataBearer {}
 
 /**
  * <p>Disable the Shield Advanced automatic application layer DDoS mitigation feature for the protected resource. This
@@ -38,77 +33,61 @@ export interface DisableApplicationLayerAutomaticResponseCommandOutput
  * ```javascript
  * import { ShieldClient, DisableApplicationLayerAutomaticResponseCommand } from "@aws-sdk/client-shield"; // ES Modules import
  * // const { ShieldClient, DisableApplicationLayerAutomaticResponseCommand } = require("@aws-sdk/client-shield"); // CommonJS import
+ * // import type { ShieldClientConfig } from "@aws-sdk/client-shield";
+ * const config = {}; // type is ShieldClientConfig
  * const client = new ShieldClient(config);
+ * const input = { // DisableApplicationLayerAutomaticResponseRequest
+ *   ResourceArn: "STRING_VALUE", // required
+ * };
  * const command = new DisableApplicationLayerAutomaticResponseCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisableApplicationLayerAutomaticResponseCommandInput - {@link DisableApplicationLayerAutomaticResponseCommandInput}
+ * @returns {@link DisableApplicationLayerAutomaticResponseCommandOutput}
  * @see {@link DisableApplicationLayerAutomaticResponseCommandInput} for command's `input` shape.
  * @see {@link DisableApplicationLayerAutomaticResponseCommandOutput} for command's `response` shape.
  * @see {@link ShieldClientResolvedConfig | config} for ShieldClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (server fault)
+ *  <p>Exception that indicates that a problem occurred with the service infrastructure. You can retry the request.</p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>Exception that indicates that the operation would not cause any change to occur.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>Exception that indicates that the parameters passed to the API are invalid. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link OptimisticLockException} (client fault)
+ *  <p>Exception that indicates that the resource state has been modified by another
+ *          client. Retrieve the resource and then retry your request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Exception indicating the specified resource does not exist. If available, this exception includes details in additional properties. </p>
+ *
+ * @throws {@link ShieldServiceException}
+ * <p>Base exception class for all service exceptions from Shield service.</p>
+ *
+ *
+ * @public
  */
-export class DisableApplicationLayerAutomaticResponseCommand extends $Command<
-  DisableApplicationLayerAutomaticResponseCommandInput,
-  DisableApplicationLayerAutomaticResponseCommandOutput,
-  ShieldClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableApplicationLayerAutomaticResponseCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ShieldClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DisableApplicationLayerAutomaticResponseCommandInput,
-    DisableApplicationLayerAutomaticResponseCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ShieldClient";
-    const commandName = "DisableApplicationLayerAutomaticResponseCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisableApplicationLayerAutomaticResponseRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DisableApplicationLayerAutomaticResponseResponseFilterSensitiveLog,
+export class DisableApplicationLayerAutomaticResponseCommand extends command<DisableApplicationLayerAutomaticResponseCommandInput, DisableApplicationLayerAutomaticResponseCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableApplicationLayerAutomaticResponse",
+  DisableApplicationLayerAutomaticResponse$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisableApplicationLayerAutomaticResponseRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisableApplicationLayerAutomaticResponseCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DisableApplicationLayerAutomaticResponseCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisableApplicationLayerAutomaticResponseCommandOutput> {
-    return deserializeAws_json1_1DisableApplicationLayerAutomaticResponseCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableApplicationLayerAutomaticResponseCommandInput;
+      output: DisableApplicationLayerAutomaticResponseCommandOutput;
+    };
+  };
 }

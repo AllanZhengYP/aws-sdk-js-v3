@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import {
-  DescribeApplicationsRequest,
-  DescribeApplicationsRequestFilterSensitiveLog,
-  DescribeApplicationsResult,
-  DescribeApplicationsResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeApplicationsCommand,
-  serializeAws_json1_1DescribeApplicationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeApplicationsRequest, DescribeApplicationsResult } from "../models/models_0";
+import { DescribeApplications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeApplicationsCommand}.
+ */
 export interface DescribeApplicationsCommandInput extends DescribeApplicationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeApplicationsCommand}.
+ */
 export interface DescribeApplicationsCommandOutput extends DescribeApplicationsResult, __MetadataBearer {}
 
 /**
@@ -34,68 +29,85 @@ export interface DescribeApplicationsCommandOutput extends DescribeApplicationsR
  * ```javascript
  * import { AppStreamClient, DescribeApplicationsCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DescribeApplicationsCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DescribeApplicationsRequest
+ *   Arns: [ // ArnList
+ *     "STRING_VALUE",
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeApplicationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeApplicationsResult
+ * //   Applications: [ // Applications
+ * //     { // Application
+ * //       Name: "STRING_VALUE",
+ * //       DisplayName: "STRING_VALUE",
+ * //       IconURL: "STRING_VALUE",
+ * //       LaunchPath: "STRING_VALUE",
+ * //       LaunchParameters: "STRING_VALUE",
+ * //       Enabled: true || false,
+ * //       Metadata: { // Metadata
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       WorkingDirectory: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       AppBlockArn: "STRING_VALUE",
+ * //       IconS3Location: { // S3Location
+ * //         S3Bucket: "STRING_VALUE", // required
+ * //         S3Key: "STRING_VALUE",
+ * //       },
+ * //       Platforms: [ // Platforms
+ * //         "WINDOWS" || "WINDOWS_SERVER_2016" || "WINDOWS_SERVER_2019" || "WINDOWS_SERVER_2022" || "WINDOWS_SERVER_2025" || "WINDOWS_11" || "AMAZON_LINUX2" || "RHEL8" || "ROCKY_LINUX8" || "UBUNTU_PRO_2404",
+ * //       ],
+ * //       InstanceFamilies: [ // StringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeApplicationsCommandInput - {@link DescribeApplicationsCommandInput}
+ * @returns {@link DescribeApplicationsCommandOutput}
  * @see {@link DescribeApplicationsCommandInput} for command's `input` shape.
  * @see {@link DescribeApplicationsCommandOutput} for command's `response` shape.
  * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeApplicationsCommand extends $Command<
-  DescribeApplicationsCommandInput,
-  DescribeApplicationsCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeApplicationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeApplicationsCommandInput, DescribeApplicationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DescribeApplicationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeApplicationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeApplicationsResultFilterSensitiveLog,
+export class DescribeApplicationsCommand extends command<DescribeApplicationsCommandInput, DescribeApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeApplications",
+  DescribeApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeApplicationsRequest;
+      output: DescribeApplicationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeApplicationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeApplicationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeApplicationsCommandOutput> {
-    return deserializeAws_json1_1DescribeApplicationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeApplicationsCommandInput;
+      output: DescribeApplicationsCommandOutput;
+    };
+  };
 }

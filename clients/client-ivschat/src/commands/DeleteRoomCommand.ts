@@ -1,25 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvschatClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvschatClient";
-import { DeleteRoomRequest, DeleteRoomRequestFilterSensitiveLog } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteRoomCommand,
-  serializeAws_restJson1DeleteRoomCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteRoomRequest } from "../models/models_0";
+import { DeleteRoom$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRoomCommand}.
+ */
 export interface DeleteRoomCommandInput extends DeleteRoomRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRoomCommand}.
+ */
 export interface DeleteRoomCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +29,57 @@ export interface DeleteRoomCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { IvschatClient, DeleteRoomCommand } from "@aws-sdk/client-ivschat"; // ES Modules import
  * // const { IvschatClient, DeleteRoomCommand } = require("@aws-sdk/client-ivschat"); // CommonJS import
+ * // import type { IvschatClientConfig } from "@aws-sdk/client-ivschat";
+ * const config = {}; // type is IvschatClientConfig
  * const client = new IvschatClient(config);
+ * const input = { // DeleteRoomRequest
+ *   identifier: "STRING_VALUE", // required
+ * };
  * const command = new DeleteRoomCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteRoomCommandInput - {@link DeleteRoomCommandInput}
+ * @returns {@link DeleteRoomCommandOutput}
  * @see {@link DeleteRoomCommandInput} for command's `input` shape.
  * @see {@link DeleteRoomCommandOutput} for command's `response` shape.
  * @see {@link IvschatClientResolvedConfig | config} for IvschatClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link PendingVerification} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link IvschatServiceException}
+ * <p>Base exception class for all service exceptions from Ivschat service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRoomCommand extends $Command<
-  DeleteRoomCommandInput,
-  DeleteRoomCommandOutput,
-  IvschatClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRoomCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvschatClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRoomCommandInput, DeleteRoomCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvschatClient";
-    const commandName = "DeleteRoomCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRoomRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteRoomCommand extends command<DeleteRoomCommandInput, DeleteRoomCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRoom",
+  DeleteRoom$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRoomRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteRoomCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteRoomCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteRoomCommandOutput> {
-    return deserializeAws_restJson1DeleteRoomCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRoomCommandInput;
+      output: DeleteRoomCommandOutput;
+    };
+  };
 }

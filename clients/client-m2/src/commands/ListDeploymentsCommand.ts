@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { M2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../M2Client";
-import {
-  ListDeploymentsRequest,
-  ListDeploymentsRequestFilterSensitiveLog,
-  ListDeploymentsResponse,
-  ListDeploymentsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDeploymentsCommand,
-  serializeAws_restJson1ListDeploymentsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDeploymentsRequest, ListDeploymentsResponse } from "../models/models_0";
+import { ListDeployments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDeploymentsCommand}.
+ */
 export interface ListDeploymentsCommandInput extends ListDeploymentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDeploymentsCommand}.
+ */
 export interface ListDeploymentsCommandOutput extends ListDeploymentsResponse, __MetadataBearer {}
 
 /**
@@ -36,68 +31,75 @@ export interface ListDeploymentsCommandOutput extends ListDeploymentsResponse, _
  * ```javascript
  * import { M2Client, ListDeploymentsCommand } from "@aws-sdk/client-m2"; // ES Modules import
  * // const { M2Client, ListDeploymentsCommand } = require("@aws-sdk/client-m2"); // CommonJS import
+ * // import type { M2ClientConfig } from "@aws-sdk/client-m2";
+ * const config = {}; // type is M2ClientConfig
  * const client = new M2Client(config);
+ * const input = { // ListDeploymentsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   applicationId: "STRING_VALUE", // required
+ * };
  * const command = new ListDeploymentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListDeploymentsResponse
+ * //   deployments: [ // DeploymentList // required
+ * //     { // DeploymentSummary
+ * //       deploymentId: "STRING_VALUE", // required
+ * //       applicationId: "STRING_VALUE", // required
+ * //       environmentId: "STRING_VALUE", // required
+ * //       applicationVersion: Number("int"), // required
+ * //       status: "STRING_VALUE", // required
+ * //       creationTime: new Date("TIMESTAMP"), // required
+ * //       statusReason: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDeploymentsCommandInput - {@link ListDeploymentsCommandInput}
+ * @returns {@link ListDeploymentsCommandOutput}
  * @see {@link ListDeploymentsCommandInput} for command's `input` shape.
  * @see {@link ListDeploymentsCommandOutput} for command's `response` shape.
  * @see {@link M2ClientResolvedConfig | config} for M2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The account or role doesn't have the right permissions to make the request.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during the processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of requests made exceeds the limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameters provided in the request is not valid.</p>
+ *
+ * @throws {@link M2ServiceException}
+ * <p>Base exception class for all service exceptions from M2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListDeploymentsCommand extends $Command<
-  ListDeploymentsCommandInput,
-  ListDeploymentsCommandOutput,
-  M2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDeploymentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: M2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDeploymentsCommandInput, ListDeploymentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "M2Client";
-    const commandName = "ListDeploymentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDeploymentsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListDeploymentsResponseFilterSensitiveLog,
+export class ListDeploymentsCommand extends command<ListDeploymentsCommandInput, ListDeploymentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDeployments",
+  ListDeployments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDeploymentsRequest;
+      output: ListDeploymentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDeploymentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDeploymentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDeploymentsCommandOutput> {
-    return deserializeAws_restJson1ListDeploymentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDeploymentsCommandInput;
+      output: ListDeploymentsCommandOutput;
+    };
+  };
 }

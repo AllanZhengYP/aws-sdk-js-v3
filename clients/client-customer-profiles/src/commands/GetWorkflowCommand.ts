@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import {
-  GetWorkflowRequest,
-  GetWorkflowRequestFilterSensitiveLog,
-  GetWorkflowResponse,
-  GetWorkflowResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetWorkflowCommand,
-  serializeAws_restJson1GetWorkflowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetWorkflowRequest, GetWorkflowResponse } from "../models/models_0";
+import { GetWorkflow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetWorkflowCommand}.
+ */
 export interface GetWorkflowCommandInput extends GetWorkflowRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetWorkflowCommand}.
+ */
 export interface GetWorkflowCommandOutput extends GetWorkflowResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,82 @@ export interface GetWorkflowCommandOutput extends GetWorkflowResponse, __Metadat
  * ```javascript
  * import { CustomerProfilesClient, GetWorkflowCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, GetWorkflowCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // GetWorkflowRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   WorkflowId: "STRING_VALUE", // required
+ * };
  * const command = new GetWorkflowCommand(input);
  * const response = await client.send(command);
+ * // { // GetWorkflowResponse
+ * //   WorkflowId: "STRING_VALUE",
+ * //   WorkflowType: "APPFLOW_INTEGRATION",
+ * //   Status: "NOT_STARTED" || "IN_PROGRESS" || "COMPLETE" || "FAILED" || "SPLIT" || "RETRY" || "CANCELLED",
+ * //   ErrorDescription: "STRING_VALUE",
+ * //   StartDate: new Date("TIMESTAMP"),
+ * //   LastUpdatedAt: new Date("TIMESTAMP"),
+ * //   Attributes: { // WorkflowAttributes
+ * //     AppflowIntegration: { // AppflowIntegrationWorkflowAttributes
+ * //       SourceConnectorType: "Salesforce" || "Marketo" || "Zendesk" || "Servicenow" || "S3", // required
+ * //       ConnectorProfileName: "STRING_VALUE", // required
+ * //       RoleArn: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   Metrics: { // WorkflowMetrics
+ * //     AppflowIntegration: { // AppflowIntegrationWorkflowMetrics
+ * //       RecordsProcessed: Number("long"), // required
+ * //       StepsCompleted: Number("long"), // required
+ * //       TotalSteps: Number("long"), // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetWorkflowCommandInput - {@link GetWorkflowCommandInput}
+ * @returns {@link GetWorkflowCommandOutput}
  * @see {@link GetWorkflowCommandInput} for command's `input` shape.
  * @see {@link GetWorkflowCommandOutput} for command's `response` shape.
  * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class GetWorkflowCommand extends $Command<
-  GetWorkflowCommandInput,
-  GetWorkflowCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetWorkflowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetWorkflowCommandInput, GetWorkflowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "GetWorkflowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetWorkflowRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetWorkflowResponseFilterSensitiveLog,
+export class GetWorkflowCommand extends command<GetWorkflowCommandInput, GetWorkflowCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetWorkflow",
+  GetWorkflow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetWorkflowRequest;
+      output: GetWorkflowResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetWorkflowCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetWorkflowCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetWorkflowCommandOutput> {
-    return deserializeAws_restJson1GetWorkflowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetWorkflowCommandInput;
+      output: GetWorkflowCommandOutput;
+    };
+  };
 }

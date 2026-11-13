@@ -1,28 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectCampaignsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectCampaignsClient";
-import {
-  DeleteInstanceOnboardingJobRequest,
-  DeleteInstanceOnboardingJobRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteInstanceOnboardingJobCommand,
-  serializeAws_restJson1DeleteInstanceOnboardingJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteInstanceOnboardingJobRequest } from "../models/models_0";
+import { DeleteInstanceOnboardingJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteInstanceOnboardingJobCommand}.
+ */
 export interface DeleteInstanceOnboardingJobCommandInput extends DeleteInstanceOnboardingJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteInstanceOnboardingJobCommand}.
+ */
 export interface DeleteInstanceOnboardingJobCommandOutput extends __MetadataBearer {}
 
 /**
@@ -32,71 +29,60 @@ export interface DeleteInstanceOnboardingJobCommandOutput extends __MetadataBear
  * ```javascript
  * import { ConnectCampaignsClient, DeleteInstanceOnboardingJobCommand } from "@aws-sdk/client-connectcampaigns"; // ES Modules import
  * // const { ConnectCampaignsClient, DeleteInstanceOnboardingJobCommand } = require("@aws-sdk/client-connectcampaigns"); // CommonJS import
+ * // import type { ConnectCampaignsClientConfig } from "@aws-sdk/client-connectcampaigns";
+ * const config = {}; // type is ConnectCampaignsClientConfig
  * const client = new ConnectCampaignsClient(config);
+ * const input = { // DeleteInstanceOnboardingJobRequest
+ *   connectInstanceId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteInstanceOnboardingJobCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteInstanceOnboardingJobCommandInput - {@link DeleteInstanceOnboardingJobCommandInput}
+ * @returns {@link DeleteInstanceOnboardingJobCommandOutput}
  * @see {@link DeleteInstanceOnboardingJobCommandInput} for command's `input` shape.
  * @see {@link DeleteInstanceOnboardingJobCommandOutput} for command's `response` shape.
  * @see {@link ConnectCampaignsClientResolvedConfig | config} for ConnectCampaignsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You do not have sufficient access to perform this action.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  Request processing failed because of an error or failure with the service.
+ *
+ * @throws {@link InvalidStateException} (client fault)
+ *  The request could not be processed because of conflict in the current state.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The specified resource was not found.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link ConnectCampaignsServiceException}
+ * <p>Base exception class for all service exceptions from ConnectCampaigns service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteInstanceOnboardingJobCommand extends $Command<
-  DeleteInstanceOnboardingJobCommandInput,
-  DeleteInstanceOnboardingJobCommandOutput,
-  ConnectCampaignsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteInstanceOnboardingJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectCampaignsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteInstanceOnboardingJobCommandInput, DeleteInstanceOnboardingJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectCampaignsClient";
-    const commandName = "DeleteInstanceOnboardingJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteInstanceOnboardingJobRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteInstanceOnboardingJobCommand extends command<DeleteInstanceOnboardingJobCommandInput, DeleteInstanceOnboardingJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteInstanceOnboardingJob",
+  DeleteInstanceOnboardingJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteInstanceOnboardingJobRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteInstanceOnboardingJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteInstanceOnboardingJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteInstanceOnboardingJobCommandOutput> {
-    return deserializeAws_restJson1DeleteInstanceOnboardingJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteInstanceOnboardingJobCommandInput;
+      output: DeleteInstanceOnboardingJobCommandOutput;
+    };
+  };
 }

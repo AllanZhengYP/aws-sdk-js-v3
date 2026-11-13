@@ -1,22 +1,26 @@
-import { Handler, MiddlewareStack } from "@aws-sdk/types";
+import type { Handler, MiddlewareStack } from "@smithy/types";
+import { describe, expect, test as it } from "vitest";
 
-import { KeyNode } from "../commands/utils";
+import type { KeyNodeChildren } from "../commands/utils";
 import { DynamoDBDocumentClientCommand } from "./DynamoDBDocumentClientCommand";
 
 class AnyCommand extends DynamoDBDocumentClientCommand<{}, {}, {}, {}, {}> {
+  // @ts-ignore Property 'middlewareStack' has no initializer
   public middlewareStack: MiddlewareStack<{}, {}>;
+  // @ts-ignore Property 'input' has no initializer
   public input: {};
-  protected inputKeyNodes: KeyNode[] = [];
-  protected outputKeyNodes: KeyNode[] = [];
+  protected inputKeyNodes: KeyNodeChildren = {};
+  protected outputKeyNodes: KeyNodeChildren = {};
 
   public argCaptor: [Function, object][] = [];
 
   protected readonly clientCommand = {
     middlewareStack: {
       argCaptor: this.argCaptor,
-      add(fn, config) {
+      addRelativeTo(fn: any, config: any) {
         this.argCaptor.push([fn, config]);
       },
+      add(fn: any, config: any) {},
     },
   } as any;
   protected readonly clientCommandName = "AnyCommand";
@@ -41,7 +45,8 @@ describe("DynamoDBDocumentClientCommand", () => {
       expect(options).toEqual({
         name: "DocumentMarshall",
         override: true,
-        step: "initialize",
+        relation: "before",
+        toMiddleware: "serializerMiddleware",
       });
     }
     {
@@ -50,7 +55,8 @@ describe("DynamoDBDocumentClientCommand", () => {
       expect(options).toEqual({
         name: "DocumentUnmarshall",
         override: true,
-        step: "deserialize",
+        relation: "before",
+        toMiddleware: "deserializerMiddleware",
       });
     }
   });

@@ -1,25 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import { DeleteWhatIfAnalysisRequest, DeleteWhatIfAnalysisRequestFilterSensitiveLog } from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteWhatIfAnalysisCommand,
-  serializeAws_json1_1DeleteWhatIfAnalysisCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteWhatIfAnalysisRequest } from "../models/models_0";
+import { DeleteWhatIfAnalysis$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteWhatIfAnalysisCommand}.
+ */
 export interface DeleteWhatIfAnalysisCommandInput extends DeleteWhatIfAnalysisRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteWhatIfAnalysisCommand}.
+ */
 export interface DeleteWhatIfAnalysisCommandOutput extends __MetadataBearer {}
 
 /**
@@ -31,68 +31,56 @@ export interface DeleteWhatIfAnalysisCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { ForecastClient, DeleteWhatIfAnalysisCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DeleteWhatIfAnalysisCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DeleteWhatIfAnalysisRequest
+ *   WhatIfAnalysisArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteWhatIfAnalysisCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteWhatIfAnalysisCommandInput - {@link DeleteWhatIfAnalysisCommandInput}
+ * @returns {@link DeleteWhatIfAnalysisCommandOutput}
  * @see {@link DeleteWhatIfAnalysisCommandInput} for command's `input` shape.
  * @see {@link DeleteWhatIfAnalysisCommandOutput} for command's `response` shape.
  * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteWhatIfAnalysisCommand extends $Command<
-  DeleteWhatIfAnalysisCommandInput,
-  DeleteWhatIfAnalysisCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteWhatIfAnalysisCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteWhatIfAnalysisCommandInput, DeleteWhatIfAnalysisCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DeleteWhatIfAnalysisCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteWhatIfAnalysisRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteWhatIfAnalysisCommand extends command<DeleteWhatIfAnalysisCommandInput, DeleteWhatIfAnalysisCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteWhatIfAnalysis",
+  DeleteWhatIfAnalysis$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWhatIfAnalysisRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteWhatIfAnalysisCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteWhatIfAnalysisCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteWhatIfAnalysisCommandOutput> {
-    return deserializeAws_json1_1DeleteWhatIfAnalysisCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteWhatIfAnalysisCommandInput;
+      output: DeleteWhatIfAnalysisCommandOutput;
+    };
+  };
 }

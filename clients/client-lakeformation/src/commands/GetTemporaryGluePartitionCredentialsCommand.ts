@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetTemporaryGluePartitionCredentialsRequest,
-  GetTemporaryGluePartitionCredentialsRequestFilterSensitiveLog,
   GetTemporaryGluePartitionCredentialsResponse,
-  GetTemporaryGluePartitionCredentialsResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetTemporaryGluePartitionCredentialsCommand,
-  serializeAws_restJson1GetTemporaryGluePartitionCredentialsCommand,
-} from "../protocols/Aws_restJson1";
+import { GetTemporaryGluePartitionCredentials$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTemporaryGluePartitionCredentialsCommand}.
+ */
 export interface GetTemporaryGluePartitionCredentialsCommandInput extends GetTemporaryGluePartitionCredentialsRequest {}
-export interface GetTemporaryGluePartitionCredentialsCommandOutput
-  extends GetTemporaryGluePartitionCredentialsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetTemporaryGluePartitionCredentialsCommand}.
+ */
+export interface GetTemporaryGluePartitionCredentialsCommandOutput extends GetTemporaryGluePartitionCredentialsResponse, __MetadataBearer {}
 
 /**
  * <p>This API is identical to <code>GetTemporaryTableCredentials</code> except that this is used when the target Data Catalog resource is of type Partition.  Lake Formation restricts the permission of the vended credentials with the same scope down policy which restricts access to a single Amazon S3 prefix.</p>
@@ -36,74 +32,83 @@ export interface GetTemporaryGluePartitionCredentialsCommandOutput
  * ```javascript
  * import { LakeFormationClient, GetTemporaryGluePartitionCredentialsCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, GetTemporaryGluePartitionCredentialsCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // GetTemporaryGluePartitionCredentialsRequest
+ *   TableArn: "STRING_VALUE", // required
+ *   Partition: { // PartitionValueList
+ *     Values: [ // ValueStringList // required
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ *   Permissions: [ // PermissionList
+ *     "ALL" || "SELECT" || "ALTER" || "DROP" || "DELETE" || "INSERT" || "DESCRIBE" || "CREATE_DATABASE" || "CREATE_TABLE" || "DATA_LOCATION_ACCESS" || "CREATE_LF_TAG" || "ASSOCIATE" || "GRANT_WITH_LF_TAG_EXPRESSION" || "CREATE_LF_TAG_EXPRESSION" || "CREATE_CATALOG" || "SUPER_USER" || "EXECUTE",
+ *   ],
+ *   DurationSeconds: Number("int"),
+ *   AuditContext: { // AuditContext
+ *     AdditionalAuditContext: "STRING_VALUE",
+ *   },
+ *   SupportedPermissionTypes: [ // PermissionTypeList
+ *     "COLUMN_PERMISSION" || "CELL_FILTER_PERMISSION" || "NESTED_PERMISSION" || "NESTED_CELL_PERMISSION",
+ *   ],
+ * };
  * const command = new GetTemporaryGluePartitionCredentialsCommand(input);
  * const response = await client.send(command);
+ * // { // GetTemporaryGluePartitionCredentialsResponse
+ * //   AccessKeyId: "STRING_VALUE",
+ * //   SecretAccessKey: "STRING_VALUE",
+ * //   SessionToken: "STRING_VALUE",
+ * //   Expiration: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetTemporaryGluePartitionCredentialsCommandInput - {@link GetTemporaryGluePartitionCredentialsCommandInput}
+ * @returns {@link GetTemporaryGluePartitionCredentialsCommandOutput}
  * @see {@link GetTemporaryGluePartitionCredentialsCommandInput} for command's `input` shape.
  * @see {@link GetTemporaryGluePartitionCredentialsCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link PermissionTypeMismatchException} (client fault)
+ *  <p>The engine does not support filtering data based on the enforced permissions. For example, if you call the <code>GetTemporaryGlueTableCredentials</code> operation with <code>SupportedPermissionType</code> equal to <code>ColumnPermission</code>, but cell-level permissions exist on the table, this exception is thrown.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class GetTemporaryGluePartitionCredentialsCommand extends $Command<
-  GetTemporaryGluePartitionCredentialsCommandInput,
-  GetTemporaryGluePartitionCredentialsCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTemporaryGluePartitionCredentialsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTemporaryGluePartitionCredentialsCommandInput, GetTemporaryGluePartitionCredentialsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "GetTemporaryGluePartitionCredentialsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTemporaryGluePartitionCredentialsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetTemporaryGluePartitionCredentialsResponseFilterSensitiveLog,
+export class GetTemporaryGluePartitionCredentialsCommand extends command<GetTemporaryGluePartitionCredentialsCommandInput, GetTemporaryGluePartitionCredentialsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTemporaryGluePartitionCredentials",
+  GetTemporaryGluePartitionCredentials$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTemporaryGluePartitionCredentialsRequest;
+      output: GetTemporaryGluePartitionCredentialsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetTemporaryGluePartitionCredentialsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetTemporaryGluePartitionCredentialsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetTemporaryGluePartitionCredentialsCommandOutput> {
-    return deserializeAws_restJson1GetTemporaryGluePartitionCredentialsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTemporaryGluePartitionCredentialsCommandInput;
+      output: GetTemporaryGluePartitionCredentialsCommandOutput;
+    };
+  };
 }

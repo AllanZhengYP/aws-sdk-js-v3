@@ -2,19 +2,16 @@
 
 # @aws-sdk/client-appconfigdata
 
-[![NPM version](https://img.shields.io/npm/v/@aws-sdk/client-appconfigdata/latest.svg)](https://www.npmjs.com/package/@aws-sdk/client-appconfigdata)
-[![NPM downloads](https://img.shields.io/npm/dm/@aws-sdk/client-appconfigdata.svg)](https://www.npmjs.com/package/@aws-sdk/client-appconfigdata)
-
 ## Description
 
 AWS SDK for JavaScript AppConfigData Client for Node.js, Browser and React Native.
 
-<p>AppConfig Data provides the data plane APIs your application uses to retrieve configuration data.
-Here's how it works:</p>
+<p>AppConfig Data provides the data plane APIs your application uses to retrieve
+configuration data. Here's how it works:</p>
 <p>Your application retrieves configuration data by first establishing a configuration
-session using the AppConfig Data <a>StartConfigurationSession</a> API action. Your session's
-client then makes periodic calls to <a>GetLatestConfiguration</a> to check for
-and retrieve the latest data available.</p>
+session using the AppConfig Data <a>StartConfigurationSession</a> API action.
+Your session's client then makes periodic calls to <a>GetLatestConfiguration</a>
+to check for and retrieve the latest data available.</p>
 <p>When calling <code>StartConfigurationSession</code>, your code sends the following
 information:</p>
 <ul>
@@ -30,6 +27,13 @@ to <code>GetLatestConfiguration</code>.</p>
 <p>In response, AppConfig provides an <code>InitialConfigurationToken</code> to be given to
 the session's client and used the first time it calls <code>GetLatestConfiguration</code>
 for that session.</p>
+<important>
+<p>This token should only be used once in your first call to
+<code>GetLatestConfiguration</code>. You <i>must</i> use the new token
+in the <code>GetLatestConfiguration</code> response
+(<code>NextPollConfigurationToken</code>) in each subsequent call to
+<code>GetLatestConfiguration</code>.</p>
+</important>
 <p>When calling <code>GetLatestConfiguration</code>, your client code sends the most recent
 <code>ConfigurationToken</code> value it has and receives in response:</p>
 <ul>
@@ -50,15 +54,21 @@ over the course of the session, so it should be used instead of the value sent o
 the client already has the latest version of the configuration.</p>
 </li>
 </ul>
+<important>
+<p>The <code>InitialConfigurationToken</code> and
+<code>NextPollConfigurationToken</code> should only be used once. To support long poll
+use cases, the tokens are valid for up to 24 hours. If a
+<code>GetLatestConfiguration</code> call uses an expired token, the system returns
+<code>BadRequestException</code>.</p>
+</important>
 <p>For more information and to view example CLI commands that show how to retrieve a
 configuration using the AppConfig Data <code>StartConfigurationSession</code> and
-<code>GetLatestConfiguration</code> API actions, see <a href="http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration">Receiving the
+<code>GetLatestConfiguration</code> API actions, see <a href="http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration">Retrieving the
 configuration</a> in the <i>AppConfig User Guide</i>.</p>
 
 ## Installing
 
-To install the this package, simply type add or install @aws-sdk/client-appconfigdata
-using your favorite package manager:
+To install this package, use the CLI of your favorite package manager:
 
 - `npm install @aws-sdk/client-appconfigdata`
 - `yarn add @aws-sdk/client-appconfigdata`
@@ -84,26 +94,24 @@ import { AppConfigDataClient, GetLatestConfigurationCommand } from "@aws-sdk/cli
 
 ### Usage
 
-To send a request, you:
+To send a request:
 
-- Initiate client with configuration (e.g. credentials, region).
-- Initiate command with input parameters.
-- Call `send` operation on client with command object as input.
-- If you are using a custom http handler, you may call `destroy()` to close open connections.
+- Instantiate a client with configuration (e.g. credentials, region).
+  - See [docs/CLIENTS](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/CLIENTS.md) for configuration details.
+  - See [@aws-sdk/config](https://github.com/aws/aws-sdk-js-v3/blob/main/packages/config/README.md) for additional options.
+- Instantiate a command with input parameters.
+- Call the `send` operation on the client, providing the command object as input.
 
 ```js
-// a client can be shared by different commands.
 const client = new AppConfigDataClient({ region: "REGION" });
 
-const params = {
-  /** input parameters */
-};
+const params = { /** input parameters */ };
 const command = new GetLatestConfigurationCommand(params);
 ```
 
 #### Async/await
 
-We recommend using [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+We recommend using the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 operator to wait for the promise returned by send operation as follows:
 
 ```js
@@ -118,26 +126,9 @@ try {
 }
 ```
 
-Async-await is clean, concise, intuitive, easy to debug and has better error handling
-as compared to using Promise chains or callbacks.
-
 #### Promises
 
-You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining)
-to execute send operation.
-
-```js
-client.send(command).then(
-  (data) => {
-    // process data.
-  },
-  (error) => {
-    // error handling.
-  }
-);
-```
-
-Promises can also be called using `.catch()` and `.finally()` as follows:
+You can also use [Promise chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining).
 
 ```js
 client
@@ -153,27 +144,21 @@ client
   });
 ```
 
-#### Callbacks
+#### Aggregated client
 
-We do not recommend using callbacks because of [callback hell](http://callbackhell.com/),
-but they are supported by the send operation.
+The aggregated client class is exported from the same package, but without the "Client" suffix.
 
-```js
-// callbacks.
-client.send(command, (err, data) => {
-  // process err and data.
-});
-```
+`AppConfigData` extends `AppConfigDataClient` and additionally supports all operations, waiters, and paginators as methods.
+This style may be familiar to you from the AWS SDK for JavaScript v2.
 
-#### v2 compatible style
-
-The client can also send requests using v2 compatible style.
-However, it results in a bigger bundle size and may be dropped in next major version. More details in the blog post
-on [modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/)
+If you are bundling the AWS SDK, we recommend using only the bare-bones client (`AppConfigDataClient`).
+More details are in the blog post on
+[modular packages in AWS SDK for JavaScript](https://aws.amazon.com/blogs/developer/modular-packages-in-aws-sdk-for-javascript/).
 
 ```ts
-import * as AWS from "@aws-sdk/client-appconfigdata";
-const client = new AWS.AppConfigData({ region: "REGION" });
+import { AppConfigData } from "@aws-sdk/client-appconfigdata";
+
+const client = new AppConfigData({ region: "REGION" });
 
 // async/await.
 try {
@@ -193,7 +178,7 @@ client
     // error handling.
   });
 
-// callbacks.
+// callbacks (not recommended).
 client.getLatestConfiguration(params, (err, data) => {
   // process err and data.
 });
@@ -209,7 +194,7 @@ try {
   const data = await client.send(command);
   // process data.
 } catch (error) {
-  const { requestId, cfId, extendedRequestId } = error.$$metadata;
+  const { requestId, cfId, extendedRequestId } = error.$metadata;
   console.log({ requestId, cfId, extendedRequestId });
   /**
    * The keys within exceptions are also parsed.
@@ -221,12 +206,14 @@ try {
 }
 ```
 
+See also [docs/ERROR_HANDLING](https://github.com/aws/aws-sdk-js-v3/blob/main/supplemental-docs/ERROR_HANDLING.md).
+
 ## Getting Help
 
 Please use these community resources for getting help.
-We use the GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
+We use GitHub issues for tracking bugs and feature requests, but have limited bandwidth to address them.
 
-- Visit [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
+- Visit the [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html)
   or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html).
 - Check out the blog posts tagged with [`aws-sdk-js`](https://aws.amazon.com/blogs/developer/tag/aws-sdk-js/)
   on AWS Developer Blog.
@@ -247,3 +234,20 @@ To contribute to client you can check our [generate clients scripts](https://git
 This SDK is distributed under the
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
 see LICENSE for more information.
+
+## Client Commands (Operations List)
+
+<details>
+<summary>
+GetLatestConfiguration
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appconfigdata/command/GetLatestConfigurationCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appconfigdata/Interface/GetLatestConfigurationCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appconfigdata/Interface/GetLatestConfigurationCommandOutput/)
+</details>
+<details>
+<summary>
+StartConfigurationSession
+</summary>
+
+[Command API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/appconfigdata/command/StartConfigurationSessionCommand/) / [Input](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appconfigdata/Interface/StartConfigurationSessionCommandInput/) / [Output](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-client-appconfigdata/Interface/StartConfigurationSessionCommandOutput/)
+</details>

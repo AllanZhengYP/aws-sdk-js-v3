@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import {
-  ListRulesetsRequest,
-  ListRulesetsRequestFilterSensitiveLog,
-  ListRulesetsResponse,
-  ListRulesetsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListRulesetsCommand,
-  serializeAws_restJson1ListRulesetsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRulesetsRequest, ListRulesetsResponse } from "../models/models_0";
+import { ListRulesets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRulesetsCommand}.
+ */
 export interface ListRulesetsCommandInput extends ListRulesetsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRulesetsCommand}.
+ */
 export interface ListRulesetsCommandOutput extends ListRulesetsResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,72 @@ export interface ListRulesetsCommandOutput extends ListRulesetsResponse, __Metad
  * ```javascript
  * import { DataBrewClient, ListRulesetsCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, ListRulesetsCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // ListRulesetsRequest
+ *   TargetArn: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListRulesetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListRulesetsResponse
+ * //   Rulesets: [ // RulesetItemList // required
+ * //     { // RulesetItem
+ * //       AccountId: "STRING_VALUE",
+ * //       CreatedBy: "STRING_VALUE",
+ * //       CreateDate: new Date("TIMESTAMP"),
+ * //       Description: "STRING_VALUE",
+ * //       LastModifiedBy: "STRING_VALUE",
+ * //       LastModifiedDate: new Date("TIMESTAMP"),
+ * //       Name: "STRING_VALUE", // required
+ * //       ResourceArn: "STRING_VALUE",
+ * //       RuleCount: Number("int"),
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       TargetArn: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRulesetsCommandInput - {@link ListRulesetsCommandInput}
+ * @returns {@link ListRulesetsCommandOutput}
  * @see {@link ListRulesetsCommandInput} for command's `input` shape.
  * @see {@link ListRulesetsCommandOutput} for command's `response` shape.
  * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>One or more resources can't be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class ListRulesetsCommand extends $Command<
-  ListRulesetsCommandInput,
-  ListRulesetsCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRulesetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRulesetsCommandInput, ListRulesetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "ListRulesetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRulesetsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListRulesetsResponseFilterSensitiveLog,
+export class ListRulesetsCommand extends command<ListRulesetsCommandInput, ListRulesetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRulesets",
+  ListRulesets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRulesetsRequest;
+      output: ListRulesetsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRulesetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListRulesetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRulesetsCommandOutput> {
-    return deserializeAws_restJson1ListRulesetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRulesetsCommandInput;
+      output: ListRulesetsCommandOutput;
+    };
+  };
 }

@@ -1,1613 +1,1920 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AssociateBrowserSettingsCommandInput,
+  type AssociateBrowserSettingsCommandOutput,
   AssociateBrowserSettingsCommand,
-  AssociateBrowserSettingsCommandInput,
-  AssociateBrowserSettingsCommandOutput,
 } from "./commands/AssociateBrowserSettingsCommand";
 import {
+  type AssociateDataProtectionSettingsCommandInput,
+  type AssociateDataProtectionSettingsCommandOutput,
+  AssociateDataProtectionSettingsCommand,
+} from "./commands/AssociateDataProtectionSettingsCommand";
+import {
+  type AssociateIpAccessSettingsCommandInput,
+  type AssociateIpAccessSettingsCommandOutput,
+  AssociateIpAccessSettingsCommand,
+} from "./commands/AssociateIpAccessSettingsCommand";
+import {
+  type AssociateNetworkSettingsCommandInput,
+  type AssociateNetworkSettingsCommandOutput,
   AssociateNetworkSettingsCommand,
-  AssociateNetworkSettingsCommandInput,
-  AssociateNetworkSettingsCommandOutput,
 } from "./commands/AssociateNetworkSettingsCommand";
 import {
+  type AssociateSessionLoggerCommandInput,
+  type AssociateSessionLoggerCommandOutput,
+  AssociateSessionLoggerCommand,
+} from "./commands/AssociateSessionLoggerCommand";
+import {
+  type AssociateTrustStoreCommandInput,
+  type AssociateTrustStoreCommandOutput,
   AssociateTrustStoreCommand,
-  AssociateTrustStoreCommandInput,
-  AssociateTrustStoreCommandOutput,
 } from "./commands/AssociateTrustStoreCommand";
 import {
+  type AssociateUserAccessLoggingSettingsCommandInput,
+  type AssociateUserAccessLoggingSettingsCommandOutput,
+  AssociateUserAccessLoggingSettingsCommand,
+} from "./commands/AssociateUserAccessLoggingSettingsCommand";
+import {
+  type AssociateUserSettingsCommandInput,
+  type AssociateUserSettingsCommandOutput,
   AssociateUserSettingsCommand,
-  AssociateUserSettingsCommandInput,
-  AssociateUserSettingsCommandOutput,
 } from "./commands/AssociateUserSettingsCommand";
 import {
+  type CreateBrowserSettingsCommandInput,
+  type CreateBrowserSettingsCommandOutput,
   CreateBrowserSettingsCommand,
-  CreateBrowserSettingsCommandInput,
-  CreateBrowserSettingsCommandOutput,
 } from "./commands/CreateBrowserSettingsCommand";
 import {
+  type CreateDataProtectionSettingsCommandInput,
+  type CreateDataProtectionSettingsCommandOutput,
+  CreateDataProtectionSettingsCommand,
+} from "./commands/CreateDataProtectionSettingsCommand";
+import {
+  type CreateIdentityProviderCommandInput,
+  type CreateIdentityProviderCommandOutput,
   CreateIdentityProviderCommand,
-  CreateIdentityProviderCommandInput,
-  CreateIdentityProviderCommandOutput,
 } from "./commands/CreateIdentityProviderCommand";
 import {
+  type CreateIpAccessSettingsCommandInput,
+  type CreateIpAccessSettingsCommandOutput,
+  CreateIpAccessSettingsCommand,
+} from "./commands/CreateIpAccessSettingsCommand";
+import {
+  type CreateNetworkSettingsCommandInput,
+  type CreateNetworkSettingsCommandOutput,
   CreateNetworkSettingsCommand,
-  CreateNetworkSettingsCommandInput,
-  CreateNetworkSettingsCommandOutput,
 } from "./commands/CreateNetworkSettingsCommand";
 import {
+  type CreatePortalCommandInput,
+  type CreatePortalCommandOutput,
   CreatePortalCommand,
-  CreatePortalCommandInput,
-  CreatePortalCommandOutput,
 } from "./commands/CreatePortalCommand";
 import {
+  type CreateSessionLoggerCommandInput,
+  type CreateSessionLoggerCommandOutput,
+  CreateSessionLoggerCommand,
+} from "./commands/CreateSessionLoggerCommand";
+import {
+  type CreateTrustStoreCommandInput,
+  type CreateTrustStoreCommandOutput,
   CreateTrustStoreCommand,
-  CreateTrustStoreCommandInput,
-  CreateTrustStoreCommandOutput,
 } from "./commands/CreateTrustStoreCommand";
 import {
+  type CreateUserAccessLoggingSettingsCommandInput,
+  type CreateUserAccessLoggingSettingsCommandOutput,
+  CreateUserAccessLoggingSettingsCommand,
+} from "./commands/CreateUserAccessLoggingSettingsCommand";
+import {
+  type CreateUserSettingsCommandInput,
+  type CreateUserSettingsCommandOutput,
   CreateUserSettingsCommand,
-  CreateUserSettingsCommandInput,
-  CreateUserSettingsCommandOutput,
 } from "./commands/CreateUserSettingsCommand";
 import {
+  type DeleteBrowserSettingsCommandInput,
+  type DeleteBrowserSettingsCommandOutput,
   DeleteBrowserSettingsCommand,
-  DeleteBrowserSettingsCommandInput,
-  DeleteBrowserSettingsCommandOutput,
 } from "./commands/DeleteBrowserSettingsCommand";
 import {
+  type DeleteDataProtectionSettingsCommandInput,
+  type DeleteDataProtectionSettingsCommandOutput,
+  DeleteDataProtectionSettingsCommand,
+} from "./commands/DeleteDataProtectionSettingsCommand";
+import {
+  type DeleteIdentityProviderCommandInput,
+  type DeleteIdentityProviderCommandOutput,
   DeleteIdentityProviderCommand,
-  DeleteIdentityProviderCommandInput,
-  DeleteIdentityProviderCommandOutput,
 } from "./commands/DeleteIdentityProviderCommand";
 import {
+  type DeleteIpAccessSettingsCommandInput,
+  type DeleteIpAccessSettingsCommandOutput,
+  DeleteIpAccessSettingsCommand,
+} from "./commands/DeleteIpAccessSettingsCommand";
+import {
+  type DeleteNetworkSettingsCommandInput,
+  type DeleteNetworkSettingsCommandOutput,
   DeleteNetworkSettingsCommand,
-  DeleteNetworkSettingsCommandInput,
-  DeleteNetworkSettingsCommandOutput,
 } from "./commands/DeleteNetworkSettingsCommand";
 import {
+  type DeletePortalCommandInput,
+  type DeletePortalCommandOutput,
   DeletePortalCommand,
-  DeletePortalCommandInput,
-  DeletePortalCommandOutput,
 } from "./commands/DeletePortalCommand";
 import {
+  type DeleteSessionLoggerCommandInput,
+  type DeleteSessionLoggerCommandOutput,
+  DeleteSessionLoggerCommand,
+} from "./commands/DeleteSessionLoggerCommand";
+import {
+  type DeleteTrustStoreCommandInput,
+  type DeleteTrustStoreCommandOutput,
   DeleteTrustStoreCommand,
-  DeleteTrustStoreCommandInput,
-  DeleteTrustStoreCommandOutput,
 } from "./commands/DeleteTrustStoreCommand";
 import {
+  type DeleteUserAccessLoggingSettingsCommandInput,
+  type DeleteUserAccessLoggingSettingsCommandOutput,
+  DeleteUserAccessLoggingSettingsCommand,
+} from "./commands/DeleteUserAccessLoggingSettingsCommand";
+import {
+  type DeleteUserSettingsCommandInput,
+  type DeleteUserSettingsCommandOutput,
   DeleteUserSettingsCommand,
-  DeleteUserSettingsCommandInput,
-  DeleteUserSettingsCommandOutput,
 } from "./commands/DeleteUserSettingsCommand";
 import {
+  type DisassociateBrowserSettingsCommandInput,
+  type DisassociateBrowserSettingsCommandOutput,
   DisassociateBrowserSettingsCommand,
-  DisassociateBrowserSettingsCommandInput,
-  DisassociateBrowserSettingsCommandOutput,
 } from "./commands/DisassociateBrowserSettingsCommand";
 import {
+  type DisassociateDataProtectionSettingsCommandInput,
+  type DisassociateDataProtectionSettingsCommandOutput,
+  DisassociateDataProtectionSettingsCommand,
+} from "./commands/DisassociateDataProtectionSettingsCommand";
+import {
+  type DisassociateIpAccessSettingsCommandInput,
+  type DisassociateIpAccessSettingsCommandOutput,
+  DisassociateIpAccessSettingsCommand,
+} from "./commands/DisassociateIpAccessSettingsCommand";
+import {
+  type DisassociateNetworkSettingsCommandInput,
+  type DisassociateNetworkSettingsCommandOutput,
   DisassociateNetworkSettingsCommand,
-  DisassociateNetworkSettingsCommandInput,
-  DisassociateNetworkSettingsCommandOutput,
 } from "./commands/DisassociateNetworkSettingsCommand";
 import {
+  type DisassociateSessionLoggerCommandInput,
+  type DisassociateSessionLoggerCommandOutput,
+  DisassociateSessionLoggerCommand,
+} from "./commands/DisassociateSessionLoggerCommand";
+import {
+  type DisassociateTrustStoreCommandInput,
+  type DisassociateTrustStoreCommandOutput,
   DisassociateTrustStoreCommand,
-  DisassociateTrustStoreCommandInput,
-  DisassociateTrustStoreCommandOutput,
 } from "./commands/DisassociateTrustStoreCommand";
 import {
+  type DisassociateUserAccessLoggingSettingsCommandInput,
+  type DisassociateUserAccessLoggingSettingsCommandOutput,
+  DisassociateUserAccessLoggingSettingsCommand,
+} from "./commands/DisassociateUserAccessLoggingSettingsCommand";
+import {
+  type DisassociateUserSettingsCommandInput,
+  type DisassociateUserSettingsCommandOutput,
   DisassociateUserSettingsCommand,
-  DisassociateUserSettingsCommandInput,
-  DisassociateUserSettingsCommandOutput,
 } from "./commands/DisassociateUserSettingsCommand";
 import {
+  type ExpireSessionCommandInput,
+  type ExpireSessionCommandOutput,
+  ExpireSessionCommand,
+} from "./commands/ExpireSessionCommand";
+import {
+  type GetBrowserSettingsCommandInput,
+  type GetBrowserSettingsCommandOutput,
   GetBrowserSettingsCommand,
-  GetBrowserSettingsCommandInput,
-  GetBrowserSettingsCommandOutput,
 } from "./commands/GetBrowserSettingsCommand";
 import {
+  type GetDataProtectionSettingsCommandInput,
+  type GetDataProtectionSettingsCommandOutput,
+  GetDataProtectionSettingsCommand,
+} from "./commands/GetDataProtectionSettingsCommand";
+import {
+  type GetIdentityProviderCommandInput,
+  type GetIdentityProviderCommandOutput,
   GetIdentityProviderCommand,
-  GetIdentityProviderCommandInput,
-  GetIdentityProviderCommandOutput,
 } from "./commands/GetIdentityProviderCommand";
 import {
-  GetNetworkSettingsCommand,
-  GetNetworkSettingsCommandInput,
-  GetNetworkSettingsCommandOutput,
-} from "./commands/GetNetworkSettingsCommand";
-import { GetPortalCommand, GetPortalCommandInput, GetPortalCommandOutput } from "./commands/GetPortalCommand";
+  type GetIpAccessSettingsCommandInput,
+  type GetIpAccessSettingsCommandOutput,
+  GetIpAccessSettingsCommand,
+} from "./commands/GetIpAccessSettingsCommand";
 import {
+  type GetNetworkSettingsCommandInput,
+  type GetNetworkSettingsCommandOutput,
+  GetNetworkSettingsCommand,
+} from "./commands/GetNetworkSettingsCommand";
+import { type GetPortalCommandInput, type GetPortalCommandOutput, GetPortalCommand } from "./commands/GetPortalCommand";
+import {
+  type GetPortalServiceProviderMetadataCommandInput,
+  type GetPortalServiceProviderMetadataCommandOutput,
   GetPortalServiceProviderMetadataCommand,
-  GetPortalServiceProviderMetadataCommandInput,
-  GetPortalServiceProviderMetadataCommandOutput,
 } from "./commands/GetPortalServiceProviderMetadataCommand";
 import {
+  type GetSessionCommandInput,
+  type GetSessionCommandOutput,
+  GetSessionCommand,
+} from "./commands/GetSessionCommand";
+import {
+  type GetSessionLoggerCommandInput,
+  type GetSessionLoggerCommandOutput,
+  GetSessionLoggerCommand,
+} from "./commands/GetSessionLoggerCommand";
+import {
+  type GetTrustStoreCertificateCommandInput,
+  type GetTrustStoreCertificateCommandOutput,
   GetTrustStoreCertificateCommand,
-  GetTrustStoreCertificateCommandInput,
-  GetTrustStoreCertificateCommandOutput,
 } from "./commands/GetTrustStoreCertificateCommand";
 import {
+  type GetTrustStoreCommandInput,
+  type GetTrustStoreCommandOutput,
   GetTrustStoreCommand,
-  GetTrustStoreCommandInput,
-  GetTrustStoreCommandOutput,
 } from "./commands/GetTrustStoreCommand";
 import {
+  type GetUserAccessLoggingSettingsCommandInput,
+  type GetUserAccessLoggingSettingsCommandOutput,
+  GetUserAccessLoggingSettingsCommand,
+} from "./commands/GetUserAccessLoggingSettingsCommand";
+import {
+  type GetUserSettingsCommandInput,
+  type GetUserSettingsCommandOutput,
   GetUserSettingsCommand,
-  GetUserSettingsCommandInput,
-  GetUserSettingsCommandOutput,
 } from "./commands/GetUserSettingsCommand";
 import {
+  type ListBrowserSettingsCommandInput,
+  type ListBrowserSettingsCommandOutput,
   ListBrowserSettingsCommand,
-  ListBrowserSettingsCommandInput,
-  ListBrowserSettingsCommandOutput,
 } from "./commands/ListBrowserSettingsCommand";
 import {
+  type ListDataProtectionSettingsCommandInput,
+  type ListDataProtectionSettingsCommandOutput,
+  ListDataProtectionSettingsCommand,
+} from "./commands/ListDataProtectionSettingsCommand";
+import {
+  type ListIdentityProvidersCommandInput,
+  type ListIdentityProvidersCommandOutput,
   ListIdentityProvidersCommand,
-  ListIdentityProvidersCommandInput,
-  ListIdentityProvidersCommandOutput,
 } from "./commands/ListIdentityProvidersCommand";
 import {
-  ListNetworkSettingsCommand,
-  ListNetworkSettingsCommandInput,
-  ListNetworkSettingsCommandOutput,
-} from "./commands/ListNetworkSettingsCommand";
-import { ListPortalsCommand, ListPortalsCommandInput, ListPortalsCommandOutput } from "./commands/ListPortalsCommand";
+  type ListIpAccessSettingsCommandInput,
+  type ListIpAccessSettingsCommandOutput,
+  ListIpAccessSettingsCommand,
+} from "./commands/ListIpAccessSettingsCommand";
 import {
+  type ListNetworkSettingsCommandInput,
+  type ListNetworkSettingsCommandOutput,
+  ListNetworkSettingsCommand,
+} from "./commands/ListNetworkSettingsCommand";
+import {
+  type ListPortalsCommandInput,
+  type ListPortalsCommandOutput,
+  ListPortalsCommand,
+} from "./commands/ListPortalsCommand";
+import {
+  type ListSessionLoggersCommandInput,
+  type ListSessionLoggersCommandOutput,
+  ListSessionLoggersCommand,
+} from "./commands/ListSessionLoggersCommand";
+import {
+  type ListSessionsCommandInput,
+  type ListSessionsCommandOutput,
+  ListSessionsCommand,
+} from "./commands/ListSessionsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTrustStoreCertificatesCommandInput,
+  type ListTrustStoreCertificatesCommandOutput,
   ListTrustStoreCertificatesCommand,
-  ListTrustStoreCertificatesCommandInput,
-  ListTrustStoreCertificatesCommandOutput,
 } from "./commands/ListTrustStoreCertificatesCommand";
 import {
+  type ListTrustStoresCommandInput,
+  type ListTrustStoresCommandOutput,
   ListTrustStoresCommand,
-  ListTrustStoresCommandInput,
-  ListTrustStoresCommandOutput,
 } from "./commands/ListTrustStoresCommand";
 import {
-  ListUserSettingsCommand,
-  ListUserSettingsCommandInput,
-  ListUserSettingsCommandOutput,
-} from "./commands/ListUserSettingsCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type ListUserAccessLoggingSettingsCommandInput,
+  type ListUserAccessLoggingSettingsCommandOutput,
+  ListUserAccessLoggingSettingsCommand,
+} from "./commands/ListUserAccessLoggingSettingsCommand";
 import {
+  type ListUserSettingsCommandInput,
+  type ListUserSettingsCommandOutput,
+  ListUserSettingsCommand,
+} from "./commands/ListUserSettingsCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateBrowserSettingsCommandInput,
+  type UpdateBrowserSettingsCommandOutput,
   UpdateBrowserSettingsCommand,
-  UpdateBrowserSettingsCommandInput,
-  UpdateBrowserSettingsCommandOutput,
 } from "./commands/UpdateBrowserSettingsCommand";
 import {
+  type UpdateDataProtectionSettingsCommandInput,
+  type UpdateDataProtectionSettingsCommandOutput,
+  UpdateDataProtectionSettingsCommand,
+} from "./commands/UpdateDataProtectionSettingsCommand";
+import {
+  type UpdateIdentityProviderCommandInput,
+  type UpdateIdentityProviderCommandOutput,
   UpdateIdentityProviderCommand,
-  UpdateIdentityProviderCommandInput,
-  UpdateIdentityProviderCommandOutput,
 } from "./commands/UpdateIdentityProviderCommand";
 import {
+  type UpdateIpAccessSettingsCommandInput,
+  type UpdateIpAccessSettingsCommandOutput,
+  UpdateIpAccessSettingsCommand,
+} from "./commands/UpdateIpAccessSettingsCommand";
+import {
+  type UpdateNetworkSettingsCommandInput,
+  type UpdateNetworkSettingsCommandOutput,
   UpdateNetworkSettingsCommand,
-  UpdateNetworkSettingsCommandInput,
-  UpdateNetworkSettingsCommandOutput,
 } from "./commands/UpdateNetworkSettingsCommand";
 import {
+  type UpdatePortalCommandInput,
+  type UpdatePortalCommandOutput,
   UpdatePortalCommand,
-  UpdatePortalCommandInput,
-  UpdatePortalCommandOutput,
 } from "./commands/UpdatePortalCommand";
 import {
+  type UpdateSessionLoggerCommandInput,
+  type UpdateSessionLoggerCommandOutput,
+  UpdateSessionLoggerCommand,
+} from "./commands/UpdateSessionLoggerCommand";
+import {
+  type UpdateTrustStoreCommandInput,
+  type UpdateTrustStoreCommandOutput,
   UpdateTrustStoreCommand,
-  UpdateTrustStoreCommandInput,
-  UpdateTrustStoreCommandOutput,
 } from "./commands/UpdateTrustStoreCommand";
 import {
+  type UpdateUserAccessLoggingSettingsCommandInput,
+  type UpdateUserAccessLoggingSettingsCommandOutput,
+  UpdateUserAccessLoggingSettingsCommand,
+} from "./commands/UpdateUserAccessLoggingSettingsCommand";
+import {
+  type UpdateUserSettingsCommandInput,
+  type UpdateUserSettingsCommandOutput,
   UpdateUserSettingsCommand,
-  UpdateUserSettingsCommandInput,
-  UpdateUserSettingsCommandOutput,
 } from "./commands/UpdateUserSettingsCommand";
+import { paginateListBrowserSettings } from "./pagination/ListBrowserSettingsPaginator";
+import { paginateListDataProtectionSettings } from "./pagination/ListDataProtectionSettingsPaginator";
+import { paginateListIdentityProviders } from "./pagination/ListIdentityProvidersPaginator";
+import { paginateListIpAccessSettings } from "./pagination/ListIpAccessSettingsPaginator";
+import { paginateListNetworkSettings } from "./pagination/ListNetworkSettingsPaginator";
+import { paginateListPortals } from "./pagination/ListPortalsPaginator";
+import { paginateListSessionLoggers } from "./pagination/ListSessionLoggersPaginator";
+import { paginateListSessions } from "./pagination/ListSessionsPaginator";
+import { paginateListTrustStoreCertificates } from "./pagination/ListTrustStoreCertificatesPaginator";
+import { paginateListTrustStores } from "./pagination/ListTrustStoresPaginator";
+import { paginateListUserAccessLoggingSettings } from "./pagination/ListUserAccessLoggingSettingsPaginator";
+import { paginateListUserSettings } from "./pagination/ListUserSettingsPaginator";
 import { WorkSpacesWebClient } from "./WorkSpacesWebClient";
 
+const commands = {
+  AssociateBrowserSettingsCommand,
+  AssociateDataProtectionSettingsCommand,
+  AssociateIpAccessSettingsCommand,
+  AssociateNetworkSettingsCommand,
+  AssociateSessionLoggerCommand,
+  AssociateTrustStoreCommand,
+  AssociateUserAccessLoggingSettingsCommand,
+  AssociateUserSettingsCommand,
+  CreateBrowserSettingsCommand,
+  CreateDataProtectionSettingsCommand,
+  CreateIdentityProviderCommand,
+  CreateIpAccessSettingsCommand,
+  CreateNetworkSettingsCommand,
+  CreatePortalCommand,
+  CreateSessionLoggerCommand,
+  CreateTrustStoreCommand,
+  CreateUserAccessLoggingSettingsCommand,
+  CreateUserSettingsCommand,
+  DeleteBrowserSettingsCommand,
+  DeleteDataProtectionSettingsCommand,
+  DeleteIdentityProviderCommand,
+  DeleteIpAccessSettingsCommand,
+  DeleteNetworkSettingsCommand,
+  DeletePortalCommand,
+  DeleteSessionLoggerCommand,
+  DeleteTrustStoreCommand,
+  DeleteUserAccessLoggingSettingsCommand,
+  DeleteUserSettingsCommand,
+  DisassociateBrowserSettingsCommand,
+  DisassociateDataProtectionSettingsCommand,
+  DisassociateIpAccessSettingsCommand,
+  DisassociateNetworkSettingsCommand,
+  DisassociateSessionLoggerCommand,
+  DisassociateTrustStoreCommand,
+  DisassociateUserAccessLoggingSettingsCommand,
+  DisassociateUserSettingsCommand,
+  ExpireSessionCommand,
+  GetBrowserSettingsCommand,
+  GetDataProtectionSettingsCommand,
+  GetIdentityProviderCommand,
+  GetIpAccessSettingsCommand,
+  GetNetworkSettingsCommand,
+  GetPortalCommand,
+  GetPortalServiceProviderMetadataCommand,
+  GetSessionCommand,
+  GetSessionLoggerCommand,
+  GetTrustStoreCommand,
+  GetTrustStoreCertificateCommand,
+  GetUserAccessLoggingSettingsCommand,
+  GetUserSettingsCommand,
+  ListBrowserSettingsCommand,
+  ListDataProtectionSettingsCommand,
+  ListIdentityProvidersCommand,
+  ListIpAccessSettingsCommand,
+  ListNetworkSettingsCommand,
+  ListPortalsCommand,
+  ListSessionLoggersCommand,
+  ListSessionsCommand,
+  ListTagsForResourceCommand,
+  ListTrustStoreCertificatesCommand,
+  ListTrustStoresCommand,
+  ListUserAccessLoggingSettingsCommand,
+  ListUserSettingsCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateBrowserSettingsCommand,
+  UpdateDataProtectionSettingsCommand,
+  UpdateIdentityProviderCommand,
+  UpdateIpAccessSettingsCommand,
+  UpdateNetworkSettingsCommand,
+  UpdatePortalCommand,
+  UpdateSessionLoggerCommand,
+  UpdateTrustStoreCommand,
+  UpdateUserAccessLoggingSettingsCommand,
+  UpdateUserSettingsCommand,
+};
+const paginators = {
+  paginateListBrowserSettings,
+  paginateListDataProtectionSettings,
+  paginateListIdentityProviders,
+  paginateListIpAccessSettings,
+  paginateListNetworkSettings,
+  paginateListPortals,
+  paginateListSessionLoggers,
+  paginateListSessions,
+  paginateListTrustStoreCertificates,
+  paginateListTrustStores,
+  paginateListUserAccessLoggingSettings,
+  paginateListUserSettings,
+};
+
 /**
- * <p>WorkSpaces Web is a low cost, fully managed WorkSpace built specifically to facilitate
- *          secure, web-based workloads. WorkSpaces Web makes it easy for customers to safely provide
- *          their employees with access to internal websites and SaaS web applications without the
- *          administrative burden of appliances or specialized client software. WorkSpaces Web provides
- *          simple policy tools tailored for user interactions, while offloading common tasks like
- *          capacity management, scaling, and maintaining browser images.</p>
+ * @public
  */
-export class WorkSpacesWeb extends WorkSpacesWebClient {
+export interface WorkSpacesWebRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface WorkSpacesWeb {
   /**
-   * <p>Associates a browser settings resource with a web portal.</p>
+   * @see {@link AssociateBrowserSettingsCommand}
    */
-  public associateBrowserSettings(
+  associateBrowserSettings(
     args: AssociateBrowserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<AssociateBrowserSettingsCommandOutput>;
-  public associateBrowserSettings(
+  associateBrowserSettings(
     args: AssociateBrowserSettingsCommandInput,
     cb: (err: any, data?: AssociateBrowserSettingsCommandOutput) => void
   ): void;
-  public associateBrowserSettings(
+  associateBrowserSettings(
     args: AssociateBrowserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: AssociateBrowserSettingsCommandOutput) => void
   ): void;
-  public associateBrowserSettings(
-    args: AssociateBrowserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateBrowserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: AssociateBrowserSettingsCommandOutput) => void
-  ): Promise<AssociateBrowserSettingsCommandOutput> | void {
-    const command = new AssociateBrowserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a network settings resource with a web portal.</p>
+   * @see {@link AssociateDataProtectionSettingsCommand}
    */
-  public associateNetworkSettings(
+  associateDataProtectionSettings(
+    args: AssociateDataProtectionSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<AssociateDataProtectionSettingsCommandOutput>;
+  associateDataProtectionSettings(
+    args: AssociateDataProtectionSettingsCommandInput,
+    cb: (err: any, data?: AssociateDataProtectionSettingsCommandOutput) => void
+  ): void;
+  associateDataProtectionSettings(
+    args: AssociateDataProtectionSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: AssociateDataProtectionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateIpAccessSettingsCommand}
+   */
+  associateIpAccessSettings(
+    args: AssociateIpAccessSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<AssociateIpAccessSettingsCommandOutput>;
+  associateIpAccessSettings(
+    args: AssociateIpAccessSettingsCommandInput,
+    cb: (err: any, data?: AssociateIpAccessSettingsCommandOutput) => void
+  ): void;
+  associateIpAccessSettings(
+    args: AssociateIpAccessSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: AssociateIpAccessSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateNetworkSettingsCommand}
+   */
+  associateNetworkSettings(
     args: AssociateNetworkSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<AssociateNetworkSettingsCommandOutput>;
-  public associateNetworkSettings(
+  associateNetworkSettings(
     args: AssociateNetworkSettingsCommandInput,
     cb: (err: any, data?: AssociateNetworkSettingsCommandOutput) => void
   ): void;
-  public associateNetworkSettings(
+  associateNetworkSettings(
     args: AssociateNetworkSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: AssociateNetworkSettingsCommandOutput) => void
   ): void;
-  public associateNetworkSettings(
-    args: AssociateNetworkSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateNetworkSettingsCommandOutput) => void),
-    cb?: (err: any, data?: AssociateNetworkSettingsCommandOutput) => void
-  ): Promise<AssociateNetworkSettingsCommandOutput> | void {
-    const command = new AssociateNetworkSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a trust store with a web portal.</p>
+   * @see {@link AssociateSessionLoggerCommand}
    */
-  public associateTrustStore(
+  associateSessionLogger(
+    args: AssociateSessionLoggerCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<AssociateSessionLoggerCommandOutput>;
+  associateSessionLogger(
+    args: AssociateSessionLoggerCommandInput,
+    cb: (err: any, data?: AssociateSessionLoggerCommandOutput) => void
+  ): void;
+  associateSessionLogger(
+    args: AssociateSessionLoggerCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: AssociateSessionLoggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateTrustStoreCommand}
+   */
+  associateTrustStore(
     args: AssociateTrustStoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<AssociateTrustStoreCommandOutput>;
-  public associateTrustStore(
+  associateTrustStore(
     args: AssociateTrustStoreCommandInput,
     cb: (err: any, data?: AssociateTrustStoreCommandOutput) => void
   ): void;
-  public associateTrustStore(
+  associateTrustStore(
     args: AssociateTrustStoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: AssociateTrustStoreCommandOutput) => void
   ): void;
-  public associateTrustStore(
-    args: AssociateTrustStoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateTrustStoreCommandOutput) => void),
-    cb?: (err: any, data?: AssociateTrustStoreCommandOutput) => void
-  ): Promise<AssociateTrustStoreCommandOutput> | void {
-    const command = new AssociateTrustStoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a user settings resource with a web portal.</p>
+   * @see {@link AssociateUserAccessLoggingSettingsCommand}
    */
-  public associateUserSettings(
+  associateUserAccessLoggingSettings(
+    args: AssociateUserAccessLoggingSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<AssociateUserAccessLoggingSettingsCommandOutput>;
+  associateUserAccessLoggingSettings(
+    args: AssociateUserAccessLoggingSettingsCommandInput,
+    cb: (err: any, data?: AssociateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+  associateUserAccessLoggingSettings(
+    args: AssociateUserAccessLoggingSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: AssociateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AssociateUserSettingsCommand}
+   */
+  associateUserSettings(
     args: AssociateUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<AssociateUserSettingsCommandOutput>;
-  public associateUserSettings(
+  associateUserSettings(
     args: AssociateUserSettingsCommandInput,
     cb: (err: any, data?: AssociateUserSettingsCommandOutput) => void
   ): void;
-  public associateUserSettings(
+  associateUserSettings(
     args: AssociateUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: AssociateUserSettingsCommandOutput) => void
   ): void;
-  public associateUserSettings(
-    args: AssociateUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: AssociateUserSettingsCommandOutput) => void
-  ): Promise<AssociateUserSettingsCommandOutput> | void {
-    const command = new AssociateUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a browser settings resource that can be associated with a web portal. Once
-   *          associated with a web portal, browser settings control how the browser will behave once a
-   *          user starts a streaming session for the web portal. </p>
+   * @see {@link CreateBrowserSettingsCommand}
    */
-  public createBrowserSettings(
+  createBrowserSettings(): Promise<CreateBrowserSettingsCommandOutput>;
+  createBrowserSettings(
     args: CreateBrowserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<CreateBrowserSettingsCommandOutput>;
-  public createBrowserSettings(
+  createBrowserSettings(
     args: CreateBrowserSettingsCommandInput,
     cb: (err: any, data?: CreateBrowserSettingsCommandOutput) => void
   ): void;
-  public createBrowserSettings(
+  createBrowserSettings(
     args: CreateBrowserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: CreateBrowserSettingsCommandOutput) => void
   ): void;
-  public createBrowserSettings(
-    args: CreateBrowserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBrowserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: CreateBrowserSettingsCommandOutput) => void
-  ): Promise<CreateBrowserSettingsCommandOutput> | void {
-    const command = new CreateBrowserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an identity provider resource that is then associated with a web portal.</p>
+   * @see {@link CreateDataProtectionSettingsCommand}
    */
-  public createIdentityProvider(
+  createDataProtectionSettings(): Promise<CreateDataProtectionSettingsCommandOutput>;
+  createDataProtectionSettings(
+    args: CreateDataProtectionSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<CreateDataProtectionSettingsCommandOutput>;
+  createDataProtectionSettings(
+    args: CreateDataProtectionSettingsCommandInput,
+    cb: (err: any, data?: CreateDataProtectionSettingsCommandOutput) => void
+  ): void;
+  createDataProtectionSettings(
+    args: CreateDataProtectionSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: CreateDataProtectionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateIdentityProviderCommand}
+   */
+  createIdentityProvider(
     args: CreateIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<CreateIdentityProviderCommandOutput>;
-  public createIdentityProvider(
+  createIdentityProvider(
     args: CreateIdentityProviderCommandInput,
     cb: (err: any, data?: CreateIdentityProviderCommandOutput) => void
   ): void;
-  public createIdentityProvider(
+  createIdentityProvider(
     args: CreateIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: CreateIdentityProviderCommandOutput) => void
   ): void;
-  public createIdentityProvider(
-    args: CreateIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: CreateIdentityProviderCommandOutput) => void
-  ): Promise<CreateIdentityProviderCommandOutput> | void {
-    const command = new CreateIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a network settings resource that can be associated with a web portal. Once
-   *          associated with a web portal, network settings define how streaming instances will connect
-   *          with your specified VPC. </p>
+   * @see {@link CreateIpAccessSettingsCommand}
    */
-  public createNetworkSettings(
+  createIpAccessSettings(
+    args: CreateIpAccessSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<CreateIpAccessSettingsCommandOutput>;
+  createIpAccessSettings(
+    args: CreateIpAccessSettingsCommandInput,
+    cb: (err: any, data?: CreateIpAccessSettingsCommandOutput) => void
+  ): void;
+  createIpAccessSettings(
+    args: CreateIpAccessSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: CreateIpAccessSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateNetworkSettingsCommand}
+   */
+  createNetworkSettings(
     args: CreateNetworkSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<CreateNetworkSettingsCommandOutput>;
-  public createNetworkSettings(
+  createNetworkSettings(
     args: CreateNetworkSettingsCommandInput,
     cb: (err: any, data?: CreateNetworkSettingsCommandOutput) => void
   ): void;
-  public createNetworkSettings(
+  createNetworkSettings(
     args: CreateNetworkSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: CreateNetworkSettingsCommandOutput) => void
   ): void;
-  public createNetworkSettings(
-    args: CreateNetworkSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateNetworkSettingsCommandOutput) => void),
-    cb?: (err: any, data?: CreateNetworkSettingsCommandOutput) => void
-  ): Promise<CreateNetworkSettingsCommandOutput> | void {
-    const command = new CreateNetworkSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a web portal.</p>
+   * @see {@link CreatePortalCommand}
    */
-  public createPortal(
+  createPortal(): Promise<CreatePortalCommandOutput>;
+  createPortal(
     args: CreatePortalCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<CreatePortalCommandOutput>;
-  public createPortal(args: CreatePortalCommandInput, cb: (err: any, data?: CreatePortalCommandOutput) => void): void;
-  public createPortal(
+  createPortal(
     args: CreatePortalCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreatePortalCommandOutput) => void
   ): void;
-  public createPortal(
+  createPortal(
     args: CreatePortalCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreatePortalCommandOutput) => void),
-    cb?: (err: any, data?: CreatePortalCommandOutput) => void
-  ): Promise<CreatePortalCommandOutput> | void {
-    const command = new CreatePortalCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: CreatePortalCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a trust store that can be associated with a web portal. A trust store contains
-   *          certificate authority (CA) certificates. Once associated with a web portal, the browser in
-   *          a streaming session will recognize certificates that have been issued using any of the CAs
-   *          in the trust store. If your organization has internal websites that use certificates issued
-   *          by private CAs, you should add the private CA certificate to the trust store. </p>
+   * @see {@link CreateSessionLoggerCommand}
    */
-  public createTrustStore(
+  createSessionLogger(
+    args: CreateSessionLoggerCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<CreateSessionLoggerCommandOutput>;
+  createSessionLogger(
+    args: CreateSessionLoggerCommandInput,
+    cb: (err: any, data?: CreateSessionLoggerCommandOutput) => void
+  ): void;
+  createSessionLogger(
+    args: CreateSessionLoggerCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: CreateSessionLoggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateTrustStoreCommand}
+   */
+  createTrustStore(
     args: CreateTrustStoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<CreateTrustStoreCommandOutput>;
-  public createTrustStore(
+  createTrustStore(
     args: CreateTrustStoreCommandInput,
     cb: (err: any, data?: CreateTrustStoreCommandOutput) => void
   ): void;
-  public createTrustStore(
+  createTrustStore(
     args: CreateTrustStoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: CreateTrustStoreCommandOutput) => void
   ): void;
-  public createTrustStore(
-    args: CreateTrustStoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTrustStoreCommandOutput) => void),
-    cb?: (err: any, data?: CreateTrustStoreCommandOutput) => void
-  ): Promise<CreateTrustStoreCommandOutput> | void {
-    const command = new CreateTrustStoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a user settings resource that can be associated with a web portal. Once
-   *          associated with a web portal, user settings control how users can transfer data between a
-   *          streaming session and the their local devices. </p>
+   * @see {@link CreateUserAccessLoggingSettingsCommand}
    */
-  public createUserSettings(
+  createUserAccessLoggingSettings(
+    args: CreateUserAccessLoggingSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<CreateUserAccessLoggingSettingsCommandOutput>;
+  createUserAccessLoggingSettings(
+    args: CreateUserAccessLoggingSettingsCommandInput,
+    cb: (err: any, data?: CreateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+  createUserAccessLoggingSettings(
+    args: CreateUserAccessLoggingSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: CreateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUserSettingsCommand}
+   */
+  createUserSettings(
     args: CreateUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<CreateUserSettingsCommandOutput>;
-  public createUserSettings(
+  createUserSettings(
     args: CreateUserSettingsCommandInput,
     cb: (err: any, data?: CreateUserSettingsCommandOutput) => void
   ): void;
-  public createUserSettings(
+  createUserSettings(
     args: CreateUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: CreateUserSettingsCommandOutput) => void
   ): void;
-  public createUserSettings(
-    args: CreateUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: CreateUserSettingsCommandOutput) => void
-  ): Promise<CreateUserSettingsCommandOutput> | void {
-    const command = new CreateUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes browser settings.</p>
+   * @see {@link DeleteBrowserSettingsCommand}
    */
-  public deleteBrowserSettings(
+  deleteBrowserSettings(
     args: DeleteBrowserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DeleteBrowserSettingsCommandOutput>;
-  public deleteBrowserSettings(
+  deleteBrowserSettings(
     args: DeleteBrowserSettingsCommandInput,
     cb: (err: any, data?: DeleteBrowserSettingsCommandOutput) => void
   ): void;
-  public deleteBrowserSettings(
+  deleteBrowserSettings(
     args: DeleteBrowserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DeleteBrowserSettingsCommandOutput) => void
   ): void;
-  public deleteBrowserSettings(
-    args: DeleteBrowserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBrowserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBrowserSettingsCommandOutput) => void
-  ): Promise<DeleteBrowserSettingsCommandOutput> | void {
-    const command = new DeleteBrowserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the identity provider.</p>
+   * @see {@link DeleteDataProtectionSettingsCommand}
    */
-  public deleteIdentityProvider(
+  deleteDataProtectionSettings(
+    args: DeleteDataProtectionSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DeleteDataProtectionSettingsCommandOutput>;
+  deleteDataProtectionSettings(
+    args: DeleteDataProtectionSettingsCommandInput,
+    cb: (err: any, data?: DeleteDataProtectionSettingsCommandOutput) => void
+  ): void;
+  deleteDataProtectionSettings(
+    args: DeleteDataProtectionSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DeleteDataProtectionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteIdentityProviderCommand}
+   */
+  deleteIdentityProvider(
     args: DeleteIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DeleteIdentityProviderCommandOutput>;
-  public deleteIdentityProvider(
+  deleteIdentityProvider(
     args: DeleteIdentityProviderCommandInput,
     cb: (err: any, data?: DeleteIdentityProviderCommandOutput) => void
   ): void;
-  public deleteIdentityProvider(
+  deleteIdentityProvider(
     args: DeleteIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DeleteIdentityProviderCommandOutput) => void
   ): void;
-  public deleteIdentityProvider(
-    args: DeleteIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: DeleteIdentityProviderCommandOutput) => void
-  ): Promise<DeleteIdentityProviderCommandOutput> | void {
-    const command = new DeleteIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes network settings.</p>
+   * @see {@link DeleteIpAccessSettingsCommand}
    */
-  public deleteNetworkSettings(
+  deleteIpAccessSettings(
+    args: DeleteIpAccessSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DeleteIpAccessSettingsCommandOutput>;
+  deleteIpAccessSettings(
+    args: DeleteIpAccessSettingsCommandInput,
+    cb: (err: any, data?: DeleteIpAccessSettingsCommandOutput) => void
+  ): void;
+  deleteIpAccessSettings(
+    args: DeleteIpAccessSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DeleteIpAccessSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteNetworkSettingsCommand}
+   */
+  deleteNetworkSettings(
     args: DeleteNetworkSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DeleteNetworkSettingsCommandOutput>;
-  public deleteNetworkSettings(
+  deleteNetworkSettings(
     args: DeleteNetworkSettingsCommandInput,
     cb: (err: any, data?: DeleteNetworkSettingsCommandOutput) => void
   ): void;
-  public deleteNetworkSettings(
+  deleteNetworkSettings(
     args: DeleteNetworkSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DeleteNetworkSettingsCommandOutput) => void
   ): void;
-  public deleteNetworkSettings(
-    args: DeleteNetworkSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteNetworkSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DeleteNetworkSettingsCommandOutput) => void
-  ): Promise<DeleteNetworkSettingsCommandOutput> | void {
-    const command = new DeleteNetworkSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a web portal.</p>
+   * @see {@link DeletePortalCommand}
    */
-  public deletePortal(
+  deletePortal(
     args: DeletePortalCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DeletePortalCommandOutput>;
-  public deletePortal(args: DeletePortalCommandInput, cb: (err: any, data?: DeletePortalCommandOutput) => void): void;
-  public deletePortal(
+  deletePortal(
     args: DeletePortalCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeletePortalCommandOutput) => void
   ): void;
-  public deletePortal(
+  deletePortal(
     args: DeletePortalCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePortalCommandOutput) => void),
-    cb?: (err: any, data?: DeletePortalCommandOutput) => void
-  ): Promise<DeletePortalCommandOutput> | void {
-    const command = new DeletePortalCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DeletePortalCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes the trust store.</p>
+   * @see {@link DeleteSessionLoggerCommand}
    */
-  public deleteTrustStore(
+  deleteSessionLogger(
+    args: DeleteSessionLoggerCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DeleteSessionLoggerCommandOutput>;
+  deleteSessionLogger(
+    args: DeleteSessionLoggerCommandInput,
+    cb: (err: any, data?: DeleteSessionLoggerCommandOutput) => void
+  ): void;
+  deleteSessionLogger(
+    args: DeleteSessionLoggerCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DeleteSessionLoggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTrustStoreCommand}
+   */
+  deleteTrustStore(
     args: DeleteTrustStoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DeleteTrustStoreCommandOutput>;
-  public deleteTrustStore(
+  deleteTrustStore(
     args: DeleteTrustStoreCommandInput,
     cb: (err: any, data?: DeleteTrustStoreCommandOutput) => void
   ): void;
-  public deleteTrustStore(
+  deleteTrustStore(
     args: DeleteTrustStoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DeleteTrustStoreCommandOutput) => void
   ): void;
-  public deleteTrustStore(
-    args: DeleteTrustStoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTrustStoreCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTrustStoreCommandOutput) => void
-  ): Promise<DeleteTrustStoreCommandOutput> | void {
-    const command = new DeleteTrustStoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes user settings.</p>
+   * @see {@link DeleteUserAccessLoggingSettingsCommand}
    */
-  public deleteUserSettings(
+  deleteUserAccessLoggingSettings(
+    args: DeleteUserAccessLoggingSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DeleteUserAccessLoggingSettingsCommandOutput>;
+  deleteUserAccessLoggingSettings(
+    args: DeleteUserAccessLoggingSettingsCommandInput,
+    cb: (err: any, data?: DeleteUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+  deleteUserAccessLoggingSettings(
+    args: DeleteUserAccessLoggingSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DeleteUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUserSettingsCommand}
+   */
+  deleteUserSettings(
     args: DeleteUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DeleteUserSettingsCommandOutput>;
-  public deleteUserSettings(
+  deleteUserSettings(
     args: DeleteUserSettingsCommandInput,
     cb: (err: any, data?: DeleteUserSettingsCommandOutput) => void
   ): void;
-  public deleteUserSettings(
+  deleteUserSettings(
     args: DeleteUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DeleteUserSettingsCommandOutput) => void
   ): void;
-  public deleteUserSettings(
-    args: DeleteUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUserSettingsCommandOutput) => void
-  ): Promise<DeleteUserSettingsCommandOutput> | void {
-    const command = new DeleteUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates browser settings from a web portal.</p>
+   * @see {@link DisassociateBrowserSettingsCommand}
    */
-  public disassociateBrowserSettings(
+  disassociateBrowserSettings(
     args: DisassociateBrowserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DisassociateBrowserSettingsCommandOutput>;
-  public disassociateBrowserSettings(
+  disassociateBrowserSettings(
     args: DisassociateBrowserSettingsCommandInput,
     cb: (err: any, data?: DisassociateBrowserSettingsCommandOutput) => void
   ): void;
-  public disassociateBrowserSettings(
+  disassociateBrowserSettings(
     args: DisassociateBrowserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DisassociateBrowserSettingsCommandOutput) => void
   ): void;
-  public disassociateBrowserSettings(
-    args: DisassociateBrowserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateBrowserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateBrowserSettingsCommandOutput) => void
-  ): Promise<DisassociateBrowserSettingsCommandOutput> | void {
-    const command = new DisassociateBrowserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates network settings from a web portal.</p>
+   * @see {@link DisassociateDataProtectionSettingsCommand}
    */
-  public disassociateNetworkSettings(
+  disassociateDataProtectionSettings(
+    args: DisassociateDataProtectionSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DisassociateDataProtectionSettingsCommandOutput>;
+  disassociateDataProtectionSettings(
+    args: DisassociateDataProtectionSettingsCommandInput,
+    cb: (err: any, data?: DisassociateDataProtectionSettingsCommandOutput) => void
+  ): void;
+  disassociateDataProtectionSettings(
+    args: DisassociateDataProtectionSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DisassociateDataProtectionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateIpAccessSettingsCommand}
+   */
+  disassociateIpAccessSettings(
+    args: DisassociateIpAccessSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DisassociateIpAccessSettingsCommandOutput>;
+  disassociateIpAccessSettings(
+    args: DisassociateIpAccessSettingsCommandInput,
+    cb: (err: any, data?: DisassociateIpAccessSettingsCommandOutput) => void
+  ): void;
+  disassociateIpAccessSettings(
+    args: DisassociateIpAccessSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DisassociateIpAccessSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateNetworkSettingsCommand}
+   */
+  disassociateNetworkSettings(
     args: DisassociateNetworkSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DisassociateNetworkSettingsCommandOutput>;
-  public disassociateNetworkSettings(
+  disassociateNetworkSettings(
     args: DisassociateNetworkSettingsCommandInput,
     cb: (err: any, data?: DisassociateNetworkSettingsCommandOutput) => void
   ): void;
-  public disassociateNetworkSettings(
+  disassociateNetworkSettings(
     args: DisassociateNetworkSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DisassociateNetworkSettingsCommandOutput) => void
   ): void;
-  public disassociateNetworkSettings(
-    args: DisassociateNetworkSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateNetworkSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateNetworkSettingsCommandOutput) => void
-  ): Promise<DisassociateNetworkSettingsCommandOutput> | void {
-    const command = new DisassociateNetworkSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a trust store from a web portal.</p>
+   * @see {@link DisassociateSessionLoggerCommand}
    */
-  public disassociateTrustStore(
+  disassociateSessionLogger(
+    args: DisassociateSessionLoggerCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DisassociateSessionLoggerCommandOutput>;
+  disassociateSessionLogger(
+    args: DisassociateSessionLoggerCommandInput,
+    cb: (err: any, data?: DisassociateSessionLoggerCommandOutput) => void
+  ): void;
+  disassociateSessionLogger(
+    args: DisassociateSessionLoggerCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DisassociateSessionLoggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateTrustStoreCommand}
+   */
+  disassociateTrustStore(
     args: DisassociateTrustStoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DisassociateTrustStoreCommandOutput>;
-  public disassociateTrustStore(
+  disassociateTrustStore(
     args: DisassociateTrustStoreCommandInput,
     cb: (err: any, data?: DisassociateTrustStoreCommandOutput) => void
   ): void;
-  public disassociateTrustStore(
+  disassociateTrustStore(
     args: DisassociateTrustStoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DisassociateTrustStoreCommandOutput) => void
   ): void;
-  public disassociateTrustStore(
-    args: DisassociateTrustStoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateTrustStoreCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateTrustStoreCommandOutput) => void
-  ): Promise<DisassociateTrustStoreCommandOutput> | void {
-    const command = new DisassociateTrustStoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates user settings from a web portal.</p>
+   * @see {@link DisassociateUserAccessLoggingSettingsCommand}
    */
-  public disassociateUserSettings(
+  disassociateUserAccessLoggingSettings(
+    args: DisassociateUserAccessLoggingSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<DisassociateUserAccessLoggingSettingsCommandOutput>;
+  disassociateUserAccessLoggingSettings(
+    args: DisassociateUserAccessLoggingSettingsCommandInput,
+    cb: (err: any, data?: DisassociateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+  disassociateUserAccessLoggingSettings(
+    args: DisassociateUserAccessLoggingSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: DisassociateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateUserSettingsCommand}
+   */
+  disassociateUserSettings(
     args: DisassociateUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<DisassociateUserSettingsCommandOutput>;
-  public disassociateUserSettings(
+  disassociateUserSettings(
     args: DisassociateUserSettingsCommandInput,
     cb: (err: any, data?: DisassociateUserSettingsCommandOutput) => void
   ): void;
-  public disassociateUserSettings(
+  disassociateUserSettings(
     args: DisassociateUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: DisassociateUserSettingsCommandOutput) => void
   ): void;
-  public disassociateUserSettings(
-    args: DisassociateUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateUserSettingsCommandOutput) => void
-  ): Promise<DisassociateUserSettingsCommandOutput> | void {
-    const command = new DisassociateUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets browser settings.</p>
+   * @see {@link ExpireSessionCommand}
    */
-  public getBrowserSettings(
+  expireSession(
+    args: ExpireSessionCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<ExpireSessionCommandOutput>;
+  expireSession(
+    args: ExpireSessionCommandInput,
+    cb: (err: any, data?: ExpireSessionCommandOutput) => void
+  ): void;
+  expireSession(
+    args: ExpireSessionCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: ExpireSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBrowserSettingsCommand}
+   */
+  getBrowserSettings(
     args: GetBrowserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<GetBrowserSettingsCommandOutput>;
-  public getBrowserSettings(
+  getBrowserSettings(
     args: GetBrowserSettingsCommandInput,
     cb: (err: any, data?: GetBrowserSettingsCommandOutput) => void
   ): void;
-  public getBrowserSettings(
+  getBrowserSettings(
     args: GetBrowserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: GetBrowserSettingsCommandOutput) => void
   ): void;
-  public getBrowserSettings(
-    args: GetBrowserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBrowserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: GetBrowserSettingsCommandOutput) => void
-  ): Promise<GetBrowserSettingsCommandOutput> | void {
-    const command = new GetBrowserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the identity provider.</p>
+   * @see {@link GetDataProtectionSettingsCommand}
    */
-  public getIdentityProvider(
+  getDataProtectionSettings(
+    args: GetDataProtectionSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<GetDataProtectionSettingsCommandOutput>;
+  getDataProtectionSettings(
+    args: GetDataProtectionSettingsCommandInput,
+    cb: (err: any, data?: GetDataProtectionSettingsCommandOutput) => void
+  ): void;
+  getDataProtectionSettings(
+    args: GetDataProtectionSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: GetDataProtectionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetIdentityProviderCommand}
+   */
+  getIdentityProvider(
     args: GetIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<GetIdentityProviderCommandOutput>;
-  public getIdentityProvider(
+  getIdentityProvider(
     args: GetIdentityProviderCommandInput,
     cb: (err: any, data?: GetIdentityProviderCommandOutput) => void
   ): void;
-  public getIdentityProvider(
+  getIdentityProvider(
     args: GetIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: GetIdentityProviderCommandOutput) => void
   ): void;
-  public getIdentityProvider(
-    args: GetIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: GetIdentityProviderCommandOutput) => void
-  ): Promise<GetIdentityProviderCommandOutput> | void {
-    const command = new GetIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the network settings.</p>
+   * @see {@link GetIpAccessSettingsCommand}
    */
-  public getNetworkSettings(
+  getIpAccessSettings(
+    args: GetIpAccessSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<GetIpAccessSettingsCommandOutput>;
+  getIpAccessSettings(
+    args: GetIpAccessSettingsCommandInput,
+    cb: (err: any, data?: GetIpAccessSettingsCommandOutput) => void
+  ): void;
+  getIpAccessSettings(
+    args: GetIpAccessSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: GetIpAccessSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNetworkSettingsCommand}
+   */
+  getNetworkSettings(
     args: GetNetworkSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<GetNetworkSettingsCommandOutput>;
-  public getNetworkSettings(
+  getNetworkSettings(
     args: GetNetworkSettingsCommandInput,
     cb: (err: any, data?: GetNetworkSettingsCommandOutput) => void
   ): void;
-  public getNetworkSettings(
+  getNetworkSettings(
     args: GetNetworkSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: GetNetworkSettingsCommandOutput) => void
   ): void;
-  public getNetworkSettings(
-    args: GetNetworkSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetNetworkSettingsCommandOutput) => void),
-    cb?: (err: any, data?: GetNetworkSettingsCommandOutput) => void
-  ): Promise<GetNetworkSettingsCommandOutput> | void {
-    const command = new GetNetworkSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the web portal.</p>
+   * @see {@link GetPortalCommand}
    */
-  public getPortal(args: GetPortalCommandInput, options?: __HttpHandlerOptions): Promise<GetPortalCommandOutput>;
-  public getPortal(args: GetPortalCommandInput, cb: (err: any, data?: GetPortalCommandOutput) => void): void;
-  public getPortal(
+  getPortal(
     args: GetPortalCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<GetPortalCommandOutput>;
+  getPortal(
+    args: GetPortalCommandInput,
     cb: (err: any, data?: GetPortalCommandOutput) => void
   ): void;
-  public getPortal(
+  getPortal(
     args: GetPortalCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPortalCommandOutput) => void),
-    cb?: (err: any, data?: GetPortalCommandOutput) => void
-  ): Promise<GetPortalCommandOutput> | void {
-    const command = new GetPortalCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: GetPortalCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets the service provider metadata.</p>
+   * @see {@link GetPortalServiceProviderMetadataCommand}
    */
-  public getPortalServiceProviderMetadata(
+  getPortalServiceProviderMetadata(
     args: GetPortalServiceProviderMetadataCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<GetPortalServiceProviderMetadataCommandOutput>;
-  public getPortalServiceProviderMetadata(
+  getPortalServiceProviderMetadata(
     args: GetPortalServiceProviderMetadataCommandInput,
     cb: (err: any, data?: GetPortalServiceProviderMetadataCommandOutput) => void
   ): void;
-  public getPortalServiceProviderMetadata(
+  getPortalServiceProviderMetadata(
     args: GetPortalServiceProviderMetadataCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: GetPortalServiceProviderMetadataCommandOutput) => void
   ): void;
-  public getPortalServiceProviderMetadata(
-    args: GetPortalServiceProviderMetadataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPortalServiceProviderMetadataCommandOutput) => void),
-    cb?: (err: any, data?: GetPortalServiceProviderMetadataCommandOutput) => void
-  ): Promise<GetPortalServiceProviderMetadataCommandOutput> | void {
-    const command = new GetPortalServiceProviderMetadataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the trust store.</p>
+   * @see {@link GetSessionCommand}
    */
-  public getTrustStore(
+  getSession(
+    args: GetSessionCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<GetSessionCommandOutput>;
+  getSession(
+    args: GetSessionCommandInput,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+  getSession(
+    args: GetSessionCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: GetSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSessionLoggerCommand}
+   */
+  getSessionLogger(
+    args: GetSessionLoggerCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<GetSessionLoggerCommandOutput>;
+  getSessionLogger(
+    args: GetSessionLoggerCommandInput,
+    cb: (err: any, data?: GetSessionLoggerCommandOutput) => void
+  ): void;
+  getSessionLogger(
+    args: GetSessionLoggerCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: GetSessionLoggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrustStoreCommand}
+   */
+  getTrustStore(
     args: GetTrustStoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<GetTrustStoreCommandOutput>;
-  public getTrustStore(
+  getTrustStore(
     args: GetTrustStoreCommandInput,
     cb: (err: any, data?: GetTrustStoreCommandOutput) => void
   ): void;
-  public getTrustStore(
+  getTrustStore(
     args: GetTrustStoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: GetTrustStoreCommandOutput) => void
   ): void;
-  public getTrustStore(
-    args: GetTrustStoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTrustStoreCommandOutput) => void),
-    cb?: (err: any, data?: GetTrustStoreCommandOutput) => void
-  ): Promise<GetTrustStoreCommandOutput> | void {
-    const command = new GetTrustStoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the trust store certificate.</p>
+   * @see {@link GetTrustStoreCertificateCommand}
    */
-  public getTrustStoreCertificate(
+  getTrustStoreCertificate(
     args: GetTrustStoreCertificateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<GetTrustStoreCertificateCommandOutput>;
-  public getTrustStoreCertificate(
+  getTrustStoreCertificate(
     args: GetTrustStoreCertificateCommandInput,
     cb: (err: any, data?: GetTrustStoreCertificateCommandOutput) => void
   ): void;
-  public getTrustStoreCertificate(
+  getTrustStoreCertificate(
     args: GetTrustStoreCertificateCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: GetTrustStoreCertificateCommandOutput) => void
   ): void;
-  public getTrustStoreCertificate(
-    args: GetTrustStoreCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTrustStoreCertificateCommandOutput) => void),
-    cb?: (err: any, data?: GetTrustStoreCertificateCommandOutput) => void
-  ): Promise<GetTrustStoreCertificateCommandOutput> | void {
-    const command = new GetTrustStoreCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets user settings.</p>
+   * @see {@link GetUserAccessLoggingSettingsCommand}
    */
-  public getUserSettings(
+  getUserAccessLoggingSettings(
+    args: GetUserAccessLoggingSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<GetUserAccessLoggingSettingsCommandOutput>;
+  getUserAccessLoggingSettings(
+    args: GetUserAccessLoggingSettingsCommandInput,
+    cb: (err: any, data?: GetUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+  getUserAccessLoggingSettings(
+    args: GetUserAccessLoggingSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: GetUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUserSettingsCommand}
+   */
+  getUserSettings(
     args: GetUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<GetUserSettingsCommandOutput>;
-  public getUserSettings(
+  getUserSettings(
     args: GetUserSettingsCommandInput,
     cb: (err: any, data?: GetUserSettingsCommandOutput) => void
   ): void;
-  public getUserSettings(
+  getUserSettings(
     args: GetUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: GetUserSettingsCommandOutput) => void
   ): void;
-  public getUserSettings(
-    args: GetUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: GetUserSettingsCommandOutput) => void
-  ): Promise<GetUserSettingsCommandOutput> | void {
-    const command = new GetUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of browser settings.</p>
+   * @see {@link ListBrowserSettingsCommand}
    */
-  public listBrowserSettings(
+  listBrowserSettings(): Promise<ListBrowserSettingsCommandOutput>;
+  listBrowserSettings(
     args: ListBrowserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<ListBrowserSettingsCommandOutput>;
-  public listBrowserSettings(
+  listBrowserSettings(
     args: ListBrowserSettingsCommandInput,
     cb: (err: any, data?: ListBrowserSettingsCommandOutput) => void
   ): void;
-  public listBrowserSettings(
+  listBrowserSettings(
     args: ListBrowserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: ListBrowserSettingsCommandOutput) => void
   ): void;
-  public listBrowserSettings(
-    args: ListBrowserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBrowserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: ListBrowserSettingsCommandOutput) => void
-  ): Promise<ListBrowserSettingsCommandOutput> | void {
-    const command = new ListBrowserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of identity providers for a specific web portal.</p>
+   * @see {@link ListDataProtectionSettingsCommand}
    */
-  public listIdentityProviders(
+  listDataProtectionSettings(): Promise<ListDataProtectionSettingsCommandOutput>;
+  listDataProtectionSettings(
+    args: ListDataProtectionSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<ListDataProtectionSettingsCommandOutput>;
+  listDataProtectionSettings(
+    args: ListDataProtectionSettingsCommandInput,
+    cb: (err: any, data?: ListDataProtectionSettingsCommandOutput) => void
+  ): void;
+  listDataProtectionSettings(
+    args: ListDataProtectionSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: ListDataProtectionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListIdentityProvidersCommand}
+   */
+  listIdentityProviders(
     args: ListIdentityProvidersCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<ListIdentityProvidersCommandOutput>;
-  public listIdentityProviders(
+  listIdentityProviders(
     args: ListIdentityProvidersCommandInput,
     cb: (err: any, data?: ListIdentityProvidersCommandOutput) => void
   ): void;
-  public listIdentityProviders(
+  listIdentityProviders(
     args: ListIdentityProvidersCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: ListIdentityProvidersCommandOutput) => void
   ): void;
-  public listIdentityProviders(
-    args: ListIdentityProvidersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListIdentityProvidersCommandOutput) => void),
-    cb?: (err: any, data?: ListIdentityProvidersCommandOutput) => void
-  ): Promise<ListIdentityProvidersCommandOutput> | void {
-    const command = new ListIdentityProvidersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of network settings.</p>
+   * @see {@link ListIpAccessSettingsCommand}
    */
-  public listNetworkSettings(
+  listIpAccessSettings(): Promise<ListIpAccessSettingsCommandOutput>;
+  listIpAccessSettings(
+    args: ListIpAccessSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<ListIpAccessSettingsCommandOutput>;
+  listIpAccessSettings(
+    args: ListIpAccessSettingsCommandInput,
+    cb: (err: any, data?: ListIpAccessSettingsCommandOutput) => void
+  ): void;
+  listIpAccessSettings(
+    args: ListIpAccessSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: ListIpAccessSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNetworkSettingsCommand}
+   */
+  listNetworkSettings(): Promise<ListNetworkSettingsCommandOutput>;
+  listNetworkSettings(
     args: ListNetworkSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<ListNetworkSettingsCommandOutput>;
-  public listNetworkSettings(
+  listNetworkSettings(
     args: ListNetworkSettingsCommandInput,
     cb: (err: any, data?: ListNetworkSettingsCommandOutput) => void
   ): void;
-  public listNetworkSettings(
+  listNetworkSettings(
     args: ListNetworkSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: ListNetworkSettingsCommandOutput) => void
   ): void;
-  public listNetworkSettings(
-    args: ListNetworkSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNetworkSettingsCommandOutput) => void),
-    cb?: (err: any, data?: ListNetworkSettingsCommandOutput) => void
-  ): Promise<ListNetworkSettingsCommandOutput> | void {
-    const command = new ListNetworkSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list or web portals.</p>
+   * @see {@link ListPortalsCommand}
    */
-  public listPortals(args: ListPortalsCommandInput, options?: __HttpHandlerOptions): Promise<ListPortalsCommandOutput>;
-  public listPortals(args: ListPortalsCommandInput, cb: (err: any, data?: ListPortalsCommandOutput) => void): void;
-  public listPortals(
+  listPortals(): Promise<ListPortalsCommandOutput>;
+  listPortals(
     args: ListPortalsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<ListPortalsCommandOutput>;
+  listPortals(
+    args: ListPortalsCommandInput,
     cb: (err: any, data?: ListPortalsCommandOutput) => void
   ): void;
-  public listPortals(
+  listPortals(
     args: ListPortalsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPortalsCommandOutput) => void),
-    cb?: (err: any, data?: ListPortalsCommandOutput) => void
-  ): Promise<ListPortalsCommandOutput> | void {
-    const command = new ListPortalsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: ListPortalsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves a list of tags for a resource.</p>
+   * @see {@link ListSessionLoggersCommand}
    */
-  public listTagsForResource(
+  listSessionLoggers(): Promise<ListSessionLoggersCommandOutput>;
+  listSessionLoggers(
+    args: ListSessionLoggersCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<ListSessionLoggersCommandOutput>;
+  listSessionLoggers(
+    args: ListSessionLoggersCommandInput,
+    cb: (err: any, data?: ListSessionLoggersCommandOutput) => void
+  ): void;
+  listSessionLoggers(
+    args: ListSessionLoggersCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: ListSessionLoggersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   */
+  listSessions(
+    args: ListSessionsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<ListSessionsCommandOutput>;
+  listSessions(
+    args: ListSessionsCommandInput,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+  listSessions(
+    args: ListSessionsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: ListSessionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of trust store certificates.</p>
+   * @see {@link ListTrustStoreCertificatesCommand}
    */
-  public listTrustStoreCertificates(
+  listTrustStoreCertificates(
     args: ListTrustStoreCertificatesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<ListTrustStoreCertificatesCommandOutput>;
-  public listTrustStoreCertificates(
+  listTrustStoreCertificates(
     args: ListTrustStoreCertificatesCommandInput,
     cb: (err: any, data?: ListTrustStoreCertificatesCommandOutput) => void
   ): void;
-  public listTrustStoreCertificates(
+  listTrustStoreCertificates(
     args: ListTrustStoreCertificatesCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: ListTrustStoreCertificatesCommandOutput) => void
   ): void;
-  public listTrustStoreCertificates(
-    args: ListTrustStoreCertificatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTrustStoreCertificatesCommandOutput) => void),
-    cb?: (err: any, data?: ListTrustStoreCertificatesCommandOutput) => void
-  ): Promise<ListTrustStoreCertificatesCommandOutput> | void {
-    const command = new ListTrustStoreCertificatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of trust stores.</p>
+   * @see {@link ListTrustStoresCommand}
    */
-  public listTrustStores(
+  listTrustStores(): Promise<ListTrustStoresCommandOutput>;
+  listTrustStores(
     args: ListTrustStoresCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<ListTrustStoresCommandOutput>;
-  public listTrustStores(
+  listTrustStores(
     args: ListTrustStoresCommandInput,
     cb: (err: any, data?: ListTrustStoresCommandOutput) => void
   ): void;
-  public listTrustStores(
+  listTrustStores(
     args: ListTrustStoresCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: ListTrustStoresCommandOutput) => void
   ): void;
-  public listTrustStores(
-    args: ListTrustStoresCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTrustStoresCommandOutput) => void),
-    cb?: (err: any, data?: ListTrustStoresCommandOutput) => void
-  ): Promise<ListTrustStoresCommandOutput> | void {
-    const command = new ListTrustStoresCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves a list of user settings.</p>
+   * @see {@link ListUserAccessLoggingSettingsCommand}
    */
-  public listUserSettings(
+  listUserAccessLoggingSettings(): Promise<ListUserAccessLoggingSettingsCommandOutput>;
+  listUserAccessLoggingSettings(
+    args: ListUserAccessLoggingSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<ListUserAccessLoggingSettingsCommandOutput>;
+  listUserAccessLoggingSettings(
+    args: ListUserAccessLoggingSettingsCommandInput,
+    cb: (err: any, data?: ListUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+  listUserAccessLoggingSettings(
+    args: ListUserAccessLoggingSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: ListUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUserSettingsCommand}
+   */
+  listUserSettings(): Promise<ListUserSettingsCommandOutput>;
+  listUserSettings(
     args: ListUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<ListUserSettingsCommandOutput>;
-  public listUserSettings(
+  listUserSettings(
     args: ListUserSettingsCommandInput,
     cb: (err: any, data?: ListUserSettingsCommandOutput) => void
   ): void;
-  public listUserSettings(
+  listUserSettings(
     args: ListUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: ListUserSettingsCommandOutput) => void
   ): void;
-  public listUserSettings(
-    args: ListUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: ListUserSettingsCommandOutput) => void
-  ): Promise<ListUserSettingsCommandOutput> | void {
-    const command = new ListUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds or overwrites one or more tags for the specified resource.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes one or more tags from the specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates browser settings.</p>
+   * @see {@link UpdateBrowserSettingsCommand}
    */
-  public updateBrowserSettings(
+  updateBrowserSettings(
     args: UpdateBrowserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<UpdateBrowserSettingsCommandOutput>;
-  public updateBrowserSettings(
+  updateBrowserSettings(
     args: UpdateBrowserSettingsCommandInput,
     cb: (err: any, data?: UpdateBrowserSettingsCommandOutput) => void
   ): void;
-  public updateBrowserSettings(
+  updateBrowserSettings(
     args: UpdateBrowserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: UpdateBrowserSettingsCommandOutput) => void
   ): void;
-  public updateBrowserSettings(
-    args: UpdateBrowserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBrowserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBrowserSettingsCommandOutput) => void
-  ): Promise<UpdateBrowserSettingsCommandOutput> | void {
-    const command = new UpdateBrowserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the identity provider. </p>
+   * @see {@link UpdateDataProtectionSettingsCommand}
    */
-  public updateIdentityProvider(
+  updateDataProtectionSettings(
+    args: UpdateDataProtectionSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<UpdateDataProtectionSettingsCommandOutput>;
+  updateDataProtectionSettings(
+    args: UpdateDataProtectionSettingsCommandInput,
+    cb: (err: any, data?: UpdateDataProtectionSettingsCommandOutput) => void
+  ): void;
+  updateDataProtectionSettings(
+    args: UpdateDataProtectionSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: UpdateDataProtectionSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateIdentityProviderCommand}
+   */
+  updateIdentityProvider(
     args: UpdateIdentityProviderCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<UpdateIdentityProviderCommandOutput>;
-  public updateIdentityProvider(
+  updateIdentityProvider(
     args: UpdateIdentityProviderCommandInput,
     cb: (err: any, data?: UpdateIdentityProviderCommandOutput) => void
   ): void;
-  public updateIdentityProvider(
+  updateIdentityProvider(
     args: UpdateIdentityProviderCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: UpdateIdentityProviderCommandOutput) => void
   ): void;
-  public updateIdentityProvider(
-    args: UpdateIdentityProviderCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateIdentityProviderCommandOutput) => void),
-    cb?: (err: any, data?: UpdateIdentityProviderCommandOutput) => void
-  ): Promise<UpdateIdentityProviderCommandOutput> | void {
-    const command = new UpdateIdentityProviderCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates network settings.</p>
+   * @see {@link UpdateIpAccessSettingsCommand}
    */
-  public updateNetworkSettings(
+  updateIpAccessSettings(
+    args: UpdateIpAccessSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<UpdateIpAccessSettingsCommandOutput>;
+  updateIpAccessSettings(
+    args: UpdateIpAccessSettingsCommandInput,
+    cb: (err: any, data?: UpdateIpAccessSettingsCommandOutput) => void
+  ): void;
+  updateIpAccessSettings(
+    args: UpdateIpAccessSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: UpdateIpAccessSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNetworkSettingsCommand}
+   */
+  updateNetworkSettings(
     args: UpdateNetworkSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<UpdateNetworkSettingsCommandOutput>;
-  public updateNetworkSettings(
+  updateNetworkSettings(
     args: UpdateNetworkSettingsCommandInput,
     cb: (err: any, data?: UpdateNetworkSettingsCommandOutput) => void
   ): void;
-  public updateNetworkSettings(
+  updateNetworkSettings(
     args: UpdateNetworkSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: UpdateNetworkSettingsCommandOutput) => void
   ): void;
-  public updateNetworkSettings(
-    args: UpdateNetworkSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateNetworkSettingsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateNetworkSettingsCommandOutput) => void
-  ): Promise<UpdateNetworkSettingsCommandOutput> | void {
-    const command = new UpdateNetworkSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a web portal.</p>
+   * @see {@link UpdatePortalCommand}
    */
-  public updatePortal(
+  updatePortal(
     args: UpdatePortalCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<UpdatePortalCommandOutput>;
-  public updatePortal(args: UpdatePortalCommandInput, cb: (err: any, data?: UpdatePortalCommandOutput) => void): void;
-  public updatePortal(
+  updatePortal(
     args: UpdatePortalCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdatePortalCommandOutput) => void
   ): void;
-  public updatePortal(
+  updatePortal(
     args: UpdatePortalCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePortalCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePortalCommandOutput) => void
-  ): Promise<UpdatePortalCommandOutput> | void {
-    const command = new UpdatePortalCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: UpdatePortalCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the trust store.</p>
+   * @see {@link UpdateSessionLoggerCommand}
    */
-  public updateTrustStore(
+  updateSessionLogger(
+    args: UpdateSessionLoggerCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<UpdateSessionLoggerCommandOutput>;
+  updateSessionLogger(
+    args: UpdateSessionLoggerCommandInput,
+    cb: (err: any, data?: UpdateSessionLoggerCommandOutput) => void
+  ): void;
+  updateSessionLogger(
+    args: UpdateSessionLoggerCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: UpdateSessionLoggerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateTrustStoreCommand}
+   */
+  updateTrustStore(
     args: UpdateTrustStoreCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<UpdateTrustStoreCommandOutput>;
-  public updateTrustStore(
+  updateTrustStore(
     args: UpdateTrustStoreCommandInput,
     cb: (err: any, data?: UpdateTrustStoreCommandOutput) => void
   ): void;
-  public updateTrustStore(
+  updateTrustStore(
     args: UpdateTrustStoreCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: UpdateTrustStoreCommandOutput) => void
   ): void;
-  public updateTrustStore(
-    args: UpdateTrustStoreCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTrustStoreCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTrustStoreCommandOutput) => void
-  ): Promise<UpdateTrustStoreCommandOutput> | void {
-    const command = new UpdateTrustStoreCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the user settings.</p>
+   * @see {@link UpdateUserAccessLoggingSettingsCommand}
    */
-  public updateUserSettings(
+  updateUserAccessLoggingSettings(
+    args: UpdateUserAccessLoggingSettingsCommandInput,
+    options?: WorkSpacesWebRequestOptions
+  ): Promise<UpdateUserAccessLoggingSettingsCommandOutput>;
+  updateUserAccessLoggingSettings(
+    args: UpdateUserAccessLoggingSettingsCommandInput,
+    cb: (err: any, data?: UpdateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+  updateUserAccessLoggingSettings(
+    args: UpdateUserAccessLoggingSettingsCommandInput,
+    options: WorkSpacesWebRequestOptions,
+    cb: (err: any, data?: UpdateUserAccessLoggingSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUserSettingsCommand}
+   */
+  updateUserSettings(
     args: UpdateUserSettingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: WorkSpacesWebRequestOptions
   ): Promise<UpdateUserSettingsCommandOutput>;
-  public updateUserSettings(
+  updateUserSettings(
     args: UpdateUserSettingsCommandInput,
     cb: (err: any, data?: UpdateUserSettingsCommandOutput) => void
   ): void;
-  public updateUserSettings(
+  updateUserSettings(
     args: UpdateUserSettingsCommandInput,
-    options: __HttpHandlerOptions,
+    options: WorkSpacesWebRequestOptions,
     cb: (err: any, data?: UpdateUserSettingsCommandOutput) => void
   ): void;
-  public updateUserSettings(
-    args: UpdateUserSettingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUserSettingsCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUserSettingsCommandOutput) => void
-  ): Promise<UpdateUserSettingsCommandOutput> | void {
-    const command = new UpdateUserSettingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListBrowserSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBrowserSettingsCommandOutput}.
+   */
+  paginateListBrowserSettings(
+    args?: ListBrowserSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBrowserSettingsCommandOutput>;
+
+  /**
+   * @see {@link ListDataProtectionSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDataProtectionSettingsCommandOutput}.
+   */
+  paginateListDataProtectionSettings(
+    args?: ListDataProtectionSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDataProtectionSettingsCommandOutput>;
+
+  /**
+   * @see {@link ListIdentityProvidersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIdentityProvidersCommandOutput}.
+   */
+  paginateListIdentityProviders(
+    args: ListIdentityProvidersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIdentityProvidersCommandOutput>;
+
+  /**
+   * @see {@link ListIpAccessSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListIpAccessSettingsCommandOutput}.
+   */
+  paginateListIpAccessSettings(
+    args?: ListIpAccessSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListIpAccessSettingsCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkSettingsCommandOutput}.
+   */
+  paginateListNetworkSettings(
+    args?: ListNetworkSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkSettingsCommandOutput>;
+
+  /**
+   * @see {@link ListPortalsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPortalsCommandOutput}.
+   */
+  paginateListPortals(
+    args?: ListPortalsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPortalsCommandOutput>;
+
+  /**
+   * @see {@link ListSessionLoggersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionLoggersCommandOutput}.
+   */
+  paginateListSessionLoggers(
+    args?: ListSessionLoggersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionLoggersCommandOutput>;
+
+  /**
+   * @see {@link ListSessionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSessionsCommandOutput}.
+   */
+  paginateListSessions(
+    args: ListSessionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSessionsCommandOutput>;
+
+  /**
+   * @see {@link ListTrustStoreCertificatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrustStoreCertificatesCommandOutput}.
+   */
+  paginateListTrustStoreCertificates(
+    args: ListTrustStoreCertificatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrustStoreCertificatesCommandOutput>;
+
+  /**
+   * @see {@link ListTrustStoresCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrustStoresCommandOutput}.
+   */
+  paginateListTrustStores(
+    args?: ListTrustStoresCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrustStoresCommandOutput>;
+
+  /**
+   * @see {@link ListUserAccessLoggingSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUserAccessLoggingSettingsCommandOutput}.
+   */
+  paginateListUserAccessLoggingSettings(
+    args?: ListUserAccessLoggingSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUserAccessLoggingSettingsCommandOutput>;
+
+  /**
+   * @see {@link ListUserSettingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUserSettingsCommandOutput}.
+   */
+  paginateListUserSettings(
+    args?: ListUserSettingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUserSettingsCommandOutput>;
 }
+
+/**
+ * <p>Amazon WorkSpaces Secure Browser is a low cost, fully managed WorkSpace built specifically to facilitate secure, web-based workloads. WorkSpaces Secure Browser makes it easy for customers to safely provide their employees with access to internal websites and SaaS web applications without the administrative burden of appliances or specialized client software. WorkSpaces Secure Browser provides simple policy tools tailored for user interactions, while offloading common tasks like capacity management, scaling, and maintaining browser images.</p>
+ * @public
+ */
+export class WorkSpacesWeb extends WorkSpacesWebClient implements WorkSpacesWeb {}
+createAggregatedClient(commands, WorkSpacesWeb, { paginators });

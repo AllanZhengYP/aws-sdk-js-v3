@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTTwinMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTTwinMakerClient";
-import {
-  GetSceneRequest,
-  GetSceneRequestFilterSensitiveLog,
-  GetSceneResponse,
-  GetSceneResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetSceneCommand,
-  serializeAws_restJson1GetSceneCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSceneRequest, GetSceneResponse } from "../models/models_0";
+import { GetScene$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSceneCommand}.
+ */
 export interface GetSceneCommandInput extends GetSceneRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSceneCommand}.
+ */
 export interface GetSceneCommandOutput extends GetSceneResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,82 @@ export interface GetSceneCommandOutput extends GetSceneResponse, __MetadataBeare
  * ```javascript
  * import { IoTTwinMakerClient, GetSceneCommand } from "@aws-sdk/client-iottwinmaker"; // ES Modules import
  * // const { IoTTwinMakerClient, GetSceneCommand } = require("@aws-sdk/client-iottwinmaker"); // CommonJS import
+ * // import type { IoTTwinMakerClientConfig } from "@aws-sdk/client-iottwinmaker";
+ * const config = {}; // type is IoTTwinMakerClientConfig
  * const client = new IoTTwinMakerClient(config);
+ * const input = { // GetSceneRequest
+ *   workspaceId: "STRING_VALUE", // required
+ *   sceneId: "STRING_VALUE", // required
+ * };
  * const command = new GetSceneCommand(input);
  * const response = await client.send(command);
+ * // { // GetSceneResponse
+ * //   workspaceId: "STRING_VALUE", // required
+ * //   sceneId: "STRING_VALUE", // required
+ * //   contentLocation: "STRING_VALUE", // required
+ * //   arn: "STRING_VALUE", // required
+ * //   creationDateTime: new Date("TIMESTAMP"), // required
+ * //   updateDateTime: new Date("TIMESTAMP"), // required
+ * //   description: "STRING_VALUE",
+ * //   capabilities: [ // SceneCapabilities
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   sceneMetadata: { // SceneMetadataMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   generatedSceneMetadata: { // GeneratedSceneMetadataMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   error: { // SceneError
+ * //     code: "STRING_VALUE",
+ * //     message: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSceneCommandInput - {@link GetSceneCommandInput}
+ * @returns {@link GetSceneCommandOutput}
  * @see {@link GetSceneCommandInput} for command's `input` shape.
  * @see {@link GetSceneCommandOutput} for command's `response` shape.
  * @see {@link IoTTwinMakerClientResolvedConfig | config} for IoTTwinMakerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource wasn't found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Failed</p>
+ *
+ * @throws {@link IoTTwinMakerServiceException}
+ * <p>Base exception class for all service exceptions from IoTTwinMaker service.</p>
+ *
+ *
+ * @public
  */
-export class GetSceneCommand extends $Command<
-  GetSceneCommandInput,
-  GetSceneCommandOutput,
-  IoTTwinMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSceneCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTTwinMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSceneCommandInput, GetSceneCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTTwinMakerClient";
-    const commandName = "GetSceneCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSceneRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetSceneResponseFilterSensitiveLog,
+export class GetSceneCommand extends command<GetSceneCommandInput, GetSceneCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetScene",
+  GetScene$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSceneRequest;
+      output: GetSceneResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSceneCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSceneCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSceneCommandOutput> {
-    return deserializeAws_restJson1GetSceneCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSceneCommandInput;
+      output: GetSceneCommandOutput;
+    };
+  };
 }

@@ -1,61 +1,24 @@
 // smithy-typescript generated code
-import { Paginator } from "@aws-sdk/types";
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   DescribeReplicationInstancesCommand,
   DescribeReplicationInstancesCommandInput,
   DescribeReplicationInstancesCommandOutput,
 } from "../commands/DescribeReplicationInstancesCommand";
-import { DatabaseMigrationService } from "../DatabaseMigrationService";
 import { DatabaseMigrationServiceClient } from "../DatabaseMigrationServiceClient";
-import { DatabaseMigrationServicePaginationConfiguration } from "./Interfaces";
+import type { DatabaseMigrationServicePaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: DatabaseMigrationServiceClient,
-  input: DescribeReplicationInstancesCommandInput,
-  ...args: any
-): Promise<DescribeReplicationInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new DescribeReplicationInstancesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: DatabaseMigrationService,
-  input: DescribeReplicationInstancesCommandInput,
-  ...args: any
-): Promise<DescribeReplicationInstancesCommandOutput> => {
-  // @ts-ignore
-  return await client.describeReplicationInstances(input, ...args);
-};
-export async function* paginateDescribeReplicationInstances(
+export const paginateDescribeReplicationInstances: (
   config: DatabaseMigrationServicePaginationConfiguration,
   input: DescribeReplicationInstancesCommandInput,
-  ...additionalArguments: any
-): Paginator<DescribeReplicationInstancesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.Marker
-  let token: typeof input.Marker | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: DescribeReplicationInstancesCommandOutput;
-  while (hasNext) {
-    input.Marker = token;
-    input["MaxRecords"] = config.pageSize;
-    if (config.client instanceof DatabaseMigrationService) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof DatabaseMigrationServiceClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected DatabaseMigrationService | DatabaseMigrationServiceClient");
-    }
-    yield page;
-    const prevToken = token;
-    token = page.Marker;
-    hasNext = !!(token && (!config.stopOnSameToken || token !== prevToken));
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<DescribeReplicationInstancesCommandOutput> = createPaginator<
+  DatabaseMigrationServicePaginationConfiguration,
+  DescribeReplicationInstancesCommandInput,
+  DescribeReplicationInstancesCommandOutput
+>(DatabaseMigrationServiceClient, DescribeReplicationInstancesCommand, "Marker", "Marker", "MaxRecords");

@@ -1,111 +1,160 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FSxClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FSxClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   UpdateDataRepositoryAssociationRequest,
-  UpdateDataRepositoryAssociationRequestFilterSensitiveLog,
   UpdateDataRepositoryAssociationResponse,
-  UpdateDataRepositoryAssociationResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateDataRepositoryAssociationCommand,
-  serializeAws_json1_1UpdateDataRepositoryAssociationCommand,
-} from "../protocols/Aws_json1_1";
+import { UpdateDataRepositoryAssociation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDataRepositoryAssociationCommand}.
+ */
 export interface UpdateDataRepositoryAssociationCommandInput extends UpdateDataRepositoryAssociationRequest {}
-export interface UpdateDataRepositoryAssociationCommandOutput
-  extends UpdateDataRepositoryAssociationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDataRepositoryAssociationCommand}.
+ */
+export interface UpdateDataRepositoryAssociationCommandOutput extends UpdateDataRepositoryAssociationResponse, __MetadataBearer {}
 
 /**
  * <p>Updates the configuration of an existing data repository association
- *             on an Amazon FSx for Lustre file system. Data repository associations are
- *             supported only for file systems with the <code>Persistent_2</code> deployment type.</p>
+ *             on an Amazon FSx for Lustre file system. Data repository associations
+ *             are supported on all FSx for Lustre 2.12 and 2.15 file systems,
+ *             excluding <code>scratch_1</code> deployment type.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { FSxClient, UpdateDataRepositoryAssociationCommand } from "@aws-sdk/client-fsx"; // ES Modules import
  * // const { FSxClient, UpdateDataRepositoryAssociationCommand } = require("@aws-sdk/client-fsx"); // CommonJS import
+ * // import type { FSxClientConfig } from "@aws-sdk/client-fsx";
+ * const config = {}; // type is FSxClientConfig
  * const client = new FSxClient(config);
+ * const input = { // UpdateDataRepositoryAssociationRequest
+ *   AssociationId: "STRING_VALUE", // required
+ *   ClientRequestToken: "STRING_VALUE",
+ *   ImportedFileChunkSize: Number("int"),
+ *   S3: { // S3DataRepositoryConfiguration
+ *     AutoImportPolicy: { // AutoImportPolicy
+ *       Events: [ // EventTypes
+ *         "NEW" || "CHANGED" || "DELETED",
+ *       ],
+ *     },
+ *     AutoExportPolicy: { // AutoExportPolicy
+ *       Events: [
+ *         "NEW" || "CHANGED" || "DELETED",
+ *       ],
+ *     },
+ *   },
+ * };
  * const command = new UpdateDataRepositoryAssociationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateDataRepositoryAssociationResponse
+ * //   Association: { // DataRepositoryAssociation
+ * //     AssociationId: "STRING_VALUE",
+ * //     ResourceARN: "STRING_VALUE",
+ * //     FileSystemId: "STRING_VALUE",
+ * //     Lifecycle: "CREATING" || "AVAILABLE" || "MISCONFIGURED" || "UPDATING" || "DELETING" || "FAILED",
+ * //     FailureDetails: { // DataRepositoryFailureDetails
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //     FileSystemPath: "STRING_VALUE",
+ * //     DataRepositoryPath: "STRING_VALUE",
+ * //     BatchImportMetaDataOnCreate: true || false,
+ * //     ImportedFileChunkSize: Number("int"),
+ * //     S3: { // S3DataRepositoryConfiguration
+ * //       AutoImportPolicy: { // AutoImportPolicy
+ * //         Events: [ // EventTypes
+ * //           "NEW" || "CHANGED" || "DELETED",
+ * //         ],
+ * //       },
+ * //       AutoExportPolicy: { // AutoExportPolicy
+ * //         Events: [
+ * //           "NEW" || "CHANGED" || "DELETED",
+ * //         ],
+ * //       },
+ * //     },
+ * //     Tags: [ // Tags
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     FileCacheId: "STRING_VALUE",
+ * //     FileCachePath: "STRING_VALUE",
+ * //     DataRepositorySubdirectories: [ // SubDirectoriesPaths
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     NFS: { // NFSDataRepositoryConfiguration
+ * //       Version: "NFS3", // required
+ * //       DnsIps: [ // RepositoryDnsIps
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       AutoExportPolicy: {
+ * //         Events: [
+ * //           "NEW" || "CHANGED" || "DELETED",
+ * //         ],
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateDataRepositoryAssociationCommandInput - {@link UpdateDataRepositoryAssociationCommandInput}
+ * @returns {@link UpdateDataRepositoryAssociationCommandOutput}
  * @see {@link UpdateDataRepositoryAssociationCommandInput} for command's `input` shape.
  * @see {@link UpdateDataRepositoryAssociationCommandOutput} for command's `response` shape.
  * @see {@link FSxClientResolvedConfig | config} for FSxClient's `config` shape.
  *
+ * @throws {@link BadRequest} (client fault)
+ *  <p>A generic error indicating a failure with a client request.</p>
+ *
+ * @throws {@link DataRepositoryAssociationNotFound} (client fault)
+ *  <p>No data repository associations were found based upon the supplied parameters.</p>
+ *
+ * @throws {@link IncompatibleParameterError} (client fault)
+ *  <p>The error returned when a second request is received with the same client request
+ *             token but different parameters settings. A client request token should always uniquely
+ *             identify a single request.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>A generic error indicating a server-side failure.</p>
+ *
+ * @throws {@link ServiceLimitExceeded} (client fault)
+ *  <p>An error indicating that a particular service limit was exceeded. You can increase
+ *             some service limits by contacting Amazon Web Services Support.</p>
+ *
+ * @throws {@link FSxServiceException}
+ * <p>Base exception class for all service exceptions from FSx service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDataRepositoryAssociationCommand extends $Command<
-  UpdateDataRepositoryAssociationCommandInput,
-  UpdateDataRepositoryAssociationCommandOutput,
-  FSxClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDataRepositoryAssociationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FSxClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDataRepositoryAssociationCommandInput, UpdateDataRepositoryAssociationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FSxClient";
-    const commandName = "UpdateDataRepositoryAssociationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDataRepositoryAssociationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateDataRepositoryAssociationResponseFilterSensitiveLog,
+export class UpdateDataRepositoryAssociationCommand extends command<UpdateDataRepositoryAssociationCommandInput, UpdateDataRepositoryAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDataRepositoryAssociation",
+  UpdateDataRepositoryAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDataRepositoryAssociationRequest;
+      output: UpdateDataRepositoryAssociationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateDataRepositoryAssociationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateDataRepositoryAssociationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateDataRepositoryAssociationCommandOutput> {
-    return deserializeAws_json1_1UpdateDataRepositoryAssociationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDataRepositoryAssociationCommandInput;
+      output: UpdateDataRepositoryAssociationCommandOutput;
+    };
+  };
 }

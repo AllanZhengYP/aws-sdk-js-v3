@@ -1,34 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetReservedNodeExchangeConfigurationOptionsInputMessage,
-  GetReservedNodeExchangeConfigurationOptionsInputMessageFilterSensitiveLog,
   GetReservedNodeExchangeConfigurationOptionsOutputMessage,
-  GetReservedNodeExchangeConfigurationOptionsOutputMessageFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_queryGetReservedNodeExchangeConfigurationOptionsCommand,
-  serializeAws_queryGetReservedNodeExchangeConfigurationOptionsCommand,
-} from "../protocols/Aws_query";
-import { RedshiftClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RedshiftClient";
+} from "../models/models_0";
+import { GetReservedNodeExchangeConfigurationOptions$ } from "../schemas/schemas_0";
 
-export interface GetReservedNodeExchangeConfigurationOptionsCommandInput
-  extends GetReservedNodeExchangeConfigurationOptionsInputMessage {}
-export interface GetReservedNodeExchangeConfigurationOptionsCommandOutput
-  extends GetReservedNodeExchangeConfigurationOptionsOutputMessage,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetReservedNodeExchangeConfigurationOptionsCommand}.
+ */
+export interface GetReservedNodeExchangeConfigurationOptionsCommandInput extends GetReservedNodeExchangeConfigurationOptionsInputMessage {}
+/**
+ * @public
+ *
+ * The output of {@link GetReservedNodeExchangeConfigurationOptionsCommand}.
+ */
+export interface GetReservedNodeExchangeConfigurationOptionsCommandOutput extends GetReservedNodeExchangeConfigurationOptionsOutputMessage, __MetadataBearer {}
 
 /**
  * <p>Gets the configuration options for the reserved-node exchange. These options
@@ -39,77 +34,118 @@ export interface GetReservedNodeExchangeConfigurationOptionsCommandOutput
  * ```javascript
  * import { RedshiftClient, GetReservedNodeExchangeConfigurationOptionsCommand } from "@aws-sdk/client-redshift"; // ES Modules import
  * // const { RedshiftClient, GetReservedNodeExchangeConfigurationOptionsCommand } = require("@aws-sdk/client-redshift"); // CommonJS import
+ * // import type { RedshiftClientConfig } from "@aws-sdk/client-redshift";
+ * const config = {}; // type is RedshiftClientConfig
  * const client = new RedshiftClient(config);
+ * const input = { // GetReservedNodeExchangeConfigurationOptionsInputMessage
+ *   ActionType: "restore-cluster" || "resize-cluster", // required
+ *   ClusterIdentifier: "STRING_VALUE",
+ *   SnapshotIdentifier: "STRING_VALUE",
+ *   MaxRecords: Number("int"),
+ *   Marker: "STRING_VALUE",
+ * };
  * const command = new GetReservedNodeExchangeConfigurationOptionsCommand(input);
  * const response = await client.send(command);
+ * // { // GetReservedNodeExchangeConfigurationOptionsOutputMessage
+ * //   Marker: "STRING_VALUE",
+ * //   ReservedNodeConfigurationOptionList: [ // ReservedNodeConfigurationOptionList
+ * //     { // ReservedNodeConfigurationOption
+ * //       SourceReservedNode: { // ReservedNode
+ * //         ReservedNodeId: "STRING_VALUE",
+ * //         ReservedNodeOfferingId: "STRING_VALUE",
+ * //         NodeType: "STRING_VALUE",
+ * //         StartTime: new Date("TIMESTAMP"),
+ * //         Duration: Number("int"),
+ * //         FixedPrice: Number("double"),
+ * //         UsagePrice: Number("double"),
+ * //         CurrencyCode: "STRING_VALUE",
+ * //         NodeCount: Number("int"),
+ * //         State: "STRING_VALUE",
+ * //         OfferingType: "STRING_VALUE",
+ * //         RecurringCharges: [ // RecurringChargeList
+ * //           { // RecurringCharge
+ * //             RecurringChargeAmount: Number("double"),
+ * //             RecurringChargeFrequency: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         ReservedNodeOfferingType: "Regular" || "Upgradable",
+ * //       },
+ * //       TargetReservedNodeCount: Number("int"),
+ * //       TargetReservedNodeOffering: { // ReservedNodeOffering
+ * //         ReservedNodeOfferingId: "STRING_VALUE",
+ * //         NodeType: "STRING_VALUE",
+ * //         Duration: Number("int"),
+ * //         FixedPrice: Number("double"),
+ * //         UsagePrice: Number("double"),
+ * //         CurrencyCode: "STRING_VALUE",
+ * //         OfferingType: "STRING_VALUE",
+ * //         RecurringCharges: [
+ * //           {
+ * //             RecurringChargeAmount: Number("double"),
+ * //             RecurringChargeFrequency: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         ReservedNodeOfferingType: "Regular" || "Upgradable",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetReservedNodeExchangeConfigurationOptionsCommandInput - {@link GetReservedNodeExchangeConfigurationOptionsCommandInput}
+ * @returns {@link GetReservedNodeExchangeConfigurationOptionsCommandOutput}
  * @see {@link GetReservedNodeExchangeConfigurationOptionsCommandInput} for command's `input` shape.
  * @see {@link GetReservedNodeExchangeConfigurationOptionsCommandOutput} for command's `response` shape.
  * @see {@link RedshiftClientResolvedConfig | config} for RedshiftClient's `config` shape.
  *
+ * @throws {@link ClusterNotFoundFault} (client fault)
+ *  <p>The <code>ClusterIdentifier</code> parameter does not refer to an existing cluster.
+ *         </p>
+ *
+ * @throws {@link ClusterSnapshotNotFoundFault} (client fault)
+ *  <p>The snapshot identifier does not refer to an existing cluster snapshot.</p>
+ *
+ * @throws {@link DependentServiceUnavailableFault} (client fault)
+ *  <p>Your request cannot be completed because a dependent internal service is
+ *             temporarily unavailable. Wait 30 to 60 seconds and try again.</p>
+ *
+ * @throws {@link InvalidReservedNodeStateFault} (client fault)
+ *  <p>Indicates that the Reserved Node being exchanged is not in an active state.</p>
+ *
+ * @throws {@link ReservedNodeAlreadyMigratedFault} (client fault)
+ *  <p>Indicates that the reserved node has already been exchanged.</p>
+ *
+ * @throws {@link ReservedNodeNotFoundFault} (client fault)
+ *  <p>The specified reserved compute node not found.</p>
+ *
+ * @throws {@link ReservedNodeOfferingNotFoundFault} (client fault)
+ *  <p>Specified offering does not exist.</p>
+ *
+ * @throws {@link UnsupportedOperationFault} (client fault)
+ *  <p>The requested operation isn't supported.</p>
+ *
+ * @throws {@link RedshiftServiceException}
+ * <p>Base exception class for all service exceptions from Redshift service.</p>
+ *
+ *
+ * @public
  */
-export class GetReservedNodeExchangeConfigurationOptionsCommand extends $Command<
-  GetReservedNodeExchangeConfigurationOptionsCommandInput,
-  GetReservedNodeExchangeConfigurationOptionsCommandOutput,
-  RedshiftClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetReservedNodeExchangeConfigurationOptionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    GetReservedNodeExchangeConfigurationOptionsCommandInput,
-    GetReservedNodeExchangeConfigurationOptionsCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftClient";
-    const commandName = "GetReservedNodeExchangeConfigurationOptionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetReservedNodeExchangeConfigurationOptionsInputMessageFilterSensitiveLog,
-      outputFilterSensitiveLog: GetReservedNodeExchangeConfigurationOptionsOutputMessageFilterSensitiveLog,
+export class GetReservedNodeExchangeConfigurationOptionsCommand extends command<GetReservedNodeExchangeConfigurationOptionsCommandInput, GetReservedNodeExchangeConfigurationOptionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetReservedNodeExchangeConfigurationOptions",
+  GetReservedNodeExchangeConfigurationOptions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetReservedNodeExchangeConfigurationOptionsInputMessage;
+      output: GetReservedNodeExchangeConfigurationOptionsOutputMessage;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetReservedNodeExchangeConfigurationOptionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_queryGetReservedNodeExchangeConfigurationOptionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetReservedNodeExchangeConfigurationOptionsCommandOutput> {
-    return deserializeAws_queryGetReservedNodeExchangeConfigurationOptionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetReservedNodeExchangeConfigurationOptionsCommandInput;
+      output: GetReservedNodeExchangeConfigurationOptionsCommandOutput;
+    };
+  };
 }

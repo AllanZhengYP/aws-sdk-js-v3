@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetRepositorySyncStatusInput,
-  GetRepositorySyncStatusInputFilterSensitiveLog,
-  GetRepositorySyncStatusOutput,
-  GetRepositorySyncStatusOutputFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_0GetRepositorySyncStatusCommand,
-  serializeAws_json1_0GetRepositorySyncStatusCommand,
-} from "../protocols/Aws_json1_0";
-import { ProtonClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ProtonClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRepositorySyncStatusInput, GetRepositorySyncStatusOutput } from "../models/models_0";
+import { GetRepositorySyncStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRepositorySyncStatusCommand}.
+ */
 export interface GetRepositorySyncStatusCommandInput extends GetRepositorySyncStatusInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetRepositorySyncStatusCommand}.
+ */
 export interface GetRepositorySyncStatusCommandOutput extends GetRepositorySyncStatusOutput, __MetadataBearer {}
 
 /**
@@ -33,76 +28,86 @@ export interface GetRepositorySyncStatusCommandOutput extends GetRepositorySyncS
  *             <p>A repository sync status isn't tied to the Proton Repository resource (or any other Proton resource). Therefore, tags on an Proton Repository resource
  *         have no effect on this action. Specifically, you can't use these tags to control access to this action using Attribute-based access control
  *         (ABAC).</p>
- *             <p>For more information about ABAC, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/security_iam_service-with-iam.html#security_iam_service-with-iam-tags">ABAC</a> in the <i>Proton
- *           Administrator Guide</i>.</p>
+ *             <p>For more information about ABAC, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-tags">ABAC</a> in the <i>Proton User
+ *           Guide</i>.</p>
  *          </note>
+ *
+ * @deprecated (since 10/07/2025) AWS Proton is not accepting new customers.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ProtonClient, GetRepositorySyncStatusCommand } from "@aws-sdk/client-proton"; // ES Modules import
  * // const { ProtonClient, GetRepositorySyncStatusCommand } = require("@aws-sdk/client-proton"); // CommonJS import
+ * // import type { ProtonClientConfig } from "@aws-sdk/client-proton";
+ * const config = {}; // type is ProtonClientConfig
  * const client = new ProtonClient(config);
+ * const input = { // GetRepositorySyncStatusInput
+ *   repositoryName: "STRING_VALUE", // required
+ *   repositoryProvider: "STRING_VALUE", // required
+ *   branch: "STRING_VALUE", // required
+ *   syncType: "STRING_VALUE", // required
+ * };
  * const command = new GetRepositorySyncStatusCommand(input);
  * const response = await client.send(command);
+ * // { // GetRepositorySyncStatusOutput
+ * //   latestSync: { // RepositorySyncAttempt
+ * //     startedAt: new Date("TIMESTAMP"), // required
+ * //     status: "STRING_VALUE", // required
+ * //     events: [ // RepositorySyncEvents // required
+ * //       { // RepositorySyncEvent
+ * //         type: "STRING_VALUE", // required
+ * //         externalId: "STRING_VALUE",
+ * //         time: new Date("TIMESTAMP"), // required
+ * //         event: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetRepositorySyncStatusCommandInput - {@link GetRepositorySyncStatusCommandInput}
+ * @returns {@link GetRepositorySyncStatusCommandOutput}
  * @see {@link GetRepositorySyncStatusCommandInput} for command's `input` shape.
  * @see {@link GetRepositorySyncStatusCommandOutput} for command's `response` shape.
  * @see {@link ProtonClientResolvedConfig | config} for ProtonClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>There <i>isn't</i> sufficient access for performing this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request failed to register with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource <i>wasn't</i> found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input is invalid or an out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ProtonServiceException}
+ * <p>Base exception class for all service exceptions from Proton service.</p>
+ *
+ *
+ * @public
  */
-export class GetRepositorySyncStatusCommand extends $Command<
-  GetRepositorySyncStatusCommandInput,
-  GetRepositorySyncStatusCommandOutput,
-  ProtonClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRepositorySyncStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ProtonClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRepositorySyncStatusCommandInput, GetRepositorySyncStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ProtonClient";
-    const commandName = "GetRepositorySyncStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRepositorySyncStatusInputFilterSensitiveLog,
-      outputFilterSensitiveLog: GetRepositorySyncStatusOutputFilterSensitiveLog,
+export class GetRepositorySyncStatusCommand extends command<GetRepositorySyncStatusCommandInput, GetRepositorySyncStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRepositorySyncStatus",
+  GetRepositorySyncStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRepositorySyncStatusInput;
+      output: GetRepositorySyncStatusOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRepositorySyncStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0GetRepositorySyncStatusCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRepositorySyncStatusCommandOutput> {
-    return deserializeAws_json1_0GetRepositorySyncStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRepositorySyncStatusCommandInput;
+      output: GetRepositorySyncStatusCommandOutput;
+    };
+  };
 }

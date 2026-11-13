@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyBackendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyBackendClient";
-import {
-  ImportBackendStorageRequest,
-  ImportBackendStorageRequestFilterSensitiveLog,
-  ImportBackendStorageResponse,
-  ImportBackendStorageResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ImportBackendStorageCommand,
-  serializeAws_restJson1ImportBackendStorageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ImportBackendStorageRequest, ImportBackendStorageResponse } from "../models/models_0";
+import { ImportBackendStorage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ImportBackendStorageCommand}.
+ */
 export interface ImportBackendStorageCommandInput extends ImportBackendStorageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ImportBackendStorageCommand}.
+ */
 export interface ImportBackendStorageCommandOutput extends ImportBackendStorageResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,65 @@ export interface ImportBackendStorageCommandOutput extends ImportBackendStorageR
  * ```javascript
  * import { AmplifyBackendClient, ImportBackendStorageCommand } from "@aws-sdk/client-amplifybackend"; // ES Modules import
  * // const { AmplifyBackendClient, ImportBackendStorageCommand } = require("@aws-sdk/client-amplifybackend"); // CommonJS import
+ * // import type { AmplifyBackendClientConfig } from "@aws-sdk/client-amplifybackend";
+ * const config = {}; // type is AmplifyBackendClientConfig
  * const client = new AmplifyBackendClient(config);
+ * const input = { // ImportBackendStorageRequest
+ *   AppId: "STRING_VALUE", // required
+ *   BackendEnvironmentName: "STRING_VALUE", // required
+ *   BucketName: "STRING_VALUE",
+ *   ServiceName: "S3", // required
+ * };
  * const command = new ImportBackendStorageCommand(input);
  * const response = await client.send(command);
+ * // { // ImportBackendStorageResponse
+ * //   AppId: "STRING_VALUE",
+ * //   BackendEnvironmentName: "STRING_VALUE",
+ * //   JobId: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ImportBackendStorageCommandInput - {@link ImportBackendStorageCommandInput}
+ * @returns {@link ImportBackendStorageCommandOutput}
  * @see {@link ImportBackendStorageCommandInput} for command's `input` shape.
  * @see {@link ImportBackendStorageCommandOutput} for command's `response` shape.
  * @see {@link AmplifyBackendClientResolvedConfig | config} for AmplifyBackendClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>An error returned if a request is not formed properly.</p>
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  <p>An error returned if there's a temporary issue with the service.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>An error returned when a specific resource type is not found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>An error that is returned when a limit of a specific type has been exceeded.</p>
+ *
+ * @throws {@link AmplifyBackendServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyBackend service.</p>
+ *
+ *
+ * @public
  */
-export class ImportBackendStorageCommand extends $Command<
-  ImportBackendStorageCommandInput,
-  ImportBackendStorageCommandOutput,
-  AmplifyBackendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ImportBackendStorageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyBackendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ImportBackendStorageCommandInput, ImportBackendStorageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyBackendClient";
-    const commandName = "ImportBackendStorageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ImportBackendStorageRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ImportBackendStorageResponseFilterSensitiveLog,
+export class ImportBackendStorageCommand extends command<ImportBackendStorageCommandInput, ImportBackendStorageCommandOutput>(
+  _ep0,
+  _mw0,
+  "ImportBackendStorage",
+  ImportBackendStorage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportBackendStorageRequest;
+      output: ImportBackendStorageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ImportBackendStorageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ImportBackendStorageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ImportBackendStorageCommandOutput> {
-    return deserializeAws_restJson1ImportBackendStorageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ImportBackendStorageCommandInput;
+      output: ImportBackendStorageCommandOutput;
+    };
+  };
 }

@@ -1,24 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
-
-import { CloudFormationClient } from "../CloudFormationClient";
 import {
-  DescribeTypeRegistrationCommand,
-  DescribeTypeRegistrationCommandInput,
-} from "../commands/DescribeTypeRegistrationCommand";
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-const checkState = async (
-  client: CloudFormationClient,
-  input: DescribeTypeRegistrationCommandInput
-): Promise<WaiterResult> => {
+import type { CloudFormationClient } from "../CloudFormationClient";
+import {
+  type DescribeTypeRegistrationCommandInput,
+  type DescribeTypeRegistrationCommandOutput,
+  DescribeTypeRegistrationCommand,
+} from "../commands/DescribeTypeRegistrationCommand";
+import type { CloudFormationServiceException } from "../models/CloudFormationServiceException";
+
+const checkState = async (client: CloudFormationClient, input: DescribeTypeRegistrationCommandInput): Promise<WaiterResult<DescribeTypeRegistrationCommandOutput | CloudFormationServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeTypeRegistrationCommand(input));
+    let result: DescribeTypeRegistrationCommandOutput & any = await client.send(new DescribeTypeRegistrationCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.ProgressStatus;
-      };
+      }
       if (returnComparator() === "COMPLETE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -26,7 +31,7 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.ProgressStatus;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -43,7 +48,7 @@ const checkState = async (
 export const waitForTypeRegistrationComplete = async (
   params: WaiterConfiguration<CloudFormationClient>,
   input: DescribeTypeRegistrationCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeTypeRegistrationCommandOutput | CloudFormationServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -55,8 +60,8 @@ export const waitForTypeRegistrationComplete = async (
 export const waitUntilTypeRegistrationComplete = async (
   params: WaiterConfiguration<CloudFormationClient>,
   input: DescribeTypeRegistrationCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeTypeRegistrationCommandOutput>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeTypeRegistrationCommandOutput>;
 };

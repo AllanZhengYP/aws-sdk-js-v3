@@ -1,14 +1,16 @@
-export * from "./GetEffectivePermissionsForPathPaginator";
-
-export * from "./GetTableObjectsPaginator";
-
-export * from "./GetWorkUnitsPaginator";
 // smithy-typescript generated code
 export * from "./Interfaces";
+export * from "./GetEffectivePermissionsForPathPaginator";
+export * from "./GetTableObjectsPaginator";
+export * from "./GetWorkUnitsPaginator";
 export * from "./ListDataCellsFilterPaginator";
+export * from "./ListLakeFormationOptInsPaginator";
+export * from "./ListLFTagExpressionsPaginator";
 export * from "./ListLFTagsPaginator";
 export * from "./ListPermissionsPaginator";
 export * from "./ListResourcesPaginator";
+export * from "./ListRLSPoliciesPaginator";
+export * from "./ListRLSPolicyAttachmentsPaginator";
 export * from "./ListTableStorageOptimizersPaginator";
 export * from "./ListTransactionsPaginator";
 export * from "./SearchDatabasesByLFTagsPaginator";

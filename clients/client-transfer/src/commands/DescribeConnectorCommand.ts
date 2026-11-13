@@ -1,102 +1,141 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DescribeConnectorRequest,
-  DescribeConnectorRequestFilterSensitiveLog,
-  DescribeConnectorResponse,
-  DescribeConnectorResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeConnectorCommand,
-  serializeAws_json1_1DescribeConnectorCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TransferClientResolvedConfig } from "../TransferClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeConnectorRequest, DescribeConnectorResponse } from "../models/models_0";
+import { DescribeConnector$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeConnectorCommand}.
+ */
 export interface DescribeConnectorCommandInput extends DescribeConnectorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeConnectorCommand}.
+ */
 export interface DescribeConnectorCommandOutput extends DescribeConnectorResponse, __MetadataBearer {}
 
 /**
- * <p>Describes the connector that's identified by the <code>ConnectorId.</code>
- *          </p>
+ * <p>Describes the connector that's identified by the <code>ConnectorId.</code> </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TransferClient, DescribeConnectorCommand } from "@aws-sdk/client-transfer"; // ES Modules import
  * // const { TransferClient, DescribeConnectorCommand } = require("@aws-sdk/client-transfer"); // CommonJS import
+ * // import type { TransferClientConfig } from "@aws-sdk/client-transfer";
+ * const config = {}; // type is TransferClientConfig
  * const client = new TransferClient(config);
+ * const input = { // DescribeConnectorRequest
+ *   ConnectorId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeConnectorCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeConnectorResponse
+ * //   Connector: { // DescribedConnector
+ * //     Arn: "STRING_VALUE", // required
+ * //     ConnectorId: "STRING_VALUE",
+ * //     Url: "STRING_VALUE",
+ * //     As2Config: { // As2ConnectorConfig
+ * //       LocalProfileId: "STRING_VALUE",
+ * //       PartnerProfileId: "STRING_VALUE",
+ * //       MessageSubject: "STRING_VALUE",
+ * //       Compression: "ZLIB" || "DISABLED",
+ * //       EncryptionAlgorithm: "AES128_CBC" || "AES192_CBC" || "AES256_CBC" || "DES_EDE3_CBC" || "NONE",
+ * //       SigningAlgorithm: "SHA256" || "SHA384" || "SHA512" || "SHA1" || "NONE",
+ * //       MdnSigningAlgorithm: "SHA256" || "SHA384" || "SHA512" || "SHA1" || "NONE" || "DEFAULT",
+ * //       MdnResponse: "SYNC" || "NONE" || "ASYNC",
+ * //       BasicAuthSecretId: "STRING_VALUE",
+ * //       PreserveContentType: "ENABLED" || "DISABLED",
+ * //       AsyncMdnConfig: { // As2AsyncMdnConnectorConfig
+ * //         Url: "STRING_VALUE",
+ * //         ServerIds: [ // As2AsyncMdnServerIds
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //     AccessRole: "STRING_VALUE",
+ * //     LoggingRole: "STRING_VALUE",
+ * //     Tags: [ // Tags
+ * //       { // Tag
+ * //         Key: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     SftpConfig: { // SftpConnectorConfig
+ * //       UserSecretId: "STRING_VALUE",
+ * //       TrustedHostKeys: [ // SftpConnectorTrustedHostKeyList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       MaxConcurrentConnections: Number("int"),
+ * //       OrderedUserSecretVersionStages: [ // SecretVersionStageList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     ServiceManagedEgressIpAddresses: [ // ServiceManagedEgressIpAddresses
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     SecurityPolicyName: "STRING_VALUE",
+ * //     EgressConfig: { // DescribedConnectorEgressConfig Union: only one key present
+ * //       VpcLattice: { // DescribedConnectorVpcLatticeEgressConfig
+ * //         ResourceConfigurationArn: "STRING_VALUE", // required
+ * //         PortNumber: Number("int"),
+ * //       },
+ * //     },
+ * //     EgressType: "SERVICE_MANAGED" || "VPC_LATTICE", // required
+ * //     ErrorMessage: "STRING_VALUE",
+ * //     Status: "ACTIVE" || "ERRORED" || "PENDING", // required
+ * //     IpAddressType: "IPV4" || "DUALSTACK",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeConnectorCommandInput - {@link DescribeConnectorCommandInput}
+ * @returns {@link DescribeConnectorCommandOutput}
  * @see {@link DescribeConnectorCommandInput} for command's `input` shape.
  * @see {@link DescribeConnectorCommandOutput} for command's `response` shape.
  * @see {@link TransferClientResolvedConfig | config} for TransferClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>
+ *
+ * @throws {@link TransferServiceException}
+ * <p>Base exception class for all service exceptions from Transfer service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeConnectorCommand extends $Command<
-  DescribeConnectorCommandInput,
-  DescribeConnectorCommandOutput,
-  TransferClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeConnectorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TransferClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeConnectorCommandInput, DescribeConnectorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TransferClient";
-    const commandName = "DescribeConnectorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeConnectorRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeConnectorResponseFilterSensitiveLog,
+export class DescribeConnectorCommand extends command<DescribeConnectorCommandInput, DescribeConnectorCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeConnector",
+  DescribeConnector$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeConnectorRequest;
+      output: DescribeConnectorResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeConnectorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeConnectorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeConnectorCommandOutput> {
-    return deserializeAws_json1_1DescribeConnectorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeConnectorCommandInput;
+      output: DescribeConnectorCommandOutput;
+    };
+  };
 }

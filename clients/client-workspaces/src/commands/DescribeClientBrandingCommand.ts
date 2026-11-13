@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DescribeClientBrandingRequest,
-  DescribeClientBrandingRequestFilterSensitiveLog,
-  DescribeClientBrandingResult,
-  DescribeClientBrandingResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeClientBrandingCommand,
-  serializeAws_json1_1DescribeClientBrandingCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeClientBrandingRequest, DescribeClientBrandingResult } from "../models/models_0";
+import { DescribeClientBranding$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeClientBrandingCommand}.
+ */
 export interface DescribeClientBrandingCommandInput extends DescribeClientBrandingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeClientBrandingCommand}.
+ */
 export interface DescribeClientBrandingCommandOutput extends DescribeClientBrandingResult, __MetadataBearer {}
 
 /**
@@ -41,68 +36,109 @@ export interface DescribeClientBrandingCommandOutput extends DescribeClientBrand
  * ```javascript
  * import { WorkSpacesClient, DescribeClientBrandingCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, DescribeClientBrandingCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // DescribeClientBrandingRequest
+ *   ResourceId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeClientBrandingCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeClientBrandingResult
+ * //   DeviceTypeWindows: { // DefaultClientBrandingAttributes
+ * //     LogoUrl: "STRING_VALUE",
+ * //     SupportEmail: "STRING_VALUE",
+ * //     SupportLink: "STRING_VALUE",
+ * //     ForgotPasswordLink: "STRING_VALUE",
+ * //     LoginMessage: { // LoginMessage
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   DeviceTypeOsx: {
+ * //     LogoUrl: "STRING_VALUE",
+ * //     SupportEmail: "STRING_VALUE",
+ * //     SupportLink: "STRING_VALUE",
+ * //     ForgotPasswordLink: "STRING_VALUE",
+ * //     LoginMessage: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   DeviceTypeAndroid: {
+ * //     LogoUrl: "STRING_VALUE",
+ * //     SupportEmail: "STRING_VALUE",
+ * //     SupportLink: "STRING_VALUE",
+ * //     ForgotPasswordLink: "STRING_VALUE",
+ * //     LoginMessage: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   DeviceTypeIos: { // IosClientBrandingAttributes
+ * //     LogoUrl: "STRING_VALUE",
+ * //     Logo2xUrl: "STRING_VALUE",
+ * //     Logo3xUrl: "STRING_VALUE",
+ * //     SupportEmail: "STRING_VALUE",
+ * //     SupportLink: "STRING_VALUE",
+ * //     ForgotPasswordLink: "STRING_VALUE",
+ * //     LoginMessage: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   DeviceTypeLinux: {
+ * //     LogoUrl: "STRING_VALUE",
+ * //     SupportEmail: "STRING_VALUE",
+ * //     SupportLink: "STRING_VALUE",
+ * //     ForgotPasswordLink: "STRING_VALUE",
+ * //     LoginMessage: {
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   DeviceTypeWeb: {
+ * //     LogoUrl: "STRING_VALUE",
+ * //     SupportEmail: "STRING_VALUE",
+ * //     SupportLink: "STRING_VALUE",
+ * //     ForgotPasswordLink: "STRING_VALUE",
+ * //     LoginMessage: "<LoginMessage>",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeClientBrandingCommandInput - {@link DescribeClientBrandingCommandInput}
+ * @returns {@link DescribeClientBrandingCommandOutput}
  * @see {@link DescribeClientBrandingCommandInput} for command's `input` shape.
  * @see {@link DescribeClientBrandingCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeClientBrandingCommand extends $Command<
-  DescribeClientBrandingCommandInput,
-  DescribeClientBrandingCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeClientBrandingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeClientBrandingCommandInput, DescribeClientBrandingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "DescribeClientBrandingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeClientBrandingRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeClientBrandingResultFilterSensitiveLog,
+export class DescribeClientBrandingCommand extends command<DescribeClientBrandingCommandInput, DescribeClientBrandingCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeClientBranding",
+  DescribeClientBranding$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeClientBrandingRequest;
+      output: DescribeClientBrandingResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeClientBrandingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeClientBrandingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeClientBrandingCommandOutput> {
-    return deserializeAws_json1_1DescribeClientBrandingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeClientBrandingCommandInput;
+      output: DescribeClientBrandingCommandOutput;
+    };
+  };
 }

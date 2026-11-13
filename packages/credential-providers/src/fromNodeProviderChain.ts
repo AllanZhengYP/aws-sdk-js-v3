@@ -1,18 +1,13 @@
-import { getDefaultRoleAssumer, getDefaultRoleAssumerWithWebIdentity, STSClientConfig } from "@aws-sdk/client-sts";
-import { defaultProvider, DefaultProviderInit } from "@aws-sdk/credential-provider-node";
-import { CredentialProvider, Pluggable } from "@aws-sdk/types";
-
-export interface fromNodeProviderChainInit extends DefaultProviderInit {
-  clientConfig?: STSClientConfig;
-  clientPlugins?: Pluggable<any, any>[];
-}
+import type {
+  DefaultProviderInit,
+  MemoizedRuntimeConfigAwsCredentialIdentityProvider,
+} from "@aws-sdk/credential-provider-node";
+import type { AwsIdentityProperties } from "@aws-sdk/types";
 
 /**
- * This is the same credential provider as {@link defaultProvider|the default provider for Node.js SDK},
+ * This is the same credential provider as {@link https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/Package/-aws-sdk-credential-providers/#fromnodeproviderchain|the default provider for Node.js SDK},
  * but with default role assumers so you don't need to import them from
- * STS client and supply them manually.
- *
- * You normally don't need to use this explicitly in the client constructor.
+ * STS client and supply them manually. You normally don't need to use this explicitly in the client constructor.
  * It is useful for utility functions requiring credentials like S3 presigner,
  * or RDS signer.
  *
@@ -21,8 +16,14 @@ export interface fromNodeProviderChainInit extends DefaultProviderInit {
  * // const { fromNodeProviderChain } = require("@aws-sdk/credential-providers") // CommonJS import
  *
  * const credentialProvider = fromNodeProviderChain({
- *   //...any input of fromEnv(), fromSSO(), fromTokenFile(), fromIni(),
+ *   // init properties for fromEnv(), fromSSO(), fromTokenFile(), fromIni(),
  *   // fromProcess(), fromInstanceMetadata(), fromContainerMetadata()
+ *
+ *   // For instance, to ignore the ini shared cache, change the credentials filepath for all
+ *   // providers, and set the sso start id:
+ *   ignoreCache: true,
+ *   filepath: "~/.config/aws/credentials",
+ *   ssoStartUrl: "https://d-abc123.awsapps.com/start"
  *
  *   // Optional. Custom STS client configurations overriding the default ones.
  *   clientConfig: { region },
@@ -31,11 +32,18 @@ export interface fromNodeProviderChainInit extends DefaultProviderInit {
  *   clientPlugins: [addFooHeadersPlugin],
  * })
  * ```
+ *
+ * @public
  */
-export const fromNodeProviderChain = (init: fromNodeProviderChainInit = {}): CredentialProvider =>
-  defaultProvider({
-    ...init,
-    roleAssumer: init.roleAssumer ?? getDefaultRoleAssumer(init.clientConfig, init.clientPlugins),
-    roleAssumerWithWebIdentity:
-      init.roleAssumerWithWebIdentity ?? getDefaultRoleAssumerWithWebIdentity(init.clientConfig, init.clientPlugins),
-  });
+export const fromNodeProviderChain = (
+  init: DefaultProviderInit = {}
+): MemoizedRuntimeConfigAwsCredentialIdentityProvider => {
+  let chain: MemoizedRuntimeConfigAwsCredentialIdentityProvider | undefined;
+  return async (args?: AwsIdentityProperties & { forceRefresh?: boolean }) => {
+    if (!chain) {
+      const { defaultProvider } = await import("@aws-sdk/credential-provider-node");
+      chain = defaultProvider({ ...init });
+    }
+    return chain(args);
+  };
+};

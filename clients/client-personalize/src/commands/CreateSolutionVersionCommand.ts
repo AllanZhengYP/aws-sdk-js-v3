@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateSolutionVersionRequest,
-  CreateSolutionVersionRequestFilterSensitiveLog,
-  CreateSolutionVersionResponse,
-  CreateSolutionVersionResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1CreateSolutionVersionCommand,
-  serializeAws_json1_1CreateSolutionVersionCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSolutionVersionRequest, CreateSolutionVersionResponse } from "../models/models_0";
+import { CreateSolutionVersion$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSolutionVersionCommand}.
+ */
 export interface CreateSolutionVersionCommandInput extends CreateSolutionVersionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSolutionVersionCommand}.
+ */
 export interface CreateSolutionVersionCommandOutput extends CreateSolutionVersionResponse, __MetadataBearer {}
 
 /**
@@ -100,68 +95,73 @@ export interface CreateSolutionVersionCommandOutput extends CreateSolutionVersio
  * ```javascript
  * import { PersonalizeClient, CreateSolutionVersionCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, CreateSolutionVersionCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // CreateSolutionVersionRequest
+ *   name: "STRING_VALUE",
+ *   solutionArn: "STRING_VALUE", // required
+ *   trainingMode: "FULL" || "UPDATE" || "AUTOTRAIN",
+ *   tags: [ // Tags
+ *     { // Tag
+ *       tagKey: "STRING_VALUE", // required
+ *       tagValue: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateSolutionVersionCommand(input);
  * const response = await client.send(command);
+ * // { // CreateSolutionVersionResponse
+ * //   solutionVersionArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateSolutionVersionCommandInput - {@link CreateSolutionVersionCommandInput}
+ * @returns {@link CreateSolutionVersionCommandOutput}
  * @see {@link CreateSolutionVersionCommandInput} for command's `input` shape.
  * @see {@link CreateSolutionVersionCommandOutput} for command's `response` shape.
  * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The limit on the number of requests per second has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The specified resource already exists.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>You have exceeded the maximum number of tags you can apply to this resource. </p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSolutionVersionCommand extends $Command<
-  CreateSolutionVersionCommandInput,
-  CreateSolutionVersionCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSolutionVersionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSolutionVersionCommandInput, CreateSolutionVersionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "CreateSolutionVersionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSolutionVersionRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateSolutionVersionResponseFilterSensitiveLog,
+export class CreateSolutionVersionCommand extends command<CreateSolutionVersionCommandInput, CreateSolutionVersionCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSolutionVersion",
+  CreateSolutionVersion$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSolutionVersionRequest;
+      output: CreateSolutionVersionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateSolutionVersionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateSolutionVersionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateSolutionVersionCommandOutput> {
-    return deserializeAws_json1_1CreateSolutionVersionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSolutionVersionCommandInput;
+      output: CreateSolutionVersionCommandOutput;
+    };
+  };
 }

@@ -1,373 +1,788 @@
 // smithy-typescript generated code
-import {
-  ExceptionOptionType as __ExceptionOptionType,
-  LazyJsonString as __LazyJsonString,
-} from "@aws-sdk/smithy-client";
-import { DocumentType as __DocumentType } from "@aws-sdk/types";
-import { Readable } from "stream";
+import { AutomaticJsonStringConversion as __AutomaticJsonStringConversion } from "@smithy/core/serde";
+import type { DocumentType as __DocumentType, StreamingBlobTypes } from "@smithy/types";
 
-import { RestJsonProtocolServiceException as __BaseException } from "./RestJsonProtocolServiceException";
+import type { FooEnum, IntegerEnum, StringEnum, TestEnum, TestIntEnum } from "./enums";
+import type { ErrorEvent } from "./errors";
 
+/**
+ * @public
+ */
 export interface GreetingStruct {
-  hi?: string;
+  hi?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const GreetingStructFilterSensitiveLog = (obj: GreetingStruct): any => ({
-  ...obj,
-});
-
-export enum FooEnum {
-  BAR = "Bar",
-  BAZ = "Baz",
-  FOO = "Foo",
-  ONE = "1",
-  ZERO = "0",
-}
-
 export interface AllQueryStringTypesInput {
-  queryString?: string;
-  queryStringList?: string[];
-  queryStringSet?: string[];
-  queryByte?: number;
-  queryShort?: number;
-  queryInteger?: number;
-  queryIntegerList?: number[];
-  queryIntegerSet?: number[];
-  queryLong?: number;
-  queryFloat?: number;
-  queryDouble?: number;
-  queryDoubleList?: number[];
-  queryBoolean?: boolean;
-  queryBooleanList?: boolean[];
-  queryTimestamp?: Date;
-  queryTimestampList?: Date[];
-  queryEnum?: FooEnum | string;
-  queryEnumList?: (FooEnum | string)[];
-  queryParamsMapOfStringList?: Record<string, string[]>;
+  queryString?: string | undefined;
+  queryStringList?: string[] | undefined;
+  queryStringSet?: string[] | undefined;
+  queryByte?: number | undefined;
+  queryShort?: number | undefined;
+  queryInteger?: number | undefined;
+  queryIntegerList?: number[] | undefined;
+  queryIntegerSet?: number[] | undefined;
+  queryLong?: number | undefined;
+  queryFloat?: number | undefined;
+  queryDouble?: number | undefined;
+  queryDoubleList?: number[] | undefined;
+  queryBoolean?: boolean | undefined;
+  queryBooleanList?: boolean[] | undefined;
+  queryTimestamp?: Date | undefined;
+  queryTimestampList?: Date[] | undefined;
+  queryEnum?: FooEnum | undefined;
+  queryEnumList?: FooEnum[] | undefined;
+  queryIntegerEnum?: IntegerEnum | undefined;
+  queryIntegerEnumList?: IntegerEnum[] | undefined;
+  queryParamsMapOfStringList?: Record<string, string[]> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const AllQueryStringTypesInputFilterSensitiveLog = (obj: AllQueryStringTypesInput): any => ({
-  ...obj,
-});
+export interface BlobPayloadEvent {
+  payload?: Uint8Array | undefined;
+}
 
+/**
+ * @public
+ */
+export interface ClientOptionalDefaults {
+  member?: number | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ComplexNestedErrorData {
-  Foo?: string;
+  Foo?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const ComplexNestedErrorDataFilterSensitiveLog = (obj: ComplexNestedErrorData): any => ({
-  ...obj,
-});
-
-/**
- * This error is thrown when a request is invalid.
- */
-export class ComplexError extends __BaseException {
-  readonly name: "ComplexError" = "ComplexError";
-  readonly $fault: "client" = "client";
-  Header?: string;
-  TopLevel?: string;
-  Nested?: ComplexNestedErrorData;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ComplexError, __BaseException>) {
-    super({
-      name: "ComplexError",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ComplexError.prototype);
-    this.Header = opts.Header;
-    this.TopLevel = opts.TopLevel;
-    this.Nested = opts.Nested;
-  }
-}
-
 export interface ConstantAndVariableQueryStringInput {
-  baz?: string;
-  maybeSet?: string;
+  baz?: string | undefined;
+  maybeSet?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const ConstantAndVariableQueryStringInputFilterSensitiveLog = (
-  obj: ConstantAndVariableQueryStringInput
-): any => ({
-  ...obj,
-});
-
 export interface ConstantQueryStringInput {
   hello: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const ConstantQueryStringInputFilterSensitiveLog = (obj: ConstantQueryStringInput): any => ({
-  ...obj,
-});
+export interface ContentTypeParametersInput {
+  value?: number | undefined;
+}
 
+/**
+ * @public
+ */
+export interface ContentTypeParametersOutput {}
+
+/**
+ * @public
+ */
+export interface DatetimeOffsetsOutput {
+  datetime?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface Defaults {
+  defaultString?: string | undefined;
+  defaultBoolean?: boolean | undefined;
+  defaultList?: string[] | undefined;
+  defaultDocumentMap?: __DocumentType | undefined;
+  defaultDocumentString?: __DocumentType | undefined;
+  defaultDocumentBoolean?: __DocumentType | undefined;
+  defaultDocumentList?: __DocumentType | undefined;
+  defaultNullDocument?: __DocumentType | undefined;
+  defaultTimestamp?: Date | undefined;
+  defaultBlob?: Uint8Array | undefined;
+  defaultByte?: number | undefined;
+  defaultShort?: number | undefined;
+  defaultInteger?: number | undefined;
+  defaultLong?: number | undefined;
+  defaultFloat?: number | undefined;
+  defaultDouble?: number | undefined;
+  defaultMap?: Record<string, string> | undefined;
+  defaultEnum?: TestEnum | undefined;
+  defaultIntEnum?: TestIntEnum | undefined;
+  emptyString?: string | undefined;
+  falseBoolean?: boolean | undefined;
+  emptyBlob?: Uint8Array | undefined;
+  zeroByte?: number | undefined;
+  zeroShort?: number | undefined;
+  zeroInteger?: number | undefined;
+  zeroLong?: number | undefined;
+  zeroFloat?: number | undefined;
+  zeroDouble?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface Farewell {
+  phrase?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface Dialog {
+  language?: string | undefined;
+  greeting?: string | undefined;
+  farewell?: Farewell | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DocumentTypeInputOutput {
-  stringValue?: string;
-  documentValue?: __DocumentType;
+  stringValue?: string | undefined;
+  documentValue?: __DocumentType | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const DocumentTypeInputOutputFilterSensitiveLog = (obj: DocumentTypeInputOutput): any => ({
-  ...obj,
-});
+export interface DocumentTypeAsMapValueInputOutput {
+  docValuedMap?: Record<string, __DocumentType> | undefined;
+}
 
+/**
+ * @public
+ */
 export interface DocumentTypeAsPayloadInputOutput {
-  documentValue?: __DocumentType;
+  documentValue?: __DocumentType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface HeadersEvent {
+  booleanHeader?: boolean | undefined;
+  byteHeader?: number | undefined;
+  shortHeader?: number | undefined;
+  intHeader?: number | undefined;
+  longHeader?: number | undefined;
+  blobHeader?: Uint8Array | undefined;
+  stringHeader?: string | undefined;
+  timestampHeader?: Date | undefined;
+}
+
+/**
+ * @public
+ */
+export interface PayloadStructure {
+  structureMember?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface HeadersAndExplicitPayloadEvent {
+  header?: string | undefined;
+  payload?: PayloadStructure | undefined;
+}
+
+/**
+ * @public
+ */
+export interface HeadersAndImplicitPayloadEvent {
+  header?: string | undefined;
+  payload?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StringPayloadEvent {
+  payload?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface StructurePayloadEvent {
+  payload?: PayloadStructure | undefined;
+}
+
+/**
+ * @public
+ */
+export type PayloadUnion =
+  | PayloadUnion.UnionMemberMember
+  | PayloadUnion.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace PayloadUnion {
+  export interface UnionMemberMember {
+    unionMember: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    unionMember?: never;
+    $unknown: [string, any];
+  }
+
+  export interface Visitor<T> {
+    unionMember: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+
+  export const visit = <T>(value: PayloadUnion, visitor: Visitor<T>): T => {
+    if (value.unionMember !== undefined) return visitor.unionMember(value.unionMember);
+    return visitor._(value.$unknown[0], value.$unknown[1]);
+  };
+}
+
+/**
+ * @public
+ */
+export interface UnionPayloadEvent {
+  payload?: PayloadUnion | undefined;
+}
+
+/**
+ * @public
+ */
+export type EventStream =
+  | EventStream.BlobPayloadMember
+  | EventStream.ErrorMember
+  | EventStream.HeadersMember
+  | EventStream.HeadersAndExplicitPayloadMember
+  | EventStream.HeadersAndImplicitPayloadMember
+  | EventStream.StringPayloadMember
+  | EventStream.StructurePayloadMember
+  | EventStream.UnionPayloadMember
+  | EventStream.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EventStream {
+  export interface HeadersMember {
+    headers: HeadersEvent;
+    blobPayload?: never;
+    stringPayload?: never;
+    structurePayload?: never;
+    unionPayload?: never;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload?: never;
+    error?: never;
+    $unknown?: never;
+  }
+
+  export interface BlobPayloadMember {
+    headers?: never;
+    blobPayload: BlobPayloadEvent;
+    stringPayload?: never;
+    structurePayload?: never;
+    unionPayload?: never;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload?: never;
+    error?: never;
+    $unknown?: never;
+  }
+
+  export interface StringPayloadMember {
+    headers?: never;
+    blobPayload?: never;
+    stringPayload: StringPayloadEvent;
+    structurePayload?: never;
+    unionPayload?: never;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload?: never;
+    error?: never;
+    $unknown?: never;
+  }
+
+  export interface StructurePayloadMember {
+    headers?: never;
+    blobPayload?: never;
+    stringPayload?: never;
+    structurePayload: StructurePayloadEvent;
+    unionPayload?: never;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload?: never;
+    error?: never;
+    $unknown?: never;
+  }
+
+  export interface UnionPayloadMember {
+    headers?: never;
+    blobPayload?: never;
+    stringPayload?: never;
+    structurePayload?: never;
+    unionPayload: UnionPayloadEvent;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload?: never;
+    error?: never;
+    $unknown?: never;
+  }
+
+  export interface HeadersAndExplicitPayloadMember {
+    headers?: never;
+    blobPayload?: never;
+    stringPayload?: never;
+    structurePayload?: never;
+    unionPayload?: never;
+    headersAndExplicitPayload: HeadersAndExplicitPayloadEvent;
+    headersAndImplicitPayload?: never;
+    error?: never;
+    $unknown?: never;
+  }
+
+  export interface HeadersAndImplicitPayloadMember {
+    headers?: never;
+    blobPayload?: never;
+    stringPayload?: never;
+    structurePayload?: never;
+    unionPayload?: never;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload: HeadersAndImplicitPayloadEvent;
+    error?: never;
+    $unknown?: never;
+  }
+
+  export interface ErrorMember {
+    headers?: never;
+    blobPayload?: never;
+    stringPayload?: never;
+    structurePayload?: never;
+    unionPayload?: never;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload?: never;
+    error: ErrorEvent;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    headers?: never;
+    blobPayload?: never;
+    stringPayload?: never;
+    structurePayload?: never;
+    unionPayload?: never;
+    headersAndExplicitPayload?: never;
+    headersAndImplicitPayload?: never;
+    error?: never;
+    $unknown: [string, any];
+  }
+
+  export interface Visitor<T> {
+    headers: (value: HeadersEvent) => T;
+    blobPayload: (value: BlobPayloadEvent) => T;
+    stringPayload: (value: StringPayloadEvent) => T;
+    structurePayload: (value: StructurePayloadEvent) => T;
+    unionPayload: (value: UnionPayloadEvent) => T;
+    headersAndExplicitPayload: (value: HeadersAndExplicitPayloadEvent) => T;
+    headersAndImplicitPayload: (value: HeadersAndImplicitPayloadEvent) => T;
+    error: (value: ErrorEvent) => T;
+    _: (name: string, value: any) => T;
+  }
+
+  export const visit = <T>(value: EventStream, visitor: Visitor<T>): T => {
+    if (value.headers !== undefined) return visitor.headers(value.headers);
+    if (value.blobPayload !== undefined) return visitor.blobPayload(value.blobPayload);
+    if (value.stringPayload !== undefined) return visitor.stringPayload(value.stringPayload);
+    if (value.structurePayload !== undefined) return visitor.structurePayload(value.structurePayload);
+    if (value.unionPayload !== undefined) return visitor.unionPayload(value.unionPayload);
+    if (value.headersAndExplicitPayload !== undefined) return visitor.headersAndExplicitPayload(value.headersAndExplicitPayload);
+    if (value.headersAndImplicitPayload !== undefined) return visitor.headersAndImplicitPayload(value.headersAndImplicitPayload);
+    if (value.error !== undefined) return visitor.error(value.error);
+    return visitor._(value.$unknown[0], value.$unknown[1]);
+  };
+}
+/**
+ * @internal
+ */
+export const EventStreamFilterSensitiveLog = (obj: EventStream): any => {
+  if (obj.headers !== undefined) {
+    return {
+      headers: obj.headers
+    };
+  }
+  if (obj.blobPayload !== undefined) {
+    return {
+      blobPayload: obj.blobPayload
+    };
+  }
+  if (obj.stringPayload !== undefined) {
+    return {
+      stringPayload: obj.stringPayload
+    };
+  }
+  if (obj.structurePayload !== undefined) {
+    return {
+      structurePayload: obj.structurePayload
+    };
+  }
+  if (obj.unionPayload !== undefined) {
+    return {
+      unionPayload: obj.unionPayload
+    };
+  }
+  if (obj.headersAndExplicitPayload !== undefined) {
+    return {
+      headersAndExplicitPayload: obj.headersAndExplicitPayload
+    };
+  }
+  if (obj.headersAndImplicitPayload !== undefined) {
+    return {
+      headersAndImplicitPayload: obj.headersAndImplicitPayload
+    };
+  }
+  if (obj.error !== undefined) {
+    return {
+      error: obj.error
+    };
+  }
+  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
+}
+
+/**
+ * @public
+ */
+export interface DuplexStreamInput {
+  stream?: AsyncIterable<EventStream> | undefined;
 }
 
 /**
  * @internal
  */
-export const DocumentTypeAsPayloadInputOutputFilterSensitiveLog = (obj: DocumentTypeAsPayloadInputOutput): any => ({
+export const DuplexStreamInputFilterSensitiveLog = (obj: DuplexStreamInput): any => ({
   ...obj,
-});
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
 
+/**
+ * @public
+ */
+export interface DuplexStreamOutput {
+  stream?: AsyncIterable<EventStream> | undefined;
+}
+
+/**
+ * @internal
+ */
+export const DuplexStreamOutputFilterSensitiveLog = (obj: DuplexStreamOutput): any => ({
+  ...obj,
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
+
+/**
+ * @public
+ */
+export interface DuplexStreamWithDistinctStreamsInput {
+  stream?: AsyncIterable<EventStream> | undefined;
+}
+
+/**
+ * @internal
+ */
+export const DuplexStreamWithDistinctStreamsInputFilterSensitiveLog = (obj: DuplexStreamWithDistinctStreamsInput): any => ({
+  ...obj,
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
+
+/**
+ * @public
+ */
+export interface SingletonEvent {
+  value?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export type SingletonEventStream =
+  | SingletonEventStream.SingletonMember
+  | SingletonEventStream.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace SingletonEventStream {
+  export interface SingletonMember {
+    singleton: SingletonEvent;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    singleton?: never;
+    $unknown: [string, any];
+  }
+
+  export interface Visitor<T> {
+    singleton: (value: SingletonEvent) => T;
+    _: (name: string, value: any) => T;
+  }
+
+  export const visit = <T>(value: SingletonEventStream, visitor: Visitor<T>): T => {
+    if (value.singleton !== undefined) return visitor.singleton(value.singleton);
+    return visitor._(value.$unknown[0], value.$unknown[1]);
+  };
+}
+
+/**
+ * @public
+ */
+export interface DuplexStreamWithDistinctStreamsOutput {
+  stream?: SingletonEventStream | undefined;
+}
+
+/**
+ * @public
+ */
+export interface DuplexStreamWithInitialMessagesInput {
+  initialRequestMember: string | undefined;
+  stream?: AsyncIterable<EventStream> | undefined;
+}
+
+/**
+ * @internal
+ */
+export const DuplexStreamWithInitialMessagesInputFilterSensitiveLog = (obj: DuplexStreamWithInitialMessagesInput): any => ({
+  ...obj,
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
+
+/**
+ * @public
+ */
+export interface DuplexStreamWithInitialMessagesOutput {
+  initialResponseMember: string | undefined;
+  stream?: AsyncIterable<EventStream> | undefined;
+}
+
+/**
+ * @internal
+ */
+export const DuplexStreamWithInitialMessagesOutputFilterSensitiveLog = (obj: DuplexStreamWithInitialMessagesOutput): any => ({
+  ...obj,
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
+
+/**
+ * @public
+ */
 export interface EmptyInputAndEmptyOutputInput {}
 
 /**
- * @internal
+ * @public
  */
-export const EmptyInputAndEmptyOutputInputFilterSensitiveLog = (obj: EmptyInputAndEmptyOutputInput): any => ({
-  ...obj,
-});
-
 export interface EmptyInputAndEmptyOutputOutput {}
 
 /**
- * @internal
+ * @public
  */
-export const EmptyInputAndEmptyOutputOutputFilterSensitiveLog = (obj: EmptyInputAndEmptyOutputOutput): any => ({
-  ...obj,
-});
-
 export interface HostLabelInput {
   label: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HostLabelInputFilterSensitiveLog = (obj: HostLabelInput): any => ({
-  ...obj,
-});
-
-export enum StringEnum {
-  V = "enumvalue",
-}
-
 export interface EnumPayloadInput {
-  payload?: StringEnum | string;
+  payload?: StringEnum | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const EnumPayloadInputFilterSensitiveLog = (obj: EnumPayloadInput): any => ({
-  ...obj,
-});
-
-/**
- * This error has test cases that test some of the dark corners of Amazon service
- * framework history. It should only be implemented by clients.
- */
-export class FooError extends __BaseException {
-  readonly name: "FooError" = "FooError";
-  readonly $fault: "server" = "server";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<FooError, __BaseException>) {
-    super({
-      name: "FooError",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, FooError.prototype);
-  }
+export interface FractionalSecondsOutput {
+  datetime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GreetingWithErrorsOutput {
-  greeting?: string;
+  greeting?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const GreetingWithErrorsOutputFilterSensitiveLog = (obj: GreetingWithErrorsOutput): any => ({
-  ...obj,
-});
-
-/**
- * This error is thrown when an invalid greeting value is provided.
- */
-export class InvalidGreeting extends __BaseException {
-  readonly name: "InvalidGreeting" = "InvalidGreeting";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidGreeting, __BaseException>) {
-    super({
-      name: "InvalidGreeting",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidGreeting.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface HttpChecksumRequiredInputOutput {
-  foo?: string;
+  foo?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpChecksumRequiredInputOutputFilterSensitiveLog = (obj: HttpChecksumRequiredInputOutput): any => ({
-  ...obj,
-});
+export interface HttpEmptyPrefixHeadersInput {
+  prefixHeaders?: Record<string, string> | undefined;
+  specificHeader?: string | undefined;
+}
 
+/**
+ * @public
+ */
+export interface HttpEmptyPrefixHeadersOutput {
+  prefixHeaders?: Record<string, string> | undefined;
+  specificHeader?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface HttpPayloadTraitsInputOutput {
-  foo?: string;
-  blob?: Uint8Array;
+  foo?: string | undefined;
+  blob?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadTraitsInputOutputFilterSensitiveLog = (obj: HttpPayloadTraitsInputOutput): any => ({
-  ...obj,
-});
-
 export interface HttpPayloadTraitsWithMediaTypeInputOutput {
-  foo?: string;
-  blob?: Uint8Array;
+  foo?: string | undefined;
+  blob?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadTraitsWithMediaTypeInputOutputFilterSensitiveLog = (
-  obj: HttpPayloadTraitsWithMediaTypeInputOutput
-): any => ({
-  ...obj,
-});
-
 export interface NestedPayload {
-  greeting?: string;
-  name?: string;
+  greeting?: string | undefined;
+  name?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const NestedPayloadFilterSensitiveLog = (obj: NestedPayload): any => ({
-  ...obj,
-});
-
 export interface HttpPayloadWithStructureInputOutput {
-  nested?: NestedPayload;
+  nested?: NestedPayload | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadWithStructureInputOutputFilterSensitiveLog = (
-  obj: HttpPayloadWithStructureInputOutput
-): any => ({
-  ...obj,
-});
+export type UnionPayload =
+  | UnionPayload.GreetingMember
+  | UnionPayload.$UnknownMember;
 
+/**
+ * @public
+ */
+export namespace UnionPayload {
+  export interface GreetingMember {
+    greeting: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    greeting?: never;
+    $unknown: [string, any];
+  }
+
+  export interface Visitor<T> {
+    greeting: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+
+  export const visit = <T>(value: UnionPayload, visitor: Visitor<T>): T => {
+    if (value.greeting !== undefined) return visitor.greeting(value.greeting);
+    return visitor._(value.$unknown[0], value.$unknown[1]);
+  };
+}
+
+/**
+ * @public
+ */
+export interface HttpPayloadWithUnionInputOutput {
+  nested?: UnionPayload | undefined;
+}
+
+/**
+ * @public
+ */
 export interface HttpPrefixHeadersInput {
-  foo?: string;
-  fooMap?: Record<string, string>;
+  foo?: string | undefined;
+  fooMap?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPrefixHeadersInputFilterSensitiveLog = (obj: HttpPrefixHeadersInput): any => ({
-  ...obj,
-});
-
 export interface HttpPrefixHeadersOutput {
-  foo?: string;
-  fooMap?: Record<string, string>;
+  foo?: string | undefined;
+  fooMap?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPrefixHeadersOutputFilterSensitiveLog = (obj: HttpPrefixHeadersOutput): any => ({
-  ...obj,
-});
-
 export interface HttpPrefixHeadersInResponseInput {}
 
 /**
- * @internal
+ * @public
  */
-export const HttpPrefixHeadersInResponseInputFilterSensitiveLog = (obj: HttpPrefixHeadersInResponseInput): any => ({
-  ...obj,
-});
-
 export interface HttpPrefixHeadersInResponseOutput {
-  prefixHeaders?: Record<string, string>;
+  prefixHeaders?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPrefixHeadersInResponseOutputFilterSensitiveLog = (obj: HttpPrefixHeadersInResponseOutput): any => ({
-  ...obj,
-});
+export interface HttpQueryParamsOnlyInput {
+  queryMap?: Record<string, string> | undefined;
+}
 
+/**
+ * @public
+ */
 export interface HttpRequestWithFloatLabelsInput {
   float: number | undefined;
   double: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithFloatLabelsInputFilterSensitiveLog = (obj: HttpRequestWithFloatLabelsInput): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithGreedyLabelInPathInput {
   foo: string | undefined;
   baz: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithGreedyLabelInPathInputFilterSensitiveLog = (
-  obj: HttpRequestWithGreedyLabelInPathInput
-): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithLabelsInput {
   string: string | undefined;
   short: number | undefined;
@@ -377,22 +792,20 @@ export interface HttpRequestWithLabelsInput {
   double: number | undefined;
   /**
    * Serialized in the path as true or false.
+   * @public
    */
   boolean: boolean | undefined;
 
   /**
    * Note that this member has no format, so it's serialized as an RFC 3399 date-time.
+   * @public
    */
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithLabelsInputFilterSensitiveLog = (obj: HttpRequestWithLabelsInput): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithLabelsAndTimestampFormatInput {
   memberEpochSeconds: Date | undefined;
   memberHttpDate: Date | undefined;
@@ -404,193 +817,221 @@ export interface HttpRequestWithLabelsAndTimestampFormatInput {
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithLabelsAndTimestampFormatInputFilterSensitiveLog = (
-  obj: HttpRequestWithLabelsAndTimestampFormatInput
-): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithRegexLiteralInput {
   str: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithRegexLiteralInputFilterSensitiveLog = (obj: HttpRequestWithRegexLiteralInput): any => ({
-  ...obj,
-});
-
 export interface HttpResponseCodeOutput {
-  Status?: number;
+  Status?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpResponseCodeOutputFilterSensitiveLog = (obj: HttpResponseCodeOutput): any => ({
-  ...obj,
-});
-
 export interface StringPayloadInput {
-  payload?: string;
+  payload?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const StringPayloadInputFilterSensitiveLog = (obj: StringPayloadInput): any => ({
-  ...obj,
-});
-
 export interface IgnoreQueryParamsInResponseOutput {
-  baz?: string;
+  baz?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const IgnoreQueryParamsInResponseOutputFilterSensitiveLog = (obj: IgnoreQueryParamsInResponseOutput): any => ({
-  ...obj,
-});
-
 export interface InputAndOutputWithHeadersIO {
-  headerString?: string;
-  headerByte?: number;
-  headerShort?: number;
-  headerInteger?: number;
-  headerLong?: number;
-  headerFloat?: number;
-  headerDouble?: number;
-  headerTrueBool?: boolean;
-  headerFalseBool?: boolean;
-  headerStringList?: string[];
-  headerStringSet?: string[];
-  headerIntegerList?: number[];
-  headerBooleanList?: boolean[];
-  headerTimestampList?: Date[];
-  headerEnum?: FooEnum | string;
-  headerEnumList?: (FooEnum | string)[];
+  headerString?: string | undefined;
+  headerByte?: number | undefined;
+  headerShort?: number | undefined;
+  headerInteger?: number | undefined;
+  headerLong?: number | undefined;
+  headerFloat?: number | undefined;
+  headerDouble?: number | undefined;
+  headerTrueBool?: boolean | undefined;
+  headerFalseBool?: boolean | undefined;
+  headerStringList?: string[] | undefined;
+  headerStringSet?: string[] | undefined;
+  headerIntegerList?: number[] | undefined;
+  headerBooleanList?: boolean[] | undefined;
+  headerTimestampList?: Date[] | undefined;
+  headerEnum?: FooEnum | undefined;
+  headerEnumList?: FooEnum[] | undefined;
+  headerIntegerEnum?: IntegerEnum | undefined;
+  headerIntegerEnumList?: IntegerEnum[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface InputStreamInput {
+  stream?: AsyncIterable<EventStream> | undefined;
 }
 
 /**
  * @internal
  */
-export const InputAndOutputWithHeadersIOFilterSensitiveLog = (obj: InputAndOutputWithHeadersIO): any => ({
+export const InputStreamInputFilterSensitiveLog = (obj: InputStreamInput): any => ({
   ...obj,
-});
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
 
+/**
+ * @public
+ */
+export interface InputStreamWithInitialRequestInput {
+  initialRequestMember: string | undefined;
+  stream?: AsyncIterable<EventStream> | undefined;
+}
+
+/**
+ * @internal
+ */
+export const InputStreamWithInitialRequestInputFilterSensitiveLog = (obj: InputStreamWithInitialRequestInput): any => ({
+  ...obj,
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
+
+/**
+ * @public
+ */
 export interface JsonBlobsInputOutput {
-  data?: Uint8Array;
+  data?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const JsonBlobsInputOutputFilterSensitiveLog = (obj: JsonBlobsInputOutput): any => ({
-  ...obj,
-});
-
 export interface JsonEnumsInputOutput {
-  fooEnum1?: FooEnum | string;
-  fooEnum2?: FooEnum | string;
-  fooEnum3?: FooEnum | string;
-  fooEnumList?: (FooEnum | string)[];
-  fooEnumSet?: (FooEnum | string)[];
-  fooEnumMap?: Record<string, FooEnum | string>;
+  fooEnum1?: FooEnum | undefined;
+  fooEnum2?: FooEnum | undefined;
+  fooEnum3?: FooEnum | undefined;
+  fooEnumList?: FooEnum[] | undefined;
+  fooEnumSet?: FooEnum[] | undefined;
+  fooEnumMap?: Record<string, FooEnum> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const JsonEnumsInputOutputFilterSensitiveLog = (obj: JsonEnumsInputOutput): any => ({
-  ...obj,
-});
+export interface JsonIntEnumsInputOutput {
+  integerEnum1?: IntegerEnum | undefined;
+  integerEnum2?: IntegerEnum | undefined;
+  integerEnum3?: IntegerEnum | undefined;
+  integerEnumList?: IntegerEnum[] | undefined;
+  integerEnumSet?: IntegerEnum[] | undefined;
+  integerEnumMap?: Record<string, IntegerEnum> | undefined;
+}
 
+/**
+ * @public
+ */
 export interface StructureListMember {
-  a?: string;
-  b?: string;
+  a?: string | undefined;
+  b?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const StructureListMemberFilterSensitiveLog = (obj: StructureListMember): any => ({
-  ...obj,
-});
-
 export interface JsonListsInputOutput {
-  stringList?: string[];
-  sparseStringList?: string[];
-  stringSet?: string[];
-  integerList?: number[];
-  booleanList?: boolean[];
-  timestampList?: Date[];
-  enumList?: (FooEnum | string)[];
+  stringList?: string[] | undefined;
+  stringSet?: string[] | undefined;
+  integerList?: number[] | undefined;
+  booleanList?: boolean[] | undefined;
+  timestampList?: Date[] | undefined;
+  enumList?: FooEnum[] | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
   /**
    * A list of lists of strings.
+   * @public
    */
-  nestedStringList?: string[][];
+  nestedStringList?: string[][] | undefined;
 
-  structureList?: StructureListMember[];
+  structureList?: StructureListMember[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const JsonListsInputOutputFilterSensitiveLog = (obj: JsonListsInputOutput): any => ({
-  ...obj,
-});
-
 export interface JsonMapsInputOutput {
-  denseStructMap?: Record<string, GreetingStruct>;
-  sparseStructMap?: Record<string, GreetingStruct>;
-  denseNumberMap?: Record<string, number>;
-  denseBooleanMap?: Record<string, boolean>;
-  denseStringMap?: Record<string, string>;
-  sparseNumberMap?: Record<string, number>;
-  sparseBooleanMap?: Record<string, boolean>;
-  sparseStringMap?: Record<string, string>;
-  denseSetMap?: Record<string, string[]>;
-  sparseSetMap?: Record<string, string[]>;
+  denseStructMap?: Record<string, GreetingStruct> | undefined;
+  denseNumberMap?: Record<string, number> | undefined;
+  denseBooleanMap?: Record<string, boolean> | undefined;
+  denseStringMap?: Record<string, string> | undefined;
+  denseSetMap?: Record<string, string[]> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const JsonMapsInputOutputFilterSensitiveLog = (obj: JsonMapsInputOutput): any => ({
-  ...obj,
-});
-
 export interface JsonTimestampsInputOutput {
-  normal?: Date;
-  dateTime?: Date;
-  epochSeconds?: Date;
-  httpDate?: Date;
+  normal?: Date | undefined;
+  dateTime?: Date | undefined;
+  dateTimeOnTarget?: Date | undefined;
+  epochSeconds?: Date | undefined;
+  epochSecondsOnTarget?: Date | undefined;
+  httpDate?: Date | undefined;
+  httpDateOnTarget?: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const JsonTimestampsInputOutputFilterSensitiveLog = (obj: JsonTimestampsInputOutput): any => ({
-  ...obj,
-});
-
 export interface RenamedGreeting {
-  salutation?: string;
+  salutation?: string | undefined;
 }
 
 /**
- * @internal
+ * A union used to test unions nested inside unions.
+ * @public
  */
-export const RenamedGreetingFilterSensitiveLog = (obj: RenamedGreeting): any => ({
-  ...obj,
-});
+export type NestedUnion =
+  | NestedUnion.StringValueMember
+  | NestedUnion.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace NestedUnion {
+  export interface StringValueMember {
+    stringValue: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    stringValue?: never;
+    $unknown: [string, any];
+  }
+
+  export interface Visitor<T> {
+    stringValue: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+
+  export const visit = <T>(value: NestedUnion, visitor: Visitor<T>): T => {
+    if (value.stringValue !== undefined) return visitor.stringValue(value.stringValue);
+    return visitor._(value.$unknown[0], value.$unknown[1]);
+  };
+}
 
 /**
  * A union with a representative set of types for members.
+ * @public
  */
 export type MyUnion =
   | MyUnion.BlobValueMember
@@ -603,8 +1044,12 @@ export type MyUnion =
   | MyUnion.StringValueMember
   | MyUnion.StructureValueMember
   | MyUnion.TimestampValueMember
+  | MyUnion.UnionValueMember
   | MyUnion.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace MyUnion {
   export interface StringValueMember {
     stringValue: string;
@@ -617,6 +1062,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -631,6 +1077,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -645,6 +1092,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -659,6 +1107,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -673,6 +1122,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -682,11 +1132,12 @@ export namespace MyUnion {
     numberValue?: never;
     blobValue?: never;
     timestampValue?: never;
-    enumValue: FooEnum | string;
+    enumValue: FooEnum;
     listValue?: never;
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -701,6 +1152,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -715,6 +1167,7 @@ export namespace MyUnion {
     mapValue: Record<string, string>;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -729,6 +1182,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue: GreetingStruct;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown?: never;
   }
 
@@ -743,9 +1197,32 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue: RenamedGreeting;
+    unionValue?: never;
     $unknown?: never;
   }
 
+  /**
+   * A union used to test unions nested inside unions.
+   * @public
+   */
+  export interface UnionValueMember {
+    stringValue?: never;
+    booleanValue?: never;
+    numberValue?: never;
+    blobValue?: never;
+    timestampValue?: never;
+    enumValue?: never;
+    listValue?: never;
+    mapValue?: never;
+    structureValue?: never;
+    renamedStructureValue?: never;
+    unionValue: NestedUnion;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     stringValue?: never;
     booleanValue?: never;
@@ -757,6 +1234,7 @@ export namespace MyUnion {
     mapValue?: never;
     structureValue?: never;
     renamedStructureValue?: never;
+    unionValue?: never;
     $unknown: [string, any];
   }
 
@@ -766,11 +1244,12 @@ export namespace MyUnion {
     numberValue: (value: number) => T;
     blobValue: (value: Uint8Array) => T;
     timestampValue: (value: Date) => T;
-    enumValue: (value: FooEnum | string) => T;
+    enumValue: (value: FooEnum) => T;
     listValue: (value: string[]) => T;
     mapValue: (value: Record<string, string>) => T;
     structureValue: (value: GreetingStruct) => T;
     renamedStructureValue: (value: RenamedGreeting) => T;
+    unionValue: (value: NestedUnion) => T;
     _: (name: string, value: any) => T;
   }
 
@@ -785,397 +1264,259 @@ export namespace MyUnion {
     if (value.mapValue !== undefined) return visitor.mapValue(value.mapValue);
     if (value.structureValue !== undefined) return visitor.structureValue(value.structureValue);
     if (value.renamedStructureValue !== undefined) return visitor.renamedStructureValue(value.renamedStructureValue);
+    if (value.unionValue !== undefined) return visitor.unionValue(value.unionValue);
     return visitor._(value.$unknown[0], value.$unknown[1]);
   };
 }
-/**
- * @internal
- */
-export const MyUnionFilterSensitiveLog = (obj: MyUnion): any => {
-  if (obj.stringValue !== undefined) return { stringValue: obj.stringValue };
-  if (obj.booleanValue !== undefined) return { booleanValue: obj.booleanValue };
-  if (obj.numberValue !== undefined) return { numberValue: obj.numberValue };
-  if (obj.blobValue !== undefined) return { blobValue: obj.blobValue };
-  if (obj.timestampValue !== undefined) return { timestampValue: obj.timestampValue };
-  if (obj.enumValue !== undefined) return { enumValue: obj.enumValue };
-  if (obj.listValue !== undefined) return { listValue: obj.listValue };
-  if (obj.mapValue !== undefined) return { mapValue: obj.mapValue };
-  if (obj.structureValue !== undefined) return { structureValue: GreetingStructFilterSensitiveLog(obj.structureValue) };
-  if (obj.renamedStructureValue !== undefined)
-    return { renamedStructureValue: RenamedGreetingFilterSensitiveLog(obj.renamedStructureValue) };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
 
 /**
  * A shared structure that contains a single union member.
+ * @public
  */
 export interface UnionInputOutput {
   /**
    * A union with a representative set of types for members.
+   * @public
    */
-  contents?: MyUnion;
+  contents?: MyUnion | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const UnionInputOutputFilterSensitiveLog = (obj: UnionInputOutput): any => ({
-  ...obj,
-  ...(obj.contents && { contents: MyUnionFilterSensitiveLog(obj.contents) }),
-});
-
 export interface MalformedAcceptWithGenericStringOutput {
-  payload?: string;
+  payload?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedAcceptWithGenericStringOutputFilterSensitiveLog = (
-  obj: MalformedAcceptWithGenericStringOutput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedAcceptWithPayloadOutput {
-  payload?: Uint8Array;
+  payload?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedAcceptWithPayloadOutputFilterSensitiveLog = (obj: MalformedAcceptWithPayloadOutput): any => ({
-  ...obj,
-});
-
 export interface MalformedBlobInput {
-  blob?: Uint8Array;
+  blob?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedBlobInputFilterSensitiveLog = (obj: MalformedBlobInput): any => ({
-  ...obj,
-});
-
 export interface MalformedBooleanInput {
-  booleanInBody?: boolean;
+  booleanInBody?: boolean | undefined;
   booleanInPath: boolean | undefined;
-  booleanInQuery?: boolean;
-  booleanInHeader?: boolean;
+  booleanInQuery?: boolean | undefined;
+  booleanInHeader?: boolean | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedBooleanInputFilterSensitiveLog = (obj: MalformedBooleanInput): any => ({
-  ...obj,
-});
-
 export interface MalformedByteInput {
-  byteInBody?: number;
+  byteInBody?: number | undefined;
   byteInPath: number | undefined;
-  byteInQuery?: number;
-  byteInHeader?: number;
+  byteInQuery?: number | undefined;
+  byteInHeader?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedByteInputFilterSensitiveLog = (obj: MalformedByteInput): any => ({
-  ...obj,
-});
-
 export interface MalformedContentTypeWithGenericStringInput {
-  payload?: string;
+  payload?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedContentTypeWithGenericStringInputFilterSensitiveLog = (
-  obj: MalformedContentTypeWithGenericStringInput
-): any => ({
-  ...obj,
-});
+export interface MalformedContentTypeWithoutBodyEmptyInputInput {
+  header?: string | undefined;
+}
 
+/**
+ * @public
+ */
 export interface MalformedContentTypeWithPayloadInput {
-  payload?: Uint8Array;
+  payload?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedContentTypeWithPayloadInputFilterSensitiveLog = (
-  obj: MalformedContentTypeWithPayloadInput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedDoubleInput {
-  doubleInBody?: number;
+  doubleInBody?: number | undefined;
   doubleInPath: number | undefined;
-  doubleInQuery?: number;
-  doubleInHeader?: number;
+  doubleInQuery?: number | undefined;
+  doubleInHeader?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedDoubleInputFilterSensitiveLog = (obj: MalformedDoubleInput): any => ({
-  ...obj,
-});
-
 export interface MalformedFloatInput {
-  floatInBody?: number;
+  floatInBody?: number | undefined;
   floatInPath: number | undefined;
-  floatInQuery?: number;
-  floatInHeader?: number;
+  floatInQuery?: number | undefined;
+  floatInHeader?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedFloatInputFilterSensitiveLog = (obj: MalformedFloatInput): any => ({
-  ...obj,
-});
-
 export interface MalformedIntegerInput {
-  integerInBody?: number;
+  integerInBody?: number | undefined;
   integerInPath: number | undefined;
-  integerInQuery?: number;
-  integerInHeader?: number;
+  integerInQuery?: number | undefined;
+  integerInHeader?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedIntegerInputFilterSensitiveLog = (obj: MalformedIntegerInput): any => ({
-  ...obj,
-});
-
 export interface MalformedListInput {
-  bodyList?: string[];
+  bodyList?: string[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedListInputFilterSensitiveLog = (obj: MalformedListInput): any => ({
-  ...obj,
-});
-
 export interface MalformedLongInput {
-  longInBody?: number;
+  longInBody?: number | undefined;
   longInPath: number | undefined;
-  longInQuery?: number;
-  longInHeader?: number;
+  longInQuery?: number | undefined;
+  longInHeader?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedLongInputFilterSensitiveLog = (obj: MalformedLongInput): any => ({
-  ...obj,
-});
-
 export interface MalformedMapInput {
-  bodyMap?: Record<string, string>;
+  bodyMap?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedMapInputFilterSensitiveLog = (obj: MalformedMapInput): any => ({
-  ...obj,
-});
-
 export interface MalformedRequestBodyInput {
-  int?: number;
-  float?: number;
+  int?: number | undefined;
+  float?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedRequestBodyInputFilterSensitiveLog = (obj: MalformedRequestBodyInput): any => ({
-  ...obj,
-});
-
 export interface MalformedShortInput {
-  shortInBody?: number;
+  shortInBody?: number | undefined;
   shortInPath: number | undefined;
-  shortInQuery?: number;
-  shortInHeader?: number;
+  shortInQuery?: number | undefined;
+  shortInHeader?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedShortInputFilterSensitiveLog = (obj: MalformedShortInput): any => ({
-  ...obj,
-});
-
 export interface MalformedStringInput {
-  blob?: __LazyJsonString | string;
+  blob?: __AutomaticJsonStringConversion | string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedStringInputFilterSensitiveLog = (obj: MalformedStringInput): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampBodyDateTimeInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampBodyDateTimeInputFilterSensitiveLog = (
-  obj: MalformedTimestampBodyDateTimeInput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampBodyDefaultInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampBodyDefaultInputFilterSensitiveLog = (obj: MalformedTimestampBodyDefaultInput): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampBodyHttpDateInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampBodyHttpDateInputFilterSensitiveLog = (
-  obj: MalformedTimestampBodyHttpDateInput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampHeaderDateTimeInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampHeaderDateTimeInputFilterSensitiveLog = (
-  obj: MalformedTimestampHeaderDateTimeInput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampHeaderDefaultInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampHeaderDefaultInputFilterSensitiveLog = (
-  obj: MalformedTimestampHeaderDefaultInput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampHeaderEpochInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampHeaderEpochInputFilterSensitiveLog = (obj: MalformedTimestampHeaderEpochInput): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampPathDefaultInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampPathDefaultInputFilterSensitiveLog = (obj: MalformedTimestampPathDefaultInput): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampPathEpochInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampPathEpochInputFilterSensitiveLog = (obj: MalformedTimestampPathEpochInput): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampPathHttpDateInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampPathHttpDateInputFilterSensitiveLog = (
-  obj: MalformedTimestampPathHttpDateInput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampQueryDefaultInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampQueryDefaultInputFilterSensitiveLog = (
-  obj: MalformedTimestampQueryDefaultInput
-): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampQueryEpochInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampQueryEpochInputFilterSensitiveLog = (obj: MalformedTimestampQueryEpochInput): any => ({
-  ...obj,
-});
-
 export interface MalformedTimestampQueryHttpDateInput {
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedTimestampQueryHttpDateInputFilterSensitiveLog = (
-  obj: MalformedTimestampQueryHttpDateInput
-): any => ({
-  ...obj,
-});
+export type SimpleUnion =
+  | SimpleUnion.IntMember
+  | SimpleUnion.StringMember
+  | SimpleUnion.$UnknownMember;
 
-export type SimpleUnion = SimpleUnion.IntMember | SimpleUnion.StringMember | SimpleUnion.$UnknownMember;
-
+/**
+ * @public
+ */
 export namespace SimpleUnion {
   export interface IntMember {
     int: number;
@@ -1189,6 +1530,9 @@ export namespace SimpleUnion {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     int?: never;
     string?: never;
@@ -1207,116 +1551,202 @@ export namespace SimpleUnion {
     return visitor._(value.$unknown[0], value.$unknown[1]);
   };
 }
-/**
- * @internal
- */
-export const SimpleUnionFilterSensitiveLog = (obj: SimpleUnion): any => {
-  if (obj.int !== undefined) return { int: obj.int };
-  if (obj.string !== undefined) return { string: obj.string };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
 
+/**
+ * @public
+ */
 export interface MalformedUnionInput {
-  union?: SimpleUnion;
+  union?: SimpleUnion | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MalformedUnionInputFilterSensitiveLog = (obj: MalformedUnionInput): any => ({
-  ...obj,
-  ...(obj.union && { union: SimpleUnionFilterSensitiveLog(obj.union) }),
-});
-
 export interface MediaTypeHeaderInput {
-  json?: __LazyJsonString | string;
+  json?: __AutomaticJsonStringConversion | string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MediaTypeHeaderInputFilterSensitiveLog = (obj: MediaTypeHeaderInput): any => ({
-  ...obj,
-});
-
 export interface MediaTypeHeaderOutput {
-  json?: __LazyJsonString | string;
+  json?: __AutomaticJsonStringConversion | string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const MediaTypeHeaderOutputFilterSensitiveLog = (obj: MediaTypeHeaderOutput): any => ({
-  ...obj,
-});
-
 export interface NoInputAndOutputOutput {}
 
 /**
- * @internal
+ * @public
  */
-export const NoInputAndOutputOutputFilterSensitiveLog = (obj: NoInputAndOutputOutput): any => ({
-  ...obj,
-});
-
 export interface NullAndEmptyHeadersIO {
-  a?: string;
-  b?: string;
-  c?: string[];
+  a?: string | undefined;
+  b?: string | undefined;
+  c?: string[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const NullAndEmptyHeadersIOFilterSensitiveLog = (obj: NullAndEmptyHeadersIO): any => ({
-  ...obj,
-});
-
 export interface OmitsNullSerializesEmptyStringInput {
-  nullValue?: string;
-  emptyString?: string;
+  nullValue?: string | undefined;
+  emptyString?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface OmitsSerializingEmptyListsInput {
+  queryStringList?: string[] | undefined;
+  queryIntegerList?: number[] | undefined;
+  queryDoubleList?: number[] | undefined;
+  queryBooleanList?: boolean[] | undefined;
+  queryTimestampList?: Date[] | undefined;
+  queryEnumList?: FooEnum[] | undefined;
+  queryIntegerEnumList?: IntegerEnum[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface OperationWithDefaultsInput {
+  defaults?: Defaults | undefined;
+  clientOptionalDefaults?: ClientOptionalDefaults | undefined;
+  topLevelDefault?: string | undefined;
+  otherTopLevelDefault?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface OperationWithDefaultsOutput {
+  defaultString?: string | undefined;
+  defaultBoolean?: boolean | undefined;
+  defaultList?: string[] | undefined;
+  defaultDocumentMap?: __DocumentType | undefined;
+  defaultDocumentString?: __DocumentType | undefined;
+  defaultDocumentBoolean?: __DocumentType | undefined;
+  defaultDocumentList?: __DocumentType | undefined;
+  defaultNullDocument?: __DocumentType | undefined;
+  defaultTimestamp?: Date | undefined;
+  defaultBlob?: Uint8Array | undefined;
+  defaultByte?: number | undefined;
+  defaultShort?: number | undefined;
+  defaultInteger?: number | undefined;
+  defaultLong?: number | undefined;
+  defaultFloat?: number | undefined;
+  defaultDouble?: number | undefined;
+  defaultMap?: Record<string, string> | undefined;
+  defaultEnum?: TestEnum | undefined;
+  defaultIntEnum?: TestIntEnum | undefined;
+  emptyString?: string | undefined;
+  falseBoolean?: boolean | undefined;
+  emptyBlob?: Uint8Array | undefined;
+  zeroByte?: number | undefined;
+  zeroShort?: number | undefined;
+  zeroInteger?: number | undefined;
+  zeroLong?: number | undefined;
+  zeroFloat?: number | undefined;
+  zeroDouble?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface TopLevel {
+  dialog: Dialog | undefined;
+  dialogList?: Dialog[] | undefined;
+  dialogMap?: Record<string, Dialog> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface OperationWithNestedStructureInput {
+  topLevel: TopLevel | undefined;
+}
+
+/**
+ * @public
+ */
+export interface OperationWithNestedStructureOutput {
+  dialog: Dialog | undefined;
+  dialogList?: Dialog[] | undefined;
+  dialogMap?: Record<string, Dialog> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface OutputStreamOutput {
+  stream?: AsyncIterable<EventStream> | undefined;
 }
 
 /**
  * @internal
  */
-export const OmitsNullSerializesEmptyStringInputFilterSensitiveLog = (
-  obj: OmitsNullSerializesEmptyStringInput
-): any => ({
+export const OutputStreamOutputFilterSensitiveLog = (obj: OutputStreamOutput): any => ({
   ...obj,
-});
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
 
+/**
+ * @public
+ */
+export interface OutputStreamWithInitialResponseOutput {
+  initialResponseMember: string | undefined;
+  stream?: AsyncIterable<EventStream> | undefined;
+}
+
+/**
+ * @internal
+ */
+export const OutputStreamWithInitialResponseOutputFilterSensitiveLog = (obj: OutputStreamWithInitialResponseOutput): any => ({
+  ...obj,
+  ...(obj.stream && { stream:
+    'STREAMING_CONTENT'
+  }),
+})
+
+/**
+ * @public
+ */
 export interface PayloadConfig {
-  data?: number;
+  data?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PayloadConfigFilterSensitiveLog = (obj: PayloadConfig): any => ({
-  ...obj,
-});
-
 export interface Unit {}
 
 /**
- * @internal
+ * @public
  */
-export const UnitFilterSensitiveLog = (obj: Unit): any => ({
-  ...obj,
-});
+export type PlayerAction =
+  | PlayerAction.QuitMember
+  | PlayerAction.$UnknownMember;
 
-export type PlayerAction = PlayerAction.QuitMember | PlayerAction.$UnknownMember;
-
+/**
+ * @public
+ */
 export namespace PlayerAction {
   /**
    * Quit the game.
+   * @public
    */
   export interface QuitMember {
     quit: Unit;
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     quit?: never;
     $unknown: [string, any];
@@ -1332,44 +1762,33 @@ export namespace PlayerAction {
     return visitor._(value.$unknown[0], value.$unknown[1]);
   };
 }
-/**
- * @internal
- */
-export const PlayerActionFilterSensitiveLog = (obj: PlayerAction): any => {
-  if (obj.quit !== undefined) return { quit: UnitFilterSensitiveLog(obj.quit) };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
 
+/**
+ * @public
+ */
 export interface PostPlayerActionInput {
-  action?: PlayerAction;
+  action?: PlayerAction | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PostPlayerActionInputFilterSensitiveLog = (obj: PostPlayerActionInput): any => ({
-  ...obj,
-  ...(obj.action && { action: PlayerActionFilterSensitiveLog(obj.action) }),
-});
-
 export interface PostPlayerActionOutput {
   action: PlayerAction | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PostPlayerActionOutputFilterSensitiveLog = (obj: PostPlayerActionOutput): any => ({
-  ...obj,
-  ...(obj.action && { action: PlayerActionFilterSensitiveLog(obj.action) }),
-});
-
 export type UnionWithJsonName =
   | UnionWithJsonName.BarMember
   | UnionWithJsonName.BazMember
   | UnionWithJsonName.FooMember
   | UnionWithJsonName.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace UnionWithJsonName {
   export interface FooMember {
     foo: string;
@@ -1392,6 +1811,9 @@ export namespace UnionWithJsonName {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     foo?: never;
     bar?: never;
@@ -1413,98 +1835,105 @@ export namespace UnionWithJsonName {
     return visitor._(value.$unknown[0], value.$unknown[1]);
   };
 }
-/**
- * @internal
- */
-export const UnionWithJsonNameFilterSensitiveLog = (obj: UnionWithJsonName): any => {
-  if (obj.foo !== undefined) return { foo: obj.foo };
-  if (obj.bar !== undefined) return { bar: obj.bar };
-  if (obj.baz !== undefined) return { baz: obj.baz };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
 
+/**
+ * @public
+ */
 export interface PostUnionWithJsonNameInput {
-  value?: UnionWithJsonName;
+  value?: UnionWithJsonName | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PostUnionWithJsonNameInputFilterSensitiveLog = (obj: PostUnionWithJsonNameInput): any => ({
-  ...obj,
-  ...(obj.value && { value: UnionWithJsonNameFilterSensitiveLog(obj.value) }),
-});
-
 export interface PostUnionWithJsonNameOutput {
   value: UnionWithJsonName | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PostUnionWithJsonNameOutputFilterSensitiveLog = (obj: PostUnionWithJsonNameOutput): any => ({
-  ...obj,
-  ...(obj.value && { value: UnionWithJsonNameFilterSensitiveLog(obj.value) }),
-});
+export interface PutWithContentEncodingInput {
+  encoding?: string | undefined;
+  data?: string | undefined;
+}
 
+/**
+ * @public
+ */
 export interface QueryIdempotencyTokenAutoFillInput {
-  token?: string;
+  token?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const QueryIdempotencyTokenAutoFillInputFilterSensitiveLog = (obj: QueryIdempotencyTokenAutoFillInput): any => ({
-  ...obj,
-});
-
 export interface QueryParamsAsStringListMapInput {
-  qux?: string;
-  foo?: Record<string, string[]>;
+  qux?: string | undefined;
+  foo?: Record<string, string[]> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const QueryParamsAsStringListMapInputFilterSensitiveLog = (obj: QueryParamsAsStringListMapInput): any => ({
-  ...obj,
-});
-
 export interface QueryPrecedenceInput {
-  foo?: string;
-  baz?: Record<string, string>;
+  foo?: string | undefined;
+  baz?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const QueryPrecedenceInputFilterSensitiveLog = (obj: QueryPrecedenceInput): any => ({
-  ...obj,
-});
+export interface ResponseCodeHttpFallbackInputOutput {}
 
+/**
+ * @public
+ */
+export interface ResponseCodeRequiredOutput {
+  responseCode: number | undefined;
+}
+
+/**
+ * @public
+ */
 export interface SimpleScalarPropertiesInputOutput {
-  foo?: string;
-  stringValue?: string;
-  trueBooleanValue?: boolean;
-  falseBooleanValue?: boolean;
-  byteValue?: number;
-  shortValue?: number;
-  integerValue?: number;
-  longValue?: number;
-  floatValue?: number;
-  doubleValue?: number;
+  foo?: string | undefined;
+  stringValue?: string | undefined;
+  trueBooleanValue?: boolean | undefined;
+  falseBooleanValue?: boolean | undefined;
+  byteValue?: number | undefined;
+  shortValue?: number | undefined;
+  integerValue?: number | undefined;
+  longValue?: number | undefined;
+  floatValue?: number | undefined;
+  doubleValue?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const SimpleScalarPropertiesInputOutputFilterSensitiveLog = (obj: SimpleScalarPropertiesInputOutput): any => ({
-  ...obj,
-});
+export interface SparseJsonListsInputOutput {
+  sparseStringList?: (string | null)[] | undefined;
+  sparseShortList?: (number | null)[] | undefined;
+}
 
+/**
+ * @public
+ */
+export interface SparseJsonMapsInputOutput {
+  sparseStructMap?: Record<string, GreetingStruct | null> | undefined;
+  sparseNumberMap?: Record<string, number | null> | undefined;
+  sparseBooleanMap?: Record<string, boolean | null> | undefined;
+  sparseStringMap?: Record<string, string | null> | undefined;
+  sparseSetMap?: Record<string, string[] | null> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface StreamingTraitsInputOutput {
-  foo?: string;
-  blob?: Readable | ReadableStream | Blob;
+  foo?: string | undefined;
+  blob?: StreamingBlobTypes | undefined;
 }
 
 /**
@@ -1512,11 +1941,14 @@ export interface StreamingTraitsInputOutput {
  */
 export const StreamingTraitsInputOutputFilterSensitiveLog = (obj: StreamingTraitsInputOutput): any => ({
   ...obj,
-});
+})
 
+/**
+ * @public
+ */
 export interface StreamingTraitsRequireLengthInput {
-  foo?: string;
-  blob?: Readable | ReadableStream | Blob;
+  foo?: string | undefined;
+  blob?: StreamingBlobTypes | undefined;
 }
 
 /**
@@ -1524,128 +1956,93 @@ export interface StreamingTraitsRequireLengthInput {
  */
 export const StreamingTraitsRequireLengthInputFilterSensitiveLog = (obj: StreamingTraitsRequireLengthInput): any => ({
   ...obj,
-});
+})
 
+/**
+ * @public
+ */
 export interface StreamingTraitsWithMediaTypeInputOutput {
-  foo?: string;
-  blob?: Readable | ReadableStream | Blob;
+  foo?: string | undefined;
+  blob?: StreamingBlobTypes | undefined;
 }
 
 /**
  * @internal
  */
-export const StreamingTraitsWithMediaTypeInputOutputFilterSensitiveLog = (
-  obj: StreamingTraitsWithMediaTypeInputOutput
-): any => ({
+export const StreamingTraitsWithMediaTypeInputOutputFilterSensitiveLog = (obj: StreamingTraitsWithMediaTypeInputOutput): any => ({
   ...obj,
-});
+})
 
+/**
+ * @public
+ */
 export interface TestConfig {
-  timeout?: number;
+  timeout?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const TestConfigFilterSensitiveLog = (obj: TestConfig): any => ({
-  ...obj,
-});
-
 export interface TestBodyStructureInputOutput {
-  testId?: string;
-  testConfig?: TestConfig;
+  testId?: string | undefined;
+  testConfig?: TestConfig | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const TestBodyStructureInputOutputFilterSensitiveLog = (obj: TestBodyStructureInputOutput): any => ({
-  ...obj,
-});
-
 export interface TestNoPayloadInputOutput {
-  testId?: string;
+  testId?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const TestNoPayloadInputOutputFilterSensitiveLog = (obj: TestNoPayloadInputOutput): any => ({
-  ...obj,
-});
-
 export interface TestPayloadBlobInputOutput {
-  contentType?: string;
-  data?: Uint8Array;
+  contentType?: string | undefined;
+  data?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const TestPayloadBlobInputOutputFilterSensitiveLog = (obj: TestPayloadBlobInputOutput): any => ({
-  ...obj,
-});
-
 export interface TestPayloadStructureInputOutput {
-  testId?: string;
-  payloadConfig?: PayloadConfig;
+  testId?: string | undefined;
+  payloadConfig?: PayloadConfig | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const TestPayloadStructureInputOutputFilterSensitiveLog = (obj: TestPayloadStructureInputOutput): any => ({
-  ...obj,
-});
-
 export interface TimestampFormatHeadersIO {
-  memberEpochSeconds?: Date;
-  memberHttpDate?: Date;
-  memberDateTime?: Date;
-  defaultFormat?: Date;
-  targetEpochSeconds?: Date;
-  targetHttpDate?: Date;
-  targetDateTime?: Date;
+  memberEpochSeconds?: Date | undefined;
+  memberHttpDate?: Date | undefined;
+  memberDateTime?: Date | undefined;
+  defaultFormat?: Date | undefined;
+  targetEpochSeconds?: Date | undefined;
+  targetHttpDate?: Date | undefined;
+  targetDateTime?: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const TimestampFormatHeadersIOFilterSensitiveLog = (obj: TimestampFormatHeadersIO): any => ({
-  ...obj,
-});
-
 export interface RecursiveShapesInputOutputNested1 {
-  foo?: string;
-  nested?: RecursiveShapesInputOutputNested2;
+  foo?: string | undefined;
+  nested?: RecursiveShapesInputOutputNested2 | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const RecursiveShapesInputOutputNested1FilterSensitiveLog = (obj: RecursiveShapesInputOutputNested1): any => ({
-  ...obj,
-});
-
 export interface RecursiveShapesInputOutputNested2 {
-  bar?: string;
-  recursiveMember?: RecursiveShapesInputOutputNested1;
+  bar?: string | undefined;
+  recursiveMember?: RecursiveShapesInputOutputNested1 | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const RecursiveShapesInputOutputNested2FilterSensitiveLog = (obj: RecursiveShapesInputOutputNested2): any => ({
-  ...obj,
-});
-
 export interface RecursiveShapesInputOutput {
-  nested?: RecursiveShapesInputOutputNested1;
+  nested?: RecursiveShapesInputOutputNested1 | undefined;
 }
-
-/**
- * @internal
- */
-export const RecursiveShapesInputOutputFilterSensitiveLog = (obj: RecursiveShapesInputOutput): any => ({
-  ...obj,
-});

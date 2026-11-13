@@ -1,18 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetFunctionCommand, GetFunctionCommandInput } from "../commands/GetFunctionCommand";
-import { LambdaClient } from "../LambdaClient";
+import {
+  type GetFunctionCommandInput,
+  type GetFunctionCommandOutput,
+  GetFunctionCommand,
+} from "../commands/GetFunctionCommand";
+import type { LambdaClient } from "../LambdaClient";
+import type { LambdaServiceException } from "../models/LambdaServiceException";
 
-const checkState = async (client: LambdaClient, input: GetFunctionCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: LambdaClient, input: GetFunctionCommandInput): Promise<WaiterResult<GetFunctionCommandOutput | LambdaServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetFunctionCommand(input));
+    let result: GetFunctionCommandOutput & any = await client.send(new GetFunctionCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Configuration.LastUpdateStatus;
-      };
+      }
       if (returnComparator() === "Successful") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -20,7 +31,7 @@ const checkState = async (client: LambdaClient, input: GetFunctionCommandInput):
     try {
       const returnComparator = () => {
         return result.Configuration.LastUpdateStatus;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -28,7 +39,7 @@ const checkState = async (client: LambdaClient, input: GetFunctionCommandInput):
     try {
       const returnComparator = () => {
         return result.Configuration.LastUpdateStatus;
-      };
+      }
       if (returnComparator() === "InProgress") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -45,8 +56,8 @@ const checkState = async (client: LambdaClient, input: GetFunctionCommandInput):
 export const waitForFunctionUpdatedV2 = async (
   params: WaiterConfiguration<LambdaClient>,
   input: GetFunctionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 1, maxDelay: 120 };
+): Promise<WaiterResult<GetFunctionCommandOutput | LambdaServiceException>> => {
+  const serviceDefaults = { minDelay: 1, maxDelay: 300 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -57,8 +68,8 @@ export const waitForFunctionUpdatedV2 = async (
 export const waitUntilFunctionUpdatedV2 = async (
   params: WaiterConfiguration<LambdaClient>,
   input: GetFunctionCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 1, maxDelay: 120 };
+): Promise<WaiterResult<GetFunctionCommandOutput>> => {
+  const serviceDefaults = { minDelay: 1, maxDelay: 300 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetFunctionCommandOutput>;
 };

@@ -1,3651 +1,2792 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AssociateAwsAccountWithPartnerAccountCommandInput,
+  type AssociateAwsAccountWithPartnerAccountCommandOutput,
   AssociateAwsAccountWithPartnerAccountCommand,
-  AssociateAwsAccountWithPartnerAccountCommandInput,
-  AssociateAwsAccountWithPartnerAccountCommandOutput,
 } from "./commands/AssociateAwsAccountWithPartnerAccountCommand";
 import {
+  type AssociateMulticastGroupWithFuotaTaskCommandInput,
+  type AssociateMulticastGroupWithFuotaTaskCommandOutput,
   AssociateMulticastGroupWithFuotaTaskCommand,
-  AssociateMulticastGroupWithFuotaTaskCommandInput,
-  AssociateMulticastGroupWithFuotaTaskCommandOutput,
 } from "./commands/AssociateMulticastGroupWithFuotaTaskCommand";
 import {
+  type AssociateWirelessDeviceWithFuotaTaskCommandInput,
+  type AssociateWirelessDeviceWithFuotaTaskCommandOutput,
   AssociateWirelessDeviceWithFuotaTaskCommand,
-  AssociateWirelessDeviceWithFuotaTaskCommandInput,
-  AssociateWirelessDeviceWithFuotaTaskCommandOutput,
 } from "./commands/AssociateWirelessDeviceWithFuotaTaskCommand";
 import {
+  type AssociateWirelessDeviceWithMulticastGroupCommandInput,
+  type AssociateWirelessDeviceWithMulticastGroupCommandOutput,
   AssociateWirelessDeviceWithMulticastGroupCommand,
-  AssociateWirelessDeviceWithMulticastGroupCommandInput,
-  AssociateWirelessDeviceWithMulticastGroupCommandOutput,
 } from "./commands/AssociateWirelessDeviceWithMulticastGroupCommand";
 import {
+  type AssociateWirelessDeviceWithThingCommandInput,
+  type AssociateWirelessDeviceWithThingCommandOutput,
   AssociateWirelessDeviceWithThingCommand,
-  AssociateWirelessDeviceWithThingCommandInput,
-  AssociateWirelessDeviceWithThingCommandOutput,
 } from "./commands/AssociateWirelessDeviceWithThingCommand";
 import {
+  type AssociateWirelessGatewayWithCertificateCommandInput,
+  type AssociateWirelessGatewayWithCertificateCommandOutput,
   AssociateWirelessGatewayWithCertificateCommand,
-  AssociateWirelessGatewayWithCertificateCommandInput,
-  AssociateWirelessGatewayWithCertificateCommandOutput,
 } from "./commands/AssociateWirelessGatewayWithCertificateCommand";
 import {
+  type AssociateWirelessGatewayWithThingCommandInput,
+  type AssociateWirelessGatewayWithThingCommandOutput,
   AssociateWirelessGatewayWithThingCommand,
-  AssociateWirelessGatewayWithThingCommandInput,
-  AssociateWirelessGatewayWithThingCommandOutput,
 } from "./commands/AssociateWirelessGatewayWithThingCommand";
 import {
+  type CancelMulticastGroupSessionCommandInput,
+  type CancelMulticastGroupSessionCommandOutput,
   CancelMulticastGroupSessionCommand,
-  CancelMulticastGroupSessionCommandInput,
-  CancelMulticastGroupSessionCommandOutput,
 } from "./commands/CancelMulticastGroupSessionCommand";
 import {
+  type CreateDestinationCommandInput,
+  type CreateDestinationCommandOutput,
   CreateDestinationCommand,
-  CreateDestinationCommandInput,
-  CreateDestinationCommandOutput,
 } from "./commands/CreateDestinationCommand";
 import {
+  type CreateDeviceProfileCommandInput,
+  type CreateDeviceProfileCommandOutput,
   CreateDeviceProfileCommand,
-  CreateDeviceProfileCommandInput,
-  CreateDeviceProfileCommandOutput,
 } from "./commands/CreateDeviceProfileCommand";
 import {
+  type CreateFuotaTaskCommandInput,
+  type CreateFuotaTaskCommandOutput,
   CreateFuotaTaskCommand,
-  CreateFuotaTaskCommandInput,
-  CreateFuotaTaskCommandOutput,
 } from "./commands/CreateFuotaTaskCommand";
 import {
+  type CreateMulticastGroupCommandInput,
+  type CreateMulticastGroupCommandOutput,
   CreateMulticastGroupCommand,
-  CreateMulticastGroupCommandInput,
-  CreateMulticastGroupCommandOutput,
 } from "./commands/CreateMulticastGroupCommand";
 import {
+  type CreateNetworkAnalyzerConfigurationCommandInput,
+  type CreateNetworkAnalyzerConfigurationCommandOutput,
   CreateNetworkAnalyzerConfigurationCommand,
-  CreateNetworkAnalyzerConfigurationCommandInput,
-  CreateNetworkAnalyzerConfigurationCommandOutput,
 } from "./commands/CreateNetworkAnalyzerConfigurationCommand";
 import {
+  type CreateServiceProfileCommandInput,
+  type CreateServiceProfileCommandOutput,
   CreateServiceProfileCommand,
-  CreateServiceProfileCommandInput,
-  CreateServiceProfileCommandOutput,
 } from "./commands/CreateServiceProfileCommand";
 import {
+  type CreateWirelessDeviceCommandInput,
+  type CreateWirelessDeviceCommandOutput,
   CreateWirelessDeviceCommand,
-  CreateWirelessDeviceCommandInput,
-  CreateWirelessDeviceCommandOutput,
 } from "./commands/CreateWirelessDeviceCommand";
 import {
+  type CreateWirelessGatewayCommandInput,
+  type CreateWirelessGatewayCommandOutput,
   CreateWirelessGatewayCommand,
-  CreateWirelessGatewayCommandInput,
-  CreateWirelessGatewayCommandOutput,
 } from "./commands/CreateWirelessGatewayCommand";
 import {
+  type CreateWirelessGatewayTaskCommandInput,
+  type CreateWirelessGatewayTaskCommandOutput,
   CreateWirelessGatewayTaskCommand,
-  CreateWirelessGatewayTaskCommandInput,
-  CreateWirelessGatewayTaskCommandOutput,
 } from "./commands/CreateWirelessGatewayTaskCommand";
 import {
+  type CreateWirelessGatewayTaskDefinitionCommandInput,
+  type CreateWirelessGatewayTaskDefinitionCommandOutput,
   CreateWirelessGatewayTaskDefinitionCommand,
-  CreateWirelessGatewayTaskDefinitionCommandInput,
-  CreateWirelessGatewayTaskDefinitionCommandOutput,
 } from "./commands/CreateWirelessGatewayTaskDefinitionCommand";
 import {
+  type DeleteDestinationCommandInput,
+  type DeleteDestinationCommandOutput,
   DeleteDestinationCommand,
-  DeleteDestinationCommandInput,
-  DeleteDestinationCommandOutput,
 } from "./commands/DeleteDestinationCommand";
 import {
+  type DeleteDeviceProfileCommandInput,
+  type DeleteDeviceProfileCommandOutput,
   DeleteDeviceProfileCommand,
-  DeleteDeviceProfileCommandInput,
-  DeleteDeviceProfileCommandOutput,
 } from "./commands/DeleteDeviceProfileCommand";
 import {
+  type DeleteFuotaTaskCommandInput,
+  type DeleteFuotaTaskCommandOutput,
   DeleteFuotaTaskCommand,
-  DeleteFuotaTaskCommandInput,
-  DeleteFuotaTaskCommandOutput,
 } from "./commands/DeleteFuotaTaskCommand";
 import {
+  type DeleteMulticastGroupCommandInput,
+  type DeleteMulticastGroupCommandOutput,
   DeleteMulticastGroupCommand,
-  DeleteMulticastGroupCommandInput,
-  DeleteMulticastGroupCommandOutput,
 } from "./commands/DeleteMulticastGroupCommand";
 import {
+  type DeleteNetworkAnalyzerConfigurationCommandInput,
+  type DeleteNetworkAnalyzerConfigurationCommandOutput,
   DeleteNetworkAnalyzerConfigurationCommand,
-  DeleteNetworkAnalyzerConfigurationCommandInput,
-  DeleteNetworkAnalyzerConfigurationCommandOutput,
 } from "./commands/DeleteNetworkAnalyzerConfigurationCommand";
 import {
+  type DeleteQueuedMessagesCommandInput,
+  type DeleteQueuedMessagesCommandOutput,
   DeleteQueuedMessagesCommand,
-  DeleteQueuedMessagesCommandInput,
-  DeleteQueuedMessagesCommandOutput,
 } from "./commands/DeleteQueuedMessagesCommand";
 import {
+  type DeleteServiceProfileCommandInput,
+  type DeleteServiceProfileCommandOutput,
   DeleteServiceProfileCommand,
-  DeleteServiceProfileCommandInput,
-  DeleteServiceProfileCommandOutput,
 } from "./commands/DeleteServiceProfileCommand";
 import {
+  type DeleteWirelessDeviceCommandInput,
+  type DeleteWirelessDeviceCommandOutput,
   DeleteWirelessDeviceCommand,
-  DeleteWirelessDeviceCommandInput,
-  DeleteWirelessDeviceCommandOutput,
 } from "./commands/DeleteWirelessDeviceCommand";
 import {
+  type DeleteWirelessDeviceImportTaskCommandInput,
+  type DeleteWirelessDeviceImportTaskCommandOutput,
+  DeleteWirelessDeviceImportTaskCommand,
+} from "./commands/DeleteWirelessDeviceImportTaskCommand";
+import {
+  type DeleteWirelessGatewayCommandInput,
+  type DeleteWirelessGatewayCommandOutput,
   DeleteWirelessGatewayCommand,
-  DeleteWirelessGatewayCommandInput,
-  DeleteWirelessGatewayCommandOutput,
 } from "./commands/DeleteWirelessGatewayCommand";
 import {
+  type DeleteWirelessGatewayTaskCommandInput,
+  type DeleteWirelessGatewayTaskCommandOutput,
   DeleteWirelessGatewayTaskCommand,
-  DeleteWirelessGatewayTaskCommandInput,
-  DeleteWirelessGatewayTaskCommandOutput,
 } from "./commands/DeleteWirelessGatewayTaskCommand";
 import {
+  type DeleteWirelessGatewayTaskDefinitionCommandInput,
+  type DeleteWirelessGatewayTaskDefinitionCommandOutput,
   DeleteWirelessGatewayTaskDefinitionCommand,
-  DeleteWirelessGatewayTaskDefinitionCommandInput,
-  DeleteWirelessGatewayTaskDefinitionCommandOutput,
 } from "./commands/DeleteWirelessGatewayTaskDefinitionCommand";
 import {
+  type DeregisterWirelessDeviceCommandInput,
+  type DeregisterWirelessDeviceCommandOutput,
+  DeregisterWirelessDeviceCommand,
+} from "./commands/DeregisterWirelessDeviceCommand";
+import {
+  type DisassociateAwsAccountFromPartnerAccountCommandInput,
+  type DisassociateAwsAccountFromPartnerAccountCommandOutput,
   DisassociateAwsAccountFromPartnerAccountCommand,
-  DisassociateAwsAccountFromPartnerAccountCommandInput,
-  DisassociateAwsAccountFromPartnerAccountCommandOutput,
 } from "./commands/DisassociateAwsAccountFromPartnerAccountCommand";
 import {
+  type DisassociateMulticastGroupFromFuotaTaskCommandInput,
+  type DisassociateMulticastGroupFromFuotaTaskCommandOutput,
   DisassociateMulticastGroupFromFuotaTaskCommand,
-  DisassociateMulticastGroupFromFuotaTaskCommandInput,
-  DisassociateMulticastGroupFromFuotaTaskCommandOutput,
 } from "./commands/DisassociateMulticastGroupFromFuotaTaskCommand";
 import {
+  type DisassociateWirelessDeviceFromFuotaTaskCommandInput,
+  type DisassociateWirelessDeviceFromFuotaTaskCommandOutput,
   DisassociateWirelessDeviceFromFuotaTaskCommand,
-  DisassociateWirelessDeviceFromFuotaTaskCommandInput,
-  DisassociateWirelessDeviceFromFuotaTaskCommandOutput,
 } from "./commands/DisassociateWirelessDeviceFromFuotaTaskCommand";
 import {
+  type DisassociateWirelessDeviceFromMulticastGroupCommandInput,
+  type DisassociateWirelessDeviceFromMulticastGroupCommandOutput,
   DisassociateWirelessDeviceFromMulticastGroupCommand,
-  DisassociateWirelessDeviceFromMulticastGroupCommandInput,
-  DisassociateWirelessDeviceFromMulticastGroupCommandOutput,
 } from "./commands/DisassociateWirelessDeviceFromMulticastGroupCommand";
 import {
+  type DisassociateWirelessDeviceFromThingCommandInput,
+  type DisassociateWirelessDeviceFromThingCommandOutput,
   DisassociateWirelessDeviceFromThingCommand,
-  DisassociateWirelessDeviceFromThingCommandInput,
-  DisassociateWirelessDeviceFromThingCommandOutput,
 } from "./commands/DisassociateWirelessDeviceFromThingCommand";
 import {
+  type DisassociateWirelessGatewayFromCertificateCommandInput,
+  type DisassociateWirelessGatewayFromCertificateCommandOutput,
   DisassociateWirelessGatewayFromCertificateCommand,
-  DisassociateWirelessGatewayFromCertificateCommandInput,
-  DisassociateWirelessGatewayFromCertificateCommandOutput,
 } from "./commands/DisassociateWirelessGatewayFromCertificateCommand";
 import {
+  type DisassociateWirelessGatewayFromThingCommandInput,
+  type DisassociateWirelessGatewayFromThingCommandOutput,
   DisassociateWirelessGatewayFromThingCommand,
-  DisassociateWirelessGatewayFromThingCommandInput,
-  DisassociateWirelessGatewayFromThingCommandOutput,
 } from "./commands/DisassociateWirelessGatewayFromThingCommand";
 import {
+  type GetDestinationCommandInput,
+  type GetDestinationCommandOutput,
   GetDestinationCommand,
-  GetDestinationCommandInput,
-  GetDestinationCommandOutput,
 } from "./commands/GetDestinationCommand";
 import {
+  type GetDeviceProfileCommandInput,
+  type GetDeviceProfileCommandOutput,
   GetDeviceProfileCommand,
-  GetDeviceProfileCommandInput,
-  GetDeviceProfileCommandOutput,
 } from "./commands/GetDeviceProfileCommand";
 import {
+  type GetEventConfigurationByResourceTypesCommandInput,
+  type GetEventConfigurationByResourceTypesCommandOutput,
   GetEventConfigurationByResourceTypesCommand,
-  GetEventConfigurationByResourceTypesCommandInput,
-  GetEventConfigurationByResourceTypesCommandOutput,
 } from "./commands/GetEventConfigurationByResourceTypesCommand";
 import {
+  type GetFuotaTaskCommandInput,
+  type GetFuotaTaskCommandOutput,
   GetFuotaTaskCommand,
-  GetFuotaTaskCommandInput,
-  GetFuotaTaskCommandOutput,
 } from "./commands/GetFuotaTaskCommand";
 import {
+  type GetLogLevelsByResourceTypesCommandInput,
+  type GetLogLevelsByResourceTypesCommandOutput,
   GetLogLevelsByResourceTypesCommand,
-  GetLogLevelsByResourceTypesCommandInput,
-  GetLogLevelsByResourceTypesCommandOutput,
 } from "./commands/GetLogLevelsByResourceTypesCommand";
 import {
+  type GetMetricConfigurationCommandInput,
+  type GetMetricConfigurationCommandOutput,
+  GetMetricConfigurationCommand,
+} from "./commands/GetMetricConfigurationCommand";
+import {
+  type GetMetricsCommandInput,
+  type GetMetricsCommandOutput,
+  GetMetricsCommand,
+} from "./commands/GetMetricsCommand";
+import {
+  type GetMulticastGroupCommandInput,
+  type GetMulticastGroupCommandOutput,
   GetMulticastGroupCommand,
-  GetMulticastGroupCommandInput,
-  GetMulticastGroupCommandOutput,
 } from "./commands/GetMulticastGroupCommand";
 import {
+  type GetMulticastGroupSessionCommandInput,
+  type GetMulticastGroupSessionCommandOutput,
   GetMulticastGroupSessionCommand,
-  GetMulticastGroupSessionCommandInput,
-  GetMulticastGroupSessionCommandOutput,
 } from "./commands/GetMulticastGroupSessionCommand";
 import {
+  type GetNetworkAnalyzerConfigurationCommandInput,
+  type GetNetworkAnalyzerConfigurationCommandOutput,
   GetNetworkAnalyzerConfigurationCommand,
-  GetNetworkAnalyzerConfigurationCommandInput,
-  GetNetworkAnalyzerConfigurationCommandOutput,
 } from "./commands/GetNetworkAnalyzerConfigurationCommand";
 import {
+  type GetPartnerAccountCommandInput,
+  type GetPartnerAccountCommandOutput,
   GetPartnerAccountCommand,
-  GetPartnerAccountCommandInput,
-  GetPartnerAccountCommandOutput,
 } from "./commands/GetPartnerAccountCommand";
-import { GetPositionCommand, GetPositionCommandInput, GetPositionCommandOutput } from "./commands/GetPositionCommand";
 import {
+  type GetPositionCommandInput,
+  type GetPositionCommandOutput,
+  GetPositionCommand,
+} from "./commands/GetPositionCommand";
+import {
+  type GetPositionConfigurationCommandInput,
+  type GetPositionConfigurationCommandOutput,
   GetPositionConfigurationCommand,
-  GetPositionConfigurationCommandInput,
-  GetPositionConfigurationCommandOutput,
 } from "./commands/GetPositionConfigurationCommand";
 import {
+  type GetPositionEstimateCommandInput,
+  type GetPositionEstimateCommandOutput,
+  GetPositionEstimateCommand,
+} from "./commands/GetPositionEstimateCommand";
+import {
+  type GetResourceEventConfigurationCommandInput,
+  type GetResourceEventConfigurationCommandOutput,
   GetResourceEventConfigurationCommand,
-  GetResourceEventConfigurationCommandInput,
-  GetResourceEventConfigurationCommandOutput,
 } from "./commands/GetResourceEventConfigurationCommand";
 import {
+  type GetResourceLogLevelCommandInput,
+  type GetResourceLogLevelCommandOutput,
   GetResourceLogLevelCommand,
-  GetResourceLogLevelCommandInput,
-  GetResourceLogLevelCommandOutput,
 } from "./commands/GetResourceLogLevelCommand";
 import {
+  type GetResourcePositionCommandInput,
+  type GetResourcePositionCommandOutput,
+  GetResourcePositionCommand,
+} from "./commands/GetResourcePositionCommand";
+import {
+  type GetServiceEndpointCommandInput,
+  type GetServiceEndpointCommandOutput,
   GetServiceEndpointCommand,
-  GetServiceEndpointCommandInput,
-  GetServiceEndpointCommandOutput,
 } from "./commands/GetServiceEndpointCommand";
 import {
+  type GetServiceProfileCommandInput,
+  type GetServiceProfileCommandOutput,
   GetServiceProfileCommand,
-  GetServiceProfileCommandInput,
-  GetServiceProfileCommandOutput,
 } from "./commands/GetServiceProfileCommand";
 import {
+  type GetWirelessDeviceCommandInput,
+  type GetWirelessDeviceCommandOutput,
   GetWirelessDeviceCommand,
-  GetWirelessDeviceCommandInput,
-  GetWirelessDeviceCommandOutput,
 } from "./commands/GetWirelessDeviceCommand";
 import {
+  type GetWirelessDeviceImportTaskCommandInput,
+  type GetWirelessDeviceImportTaskCommandOutput,
+  GetWirelessDeviceImportTaskCommand,
+} from "./commands/GetWirelessDeviceImportTaskCommand";
+import {
+  type GetWirelessDeviceStatisticsCommandInput,
+  type GetWirelessDeviceStatisticsCommandOutput,
   GetWirelessDeviceStatisticsCommand,
-  GetWirelessDeviceStatisticsCommandInput,
-  GetWirelessDeviceStatisticsCommandOutput,
 } from "./commands/GetWirelessDeviceStatisticsCommand";
 import {
+  type GetWirelessGatewayCertificateCommandInput,
+  type GetWirelessGatewayCertificateCommandOutput,
   GetWirelessGatewayCertificateCommand,
-  GetWirelessGatewayCertificateCommandInput,
-  GetWirelessGatewayCertificateCommandOutput,
 } from "./commands/GetWirelessGatewayCertificateCommand";
 import {
+  type GetWirelessGatewayCommandInput,
+  type GetWirelessGatewayCommandOutput,
   GetWirelessGatewayCommand,
-  GetWirelessGatewayCommandInput,
-  GetWirelessGatewayCommandOutput,
 } from "./commands/GetWirelessGatewayCommand";
 import {
+  type GetWirelessGatewayFirmwareInformationCommandInput,
+  type GetWirelessGatewayFirmwareInformationCommandOutput,
   GetWirelessGatewayFirmwareInformationCommand,
-  GetWirelessGatewayFirmwareInformationCommandInput,
-  GetWirelessGatewayFirmwareInformationCommandOutput,
 } from "./commands/GetWirelessGatewayFirmwareInformationCommand";
 import {
+  type GetWirelessGatewayStatisticsCommandInput,
+  type GetWirelessGatewayStatisticsCommandOutput,
   GetWirelessGatewayStatisticsCommand,
-  GetWirelessGatewayStatisticsCommandInput,
-  GetWirelessGatewayStatisticsCommandOutput,
 } from "./commands/GetWirelessGatewayStatisticsCommand";
 import {
+  type GetWirelessGatewayTaskCommandInput,
+  type GetWirelessGatewayTaskCommandOutput,
   GetWirelessGatewayTaskCommand,
-  GetWirelessGatewayTaskCommandInput,
-  GetWirelessGatewayTaskCommandOutput,
 } from "./commands/GetWirelessGatewayTaskCommand";
 import {
+  type GetWirelessGatewayTaskDefinitionCommandInput,
+  type GetWirelessGatewayTaskDefinitionCommandOutput,
   GetWirelessGatewayTaskDefinitionCommand,
-  GetWirelessGatewayTaskDefinitionCommandInput,
-  GetWirelessGatewayTaskDefinitionCommandOutput,
 } from "./commands/GetWirelessGatewayTaskDefinitionCommand";
 import {
+  type ListDestinationsCommandInput,
+  type ListDestinationsCommandOutput,
   ListDestinationsCommand,
-  ListDestinationsCommandInput,
-  ListDestinationsCommandOutput,
 } from "./commands/ListDestinationsCommand";
 import {
+  type ListDeviceProfilesCommandInput,
+  type ListDeviceProfilesCommandOutput,
   ListDeviceProfilesCommand,
-  ListDeviceProfilesCommandInput,
-  ListDeviceProfilesCommandOutput,
 } from "./commands/ListDeviceProfilesCommand";
 import {
+  type ListDevicesForWirelessDeviceImportTaskCommandInput,
+  type ListDevicesForWirelessDeviceImportTaskCommandOutput,
+  ListDevicesForWirelessDeviceImportTaskCommand,
+} from "./commands/ListDevicesForWirelessDeviceImportTaskCommand";
+import {
+  type ListEventConfigurationsCommandInput,
+  type ListEventConfigurationsCommandOutput,
   ListEventConfigurationsCommand,
-  ListEventConfigurationsCommandInput,
-  ListEventConfigurationsCommandOutput,
 } from "./commands/ListEventConfigurationsCommand";
 import {
+  type ListFuotaTasksCommandInput,
+  type ListFuotaTasksCommandOutput,
   ListFuotaTasksCommand,
-  ListFuotaTasksCommandInput,
-  ListFuotaTasksCommandOutput,
 } from "./commands/ListFuotaTasksCommand";
 import {
+  type ListMulticastGroupsByFuotaTaskCommandInput,
+  type ListMulticastGroupsByFuotaTaskCommandOutput,
   ListMulticastGroupsByFuotaTaskCommand,
-  ListMulticastGroupsByFuotaTaskCommandInput,
-  ListMulticastGroupsByFuotaTaskCommandOutput,
 } from "./commands/ListMulticastGroupsByFuotaTaskCommand";
 import {
+  type ListMulticastGroupsCommandInput,
+  type ListMulticastGroupsCommandOutput,
   ListMulticastGroupsCommand,
-  ListMulticastGroupsCommandInput,
-  ListMulticastGroupsCommandOutput,
 } from "./commands/ListMulticastGroupsCommand";
 import {
+  type ListNetworkAnalyzerConfigurationsCommandInput,
+  type ListNetworkAnalyzerConfigurationsCommandOutput,
   ListNetworkAnalyzerConfigurationsCommand,
-  ListNetworkAnalyzerConfigurationsCommandInput,
-  ListNetworkAnalyzerConfigurationsCommandOutput,
 } from "./commands/ListNetworkAnalyzerConfigurationsCommand";
 import {
+  type ListPartnerAccountsCommandInput,
+  type ListPartnerAccountsCommandOutput,
   ListPartnerAccountsCommand,
-  ListPartnerAccountsCommandInput,
-  ListPartnerAccountsCommandOutput,
 } from "./commands/ListPartnerAccountsCommand";
 import {
+  type ListPositionConfigurationsCommandInput,
+  type ListPositionConfigurationsCommandOutput,
   ListPositionConfigurationsCommand,
-  ListPositionConfigurationsCommandInput,
-  ListPositionConfigurationsCommandOutput,
 } from "./commands/ListPositionConfigurationsCommand";
 import {
+  type ListQueuedMessagesCommandInput,
+  type ListQueuedMessagesCommandOutput,
   ListQueuedMessagesCommand,
-  ListQueuedMessagesCommandInput,
-  ListQueuedMessagesCommandOutput,
 } from "./commands/ListQueuedMessagesCommand";
 import {
+  type ListServiceProfilesCommandInput,
+  type ListServiceProfilesCommandOutput,
   ListServiceProfilesCommand,
-  ListServiceProfilesCommandInput,
-  ListServiceProfilesCommandOutput,
 } from "./commands/ListServiceProfilesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListWirelessDeviceImportTasksCommandInput,
+  type ListWirelessDeviceImportTasksCommandOutput,
+  ListWirelessDeviceImportTasksCommand,
+} from "./commands/ListWirelessDeviceImportTasksCommand";
+import {
+  type ListWirelessDevicesCommandInput,
+  type ListWirelessDevicesCommandOutput,
   ListWirelessDevicesCommand,
-  ListWirelessDevicesCommandInput,
-  ListWirelessDevicesCommandOutput,
 } from "./commands/ListWirelessDevicesCommand";
 import {
+  type ListWirelessGatewaysCommandInput,
+  type ListWirelessGatewaysCommandOutput,
   ListWirelessGatewaysCommand,
-  ListWirelessGatewaysCommandInput,
-  ListWirelessGatewaysCommandOutput,
 } from "./commands/ListWirelessGatewaysCommand";
 import {
+  type ListWirelessGatewayTaskDefinitionsCommandInput,
+  type ListWirelessGatewayTaskDefinitionsCommandOutput,
   ListWirelessGatewayTaskDefinitionsCommand,
-  ListWirelessGatewayTaskDefinitionsCommandInput,
-  ListWirelessGatewayTaskDefinitionsCommandOutput,
 } from "./commands/ListWirelessGatewayTaskDefinitionsCommand";
 import {
+  type PutPositionConfigurationCommandInput,
+  type PutPositionConfigurationCommandOutput,
   PutPositionConfigurationCommand,
-  PutPositionConfigurationCommandInput,
-  PutPositionConfigurationCommandOutput,
 } from "./commands/PutPositionConfigurationCommand";
 import {
+  type PutResourceLogLevelCommandInput,
+  type PutResourceLogLevelCommandOutput,
   PutResourceLogLevelCommand,
-  PutResourceLogLevelCommandInput,
-  PutResourceLogLevelCommandOutput,
 } from "./commands/PutResourceLogLevelCommand";
 import {
+  type ResetAllResourceLogLevelsCommandInput,
+  type ResetAllResourceLogLevelsCommandOutput,
   ResetAllResourceLogLevelsCommand,
-  ResetAllResourceLogLevelsCommandInput,
-  ResetAllResourceLogLevelsCommandOutput,
 } from "./commands/ResetAllResourceLogLevelsCommand";
 import {
+  type ResetResourceLogLevelCommandInput,
+  type ResetResourceLogLevelCommandOutput,
   ResetResourceLogLevelCommand,
-  ResetResourceLogLevelCommandInput,
-  ResetResourceLogLevelCommandOutput,
 } from "./commands/ResetResourceLogLevelCommand";
 import {
+  type SendDataToMulticastGroupCommandInput,
+  type SendDataToMulticastGroupCommandOutput,
   SendDataToMulticastGroupCommand,
-  SendDataToMulticastGroupCommandInput,
-  SendDataToMulticastGroupCommandOutput,
 } from "./commands/SendDataToMulticastGroupCommand";
 import {
+  type SendDataToWirelessDeviceCommandInput,
+  type SendDataToWirelessDeviceCommandOutput,
   SendDataToWirelessDeviceCommand,
-  SendDataToWirelessDeviceCommandInput,
-  SendDataToWirelessDeviceCommandOutput,
 } from "./commands/SendDataToWirelessDeviceCommand";
 import {
+  type StartBulkAssociateWirelessDeviceWithMulticastGroupCommandInput,
+  type StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput,
   StartBulkAssociateWirelessDeviceWithMulticastGroupCommand,
-  StartBulkAssociateWirelessDeviceWithMulticastGroupCommandInput,
-  StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput,
 } from "./commands/StartBulkAssociateWirelessDeviceWithMulticastGroupCommand";
 import {
+  type StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandInput,
+  type StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput,
   StartBulkDisassociateWirelessDeviceFromMulticastGroupCommand,
-  StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandInput,
-  StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput,
 } from "./commands/StartBulkDisassociateWirelessDeviceFromMulticastGroupCommand";
 import {
+  type StartFuotaTaskCommandInput,
+  type StartFuotaTaskCommandOutput,
   StartFuotaTaskCommand,
-  StartFuotaTaskCommandInput,
-  StartFuotaTaskCommandOutput,
 } from "./commands/StartFuotaTaskCommand";
 import {
+  type StartMulticastGroupSessionCommandInput,
+  type StartMulticastGroupSessionCommandOutput,
   StartMulticastGroupSessionCommand,
-  StartMulticastGroupSessionCommandInput,
-  StartMulticastGroupSessionCommandOutput,
 } from "./commands/StartMulticastGroupSessionCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartSingleWirelessDeviceImportTaskCommandInput,
+  type StartSingleWirelessDeviceImportTaskCommandOutput,
+  StartSingleWirelessDeviceImportTaskCommand,
+} from "./commands/StartSingleWirelessDeviceImportTaskCommand";
+import {
+  type StartWirelessDeviceImportTaskCommandInput,
+  type StartWirelessDeviceImportTaskCommandOutput,
+  StartWirelessDeviceImportTaskCommand,
+} from "./commands/StartWirelessDeviceImportTaskCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TestWirelessDeviceCommandInput,
+  type TestWirelessDeviceCommandOutput,
   TestWirelessDeviceCommand,
-  TestWirelessDeviceCommandInput,
-  TestWirelessDeviceCommandOutput,
 } from "./commands/TestWirelessDeviceCommand";
 import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateDestinationCommandInput,
+  type UpdateDestinationCommandOutput,
   UpdateDestinationCommand,
-  UpdateDestinationCommandInput,
-  UpdateDestinationCommandOutput,
 } from "./commands/UpdateDestinationCommand";
 import {
+  type UpdateEventConfigurationByResourceTypesCommandInput,
+  type UpdateEventConfigurationByResourceTypesCommandOutput,
   UpdateEventConfigurationByResourceTypesCommand,
-  UpdateEventConfigurationByResourceTypesCommandInput,
-  UpdateEventConfigurationByResourceTypesCommandOutput,
 } from "./commands/UpdateEventConfigurationByResourceTypesCommand";
 import {
+  type UpdateFuotaTaskCommandInput,
+  type UpdateFuotaTaskCommandOutput,
   UpdateFuotaTaskCommand,
-  UpdateFuotaTaskCommandInput,
-  UpdateFuotaTaskCommandOutput,
 } from "./commands/UpdateFuotaTaskCommand";
 import {
+  type UpdateLogLevelsByResourceTypesCommandInput,
+  type UpdateLogLevelsByResourceTypesCommandOutput,
   UpdateLogLevelsByResourceTypesCommand,
-  UpdateLogLevelsByResourceTypesCommandInput,
-  UpdateLogLevelsByResourceTypesCommandOutput,
 } from "./commands/UpdateLogLevelsByResourceTypesCommand";
 import {
+  type UpdateMetricConfigurationCommandInput,
+  type UpdateMetricConfigurationCommandOutput,
+  UpdateMetricConfigurationCommand,
+} from "./commands/UpdateMetricConfigurationCommand";
+import {
+  type UpdateMulticastGroupCommandInput,
+  type UpdateMulticastGroupCommandOutput,
   UpdateMulticastGroupCommand,
-  UpdateMulticastGroupCommandInput,
-  UpdateMulticastGroupCommandOutput,
 } from "./commands/UpdateMulticastGroupCommand";
 import {
+  type UpdateNetworkAnalyzerConfigurationCommandInput,
+  type UpdateNetworkAnalyzerConfigurationCommandOutput,
   UpdateNetworkAnalyzerConfigurationCommand,
-  UpdateNetworkAnalyzerConfigurationCommandInput,
-  UpdateNetworkAnalyzerConfigurationCommandOutput,
 } from "./commands/UpdateNetworkAnalyzerConfigurationCommand";
 import {
+  type UpdatePartnerAccountCommandInput,
+  type UpdatePartnerAccountCommandOutput,
   UpdatePartnerAccountCommand,
-  UpdatePartnerAccountCommandInput,
-  UpdatePartnerAccountCommandOutput,
 } from "./commands/UpdatePartnerAccountCommand";
 import {
+  type UpdatePositionCommandInput,
+  type UpdatePositionCommandOutput,
   UpdatePositionCommand,
-  UpdatePositionCommandInput,
-  UpdatePositionCommandOutput,
 } from "./commands/UpdatePositionCommand";
 import {
+  type UpdateResourceEventConfigurationCommandInput,
+  type UpdateResourceEventConfigurationCommandOutput,
   UpdateResourceEventConfigurationCommand,
-  UpdateResourceEventConfigurationCommandInput,
-  UpdateResourceEventConfigurationCommandOutput,
 } from "./commands/UpdateResourceEventConfigurationCommand";
 import {
+  type UpdateResourcePositionCommandInput,
+  type UpdateResourcePositionCommandOutput,
+  UpdateResourcePositionCommand,
+} from "./commands/UpdateResourcePositionCommand";
+import {
+  type UpdateWirelessDeviceCommandInput,
+  type UpdateWirelessDeviceCommandOutput,
   UpdateWirelessDeviceCommand,
-  UpdateWirelessDeviceCommandInput,
-  UpdateWirelessDeviceCommandOutput,
 } from "./commands/UpdateWirelessDeviceCommand";
 import {
+  type UpdateWirelessDeviceImportTaskCommandInput,
+  type UpdateWirelessDeviceImportTaskCommandOutput,
+  UpdateWirelessDeviceImportTaskCommand,
+} from "./commands/UpdateWirelessDeviceImportTaskCommand";
+import {
+  type UpdateWirelessGatewayCommandInput,
+  type UpdateWirelessGatewayCommandOutput,
   UpdateWirelessGatewayCommand,
-  UpdateWirelessGatewayCommandInput,
-  UpdateWirelessGatewayCommandOutput,
 } from "./commands/UpdateWirelessGatewayCommand";
 import { IoTWirelessClient } from "./IoTWirelessClient";
+import { paginateListDestinations } from "./pagination/ListDestinationsPaginator";
+import { paginateListDeviceProfiles } from "./pagination/ListDeviceProfilesPaginator";
+import { paginateListFuotaTasks } from "./pagination/ListFuotaTasksPaginator";
+import { paginateListMulticastGroupsByFuotaTask } from "./pagination/ListMulticastGroupsByFuotaTaskPaginator";
+import { paginateListMulticastGroups } from "./pagination/ListMulticastGroupsPaginator";
+import { paginateListNetworkAnalyzerConfigurations } from "./pagination/ListNetworkAnalyzerConfigurationsPaginator";
+import { paginateListPositionConfigurations } from "./pagination/ListPositionConfigurationsPaginator";
+import { paginateListQueuedMessages } from "./pagination/ListQueuedMessagesPaginator";
+import { paginateListServiceProfiles } from "./pagination/ListServiceProfilesPaginator";
+import { paginateListWirelessDevices } from "./pagination/ListWirelessDevicesPaginator";
+import { paginateListWirelessGateways } from "./pagination/ListWirelessGatewaysPaginator";
+
+const commands = {
+  AssociateAwsAccountWithPartnerAccountCommand,
+  AssociateMulticastGroupWithFuotaTaskCommand,
+  AssociateWirelessDeviceWithFuotaTaskCommand,
+  AssociateWirelessDeviceWithMulticastGroupCommand,
+  AssociateWirelessDeviceWithThingCommand,
+  AssociateWirelessGatewayWithCertificateCommand,
+  AssociateWirelessGatewayWithThingCommand,
+  CancelMulticastGroupSessionCommand,
+  CreateDestinationCommand,
+  CreateDeviceProfileCommand,
+  CreateFuotaTaskCommand,
+  CreateMulticastGroupCommand,
+  CreateNetworkAnalyzerConfigurationCommand,
+  CreateServiceProfileCommand,
+  CreateWirelessDeviceCommand,
+  CreateWirelessGatewayCommand,
+  CreateWirelessGatewayTaskCommand,
+  CreateWirelessGatewayTaskDefinitionCommand,
+  DeleteDestinationCommand,
+  DeleteDeviceProfileCommand,
+  DeleteFuotaTaskCommand,
+  DeleteMulticastGroupCommand,
+  DeleteNetworkAnalyzerConfigurationCommand,
+  DeleteQueuedMessagesCommand,
+  DeleteServiceProfileCommand,
+  DeleteWirelessDeviceCommand,
+  DeleteWirelessDeviceImportTaskCommand,
+  DeleteWirelessGatewayCommand,
+  DeleteWirelessGatewayTaskCommand,
+  DeleteWirelessGatewayTaskDefinitionCommand,
+  DeregisterWirelessDeviceCommand,
+  DisassociateAwsAccountFromPartnerAccountCommand,
+  DisassociateMulticastGroupFromFuotaTaskCommand,
+  DisassociateWirelessDeviceFromFuotaTaskCommand,
+  DisassociateWirelessDeviceFromMulticastGroupCommand,
+  DisassociateWirelessDeviceFromThingCommand,
+  DisassociateWirelessGatewayFromCertificateCommand,
+  DisassociateWirelessGatewayFromThingCommand,
+  GetDestinationCommand,
+  GetDeviceProfileCommand,
+  GetEventConfigurationByResourceTypesCommand,
+  GetFuotaTaskCommand,
+  GetLogLevelsByResourceTypesCommand,
+  GetMetricConfigurationCommand,
+  GetMetricsCommand,
+  GetMulticastGroupCommand,
+  GetMulticastGroupSessionCommand,
+  GetNetworkAnalyzerConfigurationCommand,
+  GetPartnerAccountCommand,
+  GetPositionCommand,
+  GetPositionConfigurationCommand,
+  GetPositionEstimateCommand,
+  GetResourceEventConfigurationCommand,
+  GetResourceLogLevelCommand,
+  GetResourcePositionCommand,
+  GetServiceEndpointCommand,
+  GetServiceProfileCommand,
+  GetWirelessDeviceCommand,
+  GetWirelessDeviceImportTaskCommand,
+  GetWirelessDeviceStatisticsCommand,
+  GetWirelessGatewayCommand,
+  GetWirelessGatewayCertificateCommand,
+  GetWirelessGatewayFirmwareInformationCommand,
+  GetWirelessGatewayStatisticsCommand,
+  GetWirelessGatewayTaskCommand,
+  GetWirelessGatewayTaskDefinitionCommand,
+  ListDestinationsCommand,
+  ListDeviceProfilesCommand,
+  ListDevicesForWirelessDeviceImportTaskCommand,
+  ListEventConfigurationsCommand,
+  ListFuotaTasksCommand,
+  ListMulticastGroupsCommand,
+  ListMulticastGroupsByFuotaTaskCommand,
+  ListNetworkAnalyzerConfigurationsCommand,
+  ListPartnerAccountsCommand,
+  ListPositionConfigurationsCommand,
+  ListQueuedMessagesCommand,
+  ListServiceProfilesCommand,
+  ListTagsForResourceCommand,
+  ListWirelessDeviceImportTasksCommand,
+  ListWirelessDevicesCommand,
+  ListWirelessGatewaysCommand,
+  ListWirelessGatewayTaskDefinitionsCommand,
+  PutPositionConfigurationCommand,
+  PutResourceLogLevelCommand,
+  ResetAllResourceLogLevelsCommand,
+  ResetResourceLogLevelCommand,
+  SendDataToMulticastGroupCommand,
+  SendDataToWirelessDeviceCommand,
+  StartBulkAssociateWirelessDeviceWithMulticastGroupCommand,
+  StartBulkDisassociateWirelessDeviceFromMulticastGroupCommand,
+  StartFuotaTaskCommand,
+  StartMulticastGroupSessionCommand,
+  StartSingleWirelessDeviceImportTaskCommand,
+  StartWirelessDeviceImportTaskCommand,
+  TagResourceCommand,
+  TestWirelessDeviceCommand,
+  UntagResourceCommand,
+  UpdateDestinationCommand,
+  UpdateEventConfigurationByResourceTypesCommand,
+  UpdateFuotaTaskCommand,
+  UpdateLogLevelsByResourceTypesCommand,
+  UpdateMetricConfigurationCommand,
+  UpdateMulticastGroupCommand,
+  UpdateNetworkAnalyzerConfigurationCommand,
+  UpdatePartnerAccountCommand,
+  UpdatePositionCommand,
+  UpdateResourceEventConfigurationCommand,
+  UpdateResourcePositionCommand,
+  UpdateWirelessDeviceCommand,
+  UpdateWirelessDeviceImportTaskCommand,
+  UpdateWirelessGatewayCommand,
+};
+const paginators = {
+  paginateListDestinations,
+  paginateListDeviceProfiles,
+  paginateListFuotaTasks,
+  paginateListMulticastGroups,
+  paginateListMulticastGroupsByFuotaTask,
+  paginateListNetworkAnalyzerConfigurations,
+  paginateListPositionConfigurations,
+  paginateListQueuedMessages,
+  paginateListServiceProfiles,
+  paginateListWirelessDevices,
+  paginateListWirelessGateways,
+};
 
 /**
- * <p>AWS IoT Wireless provides bi-directional communication between internet-connected wireless
- * 	        devices and the AWS Cloud. To onboard both LoRaWAN and Sidewalk devices to AWS IoT, use the
- * 	        IoT Wireless API. These wireless devices use the Low Power Wide Area Networking (LPWAN)
- * 	        communication protocol to communicate with AWS IoT.</p>
- * 	        <p>Using the API, you can perform create, read, update, and delete operations for your wireless
- * 	        devices, gateways, destinations, and profiles. After onboarding your devices, you
- * 	        can use the API operations to set log levels and monitor your devices with CloudWatch.</p>
- * 	        <p>You can also use the API operations to create multicast groups and schedule a multicast session for
- * 	        sending a downlink message to devices in the group. By using Firmware Updates Over-The-Air
- * 	        (FUOTA) API operations, you can create a FUOTA task and schedule a session to update the firmware
- * 	        of individual devices or an entire group of devices in a multicast group.</p>
+ * @public
  */
-export class IoTWireless extends IoTWirelessClient {
+export interface IoTWirelessRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IoTWireless {
   /**
-   * <p>Associates a partner account with your AWS account.</p>
+   * @see {@link AssociateAwsAccountWithPartnerAccountCommand}
    */
-  public associateAwsAccountWithPartnerAccount(
+  associateAwsAccountWithPartnerAccount(
     args: AssociateAwsAccountWithPartnerAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<AssociateAwsAccountWithPartnerAccountCommandOutput>;
-  public associateAwsAccountWithPartnerAccount(
+  associateAwsAccountWithPartnerAccount(
     args: AssociateAwsAccountWithPartnerAccountCommandInput,
     cb: (err: any, data?: AssociateAwsAccountWithPartnerAccountCommandOutput) => void
   ): void;
-  public associateAwsAccountWithPartnerAccount(
+  associateAwsAccountWithPartnerAccount(
     args: AssociateAwsAccountWithPartnerAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: AssociateAwsAccountWithPartnerAccountCommandOutput) => void
   ): void;
-  public associateAwsAccountWithPartnerAccount(
-    args: AssociateAwsAccountWithPartnerAccountCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: AssociateAwsAccountWithPartnerAccountCommandOutput) => void),
-    cb?: (err: any, data?: AssociateAwsAccountWithPartnerAccountCommandOutput) => void
-  ): Promise<AssociateAwsAccountWithPartnerAccountCommandOutput> | void {
-    const command = new AssociateAwsAccountWithPartnerAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associate a multicast group with a FUOTA task.</p>
+   * @see {@link AssociateMulticastGroupWithFuotaTaskCommand}
    */
-  public associateMulticastGroupWithFuotaTask(
+  associateMulticastGroupWithFuotaTask(
     args: AssociateMulticastGroupWithFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<AssociateMulticastGroupWithFuotaTaskCommandOutput>;
-  public associateMulticastGroupWithFuotaTask(
+  associateMulticastGroupWithFuotaTask(
     args: AssociateMulticastGroupWithFuotaTaskCommandInput,
     cb: (err: any, data?: AssociateMulticastGroupWithFuotaTaskCommandOutput) => void
   ): void;
-  public associateMulticastGroupWithFuotaTask(
+  associateMulticastGroupWithFuotaTask(
     args: AssociateMulticastGroupWithFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: AssociateMulticastGroupWithFuotaTaskCommandOutput) => void
   ): void;
-  public associateMulticastGroupWithFuotaTask(
-    args: AssociateMulticastGroupWithFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateMulticastGroupWithFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: AssociateMulticastGroupWithFuotaTaskCommandOutput) => void
-  ): Promise<AssociateMulticastGroupWithFuotaTaskCommandOutput> | void {
-    const command = new AssociateMulticastGroupWithFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associate a wireless device with a FUOTA task.</p>
+   * @see {@link AssociateWirelessDeviceWithFuotaTaskCommand}
    */
-  public associateWirelessDeviceWithFuotaTask(
+  associateWirelessDeviceWithFuotaTask(
     args: AssociateWirelessDeviceWithFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<AssociateWirelessDeviceWithFuotaTaskCommandOutput>;
-  public associateWirelessDeviceWithFuotaTask(
+  associateWirelessDeviceWithFuotaTask(
     args: AssociateWirelessDeviceWithFuotaTaskCommandInput,
     cb: (err: any, data?: AssociateWirelessDeviceWithFuotaTaskCommandOutput) => void
   ): void;
-  public associateWirelessDeviceWithFuotaTask(
+  associateWirelessDeviceWithFuotaTask(
     args: AssociateWirelessDeviceWithFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: AssociateWirelessDeviceWithFuotaTaskCommandOutput) => void
   ): void;
-  public associateWirelessDeviceWithFuotaTask(
-    args: AssociateWirelessDeviceWithFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateWirelessDeviceWithFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: AssociateWirelessDeviceWithFuotaTaskCommandOutput) => void
-  ): Promise<AssociateWirelessDeviceWithFuotaTaskCommandOutput> | void {
-    const command = new AssociateWirelessDeviceWithFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a wireless device with a multicast group.</p>
+   * @see {@link AssociateWirelessDeviceWithMulticastGroupCommand}
    */
-  public associateWirelessDeviceWithMulticastGroup(
+  associateWirelessDeviceWithMulticastGroup(
     args: AssociateWirelessDeviceWithMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<AssociateWirelessDeviceWithMulticastGroupCommandOutput>;
-  public associateWirelessDeviceWithMulticastGroup(
+  associateWirelessDeviceWithMulticastGroup(
     args: AssociateWirelessDeviceWithMulticastGroupCommandInput,
     cb: (err: any, data?: AssociateWirelessDeviceWithMulticastGroupCommandOutput) => void
   ): void;
-  public associateWirelessDeviceWithMulticastGroup(
+  associateWirelessDeviceWithMulticastGroup(
     args: AssociateWirelessDeviceWithMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: AssociateWirelessDeviceWithMulticastGroupCommandOutput) => void
   ): void;
-  public associateWirelessDeviceWithMulticastGroup(
-    args: AssociateWirelessDeviceWithMulticastGroupCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: AssociateWirelessDeviceWithMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: AssociateWirelessDeviceWithMulticastGroupCommandOutput) => void
-  ): Promise<AssociateWirelessDeviceWithMulticastGroupCommandOutput> | void {
-    const command = new AssociateWirelessDeviceWithMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a wireless device with a thing.</p>
+   * @see {@link AssociateWirelessDeviceWithThingCommand}
    */
-  public associateWirelessDeviceWithThing(
+  associateWirelessDeviceWithThing(
     args: AssociateWirelessDeviceWithThingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<AssociateWirelessDeviceWithThingCommandOutput>;
-  public associateWirelessDeviceWithThing(
+  associateWirelessDeviceWithThing(
     args: AssociateWirelessDeviceWithThingCommandInput,
     cb: (err: any, data?: AssociateWirelessDeviceWithThingCommandOutput) => void
   ): void;
-  public associateWirelessDeviceWithThing(
+  associateWirelessDeviceWithThing(
     args: AssociateWirelessDeviceWithThingCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: AssociateWirelessDeviceWithThingCommandOutput) => void
   ): void;
-  public associateWirelessDeviceWithThing(
-    args: AssociateWirelessDeviceWithThingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateWirelessDeviceWithThingCommandOutput) => void),
-    cb?: (err: any, data?: AssociateWirelessDeviceWithThingCommandOutput) => void
-  ): Promise<AssociateWirelessDeviceWithThingCommandOutput> | void {
-    const command = new AssociateWirelessDeviceWithThingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a wireless gateway with a certificate.</p>
+   * @see {@link AssociateWirelessGatewayWithCertificateCommand}
    */
-  public associateWirelessGatewayWithCertificate(
+  associateWirelessGatewayWithCertificate(
     args: AssociateWirelessGatewayWithCertificateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<AssociateWirelessGatewayWithCertificateCommandOutput>;
-  public associateWirelessGatewayWithCertificate(
+  associateWirelessGatewayWithCertificate(
     args: AssociateWirelessGatewayWithCertificateCommandInput,
     cb: (err: any, data?: AssociateWirelessGatewayWithCertificateCommandOutput) => void
   ): void;
-  public associateWirelessGatewayWithCertificate(
+  associateWirelessGatewayWithCertificate(
     args: AssociateWirelessGatewayWithCertificateCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: AssociateWirelessGatewayWithCertificateCommandOutput) => void
   ): void;
-  public associateWirelessGatewayWithCertificate(
-    args: AssociateWirelessGatewayWithCertificateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: AssociateWirelessGatewayWithCertificateCommandOutput) => void),
-    cb?: (err: any, data?: AssociateWirelessGatewayWithCertificateCommandOutput) => void
-  ): Promise<AssociateWirelessGatewayWithCertificateCommandOutput> | void {
-    const command = new AssociateWirelessGatewayWithCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Associates a wireless gateway with a thing.</p>
+   * @see {@link AssociateWirelessGatewayWithThingCommand}
    */
-  public associateWirelessGatewayWithThing(
+  associateWirelessGatewayWithThing(
     args: AssociateWirelessGatewayWithThingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<AssociateWirelessGatewayWithThingCommandOutput>;
-  public associateWirelessGatewayWithThing(
+  associateWirelessGatewayWithThing(
     args: AssociateWirelessGatewayWithThingCommandInput,
     cb: (err: any, data?: AssociateWirelessGatewayWithThingCommandOutput) => void
   ): void;
-  public associateWirelessGatewayWithThing(
+  associateWirelessGatewayWithThing(
     args: AssociateWirelessGatewayWithThingCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: AssociateWirelessGatewayWithThingCommandOutput) => void
   ): void;
-  public associateWirelessGatewayWithThing(
-    args: AssociateWirelessGatewayWithThingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateWirelessGatewayWithThingCommandOutput) => void),
-    cb?: (err: any, data?: AssociateWirelessGatewayWithThingCommandOutput) => void
-  ): Promise<AssociateWirelessGatewayWithThingCommandOutput> | void {
-    const command = new AssociateWirelessGatewayWithThingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Cancels an existing multicast group session.</p>
+   * @see {@link CancelMulticastGroupSessionCommand}
    */
-  public cancelMulticastGroupSession(
+  cancelMulticastGroupSession(
     args: CancelMulticastGroupSessionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CancelMulticastGroupSessionCommandOutput>;
-  public cancelMulticastGroupSession(
+  cancelMulticastGroupSession(
     args: CancelMulticastGroupSessionCommandInput,
     cb: (err: any, data?: CancelMulticastGroupSessionCommandOutput) => void
   ): void;
-  public cancelMulticastGroupSession(
+  cancelMulticastGroupSession(
     args: CancelMulticastGroupSessionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CancelMulticastGroupSessionCommandOutput) => void
   ): void;
-  public cancelMulticastGroupSession(
-    args: CancelMulticastGroupSessionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelMulticastGroupSessionCommandOutput) => void),
-    cb?: (err: any, data?: CancelMulticastGroupSessionCommandOutput) => void
-  ): Promise<CancelMulticastGroupSessionCommandOutput> | void {
-    const command = new CancelMulticastGroupSessionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new destination that maps a device message to an AWS IoT rule.</p>
+   * @see {@link CreateDestinationCommand}
    */
-  public createDestination(
+  createDestination(
     args: CreateDestinationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateDestinationCommandOutput>;
-  public createDestination(
+  createDestination(
     args: CreateDestinationCommandInput,
     cb: (err: any, data?: CreateDestinationCommandOutput) => void
   ): void;
-  public createDestination(
+  createDestination(
     args: CreateDestinationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateDestinationCommandOutput) => void
   ): void;
-  public createDestination(
-    args: CreateDestinationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDestinationCommandOutput) => void),
-    cb?: (err: any, data?: CreateDestinationCommandOutput) => void
-  ): Promise<CreateDestinationCommandOutput> | void {
-    const command = new CreateDestinationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new device profile.</p>
+   * @see {@link CreateDeviceProfileCommand}
    */
-  public createDeviceProfile(
+  createDeviceProfile(): Promise<CreateDeviceProfileCommandOutput>;
+  createDeviceProfile(
     args: CreateDeviceProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateDeviceProfileCommandOutput>;
-  public createDeviceProfile(
+  createDeviceProfile(
     args: CreateDeviceProfileCommandInput,
     cb: (err: any, data?: CreateDeviceProfileCommandOutput) => void
   ): void;
-  public createDeviceProfile(
+  createDeviceProfile(
     args: CreateDeviceProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateDeviceProfileCommandOutput) => void
   ): void;
-  public createDeviceProfile(
-    args: CreateDeviceProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDeviceProfileCommandOutput) => void),
-    cb?: (err: any, data?: CreateDeviceProfileCommandOutput) => void
-  ): Promise<CreateDeviceProfileCommandOutput> | void {
-    const command = new CreateDeviceProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a FUOTA task.</p>
+   * @see {@link CreateFuotaTaskCommand}
    */
-  public createFuotaTask(
+  createFuotaTask(
     args: CreateFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateFuotaTaskCommandOutput>;
-  public createFuotaTask(
+  createFuotaTask(
     args: CreateFuotaTaskCommandInput,
     cb: (err: any, data?: CreateFuotaTaskCommandOutput) => void
   ): void;
-  public createFuotaTask(
+  createFuotaTask(
     args: CreateFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateFuotaTaskCommandOutput) => void
   ): void;
-  public createFuotaTask(
-    args: CreateFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: CreateFuotaTaskCommandOutput) => void
-  ): Promise<CreateFuotaTaskCommandOutput> | void {
-    const command = new CreateFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a multicast group.</p>
+   * @see {@link CreateMulticastGroupCommand}
    */
-  public createMulticastGroup(
+  createMulticastGroup(
     args: CreateMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateMulticastGroupCommandOutput>;
-  public createMulticastGroup(
+  createMulticastGroup(
     args: CreateMulticastGroupCommandInput,
     cb: (err: any, data?: CreateMulticastGroupCommandOutput) => void
   ): void;
-  public createMulticastGroup(
+  createMulticastGroup(
     args: CreateMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateMulticastGroupCommandOutput) => void
   ): void;
-  public createMulticastGroup(
-    args: CreateMulticastGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateMulticastGroupCommandOutput) => void
-  ): Promise<CreateMulticastGroupCommandOutput> | void {
-    const command = new CreateMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new network analyzer configuration.</p>
+   * @see {@link CreateNetworkAnalyzerConfigurationCommand}
    */
-  public createNetworkAnalyzerConfiguration(
+  createNetworkAnalyzerConfiguration(
     args: CreateNetworkAnalyzerConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateNetworkAnalyzerConfigurationCommandOutput>;
-  public createNetworkAnalyzerConfiguration(
+  createNetworkAnalyzerConfiguration(
     args: CreateNetworkAnalyzerConfigurationCommandInput,
     cb: (err: any, data?: CreateNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public createNetworkAnalyzerConfiguration(
+  createNetworkAnalyzerConfiguration(
     args: CreateNetworkAnalyzerConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public createNetworkAnalyzerConfiguration(
-    args: CreateNetworkAnalyzerConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateNetworkAnalyzerConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: CreateNetworkAnalyzerConfigurationCommandOutput) => void
-  ): Promise<CreateNetworkAnalyzerConfigurationCommandOutput> | void {
-    const command = new CreateNetworkAnalyzerConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a new service profile.</p>
+   * @see {@link CreateServiceProfileCommand}
    */
-  public createServiceProfile(
+  createServiceProfile(): Promise<CreateServiceProfileCommandOutput>;
+  createServiceProfile(
     args: CreateServiceProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateServiceProfileCommandOutput>;
-  public createServiceProfile(
+  createServiceProfile(
     args: CreateServiceProfileCommandInput,
     cb: (err: any, data?: CreateServiceProfileCommandOutput) => void
   ): void;
-  public createServiceProfile(
+  createServiceProfile(
     args: CreateServiceProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateServiceProfileCommandOutput) => void
   ): void;
-  public createServiceProfile(
-    args: CreateServiceProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateServiceProfileCommandOutput) => void),
-    cb?: (err: any, data?: CreateServiceProfileCommandOutput) => void
-  ): Promise<CreateServiceProfileCommandOutput> | void {
-    const command = new CreateServiceProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provisions a wireless device.</p>
+   * @see {@link CreateWirelessDeviceCommand}
    */
-  public createWirelessDevice(
+  createWirelessDevice(
     args: CreateWirelessDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateWirelessDeviceCommandOutput>;
-  public createWirelessDevice(
+  createWirelessDevice(
     args: CreateWirelessDeviceCommandInput,
     cb: (err: any, data?: CreateWirelessDeviceCommandOutput) => void
   ): void;
-  public createWirelessDevice(
+  createWirelessDevice(
     args: CreateWirelessDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateWirelessDeviceCommandOutput) => void
   ): void;
-  public createWirelessDevice(
-    args: CreateWirelessDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWirelessDeviceCommandOutput) => void),
-    cb?: (err: any, data?: CreateWirelessDeviceCommandOutput) => void
-  ): Promise<CreateWirelessDeviceCommandOutput> | void {
-    const command = new CreateWirelessDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Provisions a wireless gateway.</p>
+   * @see {@link CreateWirelessGatewayCommand}
    */
-  public createWirelessGateway(
+  createWirelessGateway(
     args: CreateWirelessGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateWirelessGatewayCommandOutput>;
-  public createWirelessGateway(
+  createWirelessGateway(
     args: CreateWirelessGatewayCommandInput,
     cb: (err: any, data?: CreateWirelessGatewayCommandOutput) => void
   ): void;
-  public createWirelessGateway(
+  createWirelessGateway(
     args: CreateWirelessGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateWirelessGatewayCommandOutput) => void
   ): void;
-  public createWirelessGateway(
-    args: CreateWirelessGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWirelessGatewayCommandOutput) => void),
-    cb?: (err: any, data?: CreateWirelessGatewayCommandOutput) => void
-  ): Promise<CreateWirelessGatewayCommandOutput> | void {
-    const command = new CreateWirelessGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a task for a wireless gateway.</p>
+   * @see {@link CreateWirelessGatewayTaskCommand}
    */
-  public createWirelessGatewayTask(
+  createWirelessGatewayTask(
     args: CreateWirelessGatewayTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateWirelessGatewayTaskCommandOutput>;
-  public createWirelessGatewayTask(
+  createWirelessGatewayTask(
     args: CreateWirelessGatewayTaskCommandInput,
     cb: (err: any, data?: CreateWirelessGatewayTaskCommandOutput) => void
   ): void;
-  public createWirelessGatewayTask(
+  createWirelessGatewayTask(
     args: CreateWirelessGatewayTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateWirelessGatewayTaskCommandOutput) => void
   ): void;
-  public createWirelessGatewayTask(
-    args: CreateWirelessGatewayTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWirelessGatewayTaskCommandOutput) => void),
-    cb?: (err: any, data?: CreateWirelessGatewayTaskCommandOutput) => void
-  ): Promise<CreateWirelessGatewayTaskCommandOutput> | void {
-    const command = new CreateWirelessGatewayTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a gateway task definition.</p>
+   * @see {@link CreateWirelessGatewayTaskDefinitionCommand}
    */
-  public createWirelessGatewayTaskDefinition(
+  createWirelessGatewayTaskDefinition(
     args: CreateWirelessGatewayTaskDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<CreateWirelessGatewayTaskDefinitionCommandOutput>;
-  public createWirelessGatewayTaskDefinition(
+  createWirelessGatewayTaskDefinition(
     args: CreateWirelessGatewayTaskDefinitionCommandInput,
     cb: (err: any, data?: CreateWirelessGatewayTaskDefinitionCommandOutput) => void
   ): void;
-  public createWirelessGatewayTaskDefinition(
+  createWirelessGatewayTaskDefinition(
     args: CreateWirelessGatewayTaskDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: CreateWirelessGatewayTaskDefinitionCommandOutput) => void
   ): void;
-  public createWirelessGatewayTaskDefinition(
-    args: CreateWirelessGatewayTaskDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWirelessGatewayTaskDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: CreateWirelessGatewayTaskDefinitionCommandOutput) => void
-  ): Promise<CreateWirelessGatewayTaskDefinitionCommandOutput> | void {
-    const command = new CreateWirelessGatewayTaskDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a destination.</p>
+   * @see {@link DeleteDestinationCommand}
    */
-  public deleteDestination(
+  deleteDestination(
     args: DeleteDestinationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteDestinationCommandOutput>;
-  public deleteDestination(
+  deleteDestination(
     args: DeleteDestinationCommandInput,
     cb: (err: any, data?: DeleteDestinationCommandOutput) => void
   ): void;
-  public deleteDestination(
+  deleteDestination(
     args: DeleteDestinationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteDestinationCommandOutput) => void
   ): void;
-  public deleteDestination(
-    args: DeleteDestinationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDestinationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDestinationCommandOutput) => void
-  ): Promise<DeleteDestinationCommandOutput> | void {
-    const command = new DeleteDestinationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a device profile.</p>
+   * @see {@link DeleteDeviceProfileCommand}
    */
-  public deleteDeviceProfile(
+  deleteDeviceProfile(
     args: DeleteDeviceProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteDeviceProfileCommandOutput>;
-  public deleteDeviceProfile(
+  deleteDeviceProfile(
     args: DeleteDeviceProfileCommandInput,
     cb: (err: any, data?: DeleteDeviceProfileCommandOutput) => void
   ): void;
-  public deleteDeviceProfile(
+  deleteDeviceProfile(
     args: DeleteDeviceProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteDeviceProfileCommandOutput) => void
   ): void;
-  public deleteDeviceProfile(
-    args: DeleteDeviceProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDeviceProfileCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDeviceProfileCommandOutput) => void
-  ): Promise<DeleteDeviceProfileCommandOutput> | void {
-    const command = new DeleteDeviceProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a FUOTA task.</p>
+   * @see {@link DeleteFuotaTaskCommand}
    */
-  public deleteFuotaTask(
+  deleteFuotaTask(
     args: DeleteFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteFuotaTaskCommandOutput>;
-  public deleteFuotaTask(
+  deleteFuotaTask(
     args: DeleteFuotaTaskCommandInput,
     cb: (err: any, data?: DeleteFuotaTaskCommandOutput) => void
   ): void;
-  public deleteFuotaTask(
+  deleteFuotaTask(
     args: DeleteFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteFuotaTaskCommandOutput) => void
   ): void;
-  public deleteFuotaTask(
-    args: DeleteFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFuotaTaskCommandOutput) => void
-  ): Promise<DeleteFuotaTaskCommandOutput> | void {
-    const command = new DeleteFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a multicast group if it is not in use by a fuota task.</p>
+   * @see {@link DeleteMulticastGroupCommand}
    */
-  public deleteMulticastGroup(
+  deleteMulticastGroup(
     args: DeleteMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteMulticastGroupCommandOutput>;
-  public deleteMulticastGroup(
+  deleteMulticastGroup(
     args: DeleteMulticastGroupCommandInput,
     cb: (err: any, data?: DeleteMulticastGroupCommandOutput) => void
   ): void;
-  public deleteMulticastGroup(
+  deleteMulticastGroup(
     args: DeleteMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteMulticastGroupCommandOutput) => void
   ): void;
-  public deleteMulticastGroup(
-    args: DeleteMulticastGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteMulticastGroupCommandOutput) => void
-  ): Promise<DeleteMulticastGroupCommandOutput> | void {
-    const command = new DeleteMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a network analyzer configuration.</p>
+   * @see {@link DeleteNetworkAnalyzerConfigurationCommand}
    */
-  public deleteNetworkAnalyzerConfiguration(
+  deleteNetworkAnalyzerConfiguration(
     args: DeleteNetworkAnalyzerConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteNetworkAnalyzerConfigurationCommandOutput>;
-  public deleteNetworkAnalyzerConfiguration(
+  deleteNetworkAnalyzerConfiguration(
     args: DeleteNetworkAnalyzerConfigurationCommandInput,
     cb: (err: any, data?: DeleteNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public deleteNetworkAnalyzerConfiguration(
+  deleteNetworkAnalyzerConfiguration(
     args: DeleteNetworkAnalyzerConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public deleteNetworkAnalyzerConfiguration(
-    args: DeleteNetworkAnalyzerConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteNetworkAnalyzerConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteNetworkAnalyzerConfigurationCommandOutput) => void
-  ): Promise<DeleteNetworkAnalyzerConfigurationCommandOutput> | void {
-    const command = new DeleteNetworkAnalyzerConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Remove queued messages from the downlink queue.</p>
+   * @see {@link DeleteQueuedMessagesCommand}
    */
-  public deleteQueuedMessages(
+  deleteQueuedMessages(
     args: DeleteQueuedMessagesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteQueuedMessagesCommandOutput>;
-  public deleteQueuedMessages(
+  deleteQueuedMessages(
     args: DeleteQueuedMessagesCommandInput,
     cb: (err: any, data?: DeleteQueuedMessagesCommandOutput) => void
   ): void;
-  public deleteQueuedMessages(
+  deleteQueuedMessages(
     args: DeleteQueuedMessagesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteQueuedMessagesCommandOutput) => void
   ): void;
-  public deleteQueuedMessages(
-    args: DeleteQueuedMessagesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteQueuedMessagesCommandOutput) => void),
-    cb?: (err: any, data?: DeleteQueuedMessagesCommandOutput) => void
-  ): Promise<DeleteQueuedMessagesCommandOutput> | void {
-    const command = new DeleteQueuedMessagesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a service profile.</p>
+   * @see {@link DeleteServiceProfileCommand}
    */
-  public deleteServiceProfile(
+  deleteServiceProfile(
     args: DeleteServiceProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteServiceProfileCommandOutput>;
-  public deleteServiceProfile(
+  deleteServiceProfile(
     args: DeleteServiceProfileCommandInput,
     cb: (err: any, data?: DeleteServiceProfileCommandOutput) => void
   ): void;
-  public deleteServiceProfile(
+  deleteServiceProfile(
     args: DeleteServiceProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteServiceProfileCommandOutput) => void
   ): void;
-  public deleteServiceProfile(
-    args: DeleteServiceProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteServiceProfileCommandOutput) => void),
-    cb?: (err: any, data?: DeleteServiceProfileCommandOutput) => void
-  ): Promise<DeleteServiceProfileCommandOutput> | void {
-    const command = new DeleteServiceProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a wireless device.</p>
+   * @see {@link DeleteWirelessDeviceCommand}
    */
-  public deleteWirelessDevice(
+  deleteWirelessDevice(
     args: DeleteWirelessDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteWirelessDeviceCommandOutput>;
-  public deleteWirelessDevice(
+  deleteWirelessDevice(
     args: DeleteWirelessDeviceCommandInput,
     cb: (err: any, data?: DeleteWirelessDeviceCommandOutput) => void
   ): void;
-  public deleteWirelessDevice(
+  deleteWirelessDevice(
     args: DeleteWirelessDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteWirelessDeviceCommandOutput) => void
   ): void;
-  public deleteWirelessDevice(
-    args: DeleteWirelessDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWirelessDeviceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWirelessDeviceCommandOutput) => void
-  ): Promise<DeleteWirelessDeviceCommandOutput> | void {
-    const command = new DeleteWirelessDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a wireless gateway.</p>
+   * @see {@link DeleteWirelessDeviceImportTaskCommand}
    */
-  public deleteWirelessGateway(
+  deleteWirelessDeviceImportTask(
+    args: DeleteWirelessDeviceImportTaskCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<DeleteWirelessDeviceImportTaskCommandOutput>;
+  deleteWirelessDeviceImportTask(
+    args: DeleteWirelessDeviceImportTaskCommandInput,
+    cb: (err: any, data?: DeleteWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+  deleteWirelessDeviceImportTask(
+    args: DeleteWirelessDeviceImportTaskCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: DeleteWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWirelessGatewayCommand}
+   */
+  deleteWirelessGateway(
     args: DeleteWirelessGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteWirelessGatewayCommandOutput>;
-  public deleteWirelessGateway(
+  deleteWirelessGateway(
     args: DeleteWirelessGatewayCommandInput,
     cb: (err: any, data?: DeleteWirelessGatewayCommandOutput) => void
   ): void;
-  public deleteWirelessGateway(
+  deleteWirelessGateway(
     args: DeleteWirelessGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteWirelessGatewayCommandOutput) => void
   ): void;
-  public deleteWirelessGateway(
-    args: DeleteWirelessGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWirelessGatewayCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWirelessGatewayCommandOutput) => void
-  ): Promise<DeleteWirelessGatewayCommandOutput> | void {
-    const command = new DeleteWirelessGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a wireless gateway task.</p>
+   * @see {@link DeleteWirelessGatewayTaskCommand}
    */
-  public deleteWirelessGatewayTask(
+  deleteWirelessGatewayTask(
     args: DeleteWirelessGatewayTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteWirelessGatewayTaskCommandOutput>;
-  public deleteWirelessGatewayTask(
+  deleteWirelessGatewayTask(
     args: DeleteWirelessGatewayTaskCommandInput,
     cb: (err: any, data?: DeleteWirelessGatewayTaskCommandOutput) => void
   ): void;
-  public deleteWirelessGatewayTask(
+  deleteWirelessGatewayTask(
     args: DeleteWirelessGatewayTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteWirelessGatewayTaskCommandOutput) => void
   ): void;
-  public deleteWirelessGatewayTask(
-    args: DeleteWirelessGatewayTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWirelessGatewayTaskCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWirelessGatewayTaskCommandOutput) => void
-  ): Promise<DeleteWirelessGatewayTaskCommandOutput> | void {
-    const command = new DeleteWirelessGatewayTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a wireless gateway task definition. Deleting this task definition does not affect tasks that are currently in progress.</p>
+   * @see {@link DeleteWirelessGatewayTaskDefinitionCommand}
    */
-  public deleteWirelessGatewayTaskDefinition(
+  deleteWirelessGatewayTaskDefinition(
     args: DeleteWirelessGatewayTaskDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DeleteWirelessGatewayTaskDefinitionCommandOutput>;
-  public deleteWirelessGatewayTaskDefinition(
+  deleteWirelessGatewayTaskDefinition(
     args: DeleteWirelessGatewayTaskDefinitionCommandInput,
     cb: (err: any, data?: DeleteWirelessGatewayTaskDefinitionCommandOutput) => void
   ): void;
-  public deleteWirelessGatewayTaskDefinition(
+  deleteWirelessGatewayTaskDefinition(
     args: DeleteWirelessGatewayTaskDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DeleteWirelessGatewayTaskDefinitionCommandOutput) => void
   ): void;
-  public deleteWirelessGatewayTaskDefinition(
-    args: DeleteWirelessGatewayTaskDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWirelessGatewayTaskDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWirelessGatewayTaskDefinitionCommandOutput) => void
-  ): Promise<DeleteWirelessGatewayTaskDefinitionCommandOutput> | void {
-    const command = new DeleteWirelessGatewayTaskDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates your AWS account from a partner account. If <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>, disassociates your AWS account from all partner accounts.</p>
+   * @see {@link DeregisterWirelessDeviceCommand}
    */
-  public disassociateAwsAccountFromPartnerAccount(
+  deregisterWirelessDevice(
+    args: DeregisterWirelessDeviceCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<DeregisterWirelessDeviceCommandOutput>;
+  deregisterWirelessDevice(
+    args: DeregisterWirelessDeviceCommandInput,
+    cb: (err: any, data?: DeregisterWirelessDeviceCommandOutput) => void
+  ): void;
+  deregisterWirelessDevice(
+    args: DeregisterWirelessDeviceCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: DeregisterWirelessDeviceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateAwsAccountFromPartnerAccountCommand}
+   */
+  disassociateAwsAccountFromPartnerAccount(
     args: DisassociateAwsAccountFromPartnerAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DisassociateAwsAccountFromPartnerAccountCommandOutput>;
-  public disassociateAwsAccountFromPartnerAccount(
+  disassociateAwsAccountFromPartnerAccount(
     args: DisassociateAwsAccountFromPartnerAccountCommandInput,
     cb: (err: any, data?: DisassociateAwsAccountFromPartnerAccountCommandOutput) => void
   ): void;
-  public disassociateAwsAccountFromPartnerAccount(
+  disassociateAwsAccountFromPartnerAccount(
     args: DisassociateAwsAccountFromPartnerAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DisassociateAwsAccountFromPartnerAccountCommandOutput) => void
   ): void;
-  public disassociateAwsAccountFromPartnerAccount(
-    args: DisassociateAwsAccountFromPartnerAccountCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DisassociateAwsAccountFromPartnerAccountCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateAwsAccountFromPartnerAccountCommandOutput) => void
-  ): Promise<DisassociateAwsAccountFromPartnerAccountCommandOutput> | void {
-    const command = new DisassociateAwsAccountFromPartnerAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a multicast group from a fuota task.</p>
+   * @see {@link DisassociateMulticastGroupFromFuotaTaskCommand}
    */
-  public disassociateMulticastGroupFromFuotaTask(
+  disassociateMulticastGroupFromFuotaTask(
     args: DisassociateMulticastGroupFromFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DisassociateMulticastGroupFromFuotaTaskCommandOutput>;
-  public disassociateMulticastGroupFromFuotaTask(
+  disassociateMulticastGroupFromFuotaTask(
     args: DisassociateMulticastGroupFromFuotaTaskCommandInput,
     cb: (err: any, data?: DisassociateMulticastGroupFromFuotaTaskCommandOutput) => void
   ): void;
-  public disassociateMulticastGroupFromFuotaTask(
+  disassociateMulticastGroupFromFuotaTask(
     args: DisassociateMulticastGroupFromFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DisassociateMulticastGroupFromFuotaTaskCommandOutput) => void
   ): void;
-  public disassociateMulticastGroupFromFuotaTask(
-    args: DisassociateMulticastGroupFromFuotaTaskCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DisassociateMulticastGroupFromFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateMulticastGroupFromFuotaTaskCommandOutput) => void
-  ): Promise<DisassociateMulticastGroupFromFuotaTaskCommandOutput> | void {
-    const command = new DisassociateMulticastGroupFromFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a wireless device from a FUOTA task.</p>
+   * @see {@link DisassociateWirelessDeviceFromFuotaTaskCommand}
    */
-  public disassociateWirelessDeviceFromFuotaTask(
+  disassociateWirelessDeviceFromFuotaTask(
     args: DisassociateWirelessDeviceFromFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DisassociateWirelessDeviceFromFuotaTaskCommandOutput>;
-  public disassociateWirelessDeviceFromFuotaTask(
+  disassociateWirelessDeviceFromFuotaTask(
     args: DisassociateWirelessDeviceFromFuotaTaskCommandInput,
     cb: (err: any, data?: DisassociateWirelessDeviceFromFuotaTaskCommandOutput) => void
   ): void;
-  public disassociateWirelessDeviceFromFuotaTask(
+  disassociateWirelessDeviceFromFuotaTask(
     args: DisassociateWirelessDeviceFromFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DisassociateWirelessDeviceFromFuotaTaskCommandOutput) => void
   ): void;
-  public disassociateWirelessDeviceFromFuotaTask(
-    args: DisassociateWirelessDeviceFromFuotaTaskCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DisassociateWirelessDeviceFromFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateWirelessDeviceFromFuotaTaskCommandOutput) => void
-  ): Promise<DisassociateWirelessDeviceFromFuotaTaskCommandOutput> | void {
-    const command = new DisassociateWirelessDeviceFromFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a wireless device from a multicast group.</p>
+   * @see {@link DisassociateWirelessDeviceFromMulticastGroupCommand}
    */
-  public disassociateWirelessDeviceFromMulticastGroup(
+  disassociateWirelessDeviceFromMulticastGroup(
     args: DisassociateWirelessDeviceFromMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DisassociateWirelessDeviceFromMulticastGroupCommandOutput>;
-  public disassociateWirelessDeviceFromMulticastGroup(
+  disassociateWirelessDeviceFromMulticastGroup(
     args: DisassociateWirelessDeviceFromMulticastGroupCommandInput,
     cb: (err: any, data?: DisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void
   ): void;
-  public disassociateWirelessDeviceFromMulticastGroup(
+  disassociateWirelessDeviceFromMulticastGroup(
     args: DisassociateWirelessDeviceFromMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void
   ): void;
-  public disassociateWirelessDeviceFromMulticastGroup(
-    args: DisassociateWirelessDeviceFromMulticastGroupCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void
-  ): Promise<DisassociateWirelessDeviceFromMulticastGroupCommandOutput> | void {
-    const command = new DisassociateWirelessDeviceFromMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a wireless device from its currently associated thing.</p>
+   * @see {@link DisassociateWirelessDeviceFromThingCommand}
    */
-  public disassociateWirelessDeviceFromThing(
+  disassociateWirelessDeviceFromThing(
     args: DisassociateWirelessDeviceFromThingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DisassociateWirelessDeviceFromThingCommandOutput>;
-  public disassociateWirelessDeviceFromThing(
+  disassociateWirelessDeviceFromThing(
     args: DisassociateWirelessDeviceFromThingCommandInput,
     cb: (err: any, data?: DisassociateWirelessDeviceFromThingCommandOutput) => void
   ): void;
-  public disassociateWirelessDeviceFromThing(
+  disassociateWirelessDeviceFromThing(
     args: DisassociateWirelessDeviceFromThingCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DisassociateWirelessDeviceFromThingCommandOutput) => void
   ): void;
-  public disassociateWirelessDeviceFromThing(
-    args: DisassociateWirelessDeviceFromThingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateWirelessDeviceFromThingCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateWirelessDeviceFromThingCommandOutput) => void
-  ): Promise<DisassociateWirelessDeviceFromThingCommandOutput> | void {
-    const command = new DisassociateWirelessDeviceFromThingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a wireless gateway from its currently associated certificate.</p>
+   * @see {@link DisassociateWirelessGatewayFromCertificateCommand}
    */
-  public disassociateWirelessGatewayFromCertificate(
+  disassociateWirelessGatewayFromCertificate(
     args: DisassociateWirelessGatewayFromCertificateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DisassociateWirelessGatewayFromCertificateCommandOutput>;
-  public disassociateWirelessGatewayFromCertificate(
+  disassociateWirelessGatewayFromCertificate(
     args: DisassociateWirelessGatewayFromCertificateCommandInput,
     cb: (err: any, data?: DisassociateWirelessGatewayFromCertificateCommandOutput) => void
   ): void;
-  public disassociateWirelessGatewayFromCertificate(
+  disassociateWirelessGatewayFromCertificate(
     args: DisassociateWirelessGatewayFromCertificateCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DisassociateWirelessGatewayFromCertificateCommandOutput) => void
   ): void;
-  public disassociateWirelessGatewayFromCertificate(
-    args: DisassociateWirelessGatewayFromCertificateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DisassociateWirelessGatewayFromCertificateCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateWirelessGatewayFromCertificateCommandOutput) => void
-  ): Promise<DisassociateWirelessGatewayFromCertificateCommandOutput> | void {
-    const command = new DisassociateWirelessGatewayFromCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a wireless gateway from its currently associated thing.</p>
+   * @see {@link DisassociateWirelessGatewayFromThingCommand}
    */
-  public disassociateWirelessGatewayFromThing(
+  disassociateWirelessGatewayFromThing(
     args: DisassociateWirelessGatewayFromThingCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<DisassociateWirelessGatewayFromThingCommandOutput>;
-  public disassociateWirelessGatewayFromThing(
+  disassociateWirelessGatewayFromThing(
     args: DisassociateWirelessGatewayFromThingCommandInput,
     cb: (err: any, data?: DisassociateWirelessGatewayFromThingCommandOutput) => void
   ): void;
-  public disassociateWirelessGatewayFromThing(
+  disassociateWirelessGatewayFromThing(
     args: DisassociateWirelessGatewayFromThingCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: DisassociateWirelessGatewayFromThingCommandOutput) => void
   ): void;
-  public disassociateWirelessGatewayFromThing(
-    args: DisassociateWirelessGatewayFromThingCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateWirelessGatewayFromThingCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateWirelessGatewayFromThingCommandOutput) => void
-  ): Promise<DisassociateWirelessGatewayFromThingCommandOutput> | void {
-    const command = new DisassociateWirelessGatewayFromThingCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a destination.</p>
+   * @see {@link GetDestinationCommand}
    */
-  public getDestination(
+  getDestination(
     args: GetDestinationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetDestinationCommandOutput>;
-  public getDestination(
+  getDestination(
     args: GetDestinationCommandInput,
     cb: (err: any, data?: GetDestinationCommandOutput) => void
   ): void;
-  public getDestination(
+  getDestination(
     args: GetDestinationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetDestinationCommandOutput) => void
   ): void;
-  public getDestination(
-    args: GetDestinationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDestinationCommandOutput) => void),
-    cb?: (err: any, data?: GetDestinationCommandOutput) => void
-  ): Promise<GetDestinationCommandOutput> | void {
-    const command = new GetDestinationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a device profile.</p>
+   * @see {@link GetDeviceProfileCommand}
    */
-  public getDeviceProfile(
+  getDeviceProfile(
     args: GetDeviceProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetDeviceProfileCommandOutput>;
-  public getDeviceProfile(
+  getDeviceProfile(
     args: GetDeviceProfileCommandInput,
     cb: (err: any, data?: GetDeviceProfileCommandOutput) => void
   ): void;
-  public getDeviceProfile(
+  getDeviceProfile(
     args: GetDeviceProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetDeviceProfileCommandOutput) => void
   ): void;
-  public getDeviceProfile(
-    args: GetDeviceProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDeviceProfileCommandOutput) => void),
-    cb?: (err: any, data?: GetDeviceProfileCommandOutput) => void
-  ): Promise<GetDeviceProfileCommandOutput> | void {
-    const command = new GetDeviceProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get the event configuration based on resource types.</p>
+   * @see {@link GetEventConfigurationByResourceTypesCommand}
    */
-  public getEventConfigurationByResourceTypes(
+  getEventConfigurationByResourceTypes(): Promise<GetEventConfigurationByResourceTypesCommandOutput>;
+  getEventConfigurationByResourceTypes(
     args: GetEventConfigurationByResourceTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetEventConfigurationByResourceTypesCommandOutput>;
-  public getEventConfigurationByResourceTypes(
+  getEventConfigurationByResourceTypes(
     args: GetEventConfigurationByResourceTypesCommandInput,
     cb: (err: any, data?: GetEventConfigurationByResourceTypesCommandOutput) => void
   ): void;
-  public getEventConfigurationByResourceTypes(
+  getEventConfigurationByResourceTypes(
     args: GetEventConfigurationByResourceTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetEventConfigurationByResourceTypesCommandOutput) => void
   ): void;
-  public getEventConfigurationByResourceTypes(
-    args: GetEventConfigurationByResourceTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEventConfigurationByResourceTypesCommandOutput) => void),
-    cb?: (err: any, data?: GetEventConfigurationByResourceTypesCommandOutput) => void
-  ): Promise<GetEventConfigurationByResourceTypesCommandOutput> | void {
-    const command = new GetEventConfigurationByResourceTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a FUOTA task.</p>
+   * @see {@link GetFuotaTaskCommand}
    */
-  public getFuotaTask(
+  getFuotaTask(
     args: GetFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetFuotaTaskCommandOutput>;
-  public getFuotaTask(args: GetFuotaTaskCommandInput, cb: (err: any, data?: GetFuotaTaskCommandOutput) => void): void;
-  public getFuotaTask(
+  getFuotaTask(
     args: GetFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetFuotaTaskCommandOutput) => void
   ): void;
-  public getFuotaTask(
+  getFuotaTask(
     args: GetFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: GetFuotaTaskCommandOutput) => void
-  ): Promise<GetFuotaTaskCommandOutput> | void {
-    const command = new GetFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: GetFuotaTaskCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns current default log levels or log levels by resource types. Based on resource types, log levels can be
-   *             for wireless device log options or wireless gateway log options.</p>
+   * @see {@link GetLogLevelsByResourceTypesCommand}
    */
-  public getLogLevelsByResourceTypes(
+  getLogLevelsByResourceTypes(): Promise<GetLogLevelsByResourceTypesCommandOutput>;
+  getLogLevelsByResourceTypes(
     args: GetLogLevelsByResourceTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetLogLevelsByResourceTypesCommandOutput>;
-  public getLogLevelsByResourceTypes(
+  getLogLevelsByResourceTypes(
     args: GetLogLevelsByResourceTypesCommandInput,
     cb: (err: any, data?: GetLogLevelsByResourceTypesCommandOutput) => void
   ): void;
-  public getLogLevelsByResourceTypes(
+  getLogLevelsByResourceTypes(
     args: GetLogLevelsByResourceTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetLogLevelsByResourceTypesCommandOutput) => void
   ): void;
-  public getLogLevelsByResourceTypes(
-    args: GetLogLevelsByResourceTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLogLevelsByResourceTypesCommandOutput) => void),
-    cb?: (err: any, data?: GetLogLevelsByResourceTypesCommandOutput) => void
-  ): Promise<GetLogLevelsByResourceTypesCommandOutput> | void {
-    const command = new GetLogLevelsByResourceTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a multicast group.</p>
+   * @see {@link GetMetricConfigurationCommand}
    */
-  public getMulticastGroup(
+  getMetricConfiguration(): Promise<GetMetricConfigurationCommandOutput>;
+  getMetricConfiguration(
+    args: GetMetricConfigurationCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<GetMetricConfigurationCommandOutput>;
+  getMetricConfiguration(
+    args: GetMetricConfigurationCommandInput,
+    cb: (err: any, data?: GetMetricConfigurationCommandOutput) => void
+  ): void;
+  getMetricConfiguration(
+    args: GetMetricConfigurationCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: GetMetricConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMetricsCommand}
+   */
+  getMetrics(): Promise<GetMetricsCommandOutput>;
+  getMetrics(
+    args: GetMetricsCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<GetMetricsCommandOutput>;
+  getMetrics(
+    args: GetMetricsCommandInput,
+    cb: (err: any, data?: GetMetricsCommandOutput) => void
+  ): void;
+  getMetrics(
+    args: GetMetricsCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: GetMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMulticastGroupCommand}
+   */
+  getMulticastGroup(
     args: GetMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetMulticastGroupCommandOutput>;
-  public getMulticastGroup(
+  getMulticastGroup(
     args: GetMulticastGroupCommandInput,
     cb: (err: any, data?: GetMulticastGroupCommandOutput) => void
   ): void;
-  public getMulticastGroup(
+  getMulticastGroup(
     args: GetMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetMulticastGroupCommandOutput) => void
   ): void;
-  public getMulticastGroup(
-    args: GetMulticastGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: GetMulticastGroupCommandOutput) => void
-  ): Promise<GetMulticastGroupCommandOutput> | void {
-    const command = new GetMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a multicast group session.</p>
+   * @see {@link GetMulticastGroupSessionCommand}
    */
-  public getMulticastGroupSession(
+  getMulticastGroupSession(
     args: GetMulticastGroupSessionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetMulticastGroupSessionCommandOutput>;
-  public getMulticastGroupSession(
+  getMulticastGroupSession(
     args: GetMulticastGroupSessionCommandInput,
     cb: (err: any, data?: GetMulticastGroupSessionCommandOutput) => void
   ): void;
-  public getMulticastGroupSession(
+  getMulticastGroupSession(
     args: GetMulticastGroupSessionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetMulticastGroupSessionCommandOutput) => void
   ): void;
-  public getMulticastGroupSession(
-    args: GetMulticastGroupSessionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMulticastGroupSessionCommandOutput) => void),
-    cb?: (err: any, data?: GetMulticastGroupSessionCommandOutput) => void
-  ): Promise<GetMulticastGroupSessionCommandOutput> | void {
-    const command = new GetMulticastGroupSessionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get network analyzer configuration.</p>
+   * @see {@link GetNetworkAnalyzerConfigurationCommand}
    */
-  public getNetworkAnalyzerConfiguration(
+  getNetworkAnalyzerConfiguration(
     args: GetNetworkAnalyzerConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetNetworkAnalyzerConfigurationCommandOutput>;
-  public getNetworkAnalyzerConfiguration(
+  getNetworkAnalyzerConfiguration(
     args: GetNetworkAnalyzerConfigurationCommandInput,
     cb: (err: any, data?: GetNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public getNetworkAnalyzerConfiguration(
+  getNetworkAnalyzerConfiguration(
     args: GetNetworkAnalyzerConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public getNetworkAnalyzerConfiguration(
-    args: GetNetworkAnalyzerConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetNetworkAnalyzerConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetNetworkAnalyzerConfigurationCommandOutput) => void
-  ): Promise<GetNetworkAnalyzerConfigurationCommandOutput> | void {
-    const command = new GetNetworkAnalyzerConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a partner account. If <code>PartnerAccountId</code> and <code>PartnerType</code> are <code>null</code>, returns all partner accounts.</p>
+   * @see {@link GetPartnerAccountCommand}
    */
-  public getPartnerAccount(
+  getPartnerAccount(
     args: GetPartnerAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetPartnerAccountCommandOutput>;
-  public getPartnerAccount(
+  getPartnerAccount(
     args: GetPartnerAccountCommandInput,
     cb: (err: any, data?: GetPartnerAccountCommandOutput) => void
   ): void;
-  public getPartnerAccount(
+  getPartnerAccount(
     args: GetPartnerAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetPartnerAccountCommandOutput) => void
   ): void;
-  public getPartnerAccount(
-    args: GetPartnerAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPartnerAccountCommandOutput) => void),
-    cb?: (err: any, data?: GetPartnerAccountCommandOutput) => void
-  ): Promise<GetPartnerAccountCommandOutput> | void {
-    const command = new GetPartnerAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get the position information for a given resource.</p>
+   * @see {@link GetPositionCommand}
    */
-  public getPosition(args: GetPositionCommandInput, options?: __HttpHandlerOptions): Promise<GetPositionCommandOutput>;
-  public getPosition(args: GetPositionCommandInput, cb: (err: any, data?: GetPositionCommandOutput) => void): void;
-  public getPosition(
+  getPosition(
     args: GetPositionCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTWirelessRequestOptions
+  ): Promise<GetPositionCommandOutput>;
+  getPosition(
+    args: GetPositionCommandInput,
     cb: (err: any, data?: GetPositionCommandOutput) => void
   ): void;
-  public getPosition(
+  getPosition(
     args: GetPositionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPositionCommandOutput) => void),
-    cb?: (err: any, data?: GetPositionCommandOutput) => void
-  ): Promise<GetPositionCommandOutput> | void {
-    const command = new GetPositionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: GetPositionCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Get position configuration for a given resource.</p>
+   * @see {@link GetPositionConfigurationCommand}
    */
-  public getPositionConfiguration(
+  getPositionConfiguration(
     args: GetPositionConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetPositionConfigurationCommandOutput>;
-  public getPositionConfiguration(
+  getPositionConfiguration(
     args: GetPositionConfigurationCommandInput,
     cb: (err: any, data?: GetPositionConfigurationCommandOutput) => void
   ): void;
-  public getPositionConfiguration(
+  getPositionConfiguration(
     args: GetPositionConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetPositionConfigurationCommandOutput) => void
   ): void;
-  public getPositionConfiguration(
-    args: GetPositionConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPositionConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetPositionConfigurationCommandOutput) => void
-  ): Promise<GetPositionConfigurationCommandOutput> | void {
-    const command = new GetPositionConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Get the event configuration for a particular resource identifier.</p>
+   * @see {@link GetPositionEstimateCommand}
    */
-  public getResourceEventConfiguration(
+  getPositionEstimate(): Promise<GetPositionEstimateCommandOutput>;
+  getPositionEstimate(
+    args: GetPositionEstimateCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<GetPositionEstimateCommandOutput>;
+  getPositionEstimate(
+    args: GetPositionEstimateCommandInput,
+    cb: (err: any, data?: GetPositionEstimateCommandOutput) => void
+  ): void;
+  getPositionEstimate(
+    args: GetPositionEstimateCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: GetPositionEstimateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourceEventConfigurationCommand}
+   */
+  getResourceEventConfiguration(
     args: GetResourceEventConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetResourceEventConfigurationCommandOutput>;
-  public getResourceEventConfiguration(
+  getResourceEventConfiguration(
     args: GetResourceEventConfigurationCommandInput,
     cb: (err: any, data?: GetResourceEventConfigurationCommandOutput) => void
   ): void;
-  public getResourceEventConfiguration(
+  getResourceEventConfiguration(
     args: GetResourceEventConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetResourceEventConfigurationCommandOutput) => void
   ): void;
-  public getResourceEventConfiguration(
-    args: GetResourceEventConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceEventConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceEventConfigurationCommandOutput) => void
-  ): Promise<GetResourceEventConfigurationCommandOutput> | void {
-    const command = new GetResourceEventConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for
-   *             a wireless device or a wireless gateway.</p>
+   * @see {@link GetResourceLogLevelCommand}
    */
-  public getResourceLogLevel(
+  getResourceLogLevel(
     args: GetResourceLogLevelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetResourceLogLevelCommandOutput>;
-  public getResourceLogLevel(
+  getResourceLogLevel(
     args: GetResourceLogLevelCommandInput,
     cb: (err: any, data?: GetResourceLogLevelCommandOutput) => void
   ): void;
-  public getResourceLogLevel(
+  getResourceLogLevel(
     args: GetResourceLogLevelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetResourceLogLevelCommandOutput) => void
   ): void;
-  public getResourceLogLevel(
-    args: GetResourceLogLevelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourceLogLevelCommandOutput) => void),
-    cb?: (err: any, data?: GetResourceLogLevelCommandOutput) => void
-  ): Promise<GetResourceLogLevelCommandOutput> | void {
-    const command = new GetResourceLogLevelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the account-specific endpoint for Configuration and Update Server (CUPS) protocol or LoRaWAN Network Server (LNS) connections.</p>
+   * @see {@link GetResourcePositionCommand}
    */
-  public getServiceEndpoint(
+  getResourcePosition(
+    args: GetResourcePositionCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<GetResourcePositionCommandOutput>;
+  getResourcePosition(
+    args: GetResourcePositionCommandInput,
+    cb: (err: any, data?: GetResourcePositionCommandOutput) => void
+  ): void;
+  getResourcePosition(
+    args: GetResourcePositionCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: GetResourcePositionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetServiceEndpointCommand}
+   */
+  getServiceEndpoint(): Promise<GetServiceEndpointCommandOutput>;
+  getServiceEndpoint(
     args: GetServiceEndpointCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetServiceEndpointCommandOutput>;
-  public getServiceEndpoint(
+  getServiceEndpoint(
     args: GetServiceEndpointCommandInput,
     cb: (err: any, data?: GetServiceEndpointCommandOutput) => void
   ): void;
-  public getServiceEndpoint(
+  getServiceEndpoint(
     args: GetServiceEndpointCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetServiceEndpointCommandOutput) => void
   ): void;
-  public getServiceEndpoint(
-    args: GetServiceEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetServiceEndpointCommandOutput) => void),
-    cb?: (err: any, data?: GetServiceEndpointCommandOutput) => void
-  ): Promise<GetServiceEndpointCommandOutput> | void {
-    const command = new GetServiceEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a service profile.</p>
+   * @see {@link GetServiceProfileCommand}
    */
-  public getServiceProfile(
+  getServiceProfile(
     args: GetServiceProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetServiceProfileCommandOutput>;
-  public getServiceProfile(
+  getServiceProfile(
     args: GetServiceProfileCommandInput,
     cb: (err: any, data?: GetServiceProfileCommandOutput) => void
   ): void;
-  public getServiceProfile(
+  getServiceProfile(
     args: GetServiceProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetServiceProfileCommandOutput) => void
   ): void;
-  public getServiceProfile(
-    args: GetServiceProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetServiceProfileCommandOutput) => void),
-    cb?: (err: any, data?: GetServiceProfileCommandOutput) => void
-  ): Promise<GetServiceProfileCommandOutput> | void {
-    const command = new GetServiceProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a wireless device.</p>
+   * @see {@link GetWirelessDeviceCommand}
    */
-  public getWirelessDevice(
+  getWirelessDevice(
     args: GetWirelessDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessDeviceCommandOutput>;
-  public getWirelessDevice(
+  getWirelessDevice(
     args: GetWirelessDeviceCommandInput,
     cb: (err: any, data?: GetWirelessDeviceCommandOutput) => void
   ): void;
-  public getWirelessDevice(
+  getWirelessDevice(
     args: GetWirelessDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessDeviceCommandOutput) => void
   ): void;
-  public getWirelessDevice(
-    args: GetWirelessDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWirelessDeviceCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessDeviceCommandOutput) => void
-  ): Promise<GetWirelessDeviceCommandOutput> | void {
-    const command = new GetWirelessDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets operating information about a wireless device.</p>
+   * @see {@link GetWirelessDeviceImportTaskCommand}
    */
-  public getWirelessDeviceStatistics(
+  getWirelessDeviceImportTask(
+    args: GetWirelessDeviceImportTaskCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<GetWirelessDeviceImportTaskCommandOutput>;
+  getWirelessDeviceImportTask(
+    args: GetWirelessDeviceImportTaskCommandInput,
+    cb: (err: any, data?: GetWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+  getWirelessDeviceImportTask(
+    args: GetWirelessDeviceImportTaskCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: GetWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWirelessDeviceStatisticsCommand}
+   */
+  getWirelessDeviceStatistics(
     args: GetWirelessDeviceStatisticsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessDeviceStatisticsCommandOutput>;
-  public getWirelessDeviceStatistics(
+  getWirelessDeviceStatistics(
     args: GetWirelessDeviceStatisticsCommandInput,
     cb: (err: any, data?: GetWirelessDeviceStatisticsCommandOutput) => void
   ): void;
-  public getWirelessDeviceStatistics(
+  getWirelessDeviceStatistics(
     args: GetWirelessDeviceStatisticsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessDeviceStatisticsCommandOutput) => void
   ): void;
-  public getWirelessDeviceStatistics(
-    args: GetWirelessDeviceStatisticsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWirelessDeviceStatisticsCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessDeviceStatisticsCommandOutput) => void
-  ): Promise<GetWirelessDeviceStatisticsCommandOutput> | void {
-    const command = new GetWirelessDeviceStatisticsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a wireless gateway.</p>
+   * @see {@link GetWirelessGatewayCommand}
    */
-  public getWirelessGateway(
+  getWirelessGateway(
     args: GetWirelessGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessGatewayCommandOutput>;
-  public getWirelessGateway(
+  getWirelessGateway(
     args: GetWirelessGatewayCommandInput,
     cb: (err: any, data?: GetWirelessGatewayCommandOutput) => void
   ): void;
-  public getWirelessGateway(
+  getWirelessGateway(
     args: GetWirelessGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessGatewayCommandOutput) => void
   ): void;
-  public getWirelessGateway(
-    args: GetWirelessGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWirelessGatewayCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessGatewayCommandOutput) => void
-  ): Promise<GetWirelessGatewayCommandOutput> | void {
-    const command = new GetWirelessGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the ID of the certificate that is currently associated with a wireless gateway.</p>
+   * @see {@link GetWirelessGatewayCertificateCommand}
    */
-  public getWirelessGatewayCertificate(
+  getWirelessGatewayCertificate(
     args: GetWirelessGatewayCertificateCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessGatewayCertificateCommandOutput>;
-  public getWirelessGatewayCertificate(
+  getWirelessGatewayCertificate(
     args: GetWirelessGatewayCertificateCommandInput,
     cb: (err: any, data?: GetWirelessGatewayCertificateCommandOutput) => void
   ): void;
-  public getWirelessGatewayCertificate(
+  getWirelessGatewayCertificate(
     args: GetWirelessGatewayCertificateCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessGatewayCertificateCommandOutput) => void
   ): void;
-  public getWirelessGatewayCertificate(
-    args: GetWirelessGatewayCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWirelessGatewayCertificateCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessGatewayCertificateCommandOutput) => void
-  ): Promise<GetWirelessGatewayCertificateCommandOutput> | void {
-    const command = new GetWirelessGatewayCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the firmware version and other information about a wireless gateway.</p>
+   * @see {@link GetWirelessGatewayFirmwareInformationCommand}
    */
-  public getWirelessGatewayFirmwareInformation(
+  getWirelessGatewayFirmwareInformation(
     args: GetWirelessGatewayFirmwareInformationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessGatewayFirmwareInformationCommandOutput>;
-  public getWirelessGatewayFirmwareInformation(
+  getWirelessGatewayFirmwareInformation(
     args: GetWirelessGatewayFirmwareInformationCommandInput,
     cb: (err: any, data?: GetWirelessGatewayFirmwareInformationCommandOutput) => void
   ): void;
-  public getWirelessGatewayFirmwareInformation(
+  getWirelessGatewayFirmwareInformation(
     args: GetWirelessGatewayFirmwareInformationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessGatewayFirmwareInformationCommandOutput) => void
   ): void;
-  public getWirelessGatewayFirmwareInformation(
-    args: GetWirelessGatewayFirmwareInformationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: GetWirelessGatewayFirmwareInformationCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessGatewayFirmwareInformationCommandOutput) => void
-  ): Promise<GetWirelessGatewayFirmwareInformationCommandOutput> | void {
-    const command = new GetWirelessGatewayFirmwareInformationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets operating information about a wireless gateway.</p>
+   * @see {@link GetWirelessGatewayStatisticsCommand}
    */
-  public getWirelessGatewayStatistics(
+  getWirelessGatewayStatistics(
     args: GetWirelessGatewayStatisticsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessGatewayStatisticsCommandOutput>;
-  public getWirelessGatewayStatistics(
+  getWirelessGatewayStatistics(
     args: GetWirelessGatewayStatisticsCommandInput,
     cb: (err: any, data?: GetWirelessGatewayStatisticsCommandOutput) => void
   ): void;
-  public getWirelessGatewayStatistics(
+  getWirelessGatewayStatistics(
     args: GetWirelessGatewayStatisticsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessGatewayStatisticsCommandOutput) => void
   ): void;
-  public getWirelessGatewayStatistics(
-    args: GetWirelessGatewayStatisticsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWirelessGatewayStatisticsCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessGatewayStatisticsCommandOutput) => void
-  ): Promise<GetWirelessGatewayStatisticsCommandOutput> | void {
-    const command = new GetWirelessGatewayStatisticsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a wireless gateway task.</p>
+   * @see {@link GetWirelessGatewayTaskCommand}
    */
-  public getWirelessGatewayTask(
+  getWirelessGatewayTask(
     args: GetWirelessGatewayTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessGatewayTaskCommandOutput>;
-  public getWirelessGatewayTask(
+  getWirelessGatewayTask(
     args: GetWirelessGatewayTaskCommandInput,
     cb: (err: any, data?: GetWirelessGatewayTaskCommandOutput) => void
   ): void;
-  public getWirelessGatewayTask(
+  getWirelessGatewayTask(
     args: GetWirelessGatewayTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessGatewayTaskCommandOutput) => void
   ): void;
-  public getWirelessGatewayTask(
-    args: GetWirelessGatewayTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWirelessGatewayTaskCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessGatewayTaskCommandOutput) => void
-  ): Promise<GetWirelessGatewayTaskCommandOutput> | void {
-    const command = new GetWirelessGatewayTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets information about a wireless gateway task definition.</p>
+   * @see {@link GetWirelessGatewayTaskDefinitionCommand}
    */
-  public getWirelessGatewayTaskDefinition(
+  getWirelessGatewayTaskDefinition(
     args: GetWirelessGatewayTaskDefinitionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<GetWirelessGatewayTaskDefinitionCommandOutput>;
-  public getWirelessGatewayTaskDefinition(
+  getWirelessGatewayTaskDefinition(
     args: GetWirelessGatewayTaskDefinitionCommandInput,
     cb: (err: any, data?: GetWirelessGatewayTaskDefinitionCommandOutput) => void
   ): void;
-  public getWirelessGatewayTaskDefinition(
+  getWirelessGatewayTaskDefinition(
     args: GetWirelessGatewayTaskDefinitionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: GetWirelessGatewayTaskDefinitionCommandOutput) => void
   ): void;
-  public getWirelessGatewayTaskDefinition(
-    args: GetWirelessGatewayTaskDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWirelessGatewayTaskDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: GetWirelessGatewayTaskDefinitionCommandOutput) => void
-  ): Promise<GetWirelessGatewayTaskDefinitionCommandOutput> | void {
-    const command = new GetWirelessGatewayTaskDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the destinations registered to your AWS account.</p>
+   * @see {@link ListDestinationsCommand}
    */
-  public listDestinations(
+  listDestinations(): Promise<ListDestinationsCommandOutput>;
+  listDestinations(
     args: ListDestinationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListDestinationsCommandOutput>;
-  public listDestinations(
+  listDestinations(
     args: ListDestinationsCommandInput,
     cb: (err: any, data?: ListDestinationsCommandOutput) => void
   ): void;
-  public listDestinations(
+  listDestinations(
     args: ListDestinationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListDestinationsCommandOutput) => void
   ): void;
-  public listDestinations(
-    args: ListDestinationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDestinationsCommandOutput) => void),
-    cb?: (err: any, data?: ListDestinationsCommandOutput) => void
-  ): Promise<ListDestinationsCommandOutput> | void {
-    const command = new ListDestinationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the device profiles registered to your AWS account.</p>
+   * @see {@link ListDeviceProfilesCommand}
    */
-  public listDeviceProfiles(
+  listDeviceProfiles(): Promise<ListDeviceProfilesCommandOutput>;
+  listDeviceProfiles(
     args: ListDeviceProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListDeviceProfilesCommandOutput>;
-  public listDeviceProfiles(
+  listDeviceProfiles(
     args: ListDeviceProfilesCommandInput,
     cb: (err: any, data?: ListDeviceProfilesCommandOutput) => void
   ): void;
-  public listDeviceProfiles(
+  listDeviceProfiles(
     args: ListDeviceProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListDeviceProfilesCommandOutput) => void
   ): void;
-  public listDeviceProfiles(
-    args: ListDeviceProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDeviceProfilesCommandOutput) => void),
-    cb?: (err: any, data?: ListDeviceProfilesCommandOutput) => void
-  ): Promise<ListDeviceProfilesCommandOutput> | void {
-    const command = new ListDeviceProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List event configurations where at least one event topic has been enabled.</p>
+   * @see {@link ListDevicesForWirelessDeviceImportTaskCommand}
    */
-  public listEventConfigurations(
+  listDevicesForWirelessDeviceImportTask(
+    args: ListDevicesForWirelessDeviceImportTaskCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<ListDevicesForWirelessDeviceImportTaskCommandOutput>;
+  listDevicesForWirelessDeviceImportTask(
+    args: ListDevicesForWirelessDeviceImportTaskCommandInput,
+    cb: (err: any, data?: ListDevicesForWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+  listDevicesForWirelessDeviceImportTask(
+    args: ListDevicesForWirelessDeviceImportTaskCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: ListDevicesForWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEventConfigurationsCommand}
+   */
+  listEventConfigurations(
     args: ListEventConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListEventConfigurationsCommandOutput>;
-  public listEventConfigurations(
+  listEventConfigurations(
     args: ListEventConfigurationsCommandInput,
     cb: (err: any, data?: ListEventConfigurationsCommandOutput) => void
   ): void;
-  public listEventConfigurations(
+  listEventConfigurations(
     args: ListEventConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListEventConfigurationsCommandOutput) => void
   ): void;
-  public listEventConfigurations(
-    args: ListEventConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEventConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListEventConfigurationsCommandOutput) => void
-  ): Promise<ListEventConfigurationsCommandOutput> | void {
-    const command = new ListEventConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the FUOTA tasks registered to your AWS account.</p>
+   * @see {@link ListFuotaTasksCommand}
    */
-  public listFuotaTasks(
+  listFuotaTasks(): Promise<ListFuotaTasksCommandOutput>;
+  listFuotaTasks(
     args: ListFuotaTasksCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListFuotaTasksCommandOutput>;
-  public listFuotaTasks(
+  listFuotaTasks(
     args: ListFuotaTasksCommandInput,
     cb: (err: any, data?: ListFuotaTasksCommandOutput) => void
   ): void;
-  public listFuotaTasks(
+  listFuotaTasks(
     args: ListFuotaTasksCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListFuotaTasksCommandOutput) => void
   ): void;
-  public listFuotaTasks(
-    args: ListFuotaTasksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFuotaTasksCommandOutput) => void),
-    cb?: (err: any, data?: ListFuotaTasksCommandOutput) => void
-  ): Promise<ListFuotaTasksCommandOutput> | void {
-    const command = new ListFuotaTasksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the multicast groups registered to your AWS account.</p>
+   * @see {@link ListMulticastGroupsCommand}
    */
-  public listMulticastGroups(
+  listMulticastGroups(): Promise<ListMulticastGroupsCommandOutput>;
+  listMulticastGroups(
     args: ListMulticastGroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListMulticastGroupsCommandOutput>;
-  public listMulticastGroups(
+  listMulticastGroups(
     args: ListMulticastGroupsCommandInput,
     cb: (err: any, data?: ListMulticastGroupsCommandOutput) => void
   ): void;
-  public listMulticastGroups(
+  listMulticastGroups(
     args: ListMulticastGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListMulticastGroupsCommandOutput) => void
   ): void;
-  public listMulticastGroups(
-    args: ListMulticastGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMulticastGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListMulticastGroupsCommandOutput) => void
-  ): Promise<ListMulticastGroupsCommandOutput> | void {
-    const command = new ListMulticastGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List all multicast groups associated with a fuota task.</p>
+   * @see {@link ListMulticastGroupsByFuotaTaskCommand}
    */
-  public listMulticastGroupsByFuotaTask(
+  listMulticastGroupsByFuotaTask(
     args: ListMulticastGroupsByFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListMulticastGroupsByFuotaTaskCommandOutput>;
-  public listMulticastGroupsByFuotaTask(
+  listMulticastGroupsByFuotaTask(
     args: ListMulticastGroupsByFuotaTaskCommandInput,
     cb: (err: any, data?: ListMulticastGroupsByFuotaTaskCommandOutput) => void
   ): void;
-  public listMulticastGroupsByFuotaTask(
+  listMulticastGroupsByFuotaTask(
     args: ListMulticastGroupsByFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListMulticastGroupsByFuotaTaskCommandOutput) => void
   ): void;
-  public listMulticastGroupsByFuotaTask(
-    args: ListMulticastGroupsByFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMulticastGroupsByFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: ListMulticastGroupsByFuotaTaskCommandOutput) => void
-  ): Promise<ListMulticastGroupsByFuotaTaskCommandOutput> | void {
-    const command = new ListMulticastGroupsByFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the network analyzer configurations.</p>
+   * @see {@link ListNetworkAnalyzerConfigurationsCommand}
    */
-  public listNetworkAnalyzerConfigurations(
+  listNetworkAnalyzerConfigurations(): Promise<ListNetworkAnalyzerConfigurationsCommandOutput>;
+  listNetworkAnalyzerConfigurations(
     args: ListNetworkAnalyzerConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListNetworkAnalyzerConfigurationsCommandOutput>;
-  public listNetworkAnalyzerConfigurations(
+  listNetworkAnalyzerConfigurations(
     args: ListNetworkAnalyzerConfigurationsCommandInput,
     cb: (err: any, data?: ListNetworkAnalyzerConfigurationsCommandOutput) => void
   ): void;
-  public listNetworkAnalyzerConfigurations(
+  listNetworkAnalyzerConfigurations(
     args: ListNetworkAnalyzerConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListNetworkAnalyzerConfigurationsCommandOutput) => void
   ): void;
-  public listNetworkAnalyzerConfigurations(
-    args: ListNetworkAnalyzerConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNetworkAnalyzerConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListNetworkAnalyzerConfigurationsCommandOutput) => void
-  ): Promise<ListNetworkAnalyzerConfigurationsCommandOutput> | void {
-    const command = new ListNetworkAnalyzerConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the partner accounts associated with your AWS account.</p>
+   * @see {@link ListPartnerAccountsCommand}
    */
-  public listPartnerAccounts(
+  listPartnerAccounts(): Promise<ListPartnerAccountsCommandOutput>;
+  listPartnerAccounts(
     args: ListPartnerAccountsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListPartnerAccountsCommandOutput>;
-  public listPartnerAccounts(
+  listPartnerAccounts(
     args: ListPartnerAccountsCommandInput,
     cb: (err: any, data?: ListPartnerAccountsCommandOutput) => void
   ): void;
-  public listPartnerAccounts(
+  listPartnerAccounts(
     args: ListPartnerAccountsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListPartnerAccountsCommandOutput) => void
   ): void;
-  public listPartnerAccounts(
-    args: ListPartnerAccountsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPartnerAccountsCommandOutput) => void),
-    cb?: (err: any, data?: ListPartnerAccountsCommandOutput) => void
-  ): Promise<ListPartnerAccountsCommandOutput> | void {
-    const command = new ListPartnerAccountsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List position configurations for a given resource, such as positioning solvers.</p>
+   * @see {@link ListPositionConfigurationsCommand}
    */
-  public listPositionConfigurations(
+  listPositionConfigurations(): Promise<ListPositionConfigurationsCommandOutput>;
+  listPositionConfigurations(
     args: ListPositionConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListPositionConfigurationsCommandOutput>;
-  public listPositionConfigurations(
+  listPositionConfigurations(
     args: ListPositionConfigurationsCommandInput,
     cb: (err: any, data?: ListPositionConfigurationsCommandOutput) => void
   ): void;
-  public listPositionConfigurations(
+  listPositionConfigurations(
     args: ListPositionConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListPositionConfigurationsCommandOutput) => void
   ): void;
-  public listPositionConfigurations(
-    args: ListPositionConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPositionConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListPositionConfigurationsCommandOutput) => void
-  ): Promise<ListPositionConfigurationsCommandOutput> | void {
-    const command = new ListPositionConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List queued messages in the downlink queue.</p>
+   * @see {@link ListQueuedMessagesCommand}
    */
-  public listQueuedMessages(
+  listQueuedMessages(
     args: ListQueuedMessagesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListQueuedMessagesCommandOutput>;
-  public listQueuedMessages(
+  listQueuedMessages(
     args: ListQueuedMessagesCommandInput,
     cb: (err: any, data?: ListQueuedMessagesCommandOutput) => void
   ): void;
-  public listQueuedMessages(
+  listQueuedMessages(
     args: ListQueuedMessagesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListQueuedMessagesCommandOutput) => void
   ): void;
-  public listQueuedMessages(
-    args: ListQueuedMessagesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListQueuedMessagesCommandOutput) => void),
-    cb?: (err: any, data?: ListQueuedMessagesCommandOutput) => void
-  ): Promise<ListQueuedMessagesCommandOutput> | void {
-    const command = new ListQueuedMessagesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the service profiles registered to your AWS account.</p>
+   * @see {@link ListServiceProfilesCommand}
    */
-  public listServiceProfiles(
+  listServiceProfiles(): Promise<ListServiceProfilesCommandOutput>;
+  listServiceProfiles(
     args: ListServiceProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListServiceProfilesCommandOutput>;
-  public listServiceProfiles(
+  listServiceProfiles(
     args: ListServiceProfilesCommandInput,
     cb: (err: any, data?: ListServiceProfilesCommandOutput) => void
   ): void;
-  public listServiceProfiles(
+  listServiceProfiles(
     args: ListServiceProfilesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListServiceProfilesCommandOutput) => void
   ): void;
-  public listServiceProfiles(
-    args: ListServiceProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListServiceProfilesCommandOutput) => void),
-    cb?: (err: any, data?: ListServiceProfilesCommandOutput) => void
-  ): Promise<ListServiceProfilesCommandOutput> | void {
-    const command = new ListServiceProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags (metadata) you have assigned to the resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the wireless devices registered to your AWS account.</p>
+   * @see {@link ListWirelessDeviceImportTasksCommand}
    */
-  public listWirelessDevices(
+  listWirelessDeviceImportTasks(): Promise<ListWirelessDeviceImportTasksCommandOutput>;
+  listWirelessDeviceImportTasks(
+    args: ListWirelessDeviceImportTasksCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<ListWirelessDeviceImportTasksCommandOutput>;
+  listWirelessDeviceImportTasks(
+    args: ListWirelessDeviceImportTasksCommandInput,
+    cb: (err: any, data?: ListWirelessDeviceImportTasksCommandOutput) => void
+  ): void;
+  listWirelessDeviceImportTasks(
+    args: ListWirelessDeviceImportTasksCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: ListWirelessDeviceImportTasksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWirelessDevicesCommand}
+   */
+  listWirelessDevices(): Promise<ListWirelessDevicesCommandOutput>;
+  listWirelessDevices(
     args: ListWirelessDevicesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListWirelessDevicesCommandOutput>;
-  public listWirelessDevices(
+  listWirelessDevices(
     args: ListWirelessDevicesCommandInput,
     cb: (err: any, data?: ListWirelessDevicesCommandOutput) => void
   ): void;
-  public listWirelessDevices(
+  listWirelessDevices(
     args: ListWirelessDevicesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListWirelessDevicesCommandOutput) => void
   ): void;
-  public listWirelessDevices(
-    args: ListWirelessDevicesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWirelessDevicesCommandOutput) => void),
-    cb?: (err: any, data?: ListWirelessDevicesCommandOutput) => void
-  ): Promise<ListWirelessDevicesCommandOutput> | void {
-    const command = new ListWirelessDevicesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the wireless gateways registered to your AWS account.</p>
+   * @see {@link ListWirelessGatewaysCommand}
    */
-  public listWirelessGateways(
+  listWirelessGateways(): Promise<ListWirelessGatewaysCommandOutput>;
+  listWirelessGateways(
     args: ListWirelessGatewaysCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListWirelessGatewaysCommandOutput>;
-  public listWirelessGateways(
+  listWirelessGateways(
     args: ListWirelessGatewaysCommandInput,
     cb: (err: any, data?: ListWirelessGatewaysCommandOutput) => void
   ): void;
-  public listWirelessGateways(
+  listWirelessGateways(
     args: ListWirelessGatewaysCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListWirelessGatewaysCommandOutput) => void
   ): void;
-  public listWirelessGateways(
-    args: ListWirelessGatewaysCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWirelessGatewaysCommandOutput) => void),
-    cb?: (err: any, data?: ListWirelessGatewaysCommandOutput) => void
-  ): Promise<ListWirelessGatewaysCommandOutput> | void {
-    const command = new ListWirelessGatewaysCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>List the wireless gateway tasks definitions registered to your AWS account.</p>
+   * @see {@link ListWirelessGatewayTaskDefinitionsCommand}
    */
-  public listWirelessGatewayTaskDefinitions(
+  listWirelessGatewayTaskDefinitions(): Promise<ListWirelessGatewayTaskDefinitionsCommandOutput>;
+  listWirelessGatewayTaskDefinitions(
     args: ListWirelessGatewayTaskDefinitionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ListWirelessGatewayTaskDefinitionsCommandOutput>;
-  public listWirelessGatewayTaskDefinitions(
+  listWirelessGatewayTaskDefinitions(
     args: ListWirelessGatewayTaskDefinitionsCommandInput,
     cb: (err: any, data?: ListWirelessGatewayTaskDefinitionsCommandOutput) => void
   ): void;
-  public listWirelessGatewayTaskDefinitions(
+  listWirelessGatewayTaskDefinitions(
     args: ListWirelessGatewayTaskDefinitionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ListWirelessGatewayTaskDefinitionsCommandOutput) => void
   ): void;
-  public listWirelessGatewayTaskDefinitions(
-    args: ListWirelessGatewayTaskDefinitionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWirelessGatewayTaskDefinitionsCommandOutput) => void),
-    cb?: (err: any, data?: ListWirelessGatewayTaskDefinitionsCommandOutput) => void
-  ): Promise<ListWirelessGatewayTaskDefinitionsCommandOutput> | void {
-    const command = new ListWirelessGatewayTaskDefinitionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Put position configuration for a given resource.</p>
+   * @see {@link PutPositionConfigurationCommand}
    */
-  public putPositionConfiguration(
+  putPositionConfiguration(
     args: PutPositionConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<PutPositionConfigurationCommandOutput>;
-  public putPositionConfiguration(
+  putPositionConfiguration(
     args: PutPositionConfigurationCommandInput,
     cb: (err: any, data?: PutPositionConfigurationCommandOutput) => void
   ): void;
-  public putPositionConfiguration(
+  putPositionConfiguration(
     args: PutPositionConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: PutPositionConfigurationCommandOutput) => void
   ): void;
-  public putPositionConfiguration(
-    args: PutPositionConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutPositionConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: PutPositionConfigurationCommandOutput) => void
-  ): Promise<PutPositionConfigurationCommandOutput> | void {
-    const command = new PutPositionConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sets the log-level override for a resource-ID and resource-type. This option can be specified for a wireless gateway
-   *             or a wireless device. A limit of 200 log level override can be set per account.</p>
+   * @see {@link PutResourceLogLevelCommand}
    */
-  public putResourceLogLevel(
+  putResourceLogLevel(
     args: PutResourceLogLevelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<PutResourceLogLevelCommandOutput>;
-  public putResourceLogLevel(
+  putResourceLogLevel(
     args: PutResourceLogLevelCommandInput,
     cb: (err: any, data?: PutResourceLogLevelCommandOutput) => void
   ): void;
-  public putResourceLogLevel(
+  putResourceLogLevel(
     args: PutResourceLogLevelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: PutResourceLogLevelCommandOutput) => void
   ): void;
-  public putResourceLogLevel(
-    args: PutResourceLogLevelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutResourceLogLevelCommandOutput) => void),
-    cb?: (err: any, data?: PutResourceLogLevelCommandOutput) => void
-  ): Promise<PutResourceLogLevelCommandOutput> | void {
-    const command = new PutResourceLogLevelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes the log-level overrides for all resources; both wireless devices and wireless gateways.</p>
+   * @see {@link ResetAllResourceLogLevelsCommand}
    */
-  public resetAllResourceLogLevels(
+  resetAllResourceLogLevels(): Promise<ResetAllResourceLogLevelsCommandOutput>;
+  resetAllResourceLogLevels(
     args: ResetAllResourceLogLevelsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ResetAllResourceLogLevelsCommandOutput>;
-  public resetAllResourceLogLevels(
+  resetAllResourceLogLevels(
     args: ResetAllResourceLogLevelsCommandInput,
     cb: (err: any, data?: ResetAllResourceLogLevelsCommandOutput) => void
   ): void;
-  public resetAllResourceLogLevels(
+  resetAllResourceLogLevels(
     args: ResetAllResourceLogLevelsCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ResetAllResourceLogLevelsCommandOutput) => void
   ): void;
-  public resetAllResourceLogLevels(
-    args: ResetAllResourceLogLevelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResetAllResourceLogLevelsCommandOutput) => void),
-    cb?: (err: any, data?: ResetAllResourceLogLevelsCommandOutput) => void
-  ): Promise<ResetAllResourceLogLevelsCommandOutput> | void {
-    const command = new ResetAllResourceLogLevelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes the log-level override, if any, for a specific resource-ID and resource-type. It can be used for
-   *             a wireless device or a wireless gateway.</p>
+   * @see {@link ResetResourceLogLevelCommand}
    */
-  public resetResourceLogLevel(
+  resetResourceLogLevel(
     args: ResetResourceLogLevelCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<ResetResourceLogLevelCommandOutput>;
-  public resetResourceLogLevel(
+  resetResourceLogLevel(
     args: ResetResourceLogLevelCommandInput,
     cb: (err: any, data?: ResetResourceLogLevelCommandOutput) => void
   ): void;
-  public resetResourceLogLevel(
+  resetResourceLogLevel(
     args: ResetResourceLogLevelCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: ResetResourceLogLevelCommandOutput) => void
   ): void;
-  public resetResourceLogLevel(
-    args: ResetResourceLogLevelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResetResourceLogLevelCommandOutput) => void),
-    cb?: (err: any, data?: ResetResourceLogLevelCommandOutput) => void
-  ): Promise<ResetResourceLogLevelCommandOutput> | void {
-    const command = new ResetResourceLogLevelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sends the specified data to a multicast group.</p>
+   * @see {@link SendDataToMulticastGroupCommand}
    */
-  public sendDataToMulticastGroup(
+  sendDataToMulticastGroup(
     args: SendDataToMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<SendDataToMulticastGroupCommandOutput>;
-  public sendDataToMulticastGroup(
+  sendDataToMulticastGroup(
     args: SendDataToMulticastGroupCommandInput,
     cb: (err: any, data?: SendDataToMulticastGroupCommandOutput) => void
   ): void;
-  public sendDataToMulticastGroup(
+  sendDataToMulticastGroup(
     args: SendDataToMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: SendDataToMulticastGroupCommandOutput) => void
   ): void;
-  public sendDataToMulticastGroup(
-    args: SendDataToMulticastGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SendDataToMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: SendDataToMulticastGroupCommandOutput) => void
-  ): Promise<SendDataToMulticastGroupCommandOutput> | void {
-    const command = new SendDataToMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sends a decrypted application data frame to a device.</p>
+   * @see {@link SendDataToWirelessDeviceCommand}
    */
-  public sendDataToWirelessDevice(
+  sendDataToWirelessDevice(
     args: SendDataToWirelessDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<SendDataToWirelessDeviceCommandOutput>;
-  public sendDataToWirelessDevice(
+  sendDataToWirelessDevice(
     args: SendDataToWirelessDeviceCommandInput,
     cb: (err: any, data?: SendDataToWirelessDeviceCommandOutput) => void
   ): void;
-  public sendDataToWirelessDevice(
+  sendDataToWirelessDevice(
     args: SendDataToWirelessDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: SendDataToWirelessDeviceCommandOutput) => void
   ): void;
-  public sendDataToWirelessDevice(
-    args: SendDataToWirelessDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SendDataToWirelessDeviceCommandOutput) => void),
-    cb?: (err: any, data?: SendDataToWirelessDeviceCommandOutput) => void
-  ): Promise<SendDataToWirelessDeviceCommandOutput> | void {
-    const command = new SendDataToWirelessDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a bulk association of all qualifying wireless devices with a multicast group.</p>
+   * @see {@link StartBulkAssociateWirelessDeviceWithMulticastGroupCommand}
    */
-  public startBulkAssociateWirelessDeviceWithMulticastGroup(
+  startBulkAssociateWirelessDeviceWithMulticastGroup(
     args: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput>;
-  public startBulkAssociateWirelessDeviceWithMulticastGroup(
+  startBulkAssociateWirelessDeviceWithMulticastGroup(
     args: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandInput,
     cb: (err: any, data?: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput) => void
   ): void;
-  public startBulkAssociateWirelessDeviceWithMulticastGroup(
+  startBulkAssociateWirelessDeviceWithMulticastGroup(
     args: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput) => void
   ): void;
-  public startBulkAssociateWirelessDeviceWithMulticastGroup(
-    args: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput) => void
-  ): Promise<StartBulkAssociateWirelessDeviceWithMulticastGroupCommandOutput> | void {
-    const command = new StartBulkAssociateWirelessDeviceWithMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a bulk disassociatin of all qualifying wireless devices from a multicast group.</p>
+   * @see {@link StartBulkDisassociateWirelessDeviceFromMulticastGroupCommand}
    */
-  public startBulkDisassociateWirelessDeviceFromMulticastGroup(
+  startBulkDisassociateWirelessDeviceFromMulticastGroup(
     args: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput>;
-  public startBulkDisassociateWirelessDeviceFromMulticastGroup(
+  startBulkDisassociateWirelessDeviceFromMulticastGroup(
     args: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandInput,
     cb: (err: any, data?: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void
   ): void;
-  public startBulkDisassociateWirelessDeviceFromMulticastGroup(
+  startBulkDisassociateWirelessDeviceFromMulticastGroup(
     args: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void
   ): void;
-  public startBulkDisassociateWirelessDeviceFromMulticastGroup(
-    args: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput) => void
-  ): Promise<StartBulkDisassociateWirelessDeviceFromMulticastGroupCommandOutput> | void {
-    const command = new StartBulkDisassociateWirelessDeviceFromMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a FUOTA task.</p>
+   * @see {@link StartFuotaTaskCommand}
    */
-  public startFuotaTask(
+  startFuotaTask(
     args: StartFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<StartFuotaTaskCommandOutput>;
-  public startFuotaTask(
+  startFuotaTask(
     args: StartFuotaTaskCommandInput,
     cb: (err: any, data?: StartFuotaTaskCommandOutput) => void
   ): void;
-  public startFuotaTask(
+  startFuotaTask(
     args: StartFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: StartFuotaTaskCommandOutput) => void
   ): void;
-  public startFuotaTask(
-    args: StartFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: StartFuotaTaskCommandOutput) => void
-  ): Promise<StartFuotaTaskCommandOutput> | void {
-    const command = new StartFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Starts a multicast group session.</p>
+   * @see {@link StartMulticastGroupSessionCommand}
    */
-  public startMulticastGroupSession(
+  startMulticastGroupSession(
     args: StartMulticastGroupSessionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<StartMulticastGroupSessionCommandOutput>;
-  public startMulticastGroupSession(
+  startMulticastGroupSession(
     args: StartMulticastGroupSessionCommandInput,
     cb: (err: any, data?: StartMulticastGroupSessionCommandOutput) => void
   ): void;
-  public startMulticastGroupSession(
+  startMulticastGroupSession(
     args: StartMulticastGroupSessionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: StartMulticastGroupSessionCommandOutput) => void
   ): void;
-  public startMulticastGroupSession(
-    args: StartMulticastGroupSessionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartMulticastGroupSessionCommandOutput) => void),
-    cb?: (err: any, data?: StartMulticastGroupSessionCommandOutput) => void
-  ): Promise<StartMulticastGroupSessionCommandOutput> | void {
-    const command = new StartMulticastGroupSessionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds a tag to a resource.</p>
+   * @see {@link StartSingleWirelessDeviceImportTaskCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  startSingleWirelessDeviceImportTask(
+    args: StartSingleWirelessDeviceImportTaskCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<StartSingleWirelessDeviceImportTaskCommandOutput>;
+  startSingleWirelessDeviceImportTask(
+    args: StartSingleWirelessDeviceImportTaskCommandInput,
+    cb: (err: any, data?: StartSingleWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+  startSingleWirelessDeviceImportTask(
+    args: StartSingleWirelessDeviceImportTaskCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: StartSingleWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartWirelessDeviceImportTaskCommand}
+   */
+  startWirelessDeviceImportTask(
+    args: StartWirelessDeviceImportTaskCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<StartWirelessDeviceImportTaskCommandOutput>;
+  startWirelessDeviceImportTask(
+    args: StartWirelessDeviceImportTaskCommandInput,
+    cb: (err: any, data?: StartWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+  startWirelessDeviceImportTask(
+    args: StartWirelessDeviceImportTaskCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: StartWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTWirelessRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Simulates a provisioned device by sending an uplink data payload of <code>Hello</code>.</p>
+   * @see {@link TestWirelessDeviceCommand}
    */
-  public testWirelessDevice(
+  testWirelessDevice(
     args: TestWirelessDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<TestWirelessDeviceCommandOutput>;
-  public testWirelessDevice(
+  testWirelessDevice(
     args: TestWirelessDeviceCommandInput,
     cb: (err: any, data?: TestWirelessDeviceCommandOutput) => void
   ): void;
-  public testWirelessDevice(
+  testWirelessDevice(
     args: TestWirelessDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: TestWirelessDeviceCommandOutput) => void
   ): void;
-  public testWirelessDevice(
-    args: TestWirelessDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TestWirelessDeviceCommandOutput) => void),
-    cb?: (err: any, data?: TestWirelessDeviceCommandOutput) => void
-  ): Promise<TestWirelessDeviceCommandOutput> | void {
-    const command = new TestWirelessDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes one or more tags from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates properties of a destination.</p>
+   * @see {@link UpdateDestinationCommand}
    */
-  public updateDestination(
+  updateDestination(
     args: UpdateDestinationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateDestinationCommandOutput>;
-  public updateDestination(
+  updateDestination(
     args: UpdateDestinationCommandInput,
     cb: (err: any, data?: UpdateDestinationCommandOutput) => void
   ): void;
-  public updateDestination(
+  updateDestination(
     args: UpdateDestinationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateDestinationCommandOutput) => void
   ): void;
-  public updateDestination(
-    args: UpdateDestinationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDestinationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDestinationCommandOutput) => void
-  ): Promise<UpdateDestinationCommandOutput> | void {
-    const command = new UpdateDestinationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update the event configuration based on resource types.</p>
+   * @see {@link UpdateEventConfigurationByResourceTypesCommand}
    */
-  public updateEventConfigurationByResourceTypes(
+  updateEventConfigurationByResourceTypes(): Promise<UpdateEventConfigurationByResourceTypesCommandOutput>;
+  updateEventConfigurationByResourceTypes(
     args: UpdateEventConfigurationByResourceTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateEventConfigurationByResourceTypesCommandOutput>;
-  public updateEventConfigurationByResourceTypes(
+  updateEventConfigurationByResourceTypes(
     args: UpdateEventConfigurationByResourceTypesCommandInput,
     cb: (err: any, data?: UpdateEventConfigurationByResourceTypesCommandOutput) => void
   ): void;
-  public updateEventConfigurationByResourceTypes(
+  updateEventConfigurationByResourceTypes(
     args: UpdateEventConfigurationByResourceTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateEventConfigurationByResourceTypesCommandOutput) => void
   ): void;
-  public updateEventConfigurationByResourceTypes(
-    args: UpdateEventConfigurationByResourceTypesCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: UpdateEventConfigurationByResourceTypesCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEventConfigurationByResourceTypesCommandOutput) => void
-  ): Promise<UpdateEventConfigurationByResourceTypesCommandOutput> | void {
-    const command = new UpdateEventConfigurationByResourceTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates properties of a FUOTA task.</p>
+   * @see {@link UpdateFuotaTaskCommand}
    */
-  public updateFuotaTask(
+  updateFuotaTask(
     args: UpdateFuotaTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateFuotaTaskCommandOutput>;
-  public updateFuotaTask(
+  updateFuotaTask(
     args: UpdateFuotaTaskCommandInput,
     cb: (err: any, data?: UpdateFuotaTaskCommandOutput) => void
   ): void;
-  public updateFuotaTask(
+  updateFuotaTask(
     args: UpdateFuotaTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateFuotaTaskCommandOutput) => void
   ): void;
-  public updateFuotaTask(
-    args: UpdateFuotaTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFuotaTaskCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFuotaTaskCommandOutput) => void
-  ): Promise<UpdateFuotaTaskCommandOutput> | void {
-    const command = new UpdateFuotaTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Set default log level, or log levels by resource types. This can be for wireless device log options or
-   *             wireless gateways log options and is used to control the log messages that'll be displayed in CloudWatch.</p>
+   * @see {@link UpdateLogLevelsByResourceTypesCommand}
    */
-  public updateLogLevelsByResourceTypes(
+  updateLogLevelsByResourceTypes(): Promise<UpdateLogLevelsByResourceTypesCommandOutput>;
+  updateLogLevelsByResourceTypes(
     args: UpdateLogLevelsByResourceTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateLogLevelsByResourceTypesCommandOutput>;
-  public updateLogLevelsByResourceTypes(
+  updateLogLevelsByResourceTypes(
     args: UpdateLogLevelsByResourceTypesCommandInput,
     cb: (err: any, data?: UpdateLogLevelsByResourceTypesCommandOutput) => void
   ): void;
-  public updateLogLevelsByResourceTypes(
+  updateLogLevelsByResourceTypes(
     args: UpdateLogLevelsByResourceTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateLogLevelsByResourceTypesCommandOutput) => void
   ): void;
-  public updateLogLevelsByResourceTypes(
-    args: UpdateLogLevelsByResourceTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLogLevelsByResourceTypesCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLogLevelsByResourceTypesCommandOutput) => void
-  ): Promise<UpdateLogLevelsByResourceTypesCommandOutput> | void {
-    const command = new UpdateLogLevelsByResourceTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates properties of a multicast group session.</p>
+   * @see {@link UpdateMetricConfigurationCommand}
    */
-  public updateMulticastGroup(
+  updateMetricConfiguration(): Promise<UpdateMetricConfigurationCommandOutput>;
+  updateMetricConfiguration(
+    args: UpdateMetricConfigurationCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<UpdateMetricConfigurationCommandOutput>;
+  updateMetricConfiguration(
+    args: UpdateMetricConfigurationCommandInput,
+    cb: (err: any, data?: UpdateMetricConfigurationCommandOutput) => void
+  ): void;
+  updateMetricConfiguration(
+    args: UpdateMetricConfigurationCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: UpdateMetricConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMulticastGroupCommand}
+   */
+  updateMulticastGroup(
     args: UpdateMulticastGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateMulticastGroupCommandOutput>;
-  public updateMulticastGroup(
+  updateMulticastGroup(
     args: UpdateMulticastGroupCommandInput,
     cb: (err: any, data?: UpdateMulticastGroupCommandOutput) => void
   ): void;
-  public updateMulticastGroup(
+  updateMulticastGroup(
     args: UpdateMulticastGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateMulticastGroupCommandOutput) => void
   ): void;
-  public updateMulticastGroup(
-    args: UpdateMulticastGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateMulticastGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateMulticastGroupCommandOutput) => void
-  ): Promise<UpdateMulticastGroupCommandOutput> | void {
-    const command = new UpdateMulticastGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update network analyzer configuration.</p>
+   * @see {@link UpdateNetworkAnalyzerConfigurationCommand}
    */
-  public updateNetworkAnalyzerConfiguration(
+  updateNetworkAnalyzerConfiguration(
     args: UpdateNetworkAnalyzerConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateNetworkAnalyzerConfigurationCommandOutput>;
-  public updateNetworkAnalyzerConfiguration(
+  updateNetworkAnalyzerConfiguration(
     args: UpdateNetworkAnalyzerConfigurationCommandInput,
     cb: (err: any, data?: UpdateNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public updateNetworkAnalyzerConfiguration(
+  updateNetworkAnalyzerConfiguration(
     args: UpdateNetworkAnalyzerConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateNetworkAnalyzerConfigurationCommandOutput) => void
   ): void;
-  public updateNetworkAnalyzerConfiguration(
-    args: UpdateNetworkAnalyzerConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateNetworkAnalyzerConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateNetworkAnalyzerConfigurationCommandOutput) => void
-  ): Promise<UpdateNetworkAnalyzerConfigurationCommandOutput> | void {
-    const command = new UpdateNetworkAnalyzerConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates properties of a partner account.</p>
+   * @see {@link UpdatePartnerAccountCommand}
    */
-  public updatePartnerAccount(
+  updatePartnerAccount(
     args: UpdatePartnerAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdatePartnerAccountCommandOutput>;
-  public updatePartnerAccount(
+  updatePartnerAccount(
     args: UpdatePartnerAccountCommandInput,
     cb: (err: any, data?: UpdatePartnerAccountCommandOutput) => void
   ): void;
-  public updatePartnerAccount(
+  updatePartnerAccount(
     args: UpdatePartnerAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdatePartnerAccountCommandOutput) => void
   ): void;
-  public updatePartnerAccount(
-    args: UpdatePartnerAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePartnerAccountCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePartnerAccountCommandOutput) => void
-  ): Promise<UpdatePartnerAccountCommandOutput> | void {
-    const command = new UpdatePartnerAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update the position information of a resource.</p>
+   * @see {@link UpdatePositionCommand}
    */
-  public updatePosition(
+  updatePosition(
     args: UpdatePositionCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdatePositionCommandOutput>;
-  public updatePosition(
+  updatePosition(
     args: UpdatePositionCommandInput,
     cb: (err: any, data?: UpdatePositionCommandOutput) => void
   ): void;
-  public updatePosition(
+  updatePosition(
     args: UpdatePositionCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdatePositionCommandOutput) => void
   ): void;
-  public updatePosition(
-    args: UpdatePositionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePositionCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePositionCommandOutput) => void
-  ): Promise<UpdatePositionCommandOutput> | void {
-    const command = new UpdatePositionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update the event configuration for a particular resource identifier.</p>
+   * @see {@link UpdateResourceEventConfigurationCommand}
    */
-  public updateResourceEventConfiguration(
+  updateResourceEventConfiguration(
     args: UpdateResourceEventConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateResourceEventConfigurationCommandOutput>;
-  public updateResourceEventConfiguration(
+  updateResourceEventConfiguration(
     args: UpdateResourceEventConfigurationCommandInput,
     cb: (err: any, data?: UpdateResourceEventConfigurationCommandOutput) => void
   ): void;
-  public updateResourceEventConfiguration(
+  updateResourceEventConfiguration(
     args: UpdateResourceEventConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateResourceEventConfigurationCommandOutput) => void
   ): void;
-  public updateResourceEventConfiguration(
-    args: UpdateResourceEventConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResourceEventConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResourceEventConfigurationCommandOutput) => void
-  ): Promise<UpdateResourceEventConfigurationCommandOutput> | void {
-    const command = new UpdateResourceEventConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates properties of a wireless device.</p>
+   * @see {@link UpdateResourcePositionCommand}
    */
-  public updateWirelessDevice(
+  updateResourcePosition(
+    args: UpdateResourcePositionCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<UpdateResourcePositionCommandOutput>;
+  updateResourcePosition(
+    args: UpdateResourcePositionCommandInput,
+    cb: (err: any, data?: UpdateResourcePositionCommandOutput) => void
+  ): void;
+  updateResourcePosition(
+    args: UpdateResourcePositionCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: UpdateResourcePositionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWirelessDeviceCommand}
+   */
+  updateWirelessDevice(
     args: UpdateWirelessDeviceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateWirelessDeviceCommandOutput>;
-  public updateWirelessDevice(
+  updateWirelessDevice(
     args: UpdateWirelessDeviceCommandInput,
     cb: (err: any, data?: UpdateWirelessDeviceCommandOutput) => void
   ): void;
-  public updateWirelessDevice(
+  updateWirelessDevice(
     args: UpdateWirelessDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateWirelessDeviceCommandOutput) => void
   ): void;
-  public updateWirelessDevice(
-    args: UpdateWirelessDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWirelessDeviceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWirelessDeviceCommandOutput) => void
-  ): Promise<UpdateWirelessDeviceCommandOutput> | void {
-    const command = new UpdateWirelessDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates properties of a wireless gateway.</p>
+   * @see {@link UpdateWirelessDeviceImportTaskCommand}
    */
-  public updateWirelessGateway(
+  updateWirelessDeviceImportTask(
+    args: UpdateWirelessDeviceImportTaskCommandInput,
+    options?: IoTWirelessRequestOptions
+  ): Promise<UpdateWirelessDeviceImportTaskCommandOutput>;
+  updateWirelessDeviceImportTask(
+    args: UpdateWirelessDeviceImportTaskCommandInput,
+    cb: (err: any, data?: UpdateWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+  updateWirelessDeviceImportTask(
+    args: UpdateWirelessDeviceImportTaskCommandInput,
+    options: IoTWirelessRequestOptions,
+    cb: (err: any, data?: UpdateWirelessDeviceImportTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateWirelessGatewayCommand}
+   */
+  updateWirelessGateway(
     args: UpdateWirelessGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTWirelessRequestOptions
   ): Promise<UpdateWirelessGatewayCommandOutput>;
-  public updateWirelessGateway(
+  updateWirelessGateway(
     args: UpdateWirelessGatewayCommandInput,
     cb: (err: any, data?: UpdateWirelessGatewayCommandOutput) => void
   ): void;
-  public updateWirelessGateway(
+  updateWirelessGateway(
     args: UpdateWirelessGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTWirelessRequestOptions,
     cb: (err: any, data?: UpdateWirelessGatewayCommandOutput) => void
   ): void;
-  public updateWirelessGateway(
-    args: UpdateWirelessGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWirelessGatewayCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWirelessGatewayCommandOutput) => void
-  ): Promise<UpdateWirelessGatewayCommandOutput> | void {
-    const command = new UpdateWirelessGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListDestinationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDestinationsCommandOutput}.
+   */
+  paginateListDestinations(
+    args?: ListDestinationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDestinationsCommandOutput>;
+
+  /**
+   * @see {@link ListDeviceProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDeviceProfilesCommandOutput}.
+   */
+  paginateListDeviceProfiles(
+    args?: ListDeviceProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDeviceProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListFuotaTasksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFuotaTasksCommandOutput}.
+   */
+  paginateListFuotaTasks(
+    args?: ListFuotaTasksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFuotaTasksCommandOutput>;
+
+  /**
+   * @see {@link ListMulticastGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMulticastGroupsCommandOutput}.
+   */
+  paginateListMulticastGroups(
+    args?: ListMulticastGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMulticastGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListMulticastGroupsByFuotaTaskCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMulticastGroupsByFuotaTaskCommandOutput}.
+   */
+  paginateListMulticastGroupsByFuotaTask(
+    args: ListMulticastGroupsByFuotaTaskCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMulticastGroupsByFuotaTaskCommandOutput>;
+
+  /**
+   * @see {@link ListNetworkAnalyzerConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNetworkAnalyzerConfigurationsCommandOutput}.
+   */
+  paginateListNetworkAnalyzerConfigurations(
+    args?: ListNetworkAnalyzerConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNetworkAnalyzerConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListPositionConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPositionConfigurationsCommandOutput}.
+   */
+  paginateListPositionConfigurations(
+    args?: ListPositionConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPositionConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListQueuedMessagesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListQueuedMessagesCommandOutput}.
+   */
+  paginateListQueuedMessages(
+    args: ListQueuedMessagesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListQueuedMessagesCommandOutput>;
+
+  /**
+   * @see {@link ListServiceProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListServiceProfilesCommandOutput}.
+   */
+  paginateListServiceProfiles(
+    args?: ListServiceProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListServiceProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListWirelessDevicesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWirelessDevicesCommandOutput}.
+   */
+  paginateListWirelessDevices(
+    args?: ListWirelessDevicesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWirelessDevicesCommandOutput>;
+
+  /**
+   * @see {@link ListWirelessGatewaysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWirelessGatewaysCommandOutput}.
+   */
+  paginateListWirelessGateways(
+    args?: ListWirelessGatewaysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWirelessGatewaysCommandOutput>;
 }
+
+/**
+ * <p>AWS IoT Wireless provides bi-directional communication between internet-connected
+ *             wireless devices and the AWS Cloud. To onboard both <a href="https://docs.aws.amazon.com/iot-wireless/latest/developerguide/iot-lorawan.html">LoRaWAN</a> and <a href="https://docs.aws.amazon.com/iot-wireless/latest/developerguide/iot-sidewalk.html">Sidewalk</a> devices to AWS IoT, use the IoT Wireless API. These wireless
+ *             devices use the Low Power Wide Area Networking (LPWAN) communication protocol to
+ *             communicate with AWS IoT. </p>
+ *          <p>Using the API, you can perform create, read, update, and delete operations for your
+ *             wireless devices, gateways, destinations, and profiles. After onboarding your devices,
+ *             you can use the API operations to set log levels and monitor your devices with
+ *             CloudWatch.</p>
+ *          <p>You can also use the API operations to create multicast groups and schedule a
+ *             multicast session for sending a downlink message to devices in the group. By using
+ *             Firmware Updates Over-The-Air (FUOTA) API operations, you can create a FUOTA task and
+ *             schedule a session to update the firmware of individual devices or an entire group of
+ *             devices in a multicast group.</p>
+ *          <p>To connect to the AWS IoT Wireless Service, use the Service endpoints as described in
+ *             <a href="https://docs.aws.amazon.com/general/latest/gr/iot-lorawan.html#iot-wireless_region">IoT
+ *             Wireless Service endpoints</a>. You can use both IPv4 and IPv6 protocols to connect
+ *             to the endpoints and send requests to the AWS IoT Wireless service. For more information,
+ *             see <a href="https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html">Using
+ * 			IPv6 with AWS IoT Wireless</a>.</p>
+ * @public
+ */
+export class IoTWireless extends IoTWirelessClient implements IoTWireless {}
+createAggregatedClient(commands, IoTWireless, { paginators });

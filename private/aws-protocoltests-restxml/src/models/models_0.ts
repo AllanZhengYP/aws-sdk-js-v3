@@ -1,409 +1,333 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import type { FooEnum, IntegerEnum, StringEnum } from "./enums";
 
-import { RestXmlProtocolServiceException as __BaseException } from "./RestXmlProtocolServiceException";
-
+/**
+ * @public
+ */
 export interface GreetingStruct {
-  hi?: string;
+  hi?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const GreetingStructFilterSensitiveLog = (obj: GreetingStruct): any => ({
-  ...obj,
-});
-
-export enum FooEnum {
-  BAR = "Bar",
-  BAZ = "Baz",
-  FOO = "Foo",
-  ONE = "1",
-  ZERO = "0",
-}
-
 export interface AllQueryStringTypesInput {
-  queryString?: string;
-  queryStringList?: string[];
-  queryStringSet?: string[];
-  queryByte?: number;
-  queryShort?: number;
-  queryInteger?: number;
-  queryIntegerList?: number[];
-  queryIntegerSet?: number[];
-  queryLong?: number;
-  queryFloat?: number;
-  queryDouble?: number;
-  queryDoubleList?: number[];
-  queryBoolean?: boolean;
-  queryBooleanList?: boolean[];
-  queryTimestamp?: Date;
-  queryTimestampList?: Date[];
-  queryEnum?: FooEnum | string;
-  queryEnumList?: (FooEnum | string)[];
-  queryParamsMapOfStrings?: Record<string, string>;
+  queryString?: string | undefined;
+  queryStringList?: string[] | undefined;
+  queryStringSet?: string[] | undefined;
+  queryByte?: number | undefined;
+  queryShort?: number | undefined;
+  queryInteger?: number | undefined;
+  queryIntegerList?: number[] | undefined;
+  queryIntegerSet?: number[] | undefined;
+  queryLong?: number | undefined;
+  queryFloat?: number | undefined;
+  queryDouble?: number | undefined;
+  queryDoubleList?: number[] | undefined;
+  queryBoolean?: boolean | undefined;
+  queryBooleanList?: boolean[] | undefined;
+  queryTimestamp?: Date | undefined;
+  queryTimestampList?: Date[] | undefined;
+  queryEnum?: FooEnum | undefined;
+  queryEnumList?: FooEnum[] | undefined;
+  queryIntegerEnum?: IntegerEnum | undefined;
+  queryIntegerEnumList?: IntegerEnum[] | undefined;
+  queryParamsMapOfStrings?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const AllQueryStringTypesInputFilterSensitiveLog = (obj: AllQueryStringTypesInput): any => ({
-  ...obj,
-});
-
 export interface PayloadWithXmlName {
-  name?: string;
+  name?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PayloadWithXmlNameFilterSensitiveLog = (obj: PayloadWithXmlName): any => ({
-  ...obj,
-});
-
 export interface BodyWithXmlNameInputOutput {
-  nested?: PayloadWithXmlName;
+  nested?: PayloadWithXmlName | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const BodyWithXmlNameInputOutputFilterSensitiveLog = (obj: BodyWithXmlNameInputOutput): any => ({
-  ...obj,
-});
-
 export interface ComplexNestedErrorData {
-  Foo?: string;
+  Foo?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const ComplexNestedErrorDataFilterSensitiveLog = (obj: ComplexNestedErrorData): any => ({
-  ...obj,
-});
-
-/**
- * This error is thrown when a request is invalid.
- */
-export class ComplexError extends __BaseException {
-  readonly name: "ComplexError" = "ComplexError";
-  readonly $fault: "client" = "client";
-  Header?: string;
-  TopLevel?: string;
-  Nested?: ComplexNestedErrorData;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ComplexError, __BaseException>) {
-    super({
-      name: "ComplexError",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ComplexError.prototype);
-    this.Header = opts.Header;
-    this.TopLevel = opts.TopLevel;
-    this.Nested = opts.Nested;
-  }
-}
-
 export interface ConstantAndVariableQueryStringInput {
-  baz?: string;
-  maybeSet?: string;
+  baz?: string | undefined;
+  maybeSet?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const ConstantAndVariableQueryStringInputFilterSensitiveLog = (
-  obj: ConstantAndVariableQueryStringInput
-): any => ({
-  ...obj,
-});
-
 export interface ConstantQueryStringInput {
   hello: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const ConstantQueryStringInputFilterSensitiveLog = (obj: ConstantQueryStringInput): any => ({
-  ...obj,
-});
+export interface ContentTypeParametersInput {
+  value?: number | undefined;
+}
 
+/**
+ * @public
+ */
+export interface ContentTypeParametersOutput {}
+
+/**
+ * @public
+ */
+export interface DatetimeOffsetsOutput {
+  datetime?: Date | undefined;
+}
+
+/**
+ * @public
+ */
 export interface EmptyInputAndEmptyOutputInput {}
 
 /**
- * @internal
+ * @public
  */
-export const EmptyInputAndEmptyOutputInputFilterSensitiveLog = (obj: EmptyInputAndEmptyOutputInput): any => ({
-  ...obj,
-});
-
 export interface EmptyInputAndEmptyOutputOutput {}
 
 /**
- * @internal
+ * @public
  */
-export const EmptyInputAndEmptyOutputOutputFilterSensitiveLog = (obj: EmptyInputAndEmptyOutputOutput): any => ({
-  ...obj,
-});
-
 export interface HostLabelHeaderInput {
   accountId: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HostLabelHeaderInputFilterSensitiveLog = (obj: HostLabelHeaderInput): any => ({
-  ...obj,
-});
-
-export interface HostLabelInput {
+export interface EndpointWithHostLabelOperationRequest {
   label: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HostLabelInputFilterSensitiveLog = (obj: HostLabelInput): any => ({
-  ...obj,
-});
-
-export interface FlattenedXmlMapInputOutput {
-  myMap?: Record<string, FooEnum | string>;
+export interface EnumPayloadInput {
+  payload?: StringEnum | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const FlattenedXmlMapInputOutputFilterSensitiveLog = (obj: FlattenedXmlMapInputOutput): any => ({
-  ...obj,
-});
-
-export interface FlattenedXmlMapWithXmlNameInputOutput {
-  myMap?: Record<string, string>;
+export interface FlattenedXmlMapRequest {
+  myMap?: Record<string, FooEnum> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const FlattenedXmlMapWithXmlNameInputOutputFilterSensitiveLog = (
-  obj: FlattenedXmlMapWithXmlNameInputOutput
-): any => ({
-  ...obj,
-});
+export interface FlattenedXmlMapResponse {
+  myMap?: Record<string, FooEnum> | undefined;
+}
 
+/**
+ * @public
+ */
+export interface FlattenedXmlMapWithXmlNameRequest {
+  myMap?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface FlattenedXmlMapWithXmlNameResponse {
+  myMap?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface FlattenedXmlMapWithXmlNamespaceOutput {
-  myMap?: Record<string, string>;
+  myMap?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const FlattenedXmlMapWithXmlNamespaceOutputFilterSensitiveLog = (
-  obj: FlattenedXmlMapWithXmlNamespaceOutput
-): any => ({
-  ...obj,
-});
+export interface FractionalSecondsOutput {
+  datetime?: Date | undefined;
+}
 
+/**
+ * @public
+ */
 export interface GreetingWithErrorsOutput {
-  greeting?: string;
+  greeting?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const GreetingWithErrorsOutputFilterSensitiveLog = (obj: GreetingWithErrorsOutput): any => ({
-  ...obj,
-});
-
-/**
- * This error is thrown when an invalid greeting value is provided.
- */
-export class InvalidGreeting extends __BaseException {
-  readonly name: "InvalidGreeting" = "InvalidGreeting";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidGreeting, __BaseException>) {
-    super({
-      name: "InvalidGreeting",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidGreeting.prototype);
-    this.Message = opts.Message;
-  }
+export interface HttpEmptyPrefixHeadersInput {
+  prefixHeaders?: Record<string, string> | undefined;
+  specificHeader?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface HttpEmptyPrefixHeadersOutput {
+  prefixHeaders?: Record<string, string> | undefined;
+  specificHeader?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface HttpPayloadTraitsInputOutput {
-  foo?: string;
-  blob?: Uint8Array;
+  foo?: string | undefined;
+  blob?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadTraitsInputOutputFilterSensitiveLog = (obj: HttpPayloadTraitsInputOutput): any => ({
-  ...obj,
-});
-
 export interface HttpPayloadTraitsWithMediaTypeInputOutput {
-  foo?: string;
-  blob?: Uint8Array;
+  foo?: string | undefined;
+  blob?: Uint8Array | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadTraitsWithMediaTypeInputOutputFilterSensitiveLog = (
-  obj: HttpPayloadTraitsWithMediaTypeInputOutput
-): any => ({
-  ...obj,
-});
-
 export interface HttpPayloadWithMemberXmlNameInputOutput {
-  nested?: PayloadWithXmlName;
+  nested?: PayloadWithXmlName | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadWithMemberXmlNameInputOutputFilterSensitiveLog = (
-  obj: HttpPayloadWithMemberXmlNameInputOutput
-): any => ({
-  ...obj,
-});
-
 export interface NestedPayload {
-  greeting?: string;
-  name?: string;
+  greeting?: string | undefined;
+  name?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const NestedPayloadFilterSensitiveLog = (obj: NestedPayload): any => ({
-  ...obj,
-});
-
 export interface HttpPayloadWithStructureInputOutput {
-  nested?: NestedPayload;
+  nested?: NestedPayload | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadWithStructureInputOutputFilterSensitiveLog = (
-  obj: HttpPayloadWithStructureInputOutput
-): any => ({
-  ...obj,
-});
+export type UnionPayload =
+  | UnionPayload.GreetingMember
+  | UnionPayload.$UnknownMember;
 
+/**
+ * @public
+ */
+export namespace UnionPayload {
+  export interface GreetingMember {
+    greeting: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    greeting?: never;
+    $unknown: [string, any];
+  }
+
+  export interface Visitor<T> {
+    greeting: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+
+  export const visit = <T>(value: UnionPayload, visitor: Visitor<T>): T => {
+    if (value.greeting !== undefined) return visitor.greeting(value.greeting);
+    return visitor._(value.$unknown[0], value.$unknown[1]);
+  };
+}
+
+/**
+ * @public
+ */
+export interface HttpPayloadWithUnionInputOutput {
+  nested?: UnionPayload | undefined;
+}
+
+/**
+ * @public
+ */
 export interface HttpPayloadWithXmlNameInputOutput {
-  nested?: PayloadWithXmlName;
+  nested?: PayloadWithXmlName | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadWithXmlNameInputOutputFilterSensitiveLog = (obj: HttpPayloadWithXmlNameInputOutput): any => ({
-  ...obj,
-});
-
 export interface PayloadWithXmlNamespace {
-  name?: string;
+  name?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PayloadWithXmlNamespaceFilterSensitiveLog = (obj: PayloadWithXmlNamespace): any => ({
-  ...obj,
-});
-
 export interface HttpPayloadWithXmlNamespaceInputOutput {
-  nested?: PayloadWithXmlNamespace;
+  nested?: PayloadWithXmlNamespace | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadWithXmlNamespaceInputOutputFilterSensitiveLog = (
-  obj: HttpPayloadWithXmlNamespaceInputOutput
-): any => ({
-  ...obj,
-});
-
 export interface PayloadWithXmlNamespaceAndPrefix {
-  name?: string;
+  name?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const PayloadWithXmlNamespaceAndPrefixFilterSensitiveLog = (obj: PayloadWithXmlNamespaceAndPrefix): any => ({
-  ...obj,
-});
-
 export interface HttpPayloadWithXmlNamespaceAndPrefixInputOutput {
-  nested?: PayloadWithXmlNamespaceAndPrefix;
+  nested?: PayloadWithXmlNamespaceAndPrefix | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPayloadWithXmlNamespaceAndPrefixInputOutputFilterSensitiveLog = (
-  obj: HttpPayloadWithXmlNamespaceAndPrefixInputOutput
-): any => ({
-  ...obj,
-});
-
 export interface HttpPrefixHeadersInputOutput {
-  foo?: string;
-  fooMap?: Record<string, string>;
+  foo?: string | undefined;
+  fooMap?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpPrefixHeadersInputOutputFilterSensitiveLog = (obj: HttpPrefixHeadersInputOutput): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithFloatLabelsInput {
   float: number | undefined;
   double: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithFloatLabelsInputFilterSensitiveLog = (obj: HttpRequestWithFloatLabelsInput): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithGreedyLabelInPathInput {
   foo: string | undefined;
   baz: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithGreedyLabelInPathInputFilterSensitiveLog = (
-  obj: HttpRequestWithGreedyLabelInPathInput
-): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithLabelsInput {
   string: string | undefined;
   short: number | undefined;
@@ -413,22 +337,20 @@ export interface HttpRequestWithLabelsInput {
   double: number | undefined;
   /**
    * Serialized in the path as true or false.
+   * @public
    */
   boolean: boolean | undefined;
 
   /**
    * Note that this member has no format, so it's serialized as an RFC 3399 date-time.
+   * @public
    */
   timestamp: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithLabelsInputFilterSensitiveLog = (obj: HttpRequestWithLabelsInput): any => ({
-  ...obj,
-});
-
 export interface HttpRequestWithLabelsAndTimestampFormatInput {
   memberEpochSeconds: Date | undefined;
   memberHttpDate: Date | undefined;
@@ -440,360 +362,577 @@ export interface HttpRequestWithLabelsAndTimestampFormatInput {
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpRequestWithLabelsAndTimestampFormatInputFilterSensitiveLog = (
-  obj: HttpRequestWithLabelsAndTimestampFormatInput
-): any => ({
-  ...obj,
-});
-
 export interface HttpResponseCodeOutput {
-  Status?: number;
+  Status?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const HttpResponseCodeOutputFilterSensitiveLog = (obj: HttpResponseCodeOutput): any => ({
-  ...obj,
-});
+export interface StringPayloadInput {
+  payload?: string | undefined;
+}
 
+/**
+ * @public
+ */
 export interface IgnoreQueryParamsInResponseOutput {
-  baz?: string;
+  baz?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const IgnoreQueryParamsInResponseOutputFilterSensitiveLog = (obj: IgnoreQueryParamsInResponseOutput): any => ({
-  ...obj,
-});
-
 export interface InputAndOutputWithHeadersIO {
-  headerString?: string;
-  headerByte?: number;
-  headerShort?: number;
-  headerInteger?: number;
-  headerLong?: number;
-  headerFloat?: number;
-  headerDouble?: number;
-  headerTrueBool?: boolean;
-  headerFalseBool?: boolean;
-  headerStringList?: string[];
-  headerStringSet?: string[];
-  headerIntegerList?: number[];
-  headerBooleanList?: boolean[];
-  headerTimestampList?: Date[];
-  headerEnum?: FooEnum | string;
-  headerEnumList?: (FooEnum | string)[];
+  headerString?: string | undefined;
+  headerByte?: number | undefined;
+  headerShort?: number | undefined;
+  headerInteger?: number | undefined;
+  headerLong?: number | undefined;
+  headerFloat?: number | undefined;
+  headerDouble?: number | undefined;
+  headerTrueBool?: boolean | undefined;
+  headerFalseBool?: boolean | undefined;
+  headerStringList?: string[] | undefined;
+  headerStringSet?: string[] | undefined;
+  headerIntegerList?: number[] | undefined;
+  headerBooleanList?: boolean[] | undefined;
+  headerTimestampList?: Date[] | undefined;
+  headerEnum?: FooEnum | undefined;
+  headerEnumList?: FooEnum[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const InputAndOutputWithHeadersIOFilterSensitiveLog = (obj: InputAndOutputWithHeadersIO): any => ({
-  ...obj,
-});
-
-export interface NestedXmlMapsInputOutput {
-  nestedMap?: Record<string, Record<string, FooEnum | string>>;
-  flatNestedMap?: Record<string, Record<string, FooEnum | string>>;
+export interface NestedXmlMapsRequest {
+  nestedMap?: Record<string, Record<string, FooEnum>> | undefined;
+  flatNestedMap?: Record<string, Record<string, FooEnum>> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const NestedXmlMapsInputOutputFilterSensitiveLog = (obj: NestedXmlMapsInputOutput): any => ({
-  ...obj,
-});
+export interface NestedXmlMapsResponse {
+  nestedMap?: Record<string, Record<string, FooEnum>> | undefined;
+  flatNestedMap?: Record<string, Record<string, FooEnum>> | undefined;
+}
 
+/**
+ * @public
+ */
+export interface NestedXmlMapWithXmlNameRequest {
+  nestedXmlMapWithXmlNameMap?: Record<string, Record<string, string>> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface NestedXmlMapWithXmlNameResponse {
+  nestedXmlMapWithXmlNameMap?: Record<string, Record<string, string>> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface NoInputAndOutputOutput {}
 
 /**
- * @internal
+ * @public
  */
-export const NoInputAndOutputOutputFilterSensitiveLog = (obj: NoInputAndOutputOutput): any => ({
-  ...obj,
-});
-
 export interface NullAndEmptyHeadersIO {
-  a?: string;
-  b?: string;
-  c?: string[];
+  a?: string | undefined;
+  b?: string | undefined;
+  c?: string[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const NullAndEmptyHeadersIOFilterSensitiveLog = (obj: NullAndEmptyHeadersIO): any => ({
-  ...obj,
-});
-
 export interface OmitsNullSerializesEmptyStringInput {
-  nullValue?: string;
-  emptyString?: string;
+  nullValue?: string | undefined;
+  emptyString?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const OmitsNullSerializesEmptyStringInputFilterSensitiveLog = (
-  obj: OmitsNullSerializesEmptyStringInput
-): any => ({
-  ...obj,
-});
+export interface PutWithContentEncodingInput {
+  encoding?: string | undefined;
+  data?: string | undefined;
+}
 
+/**
+ * @public
+ */
 export interface QueryIdempotencyTokenAutoFillInput {
-  token?: string;
+  token?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const QueryIdempotencyTokenAutoFillInputFilterSensitiveLog = (obj: QueryIdempotencyTokenAutoFillInput): any => ({
-  ...obj,
-});
-
 export interface QueryParamsAsStringListMapInput {
-  qux?: string;
-  foo?: Record<string, string[]>;
+  qux?: string | undefined;
+  foo?: Record<string, string[]> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const QueryParamsAsStringListMapInputFilterSensitiveLog = (obj: QueryParamsAsStringListMapInput): any => ({
-  ...obj,
-});
-
 export interface QueryPrecedenceInput {
-  foo?: string;
-  baz?: Record<string, string>;
+  foo?: string | undefined;
+  baz?: Record<string, string> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const QueryPrecedenceInputFilterSensitiveLog = (obj: QueryPrecedenceInput): any => ({
-  ...obj,
-});
-
-export interface SimpleScalarPropertiesInputOutput {
-  foo?: string;
-  stringValue?: string;
-  trueBooleanValue?: boolean;
-  falseBooleanValue?: boolean;
-  byteValue?: number;
-  shortValue?: number;
-  integerValue?: number;
-  longValue?: number;
-  floatValue?: number;
-  doubleValue?: number;
+export interface SimpleScalarPropertiesRequest {
+  foo?: string | undefined;
+  stringValue?: string | undefined;
+  trueBooleanValue?: boolean | undefined;
+  falseBooleanValue?: boolean | undefined;
+  byteValue?: number | undefined;
+  shortValue?: number | undefined;
+  integerValue?: number | undefined;
+  longValue?: number | undefined;
+  floatValue?: number | undefined;
+  doubleValue?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const SimpleScalarPropertiesInputOutputFilterSensitiveLog = (obj: SimpleScalarPropertiesInputOutput): any => ({
-  ...obj,
-});
+export interface SimpleScalarPropertiesResponse {
+  foo?: string | undefined;
+  stringValue?: string | undefined;
+  trueBooleanValue?: boolean | undefined;
+  falseBooleanValue?: boolean | undefined;
+  byteValue?: number | undefined;
+  shortValue?: number | undefined;
+  integerValue?: number | undefined;
+  longValue?: number | undefined;
+  floatValue?: number | undefined;
+  doubleValue?: number | undefined;
+}
 
+/**
+ * @public
+ */
 export interface TimestampFormatHeadersIO {
-  memberEpochSeconds?: Date;
-  memberHttpDate?: Date;
-  memberDateTime?: Date;
-  defaultFormat?: Date;
-  targetEpochSeconds?: Date;
-  targetHttpDate?: Date;
-  targetDateTime?: Date;
+  memberEpochSeconds?: Date | undefined;
+  memberHttpDate?: Date | undefined;
+  memberDateTime?: Date | undefined;
+  defaultFormat?: Date | undefined;
+  targetEpochSeconds?: Date | undefined;
+  targetHttpDate?: Date | undefined;
+  targetDateTime?: Date | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const TimestampFormatHeadersIOFilterSensitiveLog = (obj: TimestampFormatHeadersIO): any => ({
-  ...obj,
-});
-
-export interface XmlAttributesInputOutput {
-  foo?: string;
-  attr?: string;
+export interface XmlAttributesRequest {
+  foo?: string | undefined;
+  attr?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlAttributesInputOutputFilterSensitiveLog = (obj: XmlAttributesInputOutput): any => ({
-  ...obj,
-});
-
-export interface XmlAttributesOnPayloadInputOutput {
-  payload?: XmlAttributesInputOutput;
+export interface XmlAttributesResponse {
+  foo?: string | undefined;
+  attr?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlAttributesOnPayloadInputOutputFilterSensitiveLog = (obj: XmlAttributesOnPayloadInputOutput): any => ({
-  ...obj,
-});
-
-export interface XmlBlobsInputOutput {
-  data?: Uint8Array;
+export interface XmlAttributesInMiddlePayloadRequest {
+  foo?: string | undefined;
+  attr?: string | undefined;
+  baz?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlBlobsInputOutputFilterSensitiveLog = (obj: XmlBlobsInputOutput): any => ({
-  ...obj,
-});
+export interface XmlAttributesInMiddleRequest {
+  payload?: XmlAttributesInMiddlePayloadRequest | undefined;
+}
 
+/**
+ * @public
+ */
+export interface XmlAttributesInMiddlePayloadResponse {
+  foo?: string | undefined;
+  attr?: string | undefined;
+  baz?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlAttributesInMiddleResponse {
+  payload?: XmlAttributesInMiddlePayloadResponse | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlAttributesPayloadRequest {
+  foo?: string | undefined;
+  attr?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlAttributesOnPayloadRequest {
+  payload?: XmlAttributesPayloadRequest | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlAttributesPayloadResponse {
+  foo?: string | undefined;
+  attr?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlAttributesOnPayloadResponse {
+  payload?: XmlAttributesPayloadResponse | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlBlobsRequest {
+  data?: Uint8Array | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlBlobsResponse {
+  data?: Uint8Array | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlEmptyBlobsRequest {
+  data?: Uint8Array | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlEmptyBlobsResponse {
+  data?: Uint8Array | undefined;
+}
+
+/**
+ * @public
+ */
 export interface StructureListMember {
-  a?: string;
-  b?: string;
+  a?: string | undefined;
+  b?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const StructureListMemberFilterSensitiveLog = (obj: StructureListMember): any => ({
-  ...obj,
-});
-
-export interface XmlListsInputOutput {
-  stringList?: string[];
-  stringSet?: string[];
-  integerList?: number[];
-  booleanList?: boolean[];
-  timestampList?: Date[];
-  enumList?: (FooEnum | string)[];
+export interface XmlEmptyListsRequest {
+  stringList?: string[] | undefined;
+  stringSet?: string[] | undefined;
+  integerList?: number[] | undefined;
+  booleanList?: boolean[] | undefined;
+  timestampList?: Date[] | undefined;
+  enumList?: FooEnum[] | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
   /**
    * A list of lists of strings.
+   * @public
    */
-  nestedStringList?: string[][];
+  nestedStringList?: string[][] | undefined;
 
-  renamedListMembers?: string[];
-  flattenedList?: string[];
-  flattenedList2?: string[];
-  flattenedListWithMemberNamespace?: string[];
-  flattenedListWithNamespace?: string[];
-  structureList?: StructureListMember[];
-  flattenedStructureList?: StructureListMember[];
+  renamedListMembers?: string[] | undefined;
+  flattenedList?: string[] | undefined;
+  flattenedList2?: string[] | undefined;
+  flattenedListWithMemberNamespace?: string[] | undefined;
+  flattenedListWithNamespace?: string[] | undefined;
+  structureList?: StructureListMember[] | undefined;
+  flattenedStructureList?: StructureListMember[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlListsInputOutputFilterSensitiveLog = (obj: XmlListsInputOutput): any => ({
-  ...obj,
-});
+export interface XmlEmptyListsResponse {
+  stringList?: string[] | undefined;
+  stringSet?: string[] | undefined;
+  integerList?: number[] | undefined;
+  booleanList?: boolean[] | undefined;
+  timestampList?: Date[] | undefined;
+  enumList?: FooEnum[] | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
+  /**
+   * A list of lists of strings.
+   * @public
+   */
+  nestedStringList?: string[][] | undefined;
 
-export interface XmlMapsInputOutput {
-  myMap?: Record<string, GreetingStruct>;
+  renamedListMembers?: string[] | undefined;
+  flattenedList?: string[] | undefined;
+  flattenedList2?: string[] | undefined;
+  flattenedListWithMemberNamespace?: string[] | undefined;
+  flattenedListWithNamespace?: string[] | undefined;
+  structureList?: StructureListMember[] | undefined;
+  flattenedStructureList?: StructureListMember[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlMapsInputOutputFilterSensitiveLog = (obj: XmlMapsInputOutput): any => ({
-  ...obj,
-});
-
-export interface XmlEmptyStringsInputOutput {
-  emptyString?: string;
+export interface XmlEmptyMapsRequest {
+  myMap?: Record<string, GreetingStruct> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlEmptyStringsInputOutputFilterSensitiveLog = (obj: XmlEmptyStringsInputOutput): any => ({
-  ...obj,
-});
-
-export interface XmlEnumsInputOutput {
-  fooEnum1?: FooEnum | string;
-  fooEnum2?: FooEnum | string;
-  fooEnum3?: FooEnum | string;
-  fooEnumList?: (FooEnum | string)[];
-  fooEnumSet?: (FooEnum | string)[];
-  fooEnumMap?: Record<string, FooEnum | string>;
+export interface XmlEmptyMapsResponse {
+  myMap?: Record<string, GreetingStruct> | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlEnumsInputOutputFilterSensitiveLog = (obj: XmlEnumsInputOutput): any => ({
-  ...obj,
-});
-
-export interface XmlMapsXmlNameInputOutput {
-  myMap?: Record<string, GreetingStruct>;
+export interface XmlEmptyStringsRequest {
+  emptyString?: string | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlMapsXmlNameInputOutputFilterSensitiveLog = (obj: XmlMapsXmlNameInputOutput): any => ({
-  ...obj,
-});
+export interface XmlEmptyStringsResponse {
+  emptyString?: string | undefined;
+}
 
+/**
+ * @public
+ */
+export interface XmlEnumsRequest {
+  fooEnum1?: FooEnum | undefined;
+  fooEnum2?: FooEnum | undefined;
+  fooEnum3?: FooEnum | undefined;
+  fooEnumList?: FooEnum[] | undefined;
+  fooEnumSet?: FooEnum[] | undefined;
+  fooEnumMap?: Record<string, FooEnum> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlEnumsResponse {
+  fooEnum1?: FooEnum | undefined;
+  fooEnum2?: FooEnum | undefined;
+  fooEnum3?: FooEnum | undefined;
+  fooEnumList?: FooEnum[] | undefined;
+  fooEnumSet?: FooEnum[] | undefined;
+  fooEnumMap?: Record<string, FooEnum> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlIntEnumsRequest {
+  intEnum1?: IntegerEnum | undefined;
+  intEnum2?: IntegerEnum | undefined;
+  intEnum3?: IntegerEnum | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
+  intEnumSet?: IntegerEnum[] | undefined;
+  intEnumMap?: Record<string, IntegerEnum> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlIntEnumsResponse {
+  intEnum1?: IntegerEnum | undefined;
+  intEnum2?: IntegerEnum | undefined;
+  intEnum3?: IntegerEnum | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
+  intEnumSet?: IntegerEnum[] | undefined;
+  intEnumMap?: Record<string, IntegerEnum> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlListsRequest {
+  stringList?: string[] | undefined;
+  stringSet?: string[] | undefined;
+  integerList?: number[] | undefined;
+  booleanList?: boolean[] | undefined;
+  timestampList?: Date[] | undefined;
+  enumList?: FooEnum[] | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
+  /**
+   * A list of lists of strings.
+   * @public
+   */
+  nestedStringList?: string[][] | undefined;
+
+  renamedListMembers?: string[] | undefined;
+  flattenedList?: string[] | undefined;
+  flattenedList2?: string[] | undefined;
+  flattenedListWithMemberNamespace?: string[] | undefined;
+  flattenedListWithNamespace?: string[] | undefined;
+  structureList?: StructureListMember[] | undefined;
+  flattenedStructureList?: StructureListMember[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlListsResponse {
+  stringList?: string[] | undefined;
+  stringSet?: string[] | undefined;
+  integerList?: number[] | undefined;
+  booleanList?: boolean[] | undefined;
+  timestampList?: Date[] | undefined;
+  enumList?: FooEnum[] | undefined;
+  intEnumList?: IntegerEnum[] | undefined;
+  /**
+   * A list of lists of strings.
+   * @public
+   */
+  nestedStringList?: string[][] | undefined;
+
+  renamedListMembers?: string[] | undefined;
+  flattenedList?: string[] | undefined;
+  flattenedList2?: string[] | undefined;
+  flattenedListWithMemberNamespace?: string[] | undefined;
+  flattenedListWithNamespace?: string[] | undefined;
+  structureList?: StructureListMember[] | undefined;
+  flattenedStructureList?: StructureListMember[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlMapsRequest {
+  myMap?: Record<string, GreetingStruct> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlMapsResponse {
+  myMap?: Record<string, GreetingStruct> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlMapsXmlNameRequest {
+  myMap?: Record<string, GreetingStruct> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlMapsXmlNameResponse {
+  myMap?: Record<string, GreetingStruct> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlMapWithXmlNamespaceRequest {
+  myMap?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface XmlMapWithXmlNamespaceResponse {
+  myMap?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface XmlNamespaceNested {
-  foo?: string;
-  values?: string[];
+  foo?: string | undefined;
+  values?: string[] | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlNamespaceNestedFilterSensitiveLog = (obj: XmlNamespaceNested): any => ({
-  ...obj,
-});
-
-export interface XmlNamespacesInputOutput {
-  nested?: XmlNamespaceNested;
+export interface XmlNamespacesRequest {
+  nested?: XmlNamespaceNested | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlNamespacesInputOutputFilterSensitiveLog = (obj: XmlNamespacesInputOutput): any => ({
-  ...obj,
-});
-
-export interface XmlTimestampsInputOutput {
-  normal?: Date;
-  dateTime?: Date;
-  epochSeconds?: Date;
-  httpDate?: Date;
+export interface XmlNamespacesResponse {
+  nested?: XmlNamespaceNested | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlTimestampsInputOutputFilterSensitiveLog = (obj: XmlTimestampsInputOutput): any => ({
-  ...obj,
-});
+export interface XmlTimestampsRequest {
+  normal?: Date | undefined;
+  dateTime?: Date | undefined;
+  dateTimeOnTarget?: Date | undefined;
+  epochSeconds?: Date | undefined;
+  epochSecondsOnTarget?: Date | undefined;
+  httpDate?: Date | undefined;
+  httpDateOnTarget?: Date | undefined;
+}
 
+/**
+ * @public
+ */
+export interface XmlTimestampsResponse {
+  normal?: Date | undefined;
+  dateTime?: Date | undefined;
+  dateTimeOnTarget?: Date | undefined;
+  epochSeconds?: Date | undefined;
+  epochSecondsOnTarget?: Date | undefined;
+  httpDate?: Date | undefined;
+  httpDateOnTarget?: Date | undefined;
+}
+
+/**
+ * @public
+ */
 export interface XmlNestedUnionStruct {
-  stringValue?: string;
-  booleanValue?: boolean;
-  byteValue?: number;
-  shortValue?: number;
-  integerValue?: number;
-  longValue?: number;
-  floatValue?: number;
-  doubleValue?: number;
+  stringValue?: string | undefined;
+  booleanValue?: boolean | undefined;
+  byteValue?: number | undefined;
+  shortValue?: number | undefined;
+  integerValue?: number | undefined;
+  longValue?: number | undefined;
+  floatValue?: number | undefined;
+  doubleValue?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlNestedUnionStructFilterSensitiveLog = (obj: XmlNestedUnionStruct): any => ({
-  ...obj,
-});
-
 export type XmlUnionShape =
   | XmlUnionShape.BooleanValueMember
   | XmlUnionShape.ByteValueMember
@@ -807,6 +946,9 @@ export type XmlUnionShape =
   | XmlUnionShape.UnionValueMember
   | XmlUnionShape.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace XmlUnionShape {
   export interface StringValueMember {
     stringValue: string;
@@ -948,6 +1090,9 @@ export namespace XmlUnionShape {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     stringValue?: never;
     booleanValue?: never;
@@ -990,66 +1135,47 @@ export namespace XmlUnionShape {
     return visitor._(value.$unknown[0], value.$unknown[1]);
   };
 }
-/**
- * @internal
- */
-export const XmlUnionShapeFilterSensitiveLog = (obj: XmlUnionShape): any => {
-  if (obj.stringValue !== undefined) return { stringValue: obj.stringValue };
-  if (obj.booleanValue !== undefined) return { booleanValue: obj.booleanValue };
-  if (obj.byteValue !== undefined) return { byteValue: obj.byteValue };
-  if (obj.shortValue !== undefined) return { shortValue: obj.shortValue };
-  if (obj.integerValue !== undefined) return { integerValue: obj.integerValue };
-  if (obj.longValue !== undefined) return { longValue: obj.longValue };
-  if (obj.floatValue !== undefined) return { floatValue: obj.floatValue };
-  if (obj.doubleValue !== undefined) return { doubleValue: obj.doubleValue };
-  if (obj.unionValue !== undefined) return { unionValue: XmlUnionShapeFilterSensitiveLog(obj.unionValue) };
-  if (obj.structValue !== undefined) return { structValue: XmlNestedUnionStructFilterSensitiveLog(obj.structValue) };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
 
+/**
+ * @public
+ */
 export interface RecursiveShapesInputOutputNested1 {
-  foo?: string;
-  nested?: RecursiveShapesInputOutputNested2;
+  foo?: string | undefined;
+  nested?: RecursiveShapesInputOutputNested2 | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const RecursiveShapesInputOutputNested1FilterSensitiveLog = (obj: RecursiveShapesInputOutputNested1): any => ({
-  ...obj,
-});
-
 export interface RecursiveShapesInputOutputNested2 {
-  bar?: string;
-  recursiveMember?: RecursiveShapesInputOutputNested1;
+  bar?: string | undefined;
+  recursiveMember?: RecursiveShapesInputOutputNested1 | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const RecursiveShapesInputOutputNested2FilterSensitiveLog = (obj: RecursiveShapesInputOutputNested2): any => ({
-  ...obj,
-});
-
-export interface XmlUnionsInputOutput {
-  unionValue?: XmlUnionShape;
+export interface XmlUnionsRequest {
+  unionValue?: XmlUnionShape | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const XmlUnionsInputOutputFilterSensitiveLog = (obj: XmlUnionsInputOutput): any => ({
-  ...obj,
-  ...(obj.unionValue && { unionValue: XmlUnionShapeFilterSensitiveLog(obj.unionValue) }),
-});
-
-export interface RecursiveShapesInputOutput {
-  nested?: RecursiveShapesInputOutputNested1;
+export interface XmlUnionsResponse {
+  unionValue?: XmlUnionShape | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const RecursiveShapesInputOutputFilterSensitiveLog = (obj: RecursiveShapesInputOutput): any => ({
-  ...obj,
-});
+export interface RecursiveShapesRequest {
+  nested?: RecursiveShapesInputOutputNested1 | undefined;
+}
+
+/**
+ * @public
+ */
+export interface RecursiveShapesResponse {
+  nested?: RecursiveShapesInputOutputNested1 | undefined;
+}

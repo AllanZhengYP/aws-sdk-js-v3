@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LicenseManagerUserSubscriptionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LicenseManagerUserSubscriptionsClient";
-import {
-  ListInstancesRequest,
-  ListInstancesRequestFilterSensitiveLog,
-  ListInstancesResponse,
-  ListInstancesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListInstancesCommand,
-  serializeAws_restJson1ListInstancesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListInstancesRequest, ListInstancesResponse } from "../models/models_0";
+import { ListInstances$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListInstancesCommand}.
+ */
 export interface ListInstancesCommandInput extends ListInstancesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListInstancesCommand}.
+ */
 export interface ListInstancesCommandOutput extends ListInstancesResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,114 @@ export interface ListInstancesCommandOutput extends ListInstancesResponse, __Met
  * ```javascript
  * import { LicenseManagerUserSubscriptionsClient, ListInstancesCommand } from "@aws-sdk/client-license-manager-user-subscriptions"; // ES Modules import
  * // const { LicenseManagerUserSubscriptionsClient, ListInstancesCommand } = require("@aws-sdk/client-license-manager-user-subscriptions"); // CommonJS import
+ * // import type { LicenseManagerUserSubscriptionsClientConfig } from "@aws-sdk/client-license-manager-user-subscriptions";
+ * const config = {}; // type is LicenseManagerUserSubscriptionsClientConfig
  * const client = new LicenseManagerUserSubscriptionsClient(config);
+ * const input = { // ListInstancesRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Attribute: "STRING_VALUE",
+ *       Operation: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new ListInstancesCommand(input);
  * const response = await client.send(command);
+ * // { // ListInstancesResponse
+ * //   InstanceSummaries: [ // InstanceSummaryList
+ * //     { // InstanceSummary
+ * //       InstanceId: "STRING_VALUE", // required
+ * //       Status: "STRING_VALUE", // required
+ * //       Products: [ // StringList // required
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       LastStatusCheckDate: "STRING_VALUE",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       OwnerAccountId: "STRING_VALUE",
+ * //       IdentityProvider: { // IdentityProvider Union: only one key present
+ * //         ActiveDirectoryIdentityProvider: { // ActiveDirectoryIdentityProvider
+ * //           DirectoryId: "STRING_VALUE",
+ * //           ActiveDirectorySettings: { // ActiveDirectorySettings
+ * //             DomainName: "STRING_VALUE",
+ * //             DomainIpv4List: [ // IpV4List
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             DomainIpv6List: [ // IpV6List
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             DomainCredentialsProvider: { // CredentialsProvider Union: only one key present
+ * //               SecretsManagerCredentialsProvider: { // SecretsManagerCredentialsProvider
+ * //                 SecretId: "STRING_VALUE",
+ * //               },
+ * //             },
+ * //             DomainNetworkSettings: { // DomainNetworkSettings
+ * //               Subnets: [ // Subnets // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           },
+ * //           ActiveDirectoryType: "STRING_VALUE",
+ * //           IsSharedActiveDirectory: true || false,
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListInstancesCommandInput - {@link ListInstancesCommandInput}
+ * @returns {@link ListInstancesCommandOutput}
  * @see {@link ListInstancesCommandInput} for command's `input` shape.
  * @see {@link ListInstancesCommandOutput} for command's `response` shape.
  * @see {@link LicenseManagerUserSubscriptionsClientResolvedConfig | config} for LicenseManagerUserSubscriptionsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (server fault)
+ *  <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception occurred with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request failed because a service quota is exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling. Retry the request.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link LicenseManagerUserSubscriptionsServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManagerUserSubscriptions service.</p>
+ *
+ *
+ * @public
  */
-export class ListInstancesCommand extends $Command<
-  ListInstancesCommandInput,
-  ListInstancesCommandOutput,
-  LicenseManagerUserSubscriptionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListInstancesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerUserSubscriptionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListInstancesCommandInput, ListInstancesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerUserSubscriptionsClient";
-    const commandName = "ListInstancesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListInstancesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListInstancesResponseFilterSensitiveLog,
+export class ListInstancesCommand extends command<ListInstancesCommandInput, ListInstancesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListInstances",
+  ListInstances$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInstancesRequest;
+      output: ListInstancesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListInstancesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListInstancesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListInstancesCommandOutput> {
-    return deserializeAws_restJson1ListInstancesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListInstancesCommandInput;
+      output: ListInstancesCommandOutput;
+    };
+  };
 }

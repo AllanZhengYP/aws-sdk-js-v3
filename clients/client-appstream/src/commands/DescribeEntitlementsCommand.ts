@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import {
-  DescribeEntitlementsRequest,
-  DescribeEntitlementsRequestFilterSensitiveLog,
-  DescribeEntitlementsResult,
-  DescribeEntitlementsResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEntitlementsCommand,
-  serializeAws_json1_1DescribeEntitlementsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEntitlementsRequest, DescribeEntitlementsResult } from "../models/models_0";
+import { DescribeEntitlements$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEntitlementsCommand}.
+ */
 export interface DescribeEntitlementsCommandInput extends DescribeEntitlementsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEntitlementsCommand}.
+ */
 export interface DescribeEntitlementsCommandOutput extends DescribeEntitlementsResult, __MetadataBearer {}
 
 /**
@@ -34,68 +29,75 @@ export interface DescribeEntitlementsCommandOutput extends DescribeEntitlementsR
  * ```javascript
  * import { AppStreamClient, DescribeEntitlementsCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DescribeEntitlementsCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DescribeEntitlementsRequest
+ *   Name: "STRING_VALUE",
+ *   StackName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeEntitlementsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEntitlementsResult
+ * //   Entitlements: [ // EntitlementList
+ * //     { // Entitlement
+ * //       Name: "STRING_VALUE", // required
+ * //       StackName: "STRING_VALUE", // required
+ * //       Description: "STRING_VALUE",
+ * //       AppVisibility: "ALL" || "ASSOCIATED", // required
+ * //       Attributes: [ // EntitlementAttributeList // required
+ * //         { // EntitlementAttribute
+ * //           Name: "STRING_VALUE", // required
+ * //           Value: "STRING_VALUE", // required
+ * //         },
+ * //       ],
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeEntitlementsCommandInput - {@link DescribeEntitlementsCommandInput}
+ * @returns {@link DescribeEntitlementsCommandOutput}
  * @see {@link DescribeEntitlementsCommandInput} for command's `input` shape.
  * @see {@link DescribeEntitlementsCommandOutput} for command's `response` shape.
  * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link EntitlementNotFoundException} (client fault)
+ *  <p>The entitlement can't be found.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEntitlementsCommand extends $Command<
-  DescribeEntitlementsCommandInput,
-  DescribeEntitlementsCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEntitlementsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEntitlementsCommandInput, DescribeEntitlementsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DescribeEntitlementsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEntitlementsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEntitlementsResultFilterSensitiveLog,
+export class DescribeEntitlementsCommand extends command<DescribeEntitlementsCommandInput, DescribeEntitlementsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEntitlements",
+  DescribeEntitlements$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEntitlementsRequest;
+      output: DescribeEntitlementsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEntitlementsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEntitlementsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeEntitlementsCommandOutput> {
-    return deserializeAws_json1_1DescribeEntitlementsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEntitlementsCommandInput;
+      output: DescribeEntitlementsCommandOutput;
+    };
+  };
 }

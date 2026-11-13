@@ -1,30 +1,21 @@
-export * from "./DescribeAggregateComplianceByConfigRulesPaginator";
-
-export * from "./DescribeAggregateComplianceByConformancePacksPaginator";
-
-export * from "./DescribeAggregationAuthorizationsPaginator";
-
-export * from "./DescribeComplianceByConfigRulePaginator";
-
-export * from "./DescribeComplianceByResourcePaginator";
-
-export * from "./DescribeConfigRuleEvaluationStatusPaginator";
-
-export * from "./DescribeConfigRulesPaginator";
-
-export * from "./DescribeConfigurationAggregatorSourcesStatusPaginator";
-
-export * from "./DescribeConfigurationAggregatorsPaginator";
-
-export * from "./DescribeConformancePackCompliancePaginator";
 // smithy-typescript generated code
 export * from "./Interfaces";
-export * from "./DescribeConformancePackStatusPaginator";
+export * from "./DescribeAggregateComplianceByConfigRulesPaginator";
+export * from "./DescribeAggregateComplianceByConformancePacksPaginator";
+export * from "./DescribeAggregationAuthorizationsPaginator";
+export * from "./DescribeComplianceByConfigRulePaginator";
+export * from "./DescribeComplianceByResourcePaginator";
+export * from "./DescribeConfigRuleEvaluationStatusPaginator";
+export * from "./DescribeConfigRulesPaginator";
+export * from "./DescribeConfigurationAggregatorsPaginator";
+export * from "./DescribeConfigurationAggregatorSourcesStatusPaginator";
+export * from "./DescribeConformancePackCompliancePaginator";
 export * from "./DescribeConformancePacksPaginator";
-export * from "./DescribeOrganizationConfigRuleStatusesPaginator";
+export * from "./DescribeConformancePackStatusPaginator";
 export * from "./DescribeOrganizationConfigRulesPaginator";
-export * from "./DescribeOrganizationConformancePackStatusesPaginator";
+export * from "./DescribeOrganizationConfigRuleStatusesPaginator";
 export * from "./DescribeOrganizationConformancePacksPaginator";
+export * from "./DescribeOrganizationConformancePackStatusesPaginator";
 export * from "./DescribePendingAggregationRequestsPaginator";
 export * from "./DescribeRemediationExceptionsPaginator";
 export * from "./DescribeRemediationExecutionStatusPaginator";
@@ -42,8 +33,11 @@ export * from "./GetOrganizationConfigRuleDetailedStatusPaginator";
 export * from "./GetOrganizationConformancePackDetailedStatusPaginator";
 export * from "./GetResourceConfigHistoryPaginator";
 export * from "./ListAggregateDiscoveredResourcesPaginator";
+export * from "./ListConfigurationRecordersPaginator";
 export * from "./ListConformancePackComplianceScoresPaginator";
+export * from "./ListConnectorsPaginator";
 export * from "./ListDiscoveredResourcesPaginator";
+export * from "./ListResourceEvaluationsPaginator";
 export * from "./ListStoredQueriesPaginator";
 export * from "./ListTagsForResourcePaginator";
 export * from "./SelectAggregateResourceConfigPaginator";

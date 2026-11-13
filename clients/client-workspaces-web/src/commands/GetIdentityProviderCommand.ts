@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetIdentityProviderRequest,
-  GetIdentityProviderRequestFilterSensitiveLog,
-  GetIdentityProviderResponse,
-  GetIdentityProviderResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetIdentityProviderCommand,
-  serializeAws_restJson1GetIdentityProviderCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIdentityProviderRequest, GetIdentityProviderResponse } from "../models/models_0";
+import { GetIdentityProvider$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIdentityProviderCommand}.
+ */
 export interface GetIdentityProviderCommandInput extends GetIdentityProviderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIdentityProviderCommand}.
+ */
 export interface GetIdentityProviderCommandOutput extends GetIdentityProviderResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,69 @@ export interface GetIdentityProviderCommandOutput extends GetIdentityProviderRes
  * ```javascript
  * import { WorkSpacesWebClient, GetIdentityProviderCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, GetIdentityProviderCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // GetIdentityProviderRequest
+ *   identityProviderArn: "STRING_VALUE", // required
+ * };
  * const command = new GetIdentityProviderCommand(input);
  * const response = await client.send(command);
+ * // { // GetIdentityProviderResponse
+ * //   identityProvider: { // IdentityProvider
+ * //     identityProviderArn: "STRING_VALUE", // required
+ * //     identityProviderName: "STRING_VALUE",
+ * //     identityProviderType: "STRING_VALUE",
+ * //     identityProviderDetails: { // IdentityProviderDetails
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetIdentityProviderCommandInput - {@link GetIdentityProviderCommandInput}
+ * @returns {@link GetIdentityProviderCommandOutput}
  * @see {@link GetIdentityProviderCommandInput} for command's `input` shape.
  * @see {@link GetIdentityProviderCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class GetIdentityProviderCommand extends $Command<
-  GetIdentityProviderCommandInput,
-  GetIdentityProviderCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIdentityProviderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIdentityProviderCommandInput, GetIdentityProviderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "GetIdentityProviderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIdentityProviderRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetIdentityProviderResponseFilterSensitiveLog,
+export class GetIdentityProviderCommand extends command<GetIdentityProviderCommandInput, GetIdentityProviderCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIdentityProvider",
+  GetIdentityProvider$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIdentityProviderRequest;
+      output: GetIdentityProviderResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIdentityProviderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetIdentityProviderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIdentityProviderCommandOutput> {
-    return deserializeAws_restJson1GetIdentityProviderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIdentityProviderCommandInput;
+      output: GetIdentityProviderCommandOutput;
+    };
+  };
 }

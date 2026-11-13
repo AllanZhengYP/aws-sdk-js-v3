@@ -1,483 +1,349 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
+import type {
+  ApiDestinationHttpMethod,
+  ApiDestinationState,
+  ArchiveState,
+  AssignPublicIp,
+  ConnectionAuthorizationType,
+  ConnectionOAuthHttpMethod,
+  ConnectionState,
+  EventSourceState,
+  LaunchType,
+  PlacementConstraintType,
+  PlacementStrategyType,
+  PropagateTags,
+  ReplayState,
+  RuleState,
+} from "./enums";
 
-import { CloudWatchEventsServiceException as __BaseException } from "./CloudWatchEventsServiceException";
-
+/**
+ * @public
+ */
 export interface ActivateEventSourceRequest {
   /**
    * <p>The name of the partner event source to activate.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
 /**
- * <p>There is concurrent modification on a rule, target, archive, or replay.</p>
- */
-export class ConcurrentModificationException extends __BaseException {
-  readonly name: "ConcurrentModificationException" = "ConcurrentModificationException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ConcurrentModificationException, __BaseException>) {
-    super({
-      name: "ConcurrentModificationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConcurrentModificationException.prototype);
-  }
-}
-
-/**
- * <p>This exception occurs due to unexpected causes.</p>
- */
-export class InternalException extends __BaseException {
-  readonly name: "InternalException" = "InternalException";
-  readonly $fault: "server" = "server";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InternalException, __BaseException>) {
-    super({
-      name: "InternalException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InternalException.prototype);
-  }
-}
-
-/**
- * <p>The specified state is not a valid state for an event source.</p>
- */
-export class InvalidStateException extends __BaseException {
-  readonly name: "InvalidStateException" = "InvalidStateException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidStateException, __BaseException>) {
-    super({
-      name: "InvalidStateException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidStateException.prototype);
-  }
-}
-
-/**
- * <p>The operation you are attempting is not available in this region.</p>
- */
-export class OperationDisabledException extends __BaseException {
-  readonly name: "OperationDisabledException" = "OperationDisabledException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<OperationDisabledException, __BaseException>) {
-    super({
-      name: "OperationDisabledException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, OperationDisabledException.prototype);
-  }
-}
-
-/**
- * <p>An entity that you specified does not exist.</p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-  }
-}
-
-export enum ApiDestinationState {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
-}
-
-export enum ApiDestinationHttpMethod {
-  DELETE = "DELETE",
-  GET = "GET",
-  HEAD = "HEAD",
-  OPTIONS = "OPTIONS",
-  PATCH = "PATCH",
-  POST = "POST",
-  PUT = "PUT",
-}
-
-/**
  * <p>Contains details about an API destination.</p>
+ * @public
  */
 export interface ApiDestination {
   /**
    * <p>The ARN of the API destination.</p>
+   * @public
    */
-  ApiDestinationArn?: string;
+  ApiDestinationArn?: string | undefined;
 
   /**
    * <p>The name of the API destination.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The state of the API destination.</p>
+   * @public
    */
-  ApiDestinationState?: ApiDestinationState | string;
+  ApiDestinationState?: ApiDestinationState | undefined;
 
   /**
    * <p>The ARN of the connection specified for the API destination.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The URL to the endpoint for the API destination.</p>
+   * @public
    */
-  InvocationEndpoint?: string;
+  InvocationEndpoint?: string | undefined;
 
   /**
    * <p>The method to use to connect to the HTTP endpoint.</p>
+   * @public
    */
-  HttpMethod?: ApiDestinationHttpMethod | string;
+  HttpMethod?: ApiDestinationHttpMethod | undefined;
 
   /**
    * <p>The maximum number of invocations per second to send to the HTTP endpoint.</p>
+   * @public
    */
-  InvocationRateLimitPerSecond?: number;
+  InvocationRateLimitPerSecond?: number | undefined;
 
   /**
    * <p>A time stamp for the time that the API destination was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the API destination was last modified.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
-}
-
-export enum ArchiveState {
-  CREATE_FAILED = "CREATE_FAILED",
-  CREATING = "CREATING",
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
-  UPDATE_FAILED = "UPDATE_FAILED",
-  UPDATING = "UPDATING",
+  LastModifiedTime?: Date | undefined;
 }
 
 /**
  * <p>An <code>Archive</code> object that contains details about an archive.</p>
+ * @public
  */
 export interface Archive {
   /**
    * <p>The name of the archive.</p>
+   * @public
    */
-  ArchiveName?: string;
+  ArchiveName?: string | undefined;
 
   /**
    * <p>The ARN of the event bus associated with the archive. Only events from this event bus are
    *       sent to the archive.</p>
+   * @public
    */
-  EventSourceArn?: string;
+  EventSourceArn?: string | undefined;
 
   /**
    * <p>The current state of the archive.</p>
+   * @public
    */
-  State?: ArchiveState | string;
+  State?: ArchiveState | undefined;
 
   /**
    * <p>A description for the reason that the archive is in the current state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The number of days to retain events in the archive before they are deleted.</p>
+   * @public
    */
-  RetentionDays?: number;
+  RetentionDays?: number | undefined;
 
   /**
    * <p>The size of the archive, in bytes.</p>
+   * @public
    */
-  SizeBytes?: number;
+  SizeBytes?: number | undefined;
 
   /**
    * <p>The number of events in the archive.</p>
+   * @public
    */
-  EventCount?: number;
+  EventCount?: number | undefined;
 
   /**
    * <p>The time stamp for the time that the archive was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 }
 
-export enum AssignPublicIp {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
-}
-
+/**
+ * @public
+ */
 export interface CancelReplayRequest {
   /**
    * <p>The name of the replay to cancel.</p>
+   * @public
    */
   ReplayName: string | undefined;
 }
 
-export enum ReplayState {
-  CANCELLED = "CANCELLED",
-  CANCELLING = "CANCELLING",
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  RUNNING = "RUNNING",
-  STARTING = "STARTING",
-}
-
+/**
+ * @public
+ */
 export interface CancelReplayResponse {
   /**
    * <p>The ARN of the replay to cancel.</p>
+   * @public
    */
-  ReplayArn?: string;
+  ReplayArn?: string | undefined;
 
   /**
    * <p>The current state of the replay.</p>
+   * @public
    */
-  State?: ReplayState | string;
+  State?: ReplayState | undefined;
 
   /**
    * <p>The reason that the replay is in the current state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 }
 
 /**
- * <p>An error occurred because a replay can be canceled only when the state is Running or
- *       Starting.</p>
+ * @public
  */
-export class IllegalStatusException extends __BaseException {
-  readonly name: "IllegalStatusException" = "IllegalStatusException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<IllegalStatusException, __BaseException>) {
-    super({
-      name: "IllegalStatusException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, IllegalStatusException.prototype);
-  }
-}
-
 export interface CreateApiDestinationRequest {
   /**
    * <p>The name for the API destination to create.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>A description for the API destination to create.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the connection to use for the API destination. The destination endpoint must
    *       support the authorization type specified for the connection.</p>
+   * @public
    */
   ConnectionArn: string | undefined;
 
   /**
    * <p>The URL to the HTTP invocation endpoint for the API destination.</p>
+   * @public
    */
   InvocationEndpoint: string | undefined;
 
   /**
    * <p>The method to use for the request to the HTTP invocation endpoint.</p>
+   * @public
    */
-  HttpMethod: ApiDestinationHttpMethod | string | undefined;
+  HttpMethod: ApiDestinationHttpMethod | undefined;
 
   /**
    * <p>The maximum number of requests per second to send to the HTTP invocation endpoint.</p>
+   * @public
    */
-  InvocationRateLimitPerSecond?: number;
+  InvocationRateLimitPerSecond?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateApiDestinationResponse {
   /**
    * <p>The ARN of the API destination that was created by the request.</p>
+   * @public
    */
-  ApiDestinationArn?: string;
+  ApiDestinationArn?: string | undefined;
 
   /**
    * <p>The state of the API destination that was created by the request.</p>
+   * @public
    */
-  ApiDestinationState?: ApiDestinationState | string;
+  ApiDestinationState?: ApiDestinationState | undefined;
 
   /**
    * <p>A time stamp indicating the time that the API destination was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp indicating the time that the API destination was last modified.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 }
 
 /**
- * <p>The request failed because it attempted to create resource beyond the allowed service
- *       quota.</p>
+ * @public
  */
-export class LimitExceededException extends __BaseException {
-  readonly name: "LimitExceededException" = "LimitExceededException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<LimitExceededException, __BaseException>) {
-    super({
-      name: "LimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LimitExceededException.prototype);
-  }
-}
-
-/**
- * <p>The resource you are trying to create already exists.</p>
- */
-export class ResourceAlreadyExistsException extends __BaseException {
-  readonly name: "ResourceAlreadyExistsException" = "ResourceAlreadyExistsException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceAlreadyExistsException, __BaseException>) {
-    super({
-      name: "ResourceAlreadyExistsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceAlreadyExistsException.prototype);
-  }
-}
-
 export interface CreateArchiveRequest {
   /**
    * <p>The name for the archive to create.</p>
+   * @public
    */
   ArchiveName: string | undefined;
 
   /**
    * <p>The ARN of the event bus that sends events to the archive.</p>
+   * @public
    */
   EventSourceArn: string | undefined;
 
   /**
    * <p>A description for the archive.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>An event pattern to use to filter events sent to the archive.</p>
+   * @public
    */
-  EventPattern?: string;
+  EventPattern?: string | undefined;
 
   /**
    * <p>The number of days to retain events for. Default value is 0. If set to 0, events are
    *       retained indefinitely</p>
+   * @public
    */
-  RetentionDays?: number;
-}
-
-export interface CreateArchiveResponse {
-  /**
-   * <p>The ARN of the archive that was created.</p>
-   */
-  ArchiveArn?: string;
-
-  /**
-   * <p>The state of the archive that was created.</p>
-   */
-  State?: ArchiveState | string;
-
-  /**
-   * <p>The reason that the archive is in the state.</p>
-   */
-  StateReason?: string;
-
-  /**
-   * <p>The time at which the archive was created.</p>
-   */
-  CreationTime?: Date;
+  RetentionDays?: number | undefined;
 }
 
 /**
- * <p>The event pattern is not valid.</p>
+ * @public
  */
-export class InvalidEventPatternException extends __BaseException {
-  readonly name: "InvalidEventPatternException" = "InvalidEventPatternException";
-  readonly $fault: "client" = "client";
+export interface CreateArchiveResponse {
   /**
-   * @internal
+   * <p>The ARN of the archive that was created.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidEventPatternException, __BaseException>) {
-    super({
-      name: "InvalidEventPatternException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidEventPatternException.prototype);
-  }
-}
+  ArchiveArn?: string | undefined;
 
-export enum ConnectionAuthorizationType {
-  API_KEY = "API_KEY",
-  BASIC = "BASIC",
-  OAUTH_CLIENT_CREDENTIALS = "OAUTH_CLIENT_CREDENTIALS",
+  /**
+   * <p>The state of the archive that was created.</p>
+   * @public
+   */
+  State?: ArchiveState | undefined;
+
+  /**
+   * <p>The reason that the archive is in the state.</p>
+   * @public
+   */
+  StateReason?: string | undefined;
+
+  /**
+   * <p>The time at which the archive was created.</p>
+   * @public
+   */
+  CreationTime?: Date | undefined;
 }
 
 /**
  * <p>Contains the API key authorization parameters for the connection.</p>
+ * @public
  */
 export interface CreateConnectionApiKeyAuthRequestParameters {
   /**
    * <p>The name of the API key to use for authorization.</p>
+   * @public
    */
   ApiKeyName: string | undefined;
 
   /**
    * <p>The value for the API key to use for authorization.</p>
+   * @public
    */
   ApiKeyValue: string | undefined;
 }
 
 /**
  * <p>Contains the Basic authorization parameters to use for the connection.</p>
+ * @public
  */
 export interface CreateConnectionBasicAuthRequestParameters {
   /**
    * <p>The user name to use for Basic authorization.</p>
+   * @public
    */
   Username: string | undefined;
 
   /**
    * <p>The password associated with the user name to use for Basic authorization.</p>
+   * @public
    */
   Password: string | undefined;
 }
@@ -485,240 +351,273 @@ export interface CreateConnectionBasicAuthRequestParameters {
 /**
  * <p>Additional parameter included in the body. You can include up to 100 additional body
  *       parameters per request. An event payload cannot exceed 64 KB.</p>
+ * @public
  */
 export interface ConnectionBodyParameter {
   /**
    * <p>The key for the parameter.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p>The value associated with the key.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * <p>Specified whether the value is secret.</p>
+   * @public
    */
-  IsValueSecret?: boolean;
+  IsValueSecret?: boolean | undefined;
 }
 
 /**
  * <p>Additional parameter included in the header. You can include up to 100 additional header
  *       parameters per request. An event payload cannot exceed 64 KB.</p>
+ * @public
  */
 export interface ConnectionHeaderParameter {
   /**
    * <p>The key for the parameter.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p>The value associated with the key.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * <p>Specified whether the value is a secret.</p>
+   * @public
    */
-  IsValueSecret?: boolean;
+  IsValueSecret?: boolean | undefined;
 }
 
 /**
  * <p>Additional query string parameter for the connection. You can include up to 100 additional
  *       query string parameters per request. Each additional parameter counts towards the event
  *       payload size, which cannot exceed 64 KB.</p>
+ * @public
  */
 export interface ConnectionQueryStringParameter {
   /**
    * <p>The key for a query string parameter.</p>
+   * @public
    */
-  Key?: string;
+  Key?: string | undefined;
 
   /**
    * <p>The value associated with the key for the query string parameter.</p>
+   * @public
    */
-  Value?: string;
+  Value?: string | undefined;
 
   /**
    * <p>Specifies whether the value is secret.</p>
+   * @public
    */
-  IsValueSecret?: boolean;
+  IsValueSecret?: boolean | undefined;
 }
 
 /**
  * <p>Contains additional parameters for the connection.</p>
+ * @public
  */
 export interface ConnectionHttpParameters {
   /**
    * <p>Contains additional header parameters for the connection.</p>
+   * @public
    */
-  HeaderParameters?: ConnectionHeaderParameter[];
+  HeaderParameters?: ConnectionHeaderParameter[] | undefined;
 
   /**
    * <p>Contains additional query string parameters for the connection.</p>
+   * @public
    */
-  QueryStringParameters?: ConnectionQueryStringParameter[];
+  QueryStringParameters?: ConnectionQueryStringParameter[] | undefined;
 
   /**
    * <p>Contains additional body string parameters for the connection.</p>
+   * @public
    */
-  BodyParameters?: ConnectionBodyParameter[];
+  BodyParameters?: ConnectionBodyParameter[] | undefined;
 }
 
 /**
  * <p>Contains the Basic authorization parameters to use for the connection.</p>
+ * @public
  */
 export interface CreateConnectionOAuthClientRequestParameters {
   /**
    * <p>The client ID to use for OAuth authorization for the connection.</p>
+   * @public
    */
   ClientID: string | undefined;
 
   /**
    * <p>The client secret associated with the client ID to use for OAuth authorization for the
    *       connection.</p>
+   * @public
    */
   ClientSecret: string | undefined;
 }
 
-export enum ConnectionOAuthHttpMethod {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-}
-
 /**
  * <p>Contains the OAuth authorization parameters to use for the connection.</p>
+ * @public
  */
 export interface CreateConnectionOAuthRequestParameters {
   /**
    * <p>A <code>CreateConnectionOAuthClientRequestParameters</code> object that contains the
    *       client parameters for OAuth authorization.</p>
+   * @public
    */
   ClientParameters: CreateConnectionOAuthClientRequestParameters | undefined;
 
   /**
    * <p>The URL to the authorization endpoint when OAuth is specified as the authorization
    *       type.</p>
+   * @public
    */
   AuthorizationEndpoint: string | undefined;
 
   /**
    * <p>The method to use for the authorization request.</p>
+   * @public
    */
-  HttpMethod: ConnectionOAuthHttpMethod | string | undefined;
+  HttpMethod: ConnectionOAuthHttpMethod | undefined;
 
   /**
    * <p>A <code>ConnectionHttpParameters</code> object that contains details about the additional
    *       parameters to use for the connection.</p>
+   * @public
    */
-  OAuthHttpParameters?: ConnectionHttpParameters;
+  OAuthHttpParameters?: ConnectionHttpParameters | undefined;
 }
 
 /**
  * <p>Contains the authorization parameters for the connection.</p>
+ * @public
  */
 export interface CreateConnectionAuthRequestParameters {
   /**
    * <p>A <code>CreateConnectionBasicAuthRequestParameters</code> object that contains the Basic
    *       authorization parameters to use for the connection.</p>
+   * @public
    */
-  BasicAuthParameters?: CreateConnectionBasicAuthRequestParameters;
+  BasicAuthParameters?: CreateConnectionBasicAuthRequestParameters | undefined;
 
   /**
    * <p>A <code>CreateConnectionOAuthRequestParameters</code> object that contains the OAuth
    *       authorization parameters to use for the connection.</p>
+   * @public
    */
-  OAuthParameters?: CreateConnectionOAuthRequestParameters;
+  OAuthParameters?: CreateConnectionOAuthRequestParameters | undefined;
 
   /**
    * <p>A <code>CreateConnectionApiKeyAuthRequestParameters</code> object that contains the API
    *       key authorization parameters to use for the connection.</p>
+   * @public
    */
-  ApiKeyAuthParameters?: CreateConnectionApiKeyAuthRequestParameters;
+  ApiKeyAuthParameters?: CreateConnectionApiKeyAuthRequestParameters | undefined;
 
   /**
    * <p>A <code>ConnectionHttpParameters</code> object that contains the API key authorization
    *       parameters to use for the connection. Note that if you include additional parameters for the
    *       target of a rule via <code>HttpParameters</code>, including query strings, the parameters
    *       added for the connection take precedence.</p>
+   * @public
    */
-  InvocationHttpParameters?: ConnectionHttpParameters;
+  InvocationHttpParameters?: ConnectionHttpParameters | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateConnectionRequest {
   /**
    * <p>The name for the connection to create.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>A description for the connection to create.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of authorization to use for the connection.</p>
+   * @public
    */
-  AuthorizationType: ConnectionAuthorizationType | string | undefined;
+  AuthorizationType: ConnectionAuthorizationType | undefined;
 
   /**
    * <p>A <code>CreateConnectionAuthRequestParameters</code> object that contains the
    *       authorization parameters to use to authorize with the endpoint. </p>
+   * @public
    */
   AuthParameters: CreateConnectionAuthRequestParameters | undefined;
 }
 
-export enum ConnectionState {
-  AUTHORIZED = "AUTHORIZED",
-  AUTHORIZING = "AUTHORIZING",
-  CREATING = "CREATING",
-  DEAUTHORIZED = "DEAUTHORIZED",
-  DEAUTHORIZING = "DEAUTHORIZING",
-  DELETING = "DELETING",
-  UPDATING = "UPDATING",
-}
-
+/**
+ * @public
+ */
 export interface CreateConnectionResponse {
   /**
    * <p>The ARN of the connection that was created by the request.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The state of the connection that was created by the request.</p>
+   * @public
    */
-  ConnectionState?: ConnectionState | string;
+  ConnectionState?: ConnectionState | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last updated.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 }
 
 /**
  * <p>A key-value pair associated with an Amazon Web Services resource. In EventBridge, rules and event buses
  *       support tagging.</p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>A string you can use to assign a value. The combination of tag keys and values can help
    *       you organize and categorize your resources.</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
    * <p>The value for the specified tag key.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateEventBusRequest {
   /**
    * <p>The name of the new event bus. </p>
@@ -727,28 +626,38 @@ export interface CreateEventBusRequest {
    *       default event bus.</p>
    *          <p>If this is a partner event bus, the name must exactly match the name of the partner event
    *       source that this event bus is matched to.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>If you are creating a partner event bus, this specifies the partner event source that the
    *       new event bus will be matched with.</p>
+   * @public
    */
-  EventSourceName?: string;
+  EventSourceName?: string | undefined;
 
   /**
    * <p>Tags to associate with the event bus.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateEventBusResponse {
   /**
    * <p>The ARN of the new event bus.</p>
+   * @public
    */
-  EventBusArn?: string;
+  EventBusArn?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreatePartnerEventSourceRequest {
   /**
    * <p>The name of the partner event source. This name must be unique and must be in the format
@@ -757,148 +666,210 @@ export interface CreatePartnerEventSourceRequest {
    *             </code>.
    *       The Amazon Web Services account that wants to use this partner event source must create a partner event bus
    *       with a name that matches the name of the partner event source.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The Amazon Web Services account ID that is permitted to create a matching partner event bus for this
    *       partner event source.</p>
+   * @public
    */
   Account: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreatePartnerEventSourceResponse {
   /**
    * <p>The ARN of the partner event source.</p>
+   * @public
    */
-  EventSourceArn?: string;
+  EventSourceArn?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeactivateEventSourceRequest {
   /**
    * <p>The name of the partner event source to deactivate.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeauthorizeConnectionRequest {
   /**
    * <p>The name of the connection to remove authorization from.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeauthorizeConnectionResponse {
   /**
    * <p>The ARN of the connection that authorization was removed from.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The state of the connection.</p>
+   * @public
    */
-  ConnectionState?: ConnectionState | string;
+  ConnectionState?: ConnectionState | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last updated.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last authorized.</p>
+   * @public
    */
-  LastAuthorizedTime?: Date;
+  LastAuthorizedTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteApiDestinationRequest {
   /**
    * <p>The name of the destination to delete.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteApiDestinationResponse {}
 
+/**
+ * @public
+ */
 export interface DeleteArchiveRequest {
   /**
    * <p>The name of the archive to delete.</p>
+   * @public
    */
   ArchiveName: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteArchiveResponse {}
 
+/**
+ * @public
+ */
 export interface DeleteConnectionRequest {
   /**
    * <p>The name of the connection to delete.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteConnectionResponse {
   /**
    * <p>The ARN of the connection that was deleted.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The state of the connection before it was deleted.</p>
+   * @public
    */
-  ConnectionState?: ConnectionState | string;
+  ConnectionState?: ConnectionState | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last modified before it was
    *       deleted.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last authorized before it wa
    *       deleted.</p>
+   * @public
    */
-  LastAuthorizedTime?: Date;
+  LastAuthorizedTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteEventBusRequest {
   /**
    * <p>The name of the event bus to delete.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeletePartnerEventSourceRequest {
   /**
    * <p>The name of the event source to delete.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The Amazon Web Services account ID of the Amazon Web Services customer that the event source was created for.</p>
+   * @public
    */
   Account: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteRuleRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify
@@ -906,76 +877,67 @@ export interface DeleteRuleRequest {
    *       rules that are not managed rules. You can check whether a rule is a managed rule by using
    *         <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code>
    *       field of the response.</p>
+   * @public
    */
-  Force?: boolean;
+  Force?: boolean | undefined;
 }
 
 /**
- * <p>This rule was created by an Amazon Web Services service on behalf of your account. It is managed by that
- *       service. If you see this error in response to <code>DeleteRule</code> or
- *         <code>RemoveTargets</code>, you can use the <code>Force</code> parameter in those calls to
- *       delete the rule or remove targets from the rule. You cannot modify these managed rules by
- *       using <code>DisableRule</code>, <code>EnableRule</code>, <code>PutTargets</code>,
- *         <code>PutRule</code>, <code>TagResource</code>, or <code>UntagResource</code>. </p>
+ * @public
  */
-export class ManagedRuleException extends __BaseException {
-  readonly name: "ManagedRuleException" = "ManagedRuleException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ManagedRuleException, __BaseException>) {
-    super({
-      name: "ManagedRuleException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ManagedRuleException.prototype);
-  }
-}
-
 export interface DescribeApiDestinationRequest {
   /**
    * <p>The name of the API destination to retrieve.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeApiDestinationResponse {
   /**
    * <p>The ARN of the API destination retrieved.</p>
+   * @public
    */
-  ApiDestinationArn?: string;
+  ApiDestinationArn?: string | undefined;
 
   /**
    * <p>The name of the API destination retrieved.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The description for the API destination retrieved.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The state of the API destination retrieved.</p>
+   * @public
    */
-  ApiDestinationState?: ApiDestinationState | string;
+  ApiDestinationState?: ApiDestinationState | undefined;
 
   /**
    * <p>The ARN of the connection specified for the API destination retrieved.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The URL to use to connect to the HTTP endpoint.</p>
+   * @public
    */
-  InvocationEndpoint?: string;
+  InvocationEndpoint?: string | undefined;
 
   /**
    * <p>The method to use to connect to the HTTP endpoint.</p>
+   * @public
    */
-  HttpMethod?: ApiDestinationHttpMethod | string;
+  HttpMethod?: ApiDestinationHttpMethod | undefined;
 
   /**
    * <p>The maximum number of invocations per second to specified for the API destination. Note
@@ -984,87 +946,112 @@ export interface DescribeApiDestinationResponse {
    *       the 24-hour retry window. If you plan to set the rate lower than the rate necessary to deliver
    *       all events, consider using a dead-letter queue to catch events that are not delivered within
    *       24 hours.</p>
+   * @public
    */
-  InvocationRateLimitPerSecond?: number;
+  InvocationRateLimitPerSecond?: number | undefined;
 
   /**
    * <p>A time stamp for the time that the API destination was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the API destination was last modified.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeArchiveRequest {
   /**
    * <p>The name of the archive to retrieve.</p>
+   * @public
    */
   ArchiveName: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeArchiveResponse {
   /**
    * <p>The ARN of the archive.</p>
+   * @public
    */
-  ArchiveArn?: string;
+  ArchiveArn?: string | undefined;
 
   /**
    * <p>The name of the archive.</p>
+   * @public
    */
-  ArchiveName?: string;
+  ArchiveName?: string | undefined;
 
   /**
    * <p>The ARN of the event source associated with the archive.</p>
+   * @public
    */
-  EventSourceArn?: string;
+  EventSourceArn?: string | undefined;
 
   /**
    * <p>The description of the archive.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The event pattern used to filter events sent to the archive.</p>
+   * @public
    */
-  EventPattern?: string;
+  EventPattern?: string | undefined;
 
   /**
    * <p>The state of the archive.</p>
+   * @public
    */
-  State?: ArchiveState | string;
+  State?: ArchiveState | undefined;
 
   /**
    * <p>The reason that the archive is in the state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The number of days to retain events for in the archive.</p>
+   * @public
    */
-  RetentionDays?: number;
+  RetentionDays?: number | undefined;
 
   /**
    * <p>The size of the archive in bytes.</p>
+   * @public
    */
-  SizeBytes?: number;
+  SizeBytes?: number | undefined;
 
   /**
    * <p>The number of events in the archive.</p>
+   * @public
    */
-  EventCount?: number;
+  EventCount?: number | undefined;
 
   /**
    * <p>The time at which the archive was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeConnectionRequest {
   /**
    * <p>The name of the connection to retrieve.</p>
+   * @public
    */
   Name: string | undefined;
 }
@@ -1072,391 +1059,481 @@ export interface DescribeConnectionRequest {
 /**
  * <p>Contains the authorization parameters for the connection if API Key is specified as the
  *       authorization type.</p>
+ * @public
  */
 export interface ConnectionApiKeyAuthResponseParameters {
   /**
    * <p>The name of the header to use for the <code>APIKeyValue</code> used for
    *       authorization.</p>
+   * @public
    */
-  ApiKeyName?: string;
+  ApiKeyName?: string | undefined;
 }
 
 /**
  * <p>Contains the authorization parameters for the connection if Basic is specified as the
  *       authorization type.</p>
+ * @public
  */
 export interface ConnectionBasicAuthResponseParameters {
   /**
    * <p>The user name to use for Basic authorization.</p>
+   * @public
    */
-  Username?: string;
+  Username?: string | undefined;
 }
 
 /**
  * <p>Contains the client response parameters for the connection when OAuth is specified as the
  *       authorization type.</p>
+ * @public
  */
 export interface ConnectionOAuthClientResponseParameters {
   /**
    * <p>The client ID associated with the response to the connection request.</p>
+   * @public
    */
-  ClientID?: string;
+  ClientID?: string | undefined;
 }
 
 /**
  * <p>Contains the response parameters when OAuth is specified as the authorization type.</p>
+ * @public
  */
 export interface ConnectionOAuthResponseParameters {
   /**
    * <p>A <code>ConnectionOAuthClientResponseParameters</code> object that contains details about
    *       the client parameters returned when OAuth is specified as the authorization type.</p>
+   * @public
    */
-  ClientParameters?: ConnectionOAuthClientResponseParameters;
+  ClientParameters?: ConnectionOAuthClientResponseParameters | undefined;
 
   /**
    * <p>The URL to the HTTP endpoint that authorized the request.</p>
+   * @public
    */
-  AuthorizationEndpoint?: string;
+  AuthorizationEndpoint?: string | undefined;
 
   /**
    * <p>The method used to connect to the HTTP endpoint.</p>
+   * @public
    */
-  HttpMethod?: ConnectionOAuthHttpMethod | string;
+  HttpMethod?: ConnectionOAuthHttpMethod | undefined;
 
   /**
    * <p>The additional HTTP parameters used for the OAuth authorization request.</p>
+   * @public
    */
-  OAuthHttpParameters?: ConnectionHttpParameters;
+  OAuthHttpParameters?: ConnectionHttpParameters | undefined;
 }
 
 /**
  * <p>Contains the authorization parameters to use for the connection.</p>
+ * @public
  */
 export interface ConnectionAuthResponseParameters {
   /**
    * <p>The authorization parameters for Basic authorization.</p>
+   * @public
    */
-  BasicAuthParameters?: ConnectionBasicAuthResponseParameters;
+  BasicAuthParameters?: ConnectionBasicAuthResponseParameters | undefined;
 
   /**
    * <p>The OAuth parameters to use for authorization.</p>
+   * @public
    */
-  OAuthParameters?: ConnectionOAuthResponseParameters;
+  OAuthParameters?: ConnectionOAuthResponseParameters | undefined;
 
   /**
    * <p>The API Key parameters to use for authorization.</p>
+   * @public
    */
-  ApiKeyAuthParameters?: ConnectionApiKeyAuthResponseParameters;
+  ApiKeyAuthParameters?: ConnectionApiKeyAuthResponseParameters | undefined;
 
   /**
    * <p>Additional parameters for the connection that are passed through with every invocation to
    *       the HTTP endpoint.</p>
+   * @public
    */
-  InvocationHttpParameters?: ConnectionHttpParameters;
+  InvocationHttpParameters?: ConnectionHttpParameters | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeConnectionResponse {
   /**
    * <p>The ARN of the connection retrieved.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The name of the connection retrieved.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The description for the connection retrieved.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The state of the connection retrieved.</p>
+   * @public
    */
-  ConnectionState?: ConnectionState | string;
+  ConnectionState?: ConnectionState | undefined;
 
   /**
    * <p>The reason that the connection is in the current connection state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The type of authorization specified for the connection.</p>
+   * @public
    */
-  AuthorizationType?: ConnectionAuthorizationType | string;
+  AuthorizationType?: ConnectionAuthorizationType | undefined;
 
   /**
    * <p>The ARN of the secret created from the authorization parameters specified for the
    *       connection.</p>
+   * @public
    */
-  SecretArn?: string;
+  SecretArn?: string | undefined;
 
   /**
    * <p>The parameters to use for authorization for the connection.</p>
+   * @public
    */
-  AuthParameters?: ConnectionAuthResponseParameters;
+  AuthParameters?: ConnectionAuthResponseParameters | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last modified.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last authorized.</p>
+   * @public
    */
-  LastAuthorizedTime?: Date;
+  LastAuthorizedTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeEventBusRequest {
   /**
    * <p>The name or ARN of the event bus to show details for. If you omit this, the default event
    *       bus is displayed.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeEventBusResponse {
   /**
    * <p>The name of the event bus. Currently, this is always <code>default</code>.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the account permitted to write events to the current
    *       account.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The policy that enables the external account to send events to your account.</p>
+   * @public
    */
-  Policy?: string;
+  Policy?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeEventSourceRequest {
   /**
    * <p>The name of the partner event source to display the details of.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
-export enum EventSourceState {
-  ACTIVE = "ACTIVE",
-  DELETED = "DELETED",
-  PENDING = "PENDING",
-}
-
+/**
+ * @public
+ */
 export interface DescribeEventSourceResponse {
   /**
    * <p>The ARN of the partner event source.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The name of the SaaS partner that created the event source.</p>
+   * @public
    */
-  CreatedBy?: string;
+  CreatedBy?: string | undefined;
 
   /**
    * <p>The date and time that the event source was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>The date and time that the event source will expire if you do not create a matching event
    *       bus.</p>
+   * @public
    */
-  ExpirationTime?: Date;
+  ExpirationTime?: Date | undefined;
 
   /**
    * <p>The name of the partner event source.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The state of the event source. If it is ACTIVE, you have already created a matching event
    *       bus for this event source, and that event bus is active. If it is PENDING, either you haven't
    *       yet created a matching event bus, or that event bus is deactivated. If it is DELETED, you have
    *       created a matching event bus, but the event source has since been deleted.</p>
+   * @public
    */
-  State?: EventSourceState | string;
+  State?: EventSourceState | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribePartnerEventSourceRequest {
   /**
    * <p>The name of the event source to display.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribePartnerEventSourceResponse {
   /**
    * <p>The ARN of the event source.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The name of the event source.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeReplayRequest {
   /**
    * <p>The name of the replay to retrieve.</p>
+   * @public
    */
   ReplayName: string | undefined;
 }
 
 /**
  * <p>A <code>ReplayDestination</code> object that contains details about a replay.</p>
+ * @public
  */
 export interface ReplayDestination {
   /**
    * <p>The ARN of the event bus to replay event to. You can replay events only to the event bus
    *       specified to create the archive.</p>
+   * @public
    */
   Arn: string | undefined;
 
   /**
    * <p>A list of ARNs for rules to replay events to.</p>
+   * @public
    */
-  FilterArns?: string[];
+  FilterArns?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeReplayResponse {
   /**
    * <p>The name of the replay.</p>
+   * @public
    */
-  ReplayName?: string;
+  ReplayName?: string | undefined;
 
   /**
    * <p>The ARN of the replay.</p>
+   * @public
    */
-  ReplayArn?: string;
+  ReplayArn?: string | undefined;
 
   /**
    * <p>The description of the replay.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The current state of the replay.</p>
+   * @public
    */
-  State?: ReplayState | string;
+  State?: ReplayState | undefined;
 
   /**
    * <p>The reason that the replay is in the current state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The ARN of the archive events were replayed from.</p>
+   * @public
    */
-  EventSourceArn?: string;
+  EventSourceArn?: string | undefined;
 
   /**
    * <p>A <code>ReplayDestination</code> object that contains details about the replay.</p>
+   * @public
    */
-  Destination?: ReplayDestination;
+  Destination?: ReplayDestination | undefined;
 
   /**
    * <p>The time stamp of the first event that was last replayed from the archive.</p>
+   * @public
    */
-  EventStartTime?: Date;
+  EventStartTime?: Date | undefined;
 
   /**
    * <p>The time stamp for the last event that was replayed from the archive.</p>
+   * @public
    */
-  EventEndTime?: Date;
+  EventEndTime?: Date | undefined;
 
   /**
    * <p>The time that the event was last replayed.</p>
+   * @public
    */
-  EventLastReplayedTime?: Date;
+  EventLastReplayedTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the replay started.</p>
+   * @public
    */
-  ReplayStartTime?: Date;
+  ReplayStartTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the replay stopped.</p>
+   * @public
    */
-  ReplayEndTime?: Date;
+  ReplayEndTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeRuleRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 }
 
-export enum RuleState {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
-}
-
+/**
+ * @public
+ */
 export interface DescribeRuleResponse {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the rule.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event
    *         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+   * @public
    */
-  EventPattern?: string;
+  EventPattern?: string | undefined;
 
   /**
    * <p>The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".</p>
+   * @public
    */
-  ScheduleExpression?: string;
+  ScheduleExpression?: string | undefined;
 
   /**
    * <p>Specifies whether the rule is enabled or disabled.</p>
+   * @public
    */
-  State?: RuleState | string;
+  State?: RuleState | undefined;
 
   /**
    * <p>The description of the rule.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 
   /**
    * <p>If this is a managed rule, created by an Amazon Web Services service on your behalf, this field displays
    *       the principal name of the Amazon Web Services service that created the rule.</p>
+   * @public
    */
-  ManagedBy?: string;
+  ManagedBy?: string | undefined;
 
   /**
    * <p>The name of the event bus associated with the rule.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>The account ID of the user that created the rule. If you use <code>PutRule</code> to put a
@@ -1464,210 +1541,273 @@ export interface DescribeRuleResponse {
    *       rule ARN includes the account ID for that account. However, the value for
    *         <code>CreatedBy</code> is the account ID as the account that created the rule in the other
    *       account.</p>
+   * @public
    */
-  CreatedBy?: string;
+  CreatedBy?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DisableRuleRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface EnableRuleRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListApiDestinationsRequest {
   /**
    * <p>A name prefix to filter results returned. Only API destinations with a name that starts
    *       with the prefix are returned.</p>
+   * @public
    */
-  NamePrefix?: string;
+  NamePrefix?: string | undefined;
 
   /**
    * <p>The ARN of the connection specified for the API destination.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of API destinations to include in the response.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListApiDestinationsResponse {
   /**
    * <p>An array of <code>ApiDestination</code> objects that include information about an API
    *       destination.</p>
+   * @public
    */
-  ApiDestinations?: ApiDestination[];
+  ApiDestinations?: ApiDestination[] | undefined;
 
   /**
    * <p>A token you can use in a subsequent request to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListArchivesRequest {
   /**
    * <p>A name prefix to filter the archives returned. Only archives with name that match the
    *       prefix are returned.</p>
+   * @public
    */
-  NamePrefix?: string;
+  NamePrefix?: string | undefined;
 
   /**
    * <p>The ARN of the event source associated with the archive.</p>
+   * @public
    */
-  EventSourceArn?: string;
+  EventSourceArn?: string | undefined;
 
   /**
    * <p>The state of the archive.</p>
+   * @public
    */
-  State?: ArchiveState | string;
+  State?: ArchiveState | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListArchivesResponse {
   /**
    * <p>An array of <code>Archive</code> objects that include details about an archive.</p>
+   * @public
    */
-  Archives?: Archive[];
+  Archives?: Archive[] | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListConnectionsRequest {
   /**
    * <p>A name prefix to filter results returned. Only connections with a name that starts with
    *       the prefix are returned.</p>
+   * @public
    */
-  NamePrefix?: string;
+  NamePrefix?: string | undefined;
 
   /**
    * <p>The state of the connection.</p>
+   * @public
    */
-  ConnectionState?: ConnectionState | string;
+  ConnectionState?: ConnectionState | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of connections to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Contains information about a connection.</p>
+ * @public
  */
 export interface Connection {
   /**
    * <p>The ARN of the connection.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The name of the connection.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The state of the connection.</p>
+   * @public
    */
-  ConnectionState?: ConnectionState | string;
+  ConnectionState?: ConnectionState | undefined;
 
   /**
    * <p>The reason that the connection is in the connection state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The authorization type specified for the connection.</p>
+   * @public
    */
-  AuthorizationType?: ConnectionAuthorizationType | string;
+  AuthorizationType?: ConnectionAuthorizationType | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last modified.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last authorized.</p>
+   * @public
    */
-  LastAuthorizedTime?: Date;
+  LastAuthorizedTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListConnectionsResponse {
   /**
    * <p>An array of connections objects that include details about the connections.</p>
+   * @public
    */
-  Connections?: Connection[];
+  Connections?: Connection[] | undefined;
 
   /**
    * <p>A token you can use in a subsequent request to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListEventBusesRequest {
   /**
    * <p>Specifying this limits the results to only those event buses with names that start with
    *       the specified prefix.</p>
+   * @public
    */
-  NamePrefix?: string;
+  NamePrefix?: string | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Specifying this limits the number of results returned by this operation. The operation
    *       also returns a NextToken which you can use in a subsequent operation to retrieve the next set
    *       of results.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
@@ -1676,406 +1816,512 @@ export interface ListEventBusesRequest {
  *       bus can receive events from your custom applications and services. A partner event bus
  *       receives events from an event source created by an SaaS partner. These events come from the
  *       partners services or applications.</p>
+ * @public
  */
 export interface EventBus {
   /**
    * <p>The name of the event bus.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ARN of the event bus.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The permissions policy of the event bus, describing which other Amazon Web Services accounts can write
    *       events to this event bus.</p>
+   * @public
    */
-  Policy?: string;
+  Policy?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListEventBusesResponse {
   /**
    * <p>This list of event buses.</p>
+   * @public
    */
-  EventBuses?: EventBus[];
+  EventBuses?: EventBus[] | undefined;
 
   /**
    * <p>A token you can use in a subsequent operation to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListEventSourcesRequest {
   /**
    * <p>Specifying this limits the results to only those partner event sources with names that
    *       start with the specified prefix.</p>
+   * @public
    */
-  NamePrefix?: string;
+  NamePrefix?: string | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Specifying this limits the number of results returned by this operation. The operation
    *       also returns a NextToken which you can use in a subsequent operation to retrieve the next set
    *       of results.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
  * <p>A partner event source is created by an SaaS partner. If a customer creates a partner
  *       event bus that matches this event source, that Amazon Web Services account can receive events from the
  *       partner's applications or services.</p>
+ * @public
  */
 export interface EventSource {
   /**
    * <p>The ARN of the event source.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The name of the partner that created the event source.</p>
+   * @public
    */
-  CreatedBy?: string;
+  CreatedBy?: string | undefined;
 
   /**
    * <p>The date and time the event source was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>The date and time that the event source will expire, if the Amazon Web Services account doesn't create a
    *       matching event bus for it.</p>
+   * @public
    */
-  ExpirationTime?: Date;
+  ExpirationTime?: Date | undefined;
 
   /**
    * <p>The name of the event source.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The state of the event source. If it is ACTIVE, you have already created a matching event
    *       bus for this event source, and that event bus is active. If it is PENDING, either you haven't
    *       yet created a matching event bus, or that event bus is deactivated. If it is DELETED, you have
    *       created a matching event bus, but the event source has since been deleted.</p>
+   * @public
    */
-  State?: EventSourceState | string;
+  State?: EventSourceState | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListEventSourcesResponse {
   /**
    * <p>The list of event sources.</p>
+   * @public
    */
-  EventSources?: EventSource[];
+  EventSources?: EventSource[] | undefined;
 
   /**
    * <p>A token you can use in a subsequent operation to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListPartnerEventSourceAccountsRequest {
   /**
    * <p>The name of the partner event source to display account information about.</p>
+   * @public
    */
   EventSourceName: string | undefined;
 
   /**
    * <p>The token returned by a previous call to this operation. Specifying this retrieves the
    *       next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Specifying this limits the number of results returned by this operation. The operation
    *       also returns a NextToken which you can use in a subsequent operation to retrieve the next set
    *       of results.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
  * <p>The Amazon Web Services account that a partner event source has been offered to.</p>
+ * @public
  */
 export interface PartnerEventSourceAccount {
   /**
    * <p>The Amazon Web Services account ID that the partner event source was offered to.</p>
+   * @public
    */
-  Account?: string;
+  Account?: string | undefined;
 
   /**
    * <p>The date and time the event source was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>The date and time that the event source will expire, if the Amazon Web Services account doesn't create a
    *       matching event bus for it.</p>
+   * @public
    */
-  ExpirationTime?: Date;
+  ExpirationTime?: Date | undefined;
 
   /**
    * <p>The state of the event source. If it is ACTIVE, you have already created a matching event
    *       bus for this event source, and that event bus is active. If it is PENDING, either you haven't
    *       yet created a matching event bus, or that event bus is deactivated. If it is DELETED, you have
    *       created a matching event bus, but the event source has since been deleted.</p>
+   * @public
    */
-  State?: EventSourceState | string;
+  State?: EventSourceState | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListPartnerEventSourceAccountsResponse {
   /**
    * <p>The list of partner event sources returned by the operation.</p>
+   * @public
    */
-  PartnerEventSourceAccounts?: PartnerEventSourceAccount[];
+  PartnerEventSourceAccounts?: PartnerEventSourceAccount[] | undefined;
 
   /**
    * <p>A token you can use in a subsequent operation to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListPartnerEventSourcesRequest {
   /**
    * <p>If you specify this, the results are limited to only those partner event sources that
    *       start with the string you specify.</p>
+   * @public
    */
   NamePrefix: string | undefined;
 
   /**
    * <p>The token returned by a previous call to this operation. Specifying this retrieves the
    *       next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>pecifying this limits the number of results returned by this operation. The operation also
    *       returns a NextToken which you can use in a subsequent operation to retrieve the next set of
    *       results.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
  * <p>A partner event source is created by an SaaS partner. If a customer creates a partner
  *       event bus that matches this event source, that Amazon Web Services account can receive events from the
  *       partner's applications or services.</p>
+ * @public
  */
 export interface PartnerEventSource {
   /**
    * <p>The ARN of the partner event source.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The name of the partner event source.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListPartnerEventSourcesResponse {
   /**
    * <p>The list of partner event sources returned by the operation.</p>
+   * @public
    */
-  PartnerEventSources?: PartnerEventSource[];
+  PartnerEventSources?: PartnerEventSource[] | undefined;
 
   /**
    * <p>A token you can use in a subsequent operation to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListReplaysRequest {
   /**
    * <p>A name prefix to filter the replays returned. Only replays with name that match the prefix
    *       are returned.</p>
+   * @public
    */
-  NamePrefix?: string;
+  NamePrefix?: string | undefined;
 
   /**
    * <p>The state of the replay.</p>
+   * @public
    */
-  State?: ReplayState | string;
+  State?: ReplayState | undefined;
 
   /**
    * <p>The ARN of the archive from which the events are replayed.</p>
+   * @public
    */
-  EventSourceArn?: string;
+  EventSourceArn?: string | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of replays to retrieve.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
  * <p>A <code>Replay</code> object that contains details about a replay.</p>
+ * @public
  */
 export interface Replay {
   /**
    * <p>The name of the replay.</p>
+   * @public
    */
-  ReplayName?: string;
+  ReplayName?: string | undefined;
 
   /**
    * <p>The ARN of the archive to replay event from.</p>
+   * @public
    */
-  EventSourceArn?: string;
+  EventSourceArn?: string | undefined;
 
   /**
    * <p>The current state of the replay.</p>
+   * @public
    */
-  State?: ReplayState | string;
+  State?: ReplayState | undefined;
 
   /**
    * <p>A description of why the replay is in the current state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>A time stamp for the time to start replaying events. This is determined by the time in the
    *       event as described in <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time">Time</a>.</p>
+   * @public
    */
-  EventStartTime?: Date;
+  EventStartTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time to start replaying events. Any event with a creation time prior
    *       to the <code>EventEndTime</code> specified is replayed.</p>
+   * @public
    */
-  EventEndTime?: Date;
+  EventEndTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the last event was replayed.</p>
+   * @public
    */
-  EventLastReplayedTime?: Date;
+  EventLastReplayedTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the replay started.</p>
+   * @public
    */
-  ReplayStartTime?: Date;
+  ReplayStartTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the replay completed.</p>
+   * @public
    */
-  ReplayEndTime?: Date;
+  ReplayEndTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListReplaysResponse {
   /**
    * <p>An array of <code>Replay</code> objects that contain information about the replay.</p>
+   * @public
    */
-  Replays?: Replay[];
+  Replays?: Replay[] | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRuleNamesByTargetRequest {
   /**
    * <p>The Amazon Resource Name (ARN) of the target resource.</p>
+   * @public
    */
   TargetArn: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus to list rules for. If you omit this, the default event
    *       bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRuleNamesByTargetResponse {
   /**
    * <p>The names of the rules that can invoke the given target.</p>
+   * @public
    */
-  RuleNames?: string[];
+  RuleNames?: string[] | undefined;
 
   /**
    * <p>Indicates whether there are additional results to retrieve. If there are no more results,
    *       the value is null.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRulesRequest {
   /**
    * <p>The prefix matching the rule name.</p>
+   * @public
    */
-  NamePrefix?: string;
+  NamePrefix?: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus to list the rules for. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
  * <p>Contains information about a rule in Amazon EventBridge.</p>
+ * @public
  */
 export interface Rule {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the rule.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The event pattern of the rule. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event
    *         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+   * @public
    */
-  EventPattern?: string;
+  EventPattern?: string | undefined;
 
   /**
    * <p>The state of the rule.</p>
+   * @public
    */
-  State?: RuleState | string;
+  State?: RuleState | undefined;
 
   /**
    * <p>The description of the rule.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)". For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html">Creating an Amazon EventBridge rule that runs on a schedule</a>.</p>
+   * @public
    */
-  ScheduleExpression?: string;
+  ScheduleExpression?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the role that is used for target invocation.</p>
@@ -2083,109 +2329,139 @@ export interface Rule {
    *       permission to your account through an organization instead of directly by the account ID, you
    *       must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code>
    *       structure, instead of here in this parameter.</p>
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 
   /**
    * <p>If the rule was created on behalf of your account by an Amazon Web Services service, this field displays
    *       the principal name of the service that created the rule.</p>
+   * @public
    */
-  ManagedBy?: string;
+  ManagedBy?: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRulesResponse {
   /**
    * <p>The rules that match the specified criteria.</p>
+   * @public
    */
-  Rules?: Rule[];
+  Rules?: Rule[] | undefined;
 
   /**
    * <p>Indicates whether there are additional results to retrieve. If there are no more results,
    *       the value is null.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
    * <p>The ARN of the EventBridge resource for which you want to view tags.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>The list of tag keys and values associated with the resource you specified</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTargetsByRuleRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   Rule: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>The token returned by a previous call to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>The maximum number of results to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
 /**
  * <p>The array properties for the submitted job, such as the size of the array. The array size
  *       can be between 2 and 10,000. If you specify array properties for a job, it becomes an array
  *       job. This parameter is used only if the target is an Batch job.</p>
+ * @public
  */
 export interface BatchArrayProperties {
   /**
    * <p>The size of the array, if this is an array batch job. Valid values are integers between 2
    *       and 10,000.</p>
+   * @public
    */
-  Size?: number;
+  Size?: number | undefined;
 }
 
 /**
  * <p>The retry strategy to use for failed jobs, if the target is an Batch job. If you
  *       specify a retry strategy here, it overrides the retry strategy defined in the job
  *       definition.</p>
+ * @public
  */
 export interface BatchRetryStrategy {
   /**
    * <p>The number of times to attempt to retry, if the job fails. Valid values are 1–10.</p>
+   * @public
    */
-  Attempts?: number;
+  Attempts?: number | undefined;
 }
 
 /**
  * <p>The custom parameters to be used when the target is an Batch job.</p>
+ * @public
  */
 export interface BatchParameters {
   /**
    * <p>The ARN or name of the job definition to use if the event target is an Batch job. This
    *       job definition must already exist.</p>
+   * @public
    */
   JobDefinition: string | undefined;
 
   /**
    * <p>The name to use for this execution of the job, if the target is an Batch job.</p>
+   * @public
    */
   JobName: string | undefined;
 
@@ -2193,35 +2469,41 @@ export interface BatchParameters {
    * <p>The array properties for the submitted job, such as the size of the array. The array size
    *       can be between 2 and 10,000. If you specify array properties for a job, it becomes an array
    *       job. This parameter is used only if the target is an Batch job.</p>
+   * @public
    */
-  ArrayProperties?: BatchArrayProperties;
+  ArrayProperties?: BatchArrayProperties | undefined;
 
   /**
    * <p>The retry strategy to use for failed jobs, if the target is an Batch job. The retry
    *       strategy is the number of times to retry the failed job execution. Valid values are 1–10. When
    *       you specify a retry strategy here, it overrides the retry strategy defined in the job
    *       definition.</p>
+   * @public
    */
-  RetryStrategy?: BatchRetryStrategy;
+  RetryStrategy?: BatchRetryStrategy | undefined;
 }
 
 /**
  * <p>A <code>DeadLetterConfig</code> object that contains information about a dead-letter queue
  *       configuration.</p>
+ * @public
  */
 export interface DeadLetterConfig {
   /**
    * <p>The ARN of the SQS queue specified as the target for the dead-letter queue.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 }
 
 /**
  * <p>The details of a capacity provider strategy. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html">CapacityProviderStrategyItem</a> in the Amazon ECS API Reference.</p>
+ * @public
  */
 export interface CapacityProviderStrategyItem {
   /**
    * <p>The short name of the capacity provider.</p>
+   * @public
    */
   capacityProvider: string | undefined;
 
@@ -2229,32 +2511,30 @@ export interface CapacityProviderStrategyItem {
    * <p>The weight value designates the relative percentage of the total number of tasks launched
    *       that should use the specified capacity provider. The weight value is taken into consideration
    *       after the base value, if defined, is satisfied.</p>
+   * @public
    */
-  weight?: number;
+  weight?: number | undefined;
 
   /**
    * <p>The base value designates how many tasks, at a minimum, to run on the specified capacity
    *       provider. Only one capacity provider in a capacity provider strategy can have a base defined.
    *       If no value is specified, the default value of 0 is used. </p>
+   * @public
    */
-  base?: number;
-}
-
-export enum LaunchType {
-  EC2 = "EC2",
-  EXTERNAL = "EXTERNAL",
-  FARGATE = "FARGATE",
+  base?: number | undefined;
 }
 
 /**
  * <p>This structure specifies the VPC subnets and security groups for the task, and whether a
  *       public IP address is to be used. This structure is relevant only for ECS tasks that use the
  *         <code>awsvpc</code> network mode.</p>
+ * @public
  */
 export interface AwsVpcConfiguration {
   /**
    * <p>Specifies the subnets associated with the task. These subnets must all be in the same VPC.
    *       You can specify as many as 16 subnets.</p>
+   * @public
    */
   Subnets: string[] | undefined;
 
@@ -2262,63 +2542,60 @@ export interface AwsVpcConfiguration {
    * <p>Specifies the security groups associated with the task. These security groups must all be
    *       in the same VPC. You can specify as many as five security groups. If you do not specify a
    *       security group, the default security group for the VPC is used.</p>
+   * @public
    */
-  SecurityGroups?: string[];
+  SecurityGroups?: string[] | undefined;
 
   /**
    * <p>Specifies whether the task's elastic network interface receives a public IP address. You
    *       can specify <code>ENABLED</code> only when <code>LaunchType</code> in
    *         <code>EcsParameters</code> is set to <code>FARGATE</code>.</p>
+   * @public
    */
-  AssignPublicIp?: AssignPublicIp | string;
+  AssignPublicIp?: AssignPublicIp | undefined;
 }
 
 /**
  * <p>This structure specifies the network configuration for an ECS task.</p>
+ * @public
  */
 export interface NetworkConfiguration {
   /**
    * <p>Use this structure to specify the VPC subnets and security groups for the task, and
    *       whether a public IP address is to be used. This structure is relevant only for ECS tasks that
    *       use the <code>awsvpc</code> network mode.</p>
+   * @public
    */
-  awsvpcConfiguration?: AwsVpcConfiguration;
-}
-
-export enum PlacementConstraintType {
-  DISTINCT_INSTANCE = "distinctInstance",
-  MEMBER_OF = "memberOf",
+  awsvpcConfiguration?: AwsVpcConfiguration | undefined;
 }
 
 /**
  * <p>An object representing a constraint on task placement. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the Amazon Elastic Container Service Developer
  *       Guide.</p>
+ * @public
  */
 export interface PlacementConstraint {
   /**
    * <p>The type of constraint. Use distinctInstance to ensure that each task in a particular
    *       group is running on a different container instance. Use memberOf to restrict the selection to
    *       a group of valid candidates. </p>
+   * @public
    */
-  type?: PlacementConstraintType | string;
+  type?: PlacementConstraintType | undefined;
 
   /**
    * <p>A cluster query language expression to apply to the constraint. You cannot specify an
    *       expression if the constraint type is <code>distinctInstance</code>. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the Amazon Elastic Container Service Developer Guide.
    *     </p>
+   * @public
    */
-  expression?: string;
-}
-
-export enum PlacementStrategyType {
-  BINPACK = "binpack",
-  RANDOM = "random",
-  SPREAD = "spread",
+  expression?: string | undefined;
 }
 
 /**
  * <p>The task placement strategy for a task or service. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html">Task Placement Strategies</a> in the Amazon Elastic Container Service Service Developer
  *       Guide.</p>
+ * @public
  */
 export interface PlacementStrategy {
   /**
@@ -2328,8 +2605,9 @@ export interface PlacementStrategy {
    *       candidates that have the least available amount of the resource that is specified with the
    *       field parameter. For example, if you binpack on memory, a task is placed on the instance with
    *       the least amount of remaining memory (but still enough to run the task). </p>
+   * @public
    */
-  type?: PlacementStrategyType | string;
+  type?: PlacementStrategyType | undefined;
 
   /**
    * <p>The field to apply the placement strategy against. For the spread placement strategy,
@@ -2337,28 +2615,28 @@ export interface PlacementStrategy {
    *       attribute that is applied to a container instance, such as attribute:ecs.availability-zone.
    *       For the binpack placement strategy, valid values are cpu and memory. For the random placement
    *       strategy, this field is not used. </p>
+   * @public
    */
-  field?: string;
-}
-
-export enum PropagateTags {
-  TASK_DEFINITION = "TASK_DEFINITION",
+  field?: string | undefined;
 }
 
 /**
  * <p>The custom parameters to be used when the target is an Amazon ECS task.</p>
+ * @public
  */
 export interface EcsParameters {
   /**
    * <p>The ARN of the task definition to use if the event target is an Amazon ECS task. </p>
+   * @public
    */
   TaskDefinitionArn: string | undefined;
 
   /**
    * <p>The number of tasks to create based on <code>TaskDefinition</code>. The default is
    *       1.</p>
+   * @public
    */
-  TaskCount?: number;
+  TaskCount?: number | undefined;
 
   /**
    * <p>Specifies the launch type on which your task is running. The launch type that you specify
@@ -2366,8 +2644,9 @@ export interface EcsParameters {
    *       <code>FARGATE</code> value is supported only in the Regions where Fargate witt Amazon ECS
    *      is supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html">Fargate on Amazon ECS</a> in
    *       the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+   * @public
    */
-  LaunchType?: LaunchType | string;
+  LaunchType?: LaunchType | undefined;
 
   /**
    * <p>Use this structure if the Amazon ECS task uses the <code>awsvpc</code> network mode. This
@@ -2377,8 +2656,9 @@ export interface EcsParameters {
    *       tasks.</p>
    *          <p>If you specify <code>NetworkConfiguration</code> when the target ECS task does not use the
    *         <code>awsvpc</code> network mode, the task fails.</p>
+   * @public
    */
-  NetworkConfiguration?: NetworkConfiguration;
+  NetworkConfiguration?: NetworkConfiguration | undefined;
 
   /**
    * <p>Specifies the platform version for the task. Specify only the numeric portion of the
@@ -2387,66 +2667,76 @@ export interface EcsParameters {
    *       information about valid platform versions, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate Platform
    *         Versions</a> in the <i>Amazon Elastic Container Service Developer
    *         Guide</i>.</p>
+   * @public
    */
-  PlatformVersion?: string;
+  PlatformVersion?: string | undefined;
 
   /**
    * <p>Specifies an ECS task group for the task. The maximum length is 255 characters.</p>
+   * @public
    */
-  Group?: string;
+  Group?: string | undefined;
 
   /**
    * <p>The capacity provider strategy to use for the task.</p>
    *          <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code>
    *       parameter must be omitted. If no <code>capacityProviderStrategy</code> or launchType is
    *       specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used. </p>
+   * @public
    */
-  CapacityProviderStrategy?: CapacityProviderStrategyItem[];
+  CapacityProviderStrategy?: CapacityProviderStrategyItem[] | undefined;
 
   /**
    * <p>Specifies whether to enable Amazon ECS managed tags for the task. For more information,
    *       see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS Resources</a> in the Amazon Elastic Container Service Developer
    *       Guide. </p>
+   * @public
    */
-  EnableECSManagedTags?: boolean;
+  EnableECSManagedTags?: boolean | undefined;
 
   /**
    * <p>Whether or not to enable the execute command functionality for the containers in this
    *       task. If true, this enables execute command functionality on all containers in the
    *       task.</p>
+   * @public
    */
-  EnableExecuteCommand?: boolean;
+  EnableExecuteCommand?: boolean | undefined;
 
   /**
    * <p>An array of placement constraint objects to use for the task. You can specify up to 10
    *       constraints per task (including constraints in the task definition and those specified at
    *       runtime).</p>
+   * @public
    */
-  PlacementConstraints?: PlacementConstraint[];
+  PlacementConstraints?: PlacementConstraint[] | undefined;
 
   /**
    * <p>The placement strategy objects to use for the task. You can specify a maximum of five
    *       strategy rules per task. </p>
+   * @public
    */
-  PlacementStrategy?: PlacementStrategy[];
+  PlacementStrategy?: PlacementStrategy[] | undefined;
 
   /**
    * <p>Specifies whether to propagate the tags from the task definition to the task. If no value
    *       is specified, the tags are not propagated. Tags can only be propagated to the task during task
    *       creation. To add tags to a task after task creation, use the TagResource API action. </p>
+   * @public
    */
-  PropagateTags?: PropagateTags | string;
+  PropagateTags?: PropagateTags | undefined;
 
   /**
    * <p>The reference ID to use for the task.</p>
+   * @public
    */
-  ReferenceId?: string;
+  ReferenceId?: string | undefined;
 
   /**
    * <p>The metadata that you apply to the task to help you categorize and organize them. Each tag
    *       consists of a key and an optional value, both of which you define. To learn more, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags">RunTask</a> in the Amazon ECS API Reference.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
 /**
@@ -2454,30 +2744,35 @@ export interface EcsParameters {
  *       EventBridge ApiDestinations. In the latter case, these are merged with any
  *       InvocationParameters specified on the Connection, with any values from the Connection taking
  *       precedence.</p>
+ * @public
  */
 export interface HttpParameters {
   /**
    * <p>The path parameter values to be used to populate API Gateway REST API or EventBridge
    *       ApiDestination path wildcards ("*").</p>
+   * @public
    */
-  PathParameterValues?: string[];
+  PathParameterValues?: string[] | undefined;
 
   /**
    * <p>The headers that need to be sent as part of request invoking the API Gateway REST API or
    *       EventBridge ApiDestination.</p>
+   * @public
    */
-  HeaderParameters?: Record<string, string>;
+  HeaderParameters?: Record<string, string> | undefined;
 
   /**
    * <p>The query string keys/values that need to be sent as part of request invoking the API Gateway
    *       REST API or EventBridge ApiDestination.</p>
+   * @public
    */
-  QueryStringParameters?: Record<string, string>;
+  QueryStringParameters?: Record<string, string> | undefined;
 }
 
 /**
  * <p>Contains the parameters needed for you to provide custom input to a target based on one or
  *       more pieces of data extracted from the event.</p>
+ * @public
  */
 export interface InputTransformer {
   /**
@@ -2489,15 +2784,15 @@ export interface InputTransformer {
    *       path. You can have as many as 100 key-value pairs. You must use JSON dot notation, not bracket
    *       notation.</p>
    *          <p>The keys cannot start with "Amazon Web Services." </p>
+   * @public
    */
-  InputPathsMap?: Record<string, string>;
+  InputPathsMap?: Record<string, string> | undefined;
 
   /**
    * <p>Input template where you specify placeholders that will be filled with the values of the
    *       keys from <code>InputPathsMap</code> to customize the data sent to the target. Enclose each
    *         <code>InputPathsMaps</code> value in brackets: <<i>value</i>> The
    *       InputTemplate must be valid JSON.</p>
-   *
    *          <p>If <code>InputTemplate</code> is a JSON object (surrounded by curly braces), the following
    *       restrictions apply:</p>
    *          <ul>
@@ -2511,17 +2806,17 @@ export interface InputTransformer {
    *             <code> "InputTransformer":</code>
    *          </p>
    *          <p>
-   *             <code>{</code>
+   *             <code>\{</code>
    *          </p>
    *          <p>
-   *             <code>"InputPathsMap": {"instance": "$.detail.instance","status":
-   *         "$.detail.status"},</code>
+   *             <code>"InputPathsMap": \{"instance": "$.detail.instance","status":
+   *         "$.detail.status"\},</code>
    *          </p>
    *          <p>
    *             <code>"InputTemplate": "<instance> is in state <status>"</code>
    *          </p>
    *          <p>
-   *             <code>}</code>
+   *             <code>\}</code>
    *          </p>
    *          <p>To have the <code>InputTemplate</code> include quote marks within a JSON string, escape
    *       each quote marks with a slash, as in the following example:</p>
@@ -2529,17 +2824,17 @@ export interface InputTransformer {
    *             <code> "InputTransformer":</code>
    *          </p>
    *          <p>
-   *             <code>{</code>
+   *             <code>\{</code>
    *          </p>
    *          <p>
-   *             <code>"InputPathsMap": {"instance": "$.detail.instance","status":
-   *         "$.detail.status"},</code>
+   *             <code>"InputPathsMap": \{"instance": "$.detail.instance","status":
+   *         "$.detail.status"\},</code>
    *          </p>
    *          <p>
    *             <code>"InputTemplate": "<instance> is in state \"<status>\""</code>
    *          </p>
    *          <p>
-   *             <code>}</code>
+   *             <code>\}</code>
    *          </p>
    *          <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as
    *       in the following example:</p>
@@ -2547,19 +2842,20 @@ export interface InputTransformer {
    *             <code> "InputTransformer":</code>
    *          </p>
    *          <p>
-   *             <code>{</code>
+   *             <code>\{</code>
    *          </p>
    *          <p>
-   *             <code>"InputPathsMap": {"instance": "$.detail.instance","status":
-   *         "$.detail.status"},</code>
+   *             <code>"InputPathsMap": \{"instance": "$.detail.instance","status":
+   *         "$.detail.status"\},</code>
    *          </p>
    *          <p>
-   *             <code>"InputTemplate": '{"myInstance": <instance>,"myStatus": "<instance> is
-   *         in state \"<status>\""}'</code>
+   *             <code>"InputTemplate": '\{"myInstance": <instance>,"myStatus": "<instance> is
+   *         in state \"<status>\""\}'</code>
    *          </p>
    *          <p>
-   *             <code>}</code>
+   *             <code>\}</code>
    *          </p>
+   * @public
    */
   InputTemplate: string | undefined;
 }
@@ -2569,12 +2865,14 @@ export interface InputTransformer {
  *       partition key for the Amazon Kinesis data stream, so that you can control the shard to which
  *       the event goes. If you do not include this parameter, the default is to use the
  *         <code>eventId</code> as the partition key.</p>
+ * @public
  */
 export interface KinesisParameters {
   /**
    * <p>The JSON path to be extracted from the event and used as the partition key. For more
    *       information, see <a href="https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key">Amazon Kinesis Streams Key
    *         Concepts</a> in the <i>Amazon Kinesis Streams Developer Guide</i>.</p>
+   * @public
    */
   PartitionKeyPath: string | undefined;
 }
@@ -2582,70 +2880,82 @@ export interface KinesisParameters {
 /**
  * <p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the
  *       Amazon Redshift Data API ExecuteStatement based on EventBridge events.</p>
+ * @public
  */
 export interface RedshiftDataParameters {
   /**
    * <p>The name or ARN of the secret that enables access to the database. Required when
    *       authenticating using Amazon Web Services Secrets Manager.</p>
+   * @public
    */
-  SecretManagerArn?: string;
+  SecretManagerArn?: string | undefined;
 
   /**
    * <p>The name of the database. Required when authenticating using temporary credentials.</p>
+   * @public
    */
   Database: string | undefined;
 
   /**
    * <p>The database user name. Required when authenticating using temporary credentials.</p>
+   * @public
    */
-  DbUser?: string;
+  DbUser?: string | undefined;
 
   /**
    * <p>The SQL statement text to run.</p>
+   * @public
    */
   Sql: string | undefined;
 
   /**
    * <p>The name of the SQL statement. You can name the SQL statement when you create it to
    *       identify the query.</p>
+   * @public
    */
-  StatementName?: string;
+  StatementName?: string | undefined;
 
   /**
    * <p>Indicates whether to send an event back to EventBridge after the SQL statement
    *       runs.</p>
+   * @public
    */
-  WithEvent?: boolean;
+  WithEvent?: boolean | undefined;
 }
 
 /**
  * <p>A <code>RetryPolicy</code> object that includes information about the retry policy
  *       settings.</p>
+ * @public
  */
 export interface RetryPolicy {
   /**
    * <p>The maximum number of retry attempts to make before the request fails. Retry attempts
    *       continue until either the maximum number of attempts is made or until the duration of the
    *         <code>MaximumEventAgeInSeconds</code> is met.</p>
+   * @public
    */
-  MaximumRetryAttempts?: number;
+  MaximumRetryAttempts?: number | undefined;
 
   /**
    * <p>The maximum amount of time, in seconds, to continue to make retry attempts.</p>
+   * @public
    */
-  MaximumEventAgeInSeconds?: number;
+  MaximumEventAgeInSeconds?: number | undefined;
 }
 
 /**
  * <p>Information about the EC2 instances that are to be sent the command, specified as
  *       key-value pairs. Each <code>RunCommandTarget</code> block can include only one key, but this
  *       key may specify multiple values.</p>
+ * @public
  */
 export interface RunCommandTarget {
   /**
    * <p>Can be either <code>tag:</code>
    *             <i>tag-key</i> or
    *       <code>InstanceIds</code>.</p>
+   * @public
    */
   Key: string | undefined;
 
@@ -2654,6 +2964,7 @@ export interface RunCommandTarget {
    *             <i>tag-key</i>, <code>Values</code>
    *       is a list of tag values. If <code>Key</code> is <code>InstanceIds</code>, <code>Values</code>
    *       is a list of Amazon EC2 instance IDs.</p>
+   * @public
    */
   Values: string[] | undefined;
 }
@@ -2661,72 +2972,83 @@ export interface RunCommandTarget {
 /**
  * <p>This parameter contains the criteria (either InstanceIds or a tag) used to specify which
  *       EC2 instances are to be sent the command. </p>
+ * @public
  */
 export interface RunCommandParameters {
   /**
    * <p>Currently, we support including only one RunCommandTarget block, which specifies either an
    *       array of InstanceIds or a tag.</p>
+   * @public
    */
   RunCommandTargets: RunCommandTarget[] | undefined;
 }
 
 /**
- * <p>Name/Value pair of a parameter to start execution of a SageMaker Model Building
+ * <p>Name/Value pair of a parameter to start execution of a SageMaker AI Model Building
  *       Pipeline.</p>
+ * @public
  */
 export interface SageMakerPipelineParameter {
   /**
-   * <p>Name of parameter to start execution of a SageMaker Model Building Pipeline.</p>
+   * <p>Name of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>Value of parameter to start execution of a SageMaker Model Building Pipeline.</p>
+   * <p>Value of parameter to start execution of a SageMaker AI Model Building Pipeline.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
 /**
- * <p>These are custom parameters to use when the target is a SageMaker Model Building Pipeline
+ * <p>These are custom parameters to use when the target is a SageMaker AI Model Building Pipeline
  *       that starts based on EventBridge events.</p>
+ * @public
  */
 export interface SageMakerPipelineParameters {
   /**
-   * <p>List of Parameter names and values for SageMaker Model Building Pipeline execution.</p>
+   * <p>List of Parameter names and values for SageMaker AI Model Building Pipeline execution.</p>
+   * @public
    */
-  PipelineParameterList?: SageMakerPipelineParameter[];
+  PipelineParameterList?: SageMakerPipelineParameter[] | undefined;
 }
 
 /**
  * <p>This structure includes the custom parameter to be used when the target is an SQS FIFO
  *       queue.</p>
+ * @public
  */
 export interface SqsParameters {
   /**
    * <p>The FIFO message group ID to use as the target.</p>
+   * @public
    */
-  MessageGroupId?: string;
+  MessageGroupId?: string | undefined;
 }
 
 /**
  * <p>Targets are the resources to be invoked when a rule is triggered. For a complete list of
  *       services and resources that can be set as a target, see <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html">PutTargets</a>.</p>
- *
  *          <p>If you are setting the event bus of another account as the target, and that account
  *       granted permission to your account through an organization instead of directly by the account
  *       ID, then you must specify a <code>RoleArn</code> with proper permissions in the
  *         <code>Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and
  *           Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User
  *         Guide</i>.</p>
+ * @public
  */
 export interface Target {
   /**
    * <p>The ID of the target. We recommend using a memorable and unique string.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the target.</p>
+   * @public
    */
   Arn: string | undefined;
 
@@ -2734,63 +3056,72 @@ export interface Target {
    * <p>The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is
    *       triggered. If one rule triggers multiple targets, you can use a different IAM role for each
    *       target.</p>
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 
   /**
    * <p>Valid JSON text passed to the target. In this case, nothing from the event itself is
    *       passed to the target. For more information, see <a href="http://www.rfc-editor.org/rfc/rfc7159.txt">The JavaScript Object Notation (JSON) Data
    *         Interchange Format</a>.</p>
+   * @public
    */
-  Input?: string;
+  Input?: string | undefined;
 
   /**
    * <p>The value of the JSONPath that is used for extracting part of the matched event when
    *       passing it to the target. You must use JSON dot notation, not bracket notation. For more
    *       information about JSON paths, see <a href="http://goessner.net/articles/JsonPath/">JSONPath</a>.</p>
+   * @public
    */
-  InputPath?: string;
+  InputPath?: string | undefined;
 
   /**
    * <p>Settings to enable you to provide custom input to a target based on certain event data.
    *       You can extract one or more key-value pairs from the event and then use that data to send
    *       customized input to the target.</p>
+   * @public
    */
-  InputTransformer?: InputTransformer;
+  InputTransformer?: InputTransformer | undefined;
 
   /**
    * <p>The custom parameter you can use to control the shard assignment, when the target is a
    *       Kinesis data stream. If you do not include this parameter, the default is to use the
    *         <code>eventId</code> as the partition key.</p>
+   * @public
    */
-  KinesisParameters?: KinesisParameters;
+  KinesisParameters?: KinesisParameters | undefined;
 
   /**
    * <p>Parameters used when you are using the rule to invoke Amazon EC2 Run Command.</p>
+   * @public
    */
-  RunCommandParameters?: RunCommandParameters;
+  RunCommandParameters?: RunCommandParameters | undefined;
 
   /**
    * <p>Contains the Amazon ECS task definition and task count to be used, if the event target is
    *       an Amazon ECS task. For more information about Amazon ECS tasks, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html">Task
    *         Definitions </a> in the <i>Amazon EC2 Container Service Developer
    *         Guide</i>.</p>
+   * @public
    */
-  EcsParameters?: EcsParameters;
+  EcsParameters?: EcsParameters | undefined;
 
   /**
    * <p>If the event target is an Batch job, this contains the job definition, job name, and
    *       other parameters. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/jobs.html">Jobs</a> in the <i>Batch User
    *         Guide</i>.</p>
+   * @public
    */
-  BatchParameters?: BatchParameters;
+  BatchParameters?: BatchParameters | undefined;
 
   /**
    * <p>Contains the message group ID to use when the target is a FIFO queue.</p>
    *          <p>If you specify an SQS FIFO queue as a target, the queue must have content-based
    *       deduplication enabled.</p>
+   * @public
    */
-  SqsParameters?: SqsParameters;
+  SqsParameters?: SqsParameters | undefined;
 
   /**
    * <p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or
@@ -2800,230 +3131,261 @@ export interface Target {
    *       of your target invoking request. If you're using ApiDestinations, the corresponding Connection
    *       can also have these values configured. In case of any conflicting keys, values from the
    *       Connection take precedence.</p>
+   * @public
    */
-  HttpParameters?: HttpParameters;
+  HttpParameters?: HttpParameters | undefined;
 
   /**
    * <p>Contains the Amazon Redshift Data API parameters to use when the target is a Amazon Redshift
    *       cluster.</p>
    *          <p>If you specify a Amazon Redshift Cluster as a Target, you can use this to specify parameters to
    *       invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.</p>
+   * @public
    */
-  RedshiftDataParameters?: RedshiftDataParameters;
+  RedshiftDataParameters?: RedshiftDataParameters | undefined;
 
   /**
-   * <p>Contains the SageMaker Model Building Pipeline parameters to start execution of a
-   *       SageMaker Model Building Pipeline.</p>
-   *          <p>If you specify a SageMaker Model Building Pipeline as a target, you can use this to
+   * <p>Contains the SageMaker AI Model Building Pipeline parameters to start execution of a
+   *       SageMaker AI Model Building Pipeline.</p>
+   *          <p>If you specify a SageMaker AI Model Building Pipeline as a target, you can use this to
    *       specify parameters to start a pipeline execution based on EventBridge events.</p>
+   * @public
    */
-  SageMakerPipelineParameters?: SageMakerPipelineParameters;
+  SageMakerPipelineParameters?: SageMakerPipelineParameters | undefined;
 
   /**
    * <p>The <code>DeadLetterConfig</code> that defines the target queue to send dead-letter queue
    *       events to.</p>
+   * @public
    */
-  DeadLetterConfig?: DeadLetterConfig;
+  DeadLetterConfig?: DeadLetterConfig | undefined;
 
   /**
    * <p>The <code>RetryPolicy</code> object that contains the retry policy configuration to use
    *       for the dead-letter queue.</p>
+   * @public
    */
-  RetryPolicy?: RetryPolicy;
+  RetryPolicy?: RetryPolicy | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTargetsByRuleResponse {
   /**
    * <p>The targets assigned to the rule.</p>
+   * @public
    */
-  Targets?: Target[];
+  Targets?: Target[] | undefined;
 
   /**
    * <p>Indicates whether there are additional results to retrieve. If there are no more results,
    *       the value is null.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Represents an event to be submitted.</p>
+ * @public
  */
 export interface PutEventsRequestEntry {
   /**
    * <p>The time stamp of the event, per <a href="https://www.rfc-editor.org/rfc/rfc3339.txt">RFC3339</a>. If no time stamp is provided, the time stamp of the <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html">PutEvents</a> call is used.</p>
+   * @public
    */
-  Time?: Date;
+  Time?: Date | undefined;
 
   /**
    * <p>The source of the event.</p>
+   * @public
    */
-  Source?: string;
+  Source?: string | undefined;
 
   /**
    * <p>Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily
    *       concerns. Any number, including zero, may be present.</p>
+   * @public
    */
-  Resources?: string[];
+  Resources?: string[] | undefined;
 
   /**
    * <p>Free-form string used to decide what fields to expect in the event detail.</p>
+   * @public
    */
-  DetailType?: string;
+  DetailType?: string | undefined;
 
   /**
    * <p>A valid JSON string. There is no other schema imposed. The JSON string may contain fields
    *       and nested subobjects.</p>
+   * @public
    */
-  Detail?: string;
+  Detail?: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus to receive the event. Only the rules that are associated
    *       with this event bus are used to match the event. If you omit this, the default event bus is
    *       used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>An X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the
    *       trace-id associated with the event.</p>
    *          <p>To learn more about X-Ray trace headers, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader">Tracing header</a> in the X-Ray Developer Guide.</p>
+   * @public
    */
-  TraceHeader?: string;
+  TraceHeader?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutEventsRequest {
   /**
    * <p>The entry that defines an event in your system. You can specify several parameters for the
    *       entry such as the source and type of the event, resources associated with the event, and so
    *       on.</p>
+   * @public
    */
   Entries: PutEventsRequestEntry[] | undefined;
 }
 
 /**
  * <p>Represents an event that failed to be submitted.</p>
+ * @public
  */
 export interface PutEventsResultEntry {
   /**
    * <p>The ID of the event.</p>
+   * @public
    */
-  EventId?: string;
+  EventId?: string | undefined;
 
   /**
    * <p>The error code that indicates why the event submission failed.</p>
+   * @public
    */
-  ErrorCode?: string;
+  ErrorCode?: string | undefined;
 
   /**
    * <p>The error message that explains why the event submission failed.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutEventsResponse {
   /**
    * <p>The number of failed entries.</p>
+   * @public
    */
-  FailedEntryCount?: number;
+  FailedEntryCount?: number | undefined;
 
   /**
    * <p>The successfully and unsuccessfully ingested events results. If the ingestion was
    *       successful, the entry has the event ID in it. Otherwise, you can use the error code and error
    *       message to identify the problem with the entry.</p>
+   * @public
    */
-  Entries?: PutEventsResultEntry[];
+  Entries?: PutEventsResultEntry[] | undefined;
 }
 
 /**
  * <p>The details about an event generated by an SaaS partner.</p>
+ * @public
  */
 export interface PutPartnerEventsRequestEntry {
   /**
    * <p>The date and time of the event.</p>
+   * @public
    */
-  Time?: Date;
+  Time?: Date | undefined;
 
   /**
    * <p>The event source that is generating the entry.</p>
+   * @public
    */
-  Source?: string;
+  Source?: string | undefined;
 
   /**
    * <p>Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily
    *       concerns. Any number, including zero, may be present.</p>
+   * @public
    */
-  Resources?: string[];
+  Resources?: string[] | undefined;
 
   /**
    * <p>A free-form string used to decide what fields to expect in the event detail.</p>
+   * @public
    */
-  DetailType?: string;
+  DetailType?: string | undefined;
 
   /**
    * <p>A valid JSON string. There is no other schema imposed. The JSON string may contain fields
    *       and nested subobjects.</p>
+   * @public
    */
-  Detail?: string;
+  Detail?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutPartnerEventsRequest {
   /**
    * <p>The list of events to write to the event bus.</p>
+   * @public
    */
   Entries: PutPartnerEventsRequestEntry[] | undefined;
 }
 
 /**
  * <p>Represents an event that a partner tried to generate, but failed.</p>
+ * @public
  */
 export interface PutPartnerEventsResultEntry {
   /**
    * <p>The ID of the event.</p>
+   * @public
    */
-  EventId?: string;
+  EventId?: string | undefined;
 
   /**
    * <p>The error code that indicates why the event submission failed.</p>
+   * @public
    */
-  ErrorCode?: string;
+  ErrorCode?: string | undefined;
 
   /**
    * <p>The error message that explains why the event submission failed.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutPartnerEventsResponse {
   /**
    * <p>The number of events from this operation that could not be written to the partner event
    *       bus.</p>
+   * @public
    */
-  FailedEntryCount?: number;
+  FailedEntryCount?: number | undefined;
 
   /**
    * <p>The list of events from this operation that were successfully written to the partner event
    *       bus.</p>
+   * @public
    */
-  Entries?: PutPartnerEventsResultEntry[];
-}
-
-/**
- * <p>The event bus policy is too long. For more information, see the limits.</p>
- */
-export class PolicyLengthExceededException extends __BaseException {
-  readonly name: "PolicyLengthExceededException" = "PolicyLengthExceededException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<PolicyLengthExceededException, __BaseException>) {
-    super({
-      name: "PolicyLengthExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, PolicyLengthExceededException.prototype);
-  }
+  Entries?: PutPartnerEventsResultEntry[] | undefined;
 }
 
 /**
@@ -3033,60 +3395,70 @@ export class PolicyLengthExceededException extends __BaseException {
  *         <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the
  *       ID of the Amazon Web Services organization. Following is an example value for <code>Condition</code>:</p>
  *          <p>
- *             <code>'{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
- *         "o-1234567890"}'</code>
+ *             <code>'\{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value":
+ *         "o-1234567890"\}'</code>
  *          </p>
+ * @public
  */
 export interface Condition {
   /**
    * <p>Specifies the type of condition. Currently the only supported value is
    *         <code>StringEquals</code>.</p>
+   * @public
    */
   Type: string | undefined;
 
   /**
    * <p>Specifies the key for the condition. Currently the only supported key is
    *         <code>aws:PrincipalOrgID</code>.</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
    * <p>Specifies the value for the key. Currently, this must be the ID of the
    *       organization.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutPermissionRequest {
   /**
    * <p>The name of the event bus associated with the rule. If you omit this, the default event
    *       bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>The action that you are enabling the other account to perform.</p>
+   * @public
    */
-  Action?: string;
+  Action?: string | undefined;
 
   /**
    * <p>The 12-digit Amazon Web Services account ID that you are permitting to put events to your default event
    *       bus. Specify "*" to permit any account to put events to your default event bus.</p>
-   *
    *          <p>If you specify "*" without specifying <code>Condition</code>, avoid creating rules that
    *       may match undesirable events. To create more secure rules, make sure that the event pattern
    *       for each rule contains an <code>account</code> field with a specific account ID from which to
    *       receive events. Rules with an account field do not match any events sent from other
    *       accounts.</p>
+   * @public
    */
-  Principal?: string;
+  Principal?: string | undefined;
 
   /**
    * <p>An identifier string for the external account that you are granting permissions to. If you
    *       later want to revoke the permission for this external account, specify this
    *       <code>StatementId</code> when you run <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html">RemovePermission</a>.</p>
+   * @public
    */
-  StatementId?: string;
+  StatementId?: string | undefined;
 
   /**
    * <p>This parameter enables you to limit the permission to accounts that fulfill a certain
@@ -3096,46 +3468,55 @@ export interface PutPermissionRequest {
    *          <p>If you specify <code>Condition</code> with an Amazon Web Services organization ID, and specify "*" as the
    *       value for <code>Principal</code>, you grant permission to all the accounts in the named
    *       organization.</p>
-   *
    *          <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>,
    *         <code>Key</code>, and <code>Value</code> fields.</p>
+   * @public
    */
-  Condition?: Condition;
+  Condition?: Condition | undefined;
 
   /**
    * <p>A JSON string that describes the permission policy statement. You can include a
    *         <code>Policy</code> parameter in the request instead of using the <code>StatementId</code>,
    *         <code>Action</code>, <code>Principal</code>, or <code>Condition</code> parameters.</p>
+   * @public
    */
-  Policy?: string;
+  Policy?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutRuleRequest {
   /**
    * <p>The name of the rule that you are creating or updating.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5 minutes)".</p>
+   * @public
    */
-  ScheduleExpression?: string;
+  ScheduleExpression?: string | undefined;
 
   /**
    * <p>The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event
    *         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+   * @public
    */
-  EventPattern?: string;
+  EventPattern?: string | undefined;
 
   /**
    * <p>Indicates whether the rule is enabled or disabled.</p>
+   * @public
    */
-  State?: RuleState | string;
+  State?: RuleState | undefined;
 
   /**
    * <p>A description of the rule.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>
@@ -3143,113 +3524,147 @@ export interface PutRuleRequest {
    *       permission to your account through an organization instead of directly by the account ID, you
    *       must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code>
    *       structure, instead of here in this parameter.</p>
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 
   /**
    * <p>The list of key-value pairs to associate with the rule.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 
   /**
    * <p>The name or ARN of the event bus to associate with this rule. If you omit this, the
    *       default event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutRuleResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the rule.</p>
+   * @public
    */
-  RuleArn?: string;
+  RuleArn?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutTargetsRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   Rule: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>The targets to update or add to the rule.</p>
+   * @public
    */
   Targets: Target[] | undefined;
 }
 
 /**
  * <p>Represents a target that failed to be added to a rule.</p>
+ * @public
  */
 export interface PutTargetsResultEntry {
   /**
    * <p>The ID of the target.</p>
+   * @public
    */
-  TargetId?: string;
+  TargetId?: string | undefined;
 
   /**
    * <p>The error code that indicates why the target addition failed. If the value is
    *         <code>ConcurrentModificationException</code>, too many requests were made at the same
    *       time.</p>
+   * @public
    */
-  ErrorCode?: string;
+  ErrorCode?: string | undefined;
 
   /**
    * <p>The error message that explains why the target addition failed.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutTargetsResponse {
   /**
    * <p>The number of failed entries.</p>
+   * @public
    */
-  FailedEntryCount?: number;
+  FailedEntryCount?: number | undefined;
 
   /**
    * <p>The failed target entries.</p>
+   * @public
    */
-  FailedEntries?: PutTargetsResultEntry[];
+  FailedEntries?: PutTargetsResultEntry[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RemovePermissionRequest {
   /**
    * <p>The statement ID corresponding to the account that is no longer allowed to put events to
    *       the default event bus.</p>
+   * @public
    */
-  StatementId?: string;
+  StatementId?: string | undefined;
 
   /**
    * <p>Specifies whether to remove all permissions.</p>
+   * @public
    */
-  RemoveAllPermissions?: boolean;
+  RemoveAllPermissions?: boolean | undefined;
 
   /**
    * <p>The name of the event bus to revoke permissions for. If you omit this, the default event
    *       bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RemoveTargetsRequest {
   /**
    * <p>The name of the rule.</p>
+   * @public
    */
   Rule: string | undefined;
 
   /**
    * <p>The name or ARN of the event bus associated with the rule. If you omit this, the default
    *       event bus is used.</p>
+   * @public
    */
-  EventBusName?: string;
+  EventBusName?: string | undefined;
 
   /**
    * <p>The IDs of the targets to remove from the rule.</p>
+   * @public
    */
   Ids: string[] | undefined;
 
@@ -3259,119 +3674,157 @@ export interface RemoveTargetsRequest {
    *       rules that are not managed rules. You can check whether a rule is a managed rule by using
    *         <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code>
    *       field of the response.</p>
+   * @public
    */
-  Force?: boolean;
+  Force?: boolean | undefined;
 }
 
 /**
  * <p>Represents a target that failed to be removed from a rule.</p>
+ * @public
  */
 export interface RemoveTargetsResultEntry {
   /**
    * <p>The ID of the target.</p>
+   * @public
    */
-  TargetId?: string;
+  TargetId?: string | undefined;
 
   /**
    * <p>The error code that indicates why the target removal failed. If the value is
    *         <code>ConcurrentModificationException</code>, too many requests were made at the same
    *       time.</p>
+   * @public
    */
-  ErrorCode?: string;
+  ErrorCode?: string | undefined;
 
   /**
    * <p>The error message that explains why the target removal failed.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RemoveTargetsResponse {
   /**
    * <p>The number of failed entries.</p>
+   * @public
    */
-  FailedEntryCount?: number;
+  FailedEntryCount?: number | undefined;
 
   /**
    * <p>The failed target entries.</p>
+   * @public
    */
-  FailedEntries?: RemoveTargetsResultEntry[];
+  FailedEntries?: RemoveTargetsResultEntry[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartReplayRequest {
   /**
    * <p>The name of the replay to start.</p>
+   * @public
    */
   ReplayName: string | undefined;
 
   /**
    * <p>A description for the replay to start.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the archive to replay events from.</p>
+   * @public
    */
   EventSourceArn: string | undefined;
 
   /**
    * <p>A time stamp for the time to start replaying events. Only events that occurred between the
    *         <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.</p>
+   * @public
    */
   EventStartTime: Date | undefined;
 
   /**
    * <p>A time stamp for the time to stop replaying events. Only events that occurred between the
    *         <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.</p>
+   * @public
    */
   EventEndTime: Date | undefined;
 
   /**
    * <p>A <code>ReplayDestination</code> object that includes details about the destination for
    *       the replay.</p>
+   * @public
    */
   Destination: ReplayDestination | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartReplayResponse {
   /**
    * <p>The ARN of the replay.</p>
+   * @public
    */
-  ReplayArn?: string;
+  ReplayArn?: string | undefined;
 
   /**
    * <p>The state of the replay.</p>
+   * @public
    */
-  State?: ReplayState | string;
+  State?: ReplayState | undefined;
 
   /**
    * <p>The reason that the replay is in the state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The time at which the replay started.</p>
+   * @public
    */
-  ReplayStartTime?: Date;
+  ReplayStartTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p>The ARN of the EventBridge resource that you're adding tags to.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 
   /**
    * <p>The list of key-value pairs to associate with the resource.</p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
+/**
+ * @public
+ */
 export interface TestEventPatternRequest {
   /**
    * <p>The event pattern. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html">Events and Event
    *         Patterns</a> in the <i>Amazon EventBridge User Guide</i>.</p>
+   * @public
    */
   EventPattern: string | undefined;
 
@@ -3416,1363 +3869,353 @@ export interface TestEventPatternRequest {
    *                </p>
    *             </li>
    *          </ul>
+   * @public
    */
   Event: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface TestEventPatternResponse {
   /**
    * <p>Indicates whether the event matches the event pattern.</p>
+   * @public
    */
-  Result?: boolean;
+  Result?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UntagResourceRequest {
   /**
    * <p>The ARN of the EventBridge resource from which you are removing tags.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 
   /**
    * <p>The list of tag keys to remove from the resource.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
 
+/**
+ * @public
+ */
 export interface UpdateApiDestinationRequest {
   /**
    * <p>The name of the API destination to update.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The name of the API destination to update.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The ARN of the connection to use for the API destination.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The URL to the endpoint to use for the API destination.</p>
+   * @public
    */
-  InvocationEndpoint?: string;
+  InvocationEndpoint?: string | undefined;
 
   /**
    * <p>The method to use for the API destination.</p>
+   * @public
    */
-  HttpMethod?: ApiDestinationHttpMethod | string;
+  HttpMethod?: ApiDestinationHttpMethod | undefined;
 
   /**
    * <p>The maximum number of invocations per second to send to the API destination.</p>
+   * @public
    */
-  InvocationRateLimitPerSecond?: number;
+  InvocationRateLimitPerSecond?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateApiDestinationResponse {
   /**
    * <p>The ARN of the API destination that was updated.</p>
+   * @public
    */
-  ApiDestinationArn?: string;
+  ApiDestinationArn?: string | undefined;
 
   /**
    * <p>The state of the API destination that was updated.</p>
+   * @public
    */
-  ApiDestinationState?: ApiDestinationState | string;
+  ApiDestinationState?: ApiDestinationState | undefined;
 
   /**
    * <p>A time stamp for the time that the API destination was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the API destination was last modified.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateArchiveRequest {
   /**
    * <p>The name of the archive to update.</p>
+   * @public
    */
   ArchiveName: string | undefined;
 
   /**
    * <p>The description for the archive.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The event pattern to use to filter events sent to the archive.</p>
+   * @public
    */
-  EventPattern?: string;
+  EventPattern?: string | undefined;
 
   /**
    * <p>The number of days to retain events in the archive.</p>
+   * @public
    */
-  RetentionDays?: number;
+  RetentionDays?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateArchiveResponse {
   /**
    * <p>The ARN of the archive.</p>
+   * @public
    */
-  ArchiveArn?: string;
+  ArchiveArn?: string | undefined;
 
   /**
    * <p>The state of the archive.</p>
+   * @public
    */
-  State?: ArchiveState | string;
+  State?: ArchiveState | undefined;
 
   /**
    * <p>The reason that the archive is in the current state.</p>
+   * @public
    */
-  StateReason?: string;
+  StateReason?: string | undefined;
 
   /**
    * <p>The time at which the archive was updated.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 }
 
 /**
  * <p>Contains the API key authorization parameters to use to update the connection.</p>
+ * @public
  */
 export interface UpdateConnectionApiKeyAuthRequestParameters {
   /**
    * <p>The name of the API key to use for authorization.</p>
+   * @public
    */
-  ApiKeyName?: string;
+  ApiKeyName?: string | undefined;
 
   /**
    * <p>The value associated with teh API key to use for authorization.</p>
+   * @public
    */
-  ApiKeyValue?: string;
+  ApiKeyValue?: string | undefined;
 }
 
 /**
  * <p>Contains the Basic authorization parameters for the connection.</p>
+ * @public
  */
 export interface UpdateConnectionBasicAuthRequestParameters {
   /**
    * <p>The user name to use for Basic authorization.</p>
+   * @public
    */
-  Username?: string;
+  Username?: string | undefined;
 
   /**
    * <p>The password associated with the user name to use for Basic authorization.</p>
+   * @public
    */
-  Password?: string;
+  Password?: string | undefined;
 }
 
 /**
  * <p>Contains the OAuth authorization parameters to use for the connection.</p>
+ * @public
  */
 export interface UpdateConnectionOAuthClientRequestParameters {
   /**
    * <p>The client ID to use for OAuth authorization.</p>
+   * @public
    */
-  ClientID?: string;
+  ClientID?: string | undefined;
 
   /**
    * <p>The client secret assciated with the client ID to use for OAuth authorization.</p>
+   * @public
    */
-  ClientSecret?: string;
+  ClientSecret?: string | undefined;
 }
 
 /**
  * <p>Contains the OAuth request parameters to use for the connection.</p>
+ * @public
  */
 export interface UpdateConnectionOAuthRequestParameters {
   /**
    * <p>A <code>UpdateConnectionOAuthClientRequestParameters</code> object that contains the
    *       client parameters to use for the connection when OAuth is specified as the authorization
    *       type.</p>
+   * @public
    */
-  ClientParameters?: UpdateConnectionOAuthClientRequestParameters;
+  ClientParameters?: UpdateConnectionOAuthClientRequestParameters | undefined;
 
   /**
    * <p>The URL to the authorization endpoint when OAuth is specified as the authorization
    *       type.</p>
+   * @public
    */
-  AuthorizationEndpoint?: string;
+  AuthorizationEndpoint?: string | undefined;
 
   /**
    * <p>The method used to connect to the HTTP endpoint.</p>
+   * @public
    */
-  HttpMethod?: ConnectionOAuthHttpMethod | string;
+  HttpMethod?: ConnectionOAuthHttpMethod | undefined;
 
   /**
    * <p>The additional HTTP parameters used for the OAuth authorization request.</p>
+   * @public
    */
-  OAuthHttpParameters?: ConnectionHttpParameters;
+  OAuthHttpParameters?: ConnectionHttpParameters | undefined;
 }
 
 /**
  * <p>Contains the additional parameters to use for the connection.</p>
+ * @public
  */
 export interface UpdateConnectionAuthRequestParameters {
   /**
    * <p>A <code>UpdateConnectionBasicAuthRequestParameters</code> object that contains the
    *       authorization parameters for Basic authorization.</p>
+   * @public
    */
-  BasicAuthParameters?: UpdateConnectionBasicAuthRequestParameters;
+  BasicAuthParameters?: UpdateConnectionBasicAuthRequestParameters | undefined;
 
   /**
    * <p>A <code>UpdateConnectionOAuthRequestParameters</code> object that contains the
    *       authorization parameters for OAuth authorization.</p>
+   * @public
    */
-  OAuthParameters?: UpdateConnectionOAuthRequestParameters;
+  OAuthParameters?: UpdateConnectionOAuthRequestParameters | undefined;
 
   /**
    * <p>A <code>UpdateConnectionApiKeyAuthRequestParameters</code> object that contains the
    *       authorization parameters for API key authorization.</p>
+   * @public
    */
-  ApiKeyAuthParameters?: UpdateConnectionApiKeyAuthRequestParameters;
+  ApiKeyAuthParameters?: UpdateConnectionApiKeyAuthRequestParameters | undefined;
 
   /**
    * <p>A <code>ConnectionHttpParameters</code> object that contains the additional parameters to
    *       use for the connection.</p>
+   * @public
    */
-  InvocationHttpParameters?: ConnectionHttpParameters;
+  InvocationHttpParameters?: ConnectionHttpParameters | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateConnectionRequest {
   /**
    * <p>The name of the connection to update.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>A description for the connection.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of authorization to use for the connection.</p>
+   * @public
    */
-  AuthorizationType?: ConnectionAuthorizationType | string;
+  AuthorizationType?: ConnectionAuthorizationType | undefined;
 
   /**
    * <p>The authorization parameters to use for the connection.</p>
+   * @public
    */
-  AuthParameters?: UpdateConnectionAuthRequestParameters;
+  AuthParameters?: UpdateConnectionAuthRequestParameters | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateConnectionResponse {
   /**
    * <p>The ARN of the connection that was updated.</p>
+   * @public
    */
-  ConnectionArn?: string;
+  ConnectionArn?: string | undefined;
 
   /**
    * <p>The state of the connection that was updated.</p>
+   * @public
    */
-  ConnectionState?: ConnectionState | string;
+  ConnectionState?: ConnectionState | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was created.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last modified.</p>
+   * @public
    */
-  LastModifiedTime?: Date;
+  LastModifiedTime?: Date | undefined;
 
   /**
    * <p>A time stamp for the time that the connection was last authorized.</p>
+   * @public
    */
-  LastAuthorizedTime?: Date;
+  LastAuthorizedTime?: Date | undefined;
 }
-
-/**
- * @internal
- */
-export const ActivateEventSourceRequestFilterSensitiveLog = (obj: ActivateEventSourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ApiDestinationFilterSensitiveLog = (obj: ApiDestination): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ArchiveFilterSensitiveLog = (obj: Archive): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CancelReplayRequestFilterSensitiveLog = (obj: CancelReplayRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CancelReplayResponseFilterSensitiveLog = (obj: CancelReplayResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateApiDestinationRequestFilterSensitiveLog = (obj: CreateApiDestinationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateApiDestinationResponseFilterSensitiveLog = (obj: CreateApiDestinationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateArchiveRequestFilterSensitiveLog = (obj: CreateArchiveRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateArchiveResponseFilterSensitiveLog = (obj: CreateArchiveResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateConnectionApiKeyAuthRequestParametersFilterSensitiveLog = (
-  obj: CreateConnectionApiKeyAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateConnectionBasicAuthRequestParametersFilterSensitiveLog = (
-  obj: CreateConnectionBasicAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionBodyParameterFilterSensitiveLog = (obj: ConnectionBodyParameter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionHeaderParameterFilterSensitiveLog = (obj: ConnectionHeaderParameter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionQueryStringParameterFilterSensitiveLog = (obj: ConnectionQueryStringParameter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionHttpParametersFilterSensitiveLog = (obj: ConnectionHttpParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateConnectionOAuthClientRequestParametersFilterSensitiveLog = (
-  obj: CreateConnectionOAuthClientRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateConnectionOAuthRequestParametersFilterSensitiveLog = (
-  obj: CreateConnectionOAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateConnectionAuthRequestParametersFilterSensitiveLog = (
-  obj: CreateConnectionAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateConnectionRequestFilterSensitiveLog = (obj: CreateConnectionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateConnectionResponseFilterSensitiveLog = (obj: CreateConnectionResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagFilterSensitiveLog = (obj: Tag): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateEventBusRequestFilterSensitiveLog = (obj: CreateEventBusRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateEventBusResponseFilterSensitiveLog = (obj: CreateEventBusResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreatePartnerEventSourceRequestFilterSensitiveLog = (obj: CreatePartnerEventSourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreatePartnerEventSourceResponseFilterSensitiveLog = (obj: CreatePartnerEventSourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeactivateEventSourceRequestFilterSensitiveLog = (obj: DeactivateEventSourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeauthorizeConnectionRequestFilterSensitiveLog = (obj: DeauthorizeConnectionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeauthorizeConnectionResponseFilterSensitiveLog = (obj: DeauthorizeConnectionResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteApiDestinationRequestFilterSensitiveLog = (obj: DeleteApiDestinationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteApiDestinationResponseFilterSensitiveLog = (obj: DeleteApiDestinationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteArchiveRequestFilterSensitiveLog = (obj: DeleteArchiveRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteArchiveResponseFilterSensitiveLog = (obj: DeleteArchiveResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteConnectionRequestFilterSensitiveLog = (obj: DeleteConnectionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteConnectionResponseFilterSensitiveLog = (obj: DeleteConnectionResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteEventBusRequestFilterSensitiveLog = (obj: DeleteEventBusRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeletePartnerEventSourceRequestFilterSensitiveLog = (obj: DeletePartnerEventSourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteRuleRequestFilterSensitiveLog = (obj: DeleteRuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeApiDestinationRequestFilterSensitiveLog = (obj: DescribeApiDestinationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeApiDestinationResponseFilterSensitiveLog = (obj: DescribeApiDestinationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeArchiveRequestFilterSensitiveLog = (obj: DescribeArchiveRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeArchiveResponseFilterSensitiveLog = (obj: DescribeArchiveResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeConnectionRequestFilterSensitiveLog = (obj: DescribeConnectionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionApiKeyAuthResponseParametersFilterSensitiveLog = (
-  obj: ConnectionApiKeyAuthResponseParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionBasicAuthResponseParametersFilterSensitiveLog = (
-  obj: ConnectionBasicAuthResponseParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionOAuthClientResponseParametersFilterSensitiveLog = (
-  obj: ConnectionOAuthClientResponseParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionOAuthResponseParametersFilterSensitiveLog = (obj: ConnectionOAuthResponseParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionAuthResponseParametersFilterSensitiveLog = (obj: ConnectionAuthResponseParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeConnectionResponseFilterSensitiveLog = (obj: DescribeConnectionResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeEventBusRequestFilterSensitiveLog = (obj: DescribeEventBusRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeEventBusResponseFilterSensitiveLog = (obj: DescribeEventBusResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeEventSourceRequestFilterSensitiveLog = (obj: DescribeEventSourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeEventSourceResponseFilterSensitiveLog = (obj: DescribeEventSourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribePartnerEventSourceRequestFilterSensitiveLog = (obj: DescribePartnerEventSourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribePartnerEventSourceResponseFilterSensitiveLog = (obj: DescribePartnerEventSourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeReplayRequestFilterSensitiveLog = (obj: DescribeReplayRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReplayDestinationFilterSensitiveLog = (obj: ReplayDestination): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeReplayResponseFilterSensitiveLog = (obj: DescribeReplayResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeRuleRequestFilterSensitiveLog = (obj: DescribeRuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeRuleResponseFilterSensitiveLog = (obj: DescribeRuleResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisableRuleRequestFilterSensitiveLog = (obj: DisableRuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EnableRuleRequestFilterSensitiveLog = (obj: EnableRuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListApiDestinationsRequestFilterSensitiveLog = (obj: ListApiDestinationsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListApiDestinationsResponseFilterSensitiveLog = (obj: ListApiDestinationsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListArchivesRequestFilterSensitiveLog = (obj: ListArchivesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListArchivesResponseFilterSensitiveLog = (obj: ListArchivesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListConnectionsRequestFilterSensitiveLog = (obj: ListConnectionsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConnectionFilterSensitiveLog = (obj: Connection): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListConnectionsResponseFilterSensitiveLog = (obj: ListConnectionsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListEventBusesRequestFilterSensitiveLog = (obj: ListEventBusesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EventBusFilterSensitiveLog = (obj: EventBus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListEventBusesResponseFilterSensitiveLog = (obj: ListEventBusesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListEventSourcesRequestFilterSensitiveLog = (obj: ListEventSourcesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EventSourceFilterSensitiveLog = (obj: EventSource): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListEventSourcesResponseFilterSensitiveLog = (obj: ListEventSourcesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPartnerEventSourceAccountsRequestFilterSensitiveLog = (
-  obj: ListPartnerEventSourceAccountsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PartnerEventSourceAccountFilterSensitiveLog = (obj: PartnerEventSourceAccount): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPartnerEventSourceAccountsResponseFilterSensitiveLog = (
-  obj: ListPartnerEventSourceAccountsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPartnerEventSourcesRequestFilterSensitiveLog = (obj: ListPartnerEventSourcesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PartnerEventSourceFilterSensitiveLog = (obj: PartnerEventSource): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPartnerEventSourcesResponseFilterSensitiveLog = (obj: ListPartnerEventSourcesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListReplaysRequestFilterSensitiveLog = (obj: ListReplaysRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReplayFilterSensitiveLog = (obj: Replay): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListReplaysResponseFilterSensitiveLog = (obj: ListReplaysResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRuleNamesByTargetRequestFilterSensitiveLog = (obj: ListRuleNamesByTargetRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRuleNamesByTargetResponseFilterSensitiveLog = (obj: ListRuleNamesByTargetResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRulesRequestFilterSensitiveLog = (obj: ListRulesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RuleFilterSensitiveLog = (obj: Rule): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRulesResponseFilterSensitiveLog = (obj: ListRulesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsForResourceRequestFilterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsForResourceResponseFilterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTargetsByRuleRequestFilterSensitiveLog = (obj: ListTargetsByRuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const BatchArrayPropertiesFilterSensitiveLog = (obj: BatchArrayProperties): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const BatchRetryStrategyFilterSensitiveLog = (obj: BatchRetryStrategy): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const BatchParametersFilterSensitiveLog = (obj: BatchParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeadLetterConfigFilterSensitiveLog = (obj: DeadLetterConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CapacityProviderStrategyItemFilterSensitiveLog = (obj: CapacityProviderStrategyItem): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AwsVpcConfigurationFilterSensitiveLog = (obj: AwsVpcConfiguration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NetworkConfigurationFilterSensitiveLog = (obj: NetworkConfiguration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PlacementConstraintFilterSensitiveLog = (obj: PlacementConstraint): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PlacementStrategyFilterSensitiveLog = (obj: PlacementStrategy): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EcsParametersFilterSensitiveLog = (obj: EcsParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HttpParametersFilterSensitiveLog = (obj: HttpParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InputTransformerFilterSensitiveLog = (obj: InputTransformer): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const KinesisParametersFilterSensitiveLog = (obj: KinesisParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RedshiftDataParametersFilterSensitiveLog = (obj: RedshiftDataParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RetryPolicyFilterSensitiveLog = (obj: RetryPolicy): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RunCommandTargetFilterSensitiveLog = (obj: RunCommandTarget): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RunCommandParametersFilterSensitiveLog = (obj: RunCommandParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SageMakerPipelineParameterFilterSensitiveLog = (obj: SageMakerPipelineParameter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SageMakerPipelineParametersFilterSensitiveLog = (obj: SageMakerPipelineParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SqsParametersFilterSensitiveLog = (obj: SqsParameters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TargetFilterSensitiveLog = (obj: Target): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTargetsByRuleResponseFilterSensitiveLog = (obj: ListTargetsByRuleResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutEventsRequestEntryFilterSensitiveLog = (obj: PutEventsRequestEntry): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutEventsRequestFilterSensitiveLog = (obj: PutEventsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutEventsResultEntryFilterSensitiveLog = (obj: PutEventsResultEntry): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutEventsResponseFilterSensitiveLog = (obj: PutEventsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutPartnerEventsRequestEntryFilterSensitiveLog = (obj: PutPartnerEventsRequestEntry): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutPartnerEventsRequestFilterSensitiveLog = (obj: PutPartnerEventsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutPartnerEventsResultEntryFilterSensitiveLog = (obj: PutPartnerEventsResultEntry): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutPartnerEventsResponseFilterSensitiveLog = (obj: PutPartnerEventsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ConditionFilterSensitiveLog = (obj: Condition): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutPermissionRequestFilterSensitiveLog = (obj: PutPermissionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutRuleRequestFilterSensitiveLog = (obj: PutRuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutRuleResponseFilterSensitiveLog = (obj: PutRuleResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutTargetsRequestFilterSensitiveLog = (obj: PutTargetsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutTargetsResultEntryFilterSensitiveLog = (obj: PutTargetsResultEntry): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutTargetsResponseFilterSensitiveLog = (obj: PutTargetsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RemovePermissionRequestFilterSensitiveLog = (obj: RemovePermissionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RemoveTargetsRequestFilterSensitiveLog = (obj: RemoveTargetsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RemoveTargetsResultEntryFilterSensitiveLog = (obj: RemoveTargetsResultEntry): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RemoveTargetsResponseFilterSensitiveLog = (obj: RemoveTargetsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartReplayRequestFilterSensitiveLog = (obj: StartReplayRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartReplayResponseFilterSensitiveLog = (obj: StartReplayResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagResourceRequestFilterSensitiveLog = (obj: TagResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagResourceResponseFilterSensitiveLog = (obj: TagResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TestEventPatternRequestFilterSensitiveLog = (obj: TestEventPatternRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TestEventPatternResponseFilterSensitiveLog = (obj: TestEventPatternResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UntagResourceRequestFilterSensitiveLog = (obj: UntagResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UntagResourceResponseFilterSensitiveLog = (obj: UntagResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateApiDestinationRequestFilterSensitiveLog = (obj: UpdateApiDestinationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateApiDestinationResponseFilterSensitiveLog = (obj: UpdateApiDestinationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateArchiveRequestFilterSensitiveLog = (obj: UpdateArchiveRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateArchiveResponseFilterSensitiveLog = (obj: UpdateArchiveResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateConnectionApiKeyAuthRequestParametersFilterSensitiveLog = (
-  obj: UpdateConnectionApiKeyAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateConnectionBasicAuthRequestParametersFilterSensitiveLog = (
-  obj: UpdateConnectionBasicAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateConnectionOAuthClientRequestParametersFilterSensitiveLog = (
-  obj: UpdateConnectionOAuthClientRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateConnectionOAuthRequestParametersFilterSensitiveLog = (
-  obj: UpdateConnectionOAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateConnectionAuthRequestParametersFilterSensitiveLog = (
-  obj: UpdateConnectionAuthRequestParameters
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateConnectionRequestFilterSensitiveLog = (obj: UpdateConnectionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateConnectionResponseFilterSensitiveLog = (obj: UpdateConnectionResponse): any => ({
-  ...obj,
-});

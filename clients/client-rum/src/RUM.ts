@@ -1,409 +1,544 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type BatchCreateRumMetricDefinitionsCommandInput,
+  type BatchCreateRumMetricDefinitionsCommandOutput,
+  BatchCreateRumMetricDefinitionsCommand,
+} from "./commands/BatchCreateRumMetricDefinitionsCommand";
+import {
+  type BatchDeleteRumMetricDefinitionsCommandInput,
+  type BatchDeleteRumMetricDefinitionsCommandOutput,
+  BatchDeleteRumMetricDefinitionsCommand,
+} from "./commands/BatchDeleteRumMetricDefinitionsCommand";
+import {
+  type BatchGetRumMetricDefinitionsCommandInput,
+  type BatchGetRumMetricDefinitionsCommandOutput,
+  BatchGetRumMetricDefinitionsCommand,
+} from "./commands/BatchGetRumMetricDefinitionsCommand";
+import {
+  type CreateAppMonitorCommandInput,
+  type CreateAppMonitorCommandOutput,
   CreateAppMonitorCommand,
-  CreateAppMonitorCommandInput,
-  CreateAppMonitorCommandOutput,
 } from "./commands/CreateAppMonitorCommand";
 import {
+  type DeleteAppMonitorCommandInput,
+  type DeleteAppMonitorCommandOutput,
   DeleteAppMonitorCommand,
-  DeleteAppMonitorCommandInput,
-  DeleteAppMonitorCommandOutput,
 } from "./commands/DeleteAppMonitorCommand";
 import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
+  DeleteResourcePolicyCommand,
+} from "./commands/DeleteResourcePolicyCommand";
+import {
+  type DeleteRumMetricsDestinationCommandInput,
+  type DeleteRumMetricsDestinationCommandOutput,
+  DeleteRumMetricsDestinationCommand,
+} from "./commands/DeleteRumMetricsDestinationCommand";
+import {
+  type GetAppMonitorCommandInput,
+  type GetAppMonitorCommandOutput,
   GetAppMonitorCommand,
-  GetAppMonitorCommandInput,
-  GetAppMonitorCommandOutput,
 } from "./commands/GetAppMonitorCommand";
 import {
+  type GetAppMonitorDataCommandInput,
+  type GetAppMonitorDataCommandOutput,
   GetAppMonitorDataCommand,
-  GetAppMonitorDataCommandInput,
-  GetAppMonitorDataCommandOutput,
 } from "./commands/GetAppMonitorDataCommand";
 import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type ListAppMonitorsCommandInput,
+  type ListAppMonitorsCommandOutput,
   ListAppMonitorsCommand,
-  ListAppMonitorsCommandInput,
-  ListAppMonitorsCommandOutput,
 } from "./commands/ListAppMonitorsCommand";
 import {
+  type ListRumMetricsDestinationsCommandInput,
+  type ListRumMetricsDestinationsCommandOutput,
+  ListRumMetricsDestinationsCommand,
+} from "./commands/ListRumMetricsDestinationsCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
-  PutRumEventsCommand,
-  PutRumEventsCommandInput,
-  PutRumEventsCommandOutput,
-} from "./commands/PutRumEventsCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
+  PutResourcePolicyCommand,
+} from "./commands/PutResourcePolicyCommand";
 import {
+  type PutRumEventsCommandInput,
+  type PutRumEventsCommandOutput,
+  PutRumEventsCommand,
+} from "./commands/PutRumEventsCommand";
+import {
+  type PutRumMetricsDestinationCommandInput,
+  type PutRumMetricsDestinationCommandOutput,
+  PutRumMetricsDestinationCommand,
+} from "./commands/PutRumMetricsDestinationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateAppMonitorCommandInput,
+  type UpdateAppMonitorCommandOutput,
   UpdateAppMonitorCommand,
-  UpdateAppMonitorCommandInput,
-  UpdateAppMonitorCommandOutput,
 } from "./commands/UpdateAppMonitorCommand";
+import {
+  type UpdateRumMetricDefinitionCommandInput,
+  type UpdateRumMetricDefinitionCommandOutput,
+  UpdateRumMetricDefinitionCommand,
+} from "./commands/UpdateRumMetricDefinitionCommand";
+import { paginateBatchGetRumMetricDefinitions } from "./pagination/BatchGetRumMetricDefinitionsPaginator";
+import { paginateGetAppMonitorData } from "./pagination/GetAppMonitorDataPaginator";
+import { paginateListAppMonitors } from "./pagination/ListAppMonitorsPaginator";
+import { paginateListRumMetricsDestinations } from "./pagination/ListRumMetricsDestinationsPaginator";
 import { RUMClient } from "./RUMClient";
 
+const commands = {
+  BatchCreateRumMetricDefinitionsCommand,
+  BatchDeleteRumMetricDefinitionsCommand,
+  BatchGetRumMetricDefinitionsCommand,
+  CreateAppMonitorCommand,
+  DeleteAppMonitorCommand,
+  DeleteResourcePolicyCommand,
+  DeleteRumMetricsDestinationCommand,
+  GetAppMonitorCommand,
+  GetAppMonitorDataCommand,
+  GetResourcePolicyCommand,
+  ListAppMonitorsCommand,
+  ListRumMetricsDestinationsCommand,
+  ListTagsForResourceCommand,
+  PutResourcePolicyCommand,
+  PutRumEventsCommand,
+  PutRumMetricsDestinationCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAppMonitorCommand,
+  UpdateRumMetricDefinitionCommand,
+};
+const paginators = {
+  paginateBatchGetRumMetricDefinitions,
+  paginateGetAppMonitorData,
+  paginateListAppMonitors,
+  paginateListRumMetricsDestinations,
+};
+
 /**
- * <p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about
- *        your web application performance from actual user sessions in real time. The data collected includes page load
- *        times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and
- *        also see breakdowns by the browsers and devices that your customers use.</p>
- *
- *          <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch
- *        RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error
- *        messages, stack traces, and user sessions. You can also use RUM to
- *        understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>
+ * @public
  */
-export class RUM extends RUMClient {
+export interface RUMRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface RUM {
   /**
-   * <p>Creates a Amazon CloudWatch RUM app monitor, which collects telemetry data from your application and sends that
-   *       data to RUM. The data includes performance and reliability information such as page load time, client-side errors,
-   *       and user behavior.</p>
-   *          <p>You use this operation only to create a new app monitor. To update an existing app monitor, use <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_UpdateAppMonitor.html">UpdateAppMonitor</a> instead.</p>
-   *          <p>After you create an app monitor, sign in to the CloudWatch RUM console to get
-   *          the JavaScript code snippet to add to your web application. For more information, see
-   *          <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html">How do I find a code snippet
-   *          that I've already generated?</a>
-   *          </p>
+   * @see {@link BatchCreateRumMetricDefinitionsCommand}
    */
-  public createAppMonitor(
+  batchCreateRumMetricDefinitions(
+    args: BatchCreateRumMetricDefinitionsCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<BatchCreateRumMetricDefinitionsCommandOutput>;
+  batchCreateRumMetricDefinitions(
+    args: BatchCreateRumMetricDefinitionsCommandInput,
+    cb: (err: any, data?: BatchCreateRumMetricDefinitionsCommandOutput) => void
+  ): void;
+  batchCreateRumMetricDefinitions(
+    args: BatchCreateRumMetricDefinitionsCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: BatchCreateRumMetricDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDeleteRumMetricDefinitionsCommand}
+   */
+  batchDeleteRumMetricDefinitions(
+    args: BatchDeleteRumMetricDefinitionsCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<BatchDeleteRumMetricDefinitionsCommandOutput>;
+  batchDeleteRumMetricDefinitions(
+    args: BatchDeleteRumMetricDefinitionsCommandInput,
+    cb: (err: any, data?: BatchDeleteRumMetricDefinitionsCommandOutput) => void
+  ): void;
+  batchDeleteRumMetricDefinitions(
+    args: BatchDeleteRumMetricDefinitionsCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: BatchDeleteRumMetricDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetRumMetricDefinitionsCommand}
+   */
+  batchGetRumMetricDefinitions(
+    args: BatchGetRumMetricDefinitionsCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<BatchGetRumMetricDefinitionsCommandOutput>;
+  batchGetRumMetricDefinitions(
+    args: BatchGetRumMetricDefinitionsCommandInput,
+    cb: (err: any, data?: BatchGetRumMetricDefinitionsCommandOutput) => void
+  ): void;
+  batchGetRumMetricDefinitions(
+    args: BatchGetRumMetricDefinitionsCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: BatchGetRumMetricDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAppMonitorCommand}
+   */
+  createAppMonitor(
     args: CreateAppMonitorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<CreateAppMonitorCommandOutput>;
-  public createAppMonitor(
+  createAppMonitor(
     args: CreateAppMonitorCommandInput,
     cb: (err: any, data?: CreateAppMonitorCommandOutput) => void
   ): void;
-  public createAppMonitor(
+  createAppMonitor(
     args: CreateAppMonitorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: CreateAppMonitorCommandOutput) => void
   ): void;
-  public createAppMonitor(
-    args: CreateAppMonitorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAppMonitorCommandOutput) => void),
-    cb?: (err: any, data?: CreateAppMonitorCommandOutput) => void
-  ): Promise<CreateAppMonitorCommandOutput> | void {
-    const command = new CreateAppMonitorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an existing app monitor. This immediately stops the collection of data.</p>
+   * @see {@link DeleteAppMonitorCommand}
    */
-  public deleteAppMonitor(
+  deleteAppMonitor(
     args: DeleteAppMonitorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<DeleteAppMonitorCommandOutput>;
-  public deleteAppMonitor(
+  deleteAppMonitor(
     args: DeleteAppMonitorCommandInput,
     cb: (err: any, data?: DeleteAppMonitorCommandOutput) => void
   ): void;
-  public deleteAppMonitor(
+  deleteAppMonitor(
     args: DeleteAppMonitorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: DeleteAppMonitorCommandOutput) => void
   ): void;
-  public deleteAppMonitor(
-    args: DeleteAppMonitorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAppMonitorCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAppMonitorCommandOutput) => void
-  ): Promise<DeleteAppMonitorCommandOutput> | void {
-    const command = new DeleteAppMonitorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the complete configuration information for one app monitor.</p>
+   * @see {@link DeleteResourcePolicyCommand}
    */
-  public getAppMonitor(
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<DeleteResourcePolicyCommandOutput>;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+  deleteResourcePolicy(
+    args: DeleteResourcePolicyCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRumMetricsDestinationCommand}
+   */
+  deleteRumMetricsDestination(
+    args: DeleteRumMetricsDestinationCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<DeleteRumMetricsDestinationCommandOutput>;
+  deleteRumMetricsDestination(
+    args: DeleteRumMetricsDestinationCommandInput,
+    cb: (err: any, data?: DeleteRumMetricsDestinationCommandOutput) => void
+  ): void;
+  deleteRumMetricsDestination(
+    args: DeleteRumMetricsDestinationCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: DeleteRumMetricsDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAppMonitorCommand}
+   */
+  getAppMonitor(
     args: GetAppMonitorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<GetAppMonitorCommandOutput>;
-  public getAppMonitor(
+  getAppMonitor(
     args: GetAppMonitorCommandInput,
     cb: (err: any, data?: GetAppMonitorCommandOutput) => void
   ): void;
-  public getAppMonitor(
+  getAppMonitor(
     args: GetAppMonitorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: GetAppMonitorCommandOutput) => void
   ): void;
-  public getAppMonitor(
-    args: GetAppMonitorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAppMonitorCommandOutput) => void),
-    cb?: (err: any, data?: GetAppMonitorCommandOutput) => void
-  ): Promise<GetAppMonitorCommandOutput> | void {
-    const command = new GetAppMonitorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the raw performance events that RUM has collected from your web application,
-   *          so that you can do your own processing or analysis of this data.</p>
+   * @see {@link GetAppMonitorDataCommand}
    */
-  public getAppMonitorData(
+  getAppMonitorData(
     args: GetAppMonitorDataCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<GetAppMonitorDataCommandOutput>;
-  public getAppMonitorData(
+  getAppMonitorData(
     args: GetAppMonitorDataCommandInput,
     cb: (err: any, data?: GetAppMonitorDataCommandOutput) => void
   ): void;
-  public getAppMonitorData(
+  getAppMonitorData(
     args: GetAppMonitorDataCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: GetAppMonitorDataCommandOutput) => void
   ): void;
-  public getAppMonitorData(
-    args: GetAppMonitorDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAppMonitorDataCommandOutput) => void),
-    cb?: (err: any, data?: GetAppMonitorDataCommandOutput) => void
-  ): Promise<GetAppMonitorDataCommandOutput> | void {
-    const command = new GetAppMonitorDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of the Amazon CloudWatch RUM app monitors in the account.</p>
+   * @see {@link GetResourcePolicyCommand}
    */
-  public listAppMonitors(
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<GetResourcePolicyCommandOutput>;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+  getResourcePolicy(
+    args: GetResourcePolicyCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppMonitorsCommand}
+   */
+  listAppMonitors(): Promise<ListAppMonitorsCommandOutput>;
+  listAppMonitors(
     args: ListAppMonitorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<ListAppMonitorsCommandOutput>;
-  public listAppMonitors(
+  listAppMonitors(
     args: ListAppMonitorsCommandInput,
     cb: (err: any, data?: ListAppMonitorsCommandOutput) => void
   ): void;
-  public listAppMonitors(
+  listAppMonitors(
     args: ListAppMonitorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: ListAppMonitorsCommandOutput) => void
   ): void;
-  public listAppMonitors(
-    args: ListAppMonitorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppMonitorsCommandOutput) => void),
-    cb?: (err: any, data?: ListAppMonitorsCommandOutput) => void
-  ): Promise<ListAppMonitorsCommandOutput> | void {
-    const command = new ListAppMonitorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays the tags associated with a CloudWatch RUM resource.</p>
+   * @see {@link ListRumMetricsDestinationsCommand}
    */
-  public listTagsForResource(
+  listRumMetricsDestinations(
+    args: ListRumMetricsDestinationsCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<ListRumMetricsDestinationsCommandOutput>;
+  listRumMetricsDestinations(
+    args: ListRumMetricsDestinationsCommandInput,
+    cb: (err: any, data?: ListRumMetricsDestinationsCommandOutput) => void
+  ): void;
+  listRumMetricsDestinations(
+    args: ListRumMetricsDestinationsCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: ListRumMetricsDestinationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Sends telemetry events about your application performance and user behavior to CloudWatch RUM. The code
-   *       snippet that RUM generates for you to add to your application includes <code>PutRumEvents</code> operations to
-   *       send this data to RUM.</p>
-   *          <p>Each <code>PutRumEvents</code> operation can send a batch of events from one user session.</p>
+   * @see {@link PutResourcePolicyCommand}
    */
-  public putRumEvents(
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<PutResourcePolicyCommandOutput>;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+  putResourcePolicy(
+    args: PutResourcePolicyCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutRumEventsCommand}
+   */
+  putRumEvents(
     args: PutRumEventsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<PutRumEventsCommandOutput>;
-  public putRumEvents(args: PutRumEventsCommandInput, cb: (err: any, data?: PutRumEventsCommandOutput) => void): void;
-  public putRumEvents(
+  putRumEvents(
     args: PutRumEventsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: PutRumEventsCommandOutput) => void
   ): void;
-  public putRumEvents(
+  putRumEvents(
     args: PutRumEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutRumEventsCommandOutput) => void),
-    cb?: (err: any, data?: PutRumEventsCommandOutput) => void
-  ): Promise<PutRumEventsCommandOutput> | void {
-    const command = new PutRumEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RUMRequestOptions,
+    cb: (err: any, data?: PutRumEventsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently,
-   *        the only resources that
-   *        can be tagged app monitors.</p>
-   *          <p>Tags can help you organize and categorize your resources. You can also use them to scope user
-   *        permissions by granting a user
-   *        permission to access or change only resources with certain tag values.</p>
-   *          <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>
-   *          <p>You can use the <code>TagResource</code> action with a resource that already has tags.
-   *        If you specify a new tag key for the resource,
-   *        this tag is appended to the list of tags associated
-   *        with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces
-   *        the previous value for that tag.</p>
-   *          <p>You can associate as many as 50 tags with a resource.</p>
-   *          <p>For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>.</p>
+   * @see {@link PutRumMetricsDestinationCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  putRumMetricsDestination(
+    args: PutRumMetricsDestinationCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<PutRumMetricsDestinationCommandOutput>;
+  putRumMetricsDestination(
+    args: PutRumMetricsDestinationCommandInput,
+    cb: (err: any, data?: PutRumMetricsDestinationCommandOutput) => void
+  ): void;
+  putRumMetricsDestination(
+    args: PutRumMetricsDestinationCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: PutRumMetricsDestinationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RUMRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RUMRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes one or more tags from the specified resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor
-   *          configuration that you specify in this operation are changed. For any parameters that you omit, the existing
-   *          values are kept.</p>
-   *          <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use
-   *          <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html">TagResource</a>.</p>
-   *          <p>To create a new app monitor, use <a href="https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html">CreateAppMonitor</a>.</p>
-   *          <p>After you update an app monitor, sign in to the CloudWatch RUM console to get
-   *          the updated JavaScript code snippet to add to your web application. For more information, see
-   *          <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html">How do I find a code snippet
-   *             that I've already generated?</a>
-   *          </p>
+   * @see {@link UpdateAppMonitorCommand}
    */
-  public updateAppMonitor(
+  updateAppMonitor(
     args: UpdateAppMonitorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RUMRequestOptions
   ): Promise<UpdateAppMonitorCommandOutput>;
-  public updateAppMonitor(
+  updateAppMonitor(
     args: UpdateAppMonitorCommandInput,
     cb: (err: any, data?: UpdateAppMonitorCommandOutput) => void
   ): void;
-  public updateAppMonitor(
+  updateAppMonitor(
     args: UpdateAppMonitorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RUMRequestOptions,
     cb: (err: any, data?: UpdateAppMonitorCommandOutput) => void
   ): void;
-  public updateAppMonitor(
-    args: UpdateAppMonitorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAppMonitorCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAppMonitorCommandOutput) => void
-  ): Promise<UpdateAppMonitorCommandOutput> | void {
-    const command = new UpdateAppMonitorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateRumMetricDefinitionCommand}
+   */
+  updateRumMetricDefinition(
+    args: UpdateRumMetricDefinitionCommandInput,
+    options?: RUMRequestOptions
+  ): Promise<UpdateRumMetricDefinitionCommandOutput>;
+  updateRumMetricDefinition(
+    args: UpdateRumMetricDefinitionCommandInput,
+    cb: (err: any, data?: UpdateRumMetricDefinitionCommandOutput) => void
+  ): void;
+  updateRumMetricDefinition(
+    args: UpdateRumMetricDefinitionCommandInput,
+    options: RUMRequestOptions,
+    cb: (err: any, data?: UpdateRumMetricDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetRumMetricDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link BatchGetRumMetricDefinitionsCommandOutput}.
+   */
+  paginateBatchGetRumMetricDefinitions(
+    args: BatchGetRumMetricDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<BatchGetRumMetricDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link GetAppMonitorDataCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetAppMonitorDataCommandOutput}.
+   */
+  paginateGetAppMonitorData(
+    args: GetAppMonitorDataCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetAppMonitorDataCommandOutput>;
+
+  /**
+   * @see {@link ListAppMonitorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppMonitorsCommandOutput}.
+   */
+  paginateListAppMonitors(
+    args?: ListAppMonitorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppMonitorsCommandOutput>;
+
+  /**
+   * @see {@link ListRumMetricsDestinationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRumMetricsDestinationsCommandOutput}.
+   */
+  paginateListRumMetricsDestinations(
+    args: ListRumMetricsDestinationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRumMetricsDestinationsCommandOutput>;
 }
+
+/**
+ * <p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about your web application performance from actual user sessions in real time. The data collected includes page load times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and also see breakdowns by the browsers and devices that your customers use.</p> <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error messages, stack traces, and user sessions. You can also use RUM to understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>
+ * @public
+ */
+export class RUM extends RUMClient implements RUM {}
+createAggregatedClient(commands, RUM, { paginators });

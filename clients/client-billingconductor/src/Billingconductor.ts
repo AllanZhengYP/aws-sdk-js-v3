@@ -1,1185 +1,968 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { BillingconductorClient } from "./BillingconductorClient";
 import {
+  type AssociateAccountsCommandInput,
+  type AssociateAccountsCommandOutput,
   AssociateAccountsCommand,
-  AssociateAccountsCommandInput,
-  AssociateAccountsCommandOutput,
 } from "./commands/AssociateAccountsCommand";
 import {
+  type AssociatePricingRulesCommandInput,
+  type AssociatePricingRulesCommandOutput,
   AssociatePricingRulesCommand,
-  AssociatePricingRulesCommandInput,
-  AssociatePricingRulesCommandOutput,
 } from "./commands/AssociatePricingRulesCommand";
 import {
+  type BatchAssociateResourcesToCustomLineItemCommandInput,
+  type BatchAssociateResourcesToCustomLineItemCommandOutput,
   BatchAssociateResourcesToCustomLineItemCommand,
-  BatchAssociateResourcesToCustomLineItemCommandInput,
-  BatchAssociateResourcesToCustomLineItemCommandOutput,
 } from "./commands/BatchAssociateResourcesToCustomLineItemCommand";
 import {
+  type BatchDisassociateResourcesFromCustomLineItemCommandInput,
+  type BatchDisassociateResourcesFromCustomLineItemCommandOutput,
   BatchDisassociateResourcesFromCustomLineItemCommand,
-  BatchDisassociateResourcesFromCustomLineItemCommandInput,
-  BatchDisassociateResourcesFromCustomLineItemCommandOutput,
 } from "./commands/BatchDisassociateResourcesFromCustomLineItemCommand";
 import {
+  type CreateBillingGroupCommandInput,
+  type CreateBillingGroupCommandOutput,
   CreateBillingGroupCommand,
-  CreateBillingGroupCommandInput,
-  CreateBillingGroupCommandOutput,
 } from "./commands/CreateBillingGroupCommand";
 import {
+  type CreateCustomLineItemCommandInput,
+  type CreateCustomLineItemCommandOutput,
   CreateCustomLineItemCommand,
-  CreateCustomLineItemCommandInput,
-  CreateCustomLineItemCommandOutput,
 } from "./commands/CreateCustomLineItemCommand";
 import {
+  type CreatePricingPlanCommandInput,
+  type CreatePricingPlanCommandOutput,
   CreatePricingPlanCommand,
-  CreatePricingPlanCommandInput,
-  CreatePricingPlanCommandOutput,
 } from "./commands/CreatePricingPlanCommand";
 import {
+  type CreatePricingRuleCommandInput,
+  type CreatePricingRuleCommandOutput,
   CreatePricingRuleCommand,
-  CreatePricingRuleCommandInput,
-  CreatePricingRuleCommandOutput,
 } from "./commands/CreatePricingRuleCommand";
 import {
+  type DeleteBillingGroupCommandInput,
+  type DeleteBillingGroupCommandOutput,
   DeleteBillingGroupCommand,
-  DeleteBillingGroupCommandInput,
-  DeleteBillingGroupCommandOutput,
 } from "./commands/DeleteBillingGroupCommand";
 import {
+  type DeleteCustomLineItemCommandInput,
+  type DeleteCustomLineItemCommandOutput,
   DeleteCustomLineItemCommand,
-  DeleteCustomLineItemCommandInput,
-  DeleteCustomLineItemCommandOutput,
 } from "./commands/DeleteCustomLineItemCommand";
 import {
+  type DeletePricingPlanCommandInput,
+  type DeletePricingPlanCommandOutput,
   DeletePricingPlanCommand,
-  DeletePricingPlanCommandInput,
-  DeletePricingPlanCommandOutput,
 } from "./commands/DeletePricingPlanCommand";
 import {
+  type DeletePricingRuleCommandInput,
+  type DeletePricingRuleCommandOutput,
   DeletePricingRuleCommand,
-  DeletePricingRuleCommandInput,
-  DeletePricingRuleCommandOutput,
 } from "./commands/DeletePricingRuleCommand";
 import {
+  type DisassociateAccountsCommandInput,
+  type DisassociateAccountsCommandOutput,
   DisassociateAccountsCommand,
-  DisassociateAccountsCommandInput,
-  DisassociateAccountsCommandOutput,
 } from "./commands/DisassociateAccountsCommand";
 import {
+  type DisassociatePricingRulesCommandInput,
+  type DisassociatePricingRulesCommandOutput,
   DisassociatePricingRulesCommand,
-  DisassociatePricingRulesCommandInput,
-  DisassociatePricingRulesCommandOutput,
 } from "./commands/DisassociatePricingRulesCommand";
 import {
+  type GetBillingGroupCostReportCommandInput,
+  type GetBillingGroupCostReportCommandOutput,
+  GetBillingGroupCostReportCommand,
+} from "./commands/GetBillingGroupCostReportCommand";
+import {
+  type GetBillingTransferPreferenceCommandInput,
+  type GetBillingTransferPreferenceCommandOutput,
+  GetBillingTransferPreferenceCommand,
+} from "./commands/GetBillingTransferPreferenceCommand";
+import {
+  type ListAccountAssociationsCommandInput,
+  type ListAccountAssociationsCommandOutput,
   ListAccountAssociationsCommand,
-  ListAccountAssociationsCommandInput,
-  ListAccountAssociationsCommandOutput,
 } from "./commands/ListAccountAssociationsCommand";
 import {
+  type ListBillingGroupCostReportsCommandInput,
+  type ListBillingGroupCostReportsCommandOutput,
   ListBillingGroupCostReportsCommand,
-  ListBillingGroupCostReportsCommandInput,
-  ListBillingGroupCostReportsCommandOutput,
 } from "./commands/ListBillingGroupCostReportsCommand";
 import {
+  type ListBillingGroupsCommandInput,
+  type ListBillingGroupsCommandOutput,
   ListBillingGroupsCommand,
-  ListBillingGroupsCommandInput,
-  ListBillingGroupsCommandOutput,
 } from "./commands/ListBillingGroupsCommand";
 import {
+  type ListCustomLineItemsCommandInput,
+  type ListCustomLineItemsCommandOutput,
   ListCustomLineItemsCommand,
-  ListCustomLineItemsCommandInput,
-  ListCustomLineItemsCommandOutput,
 } from "./commands/ListCustomLineItemsCommand";
 import {
+  type ListCustomLineItemVersionsCommandInput,
+  type ListCustomLineItemVersionsCommandOutput,
+  ListCustomLineItemVersionsCommand,
+} from "./commands/ListCustomLineItemVersionsCommand";
+import {
+  type ListPricingPlansAssociatedWithPricingRuleCommandInput,
+  type ListPricingPlansAssociatedWithPricingRuleCommandOutput,
   ListPricingPlansAssociatedWithPricingRuleCommand,
-  ListPricingPlansAssociatedWithPricingRuleCommandInput,
-  ListPricingPlansAssociatedWithPricingRuleCommandOutput,
 } from "./commands/ListPricingPlansAssociatedWithPricingRuleCommand";
 import {
+  type ListPricingPlansCommandInput,
+  type ListPricingPlansCommandOutput,
   ListPricingPlansCommand,
-  ListPricingPlansCommandInput,
-  ListPricingPlansCommandOutput,
 } from "./commands/ListPricingPlansCommand";
 import {
+  type ListPricingRulesAssociatedToPricingPlanCommandInput,
+  type ListPricingRulesAssociatedToPricingPlanCommandOutput,
   ListPricingRulesAssociatedToPricingPlanCommand,
-  ListPricingRulesAssociatedToPricingPlanCommandInput,
-  ListPricingRulesAssociatedToPricingPlanCommandOutput,
 } from "./commands/ListPricingRulesAssociatedToPricingPlanCommand";
 import {
+  type ListPricingRulesCommandInput,
+  type ListPricingRulesCommandOutput,
   ListPricingRulesCommand,
-  ListPricingRulesCommandInput,
-  ListPricingRulesCommandOutput,
 } from "./commands/ListPricingRulesCommand";
 import {
+  type ListResourcesAssociatedToCustomLineItemCommandInput,
+  type ListResourcesAssociatedToCustomLineItemCommandOutput,
   ListResourcesAssociatedToCustomLineItemCommand,
-  ListResourcesAssociatedToCustomLineItemCommandInput,
-  ListResourcesAssociatedToCustomLineItemCommandOutput,
 } from "./commands/ListResourcesAssociatedToCustomLineItemCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateBillingGroupCommandInput,
+  type UpdateBillingGroupCommandOutput,
   UpdateBillingGroupCommand,
-  UpdateBillingGroupCommandInput,
-  UpdateBillingGroupCommandOutput,
 } from "./commands/UpdateBillingGroupCommand";
 import {
+  type UpdateBillingTransferPreferenceCommandInput,
+  type UpdateBillingTransferPreferenceCommandOutput,
+  UpdateBillingTransferPreferenceCommand,
+} from "./commands/UpdateBillingTransferPreferenceCommand";
+import {
+  type UpdateCustomLineItemCommandInput,
+  type UpdateCustomLineItemCommandOutput,
   UpdateCustomLineItemCommand,
-  UpdateCustomLineItemCommandInput,
-  UpdateCustomLineItemCommandOutput,
 } from "./commands/UpdateCustomLineItemCommand";
 import {
+  type UpdatePricingPlanCommandInput,
+  type UpdatePricingPlanCommandOutput,
   UpdatePricingPlanCommand,
-  UpdatePricingPlanCommandInput,
-  UpdatePricingPlanCommandOutput,
 } from "./commands/UpdatePricingPlanCommand";
 import {
+  type UpdatePricingRuleCommandInput,
+  type UpdatePricingRuleCommandOutput,
   UpdatePricingRuleCommand,
-  UpdatePricingRuleCommandInput,
-  UpdatePricingRuleCommandOutput,
 } from "./commands/UpdatePricingRuleCommand";
+import { paginateGetBillingGroupCostReport } from "./pagination/GetBillingGroupCostReportPaginator";
+import { paginateListAccountAssociations } from "./pagination/ListAccountAssociationsPaginator";
+import { paginateListBillingGroupCostReports } from "./pagination/ListBillingGroupCostReportsPaginator";
+import { paginateListBillingGroups } from "./pagination/ListBillingGroupsPaginator";
+import { paginateListCustomLineItems } from "./pagination/ListCustomLineItemsPaginator";
+import { paginateListCustomLineItemVersions } from "./pagination/ListCustomLineItemVersionsPaginator";
+import {
+  paginateListPricingPlansAssociatedWithPricingRule,
+} from "./pagination/ListPricingPlansAssociatedWithPricingRulePaginator";
+import { paginateListPricingPlans } from "./pagination/ListPricingPlansPaginator";
+import {
+  paginateListPricingRulesAssociatedToPricingPlan,
+} from "./pagination/ListPricingRulesAssociatedToPricingPlanPaginator";
+import { paginateListPricingRules } from "./pagination/ListPricingRulesPaginator";
+import {
+  paginateListResourcesAssociatedToCustomLineItem,
+} from "./pagination/ListResourcesAssociatedToCustomLineItemPaginator";
+
+const commands = {
+  AssociateAccountsCommand,
+  AssociatePricingRulesCommand,
+  BatchAssociateResourcesToCustomLineItemCommand,
+  BatchDisassociateResourcesFromCustomLineItemCommand,
+  CreateBillingGroupCommand,
+  CreateCustomLineItemCommand,
+  CreatePricingPlanCommand,
+  CreatePricingRuleCommand,
+  DeleteBillingGroupCommand,
+  DeleteCustomLineItemCommand,
+  DeletePricingPlanCommand,
+  DeletePricingRuleCommand,
+  DisassociateAccountsCommand,
+  DisassociatePricingRulesCommand,
+  GetBillingGroupCostReportCommand,
+  GetBillingTransferPreferenceCommand,
+  ListAccountAssociationsCommand,
+  ListBillingGroupCostReportsCommand,
+  ListBillingGroupsCommand,
+  ListCustomLineItemsCommand,
+  ListCustomLineItemVersionsCommand,
+  ListPricingPlansCommand,
+  ListPricingPlansAssociatedWithPricingRuleCommand,
+  ListPricingRulesCommand,
+  ListPricingRulesAssociatedToPricingPlanCommand,
+  ListResourcesAssociatedToCustomLineItemCommand,
+  ListTagsForResourceCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateBillingGroupCommand,
+  UpdateBillingTransferPreferenceCommand,
+  UpdateCustomLineItemCommand,
+  UpdatePricingPlanCommand,
+  UpdatePricingRuleCommand,
+};
+const paginators = {
+  paginateGetBillingGroupCostReport,
+  paginateListAccountAssociations,
+  paginateListBillingGroupCostReports,
+  paginateListBillingGroups,
+  paginateListCustomLineItems,
+  paginateListCustomLineItemVersions,
+  paginateListPricingPlans,
+  paginateListPricingPlansAssociatedWithPricingRule,
+  paginateListPricingRules,
+  paginateListPricingRulesAssociatedToPricingPlan,
+  paginateListResourcesAssociatedToCustomLineItem,
+};
 
 /**
- * <p>Amazon Web Services Billing Conductor is a fully managed service that you can use
- *       to customize a <a href="https://docs.aws.amazon.com/enterprisebilling/6b7c01c5-b592-467e-9769-90052eaf359c/userguide/understanding-eb.html#eb-other-definitions">pro forma</a> version of your billing data each month, to accurately show or chargeback
- *       your end customers. Amazon Web Services Billing Conductor doesn't change the way
- *       you're billed by Amazon Web Services each month by design. Instead, it provides you with a
- *       mechanism to configure, generate, and display rates to certain customers over a given billing
- *       period. You can also analyze the difference between the rates you apply to your accounting
- *       groupings relative to your actual rates from Amazon Web Services. As a result of your Amazon Web Services Billing Conductor configuration, the payer account can also see the
- *       custom rate applied on the billing details page of the <a href="https://console.aws.amazon.com/billing">Amazon Web Services Billing console</a>, or configure a cost and usage report per
- *       billing group.</p>
- *          <p>This documentation shows how you can configure Amazon Web Services Billing Conductor using its
- *       API. For more information about using the <a href="https://console.aws.amazon.com/enterprisebilling/">Amazon Web Services
- *         Billing Conductor</a> user interface, see the <a href="https://docs.aws.amazon.com/enterprisebilling/6b7c01c5-b592-467e-9769-90052eaf359c/userguide/what-is-enterprisebilling.html"> Amazon Web Services Enterprise
- *         Billing Console User Guide</a>.</p>
+ * @public
  */
-export class Billingconductor extends BillingconductorClient {
+export interface BillingconductorRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Billingconductor {
   /**
-   * <p>Connects an array of account IDs in a consolidated billing family to a predefined
-   *       billing group. The account IDs must be a part of the consolidated billing family during the
-   *       current month, and not already associated with another billing group. The maximum number of
-   *       accounts that can be associated in one call is 30. </p>
+   * @see {@link AssociateAccountsCommand}
    */
-  public associateAccounts(
+  associateAccounts(
     args: AssociateAccountsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<AssociateAccountsCommandOutput>;
-  public associateAccounts(
+  associateAccounts(
     args: AssociateAccountsCommandInput,
     cb: (err: any, data?: AssociateAccountsCommandOutput) => void
   ): void;
-  public associateAccounts(
+  associateAccounts(
     args: AssociateAccountsCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: AssociateAccountsCommandOutput) => void
   ): void;
-  public associateAccounts(
-    args: AssociateAccountsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateAccountsCommandOutput) => void),
-    cb?: (err: any, data?: AssociateAccountsCommandOutput) => void
-  ): Promise<AssociateAccountsCommandOutput> | void {
-    const command = new AssociateAccountsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Connects an array of <code>PricingRuleArns</code> to a defined <code>PricingPlan</code>.
-   *       The maximum number <code>PricingRuleArn</code> that can be associated in one call is 30. </p>
+   * @see {@link AssociatePricingRulesCommand}
    */
-  public associatePricingRules(
+  associatePricingRules(
     args: AssociatePricingRulesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<AssociatePricingRulesCommandOutput>;
-  public associatePricingRules(
+  associatePricingRules(
     args: AssociatePricingRulesCommandInput,
     cb: (err: any, data?: AssociatePricingRulesCommandOutput) => void
   ): void;
-  public associatePricingRules(
+  associatePricingRules(
     args: AssociatePricingRulesCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: AssociatePricingRulesCommandOutput) => void
   ): void;
-  public associatePricingRules(
-    args: AssociatePricingRulesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociatePricingRulesCommandOutput) => void),
-    cb?: (err: any, data?: AssociatePricingRulesCommandOutput) => void
-  ): Promise<AssociatePricingRulesCommandOutput> | void {
-    const command = new AssociatePricingRulesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Associates a batch of resources to a percentage custom line item.
-   *     </p>
+   * @see {@link BatchAssociateResourcesToCustomLineItemCommand}
    */
-  public batchAssociateResourcesToCustomLineItem(
+  batchAssociateResourcesToCustomLineItem(
     args: BatchAssociateResourcesToCustomLineItemCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<BatchAssociateResourcesToCustomLineItemCommandOutput>;
-  public batchAssociateResourcesToCustomLineItem(
+  batchAssociateResourcesToCustomLineItem(
     args: BatchAssociateResourcesToCustomLineItemCommandInput,
     cb: (err: any, data?: BatchAssociateResourcesToCustomLineItemCommandOutput) => void
   ): void;
-  public batchAssociateResourcesToCustomLineItem(
+  batchAssociateResourcesToCustomLineItem(
     args: BatchAssociateResourcesToCustomLineItemCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: BatchAssociateResourcesToCustomLineItemCommandOutput) => void
   ): void;
-  public batchAssociateResourcesToCustomLineItem(
-    args: BatchAssociateResourcesToCustomLineItemCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: BatchAssociateResourcesToCustomLineItemCommandOutput) => void),
-    cb?: (err: any, data?: BatchAssociateResourcesToCustomLineItemCommandOutput) => void
-  ): Promise<BatchAssociateResourcesToCustomLineItemCommandOutput> | void {
-    const command = new BatchAssociateResourcesToCustomLineItemCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Disassociates a batch of resources from a percentage custom line item.
-   *     </p>
+   * @see {@link BatchDisassociateResourcesFromCustomLineItemCommand}
    */
-  public batchDisassociateResourcesFromCustomLineItem(
+  batchDisassociateResourcesFromCustomLineItem(
     args: BatchDisassociateResourcesFromCustomLineItemCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<BatchDisassociateResourcesFromCustomLineItemCommandOutput>;
-  public batchDisassociateResourcesFromCustomLineItem(
+  batchDisassociateResourcesFromCustomLineItem(
     args: BatchDisassociateResourcesFromCustomLineItemCommandInput,
     cb: (err: any, data?: BatchDisassociateResourcesFromCustomLineItemCommandOutput) => void
   ): void;
-  public batchDisassociateResourcesFromCustomLineItem(
+  batchDisassociateResourcesFromCustomLineItem(
     args: BatchDisassociateResourcesFromCustomLineItemCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: BatchDisassociateResourcesFromCustomLineItemCommandOutput) => void
   ): void;
-  public batchDisassociateResourcesFromCustomLineItem(
-    args: BatchDisassociateResourcesFromCustomLineItemCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: BatchDisassociateResourcesFromCustomLineItemCommandOutput) => void),
-    cb?: (err: any, data?: BatchDisassociateResourcesFromCustomLineItemCommandOutput) => void
-  ): Promise<BatchDisassociateResourcesFromCustomLineItemCommandOutput> | void {
-    const command = new BatchDisassociateResourcesFromCustomLineItemCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Creates a billing group that resembles a consolidated billing family that Amazon Web Services charges, based off of the predefined pricing plan computation.
-   *     </p>
+   * @see {@link CreateBillingGroupCommand}
    */
-  public createBillingGroup(
+  createBillingGroup(
     args: CreateBillingGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<CreateBillingGroupCommandOutput>;
-  public createBillingGroup(
+  createBillingGroup(
     args: CreateBillingGroupCommandInput,
     cb: (err: any, data?: CreateBillingGroupCommandOutput) => void
   ): void;
-  public createBillingGroup(
+  createBillingGroup(
     args: CreateBillingGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: CreateBillingGroupCommandOutput) => void
   ): void;
-  public createBillingGroup(
-    args: CreateBillingGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBillingGroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateBillingGroupCommandOutput) => void
-  ): Promise<CreateBillingGroupCommandOutput> | void {
-    const command = new CreateBillingGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period. The one-time fixed charge is either a fee or discount.
-   *     </p>
+   * @see {@link CreateCustomLineItemCommand}
    */
-  public createCustomLineItem(
+  createCustomLineItem(
     args: CreateCustomLineItemCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<CreateCustomLineItemCommandOutput>;
-  public createCustomLineItem(
+  createCustomLineItem(
     args: CreateCustomLineItemCommandInput,
     cb: (err: any, data?: CreateCustomLineItemCommandOutput) => void
   ): void;
-  public createCustomLineItem(
+  createCustomLineItem(
     args: CreateCustomLineItemCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: CreateCustomLineItemCommandOutput) => void
   ): void;
-  public createCustomLineItem(
-    args: CreateCustomLineItemCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCustomLineItemCommandOutput) => void),
-    cb?: (err: any, data?: CreateCustomLineItemCommandOutput) => void
-  ): Promise<CreateCustomLineItemCommandOutput> | void {
-    const command = new CreateCustomLineItemCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a pricing plan that is used for computing Amazon Web Services charges for billing groups.
-   *     </p>
+   * @see {@link CreatePricingPlanCommand}
    */
-  public createPricingPlan(
+  createPricingPlan(
     args: CreatePricingPlanCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<CreatePricingPlanCommandOutput>;
-  public createPricingPlan(
+  createPricingPlan(
     args: CreatePricingPlanCommandInput,
     cb: (err: any, data?: CreatePricingPlanCommandOutput) => void
   ): void;
-  public createPricingPlan(
+  createPricingPlan(
     args: CreatePricingPlanCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: CreatePricingPlanCommandOutput) => void
   ): void;
-  public createPricingPlan(
-    args: CreatePricingPlanCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreatePricingPlanCommandOutput) => void),
-    cb?: (err: any, data?: CreatePricingPlanCommandOutput) => void
-  ): Promise<CreatePricingPlanCommandOutput> | void {
-    const command = new CreatePricingPlanCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Creates a pricing rule can be associated to a pricing plan, or a set of pricing plans.
-   *     </p>
+   * @see {@link CreatePricingRuleCommand}
    */
-  public createPricingRule(
+  createPricingRule(
     args: CreatePricingRuleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<CreatePricingRuleCommandOutput>;
-  public createPricingRule(
+  createPricingRule(
     args: CreatePricingRuleCommandInput,
     cb: (err: any, data?: CreatePricingRuleCommandOutput) => void
   ): void;
-  public createPricingRule(
+  createPricingRule(
     args: CreatePricingRuleCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: CreatePricingRuleCommandOutput) => void
   ): void;
-  public createPricingRule(
-    args: CreatePricingRuleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreatePricingRuleCommandOutput) => void),
-    cb?: (err: any, data?: CreatePricingRuleCommandOutput) => void
-  ): Promise<CreatePricingRuleCommandOutput> | void {
-    const command = new CreatePricingRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Deletes a billing group.
-   *     </p>
+   * @see {@link DeleteBillingGroupCommand}
    */
-  public deleteBillingGroup(
+  deleteBillingGroup(
     args: DeleteBillingGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<DeleteBillingGroupCommandOutput>;
-  public deleteBillingGroup(
+  deleteBillingGroup(
     args: DeleteBillingGroupCommandInput,
     cb: (err: any, data?: DeleteBillingGroupCommandOutput) => void
   ): void;
-  public deleteBillingGroup(
+  deleteBillingGroup(
     args: DeleteBillingGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: DeleteBillingGroupCommandOutput) => void
   ): void;
-  public deleteBillingGroup(
-    args: DeleteBillingGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBillingGroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBillingGroupCommandOutput) => void
-  ): Promise<DeleteBillingGroupCommandOutput> | void {
-    const command = new DeleteBillingGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Deletes the custom line item identified by the given ARN in the current, or previous billing period.
-   *     </p>
+   * @see {@link DeleteCustomLineItemCommand}
    */
-  public deleteCustomLineItem(
+  deleteCustomLineItem(
     args: DeleteCustomLineItemCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<DeleteCustomLineItemCommandOutput>;
-  public deleteCustomLineItem(
+  deleteCustomLineItem(
     args: DeleteCustomLineItemCommandInput,
     cb: (err: any, data?: DeleteCustomLineItemCommandOutput) => void
   ): void;
-  public deleteCustomLineItem(
+  deleteCustomLineItem(
     args: DeleteCustomLineItemCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: DeleteCustomLineItemCommandOutput) => void
   ): void;
-  public deleteCustomLineItem(
-    args: DeleteCustomLineItemCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCustomLineItemCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCustomLineItemCommandOutput) => void
-  ): Promise<DeleteCustomLineItemCommandOutput> | void {
-    const command = new DeleteCustomLineItemCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a pricing plan. The pricing plan must not be associated with any billing groups to
-   *       delete successfully.</p>
+   * @see {@link DeletePricingPlanCommand}
    */
-  public deletePricingPlan(
+  deletePricingPlan(
     args: DeletePricingPlanCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<DeletePricingPlanCommandOutput>;
-  public deletePricingPlan(
+  deletePricingPlan(
     args: DeletePricingPlanCommandInput,
     cb: (err: any, data?: DeletePricingPlanCommandOutput) => void
   ): void;
-  public deletePricingPlan(
+  deletePricingPlan(
     args: DeletePricingPlanCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: DeletePricingPlanCommandOutput) => void
   ): void;
-  public deletePricingPlan(
-    args: DeletePricingPlanCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePricingPlanCommandOutput) => void),
-    cb?: (err: any, data?: DeletePricingPlanCommandOutput) => void
-  ): Promise<DeletePricingPlanCommandOutput> | void {
-    const command = new DeletePricingPlanCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p> Deletes the pricing rule identified by the input Amazon Resource Name (ARN). </p>
+   * @see {@link DeletePricingRuleCommand}
    */
-  public deletePricingRule(
+  deletePricingRule(
     args: DeletePricingRuleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<DeletePricingRuleCommandOutput>;
-  public deletePricingRule(
+  deletePricingRule(
     args: DeletePricingRuleCommandInput,
     cb: (err: any, data?: DeletePricingRuleCommandOutput) => void
   ): void;
-  public deletePricingRule(
+  deletePricingRule(
     args: DeletePricingRuleCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: DeletePricingRuleCommandOutput) => void
   ): void;
-  public deletePricingRule(
-    args: DeletePricingRuleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeletePricingRuleCommandOutput) => void),
-    cb?: (err: any, data?: DeletePricingRuleCommandOutput) => void
-  ): Promise<DeletePricingRuleCommandOutput> | void {
-    const command = new DeletePricingRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes the specified list of account IDs from the given billing group. </p>
+   * @see {@link DisassociateAccountsCommand}
    */
-  public disassociateAccounts(
+  disassociateAccounts(
     args: DisassociateAccountsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<DisassociateAccountsCommandOutput>;
-  public disassociateAccounts(
+  disassociateAccounts(
     args: DisassociateAccountsCommandInput,
     cb: (err: any, data?: DisassociateAccountsCommandOutput) => void
   ): void;
-  public disassociateAccounts(
+  disassociateAccounts(
     args: DisassociateAccountsCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: DisassociateAccountsCommandOutput) => void
   ): void;
-  public disassociateAccounts(
-    args: DisassociateAccountsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateAccountsCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateAccountsCommandOutput) => void
-  ): Promise<DisassociateAccountsCommandOutput> | void {
-    const command = new DisassociateAccountsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Disassociates a list of pricing rules from a pricing plan.
-   *     </p>
+   * @see {@link DisassociatePricingRulesCommand}
    */
-  public disassociatePricingRules(
+  disassociatePricingRules(
     args: DisassociatePricingRulesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<DisassociatePricingRulesCommandOutput>;
-  public disassociatePricingRules(
+  disassociatePricingRules(
     args: DisassociatePricingRulesCommandInput,
     cb: (err: any, data?: DisassociatePricingRulesCommandOutput) => void
   ): void;
-  public disassociatePricingRules(
+  disassociatePricingRules(
     args: DisassociatePricingRulesCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: DisassociatePricingRulesCommandOutput) => void
   ): void;
-  public disassociatePricingRules(
-    args: DisassociatePricingRulesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociatePricingRulesCommandOutput) => void),
-    cb?: (err: any, data?: DisassociatePricingRulesCommandOutput) => void
-  ): Promise<DisassociatePricingRulesCommandOutput> | void {
-    const command = new DisassociatePricingRulesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *             <i>
-   *                <b>Amazon Web Services Billing Conductor is in beta release and is subject to change. Your use of Amazon Web Services Billing Conductor is subject to the Beta Service Participation terms of the <a href="https://aws.amazon.com/service-terms/">Amazon Web Services Service Terms</a> (Section 1.10).</b>
-   *             </i>
-   *          </p>
-   *          <p> This is a paginated call to list linked accounts that are linked to the payer account for
-   *       the specified time period. If no information is provided, the current billing period is used.
-   *       The response will optionally include the billing group associated with the linked
-   *       account.</p>
+   * @see {@link GetBillingGroupCostReportCommand}
    */
-  public listAccountAssociations(
+  getBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<GetBillingGroupCostReportCommandOutput>;
+  getBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    cb: (err: any, data?: GetBillingGroupCostReportCommandOutput) => void
+  ): void;
+  getBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: GetBillingGroupCostReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBillingTransferPreferenceCommand}
+   */
+  getBillingTransferPreference(
+    args: GetBillingTransferPreferenceCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<GetBillingTransferPreferenceCommandOutput>;
+  getBillingTransferPreference(
+    args: GetBillingTransferPreferenceCommandInput,
+    cb: (err: any, data?: GetBillingTransferPreferenceCommandOutput) => void
+  ): void;
+  getBillingTransferPreference(
+    args: GetBillingTransferPreferenceCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: GetBillingTransferPreferenceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountAssociationsCommand}
+   */
+  listAccountAssociations(): Promise<ListAccountAssociationsCommandOutput>;
+  listAccountAssociations(
     args: ListAccountAssociationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListAccountAssociationsCommandOutput>;
-  public listAccountAssociations(
+  listAccountAssociations(
     args: ListAccountAssociationsCommandInput,
     cb: (err: any, data?: ListAccountAssociationsCommandOutput) => void
   ): void;
-  public listAccountAssociations(
+  listAccountAssociations(
     args: ListAccountAssociationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListAccountAssociationsCommandOutput) => void
   ): void;
-  public listAccountAssociations(
-    args: ListAccountAssociationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAccountAssociationsCommandOutput) => void),
-    cb?: (err: any, data?: ListAccountAssociationsCommandOutput) => void
-  ): Promise<ListAccountAssociationsCommandOutput> | void {
-    const command = new ListAccountAssociationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>A paginated call to retrieve a summary report of actual Amazon Web Services charges and the calculated
-   *       Amazon Web Services charges based on the associated pricing plan of a billing group.</p>
+   * @see {@link ListBillingGroupCostReportsCommand}
    */
-  public listBillingGroupCostReports(
+  listBillingGroupCostReports(): Promise<ListBillingGroupCostReportsCommandOutput>;
+  listBillingGroupCostReports(
     args: ListBillingGroupCostReportsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListBillingGroupCostReportsCommandOutput>;
-  public listBillingGroupCostReports(
+  listBillingGroupCostReports(
     args: ListBillingGroupCostReportsCommandInput,
     cb: (err: any, data?: ListBillingGroupCostReportsCommandOutput) => void
   ): void;
-  public listBillingGroupCostReports(
+  listBillingGroupCostReports(
     args: ListBillingGroupCostReportsCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListBillingGroupCostReportsCommandOutput) => void
   ): void;
-  public listBillingGroupCostReports(
-    args: ListBillingGroupCostReportsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBillingGroupCostReportsCommandOutput) => void),
-    cb?: (err: any, data?: ListBillingGroupCostReportsCommandOutput) => void
-  ): Promise<ListBillingGroupCostReportsCommandOutput> | void {
-    const command = new ListBillingGroupCostReportsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>A paginated call to retrieve a list of billing groups for the given billing period. If you don't provide a billing group, the current billing period is used.</p>
+   * @see {@link ListBillingGroupsCommand}
    */
-  public listBillingGroups(
+  listBillingGroups(): Promise<ListBillingGroupsCommandOutput>;
+  listBillingGroups(
     args: ListBillingGroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListBillingGroupsCommandOutput>;
-  public listBillingGroups(
+  listBillingGroups(
     args: ListBillingGroupsCommandInput,
     cb: (err: any, data?: ListBillingGroupsCommandOutput) => void
   ): void;
-  public listBillingGroups(
+  listBillingGroups(
     args: ListBillingGroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListBillingGroupsCommandOutput) => void
   ): void;
-  public listBillingGroups(
-    args: ListBillingGroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListBillingGroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListBillingGroupsCommandOutput) => void
-  ): Promise<ListBillingGroupsCommandOutput> | void {
-    const command = new ListBillingGroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       A paginated call to get a list of all custom line items (FFLIs) for the given billing period. If you don't provide a billing period, the current billing period is used.
-   *     </p>
+   * @see {@link ListCustomLineItemsCommand}
    */
-  public listCustomLineItems(
+  listCustomLineItems(): Promise<ListCustomLineItemsCommandOutput>;
+  listCustomLineItems(
     args: ListCustomLineItemsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListCustomLineItemsCommandOutput>;
-  public listCustomLineItems(
+  listCustomLineItems(
     args: ListCustomLineItemsCommandInput,
     cb: (err: any, data?: ListCustomLineItemsCommandOutput) => void
   ): void;
-  public listCustomLineItems(
+  listCustomLineItems(
     args: ListCustomLineItemsCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListCustomLineItemsCommandOutput) => void
   ): void;
-  public listCustomLineItems(
-    args: ListCustomLineItemsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCustomLineItemsCommandOutput) => void),
-    cb?: (err: any, data?: ListCustomLineItemsCommandOutput) => void
-  ): Promise<ListCustomLineItemsCommandOutput> | void {
-    const command = new ListCustomLineItemsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>A paginated call to get pricing plans for the given billing period. If you don't provide a billing period, the current billing period is used.
-   *     </p>
+   * @see {@link ListCustomLineItemVersionsCommand}
    */
-  public listPricingPlans(
+  listCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<ListCustomLineItemVersionsCommandOutput>;
+  listCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    cb: (err: any, data?: ListCustomLineItemVersionsCommandOutput) => void
+  ): void;
+  listCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: ListCustomLineItemVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPricingPlansCommand}
+   */
+  listPricingPlans(): Promise<ListPricingPlansCommandOutput>;
+  listPricingPlans(
     args: ListPricingPlansCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListPricingPlansCommandOutput>;
-  public listPricingPlans(
+  listPricingPlans(
     args: ListPricingPlansCommandInput,
     cb: (err: any, data?: ListPricingPlansCommandOutput) => void
   ): void;
-  public listPricingPlans(
+  listPricingPlans(
     args: ListPricingPlansCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListPricingPlansCommandOutput) => void
   ): void;
-  public listPricingPlans(
-    args: ListPricingPlansCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPricingPlansCommandOutput) => void),
-    cb?: (err: any, data?: ListPricingPlansCommandOutput) => void
-  ): Promise<ListPricingPlansCommandOutput> | void {
-    const command = new ListPricingPlansCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       A list of the pricing plans associated with a pricing rule.
-   *     </p>
+   * @see {@link ListPricingPlansAssociatedWithPricingRuleCommand}
    */
-  public listPricingPlansAssociatedWithPricingRule(
+  listPricingPlansAssociatedWithPricingRule(
     args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListPricingPlansAssociatedWithPricingRuleCommandOutput>;
-  public listPricingPlansAssociatedWithPricingRule(
+  listPricingPlansAssociatedWithPricingRule(
     args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
     cb: (err: any, data?: ListPricingPlansAssociatedWithPricingRuleCommandOutput) => void
   ): void;
-  public listPricingPlansAssociatedWithPricingRule(
+  listPricingPlansAssociatedWithPricingRule(
     args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListPricingPlansAssociatedWithPricingRuleCommandOutput) => void
   ): void;
-  public listPricingPlansAssociatedWithPricingRule(
-    args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: ListPricingPlansAssociatedWithPricingRuleCommandOutput) => void),
-    cb?: (err: any, data?: ListPricingPlansAssociatedWithPricingRuleCommandOutput) => void
-  ): Promise<ListPricingPlansAssociatedWithPricingRuleCommandOutput> | void {
-    const command = new ListPricingPlansAssociatedWithPricingRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Describes a pricing rule that can be associated to a pricing plan, or set of pricing plans.
-   *     </p>
+   * @see {@link ListPricingRulesCommand}
    */
-  public listPricingRules(
+  listPricingRules(): Promise<ListPricingRulesCommandOutput>;
+  listPricingRules(
     args: ListPricingRulesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListPricingRulesCommandOutput>;
-  public listPricingRules(
+  listPricingRules(
     args: ListPricingRulesCommandInput,
     cb: (err: any, data?: ListPricingRulesCommandOutput) => void
   ): void;
-  public listPricingRules(
+  listPricingRules(
     args: ListPricingRulesCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListPricingRulesCommandOutput) => void
   ): void;
-  public listPricingRules(
-    args: ListPricingRulesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPricingRulesCommandOutput) => void),
-    cb?: (err: any, data?: ListPricingRulesCommandOutput) => void
-  ): Promise<ListPricingRulesCommandOutput> | void {
-    const command = new ListPricingRulesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Lists the pricing rules associated with a pricing plan.
-   *     </p>
+   * @see {@link ListPricingRulesAssociatedToPricingPlanCommand}
    */
-  public listPricingRulesAssociatedToPricingPlan(
+  listPricingRulesAssociatedToPricingPlan(
     args: ListPricingRulesAssociatedToPricingPlanCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListPricingRulesAssociatedToPricingPlanCommandOutput>;
-  public listPricingRulesAssociatedToPricingPlan(
+  listPricingRulesAssociatedToPricingPlan(
     args: ListPricingRulesAssociatedToPricingPlanCommandInput,
     cb: (err: any, data?: ListPricingRulesAssociatedToPricingPlanCommandOutput) => void
   ): void;
-  public listPricingRulesAssociatedToPricingPlan(
+  listPricingRulesAssociatedToPricingPlan(
     args: ListPricingRulesAssociatedToPricingPlanCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListPricingRulesAssociatedToPricingPlanCommandOutput) => void
   ): void;
-  public listPricingRulesAssociatedToPricingPlan(
-    args: ListPricingRulesAssociatedToPricingPlanCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: ListPricingRulesAssociatedToPricingPlanCommandOutput) => void),
-    cb?: (err: any, data?: ListPricingRulesAssociatedToPricingPlanCommandOutput) => void
-  ): Promise<ListPricingRulesAssociatedToPricingPlanCommandOutput> | void {
-    const command = new ListPricingRulesAssociatedToPricingPlanCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       List the resources associated to a custom line item.
-   *     </p>
+   * @see {@link ListResourcesAssociatedToCustomLineItemCommand}
    */
-  public listResourcesAssociatedToCustomLineItem(
+  listResourcesAssociatedToCustomLineItem(
     args: ListResourcesAssociatedToCustomLineItemCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListResourcesAssociatedToCustomLineItemCommandOutput>;
-  public listResourcesAssociatedToCustomLineItem(
+  listResourcesAssociatedToCustomLineItem(
     args: ListResourcesAssociatedToCustomLineItemCommandInput,
     cb: (err: any, data?: ListResourcesAssociatedToCustomLineItemCommandOutput) => void
   ): void;
-  public listResourcesAssociatedToCustomLineItem(
+  listResourcesAssociatedToCustomLineItem(
     args: ListResourcesAssociatedToCustomLineItemCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListResourcesAssociatedToCustomLineItemCommandOutput) => void
   ): void;
-  public listResourcesAssociatedToCustomLineItem(
-    args: ListResourcesAssociatedToCustomLineItemCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: ListResourcesAssociatedToCustomLineItemCommandOutput) => void),
-    cb?: (err: any, data?: ListResourcesAssociatedToCustomLineItemCommandOutput) => void
-  ): Promise<ListResourcesAssociatedToCustomLineItemCommandOutput> | void {
-    const command = new ListResourcesAssociatedToCustomLineItemCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       A list the tags for a resource.
-   *     </p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p> Associates the specified tags to a resource with the specified <code>resourceArn</code>.
-   *       If existing tags on a resource are not specified in the request parameters, they are not
-   *       changed. </p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BillingconductorRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>
-   *       Deletes specified tags from a resource.
-   *     </p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This updates an existing billing group.
-   *     </p>
+   * @see {@link UpdateBillingGroupCommand}
    */
-  public updateBillingGroup(
+  updateBillingGroup(
     args: UpdateBillingGroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<UpdateBillingGroupCommandOutput>;
-  public updateBillingGroup(
+  updateBillingGroup(
     args: UpdateBillingGroupCommandInput,
     cb: (err: any, data?: UpdateBillingGroupCommandOutput) => void
   ): void;
-  public updateBillingGroup(
+  updateBillingGroup(
     args: UpdateBillingGroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: UpdateBillingGroupCommandOutput) => void
   ): void;
-  public updateBillingGroup(
-    args: UpdateBillingGroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBillingGroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBillingGroupCommandOutput) => void
-  ): Promise<UpdateBillingGroupCommandOutput> | void {
-    const command = new UpdateBillingGroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Update an existing custom line item in the current or previous billing period.
-   *     </p>
+   * @see {@link UpdateBillingTransferPreferenceCommand}
    */
-  public updateCustomLineItem(
+  updateBillingTransferPreference(
+    args: UpdateBillingTransferPreferenceCommandInput,
+    options?: BillingconductorRequestOptions
+  ): Promise<UpdateBillingTransferPreferenceCommandOutput>;
+  updateBillingTransferPreference(
+    args: UpdateBillingTransferPreferenceCommandInput,
+    cb: (err: any, data?: UpdateBillingTransferPreferenceCommandOutput) => void
+  ): void;
+  updateBillingTransferPreference(
+    args: UpdateBillingTransferPreferenceCommandInput,
+    options: BillingconductorRequestOptions,
+    cb: (err: any, data?: UpdateBillingTransferPreferenceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCustomLineItemCommand}
+   */
+  updateCustomLineItem(
     args: UpdateCustomLineItemCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<UpdateCustomLineItemCommandOutput>;
-  public updateCustomLineItem(
+  updateCustomLineItem(
     args: UpdateCustomLineItemCommandInput,
     cb: (err: any, data?: UpdateCustomLineItemCommandOutput) => void
   ): void;
-  public updateCustomLineItem(
+  updateCustomLineItem(
     args: UpdateCustomLineItemCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: UpdateCustomLineItemCommandOutput) => void
   ): void;
-  public updateCustomLineItem(
-    args: UpdateCustomLineItemCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCustomLineItemCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCustomLineItemCommandOutput) => void
-  ): Promise<UpdateCustomLineItemCommandOutput> | void {
-    const command = new UpdateCustomLineItemCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>This updates an existing pricing plan.
-   *     </p>
+   * @see {@link UpdatePricingPlanCommand}
    */
-  public updatePricingPlan(
+  updatePricingPlan(
     args: UpdatePricingPlanCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<UpdatePricingPlanCommandOutput>;
-  public updatePricingPlan(
+  updatePricingPlan(
     args: UpdatePricingPlanCommandInput,
     cb: (err: any, data?: UpdatePricingPlanCommandOutput) => void
   ): void;
-  public updatePricingPlan(
+  updatePricingPlan(
     args: UpdatePricingPlanCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: UpdatePricingPlanCommandOutput) => void
   ): void;
-  public updatePricingPlan(
-    args: UpdatePricingPlanCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePricingPlanCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePricingPlanCommandOutput) => void
-  ): Promise<UpdatePricingPlanCommandOutput> | void {
-    const command = new UpdatePricingPlanCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>
-   *       Updates an existing pricing rule.
-   *     </p>
+   * @see {@link UpdatePricingRuleCommand}
    */
-  public updatePricingRule(
+  updatePricingRule(
     args: UpdatePricingRuleCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BillingconductorRequestOptions
   ): Promise<UpdatePricingRuleCommandOutput>;
-  public updatePricingRule(
+  updatePricingRule(
     args: UpdatePricingRuleCommandInput,
     cb: (err: any, data?: UpdatePricingRuleCommandOutput) => void
   ): void;
-  public updatePricingRule(
+  updatePricingRule(
     args: UpdatePricingRuleCommandInput,
-    options: __HttpHandlerOptions,
+    options: BillingconductorRequestOptions,
     cb: (err: any, data?: UpdatePricingRuleCommandOutput) => void
   ): void;
-  public updatePricingRule(
-    args: UpdatePricingRuleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePricingRuleCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePricingRuleCommandOutput) => void
-  ): Promise<UpdatePricingRuleCommandOutput> | void {
-    const command = new UpdatePricingRuleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link GetBillingGroupCostReportCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetBillingGroupCostReportCommandOutput}.
+   */
+  paginateGetBillingGroupCostReport(
+    args: GetBillingGroupCostReportCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetBillingGroupCostReportCommandOutput>;
+
+  /**
+   * @see {@link ListAccountAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountAssociationsCommandOutput}.
+   */
+  paginateListAccountAssociations(
+    args?: ListAccountAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListBillingGroupCostReportsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBillingGroupCostReportsCommandOutput}.
+   */
+  paginateListBillingGroupCostReports(
+    args?: ListBillingGroupCostReportsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBillingGroupCostReportsCommandOutput>;
+
+  /**
+   * @see {@link ListBillingGroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListBillingGroupsCommandOutput}.
+   */
+  paginateListBillingGroups(
+    args?: ListBillingGroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListBillingGroupsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomLineItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomLineItemsCommandOutput}.
+   */
+  paginateListCustomLineItems(
+    args?: ListCustomLineItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomLineItemsCommandOutput>;
+
+  /**
+   * @see {@link ListCustomLineItemVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomLineItemVersionsCommandOutput}.
+   */
+  paginateListCustomLineItemVersions(
+    args: ListCustomLineItemVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomLineItemVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListPricingPlansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingPlansCommandOutput}.
+   */
+  paginateListPricingPlans(
+    args?: ListPricingPlansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingPlansCommandOutput>;
+
+  /**
+   * @see {@link ListPricingPlansAssociatedWithPricingRuleCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingPlansAssociatedWithPricingRuleCommandOutput}.
+   */
+  paginateListPricingPlansAssociatedWithPricingRule(
+    args: ListPricingPlansAssociatedWithPricingRuleCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingPlansAssociatedWithPricingRuleCommandOutput>;
+
+  /**
+   * @see {@link ListPricingRulesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingRulesCommandOutput}.
+   */
+  paginateListPricingRules(
+    args?: ListPricingRulesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingRulesCommandOutput>;
+
+  /**
+   * @see {@link ListPricingRulesAssociatedToPricingPlanCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPricingRulesAssociatedToPricingPlanCommandOutput}.
+   */
+  paginateListPricingRulesAssociatedToPricingPlan(
+    args: ListPricingRulesAssociatedToPricingPlanCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPricingRulesAssociatedToPricingPlanCommandOutput>;
+
+  /**
+   * @see {@link ListResourcesAssociatedToCustomLineItemCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourcesAssociatedToCustomLineItemCommandOutput}.
+   */
+  paginateListResourcesAssociatedToCustomLineItem(
+    args: ListResourcesAssociatedToCustomLineItemCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourcesAssociatedToCustomLineItemCommandOutput>;
 }
+
+/**
+ * <p>Billing Conductor is a fully managed service that you can use to customize a <a href="https://docs.aws.amazon.com/billingconductor/latest/userguide/understanding-eb.html#eb-other-definitions">pro forma</a> version of your billing data each month, to accurately show or chargeback your end customers. Billing Conductor doesn't change the way you're billed by Amazon Web Services each month by design. Instead, it provides you with a mechanism to configure, generate, and display rates to certain customers over a given billing period. You can also analyze the difference between the rates you apply to your accounting groupings relative to your actual rates from Amazon Web Services. As a result of your Billing Conductor configuration, the payer account can also see the custom rate applied on the billing details page of the <a href="https://console.aws.amazon.com/billing">Billing console</a>, or configure a cost and usage report per billing group.</p> <p>This documentation shows how you can configure Billing Conductor by using its API. For more information about using the <a href="https://console.aws.amazon.com/billingconductor/">Billing Conductor</a> user interface, see the <a href="https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html"> Billing Conductor User Guide</a>.</p>
+ * @public
+ */
+export class Billingconductor extends BillingconductorClient implements Billingconductor {}
+createAggregatedClient(commands, Billingconductor, { paginators });

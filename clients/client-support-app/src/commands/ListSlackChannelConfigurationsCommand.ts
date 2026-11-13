@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListSlackChannelConfigurationsRequest,
-  ListSlackChannelConfigurationsRequestFilterSensitiveLog,
-  ListSlackChannelConfigurationsResult,
-  ListSlackChannelConfigurationsResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSlackChannelConfigurationsCommand,
-  serializeAws_restJson1ListSlackChannelConfigurationsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SupportAppClientResolvedConfig } from "../SupportAppClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSlackChannelConfigurationsRequest, ListSlackChannelConfigurationsResult } from "../models/models_0";
+import { ListSlackChannelConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSlackChannelConfigurationsCommand}.
+ */
 export interface ListSlackChannelConfigurationsCommandInput extends ListSlackChannelConfigurationsRequest {}
-export interface ListSlackChannelConfigurationsCommandOutput
-  extends ListSlackChannelConfigurationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListSlackChannelConfigurationsCommand}.
+ */
+export interface ListSlackChannelConfigurationsCommandOutput extends ListSlackChannelConfigurationsResult, __MetadataBearer {}
 
 /**
  * <p>Lists the Slack channel configurations for an Amazon Web Services account.</p>
@@ -36,74 +29,65 @@ export interface ListSlackChannelConfigurationsCommandOutput
  * ```javascript
  * import { SupportAppClient, ListSlackChannelConfigurationsCommand } from "@aws-sdk/client-support-app"; // ES Modules import
  * // const { SupportAppClient, ListSlackChannelConfigurationsCommand } = require("@aws-sdk/client-support-app"); // CommonJS import
+ * // import type { SupportAppClientConfig } from "@aws-sdk/client-support-app";
+ * const config = {}; // type is SupportAppClientConfig
  * const client = new SupportAppClient(config);
+ * const input = { // ListSlackChannelConfigurationsRequest
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListSlackChannelConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSlackChannelConfigurationsResult
+ * //   nextToken: "STRING_VALUE",
+ * //   slackChannelConfigurations: [ // slackChannelConfigurationList // required
+ * //     { // SlackChannelConfiguration
+ * //       teamId: "STRING_VALUE", // required
+ * //       channelId: "STRING_VALUE", // required
+ * //       channelName: "STRING_VALUE",
+ * //       notifyOnCreateOrReopenCase: true || false,
+ * //       notifyOnAddCorrespondenceToCase: true || false,
+ * //       notifyOnResolveCase: true || false,
+ * //       notifyOnCaseSeverity: "STRING_VALUE",
+ * //       channelRoleArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListSlackChannelConfigurationsCommandInput - {@link ListSlackChannelConfigurationsCommandInput}
+ * @returns {@link ListSlackChannelConfigurationsCommandOutput}
  * @see {@link ListSlackChannelConfigurationsCommandInput} for command's `input` shape.
  * @see {@link ListSlackChannelConfigurationsCommandOutput} for command's `response` shape.
  * @see {@link SupportAppClientResolvedConfig | config} for SupportAppClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>We can’t process your request right now because of a server issue. Try again later.</p>
+ *
+ * @throws {@link SupportAppServiceException}
+ * <p>Base exception class for all service exceptions from SupportApp service.</p>
+ *
+ *
+ * @public
  */
-export class ListSlackChannelConfigurationsCommand extends $Command<
-  ListSlackChannelConfigurationsCommandInput,
-  ListSlackChannelConfigurationsCommandOutput,
-  SupportAppClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSlackChannelConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SupportAppClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSlackChannelConfigurationsCommandInput, ListSlackChannelConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SupportAppClient";
-    const commandName = "ListSlackChannelConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSlackChannelConfigurationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListSlackChannelConfigurationsResultFilterSensitiveLog,
+export class ListSlackChannelConfigurationsCommand extends command<ListSlackChannelConfigurationsCommandInput, ListSlackChannelConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSlackChannelConfigurations",
+  ListSlackChannelConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSlackChannelConfigurationsRequest;
+      output: ListSlackChannelConfigurationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListSlackChannelConfigurationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSlackChannelConfigurationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListSlackChannelConfigurationsCommandOutput> {
-    return deserializeAws_restJson1ListSlackChannelConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSlackChannelConfigurationsCommandInput;
+      output: ListSlackChannelConfigurationsCommandOutput;
+    };
+  };
 }

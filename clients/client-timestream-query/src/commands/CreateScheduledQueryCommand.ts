@@ -1,31 +1,25 @@
 // smithy-typescript generated code
-import { getEndpointDiscoveryPlugin } from "@aws-sdk/middleware-endpoint-discovery";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateScheduledQueryRequest,
-  CreateScheduledQueryRequestFilterSensitiveLog,
-  CreateScheduledQueryResponse,
-  CreateScheduledQueryResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_0CreateScheduledQueryCommand,
-  serializeAws_json1_0CreateScheduledQueryCommand,
-} from "../protocols/Aws_json1_0";
-import { ServiceInputTypes, ServiceOutputTypes, TimestreamQueryClientResolvedConfig } from "../TimestreamQueryClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateScheduledQueryRequest, CreateScheduledQueryResponse } from "../models/models_0";
+import { CreateScheduledQuery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateScheduledQueryCommand}.
+ */
 export interface CreateScheduledQueryCommandInput extends CreateScheduledQueryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateScheduledQueryCommand}.
+ */
 export interface CreateScheduledQueryCommandOutput extends CreateScheduledQueryResponse, __MetadataBearer {}
 
 /**
@@ -39,71 +33,132 @@ export interface CreateScheduledQueryCommandOutput extends CreateScheduledQueryR
  * ```javascript
  * import { TimestreamQueryClient, CreateScheduledQueryCommand } from "@aws-sdk/client-timestream-query"; // ES Modules import
  * // const { TimestreamQueryClient, CreateScheduledQueryCommand } = require("@aws-sdk/client-timestream-query"); // CommonJS import
+ * // import type { TimestreamQueryClientConfig } from "@aws-sdk/client-timestream-query";
+ * const config = {}; // type is TimestreamQueryClientConfig
  * const client = new TimestreamQueryClient(config);
+ * const input = { // CreateScheduledQueryRequest
+ *   Name: "STRING_VALUE", // required
+ *   QueryString: "STRING_VALUE", // required
+ *   ScheduleConfiguration: { // ScheduleConfiguration
+ *     ScheduleExpression: "STRING_VALUE", // required
+ *   },
+ *   NotificationConfiguration: { // NotificationConfiguration
+ *     SnsConfiguration: { // SnsConfiguration
+ *       TopicArn: "STRING_VALUE", // required
+ *     },
+ *   },
+ *   TargetConfiguration: { // TargetConfiguration
+ *     TimestreamConfiguration: { // TimestreamConfiguration
+ *       DatabaseName: "STRING_VALUE", // required
+ *       TableName: "STRING_VALUE", // required
+ *       TimeColumn: "STRING_VALUE", // required
+ *       DimensionMappings: [ // DimensionMappingList // required
+ *         { // DimensionMapping
+ *           Name: "STRING_VALUE", // required
+ *           DimensionValueType: "VARCHAR", // required
+ *         },
+ *       ],
+ *       MultiMeasureMappings: { // MultiMeasureMappings
+ *         TargetMultiMeasureName: "STRING_VALUE",
+ *         MultiMeasureAttributeMappings: [ // MultiMeasureAttributeMappingList // required
+ *           { // MultiMeasureAttributeMapping
+ *             SourceColumn: "STRING_VALUE", // required
+ *             TargetMultiMeasureAttributeName: "STRING_VALUE",
+ *             MeasureValueType: "BIGINT" || "BOOLEAN" || "DOUBLE" || "VARCHAR" || "TIMESTAMP", // required
+ *           },
+ *         ],
+ *       },
+ *       MixedMeasureMappings: [ // MixedMeasureMappingList
+ *         { // MixedMeasureMapping
+ *           MeasureName: "STRING_VALUE",
+ *           SourceColumn: "STRING_VALUE",
+ *           TargetMeasureName: "STRING_VALUE",
+ *           MeasureValueType: "BIGINT" || "BOOLEAN" || "DOUBLE" || "VARCHAR" || "MULTI", // required
+ *           MultiMeasureAttributeMappings: [
+ *             {
+ *               SourceColumn: "STRING_VALUE", // required
+ *               TargetMultiMeasureAttributeName: "STRING_VALUE",
+ *               MeasureValueType: "BIGINT" || "BOOLEAN" || "DOUBLE" || "VARCHAR" || "TIMESTAMP", // required
+ *             },
+ *           ],
+ *         },
+ *       ],
+ *       MeasureNameColumn: "STRING_VALUE",
+ *     },
+ *   },
+ *   ClientToken: "STRING_VALUE",
+ *   ScheduledQueryExecutionRoleArn: "STRING_VALUE", // required
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   KmsKeyId: "STRING_VALUE",
+ *   ErrorReportConfiguration: { // ErrorReportConfiguration
+ *     S3Configuration: { // S3Configuration
+ *       BucketName: "STRING_VALUE", // required
+ *       ObjectKeyPrefix: "STRING_VALUE",
+ *       EncryptionOption: "SSE_S3" || "SSE_KMS",
+ *     },
+ *   },
+ * };
  * const command = new CreateScheduledQueryCommand(input);
  * const response = await client.send(command);
+ * // { // CreateScheduledQueryResponse
+ * //   Arn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateScheduledQueryCommandInput - {@link CreateScheduledQueryCommandInput}
+ * @returns {@link CreateScheduledQueryCommandOutput}
  * @see {@link CreateScheduledQueryCommandInput} for command's `input` shape.
  * @see {@link CreateScheduledQueryCommandOutput} for command's `response` shape.
  * @see {@link TimestreamQueryClientResolvedConfig | config} for TimestreamQueryClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have the necessary permissions to access the account settings.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p> Unable to poll results for a cancelled query. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred while processing the request.</p>
+ *
+ * @throws {@link InvalidEndpointException} (client fault)
+ *  <p>The requested endpoint is invalid.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You have exceeded the service quota.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled due to excessive requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> Invalid or malformed request. </p>
+ *
+ * @throws {@link TimestreamQueryServiceException}
+ * <p>Base exception class for all service exceptions from TimestreamQuery service.</p>
+ *
+ *
+ * @public
  */
-export class CreateScheduledQueryCommand extends $Command<
-  CreateScheduledQueryCommandInput,
-  CreateScheduledQueryCommandOutput,
-  TimestreamQueryClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateScheduledQueryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TimestreamQueryClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateScheduledQueryCommandInput, CreateScheduledQueryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(
-      getEndpointDiscoveryPlugin(configuration, { clientStack, options, isDiscoveredEndpointRequired: true })
-    );
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TimestreamQueryClient";
-    const commandName = "CreateScheduledQueryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateScheduledQueryRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateScheduledQueryResponseFilterSensitiveLog,
+export class CreateScheduledQueryCommand extends command<CreateScheduledQueryCommandInput, CreateScheduledQueryCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateScheduledQuery",
+  CreateScheduledQuery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateScheduledQueryRequest;
+      output: CreateScheduledQueryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateScheduledQueryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CreateScheduledQueryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateScheduledQueryCommandOutput> {
-    return deserializeAws_json1_0CreateScheduledQueryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateScheduledQueryCommandInput;
+      output: CreateScheduledQueryCommandOutput;
+    };
+  };
 }

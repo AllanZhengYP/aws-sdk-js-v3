@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { HealthClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../HealthClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeEventDetailsForOrganizationRequest,
-  DescribeEventDetailsForOrganizationRequestFilterSensitiveLog,
   DescribeEventDetailsForOrganizationResponse,
-  DescribeEventDetailsForOrganizationResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeEventDetailsForOrganizationCommand,
-  serializeAws_json1_1DescribeEventDetailsForOrganizationCommand,
-} from "../protocols/Aws_json1_1";
+import { DescribeEventDetailsForOrganization$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEventDetailsForOrganizationCommand}.
+ */
 export interface DescribeEventDetailsForOrganizationCommandInput extends DescribeEventDetailsForOrganizationRequest {}
-export interface DescribeEventDetailsForOrganizationCommandOutput
-  extends DescribeEventDetailsForOrganizationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEventDetailsForOrganizationCommand}.
+ */
+export interface DescribeEventDetailsForOrganizationCommandOutput extends DescribeEventDetailsForOrganizationResponse, __MetadataBearer {}
 
 /**
  * <p>Returns detailed information about one or more specified events for one or more
@@ -58,7 +54,6 @@ export interface DescribeEventDetailsForOrganizationCommandOutput
  *             </li>
  *          </ul>
  *          <p>For more information, see <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a>.</p>
- *
  *          <note>
  *             <p>This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific Health events. For more
  *                   information, see <a href="https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions">Resource- and action-based conditions</a> in the <i>Health User Guide</i>.</p>
@@ -68,74 +63,91 @@ export interface DescribeEventDetailsForOrganizationCommandOutput
  * ```javascript
  * import { HealthClient, DescribeEventDetailsForOrganizationCommand } from "@aws-sdk/client-health"; // ES Modules import
  * // const { HealthClient, DescribeEventDetailsForOrganizationCommand } = require("@aws-sdk/client-health"); // CommonJS import
+ * // import type { HealthClientConfig } from "@aws-sdk/client-health";
+ * const config = {}; // type is HealthClientConfig
  * const client = new HealthClient(config);
+ * const input = { // DescribeEventDetailsForOrganizationRequest
+ *   organizationEventDetailFilters: [ // OrganizationEventDetailFiltersList // required
+ *     { // EventAccountFilter
+ *       eventArn: "STRING_VALUE", // required
+ *       awsAccountId: "STRING_VALUE",
+ *     },
+ *   ],
+ *   locale: "STRING_VALUE",
+ * };
  * const command = new DescribeEventDetailsForOrganizationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEventDetailsForOrganizationResponse
+ * //   successfulSet: [ // DescribeEventDetailsForOrganizationSuccessfulSet
+ * //     { // OrganizationEventDetails
+ * //       awsAccountId: "STRING_VALUE",
+ * //       event: { // Event
+ * //         arn: "STRING_VALUE",
+ * //         service: "STRING_VALUE",
+ * //         eventTypeCode: "STRING_VALUE",
+ * //         eventTypeCategory: "issue" || "accountNotification" || "scheduledChange" || "investigation",
+ * //         region: "STRING_VALUE",
+ * //         availabilityZone: "STRING_VALUE",
+ * //         startTime: new Date("TIMESTAMP"),
+ * //         endTime: new Date("TIMESTAMP"),
+ * //         lastUpdatedTime: new Date("TIMESTAMP"),
+ * //         statusCode: "open" || "closed" || "upcoming",
+ * //         eventScopeCode: "PUBLIC" || "ACCOUNT_SPECIFIC" || "NONE",
+ * //         actionability: "ACTION_REQUIRED" || "ACTION_MAY_BE_REQUIRED" || "INFORMATIONAL",
+ * //         personas: [ // EventPersonaList
+ * //           "OPERATIONS" || "SECURITY" || "BILLING",
+ * //         ],
+ * //       },
+ * //       eventDescription: { // EventDescription
+ * //         latestDescription: "STRING_VALUE",
+ * //       },
+ * //       eventMetadata: { // eventMetadata
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   failedSet: [ // DescribeEventDetailsForOrganizationFailedSet
+ * //     { // OrganizationEventDetailsErrorItem
+ * //       awsAccountId: "STRING_VALUE",
+ * //       eventArn: "STRING_VALUE",
+ * //       errorName: "STRING_VALUE",
+ * //       errorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeEventDetailsForOrganizationCommandInput - {@link DescribeEventDetailsForOrganizationCommandInput}
+ * @returns {@link DescribeEventDetailsForOrganizationCommandOutput}
  * @see {@link DescribeEventDetailsForOrganizationCommandInput} for command's `input` shape.
  * @see {@link DescribeEventDetailsForOrganizationCommandOutput} for command's `response` shape.
  * @see {@link HealthClientResolvedConfig | config} for HealthClient's `config` shape.
  *
+ * @throws {@link UnsupportedLocale} (client fault)
+ *  <p>The specified locale is not supported.</p>
+ *
+ * @throws {@link HealthServiceException}
+ * <p>Base exception class for all service exceptions from Health service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEventDetailsForOrganizationCommand extends $Command<
-  DescribeEventDetailsForOrganizationCommandInput,
-  DescribeEventDetailsForOrganizationCommandOutput,
-  HealthClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEventDetailsForOrganizationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: HealthClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEventDetailsForOrganizationCommandInput, DescribeEventDetailsForOrganizationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "HealthClient";
-    const commandName = "DescribeEventDetailsForOrganizationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEventDetailsForOrganizationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEventDetailsForOrganizationResponseFilterSensitiveLog,
+export class DescribeEventDetailsForOrganizationCommand extends command<DescribeEventDetailsForOrganizationCommandInput, DescribeEventDetailsForOrganizationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEventDetailsForOrganization",
+  DescribeEventDetailsForOrganization$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEventDetailsForOrganizationRequest;
+      output: DescribeEventDetailsForOrganizationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeEventDetailsForOrganizationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEventDetailsForOrganizationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeEventDetailsForOrganizationCommandOutput> {
-    return deserializeAws_json1_1DescribeEventDetailsForOrganizationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEventDetailsForOrganizationCommandInput;
+      output: DescribeEventDetailsForOrganizationCommandOutput;
+    };
+  };
 }

@@ -1,105 +1,96 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CrlDetailResponse,
-  CrlDetailResponseFilterSensitiveLog,
-  ScalarCrlRequest,
-  ScalarCrlRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteCrlCommand,
-  serializeAws_restJson1DeleteCrlCommand,
-} from "../protocols/Aws_restJson1";
-import { RolesAnywhereClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RolesAnywhereClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CrlDetailResponse, ScalarCrlRequest } from "../models/models_0";
+import { DeleteCrl$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCrlCommand}.
+ */
 export interface DeleteCrlCommandInput extends ScalarCrlRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCrlCommand}.
+ */
 export interface DeleteCrlCommandOutput extends CrlDetailResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes a certificate revocation list (CRL).</p>
- *          <p>
- *             <b>Required permissions: </b>
- *             <code>rolesanywhere:DeleteCrl</code>.
- *          </p>
+ * <p>Deletes a certificate revocation list (CRL).</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DeleteCrl</code>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RolesAnywhereClient, DeleteCrlCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
  * // const { RolesAnywhereClient, DeleteCrlCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
  * const client = new RolesAnywhereClient(config);
+ * const input = { // ScalarCrlRequest
+ *   crlId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteCrlCommand(input);
  * const response = await client.send(command);
+ * // { // CrlDetailResponse
+ * //   crl: { // CrlDetail
+ * //     crlId: "STRING_VALUE",
+ * //     crlArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     enabled: true || false,
+ * //     crlData: new Uint8Array(),
+ * //     trustAnchorArn: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     aliasName: "STRING_VALUE",
+ * //     aliasArn: "STRING_VALUE",
+ * //     previousAliasName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteCrlCommandInput - {@link DeleteCrlCommandInput}
+ * @returns {@link DeleteCrlCommandOutput}
  * @see {@link DeleteCrlCommandInput} for command's `input` shape.
  * @see {@link DeleteCrlCommandOutput} for command's `response` shape.
  * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteCrlCommand extends $Command<
-  DeleteCrlCommandInput,
-  DeleteCrlCommandOutput,
-  RolesAnywhereClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCrlCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RolesAnywhereClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCrlCommandInput, DeleteCrlCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RolesAnywhereClient";
-    const commandName = "DeleteCrlCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ScalarCrlRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CrlDetailResponseFilterSensitiveLog,
+export class DeleteCrlCommand extends command<DeleteCrlCommandInput, DeleteCrlCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCrl",
+  DeleteCrl$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ScalarCrlRequest;
+      output: CrlDetailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteCrlCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteCrlCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteCrlCommandOutput> {
-    return deserializeAws_restJson1DeleteCrlCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCrlCommandInput;
+      output: DeleteCrlCommandOutput;
+    };
+  };
 }

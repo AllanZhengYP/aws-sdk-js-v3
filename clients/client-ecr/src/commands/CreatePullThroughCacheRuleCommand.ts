@@ -1,105 +1,125 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ECRClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ECRClient";
-import {
-  CreatePullThroughCacheRuleRequest,
-  CreatePullThroughCacheRuleRequestFilterSensitiveLog,
-  CreatePullThroughCacheRuleResponse,
-  CreatePullThroughCacheRuleResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1CreatePullThroughCacheRuleCommand,
-  serializeAws_json1_1CreatePullThroughCacheRuleCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePullThroughCacheRuleRequest, CreatePullThroughCacheRuleResponse } from "../models/models_0";
+import { CreatePullThroughCacheRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePullThroughCacheRuleCommand}.
+ */
 export interface CreatePullThroughCacheRuleCommandInput extends CreatePullThroughCacheRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePullThroughCacheRuleCommand}.
+ */
 export interface CreatePullThroughCacheRuleCommandOutput extends CreatePullThroughCacheRuleResponse, __MetadataBearer {}
 
 /**
  * <p>Creates a pull through cache rule. A pull through cache rule provides a way to cache
- *             images from an external public registry in your Amazon ECR private registry.</p>
+ *             images from an upstream registry source in your Amazon ECR private registry. For more
+ *             information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html">Using pull through cache
+ *                 rules</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ECRClient, CreatePullThroughCacheRuleCommand } from "@aws-sdk/client-ecr"; // ES Modules import
  * // const { ECRClient, CreatePullThroughCacheRuleCommand } = require("@aws-sdk/client-ecr"); // CommonJS import
+ * // import type { ECRClientConfig } from "@aws-sdk/client-ecr";
+ * const config = {}; // type is ECRClientConfig
  * const client = new ECRClient(config);
+ * const input = { // CreatePullThroughCacheRuleRequest
+ *   ecrRepositoryPrefix: "STRING_VALUE", // required
+ *   upstreamRegistryUrl: "STRING_VALUE", // required
+ *   registryId: "STRING_VALUE",
+ *   upstreamRegistry: "ecr" || "ecr-public" || "quay" || "k8s" || "docker-hub" || "github-container-registry" || "azure-container-registry" || "gitlab-container-registry" || "chainguard",
+ *   credentialArn: "STRING_VALUE",
+ *   customRoleArn: "STRING_VALUE",
+ *   upstreamRepositoryPrefix: "STRING_VALUE",
+ * };
  * const command = new CreatePullThroughCacheRuleCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePullThroughCacheRuleResponse
+ * //   ecrRepositoryPrefix: "STRING_VALUE",
+ * //   upstreamRegistryUrl: "STRING_VALUE",
+ * //   createdAt: new Date("TIMESTAMP"),
+ * //   registryId: "STRING_VALUE",
+ * //   upstreamRegistry: "ecr" || "ecr-public" || "quay" || "k8s" || "docker-hub" || "github-container-registry" || "azure-container-registry" || "gitlab-container-registry" || "chainguard",
+ * //   credentialArn: "STRING_VALUE",
+ * //   customRoleArn: "STRING_VALUE",
+ * //   upstreamRepositoryPrefix: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreatePullThroughCacheRuleCommandInput - {@link CreatePullThroughCacheRuleCommandInput}
+ * @returns {@link CreatePullThroughCacheRuleCommandOutput}
  * @see {@link CreatePullThroughCacheRuleCommandInput} for command's `input` shape.
  * @see {@link CreatePullThroughCacheRuleCommandOutput} for command's `response` shape.
  * @see {@link ECRClientResolvedConfig | config} for ECRClient's `config` shape.
  *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The specified parameter is invalid. Review the available parameters for the API
+ *             request.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The operation did not succeed because it would have exceeded a service limit for your
+ *             account. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html">Amazon ECR service quotas</a> in
+ *             the Amazon Elastic Container Registry User Guide.</p>
+ *
+ * @throws {@link PullThroughCacheRuleAlreadyExistsException} (client fault)
+ *  <p>A pull through cache rule with these settings already exists for the private
+ *             registry.</p>
+ *
+ * @throws {@link SecretNotFoundException} (client fault)
+ *  <p>The ARN of the secret specified in the pull through cache rule was not found. Update
+ *             the pull through cache rule with a valid secret ARN and try again.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server-side issue.</p>
+ *
+ * @throws {@link UnableToAccessSecretException} (client fault)
+ *  <p>The secret is unable to be accessed. Verify the resource permissions for the secret
+ *             and try again.</p>
+ *
+ * @throws {@link UnableToDecryptSecretValueException} (client fault)
+ *  <p>The secret is accessible but is unable to be decrypted. Verify the resource
+ *             permisisons and try again.</p>
+ *
+ * @throws {@link UnsupportedUpstreamRegistryException} (client fault)
+ *  <p>The specified upstream registry isn't supported.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There was an exception validating this request.</p>
+ *
+ * @throws {@link ECRServiceException}
+ * <p>Base exception class for all service exceptions from ECR service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePullThroughCacheRuleCommand extends $Command<
-  CreatePullThroughCacheRuleCommandInput,
-  CreatePullThroughCacheRuleCommandOutput,
-  ECRClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePullThroughCacheRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ECRClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePullThroughCacheRuleCommandInput, CreatePullThroughCacheRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ECRClient";
-    const commandName = "CreatePullThroughCacheRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePullThroughCacheRuleRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreatePullThroughCacheRuleResponseFilterSensitiveLog,
+export class CreatePullThroughCacheRuleCommand extends command<CreatePullThroughCacheRuleCommandInput, CreatePullThroughCacheRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePullThroughCacheRule",
+  CreatePullThroughCacheRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePullThroughCacheRuleRequest;
+      output: CreatePullThroughCacheRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePullThroughCacheRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreatePullThroughCacheRuleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreatePullThroughCacheRuleCommandOutput> {
-    return deserializeAws_json1_1CreatePullThroughCacheRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePullThroughCacheRuleCommandInput;
+      output: CreatePullThroughCacheRuleCommandOutput;
+    };
+  };
 }

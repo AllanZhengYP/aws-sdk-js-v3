@@ -20,6 +20,8 @@ export * from "./ListClustersCommand";
 export * from "./ListCompatibleImagesCommand";
 export * from "./ListJobsCommand";
 export * from "./ListLongTermPricingCommand";
+export * from "./ListPickupLocationsCommand";
+export * from "./ListServiceVersionsCommand";
 export * from "./UpdateClusterCommand";
 export * from "./UpdateJobCommand";
 export * from "./UpdateJobShipmentStateCommand";

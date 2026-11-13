@@ -1,107 +1,110 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import {
-  ListExplainabilityExportsRequest,
-  ListExplainabilityExportsRequestFilterSensitiveLog,
-  ListExplainabilityExportsResponse,
-  ListExplainabilityExportsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListExplainabilityExportsCommand,
-  serializeAws_json1_1ListExplainabilityExportsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListExplainabilityExportsRequest, ListExplainabilityExportsResponse } from "../models/models_0";
+import { ListExplainabilityExports$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListExplainabilityExportsCommand}.
+ */
 export interface ListExplainabilityExportsCommandInput extends ListExplainabilityExportsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListExplainabilityExportsCommand}.
+ */
 export interface ListExplainabilityExportsCommandOutput extends ListExplainabilityExportsResponse, __MetadataBearer {}
 
 /**
  * <p>Returns a list of Explainability exports created using the <a>CreateExplainabilityExport</a> operation. This operation returns a summary
  *             for each Explainability export. You can filter the list using an array of <a>Filter</a> objects.</p>
- *         <p>To retrieve the complete set of properties for a particular Explainability export, use
+ *          <p>To retrieve the complete set of properties for a particular Explainability export, use
  *             the ARN with the <a>DescribeExplainability</a> operation.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ForecastClient, ListExplainabilityExportsCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, ListExplainabilityExportsCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // ListExplainabilityExportsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // Filters
+ *     { // Filter
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *       Condition: "IS" || "IS_NOT", // required
+ *     },
+ *   ],
+ * };
  * const command = new ListExplainabilityExportsCommand(input);
  * const response = await client.send(command);
+ * // { // ListExplainabilityExportsResponse
+ * //   ExplainabilityExports: [ // ExplainabilityExports
+ * //     { // ExplainabilityExportSummary
+ * //       ExplainabilityExportArn: "STRING_VALUE",
+ * //       ExplainabilityExportName: "STRING_VALUE",
+ * //       Destination: { // DataDestination
+ * //         S3Config: { // S3Config
+ * //           Path: "STRING_VALUE", // required
+ * //           RoleArn: "STRING_VALUE", // required
+ * //           KMSKeyArn: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Status: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       LastModificationTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListExplainabilityExportsCommandInput - {@link ListExplainabilityExportsCommandInput}
+ * @returns {@link ListExplainabilityExportsCommandOutput}
  * @see {@link ListExplainabilityExportsCommandInput} for command's `input` shape.
  * @see {@link ListExplainabilityExportsCommandOutput} for command's `response` shape.
  * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid. Tokens expire after 24 hours.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class ListExplainabilityExportsCommand extends $Command<
-  ListExplainabilityExportsCommandInput,
-  ListExplainabilityExportsCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListExplainabilityExportsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListExplainabilityExportsCommandInput, ListExplainabilityExportsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "ListExplainabilityExportsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListExplainabilityExportsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListExplainabilityExportsResponseFilterSensitiveLog,
+export class ListExplainabilityExportsCommand extends command<ListExplainabilityExportsCommandInput, ListExplainabilityExportsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListExplainabilityExports",
+  ListExplainabilityExports$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListExplainabilityExportsRequest;
+      output: ListExplainabilityExportsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListExplainabilityExportsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListExplainabilityExportsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListExplainabilityExportsCommandOutput> {
-    return deserializeAws_json1_1ListExplainabilityExportsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListExplainabilityExportsCommandInput;
+      output: ListExplainabilityExportsCommandOutput;
+    };
+  };
 }

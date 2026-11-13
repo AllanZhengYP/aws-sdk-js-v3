@@ -1,101 +1,117 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetOrderInput,
-  GetOrderInputFilterSensitiveLog,
-  GetOrderOutput,
-  GetOrderOutputFilterSensitiveLog,
-} from "../models/models_0";
-import { OutpostsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OutpostsClient";
-import {
-  deserializeAws_restJson1GetOrderCommand,
-  serializeAws_restJson1GetOrderCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetOrderInput, GetOrderOutput } from "../models/models_0";
+import { GetOrder$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetOrderCommand}.
+ */
 export interface GetOrderCommandInput extends GetOrderInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetOrderCommand}.
+ */
 export interface GetOrderCommandOutput extends GetOrderOutput, __MetadataBearer {}
 
 /**
- * <p>Gets an order.</p>
+ * <p>Gets information about the specified order.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OutpostsClient, GetOrderCommand } from "@aws-sdk/client-outposts"; // ES Modules import
  * // const { OutpostsClient, GetOrderCommand } = require("@aws-sdk/client-outposts"); // CommonJS import
+ * // import type { OutpostsClientConfig } from "@aws-sdk/client-outposts";
+ * const config = {}; // type is OutpostsClientConfig
  * const client = new OutpostsClient(config);
+ * const input = { // GetOrderInput
+ *   OrderId: "STRING_VALUE", // required
+ * };
  * const command = new GetOrderCommand(input);
  * const response = await client.send(command);
+ * // { // GetOrderOutput
+ * //   Order: { // Order
+ * //     OutpostId: "STRING_VALUE",
+ * //     QuoteIdentifier: "STRING_VALUE",
+ * //     QuoteOptionIdentifier: "STRING_VALUE",
+ * //     OrderId: "STRING_VALUE",
+ * //     Status: "RECEIVED" || "PENDING" || "PROCESSING" || "INSTALLING" || "FULFILLED" || "CANCELLED" || "PREPARING" || "IN_PROGRESS" || "DELIVERED" || "COMPLETED" || "ERROR",
+ * //     LineItems: [ // LineItemListDefinition
+ * //       { // LineItem
+ * //         CatalogItemId: "STRING_VALUE",
+ * //         LineItemId: "STRING_VALUE",
+ * //         Quantity: Number("int"),
+ * //         Status: "PREPARING" || "BUILDING" || "SHIPPED" || "DELIVERED" || "INSTALLING" || "INSTALLED" || "ERROR" || "CANCELLED" || "REPLACED",
+ * //         ShipmentInformation: { // ShipmentInformation
+ * //           ShipmentTrackingNumber: "STRING_VALUE",
+ * //           ShipmentCarrier: "DHL" || "DBS" || "FEDEX" || "UPS" || "EXPEDITORS",
+ * //         },
+ * //         AssetInformationList: [ // LineItemAssetInformationList
+ * //           { // LineItemAssetInformation
+ * //             AssetId: "STRING_VALUE",
+ * //             MacAddressList: [ // MacAddressList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //         PreviousLineItemId: "STRING_VALUE",
+ * //         PreviousOrderId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     PaymentOption: "ALL_UPFRONT" || "NO_UPFRONT" || "PARTIAL_UPFRONT",
+ * //     OrderSubmissionDate: new Date("TIMESTAMP"),
+ * //     OrderFulfilledDate: new Date("TIMESTAMP"),
+ * //     PaymentTerm: "THREE_YEARS" || "ONE_YEAR" || "FIVE_YEARS",
+ * //     OrderType: "OUTPOST" || "REPLACEMENT",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetOrderCommandInput - {@link GetOrderCommandInput}
+ * @returns {@link GetOrderCommandOutput}
  * @see {@link GetOrderCommandInput} for command's `input` shape.
  * @see {@link GetOrderCommandOutput} for command's `response` shape.
  * @see {@link OutpostsClientResolvedConfig | config} for OutpostsClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified request is not valid.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link OutpostsServiceException}
+ * <p>Base exception class for all service exceptions from Outposts service.</p>
+ *
+ *
+ * @public
  */
-export class GetOrderCommand extends $Command<
-  GetOrderCommandInput,
-  GetOrderCommandOutput,
-  OutpostsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetOrderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OutpostsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetOrderCommandInput, GetOrderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OutpostsClient";
-    const commandName = "GetOrderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetOrderInputFilterSensitiveLog,
-      outputFilterSensitiveLog: GetOrderOutputFilterSensitiveLog,
+export class GetOrderCommand extends command<GetOrderCommandInput, GetOrderCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetOrder",
+  GetOrder$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetOrderInput;
+      output: GetOrderOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetOrderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetOrderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetOrderCommandOutput> {
-    return deserializeAws_restJson1GetOrderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetOrderCommandInput;
+      output: GetOrderCommandOutput;
+    };
+  };
 }

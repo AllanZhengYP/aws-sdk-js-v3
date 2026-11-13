@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyUIBuilderClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyUIBuilderClient";
-import {
-  ListThemesRequest,
-  ListThemesRequestFilterSensitiveLog,
-  ListThemesResponse,
-  ListThemesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListThemesCommand,
-  serializeAws_restJson1ListThemesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListThemesRequest, ListThemesResponse } from "../models/models_0";
+import { ListThemes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListThemesCommand}.
+ */
 export interface ListThemesCommandInput extends ListThemesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListThemesCommand}.
+ */
 export interface ListThemesCommandOutput extends ListThemesResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,64 @@ export interface ListThemesCommandOutput extends ListThemesResponse, __MetadataB
  * ```javascript
  * import { AmplifyUIBuilderClient, ListThemesCommand } from "@aws-sdk/client-amplifyuibuilder"; // ES Modules import
  * // const { AmplifyUIBuilderClient, ListThemesCommand } = require("@aws-sdk/client-amplifyuibuilder"); // CommonJS import
+ * // import type { AmplifyUIBuilderClientConfig } from "@aws-sdk/client-amplifyuibuilder";
+ * const config = {}; // type is AmplifyUIBuilderClientConfig
  * const client = new AmplifyUIBuilderClient(config);
+ * const input = { // ListThemesRequest
+ *   appId: "STRING_VALUE", // required
+ *   environmentName: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListThemesCommand(input);
  * const response = await client.send(command);
+ * // { // ListThemesResponse
+ * //   entities: [ // ThemeSummaryList // required
+ * //     { // ThemeSummary
+ * //       appId: "STRING_VALUE", // required
+ * //       environmentName: "STRING_VALUE", // required
+ * //       id: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListThemesCommandInput - {@link ListThemesCommandInput}
+ * @returns {@link ListThemesCommandOutput}
  * @see {@link ListThemesCommandInput} for command's `input` shape.
  * @see {@link ListThemesCommandOutput} for command's `response` shape.
  * @see {@link AmplifyUIBuilderClientResolvedConfig | config} for AmplifyUIBuilderClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred. Please retry your request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An invalid or out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link AmplifyUIBuilderServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyUIBuilder service.</p>
+ *
+ *
+ * @public
  */
-export class ListThemesCommand extends $Command<
-  ListThemesCommandInput,
-  ListThemesCommandOutput,
-  AmplifyUIBuilderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListThemesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyUIBuilderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListThemesCommandInput, ListThemesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyUIBuilderClient";
-    const commandName = "ListThemesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListThemesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListThemesResponseFilterSensitiveLog,
+export class ListThemesCommand extends command<ListThemesCommandInput, ListThemesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListThemes",
+  ListThemes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListThemesRequest;
+      output: ListThemesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListThemesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListThemesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListThemesCommandOutput> {
-    return deserializeAws_restJson1ListThemesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListThemesCommandInput;
+      output: ListThemesCommandOutput;
+    };
+  };
 }

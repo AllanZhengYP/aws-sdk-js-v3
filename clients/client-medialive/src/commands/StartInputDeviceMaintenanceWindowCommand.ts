@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaLiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaLiveClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   StartInputDeviceMaintenanceWindowRequest,
-  StartInputDeviceMaintenanceWindowRequestFilterSensitiveLog,
   StartInputDeviceMaintenanceWindowResponse,
-  StartInputDeviceMaintenanceWindowResponseFilterSensitiveLog,
 } from "../models/models_1";
-import {
-  deserializeAws_restJson1StartInputDeviceMaintenanceWindowCommand,
-  serializeAws_restJson1StartInputDeviceMaintenanceWindowCommand,
-} from "../protocols/Aws_restJson1";
+import { StartInputDeviceMaintenanceWindow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartInputDeviceMaintenanceWindowCommand}.
+ */
 export interface StartInputDeviceMaintenanceWindowCommandInput extends StartInputDeviceMaintenanceWindowRequest {}
-export interface StartInputDeviceMaintenanceWindowCommandOutput
-  extends StartInputDeviceMaintenanceWindowResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link StartInputDeviceMaintenanceWindowCommand}.
+ */
+export interface StartInputDeviceMaintenanceWindowCommandOutput extends StartInputDeviceMaintenanceWindowResponse, __MetadataBearer {}
 
 /**
  * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
@@ -36,74 +32,69 @@ export interface StartInputDeviceMaintenanceWindowCommandOutput
  * ```javascript
  * import { MediaLiveClient, StartInputDeviceMaintenanceWindowCommand } from "@aws-sdk/client-medialive"; // ES Modules import
  * // const { MediaLiveClient, StartInputDeviceMaintenanceWindowCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * // import type { MediaLiveClientConfig } from "@aws-sdk/client-medialive";
+ * const config = {}; // type is MediaLiveClientConfig
  * const client = new MediaLiveClient(config);
+ * const input = { // StartInputDeviceMaintenanceWindowRequest
+ *   InputDeviceId: "STRING_VALUE", // required
+ * };
  * const command = new StartInputDeviceMaintenanceWindowCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StartInputDeviceMaintenanceWindowCommandInput - {@link StartInputDeviceMaintenanceWindowCommandInput}
+ * @returns {@link StartInputDeviceMaintenanceWindowCommandOutput}
  * @see {@link StartInputDeviceMaintenanceWindowCommandInput} for command's `input` shape.
  * @see {@link StartInputDeviceMaintenanceWindowCommandOutput} for command's `response` shape.
  * @see {@link MediaLiveClientResolvedConfig | config} for MediaLiveClient's `config` shape.
  *
+ * @throws {@link BadGatewayException} (server fault)
+ *  Placeholder documentation for BadGatewayException
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  Placeholder documentation for BadRequestException
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  Placeholder documentation for ForbiddenException
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  Placeholder documentation for GatewayTimeoutException
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  Placeholder documentation for InternalServerErrorException
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  Placeholder documentation for NotFoundException
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  Placeholder documentation for TooManyRequestsException
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  Placeholder documentation for UnprocessableEntityException
+ *
+ * @throws {@link MediaLiveServiceException}
+ * <p>Base exception class for all service exceptions from MediaLive service.</p>
+ *
+ *
+ * @public
  */
-export class StartInputDeviceMaintenanceWindowCommand extends $Command<
-  StartInputDeviceMaintenanceWindowCommandInput,
-  StartInputDeviceMaintenanceWindowCommandOutput,
-  MediaLiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartInputDeviceMaintenanceWindowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaLiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartInputDeviceMaintenanceWindowCommandInput, StartInputDeviceMaintenanceWindowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaLiveClient";
-    const commandName = "StartInputDeviceMaintenanceWindowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartInputDeviceMaintenanceWindowRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StartInputDeviceMaintenanceWindowResponseFilterSensitiveLog,
+export class StartInputDeviceMaintenanceWindowCommand extends command<StartInputDeviceMaintenanceWindowCommandInput, StartInputDeviceMaintenanceWindowCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartInputDeviceMaintenanceWindow",
+  StartInputDeviceMaintenanceWindow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartInputDeviceMaintenanceWindowRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: StartInputDeviceMaintenanceWindowCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartInputDeviceMaintenanceWindowCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartInputDeviceMaintenanceWindowCommandOutput> {
-    return deserializeAws_restJson1StartInputDeviceMaintenanceWindowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartInputDeviceMaintenanceWindowCommandInput;
+      output: StartInputDeviceMaintenanceWindowCommandOutput;
+    };
+  };
 }

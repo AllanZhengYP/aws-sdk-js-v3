@@ -1,104 +1,105 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AthenaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AthenaClient";
-import {
-  BatchGetPreparedStatementInput,
-  BatchGetPreparedStatementInputFilterSensitiveLog,
-  BatchGetPreparedStatementOutput,
-  BatchGetPreparedStatementOutputFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetPreparedStatementCommand,
-  serializeAws_json1_1BatchGetPreparedStatementCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetPreparedStatementInput, BatchGetPreparedStatementOutput } from "../models/models_0";
+import { BatchGetPreparedStatement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetPreparedStatementCommand}.
+ */
 export interface BatchGetPreparedStatementCommandInput extends BatchGetPreparedStatementInput {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetPreparedStatementCommand}.
+ */
 export interface BatchGetPreparedStatementCommandOutput extends BatchGetPreparedStatementOutput, __MetadataBearer {}
 
 /**
- * <p>Returns the details of a single prepared statement or a list of up to 256 prepared statements for the array of prepared statement names that you provide. Requires you to have access to the workgroup to which the prepared statements belong. If a prepared statement cannot be retrieved for the name specified, the statement is listed in <code>UnprocessedPreparedStatementNames</code>.</p>
+ * <p>Returns the details of a single prepared statement or a list of up to 256 prepared
+ *             statements for the array of prepared statement names that you provide. Requires you to
+ *             have access to the workgroup to which the prepared statements belong. If a prepared
+ *             statement cannot be retrieved for the name specified, the statement is listed in
+ *                 <code>UnprocessedPreparedStatementNames</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AthenaClient, BatchGetPreparedStatementCommand } from "@aws-sdk/client-athena"; // ES Modules import
  * // const { AthenaClient, BatchGetPreparedStatementCommand } = require("@aws-sdk/client-athena"); // CommonJS import
+ * // import type { AthenaClientConfig } from "@aws-sdk/client-athena";
+ * const config = {}; // type is AthenaClientConfig
  * const client = new AthenaClient(config);
+ * const input = { // BatchGetPreparedStatementInput
+ *   PreparedStatementNames: [ // PreparedStatementNameList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   WorkGroup: "STRING_VALUE", // required
+ * };
  * const command = new BatchGetPreparedStatementCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetPreparedStatementOutput
+ * //   PreparedStatements: [ // PreparedStatementDetailsList
+ * //     { // PreparedStatement
+ * //       StatementName: "STRING_VALUE",
+ * //       QueryStatement: "STRING_VALUE",
+ * //       WorkGroupName: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   UnprocessedPreparedStatementNames: [ // UnprocessedPreparedStatementNameList
+ * //     { // UnprocessedPreparedStatementName
+ * //       StatementName: "STRING_VALUE",
+ * //       ErrorCode: "STRING_VALUE",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetPreparedStatementCommandInput - {@link BatchGetPreparedStatementCommandInput}
+ * @returns {@link BatchGetPreparedStatementCommandOutput}
  * @see {@link BatchGetPreparedStatementCommandInput} for command's `input` shape.
  * @see {@link BatchGetPreparedStatementCommandOutput} for command's `response` shape.
  * @see {@link AthenaClientResolvedConfig | config} for AthenaClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Indicates a platform issue, which may be due to a transient condition or
+ *             outage.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>Indicates that something is wrong with the input to the request. For example, a
+ *             required parameter may be missing or out of range.</p>
+ *
+ * @throws {@link AthenaServiceException}
+ * <p>Base exception class for all service exceptions from Athena service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetPreparedStatementCommand extends $Command<
-  BatchGetPreparedStatementCommandInput,
-  BatchGetPreparedStatementCommandOutput,
-  AthenaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetPreparedStatementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AthenaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetPreparedStatementCommandInput, BatchGetPreparedStatementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AthenaClient";
-    const commandName = "BatchGetPreparedStatementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetPreparedStatementInputFilterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetPreparedStatementOutputFilterSensitiveLog,
+export class BatchGetPreparedStatementCommand extends command<BatchGetPreparedStatementCommandInput, BatchGetPreparedStatementCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetPreparedStatement",
+  BatchGetPreparedStatement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetPreparedStatementInput;
+      output: BatchGetPreparedStatementOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetPreparedStatementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetPreparedStatementCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchGetPreparedStatementCommandOutput> {
-    return deserializeAws_json1_1BatchGetPreparedStatementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetPreparedStatementCommandInput;
+      output: BatchGetPreparedStatementCommandOutput;
+    };
+  };
 }

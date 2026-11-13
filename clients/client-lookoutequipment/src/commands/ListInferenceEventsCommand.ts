@@ -1,102 +1,111 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LookoutEquipmentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LookoutEquipmentClient";
-import {
-  ListInferenceEventsRequest,
-  ListInferenceEventsRequestFilterSensitiveLog,
-  ListInferenceEventsResponse,
-  ListInferenceEventsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_0ListInferenceEventsCommand,
-  serializeAws_json1_0ListInferenceEventsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListInferenceEventsRequest, ListInferenceEventsResponse } from "../models/models_0";
+import { ListInferenceEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListInferenceEventsCommand}.
+ */
 export interface ListInferenceEventsCommandInput extends ListInferenceEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListInferenceEventsCommand}.
+ */
 export interface ListInferenceEventsCommandOutput extends ListInferenceEventsResponse, __MetadataBearer {}
 
 /**
- * <p> Lists all inference events that have been found for the specified inference
- *          scheduler. </p>
+ * <p> Lists all inference events that have been found for the specified inference scheduler.
+ *       </p>
+ *
+ * @deprecated (since 2026-10-07) End of support notice: On October 7, 2026, AWS ended support for Amazon Lookout for Equipment. For more information, see https://aws.amazon.com/products/lifecycle/
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LookoutEquipmentClient, ListInferenceEventsCommand } from "@aws-sdk/client-lookoutequipment"; // ES Modules import
  * // const { LookoutEquipmentClient, ListInferenceEventsCommand } = require("@aws-sdk/client-lookoutequipment"); // CommonJS import
+ * // import type { LookoutEquipmentClientConfig } from "@aws-sdk/client-lookoutequipment";
+ * const config = {}; // type is LookoutEquipmentClientConfig
  * const client = new LookoutEquipmentClient(config);
+ * const input = { // ListInferenceEventsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   InferenceSchedulerName: "STRING_VALUE", // required
+ *   IntervalStartTime: new Date("TIMESTAMP"), // required
+ *   IntervalEndTime: new Date("TIMESTAMP"), // required
+ * };
  * const command = new ListInferenceEventsCommand(input);
  * const response = await client.send(command);
+ * // { // ListInferenceEventsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   InferenceEventSummaries: [ // InferenceEventSummaries
+ * //     { // InferenceEventSummary
+ * //       InferenceSchedulerArn: "STRING_VALUE",
+ * //       InferenceSchedulerName: "STRING_VALUE",
+ * //       EventStartTime: new Date("TIMESTAMP"),
+ * //       EventEndTime: new Date("TIMESTAMP"),
+ * //       Diagnostics: "STRING_VALUE",
+ * //       EventDurationInSeconds: Number("long"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListInferenceEventsCommandInput - {@link ListInferenceEventsCommandInput}
+ * @returns {@link ListInferenceEventsCommandOutput}
  * @see {@link ListInferenceEventsCommandInput} for command's `input` shape.
  * @see {@link ListInferenceEventsCommandOutput} for command's `response` shape.
  * @see {@link LookoutEquipmentClientResolvedConfig | config} for LookoutEquipmentClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request could not be completed because you do not have access to the resource.
+ *       </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> Processing of the request has failed because of an unknown error, exception or failure.
+ *       </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The resource requested could not be found. Verify the resource ID and retry your
+ *          request. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related Amazon Web Services
+ *          service that's being utilized. </p>
+ *
+ * @throws {@link LookoutEquipmentServiceException}
+ * <p>Base exception class for all service exceptions from LookoutEquipment service.</p>
+ *
+ *
+ * @public
  */
-export class ListInferenceEventsCommand extends $Command<
-  ListInferenceEventsCommandInput,
-  ListInferenceEventsCommandOutput,
-  LookoutEquipmentClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListInferenceEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LookoutEquipmentClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListInferenceEventsCommandInput, ListInferenceEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LookoutEquipmentClient";
-    const commandName = "ListInferenceEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListInferenceEventsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListInferenceEventsResponseFilterSensitiveLog,
+export class ListInferenceEventsCommand extends command<ListInferenceEventsCommandInput, ListInferenceEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListInferenceEvents",
+  ListInferenceEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListInferenceEventsRequest;
+      output: ListInferenceEventsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListInferenceEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListInferenceEventsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListInferenceEventsCommandOutput> {
-    return deserializeAws_json1_0ListInferenceEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListInferenceEventsCommandInput;
+      output: ListInferenceEventsCommandOutput;
+    };
+  };
 }

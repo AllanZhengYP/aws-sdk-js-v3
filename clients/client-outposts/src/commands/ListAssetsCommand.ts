@@ -1,105 +1,125 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListAssetsInput,
-  ListAssetsInputFilterSensitiveLog,
-  ListAssetsOutput,
-  ListAssetsOutputFilterSensitiveLog,
-} from "../models/models_0";
-import { OutpostsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OutpostsClient";
-import {
-  deserializeAws_restJson1ListAssetsCommand,
-  serializeAws_restJson1ListAssetsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAssetsInput, ListAssetsOutput } from "../models/models_0";
+import { ListAssets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAssetsCommand}.
+ */
 export interface ListAssetsCommandInput extends ListAssetsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListAssetsCommand}.
+ */
 export interface ListAssetsCommandOutput extends ListAssetsOutput, __MetadataBearer {}
 
 /**
- * <p>
- *       Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on
- *       Amazon Web Services Outposts, you can filter your request by host ID to return a list of hardware
- *       assets that allocate resources for Dedicated Hosts.
- *     </p>
+ * <p>Lists the hardware assets for the specified Outpost.</p>
+ *          <p>Use filters to return specific results. If you specify multiple filters, the results include only the resources that match
+ *  all of the specified filters. For a filter where you can specify multiple values, the results include
+ *  items that match any of the values that you specify for the filter.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OutpostsClient, ListAssetsCommand } from "@aws-sdk/client-outposts"; // ES Modules import
  * // const { OutpostsClient, ListAssetsCommand } = require("@aws-sdk/client-outposts"); // CommonJS import
+ * // import type { OutpostsClientConfig } from "@aws-sdk/client-outposts";
+ * const config = {}; // type is OutpostsClientConfig
  * const client = new OutpostsClient(config);
+ * const input = { // ListAssetsInput
+ *   OutpostIdentifier: "STRING_VALUE", // required
+ *   HostIdFilter: [ // HostIdList
+ *     "STRING_VALUE",
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   StatusFilter: [ // StatusList
+ *     "ACTIVE" || "RETIRING" || "ISOLATED" || "INSTALLING",
+ *   ],
+ *   AssetTypeFilter: [ // AssetTypeList
+ *     "COMPUTE" || "STORAGE" || "POWERSHELF" || "SWITCH" || "NETWORKING",
+ *   ],
+ * };
  * const command = new ListAssetsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAssetsOutput
+ * //   Assets: [ // AssetListDefinition
+ * //     { // AssetInfo
+ * //       AssetId: "STRING_VALUE",
+ * //       RackId: "STRING_VALUE",
+ * //       AssetType: "COMPUTE" || "STORAGE" || "POWERSHELF" || "SWITCH" || "NETWORKING",
+ * //       ComputeAttributes: { // ComputeAttributes
+ * //         HostId: "STRING_VALUE",
+ * //         State: "ACTIVE" || "ISOLATED" || "RETIRING" || "INSTALLING",
+ * //         InstanceFamilies: [ // InstanceFamilies
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         InstanceTypeCapacities: [ // AssetInstanceCapacityList
+ * //           { // AssetInstanceTypeCapacity
+ * //             InstanceType: "STRING_VALUE", // required
+ * //             Count: Number("int"), // required
+ * //           },
+ * //         ],
+ * //         MaxVcpus: Number("int"),
+ * //       },
+ * //       AssetLocation: { // AssetLocation
+ * //         RackElevation: Number("float"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAssetsCommandInput - {@link ListAssetsCommandInput}
+ * @returns {@link ListAssetsCommandOutput}
  * @see {@link ListAssetsCommandInput} for command's `input` shape.
  * @see {@link ListAssetsCommandOutput} for command's `response` shape.
  * @see {@link OutpostsClientResolvedConfig | config} for OutpostsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have permission to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified request is not valid.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link OutpostsServiceException}
+ * <p>Base exception class for all service exceptions from Outposts service.</p>
+ *
+ *
+ * @public
  */
-export class ListAssetsCommand extends $Command<
-  ListAssetsCommandInput,
-  ListAssetsCommandOutput,
-  OutpostsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAssetsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OutpostsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAssetsCommandInput, ListAssetsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OutpostsClient";
-    const commandName = "ListAssetsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAssetsInputFilterSensitiveLog,
-      outputFilterSensitiveLog: ListAssetsOutputFilterSensitiveLog,
+export class ListAssetsCommand extends command<ListAssetsCommandInput, ListAssetsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAssets",
+  ListAssets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAssetsInput;
+      output: ListAssetsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAssetsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAssetsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAssetsCommandOutput> {
-    return deserializeAws_restJson1ListAssetsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAssetsCommandInput;
+      output: ListAssetsCommandOutput;
+    };
+  };
 }

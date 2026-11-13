@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GreengrassV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GreengrassV2Client";
-import {
-  GetServiceRoleForAccountRequest,
-  GetServiceRoleForAccountRequestFilterSensitiveLog,
-  GetServiceRoleForAccountResponse,
-  GetServiceRoleForAccountResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetServiceRoleForAccountCommand,
-  serializeAws_restJson1GetServiceRoleForAccountCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetServiceRoleForAccountRequest, GetServiceRoleForAccountResponse } from "../models/models_0";
+import { GetServiceRoleForAccount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetServiceRoleForAccountCommand}.
+ */
 export interface GetServiceRoleForAccountCommandInput extends GetServiceRoleForAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetServiceRoleForAccountCommand}.
+ */
 export interface GetServiceRoleForAccountCommandOutput extends GetServiceRoleForAccountResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +32,49 @@ export interface GetServiceRoleForAccountCommandOutput extends GetServiceRoleFor
  * ```javascript
  * import { GreengrassV2Client, GetServiceRoleForAccountCommand } from "@aws-sdk/client-greengrassv2"; // ES Modules import
  * // const { GreengrassV2Client, GetServiceRoleForAccountCommand } = require("@aws-sdk/client-greengrassv2"); // CommonJS import
+ * // import type { GreengrassV2ClientConfig } from "@aws-sdk/client-greengrassv2";
+ * const config = {}; // type is GreengrassV2ClientConfig
  * const client = new GreengrassV2Client(config);
+ * const input = {};
  * const command = new GetServiceRoleForAccountCommand(input);
  * const response = await client.send(command);
+ * // { // GetServiceRoleForAccountResponse
+ * //   associatedAt: "STRING_VALUE",
+ * //   roleArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetServiceRoleForAccountCommandInput - {@link GetServiceRoleForAccountCommandInput}
+ * @returns {@link GetServiceRoleForAccountCommandOutput}
  * @see {@link GetServiceRoleForAccountCommandInput} for command's `input` shape.
  * @see {@link GetServiceRoleForAccountCommandOutput} for command's `response` shape.
  * @see {@link GreengrassV2ClientResolvedConfig | config} for GreengrassV2Client's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>IoT Greengrass can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link GreengrassV2ServiceException}
+ * <p>Base exception class for all service exceptions from GreengrassV2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetServiceRoleForAccountCommand extends $Command<
-  GetServiceRoleForAccountCommandInput,
-  GetServiceRoleForAccountCommandOutput,
-  GreengrassV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetServiceRoleForAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GreengrassV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetServiceRoleForAccountCommandInput, GetServiceRoleForAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GreengrassV2Client";
-    const commandName = "GetServiceRoleForAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetServiceRoleForAccountRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetServiceRoleForAccountResponseFilterSensitiveLog,
+export class GetServiceRoleForAccountCommand extends command<GetServiceRoleForAccountCommandInput, GetServiceRoleForAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetServiceRoleForAccount",
+  GetServiceRoleForAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetServiceRoleForAccountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetServiceRoleForAccountCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetServiceRoleForAccountCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetServiceRoleForAccountCommandOutput> {
-    return deserializeAws_restJson1GetServiceRoleForAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetServiceRoleForAccountCommandInput;
+      output: GetServiceRoleForAccountCommandOutput;
+    };
+  };
 }

@@ -1,25 +1,36 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeNatGatewaysCommand, DescribeNatGatewaysCommandInput } from "../commands/DescribeNatGatewaysCommand";
-import { EC2Client } from "../EC2Client";
+import {
+  type DescribeNatGatewaysCommandInput,
+  type DescribeNatGatewaysCommandOutput,
+  DescribeNatGatewaysCommand,
+} from "../commands/DescribeNatGatewaysCommand";
+import type { EC2Client } from "../EC2Client";
+import type { EC2ServiceException } from "../models/EC2ServiceException";
 
-const checkState = async (client: EC2Client, input: DescribeNatGatewaysCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EC2Client, input: DescribeNatGatewaysCommandInput): Promise<WaiterResult<DescribeNatGatewaysCommandOutput | EC2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeNatGatewaysCommand(input));
+    let result: DescribeNatGatewaysCommandOutput & any = await client.send(new DescribeNatGatewaysCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.NatGateways);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.NatGateways);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.State;
         });
         return projection_3;
-      };
-      let allStringEq_5 = returnComparator().length > 0;
-      for (const element_4 of returnComparator()) {
-        allStringEq_5 = allStringEq_5 && element_4 == "deleted";
+      }
+      let allStringEq_5 = (returnComparator().length > 0);
+      for (let element_4 of returnComparator()) {
+        allStringEq_5 = allStringEq_5 && (element_4 == "deleted")
       }
       if (allStringEq_5) {
         return { state: WaiterState.SUCCESS, reason };
@@ -27,7 +38,7 @@ const checkState = async (client: EC2Client, input: DescribeNatGatewaysCommandIn
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "NatGatewayNotFound") {
+    if (exception.name === "NatGatewayNotFound") {
       return { state: WaiterState.SUCCESS, reason };
     }
   }
@@ -40,7 +51,7 @@ const checkState = async (client: EC2Client, input: DescribeNatGatewaysCommandIn
 export const waitForNatGatewayDeleted = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeNatGatewaysCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeNatGatewaysCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -52,8 +63,8 @@ export const waitForNatGatewayDeleted = async (
 export const waitUntilNatGatewayDeleted = async (
   params: WaiterConfiguration<EC2Client>,
   input: DescribeNatGatewaysCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeNatGatewaysCommandOutput | EC2ServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeNatGatewaysCommandOutput | EC2ServiceException>;
 };

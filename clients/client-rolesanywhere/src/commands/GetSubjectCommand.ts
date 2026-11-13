@@ -1,105 +1,111 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ScalarSubjectRequest,
-  ScalarSubjectRequestFilterSensitiveLog,
-  SubjectDetailResponse,
-  SubjectDetailResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetSubjectCommand,
-  serializeAws_restJson1GetSubjectCommand,
-} from "../protocols/Aws_restJson1";
-import { RolesAnywhereClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RolesAnywhereClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ScalarSubjectRequest, SubjectDetailResponse } from "../models/models_0";
+import { GetSubject$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSubjectCommand}.
+ */
 export interface GetSubjectCommandInput extends ScalarSubjectRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSubjectCommand}.
+ */
 export interface GetSubjectCommandOutput extends SubjectDetailResponse, __MetadataBearer {}
 
 /**
- * <p>Gets a Subject. A Subject associates a certificate identity with authentication attempts by CreateSession. The Subject resources stores audit information such as status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p>
- *          <p>
- *             <b>Required permissions: </b>
- *             <code>rolesanywhere:GetSubject</code>.
- *          </p>
+ * <p>Gets a <i>subject</i>, which associates a certificate identity with authentication attempts. The subject stores auditing information such as the status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetSubject</code>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RolesAnywhereClient, GetSubjectCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
  * // const { RolesAnywhereClient, GetSubjectCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
  * const client = new RolesAnywhereClient(config);
+ * const input = { // ScalarSubjectRequest
+ *   subjectId: "STRING_VALUE", // required
+ * };
  * const command = new GetSubjectCommand(input);
  * const response = await client.send(command);
+ * // { // SubjectDetailResponse
+ * //   subject: { // SubjectDetail
+ * //     subjectArn: "STRING_VALUE",
+ * //     subjectId: "STRING_VALUE",
+ * //     enabled: true || false,
+ * //     x509Subject: "STRING_VALUE",
+ * //     lastSeenAt: new Date("TIMESTAMP"),
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     credentials: [ // CredentialSummaries
+ * //       { // CredentialSummary
+ * //         seenAt: new Date("TIMESTAMP"),
+ * //         serialNumber: "STRING_VALUE",
+ * //         issuer: "STRING_VALUE",
+ * //         enabled: true || false,
+ * //         x509CertificateData: "STRING_VALUE",
+ * //         failed: true || false,
+ * //       },
+ * //     ],
+ * //     instanceProperties: [ // InstanceProperties
+ * //       { // InstanceProperty
+ * //         seenAt: new Date("TIMESTAMP"),
+ * //         properties: { // InstancePropertyMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         failed: true || false,
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSubjectCommandInput - {@link GetSubjectCommandInput}
+ * @returns {@link GetSubjectCommandOutput}
  * @see {@link GetSubjectCommandInput} for command's `input` shape.
  * @see {@link GetSubjectCommandOutput} for command's `response` shape.
  * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
  */
-export class GetSubjectCommand extends $Command<
-  GetSubjectCommandInput,
-  GetSubjectCommandOutput,
-  RolesAnywhereClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSubjectCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RolesAnywhereClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSubjectCommandInput, GetSubjectCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RolesAnywhereClient";
-    const commandName = "GetSubjectCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ScalarSubjectRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: SubjectDetailResponseFilterSensitiveLog,
+export class GetSubjectCommand extends command<GetSubjectCommandInput, GetSubjectCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSubject",
+  GetSubject$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ScalarSubjectRequest;
+      output: SubjectDetailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSubjectCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSubjectCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSubjectCommandOutput> {
-    return deserializeAws_restJson1GetSubjectCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSubjectCommandInput;
+      output: GetSubjectCommandOutput;
+    };
+  };
 }

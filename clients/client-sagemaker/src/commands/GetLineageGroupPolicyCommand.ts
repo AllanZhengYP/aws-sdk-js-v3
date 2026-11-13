@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetLineageGroupPolicyRequest,
-  GetLineageGroupPolicyRequestFilterSensitiveLog,
-  GetLineageGroupPolicyResponse,
-  GetLineageGroupPolicyResponseFilterSensitiveLog,
-} from "../models/models_2";
-import {
-  deserializeAws_json1_1GetLineageGroupPolicyCommand,
-  serializeAws_json1_1GetLineageGroupPolicyCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLineageGroupPolicyRequest, GetLineageGroupPolicyResponse } from "../models/models_3";
+import { GetLineageGroupPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLineageGroupPolicyCommand}.
+ */
 export interface GetLineageGroupPolicyCommandInput extends GetLineageGroupPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetLineageGroupPolicyCommand}.
+ */
 export interface GetLineageGroupPolicyCommandOutput extends GetLineageGroupPolicyResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,51 @@ export interface GetLineageGroupPolicyCommandOutput extends GetLineageGroupPolic
  * ```javascript
  * import { SageMakerClient, GetLineageGroupPolicyCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, GetLineageGroupPolicyCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // GetLineageGroupPolicyRequest
+ *   LineageGroupName: "STRING_VALUE", // required
+ * };
  * const command = new GetLineageGroupPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetLineageGroupPolicyResponse
+ * //   LineageGroupArn: "STRING_VALUE",
+ * //   ResourcePolicy: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetLineageGroupPolicyCommandInput - {@link GetLineageGroupPolicyCommandInput}
+ * @returns {@link GetLineageGroupPolicyCommandOutput}
  * @see {@link GetLineageGroupPolicyCommandInput} for command's `input` shape.
  * @see {@link GetLineageGroupPolicyCommandOutput} for command's `response` shape.
  * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class GetLineageGroupPolicyCommand extends $Command<
-  GetLineageGroupPolicyCommandInput,
-  GetLineageGroupPolicyCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLineageGroupPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLineageGroupPolicyCommandInput, GetLineageGroupPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "GetLineageGroupPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLineageGroupPolicyRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetLineageGroupPolicyResponseFilterSensitiveLog,
+export class GetLineageGroupPolicyCommand extends command<GetLineageGroupPolicyCommandInput, GetLineageGroupPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLineageGroupPolicy",
+  GetLineageGroupPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLineageGroupPolicyRequest;
+      output: GetLineageGroupPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLineageGroupPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetLineageGroupPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLineageGroupPolicyCommandOutput> {
-    return deserializeAws_json1_1GetLineageGroupPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLineageGroupPolicyCommandInput;
+      output: GetLineageGroupPolicyCommandOutput;
+    };
+  };
 }

@@ -1,1180 +1,1847 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AssociateSourceNetworkStackCommandInput,
+  type AssociateSourceNetworkStackCommandOutput,
+  AssociateSourceNetworkStackCommand,
+} from "./commands/AssociateSourceNetworkStackCommand";
+import {
+  type CancelRecoveryPlanExecutionCommandInput,
+  type CancelRecoveryPlanExecutionCommandOutput,
+  CancelRecoveryPlanExecutionCommand,
+} from "./commands/CancelRecoveryPlanExecutionCommand";
+import {
+  type CreateExtendedSourceServerCommandInput,
+  type CreateExtendedSourceServerCommandOutput,
   CreateExtendedSourceServerCommand,
-  CreateExtendedSourceServerCommandInput,
-  CreateExtendedSourceServerCommandOutput,
 } from "./commands/CreateExtendedSourceServerCommand";
 import {
-  CreateReplicationConfigurationTemplateCommand,
-  CreateReplicationConfigurationTemplateCommandInput,
-  CreateReplicationConfigurationTemplateCommandOutput,
-} from "./commands/CreateReplicationConfigurationTemplateCommand";
-import { DeleteJobCommand, DeleteJobCommandInput, DeleteJobCommandOutput } from "./commands/DeleteJobCommand";
+  type CreateLaunchConfigurationTemplateCommandInput,
+  type CreateLaunchConfigurationTemplateCommandOutput,
+  CreateLaunchConfigurationTemplateCommand,
+} from "./commands/CreateLaunchConfigurationTemplateCommand";
 import {
+  type CreateRecoveryPlanCommandInput,
+  type CreateRecoveryPlanCommandOutput,
+  CreateRecoveryPlanCommand,
+} from "./commands/CreateRecoveryPlanCommand";
+import {
+  type CreateRecoveryPlanStepCommandInput,
+  type CreateRecoveryPlanStepCommandOutput,
+  CreateRecoveryPlanStepCommand,
+} from "./commands/CreateRecoveryPlanStepCommand";
+import {
+  type CreateReplicationConfigurationTemplateCommandInput,
+  type CreateReplicationConfigurationTemplateCommandOutput,
+  CreateReplicationConfigurationTemplateCommand,
+} from "./commands/CreateReplicationConfigurationTemplateCommand";
+import {
+  type CreateSourceNetworkCommandInput,
+  type CreateSourceNetworkCommandOutput,
+  CreateSourceNetworkCommand,
+} from "./commands/CreateSourceNetworkCommand";
+import { type DeleteJobCommandInput, type DeleteJobCommandOutput, DeleteJobCommand } from "./commands/DeleteJobCommand";
+import {
+  type DeleteLaunchActionCommandInput,
+  type DeleteLaunchActionCommandOutput,
+  DeleteLaunchActionCommand,
+} from "./commands/DeleteLaunchActionCommand";
+import {
+  type DeleteLaunchConfigurationTemplateCommandInput,
+  type DeleteLaunchConfigurationTemplateCommandOutput,
+  DeleteLaunchConfigurationTemplateCommand,
+} from "./commands/DeleteLaunchConfigurationTemplateCommand";
+import {
+  type DeleteRecoveryInstanceCommandInput,
+  type DeleteRecoveryInstanceCommandOutput,
   DeleteRecoveryInstanceCommand,
-  DeleteRecoveryInstanceCommandInput,
-  DeleteRecoveryInstanceCommandOutput,
 } from "./commands/DeleteRecoveryInstanceCommand";
 import {
+  type DeleteRecoveryPlanCommandInput,
+  type DeleteRecoveryPlanCommandOutput,
+  DeleteRecoveryPlanCommand,
+} from "./commands/DeleteRecoveryPlanCommand";
+import {
+  type DeleteRecoveryPlanExecutionCommandInput,
+  type DeleteRecoveryPlanExecutionCommandOutput,
+  DeleteRecoveryPlanExecutionCommand,
+} from "./commands/DeleteRecoveryPlanExecutionCommand";
+import {
+  type DeleteRecoveryPlanStepCommandInput,
+  type DeleteRecoveryPlanStepCommandOutput,
+  DeleteRecoveryPlanStepCommand,
+} from "./commands/DeleteRecoveryPlanStepCommand";
+import {
+  type DeleteReplicationConfigurationTemplateCommandInput,
+  type DeleteReplicationConfigurationTemplateCommandOutput,
   DeleteReplicationConfigurationTemplateCommand,
-  DeleteReplicationConfigurationTemplateCommandInput,
-  DeleteReplicationConfigurationTemplateCommandOutput,
 } from "./commands/DeleteReplicationConfigurationTemplateCommand";
 import {
+  type DeleteSourceNetworkCommandInput,
+  type DeleteSourceNetworkCommandOutput,
+  DeleteSourceNetworkCommand,
+} from "./commands/DeleteSourceNetworkCommand";
+import {
+  type DeleteSourceServerCommandInput,
+  type DeleteSourceServerCommandOutput,
   DeleteSourceServerCommand,
-  DeleteSourceServerCommandInput,
-  DeleteSourceServerCommandOutput,
 } from "./commands/DeleteSourceServerCommand";
 import {
+  type DescribeJobLogItemsCommandInput,
+  type DescribeJobLogItemsCommandOutput,
   DescribeJobLogItemsCommand,
-  DescribeJobLogItemsCommandInput,
-  DescribeJobLogItemsCommandOutput,
 } from "./commands/DescribeJobLogItemsCommand";
 import {
+  type DescribeJobsCommandInput,
+  type DescribeJobsCommandOutput,
   DescribeJobsCommand,
-  DescribeJobsCommandInput,
-  DescribeJobsCommandOutput,
 } from "./commands/DescribeJobsCommand";
 import {
+  type DescribeLaunchConfigurationTemplatesCommandInput,
+  type DescribeLaunchConfigurationTemplatesCommandOutput,
+  DescribeLaunchConfigurationTemplatesCommand,
+} from "./commands/DescribeLaunchConfigurationTemplatesCommand";
+import {
+  type DescribeRecoveryInstancesCommandInput,
+  type DescribeRecoveryInstancesCommandOutput,
   DescribeRecoveryInstancesCommand,
-  DescribeRecoveryInstancesCommandInput,
-  DescribeRecoveryInstancesCommandOutput,
 } from "./commands/DescribeRecoveryInstancesCommand";
 import {
+  type DescribeRecoverySnapshotsCommandInput,
+  type DescribeRecoverySnapshotsCommandOutput,
   DescribeRecoverySnapshotsCommand,
-  DescribeRecoverySnapshotsCommandInput,
-  DescribeRecoverySnapshotsCommandOutput,
 } from "./commands/DescribeRecoverySnapshotsCommand";
 import {
+  type DescribeReplicationConfigurationTemplatesCommandInput,
+  type DescribeReplicationConfigurationTemplatesCommandOutput,
   DescribeReplicationConfigurationTemplatesCommand,
-  DescribeReplicationConfigurationTemplatesCommandInput,
-  DescribeReplicationConfigurationTemplatesCommandOutput,
 } from "./commands/DescribeReplicationConfigurationTemplatesCommand";
 import {
+  type DescribeSourceNetworksCommandInput,
+  type DescribeSourceNetworksCommandOutput,
+  DescribeSourceNetworksCommand,
+} from "./commands/DescribeSourceNetworksCommand";
+import {
+  type DescribeSourceServersCommandInput,
+  type DescribeSourceServersCommandOutput,
   DescribeSourceServersCommand,
-  DescribeSourceServersCommandInput,
-  DescribeSourceServersCommandOutput,
 } from "./commands/DescribeSourceServersCommand";
 import {
+  type DisconnectRecoveryInstanceCommandInput,
+  type DisconnectRecoveryInstanceCommandOutput,
   DisconnectRecoveryInstanceCommand,
-  DisconnectRecoveryInstanceCommandInput,
-  DisconnectRecoveryInstanceCommandOutput,
 } from "./commands/DisconnectRecoveryInstanceCommand";
 import {
+  type DisconnectSourceServerCommandInput,
+  type DisconnectSourceServerCommandOutput,
   DisconnectSourceServerCommand,
-  DisconnectSourceServerCommandInput,
-  DisconnectSourceServerCommandOutput,
 } from "./commands/DisconnectSourceServerCommand";
 import {
+  type ExportSourceNetworkCfnTemplateCommandInput,
+  type ExportSourceNetworkCfnTemplateCommandOutput,
+  ExportSourceNetworkCfnTemplateCommand,
+} from "./commands/ExportSourceNetworkCfnTemplateCommand";
+import {
+  type GetFailbackReplicationConfigurationCommandInput,
+  type GetFailbackReplicationConfigurationCommandOutput,
   GetFailbackReplicationConfigurationCommand,
-  GetFailbackReplicationConfigurationCommandInput,
-  GetFailbackReplicationConfigurationCommandOutput,
 } from "./commands/GetFailbackReplicationConfigurationCommand";
 import {
+  type GetLaunchConfigurationCommandInput,
+  type GetLaunchConfigurationCommandOutput,
   GetLaunchConfigurationCommand,
-  GetLaunchConfigurationCommandInput,
-  GetLaunchConfigurationCommandOutput,
 } from "./commands/GetLaunchConfigurationCommand";
 import {
+  type GetRecoveryPlanCommandInput,
+  type GetRecoveryPlanCommandOutput,
+  GetRecoveryPlanCommand,
+} from "./commands/GetRecoveryPlanCommand";
+import {
+  type GetRecoveryPlanExecutionCommandInput,
+  type GetRecoveryPlanExecutionCommandOutput,
+  GetRecoveryPlanExecutionCommand,
+} from "./commands/GetRecoveryPlanExecutionCommand";
+import {
+  type GetRecoveryPlanExecutionStepCommandInput,
+  type GetRecoveryPlanExecutionStepCommandOutput,
+  GetRecoveryPlanExecutionStepCommand,
+} from "./commands/GetRecoveryPlanExecutionStepCommand";
+import {
+  type GetRecoveryPlanStepCommandInput,
+  type GetRecoveryPlanStepCommandOutput,
+  GetRecoveryPlanStepCommand,
+} from "./commands/GetRecoveryPlanStepCommand";
+import {
+  type GetReplicationConfigurationCommandInput,
+  type GetReplicationConfigurationCommandOutput,
   GetReplicationConfigurationCommand,
-  GetReplicationConfigurationCommandInput,
-  GetReplicationConfigurationCommandOutput,
 } from "./commands/GetReplicationConfigurationCommand";
 import {
+  type InitializeServiceCommandInput,
+  type InitializeServiceCommandOutput,
   InitializeServiceCommand,
-  InitializeServiceCommandInput,
-  InitializeServiceCommandOutput,
 } from "./commands/InitializeServiceCommand";
 import {
+  type ListExtensibleSourceServersCommandInput,
+  type ListExtensibleSourceServersCommandOutput,
   ListExtensibleSourceServersCommand,
-  ListExtensibleSourceServersCommandInput,
-  ListExtensibleSourceServersCommandOutput,
 } from "./commands/ListExtensibleSourceServersCommand";
 import {
+  type ListLaunchActionsCommandInput,
+  type ListLaunchActionsCommandOutput,
+  ListLaunchActionsCommand,
+} from "./commands/ListLaunchActionsCommand";
+import {
+  type ListRecoveryPlanExecutionsCommandInput,
+  type ListRecoveryPlanExecutionsCommandOutput,
+  ListRecoveryPlanExecutionsCommand,
+} from "./commands/ListRecoveryPlanExecutionsCommand";
+import {
+  type ListRecoveryPlanExecutionStepsCommandInput,
+  type ListRecoveryPlanExecutionStepsCommandOutput,
+  ListRecoveryPlanExecutionStepsCommand,
+} from "./commands/ListRecoveryPlanExecutionStepsCommand";
+import {
+  type ListRecoveryPlansCommandInput,
+  type ListRecoveryPlansCommandOutput,
+  ListRecoveryPlansCommand,
+} from "./commands/ListRecoveryPlansCommand";
+import {
+  type ListRecoveryPlanStepsCommandInput,
+  type ListRecoveryPlanStepsCommandOutput,
+  ListRecoveryPlanStepsCommand,
+} from "./commands/ListRecoveryPlanStepsCommand";
+import {
+  type ListStagingAccountsCommandInput,
+  type ListStagingAccountsCommandOutput,
   ListStagingAccountsCommand,
-  ListStagingAccountsCommandInput,
-  ListStagingAccountsCommandOutput,
 } from "./commands/ListStagingAccountsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type PutLaunchActionCommandInput,
+  type PutLaunchActionCommandOutput,
+  PutLaunchActionCommand,
+} from "./commands/PutLaunchActionCommand";
+import {
+  type ReorderRecoveryPlanStepsCommandInput,
+  type ReorderRecoveryPlanStepsCommandOutput,
+  ReorderRecoveryPlanStepsCommand,
+} from "./commands/ReorderRecoveryPlanStepsCommand";
+import {
+  type RetryDataReplicationCommandInput,
+  type RetryDataReplicationCommandOutput,
   RetryDataReplicationCommand,
-  RetryDataReplicationCommandInput,
-  RetryDataReplicationCommandOutput,
 } from "./commands/RetryDataReplicationCommand";
 import {
+  type RetryRecoveryPlanExecutionStepCommandInput,
+  type RetryRecoveryPlanExecutionStepCommandOutput,
+  RetryRecoveryPlanExecutionStepCommand,
+} from "./commands/RetryRecoveryPlanExecutionStepCommand";
+import {
+  type ReverseReplicationCommandInput,
+  type ReverseReplicationCommandOutput,
+  ReverseReplicationCommand,
+} from "./commands/ReverseReplicationCommand";
+import {
+  type StartFailbackLaunchCommandInput,
+  type StartFailbackLaunchCommandOutput,
   StartFailbackLaunchCommand,
-  StartFailbackLaunchCommandInput,
-  StartFailbackLaunchCommandOutput,
 } from "./commands/StartFailbackLaunchCommand";
 import {
+  type StartRecoveryCommandInput,
+  type StartRecoveryCommandOutput,
   StartRecoveryCommand,
-  StartRecoveryCommandInput,
-  StartRecoveryCommandOutput,
 } from "./commands/StartRecoveryCommand";
 import {
-  StopFailbackCommand,
-  StopFailbackCommandInput,
-  StopFailbackCommandOutput,
-} from "./commands/StopFailbackCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type StartRecoveryPlanExecutionCommandInput,
+  type StartRecoveryPlanExecutionCommandOutput,
+  StartRecoveryPlanExecutionCommand,
+} from "./commands/StartRecoveryPlanExecutionCommand";
 import {
+  type StartReplicationCommandInput,
+  type StartReplicationCommandOutput,
+  StartReplicationCommand,
+} from "./commands/StartReplicationCommand";
+import {
+  type StartSourceNetworkRecoveryCommandInput,
+  type StartSourceNetworkRecoveryCommandOutput,
+  StartSourceNetworkRecoveryCommand,
+} from "./commands/StartSourceNetworkRecoveryCommand";
+import {
+  type StartSourceNetworkReplicationCommandInput,
+  type StartSourceNetworkReplicationCommandOutput,
+  StartSourceNetworkReplicationCommand,
+} from "./commands/StartSourceNetworkReplicationCommand";
+import {
+  type StopFailbackCommandInput,
+  type StopFailbackCommandOutput,
+  StopFailbackCommand,
+} from "./commands/StopFailbackCommand";
+import {
+  type StopReplicationCommandInput,
+  type StopReplicationCommandOutput,
+  StopReplicationCommand,
+} from "./commands/StopReplicationCommand";
+import {
+  type StopSourceNetworkReplicationCommandInput,
+  type StopSourceNetworkReplicationCommandOutput,
+  StopSourceNetworkReplicationCommand,
+} from "./commands/StopSourceNetworkReplicationCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TerminateRecoveryInstancesCommandInput,
+  type TerminateRecoveryInstancesCommandOutput,
   TerminateRecoveryInstancesCommand,
-  TerminateRecoveryInstancesCommandInput,
-  TerminateRecoveryInstancesCommandOutput,
 } from "./commands/TerminateRecoveryInstancesCommand";
 import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateFailbackReplicationConfigurationCommandInput,
+  type UpdateFailbackReplicationConfigurationCommandOutput,
   UpdateFailbackReplicationConfigurationCommand,
-  UpdateFailbackReplicationConfigurationCommandInput,
-  UpdateFailbackReplicationConfigurationCommandOutput,
 } from "./commands/UpdateFailbackReplicationConfigurationCommand";
 import {
+  type UpdateLaunchConfigurationCommandInput,
+  type UpdateLaunchConfigurationCommandOutput,
   UpdateLaunchConfigurationCommand,
-  UpdateLaunchConfigurationCommandInput,
-  UpdateLaunchConfigurationCommandOutput,
 } from "./commands/UpdateLaunchConfigurationCommand";
 import {
+  type UpdateLaunchConfigurationTemplateCommandInput,
+  type UpdateLaunchConfigurationTemplateCommandOutput,
+  UpdateLaunchConfigurationTemplateCommand,
+} from "./commands/UpdateLaunchConfigurationTemplateCommand";
+import {
+  type UpdateRecoveryPlanCommandInput,
+  type UpdateRecoveryPlanCommandOutput,
+  UpdateRecoveryPlanCommand,
+} from "./commands/UpdateRecoveryPlanCommand";
+import {
+  type UpdateRecoveryPlanExecutionStepCommandInput,
+  type UpdateRecoveryPlanExecutionStepCommandOutput,
+  UpdateRecoveryPlanExecutionStepCommand,
+} from "./commands/UpdateRecoveryPlanExecutionStepCommand";
+import {
+  type UpdateRecoveryPlanStepCommandInput,
+  type UpdateRecoveryPlanStepCommandOutput,
+  UpdateRecoveryPlanStepCommand,
+} from "./commands/UpdateRecoveryPlanStepCommand";
+import {
+  type UpdateReplicationConfigurationCommandInput,
+  type UpdateReplicationConfigurationCommandOutput,
   UpdateReplicationConfigurationCommand,
-  UpdateReplicationConfigurationCommandInput,
-  UpdateReplicationConfigurationCommandOutput,
 } from "./commands/UpdateReplicationConfigurationCommand";
 import {
+  type UpdateReplicationConfigurationTemplateCommandInput,
+  type UpdateReplicationConfigurationTemplateCommandOutput,
   UpdateReplicationConfigurationTemplateCommand,
-  UpdateReplicationConfigurationTemplateCommandInput,
-  UpdateReplicationConfigurationTemplateCommandOutput,
 } from "./commands/UpdateReplicationConfigurationTemplateCommand";
 import { DrsClient } from "./DrsClient";
+import { paginateDescribeJobLogItems } from "./pagination/DescribeJobLogItemsPaginator";
+import { paginateDescribeJobs } from "./pagination/DescribeJobsPaginator";
+import {
+  paginateDescribeLaunchConfigurationTemplates,
+} from "./pagination/DescribeLaunchConfigurationTemplatesPaginator";
+import { paginateDescribeRecoveryInstances } from "./pagination/DescribeRecoveryInstancesPaginator";
+import { paginateDescribeRecoverySnapshots } from "./pagination/DescribeRecoverySnapshotsPaginator";
+import {
+  paginateDescribeReplicationConfigurationTemplates,
+} from "./pagination/DescribeReplicationConfigurationTemplatesPaginator";
+import { paginateDescribeSourceNetworks } from "./pagination/DescribeSourceNetworksPaginator";
+import { paginateDescribeSourceServers } from "./pagination/DescribeSourceServersPaginator";
+import { paginateListExtensibleSourceServers } from "./pagination/ListExtensibleSourceServersPaginator";
+import { paginateListLaunchActions } from "./pagination/ListLaunchActionsPaginator";
+import { paginateListRecoveryPlanExecutions } from "./pagination/ListRecoveryPlanExecutionsPaginator";
+import { paginateListRecoveryPlanExecutionSteps } from "./pagination/ListRecoveryPlanExecutionStepsPaginator";
+import { paginateListRecoveryPlans } from "./pagination/ListRecoveryPlansPaginator";
+import { paginateListRecoveryPlanSteps } from "./pagination/ListRecoveryPlanStepsPaginator";
+import { paginateListStagingAccounts } from "./pagination/ListStagingAccountsPaginator";
+
+const commands = {
+  AssociateSourceNetworkStackCommand,
+  CancelRecoveryPlanExecutionCommand,
+  CreateExtendedSourceServerCommand,
+  CreateLaunchConfigurationTemplateCommand,
+  CreateRecoveryPlanCommand,
+  CreateRecoveryPlanStepCommand,
+  CreateReplicationConfigurationTemplateCommand,
+  CreateSourceNetworkCommand,
+  DeleteJobCommand,
+  DeleteLaunchActionCommand,
+  DeleteLaunchConfigurationTemplateCommand,
+  DeleteRecoveryInstanceCommand,
+  DeleteRecoveryPlanCommand,
+  DeleteRecoveryPlanExecutionCommand,
+  DeleteRecoveryPlanStepCommand,
+  DeleteReplicationConfigurationTemplateCommand,
+  DeleteSourceNetworkCommand,
+  DeleteSourceServerCommand,
+  DescribeJobLogItemsCommand,
+  DescribeJobsCommand,
+  DescribeLaunchConfigurationTemplatesCommand,
+  DescribeRecoveryInstancesCommand,
+  DescribeRecoverySnapshotsCommand,
+  DescribeReplicationConfigurationTemplatesCommand,
+  DescribeSourceNetworksCommand,
+  DescribeSourceServersCommand,
+  DisconnectRecoveryInstanceCommand,
+  DisconnectSourceServerCommand,
+  ExportSourceNetworkCfnTemplateCommand,
+  GetFailbackReplicationConfigurationCommand,
+  GetLaunchConfigurationCommand,
+  GetRecoveryPlanCommand,
+  GetRecoveryPlanExecutionCommand,
+  GetRecoveryPlanExecutionStepCommand,
+  GetRecoveryPlanStepCommand,
+  GetReplicationConfigurationCommand,
+  InitializeServiceCommand,
+  ListExtensibleSourceServersCommand,
+  ListLaunchActionsCommand,
+  ListRecoveryPlanExecutionsCommand,
+  ListRecoveryPlanExecutionStepsCommand,
+  ListRecoveryPlansCommand,
+  ListRecoveryPlanStepsCommand,
+  ListStagingAccountsCommand,
+  ListTagsForResourceCommand,
+  PutLaunchActionCommand,
+  ReorderRecoveryPlanStepsCommand,
+  RetryDataReplicationCommand,
+  RetryRecoveryPlanExecutionStepCommand,
+  ReverseReplicationCommand,
+  StartFailbackLaunchCommand,
+  StartRecoveryCommand,
+  StartRecoveryPlanExecutionCommand,
+  StartReplicationCommand,
+  StartSourceNetworkRecoveryCommand,
+  StartSourceNetworkReplicationCommand,
+  StopFailbackCommand,
+  StopReplicationCommand,
+  StopSourceNetworkReplicationCommand,
+  TagResourceCommand,
+  TerminateRecoveryInstancesCommand,
+  UntagResourceCommand,
+  UpdateFailbackReplicationConfigurationCommand,
+  UpdateLaunchConfigurationCommand,
+  UpdateLaunchConfigurationTemplateCommand,
+  UpdateRecoveryPlanCommand,
+  UpdateRecoveryPlanExecutionStepCommand,
+  UpdateRecoveryPlanStepCommand,
+  UpdateReplicationConfigurationCommand,
+  UpdateReplicationConfigurationTemplateCommand,
+};
+const paginators = {
+  paginateDescribeJobLogItems,
+  paginateDescribeJobs,
+  paginateDescribeLaunchConfigurationTemplates,
+  paginateDescribeRecoveryInstances,
+  paginateDescribeRecoverySnapshots,
+  paginateDescribeReplicationConfigurationTemplates,
+  paginateDescribeSourceNetworks,
+  paginateDescribeSourceServers,
+  paginateListExtensibleSourceServers,
+  paginateListLaunchActions,
+  paginateListRecoveryPlanExecutions,
+  paginateListRecoveryPlanExecutionSteps,
+  paginateListRecoveryPlans,
+  paginateListRecoveryPlanSteps,
+  paginateListStagingAccounts,
+};
+
+/**
+ * @public
+ */
+export interface DrsRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Drs {
+  /**
+   * @see {@link AssociateSourceNetworkStackCommand}
+   */
+  associateSourceNetworkStack(
+    args: AssociateSourceNetworkStackCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<AssociateSourceNetworkStackCommandOutput>;
+  associateSourceNetworkStack(
+    args: AssociateSourceNetworkStackCommandInput,
+    cb: (err: any, data?: AssociateSourceNetworkStackCommandOutput) => void
+  ): void;
+  associateSourceNetworkStack(
+    args: AssociateSourceNetworkStackCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: AssociateSourceNetworkStackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelRecoveryPlanExecutionCommand}
+   */
+  cancelRecoveryPlanExecution(
+    args: CancelRecoveryPlanExecutionCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<CancelRecoveryPlanExecutionCommandOutput>;
+  cancelRecoveryPlanExecution(
+    args: CancelRecoveryPlanExecutionCommandInput,
+    cb: (err: any, data?: CancelRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+  cancelRecoveryPlanExecution(
+    args: CancelRecoveryPlanExecutionCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: CancelRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateExtendedSourceServerCommand}
+   */
+  createExtendedSourceServer(
+    args: CreateExtendedSourceServerCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<CreateExtendedSourceServerCommandOutput>;
+  createExtendedSourceServer(
+    args: CreateExtendedSourceServerCommandInput,
+    cb: (err: any, data?: CreateExtendedSourceServerCommandOutput) => void
+  ): void;
+  createExtendedSourceServer(
+    args: CreateExtendedSourceServerCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: CreateExtendedSourceServerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLaunchConfigurationTemplateCommand}
+   */
+  createLaunchConfigurationTemplate(): Promise<CreateLaunchConfigurationTemplateCommandOutput>;
+  createLaunchConfigurationTemplate(
+    args: CreateLaunchConfigurationTemplateCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<CreateLaunchConfigurationTemplateCommandOutput>;
+  createLaunchConfigurationTemplate(
+    args: CreateLaunchConfigurationTemplateCommandInput,
+    cb: (err: any, data?: CreateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+  createLaunchConfigurationTemplate(
+    args: CreateLaunchConfigurationTemplateCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: CreateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRecoveryPlanCommand}
+   */
+  createRecoveryPlan(
+    args: CreateRecoveryPlanCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<CreateRecoveryPlanCommandOutput>;
+  createRecoveryPlan(
+    args: CreateRecoveryPlanCommandInput,
+    cb: (err: any, data?: CreateRecoveryPlanCommandOutput) => void
+  ): void;
+  createRecoveryPlan(
+    args: CreateRecoveryPlanCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: CreateRecoveryPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRecoveryPlanStepCommand}
+   */
+  createRecoveryPlanStep(
+    args: CreateRecoveryPlanStepCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<CreateRecoveryPlanStepCommandOutput>;
+  createRecoveryPlanStep(
+    args: CreateRecoveryPlanStepCommandInput,
+    cb: (err: any, data?: CreateRecoveryPlanStepCommandOutput) => void
+  ): void;
+  createRecoveryPlanStep(
+    args: CreateRecoveryPlanStepCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: CreateRecoveryPlanStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateReplicationConfigurationTemplateCommand}
+   */
+  createReplicationConfigurationTemplate(
+    args: CreateReplicationConfigurationTemplateCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<CreateReplicationConfigurationTemplateCommandOutput>;
+  createReplicationConfigurationTemplate(
+    args: CreateReplicationConfigurationTemplateCommandInput,
+    cb: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
+  ): void;
+  createReplicationConfigurationTemplate(
+    args: CreateReplicationConfigurationTemplateCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSourceNetworkCommand}
+   */
+  createSourceNetwork(
+    args: CreateSourceNetworkCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<CreateSourceNetworkCommandOutput>;
+  createSourceNetwork(
+    args: CreateSourceNetworkCommandInput,
+    cb: (err: any, data?: CreateSourceNetworkCommandOutput) => void
+  ): void;
+  createSourceNetwork(
+    args: CreateSourceNetworkCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: CreateSourceNetworkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteJobCommand}
+   */
+  deleteJob(
+    args: DeleteJobCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteJobCommandOutput>;
+  deleteJob(
+    args: DeleteJobCommandInput,
+    cb: (err: any, data?: DeleteJobCommandOutput) => void
+  ): void;
+  deleteJob(
+    args: DeleteJobCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLaunchActionCommand}
+   */
+  deleteLaunchAction(
+    args: DeleteLaunchActionCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteLaunchActionCommandOutput>;
+  deleteLaunchAction(
+    args: DeleteLaunchActionCommandInput,
+    cb: (err: any, data?: DeleteLaunchActionCommandOutput) => void
+  ): void;
+  deleteLaunchAction(
+    args: DeleteLaunchActionCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteLaunchActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLaunchConfigurationTemplateCommand}
+   */
+  deleteLaunchConfigurationTemplate(
+    args: DeleteLaunchConfigurationTemplateCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteLaunchConfigurationTemplateCommandOutput>;
+  deleteLaunchConfigurationTemplate(
+    args: DeleteLaunchConfigurationTemplateCommandInput,
+    cb: (err: any, data?: DeleteLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+  deleteLaunchConfigurationTemplate(
+    args: DeleteLaunchConfigurationTemplateCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecoveryInstanceCommand}
+   */
+  deleteRecoveryInstance(
+    args: DeleteRecoveryInstanceCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteRecoveryInstanceCommandOutput>;
+  deleteRecoveryInstance(
+    args: DeleteRecoveryInstanceCommandInput,
+    cb: (err: any, data?: DeleteRecoveryInstanceCommandOutput) => void
+  ): void;
+  deleteRecoveryInstance(
+    args: DeleteRecoveryInstanceCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteRecoveryInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecoveryPlanCommand}
+   */
+  deleteRecoveryPlan(
+    args: DeleteRecoveryPlanCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteRecoveryPlanCommandOutput>;
+  deleteRecoveryPlan(
+    args: DeleteRecoveryPlanCommandInput,
+    cb: (err: any, data?: DeleteRecoveryPlanCommandOutput) => void
+  ): void;
+  deleteRecoveryPlan(
+    args: DeleteRecoveryPlanCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteRecoveryPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecoveryPlanExecutionCommand}
+   */
+  deleteRecoveryPlanExecution(
+    args: DeleteRecoveryPlanExecutionCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteRecoveryPlanExecutionCommandOutput>;
+  deleteRecoveryPlanExecution(
+    args: DeleteRecoveryPlanExecutionCommandInput,
+    cb: (err: any, data?: DeleteRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+  deleteRecoveryPlanExecution(
+    args: DeleteRecoveryPlanExecutionCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecoveryPlanStepCommand}
+   */
+  deleteRecoveryPlanStep(
+    args: DeleteRecoveryPlanStepCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteRecoveryPlanStepCommandOutput>;
+  deleteRecoveryPlanStep(
+    args: DeleteRecoveryPlanStepCommandInput,
+    cb: (err: any, data?: DeleteRecoveryPlanStepCommandOutput) => void
+  ): void;
+  deleteRecoveryPlanStep(
+    args: DeleteRecoveryPlanStepCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteRecoveryPlanStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteReplicationConfigurationTemplateCommand}
+   */
+  deleteReplicationConfigurationTemplate(
+    args: DeleteReplicationConfigurationTemplateCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteReplicationConfigurationTemplateCommandOutput>;
+  deleteReplicationConfigurationTemplate(
+    args: DeleteReplicationConfigurationTemplateCommandInput,
+    cb: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
+  ): void;
+  deleteReplicationConfigurationTemplate(
+    args: DeleteReplicationConfigurationTemplateCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSourceNetworkCommand}
+   */
+  deleteSourceNetwork(
+    args: DeleteSourceNetworkCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteSourceNetworkCommandOutput>;
+  deleteSourceNetwork(
+    args: DeleteSourceNetworkCommandInput,
+    cb: (err: any, data?: DeleteSourceNetworkCommandOutput) => void
+  ): void;
+  deleteSourceNetwork(
+    args: DeleteSourceNetworkCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteSourceNetworkCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSourceServerCommand}
+   */
+  deleteSourceServer(
+    args: DeleteSourceServerCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DeleteSourceServerCommandOutput>;
+  deleteSourceServer(
+    args: DeleteSourceServerCommandInput,
+    cb: (err: any, data?: DeleteSourceServerCommandOutput) => void
+  ): void;
+  deleteSourceServer(
+    args: DeleteSourceServerCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DeleteSourceServerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeJobLogItemsCommand}
+   */
+  describeJobLogItems(
+    args: DescribeJobLogItemsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeJobLogItemsCommandOutput>;
+  describeJobLogItems(
+    args: DescribeJobLogItemsCommandInput,
+    cb: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
+  ): void;
+  describeJobLogItems(
+    args: DescribeJobLogItemsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeJobsCommand}
+   */
+  describeJobs(): Promise<DescribeJobsCommandOutput>;
+  describeJobs(
+    args: DescribeJobsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeJobsCommandOutput>;
+  describeJobs(
+    args: DescribeJobsCommandInput,
+    cb: (err: any, data?: DescribeJobsCommandOutput) => void
+  ): void;
+  describeJobs(
+    args: DescribeJobsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLaunchConfigurationTemplatesCommand}
+   */
+  describeLaunchConfigurationTemplates(): Promise<DescribeLaunchConfigurationTemplatesCommandOutput>;
+  describeLaunchConfigurationTemplates(
+    args: DescribeLaunchConfigurationTemplatesCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeLaunchConfigurationTemplatesCommandOutput>;
+  describeLaunchConfigurationTemplates(
+    args: DescribeLaunchConfigurationTemplatesCommandInput,
+    cb: (err: any, data?: DescribeLaunchConfigurationTemplatesCommandOutput) => void
+  ): void;
+  describeLaunchConfigurationTemplates(
+    args: DescribeLaunchConfigurationTemplatesCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeLaunchConfigurationTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecoveryInstancesCommand}
+   */
+  describeRecoveryInstances(): Promise<DescribeRecoveryInstancesCommandOutput>;
+  describeRecoveryInstances(
+    args: DescribeRecoveryInstancesCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeRecoveryInstancesCommandOutput>;
+  describeRecoveryInstances(
+    args: DescribeRecoveryInstancesCommandInput,
+    cb: (err: any, data?: DescribeRecoveryInstancesCommandOutput) => void
+  ): void;
+  describeRecoveryInstances(
+    args: DescribeRecoveryInstancesCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeRecoveryInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeRecoverySnapshotsCommand}
+   */
+  describeRecoverySnapshots(
+    args: DescribeRecoverySnapshotsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeRecoverySnapshotsCommandOutput>;
+  describeRecoverySnapshots(
+    args: DescribeRecoverySnapshotsCommandInput,
+    cb: (err: any, data?: DescribeRecoverySnapshotsCommandOutput) => void
+  ): void;
+  describeRecoverySnapshots(
+    args: DescribeRecoverySnapshotsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeRecoverySnapshotsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeReplicationConfigurationTemplatesCommand}
+   */
+  describeReplicationConfigurationTemplates(): Promise<DescribeReplicationConfigurationTemplatesCommandOutput>;
+  describeReplicationConfigurationTemplates(
+    args: DescribeReplicationConfigurationTemplatesCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeReplicationConfigurationTemplatesCommandOutput>;
+  describeReplicationConfigurationTemplates(
+    args: DescribeReplicationConfigurationTemplatesCommandInput,
+    cb: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
+  ): void;
+  describeReplicationConfigurationTemplates(
+    args: DescribeReplicationConfigurationTemplatesCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSourceNetworksCommand}
+   */
+  describeSourceNetworks(): Promise<DescribeSourceNetworksCommandOutput>;
+  describeSourceNetworks(
+    args: DescribeSourceNetworksCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeSourceNetworksCommandOutput>;
+  describeSourceNetworks(
+    args: DescribeSourceNetworksCommandInput,
+    cb: (err: any, data?: DescribeSourceNetworksCommandOutput) => void
+  ): void;
+  describeSourceNetworks(
+    args: DescribeSourceNetworksCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeSourceNetworksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeSourceServersCommand}
+   */
+  describeSourceServers(): Promise<DescribeSourceServersCommandOutput>;
+  describeSourceServers(
+    args: DescribeSourceServersCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DescribeSourceServersCommandOutput>;
+  describeSourceServers(
+    args: DescribeSourceServersCommandInput,
+    cb: (err: any, data?: DescribeSourceServersCommandOutput) => void
+  ): void;
+  describeSourceServers(
+    args: DescribeSourceServersCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DescribeSourceServersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisconnectRecoveryInstanceCommand}
+   */
+  disconnectRecoveryInstance(
+    args: DisconnectRecoveryInstanceCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DisconnectRecoveryInstanceCommandOutput>;
+  disconnectRecoveryInstance(
+    args: DisconnectRecoveryInstanceCommandInput,
+    cb: (err: any, data?: DisconnectRecoveryInstanceCommandOutput) => void
+  ): void;
+  disconnectRecoveryInstance(
+    args: DisconnectRecoveryInstanceCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DisconnectRecoveryInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisconnectSourceServerCommand}
+   */
+  disconnectSourceServer(
+    args: DisconnectSourceServerCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<DisconnectSourceServerCommandOutput>;
+  disconnectSourceServer(
+    args: DisconnectSourceServerCommandInput,
+    cb: (err: any, data?: DisconnectSourceServerCommandOutput) => void
+  ): void;
+  disconnectSourceServer(
+    args: DisconnectSourceServerCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: DisconnectSourceServerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportSourceNetworkCfnTemplateCommand}
+   */
+  exportSourceNetworkCfnTemplate(
+    args: ExportSourceNetworkCfnTemplateCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ExportSourceNetworkCfnTemplateCommandOutput>;
+  exportSourceNetworkCfnTemplate(
+    args: ExportSourceNetworkCfnTemplateCommandInput,
+    cb: (err: any, data?: ExportSourceNetworkCfnTemplateCommandOutput) => void
+  ): void;
+  exportSourceNetworkCfnTemplate(
+    args: ExportSourceNetworkCfnTemplateCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ExportSourceNetworkCfnTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFailbackReplicationConfigurationCommand}
+   */
+  getFailbackReplicationConfiguration(
+    args: GetFailbackReplicationConfigurationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<GetFailbackReplicationConfigurationCommandOutput>;
+  getFailbackReplicationConfiguration(
+    args: GetFailbackReplicationConfigurationCommandInput,
+    cb: (err: any, data?: GetFailbackReplicationConfigurationCommandOutput) => void
+  ): void;
+  getFailbackReplicationConfiguration(
+    args: GetFailbackReplicationConfigurationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: GetFailbackReplicationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLaunchConfigurationCommand}
+   */
+  getLaunchConfiguration(
+    args: GetLaunchConfigurationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<GetLaunchConfigurationCommandOutput>;
+  getLaunchConfiguration(
+    args: GetLaunchConfigurationCommandInput,
+    cb: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
+  ): void;
+  getLaunchConfiguration(
+    args: GetLaunchConfigurationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecoveryPlanCommand}
+   */
+  getRecoveryPlan(
+    args: GetRecoveryPlanCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<GetRecoveryPlanCommandOutput>;
+  getRecoveryPlan(
+    args: GetRecoveryPlanCommandInput,
+    cb: (err: any, data?: GetRecoveryPlanCommandOutput) => void
+  ): void;
+  getRecoveryPlan(
+    args: GetRecoveryPlanCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: GetRecoveryPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecoveryPlanExecutionCommand}
+   */
+  getRecoveryPlanExecution(
+    args: GetRecoveryPlanExecutionCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<GetRecoveryPlanExecutionCommandOutput>;
+  getRecoveryPlanExecution(
+    args: GetRecoveryPlanExecutionCommandInput,
+    cb: (err: any, data?: GetRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+  getRecoveryPlanExecution(
+    args: GetRecoveryPlanExecutionCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: GetRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecoveryPlanExecutionStepCommand}
+   */
+  getRecoveryPlanExecutionStep(
+    args: GetRecoveryPlanExecutionStepCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<GetRecoveryPlanExecutionStepCommandOutput>;
+  getRecoveryPlanExecutionStep(
+    args: GetRecoveryPlanExecutionStepCommandInput,
+    cb: (err: any, data?: GetRecoveryPlanExecutionStepCommandOutput) => void
+  ): void;
+  getRecoveryPlanExecutionStep(
+    args: GetRecoveryPlanExecutionStepCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: GetRecoveryPlanExecutionStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRecoveryPlanStepCommand}
+   */
+  getRecoveryPlanStep(
+    args: GetRecoveryPlanStepCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<GetRecoveryPlanStepCommandOutput>;
+  getRecoveryPlanStep(
+    args: GetRecoveryPlanStepCommandInput,
+    cb: (err: any, data?: GetRecoveryPlanStepCommandOutput) => void
+  ): void;
+  getRecoveryPlanStep(
+    args: GetRecoveryPlanStepCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: GetRecoveryPlanStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReplicationConfigurationCommand}
+   */
+  getReplicationConfiguration(
+    args: GetReplicationConfigurationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<GetReplicationConfigurationCommandOutput>;
+  getReplicationConfiguration(
+    args: GetReplicationConfigurationCommandInput,
+    cb: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
+  ): void;
+  getReplicationConfiguration(
+    args: GetReplicationConfigurationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link InitializeServiceCommand}
+   */
+  initializeService(): Promise<InitializeServiceCommandOutput>;
+  initializeService(
+    args: InitializeServiceCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<InitializeServiceCommandOutput>;
+  initializeService(
+    args: InitializeServiceCommandInput,
+    cb: (err: any, data?: InitializeServiceCommandOutput) => void
+  ): void;
+  initializeService(
+    args: InitializeServiceCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: InitializeServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListExtensibleSourceServersCommand}
+   */
+  listExtensibleSourceServers(
+    args: ListExtensibleSourceServersCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListExtensibleSourceServersCommandOutput>;
+  listExtensibleSourceServers(
+    args: ListExtensibleSourceServersCommandInput,
+    cb: (err: any, data?: ListExtensibleSourceServersCommandOutput) => void
+  ): void;
+  listExtensibleSourceServers(
+    args: ListExtensibleSourceServersCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListExtensibleSourceServersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLaunchActionsCommand}
+   */
+  listLaunchActions(
+    args: ListLaunchActionsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListLaunchActionsCommandOutput>;
+  listLaunchActions(
+    args: ListLaunchActionsCommandInput,
+    cb: (err: any, data?: ListLaunchActionsCommandOutput) => void
+  ): void;
+  listLaunchActions(
+    args: ListLaunchActionsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListLaunchActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecoveryPlanExecutionsCommand}
+   */
+  listRecoveryPlanExecutions(): Promise<ListRecoveryPlanExecutionsCommandOutput>;
+  listRecoveryPlanExecutions(
+    args: ListRecoveryPlanExecutionsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListRecoveryPlanExecutionsCommandOutput>;
+  listRecoveryPlanExecutions(
+    args: ListRecoveryPlanExecutionsCommandInput,
+    cb: (err: any, data?: ListRecoveryPlanExecutionsCommandOutput) => void
+  ): void;
+  listRecoveryPlanExecutions(
+    args: ListRecoveryPlanExecutionsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListRecoveryPlanExecutionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecoveryPlanExecutionStepsCommand}
+   */
+  listRecoveryPlanExecutionSteps(
+    args: ListRecoveryPlanExecutionStepsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListRecoveryPlanExecutionStepsCommandOutput>;
+  listRecoveryPlanExecutionSteps(
+    args: ListRecoveryPlanExecutionStepsCommandInput,
+    cb: (err: any, data?: ListRecoveryPlanExecutionStepsCommandOutput) => void
+  ): void;
+  listRecoveryPlanExecutionSteps(
+    args: ListRecoveryPlanExecutionStepsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListRecoveryPlanExecutionStepsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecoveryPlansCommand}
+   */
+  listRecoveryPlans(): Promise<ListRecoveryPlansCommandOutput>;
+  listRecoveryPlans(
+    args: ListRecoveryPlansCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListRecoveryPlansCommandOutput>;
+  listRecoveryPlans(
+    args: ListRecoveryPlansCommandInput,
+    cb: (err: any, data?: ListRecoveryPlansCommandOutput) => void
+  ): void;
+  listRecoveryPlans(
+    args: ListRecoveryPlansCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListRecoveryPlansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecoveryPlanStepsCommand}
+   */
+  listRecoveryPlanSteps(
+    args: ListRecoveryPlanStepsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListRecoveryPlanStepsCommandOutput>;
+  listRecoveryPlanSteps(
+    args: ListRecoveryPlanStepsCommandInput,
+    cb: (err: any, data?: ListRecoveryPlanStepsCommandOutput) => void
+  ): void;
+  listRecoveryPlanSteps(
+    args: ListRecoveryPlanStepsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListRecoveryPlanStepsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListStagingAccountsCommand}
+   */
+  listStagingAccounts(): Promise<ListStagingAccountsCommandOutput>;
+  listStagingAccounts(
+    args: ListStagingAccountsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListStagingAccountsCommandOutput>;
+  listStagingAccounts(
+    args: ListStagingAccountsCommandInput,
+    cb: (err: any, data?: ListStagingAccountsCommandOutput) => void
+  ): void;
+  listStagingAccounts(
+    args: ListStagingAccountsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListStagingAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutLaunchActionCommand}
+   */
+  putLaunchAction(
+    args: PutLaunchActionCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<PutLaunchActionCommandOutput>;
+  putLaunchAction(
+    args: PutLaunchActionCommandInput,
+    cb: (err: any, data?: PutLaunchActionCommandOutput) => void
+  ): void;
+  putLaunchAction(
+    args: PutLaunchActionCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: PutLaunchActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReorderRecoveryPlanStepsCommand}
+   */
+  reorderRecoveryPlanSteps(
+    args: ReorderRecoveryPlanStepsCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ReorderRecoveryPlanStepsCommandOutput>;
+  reorderRecoveryPlanSteps(
+    args: ReorderRecoveryPlanStepsCommandInput,
+    cb: (err: any, data?: ReorderRecoveryPlanStepsCommandOutput) => void
+  ): void;
+  reorderRecoveryPlanSteps(
+    args: ReorderRecoveryPlanStepsCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ReorderRecoveryPlanStepsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetryDataReplicationCommand}
+   */
+  retryDataReplication(
+    args: RetryDataReplicationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<RetryDataReplicationCommandOutput>;
+  retryDataReplication(
+    args: RetryDataReplicationCommandInput,
+    cb: (err: any, data?: RetryDataReplicationCommandOutput) => void
+  ): void;
+  retryDataReplication(
+    args: RetryDataReplicationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: RetryDataReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RetryRecoveryPlanExecutionStepCommand}
+   */
+  retryRecoveryPlanExecutionStep(
+    args: RetryRecoveryPlanExecutionStepCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<RetryRecoveryPlanExecutionStepCommandOutput>;
+  retryRecoveryPlanExecutionStep(
+    args: RetryRecoveryPlanExecutionStepCommandInput,
+    cb: (err: any, data?: RetryRecoveryPlanExecutionStepCommandOutput) => void
+  ): void;
+  retryRecoveryPlanExecutionStep(
+    args: RetryRecoveryPlanExecutionStepCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: RetryRecoveryPlanExecutionStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReverseReplicationCommand}
+   */
+  reverseReplication(
+    args: ReverseReplicationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<ReverseReplicationCommandOutput>;
+  reverseReplication(
+    args: ReverseReplicationCommandInput,
+    cb: (err: any, data?: ReverseReplicationCommandOutput) => void
+  ): void;
+  reverseReplication(
+    args: ReverseReplicationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: ReverseReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartFailbackLaunchCommand}
+   */
+  startFailbackLaunch(
+    args: StartFailbackLaunchCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StartFailbackLaunchCommandOutput>;
+  startFailbackLaunch(
+    args: StartFailbackLaunchCommandInput,
+    cb: (err: any, data?: StartFailbackLaunchCommandOutput) => void
+  ): void;
+  startFailbackLaunch(
+    args: StartFailbackLaunchCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StartFailbackLaunchCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRecoveryCommand}
+   */
+  startRecovery(
+    args: StartRecoveryCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StartRecoveryCommandOutput>;
+  startRecovery(
+    args: StartRecoveryCommandInput,
+    cb: (err: any, data?: StartRecoveryCommandOutput) => void
+  ): void;
+  startRecovery(
+    args: StartRecoveryCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StartRecoveryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRecoveryPlanExecutionCommand}
+   */
+  startRecoveryPlanExecution(
+    args: StartRecoveryPlanExecutionCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StartRecoveryPlanExecutionCommandOutput>;
+  startRecoveryPlanExecution(
+    args: StartRecoveryPlanExecutionCommandInput,
+    cb: (err: any, data?: StartRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+  startRecoveryPlanExecution(
+    args: StartRecoveryPlanExecutionCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StartRecoveryPlanExecutionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartReplicationCommand}
+   */
+  startReplication(
+    args: StartReplicationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StartReplicationCommandOutput>;
+  startReplication(
+    args: StartReplicationCommandInput,
+    cb: (err: any, data?: StartReplicationCommandOutput) => void
+  ): void;
+  startReplication(
+    args: StartReplicationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StartReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartSourceNetworkRecoveryCommand}
+   */
+  startSourceNetworkRecovery(
+    args: StartSourceNetworkRecoveryCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StartSourceNetworkRecoveryCommandOutput>;
+  startSourceNetworkRecovery(
+    args: StartSourceNetworkRecoveryCommandInput,
+    cb: (err: any, data?: StartSourceNetworkRecoveryCommandOutput) => void
+  ): void;
+  startSourceNetworkRecovery(
+    args: StartSourceNetworkRecoveryCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StartSourceNetworkRecoveryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartSourceNetworkReplicationCommand}
+   */
+  startSourceNetworkReplication(
+    args: StartSourceNetworkReplicationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StartSourceNetworkReplicationCommandOutput>;
+  startSourceNetworkReplication(
+    args: StartSourceNetworkReplicationCommandInput,
+    cb: (err: any, data?: StartSourceNetworkReplicationCommandOutput) => void
+  ): void;
+  startSourceNetworkReplication(
+    args: StartSourceNetworkReplicationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StartSourceNetworkReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopFailbackCommand}
+   */
+  stopFailback(
+    args: StopFailbackCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StopFailbackCommandOutput>;
+  stopFailback(
+    args: StopFailbackCommandInput,
+    cb: (err: any, data?: StopFailbackCommandOutput) => void
+  ): void;
+  stopFailback(
+    args: StopFailbackCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StopFailbackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopReplicationCommand}
+   */
+  stopReplication(
+    args: StopReplicationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StopReplicationCommandOutput>;
+  stopReplication(
+    args: StopReplicationCommandInput,
+    cb: (err: any, data?: StopReplicationCommandOutput) => void
+  ): void;
+  stopReplication(
+    args: StopReplicationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StopReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopSourceNetworkReplicationCommand}
+   */
+  stopSourceNetworkReplication(
+    args: StopSourceNetworkReplicationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<StopSourceNetworkReplicationCommandOutput>;
+  stopSourceNetworkReplication(
+    args: StopSourceNetworkReplicationCommandInput,
+    cb: (err: any, data?: StopSourceNetworkReplicationCommandOutput) => void
+  ): void;
+  stopSourceNetworkReplication(
+    args: StopSourceNetworkReplicationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: StopSourceNetworkReplicationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TerminateRecoveryInstancesCommand}
+   */
+  terminateRecoveryInstances(
+    args: TerminateRecoveryInstancesCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<TerminateRecoveryInstancesCommandOutput>;
+  terminateRecoveryInstances(
+    args: TerminateRecoveryInstancesCommandInput,
+    cb: (err: any, data?: TerminateRecoveryInstancesCommandOutput) => void
+  ): void;
+  terminateRecoveryInstances(
+    args: TerminateRecoveryInstancesCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: TerminateRecoveryInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFailbackReplicationConfigurationCommand}
+   */
+  updateFailbackReplicationConfiguration(
+    args: UpdateFailbackReplicationConfigurationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateFailbackReplicationConfigurationCommandOutput>;
+  updateFailbackReplicationConfiguration(
+    args: UpdateFailbackReplicationConfigurationCommandInput,
+    cb: (err: any, data?: UpdateFailbackReplicationConfigurationCommandOutput) => void
+  ): void;
+  updateFailbackReplicationConfiguration(
+    args: UpdateFailbackReplicationConfigurationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateFailbackReplicationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLaunchConfigurationCommand}
+   */
+  updateLaunchConfiguration(
+    args: UpdateLaunchConfigurationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateLaunchConfigurationCommandOutput>;
+  updateLaunchConfiguration(
+    args: UpdateLaunchConfigurationCommandInput,
+    cb: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
+  ): void;
+  updateLaunchConfiguration(
+    args: UpdateLaunchConfigurationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLaunchConfigurationTemplateCommand}
+   */
+  updateLaunchConfigurationTemplate(
+    args: UpdateLaunchConfigurationTemplateCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateLaunchConfigurationTemplateCommandOutput>;
+  updateLaunchConfigurationTemplate(
+    args: UpdateLaunchConfigurationTemplateCommandInput,
+    cb: (err: any, data?: UpdateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+  updateLaunchConfigurationTemplate(
+    args: UpdateLaunchConfigurationTemplateCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateLaunchConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRecoveryPlanCommand}
+   */
+  updateRecoveryPlan(
+    args: UpdateRecoveryPlanCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateRecoveryPlanCommandOutput>;
+  updateRecoveryPlan(
+    args: UpdateRecoveryPlanCommandInput,
+    cb: (err: any, data?: UpdateRecoveryPlanCommandOutput) => void
+  ): void;
+  updateRecoveryPlan(
+    args: UpdateRecoveryPlanCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateRecoveryPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRecoveryPlanExecutionStepCommand}
+   */
+  updateRecoveryPlanExecutionStep(
+    args: UpdateRecoveryPlanExecutionStepCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateRecoveryPlanExecutionStepCommandOutput>;
+  updateRecoveryPlanExecutionStep(
+    args: UpdateRecoveryPlanExecutionStepCommandInput,
+    cb: (err: any, data?: UpdateRecoveryPlanExecutionStepCommandOutput) => void
+  ): void;
+  updateRecoveryPlanExecutionStep(
+    args: UpdateRecoveryPlanExecutionStepCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateRecoveryPlanExecutionStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRecoveryPlanStepCommand}
+   */
+  updateRecoveryPlanStep(
+    args: UpdateRecoveryPlanStepCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateRecoveryPlanStepCommandOutput>;
+  updateRecoveryPlanStep(
+    args: UpdateRecoveryPlanStepCommandInput,
+    cb: (err: any, data?: UpdateRecoveryPlanStepCommandOutput) => void
+  ): void;
+  updateRecoveryPlanStep(
+    args: UpdateRecoveryPlanStepCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateRecoveryPlanStepCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateReplicationConfigurationCommand}
+   */
+  updateReplicationConfiguration(
+    args: UpdateReplicationConfigurationCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateReplicationConfigurationCommandOutput>;
+  updateReplicationConfiguration(
+    args: UpdateReplicationConfigurationCommandInput,
+    cb: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
+  ): void;
+  updateReplicationConfiguration(
+    args: UpdateReplicationConfigurationCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateReplicationConfigurationTemplateCommand}
+   */
+  updateReplicationConfigurationTemplate(
+    args: UpdateReplicationConfigurationTemplateCommandInput,
+    options?: DrsRequestOptions
+  ): Promise<UpdateReplicationConfigurationTemplateCommandOutput>;
+  updateReplicationConfigurationTemplate(
+    args: UpdateReplicationConfigurationTemplateCommandInput,
+    cb: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
+  ): void;
+  updateReplicationConfigurationTemplate(
+    args: UpdateReplicationConfigurationTemplateCommandInput,
+    options: DrsRequestOptions,
+    cb: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeJobLogItemsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeJobLogItemsCommandOutput}.
+   */
+  paginateDescribeJobLogItems(
+    args: DescribeJobLogItemsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeJobLogItemsCommandOutput>;
+
+  /**
+   * @see {@link DescribeJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeJobsCommandOutput}.
+   */
+  paginateDescribeJobs(
+    args?: DescribeJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeJobsCommandOutput>;
+
+  /**
+   * @see {@link DescribeLaunchConfigurationTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeLaunchConfigurationTemplatesCommandOutput}.
+   */
+  paginateDescribeLaunchConfigurationTemplates(
+    args?: DescribeLaunchConfigurationTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeLaunchConfigurationTemplatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeRecoveryInstancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRecoveryInstancesCommandOutput}.
+   */
+  paginateDescribeRecoveryInstances(
+    args?: DescribeRecoveryInstancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRecoveryInstancesCommandOutput>;
+
+  /**
+   * @see {@link DescribeRecoverySnapshotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeRecoverySnapshotsCommandOutput}.
+   */
+  paginateDescribeRecoverySnapshots(
+    args: DescribeRecoverySnapshotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeRecoverySnapshotsCommandOutput>;
+
+  /**
+   * @see {@link DescribeReplicationConfigurationTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeReplicationConfigurationTemplatesCommandOutput}.
+   */
+  paginateDescribeReplicationConfigurationTemplates(
+    args?: DescribeReplicationConfigurationTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeReplicationConfigurationTemplatesCommandOutput>;
+
+  /**
+   * @see {@link DescribeSourceNetworksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeSourceNetworksCommandOutput}.
+   */
+  paginateDescribeSourceNetworks(
+    args?: DescribeSourceNetworksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeSourceNetworksCommandOutput>;
+
+  /**
+   * @see {@link DescribeSourceServersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link DescribeSourceServersCommandOutput}.
+   */
+  paginateDescribeSourceServers(
+    args?: DescribeSourceServersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<DescribeSourceServersCommandOutput>;
+
+  /**
+   * @see {@link ListExtensibleSourceServersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListExtensibleSourceServersCommandOutput}.
+   */
+  paginateListExtensibleSourceServers(
+    args: ListExtensibleSourceServersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListExtensibleSourceServersCommandOutput>;
+
+  /**
+   * @see {@link ListLaunchActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLaunchActionsCommandOutput}.
+   */
+  paginateListLaunchActions(
+    args: ListLaunchActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLaunchActionsCommandOutput>;
+
+  /**
+   * @see {@link ListRecoveryPlanExecutionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecoveryPlanExecutionsCommandOutput}.
+   */
+  paginateListRecoveryPlanExecutions(
+    args?: ListRecoveryPlanExecutionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecoveryPlanExecutionsCommandOutput>;
+
+  /**
+   * @see {@link ListRecoveryPlanExecutionStepsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecoveryPlanExecutionStepsCommandOutput}.
+   */
+  paginateListRecoveryPlanExecutionSteps(
+    args: ListRecoveryPlanExecutionStepsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecoveryPlanExecutionStepsCommandOutput>;
+
+  /**
+   * @see {@link ListRecoveryPlansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecoveryPlansCommandOutput}.
+   */
+  paginateListRecoveryPlans(
+    args?: ListRecoveryPlansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecoveryPlansCommandOutput>;
+
+  /**
+   * @see {@link ListRecoveryPlanStepsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecoveryPlanStepsCommandOutput}.
+   */
+  paginateListRecoveryPlanSteps(
+    args: ListRecoveryPlanStepsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecoveryPlanStepsCommandOutput>;
+
+  /**
+   * @see {@link ListStagingAccountsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListStagingAccountsCommandOutput}.
+   */
+  paginateListStagingAccounts(
+    args?: ListStagingAccountsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListStagingAccountsCommandOutput>;
+}
 
 /**
  * <p>AWS Elastic Disaster Recovery Service.</p>
+ * @public
  */
-export class Drs extends DrsClient {
-  /**
-   * <p>Create an extended source server in the target Account based on the source server in staging account.</p>
-   */
-  public createExtendedSourceServer(
-    args: CreateExtendedSourceServerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateExtendedSourceServerCommandOutput>;
-  public createExtendedSourceServer(
-    args: CreateExtendedSourceServerCommandInput,
-    cb: (err: any, data?: CreateExtendedSourceServerCommandOutput) => void
-  ): void;
-  public createExtendedSourceServer(
-    args: CreateExtendedSourceServerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateExtendedSourceServerCommandOutput) => void
-  ): void;
-  public createExtendedSourceServer(
-    args: CreateExtendedSourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateExtendedSourceServerCommandOutput) => void),
-    cb?: (err: any, data?: CreateExtendedSourceServerCommandOutput) => void
-  ): Promise<CreateExtendedSourceServerCommandOutput> | void {
-    const command = new CreateExtendedSourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new ReplicationConfigurationTemplate.</p>
-   */
-  public createReplicationConfigurationTemplate(
-    args: CreateReplicationConfigurationTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateReplicationConfigurationTemplateCommandOutput>;
-  public createReplicationConfigurationTemplate(
-    args: CreateReplicationConfigurationTemplateCommandInput,
-    cb: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
-  ): void;
-  public createReplicationConfigurationTemplate(
-    args: CreateReplicationConfigurationTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
-  ): void;
-  public createReplicationConfigurationTemplate(
-    args: CreateReplicationConfigurationTemplateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: CreateReplicationConfigurationTemplateCommandOutput) => void
-  ): Promise<CreateReplicationConfigurationTemplateCommandOutput> | void {
-    const command = new CreateReplicationConfigurationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a single Job by ID.</p>
-   */
-  public deleteJob(args: DeleteJobCommandInput, options?: __HttpHandlerOptions): Promise<DeleteJobCommandOutput>;
-  public deleteJob(args: DeleteJobCommandInput, cb: (err: any, data?: DeleteJobCommandOutput) => void): void;
-  public deleteJob(
-    args: DeleteJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteJobCommandOutput) => void
-  ): void;
-  public deleteJob(
-    args: DeleteJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteJobCommandOutput) => void),
-    cb?: (err: any, data?: DeleteJobCommandOutput) => void
-  ): Promise<DeleteJobCommandOutput> | void {
-    const command = new DeleteJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a single Recovery Instance by ID. This deletes the Recovery Instance resource from Elastic Disaster Recovery. The Recovery Instance must be disconnected first in order to delete it.</p>
-   */
-  public deleteRecoveryInstance(
-    args: DeleteRecoveryInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRecoveryInstanceCommandOutput>;
-  public deleteRecoveryInstance(
-    args: DeleteRecoveryInstanceCommandInput,
-    cb: (err: any, data?: DeleteRecoveryInstanceCommandOutput) => void
-  ): void;
-  public deleteRecoveryInstance(
-    args: DeleteRecoveryInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRecoveryInstanceCommandOutput) => void
-  ): void;
-  public deleteRecoveryInstance(
-    args: DeleteRecoveryInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRecoveryInstanceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRecoveryInstanceCommandOutput) => void
-  ): Promise<DeleteRecoveryInstanceCommandOutput> | void {
-    const command = new DeleteRecoveryInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a single Replication Configuration Template by ID</p>
-   */
-  public deleteReplicationConfigurationTemplate(
-    args: DeleteReplicationConfigurationTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteReplicationConfigurationTemplateCommandOutput>;
-  public deleteReplicationConfigurationTemplate(
-    args: DeleteReplicationConfigurationTemplateCommandInput,
-    cb: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
-  ): void;
-  public deleteReplicationConfigurationTemplate(
-    args: DeleteReplicationConfigurationTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
-  ): void;
-  public deleteReplicationConfigurationTemplate(
-    args: DeleteReplicationConfigurationTemplateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteReplicationConfigurationTemplateCommandOutput) => void
-  ): Promise<DeleteReplicationConfigurationTemplateCommandOutput> | void {
-    const command = new DeleteReplicationConfigurationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a single Source Server by ID. The Source Server must be disconnected first.</p>
-   */
-  public deleteSourceServer(
-    args: DeleteSourceServerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSourceServerCommandOutput>;
-  public deleteSourceServer(
-    args: DeleteSourceServerCommandInput,
-    cb: (err: any, data?: DeleteSourceServerCommandOutput) => void
-  ): void;
-  public deleteSourceServer(
-    args: DeleteSourceServerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSourceServerCommandOutput) => void
-  ): void;
-  public deleteSourceServer(
-    args: DeleteSourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSourceServerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSourceServerCommandOutput) => void
-  ): Promise<DeleteSourceServerCommandOutput> | void {
-    const command = new DeleteSourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves a detailed Job log with pagination.</p>
-   */
-  public describeJobLogItems(
-    args: DescribeJobLogItemsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeJobLogItemsCommandOutput>;
-  public describeJobLogItems(
-    args: DescribeJobLogItemsCommandInput,
-    cb: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
-  ): void;
-  public describeJobLogItems(
-    args: DescribeJobLogItemsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
-  ): void;
-  public describeJobLogItems(
-    args: DescribeJobLogItemsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeJobLogItemsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeJobLogItemsCommandOutput) => void
-  ): Promise<DescribeJobLogItemsCommandOutput> | void {
-    const command = new DescribeJobLogItemsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of Jobs. Use the JobsID and fromDate and toDate filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are created by the StartRecovery, TerminateRecoveryInstances and StartFailbackLaunch APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.</p>
-   */
-  public describeJobs(
-    args: DescribeJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeJobsCommandOutput>;
-  public describeJobs(args: DescribeJobsCommandInput, cb: (err: any, data?: DescribeJobsCommandOutput) => void): void;
-  public describeJobs(
-    args: DescribeJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeJobsCommandOutput) => void
-  ): void;
-  public describeJobs(
-    args: DescribeJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeJobsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeJobsCommandOutput) => void
-  ): Promise<DescribeJobsCommandOutput> | void {
-    const command = new DescribeJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all Recovery Instances or multiple Recovery Instances by ID.</p>
-   */
-  public describeRecoveryInstances(
-    args: DescribeRecoveryInstancesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRecoveryInstancesCommandOutput>;
-  public describeRecoveryInstances(
-    args: DescribeRecoveryInstancesCommandInput,
-    cb: (err: any, data?: DescribeRecoveryInstancesCommandOutput) => void
-  ): void;
-  public describeRecoveryInstances(
-    args: DescribeRecoveryInstancesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRecoveryInstancesCommandOutput) => void
-  ): void;
-  public describeRecoveryInstances(
-    args: DescribeRecoveryInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRecoveryInstancesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRecoveryInstancesCommandOutput) => void
-  ): Promise<DescribeRecoveryInstancesCommandOutput> | void {
-    const command = new DescribeRecoveryInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all Recovery Snapshots for a single Source Server.</p>
-   */
-  public describeRecoverySnapshots(
-    args: DescribeRecoverySnapshotsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeRecoverySnapshotsCommandOutput>;
-  public describeRecoverySnapshots(
-    args: DescribeRecoverySnapshotsCommandInput,
-    cb: (err: any, data?: DescribeRecoverySnapshotsCommandOutput) => void
-  ): void;
-  public describeRecoverySnapshots(
-    args: DescribeRecoverySnapshotsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeRecoverySnapshotsCommandOutput) => void
-  ): void;
-  public describeRecoverySnapshots(
-    args: DescribeRecoverySnapshotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeRecoverySnapshotsCommandOutput) => void),
-    cb?: (err: any, data?: DescribeRecoverySnapshotsCommandOutput) => void
-  ): Promise<DescribeRecoverySnapshotsCommandOutput> | void {
-    const command = new DescribeRecoverySnapshotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.</p>
-   */
-  public describeReplicationConfigurationTemplates(
-    args: DescribeReplicationConfigurationTemplatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeReplicationConfigurationTemplatesCommandOutput>;
-  public describeReplicationConfigurationTemplates(
-    args: DescribeReplicationConfigurationTemplatesCommandInput,
-    cb: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
-  ): void;
-  public describeReplicationConfigurationTemplates(
-    args: DescribeReplicationConfigurationTemplatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
-  ): void;
-  public describeReplicationConfigurationTemplates(
-    args: DescribeReplicationConfigurationTemplatesCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void),
-    cb?: (err: any, data?: DescribeReplicationConfigurationTemplatesCommandOutput) => void
-  ): Promise<DescribeReplicationConfigurationTemplatesCommandOutput> | void {
-    const command = new DescribeReplicationConfigurationTemplatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all Source Servers or multiple Source Servers filtered by ID.</p>
-   */
-  public describeSourceServers(
-    args: DescribeSourceServersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeSourceServersCommandOutput>;
-  public describeSourceServers(
-    args: DescribeSourceServersCommandInput,
-    cb: (err: any, data?: DescribeSourceServersCommandOutput) => void
-  ): void;
-  public describeSourceServers(
-    args: DescribeSourceServersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeSourceServersCommandOutput) => void
-  ): void;
-  public describeSourceServers(
-    args: DescribeSourceServersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeSourceServersCommandOutput) => void),
-    cb?: (err: any, data?: DescribeSourceServersCommandOutput) => void
-  ): Promise<DescribeSourceServersCommandOutput> | void {
-    const command = new DescribeSourceServersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disconnect a Recovery Instance from Elastic Disaster Recovery. Data replication is stopped immediately. All AWS resources created by Elastic Disaster Recovery for enabling the replication of the Recovery Instance will be terminated / deleted within 90 minutes. If the agent on the Recovery Instance has not been prevented from communicating with the Elastic Disaster Recovery service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the Recovery Instance will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>
-   */
-  public disconnectRecoveryInstance(
-    args: DisconnectRecoveryInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisconnectRecoveryInstanceCommandOutput>;
-  public disconnectRecoveryInstance(
-    args: DisconnectRecoveryInstanceCommandInput,
-    cb: (err: any, data?: DisconnectRecoveryInstanceCommandOutput) => void
-  ): void;
-  public disconnectRecoveryInstance(
-    args: DisconnectRecoveryInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisconnectRecoveryInstanceCommandOutput) => void
-  ): void;
-  public disconnectRecoveryInstance(
-    args: DisconnectRecoveryInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisconnectRecoveryInstanceCommandOutput) => void),
-    cb?: (err: any, data?: DisconnectRecoveryInstanceCommandOutput) => void
-  ): Promise<DisconnectRecoveryInstanceCommandOutput> | void {
-    const command = new DisconnectRecoveryInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disconnects a specific Source Server from Elastic Disaster Recovery. Data replication is stopped immediately. All AWS resources created by Elastic Disaster Recovery for enabling the replication of the Source Server will be terminated / deleted within 90 minutes. You cannot disconnect a Source Server if it has a Recovery Instance. If the agent on the Source Server has not been prevented from communicating with the Elastic Disaster Recovery service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.</p>
-   */
-  public disconnectSourceServer(
-    args: DisconnectSourceServerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisconnectSourceServerCommandOutput>;
-  public disconnectSourceServer(
-    args: DisconnectSourceServerCommandInput,
-    cb: (err: any, data?: DisconnectSourceServerCommandOutput) => void
-  ): void;
-  public disconnectSourceServer(
-    args: DisconnectSourceServerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisconnectSourceServerCommandOutput) => void
-  ): void;
-  public disconnectSourceServer(
-    args: DisconnectSourceServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisconnectSourceServerCommandOutput) => void),
-    cb?: (err: any, data?: DisconnectSourceServerCommandOutput) => void
-  ): Promise<DisconnectSourceServerCommandOutput> | void {
-    const command = new DisconnectSourceServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.</p>
-   */
-  public getFailbackReplicationConfiguration(
-    args: GetFailbackReplicationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetFailbackReplicationConfigurationCommandOutput>;
-  public getFailbackReplicationConfiguration(
-    args: GetFailbackReplicationConfigurationCommandInput,
-    cb: (err: any, data?: GetFailbackReplicationConfigurationCommandOutput) => void
-  ): void;
-  public getFailbackReplicationConfiguration(
-    args: GetFailbackReplicationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetFailbackReplicationConfigurationCommandOutput) => void
-  ): void;
-  public getFailbackReplicationConfiguration(
-    args: GetFailbackReplicationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFailbackReplicationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetFailbackReplicationConfigurationCommandOutput) => void
-  ): Promise<GetFailbackReplicationConfigurationCommandOutput> | void {
-    const command = new GetFailbackReplicationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a LaunchConfiguration, filtered by Source Server IDs.</p>
-   */
-  public getLaunchConfiguration(
-    args: GetLaunchConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLaunchConfigurationCommandOutput>;
-  public getLaunchConfiguration(
-    args: GetLaunchConfigurationCommandInput,
-    cb: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
-  ): void;
-  public getLaunchConfiguration(
-    args: GetLaunchConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
-  ): void;
-  public getLaunchConfiguration(
-    args: GetLaunchConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLaunchConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetLaunchConfigurationCommandOutput) => void
-  ): Promise<GetLaunchConfigurationCommandOutput> | void {
-    const command = new GetLaunchConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a ReplicationConfiguration, filtered by Source Server ID.</p>
-   */
-  public getReplicationConfiguration(
-    args: GetReplicationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetReplicationConfigurationCommandOutput>;
-  public getReplicationConfiguration(
-    args: GetReplicationConfigurationCommandInput,
-    cb: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
-  ): void;
-  public getReplicationConfiguration(
-    args: GetReplicationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
-  ): void;
-  public getReplicationConfiguration(
-    args: GetReplicationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetReplicationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetReplicationConfigurationCommandOutput) => void
-  ): Promise<GetReplicationConfigurationCommandOutput> | void {
-    const command = new GetReplicationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Initialize Elastic Disaster Recovery.</p>
-   */
-  public initializeService(
-    args: InitializeServiceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<InitializeServiceCommandOutput>;
-  public initializeService(
-    args: InitializeServiceCommandInput,
-    cb: (err: any, data?: InitializeServiceCommandOutput) => void
-  ): void;
-  public initializeService(
-    args: InitializeServiceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: InitializeServiceCommandOutput) => void
-  ): void;
-  public initializeService(
-    args: InitializeServiceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: InitializeServiceCommandOutput) => void),
-    cb?: (err: any, data?: InitializeServiceCommandOutput) => void
-  ): Promise<InitializeServiceCommandOutput> | void {
-    const command = new InitializeServiceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of source servers on a staging account that are extensible, which means that:
-   *             a. The source server is not already extended into this Account.
-   *             b. The source server on the Account we’re reading from is not an extension of another source server.
-   *         </p>
-   */
-  public listExtensibleSourceServers(
-    args: ListExtensibleSourceServersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListExtensibleSourceServersCommandOutput>;
-  public listExtensibleSourceServers(
-    args: ListExtensibleSourceServersCommandInput,
-    cb: (err: any, data?: ListExtensibleSourceServersCommandOutput) => void
-  ): void;
-  public listExtensibleSourceServers(
-    args: ListExtensibleSourceServersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListExtensibleSourceServersCommandOutput) => void
-  ): void;
-  public listExtensibleSourceServers(
-    args: ListExtensibleSourceServersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListExtensibleSourceServersCommandOutput) => void),
-    cb?: (err: any, data?: ListExtensibleSourceServersCommandOutput) => void
-  ): Promise<ListExtensibleSourceServersCommandOutput> | void {
-    const command = new ListExtensibleSourceServersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns an array of staging accounts for existing extended source servers.</p>
-   */
-  public listStagingAccounts(
-    args: ListStagingAccountsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListStagingAccountsCommandOutput>;
-  public listStagingAccounts(
-    args: ListStagingAccountsCommandInput,
-    cb: (err: any, data?: ListStagingAccountsCommandOutput) => void
-  ): void;
-  public listStagingAccounts(
-    args: ListStagingAccountsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListStagingAccountsCommandOutput) => void
-  ): void;
-  public listStagingAccounts(
-    args: ListStagingAccountsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListStagingAccountsCommandOutput) => void),
-    cb?: (err: any, data?: ListStagingAccountsCommandOutput) => void
-  ): Promise<ListStagingAccountsCommandOutput> | void {
-    const command = new ListStagingAccountsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>List all tags for your Elastic Disaster Recovery resources.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.</p>
-   */
-  public retryDataReplication(
-    args: RetryDataReplicationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RetryDataReplicationCommandOutput>;
-  public retryDataReplication(
-    args: RetryDataReplicationCommandInput,
-    cb: (err: any, data?: RetryDataReplicationCommandOutput) => void
-  ): void;
-  public retryDataReplication(
-    args: RetryDataReplicationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RetryDataReplicationCommandOutput) => void
-  ): void;
-  public retryDataReplication(
-    args: RetryDataReplicationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RetryDataReplicationCommandOutput) => void),
-    cb?: (err: any, data?: RetryDataReplicationCommandOutput) => void
-  ): Promise<RetryDataReplicationCommandOutput> | void {
-    const command = new RetryDataReplicationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Initiates a Job for launching the machine that is being failed back to from the specified Recovery Instance. This will run conversion on the failback client and will reboot your machine, thus completing the failback process.</p>
-   */
-  public startFailbackLaunch(
-    args: StartFailbackLaunchCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartFailbackLaunchCommandOutput>;
-  public startFailbackLaunch(
-    args: StartFailbackLaunchCommandInput,
-    cb: (err: any, data?: StartFailbackLaunchCommandOutput) => void
-  ): void;
-  public startFailbackLaunch(
-    args: StartFailbackLaunchCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartFailbackLaunchCommandOutput) => void
-  ): void;
-  public startFailbackLaunch(
-    args: StartFailbackLaunchCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartFailbackLaunchCommandOutput) => void),
-    cb?: (err: any, data?: StartFailbackLaunchCommandOutput) => void
-  ): Promise<StartFailbackLaunchCommandOutput> | void {
-    const command = new StartFailbackLaunchCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Launches Recovery Instances for the specified Source Servers. For each Source Server you may choose a point in time snapshot to launch from, or use an on demand snapshot.</p>
-   */
-  public startRecovery(
-    args: StartRecoveryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartRecoveryCommandOutput>;
-  public startRecovery(
-    args: StartRecoveryCommandInput,
-    cb: (err: any, data?: StartRecoveryCommandOutput) => void
-  ): void;
-  public startRecovery(
-    args: StartRecoveryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartRecoveryCommandOutput) => void
-  ): void;
-  public startRecovery(
-    args: StartRecoveryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartRecoveryCommandOutput) => void),
-    cb?: (err: any, data?: StartRecoveryCommandOutput) => void
-  ): Promise<StartRecoveryCommandOutput> | void {
-    const command = new StartRecoveryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops the failback process for a specified Recovery Instance. This changes the Failback State of the Recovery Instance back to FAILBACK_NOT_STARTED.</p>
-   */
-  public stopFailback(
-    args: StopFailbackCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopFailbackCommandOutput>;
-  public stopFailback(args: StopFailbackCommandInput, cb: (err: any, data?: StopFailbackCommandOutput) => void): void;
-  public stopFailback(
-    args: StopFailbackCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopFailbackCommandOutput) => void
-  ): void;
-  public stopFailback(
-    args: StopFailbackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopFailbackCommandOutput) => void),
-    cb?: (err: any, data?: StopFailbackCommandOutput) => void
-  ): Promise<StopFailbackCommandOutput> | void {
-    const command = new StopFailbackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.</p>
-   */
-  public terminateRecoveryInstances(
-    args: TerminateRecoveryInstancesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<TerminateRecoveryInstancesCommandOutput>;
-  public terminateRecoveryInstances(
-    args: TerminateRecoveryInstancesCommandInput,
-    cb: (err: any, data?: TerminateRecoveryInstancesCommandOutput) => void
-  ): void;
-  public terminateRecoveryInstances(
-    args: TerminateRecoveryInstancesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TerminateRecoveryInstancesCommandOutput) => void
-  ): void;
-  public terminateRecoveryInstances(
-    args: TerminateRecoveryInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TerminateRecoveryInstancesCommandOutput) => void),
-    cb?: (err: any, data?: TerminateRecoveryInstancesCommandOutput) => void
-  ): Promise<TerminateRecoveryInstancesCommandOutput> | void {
-    const command = new TerminateRecoveryInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Allows you to update the failback replication configuration of a Recovery Instance by ID.</p>
-   */
-  public updateFailbackReplicationConfiguration(
-    args: UpdateFailbackReplicationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateFailbackReplicationConfigurationCommandOutput>;
-  public updateFailbackReplicationConfiguration(
-    args: UpdateFailbackReplicationConfigurationCommandInput,
-    cb: (err: any, data?: UpdateFailbackReplicationConfigurationCommandOutput) => void
-  ): void;
-  public updateFailbackReplicationConfiguration(
-    args: UpdateFailbackReplicationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateFailbackReplicationConfigurationCommandOutput) => void
-  ): void;
-  public updateFailbackReplicationConfiguration(
-    args: UpdateFailbackReplicationConfigurationCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: UpdateFailbackReplicationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFailbackReplicationConfigurationCommandOutput) => void
-  ): Promise<UpdateFailbackReplicationConfigurationCommandOutput> | void {
-    const command = new UpdateFailbackReplicationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a LaunchConfiguration by Source Server ID.</p>
-   */
-  public updateLaunchConfiguration(
-    args: UpdateLaunchConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateLaunchConfigurationCommandOutput>;
-  public updateLaunchConfiguration(
-    args: UpdateLaunchConfigurationCommandInput,
-    cb: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
-  ): void;
-  public updateLaunchConfiguration(
-    args: UpdateLaunchConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
-  ): void;
-  public updateLaunchConfiguration(
-    args: UpdateLaunchConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLaunchConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLaunchConfigurationCommandOutput) => void
-  ): Promise<UpdateLaunchConfigurationCommandOutput> | void {
-    const command = new UpdateLaunchConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Allows you to update a ReplicationConfiguration by Source Server ID.</p>
-   */
-  public updateReplicationConfiguration(
-    args: UpdateReplicationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateReplicationConfigurationCommandOutput>;
-  public updateReplicationConfiguration(
-    args: UpdateReplicationConfigurationCommandInput,
-    cb: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
-  ): void;
-  public updateReplicationConfiguration(
-    args: UpdateReplicationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
-  ): void;
-  public updateReplicationConfiguration(
-    args: UpdateReplicationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateReplicationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateReplicationConfigurationCommandOutput) => void
-  ): Promise<UpdateReplicationConfigurationCommandOutput> | void {
-    const command = new UpdateReplicationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a ReplicationConfigurationTemplate by ID.</p>
-   */
-  public updateReplicationConfigurationTemplate(
-    args: UpdateReplicationConfigurationTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateReplicationConfigurationTemplateCommandOutput>;
-  public updateReplicationConfigurationTemplate(
-    args: UpdateReplicationConfigurationTemplateCommandInput,
-    cb: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
-  ): void;
-  public updateReplicationConfigurationTemplate(
-    args: UpdateReplicationConfigurationTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
-  ): void;
-  public updateReplicationConfigurationTemplate(
-    args: UpdateReplicationConfigurationTemplateCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: UpdateReplicationConfigurationTemplateCommandOutput) => void
-  ): Promise<UpdateReplicationConfigurationTemplateCommandOutput> | void {
-    const command = new UpdateReplicationConfigurationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Drs extends DrsClient implements Drs {}
+createAggregatedClient(commands, Drs, { paginators });

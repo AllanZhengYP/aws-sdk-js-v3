@@ -1,101 +1,127 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataSyncClient";
-import {
-  CreateLocationFsxOpenZfsRequest,
-  CreateLocationFsxOpenZfsRequestFilterSensitiveLog,
-  CreateLocationFsxOpenZfsResponse,
-  CreateLocationFsxOpenZfsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateLocationFsxOpenZfsCommand,
-  serializeAws_json1_1CreateLocationFsxOpenZfsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateLocationFsxOpenZfsRequest, CreateLocationFsxOpenZfsResponse } from "../models/models_0";
+import { CreateLocationFsxOpenZfs$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateLocationFsxOpenZfsCommand}.
+ */
 export interface CreateLocationFsxOpenZfsCommandInput extends CreateLocationFsxOpenZfsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateLocationFsxOpenZfsCommand}.
+ */
 export interface CreateLocationFsxOpenZfsCommandOutput extends CreateLocationFsxOpenZfsResponse, __MetadataBearer {}
 
 /**
- * <p>Creates an endpoint for an Amazon FSx for OpenZFS file system.</p>
+ * <p>Creates a transfer <i>location</i> for an Amazon FSx for OpenZFS file
+ *       system. DataSync can use this location as a source or destination for
+ *       transferring data.</p>
+ *          <p>Before you begin, make sure that you understand how DataSync
+ *       <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html#create-openzfs-access">accesses
+ *           FSx for OpenZFS file systems</a>.</p>
+ *          <note>
+ *             <p>Request parameters related to <code>SMB</code> aren't supported with the
+ *           <code>CreateLocationFsxOpenZfs</code> operation.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DataSyncClient, CreateLocationFsxOpenZfsCommand } from "@aws-sdk/client-datasync"; // ES Modules import
  * // const { DataSyncClient, CreateLocationFsxOpenZfsCommand } = require("@aws-sdk/client-datasync"); // CommonJS import
+ * // import type { DataSyncClientConfig } from "@aws-sdk/client-datasync";
+ * const config = {}; // type is DataSyncClientConfig
  * const client = new DataSyncClient(config);
+ * const input = { // CreateLocationFsxOpenZfsRequest
+ *   FsxFilesystemArn: "STRING_VALUE", // required
+ *   Protocol: { // FsxProtocol
+ *     NFS: { // FsxProtocolNfs
+ *       MountOptions: { // NfsMountOptions
+ *         Version: "AUTOMATIC" || "NFS3" || "NFS4_0" || "NFS4_1" || "NFS4_2",
+ *       },
+ *     },
+ *     SMB: { // FsxProtocolSmb
+ *       Domain: "STRING_VALUE",
+ *       MountOptions: { // SmbMountOptions
+ *         Version: "AUTOMATIC" || "SMB2" || "SMB3" || "SMB1" || "SMB2_0",
+ *       },
+ *       Password: "STRING_VALUE",
+ *       User: "STRING_VALUE", // required
+ *       ManagedSecretConfig: { // ManagedSecretConfig
+ *         SecretArn: "STRING_VALUE",
+ *       },
+ *       CmkSecretConfig: { // CmkSecretConfig
+ *         SecretArn: "STRING_VALUE",
+ *         KmsKeyArn: "STRING_VALUE",
+ *       },
+ *       CustomSecretConfig: { // CustomSecretConfig
+ *         SecretArn: "STRING_VALUE",
+ *         SecretAccessRoleArn: "STRING_VALUE",
+ *       },
+ *     },
+ *   },
+ *   SecurityGroupArns: [ // Ec2SecurityGroupArnList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   Subdirectory: "STRING_VALUE",
+ *   Tags: [ // InputTagList
+ *     { // TagListEntry
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateLocationFsxOpenZfsCommand(input);
  * const response = await client.send(command);
+ * // { // CreateLocationFsxOpenZfsResponse
+ * //   LocationArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateLocationFsxOpenZfsCommandInput - {@link CreateLocationFsxOpenZfsCommandInput}
+ * @returns {@link CreateLocationFsxOpenZfsCommandOutput}
  * @see {@link CreateLocationFsxOpenZfsCommandInput} for command's `input` shape.
  * @see {@link CreateLocationFsxOpenZfsCommandOutput} for command's `response` shape.
  * @see {@link DataSyncClientResolvedConfig | config} for DataSyncClient's `config` shape.
  *
+ * @throws {@link InternalException} (server fault)
+ *  <p>This exception is thrown when an error occurs in the DataSync
+ *       service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link DataSyncServiceException}
+ * <p>Base exception class for all service exceptions from DataSync service.</p>
+ *
+ *
+ * @public
  */
-export class CreateLocationFsxOpenZfsCommand extends $Command<
-  CreateLocationFsxOpenZfsCommandInput,
-  CreateLocationFsxOpenZfsCommandOutput,
-  DataSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateLocationFsxOpenZfsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateLocationFsxOpenZfsCommandInput, CreateLocationFsxOpenZfsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataSyncClient";
-    const commandName = "CreateLocationFsxOpenZfsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateLocationFsxOpenZfsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateLocationFsxOpenZfsResponseFilterSensitiveLog,
+export class CreateLocationFsxOpenZfsCommand extends command<CreateLocationFsxOpenZfsCommandInput, CreateLocationFsxOpenZfsCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateLocationFsxOpenZfs",
+  CreateLocationFsxOpenZfs$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateLocationFsxOpenZfsRequest;
+      output: CreateLocationFsxOpenZfsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateLocationFsxOpenZfsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateLocationFsxOpenZfsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateLocationFsxOpenZfsCommandOutput> {
-    return deserializeAws_json1_1CreateLocationFsxOpenZfsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateLocationFsxOpenZfsCommandInput;
+      output: CreateLocationFsxOpenZfsCommandOutput;
+    };
+  };
 }

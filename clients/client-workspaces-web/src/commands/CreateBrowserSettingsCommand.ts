@@ -1,103 +1,118 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateBrowserSettingsRequest,
-  CreateBrowserSettingsRequestFilterSensitiveLog,
-  CreateBrowserSettingsResponse,
-  CreateBrowserSettingsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateBrowserSettingsCommand,
-  serializeAws_restJson1CreateBrowserSettingsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateBrowserSettingsRequest, CreateBrowserSettingsResponse } from "../models/models_0";
+import { CreateBrowserSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateBrowserSettingsCommand}.
+ */
 export interface CreateBrowserSettingsCommandInput extends CreateBrowserSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateBrowserSettingsCommand}.
+ */
 export interface CreateBrowserSettingsCommandOutput extends CreateBrowserSettingsResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a browser settings resource that can be associated with a web portal. Once
- *          associated with a web portal, browser settings control how the browser will behave once a
- *          user starts a streaming session for the web portal. </p>
+ * <p>Creates a browser settings resource that can be associated with a web portal. Once associated with a web portal, browser settings control how the browser will behave once a user starts a streaming session for the web portal. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WorkSpacesWebClient, CreateBrowserSettingsCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, CreateBrowserSettingsCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // CreateBrowserSettingsRequest
+ *   tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   customerManagedKey: "STRING_VALUE",
+ *   additionalEncryptionContext: { // EncryptionContextMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   browserPolicy: "STRING_VALUE",
+ *   clientToken: "STRING_VALUE",
+ *   webContentFilteringPolicy: { // WebContentFilteringPolicy
+ *     blockedCategories: [ // BlockedCategories
+ *       "Cults" || "Gambling" || "Nudity" || "Pornography" || "SexEducation" || "Tasteless" || "Violence" || "DownloadSites" || "ImageSharing" || "PeerToPeer" || "StreamingMediaAndDownloads" || "GenerativeAI" || "CriminalActivity" || "Hacking" || "HateAndIntolerance" || "IllegalDrug" || "IllegalSoftware" || "SchoolCheating" || "SelfHarm" || "Weapons" || "Chat" || "Games" || "InstantMessaging" || "ProfessionalNetwork" || "SocialNetworking" || "WebBasedEmail" || "ParkedDomains",
+ *     ],
+ *     allowedUrls: [ // UrlPatternList
+ *       "STRING_VALUE",
+ *     ],
+ *     blockedUrls: [
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new CreateBrowserSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // CreateBrowserSettingsResponse
+ * //   browserSettingsArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateBrowserSettingsCommandInput - {@link CreateBrowserSettingsCommandInput}
+ * @returns {@link CreateBrowserSettingsCommandOutput}
  * @see {@link CreateBrowserSettingsCommandInput} for command's `input` shape.
  * @see {@link CreateBrowserSettingsCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There is a conflict.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The service quota has been exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class CreateBrowserSettingsCommand extends $Command<
-  CreateBrowserSettingsCommandInput,
-  CreateBrowserSettingsCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateBrowserSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateBrowserSettingsCommandInput, CreateBrowserSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "CreateBrowserSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateBrowserSettingsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateBrowserSettingsResponseFilterSensitiveLog,
+export class CreateBrowserSettingsCommand extends command<CreateBrowserSettingsCommandInput, CreateBrowserSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateBrowserSettings",
+  CreateBrowserSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateBrowserSettingsRequest;
+      output: CreateBrowserSettingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateBrowserSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateBrowserSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateBrowserSettingsCommandOutput> {
-    return deserializeAws_restJson1CreateBrowserSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateBrowserSettingsCommandInput;
+      output: CreateBrowserSettingsCommandOutput;
+    };
+  };
 }

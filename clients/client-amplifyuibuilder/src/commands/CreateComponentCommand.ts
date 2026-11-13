@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyUIBuilderClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyUIBuilderClient";
-import {
-  CreateComponentRequest,
-  CreateComponentRequestFilterSensitiveLog,
-  CreateComponentResponse,
-  CreateComponentResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateComponentCommand,
-  serializeAws_restJson1CreateComponentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateComponentRequest, CreateComponentResponse } from "../models/models_0";
+import { CreateComponent$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateComponentCommand}.
+ */
 export interface CreateComponentCommandInput extends CreateComponentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateComponentCommand}.
+ */
 export interface CreateComponentCommandOutput extends CreateComponentResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,494 @@ export interface CreateComponentCommandOutput extends CreateComponentResponse, _
  * ```javascript
  * import { AmplifyUIBuilderClient, CreateComponentCommand } from "@aws-sdk/client-amplifyuibuilder"; // ES Modules import
  * // const { AmplifyUIBuilderClient, CreateComponentCommand } = require("@aws-sdk/client-amplifyuibuilder"); // CommonJS import
+ * // import type { AmplifyUIBuilderClientConfig } from "@aws-sdk/client-amplifyuibuilder";
+ * const config = {}; // type is AmplifyUIBuilderClientConfig
  * const client = new AmplifyUIBuilderClient(config);
+ * const input = { // CreateComponentRequest
+ *   appId: "STRING_VALUE", // required
+ *   environmentName: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ *   componentToCreate: { // CreateComponentData
+ *     name: "STRING_VALUE", // required
+ *     sourceId: "STRING_VALUE",
+ *     componentType: "STRING_VALUE", // required
+ *     properties: { // ComponentProperties // required
+ *       "<keys>": { // ComponentProperty
+ *         value: "STRING_VALUE",
+ *         bindingProperties: { // ComponentPropertyBindingProperties
+ *           property: "STRING_VALUE", // required
+ *           field: "STRING_VALUE",
+ *         },
+ *         collectionBindingProperties: {
+ *           property: "STRING_VALUE", // required
+ *           field: "STRING_VALUE",
+ *         },
+ *         defaultValue: "STRING_VALUE",
+ *         model: "STRING_VALUE",
+ *         bindings: { // FormBindings
+ *           "<keys>": { // FormBindingElement
+ *             element: "STRING_VALUE", // required
+ *             property: "STRING_VALUE", // required
+ *           },
+ *         },
+ *         event: "STRING_VALUE",
+ *         userAttribute: "STRING_VALUE",
+ *         concat: [ // ComponentPropertyList
+ *           {
+ *             value: "STRING_VALUE",
+ *             bindingProperties: {
+ *               property: "STRING_VALUE", // required
+ *               field: "STRING_VALUE",
+ *             },
+ *             collectionBindingProperties: {
+ *               property: "STRING_VALUE", // required
+ *               field: "STRING_VALUE",
+ *             },
+ *             defaultValue: "STRING_VALUE",
+ *             model: "STRING_VALUE",
+ *             bindings: {
+ *               "<keys>": {
+ *                 element: "STRING_VALUE", // required
+ *                 property: "STRING_VALUE", // required
+ *               },
+ *             },
+ *             event: "STRING_VALUE",
+ *             userAttribute: "STRING_VALUE",
+ *             concat: [
+ *               "<ComponentProperty>",
+ *             ],
+ *             condition: { // ComponentConditionProperty
+ *               property: "STRING_VALUE",
+ *               field: "STRING_VALUE",
+ *               operator: "STRING_VALUE",
+ *               operand: "STRING_VALUE",
+ *               then: "<ComponentProperty>",
+ *               else: "<ComponentProperty>",
+ *               operandType: "STRING_VALUE",
+ *             },
+ *             configured: true || false,
+ *             type: "STRING_VALUE",
+ *             importedValue: "STRING_VALUE",
+ *             componentName: "STRING_VALUE",
+ *             property: "STRING_VALUE",
+ *           },
+ *         ],
+ *         condition: {
+ *           property: "STRING_VALUE",
+ *           field: "STRING_VALUE",
+ *           operator: "STRING_VALUE",
+ *           operand: "STRING_VALUE",
+ *           then: "<ComponentProperty>",
+ *           else: "<ComponentProperty>",
+ *           operandType: "STRING_VALUE",
+ *         },
+ *         configured: true || false,
+ *         type: "STRING_VALUE",
+ *         importedValue: "STRING_VALUE",
+ *         componentName: "STRING_VALUE",
+ *         property: "STRING_VALUE",
+ *       },
+ *     },
+ *     children: [ // ComponentChildList
+ *       { // ComponentChild
+ *         componentType: "STRING_VALUE", // required
+ *         name: "STRING_VALUE", // required
+ *         properties: { // required
+ *           "<keys>": "<ComponentProperty>",
+ *         },
+ *         children: [
+ *           {
+ *             componentType: "STRING_VALUE", // required
+ *             name: "STRING_VALUE", // required
+ *             properties: "<ComponentProperties>", // required
+ *             children: "<ComponentChildList>",
+ *             events: { // ComponentEvents
+ *               "<keys>": { // ComponentEvent
+ *                 action: "STRING_VALUE",
+ *                 parameters: { // ActionParameters
+ *                   type: "<ComponentProperty>",
+ *                   url: "<ComponentProperty>",
+ *                   anchor: "<ComponentProperty>",
+ *                   target: "<ComponentProperty>",
+ *                   global: "<ComponentProperty>",
+ *                   model: "STRING_VALUE",
+ *                   id: "<ComponentProperty>",
+ *                   fields: "<ComponentProperties>",
+ *                   state: { // MutationActionSetStateParameter
+ *                     componentName: "STRING_VALUE", // required
+ *                     property: "STRING_VALUE", // required
+ *                     set: "<ComponentProperty>", // required
+ *                   },
+ *                 },
+ *                 bindingEvent: "STRING_VALUE",
+ *               },
+ *             },
+ *             sourceId: "STRING_VALUE",
+ *           },
+ *         ],
+ *         events: {
+ *           "<keys>": {
+ *             action: "STRING_VALUE",
+ *             parameters: {
+ *               type: "<ComponentProperty>",
+ *               url: "<ComponentProperty>",
+ *               anchor: "<ComponentProperty>",
+ *               target: "<ComponentProperty>",
+ *               global: "<ComponentProperty>",
+ *               model: "STRING_VALUE",
+ *               id: "<ComponentProperty>",
+ *               fields: "<ComponentProperties>",
+ *               state: {
+ *                 componentName: "STRING_VALUE", // required
+ *                 property: "STRING_VALUE", // required
+ *                 set: "<ComponentProperty>", // required
+ *               },
+ *             },
+ *             bindingEvent: "STRING_VALUE",
+ *           },
+ *         },
+ *         sourceId: "STRING_VALUE",
+ *       },
+ *     ],
+ *     variants: [ // ComponentVariants // required
+ *       { // ComponentVariant
+ *         variantValues: { // ComponentVariantValues
+ *           "<keys>": "STRING_VALUE",
+ *         },
+ *         overrides: { // ComponentOverrides
+ *           "<keys>": { // ComponentOverridesValue
+ *             "<keys>": "STRING_VALUE",
+ *           },
+ *         },
+ *       },
+ *     ],
+ *     overrides: { // required
+ *       "<keys>": {
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *     },
+ *     bindingProperties: { // ComponentBindingProperties // required
+ *       "<keys>": { // ComponentBindingPropertiesValue
+ *         type: "STRING_VALUE",
+ *         bindingProperties: { // ComponentBindingPropertiesValueProperties
+ *           model: "STRING_VALUE",
+ *           field: "STRING_VALUE",
+ *           predicates: [ // PredicateList
+ *             { // Predicate
+ *               or: [
+ *                 {
+ *                   or: "<PredicateList>",
+ *                   and: "<PredicateList>",
+ *                   field: "STRING_VALUE",
+ *                   operator: "STRING_VALUE",
+ *                   operand: "STRING_VALUE",
+ *                   operandType: "STRING_VALUE",
+ *                 },
+ *               ],
+ *               and: "<PredicateList>",
+ *               field: "STRING_VALUE",
+ *               operator: "STRING_VALUE",
+ *               operand: "STRING_VALUE",
+ *               operandType: "STRING_VALUE",
+ *             },
+ *           ],
+ *           userAttribute: "STRING_VALUE",
+ *           bucket: "STRING_VALUE",
+ *           key: "STRING_VALUE",
+ *           defaultValue: "STRING_VALUE",
+ *           slotName: "STRING_VALUE",
+ *         },
+ *         defaultValue: "STRING_VALUE",
+ *       },
+ *     },
+ *     collectionProperties: { // ComponentCollectionProperties
+ *       "<keys>": { // ComponentDataConfiguration
+ *         model: "STRING_VALUE", // required
+ *         sort: [ // SortPropertyList
+ *           { // SortProperty
+ *             field: "STRING_VALUE", // required
+ *             direction: "ASC" || "DESC", // required
+ *           },
+ *         ],
+ *         predicate: "<Predicate>",
+ *         identifiers: [ // IdentifierList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *     tags: { // Tags
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     events: "<ComponentEvents>",
+ *     schemaVersion: "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateComponentCommand(input);
  * const response = await client.send(command);
+ * // { // CreateComponentResponse
+ * //   entity: { // Component
+ * //     appId: "STRING_VALUE", // required
+ * //     environmentName: "STRING_VALUE", // required
+ * //     sourceId: "STRING_VALUE",
+ * //     id: "STRING_VALUE", // required
+ * //     name: "STRING_VALUE", // required
+ * //     componentType: "STRING_VALUE", // required
+ * //     properties: { // ComponentProperties // required
+ * //       "<keys>": { // ComponentProperty
+ * //         value: "STRING_VALUE",
+ * //         bindingProperties: { // ComponentPropertyBindingProperties
+ * //           property: "STRING_VALUE", // required
+ * //           field: "STRING_VALUE",
+ * //         },
+ * //         collectionBindingProperties: {
+ * //           property: "STRING_VALUE", // required
+ * //           field: "STRING_VALUE",
+ * //         },
+ * //         defaultValue: "STRING_VALUE",
+ * //         model: "STRING_VALUE",
+ * //         bindings: { // FormBindings
+ * //           "<keys>": { // FormBindingElement
+ * //             element: "STRING_VALUE", // required
+ * //             property: "STRING_VALUE", // required
+ * //           },
+ * //         },
+ * //         event: "STRING_VALUE",
+ * //         userAttribute: "STRING_VALUE",
+ * //         concat: [ // ComponentPropertyList
+ * //           {
+ * //             value: "STRING_VALUE",
+ * //             bindingProperties: {
+ * //               property: "STRING_VALUE", // required
+ * //               field: "STRING_VALUE",
+ * //             },
+ * //             collectionBindingProperties: {
+ * //               property: "STRING_VALUE", // required
+ * //               field: "STRING_VALUE",
+ * //             },
+ * //             defaultValue: "STRING_VALUE",
+ * //             model: "STRING_VALUE",
+ * //             bindings: {
+ * //               "<keys>": {
+ * //                 element: "STRING_VALUE", // required
+ * //                 property: "STRING_VALUE", // required
+ * //               },
+ * //             },
+ * //             event: "STRING_VALUE",
+ * //             userAttribute: "STRING_VALUE",
+ * //             concat: [
+ * //               "<ComponentProperty>",
+ * //             ],
+ * //             condition: { // ComponentConditionProperty
+ * //               property: "STRING_VALUE",
+ * //               field: "STRING_VALUE",
+ * //               operator: "STRING_VALUE",
+ * //               operand: "STRING_VALUE",
+ * //               then: "<ComponentProperty>",
+ * //               else: "<ComponentProperty>",
+ * //               operandType: "STRING_VALUE",
+ * //             },
+ * //             configured: true || false,
+ * //             type: "STRING_VALUE",
+ * //             importedValue: "STRING_VALUE",
+ * //             componentName: "STRING_VALUE",
+ * //             property: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         condition: {
+ * //           property: "STRING_VALUE",
+ * //           field: "STRING_VALUE",
+ * //           operator: "STRING_VALUE",
+ * //           operand: "STRING_VALUE",
+ * //           then: "<ComponentProperty>",
+ * //           else: "<ComponentProperty>",
+ * //           operandType: "STRING_VALUE",
+ * //         },
+ * //         configured: true || false,
+ * //         type: "STRING_VALUE",
+ * //         importedValue: "STRING_VALUE",
+ * //         componentName: "STRING_VALUE",
+ * //         property: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     children: [ // ComponentChildList
+ * //       { // ComponentChild
+ * //         componentType: "STRING_VALUE", // required
+ * //         name: "STRING_VALUE", // required
+ * //         properties: { // required
+ * //           "<keys>": "<ComponentProperty>",
+ * //         },
+ * //         children: [
+ * //           {
+ * //             componentType: "STRING_VALUE", // required
+ * //             name: "STRING_VALUE", // required
+ * //             properties: "<ComponentProperties>", // required
+ * //             children: "<ComponentChildList>",
+ * //             events: { // ComponentEvents
+ * //               "<keys>": { // ComponentEvent
+ * //                 action: "STRING_VALUE",
+ * //                 parameters: { // ActionParameters
+ * //                   type: "<ComponentProperty>",
+ * //                   url: "<ComponentProperty>",
+ * //                   anchor: "<ComponentProperty>",
+ * //                   target: "<ComponentProperty>",
+ * //                   global: "<ComponentProperty>",
+ * //                   model: "STRING_VALUE",
+ * //                   id: "<ComponentProperty>",
+ * //                   fields: "<ComponentProperties>",
+ * //                   state: { // MutationActionSetStateParameter
+ * //                     componentName: "STRING_VALUE", // required
+ * //                     property: "STRING_VALUE", // required
+ * //                     set: "<ComponentProperty>", // required
+ * //                   },
+ * //                 },
+ * //                 bindingEvent: "STRING_VALUE",
+ * //               },
+ * //             },
+ * //             sourceId: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         events: {
+ * //           "<keys>": {
+ * //             action: "STRING_VALUE",
+ * //             parameters: {
+ * //               type: "<ComponentProperty>",
+ * //               url: "<ComponentProperty>",
+ * //               anchor: "<ComponentProperty>",
+ * //               target: "<ComponentProperty>",
+ * //               global: "<ComponentProperty>",
+ * //               model: "STRING_VALUE",
+ * //               id: "<ComponentProperty>",
+ * //               fields: "<ComponentProperties>",
+ * //               state: {
+ * //                 componentName: "STRING_VALUE", // required
+ * //                 property: "STRING_VALUE", // required
+ * //                 set: "<ComponentProperty>", // required
+ * //               },
+ * //             },
+ * //             bindingEvent: "STRING_VALUE",
+ * //           },
+ * //         },
+ * //         sourceId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     variants: [ // ComponentVariants // required
+ * //       { // ComponentVariant
+ * //         variantValues: { // ComponentVariantValues
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         overrides: { // ComponentOverrides
+ * //           "<keys>": { // ComponentOverridesValue
+ * //             "<keys>": "STRING_VALUE",
+ * //           },
+ * //         },
+ * //       },
+ * //     ],
+ * //     overrides: { // required
+ * //       "<keys>": {
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     bindingProperties: { // ComponentBindingProperties // required
+ * //       "<keys>": { // ComponentBindingPropertiesValue
+ * //         type: "STRING_VALUE",
+ * //         bindingProperties: { // ComponentBindingPropertiesValueProperties
+ * //           model: "STRING_VALUE",
+ * //           field: "STRING_VALUE",
+ * //           predicates: [ // PredicateList
+ * //             { // Predicate
+ * //               or: [
+ * //                 {
+ * //                   or: "<PredicateList>",
+ * //                   and: "<PredicateList>",
+ * //                   field: "STRING_VALUE",
+ * //                   operator: "STRING_VALUE",
+ * //                   operand: "STRING_VALUE",
+ * //                   operandType: "STRING_VALUE",
+ * //                 },
+ * //               ],
+ * //               and: "<PredicateList>",
+ * //               field: "STRING_VALUE",
+ * //               operator: "STRING_VALUE",
+ * //               operand: "STRING_VALUE",
+ * //               operandType: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //           userAttribute: "STRING_VALUE",
+ * //           bucket: "STRING_VALUE",
+ * //           key: "STRING_VALUE",
+ * //           defaultValue: "STRING_VALUE",
+ * //           slotName: "STRING_VALUE",
+ * //         },
+ * //         defaultValue: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     collectionProperties: { // ComponentCollectionProperties
+ * //       "<keys>": { // ComponentDataConfiguration
+ * //         model: "STRING_VALUE", // required
+ * //         sort: [ // SortPropertyList
+ * //           { // SortProperty
+ * //             field: "STRING_VALUE", // required
+ * //             direction: "ASC" || "DESC", // required
+ * //           },
+ * //         ],
+ * //         predicate: "<Predicate>",
+ * //         identifiers: [ // IdentifierList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //     },
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     modifiedAt: new Date("TIMESTAMP"),
+ * //     tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     events: "<ComponentEvents>",
+ * //     schemaVersion: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateComponentCommandInput - {@link CreateComponentCommandInput}
+ * @returns {@link CreateComponentCommandOutput}
  * @see {@link CreateComponentCommandInput} for command's `input` shape.
  * @see {@link CreateComponentCommandOutput} for command's `response` shape.
  * @see {@link AmplifyUIBuilderClientResolvedConfig | config} for AmplifyUIBuilderClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred. Please retry your request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An invalid or out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource specified in the request conflicts with an existing resource.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>You exceeded your service quota. Service quotas, also referred to as limits, are the
+ *       maximum number of service resources or operations for your Amazon Web Services account. </p>
+ *
+ * @throws {@link AmplifyUIBuilderServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyUIBuilder service.</p>
+ *
+ *
+ * @public
  */
-export class CreateComponentCommand extends $Command<
-  CreateComponentCommandInput,
-  CreateComponentCommandOutput,
-  AmplifyUIBuilderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateComponentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyUIBuilderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateComponentCommandInput, CreateComponentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyUIBuilderClient";
-    const commandName = "CreateComponentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateComponentRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateComponentResponseFilterSensitiveLog,
+export class CreateComponentCommand extends command<CreateComponentCommandInput, CreateComponentCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateComponent",
+  CreateComponent$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateComponentRequest;
+      output: CreateComponentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateComponentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateComponentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateComponentCommandOutput> {
-    return deserializeAws_restJson1CreateComponentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateComponentCommandInput;
+      output: CreateComponentCommandOutput;
+    };
+  };
 }

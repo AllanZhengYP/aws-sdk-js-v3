@@ -1,10 +1,10 @@
 // @ts-check
 const yargs = require("yargs");
-const path = require("path");
+const path = require("node:path");
 const { emptyDirSync, rmdirSync } = require("fs-extra");
 const { generateClients, generateGenericClient, generateProtocolTests } = require("./code-gen");
-const { codeOrdering } = require("./code-ordering");
 const { copyToClients, copyServerTests } = require("./copy-to-clients");
+const generateNestedClients = require("./nested-clients/generate-nested-clients");
 const {
   CODE_GEN_SDK_OUTPUT_DIR,
   CODE_GEN_GENERIC_CLIENT_OUTPUT_DIR,
@@ -12,11 +12,15 @@ const {
   DEFAULT_CODE_GEN_INPUT_DIR,
   TEMP_CODE_GEN_INPUT_DIR,
 } = require("./code-gen-dir");
-const { prettifyCode } = require("./code-prettify");
-const { eslintFixCode } = require("./code-eslint-fix");
+const { buildSmithyTypeScript, runWithSpecificSmithyTypeScriptVersion } = require("./build-smithy-typescript");
+const { SMITHY_TS_COMMIT } = require("./config");
+const { spawnProcess } = require("../utils/spawn-process");
 
+const REPO_ROOT = path.join(__dirname, "..", "..");
+const SMITHY_TS_DIR = path.normalize(path.join(__dirname, "..", "..", "..", "smithy-typescript"));
 const SDK_CLIENTS_DIR = path.normalize(path.join(__dirname, "..", "..", "clients"));
 const PRIVATE_CLIENTS_DIR = path.normalize(path.join(__dirname, "..", "..", "private"));
+const start = Date.now();
 
 const {
   models,
@@ -26,6 +30,11 @@ const {
   s: serverOnly,
   batchSize,
   keepFiles,
+  repo,
+  commit,
+  d: noSmithyCheckout,
+  p: protocolTestsOnly,
+  x: pullRequest,
 } = yargs(process.argv.slice(2))
   .alias("m", "models")
   .string("m")
@@ -41,6 +50,15 @@ const {
   .alias("n", "noPrivateClients")
   .boolean("n")
   .describe("n", "Disable generating private clients")
+  .alias("d", "noSmithyCheckout")
+  .boolean("d")
+  .describe("d", "use existing Smithy version instead of target hash")
+  .alias("x", "pullRequest")
+  .boolean("x")
+  .describe("x", "command was invoked by developer creating a pull request")
+  .alias("p", "protocolTestsOnly")
+  .boolean("p")
+  .describe("p", "Generate protocol tests only")
   .alias("s", "server-artifacts")
   .boolean("s")
   .describe("s", "Generate server artifacts instead of client ones")
@@ -50,15 +68,25 @@ const {
   .describe("b", "Batchsize for generating clients")
   .number("b")
   .alias("b", "batch-size")
-  .default("b", 50)
+  .default("b", 200)
+  .describe("r", "The location where smithy-typescript is cloned.")
+  .string("r")
+  .alias("r", "repo")
+  .default("r", SMITHY_TS_DIR)
+  .describe("c", "The smithy-typescript commit to be used for codegen.")
+  .string("c")
+  .alias("c", "commit")
+  .default("c", SMITHY_TS_COMMIT)
   .help().argv;
 
 (async () => {
   try {
+    if (!noSmithyCheckout) {
+      await buildSmithyTypeScript(repo, commit);
+    }
+
     if (serverOnly === true) {
       await generateProtocolTests();
-      await eslintFixCode();
-      await prettifyCode(CODE_GEN_PROTOCOL_TESTS_OUTPUT_DIR);
       await copyServerTests(CODE_GEN_PROTOCOL_TESTS_OUTPUT_DIR, PRIVATE_CLIENTS_DIR);
 
       if (!keepFiles) {
@@ -69,26 +97,22 @@ const {
       return;
     }
 
-    await generateClients(models || globs || DEFAULT_CODE_GEN_INPUT_DIR, batchSize);
+    if (!protocolTestsOnly) {
+      await generateClients(models || globs || DEFAULT_CODE_GEN_INPUT_DIR, batchSize);
+    }
+
     if (!noPrivateClients) {
       await generateGenericClient();
       await generateProtocolTests();
     }
 
-    await codeOrdering(CODE_GEN_SDK_OUTPUT_DIR);
-    await eslintFixCode();
-    await prettifyCode(CODE_GEN_SDK_OUTPUT_DIR);
-
-    if (!noPrivateClients) {
-      await codeOrdering(CODE_GEN_GENERIC_CLIENT_OUTPUT_DIR);
-      await prettifyCode(CODE_GEN_GENERIC_CLIENT_OUTPUT_DIR);
-      await prettifyCode(CODE_GEN_PROTOCOL_TESTS_OUTPUT_DIR);
+    if (!protocolTestsOnly) {
+      await copyToClients(CODE_GEN_SDK_OUTPUT_DIR, clientsDir);
     }
-
-    await copyToClients(CODE_GEN_SDK_OUTPUT_DIR, clientsDir);
     if (!noPrivateClients) {
       await copyToClients(CODE_GEN_GENERIC_CLIENT_OUTPUT_DIR, PRIVATE_CLIENTS_DIR);
       await copyToClients(CODE_GEN_PROTOCOL_TESTS_OUTPUT_DIR, PRIVATE_CLIENTS_DIR);
+      await copyServerTests(CODE_GEN_PROTOCOL_TESTS_OUTPUT_DIR, PRIVATE_CLIENTS_DIR);
     }
 
     if (!keepFiles) {
@@ -99,6 +123,38 @@ const {
       }
       emptyDirSync(TEMP_CODE_GEN_INPUT_DIR);
       rmdirSync(TEMP_CODE_GEN_INPUT_DIR);
+    }
+
+    require("./customizations/workspaces-thin-client")();
+
+    if (!protocolTestsOnly && !globs) {
+      await generateNestedClients();
+    }
+
+    if (!noSmithyCheckout && pullRequest) {
+      await runWithSpecificSmithyTypeScriptVersion(repo, commit, async () => {
+        process.argv.push("--set-smithy-version");
+        require("../runtime-dependency-version-check/runtime-dep-version-check");
+      });
+    } else {
+      require("../runtime-dependency-version-check/runtime-dep-version-check");
+    }
+
+    await spawnProcess("yarn", ["install", "--no-immutable"], {
+      cwd: REPO_ROOT,
+      stdio: "inherit",
+      env: { ...process.env, CI: "" },
+    });
+
+    await spawnProcess("make", ["tpk", "snapshot-write"], {
+      cwd: REPO_ROOT,
+      stdio: "inherit",
+      env: { ...process.env },
+    });
+
+    if (!noSmithyCheckout && pullRequest) {
+      const end = Date.now();
+      console.log(`Codegen completed in ${((end - start) / 1000) | 0}s. Run git commit.`);
     }
   } catch (e) {
     console.log(e);

@@ -1,113 +1,131 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateEventDestinationRequest,
-  CreateEventDestinationRequestFilterSensitiveLog,
-  CreateEventDestinationResult,
-  CreateEventDestinationResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  PinpointSMSVoiceV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../PinpointSMSVoiceV2Client";
-import {
-  deserializeAws_json1_0CreateEventDestinationCommand,
-  serializeAws_json1_0CreateEventDestinationCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateEventDestinationRequest, CreateEventDestinationResult } from "../models/models_0";
+import { CreateEventDestination$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateEventDestinationCommand}.
+ */
 export interface CreateEventDestinationCommandInput extends CreateEventDestinationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateEventDestinationCommand}.
+ */
 export interface CreateEventDestinationCommandOutput extends CreateEventDestinationResult, __MetadataBearer {}
 
 /**
- * <p>Creates a new event destination in a configuration set.</p>
- *         <p>An event destination is a location where you send message events. The event options
- *             are Amazon CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For example,
- *             when a message is delivered successfully, you can send information about that event to
- *             an event destination, or send notifications to endpoints that are subscribed to an
- *                 Amazon SNS topic.</p>
- *         <p>Each configuration set can contain between 0 and 5 event destinations. Each event
- *             destination can contain a reference to a single destination, such as a CloudWatch
- *             or Kinesis Data Firehose destination.</p>
+ * <p>Creates a new event destination in a configuration set.</p> <p>An event destination is a location where you send message events. The event options are Amazon CloudWatch, Amazon Data Firehose, or Amazon SNS. For example, when a message is delivered successfully, you can send information about that event to an event destination, or send notifications to endpoints that are subscribed to an Amazon SNS topic. </p> <p>You can only create one event destination at a time. You must provide a value for a single event destination using either <code>CloudWatchLogsDestination</code>, <code>KinesisFirehoseDestination</code> or <code>SnsDestination</code>. If an event destination isn't provided then an exception is returned.</p> <p>Each configuration set can contain between 0 and 5 event destinations. Each event destination can contain a reference to a single destination, such as a CloudWatch or Firehose destination.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PinpointSMSVoiceV2Client, CreateEventDestinationCommand } from "@aws-sdk/client-pinpoint-sms-voice-v2"; // ES Modules import
  * // const { PinpointSMSVoiceV2Client, CreateEventDestinationCommand } = require("@aws-sdk/client-pinpoint-sms-voice-v2"); // CommonJS import
+ * // import type { PinpointSMSVoiceV2ClientConfig } from "@aws-sdk/client-pinpoint-sms-voice-v2";
+ * const config = {}; // type is PinpointSMSVoiceV2ClientConfig
  * const client = new PinpointSMSVoiceV2Client(config);
+ * const input = { // CreateEventDestinationRequest
+ *   ConfigurationSetName: "STRING_VALUE", // required
+ *   EventDestinationName: "STRING_VALUE", // required
+ *   MatchingEventTypes: [ // EventTypeList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   CloudWatchLogsDestination: { // CloudWatchLogsDestination
+ *     IamRoleArn: "STRING_VALUE", // required
+ *     LogGroupArn: "STRING_VALUE", // required
+ *   },
+ *   KinesisFirehoseDestination: { // KinesisFirehoseDestination
+ *     IamRoleArn: "STRING_VALUE", // required
+ *     DeliveryStreamArn: "STRING_VALUE", // required
+ *   },
+ *   SnsDestination: { // SnsDestination
+ *     TopicArn: "STRING_VALUE", // required
+ *   },
+ *   ClientToken: "STRING_VALUE",
+ * };
  * const command = new CreateEventDestinationCommand(input);
  * const response = await client.send(command);
+ * // { // CreateEventDestinationResult
+ * //   ConfigurationSetArn: "STRING_VALUE",
+ * //   ConfigurationSetName: "STRING_VALUE",
+ * //   EventDestination: { // EventDestination
+ * //     EventDestinationName: "STRING_VALUE", // required
+ * //     Enabled: true || false, // required
+ * //     MatchingEventTypes: [ // EventTypeList // required
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     CloudWatchLogsDestination: { // CloudWatchLogsDestination
+ * //       IamRoleArn: "STRING_VALUE", // required
+ * //       LogGroupArn: "STRING_VALUE", // required
+ * //     },
+ * //     KinesisFirehoseDestination: { // KinesisFirehoseDestination
+ * //       IamRoleArn: "STRING_VALUE", // required
+ * //       DeliveryStreamArn: "STRING_VALUE", // required
+ * //     },
+ * //     SnsDestination: { // SnsDestination
+ * //       TopicArn: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateEventDestinationCommandInput - {@link CreateEventDestinationCommandInput}
+ * @returns {@link CreateEventDestinationCommandOutput}
  * @see {@link CreateEventDestinationCommandInput} for command's `input` shape.
  * @see {@link CreateEventDestinationCommandOutput} for command's `response` shape.
  * @see {@link PinpointSMSVoiceV2ClientResolvedConfig | config} for PinpointSMSVoiceV2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because you don't have sufficient permissions to access the resource.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time or it could be that the requested action isn't valid for the current state or configuration of the resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The API encountered an unexpected error and couldn't complete the request. You might be able to successfully issue the request again in the future.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A requested resource couldn't be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request would cause a service quota to be exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>An error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A validation exception for a field.</p>
+ *
+ * @throws {@link PinpointSMSVoiceV2ServiceException}
+ * <p>Base exception class for all service exceptions from PinpointSMSVoiceV2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateEventDestinationCommand extends $Command<
-  CreateEventDestinationCommandInput,
-  CreateEventDestinationCommandOutput,
-  PinpointSMSVoiceV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateEventDestinationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointSMSVoiceV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateEventDestinationCommandInput, CreateEventDestinationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointSMSVoiceV2Client";
-    const commandName = "CreateEventDestinationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateEventDestinationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateEventDestinationResultFilterSensitiveLog,
+export class CreateEventDestinationCommand extends command<CreateEventDestinationCommandInput, CreateEventDestinationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateEventDestination",
+  CreateEventDestination$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEventDestinationRequest;
+      output: CreateEventDestinationResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateEventDestinationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0CreateEventDestinationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateEventDestinationCommandOutput> {
-    return deserializeAws_json1_0CreateEventDestinationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateEventDestinationCommandInput;
+      output: CreateEventDestinationCommandOutput;
+    };
+  };
 }

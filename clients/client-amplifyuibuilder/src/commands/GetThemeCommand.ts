@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyUIBuilderClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyUIBuilderClient";
-import {
-  GetThemeRequest,
-  GetThemeRequestFilterSensitiveLog,
-  GetThemeResponse,
-  GetThemeResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetThemeCommand,
-  serializeAws_restJson1GetThemeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetThemeRequest, GetThemeResponse } from "../models/models_0";
+import { GetTheme$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetThemeCommand}.
+ */
 export interface GetThemeCommandInput extends GetThemeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetThemeCommand}.
+ */
 export interface GetThemeCommandOutput extends GetThemeResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,86 @@ export interface GetThemeCommandOutput extends GetThemeResponse, __MetadataBeare
  * ```javascript
  * import { AmplifyUIBuilderClient, GetThemeCommand } from "@aws-sdk/client-amplifyuibuilder"; // ES Modules import
  * // const { AmplifyUIBuilderClient, GetThemeCommand } = require("@aws-sdk/client-amplifyuibuilder"); // CommonJS import
+ * // import type { AmplifyUIBuilderClientConfig } from "@aws-sdk/client-amplifyuibuilder";
+ * const config = {}; // type is AmplifyUIBuilderClientConfig
  * const client = new AmplifyUIBuilderClient(config);
+ * const input = { // GetThemeRequest
+ *   appId: "STRING_VALUE", // required
+ *   environmentName: "STRING_VALUE", // required
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new GetThemeCommand(input);
  * const response = await client.send(command);
+ * // { // GetThemeResponse
+ * //   theme: { // Theme
+ * //     appId: "STRING_VALUE", // required
+ * //     environmentName: "STRING_VALUE", // required
+ * //     id: "STRING_VALUE", // required
+ * //     name: "STRING_VALUE", // required
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     modifiedAt: new Date("TIMESTAMP"),
+ * //     values: [ // ThemeValuesList // required
+ * //       { // ThemeValues
+ * //         key: "STRING_VALUE",
+ * //         value: { // ThemeValue
+ * //           value: "STRING_VALUE",
+ * //           children: [
+ * //             {
+ * //               key: "STRING_VALUE",
+ * //               value: {
+ * //                 value: "STRING_VALUE",
+ * //                 children: "<ThemeValuesList>",
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //     overrides: "<ThemeValuesList>",
+ * //     tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetThemeCommandInput - {@link GetThemeCommandInput}
+ * @returns {@link GetThemeCommandOutput}
  * @see {@link GetThemeCommandInput} for command's `input` shape.
  * @see {@link GetThemeCommandOutput} for command's `response` shape.
  * @see {@link AmplifyUIBuilderClientResolvedConfig | config} for AmplifyUIBuilderClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred. Please retry your request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An invalid or out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link AmplifyUIBuilderServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyUIBuilder service.</p>
+ *
+ *
+ * @public
  */
-export class GetThemeCommand extends $Command<
-  GetThemeCommandInput,
-  GetThemeCommandOutput,
-  AmplifyUIBuilderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetThemeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyUIBuilderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetThemeCommandInput, GetThemeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyUIBuilderClient";
-    const commandName = "GetThemeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetThemeRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetThemeResponseFilterSensitiveLog,
+export class GetThemeCommand extends command<GetThemeCommandInput, GetThemeCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTheme",
+  GetTheme$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetThemeRequest;
+      output: GetThemeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetThemeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetThemeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetThemeCommandOutput> {
-    return deserializeAws_restJson1GetThemeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetThemeCommandInput;
+      output: GetThemeCommandOutput;
+    };
+  };
 }

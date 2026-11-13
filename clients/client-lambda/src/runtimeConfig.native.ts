@@ -1,7 +1,5 @@
 // smithy-typescript generated code
-import { Sha256 } from "@aws-crypto/sha256-js";
-
-import { LambdaClientConfig } from "./LambdaClient";
+import type { LambdaClientConfig } from "./LambdaClient";
 import { getRuntimeConfig as getBrowserRuntimeConfig } from "./runtimeConfig.browser";
 
 /**
@@ -13,6 +11,5 @@ export const getRuntimeConfig = (config: LambdaClientConfig) => {
     ...browserDefaults,
     ...config,
     runtime: "react-native",
-    sha256: config?.sha256 ?? Sha256,
   };
 };

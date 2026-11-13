@@ -1,25 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyUIBuilderClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyUIBuilderClient";
-import { DeleteThemeRequest, DeleteThemeRequestFilterSensitiveLog } from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteThemeCommand,
-  serializeAws_restJson1DeleteThemeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteThemeRequest } from "../models/models_0";
+import { DeleteTheme$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteThemeCommand}.
+ */
 export interface DeleteThemeCommandInput extends DeleteThemeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteThemeCommand}.
+ */
 export interface DeleteThemeCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +29,56 @@ export interface DeleteThemeCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { AmplifyUIBuilderClient, DeleteThemeCommand } from "@aws-sdk/client-amplifyuibuilder"; // ES Modules import
  * // const { AmplifyUIBuilderClient, DeleteThemeCommand } = require("@aws-sdk/client-amplifyuibuilder"); // CommonJS import
+ * // import type { AmplifyUIBuilderClientConfig } from "@aws-sdk/client-amplifyuibuilder";
+ * const config = {}; // type is AmplifyUIBuilderClientConfig
  * const client = new AmplifyUIBuilderClient(config);
+ * const input = { // DeleteThemeRequest
+ *   appId: "STRING_VALUE", // required
+ *   environmentName: "STRING_VALUE", // required
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new DeleteThemeCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteThemeCommandInput - {@link DeleteThemeCommandInput}
+ * @returns {@link DeleteThemeCommandOutput}
  * @see {@link DeleteThemeCommandInput} for command's `input` shape.
  * @see {@link DeleteThemeCommandOutput} for command's `response` shape.
  * @see {@link AmplifyUIBuilderClientResolvedConfig | config} for AmplifyUIBuilderClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred. Please retry your request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An invalid or out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link AmplifyUIBuilderServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyUIBuilder service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteThemeCommand extends $Command<
-  DeleteThemeCommandInput,
-  DeleteThemeCommandOutput,
-  AmplifyUIBuilderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteThemeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyUIBuilderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteThemeCommandInput, DeleteThemeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyUIBuilderClient";
-    const commandName = "DeleteThemeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteThemeRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteThemeCommand extends command<DeleteThemeCommandInput, DeleteThemeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTheme",
+  DeleteTheme$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteThemeRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteThemeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteThemeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteThemeCommandOutput> {
-    return deserializeAws_restJson1DeleteThemeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteThemeCommandInput;
+      output: DeleteThemeCommandOutput;
+    };
+  };
 }

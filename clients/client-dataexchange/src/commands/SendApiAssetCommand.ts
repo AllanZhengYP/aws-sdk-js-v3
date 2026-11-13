@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataExchangeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataExchangeClient";
-import {
-  SendApiAssetRequest,
-  SendApiAssetRequestFilterSensitiveLog,
-  SendApiAssetResponse,
-  SendApiAssetResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1SendApiAssetCommand,
-  serializeAws_restJson1SendApiAssetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SendApiAssetRequest, SendApiAssetResponse } from "../models/models_0";
+import { SendApiAsset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SendApiAssetCommand}.
+ */
 export interface SendApiAssetCommandInput extends SendApiAssetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SendApiAssetCommand}.
+ */
 export interface SendApiAssetCommandOutput extends SendApiAssetResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,76 @@ export interface SendApiAssetCommandOutput extends SendApiAssetResponse, __Metad
  * ```javascript
  * import { DataExchangeClient, SendApiAssetCommand } from "@aws-sdk/client-dataexchange"; // ES Modules import
  * // const { DataExchangeClient, SendApiAssetCommand } = require("@aws-sdk/client-dataexchange"); // CommonJS import
+ * // import type { DataExchangeClientConfig } from "@aws-sdk/client-dataexchange";
+ * const config = {}; // type is DataExchangeClientConfig
  * const client = new DataExchangeClient(config);
+ * const input = { // SendApiAssetRequest
+ *   Body: "STRING_VALUE",
+ *   QueryStringParameters: { // MapOf__string
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   AssetId: "STRING_VALUE", // required
+ *   DataSetId: "STRING_VALUE", // required
+ *   RequestHeaders: {
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   Method: "STRING_VALUE",
+ *   Path: "STRING_VALUE",
+ *   RevisionId: "STRING_VALUE", // required
+ * };
  * const command = new SendApiAssetCommand(input);
  * const response = await client.send(command);
+ * // { // SendApiAssetResponse
+ * //   Body: "STRING_VALUE",
+ * //   ResponseHeaders: { // MapOf__string
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param SendApiAssetCommandInput - {@link SendApiAssetCommandInput}
+ * @returns {@link SendApiAssetCommandOutput}
  * @see {@link SendApiAssetCommandInput} for command's `input` shape.
  * @see {@link SendApiAssetCommandOutput} for command's `response` shape.
  * @see {@link DataExchangeClientResolvedConfig | config} for DataExchangeClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to the resource is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception occurred with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request was invalid.</p>
+ *
+ * @throws {@link DataExchangeServiceException}
+ * <p>Base exception class for all service exceptions from DataExchange service.</p>
+ *
+ *
+ * @public
  */
-export class SendApiAssetCommand extends $Command<
-  SendApiAssetCommandInput,
-  SendApiAssetCommandOutput,
-  DataExchangeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SendApiAssetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataExchangeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SendApiAssetCommandInput, SendApiAssetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataExchangeClient";
-    const commandName = "SendApiAssetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SendApiAssetRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: SendApiAssetResponseFilterSensitiveLog,
+export class SendApiAssetCommand extends command<SendApiAssetCommandInput, SendApiAssetCommandOutput>(
+  _ep0,
+  _mw0,
+  "SendApiAsset",
+  SendApiAsset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SendApiAssetRequest;
+      output: SendApiAssetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SendApiAssetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SendApiAssetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SendApiAssetCommandOutput> {
-    return deserializeAws_restJson1SendApiAssetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SendApiAssetCommandInput;
+      output: SendApiAssetCommandOutput;
+    };
+  };
 }

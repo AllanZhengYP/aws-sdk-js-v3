@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import {
-  ListEntitledApplicationsRequest,
-  ListEntitledApplicationsRequestFilterSensitiveLog,
-  ListEntitledApplicationsResult,
-  ListEntitledApplicationsResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListEntitledApplicationsCommand,
-  serializeAws_json1_1ListEntitledApplicationsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListEntitledApplicationsRequest, ListEntitledApplicationsResult } from "../models/models_0";
+import { ListEntitledApplications$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListEntitledApplicationsCommand}.
+ */
 export interface ListEntitledApplicationsCommandInput extends ListEntitledApplicationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListEntitledApplicationsCommand}.
+ */
 export interface ListEntitledApplicationsCommandOutput extends ListEntitledApplicationsResult, __MetadataBearer {}
 
 /**
@@ -34,68 +29,64 @@ export interface ListEntitledApplicationsCommandOutput extends ListEntitledAppli
  * ```javascript
  * import { AppStreamClient, ListEntitledApplicationsCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, ListEntitledApplicationsCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // ListEntitledApplicationsRequest
+ *   StackName: "STRING_VALUE", // required
+ *   EntitlementName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListEntitledApplicationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListEntitledApplicationsResult
+ * //   EntitledApplications: [ // EntitledApplicationList
+ * //     { // EntitledApplication
+ * //       ApplicationIdentifier: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListEntitledApplicationsCommandInput - {@link ListEntitledApplicationsCommandInput}
+ * @returns {@link ListEntitledApplicationsCommandOutput}
  * @see {@link ListEntitledApplicationsCommandInput} for command's `input` shape.
  * @see {@link ListEntitledApplicationsCommandOutput} for command's `response` shape.
  * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link EntitlementNotFoundException} (client fault)
+ *  <p>The entitlement can't be found.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class ListEntitledApplicationsCommand extends $Command<
-  ListEntitledApplicationsCommandInput,
-  ListEntitledApplicationsCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListEntitledApplicationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListEntitledApplicationsCommandInput, ListEntitledApplicationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "ListEntitledApplicationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListEntitledApplicationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListEntitledApplicationsResultFilterSensitiveLog,
+export class ListEntitledApplicationsCommand extends command<ListEntitledApplicationsCommandInput, ListEntitledApplicationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListEntitledApplications",
+  ListEntitledApplications$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListEntitledApplicationsRequest;
+      output: ListEntitledApplicationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListEntitledApplicationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListEntitledApplicationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListEntitledApplicationsCommandOutput> {
-    return deserializeAws_json1_1ListEntitledApplicationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListEntitledApplicationsCommandInput;
+      output: ListEntitledApplicationsCommandOutput;
+    };
+  };
 }

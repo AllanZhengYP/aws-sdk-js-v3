@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LambdaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LambdaClient";
-import {
-  GetFunctionUrlConfigRequest,
-  GetFunctionUrlConfigRequestFilterSensitiveLog,
-  GetFunctionUrlConfigResponse,
-  GetFunctionUrlConfigResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetFunctionUrlConfigCommand,
-  serializeAws_restJson1GetFunctionUrlConfigCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetFunctionUrlConfigRequest, GetFunctionUrlConfigResponse } from "../models/models_0";
+import { GetFunctionUrlConfig$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetFunctionUrlConfigCommand}.
+ */
 export interface GetFunctionUrlConfigCommandInput extends GetFunctionUrlConfigRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetFunctionUrlConfigCommand}.
+ */
 export interface GetFunctionUrlConfigCommandOutput extends GetFunctionUrlConfigResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,81 @@ export interface GetFunctionUrlConfigCommandOutput extends GetFunctionUrlConfigR
  * ```javascript
  * import { LambdaClient, GetFunctionUrlConfigCommand } from "@aws-sdk/client-lambda"; // ES Modules import
  * // const { LambdaClient, GetFunctionUrlConfigCommand } = require("@aws-sdk/client-lambda"); // CommonJS import
+ * // import type { LambdaClientConfig } from "@aws-sdk/client-lambda";
+ * const config = {}; // type is LambdaClientConfig
  * const client = new LambdaClient(config);
+ * const input = { // GetFunctionUrlConfigRequest
+ *   FunctionName: "STRING_VALUE", // required
+ *   Qualifier: "STRING_VALUE",
+ * };
  * const command = new GetFunctionUrlConfigCommand(input);
  * const response = await client.send(command);
+ * // { // GetFunctionUrlConfigResponse
+ * //   FunctionUrl: "STRING_VALUE", // required
+ * //   FunctionArn: "STRING_VALUE", // required
+ * //   AuthType: "NONE" || "AWS_IAM", // required
+ * //   Cors: { // Cors
+ * //     AllowCredentials: true || false,
+ * //     AllowHeaders: [ // HeadersList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     AllowMethods: [ // AllowMethodsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     AllowOrigins: [ // AllowOriginsList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ExposeHeaders: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     MaxAge: Number("int"),
+ * //   },
+ * //   CreationTime: "STRING_VALUE", // required
+ * //   LastModifiedTime: "STRING_VALUE", // required
+ * //   InvokeMode: "BUFFERED" || "RESPONSE_STREAM",
+ * // };
+ *
  * ```
  *
+ * @param GetFunctionUrlConfigCommandInput - {@link GetFunctionUrlConfigCommandInput}
+ * @returns {@link GetFunctionUrlConfigCommandOutput}
  * @see {@link GetFunctionUrlConfigCommandInput} for command's `input` shape.
  * @see {@link GetFunctionUrlConfigCommandOutput} for command's `response` shape.
  * @see {@link LambdaClientResolvedConfig | config} for LambdaClient's `config` shape.
  *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>One of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource specified in the request does not exist.</p>
+ *
+ * @throws {@link ServiceException} (server fault)
+ *  <p>The Lambda service encountered an internal error.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request throughput limit was exceeded. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests">Lambda quotas</a>.</p>
+ *
+ * @throws {@link LambdaServiceException}
+ * <p>Base exception class for all service exceptions from Lambda service.</p>
+ *
+ *
+ * @public
  */
-export class GetFunctionUrlConfigCommand extends $Command<
-  GetFunctionUrlConfigCommandInput,
-  GetFunctionUrlConfigCommandOutput,
-  LambdaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetFunctionUrlConfigCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LambdaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetFunctionUrlConfigCommandInput, GetFunctionUrlConfigCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LambdaClient";
-    const commandName = "GetFunctionUrlConfigCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetFunctionUrlConfigRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetFunctionUrlConfigResponseFilterSensitiveLog,
+export class GetFunctionUrlConfigCommand extends command<GetFunctionUrlConfigCommandInput, GetFunctionUrlConfigCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetFunctionUrlConfig",
+  GetFunctionUrlConfig$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetFunctionUrlConfigRequest;
+      output: GetFunctionUrlConfigResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetFunctionUrlConfigCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetFunctionUrlConfigCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetFunctionUrlConfigCommandOutput> {
-    return deserializeAws_restJson1GetFunctionUrlConfigCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetFunctionUrlConfigCommandInput;
+      output: GetFunctionUrlConfigCommandOutput;
+    };
+  };
 }

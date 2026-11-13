@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import {
-  DescribeAutoPredictorRequest,
-  DescribeAutoPredictorRequestFilterSensitiveLog,
-  DescribeAutoPredictorResponse,
-  DescribeAutoPredictorResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeAutoPredictorCommand,
-  serializeAws_json1_1DescribeAutoPredictorCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeAutoPredictorRequest, DescribeAutoPredictorResponse } from "../models/models_0";
+import { DescribeAutoPredictor$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAutoPredictorCommand}.
+ */
 export interface DescribeAutoPredictorCommandInput extends DescribeAutoPredictorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAutoPredictorCommand}.
+ */
 export interface DescribeAutoPredictorCommandOutput extends DescribeAutoPredictorResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,116 @@ export interface DescribeAutoPredictorCommandOutput extends DescribeAutoPredicto
  * ```javascript
  * import { ForecastClient, DescribeAutoPredictorCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DescribeAutoPredictorCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DescribeAutoPredictorRequest
+ *   PredictorArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeAutoPredictorCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAutoPredictorResponse
+ * //   PredictorArn: "STRING_VALUE",
+ * //   PredictorName: "STRING_VALUE",
+ * //   ForecastHorizon: Number("int"),
+ * //   ForecastTypes: [ // ForecastTypes
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   ForecastFrequency: "STRING_VALUE",
+ * //   ForecastDimensions: [ // ForecastDimensions
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   DatasetImportJobArns: [ // ArnList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   DataConfig: { // DataConfig
+ * //     DatasetGroupArn: "STRING_VALUE", // required
+ * //     AttributeConfigs: [ // AttributeConfigs
+ * //       { // AttributeConfig
+ * //         AttributeName: "STRING_VALUE", // required
+ * //         Transformations: { // Transformations // required
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     ],
+ * //     AdditionalDatasets: [ // AdditionalDatasets
+ * //       { // AdditionalDataset
+ * //         Name: "STRING_VALUE", // required
+ * //         Configuration: { // Configuration
+ * //           "<keys>": [ // Values
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //   },
+ * //   EncryptionConfig: { // EncryptionConfig
+ * //     RoleArn: "STRING_VALUE", // required
+ * //     KMSKeyArn: "STRING_VALUE", // required
+ * //   },
+ * //   ReferencePredictorSummary: { // ReferencePredictorSummary
+ * //     Arn: "STRING_VALUE",
+ * //     State: "Active" || "Deleted",
+ * //   },
+ * //   EstimatedTimeRemainingInMinutes: Number("long"),
+ * //   Status: "STRING_VALUE",
+ * //   Message: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModificationTime: new Date("TIMESTAMP"),
+ * //   OptimizationMetric: "WAPE" || "RMSE" || "AverageWeightedQuantileLoss" || "MASE" || "MAPE",
+ * //   ExplainabilityInfo: { // ExplainabilityInfo
+ * //     ExplainabilityArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //   },
+ * //   MonitorInfo: { // MonitorInfo
+ * //     MonitorArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //   },
+ * //   TimeAlignmentBoundary: { // TimeAlignmentBoundary
+ * //     Month: "JANUARY" || "FEBRUARY" || "MARCH" || "APRIL" || "MAY" || "JUNE" || "JULY" || "AUGUST" || "SEPTEMBER" || "OCTOBER" || "NOVEMBER" || "DECEMBER",
+ * //     DayOfMonth: Number("int"),
+ * //     DayOfWeek: "MONDAY" || "TUESDAY" || "WEDNESDAY" || "THURSDAY" || "FRIDAY" || "SATURDAY" || "SUNDAY",
+ * //     Hour: Number("int"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeAutoPredictorCommandInput - {@link DescribeAutoPredictorCommandInput}
+ * @returns {@link DescribeAutoPredictorCommandOutput}
  * @see {@link DescribeAutoPredictorCommandInput} for command's `input` shape.
  * @see {@link DescribeAutoPredictorCommandOutput} for command's `response` shape.
  * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAutoPredictorCommand extends $Command<
-  DescribeAutoPredictorCommandInput,
-  DescribeAutoPredictorCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAutoPredictorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeAutoPredictorCommandInput, DescribeAutoPredictorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DescribeAutoPredictorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAutoPredictorRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAutoPredictorResponseFilterSensitiveLog,
+export class DescribeAutoPredictorCommand extends command<DescribeAutoPredictorCommandInput, DescribeAutoPredictorCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAutoPredictor",
+  DescribeAutoPredictor$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAutoPredictorRequest;
+      output: DescribeAutoPredictorResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeAutoPredictorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeAutoPredictorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeAutoPredictorCommandOutput> {
-    return deserializeAws_json1_1DescribeAutoPredictorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAutoPredictorCommandInput;
+      output: DescribeAutoPredictorCommandOutput;
+    };
+  };
 }

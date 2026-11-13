@@ -1,47 +1,60 @@
 // smithy-typescript generated code
-import {
-  Condition,
-  QueryCommand as __QueryCommand,
-  QueryCommandInput as __QueryCommandInput,
-  QueryCommandOutput as __QueryCommandOutput,
-} from "@aws-sdk/client-dynamodb";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
 import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { ALL_MEMBERS, ALL_VALUES } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { QueryCommand as __QueryCommand } from "@aws-sdk/client-dynamodb";
 
-export type QueryCommandInput = Omit<
-  __QueryCommandInput,
-  "KeyConditions" | "QueryFilter" | "ExclusiveStartKey" | "ExpressionAttributeValues"
-> & {
-  KeyConditions?: Record<
-    string,
-    Omit<Condition, "AttributeValueList"> & {
-      AttributeValueList?: NativeAttributeValue[];
-    }
-  >;
-  QueryFilter?: Record<
-    string,
-    Omit<Condition, "AttributeValueList"> & {
-      AttributeValueList?: NativeAttributeValue[];
-    }
-  >;
-  ExclusiveStartKey?: Record<string, NativeAttributeValue>;
-  ExpressionAttributeValues?: Record<string, NativeAttributeValue>;
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type QueryCondition = Omit<Condition, "AttributeValueList"> & {
+  AttributeValueList?: NativeAttributeValue[] | undefined;
 };
 
+/**
+ * @public
+ */
+export type QueryCommandInput = Omit<__QueryCommandInput, "KeyConditions" | "QueryFilter" | "ExclusiveStartKey" | "ExpressionAttributeValues"> & {
+  KeyConditions?: Record<
+    string,
+    QueryCondition
+  > | undefined;
+  QueryFilter?: Record<
+    string,
+    QueryCondition
+  > | undefined;
+  ExclusiveStartKey?: Record<string, NativeAttributeValue> | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
 export type QueryCommandOutput = Omit<__QueryCommandOutput, "Items" | "LastEvaluatedKey"> & {
-  Items?: Record<string, NativeAttributeValue>[];
-  LastEvaluatedKey?: Record<string, NativeAttributeValue>;
+  Items?: Record<string, NativeAttributeValue>[] | undefined;
+  LastEvaluatedKey?: Record<string, NativeAttributeValue> | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * QueryCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * QueryCommand operation from {@link @aws-sdk/client-dynamodb#QueryCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
 export class QueryCommand extends DynamoDBDocumentClientCommand<
   QueryCommandInput,
@@ -50,29 +63,30 @@ export class QueryCommand extends DynamoDBDocumentClientCommand<
   __QueryCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  protected readonly inputKeyNodes = [
-    {
-      key: "KeyConditions",
-      children: {
-        children: [{ key: "AttributeValueList" }],
+  protected readonly inputKeyNodes = {
+    KeyConditions: {
+      "*": {
+        AttributeValueList: ALL_MEMBERS, // set/list of AttributeValue
       },
     },
-    {
-      key: "QueryFilter",
-      children: {
-        children: [{ key: "AttributeValueList" }],
+    QueryFilter: {
+      "*": {
+        AttributeValueList: ALL_MEMBERS, // set/list of AttributeValue
       },
     },
-    { key: "ExclusiveStartKey" },
-    { key: "ExpressionAttributeValues" },
-  ];
-  protected readonly outputKeyNodes = [{ key: "Items" }, { key: "LastEvaluatedKey" }];
+    ExclusiveStartKey: ALL_VALUES, // map with AttributeValue
+    ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+  };
+  protected readonly outputKeyNodes = {
+    Items: {
+      "*": ALL_VALUES, // map with AttributeValue
+    },
+    LastEvaluatedKey: ALL_VALUES, // map with AttributeValue
+  };
 
   protected readonly clientCommand: __QueryCommand;
-  public readonly middlewareStack: MiddlewareStack<
-    QueryCommandInput | __QueryCommandInput,
-    QueryCommandOutput | __QueryCommandOutput
-  >;
+  public readonly middlewareStack: MiddlewareStack<QueryCommandInput | __QueryCommandInput,
+  QueryCommandOutput | __QueryCommandOutput>;
 
   constructor(readonly input: QueryCommandInput) {
     super();
@@ -95,3 +109,12 @@ export class QueryCommand extends DynamoDBDocumentClientCommand<
     return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  Condition,
+  QueryCommandInput as __QueryCommandInput,
+  QueryCommandOutput as __QueryCommandOutput,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

@@ -1,29 +1,65 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-
-import { ElasticsearchServiceServiceException as __BaseException } from "./ElasticsearchServiceServiceException";
+import type {
+  AutoTuneDesiredState,
+  AutoTuneState,
+  AutoTuneType,
+  ClonedBlueGreenScheduledActionType,
+  ConfigChangeStatus,
+  CutoverStatus,
+  CutoverTarget,
+  DeploymentStatus,
+  DeploymentStrategy,
+  DeploymentStrategyOverride,
+  DescribePackagesFilterName,
+  DomainEngineMode,
+  DomainPackageStatus,
+  DomainProcessingStatusType,
+  DomainUseCase,
+  EngineType,
+  ESPartitionInstanceType,
+  ESWarmPartitionInstanceType,
+  InboundCrossClusterSearchConnectionStatusCode,
+  InitiatedBy,
+  LogType,
+  OptionState,
+  OutboundCrossClusterSearchConnectionStatusCode,
+  OverallChangeStatus,
+  PackageStatus,
+  PackageType,
+  PauseState,
+  PrincipalType,
+  PropertyValueType,
+  ReservedElasticsearchInstancePaymentOption,
+  RetentionAction,
+  RollbackOnDisable,
+  ScheduledAutoTuneActionType,
+  ScheduledAutoTuneSeverityType,
+  TimeUnit,
+  TLSSecurityPolicy,
+  TrafficSplitStatus,
+  TrafficStrategy,
+  UpgradeStatus,
+  UpgradeStep,
+  VolumeType,
+  VpcEndpointErrorCode,
+  VpcEndpointStatus,
+} from "./enums";
 
 /**
  * <p>Container for the parameters to the <code><a>AcceptInboundCrossClusterSearchConnection</a></code> operation.</p>
+ * @public
  */
 export interface AcceptInboundCrossClusterSearchConnectionRequest {
   /**
    * <p>The id of the inbound connection that you want to accept.</p>
+   * @public
    */
   CrossClusterSearchConnectionId: string | undefined;
 }
 
-export enum InboundCrossClusterSearchConnectionStatusCode {
-  APPROVED = "APPROVED",
-  DELETED = "DELETED",
-  DELETING = "DELETING",
-  PENDING_ACCEPTANCE = "PENDING_ACCEPTANCE",
-  REJECTED = "REJECTED",
-  REJECTING = "REJECTING",
-}
-
 /**
  * <p>Specifies the coonection status of an inbound cross-cluster search connection.</p>
+ * @public
  */
 export interface InboundCrossClusterSearchConnectionStatus {
   /**
@@ -36,180 +72,124 @@ export interface InboundCrossClusterSearchConnectionStatus {
    *       <li>DELETING: Inbound connection deletion is in progress.</li>
    *       <li>DELETED: Inbound connection is deleted and cannot be used further.</li>
    *     </ul>
+   * @public
    */
-  StatusCode?: InboundCrossClusterSearchConnectionStatusCode | string;
+  StatusCode?: InboundCrossClusterSearchConnectionStatusCode | undefined;
 
   /**
    * <p>Specifies verbose information for the inbound connection status.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DomainInformation {
-  OwnerId?: string;
+  OwnerId?: string | undefined;
   /**
    * <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
   DomainName: string | undefined;
 
-  Region?: string;
+  Region?: string | undefined;
 }
 
 /**
  * <p>Specifies details of an inbound connection.</p>
+ * @public
  */
 export interface InboundCrossClusterSearchConnection {
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.</p>
+   * @public
    */
-  SourceDomainInfo?: DomainInformation;
+  SourceDomainInfo?: DomainInformation | undefined;
 
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.</p>
+   * @public
    */
-  DestinationDomainInfo?: DomainInformation;
+  DestinationDomainInfo?: DomainInformation | undefined;
 
   /**
    * <p>Specifies the connection id for the inbound cross-cluster search connection.</p>
+   * @public
    */
-  CrossClusterSearchConnectionId?: string;
+  CrossClusterSearchConnectionId?: string | undefined;
 
   /**
    * <p>Specifies the <code><a>InboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.</p>
+   * @public
    */
-  ConnectionStatus?: InboundCrossClusterSearchConnectionStatus;
+  ConnectionStatus?: InboundCrossClusterSearchConnectionStatus | undefined;
 }
 
 /**
  * <p>The result of a <code><a>AcceptInboundCrossClusterSearchConnection</a></code> operation. Contains details of accepted inbound connection.</p>
+ * @public
  */
 export interface AcceptInboundCrossClusterSearchConnectionResponse {
   /**
    * <p>Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of accepted inbound connection. </p>
+   * @public
    */
-  CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  CrossClusterSearchConnection?: InboundCrossClusterSearchConnection | undefined;
 }
-
-/**
- * <p>An error occured because the client wanted to access a not supported operation. Gives http status code of 409.</p>
- */
-export class DisabledOperationException extends __BaseException {
-  readonly name: "DisabledOperationException" = "DisabledOperationException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<DisabledOperationException, __BaseException>) {
-    super({
-      name: "DisabledOperationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, DisabledOperationException.prototype);
-  }
-}
-
-/**
- * <p>An exception for trying to create more than allowed resources or sub-resources. Gives http status code of 409.</p>
- */
-export class LimitExceededException extends __BaseException {
-  readonly name: "LimitExceededException" = "LimitExceededException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<LimitExceededException, __BaseException>) {
-    super({
-      name: "LimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LimitExceededException.prototype);
-  }
-}
-
-/**
- * <p>An exception for accessing or deleting a resource that does not exist. Gives http status code of 400.</p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-  }
-}
-
-/**
- * <p>An error occurred because user does not have permissions to access the resource. Returns HTTP status code 403.</p>
- */
-export class AccessDeniedException extends __BaseException {
-  readonly name: "AccessDeniedException" = "AccessDeniedException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
-    super({
-      name: "AccessDeniedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AccessDeniedException.prototype);
-  }
-}
-
-export type OptionState = "Active" | "Processing" | "RequiresIndexDocuments";
 
 /**
  * <p>Provides the current status of the entity.</p>
+ * @public
  */
 export interface OptionStatus {
   /**
    * <p>Timestamp which tells the creation date for the entity.</p>
+   * @public
    */
   CreationDate: Date | undefined;
 
   /**
    * <p>Timestamp which tells the last updated time for the entity.</p>
+   * @public
    */
   UpdateDate: Date | undefined;
 
   /**
    * <p>Specifies the latest version for the entity.</p>
+   * @public
    */
-  UpdateVersion?: number;
+  UpdateVersion?: number | undefined;
 
   /**
    * <p>Provides the <code>OptionState</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  State: OptionState | string | undefined;
+  State: OptionState | undefined;
 
   /**
    * <p>Indicates whether the Elasticsearch domain is being deleted.</p>
+   * @public
    */
-  PendingDeletion?: boolean;
+  PendingDeletion?: boolean | undefined;
 }
 
 /**
  * <p>The configured access rules for the domain's document and search endpoints, and the current status of those rules.</p>
+ * @public
  */
 export interface AccessPoliciesStatus {
   /**
    * <p>The access policy configured for the Elasticsearch domain.  Access policies may be resource-based, IP-based, or IAM-based.  See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank">
    *            Configuring Access Policies</a>for more information.</p>
+   * @public
    */
   Options: string | undefined;
 
   /**
    * <p>The status of the access policy for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that's included. </p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
@@ -222,6 +202,7 @@ export interface AccessPoliciesStatus {
  *       </code>
  *       .
  *     </p>
+ * @public
  */
 export interface AdditionalLimit {
   /**
@@ -251,8 +232,9 @@ export interface AdditionalLimit {
    *         upto which you don't need any master nodes to govern them.
    *       </ul>
    *     </p>
+   * @public
    */
-  LimitName?: string;
+  LimitName?: string | undefined;
 
   /**
    * <p>
@@ -262,96 +244,46 @@ export interface AdditionalLimit {
    *     </code>
    *     .
    *   </p>
+   * @public
    */
-  LimitValues?: string[];
+  LimitValues?: string[] | undefined;
 }
 
 /**
  * <p>Specifies a key value pair for a resource tag.</p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>Specifies the <code>TagKey</code>, the name of the tag.  Tag keys must be unique for the Elasticsearch domain to which they are attached.</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
    * <p>Specifies the <code>TagValue</code>, the value assigned to the corresponding tag key.  Tag values can be null and do not have to be unique in a tag set.  For example, you can have a key value
    *        pair in a tag set of <code>project : Trinity</code> and <code>cost-center : Trinity</code></p>
+   * @public
    */
   Value: string | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.</p>
+ * @public
  */
 export interface AddTagsRequest {
   /**
    * <p> Specify the <code>ARN</code> for which you want to add the tags.</p>
+   * @public
    */
   ARN: string | undefined;
 
   /**
    * <p> List of <code>Tag</code> that need to be added for the Elasticsearch domain. </p>
+   * @public
    */
   TagList: Tag[] | undefined;
-}
-
-/**
- * <p>An error occurred while processing the request.</p>
- */
-export class BaseException extends __BaseException {
-  readonly name: "BaseException" = "BaseException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<BaseException, __BaseException>) {
-    super({
-      name: "BaseException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, BaseException.prototype);
-  }
-}
-
-/**
- * <p>The request processing has failed because of an unknown error, exception or failure (the failure is internal to the service) . Gives http status code of 500.</p>
- */
-export class InternalException extends __BaseException {
-  readonly name: "InternalException" = "InternalException";
-  readonly $fault: "server" = "server";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InternalException, __BaseException>) {
-    super({
-      name: "InternalException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InternalException.prototype);
-  }
-}
-
-/**
- * <p>An exception for missing / invalid input fields. Gives http status code of 400.</p>
- */
-export class ValidationException extends __BaseException {
-  readonly name: "ValidationException" = "ValidationException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ValidationException, __BaseException>) {
-    super({
-      name: "ValidationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ValidationException.prototype);
-  }
 }
 
 /**
@@ -362,195 +294,234 @@ export class ValidationException extends __BaseException {
  *            <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li>
  *        </ul>
  *        <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>
+ * @public
  */
 export interface AdvancedOptionsStatus {
   /**
    * <p> Specifies the status of advanced options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: Record<string, string> | undefined;
 
   /**
    * <p> Specifies the status of <code>OptionStatus</code> for advanced options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p>Specifies the SAML Identity Provider's information.</p>
+ * @public
  */
 export interface SAMLIdp {
   /**
    * <p>The Metadata of the SAML application in xml format.</p>
+   * @public
    */
   MetadataContent: string | undefined;
 
   /**
    * <p>The unique Entity ID of the application in SAML Identity Provider.</p>
+   * @public
    */
   EntityId: string | undefined;
 }
 
 /**
  * <p>Describes the SAML application configured for the domain.</p>
+ * @public
  */
 export interface SAMLOptionsOutput {
   /**
    * <p>True if SAML is enabled.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * <p>Describes the SAML Identity Provider's information.</p>
+   * @public
    */
-  Idp?: SAMLIdp;
+  Idp?: SAMLIdp | undefined;
 
   /**
    * <p>The key used for matching the SAML Subject attribute.</p>
+   * @public
    */
-  SubjectKey?: string;
+  SubjectKey?: string | undefined;
 
   /**
    * <p>The key used for matching the SAML Roles attribute.</p>
+   * @public
    */
-  RolesKey?: string;
+  RolesKey?: string | undefined;
 
   /**
    * <p>The duration, in minutes, after which a user session becomes inactive.</p>
+   * @public
    */
-  SessionTimeoutMinutes?: number;
+  SessionTimeoutMinutes?: number | undefined;
 }
 
 /**
  * <p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.</p>
+ * @public
  */
 export interface AdvancedSecurityOptions {
   /**
    * <p>True if advanced security is enabled.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * <p>True if the internal user database is enabled.</p>
+   * @public
    */
-  InternalUserDatabaseEnabled?: boolean;
+  InternalUserDatabaseEnabled?: boolean | undefined;
 
   /**
    * <p>Describes the SAML application configured for a domain.</p>
+   * @public
    */
-  SAMLOptions?: SAMLOptionsOutput;
+  SAMLOptions?: SAMLOptionsOutput | undefined;
 
   /**
    * <p>Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.</p>
+   * @public
    */
-  AnonymousAuthDisableDate?: Date;
+  AnonymousAuthDisableDate?: Date | undefined;
 
   /**
    * <p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>
+   * @public
    */
-  AnonymousAuthEnabled?: boolean;
+  AnonymousAuthEnabled?: boolean | undefined;
 }
 
 /**
  * <p>Credentials for the master user: username and password, ARN, or both.</p>
+ * @public
  */
 export interface MasterUserOptions {
   /**
    * <p>ARN for the master user (if IAM is enabled).</p>
+   * @public
    */
-  MasterUserARN?: string;
+  MasterUserARN?: string | undefined;
 
   /**
    * <p>The master user's username, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>
+   * @public
    */
-  MasterUserName?: string;
+  MasterUserName?: string | undefined;
 
   /**
    * <p>The master user's password, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>
+   * @public
    */
-  MasterUserPassword?: string;
+  MasterUserPassword?: string | undefined;
 }
 
 /**
  * <p>Specifies the SAML application configuration for the domain.</p>
+ * @public
  */
 export interface SAMLOptionsInput {
   /**
    * <p>True if SAML is enabled.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * <p>Specifies the SAML Identity Provider's information.</p>
+   * @public
    */
-  Idp?: SAMLIdp;
+  Idp?: SAMLIdp | undefined;
 
   /**
    * <p>The SAML master username, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>
+   * @public
    */
-  MasterUserName?: string;
+  MasterUserName?: string | undefined;
 
   /**
    * <p>The backend role to which the SAML master user is mapped to.</p>
+   * @public
    */
-  MasterBackendRole?: string;
+  MasterBackendRole?: string | undefined;
 
   /**
    * <p>The key to use for matching the SAML Subject attribute.</p>
+   * @public
    */
-  SubjectKey?: string;
+  SubjectKey?: string | undefined;
 
   /**
    * <p>The key to use for matching the SAML Roles attribute.</p>
+   * @public
    */
-  RolesKey?: string;
+  RolesKey?: string | undefined;
 
   /**
    * <p>The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.</p>
+   * @public
    */
-  SessionTimeoutMinutes?: number;
+  SessionTimeoutMinutes?: number | undefined;
 }
 
 /**
  * <p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).</p>
+ * @public
  */
 export interface AdvancedSecurityOptionsInput {
   /**
    * <p>True if advanced security is enabled.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * <p>True if the internal user database is enabled.</p>
+   * @public
    */
-  InternalUserDatabaseEnabled?: boolean;
+  InternalUserDatabaseEnabled?: boolean | undefined;
 
   /**
    * <p>Credentials for the master user: username and password, ARN, or both.</p>
+   * @public
    */
-  MasterUserOptions?: MasterUserOptions;
+  MasterUserOptions?: MasterUserOptions | undefined;
 
   /**
    * <p>Specifies the SAML application configuration for the domain.</p>
+   * @public
    */
-  SAMLOptions?: SAMLOptionsInput;
+  SAMLOptions?: SAMLOptionsInput | undefined;
 
   /**
    * <p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>
+   * @public
    */
-  AnonymousAuthEnabled?: boolean;
+  AnonymousAuthEnabled?: boolean | undefined;
 }
 
 /**
  * <p> Specifies the status of advanced security options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface AdvancedSecurityOptionsStatus {
   /**
    * <p> Specifies advanced security options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: AdvancedSecurityOptions | undefined;
 
   /**
    * <p> Status of the advanced security options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
@@ -563,77 +534,83 @@ export interface AdvancedSecurityOptionsStatus {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface AssociatePackageRequest {
   /**
    * <p>Internal ID of the package that you want to associate with a domain. Use <code>DescribePackages</code> to find this value.</p>
+   * @public
    */
   PackageID: string | undefined;
 
   /**
    * <p>Name of the domain that you want to associate the package with.</p>
+   * @public
    */
   DomainName: string | undefined;
 }
 
-export type DomainPackageStatus =
-  | "ACTIVE"
-  | "ASSOCIATING"
-  | "ASSOCIATION_FAILED"
-  | "DISSOCIATING"
-  | "DISSOCIATION_FAILED";
-
+/**
+ * @public
+ */
 export interface ErrorDetails {
-  ErrorType?: string;
-  ErrorMessage?: string;
+  ErrorType?: string | undefined;
+  ErrorMessage?: string | undefined;
 }
-
-export type PackageType = "TXT-DICTIONARY";
 
 /**
  * <p>Information on a package that is associated with a domain.</p>
+ * @public
  */
 export interface DomainPackageDetails {
   /**
    * <p>Internal ID of the package.</p>
+   * @public
    */
-  PackageID?: string;
+  PackageID?: string | undefined;
 
   /**
    * <p>User specified name of the package.</p>
+   * @public
    */
-  PackageName?: string;
+  PackageName?: string | undefined;
 
   /**
    * <p>Currently supports only TXT-DICTIONARY.</p>
+   * @public
    */
-  PackageType?: PackageType | string;
+  PackageType?: PackageType | undefined;
 
   /**
    * <p>Timestamp of the most-recent update to the association status.</p>
+   * @public
    */
-  LastUpdated?: Date;
+  LastUpdated?: Date | undefined;
 
   /**
    * <p>Name of the domain you've associated a package with.</p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 
   /**
    * <p>State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.</p>
+   * @public
    */
-  DomainPackageStatus?: DomainPackageStatus | string;
+  DomainPackageStatus?: DomainPackageStatus | undefined;
 
-  PackageVersion?: string;
+  PackageVersion?: string | undefined;
   /**
    * <p>The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.</p>
+   * @public
    */
-  ReferencePath?: string;
+  ReferencePath?: string | undefined;
 
   /**
    * <p>Additional information if the package is in an error state. Null otherwise.</p>
+   * @public
    */
-  ErrorDetails?: ErrorDetails;
+  ErrorDetails?: ErrorDetails | undefined;
 }
 
 /**
@@ -644,415 +621,538 @@ export interface DomainPackageDetails {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface AssociatePackageResponse {
   /**
    * <p><code>DomainPackageDetails</code></p>
+   * @public
    */
-  DomainPackageDetails?: DomainPackageDetails;
+  DomainPackageDetails?: DomainPackageDetails | undefined;
 }
 
 /**
- * <p>An error occurred because the client attempts to remove a resource that is currently in use. Returns HTTP status code 409.</p>
+ * <p>Container for request parameters to the <code><a>AuthorizeVpcEndpointAccess</a></code> operation.
+ *           Specifies the account to be permitted to manage VPC endpoints against the domain.</p>
+ * @public
  */
-export class ConflictException extends __BaseException {
-  readonly name: "ConflictException" = "ConflictException";
-  readonly $fault: "client" = "client";
+export interface AuthorizeVpcEndpointAccessRequest {
   /**
-   * @internal
+   * <p>The name of the OpenSearch Service domain to provide access to.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<ConflictException, __BaseException>) {
-    super({
-      name: "ConflictException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConflictException.prototype);
-  }
+  DomainName: string | undefined;
+
+  /**
+   * <p>The account ID to grant access to.</p>
+   * @public
+   */
+  Account: string | undefined;
+}
+
+/**
+ * <p>Information about an  account or service that has access to an Amazon
+ *    OpenSearch Service domain through the use of an interface VPC endpoint.</p>
+ * @public
+ */
+export interface AuthorizedPrincipal {
+  /**
+   * <p>The type of principal.</p>
+   * @public
+   */
+  PrincipalType?: PrincipalType | undefined;
+
+  /**
+   * <p>The IAM principal that is allowed access to the domain.</p>
+   * @public
+   */
+  Principal?: string | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>AuthorizeVpcEndpointAccess</a></code> operation.
+ *           Contains the account ID and the type of the account being authorized to access the VPC endpoint.</p>
+ * @public
+ */
+export interface AuthorizeVpcEndpointAccessResponse {
+  /**
+   * <p>Information about the account or service that was provided access to the
+   *    domain.</p>
+   * @public
+   */
+  AuthorizedPrincipal: AuthorizedPrincipal | undefined;
+}
+
+/**
+ * <p>Container for parameters of the <code>CancelDomainConfigChange</code> operation.</p>
+ * @public
+ */
+export interface CancelDomainConfigChangeRequest {
+  /**
+   * <p>Name of the OpenSearch Service domain configuration request to cancel.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>When set to <b>True</b>, returns the list of change IDs and properties that will be cancelled without actually cancelling the change.</p>
+   * @public
+   */
+  DryRun?: boolean | undefined;
+}
+
+/**
+ * <p>A property change that was cancelled for an Amazon OpenSearch Service domain.</p>
+ * @public
+ */
+export interface CancelledChangeProperty {
+  /**
+   * <p>The name of the property whose change was cancelled.</p>
+   * @public
+   */
+  PropertyName?: string | undefined;
+
+  /**
+   * <p>The pending value of the property that was cancelled. This would have been the eventual value of the property if the chance had not been cancelled.</p>
+   * @public
+   */
+  CancelledValue?: string | undefined;
+
+  /**
+   * <p>The current value of the property, after the change was cancelled.</p>
+   * @public
+   */
+  ActiveValue?: string | undefined;
+}
+
+/**
+ * <p>Contains the details of the cancelled domain config change.</p>
+ * @public
+ */
+export interface CancelDomainConfigChangeResponse {
+  /**
+   * <p>Whether or not the request was a dry run. If <b>True</b>, the changes were not actually cancelled.</p>
+   * @public
+   */
+  DryRun?: boolean | undefined;
+
+  /**
+   * <p>The unique identifiers of the changes that were cancelled.</p>
+   * @public
+   */
+  CancelledChangeIds?: string[] | undefined;
+
+  /**
+   * <p>The domain change properties that were cancelled.</p>
+   * @public
+   */
+  CancelledChangeProperties?: CancelledChangeProperty[] | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>CancelElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to cancel a service software update on.</p>
+ * @public
  */
 export interface CancelElasticsearchServiceSoftwareUpdateRequest {
   /**
    * <p>The name of the domain that you want to stop the latest service software update on.</p>
+   * @public
    */
   DomainName: string | undefined;
 }
 
-export type DeploymentStatus = "COMPLETED" | "ELIGIBLE" | "IN_PROGRESS" | "NOT_ELIGIBLE" | "PENDING_UPDATE";
-
 /**
  * <p>The current options of an Elasticsearch domain service software options.</p>
+ * @public
  */
 export interface ServiceSoftwareOptions {
   /**
    * <p>The current service software version that is present on the domain.</p>
+   * @public
    */
-  CurrentVersion?: string;
+  CurrentVersion?: string | undefined;
 
   /**
    * <p>The new service software version if one is available.</p>
+   * @public
    */
-  NewVersion?: string;
+  NewVersion?: string | undefined;
 
   /**
    * <p><code>True</code> if you are able to update you service software version. <code>False</code> if you are not able to update your service software version. </p>
+   * @public
    */
-  UpdateAvailable?: boolean;
+  UpdateAvailable?: boolean | undefined;
 
   /**
    * <p><code>True</code> if you are able to cancel your service software version update. <code>False</code> if you are not able to cancel your service software version. </p>
+   * @public
    */
-  Cancellable?: boolean;
+  Cancellable?: boolean | undefined;
 
   /**
    * <p>The status of your service software update. This field can take the following values: <code>ELIGIBLE</code>, <code>PENDING_UPDATE</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>NOT_ELIGIBLE</code>.</p>
+   * @public
    */
-  UpdateStatus?: DeploymentStatus | string;
+  UpdateStatus?: DeploymentStatus | undefined;
 
   /**
    * <p>The description of the <code>UpdateStatus</code>.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.</p>
+   * @public
    */
-  AutomatedUpdateDate?: Date;
+  AutomatedUpdateDate?: Date | undefined;
 
   /**
    * <p><code>True</code> if a service software is never automatically updated. <code>False</code> if a service software is automatically updated after <code>AutomatedUpdateDate</code>.  </p>
+   * @public
    */
-  OptionalDeployment?: boolean;
+  OptionalDeployment?: boolean | undefined;
 }
 
 /**
  * <p>The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>
+ * @public
  */
 export interface CancelElasticsearchServiceSoftwareUpdateResponse {
   /**
    * <p>The current status of the Elasticsearch service software update.</p>
+   * @public
    */
-  ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  ServiceSoftwareOptions?: ServiceSoftwareOptions | undefined;
 }
 
-export enum AutoTuneDesiredState {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
-}
+/**
+ * <p>Specifies the automated snapshot pause request options for the domain.</p>
+ *        <important>
+ *            <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+ *                points in time when snapshots are suspended. Use this feature only for short-term
+ *                operational needs such as migrations or maintenance windows.</p>
+ *        </important>
+ *        <p>Maximum suspension duration: 3 days.</p>
+ * @public
+ */
+export interface AutomatedSnapshotPauseRequestOptions {
+  /**
+   * <p>Whether to enable or disable automated snapshot pause for the domain.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
 
-export enum TimeUnit {
-  HOURS = "HOURS",
+  /**
+   * <p>The timestamp at which the automated snapshot pause should begin.</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The timestamp at which the automated snapshot pause should end. The maximum allowed
+   *            duration between <code>StartTime</code> and <code>EndTime</code> is 3 days.</p>
+   * @public
+   */
+  EndTime?: Date | undefined;
 }
 
 /**
  * <p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+ * @public
  */
 export interface Duration {
   /**
    * <p> Integer to specify the value of a maintenance schedule duration. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+   * @public
    */
-  Value?: number;
+  Value?: number | undefined;
 
   /**
    * <p>Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+   * @public
    */
-  Unit?: TimeUnit | string;
+  Unit?: TimeUnit | undefined;
 }
 
 /**
  * <p>Specifies Auto-Tune maitenance schedule. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+ * @public
  */
 export interface AutoTuneMaintenanceSchedule {
   /**
    * <p>Specifies timestamp at which Auto-Tune maintenance schedule start. </p>
+   * @public
    */
-  StartAt?: Date;
+  StartAt?: Date | undefined;
 
   /**
    * <p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+   * @public
    */
-  Duration?: Duration;
+  Duration?: Duration | undefined;
 
   /**
    * <p>Specifies cron expression for a recurring maintenance schedule. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+   * @public
    */
-  CronExpressionForRecurrence?: string;
+  CronExpressionForRecurrence?: string | undefined;
 }
 
 /**
  * <p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>
+ * @public
  */
 export interface AutoTuneOptionsInput {
   /**
    * <p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>
+   * @public
    */
-  DesiredState?: AutoTuneDesiredState | string;
+  DesiredState?: AutoTuneDesiredState | undefined;
 
   /**
    * <p>Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+   * @public
    */
-  MaintenanceSchedules?: AutoTuneMaintenanceSchedule[];
+  MaintenanceSchedules?: AutoTuneMaintenanceSchedule[] | undefined;
 }
 
 /**
  * <p>Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.</p>
+ * @public
  */
 export interface CognitoOptions {
   /**
    * <p>Specifies the option to enable Cognito for Kibana authentication.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * <p>Specifies the Cognito user pool ID for Kibana authentication.</p>
+   * @public
    */
-  UserPoolId?: string;
+  UserPoolId?: string | undefined;
 
   /**
    * <p>Specifies the Cognito identity pool ID for Kibana authentication.</p>
+   * @public
    */
-  IdentityPoolId?: string;
+  IdentityPoolId?: string | undefined;
 
   /**
    * <p>Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.</p>
+   * @public
    */
-  RoleArn?: string;
+  RoleArn?: string | undefined;
 }
 
-export enum TLSSecurityPolicy {
-  POLICY_MIN_TLS_1_0_2019_07 = "Policy-Min-TLS-1-0-2019-07",
-  POLICY_MIN_TLS_1_2_2019_07 = "Policy-Min-TLS-1-2-2019-07",
+/**
+ * <p>Specifies the deployment strategy options for the domain.</p>
+ * @public
+ */
+export interface DeploymentStrategyOptions {
+  /**
+   * <p>Specifies the deployment strategy for the domain. Valid values are <code>Default</code> and <code>CapacityOptimized</code>.</p>
+   * @public
+   */
+  DeploymentStrategy: DeploymentStrategy | undefined;
 }
 
 /**
  * <p>Options to configure endpoint for the Elasticsearch domain.</p>
+ * @public
  */
 export interface DomainEndpointOptions {
   /**
    * <p>Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.</p>
+   * @public
    */
-  EnforceHTTPS?: boolean;
+  EnforceHTTPS?: boolean | undefined;
 
   /**
    * <p>Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.
    *         <br></br> It can be one of the following values:
    *         <ul>
-   *             <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li>
-   *             <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li>
+   *             <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy that supports TLS version 1.0 to TLS version 1.2</li>
+   *             <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy that supports only TLS version 1.2</li>
+   *             <li><b>Policy-Min-TLS-1-2-PFS-2023-10: </b> TLS security policy that supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites</li>
+   *             <li><b>Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08: </b> TLS security policy that supports TLS version 1.3 with FIPS</li>
    *         </ul>
    *     </p>
+   * @public
    */
-  TLSSecurityPolicy?: TLSSecurityPolicy | string;
+  TLSSecurityPolicy?: TLSSecurityPolicy | undefined;
 
   /**
    * <p>Specify if custom endpoint should be enabled for the Elasticsearch domain.</p>
+   * @public
    */
-  CustomEndpointEnabled?: boolean;
+  CustomEndpointEnabled?: boolean | undefined;
 
   /**
    * <p>Specify the fully qualified domain for your custom endpoint.</p>
+   * @public
    */
-  CustomEndpoint?: string;
+  CustomEndpoint?: string | undefined;
 
   /**
    * <p>Specify ACM certificate ARN for your custom endpoint.</p>
+   * @public
    */
-  CustomEndpointCertificateArn?: string;
+  CustomEndpointCertificateArn?: string | undefined;
 }
-
-export type VolumeType = "gp2" | "gp3" | "io1" | "standard";
 
 /**
  * <p>Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.</p>
+ * @public
  */
 export interface EBSOptions {
   /**
    * <p>Specifies whether EBS-based storage is enabled.</p>
+   * @public
    */
-  EBSEnabled?: boolean;
+  EBSEnabled?: boolean | undefined;
 
   /**
    * <p> Specifies the volume type for EBS-based storage.</p>
+   * @public
    */
-  VolumeType?: VolumeType | string;
+  VolumeType?: VolumeType | undefined;
 
   /**
    * <p> Integer to specify the size of an EBS volume.</p>
+   * @public
    */
-  VolumeSize?: number;
+  VolumeSize?: number | undefined;
 
   /**
    * <p>Specifies the IOPS for Provisioned IOPS And GP3 EBS volume (SSD).</p>
+   * @public
    */
-  Iops?: number;
+  Iops?: number | undefined;
 
   /**
    * <p>Specifies the Throughput for GP3 EBS volume (SSD).</p>
+   * @public
    */
-  Throughput?: number;
+  Throughput?: number | undefined;
 }
 
 /**
  * <p>Specifies the configuration for cold storage options such as enabled</p>
+ * @public
  */
 export interface ColdStorageOptions {
   /**
    * <p>Enable cold storage option. Accepted values true or false</p>
+   * @public
    */
   Enabled: boolean | undefined;
 }
 
-export type ESPartitionInstanceType =
-  | "c4.2xlarge.elasticsearch"
-  | "c4.4xlarge.elasticsearch"
-  | "c4.8xlarge.elasticsearch"
-  | "c4.large.elasticsearch"
-  | "c4.xlarge.elasticsearch"
-  | "c5.18xlarge.elasticsearch"
-  | "c5.2xlarge.elasticsearch"
-  | "c5.4xlarge.elasticsearch"
-  | "c5.9xlarge.elasticsearch"
-  | "c5.large.elasticsearch"
-  | "c5.xlarge.elasticsearch"
-  | "d2.2xlarge.elasticsearch"
-  | "d2.4xlarge.elasticsearch"
-  | "d2.8xlarge.elasticsearch"
-  | "d2.xlarge.elasticsearch"
-  | "i2.2xlarge.elasticsearch"
-  | "i2.xlarge.elasticsearch"
-  | "i3.16xlarge.elasticsearch"
-  | "i3.2xlarge.elasticsearch"
-  | "i3.4xlarge.elasticsearch"
-  | "i3.8xlarge.elasticsearch"
-  | "i3.large.elasticsearch"
-  | "i3.xlarge.elasticsearch"
-  | "m3.2xlarge.elasticsearch"
-  | "m3.large.elasticsearch"
-  | "m3.medium.elasticsearch"
-  | "m3.xlarge.elasticsearch"
-  | "m4.10xlarge.elasticsearch"
-  | "m4.2xlarge.elasticsearch"
-  | "m4.4xlarge.elasticsearch"
-  | "m4.large.elasticsearch"
-  | "m4.xlarge.elasticsearch"
-  | "m5.12xlarge.elasticsearch"
-  | "m5.2xlarge.elasticsearch"
-  | "m5.4xlarge.elasticsearch"
-  | "m5.large.elasticsearch"
-  | "m5.xlarge.elasticsearch"
-  | "r3.2xlarge.elasticsearch"
-  | "r3.4xlarge.elasticsearch"
-  | "r3.8xlarge.elasticsearch"
-  | "r3.large.elasticsearch"
-  | "r3.xlarge.elasticsearch"
-  | "r4.16xlarge.elasticsearch"
-  | "r4.2xlarge.elasticsearch"
-  | "r4.4xlarge.elasticsearch"
-  | "r4.8xlarge.elasticsearch"
-  | "r4.large.elasticsearch"
-  | "r4.xlarge.elasticsearch"
-  | "r5.12xlarge.elasticsearch"
-  | "r5.2xlarge.elasticsearch"
-  | "r5.4xlarge.elasticsearch"
-  | "r5.large.elasticsearch"
-  | "r5.xlarge.elasticsearch"
-  | "t2.medium.elasticsearch"
-  | "t2.micro.elasticsearch"
-  | "t2.small.elasticsearch"
-  | "ultrawarm1.large.elasticsearch"
-  | "ultrawarm1.medium.elasticsearch";
-
-export type ESWarmPartitionInstanceType = "ultrawarm1.large.elasticsearch" | "ultrawarm1.medium.elasticsearch";
-
 /**
  * <p>Specifies the zone awareness configuration for the domain cluster, such as the number of availability zones.</p>
+ * @public
  */
 export interface ZoneAwarenessConfig {
   /**
    * <p>An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled</p>
+   * @public
    */
-  AvailabilityZoneCount?: number;
+  AvailabilityZoneCount?: number | undefined;
 }
 
 /**
  * <p>Specifies the configuration for the domain cluster, such as the type and number of instances.</p>
+ * @public
  */
 export interface ElasticsearchClusterConfig {
   /**
    * <p>The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.</p>
+   * @public
    */
-  InstanceType?: ESPartitionInstanceType | string;
+  InstanceType?: ESPartitionInstanceType | undefined;
 
   /**
    * <p>The number of instances in the specified domain cluster.</p>
+   * @public
    */
-  InstanceCount?: number;
+  InstanceCount?: number | undefined;
 
   /**
    * <p>A boolean value to indicate whether a dedicated master node is enabled.  See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.</p>
+   * @public
    */
-  DedicatedMasterEnabled?: boolean;
+  DedicatedMasterEnabled?: boolean | undefined;
 
   /**
    * <p>A boolean value to indicate whether zone awareness is enabled.  See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.</p>
+   * @public
    */
-  ZoneAwarenessEnabled?: boolean;
+  ZoneAwarenessEnabled?: boolean | undefined;
 
   /**
    * <p>Specifies the zone awareness configuration for a domain when zone awareness is enabled.</p>
+   * @public
    */
-  ZoneAwarenessConfig?: ZoneAwarenessConfig;
+  ZoneAwarenessConfig?: ZoneAwarenessConfig | undefined;
 
   /**
    * <p>The instance type for a dedicated master node.</p>
+   * @public
    */
-  DedicatedMasterType?: ESPartitionInstanceType | string;
+  DedicatedMasterType?: ESPartitionInstanceType | undefined;
 
   /**
    * <p>Total number of dedicated master nodes, active and on standby, for the cluster.</p>
+   * @public
    */
-  DedicatedMasterCount?: number;
+  DedicatedMasterCount?: number | undefined;
 
   /**
    * <p>True to enable warm storage.</p>
+   * @public
    */
-  WarmEnabled?: boolean;
+  WarmEnabled?: boolean | undefined;
 
   /**
    * <p>The instance type for the Elasticsearch cluster's warm nodes.</p>
+   * @public
    */
-  WarmType?: ESWarmPartitionInstanceType | string;
+  WarmType?: ESWarmPartitionInstanceType | undefined;
 
   /**
    * <p>The number of warm nodes in the cluster.</p>
+   * @public
    */
-  WarmCount?: number;
+  WarmCount?: number | undefined;
 
   /**
    * <p>Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain</p>
+   * @public
    */
-  ColdStorageOptions?: ColdStorageOptions;
+  ColdStorageOptions?: ColdStorageOptions | undefined;
 }
 
 /**
  * <p>Specifies the Encryption At Rest Options.</p>
+ * @public
  */
 export interface EncryptionAtRestOptions {
   /**
    * <p>Specifies the option to enable Encryption At Rest.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 
   /**
    * <p> Specifies the KMS Key ID for Encryption At Rest options.</p>
+   * @public
    */
-  KmsKeyId?: string;
+  KmsKeyId?: string | undefined;
 }
-
-export type LogType = "AUDIT_LOGS" | "ES_APPLICATION_LOGS" | "INDEX_SLOW_LOGS" | "SEARCH_SLOW_LOGS";
 
 /**
  * <p>Log Publishing option that is set for given domain.
@@ -1062,412 +1162,577 @@ export type LogType = "AUDIT_LOGS" | "ES_APPLICATION_LOGS" | "INDEX_SLOW_LOGS" |
  *        <li>Enabled: Whether the log publishing for given log type is enabled or not</li>
  *      </ul>
  *    </p>
+ * @public
  */
 export interface LogPublishingOption {
   /**
    * <p>ARN of the Cloudwatch log group to which log needs to be published.</p>
+   * @public
    */
-  CloudWatchLogsLogGroupArn?: string;
+  CloudWatchLogsLogGroupArn?: string | undefined;
 
   /**
    * <p> Specifies whether given log publishing option is enabled or not.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 }
 
 /**
  * <p>Specifies the node-to-node encryption options.</p>
+ * @public
  */
 export interface NodeToNodeEncryptionOptions {
   /**
    * <p>Specify true to enable node-to-node encryption.</p>
+   * @public
    */
-  Enabled?: boolean;
+  Enabled?: boolean | undefined;
 }
 
 /**
  * <p>Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.</p>
+ * @public
  */
 export interface SnapshotOptions {
   /**
    * <p>Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.</p>
+   * @public
    */
-  AutomatedSnapshotStartHour?: number;
+  AutomatedSnapshotStartHour?: number | undefined;
 }
 
 /**
  * <p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>
+ * @public
  */
 export interface VPCOptions {
   /**
    * <p>Specifies the subnets for VPC endpoint.</p>
+   * @public
    */
-  SubnetIds?: string[];
+  SubnetIds?: string[] | undefined;
 
   /**
    * <p>Specifies the security groups for VPC endpoint.</p>
+   * @public
    */
-  SecurityGroupIds?: string[];
+  SecurityGroupIds?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateElasticsearchDomainRequest {
   /**
    * <p>The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
   DomainName: string | undefined;
 
   /**
    * <p>String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information,
    *           see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.</p>
+   * @public
    */
-  ElasticsearchVersion?: string;
+  ElasticsearchVersion?: string | undefined;
 
   /**
    * <p>Configuration options for an Elasticsearch domain. Specifies the instance type and number of instances in the domain cluster. </p>
+   * @public
    */
-  ElasticsearchClusterConfig?: ElasticsearchClusterConfig;
+  ElasticsearchClusterConfig?: ElasticsearchClusterConfig | undefined;
 
   /**
    * <p>Options to enable, disable and specify the type and size of EBS storage volumes. </p>
+   * @public
    */
-  EBSOptions?: EBSOptions;
+  EBSOptions?: EBSOptions | undefined;
 
   /**
    * <p> IAM access policy as a JSON-formatted string.</p>
+   * @public
    */
-  AccessPolicies?: string;
+  AccessPolicies?: string | undefined;
 
   /**
    * <p>Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours. </p>
+   * @public
    */
-  SnapshotOptions?: SnapshotOptions;
+  SnapshotOptions?: SnapshotOptions | undefined;
 
   /**
    * <p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i></p>
+   * @public
    */
-  VPCOptions?: VPCOptions;
+  VPCOptions?: VPCOptions | undefined;
 
   /**
    * <p>Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.</p>
+   * @public
    */
-  CognitoOptions?: CognitoOptions;
+  CognitoOptions?: CognitoOptions | undefined;
 
   /**
    * <p>Specifies the Encryption At Rest Options.</p>
+   * @public
    */
-  EncryptionAtRestOptions?: EncryptionAtRestOptions;
+  EncryptionAtRestOptions?: EncryptionAtRestOptions | undefined;
 
   /**
    * <p>Specifies the NodeToNodeEncryptionOptions.</p>
+   * @public
    */
-  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions | undefined;
 
   /**
    * <p> Option to allow references to indices in an HTTP request body.  Must be <code>false</code> when configuring access to individual sub-resources.  By default, the value is <code>true</code>.
    *           See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</p>
+   * @public
    */
-  AdvancedOptions?: Record<string, string>;
+  AdvancedOptions?: Record<string, string> | undefined;
 
   /**
    * <p>Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.</p>
+   * @public
    */
-  LogPublishingOptions?: Record<string, LogPublishingOption>;
+  LogPublishingOptions?: Partial<Record<LogType, LogPublishingOption>> | undefined;
 
   /**
    * <p>Options to specify configuration that will be applied to the domain endpoint.</p>
+   * @public
    */
-  DomainEndpointOptions?: DomainEndpointOptions;
+  DomainEndpointOptions?: DomainEndpointOptions | undefined;
 
   /**
    * <p>Specifies advanced security options.</p>
+   * @public
    */
-  AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
+  AdvancedSecurityOptions?: AdvancedSecurityOptionsInput | undefined;
 
   /**
    * <p>Specifies Auto-Tune options.</p>
+   * @public
    */
-  AutoTuneOptions?: AutoTuneOptionsInput;
+  AutoTuneOptions?: AutoTuneOptionsInput | undefined;
 
   /**
    * <p>A list of <code>Tag</code> added during domain creation.</p>
+   * @public
    */
-  TagList?: Tag[];
+  TagList?: Tag[] | undefined;
+
+  /**
+   * <p>Specifies the deployment strategy options.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOptions | undefined;
+
+  /**
+   * <p>Specifies the automated snapshot pause options for the domain.</p>
+   *         <important>
+   *             <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+   *                 points in time when snapshots are suspended. Use this feature only for short-term
+   *                 operational needs such as migrations or maintenance windows.</p>
+   *         </important>
+   *         <p>Maximum suspension duration: 3 days.</p>
+   * @public
+   */
+  AutomatedSnapshotPauseOptions?: AutomatedSnapshotPauseRequestOptions | undefined;
+
+  /**
+   * <p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>
+   * @public
+   */
+  UseCase?: DomainUseCase | undefined;
+
+  /**
+   * <p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>
+   * @public
+   */
+  EngineMode?: DomainEngineMode | undefined;
 }
 
-export enum AutoTuneState {
-  DISABLED = "DISABLED",
-  DISABLED_AND_ROLLBACK_COMPLETE = "DISABLED_AND_ROLLBACK_COMPLETE",
-  DISABLED_AND_ROLLBACK_ERROR = "DISABLED_AND_ROLLBACK_ERROR",
-  DISABLED_AND_ROLLBACK_IN_PROGRESS = "DISABLED_AND_ROLLBACK_IN_PROGRESS",
-  DISABLED_AND_ROLLBACK_SCHEDULED = "DISABLED_AND_ROLLBACK_SCHEDULED",
-  DISABLE_IN_PROGRESS = "DISABLE_IN_PROGRESS",
-  ENABLED = "ENABLED",
-  ENABLE_IN_PROGRESS = "ENABLE_IN_PROGRESS",
-  ERROR = "ERROR",
+/**
+ * <p>Specifies the automated snapshot pause options for the domain. These options allow you to temporarily pause automated snapshots for a specified time period.</p>
+ * @public
+ */
+export interface AutomatedSnapshotPauseOptions {
+  /**
+   * <p>Whether automated snapshot pause is enabled for the domain.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+
+  /**
+   * <p>The timestamp at which the automated snapshot pause begins.</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The timestamp at which the automated snapshot pause ends.</p>
+   * @public
+   */
+  EndTime?: Date | undefined;
+
+  /**
+   * <p>The current state of the automated snapshot pause. Valid values are <code>Active</code>, <code>Completed</code>, <code>Scheduled</code>, and <code>Disabled</code>.</p>
+   * @public
+   */
+  State?: PauseState | undefined;
 }
 
 /**
  * <p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>
+ * @public
  */
 export interface AutoTuneOptionsOutput {
   /**
    * <p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  State?: AutoTuneState | string;
+  State?: AutoTuneState | undefined;
 
   /**
    * <p>Specifies the error message while enabling or disabling the Auto-Tune.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 }
 
 /**
  * <p>Specifies change details of the domain configuration change.</p>
+ * @public
  */
 export interface ChangeProgressDetails {
   /**
    * <p>The unique change identifier associated with a specific domain configuration change.</p>
+   * @public
    */
-  ChangeId?: string;
+  ChangeId?: string | undefined;
 
   /**
    * <p>Contains an optional message associated with the domain configuration change.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
+
+  /**
+   * <p>The current status of the configuration change.</p>
+   * @public
+   */
+  ConfigChangeStatus?: ConfigChangeStatus | undefined;
+
+  /**
+   * <p>The time that the configuration change was initiated, in Universal Coordinated Time (UTC).</p>
+   * @public
+   */
+  StartTime?: Date | undefined;
+
+  /**
+   * <p>The last time that the configuration change was updated.</p>
+   * @public
+   */
+  LastUpdatedTime?: Date | undefined;
+
+  /**
+   * <p>The IAM principal who initiated the configuration change.</p>
+   * @public
+   */
+  InitiatedBy?: InitiatedBy | undefined;
+}
+
+/**
+ * <p>Information about the domain properties that are currently being modified.</p>
+ * @public
+ */
+export interface ModifyingProperties {
+  /**
+   * <p>The name of the property that is currently being modified.</p>
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * <p>The current value of the domain property that is being modified.</p>
+   * @public
+   */
+  ActiveValue?: string | undefined;
+
+  /**
+   * <p>The value that the property that is currently being modified will eventually have.</p>
+   * @public
+   */
+  PendingValue?: string | undefined;
+
+  /**
+   * <p>The type of value that is currently being modified. Properties can have two types:</p>
+   *     <ul>
+   *       <li><b>PLAIN_TEXT</b>: Contain direct values such as "1", "True", or "c5.large.search".</li>
+   *       <li><b>STRINGIFIED_JSON</b>: Contain content in JSON format, such as \{"Enabled":"True"\}".</li>
+   *     </ul>
+   * @public
+   */
+  ValueType?: PropertyValueType | undefined;
 }
 
 /**
  * <p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>
+ * @public
  */
 export interface VPCDerivedInfo {
   /**
    * <p>The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.</p>
+   * @public
    */
-  VPCId?: string;
+  VPCId?: string | undefined;
 
   /**
    * <p>Specifies the subnets for VPC endpoint.</p>
+   * @public
    */
-  SubnetIds?: string[];
+  SubnetIds?: string[] | undefined;
 
   /**
    * <p>The availability zones for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.</p>
+   * @public
    */
-  AvailabilityZones?: string[];
+  AvailabilityZones?: string[] | undefined;
 
   /**
    * <p>Specifies the security groups for VPC endpoint.</p>
+   * @public
    */
-  SecurityGroupIds?: string[];
+  SecurityGroupIds?: string[] | undefined;
 }
 
 /**
  * <p>The current status of an Elasticsearch domain.</p>
+ * @public
  */
 export interface ElasticsearchDomainStatus {
   /**
    * <p>The unique identifier for the specified Elasticsearch domain.</p>
+   * @public
    */
   DomainId: string | undefined;
 
   /**
    * <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
   DomainName: string | undefined;
 
   /**
    * <p>The Amazon resource name (ARN) of an Elasticsearch domain.  See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.</p>
+   * @public
    */
   ARN: string | undefined;
 
   /**
    * <p>The domain creation status. <code>True</code> if the creation of an Elasticsearch domain is complete. <code>False</code> if domain creation is still in progress.</p>
+   * @public
    */
-  Created?: boolean;
+  Created?: boolean | undefined;
 
   /**
    * <p>The domain deletion status. <code>True</code> if a delete request has been received for the domain but resource cleanup is still in progress. <code>False</code> if the domain has not been deleted. Once domain deletion is complete, the status of the domain is no longer returned.</p>
+   * @public
    */
-  Deleted?: boolean;
+  Deleted?: boolean | undefined;
 
   /**
    * <p>The Elasticsearch domain endpoint that you use to submit index and search requests.</p>
+   * @public
    */
-  Endpoint?: string;
+  Endpoint?: string | undefined;
 
   /**
    * <p>Map containing the Elasticsearch domain endpoints used to submit index and search requests. Example <code>key, value</code>: <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>.</p>
+   * @public
    */
-  Endpoints?: Record<string, string>;
+  Endpoints?: Record<string, string> | undefined;
 
   /**
    * <p>The status of the Elasticsearch domain configuration. <code>True</code> if Amazon Elasticsearch Service is processing configuration changes. <code>False</code> if the configuration is active.</p>
+   * @public
    */
-  Processing?: boolean;
+  Processing?: boolean | undefined;
 
   /**
    * <p>The status of an Elasticsearch domain version upgrade. <code>True</code> if Amazon Elasticsearch Service is undergoing a version upgrade. <code>False</code> if the configuration is active.</p>
+   * @public
    */
-  UpgradeProcessing?: boolean;
+  UpgradeProcessing?: boolean | undefined;
 
-  ElasticsearchVersion?: string;
+  ElasticsearchVersion?: string | undefined;
   /**
    * <p>The type and number of instances in the domain cluster.</p>
+   * @public
    */
   ElasticsearchClusterConfig: ElasticsearchClusterConfig | undefined;
 
   /**
    * <p>The <code>EBSOptions</code> for the specified domain.  See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank">Configuring EBS-based Storage</a> for more information.</p>
+   * @public
    */
-  EBSOptions?: EBSOptions;
+  EBSOptions?: EBSOptions | undefined;
 
   /**
    * <p> IAM access policy as a JSON-formatted string.</p>
+   * @public
    */
-  AccessPolicies?: string;
+  AccessPolicies?: string | undefined;
 
   /**
    * <p>Specifies the status of the <code>SnapshotOptions</code></p>
+   * @public
    */
-  SnapshotOptions?: SnapshotOptions;
+  SnapshotOptions?: SnapshotOptions | undefined;
 
   /**
    * <p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>
+   * @public
    */
-  VPCOptions?: VPCDerivedInfo;
+  VPCOptions?: VPCDerivedInfo | undefined;
 
   /**
    * <p>The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.</p>
+   * @public
    */
-  CognitoOptions?: CognitoOptions;
+  CognitoOptions?: CognitoOptions | undefined;
 
   /**
    * <p> Specifies the status of the <code>EncryptionAtRestOptions</code>.</p>
+   * @public
    */
-  EncryptionAtRestOptions?: EncryptionAtRestOptions;
+  EncryptionAtRestOptions?: EncryptionAtRestOptions | undefined;
 
   /**
    * <p>Specifies the status of the <code>NodeToNodeEncryptionOptions</code>.</p>
+   * @public
    */
-  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions | undefined;
 
   /**
    * <p>Specifies the status of the <code>AdvancedOptions</code></p>
+   * @public
    */
-  AdvancedOptions?: Record<string, string>;
+  AdvancedOptions?: Record<string, string> | undefined;
 
   /**
    * <p>Log publishing options for the given domain.</p>
+   * @public
    */
-  LogPublishingOptions?: Record<string, LogPublishingOption>;
+  LogPublishingOptions?: Partial<Record<LogType, LogPublishingOption>> | undefined;
 
   /**
    * <p>The current status of the Elasticsearch domain's service software.</p>
+   * @public
    */
-  ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  ServiceSoftwareOptions?: ServiceSoftwareOptions | undefined;
 
   /**
    * <p>The current status of the Elasticsearch domain's endpoint options.</p>
+   * @public
    */
-  DomainEndpointOptions?: DomainEndpointOptions;
+  DomainEndpointOptions?: DomainEndpointOptions | undefined;
 
   /**
    * <p>The current status of the Elasticsearch domain's advanced security options.</p>
+   * @public
    */
-  AdvancedSecurityOptions?: AdvancedSecurityOptions;
+  AdvancedSecurityOptions?: AdvancedSecurityOptions | undefined;
 
   /**
    * <p>The current status of the Elasticsearch domain's Auto-Tune options.</p>
+   * @public
    */
-  AutoTuneOptions?: AutoTuneOptionsOutput;
+  AutoTuneOptions?: AutoTuneOptionsOutput | undefined;
 
   /**
    * <p>Specifies change details of the domain configuration change.</p>
+   * @public
    */
-  ChangeProgressDetails?: ChangeProgressDetails;
+  ChangeProgressDetails?: ChangeProgressDetails | undefined;
+
+  /**
+   * <p>The status of any changes that are currently in progress for the domain.</p>
+   * @public
+   */
+  DomainProcessingStatus?: DomainProcessingStatusType | undefined;
+
+  /**
+   * <p>Information about the domain properties that are currently being modified.</p>
+   * @public
+   */
+  ModifyingProperties?: ModifyingProperties[] | undefined;
+
+  /**
+   * <p>The current status of the Elasticsearch domain's deployment strategy options.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOptions | undefined;
+
+  /**
+   * <p>The current status of the Elasticsearch domain's automated snapshot pause options.</p>
+   * @public
+   */
+  AutomatedSnapshotPauseOptions?: AutomatedSnapshotPauseOptions | undefined;
+
+  /**
+   * <p>The primary use case for the domain.</p>
+   * @public
+   */
+  UseCase?: DomainUseCase | undefined;
+
+  /**
+   * <p>The engine mode for the domain.</p>
+   * @public
+   */
+  EngineMode?: DomainEngineMode | undefined;
 }
 
 /**
  * <p>The result of a <code>CreateElasticsearchDomain</code> operation. Contains the status of the newly created Elasticsearch domain.</p>
+ * @public
  */
 export interface CreateElasticsearchDomainResponse {
   /**
    * <p>The status of the newly created Elasticsearch domain. </p>
+   * @public
    */
-  DomainStatus?: ElasticsearchDomainStatus;
-}
-
-/**
- * <p>An exception for trying to create or access sub-resource that is either invalid or not supported. Gives http status code of 409.</p>
- */
-export class InvalidTypeException extends __BaseException {
-  readonly name: "InvalidTypeException" = "InvalidTypeException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidTypeException, __BaseException>) {
-    super({
-      name: "InvalidTypeException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidTypeException.prototype);
-  }
-}
-
-/**
- * <p>An exception for creating a resource that already exists. Gives http status code of 400.</p>
- */
-export class ResourceAlreadyExistsException extends __BaseException {
-  readonly name: "ResourceAlreadyExistsException" = "ResourceAlreadyExistsException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceAlreadyExistsException, __BaseException>) {
-    super({
-      name: "ResourceAlreadyExistsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceAlreadyExistsException.prototype);
-  }
+  DomainStatus?: ElasticsearchDomainStatus | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>CreateOutboundCrossClusterSearchConnection</a></code> operation.</p>
+ * @public
  */
 export interface CreateOutboundCrossClusterSearchConnectionRequest {
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.</p>
+   * @public
    */
   SourceDomainInfo: DomainInformation | undefined;
 
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.</p>
+   * @public
    */
   DestinationDomainInfo: DomainInformation | undefined;
 
   /**
    * <p>Specifies the connection alias that will be used by the customer for this connection.</p>
+   * @public
    */
   ConnectionAlias: string | undefined;
 }
 
-export enum OutboundCrossClusterSearchConnectionStatusCode {
-  ACTIVE = "ACTIVE",
-  DELETED = "DELETED",
-  DELETING = "DELETING",
-  PENDING_ACCEPTANCE = "PENDING_ACCEPTANCE",
-  PROVISIONING = "PROVISIONING",
-  REJECTED = "REJECTED",
-  VALIDATING = "VALIDATING",
-  VALIDATION_FAILED = "VALIDATION_FAILED",
-}
-
 /**
  * <p>Specifies the connection status of an outbound cross-cluster search connection.</p>
+ * @public
  */
 export interface OutboundCrossClusterSearchConnectionStatus {
   /**
@@ -1482,58 +1747,69 @@ export interface OutboundCrossClusterSearchConnectionStatus {
    *       <li>DELETING: Outbound connection deletion is in progress.</li>
    *       <li>DELETED: Outbound connection is deleted and cannot be used further.</li>
    *     </ul>
+   * @public
    */
-  StatusCode?: OutboundCrossClusterSearchConnectionStatusCode | string;
+  StatusCode?: OutboundCrossClusterSearchConnectionStatusCode | undefined;
 
   /**
    * <p>Specifies verbose information for the outbound connection status.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 }
 
 /**
  * <p>The result of a <code><a>CreateOutboundCrossClusterSearchConnection</a></code> request. Contains the details of the newly created cross-cluster search connection.</p>
+ * @public
  */
 export interface CreateOutboundCrossClusterSearchConnectionResponse {
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.</p>
+   * @public
    */
-  SourceDomainInfo?: DomainInformation;
+  SourceDomainInfo?: DomainInformation | undefined;
 
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.</p>
+   * @public
    */
-  DestinationDomainInfo?: DomainInformation;
+  DestinationDomainInfo?: DomainInformation | undefined;
 
   /**
    * <p>Specifies the connection alias provided during the create connection request.</p>
+   * @public
    */
-  ConnectionAlias?: string;
+  ConnectionAlias?: string | undefined;
 
   /**
    * <p>Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the newly created connection.</p>
+   * @public
    */
-  ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus;
+  ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus | undefined;
 
   /**
    * <p>Unique id for the created outbound connection, which is used for subsequent operations on connection.</p>
+   * @public
    */
-  CrossClusterSearchConnectionId?: string;
+  CrossClusterSearchConnectionId?: string | undefined;
 }
 
 /**
  * <p>The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code></p>
+ * @public
  */
 export interface PackageSource {
   /**
    * <p>Name of the bucket containing the package.</p>
+   * @public
    */
-  S3BucketName?: string;
+  S3BucketName?: string | undefined;
 
   /**
    * <p>Key (file name) of the package.</p>
+   * @public
    */
-  S3Key?: string;
+  S3Key?: string | undefined;
 }
 
 /**
@@ -1544,79 +1820,82 @@ export interface PackageSource {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface CreatePackageRequest {
   /**
    * <p>Unique identifier for the package.</p>
+   * @public
    */
   PackageName: string | undefined;
 
   /**
    * <p>Type of package. Currently supports only TXT-DICTIONARY.</p>
+   * @public
    */
-  PackageType: PackageType | string | undefined;
+  PackageType: PackageType | undefined;
 
   /**
    * <p>Description of the package.</p>
+   * @public
    */
-  PackageDescription?: string;
+  PackageDescription?: string | undefined;
 
   /**
    * <p>The customer S3 location <code>PackageSource</code> for importing the package.</p>
+   * @public
    */
   PackageSource: PackageSource | undefined;
 }
 
-export type PackageStatus =
-  | "AVAILABLE"
-  | "COPYING"
-  | "COPY_FAILED"
-  | "DELETED"
-  | "DELETE_FAILED"
-  | "DELETING"
-  | "VALIDATING"
-  | "VALIDATION_FAILED";
-
 /**
  * <p>Basic information about a package.</p>
+ * @public
  */
 export interface PackageDetails {
   /**
    * <p>Internal ID of the package.</p>
+   * @public
    */
-  PackageID?: string;
+  PackageID?: string | undefined;
 
   /**
    * <p>User specified name of the package.</p>
+   * @public
    */
-  PackageName?: string;
+  PackageName?: string | undefined;
 
   /**
    * <p>Currently supports only TXT-DICTIONARY.</p>
+   * @public
    */
-  PackageType?: PackageType | string;
+  PackageType?: PackageType | undefined;
 
   /**
    * <p>User-specified description of the package.</p>
+   * @public
    */
-  PackageDescription?: string;
+  PackageDescription?: string | undefined;
 
   /**
    * <p>Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED</p>
+   * @public
    */
-  PackageStatus?: PackageStatus | string;
+  PackageStatus?: PackageStatus | undefined;
 
   /**
    * <p>Timestamp which tells creation date of the package.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 
-  LastUpdatedAt?: Date;
-  AvailablePackageVersion?: string;
+  LastUpdatedAt?: Date | undefined;
+  AvailablePackageVersion?: string | undefined;
   /**
    * <p>Additional information if the package is in an error state. Null otherwise.</p>
+   * @public
    */
-  ErrorDetails?: ErrorDetails;
+  ErrorDetails?: ErrorDetails | undefined;
 }
 
 /**
@@ -1627,102 +1906,202 @@ export interface PackageDetails {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface CreatePackageResponse {
   /**
    * <p>Information about the package <code>PackageDetails</code>.</p>
+   * @public
    */
-  PackageDetails?: PackageDetails;
+  PackageDetails?: PackageDetails | undefined;
+}
+
+/**
+ * <p>Container for the parameters to the <code><a>CreateVpcEndpointRequest</a></code> operation.</p>
+ * @public
+ */
+export interface CreateVpcEndpointRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain to grant access to.</p>
+   * @public
+   */
+  DomainArn: string | undefined;
+
+  /**
+   * <p>Options to specify the subnets and security groups for the endpoint.</p>
+   * @public
+   */
+  VpcOptions: VPCOptions | undefined;
+
+  /**
+   * <p>Unique, case-sensitive identifier to ensure idempotency of the request.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * <p>The connection endpoint for connecting to an Amazon OpenSearch Service domain through a
+ *    proxy.</p>
+ * @public
+ */
+export interface VpcEndpoint {
+  /**
+   * <p>The unique identifier of the endpoint.</p>
+   * @public
+   */
+  VpcEndpointId?: string | undefined;
+
+  /**
+   * <p>The creator of the endpoint.</p>
+   * @public
+   */
+  VpcEndpointOwner?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain associated with the endpoint.</p>
+   * @public
+   */
+  DomainArn?: string | undefined;
+
+  /**
+   * <p>Options to specify the subnets and security groups for an Amazon OpenSearch Service VPC
+   *    endpoint.</p>
+   * @public
+   */
+  VpcOptions?: VPCDerivedInfo | undefined;
+
+  /**
+   * <p>The current status of the endpoint.</p>
+   * @public
+   */
+  Status?: VpcEndpointStatus | undefined;
+
+  /**
+   * <p>The connection endpoint ID for connecting to the domain.</p>
+   * @public
+   */
+  Endpoint?: string | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>CreateVpcEndpoint</a></code> operation. Contains the configuration and status of the VPC Endpoint being created.</p>
+ * @public
+ */
+export interface CreateVpcEndpointResponse {
+  /**
+   * <p>Information about the newly created VPC endpoint.</p>
+   * @public
+   */
+  VpcEndpoint: VpcEndpoint | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>DeleteElasticsearchDomain</a></code> operation. Specifies the name of the Elasticsearch domain that you want to delete.</p>
+ * @public
  */
 export interface DeleteElasticsearchDomainRequest {
   /**
    * <p>The name of the Elasticsearch domain that you want to permanently delete.</p>
+   * @public
    */
   DomainName: string | undefined;
 }
 
 /**
  * <p>The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.</p>
+ * @public
  */
 export interface DeleteElasticsearchDomainResponse {
   /**
    * <p>The status of the Elasticsearch domain being deleted.</p>
+   * @public
    */
-  DomainStatus?: ElasticsearchDomainStatus;
+  DomainStatus?: ElasticsearchDomainStatus | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>DeleteInboundCrossClusterSearchConnection</a></code> operation.</p>
+ * @public
  */
 export interface DeleteInboundCrossClusterSearchConnectionRequest {
   /**
    * <p>The id of the inbound connection that you want to permanently delete.</p>
+   * @public
    */
   CrossClusterSearchConnectionId: string | undefined;
 }
 
 /**
  * <p>The result of a <code><a>DeleteInboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted inbound connection.</p>
+ * @public
  */
 export interface DeleteInboundCrossClusterSearchConnectionResponse {
   /**
    * <p>Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of deleted inbound connection. </p>
+   * @public
    */
-  CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  CrossClusterSearchConnection?: InboundCrossClusterSearchConnection | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>DeleteOutboundCrossClusterSearchConnection</a></code> operation.</p>
+ * @public
  */
 export interface DeleteOutboundCrossClusterSearchConnectionRequest {
   /**
    * <p>The id of the outbound connection that you want to permanently delete.</p>
+   * @public
    */
   CrossClusterSearchConnectionId: string | undefined;
 }
 
 /**
  * <p>Specifies details of an outbound connection.</p>
+ * @public
  */
 export interface OutboundCrossClusterSearchConnection {
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.</p>
+   * @public
    */
-  SourceDomainInfo?: DomainInformation;
+  SourceDomainInfo?: DomainInformation | undefined;
 
   /**
    * <p>Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.</p>
+   * @public
    */
-  DestinationDomainInfo?: DomainInformation;
+  DestinationDomainInfo?: DomainInformation | undefined;
 
   /**
    * <p>Specifies the connection id for the outbound cross-cluster search connection.</p>
+   * @public
    */
-  CrossClusterSearchConnectionId?: string;
+  CrossClusterSearchConnectionId?: string | undefined;
 
   /**
    * <p>Specifies the connection alias for the outbound cross-cluster search connection.</p>
+   * @public
    */
-  ConnectionAlias?: string;
+  ConnectionAlias?: string | undefined;
 
   /**
    * <p>Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.</p>
+   * @public
    */
-  ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus;
+  ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus | undefined;
 }
 
 /**
  * <p>The result of a <code><a>DeleteOutboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted outbound connection.</p>
+ * @public
  */
 export interface DeleteOutboundCrossClusterSearchConnectionResponse {
   /**
    * <p>Specifies the <code><a>OutboundCrossClusterSearchConnection</a></code> of deleted outbound connection. </p>
+   * @public
    */
-  CrossClusterSearchConnection?: OutboundCrossClusterSearchConnection;
+  CrossClusterSearchConnection?: OutboundCrossClusterSearchConnection | undefined;
 }
 
 /**
@@ -1733,10 +2112,12 @@ export interface DeleteOutboundCrossClusterSearchConnectionResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DeletePackageRequest {
   /**
    * <p>Internal ID of the package that you want to delete. Use <code>DescribePackages</code> to find this value.</p>
+   * @public
    */
   PackageID: string | undefined;
 }
@@ -1749,122 +2130,183 @@ export interface DeletePackageRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DeletePackageResponse {
   /**
    * <p><code>PackageDetails</code></p>
+   * @public
    */
-  PackageDetails?: PackageDetails;
+  PackageDetails?: PackageDetails | undefined;
+}
+
+/**
+ * <p>Deletes an Amazon OpenSearch Service-managed interface VPC endpoint.</p>
+ * @public
+ */
+export interface DeleteVpcEndpointRequest {
+  /**
+   * <p>The unique identifier of the endpoint to be deleted.</p>
+   * @public
+   */
+  VpcEndpointId: string | undefined;
+}
+
+/**
+ * <p>Summary information for an Amazon OpenSearch Service-managed VPC endpoint.</p>
+ * @public
+ */
+export interface VpcEndpointSummary {
+  /**
+   * <p>The unique identifier of the endpoint.</p>
+   * @public
+   */
+  VpcEndpointId?: string | undefined;
+
+  /**
+   * <p>The creator of the endpoint.</p>
+   * @public
+   */
+  VpcEndpointOwner?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the domain associated with the endpoint.</p>
+   * @public
+   */
+  DomainArn?: string | undefined;
+
+  /**
+   * <p>The current status of the endpoint.</p>
+   * @public
+   */
+  Status?: VpcEndpointStatus | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>DeleteVpcEndpoint</a></code> operation. Contains the summarized detail of the VPC Endpoint being deleted.</p>
+ * @public
+ */
+export interface DeleteVpcEndpointResponse {
+  /**
+   * <p>Information about the deleted endpoint, including its current status (<code>DELETING</code>
+   *    or <code>DELETE_FAILED</code>).</p>
+   * @public
+   */
+  VpcEndpointSummary: VpcEndpointSummary | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.</p>
+ * @public
  */
 export interface DescribeDomainAutoTunesRequest {
   /**
    * <p>Specifies the domain name for which you want Auto-Tune action details.</p>
+   * @public
    */
   DomainName: string | undefined;
 
   /**
    * <p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export enum ScheduledAutoTuneActionType {
-  JVM_HEAP_SIZE_TUNING = "JVM_HEAP_SIZE_TUNING",
-  JVM_YOUNG_GEN_TUNING = "JVM_YOUNG_GEN_TUNING",
-}
-
-export enum ScheduledAutoTuneSeverityType {
-  HIGH = "HIGH",
-  LOW = "LOW",
-  MEDIUM = "MEDIUM",
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Specifies details of the scheduled Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
+ * @public
  */
 export interface ScheduledAutoTuneDetails {
   /**
    * <p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>
+   * @public
    */
-  Date?: Date;
+  Date?: Date | undefined;
 
   /**
    * <p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>
+   * @public
    */
-  ActionType?: ScheduledAutoTuneActionType | string;
+  ActionType?: ScheduledAutoTuneActionType | undefined;
 
   /**
    * <p>Specifies Auto-Tune action description. </p>
+   * @public
    */
-  Action?: string;
+  Action?: string | undefined;
 
   /**
    * <p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>
+   * @public
    */
-  Severity?: ScheduledAutoTuneSeverityType | string;
+  Severity?: ScheduledAutoTuneSeverityType | undefined;
 }
 
 /**
  * <p>Specifies details of the Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
+ * @public
  */
 export interface AutoTuneDetails {
   /**
    * <p>Specifies details of the scheduled Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
+   * @public
    */
-  ScheduledAutoTuneDetails?: ScheduledAutoTuneDetails;
-}
-
-export enum AutoTuneType {
-  SCHEDULED_ACTION = "SCHEDULED_ACTION",
+  ScheduledAutoTuneDetails?: ScheduledAutoTuneDetails | undefined;
 }
 
 /**
  * <p>Specifies Auto-Tune type and Auto-Tune action details. </p>
+ * @public
  */
 export interface AutoTune {
   /**
    * <p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>
+   * @public
    */
-  AutoTuneType?: AutoTuneType | string;
+  AutoTuneType?: AutoTuneType | undefined;
 
   /**
    * <p>Specifies details of the Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
+   * @public
    */
-  AutoTuneDetails?: AutoTuneDetails;
+  AutoTuneDetails?: AutoTuneDetails | undefined;
 }
 
 /**
  * <p>The result of <code>DescribeDomainAutoTunes</code> request. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. </p>
+ * @public
  */
 export interface DescribeDomainAutoTunesResponse {
   /**
    * <p>Specifies the list of setting adjustments that Auto-Tune has made to the domain. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+   * @public
    */
-  AutoTunes?: AutoTune[];
+  AutoTunes?: AutoTune[] | undefined;
 
   /**
    * <p>Specifies an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code>DescribeDomainChangeProgress</code> operation. Specifies the
  *         domain name and optional change specific identity for which you want progress information.
  *       </p>
+ * @public
  */
 export interface DescribeDomainChangeProgressRequest {
   /**
    * <p>The domain you want to get the progress information about.</p>
+   * @public
    */
   DomainName: string | undefined;
 
@@ -1872,456 +2314,718 @@ export interface DescribeDomainChangeProgressRequest {
    * <p>The specific change ID for which you want to get progress information. This is an optional parameter.
    *         If omitted, the service returns information about the most recent configuration change.
    *       </p>
+   * @public
    */
-  ChangeId?: string;
+  ChangeId?: string | undefined;
 }
 
 /**
  * <p>A progress stage details of a specific domain configuration change.</p>
+ * @public
  */
 export interface ChangeProgressStage {
   /**
    * <p>The name of the specific progress stage.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The overall status of a specific progress stage.</p>
+   * @public
    */
-  Status?: string;
+  Status?: string | undefined;
 
   /**
    * <p>The description of the progress stage.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The last updated timestamp of the progress stage.</p>
+   * @public
    */
-  LastUpdated?: Date;
+  LastUpdated?: Date | undefined;
 }
 
-export enum OverallChangeStatus {
-  COMPLETED = "COMPLETED",
-  FAILED = "FAILED",
-  PENDING = "PENDING",
-  PROCESSING = "PROCESSING",
+/**
+ * <p>An action that the service takes automatically at a scheduled time during a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface ClonedBlueGreenScheduledAction {
+  /**
+   * <p>The action that the service takes.</p>
+   * @public
+   */
+  Action?: ClonedBlueGreenScheduledActionType | undefined;
+
+  /**
+   * <p>The time at which the service takes the action.</p>
+   * @public
+   */
+  ScheduledTime?: Date | undefined;
+}
+
+/**
+ * <p>The split of search traffic between the primary and cloned clusters.</p>
+ * @public
+ */
+export interface TrafficPercents {
+  /**
+   * <p>The percentage of search traffic sent to the primary cluster.</p>
+   * @public
+   */
+  PrimaryReadTrafficPercent: number | undefined;
+
+  /**
+   * <p>The percentage of search traffic sent to the cloned cluster.</p>
+   * @public
+   */
+  CloneReadTrafficPercent: number | undefined;
+}
+
+/**
+ * <p>The state of a cloned blue/green upgrade. Members that don't apply are omitted.</p>
+ * @public
+ */
+export interface ClonedBlueGreenUpgradeDetails {
+  /**
+   * <p>The current split of search traffic between the primary and cloned clusters.</p>
+   * @public
+   */
+  TrafficSplit?: TrafficPercents | undefined;
+
+  /**
+   * <p>The action that the service takes automatically if you don't act before the scheduled time.</p>
+   * @public
+   */
+  ScheduledAction?: ClonedBlueGreenScheduledAction | undefined;
+
+  /**
+   * <p>The retention period, in hours, for the cluster that you cut over from.</p>
+   * @public
+   */
+  RetentionInHours?: number | undefined;
 }
 
 /**
  * <p>The progress details of a specific domain configuration change.</p>
+ * @public
  */
 export interface ChangeProgressStatusDetails {
   /**
    * <p>The unique change identifier associated with a specific domain configuration change.</p>
+   * @public
    */
-  ChangeId?: string;
+  ChangeId?: string | undefined;
 
   /**
    * <p>The time at which the configuration change is made on the domain.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The overall status of the domain configuration change. This field can take the following values: <code>PENDING</code>, <code>PROCESSING</code>, <code>COMPLETED</code> and <code>FAILED</code></p>
+   * @public
    */
-  Status?: OverallChangeStatus | string;
+  Status?: OverallChangeStatus | undefined;
 
   /**
    * <p>The list of properties involved in the domain configuration change that are still in pending.</p>
+   * @public
    */
-  PendingProperties?: string[];
+  PendingProperties?: string[] | undefined;
 
   /**
    * <p>The list of properties involved in the domain configuration change that are completed.</p>
+   * @public
    */
-  CompletedProperties?: string[];
+  CompletedProperties?: string[] | undefined;
 
   /**
    * <p>The total number of stages required for the configuration change.</p>
+   * @public
    */
-  TotalNumberOfStages?: number;
+  TotalNumberOfStages?: number | undefined;
 
   /**
    * <p>The specific stages that the domain is going through to perform the configuration change.</p>
+   * @public
    */
-  ChangeProgressStages?: ChangeProgressStage[];
+  ChangeProgressStages?: ChangeProgressStage[] | undefined;
+
+  /**
+   * <p>The current status of the configuration change.</p>
+   * @public
+   */
+  ConfigChangeStatus?: ConfigChangeStatus | undefined;
+
+  /**
+   * <p>The last time that the status of the configuration change was updated.</p>
+   * @public
+   */
+  LastUpdatedTime?: Date | undefined;
+
+  /**
+   * <p>The IAM principal who initiated the configuration change.</p>
+   * @public
+   */
+  InitiatedBy?: InitiatedBy | undefined;
+
+  /**
+   * <p>Details about a cloned blue/green upgrade, when the change is one.</p>
+   * @public
+   */
+  ClonedBlueGreenUpgradeDetails?: ClonedBlueGreenUpgradeDetails | undefined;
 }
 
 /**
  * <p>The result of a <code>DescribeDomainChangeProgress</code> request. Contains the progress information of
  *         the requested domain change.
  *       </p>
+ * @public
  */
 export interface DescribeDomainChangeProgressResponse {
   /**
    * <p>Progress information for the configuration change that is requested in the <code>DescribeDomainChangeProgress</code> request.
    *       </p>
+   * @public
    */
-  ChangeProgressStatus?: ChangeProgressStatusDetails;
+  ChangeProgressStatus?: ChangeProgressStatusDetails | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>DescribeElasticsearchDomain</a></code> operation.</p>
+ * @public
  */
 export interface DescribeElasticsearchDomainRequest {
   /**
    * <p>The name of the Elasticsearch domain for which you want information.</p>
+   * @public
    */
   DomainName: string | undefined;
 }
 
 /**
  * <p>The result of a <code>DescribeElasticsearchDomain</code> request. Contains the status of the domain specified in the request.</p>
+ * @public
  */
 export interface DescribeElasticsearchDomainResponse {
   /**
    * <p>The current status of the Elasticsearch domain.</p>
+   * @public
    */
   DomainStatus: ElasticsearchDomainStatus | undefined;
 }
 
 /**
  * <p> Container for the parameters to the <code>DescribeElasticsearchDomainConfig</code> operation. Specifies the domain name for which you want configuration information.</p>
+ * @public
  */
 export interface DescribeElasticsearchDomainConfigRequest {
   /**
    * <p>The Elasticsearch domain that you want to get information about.</p>
+   * @public
    */
   DomainName: string | undefined;
 }
 
-export enum RollbackOnDisable {
-  DEFAULT_ROLLBACK = "DEFAULT_ROLLBACK",
-  NO_ROLLBACK = "NO_ROLLBACK",
+/**
+ * <p>The status of automated snapshot pause options for the specified Elasticsearch domain.</p>
+ * @public
+ */
+export interface AutomatedSnapshotPauseOptionsStatus {
+  /**
+   * <p>Automated snapshot pause options for the specified Elasticsearch domain.</p>
+   * @public
+   */
+  Options: AutomatedSnapshotPauseOptions | undefined;
+
+  /**
+   * <p>The current status of the automated snapshot pause options for the specified Elasticsearch domain.</p>
+   * @public
+   */
+  Status: OptionStatus | undefined;
 }
 
 /**
  * <p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.</p>
+ * @public
  */
 export interface AutoTuneOptions {
   /**
    * <p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>
+   * @public
    */
-  DesiredState?: AutoTuneDesiredState | string;
+  DesiredState?: AutoTuneDesiredState | undefined;
 
   /**
    * <p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. </p>
+   * @public
    */
-  RollbackOnDisable?: RollbackOnDisable | string;
+  RollbackOnDisable?: RollbackOnDisable | undefined;
 
   /**
    * <p>Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.</p>
+   * @public
    */
-  MaintenanceSchedules?: AutoTuneMaintenanceSchedule[];
+  MaintenanceSchedules?: AutoTuneMaintenanceSchedule[] | undefined;
 }
 
 /**
  * <p>Provides the current status of the Auto-Tune options. </p>
+ * @public
  */
 export interface AutoTuneStatus {
   /**
    * <p>Timestamp which tells Auto-Tune options creation date .</p>
+   * @public
    */
   CreationDate: Date | undefined;
 
   /**
    * <p>Timestamp which tells Auto-Tune options last updated time.</p>
+   * @public
    */
   UpdateDate: Date | undefined;
 
   /**
    * <p>Specifies the Auto-Tune options latest version.</p>
+   * @public
    */
-  UpdateVersion?: number;
+  UpdateVersion?: number | undefined;
 
   /**
    * <p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  State: AutoTuneState | string | undefined;
+  State: AutoTuneState | undefined;
 
   /**
    * <p>Specifies the error message while enabling or disabling the Auto-Tune options.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 
   /**
    * <p>Indicates whether the Elasticsearch domain is being deleted.</p>
+   * @public
    */
-  PendingDeletion?: boolean;
+  PendingDeletion?: boolean | undefined;
 }
 
 /**
  * <p> Specifies the status of Auto-Tune options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface AutoTuneOptionsStatus {
   /**
    * <p> Specifies Auto-Tune options for the specified Elasticsearch domain.</p>
+   * @public
    */
-  Options?: AutoTuneOptions;
+  Options?: AutoTuneOptions | undefined;
 
   /**
    * <p> Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.</p>
+   * @public
    */
-  Status?: AutoTuneStatus;
+  Status?: AutoTuneStatus | undefined;
 }
 
 /**
  * <p>Status of the Cognito options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface CognitoOptionsStatus {
   /**
    * <p>Specifies the Cognito options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: CognitoOptions | undefined;
 
   /**
    * <p>Specifies the status of the Cognito options for the specified Elasticsearch domain.</p>
+   * @public
+   */
+  Status: OptionStatus | undefined;
+}
+
+/**
+ * <p>Specifies the status of deployment strategy options for the specified Elasticsearch domain.</p>
+ * @public
+ */
+export interface DeploymentStrategyOptionsStatus {
+  /**
+   * <p>Specifies deployment strategy options for the specified Elasticsearch domain.</p>
+   * @public
+   */
+  Options: DeploymentStrategyOptions | undefined;
+
+  /**
+   * <p>Specifies the status of the deployment strategy options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p>The configured endpoint options for the domain and their current status.</p>
+ * @public
  */
 export interface DomainEndpointOptionsStatus {
   /**
    * <p>Options to configure endpoint for the Elasticsearch domain.</p>
+   * @public
    */
   Options: DomainEndpointOptions | undefined;
 
   /**
    * <p>The status of the endpoint options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that's included. </p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p> Status of the EBS options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface EBSOptionsStatus {
   /**
    * <p> Specifies the EBS options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: EBSOptions | undefined;
 
   /**
    * <p> Specifies the status of the EBS options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p> Specifies the configuration status for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface ElasticsearchClusterConfigStatus {
   /**
    * <p> Specifies the cluster configuration for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: ElasticsearchClusterConfig | undefined;
 
   /**
    * <p> Specifies the status of the configuration for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p> Status of the Elasticsearch version options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface ElasticsearchVersionStatus {
   /**
    * <p> Specifies the Elasticsearch version for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: string | undefined;
 
   /**
    * <p> Specifies the status of the Elasticsearch version options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p> Status of the Encryption At Rest options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface EncryptionAtRestOptionsStatus {
   /**
    * <p> Specifies the Encryption At Rest options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: EncryptionAtRestOptions | undefined;
 
   /**
    * <p> Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.</p>
+   * @public
+   */
+  Status: OptionStatus | undefined;
+}
+
+/**
+ * <p>The status of the engine mode for the domain.</p>
+ * @public
+ */
+export interface EngineModeStatus {
+  /**
+   * <p>The engine mode configured for the domain.</p>
+   * @public
+   */
+  Options: DomainEngineMode | undefined;
+
+  /**
+   * <p>The current status of the engine mode for the domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p>The configured log publishing options for the domain and their current status.</p>
+ * @public
  */
 export interface LogPublishingOptionsStatus {
   /**
    * <p>The log publishing options configured for the Elasticsearch domain.</p>
+   * @public
    */
-  Options?: Record<string, LogPublishingOption>;
+  Options?: Partial<Record<LogType, LogPublishingOption>> | undefined;
 
   /**
    * <p>The status of the log publishing options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that's included. </p>
+   * @public
    */
-  Status?: OptionStatus;
+  Status?: OptionStatus | undefined;
 }
 
 /**
  * <p>Status of the node-to-node encryption options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface NodeToNodeEncryptionOptionsStatus {
   /**
    * <p>Specifies the node-to-node encryption options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: NodeToNodeEncryptionOptions | undefined;
 
   /**
    * <p>Specifies the status of the node-to-node encryption options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p>Status of a daily automated snapshot.</p>
+ * @public
  */
 export interface SnapshotOptionsStatus {
   /**
    * <p>Specifies the daily snapshot options specified for the Elasticsearch domain.</p>
+   * @public
    */
   Options: SnapshotOptions | undefined;
 
   /**
    * <p>Specifies the status of a daily automated snapshot.</p>
+   * @public
+   */
+  Status: OptionStatus | undefined;
+}
+
+/**
+ * <p>The status of the use case for the domain.</p>
+ * @public
+ */
+export interface UseCaseStatus {
+  /**
+   * <p>The use case configured for the domain.</p>
+   * @public
+   */
+  Options: DomainUseCase | undefined;
+
+  /**
+   * <p>The current status of the use case for the domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p> Status of the VPC options for the specified Elasticsearch domain.</p>
+ * @public
  */
 export interface VPCDerivedInfoStatus {
   /**
    * <p> Specifies the VPC options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Options: VPCDerivedInfo | undefined;
 
   /**
    * <p> Specifies the status of the VPC options for the specified Elasticsearch domain.</p>
+   * @public
    */
   Status: OptionStatus | undefined;
 }
 
 /**
  * <p>The configuration of an Elasticsearch domain.</p>
+ * @public
  */
 export interface ElasticsearchDomainConfig {
   /**
    * <p>String of format X.Y to specify version for the Elasticsearch domain.</p>
+   * @public
    */
-  ElasticsearchVersion?: ElasticsearchVersionStatus;
+  ElasticsearchVersion?: ElasticsearchVersionStatus | undefined;
 
   /**
    * <p>Specifies the <code>ElasticsearchClusterConfig</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  ElasticsearchClusterConfig?: ElasticsearchClusterConfigStatus;
+  ElasticsearchClusterConfig?: ElasticsearchClusterConfigStatus | undefined;
 
   /**
    * <p>Specifies the <code>EBSOptions</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  EBSOptions?: EBSOptionsStatus;
+  EBSOptions?: EBSOptionsStatus | undefined;
 
   /**
    * <p>IAM access policy as a JSON-formatted string.</p>
+   * @public
    */
-  AccessPolicies?: AccessPoliciesStatus;
+  AccessPolicies?: AccessPoliciesStatus | undefined;
 
   /**
    * <p>Specifies the <code>SnapshotOptions</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  SnapshotOptions?: SnapshotOptionsStatus;
+  SnapshotOptions?: SnapshotOptionsStatus | undefined;
 
   /**
    * <p>The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.</p>
+   * @public
    */
-  VPCOptions?: VPCDerivedInfoStatus;
+  VPCOptions?: VPCDerivedInfoStatus | undefined;
 
   /**
    * <p>The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.</p>
+   * @public
    */
-  CognitoOptions?: CognitoOptionsStatus;
+  CognitoOptions?: CognitoOptionsStatus | undefined;
 
   /**
    * <p>Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  EncryptionAtRestOptions?: EncryptionAtRestOptionsStatus;
+  EncryptionAtRestOptions?: EncryptionAtRestOptionsStatus | undefined;
 
   /**
    * <p>Specifies the <code>NodeToNodeEncryptionOptions</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptionsStatus;
+  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptionsStatus | undefined;
 
   /**
    * <p>Specifies the <code>AdvancedOptions</code> for the domain.  See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuring Advanced Options</a> for more information.</p>
+   * @public
    */
-  AdvancedOptions?: AdvancedOptionsStatus;
+  AdvancedOptions?: AdvancedOptionsStatus | undefined;
 
   /**
    * <p>Log publishing options for the given domain.</p>
+   * @public
    */
-  LogPublishingOptions?: LogPublishingOptionsStatus;
+  LogPublishingOptions?: LogPublishingOptionsStatus | undefined;
 
   /**
    * <p>Specifies the <code>DomainEndpointOptions</code> for the Elasticsearch domain.</p>
+   * @public
    */
-  DomainEndpointOptions?: DomainEndpointOptionsStatus;
+  DomainEndpointOptions?: DomainEndpointOptionsStatus | undefined;
 
   /**
    * <p>Specifies <code>AdvancedSecurityOptions</code> for the domain. </p>
+   * @public
    */
-  AdvancedSecurityOptions?: AdvancedSecurityOptionsStatus;
+  AdvancedSecurityOptions?: AdvancedSecurityOptionsStatus | undefined;
 
   /**
    * <p>Specifies <code>AutoTuneOptions</code> for the domain. </p>
+   * @public
    */
-  AutoTuneOptions?: AutoTuneOptionsStatus;
+  AutoTuneOptions?: AutoTuneOptionsStatus | undefined;
 
   /**
    * <p>Specifies change details of the domain configuration change.</p>
+   * @public
    */
-  ChangeProgressDetails?: ChangeProgressDetails;
+  ChangeProgressDetails?: ChangeProgressDetails | undefined;
+
+  /**
+   * <p>Information about the domain properties that are currently being modified.</p>
+   * @public
+   */
+  ModifyingProperties?: ModifyingProperties[] | undefined;
+
+  /**
+   * <p>Specifies <code>DeploymentStrategyOptions</code> for the domain. </p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOptionsStatus | undefined;
+
+  /**
+   * <p>Specifies <code>AutomatedSnapshotPauseOptions</code> for the domain. </p>
+   * @public
+   */
+  AutomatedSnapshotPauseOptions?: AutomatedSnapshotPauseOptionsStatus | undefined;
+
+  /**
+   * <p>The use case configured for the domain.</p>
+   * @public
+   */
+  UseCase?: UseCaseStatus | undefined;
+
+  /**
+   * <p>The engine mode configured for the domain.</p>
+   * @public
+   */
+  EngineMode?: EngineModeStatus | undefined;
 }
 
 /**
  * <p>The result of a <code>DescribeElasticsearchDomainConfig</code> request. Contains the configuration information of the requested domain.</p>
+ * @public
  */
 export interface DescribeElasticsearchDomainConfigResponse {
   /**
    * <p>The configuration information of the domain requested in the <code>DescribeElasticsearchDomainConfig</code> request.</p>
+   * @public
    */
   DomainConfig: ElasticsearchDomainConfig | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>DescribeElasticsearchDomains</a></code> operation. By default, the API returns the status of all Elasticsearch domains.</p>
+ * @public
  */
 export interface DescribeElasticsearchDomainsRequest {
   /**
    * <p>The Elasticsearch domains for which you want information.</p>
+   * @public
    */
   DomainNames: string[] | undefined;
 }
 
 /**
  * <p>The result of a <code>DescribeElasticsearchDomains</code> request. Contains the status of the specified domains or all domains owned by the account.</p>
+ * @public
  */
 export interface DescribeElasticsearchDomainsResponse {
   /**
    * <p>The status of the domains requested in the <code>DescribeElasticsearchDomains</code> request.</p>
+   * @public
    */
   DomainStatusList: ElasticsearchDomainStatus[] | undefined;
 }
@@ -2334,6 +3038,7 @@ export interface DescribeElasticsearchDomainsResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DescribeElasticsearchInstanceTypeLimitsRequest {
   /**
@@ -2346,8 +3051,9 @@ export interface DescribeElasticsearchInstanceTypeLimitsRequest {
    *       </code>
    *       for existing domain.
    *     </p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 
   /**
    * <p>
@@ -2357,8 +3063,9 @@ export interface DescribeElasticsearchInstanceTypeLimitsRequest {
    *       </code>
    *       are needed.
    *     </p>
+   * @public
    */
-  InstanceType: ESPartitionInstanceType | string | undefined;
+  InstanceType: ESPartitionInstanceType | undefined;
 
   /**
    * <p>
@@ -2368,6 +3075,7 @@ export interface DescribeElasticsearchInstanceTypeLimitsRequest {
    *       </code>
    *       are needed.
    *     </p>
+   * @public
    */
   ElasticsearchVersion: string | undefined;
 }
@@ -2377,26 +3085,30 @@ export interface DescribeElasticsearchInstanceTypeLimitsRequest {
  *       InstanceCountLimits represents the limits on number of instances that be created in Amazon Elasticsearch for
  *       given InstanceType.
  *     </p>
+ * @public
  */
 export interface InstanceCountLimits {
   /**
    * <p>
    *       Minimum number of Instances that can be instantiated for given InstanceType.
    *     </p>
+   * @public
    */
-  MinimumInstanceCount?: number;
+  MinimumInstanceCount?: number | undefined;
 
   /**
    * <p>
    *       Maximum number of Instances that can be instantiated for given InstanceType.
    *     </p>
+   * @public
    */
-  MaximumInstanceCount?: number;
+  MaximumInstanceCount?: number | undefined;
 }
 
 /**
  * <p>InstanceLimits represents the list of instance related attributes that are available for given InstanceType.
  *     </p>
+ * @public
  */
 export interface InstanceLimits {
   /**
@@ -2404,13 +3116,15 @@ export interface InstanceLimits {
    *       InstanceCountLimits represents the limits on number of instances that be created in Amazon Elasticsearch for
    *       given InstanceType.
    *     </p>
+   * @public
    */
-  InstanceCountLimits?: InstanceCountLimits;
+  InstanceCountLimits?: InstanceCountLimits | undefined;
 }
 
 /**
  * <p>Limits that are applicable for given storage type.
  *     </p>
+ * @public
  */
 export interface StorageTypeLimit {
   /**
@@ -2436,8 +3150,9 @@ export interface StorageTypeLimit {
    *       Minimum amount of Throughput that is applicable for given storage type.It can be empty if it is not applicable.
    *     </ol>
    *   </p>
+   * @public
    */
-  LimitName?: string;
+  LimitName?: string | undefined;
 
   /**
    * <p>
@@ -2447,14 +3162,16 @@ export interface StorageTypeLimit {
    *       </code>
    *       .
    *     </p>
+   * @public
    */
-  LimitValues?: string[];
+  LimitValues?: string[] | undefined;
 }
 
 /**
  * <p>StorageTypes represents the list of storage related types and their attributes
  *       that are available for given InstanceType.
  *     </p>
+ * @public
  */
 export interface StorageType {
   /**
@@ -2466,8 +3183,9 @@ export interface StorageType {
    *     <li>ebs</li> Elastic block storage that would be attached to the given Instance
    *   </ol>
    *     </p>
+   * @public
    */
-  StorageTypeName?: string;
+  StorageTypeName?: string | undefined;
 
   /**
    * <p>
@@ -2483,14 +3201,16 @@ export interface StorageType {
    *       </ol>
    *       Refer <code><a>VolumeType</a></code> for more information regarding above EBS storage options.
    *     </p>
+   * @public
    */
-  StorageSubTypeName?: string;
+  StorageSubTypeName?: string | undefined;
 
   /**
    * <p>List of limits that are applicable for given storage type.
    *     </p>
+   * @public
    */
-  StorageTypeLimits?: StorageTypeLimit[];
+  StorageTypeLimits?: StorageTypeLimit[] | undefined;
 }
 
 /**
@@ -2509,20 +3229,23 @@ export interface StorageType {
  *         <a>AdditionalLimits</a>
  *       </code>
  *     </p>
+ * @public
  */
 export interface Limits {
   /**
    * <p>StorageType represents the list of storage related types and attributes
    *       that are available for given InstanceType.
    *     </p>
+   * @public
    */
-  StorageTypes?: StorageType[];
+  StorageTypes?: StorageType[] | undefined;
 
   /**
    * <p>InstanceLimits represents the list of instance related attributes that are available for given InstanceType.
    *     </p>
+   * @public
    */
-  InstanceLimits?: InstanceLimits;
+  InstanceLimits?: InstanceLimits | undefined;
 
   /**
    * <p>
@@ -2532,8 +3255,9 @@ export interface Limits {
    *       </code>
    *       .
    *     </p>
+   * @public
    */
-  AdditionalLimits?: AdditionalLimit[];
+  AdditionalLimits?: AdditionalLimit[] | undefined;
 }
 
 /**
@@ -2544,6 +3268,7 @@ export interface Limits {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DescribeElasticsearchInstanceTypeLimitsResponse {
   /**
@@ -2557,8 +3282,9 @@ export interface DescribeElasticsearchInstanceTypeLimitsResponse {
    *         <li>ultra_warm: If the given InstanceType is used as warm node</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  LimitsByRole?: Record<string, Limits>;
+  LimitsByRole?: Record<string, Limits> | undefined;
 }
 
 /**
@@ -2568,25 +3294,29 @@ export interface DescribeElasticsearchInstanceTypeLimitsResponse {
  *       A cross-cluster search connection must match at least one of the specified values for it to be
  *       returned from an operation.
  *     </p>
+ * @public
  */
 export interface Filter {
   /**
    * <p>
    *       Specifies the name of the filter.
    *     </p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>
    *       Contains one or more values for the filter.
    *     </p>
+   * @public
    */
-  Values?: string[];
+  Values?: string[] | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>DescribeInboundCrossClusterSearchConnections</a></code> operation.</p>
+ * @public
  */
 export interface DescribeInboundCrossClusterSearchConnectionsRequest {
   /**
@@ -2601,57 +3331,45 @@ export interface DescribeInboundCrossClusterSearchConnectionsRequest {
    *         <li>destination-domain-info.domain-name</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p> NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>The result of a <code><a>DescribeInboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.</p>
+ * @public
  */
 export interface DescribeInboundCrossClusterSearchConnectionsResponse {
   /**
    * <p>Consists of list of <code><a>InboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.</p>
+   * @public
    */
-  CrossClusterSearchConnections?: InboundCrossClusterSearchConnection[];
+  CrossClusterSearchConnections?: InboundCrossClusterSearchConnection[] | undefined;
 
   /**
    * <p>If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results.
    *     </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-/**
- * <p>The request processing has failed because of invalid pagination token provided by customer. Returns an HTTP status code of 400. </p>
- */
-export class InvalidPaginationTokenException extends __BaseException {
-  readonly name: "InvalidPaginationTokenException" = "InvalidPaginationTokenException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidPaginationTokenException, __BaseException>) {
-    super({
-      name: "InvalidPaginationTokenException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidPaginationTokenException.prototype);
-  }
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> operation.</p>
+ * @public
  */
 export interface DescribeOutboundCrossClusterSearchConnectionsRequest {
   /**
@@ -2666,55 +3384,58 @@ export interface DescribeOutboundCrossClusterSearchConnectionsRequest {
    *         <li>source-domain-info.domain-name</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  Filters?: Filter[];
+  Filters?: Filter[] | undefined;
 
   /**
    * <p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p> NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>The result of a <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.</p>
+ * @public
  */
 export interface DescribeOutboundCrossClusterSearchConnectionsResponse {
   /**
    * <p>Consists of list of <code><a>OutboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.</p>
+   * @public
    */
-  CrossClusterSearchConnections?: OutboundCrossClusterSearchConnection[];
+  CrossClusterSearchConnections?: OutboundCrossClusterSearchConnection[] | undefined;
 
   /**
    * <p>If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results.
    *     </p>
+   * @public
    */
-  NextToken?: string;
-}
-
-export enum DescribePackagesFilterName {
-  PackageID = "PackageID",
-  PackageName = "PackageName",
-  PackageStatus = "PackageStatus",
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Filter to apply in <code>DescribePackage</code> response.</p>
+ * @public
  */
 export interface DescribePackagesFilter {
   /**
    * <p>Any field from <code>PackageDetails</code>.</p>
+   * @public
    */
-  Name?: DescribePackagesFilterName | string;
+  Name?: DescribePackagesFilterName | undefined;
 
   /**
-   * <p>A list of values for the specified field.</p>
+   * <p>A non-empty list of values for the specified field.</p>
+   * @public
    */
-  Value?: string[];
+  Value?: string[] | undefined;
 }
 
 /**
@@ -2725,22 +3446,26 @@ export interface DescribePackagesFilter {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DescribePackagesRequest {
   /**
    * <p>Only returns packages that match the <code>DescribePackagesFilterList</code> values.</p>
+   * @public
    */
-  Filters?: DescribePackagesFilter[];
+  Filters?: DescribePackagesFilter[] | undefined;
 
   /**
    * <p>Limits results to a maximum number of packages.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -2751,218 +3476,314 @@ export interface DescribePackagesRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DescribePackagesResponse {
   /**
    * <p>List of <code>PackageDetails</code> objects.</p>
+   * @public
    */
-  PackageDetailsList?: PackageDetails[];
+  PackageDetailsList?: PackageDetails[] | undefined;
 
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Container for parameters to <code>DescribeReservedElasticsearchInstanceOfferings</code></p>
+ * @public
  */
 export interface DescribeReservedElasticsearchInstanceOfferingsRequest {
   /**
    * <p>The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.</p>
+   * @public
    */
-  ReservedElasticsearchInstanceOfferingId?: string;
+  ReservedElasticsearchInstanceOfferingId?: string | undefined;
 
   /**
    * <p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>NextToken should be sent in case if earlier API call produced result
    * 		containing NextToken. It is used for pagination.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
-
-export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT";
 
 /**
  * <p>Contains the specific price and frequency of a recurring charges for a reserved Elasticsearch instance, or for a reserved Elasticsearch instance offering.</p>
+ * @public
  */
 export interface RecurringCharge {
   /**
    * <p>The monetary amount of the recurring charge.</p>
+   * @public
    */
-  RecurringChargeAmount?: number;
+  RecurringChargeAmount?: number | undefined;
 
   /**
    * <p>The frequency of the recurring charge.</p>
+   * @public
    */
-  RecurringChargeFrequency?: string;
+  RecurringChargeFrequency?: string | undefined;
 }
 
 /**
  * <p>Details of a reserved Elasticsearch instance offering.</p>
+ * @public
  */
 export interface ReservedElasticsearchInstanceOffering {
   /**
    * <p>The Elasticsearch reserved instance offering identifier.</p>
+   * @public
    */
-  ReservedElasticsearchInstanceOfferingId?: string;
+  ReservedElasticsearchInstanceOfferingId?: string | undefined;
 
   /**
    * <p>The Elasticsearch instance type offered by the reserved instance offering.</p>
+   * @public
    */
-  ElasticsearchInstanceType?: ESPartitionInstanceType | string;
+  ElasticsearchInstanceType?: ESPartitionInstanceType | undefined;
 
   /**
    * <p>The duration, in seconds, for which the offering will reserve the Elasticsearch instance.</p>
+   * @public
    */
-  Duration?: number;
+  Duration?: number | undefined;
 
   /**
    * <p>The upfront fixed charge you will pay to purchase the specific reserved Elasticsearch instance offering. </p>
+   * @public
    */
-  FixedPrice?: number;
+  FixedPrice?: number | undefined;
 
   /**
    * <p>The rate you are charged for each hour the domain that is using the offering is running.</p>
+   * @public
    */
-  UsagePrice?: number;
+  UsagePrice?: number | undefined;
 
   /**
    * <p>The currency code for the reserved Elasticsearch instance offering.</p>
+   * @public
    */
-  CurrencyCode?: string;
+  CurrencyCode?: string | undefined;
 
   /**
    * <p>Payment option for the reserved Elasticsearch instance offering</p>
+   * @public
    */
-  PaymentOption?: ReservedElasticsearchInstancePaymentOption | string;
+  PaymentOption?: ReservedElasticsearchInstancePaymentOption | undefined;
 
   /**
    * <p>The charge to your account regardless of whether you are creating any domains using the instance offering.</p>
+   * @public
    */
-  RecurringCharges?: RecurringCharge[];
+  RecurringCharges?: RecurringCharge[] | undefined;
 }
 
 /**
  * <p>Container for results from <code>DescribeReservedElasticsearchInstanceOfferings</code></p>
+ * @public
  */
 export interface DescribeReservedElasticsearchInstanceOfferingsResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>List of reserved Elasticsearch instance offerings</p>
+   * @public
    */
-  ReservedElasticsearchInstanceOfferings?: ReservedElasticsearchInstanceOffering[];
+  ReservedElasticsearchInstanceOfferings?: ReservedElasticsearchInstanceOffering[] | undefined;
 }
 
 /**
  * <p>Container for parameters to <code>DescribeReservedElasticsearchInstances</code></p>
+ * @public
  */
 export interface DescribeReservedElasticsearchInstancesRequest {
   /**
    * <p>The reserved instance identifier filter value. Use this parameter to show only the reservation that matches the specified reserved Elasticsearch instance ID.</p>
+   * @public
    */
-  ReservedElasticsearchInstanceId?: string;
+  ReservedElasticsearchInstanceId?: string | undefined;
 
   /**
    * <p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>NextToken should be sent in case if earlier API call produced result
    * 		containing NextToken. It is used for pagination.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Details of a reserved Elasticsearch instance.</p>
+ * @public
  */
 export interface ReservedElasticsearchInstance {
   /**
    * <p>The customer-specified identifier to track this reservation.</p>
+   * @public
    */
-  ReservationName?: string;
+  ReservationName?: string | undefined;
 
   /**
    * <p>The unique identifier for the reservation.</p>
+   * @public
    */
-  ReservedElasticsearchInstanceId?: string;
+  ReservedElasticsearchInstanceId?: string | undefined;
 
   /**
    * <p>The offering identifier.</p>
+   * @public
    */
-  ReservedElasticsearchInstanceOfferingId?: string;
+  ReservedElasticsearchInstanceOfferingId?: string | undefined;
 
   /**
    * <p>The Elasticsearch instance type offered by the reserved instance offering.</p>
+   * @public
    */
-  ElasticsearchInstanceType?: ESPartitionInstanceType | string;
+  ElasticsearchInstanceType?: ESPartitionInstanceType | undefined;
 
   /**
    * <p>The time the reservation started.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The duration, in seconds, for which the Elasticsearch instance is reserved.</p>
+   * @public
    */
-  Duration?: number;
+  Duration?: number | undefined;
 
   /**
    * <p>The upfront fixed charge you will paid to purchase the specific reserved Elasticsearch instance offering. </p>
+   * @public
    */
-  FixedPrice?: number;
+  FixedPrice?: number | undefined;
 
   /**
    * <p>The rate you are charged for each hour for the domain that is using this reserved instance.</p>
+   * @public
    */
-  UsagePrice?: number;
+  UsagePrice?: number | undefined;
 
   /**
    * <p>The currency code for the reserved Elasticsearch instance offering.</p>
+   * @public
    */
-  CurrencyCode?: string;
+  CurrencyCode?: string | undefined;
 
   /**
    * <p>The number of Elasticsearch instances that have been reserved.</p>
+   * @public
    */
-  ElasticsearchInstanceCount?: number;
+  ElasticsearchInstanceCount?: number | undefined;
 
   /**
    * <p>The state of the reserved Elasticsearch instance.</p>
+   * @public
    */
-  State?: string;
+  State?: string | undefined;
 
   /**
    * <p>The payment option as defined in the reserved Elasticsearch instance offering.</p>
+   * @public
    */
-  PaymentOption?: ReservedElasticsearchInstancePaymentOption | string;
+  PaymentOption?: ReservedElasticsearchInstancePaymentOption | undefined;
 
   /**
    * <p>The charge to your account regardless of whether you are creating any domains using the instance offering.</p>
+   * @public
    */
-  RecurringCharges?: RecurringCharge[];
+  RecurringCharges?: RecurringCharge[] | undefined;
 }
 
 /**
  * <p>Container for results from <code>DescribeReservedElasticsearchInstances</code></p>
+ * @public
  */
 export interface DescribeReservedElasticsearchInstancesResponse {
   /**
    * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>List of reserved Elasticsearch instances.</p>
+   * @public
    */
-  ReservedElasticsearchInstances?: ReservedElasticsearchInstance[];
+  ReservedElasticsearchInstances?: ReservedElasticsearchInstance[] | undefined;
+}
+
+/**
+ * <p>Container for request parameters to the <code><a>DescribeVpcEndpoints</a></code> operation. Specifies the list of VPC endpoints to be described.</p>
+ * @public
+ */
+export interface DescribeVpcEndpointsRequest {
+  /**
+   * <p>The unique identifiers of the endpoints to get information about.</p>
+   * @public
+   */
+  VpcEndpointIds: string[] | undefined;
+}
+
+/**
+ * <p>Error information when attempting to describe an Amazon OpenSearch Service-managed VPC
+ *    endpoint.</p>
+ * @public
+ */
+export interface VpcEndpointError {
+  /**
+   * <p>The unique identifier of the endpoint. </p>
+   * @public
+   */
+  VpcEndpointId?: string | undefined;
+
+  /**
+   * <p>The code associated with the error.</p>
+   * @public
+   */
+  ErrorCode?: VpcEndpointErrorCode | undefined;
+
+  /**
+   * <p>A message describing the error.</p>
+   * @public
+   */
+  ErrorMessage?: string | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>DescribeVpcEndpoints</a></code> operation. Returns a list containing configuration details and
+ *           status of the VPC Endpoints as well as a list containing error responses of the endpoints that could not be described</p>
+ * @public
+ */
+export interface DescribeVpcEndpointsResponse {
+  /**
+   * <p>Information about each requested VPC endpoint.</p>
+   * @public
+   */
+  VpcEndpoints: VpcEndpoint[] | undefined;
+
+  /**
+   * <p>Any errors associated with the request.</p>
+   * @public
+   */
+  VpcEndpointErrors: VpcEndpointError[] | undefined;
 }
 
 /**
@@ -2973,15 +3794,18 @@ export interface DescribeReservedElasticsearchInstancesResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DissociatePackageRequest {
   /**
    * <p>Internal ID of the package that you want to associate with a domain. Use <code>DescribePackages</code> to find this value.</p>
+   * @public
    */
   PackageID: string | undefined;
 
   /**
    * <p>Name of the domain that you want to associate the package with.</p>
+   * @public
    */
   DomainName: string | undefined;
 }
@@ -2994,12 +3818,14 @@ export interface DissociatePackageRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface DissociatePackageResponse {
   /**
    * <p><code>DomainPackageDetails</code></p>
+   * @public
    */
-  DomainPackageDetails?: DomainPackageDetails;
+  DomainPackageDetails?: DomainPackageDetails | undefined;
 }
 
 /**
@@ -3010,12 +3836,14 @@ export interface DissociatePackageResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetCompatibleElasticsearchVersionsRequest {
   /**
    * <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 }
 
 /**
@@ -3030,18 +3858,21 @@ export interface GetCompatibleElasticsearchVersionsRequest {
  *       </code>
  *       s to which the domain can be upgraded.
  *     </p>
+ * @public
  */
 export interface CompatibleVersionsMap {
   /**
    * <p>The current version of Elasticsearch on which a domain is.</p>
+   * @public
    */
-  SourceVersion?: string;
+  SourceVersion?: string | undefined;
 
   /**
    * <p>List of supported elastic search versions.
    *     </p>
+   * @public
    */
-  TargetVersions?: string[];
+  TargetVersions?: string[] | undefined;
 }
 
 /**
@@ -3052,6 +3883,7 @@ export interface CompatibleVersionsMap {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetCompatibleElasticsearchVersionsResponse {
   /**
@@ -3062,8 +3894,9 @@ export interface GetCompatibleElasticsearchVersionsResponse {
    *       </code>
    *       operation.
    *     </p>
+   * @public
    */
-  CompatibleElasticsearchVersions?: CompatibleVersionsMap[];
+  CompatibleElasticsearchVersions?: CompatibleVersionsMap[] | undefined;
 }
 
 /**
@@ -3074,42 +3907,50 @@ export interface GetCompatibleElasticsearchVersionsResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetPackageVersionHistoryRequest {
   /**
    * <p>Returns an audit history of versions of the package.</p>
+   * @public
    */
   PackageID: string | undefined;
 
   /**
    * <p>Limits results to a maximum number of versions.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Details of a package version.</p>
+ * @public
  */
 export interface PackageVersionHistory {
   /**
    * <p>Version of the package.</p>
+   * @public
    */
-  PackageVersion?: string;
+  PackageVersion?: string | undefined;
 
   /**
    * <p>A message associated with the version.</p>
+   * @public
    */
-  CommitMessage?: string;
+  CommitMessage?: string | undefined;
 
   /**
    * <p>Timestamp which tells creation time of the package version.</p>
+   * @public
    */
-  CreatedAt?: Date;
+  CreatedAt?: Date | undefined;
 }
 
 /**
@@ -3120,15 +3961,17 @@ export interface PackageVersionHistory {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetPackageVersionHistoryResponse {
-  PackageID?: string;
+  PackageID?: string | undefined;
   /**
    * <p>List of <code>PackageVersionHistory</code> objects.</p>
+   * @public
    */
-  PackageVersionHistoryList?: PackageVersionHistory[];
+  PackageVersionHistoryList?: PackageVersionHistory[] | undefined;
 
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3139,10 +3982,12 @@ export interface GetPackageVersionHistoryResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetUpgradeHistoryRequest {
   /**
    * <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
   DomainName: string | undefined;
 
@@ -3150,24 +3995,23 @@ export interface GetUpgradeHistoryRequest {
    * <p>
    *       Set this value to limit the number of results returned.
    *     </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>
    *       Paginated APIs accepts NextToken input to returns next page results and provides
    *       a NextToken output in the response which can be used by the client to retrieve more results.
    *     </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
-
-export type UpgradeStep = "PRE_UPGRADE_CHECK" | "SNAPSHOT" | "UPGRADE";
-
-export type UpgradeStatus = "FAILED" | "IN_PROGRESS" | "SUCCEEDED" | "SUCCEEDED_WITH_ISSUES";
 
 /**
  * <p>Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.</p>
+ * @public
  */
 export interface UpgradeStepItem {
   /**
@@ -3179,8 +4023,9 @@ export interface UpgradeStepItem {
    *         <li>Upgrade</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  UpgradeStep?: UpgradeStep | string;
+  UpgradeStep?: UpgradeStep | undefined;
 
   /**
    * <p>
@@ -3192,33 +4037,39 @@ export interface UpgradeStepItem {
    *         <li>Failed</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  UpgradeStepStatus?: UpgradeStatus | string;
+  UpgradeStepStatus?: UpgradeStatus | undefined;
 
   /**
    * <p>A list of strings containing detailed information about the errors encountered in a particular step.</p>
+   * @public
    */
-  Issues?: string[];
+  Issues?: string[] | undefined;
 
   /**
    * <p>The Floating point value representing progress percentage of a particular step.</p>
+   * @public
    */
-  ProgressPercent?: number;
+  ProgressPercent?: number | undefined;
 }
 
 /**
  * <p>History of the last 10 Upgrades and Upgrade Eligibility Checks.</p>
+ * @public
  */
 export interface UpgradeHistory {
   /**
    * <p>A string that describes the update briefly</p>
+   * @public
    */
-  UpgradeName?: string;
+  UpgradeName?: string | undefined;
 
   /**
    * <p>UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ" format.</p>
+   * @public
    */
-  StartTimestamp?: Date;
+  StartTimestamp?: Date | undefined;
 
   /**
    * <p>
@@ -3230,8 +4081,9 @@ export interface UpgradeHistory {
    *         <li>Failed</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  UpgradeStatus?: UpgradeStatus | string;
+  UpgradeStatus?: UpgradeStatus | undefined;
 
   /**
    * <p>
@@ -3241,8 +4093,9 @@ export interface UpgradeHistory {
    *       </code>
    *       s representing information about each step performed as pard of a specific Upgrade or Upgrade Eligibility Check.
    *     </p>
+   * @public
    */
-  StepsList?: UpgradeStepItem[];
+  StepsList?: UpgradeStepItem[] | undefined;
 }
 
 /**
@@ -3253,6 +4106,7 @@ export interface UpgradeHistory {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetUpgradeHistoryResponse {
   /**
@@ -3267,13 +4121,15 @@ export interface GetUpgradeHistoryResponse {
    *       </code>
    *       object.
    *     </p>
+   * @public
    */
-  UpgradeHistories?: UpgradeHistory[];
+  UpgradeHistories?: UpgradeHistory[] | undefined;
 
   /**
    * <p>Pagination token that needs to be supplied to the next call to get the next page of results</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3284,10 +4140,12 @@ export interface GetUpgradeHistoryResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetUpgradeStatusRequest {
   /**
    * <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
   DomainName: string | undefined;
 }
@@ -3300,6 +4158,7 @@ export interface GetUpgradeStatusRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface GetUpgradeStatusResponse {
   /**
@@ -3311,8 +4170,9 @@ export interface GetUpgradeStatusResponse {
    *         <li>Upgrade</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  UpgradeStep?: UpgradeStep | string;
+  UpgradeStep?: UpgradeStep | undefined;
 
   /**
    * <p>
@@ -3328,50 +4188,56 @@ export interface GetUpgradeStatusResponse {
    *         <li>Failed</li>
    *       </ul>
    *     </p>
+   * @public
    */
-  StepStatus?: UpgradeStatus | string;
+  StepStatus?: UpgradeStatus | undefined;
 
   /**
    * <p>A string that describes the update briefly</p>
+   * @public
    */
-  UpgradeName?: string;
-}
-
-export enum EngineType {
-  Elasticsearch = "Elasticsearch",
-  OpenSearch = "OpenSearch",
+  UpgradeName?: string | undefined;
 }
 
 /**
  * <p> Container for the parameters to the <code><a>ListDomainNames</a></code> operation.</p>
+ * @public
  */
 export interface ListDomainNamesRequest {
   /**
    * <p> Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. </p>
+   * @public
    */
-  EngineType?: EngineType | string;
+  EngineType?: EngineType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DomainInfo {
   /**
    * <p> Specifies the <code>DomainName</code>.</p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 
   /**
    * <p> Specifies the <code>EngineType</code> of the domain.</p>
+   * @public
    */
-  EngineType?: EngineType | string;
+  EngineType?: EngineType | undefined;
 }
 
 /**
  * <p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.</p>
+ * @public
  */
 export interface ListDomainNamesResponse {
   /**
    * <p>List of domain names and respective engine types.</p>
+   * @public
    */
-  DomainNames?: DomainInfo[];
+  DomainNames?: DomainInfo[] | undefined;
 }
 
 /**
@@ -3382,22 +4248,26 @@ export interface ListDomainNamesResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface ListDomainsForPackageRequest {
   /**
    * <p>The package for which to list domains.</p>
+   * @public
    */
   PackageID: string | undefined;
 
   /**
    * <p>Limits results to a maximum number of domains.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3408,14 +4278,16 @@ export interface ListDomainsForPackageRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface ListDomainsForPackageResponse {
   /**
    * <p>List of <code>DomainPackageDetails</code> objects.</p>
+   * @public
    */
-  DomainPackageDetailsList?: DomainPackageDetails[];
+  DomainPackageDetailsList?: DomainPackageDetails[] | undefined;
 
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3426,12 +4298,14 @@ export interface ListDomainsForPackageResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface ListElasticsearchInstanceTypesRequest {
   /**
    * <p>Version of Elasticsearch for which list of supported elasticsearch
    *       instance types are needed.
    *     </p>
+   * @public
    */
   ElasticsearchVersion: string | undefined;
 
@@ -3439,23 +4313,26 @@ export interface ListElasticsearchInstanceTypesRequest {
    * <p>DomainName represents the name of the Domain that we are trying to modify. This should be present only if we are
    *       querying for list of available Elasticsearch instance types when modifying existing domain.
    *     </p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 
   /**
    * <p>
    *     Set this value to limit the number of results returned.
    *     Value provided must be greater than 30 else it wont be honored.
    *   </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>NextToken should be sent in case if earlier API call produced result
    *       containing NextToken. It is used for pagination.
    *     </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3466,6 +4343,7 @@ export interface ListElasticsearchInstanceTypesRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface ListElasticsearchInstanceTypesResponse {
   /**
@@ -3476,16 +4354,18 @@ export interface ListElasticsearchInstanceTypesResponse {
    *         <a>ElasticsearchVersion</a>
    *       </code>
    *     </p>
+   * @public
    */
-  ElasticsearchInstanceTypes?: (ESPartitionInstanceType | string)[];
+  ElasticsearchInstanceTypes?: ESPartitionInstanceType[] | undefined;
 
   /**
    * <p>In case if there are more results available NextToken would be
    *       present, make further request to the same API with
    *       received NextToken to paginate remaining results.
    *     </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3512,6 +4392,7 @@ export interface ListElasticsearchInstanceTypesResponse {
  *         not contain a NextToken, then there are no more results to retrieve.
  *       </p>
  *     </p>
+ * @public
  */
 export interface ListElasticsearchVersionsRequest {
   /**
@@ -3519,16 +4400,18 @@ export interface ListElasticsearchVersionsRequest {
    *       Set this value to limit the number of results returned.
    *       Value provided must be greater than 10 else it wont be honored.
    *     </p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>
    *       Paginated APIs accepts NextToken input to returns next page results and provides
    *       a NextToken output in the response which can be used by the client to retrieve more results.
    *     </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3539,21 +4422,24 @@ export interface ListElasticsearchVersionsRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface ListElasticsearchVersionsResponse {
   /**
    * <p>List of supported elastic search versions.
    *     </p>
+   * @public
    */
-  ElasticsearchVersions?: string[];
+  ElasticsearchVersions?: string[] | undefined;
 
   /**
    * <p>
    *       Paginated APIs accepts NextToken input to returns next page results and provides
    *       a NextToken output in the response which can be used by the client to retrieve more results.
    *     </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3564,22 +4450,26 @@ export interface ListElasticsearchVersionsResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface ListPackagesForDomainRequest {
   /**
    * <p>The name of the domain for which you want to list associated packages.</p>
+   * @public
    */
   DomainName: string | undefined;
 
   /**
    * <p>Limits results to a maximum number of packages.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
@@ -3590,203 +4480,563 @@ export interface ListPackagesForDomainRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface ListPackagesForDomainResponse {
   /**
    * <p>List of <code>DomainPackageDetails</code> objects.</p>
+   * @public
    */
-  DomainPackageDetailsList?: DomainPackageDetails[];
+  DomainPackageDetailsList?: DomainPackageDetails[] | undefined;
 
   /**
    * <p>Pagination token that needs to be supplied to the next call to get the next page of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>ListTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain to which the tags are attached that you want to view are attached.</p>
+ * @public
  */
 export interface ListTagsRequest {
   /**
    * <p> Specify the <code>ARN</code> for the Elasticsearch domain to which the tags are attached that you want to view.</p>
+   * @public
    */
   ARN: string | undefined;
 }
 
 /**
  * <p>The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.</p>
+ * @public
  */
 export interface ListTagsResponse {
   /**
    * <p> List of <code>Tag</code> for the requested Elasticsearch domain.</p>
+   * @public
    */
-  TagList?: Tag[];
+  TagList?: Tag[] | undefined;
+}
+
+/**
+ * <p>Retrieves information about each principal that is allowed to access a
+ *    given Amazon OpenSearch Service domain through the use of an interface VPC endpoint</p>
+ * @public
+ */
+export interface ListVpcEndpointAccessRequest {
+  /**
+   * <p>The name of the OpenSearch Service domain to retrieve access information for.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>ListVpcEndpointAccess</a></code> operation.
+ *           Returns a list of accounts id and account type authorized to manage VPC endpoints.</p>
+ * @public
+ */
+export interface ListVpcEndpointAccessResponse {
+  /**
+   * <p>List of <code>AuthorizedPrincipal</code> describing the details of the permissions to manage VPC endpoints against the specified domain.</p>
+   * @public
+   */
+  AuthorizedPrincipalList: AuthorizedPrincipal[] | undefined;
+
+  /**
+   * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
+   */
+  NextToken: string | undefined;
+}
+
+/**
+ * <p>Container for request parameters to the <code><a>ListVpcEndpoints</a></code> operation.</p>
+ * @public
+ */
+export interface ListVpcEndpointsRequest {
+  /**
+   * <p>Identifier to allow retrieval of paginated results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>ListVpcEndpoints</a></code> operation. Returns a list containing summarized details of the VPC endpoints.</p>
+ * @public
+ */
+export interface ListVpcEndpointsResponse {
+  /**
+   * <p>Information about each endpoint.</p>
+   * @public
+   */
+  VpcEndpointSummaryList: VpcEndpointSummary[] | undefined;
+
+  /**
+   * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
+   */
+  NextToken: string | undefined;
+}
+
+/**
+ * <p>Container for request parameters to the <code><a>ListVpcEndpointsForDomain</a></code> operation. Specifies the domain whose VPC endpoints will be listed.</p>
+ * @public
+ */
+export interface ListVpcEndpointsForDomainRequest {
+  /**
+   * <p>Name of the ElasticSearch domain whose VPC endpoints are to be listed.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>Provides an identifier to allow retrieval of paginated results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>ListVpcEndpointsForDomain</a></code> operation. Returns a list containing summarized details of the VPC endpoints.</p>
+ * @public
+ */
+export interface ListVpcEndpointsForDomainResponse {
+  /**
+   * <p>Provides list of <code>VpcEndpointSummary</code> summarizing details of the VPC endpoints.</p>
+   * @public
+   */
+  VpcEndpointSummaryList: VpcEndpointSummary[] | undefined;
+
+  /**
+   * <p>Information about each endpoint associated with the domain.</p>
+   * @public
+   */
+  NextToken: string | undefined;
 }
 
 /**
  * <p>Container for parameters to <code>PurchaseReservedElasticsearchInstanceOffering</code></p>
+ * @public
  */
 export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
   /**
    * <p>The ID of the reserved Elasticsearch instance offering to purchase.</p>
+   * @public
    */
   ReservedElasticsearchInstanceOfferingId: string | undefined;
 
   /**
    * <p>A customer-specified identifier to track this reservation.</p>
+   * @public
    */
   ReservationName: string | undefined;
 
   /**
    * <p>The number of Elasticsearch instances to reserve.</p>
+   * @public
    */
-  InstanceCount?: number;
+  InstanceCount?: number | undefined;
 }
 
 /**
  * <p>Represents the output of a <code>PurchaseReservedElasticsearchInstanceOffering</code> operation.</p>
+ * @public
  */
 export interface PurchaseReservedElasticsearchInstanceOfferingResponse {
   /**
    * <p>Details of the reserved Elasticsearch instance which was purchased.</p>
+   * @public
    */
-  ReservedElasticsearchInstanceId?: string;
+  ReservedElasticsearchInstanceId?: string | undefined;
 
   /**
    * <p>The customer-specified identifier used to track this reservation.</p>
+   * @public
    */
-  ReservationName?: string;
+  ReservationName?: string | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>RejectInboundCrossClusterSearchConnection</a></code> operation.</p>
+ * @public
  */
 export interface RejectInboundCrossClusterSearchConnectionRequest {
   /**
    * <p>The id of the inbound connection that you want to reject.</p>
+   * @public
    */
   CrossClusterSearchConnectionId: string | undefined;
 }
 
 /**
  * <p>The result of a <code><a>RejectInboundCrossClusterSearchConnection</a></code> operation. Contains details of rejected inbound connection.</p>
+ * @public
  */
 export interface RejectInboundCrossClusterSearchConnectionResponse {
   /**
    * <p>Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of rejected inbound connection. </p>
+   * @public
    */
-  CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  CrossClusterSearchConnection?: InboundCrossClusterSearchConnection | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.</p>
+ * @public
  */
 export interface RemoveTagsRequest {
   /**
    * <p>Specifies the <code>ARN</code> for the Elasticsearch domain from which you want to delete the specified tags.</p>
+   * @public
    */
   ARN: string | undefined;
 
   /**
    * <p>Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
 /**
+ * <p>Revokes access to an Amazon OpenSearch Service domain that was provided through an interface
+ *    VPC endpoint.</p>
+ * @public
+ */
+export interface RevokeVpcEndpointAccessRequest {
+  /**
+   * <p>The name of the OpenSearch Service domain.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The account ID to revoke access from.</p>
+   * @public
+   */
+  Account: string | undefined;
+}
+
+/**
+ * <p>Container for response parameters to the <code><a>RevokeVpcEndpointAccess</a></code> operation. The response body for this operation is empty.</p>
+ * @public
+ */
+export interface RevokeVpcEndpointAccessResponse {}
+
+/**
  * <p>Container for the parameters to the <code><a>StartElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to schedule a service software update on.</p>
+ * @public
  */
 export interface StartElasticsearchServiceSoftwareUpdateRequest {
   /**
    * <p>The name of the domain that you want to update to the latest service software.</p>
+   * @public
    */
   DomainName: string | undefined;
 }
 
 /**
  * <p>The result of a <code>StartElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.</p>
+ * @public
  */
 export interface StartElasticsearchServiceSoftwareUpdateResponse {
   /**
    * <p>The current status of the Elasticsearch service software update.</p>
+   * @public
    */
-  ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  ServiceSoftwareOptions?: ServiceSoftwareOptions | undefined;
+}
+
+/**
+ * <p>The cutover to perform for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface CutoverRequestOptions {
+  /**
+   * <p>The cluster to cut over to. <code>ClonedCluster</code> makes the cloned cluster serve the domain. <code>PrimaryCluster</code> keeps the primary cluster and ends the upgrade.</p>
+   * @public
+   */
+  Target: CutoverTarget | undefined;
+}
+
+/**
+ * <p>Controls how long the cluster that you cut over from is kept after cutover completes. Specify exactly one of <code>RetentionInHours</code> or <code>RetentionAction</code>.</p>
+ * @public
+ */
+export type RetentionOptions =
+  | RetentionOptions.RetentionActionMember
+  | RetentionOptions.RetentionInHoursMember
+  | RetentionOptions.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace RetentionOptions {
+  /**
+   * <p>The number of hours to keep the cluster that you cut over from. The retention period starts when cutover completes. The minimum is 1 hour. In an <code>UpdateClone</code> response after cutover completes, this value is the number of hours remaining in the retention period, rounded up.</p>
+   * @public
+   */
+  export interface RetentionInHoursMember {
+    RetentionInHours: number;
+    RetentionAction?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Ends the retention period now. Valid only after cutover completes.</p>
+   * @public
+   */
+  export interface RetentionActionMember {
+    RetentionInHours?: never;
+    RetentionAction: RetentionAction;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    RetentionInHours?: never;
+    RetentionAction?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    RetentionInHours: (value: number) => T;
+    RetentionAction: (value: RetentionAction) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>The traffic shift to perform for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface TrafficSplitRequestOptions {
+  /**
+   * <p>The traffic shifting strategy. The only valid value is <code>ShiftReadTrafficPercent</code>.</p>
+   * @public
+   */
+  Strategy: TrafficStrategy | undefined;
+
+  /**
+   * <p>The percentage of search traffic, from 0 to 100, to send to the cloned cluster. The rest goes to the primary cluster.</p>
+   * @public
+   */
+  CloneReadTrafficPercent: number | undefined;
+}
+
+/**
+ * <p>Container for the request parameters to the <code>UpdateClone</code> operation.</p>
+ * @public
+ */
+export interface UpdateCloneRequest {
+  /**
+   * <p>The name of the domain that has a cloned blue/green upgrade in progress.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>Shifts a percentage of search traffic from the primary cluster to the cloned cluster.</p>
+   * @public
+   */
+  TrafficSplitOptions?: TrafficSplitRequestOptions | undefined;
+
+  /**
+   * <p>Cuts the domain over to the cloned cluster or back to the primary cluster.</p>
+   * @public
+   */
+  CutoverOptions?: CutoverRequestOptions | undefined;
+
+  /**
+   * <p>Changes the retention period, or ends it after cutover completes.</p>
+   * @public
+   */
+  RetentionOptions?: RetentionOptions | undefined;
+}
+
+/**
+ * <p>The cutover target and status for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface CutoverOptions {
+  /**
+   * <p>The cluster that the domain is cutting over to.</p>
+   * @public
+   */
+  Target: CutoverTarget | undefined;
+
+  /**
+   * <p>The status of the cutover.</p>
+   * @public
+   */
+  Status: CutoverStatus | undefined;
+}
+
+/**
+ * <p>The traffic split and status for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface TrafficSplitOptions {
+  /**
+   * <p>The traffic split currently in effect.</p>
+   * @public
+   */
+  Current: TrafficPercents | undefined;
+
+  /**
+   * <p>The requested traffic split.</p>
+   * @public
+   */
+  Target: TrafficPercents | undefined;
+
+  /**
+   * <p>The status of the traffic shift.</p>
+   * @public
+   */
+  Status: TrafficSplitStatus | undefined;
+}
+
+/**
+ * <p>Container for the response returned by the <code>UpdateClone</code> operation.</p>
+ * @public
+ */
+export interface UpdateCloneResponse {
+  /**
+   * <p>The name of the domain.</p>
+   * @public
+   */
+  DomainName: string | undefined;
+
+  /**
+   * <p>The unique identifier of the configuration change. Use it with <code>DescribeDomainChangeProgress</code> to track the change.</p>
+   * @public
+   */
+  ChangeId: string | undefined;
+
+  /**
+   * <p>The requested cutover target and the status of the cutover.</p>
+   * @public
+   */
+  CutoverOptions?: CutoverOptions | undefined;
+
+  /**
+   * <p>The current and requested traffic split, and the status of the traffic shift.</p>
+   * @public
+   */
+  TrafficSplitOptions?: TrafficSplitOptions | undefined;
+
+  /**
+   * <p>The retention settings for the upgrade.</p>
+   * @public
+   */
+  RetentionOptions?: RetentionOptions | undefined;
 }
 
 /**
  * <p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>
+ * @public
  */
 export interface UpdateElasticsearchDomainConfigRequest {
   /**
    * <p>The name of the Elasticsearch domain that you are updating. </p>
+   * @public
    */
   DomainName: string | undefined;
 
   /**
    * <p>The type and number of instances to instantiate for the domain cluster.</p>
+   * @public
    */
-  ElasticsearchClusterConfig?: ElasticsearchClusterConfig;
+  ElasticsearchClusterConfig?: ElasticsearchClusterConfig | undefined;
 
   /**
    * <p>Specify the type and size of the EBS volume that you want to use. </p>
+   * @public
    */
-  EBSOptions?: EBSOptions;
+  EBSOptions?: EBSOptions | undefined;
 
   /**
    * <p>Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours. </p>
+   * @public
    */
-  SnapshotOptions?: SnapshotOptions;
+  SnapshotOptions?: SnapshotOptions | undefined;
 
   /**
    * <p>Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i></p>
+   * @public
    */
-  VPCOptions?: VPCOptions;
+  VPCOptions?: VPCOptions | undefined;
 
   /**
    * <p>Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.</p>
+   * @public
    */
-  CognitoOptions?: CognitoOptions;
+  CognitoOptions?: CognitoOptions | undefined;
 
   /**
    * <p>Modifies the advanced option to allow references to indices in an HTTP request body.  Must be <code>false</code> when configuring access to individual sub-resources.  By default, the value is <code>true</code>.
    *        See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</p>
+   * @public
    */
-  AdvancedOptions?: Record<string, string>;
+  AdvancedOptions?: Record<string, string> | undefined;
 
   /**
    * <p>IAM access policy as a JSON-formatted string.</p>
+   * @public
    */
-  AccessPolicies?: string;
+  AccessPolicies?: string | undefined;
 
   /**
    * <p>Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.</p>
+   * @public
    */
-  LogPublishingOptions?: Record<string, LogPublishingOption>;
+  LogPublishingOptions?: Partial<Record<LogType, LogPublishingOption>> | undefined;
 
   /**
    * <p>Options to specify configuration that will be applied to the domain endpoint.</p>
+   * @public
    */
-  DomainEndpointOptions?: DomainEndpointOptions;
+  DomainEndpointOptions?: DomainEndpointOptions | undefined;
 
   /**
    * <p>Specifies advanced security options.</p>
+   * @public
    */
-  AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
+  AdvancedSecurityOptions?: AdvancedSecurityOptionsInput | undefined;
 
   /**
    * <p>Specifies the NodeToNodeEncryptionOptions.</p>
+   * @public
    */
-  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+  NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions | undefined;
 
   /**
    * <p>Specifies the Encryption At Rest Options.</p>
+   * @public
    */
-  EncryptionAtRestOptions?: EncryptionAtRestOptions;
+  EncryptionAtRestOptions?: EncryptionAtRestOptions | undefined;
 
   /**
    * <p>Specifies Auto-Tune options.</p>
+   * @public
    */
-  AutoTuneOptions?: AutoTuneOptions;
+  AutoTuneOptions?: AutoTuneOptions | undefined;
 
   /**
    * <p>
@@ -3794,10 +5044,44 @@ export interface UpdateElasticsearchDomainConfigRequest {
    *            This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain.
    *            This will not actually perform the Update.
    *        </p>
+   * @public
    */
-  DryRun?: boolean;
+  DryRun?: boolean | undefined;
+
+  /**
+   * <p>Specifies the deployment strategy options.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOptions | undefined;
+
+  /**
+   * <p>Specifies the automated snapshot pause options for the domain.</p>
+   *       <important>
+   *           <p>Suspending snapshots reduces data protection. You cannot restore your domain to
+   *               points in time when snapshots are suspended. Use this feature only for short-term
+   *               operational needs such as migrations or maintenance windows.</p>
+   *       </important>
+   *       <p>Maximum suspension duration: 3 days.</p>
+   * @public
+   */
+  AutomatedSnapshotPauseOptions?: AutomatedSnapshotPauseRequestOptions | undefined;
+
+  /**
+   * <p>The primary use case for the domain. For valid values, see <code>DomainUseCase</code>.</p>
+   * @public
+   */
+  UseCase?: DomainUseCase | undefined;
+
+  /**
+   * <p>The engine mode for the domain. For valid values and requirements, see <code>DomainEngineMode</code>.</p>
+   * @public
+   */
+  EngineMode?: DomainEngineMode | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DryRunResults {
   /**
    * <p>
@@ -3808,28 +5092,33 @@ export interface DryRunResults {
    *             <code>Undetermined</code> (The domain is undergoing an update which needs to complete before the deployment type can be predicted.)
    *             <code>None</code> (The configuration change matches the current configuration and will not result in any update.)
    *         </p>
+   * @public
    */
-  DeploymentType?: string;
+  DeploymentType?: string | undefined;
 
   /**
    * <p>Contains an optional message associated with the DryRunResults.</p>
+   * @public
    */
-  Message?: string;
+  Message?: string | undefined;
 }
 
 /**
  * <p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>
+ * @public
  */
 export interface UpdateElasticsearchDomainConfigResponse {
   /**
    * <p>The status of the updated Elasticsearch domain. </p>
+   * @public
    */
   DomainConfig: ElasticsearchDomainConfig | undefined;
 
   /**
    * <p>Contains result of DryRun. </p>
+   * @public
    */
-  DryRunResults?: DryRunResults;
+  DryRunResults?: DryRunResults | undefined;
 }
 
 /**
@@ -3840,27 +5129,32 @@ export interface UpdateElasticsearchDomainConfigResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface UpdatePackageRequest {
   /**
    * <p>Unique identifier for the package.</p>
+   * @public
    */
   PackageID: string | undefined;
 
   /**
    * <p>The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code></p>
+   * @public
    */
   PackageSource: PackageSource | undefined;
 
   /**
    * <p>New description of the package.</p>
+   * @public
    */
-  PackageDescription?: string;
+  PackageDescription?: string | undefined;
 
   /**
    * <p>An info message for the new version which will be shown as part of <code>GetPackageVersionHistoryResponse</code>.</p>
+   * @public
    */
-  CommitMessage?: string;
+  CommitMessage?: string | undefined;
 }
 
 /**
@@ -3871,12 +5165,74 @@ export interface UpdatePackageRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface UpdatePackageResponse {
   /**
    * <p>Information about the package <code>PackageDetails</code>.</p>
+   * @public
    */
-  PackageDetails?: PackageDetails;
+  PackageDetails?: PackageDetails | undefined;
+}
+
+/**
+ * <p>Modifies an Amazon OpenSearch Service-managed interface VPC endpoint.</p>
+ * @public
+ */
+export interface UpdateVpcEndpointRequest {
+  /**
+   * <p>Unique identifier of the VPC endpoint to be updated.</p>
+   * @public
+   */
+  VpcEndpointId: string | undefined;
+
+  /**
+   * <p>The security groups and/or subnets to add, remove, or modify.</p>
+   * @public
+   */
+  VpcOptions: VPCOptions | undefined;
+}
+
+/**
+ * <p>Contains the configuration and status of the VPC endpoint being updated.</p>
+ * @public
+ */
+export interface UpdateVpcEndpointResponse {
+  /**
+   * <p>The endpoint to be updated.</p>
+   * @public
+   */
+  VpcEndpoint: VpcEndpoint | undefined;
+}
+
+/**
+ * <p>Options for a cloned blue/green upgrade.</p>
+ * @public
+ */
+export interface ClonedBlueGreenOptions {
+  /**
+   * <p>How long to keep the cluster that you cut over from after cutover completes. When you start the upgrade, only <code>RetentionInHours</code> is accepted.</p>
+   * @public
+   */
+  RetentionOptions?: RetentionOptions | undefined;
+}
+
+/**
+ * <p>Overrides the deployment strategy for a single operation, such as a version upgrade.</p>
+ * @public
+ */
+export interface DeploymentStrategyOverrideOptions {
+  /**
+   * <p>The deployment strategy to use for this operation. The only valid value is <code>ClonedBlueGreen</code>, which creates a cloned cluster on the target version next to the primary cluster so that you can validate it and shift traffic to it before you cut over.</p>
+   * @public
+   */
+  DeploymentStrategy: DeploymentStrategyOverride | undefined;
+
+  /**
+   * <p>Options that apply when <code>DeploymentStrategy</code> is <code>ClonedBlueGreen</code>.</p>
+   * @public
+   */
+  ClonedBlueGreenOptions?: ClonedBlueGreenOptions | undefined;
 }
 
 /**
@@ -3887,15 +5243,18 @@ export interface UpdatePackageResponse {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface UpgradeElasticsearchDomainRequest {
   /**
    * <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
   DomainName: string | undefined;
 
   /**
    * <p>The version of Elasticsearch that you intend to upgrade the domain to.</p>
+   * @public
    */
   TargetVersion: string | undefined;
 
@@ -3904,8 +5263,15 @@ export interface UpgradeElasticsearchDomainRequest {
    *       This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.
    *       This will not actually perform the Upgrade.
    *     </p>
+   * @public
    */
-  PerformCheckOnly?: boolean;
+  PerformCheckOnly?: boolean | undefined;
+
+  /**
+   * <p>Overrides the deployment strategy for this upgrade. To run a cloned blue/green upgrade, set <code>DeploymentStrategy</code> to <code>ClonedBlueGreen</code>.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOverrideOptions | undefined;
 }
 
 /**
@@ -3916,1198 +5282,39 @@ export interface UpgradeElasticsearchDomainRequest {
  *       </code>
  *       operation.
  *     </p>
+ * @public
  */
 export interface UpgradeElasticsearchDomainResponse {
   /**
    * <p>The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).</p>
+   * @public
    */
-  DomainName?: string;
+  DomainName?: string | undefined;
 
   /**
    * <p>The version of Elasticsearch that you intend to upgrade the domain to.</p>
+   * @public
    */
-  TargetVersion?: string;
+  TargetVersion?: string | undefined;
 
   /**
    * <p>
    *       This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.
    *       This will not actually perform the Upgrade.
    *     </p>
+   * @public
    */
-  PerformCheckOnly?: boolean;
+  PerformCheckOnly?: boolean | undefined;
+
+  /**
+   * <p>The deployment strategy override used for the upgrade.</p>
+   * @public
+   */
+  DeploymentStrategyOptions?: DeploymentStrategyOverrideOptions | undefined;
 
   /**
    * <p>Specifies change details of the domain configuration change.</p>
+   * @public
    */
-  ChangeProgressDetails?: ChangeProgressDetails;
+  ChangeProgressDetails?: ChangeProgressDetails | undefined;
 }
-
-/**
- * @internal
- */
-export const AcceptInboundCrossClusterSearchConnectionRequestFilterSensitiveLog = (
-  obj: AcceptInboundCrossClusterSearchConnectionRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InboundCrossClusterSearchConnectionStatusFilterSensitiveLog = (
-  obj: InboundCrossClusterSearchConnectionStatus
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DomainInformationFilterSensitiveLog = (obj: DomainInformation): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InboundCrossClusterSearchConnectionFilterSensitiveLog = (
-  obj: InboundCrossClusterSearchConnection
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AcceptInboundCrossClusterSearchConnectionResponseFilterSensitiveLog = (
-  obj: AcceptInboundCrossClusterSearchConnectionResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const OptionStatusFilterSensitiveLog = (obj: OptionStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AccessPoliciesStatusFilterSensitiveLog = (obj: AccessPoliciesStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AdditionalLimitFilterSensitiveLog = (obj: AdditionalLimit): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagFilterSensitiveLog = (obj: Tag): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AddTagsRequestFilterSensitiveLog = (obj: AddTagsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AdvancedOptionsStatusFilterSensitiveLog = (obj: AdvancedOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SAMLIdpFilterSensitiveLog = (obj: SAMLIdp): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SAMLOptionsOutputFilterSensitiveLog = (obj: SAMLOptionsOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AdvancedSecurityOptionsFilterSensitiveLog = (obj: AdvancedSecurityOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const MasterUserOptionsFilterSensitiveLog = (obj: MasterUserOptions): any => ({
-  ...obj,
-  ...(obj.MasterUserName && { MasterUserName: SENSITIVE_STRING }),
-  ...(obj.MasterUserPassword && { MasterUserPassword: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const SAMLOptionsInputFilterSensitiveLog = (obj: SAMLOptionsInput): any => ({
-  ...obj,
-  ...(obj.MasterUserName && { MasterUserName: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const AdvancedSecurityOptionsInputFilterSensitiveLog = (obj: AdvancedSecurityOptionsInput): any => ({
-  ...obj,
-  ...(obj.MasterUserOptions && { MasterUserOptions: MasterUserOptionsFilterSensitiveLog(obj.MasterUserOptions) }),
-  ...(obj.SAMLOptions && { SAMLOptions: SAMLOptionsInputFilterSensitiveLog(obj.SAMLOptions) }),
-});
-
-/**
- * @internal
- */
-export const AdvancedSecurityOptionsStatusFilterSensitiveLog = (obj: AdvancedSecurityOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociatePackageRequestFilterSensitiveLog = (obj: AssociatePackageRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ErrorDetailsFilterSensitiveLog = (obj: ErrorDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DomainPackageDetailsFilterSensitiveLog = (obj: DomainPackageDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociatePackageResponseFilterSensitiveLog = (obj: AssociatePackageResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CancelElasticsearchServiceSoftwareUpdateRequestFilterSensitiveLog = (
-  obj: CancelElasticsearchServiceSoftwareUpdateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ServiceSoftwareOptionsFilterSensitiveLog = (obj: ServiceSoftwareOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CancelElasticsearchServiceSoftwareUpdateResponseFilterSensitiveLog = (
-  obj: CancelElasticsearchServiceSoftwareUpdateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DurationFilterSensitiveLog = (obj: Duration): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutoTuneMaintenanceScheduleFilterSensitiveLog = (obj: AutoTuneMaintenanceSchedule): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutoTuneOptionsInputFilterSensitiveLog = (obj: AutoTuneOptionsInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CognitoOptionsFilterSensitiveLog = (obj: CognitoOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DomainEndpointOptionsFilterSensitiveLog = (obj: DomainEndpointOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EBSOptionsFilterSensitiveLog = (obj: EBSOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ColdStorageOptionsFilterSensitiveLog = (obj: ColdStorageOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ZoneAwarenessConfigFilterSensitiveLog = (obj: ZoneAwarenessConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ElasticsearchClusterConfigFilterSensitiveLog = (obj: ElasticsearchClusterConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EncryptionAtRestOptionsFilterSensitiveLog = (obj: EncryptionAtRestOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LogPublishingOptionFilterSensitiveLog = (obj: LogPublishingOption): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NodeToNodeEncryptionOptionsFilterSensitiveLog = (obj: NodeToNodeEncryptionOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SnapshotOptionsFilterSensitiveLog = (obj: SnapshotOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const VPCOptionsFilterSensitiveLog = (obj: VPCOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateElasticsearchDomainRequestFilterSensitiveLog = (obj: CreateElasticsearchDomainRequest): any => ({
-  ...obj,
-  ...(obj.AdvancedSecurityOptions && {
-    AdvancedSecurityOptions: AdvancedSecurityOptionsInputFilterSensitiveLog(obj.AdvancedSecurityOptions),
-  }),
-});
-
-/**
- * @internal
- */
-export const AutoTuneOptionsOutputFilterSensitiveLog = (obj: AutoTuneOptionsOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ChangeProgressDetailsFilterSensitiveLog = (obj: ChangeProgressDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const VPCDerivedInfoFilterSensitiveLog = (obj: VPCDerivedInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ElasticsearchDomainStatusFilterSensitiveLog = (obj: ElasticsearchDomainStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateElasticsearchDomainResponseFilterSensitiveLog = (obj: CreateElasticsearchDomainResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateOutboundCrossClusterSearchConnectionRequestFilterSensitiveLog = (
-  obj: CreateOutboundCrossClusterSearchConnectionRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const OutboundCrossClusterSearchConnectionStatusFilterSensitiveLog = (
-  obj: OutboundCrossClusterSearchConnectionStatus
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateOutboundCrossClusterSearchConnectionResponseFilterSensitiveLog = (
-  obj: CreateOutboundCrossClusterSearchConnectionResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PackageSourceFilterSensitiveLog = (obj: PackageSource): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreatePackageRequestFilterSensitiveLog = (obj: CreatePackageRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PackageDetailsFilterSensitiveLog = (obj: PackageDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreatePackageResponseFilterSensitiveLog = (obj: CreatePackageResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteElasticsearchDomainRequestFilterSensitiveLog = (obj: DeleteElasticsearchDomainRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteElasticsearchDomainResponseFilterSensitiveLog = (obj: DeleteElasticsearchDomainResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteInboundCrossClusterSearchConnectionRequestFilterSensitiveLog = (
-  obj: DeleteInboundCrossClusterSearchConnectionRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteInboundCrossClusterSearchConnectionResponseFilterSensitiveLog = (
-  obj: DeleteInboundCrossClusterSearchConnectionResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteOutboundCrossClusterSearchConnectionRequestFilterSensitiveLog = (
-  obj: DeleteOutboundCrossClusterSearchConnectionRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const OutboundCrossClusterSearchConnectionFilterSensitiveLog = (
-  obj: OutboundCrossClusterSearchConnection
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteOutboundCrossClusterSearchConnectionResponseFilterSensitiveLog = (
-  obj: DeleteOutboundCrossClusterSearchConnectionResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeletePackageRequestFilterSensitiveLog = (obj: DeletePackageRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeletePackageResponseFilterSensitiveLog = (obj: DeletePackageResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeDomainAutoTunesRequestFilterSensitiveLog = (obj: DescribeDomainAutoTunesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ScheduledAutoTuneDetailsFilterSensitiveLog = (obj: ScheduledAutoTuneDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutoTuneDetailsFilterSensitiveLog = (obj: AutoTuneDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutoTuneFilterSensitiveLog = (obj: AutoTune): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeDomainAutoTunesResponseFilterSensitiveLog = (obj: DescribeDomainAutoTunesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeDomainChangeProgressRequestFilterSensitiveLog = (
-  obj: DescribeDomainChangeProgressRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ChangeProgressStageFilterSensitiveLog = (obj: ChangeProgressStage): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ChangeProgressStatusDetailsFilterSensitiveLog = (obj: ChangeProgressStatusDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeDomainChangeProgressResponseFilterSensitiveLog = (
-  obj: DescribeDomainChangeProgressResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchDomainRequestFilterSensitiveLog = (obj: DescribeElasticsearchDomainRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchDomainResponseFilterSensitiveLog = (
-  obj: DescribeElasticsearchDomainResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchDomainConfigRequestFilterSensitiveLog = (
-  obj: DescribeElasticsearchDomainConfigRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutoTuneOptionsFilterSensitiveLog = (obj: AutoTuneOptions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutoTuneStatusFilterSensitiveLog = (obj: AutoTuneStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AutoTuneOptionsStatusFilterSensitiveLog = (obj: AutoTuneOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CognitoOptionsStatusFilterSensitiveLog = (obj: CognitoOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DomainEndpointOptionsStatusFilterSensitiveLog = (obj: DomainEndpointOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EBSOptionsStatusFilterSensitiveLog = (obj: EBSOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ElasticsearchClusterConfigStatusFilterSensitiveLog = (obj: ElasticsearchClusterConfigStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ElasticsearchVersionStatusFilterSensitiveLog = (obj: ElasticsearchVersionStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EncryptionAtRestOptionsStatusFilterSensitiveLog = (obj: EncryptionAtRestOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LogPublishingOptionsStatusFilterSensitiveLog = (obj: LogPublishingOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NodeToNodeEncryptionOptionsStatusFilterSensitiveLog = (obj: NodeToNodeEncryptionOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SnapshotOptionsStatusFilterSensitiveLog = (obj: SnapshotOptionsStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const VPCDerivedInfoStatusFilterSensitiveLog = (obj: VPCDerivedInfoStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ElasticsearchDomainConfigFilterSensitiveLog = (obj: ElasticsearchDomainConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchDomainConfigResponseFilterSensitiveLog = (
-  obj: DescribeElasticsearchDomainConfigResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchDomainsRequestFilterSensitiveLog = (
-  obj: DescribeElasticsearchDomainsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchDomainsResponseFilterSensitiveLog = (
-  obj: DescribeElasticsearchDomainsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchInstanceTypeLimitsRequestFilterSensitiveLog = (
-  obj: DescribeElasticsearchInstanceTypeLimitsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InstanceCountLimitsFilterSensitiveLog = (obj: InstanceCountLimits): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InstanceLimitsFilterSensitiveLog = (obj: InstanceLimits): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StorageTypeLimitFilterSensitiveLog = (obj: StorageTypeLimit): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StorageTypeFilterSensitiveLog = (obj: StorageType): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LimitsFilterSensitiveLog = (obj: Limits): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeElasticsearchInstanceTypeLimitsResponseFilterSensitiveLog = (
-  obj: DescribeElasticsearchInstanceTypeLimitsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const FilterFilterSensitiveLog = (obj: Filter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeInboundCrossClusterSearchConnectionsRequestFilterSensitiveLog = (
-  obj: DescribeInboundCrossClusterSearchConnectionsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeInboundCrossClusterSearchConnectionsResponseFilterSensitiveLog = (
-  obj: DescribeInboundCrossClusterSearchConnectionsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeOutboundCrossClusterSearchConnectionsRequestFilterSensitiveLog = (
-  obj: DescribeOutboundCrossClusterSearchConnectionsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeOutboundCrossClusterSearchConnectionsResponseFilterSensitiveLog = (
-  obj: DescribeOutboundCrossClusterSearchConnectionsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribePackagesFilterFilterSensitiveLog = (obj: DescribePackagesFilter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribePackagesRequestFilterSensitiveLog = (obj: DescribePackagesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribePackagesResponseFilterSensitiveLog = (obj: DescribePackagesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeReservedElasticsearchInstanceOfferingsRequestFilterSensitiveLog = (
-  obj: DescribeReservedElasticsearchInstanceOfferingsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RecurringChargeFilterSensitiveLog = (obj: RecurringCharge): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReservedElasticsearchInstanceOfferingFilterSensitiveLog = (
-  obj: ReservedElasticsearchInstanceOffering
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeReservedElasticsearchInstanceOfferingsResponseFilterSensitiveLog = (
-  obj: DescribeReservedElasticsearchInstanceOfferingsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeReservedElasticsearchInstancesRequestFilterSensitiveLog = (
-  obj: DescribeReservedElasticsearchInstancesRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReservedElasticsearchInstanceFilterSensitiveLog = (obj: ReservedElasticsearchInstance): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeReservedElasticsearchInstancesResponseFilterSensitiveLog = (
-  obj: DescribeReservedElasticsearchInstancesResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DissociatePackageRequestFilterSensitiveLog = (obj: DissociatePackageRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DissociatePackageResponseFilterSensitiveLog = (obj: DissociatePackageResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetCompatibleElasticsearchVersionsRequestFilterSensitiveLog = (
-  obj: GetCompatibleElasticsearchVersionsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CompatibleVersionsMapFilterSensitiveLog = (obj: CompatibleVersionsMap): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetCompatibleElasticsearchVersionsResponseFilterSensitiveLog = (
-  obj: GetCompatibleElasticsearchVersionsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetPackageVersionHistoryRequestFilterSensitiveLog = (obj: GetPackageVersionHistoryRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PackageVersionHistoryFilterSensitiveLog = (obj: PackageVersionHistory): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetPackageVersionHistoryResponseFilterSensitiveLog = (obj: GetPackageVersionHistoryResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetUpgradeHistoryRequestFilterSensitiveLog = (obj: GetUpgradeHistoryRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpgradeStepItemFilterSensitiveLog = (obj: UpgradeStepItem): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpgradeHistoryFilterSensitiveLog = (obj: UpgradeHistory): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetUpgradeHistoryResponseFilterSensitiveLog = (obj: GetUpgradeHistoryResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetUpgradeStatusRequestFilterSensitiveLog = (obj: GetUpgradeStatusRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetUpgradeStatusResponseFilterSensitiveLog = (obj: GetUpgradeStatusResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListDomainNamesRequestFilterSensitiveLog = (obj: ListDomainNamesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DomainInfoFilterSensitiveLog = (obj: DomainInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListDomainNamesResponseFilterSensitiveLog = (obj: ListDomainNamesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListDomainsForPackageRequestFilterSensitiveLog = (obj: ListDomainsForPackageRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListDomainsForPackageResponseFilterSensitiveLog = (obj: ListDomainsForPackageResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListElasticsearchInstanceTypesRequestFilterSensitiveLog = (
-  obj: ListElasticsearchInstanceTypesRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListElasticsearchInstanceTypesResponseFilterSensitiveLog = (
-  obj: ListElasticsearchInstanceTypesResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListElasticsearchVersionsRequestFilterSensitiveLog = (obj: ListElasticsearchVersionsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListElasticsearchVersionsResponseFilterSensitiveLog = (obj: ListElasticsearchVersionsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPackagesForDomainRequestFilterSensitiveLog = (obj: ListPackagesForDomainRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPackagesForDomainResponseFilterSensitiveLog = (obj: ListPackagesForDomainResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsRequestFilterSensitiveLog = (obj: ListTagsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsResponseFilterSensitiveLog = (obj: ListTagsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PurchaseReservedElasticsearchInstanceOfferingRequestFilterSensitiveLog = (
-  obj: PurchaseReservedElasticsearchInstanceOfferingRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PurchaseReservedElasticsearchInstanceOfferingResponseFilterSensitiveLog = (
-  obj: PurchaseReservedElasticsearchInstanceOfferingResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RejectInboundCrossClusterSearchConnectionRequestFilterSensitiveLog = (
-  obj: RejectInboundCrossClusterSearchConnectionRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RejectInboundCrossClusterSearchConnectionResponseFilterSensitiveLog = (
-  obj: RejectInboundCrossClusterSearchConnectionResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RemoveTagsRequestFilterSensitiveLog = (obj: RemoveTagsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartElasticsearchServiceSoftwareUpdateRequestFilterSensitiveLog = (
-  obj: StartElasticsearchServiceSoftwareUpdateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartElasticsearchServiceSoftwareUpdateResponseFilterSensitiveLog = (
-  obj: StartElasticsearchServiceSoftwareUpdateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateElasticsearchDomainConfigRequestFilterSensitiveLog = (
-  obj: UpdateElasticsearchDomainConfigRequest
-): any => ({
-  ...obj,
-  ...(obj.AdvancedSecurityOptions && {
-    AdvancedSecurityOptions: AdvancedSecurityOptionsInputFilterSensitiveLog(obj.AdvancedSecurityOptions),
-  }),
-});
-
-/**
- * @internal
- */
-export const DryRunResultsFilterSensitiveLog = (obj: DryRunResults): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateElasticsearchDomainConfigResponseFilterSensitiveLog = (
-  obj: UpdateElasticsearchDomainConfigResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdatePackageRequestFilterSensitiveLog = (obj: UpdatePackageRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdatePackageResponseFilterSensitiveLog = (obj: UpdatePackageResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpgradeElasticsearchDomainRequestFilterSensitiveLog = (obj: UpgradeElasticsearchDomainRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpgradeElasticsearchDomainResponseFilterSensitiveLog = (obj: UpgradeElasticsearchDomainResponse): any => ({
-  ...obj,
-});

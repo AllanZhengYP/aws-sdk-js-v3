@@ -1,893 +1,1106 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type BatchPutPropertyValuesCommandInput,
+  type BatchPutPropertyValuesCommandOutput,
   BatchPutPropertyValuesCommand,
-  BatchPutPropertyValuesCommandInput,
-  BatchPutPropertyValuesCommandOutput,
 } from "./commands/BatchPutPropertyValuesCommand";
 import {
+  type CancelMetadataTransferJobCommandInput,
+  type CancelMetadataTransferJobCommandOutput,
+  CancelMetadataTransferJobCommand,
+} from "./commands/CancelMetadataTransferJobCommand";
+import {
+  type CreateComponentTypeCommandInput,
+  type CreateComponentTypeCommandOutput,
   CreateComponentTypeCommand,
-  CreateComponentTypeCommandInput,
-  CreateComponentTypeCommandOutput,
 } from "./commands/CreateComponentTypeCommand";
 import {
+  type CreateEntityCommandInput,
+  type CreateEntityCommandOutput,
   CreateEntityCommand,
-  CreateEntityCommandInput,
-  CreateEntityCommandOutput,
 } from "./commands/CreateEntityCommand";
-import { CreateSceneCommand, CreateSceneCommandInput, CreateSceneCommandOutput } from "./commands/CreateSceneCommand";
 import {
+  type CreateMetadataTransferJobCommandInput,
+  type CreateMetadataTransferJobCommandOutput,
+  CreateMetadataTransferJobCommand,
+} from "./commands/CreateMetadataTransferJobCommand";
+import {
+  type CreateSceneCommandInput,
+  type CreateSceneCommandOutput,
+  CreateSceneCommand,
+} from "./commands/CreateSceneCommand";
+import {
+  type CreateSyncJobCommandInput,
+  type CreateSyncJobCommandOutput,
+  CreateSyncJobCommand,
+} from "./commands/CreateSyncJobCommand";
+import {
+  type CreateWorkspaceCommandInput,
+  type CreateWorkspaceCommandOutput,
   CreateWorkspaceCommand,
-  CreateWorkspaceCommandInput,
-  CreateWorkspaceCommandOutput,
 } from "./commands/CreateWorkspaceCommand";
 import {
+  type DeleteComponentTypeCommandInput,
+  type DeleteComponentTypeCommandOutput,
   DeleteComponentTypeCommand,
-  DeleteComponentTypeCommandInput,
-  DeleteComponentTypeCommandOutput,
 } from "./commands/DeleteComponentTypeCommand";
 import {
+  type DeleteEntityCommandInput,
+  type DeleteEntityCommandOutput,
   DeleteEntityCommand,
-  DeleteEntityCommandInput,
-  DeleteEntityCommandOutput,
 } from "./commands/DeleteEntityCommand";
-import { DeleteSceneCommand, DeleteSceneCommandInput, DeleteSceneCommandOutput } from "./commands/DeleteSceneCommand";
 import {
+  type DeleteSceneCommandInput,
+  type DeleteSceneCommandOutput,
+  DeleteSceneCommand,
+} from "./commands/DeleteSceneCommand";
+import {
+  type DeleteSyncJobCommandInput,
+  type DeleteSyncJobCommandOutput,
+  DeleteSyncJobCommand,
+} from "./commands/DeleteSyncJobCommand";
+import {
+  type DeleteWorkspaceCommandInput,
+  type DeleteWorkspaceCommandOutput,
   DeleteWorkspaceCommand,
-  DeleteWorkspaceCommandInput,
-  DeleteWorkspaceCommandOutput,
 } from "./commands/DeleteWorkspaceCommand";
 import {
-  GetComponentTypeCommand,
-  GetComponentTypeCommandInput,
-  GetComponentTypeCommandOutput,
-} from "./commands/GetComponentTypeCommand";
-import { GetEntityCommand, GetEntityCommandInput, GetEntityCommandOutput } from "./commands/GetEntityCommand";
+  type ExecuteQueryCommandInput,
+  type ExecuteQueryCommandOutput,
+  ExecuteQueryCommand,
+} from "./commands/ExecuteQueryCommand";
 import {
+  type GetComponentTypeCommandInput,
+  type GetComponentTypeCommandOutput,
+  GetComponentTypeCommand,
+} from "./commands/GetComponentTypeCommand";
+import { type GetEntityCommandInput, type GetEntityCommandOutput, GetEntityCommand } from "./commands/GetEntityCommand";
+import {
+  type GetMetadataTransferJobCommandInput,
+  type GetMetadataTransferJobCommandOutput,
+  GetMetadataTransferJobCommand,
+} from "./commands/GetMetadataTransferJobCommand";
+import {
+  type GetPricingPlanCommandInput,
+  type GetPricingPlanCommandOutput,
+  GetPricingPlanCommand,
+} from "./commands/GetPricingPlanCommand";
+import {
+  type GetPropertyValueCommandInput,
+  type GetPropertyValueCommandOutput,
   GetPropertyValueCommand,
-  GetPropertyValueCommandInput,
-  GetPropertyValueCommandOutput,
 } from "./commands/GetPropertyValueCommand";
 import {
+  type GetPropertyValueHistoryCommandInput,
+  type GetPropertyValueHistoryCommandOutput,
   GetPropertyValueHistoryCommand,
-  GetPropertyValueHistoryCommandInput,
-  GetPropertyValueHistoryCommandOutput,
 } from "./commands/GetPropertyValueHistoryCommand";
-import { GetSceneCommand, GetSceneCommandInput, GetSceneCommandOutput } from "./commands/GetSceneCommand";
+import { type GetSceneCommandInput, type GetSceneCommandOutput, GetSceneCommand } from "./commands/GetSceneCommand";
 import {
+  type GetSyncJobCommandInput,
+  type GetSyncJobCommandOutput,
+  GetSyncJobCommand,
+} from "./commands/GetSyncJobCommand";
+import {
+  type GetWorkspaceCommandInput,
+  type GetWorkspaceCommandOutput,
   GetWorkspaceCommand,
-  GetWorkspaceCommandInput,
-  GetWorkspaceCommandOutput,
 } from "./commands/GetWorkspaceCommand";
 import {
+  type ListComponentsCommandInput,
+  type ListComponentsCommandOutput,
+  ListComponentsCommand,
+} from "./commands/ListComponentsCommand";
+import {
+  type ListComponentTypesCommandInput,
+  type ListComponentTypesCommandOutput,
   ListComponentTypesCommand,
-  ListComponentTypesCommandInput,
-  ListComponentTypesCommandOutput,
 } from "./commands/ListComponentTypesCommand";
 import {
+  type ListEntitiesCommandInput,
+  type ListEntitiesCommandOutput,
   ListEntitiesCommand,
-  ListEntitiesCommandInput,
-  ListEntitiesCommandOutput,
 } from "./commands/ListEntitiesCommand";
-import { ListScenesCommand, ListScenesCommandInput, ListScenesCommandOutput } from "./commands/ListScenesCommand";
 import {
+  type ListMetadataTransferJobsCommandInput,
+  type ListMetadataTransferJobsCommandOutput,
+  ListMetadataTransferJobsCommand,
+} from "./commands/ListMetadataTransferJobsCommand";
+import {
+  type ListPropertiesCommandInput,
+  type ListPropertiesCommandOutput,
+  ListPropertiesCommand,
+} from "./commands/ListPropertiesCommand";
+import {
+  type ListScenesCommandInput,
+  type ListScenesCommandOutput,
+  ListScenesCommand,
+} from "./commands/ListScenesCommand";
+import {
+  type ListSyncJobsCommandInput,
+  type ListSyncJobsCommandOutput,
+  ListSyncJobsCommand,
+} from "./commands/ListSyncJobsCommand";
+import {
+  type ListSyncResourcesCommandInput,
+  type ListSyncResourcesCommandOutput,
+  ListSyncResourcesCommand,
+} from "./commands/ListSyncResourcesCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListWorkspacesCommandInput,
+  type ListWorkspacesCommandOutput,
   ListWorkspacesCommand,
-  ListWorkspacesCommandInput,
-  ListWorkspacesCommandOutput,
 } from "./commands/ListWorkspacesCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateComponentTypeCommandInput,
+  type UpdateComponentTypeCommandOutput,
   UpdateComponentTypeCommand,
-  UpdateComponentTypeCommandInput,
-  UpdateComponentTypeCommandOutput,
 } from "./commands/UpdateComponentTypeCommand";
 import {
+  type UpdateEntityCommandInput,
+  type UpdateEntityCommandOutput,
   UpdateEntityCommand,
-  UpdateEntityCommandInput,
-  UpdateEntityCommandOutput,
 } from "./commands/UpdateEntityCommand";
-import { UpdateSceneCommand, UpdateSceneCommandInput, UpdateSceneCommandOutput } from "./commands/UpdateSceneCommand";
 import {
+  type UpdatePricingPlanCommandInput,
+  type UpdatePricingPlanCommandOutput,
+  UpdatePricingPlanCommand,
+} from "./commands/UpdatePricingPlanCommand";
+import {
+  type UpdateSceneCommandInput,
+  type UpdateSceneCommandOutput,
+  UpdateSceneCommand,
+} from "./commands/UpdateSceneCommand";
+import {
+  type UpdateWorkspaceCommandInput,
+  type UpdateWorkspaceCommandOutput,
   UpdateWorkspaceCommand,
-  UpdateWorkspaceCommandInput,
-  UpdateWorkspaceCommandOutput,
 } from "./commands/UpdateWorkspaceCommand";
 import { IoTTwinMakerClient } from "./IoTTwinMakerClient";
+import { paginateExecuteQuery } from "./pagination/ExecuteQueryPaginator";
+import { paginateGetPropertyValueHistory } from "./pagination/GetPropertyValueHistoryPaginator";
+import { paginateGetPropertyValue } from "./pagination/GetPropertyValuePaginator";
+import { paginateListComponents } from "./pagination/ListComponentsPaginator";
+import { paginateListComponentTypes } from "./pagination/ListComponentTypesPaginator";
+import { paginateListEntities } from "./pagination/ListEntitiesPaginator";
+import { paginateListMetadataTransferJobs } from "./pagination/ListMetadataTransferJobsPaginator";
+import { paginateListProperties } from "./pagination/ListPropertiesPaginator";
+import { paginateListScenes } from "./pagination/ListScenesPaginator";
+import { paginateListSyncJobs } from "./pagination/ListSyncJobsPaginator";
+import { paginateListSyncResources } from "./pagination/ListSyncResourcesPaginator";
+import { paginateListWorkspaces } from "./pagination/ListWorkspacesPaginator";
+
+const commands = {
+  BatchPutPropertyValuesCommand,
+  CancelMetadataTransferJobCommand,
+  CreateComponentTypeCommand,
+  CreateEntityCommand,
+  CreateMetadataTransferJobCommand,
+  CreateSceneCommand,
+  CreateSyncJobCommand,
+  CreateWorkspaceCommand,
+  DeleteComponentTypeCommand,
+  DeleteEntityCommand,
+  DeleteSceneCommand,
+  DeleteSyncJobCommand,
+  DeleteWorkspaceCommand,
+  ExecuteQueryCommand,
+  GetComponentTypeCommand,
+  GetEntityCommand,
+  GetMetadataTransferJobCommand,
+  GetPricingPlanCommand,
+  GetPropertyValueCommand,
+  GetPropertyValueHistoryCommand,
+  GetSceneCommand,
+  GetSyncJobCommand,
+  GetWorkspaceCommand,
+  ListComponentsCommand,
+  ListComponentTypesCommand,
+  ListEntitiesCommand,
+  ListMetadataTransferJobsCommand,
+  ListPropertiesCommand,
+  ListScenesCommand,
+  ListSyncJobsCommand,
+  ListSyncResourcesCommand,
+  ListTagsForResourceCommand,
+  ListWorkspacesCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateComponentTypeCommand,
+  UpdateEntityCommand,
+  UpdatePricingPlanCommand,
+  UpdateSceneCommand,
+  UpdateWorkspaceCommand,
+};
+const paginators = {
+  paginateExecuteQuery,
+  paginateGetPropertyValue,
+  paginateGetPropertyValueHistory,
+  paginateListComponents,
+  paginateListComponentTypes,
+  paginateListEntities,
+  paginateListMetadataTransferJobs,
+  paginateListProperties,
+  paginateListScenes,
+  paginateListSyncJobs,
+  paginateListSyncResources,
+  paginateListWorkspaces,
+};
 
 /**
- * <p>IoT TwinMaker is a service that enables you to build operational digital twins of
- *          physical systems. IoT TwinMaker overlays measurements and analysis from real-world sensors,
- *          cameras, and enterprise applications so you can create data visualizations to monitor your
- *          physical factory, building, or industrial plant. You can use this real-world data to
- *          monitor operations and diagnose and repair errors.</p>
+ * @public
  */
-export class IoTTwinMaker extends IoTTwinMakerClient {
+export interface IoTTwinMakerRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IoTTwinMaker {
   /**
-   * <p>Sets values for multiple time series properties.</p>
+   * @see {@link BatchPutPropertyValuesCommand}
    */
-  public batchPutPropertyValues(
+  batchPutPropertyValues(
     args: BatchPutPropertyValuesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<BatchPutPropertyValuesCommandOutput>;
-  public batchPutPropertyValues(
+  batchPutPropertyValues(
     args: BatchPutPropertyValuesCommandInput,
     cb: (err: any, data?: BatchPutPropertyValuesCommandOutput) => void
   ): void;
-  public batchPutPropertyValues(
+  batchPutPropertyValues(
     args: BatchPutPropertyValuesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: BatchPutPropertyValuesCommandOutput) => void
   ): void;
-  public batchPutPropertyValues(
-    args: BatchPutPropertyValuesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchPutPropertyValuesCommandOutput) => void),
-    cb?: (err: any, data?: BatchPutPropertyValuesCommandOutput) => void
-  ): Promise<BatchPutPropertyValuesCommandOutput> | void {
-    const command = new BatchPutPropertyValuesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a component type.</p>
+   * @see {@link CancelMetadataTransferJobCommand}
    */
-  public createComponentType(
+  cancelMetadataTransferJob(
+    args: CancelMetadataTransferJobCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<CancelMetadataTransferJobCommandOutput>;
+  cancelMetadataTransferJob(
+    args: CancelMetadataTransferJobCommandInput,
+    cb: (err: any, data?: CancelMetadataTransferJobCommandOutput) => void
+  ): void;
+  cancelMetadataTransferJob(
+    args: CancelMetadataTransferJobCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: CancelMetadataTransferJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateComponentTypeCommand}
+   */
+  createComponentType(
     args: CreateComponentTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<CreateComponentTypeCommandOutput>;
-  public createComponentType(
+  createComponentType(
     args: CreateComponentTypeCommandInput,
     cb: (err: any, data?: CreateComponentTypeCommandOutput) => void
   ): void;
-  public createComponentType(
+  createComponentType(
     args: CreateComponentTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: CreateComponentTypeCommandOutput) => void
   ): void;
-  public createComponentType(
-    args: CreateComponentTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateComponentTypeCommandOutput) => void),
-    cb?: (err: any, data?: CreateComponentTypeCommandOutput) => void
-  ): Promise<CreateComponentTypeCommandOutput> | void {
-    const command = new CreateComponentTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an entity.</p>
+   * @see {@link CreateEntityCommand}
    */
-  public createEntity(
+  createEntity(
     args: CreateEntityCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<CreateEntityCommandOutput>;
-  public createEntity(args: CreateEntityCommandInput, cb: (err: any, data?: CreateEntityCommandOutput) => void): void;
-  public createEntity(
+  createEntity(
     args: CreateEntityCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateEntityCommandOutput) => void
   ): void;
-  public createEntity(
+  createEntity(
     args: CreateEntityCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEntityCommandOutput) => void),
-    cb?: (err: any, data?: CreateEntityCommandOutput) => void
-  ): Promise<CreateEntityCommandOutput> | void {
-    const command = new CreateEntityCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: CreateEntityCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a scene.</p>
+   * @see {@link CreateMetadataTransferJobCommand}
    */
-  public createScene(args: CreateSceneCommandInput, options?: __HttpHandlerOptions): Promise<CreateSceneCommandOutput>;
-  public createScene(args: CreateSceneCommandInput, cb: (err: any, data?: CreateSceneCommandOutput) => void): void;
-  public createScene(
+  createMetadataTransferJob(
+    args: CreateMetadataTransferJobCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<CreateMetadataTransferJobCommandOutput>;
+  createMetadataTransferJob(
+    args: CreateMetadataTransferJobCommandInput,
+    cb: (err: any, data?: CreateMetadataTransferJobCommandOutput) => void
+  ): void;
+  createMetadataTransferJob(
+    args: CreateMetadataTransferJobCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: CreateMetadataTransferJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSceneCommand}
+   */
+  createScene(
     args: CreateSceneCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<CreateSceneCommandOutput>;
+  createScene(
+    args: CreateSceneCommandInput,
     cb: (err: any, data?: CreateSceneCommandOutput) => void
   ): void;
-  public createScene(
+  createScene(
     args: CreateSceneCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSceneCommandOutput) => void),
-    cb?: (err: any, data?: CreateSceneCommandOutput) => void
-  ): Promise<CreateSceneCommandOutput> | void {
-    const command = new CreateSceneCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: CreateSceneCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a workplace.</p>
+   * @see {@link CreateSyncJobCommand}
    */
-  public createWorkspace(
+  createSyncJob(
+    args: CreateSyncJobCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<CreateSyncJobCommandOutput>;
+  createSyncJob(
+    args: CreateSyncJobCommandInput,
+    cb: (err: any, data?: CreateSyncJobCommandOutput) => void
+  ): void;
+  createSyncJob(
+    args: CreateSyncJobCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: CreateSyncJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkspaceCommand}
+   */
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<CreateWorkspaceCommandOutput>;
-  public createWorkspace(
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
     cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
   ): void;
-  public createWorkspace(
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
   ): void;
-  public createWorkspace(
-    args: CreateWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkspaceCommandOutput) => void
-  ): Promise<CreateWorkspaceCommandOutput> | void {
-    const command = new CreateWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a component type.</p>
+   * @see {@link DeleteComponentTypeCommand}
    */
-  public deleteComponentType(
+  deleteComponentType(
     args: DeleteComponentTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<DeleteComponentTypeCommandOutput>;
-  public deleteComponentType(
+  deleteComponentType(
     args: DeleteComponentTypeCommandInput,
     cb: (err: any, data?: DeleteComponentTypeCommandOutput) => void
   ): void;
-  public deleteComponentType(
+  deleteComponentType(
     args: DeleteComponentTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: DeleteComponentTypeCommandOutput) => void
   ): void;
-  public deleteComponentType(
-    args: DeleteComponentTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteComponentTypeCommandOutput) => void),
-    cb?: (err: any, data?: DeleteComponentTypeCommandOutput) => void
-  ): Promise<DeleteComponentTypeCommandOutput> | void {
-    const command = new DeleteComponentTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an entity.</p>
+   * @see {@link DeleteEntityCommand}
    */
-  public deleteEntity(
+  deleteEntity(
     args: DeleteEntityCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<DeleteEntityCommandOutput>;
-  public deleteEntity(args: DeleteEntityCommandInput, cb: (err: any, data?: DeleteEntityCommandOutput) => void): void;
-  public deleteEntity(
+  deleteEntity(
     args: DeleteEntityCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteEntityCommandOutput) => void
   ): void;
-  public deleteEntity(
+  deleteEntity(
     args: DeleteEntityCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEntityCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEntityCommandOutput) => void
-  ): Promise<DeleteEntityCommandOutput> | void {
-    const command = new DeleteEntityCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: DeleteEntityCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a scene.</p>
+   * @see {@link DeleteSceneCommand}
    */
-  public deleteScene(args: DeleteSceneCommandInput, options?: __HttpHandlerOptions): Promise<DeleteSceneCommandOutput>;
-  public deleteScene(args: DeleteSceneCommandInput, cb: (err: any, data?: DeleteSceneCommandOutput) => void): void;
-  public deleteScene(
+  deleteScene(
     args: DeleteSceneCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<DeleteSceneCommandOutput>;
+  deleteScene(
+    args: DeleteSceneCommandInput,
     cb: (err: any, data?: DeleteSceneCommandOutput) => void
   ): void;
-  public deleteScene(
+  deleteScene(
     args: DeleteSceneCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSceneCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSceneCommandOutput) => void
-  ): Promise<DeleteSceneCommandOutput> | void {
-    const command = new DeleteSceneCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: DeleteSceneCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a workspace.</p>
+   * @see {@link DeleteSyncJobCommand}
    */
-  public deleteWorkspace(
+  deleteSyncJob(
+    args: DeleteSyncJobCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<DeleteSyncJobCommandOutput>;
+  deleteSyncJob(
+    args: DeleteSyncJobCommandInput,
+    cb: (err: any, data?: DeleteSyncJobCommandOutput) => void
+  ): void;
+  deleteSyncJob(
+    args: DeleteSyncJobCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: DeleteSyncJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkspaceCommand}
+   */
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<DeleteWorkspaceCommandOutput>;
-  public deleteWorkspace(
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
     cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
   ): void;
-  public deleteWorkspace(
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
   ): void;
-  public deleteWorkspace(
-    args: DeleteWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkspaceCommandOutput) => void
-  ): Promise<DeleteWorkspaceCommandOutput> | void {
-    const command = new DeleteWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about a component type.</p>
+   * @see {@link ExecuteQueryCommand}
    */
-  public getComponentType(
+  executeQuery(
+    args: ExecuteQueryCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<ExecuteQueryCommandOutput>;
+  executeQuery(
+    args: ExecuteQueryCommandInput,
+    cb: (err: any, data?: ExecuteQueryCommandOutput) => void
+  ): void;
+  executeQuery(
+    args: ExecuteQueryCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ExecuteQueryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetComponentTypeCommand}
+   */
+  getComponentType(
     args: GetComponentTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<GetComponentTypeCommandOutput>;
-  public getComponentType(
+  getComponentType(
     args: GetComponentTypeCommandInput,
     cb: (err: any, data?: GetComponentTypeCommandOutput) => void
   ): void;
-  public getComponentType(
+  getComponentType(
     args: GetComponentTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: GetComponentTypeCommandOutput) => void
   ): void;
-  public getComponentType(
-    args: GetComponentTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetComponentTypeCommandOutput) => void),
-    cb?: (err: any, data?: GetComponentTypeCommandOutput) => void
-  ): Promise<GetComponentTypeCommandOutput> | void {
-    const command = new GetComponentTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about an entity.</p>
+   * @see {@link GetEntityCommand}
    */
-  public getEntity(args: GetEntityCommandInput, options?: __HttpHandlerOptions): Promise<GetEntityCommandOutput>;
-  public getEntity(args: GetEntityCommandInput, cb: (err: any, data?: GetEntityCommandOutput) => void): void;
-  public getEntity(
+  getEntity(
     args: GetEntityCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<GetEntityCommandOutput>;
+  getEntity(
+    args: GetEntityCommandInput,
     cb: (err: any, data?: GetEntityCommandOutput) => void
   ): void;
-  public getEntity(
+  getEntity(
     args: GetEntityCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEntityCommandOutput) => void),
-    cb?: (err: any, data?: GetEntityCommandOutput) => void
-  ): Promise<GetEntityCommandOutput> | void {
-    const command = new GetEntityCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: GetEntityCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets the property values for a component, component type, entity, or workspace.</p>
-   *          <p>You must specify a value for either <code>componentName</code>, <code>componentTypeId</code>, <code>entityId</code>, or <code>workspaceId</code>.</p>
+   * @see {@link GetMetadataTransferJobCommand}
    */
-  public getPropertyValue(
+  getMetadataTransferJob(
+    args: GetMetadataTransferJobCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<GetMetadataTransferJobCommandOutput>;
+  getMetadataTransferJob(
+    args: GetMetadataTransferJobCommandInput,
+    cb: (err: any, data?: GetMetadataTransferJobCommandOutput) => void
+  ): void;
+  getMetadataTransferJob(
+    args: GetMetadataTransferJobCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: GetMetadataTransferJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPricingPlanCommand}
+   */
+  getPricingPlan(): Promise<GetPricingPlanCommandOutput>;
+  getPricingPlan(
+    args: GetPricingPlanCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<GetPricingPlanCommandOutput>;
+  getPricingPlan(
+    args: GetPricingPlanCommandInput,
+    cb: (err: any, data?: GetPricingPlanCommandOutput) => void
+  ): void;
+  getPricingPlan(
+    args: GetPricingPlanCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: GetPricingPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetPropertyValueCommand}
+   */
+  getPropertyValue(
     args: GetPropertyValueCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<GetPropertyValueCommandOutput>;
-  public getPropertyValue(
+  getPropertyValue(
     args: GetPropertyValueCommandInput,
     cb: (err: any, data?: GetPropertyValueCommandOutput) => void
   ): void;
-  public getPropertyValue(
+  getPropertyValue(
     args: GetPropertyValueCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: GetPropertyValueCommandOutput) => void
   ): void;
-  public getPropertyValue(
-    args: GetPropertyValueCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPropertyValueCommandOutput) => void),
-    cb?: (err: any, data?: GetPropertyValueCommandOutput) => void
-  ): Promise<GetPropertyValueCommandOutput> | void {
-    const command = new GetPropertyValueCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about the history of a time series property value for a component, component type, entity, or workspace.</p>
-   *          <p>You must specify a value for <code>workspaceId</code>. For entity-specific queries, specify values for <code>componentName</code> and
-   *         <code>entityId</code>. For cross-entity quries, specify a value for <code>componentTypeId</code>.</p>
+   * @see {@link GetPropertyValueHistoryCommand}
    */
-  public getPropertyValueHistory(
+  getPropertyValueHistory(
     args: GetPropertyValueHistoryCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<GetPropertyValueHistoryCommandOutput>;
-  public getPropertyValueHistory(
+  getPropertyValueHistory(
     args: GetPropertyValueHistoryCommandInput,
     cb: (err: any, data?: GetPropertyValueHistoryCommandOutput) => void
   ): void;
-  public getPropertyValueHistory(
+  getPropertyValueHistory(
     args: GetPropertyValueHistoryCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: GetPropertyValueHistoryCommandOutput) => void
   ): void;
-  public getPropertyValueHistory(
-    args: GetPropertyValueHistoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetPropertyValueHistoryCommandOutput) => void),
-    cb?: (err: any, data?: GetPropertyValueHistoryCommandOutput) => void
-  ): Promise<GetPropertyValueHistoryCommandOutput> | void {
-    const command = new GetPropertyValueHistoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about a scene.</p>
+   * @see {@link GetSceneCommand}
    */
-  public getScene(args: GetSceneCommandInput, options?: __HttpHandlerOptions): Promise<GetSceneCommandOutput>;
-  public getScene(args: GetSceneCommandInput, cb: (err: any, data?: GetSceneCommandOutput) => void): void;
-  public getScene(
+  getScene(
     args: GetSceneCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<GetSceneCommandOutput>;
+  getScene(
+    args: GetSceneCommandInput,
     cb: (err: any, data?: GetSceneCommandOutput) => void
   ): void;
-  public getScene(
+  getScene(
     args: GetSceneCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSceneCommandOutput) => void),
-    cb?: (err: any, data?: GetSceneCommandOutput) => void
-  ): Promise<GetSceneCommandOutput> | void {
-    const command = new GetSceneCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: GetSceneCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves information about a workspace.</p>
+   * @see {@link GetSyncJobCommand}
    */
-  public getWorkspace(
+  getSyncJob(
+    args: GetSyncJobCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<GetSyncJobCommandOutput>;
+  getSyncJob(
+    args: GetSyncJobCommandInput,
+    cb: (err: any, data?: GetSyncJobCommandOutput) => void
+  ): void;
+  getSyncJob(
+    args: GetSyncJobCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: GetSyncJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetWorkspaceCommand}
+   */
+  getWorkspace(
     args: GetWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<GetWorkspaceCommandOutput>;
-  public getWorkspace(args: GetWorkspaceCommandInput, cb: (err: any, data?: GetWorkspaceCommandOutput) => void): void;
-  public getWorkspace(
+  getWorkspace(
     args: GetWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetWorkspaceCommandOutput) => void
   ): void;
-  public getWorkspace(
+  getWorkspace(
     args: GetWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: GetWorkspaceCommandOutput) => void
-  ): Promise<GetWorkspaceCommandOutput> | void {
-    const command = new GetWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: GetWorkspaceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all component types in a workspace.</p>
+   * @see {@link ListComponentsCommand}
    */
-  public listComponentTypes(
+  listComponents(
+    args: ListComponentsCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<ListComponentsCommandOutput>;
+  listComponents(
+    args: ListComponentsCommandInput,
+    cb: (err: any, data?: ListComponentsCommandOutput) => void
+  ): void;
+  listComponents(
+    args: ListComponentsCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ListComponentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListComponentTypesCommand}
+   */
+  listComponentTypes(
     args: ListComponentTypesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<ListComponentTypesCommandOutput>;
-  public listComponentTypes(
+  listComponentTypes(
     args: ListComponentTypesCommandInput,
     cb: (err: any, data?: ListComponentTypesCommandOutput) => void
   ): void;
-  public listComponentTypes(
+  listComponentTypes(
     args: ListComponentTypesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: ListComponentTypesCommandOutput) => void
   ): void;
-  public listComponentTypes(
-    args: ListComponentTypesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListComponentTypesCommandOutput) => void),
-    cb?: (err: any, data?: ListComponentTypesCommandOutput) => void
-  ): Promise<ListComponentTypesCommandOutput> | void {
-    const command = new ListComponentTypesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all entities in a workspace.</p>
+   * @see {@link ListEntitiesCommand}
    */
-  public listEntities(
+  listEntities(
     args: ListEntitiesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<ListEntitiesCommandOutput>;
-  public listEntities(args: ListEntitiesCommandInput, cb: (err: any, data?: ListEntitiesCommandOutput) => void): void;
-  public listEntities(
+  listEntities(
     args: ListEntitiesCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListEntitiesCommandOutput) => void
   ): void;
-  public listEntities(
+  listEntities(
     args: ListEntitiesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEntitiesCommandOutput) => void),
-    cb?: (err: any, data?: ListEntitiesCommandOutput) => void
-  ): Promise<ListEntitiesCommandOutput> | void {
-    const command = new ListEntitiesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ListEntitiesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all scenes in a workspace.</p>
+   * @see {@link ListMetadataTransferJobsCommand}
    */
-  public listScenes(args: ListScenesCommandInput, options?: __HttpHandlerOptions): Promise<ListScenesCommandOutput>;
-  public listScenes(args: ListScenesCommandInput, cb: (err: any, data?: ListScenesCommandOutput) => void): void;
-  public listScenes(
+  listMetadataTransferJobs(
+    args: ListMetadataTransferJobsCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<ListMetadataTransferJobsCommandOutput>;
+  listMetadataTransferJobs(
+    args: ListMetadataTransferJobsCommandInput,
+    cb: (err: any, data?: ListMetadataTransferJobsCommandOutput) => void
+  ): void;
+  listMetadataTransferJobs(
+    args: ListMetadataTransferJobsCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ListMetadataTransferJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPropertiesCommand}
+   */
+  listProperties(
+    args: ListPropertiesCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<ListPropertiesCommandOutput>;
+  listProperties(
+    args: ListPropertiesCommandInput,
+    cb: (err: any, data?: ListPropertiesCommandOutput) => void
+  ): void;
+  listProperties(
+    args: ListPropertiesCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ListPropertiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListScenesCommand}
+   */
+  listScenes(
     args: ListScenesCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<ListScenesCommandOutput>;
+  listScenes(
+    args: ListScenesCommandInput,
     cb: (err: any, data?: ListScenesCommandOutput) => void
   ): void;
-  public listScenes(
+  listScenes(
     args: ListScenesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListScenesCommandOutput) => void),
-    cb?: (err: any, data?: ListScenesCommandOutput) => void
-  ): Promise<ListScenesCommandOutput> | void {
-    const command = new ListScenesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ListScenesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all tags associated with a resource.</p>
+   * @see {@link ListSyncJobsCommand}
    */
-  public listTagsForResource(
+  listSyncJobs(
+    args: ListSyncJobsCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<ListSyncJobsCommandOutput>;
+  listSyncJobs(
+    args: ListSyncJobsCommandInput,
+    cb: (err: any, data?: ListSyncJobsCommandOutput) => void
+  ): void;
+  listSyncJobs(
+    args: ListSyncJobsCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ListSyncJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSyncResourcesCommand}
+   */
+  listSyncResources(
+    args: ListSyncResourcesCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<ListSyncResourcesCommandOutput>;
+  listSyncResources(
+    args: ListSyncResourcesCommandInput,
+    cb: (err: any, data?: ListSyncResourcesCommandOutput) => void
+  ): void;
+  listSyncResources(
+    args: ListSyncResourcesCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: ListSyncResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about workspaces in the current account.</p>
+   * @see {@link ListWorkspacesCommand}
    */
-  public listWorkspaces(
+  listWorkspaces(): Promise<ListWorkspacesCommandOutput>;
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<ListWorkspacesCommandOutput>;
-  public listWorkspaces(
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
     cb: (err: any, data?: ListWorkspacesCommandOutput) => void
   ): void;
-  public listWorkspaces(
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: ListWorkspacesCommandOutput) => void
   ): void;
-  public listWorkspaces(
-    args: ListWorkspacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkspacesCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkspacesCommandOutput) => void
-  ): Promise<ListWorkspacesCommandOutput> | void {
-    const command = new ListWorkspacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds tags to a resource.</p>
+   * @see {@link TagResourceCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates information in a component type.</p>
+   * @see {@link UpdateComponentTypeCommand}
    */
-  public updateComponentType(
+  updateComponentType(
     args: UpdateComponentTypeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<UpdateComponentTypeCommandOutput>;
-  public updateComponentType(
+  updateComponentType(
     args: UpdateComponentTypeCommandInput,
     cb: (err: any, data?: UpdateComponentTypeCommandOutput) => void
   ): void;
-  public updateComponentType(
+  updateComponentType(
     args: UpdateComponentTypeCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: UpdateComponentTypeCommandOutput) => void
   ): void;
-  public updateComponentType(
-    args: UpdateComponentTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateComponentTypeCommandOutput) => void),
-    cb?: (err: any, data?: UpdateComponentTypeCommandOutput) => void
-  ): Promise<UpdateComponentTypeCommandOutput> | void {
-    const command = new UpdateComponentTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an entity.</p>
+   * @see {@link UpdateEntityCommand}
    */
-  public updateEntity(
+  updateEntity(
     args: UpdateEntityCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<UpdateEntityCommandOutput>;
-  public updateEntity(args: UpdateEntityCommandInput, cb: (err: any, data?: UpdateEntityCommandOutput) => void): void;
-  public updateEntity(
+  updateEntity(
     args: UpdateEntityCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateEntityCommandOutput) => void
   ): void;
-  public updateEntity(
+  updateEntity(
     args: UpdateEntityCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateEntityCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEntityCommandOutput) => void
-  ): Promise<UpdateEntityCommandOutput> | void {
-    const command = new UpdateEntityCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: UpdateEntityCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates a scene.</p>
+   * @see {@link UpdatePricingPlanCommand}
    */
-  public updateScene(args: UpdateSceneCommandInput, options?: __HttpHandlerOptions): Promise<UpdateSceneCommandOutput>;
-  public updateScene(args: UpdateSceneCommandInput, cb: (err: any, data?: UpdateSceneCommandOutput) => void): void;
-  public updateScene(
+  updatePricingPlan(
+    args: UpdatePricingPlanCommandInput,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<UpdatePricingPlanCommandOutput>;
+  updatePricingPlan(
+    args: UpdatePricingPlanCommandInput,
+    cb: (err: any, data?: UpdatePricingPlanCommandOutput) => void
+  ): void;
+  updatePricingPlan(
+    args: UpdatePricingPlanCommandInput,
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: UpdatePricingPlanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSceneCommand}
+   */
+  updateScene(
     args: UpdateSceneCommandInput,
-    options: __HttpHandlerOptions,
+    options?: IoTTwinMakerRequestOptions
+  ): Promise<UpdateSceneCommandOutput>;
+  updateScene(
+    args: UpdateSceneCommandInput,
     cb: (err: any, data?: UpdateSceneCommandOutput) => void
   ): void;
-  public updateScene(
+  updateScene(
     args: UpdateSceneCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSceneCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSceneCommandOutput) => void
-  ): Promise<UpdateSceneCommandOutput> | void {
-    const command = new UpdateSceneCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: IoTTwinMakerRequestOptions,
+    cb: (err: any, data?: UpdateSceneCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates a workspace.</p>
+   * @see {@link UpdateWorkspaceCommand}
    */
-  public updateWorkspace(
+  updateWorkspace(
     args: UpdateWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: IoTTwinMakerRequestOptions
   ): Promise<UpdateWorkspaceCommandOutput>;
-  public updateWorkspace(
+  updateWorkspace(
     args: UpdateWorkspaceCommandInput,
     cb: (err: any, data?: UpdateWorkspaceCommandOutput) => void
   ): void;
-  public updateWorkspace(
+  updateWorkspace(
     args: UpdateWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: IoTTwinMakerRequestOptions,
     cb: (err: any, data?: UpdateWorkspaceCommandOutput) => void
   ): void;
-  public updateWorkspace(
-    args: UpdateWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkspaceCommandOutput) => void
-  ): Promise<UpdateWorkspaceCommandOutput> | void {
-    const command = new UpdateWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ExecuteQueryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ExecuteQueryCommandOutput}.
+   */
+  paginateExecuteQuery(
+    args: ExecuteQueryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ExecuteQueryCommandOutput>;
+
+  /**
+   * @see {@link GetPropertyValueCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetPropertyValueCommandOutput}.
+   */
+  paginateGetPropertyValue(
+    args: GetPropertyValueCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetPropertyValueCommandOutput>;
+
+  /**
+   * @see {@link GetPropertyValueHistoryCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetPropertyValueHistoryCommandOutput}.
+   */
+  paginateGetPropertyValueHistory(
+    args: GetPropertyValueHistoryCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetPropertyValueHistoryCommandOutput>;
+
+  /**
+   * @see {@link ListComponentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListComponentsCommandOutput}.
+   */
+  paginateListComponents(
+    args: ListComponentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListComponentsCommandOutput>;
+
+  /**
+   * @see {@link ListComponentTypesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListComponentTypesCommandOutput}.
+   */
+  paginateListComponentTypes(
+    args: ListComponentTypesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListComponentTypesCommandOutput>;
+
+  /**
+   * @see {@link ListEntitiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEntitiesCommandOutput}.
+   */
+  paginateListEntities(
+    args: ListEntitiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEntitiesCommandOutput>;
+
+  /**
+   * @see {@link ListMetadataTransferJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMetadataTransferJobsCommandOutput}.
+   */
+  paginateListMetadataTransferJobs(
+    args: ListMetadataTransferJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMetadataTransferJobsCommandOutput>;
+
+  /**
+   * @see {@link ListPropertiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPropertiesCommandOutput}.
+   */
+  paginateListProperties(
+    args: ListPropertiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPropertiesCommandOutput>;
+
+  /**
+   * @see {@link ListScenesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListScenesCommandOutput}.
+   */
+  paginateListScenes(
+    args: ListScenesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListScenesCommandOutput>;
+
+  /**
+   * @see {@link ListSyncJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSyncJobsCommandOutput}.
+   */
+  paginateListSyncJobs(
+    args: ListSyncJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSyncJobsCommandOutput>;
+
+  /**
+   * @see {@link ListSyncResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSyncResourcesCommandOutput}.
+   */
+  paginateListSyncResources(
+    args: ListSyncResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSyncResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListWorkspacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkspacesCommandOutput}.
+   */
+  paginateListWorkspaces(
+    args?: ListWorkspacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkspacesCommandOutput>;
 }
+
+/**
+ * <p>IoT TwinMaker is a service with which you can
+ *          build operational digital twins of physical systems. IoT TwinMaker overlays measurements
+ *          and analysis from real-world sensors, cameras, and enterprise applications so you can
+ *          create data visualizations to monitor your physical factory, building, or industrial plant.
+ *          You can use this real-world data to monitor operations and diagnose and repair
+ *          errors.</p>
+ * @public
+ */
+export class IoTTwinMaker extends IoTTwinMakerClient implements IoTTwinMaker {}
+createAggregatedClient(commands, IoTTwinMaker, { paginators });

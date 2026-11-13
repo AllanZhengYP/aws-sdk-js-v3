@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LexModelsV2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LexModelsV2Client";
-import {
-  DescribeBotRecommendationRequest,
-  DescribeBotRecommendationRequestFilterSensitiveLog,
-  DescribeBotRecommendationResponse,
-  DescribeBotRecommendationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeBotRecommendationCommand,
-  serializeAws_restJson1DescribeBotRecommendationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeBotRecommendationRequest, DescribeBotRecommendationResponse } from "../models/models_0";
+import { DescribeBotRecommendation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBotRecommendationCommand}.
+ */
 export interface DescribeBotRecommendationCommandInput extends DescribeBotRecommendationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBotRecommendationCommand}.
+ */
 export interface DescribeBotRecommendationCommandOutput extends DescribeBotRecommendationResponse, __MetadataBearer {}
 
 /**
@@ -38,71 +33,112 @@ export interface DescribeBotRecommendationCommandOutput extends DescribeBotRecom
  * ```javascript
  * import { LexModelsV2Client, DescribeBotRecommendationCommand } from "@aws-sdk/client-lex-models-v2"; // ES Modules import
  * // const { LexModelsV2Client, DescribeBotRecommendationCommand } = require("@aws-sdk/client-lex-models-v2"); // CommonJS import
+ * // import type { LexModelsV2ClientConfig } from "@aws-sdk/client-lex-models-v2";
+ * const config = {}; // type is LexModelsV2ClientConfig
  * const client = new LexModelsV2Client(config);
+ * const input = { // DescribeBotRecommendationRequest
+ *   botId: "STRING_VALUE", // required
+ *   botVersion: "STRING_VALUE", // required
+ *   localeId: "STRING_VALUE", // required
+ *   botRecommendationId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeBotRecommendationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBotRecommendationResponse
+ * //   botId: "STRING_VALUE",
+ * //   botVersion: "STRING_VALUE",
+ * //   localeId: "STRING_VALUE",
+ * //   botRecommendationStatus: "Processing" || "Deleting" || "Deleted" || "Downloading" || "Updating" || "Available" || "Failed" || "Stopping" || "Stopped",
+ * //   botRecommendationId: "STRING_VALUE",
+ * //   failureReasons: [ // FailureReasons
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   creationDateTime: new Date("TIMESTAMP"),
+ * //   lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //   transcriptSourceSetting: { // TranscriptSourceSetting
+ * //     s3BucketTranscriptSource: { // S3BucketTranscriptSource
+ * //       s3BucketName: "STRING_VALUE", // required
+ * //       pathFormat: { // PathFormat
+ * //         objectPrefixes: [ // ObjectPrefixes
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       transcriptFormat: "Lex", // required
+ * //       transcriptFilter: { // TranscriptFilter
+ * //         lexTranscriptFilter: { // LexTranscriptFilter
+ * //           dateRangeFilter: { // DateRangeFilter
+ * //             startDateTime: new Date("TIMESTAMP"), // required
+ * //             endDateTime: new Date("TIMESTAMP"), // required
+ * //           },
+ * //         },
+ * //       },
+ * //       kmsKeyArn: "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   encryptionSetting: { // EncryptionSetting
+ * //     kmsKeyArn: "STRING_VALUE",
+ * //     botLocaleExportPassword: "STRING_VALUE",
+ * //     associatedTranscriptsPassword: "STRING_VALUE",
+ * //   },
+ * //   botRecommendationResults: { // BotRecommendationResults
+ * //     botLocaleExportUrl: "STRING_VALUE",
+ * //     associatedTranscriptsUrl: "STRING_VALUE",
+ * //     statistics: { // BotRecommendationResultStatistics
+ * //       intents: { // IntentStatistics
+ * //         discoveredIntentCount: Number("int"),
+ * //       },
+ * //       slotTypes: { // SlotTypeStatistics
+ * //         discoveredSlotTypeCount: Number("int"),
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeBotRecommendationCommandInput - {@link DescribeBotRecommendationCommandInput}
+ * @returns {@link DescribeBotRecommendationCommandOutput}
  * @see {@link DescribeBotRecommendationCommandInput} for command's `input` shape.
  * @see {@link DescribeBotRecommendationCommandOutput} for command's `response` shape.
  * @see {@link LexModelsV2ClientResolvedConfig | config} for LexModelsV2Client's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service encountered an unexpected condition. Try your request
+ *          again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>You asked to describe a resource that doesn't exist. Check the
+ *          resource that you are requesting and try again.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request rate is too high. Reduce the frequency of
+ *          requests.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the input parameters in your request isn't valid. Check the
+ *          parameters and try your request again.</p>
+ *
+ * @throws {@link LexModelsV2ServiceException}
+ * <p>Base exception class for all service exceptions from LexModelsV2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBotRecommendationCommand extends $Command<
-  DescribeBotRecommendationCommandInput,
-  DescribeBotRecommendationCommandOutput,
-  LexModelsV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBotRecommendationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LexModelsV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBotRecommendationCommandInput, DescribeBotRecommendationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LexModelsV2Client";
-    const commandName = "DescribeBotRecommendationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBotRecommendationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBotRecommendationResponseFilterSensitiveLog,
+export class DescribeBotRecommendationCommand extends command<DescribeBotRecommendationCommandInput, DescribeBotRecommendationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBotRecommendation",
+  DescribeBotRecommendation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBotRecommendationRequest;
+      output: DescribeBotRecommendationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeBotRecommendationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeBotRecommendationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeBotRecommendationCommandOutput> {
-    return deserializeAws_restJson1DescribeBotRecommendationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBotRecommendationCommandInput;
+      output: DescribeBotRecommendationCommandOutput;
+    };
+  };
 }

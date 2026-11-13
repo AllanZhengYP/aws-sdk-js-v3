@@ -1,115 +1,94 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeFleetAdvisorLsaAnalysisRequest,
-  DescribeFleetAdvisorLsaAnalysisRequestFilterSensitiveLog,
   DescribeFleetAdvisorLsaAnalysisResponse,
-  DescribeFleetAdvisorLsaAnalysisResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1DescribeFleetAdvisorLsaAnalysisCommand,
-  serializeAws_json1_1DescribeFleetAdvisorLsaAnalysisCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DescribeFleetAdvisorLsaAnalysisCommandInput extends DescribeFleetAdvisorLsaAnalysisRequest {}
-export interface DescribeFleetAdvisorLsaAnalysisCommandOutput
-  extends DescribeFleetAdvisorLsaAnalysisResponse,
-    __MetadataBearer {}
+import { DescribeFleetAdvisorLsaAnalysis$ } from "../schemas/schemas_0";
 
 /**
- * <p>Provides descriptions of large-scale assessment (LSA) analyses produced by your
- *             Fleet Advisor collectors.
- *         </p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFleetAdvisorLsaAnalysisCommand}.
+ */
+export interface DescribeFleetAdvisorLsaAnalysisCommandInput extends DescribeFleetAdvisorLsaAnalysisRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFleetAdvisorLsaAnalysisCommand}.
+ */
+export interface DescribeFleetAdvisorLsaAnalysisCommandOutput extends DescribeFleetAdvisorLsaAnalysisResponse, __MetadataBearer {}
+
+/**
+ * <important>
+ *             <p>
+ * End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html">Amazon Web Services DMS Fleet Advisor end of support</a>.
+ * </p>
+ *          </important>
+ *          <p>Provides descriptions of large-scale assessment (LSA) analyses produced by your Fleet
+ *             Advisor collectors. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DatabaseMigrationServiceClient, DescribeFleetAdvisorLsaAnalysisCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DescribeFleetAdvisorLsaAnalysisCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DescribeFleetAdvisorLsaAnalysisRequest
+ *   MaxRecords: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeFleetAdvisorLsaAnalysisCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFleetAdvisorLsaAnalysisResponse
+ * //   Analysis: [ // FleetAdvisorLsaAnalysisResponseList
+ * //     { // FleetAdvisorLsaAnalysisResponse
+ * //       LsaAnalysisId: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeFleetAdvisorLsaAnalysisCommandInput - {@link DescribeFleetAdvisorLsaAnalysisCommandInput}
+ * @returns {@link DescribeFleetAdvisorLsaAnalysisCommandOutput}
  * @see {@link DescribeFleetAdvisorLsaAnalysisCommandInput} for command's `input` shape.
  * @see {@link DescribeFleetAdvisorLsaAnalysisCommandOutput} for command's `response` shape.
  * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link InvalidResourceStateFault} (client fault)
+ *  <p>The resource is in a state that prevents it from being used for database migration.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFleetAdvisorLsaAnalysisCommand extends $Command<
-  DescribeFleetAdvisorLsaAnalysisCommandInput,
-  DescribeFleetAdvisorLsaAnalysisCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFleetAdvisorLsaAnalysisCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFleetAdvisorLsaAnalysisCommandInput, DescribeFleetAdvisorLsaAnalysisCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DescribeFleetAdvisorLsaAnalysisCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFleetAdvisorLsaAnalysisRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFleetAdvisorLsaAnalysisResponseFilterSensitiveLog,
+export class DescribeFleetAdvisorLsaAnalysisCommand extends command<DescribeFleetAdvisorLsaAnalysisCommandInput, DescribeFleetAdvisorLsaAnalysisCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFleetAdvisorLsaAnalysis",
+  DescribeFleetAdvisorLsaAnalysis$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFleetAdvisorLsaAnalysisRequest;
+      output: DescribeFleetAdvisorLsaAnalysisResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeFleetAdvisorLsaAnalysisCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeFleetAdvisorLsaAnalysisCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeFleetAdvisorLsaAnalysisCommandOutput> {
-    return deserializeAws_json1_1DescribeFleetAdvisorLsaAnalysisCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFleetAdvisorLsaAnalysisCommandInput;
+      output: DescribeFleetAdvisorLsaAnalysisCommandOutput;
+    };
+  };
 }

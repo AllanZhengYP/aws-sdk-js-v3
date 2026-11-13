@@ -1,4 +1,4 @@
-const { ListChangeSetsCommand, DeleteChangeSetCommand } = require("../../clients/client-cloudformation");
+const { ListChangeSetsCommand, DeleteChangeSetCommand } = require("@aws-sdk/client-cloudformation");
 
 exports.deleteStaleChangesets = async (client, stackName) => {
   const changesets = await client.send(
@@ -12,7 +12,8 @@ exports.deleteStaleChangesets = async (client, stackName) => {
       if (
         changeset.Status === "FAILED" &&
         changeset.StatusReason ===
-          `The submitted information didn't contain changes. Submit different information to create a change set.`
+          `The submitted information didn't contain changes. Submit different information to create a change set.` &&
+        changeset.CreationTime < new Date(Date.now() - 5 * 60 * 1000)
       ) {
         console.log("Deleting stale changeset", changeset.ChangeSetId);
         await new Promise((r) => setTimeout(r, 200));
@@ -24,7 +25,7 @@ exports.deleteStaleChangesets = async (client, stackName) => {
         );
       }
     }
-  } catch(e) {
+  } catch (e) {
     // non-blocking throttling error, potentially.
     console.error(e);
   }

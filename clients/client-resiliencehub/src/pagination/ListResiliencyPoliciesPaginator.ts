@@ -1,60 +1,24 @@
 // smithy-typescript generated code
-import { Paginator } from "@aws-sdk/types";
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListResiliencyPoliciesCommand,
   ListResiliencyPoliciesCommandInput,
   ListResiliencyPoliciesCommandOutput,
 } from "../commands/ListResiliencyPoliciesCommand";
-import { Resiliencehub } from "../Resiliencehub";
 import { ResiliencehubClient } from "../ResiliencehubClient";
-import { ResiliencehubPaginationConfiguration } from "./Interfaces";
+import type { ResiliencehubPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: ResiliencehubClient,
-  input: ListResiliencyPoliciesCommandInput,
-  ...args: any
-): Promise<ListResiliencyPoliciesCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListResiliencyPoliciesCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: Resiliencehub,
-  input: ListResiliencyPoliciesCommandInput,
-  ...args: any
-): Promise<ListResiliencyPoliciesCommandOutput> => {
-  // @ts-ignore
-  return await client.listResiliencyPolicies(input, ...args);
-};
-export async function* paginateListResiliencyPolicies(
+export const paginateListResiliencyPolicies: (
   config: ResiliencehubPaginationConfiguration,
   input: ListResiliencyPoliciesCommandInput,
-  ...additionalArguments: any
-): Paginator<ListResiliencyPoliciesCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListResiliencyPoliciesCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    if (config.client instanceof Resiliencehub) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof ResiliencehubClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected Resiliencehub | ResiliencehubClient");
-    }
-    yield page;
-    const prevToken = token;
-    token = page.nextToken;
-    hasNext = !!(token && (!config.stopOnSameToken || token !== prevToken));
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListResiliencyPoliciesCommandOutput> = createPaginator<
+  ResiliencehubPaginationConfiguration,
+  ListResiliencyPoliciesCommandInput,
+  ListResiliencyPoliciesCommandOutput
+>(ResiliencehubClient, ListResiliencyPoliciesCommand, "nextToken", "nextToken", "maxResults");

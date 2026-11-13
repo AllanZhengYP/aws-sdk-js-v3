@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KafkaClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KafkaClient";
-import {
-  UpdateConnectivityRequest,
-  UpdateConnectivityRequestFilterSensitiveLog,
-  UpdateConnectivityResponse,
-  UpdateConnectivityResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateConnectivityCommand,
-  serializeAws_restJson1UpdateConnectivityCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateConnectivityRequest, UpdateConnectivityResponse } from "../models/models_0";
+import { UpdateConnectivity$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateConnectivityCommand}.
+ */
 export interface UpdateConnectivityCommandInput extends UpdateConnectivityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateConnectivityCommand}.
+ */
 export interface UpdateConnectivityCommandOutput extends UpdateConnectivityResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,91 @@ export interface UpdateConnectivityCommandOutput extends UpdateConnectivityRespo
  * ```javascript
  * import { KafkaClient, UpdateConnectivityCommand } from "@aws-sdk/client-kafka"; // ES Modules import
  * // const { KafkaClient, UpdateConnectivityCommand } = require("@aws-sdk/client-kafka"); // CommonJS import
+ * // import type { KafkaClientConfig } from "@aws-sdk/client-kafka";
+ * const config = {}; // type is KafkaClientConfig
  * const client = new KafkaClient(config);
+ * const input = { // UpdateConnectivityRequest
+ *   ClusterArn: "STRING_VALUE", // required
+ *   ConnectivityInfo: { // ConnectivityInfo
+ *     PublicAccess: { // PublicAccess
+ *       Type: "STRING_VALUE",
+ *     },
+ *     VpcConnectivity: { // VpcConnectivity
+ *       ClientAuthentication: { // VpcConnectivityClientAuthentication
+ *         Sasl: { // VpcConnectivitySasl
+ *           Scram: { // VpcConnectivityScram
+ *             Enabled: true || false,
+ *           },
+ *           Iam: { // VpcConnectivityIam
+ *             Enabled: true || false,
+ *           },
+ *         },
+ *         Tls: { // VpcConnectivityTls
+ *           Enabled: true || false,
+ *         },
+ *       },
+ *     },
+ *     NetworkType: "IPV4" || "DUAL",
+ *   },
+ *   CurrentVersion: "STRING_VALUE", // required
+ *   ZookeeperAccess: { // ZookeeperAccess
+ *     Enabled: true || false,
+ *   },
+ * };
  * const command = new UpdateConnectivityCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateConnectivityResponse
+ * //   ClusterArn: "STRING_VALUE",
+ * //   ClusterOperationArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateConnectivityCommandInput - {@link UpdateConnectivityCommandInput}
+ * @returns {@link UpdateConnectivityCommandOutput}
  * @see {@link UpdateConnectivityCommandInput} for command's `input` shape.
  * @see {@link UpdateConnectivityCommandOutput} for command's `response` shape.
  * @see {@link KafkaClientResolvedConfig | config} for KafkaClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link InternalServerErrorException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>Returns information about an error.</p>
+ *
+ * @throws {@link KafkaServiceException}
+ * <p>Base exception class for all service exceptions from Kafka service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateConnectivityCommand extends $Command<
-  UpdateConnectivityCommandInput,
-  UpdateConnectivityCommandOutput,
-  KafkaClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateConnectivityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KafkaClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateConnectivityCommandInput, UpdateConnectivityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KafkaClient";
-    const commandName = "UpdateConnectivityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateConnectivityRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateConnectivityResponseFilterSensitiveLog,
+export class UpdateConnectivityCommand extends command<UpdateConnectivityCommandInput, UpdateConnectivityCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateConnectivity",
+  UpdateConnectivity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateConnectivityRequest;
+      output: UpdateConnectivityResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateConnectivityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateConnectivityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateConnectivityCommandOutput> {
-    return deserializeAws_restJson1UpdateConnectivityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateConnectivityCommandInput;
+      output: UpdateConnectivityCommandOutput;
+    };
+  };
 }

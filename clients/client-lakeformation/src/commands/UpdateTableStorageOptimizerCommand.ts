@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
-  UpdateTableStorageOptimizerRequest,
-  UpdateTableStorageOptimizerRequestFilterSensitiveLog,
-  UpdateTableStorageOptimizerResponse,
-  UpdateTableStorageOptimizerResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateTableStorageOptimizerCommand,
-  serializeAws_restJson1UpdateTableStorageOptimizerCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateTableStorageOptimizerRequest, UpdateTableStorageOptimizerResponse } from "../models/models_0";
+import { UpdateTableStorageOptimizer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateTableStorageOptimizerCommand}.
+ */
 export interface UpdateTableStorageOptimizerCommandInput extends UpdateTableStorageOptimizerRequest {}
-export interface UpdateTableStorageOptimizerCommandOutput
-  extends UpdateTableStorageOptimizerResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateTableStorageOptimizerCommand}.
+ */
+export interface UpdateTableStorageOptimizerCommandOutput extends UpdateTableStorageOptimizerResponse, __MetadataBearer {}
 
 /**
  * <p>Updates the configuration of the storage optimizers for a table.</p>
@@ -36,71 +29,66 @@ export interface UpdateTableStorageOptimizerCommandOutput
  * ```javascript
  * import { LakeFormationClient, UpdateTableStorageOptimizerCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, UpdateTableStorageOptimizerCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // UpdateTableStorageOptimizerRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE", // required
+ *   TableName: "STRING_VALUE", // required
+ *   StorageOptimizerConfig: { // StorageOptimizerConfigMap // required
+ *     "<keys>": { // StorageOptimizerConfig
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ * };
  * const command = new UpdateTableStorageOptimizerCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateTableStorageOptimizerResponse
+ * //   Result: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param UpdateTableStorageOptimizerCommandInput - {@link UpdateTableStorageOptimizerCommandInput}
+ * @returns {@link UpdateTableStorageOptimizerCommandOutput}
  * @see {@link UpdateTableStorageOptimizerCommandInput} for command's `input` shape.
  * @see {@link UpdateTableStorageOptimizerCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateTableStorageOptimizerCommand extends $Command<
-  UpdateTableStorageOptimizerCommandInput,
-  UpdateTableStorageOptimizerCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateTableStorageOptimizerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateTableStorageOptimizerCommandInput, UpdateTableStorageOptimizerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "UpdateTableStorageOptimizerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateTableStorageOptimizerRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateTableStorageOptimizerResponseFilterSensitiveLog,
+export class UpdateTableStorageOptimizerCommand extends command<UpdateTableStorageOptimizerCommandInput, UpdateTableStorageOptimizerCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTableStorageOptimizer",
+  UpdateTableStorageOptimizer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTableStorageOptimizerRequest;
+      output: UpdateTableStorageOptimizerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateTableStorageOptimizerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateTableStorageOptimizerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateTableStorageOptimizerCommandOutput> {
-    return deserializeAws_restJson1UpdateTableStorageOptimizerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateTableStorageOptimizerCommandInput;
+      output: UpdateTableStorageOptimizerCommandOutput;
+    };
+  };
 }

@@ -1,35 +1,31 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListPricesRequest,
-  ListPricesRequestFilterSensitiveLog,
-  ListPricesResponse,
-  ListPricesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListPricesCommand,
-  serializeAws_json1_1ListPricesCommand,
-} from "../protocols/Aws_json1_1";
-import { Route53DomainsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53DomainsClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPricesRequest, ListPricesResponse } from "../models/models_0";
+import { ListPrices$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPricesCommand}.
+ */
 export interface ListPricesCommandInput extends ListPricesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPricesCommand}.
+ */
 export interface ListPricesCommandOutput extends ListPricesResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the following prices for either all the TLDs supported by Route 53, or the specified TLD:</p>
- * 		       <ul>
+ * <p>Lists the following prices for either all the TLDs supported by Route 53, or
+ * 			the specified TLD:</p>
+ *          <ul>
  *             <li>
  *                <p>Registration</p>
  *             </li>
@@ -40,79 +36,105 @@ export interface ListPricesCommandOutput extends ListPricesResponse, __MetadataB
  *                <p>Owner change</p>
  *             </li>
  *             <li>
- *                <p>Domain renewal</p>
+ *                <p>Renewal</p>
  *             </li>
  *             <li>
- *                <p>Domain restoration</p>
+ *                <p>Restoration</p>
  *             </li>
  *          </ul>
+ *          <note>
+ *             <p>The prices that <code>ListPrices</code> returns are the standard rates for a TLD.
+ * 					<code>ListPrices</code> doesn't return registry premium prices, which apply to
+ * 				individual domain names rather than to a TLD. To get accurate pricing for a specific
+ * 				domain name, including premium prices, call <code>GetDomainPrices</code>.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Route53DomainsClient, ListPricesCommand } from "@aws-sdk/client-route-53-domains"; // ES Modules import
  * // const { Route53DomainsClient, ListPricesCommand } = require("@aws-sdk/client-route-53-domains"); // CommonJS import
+ * // import type { Route53DomainsClientConfig } from "@aws-sdk/client-route-53-domains";
+ * const config = {}; // type is Route53DomainsClientConfig
  * const client = new Route53DomainsClient(config);
+ * const input = { // ListPricesRequest
+ *   Tld: "STRING_VALUE",
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListPricesCommand(input);
  * const response = await client.send(command);
+ * // { // ListPricesResponse
+ * //   Prices: [ // DomainPriceList
+ * //     { // DomainPrice
+ * //       Name: "STRING_VALUE",
+ * //       RegistrationPrice: { // PriceWithCurrency
+ * //         Price: Number("double"), // required
+ * //         Currency: "STRING_VALUE", // required
+ * //         PriceType: "STANDARD" || "REGISTRY_PREMIUM",
+ * //       },
+ * //       TransferPrice: {
+ * //         Price: Number("double"), // required
+ * //         Currency: "STRING_VALUE", // required
+ * //         PriceType: "STANDARD" || "REGISTRY_PREMIUM",
+ * //       },
+ * //       RenewalPrice: {
+ * //         Price: Number("double"), // required
+ * //         Currency: "STRING_VALUE", // required
+ * //         PriceType: "STANDARD" || "REGISTRY_PREMIUM",
+ * //       },
+ * //       ChangeOwnershipPrice: {
+ * //         Price: Number("double"), // required
+ * //         Currency: "STRING_VALUE", // required
+ * //         PriceType: "STANDARD" || "REGISTRY_PREMIUM",
+ * //       },
+ * //       RestorationPrice: {
+ * //         Price: Number("double"), // required
+ * //         Currency: "STRING_VALUE", // required
+ * //         PriceType: "STANDARD" || "REGISTRY_PREMIUM",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextPageMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPricesCommandInput - {@link ListPricesCommandInput}
+ * @returns {@link ListPricesCommandOutput}
  * @see {@link ListPricesCommandInput} for command's `input` shape.
  * @see {@link ListPricesCommandOutput} for command's `response` shape.
  * @see {@link Route53DomainsClientResolvedConfig | config} for Route53DomainsClient's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The requested item is not acceptable. For example, for APIs that accept a domain name,
+ * 			the request might specify a domain name that doesn't belong to the account that
+ * 			submitted the request. For <code>AcceptDomainTransferFromAnotherAwsAccount</code>, the
+ * 			password might be invalid.</p>
+ *
+ * @throws {@link UnsupportedTLD} (client fault)
+ *  <p>Amazon Route 53 does not support this top-level domain (TLD).</p>
+ *
+ * @throws {@link Route53DomainsServiceException}
+ * <p>Base exception class for all service exceptions from Route53Domains service.</p>
+ *
+ *
+ * @public
  */
-export class ListPricesCommand extends $Command<
-  ListPricesCommandInput,
-  ListPricesCommandOutput,
-  Route53DomainsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPricesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53DomainsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPricesCommandInput, ListPricesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53DomainsClient";
-    const commandName = "ListPricesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPricesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListPricesResponseFilterSensitiveLog,
+export class ListPricesCommand extends command<ListPricesCommandInput, ListPricesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPrices",
+  ListPrices$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPricesRequest;
+      output: ListPricesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPricesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListPricesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPricesCommandOutput> {
-    return deserializeAws_json1_1ListPricesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPricesCommandInput;
+      output: ListPricesCommandOutput;
+    };
+  };
 }

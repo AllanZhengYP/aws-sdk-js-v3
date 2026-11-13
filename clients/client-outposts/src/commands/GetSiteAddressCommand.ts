@@ -1,103 +1,102 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetSiteAddressInput,
-  GetSiteAddressInputFilterSensitiveLog,
-  GetSiteAddressOutput,
-  GetSiteAddressOutputFilterSensitiveLog,
-} from "../models/models_0";
-import { OutpostsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OutpostsClient";
-import {
-  deserializeAws_restJson1GetSiteAddressCommand,
-  serializeAws_restJson1GetSiteAddressCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSiteAddressInput, GetSiteAddressOutput } from "../models/models_0";
+import { GetSiteAddress$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSiteAddressCommand}.
+ */
 export interface GetSiteAddressCommandInput extends GetSiteAddressInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetSiteAddressCommand}.
+ */
 export interface GetSiteAddressCommandOutput extends GetSiteAddressOutput, __MetadataBearer {}
 
 /**
- * <p>
- *       Gets the site address.
- *     </p>
+ * <p> Gets the site address of the specified site. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OutpostsClient, GetSiteAddressCommand } from "@aws-sdk/client-outposts"; // ES Modules import
  * // const { OutpostsClient, GetSiteAddressCommand } = require("@aws-sdk/client-outposts"); // CommonJS import
+ * // import type { OutpostsClientConfig } from "@aws-sdk/client-outposts";
+ * const config = {}; // type is OutpostsClientConfig
  * const client = new OutpostsClient(config);
+ * const input = { // GetSiteAddressInput
+ *   SiteId: "STRING_VALUE", // required
+ *   AddressType: "SHIPPING_ADDRESS" || "OPERATING_ADDRESS", // required
+ * };
  * const command = new GetSiteAddressCommand(input);
  * const response = await client.send(command);
+ * // { // GetSiteAddressOutput
+ * //   SiteId: "STRING_VALUE",
+ * //   AddressType: "SHIPPING_ADDRESS" || "OPERATING_ADDRESS",
+ * //   Address: { // Address
+ * //     ContactName: "STRING_VALUE", // required
+ * //     ContactPhoneNumber: "STRING_VALUE", // required
+ * //     AddressLine1: "STRING_VALUE", // required
+ * //     AddressLine2: "STRING_VALUE",
+ * //     AddressLine3: "STRING_VALUE",
+ * //     City: "STRING_VALUE", // required
+ * //     StateOrRegion: "STRING_VALUE", // required
+ * //     DistrictOrCounty: "STRING_VALUE",
+ * //     PostalCode: "STRING_VALUE", // required
+ * //     CountryCode: "STRING_VALUE", // required
+ * //     Municipality: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSiteAddressCommandInput - {@link GetSiteAddressCommandInput}
+ * @returns {@link GetSiteAddressCommandOutput}
  * @see {@link GetSiteAddressCommandInput} for command's `input` shape.
  * @see {@link GetSiteAddressCommandOutput} for command's `response` shape.
  * @see {@link OutpostsClientResolvedConfig | config} for OutpostsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have permission to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified request is not valid.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link OutpostsServiceException}
+ * <p>Base exception class for all service exceptions from Outposts service.</p>
+ *
+ *
+ * @public
  */
-export class GetSiteAddressCommand extends $Command<
-  GetSiteAddressCommandInput,
-  GetSiteAddressCommandOutput,
-  OutpostsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSiteAddressCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OutpostsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSiteAddressCommandInput, GetSiteAddressCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OutpostsClient";
-    const commandName = "GetSiteAddressCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSiteAddressInputFilterSensitiveLog,
-      outputFilterSensitiveLog: GetSiteAddressOutputFilterSensitiveLog,
+export class GetSiteAddressCommand extends command<GetSiteAddressCommandInput, GetSiteAddressCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSiteAddress",
+  GetSiteAddress$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSiteAddressInput;
+      output: GetSiteAddressOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSiteAddressCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSiteAddressCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSiteAddressCommandOutput> {
-    return deserializeAws_restJson1GetSiteAddressCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSiteAddressCommandInput;
+      output: GetSiteAddressCommandOutput;
+    };
+  };
 }

@@ -1,448 +1,459 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { BraketClient } from "./BraketClient";
-import { CancelJobCommand, CancelJobCommandInput, CancelJobCommandOutput } from "./commands/CancelJobCommand";
+import { type CancelJobCommandInput, type CancelJobCommandOutput, CancelJobCommand } from "./commands/CancelJobCommand";
 import {
+  type CancelQuantumTaskCommandInput,
+  type CancelQuantumTaskCommandOutput,
   CancelQuantumTaskCommand,
-  CancelQuantumTaskCommandInput,
-  CancelQuantumTaskCommandOutput,
 } from "./commands/CancelQuantumTaskCommand";
-import { CreateJobCommand, CreateJobCommandInput, CreateJobCommandOutput } from "./commands/CreateJobCommand";
+import { type CreateJobCommandInput, type CreateJobCommandOutput, CreateJobCommand } from "./commands/CreateJobCommand";
 import {
+  type CreateQuantumTaskCommandInput,
+  type CreateQuantumTaskCommandOutput,
   CreateQuantumTaskCommand,
-  CreateQuantumTaskCommandInput,
-  CreateQuantumTaskCommandOutput,
 } from "./commands/CreateQuantumTaskCommand";
-import { GetDeviceCommand, GetDeviceCommandInput, GetDeviceCommandOutput } from "./commands/GetDeviceCommand";
-import { GetJobCommand, GetJobCommandInput, GetJobCommandOutput } from "./commands/GetJobCommand";
 import {
+  type CreateSpendingLimitCommandInput,
+  type CreateSpendingLimitCommandOutput,
+  CreateSpendingLimitCommand,
+} from "./commands/CreateSpendingLimitCommand";
+import {
+  type DeleteSpendingLimitCommandInput,
+  type DeleteSpendingLimitCommandOutput,
+  DeleteSpendingLimitCommand,
+} from "./commands/DeleteSpendingLimitCommand";
+import { type GetDeviceCommandInput, type GetDeviceCommandOutput, GetDeviceCommand } from "./commands/GetDeviceCommand";
+import { type GetJobCommandInput, type GetJobCommandOutput, GetJobCommand } from "./commands/GetJobCommand";
+import {
+  type GetQuantumTaskCommandInput,
+  type GetQuantumTaskCommandOutput,
   GetQuantumTaskCommand,
-  GetQuantumTaskCommandInput,
-  GetQuantumTaskCommandOutput,
 } from "./commands/GetQuantumTaskCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type SearchDevicesCommandInput,
+  type SearchDevicesCommandOutput,
   SearchDevicesCommand,
-  SearchDevicesCommandInput,
-  SearchDevicesCommandOutput,
 } from "./commands/SearchDevicesCommand";
-import { SearchJobsCommand, SearchJobsCommandInput, SearchJobsCommandOutput } from "./commands/SearchJobsCommand";
 import {
+  type SearchJobsCommandInput,
+  type SearchJobsCommandOutput,
+  SearchJobsCommand,
+} from "./commands/SearchJobsCommand";
+import {
+  type SearchQuantumTasksCommandInput,
+  type SearchQuantumTasksCommandOutput,
   SearchQuantumTasksCommand,
-  SearchQuantumTasksCommandInput,
-  SearchQuantumTasksCommandOutput,
 } from "./commands/SearchQuantumTasksCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type SearchSpendingLimitsCommandInput,
+  type SearchSpendingLimitsCommandOutput,
+  SearchSpendingLimitsCommand,
+} from "./commands/SearchSpendingLimitsCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
+import {
+  type UpdateSpendingLimitCommandInput,
+  type UpdateSpendingLimitCommandOutput,
+  UpdateSpendingLimitCommand,
+} from "./commands/UpdateSpendingLimitCommand";
+import { paginateSearchDevices } from "./pagination/SearchDevicesPaginator";
+import { paginateSearchJobs } from "./pagination/SearchJobsPaginator";
+import { paginateSearchQuantumTasks } from "./pagination/SearchQuantumTasksPaginator";
+import { paginateSearchSpendingLimits } from "./pagination/SearchSpendingLimitsPaginator";
+
+const commands = {
+  CancelJobCommand,
+  CancelQuantumTaskCommand,
+  CreateJobCommand,
+  CreateQuantumTaskCommand,
+  CreateSpendingLimitCommand,
+  DeleteSpendingLimitCommand,
+  GetDeviceCommand,
+  GetJobCommand,
+  GetQuantumTaskCommand,
+  ListTagsForResourceCommand,
+  SearchDevicesCommand,
+  SearchJobsCommand,
+  SearchQuantumTasksCommand,
+  SearchSpendingLimitsCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateSpendingLimitCommand,
+};
+const paginators = {
+  paginateSearchDevices,
+  paginateSearchJobs,
+  paginateSearchQuantumTasks,
+  paginateSearchSpendingLimits,
+};
 
 /**
- * <p>The Amazon Braket API Reference provides information about the operations and structures
- *          supported in Amazon Braket.</p>
- *          <p>Additional Resources:</p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a href="https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html">Amazon Braket Developer Guide</a>
- *                </p>
- *             </li>
- *          </ul>
+ * @public
  */
-export class Braket extends BraketClient {
+export interface BraketRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Braket {
   /**
-   * <p>Cancels an Amazon Braket job.</p>
+   * @see {@link CancelJobCommand}
    */
-  public cancelJob(args: CancelJobCommandInput, options?: __HttpHandlerOptions): Promise<CancelJobCommandOutput>;
-  public cancelJob(args: CancelJobCommandInput, cb: (err: any, data?: CancelJobCommandOutput) => void): void;
-  public cancelJob(
+  cancelJob(
     args: CancelJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BraketRequestOptions
+  ): Promise<CancelJobCommandOutput>;
+  cancelJob(
+    args: CancelJobCommandInput,
     cb: (err: any, data?: CancelJobCommandOutput) => void
   ): void;
-  public cancelJob(
+  cancelJob(
     args: CancelJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelJobCommandOutput) => void),
-    cb?: (err: any, data?: CancelJobCommandOutput) => void
-  ): Promise<CancelJobCommandOutput> | void {
-    const command = new CancelJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BraketRequestOptions,
+    cb: (err: any, data?: CancelJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Cancels the specified task.</p>
+   * @see {@link CancelQuantumTaskCommand}
    */
-  public cancelQuantumTask(
+  cancelQuantumTask(
     args: CancelQuantumTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BraketRequestOptions
   ): Promise<CancelQuantumTaskCommandOutput>;
-  public cancelQuantumTask(
+  cancelQuantumTask(
     args: CancelQuantumTaskCommandInput,
     cb: (err: any, data?: CancelQuantumTaskCommandOutput) => void
   ): void;
-  public cancelQuantumTask(
+  cancelQuantumTask(
     args: CancelQuantumTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: BraketRequestOptions,
     cb: (err: any, data?: CancelQuantumTaskCommandOutput) => void
   ): void;
-  public cancelQuantumTask(
-    args: CancelQuantumTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelQuantumTaskCommandOutput) => void),
-    cb?: (err: any, data?: CancelQuantumTaskCommandOutput) => void
-  ): Promise<CancelQuantumTaskCommandOutput> | void {
-    const command = new CancelQuantumTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an Amazon Braket job.</p>
+   * @see {@link CreateJobCommand}
    */
-  public createJob(args: CreateJobCommandInput, options?: __HttpHandlerOptions): Promise<CreateJobCommandOutput>;
-  public createJob(args: CreateJobCommandInput, cb: (err: any, data?: CreateJobCommandOutput) => void): void;
-  public createJob(
+  createJob(
     args: CreateJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BraketRequestOptions
+  ): Promise<CreateJobCommandOutput>;
+  createJob(
+    args: CreateJobCommandInput,
     cb: (err: any, data?: CreateJobCommandOutput) => void
   ): void;
-  public createJob(
+  createJob(
     args: CreateJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateJobCommandOutput) => void),
-    cb?: (err: any, data?: CreateJobCommandOutput) => void
-  ): Promise<CreateJobCommandOutput> | void {
-    const command = new CreateJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BraketRequestOptions,
+    cb: (err: any, data?: CreateJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a quantum task.</p>
+   * @see {@link CreateQuantumTaskCommand}
    */
-  public createQuantumTask(
+  createQuantumTask(
     args: CreateQuantumTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BraketRequestOptions
   ): Promise<CreateQuantumTaskCommandOutput>;
-  public createQuantumTask(
+  createQuantumTask(
     args: CreateQuantumTaskCommandInput,
     cb: (err: any, data?: CreateQuantumTaskCommandOutput) => void
   ): void;
-  public createQuantumTask(
+  createQuantumTask(
     args: CreateQuantumTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: BraketRequestOptions,
     cb: (err: any, data?: CreateQuantumTaskCommandOutput) => void
   ): void;
-  public createQuantumTask(
-    args: CreateQuantumTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateQuantumTaskCommandOutput) => void),
-    cb?: (err: any, data?: CreateQuantumTaskCommandOutput) => void
-  ): Promise<CreateQuantumTaskCommandOutput> | void {
-    const command = new CreateQuantumTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the devices available in Amazon Braket.</p>
-   *          <note>
-   *             <p>For backwards compatibility with older versions of BraketSchemas, OpenQASM
-   *             information is omitted from GetDevice API calls. To get this information the user-agent
-   *             needs to present a recent version of the BraketSchemas (1.8.0 or later). The Braket SDK
-   *             automatically reports this for you. If you do not see OpenQASM results in the GetDevice
-   *             response when using a Braket SDK, you may need to set AWS_EXECUTION_ENV environment
-   *             variable to configure user-agent. See the code examples provided below for how to do
-   *             this for the AWS CLI, Boto3, and the Go, Java, and JavaScript/TypeScript SDKs.</p>
-   *          </note>
+   * @see {@link CreateSpendingLimitCommand}
    */
-  public getDevice(args: GetDeviceCommandInput, options?: __HttpHandlerOptions): Promise<GetDeviceCommandOutput>;
-  public getDevice(args: GetDeviceCommandInput, cb: (err: any, data?: GetDeviceCommandOutput) => void): void;
-  public getDevice(
+  createSpendingLimit(
+    args: CreateSpendingLimitCommandInput,
+    options?: BraketRequestOptions
+  ): Promise<CreateSpendingLimitCommandOutput>;
+  createSpendingLimit(
+    args: CreateSpendingLimitCommandInput,
+    cb: (err: any, data?: CreateSpendingLimitCommandOutput) => void
+  ): void;
+  createSpendingLimit(
+    args: CreateSpendingLimitCommandInput,
+    options: BraketRequestOptions,
+    cb: (err: any, data?: CreateSpendingLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSpendingLimitCommand}
+   */
+  deleteSpendingLimit(
+    args: DeleteSpendingLimitCommandInput,
+    options?: BraketRequestOptions
+  ): Promise<DeleteSpendingLimitCommandOutput>;
+  deleteSpendingLimit(
+    args: DeleteSpendingLimitCommandInput,
+    cb: (err: any, data?: DeleteSpendingLimitCommandOutput) => void
+  ): void;
+  deleteSpendingLimit(
+    args: DeleteSpendingLimitCommandInput,
+    options: BraketRequestOptions,
+    cb: (err: any, data?: DeleteSpendingLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeviceCommand}
+   */
+  getDevice(
     args: GetDeviceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BraketRequestOptions
+  ): Promise<GetDeviceCommandOutput>;
+  getDevice(
+    args: GetDeviceCommandInput,
     cb: (err: any, data?: GetDeviceCommandOutput) => void
   ): void;
-  public getDevice(
+  getDevice(
     args: GetDeviceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDeviceCommandOutput) => void),
-    cb?: (err: any, data?: GetDeviceCommandOutput) => void
-  ): Promise<GetDeviceCommandOutput> | void {
-    const command = new GetDeviceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BraketRequestOptions,
+    cb: (err: any, data?: GetDeviceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves the specified Amazon Braket job.</p>
+   * @see {@link GetJobCommand}
    */
-  public getJob(args: GetJobCommandInput, options?: __HttpHandlerOptions): Promise<GetJobCommandOutput>;
-  public getJob(args: GetJobCommandInput, cb: (err: any, data?: GetJobCommandOutput) => void): void;
-  public getJob(
+  getJob(
     args: GetJobCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BraketRequestOptions
+  ): Promise<GetJobCommandOutput>;
+  getJob(
+    args: GetJobCommandInput,
     cb: (err: any, data?: GetJobCommandOutput) => void
   ): void;
-  public getJob(
+  getJob(
     args: GetJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetJobCommandOutput) => void),
-    cb?: (err: any, data?: GetJobCommandOutput) => void
-  ): Promise<GetJobCommandOutput> | void {
-    const command = new GetJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BraketRequestOptions,
+    cb: (err: any, data?: GetJobCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Retrieves the specified quantum task.</p>
+   * @see {@link GetQuantumTaskCommand}
    */
-  public getQuantumTask(
+  getQuantumTask(
     args: GetQuantumTaskCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BraketRequestOptions
   ): Promise<GetQuantumTaskCommandOutput>;
-  public getQuantumTask(
+  getQuantumTask(
     args: GetQuantumTaskCommandInput,
     cb: (err: any, data?: GetQuantumTaskCommandOutput) => void
   ): void;
-  public getQuantumTask(
+  getQuantumTask(
     args: GetQuantumTaskCommandInput,
-    options: __HttpHandlerOptions,
+    options: BraketRequestOptions,
     cb: (err: any, data?: GetQuantumTaskCommandOutput) => void
   ): void;
-  public getQuantumTask(
-    args: GetQuantumTaskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetQuantumTaskCommandOutput) => void),
-    cb?: (err: any, data?: GetQuantumTaskCommandOutput) => void
-  ): Promise<GetQuantumTaskCommandOutput> | void {
-    const command = new GetQuantumTaskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Shows the tags associated with this resource.</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BraketRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: BraketRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches for devices using the specified filters.</p>
+   * @see {@link SearchDevicesCommand}
    */
-  public searchDevices(
+  searchDevices(
     args: SearchDevicesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BraketRequestOptions
   ): Promise<SearchDevicesCommandOutput>;
-  public searchDevices(
+  searchDevices(
     args: SearchDevicesCommandInput,
     cb: (err: any, data?: SearchDevicesCommandOutput) => void
   ): void;
-  public searchDevices(
+  searchDevices(
     args: SearchDevicesCommandInput,
-    options: __HttpHandlerOptions,
+    options: BraketRequestOptions,
     cb: (err: any, data?: SearchDevicesCommandOutput) => void
   ): void;
-  public searchDevices(
-    args: SearchDevicesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchDevicesCommandOutput) => void),
-    cb?: (err: any, data?: SearchDevicesCommandOutput) => void
-  ): Promise<SearchDevicesCommandOutput> | void {
-    const command = new SearchDevicesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Searches for Amazon Braket jobs that match the specified filter values.</p>
+   * @see {@link SearchJobsCommand}
    */
-  public searchJobs(args: SearchJobsCommandInput, options?: __HttpHandlerOptions): Promise<SearchJobsCommandOutput>;
-  public searchJobs(args: SearchJobsCommandInput, cb: (err: any, data?: SearchJobsCommandOutput) => void): void;
-  public searchJobs(
+  searchJobs(
     args: SearchJobsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BraketRequestOptions
+  ): Promise<SearchJobsCommandOutput>;
+  searchJobs(
+    args: SearchJobsCommandInput,
     cb: (err: any, data?: SearchJobsCommandOutput) => void
   ): void;
-  public searchJobs(
+  searchJobs(
     args: SearchJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchJobsCommandOutput) => void),
-    cb?: (err: any, data?: SearchJobsCommandOutput) => void
-  ): Promise<SearchJobsCommandOutput> | void {
-    const command = new SearchJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BraketRequestOptions,
+    cb: (err: any, data?: SearchJobsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Searches for tasks that match the specified filter values.</p>
+   * @see {@link SearchQuantumTasksCommand}
    */
-  public searchQuantumTasks(
+  searchQuantumTasks(
     args: SearchQuantumTasksCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BraketRequestOptions
   ): Promise<SearchQuantumTasksCommandOutput>;
-  public searchQuantumTasks(
+  searchQuantumTasks(
     args: SearchQuantumTasksCommandInput,
     cb: (err: any, data?: SearchQuantumTasksCommandOutput) => void
   ): void;
-  public searchQuantumTasks(
+  searchQuantumTasks(
     args: SearchQuantumTasksCommandInput,
-    options: __HttpHandlerOptions,
+    options: BraketRequestOptions,
     cb: (err: any, data?: SearchQuantumTasksCommandOutput) => void
   ): void;
-  public searchQuantumTasks(
-    args: SearchQuantumTasksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SearchQuantumTasksCommandOutput) => void),
-    cb?: (err: any, data?: SearchQuantumTasksCommandOutput) => void
-  ): Promise<SearchQuantumTasksCommandOutput> | void {
-    const command = new SearchQuantumTasksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Add a tag to the specified resource.</p>
+   * @see {@link SearchSpendingLimitsCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  searchSpendingLimits(): Promise<SearchSpendingLimitsCommandOutput>;
+  searchSpendingLimits(
+    args: SearchSpendingLimitsCommandInput,
+    options?: BraketRequestOptions
+  ): Promise<SearchSpendingLimitsCommandOutput>;
+  searchSpendingLimits(
+    args: SearchSpendingLimitsCommandInput,
+    cb: (err: any, data?: SearchSpendingLimitsCommandOutput) => void
+  ): void;
+  searchSpendingLimits(
+    args: SearchSpendingLimitsCommandInput,
+    options: BraketRequestOptions,
+    cb: (err: any, data?: SearchSpendingLimitsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BraketRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BraketRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Remove tags from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BraketRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: BraketRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateSpendingLimitCommand}
+   */
+  updateSpendingLimit(
+    args: UpdateSpendingLimitCommandInput,
+    options?: BraketRequestOptions
+  ): Promise<UpdateSpendingLimitCommandOutput>;
+  updateSpendingLimit(
+    args: UpdateSpendingLimitCommandInput,
+    cb: (err: any, data?: UpdateSpendingLimitCommandOutput) => void
+  ): void;
+  updateSpendingLimit(
+    args: UpdateSpendingLimitCommandInput,
+    options: BraketRequestOptions,
+    cb: (err: any, data?: UpdateSpendingLimitCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchDevicesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchDevicesCommandOutput}.
+   */
+  paginateSearchDevices(
+    args: SearchDevicesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchDevicesCommandOutput>;
+
+  /**
+   * @see {@link SearchJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchJobsCommandOutput}.
+   */
+  paginateSearchJobs(
+    args: SearchJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchJobsCommandOutput>;
+
+  /**
+   * @see {@link SearchQuantumTasksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchQuantumTasksCommandOutput}.
+   */
+  paginateSearchQuantumTasks(
+    args: SearchQuantumTasksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchQuantumTasksCommandOutput>;
+
+  /**
+   * @see {@link SearchSpendingLimitsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchSpendingLimitsCommandOutput}.
+   */
+  paginateSearchSpendingLimits(
+    args?: SearchSpendingLimitsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchSpendingLimitsCommandOutput>;
 }
+
+/**
+ * <p>The Amazon Braket API Reference provides information about the operations and structures supported by Amazon Braket.</p> <p>To learn about the permissions required to call an Amazon Braket API action, see <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonbraket.html">Actions, resources, and condition keys for Amazon Braket</a>. <a href="https://amazon-braket-sdk-python.readthedocs.io/en/latest/#">Amazon Braket Python SDK</a> and the <a href="https://docs.aws.amazon.com/cli/latest/reference/braket/">AWS Command Line Interface</a> can be used to make discovery and creation of API calls easier. For more information about Amazon Braket features, see <a href="https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html">What is Amazon Braket?</a> and important <a href="https://docs.aws.amazon.com/braket/latest/developerguide/braket-terms.html">terms and concepts</a> in the <i>Amazon Braket Developer Guide</i>.</p> <p> <b>In this guide:</b> </p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p> <a>CommonParameters</a> </p> </li> <li> <p> <a>CommonErrors</a> </p> </li> </ul> <p> <b>Available languages for AWS SDK:</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Braket/NBraket.html">.NET</a> </p> </li> <li> <p> <a href="https://sdk.amazonaws.com/cpp/api/LATEST/root/html/index.html">C++</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/braket/">Go API reference</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/braket/package-summary.html">Java</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Braket.html">JavaScript</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.Braket.BraketClient.html">PHP</a> </p> </li> <li> <p> <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/braket.html">Python (Boto)</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket.html">Ruby</a> </p> </li> </ul> <p> <b>Code examples from the Amazon Braket Tutorials GitHub repository:</b> </p> <ul> <li> <p> <a href="https://github.com/amazon-braket/amazon-braket-examples">Amazon Braket Examples</a> </p> </li> </ul>
+ * @public
+ */
+export class Braket extends BraketClient implements Braket {}
+createAggregatedClient(commands, Braket, { paginators });

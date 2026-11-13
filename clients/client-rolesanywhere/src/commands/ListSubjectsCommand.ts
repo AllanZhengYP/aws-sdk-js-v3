@@ -1,105 +1,96 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListRequest,
-  ListRequestFilterSensitiveLog,
-  ListSubjectsResponse,
-  ListSubjectsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSubjectsCommand,
-  serializeAws_restJson1ListSubjectsCommand,
-} from "../protocols/Aws_restJson1";
-import { RolesAnywhereClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RolesAnywhereClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRequest, ListSubjectsResponse } from "../models/models_0";
+import { ListSubjects$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSubjectsCommand}.
+ */
 export interface ListSubjectsCommandInput extends ListRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSubjectsCommand}.
+ */
 export interface ListSubjectsCommandOutput extends ListSubjectsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p>
- *          <p>
- *             <b>Required permissions: </b>
- *             <code>rolesanywhere:ListSubjects</code>.
- *          </p>
+ * <p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListSubjects</code>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RolesAnywhereClient, ListSubjectsCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
  * // const { RolesAnywhereClient, ListSubjectsCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
  * const client = new RolesAnywhereClient(config);
+ * const input = { // ListRequest
+ *   nextToken: "STRING_VALUE",
+ *   pageSize: Number("int"),
+ * };
  * const command = new ListSubjectsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSubjectsResponse
+ * //   subjects: [ // SubjectSummaries
+ * //     { // SubjectSummary
+ * //       subjectArn: "STRING_VALUE",
+ * //       subjectId: "STRING_VALUE",
+ * //       enabled: true || false,
+ * //       x509Subject: "STRING_VALUE",
+ * //       lastSeenAt: new Date("TIMESTAMP"),
+ * //       createdAt: new Date("TIMESTAMP"),
+ * //       updatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSubjectsCommandInput - {@link ListSubjectsCommandInput}
+ * @returns {@link ListSubjectsCommandOutput}
  * @see {@link ListSubjectsCommandInput} for command's `input` shape.
  * @see {@link ListSubjectsCommandOutput} for command's `response` shape.
  * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
  */
-export class ListSubjectsCommand extends $Command<
-  ListSubjectsCommandInput,
-  ListSubjectsCommandOutput,
-  RolesAnywhereClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSubjectsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RolesAnywhereClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSubjectsCommandInput, ListSubjectsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RolesAnywhereClient";
-    const commandName = "ListSubjectsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListSubjectsResponseFilterSensitiveLog,
+export class ListSubjectsCommand extends command<ListSubjectsCommandInput, ListSubjectsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSubjects",
+  ListSubjects$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRequest;
+      output: ListSubjectsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSubjectsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSubjectsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSubjectsCommandOutput> {
-    return deserializeAws_restJson1ListSubjectsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSubjectsCommandInput;
+      output: ListSubjectsCommandOutput;
+    };
+  };
 }

@@ -1,8 +1,7 @@
-// polyfill exposes the same ReadableStream API as web, allowing easy testing
-import { ReadableStream } from "web-streams-polyfill";
+import { describe, expect, test as it } from "vitest";
 
-import { byteLength } from "../bytelength";
-import { RawDataPart as DataPart } from "../Upload";
+import { byteLength } from "../byteLength";
+import type { RawDataPart as DataPart } from "../Upload";
 import { getChunkStream as chunkFromReadable } from "./getChunkStream";
 import { getDataReadableStream } from "./getDataReadableStream";
 
@@ -40,6 +39,15 @@ describe("chunkFromReadable.name", () => {
 
     expect(chunks.length).toBe(1);
     expect(byteLength(chunks[0].data)).toEqual(68);
+    expect(chunks[0].partNumber).toEqual(1);
+    expect(chunks[0].lastPart).toBe(true);
+  });
+
+  it("should a single chunk if the stream is equal to partsize", async () => {
+    const chunks = await getChunks(20, 5, 100);
+
+    expect(chunks.length).toBe(1);
+    expect(byteLength(chunks[0].data)).toEqual(100);
     expect(chunks[0].partNumber).toEqual(1);
     expect(chunks[0].lastPart).toBe(true);
   });

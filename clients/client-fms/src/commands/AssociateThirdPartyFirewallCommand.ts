@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FMSClient";
-import {
-  AssociateThirdPartyFirewallRequest,
-  AssociateThirdPartyFirewallRequestFilterSensitiveLog,
-  AssociateThirdPartyFirewallResponse,
-  AssociateThirdPartyFirewallResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociateThirdPartyFirewallCommand,
-  serializeAws_json1_1AssociateThirdPartyFirewallCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateThirdPartyFirewallRequest, AssociateThirdPartyFirewallResponse } from "../models/models_0";
+import { AssociateThirdPartyFirewall$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateThirdPartyFirewallCommand}.
+ */
 export interface AssociateThirdPartyFirewallCommandInput extends AssociateThirdPartyFirewallRequest {}
-export interface AssociateThirdPartyFirewallCommandOutput
-  extends AssociateThirdPartyFirewallResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateThirdPartyFirewallCommand}.
+ */
+export interface AssociateThirdPartyFirewallCommandOutput extends AssociateThirdPartyFirewallResponse, __MetadataBearer {}
 
 /**
  * <p>Sets the Firewall Manager policy administrator as a tenant administrator of a third-party firewall service. A tenant is an instance of the third-party firewall service that's associated with your Amazon Web Services customer account.</p>
@@ -36,71 +29,64 @@ export interface AssociateThirdPartyFirewallCommandOutput
  * ```javascript
  * import { FMSClient, AssociateThirdPartyFirewallCommand } from "@aws-sdk/client-fms"; // ES Modules import
  * // const { FMSClient, AssociateThirdPartyFirewallCommand } = require("@aws-sdk/client-fms"); // CommonJS import
+ * // import type { FMSClientConfig } from "@aws-sdk/client-fms";
+ * const config = {}; // type is FMSClientConfig
  * const client = new FMSClient(config);
+ * const input = { // AssociateThirdPartyFirewallRequest
+ *   ThirdPartyFirewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW" || "FORTIGATE_CLOUD_NATIVE_FIREWALL", // required
+ * };
  * const command = new AssociateThirdPartyFirewallCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateThirdPartyFirewallResponse
+ * //   ThirdPartyFirewallStatus: "ONBOARDING" || "ONBOARD_COMPLETE" || "OFFBOARDING" || "OFFBOARD_COMPLETE" || "NOT_EXIST",
+ * // };
+ *
  * ```
  *
+ * @param AssociateThirdPartyFirewallCommandInput - {@link AssociateThirdPartyFirewallCommandInput}
+ * @returns {@link AssociateThirdPartyFirewallCommandOutput}
  * @see {@link AssociateThirdPartyFirewallCommandInput} for command's `input` shape.
  * @see {@link AssociateThirdPartyFirewallCommandOutput} for command's `response` shape.
  * @see {@link FMSClientResolvedConfig | config} for FMSClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (client fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry
+ *       your request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The parameters of the request were invalid.</p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The operation failed because there was nothing to do or the operation wasn't possible. For example, you might have
+ *         submitted an <code>AssociateAdminAccount</code> request for an account ID that
+ *             was already set as the Firewall Manager administrator. Or you might have tried to access a Region
+ *   that's disabled by default, and that you need to enable for the Firewall Manager
+ *   administrator account and for Organizations before you can access it.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link FMSServiceException}
+ * <p>Base exception class for all service exceptions from FMS service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateThirdPartyFirewallCommand extends $Command<
-  AssociateThirdPartyFirewallCommandInput,
-  AssociateThirdPartyFirewallCommandOutput,
-  FMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateThirdPartyFirewallCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateThirdPartyFirewallCommandInput, AssociateThirdPartyFirewallCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FMSClient";
-    const commandName = "AssociateThirdPartyFirewallCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateThirdPartyFirewallRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: AssociateThirdPartyFirewallResponseFilterSensitiveLog,
+export class AssociateThirdPartyFirewallCommand extends command<AssociateThirdPartyFirewallCommandInput, AssociateThirdPartyFirewallCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateThirdPartyFirewall",
+  AssociateThirdPartyFirewall$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateThirdPartyFirewallRequest;
+      output: AssociateThirdPartyFirewallResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateThirdPartyFirewallCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateThirdPartyFirewallCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateThirdPartyFirewallCommandOutput> {
-    return deserializeAws_json1_1AssociateThirdPartyFirewallCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateThirdPartyFirewallCommandInput;
+      output: AssociateThirdPartyFirewallCommandOutput;
+    };
+  };
 }

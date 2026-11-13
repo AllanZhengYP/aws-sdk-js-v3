@@ -1,106 +1,101 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Macie2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Macie2Client";
-import {
-  GetSensitiveDataOccurrencesRequest,
-  GetSensitiveDataOccurrencesRequestFilterSensitiveLog,
-  GetSensitiveDataOccurrencesResponse,
-  GetSensitiveDataOccurrencesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetSensitiveDataOccurrencesCommand,
-  serializeAws_restJson1GetSensitiveDataOccurrencesCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface GetSensitiveDataOccurrencesCommandInput extends GetSensitiveDataOccurrencesRequest {}
-export interface GetSensitiveDataOccurrencesCommandOutput
-  extends GetSensitiveDataOccurrencesResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSensitiveDataOccurrencesRequest, GetSensitiveDataOccurrencesResponse } from "../models/models_0";
+import { GetSensitiveDataOccurrences$ } from "../schemas/schemas_0";
 
 /**
- * <p>Retrieves (reveals) occurrences of sensitive data reported by a finding.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSensitiveDataOccurrencesCommand}.
+ */
+export interface GetSensitiveDataOccurrencesCommandInput extends GetSensitiveDataOccurrencesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSensitiveDataOccurrencesCommand}.
+ */
+export interface GetSensitiveDataOccurrencesCommandOutput extends GetSensitiveDataOccurrencesResponse, __MetadataBearer {}
+
+/**
+ * <p>Retrieves occurrences of sensitive data reported by a finding.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Macie2Client, GetSensitiveDataOccurrencesCommand } from "@aws-sdk/client-macie2"; // ES Modules import
  * // const { Macie2Client, GetSensitiveDataOccurrencesCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
  * const client = new Macie2Client(config);
+ * const input = { // GetSensitiveDataOccurrencesRequest
+ *   findingId: "STRING_VALUE", // required
+ * };
  * const command = new GetSensitiveDataOccurrencesCommand(input);
  * const response = await client.send(command);
+ * // { // GetSensitiveDataOccurrencesResponse
+ * //   error: "STRING_VALUE",
+ * //   sensitiveDataOccurrences: { // SensitiveDataOccurrences
+ * //     "<keys>": [ // __listOfDetectedDataDetails
+ * //       { // DetectedDataDetails
+ * //         value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //   },
+ * //   status: "SUCCESS" || "PROCESSING" || "ERROR",
+ * // };
+ *
  * ```
  *
+ * @param GetSensitiveDataOccurrencesCommandInput - {@link GetSensitiveDataOccurrencesCommandInput}
+ * @returns {@link GetSensitiveDataOccurrencesCommandOutput}
  * @see {@link GetSensitiveDataOccurrencesCommandInput} for command's `input` shape.
  * @see {@link GetSensitiveDataOccurrencesCommandOutput} for command's `response` shape.
  * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Provides information about an error that occurred because a specified resource wasn't found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Provides information about an error that occurred due to one or more service quotas for an account.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link UnprocessableEntityException} (client fault)
+ *  <p>Provides information about an error that occurred due to an unprocessable entity.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetSensitiveDataOccurrencesCommand extends $Command<
-  GetSensitiveDataOccurrencesCommandInput,
-  GetSensitiveDataOccurrencesCommandOutput,
-  Macie2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSensitiveDataOccurrencesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Macie2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSensitiveDataOccurrencesCommandInput, GetSensitiveDataOccurrencesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Macie2Client";
-    const commandName = "GetSensitiveDataOccurrencesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSensitiveDataOccurrencesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetSensitiveDataOccurrencesResponseFilterSensitiveLog,
+export class GetSensitiveDataOccurrencesCommand extends command<GetSensitiveDataOccurrencesCommandInput, GetSensitiveDataOccurrencesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSensitiveDataOccurrences",
+  GetSensitiveDataOccurrences$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSensitiveDataOccurrencesRequest;
+      output: GetSensitiveDataOccurrencesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSensitiveDataOccurrencesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSensitiveDataOccurrencesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetSensitiveDataOccurrencesCommandOutput> {
-    return deserializeAws_restJson1GetSensitiveDataOccurrencesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSensitiveDataOccurrencesCommandInput;
+      output: GetSensitiveDataOccurrencesCommandOutput;
+    };
+  };
 }

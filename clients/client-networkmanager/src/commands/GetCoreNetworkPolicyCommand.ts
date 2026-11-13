@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetCoreNetworkPolicyRequest,
-  GetCoreNetworkPolicyRequestFilterSensitiveLog,
-  GetCoreNetworkPolicyResponse,
-  GetCoreNetworkPolicyResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { NetworkManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkManagerClient";
-import {
-  deserializeAws_restJson1GetCoreNetworkPolicyCommand,
-  serializeAws_restJson1GetCoreNetworkPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCoreNetworkPolicyRequest, GetCoreNetworkPolicyResponse } from "../models/models_0";
+import { GetCoreNetworkPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCoreNetworkPolicyCommand}.
+ */
 export interface GetCoreNetworkPolicyCommandInput extends GetCoreNetworkPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCoreNetworkPolicyCommand}.
+ */
 export interface GetCoreNetworkPolicyCommandOutput extends GetCoreNetworkPolicyResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,79 @@ export interface GetCoreNetworkPolicyCommandOutput extends GetCoreNetworkPolicyR
  * ```javascript
  * import { NetworkManagerClient, GetCoreNetworkPolicyCommand } from "@aws-sdk/client-networkmanager"; // ES Modules import
  * // const { NetworkManagerClient, GetCoreNetworkPolicyCommand } = require("@aws-sdk/client-networkmanager"); // CommonJS import
+ * // import type { NetworkManagerClientConfig } from "@aws-sdk/client-networkmanager";
+ * const config = {}; // type is NetworkManagerClientConfig
  * const client = new NetworkManagerClient(config);
+ * const input = { // GetCoreNetworkPolicyRequest
+ *   CoreNetworkId: "STRING_VALUE", // required
+ *   PolicyVersionId: Number("int"),
+ *   Alias: "LIVE" || "LATEST",
+ * };
  * const command = new GetCoreNetworkPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // GetCoreNetworkPolicyResponse
+ * //   CoreNetworkPolicy: { // CoreNetworkPolicy
+ * //     CoreNetworkId: "STRING_VALUE",
+ * //     PolicyVersionId: Number("int"),
+ * //     Alias: "LIVE" || "LATEST",
+ * //     Description: "STRING_VALUE",
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     ChangeSetState: "PENDING_GENERATION" || "FAILED_GENERATION" || "READY_TO_EXECUTE" || "EXECUTING" || "EXECUTION_SUCCEEDED" || "OUT_OF_DATE",
+ * //     PolicyErrors: [ // CoreNetworkPolicyErrorList
+ * //       { // CoreNetworkPolicyError
+ * //         ErrorCode: "STRING_VALUE", // required
+ * //         Message: "STRING_VALUE", // required
+ * //         Path: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     PolicyDocument: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetCoreNetworkPolicyCommandInput - {@link GetCoreNetworkPolicyCommandInput}
+ * @returns {@link GetCoreNetworkPolicyCommandOutput}
  * @see {@link GetCoreNetworkPolicyCommandInput} for command's `input` shape.
  * @see {@link GetCoreNetworkPolicyCommandOutput} for command's `response` shape.
  * @see {@link NetworkManagerClientResolvedConfig | config} for NetworkManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints.</p>
+ *
+ * @throws {@link NetworkManagerServiceException}
+ * <p>Base exception class for all service exceptions from NetworkManager service.</p>
+ *
+ *
+ * @public
  */
-export class GetCoreNetworkPolicyCommand extends $Command<
-  GetCoreNetworkPolicyCommandInput,
-  GetCoreNetworkPolicyCommandOutput,
-  NetworkManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCoreNetworkPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCoreNetworkPolicyCommandInput, GetCoreNetworkPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkManagerClient";
-    const commandName = "GetCoreNetworkPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCoreNetworkPolicyRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetCoreNetworkPolicyResponseFilterSensitiveLog,
+export class GetCoreNetworkPolicyCommand extends command<GetCoreNetworkPolicyCommandInput, GetCoreNetworkPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCoreNetworkPolicy",
+  GetCoreNetworkPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCoreNetworkPolicyRequest;
+      output: GetCoreNetworkPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCoreNetworkPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetCoreNetworkPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetCoreNetworkPolicyCommandOutput> {
-    return deserializeAws_restJson1GetCoreNetworkPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCoreNetworkPolicyCommandInput;
+      output: GetCoreNetworkPolicyCommandOutput;
+    };
+  };
 }

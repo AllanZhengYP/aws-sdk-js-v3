@@ -1,212 +1,294 @@
 // smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  DefaultsMode,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
   BodyLengthCalculator as __BodyLengthCalculator,
-  Credentials as __Credentials,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { CompareFacesCommandInput, CompareFacesCommandOutput } from "./commands/CompareFacesCommand";
-import { CopyProjectVersionCommandInput, CopyProjectVersionCommandOutput } from "./commands/CopyProjectVersionCommand";
-import { CreateCollectionCommandInput, CreateCollectionCommandOutput } from "./commands/CreateCollectionCommand";
-import { CreateDatasetCommandInput, CreateDatasetCommandOutput } from "./commands/CreateDatasetCommand";
-import { CreateProjectCommandInput, CreateProjectCommandOutput } from "./commands/CreateProjectCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultRekognitionHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AssociateFacesCommandInput, AssociateFacesCommandOutput } from "./commands/AssociateFacesCommand";
+import type { CompareFacesCommandInput, CompareFacesCommandOutput } from "./commands/CompareFacesCommand";
+import type {
+  CopyProjectVersionCommandInput,
+  CopyProjectVersionCommandOutput,
+} from "./commands/CopyProjectVersionCommand";
+import type { CreateCollectionCommandInput, CreateCollectionCommandOutput } from "./commands/CreateCollectionCommand";
+import type { CreateDatasetCommandInput, CreateDatasetCommandOutput } from "./commands/CreateDatasetCommand";
+import type {
+  CreateFaceLivenessSessionCommandInput,
+  CreateFaceLivenessSessionCommandOutput,
+} from "./commands/CreateFaceLivenessSessionCommand";
+import type { CreateProjectCommandInput, CreateProjectCommandOutput } from "./commands/CreateProjectCommand";
+import type {
   CreateProjectVersionCommandInput,
   CreateProjectVersionCommandOutput,
 } from "./commands/CreateProjectVersionCommand";
-import {
+import type {
   CreateStreamProcessorCommandInput,
   CreateStreamProcessorCommandOutput,
 } from "./commands/CreateStreamProcessorCommand";
-import { DeleteCollectionCommandInput, DeleteCollectionCommandOutput } from "./commands/DeleteCollectionCommand";
-import { DeleteDatasetCommandInput, DeleteDatasetCommandOutput } from "./commands/DeleteDatasetCommand";
-import { DeleteFacesCommandInput, DeleteFacesCommandOutput } from "./commands/DeleteFacesCommand";
-import { DeleteProjectCommandInput, DeleteProjectCommandOutput } from "./commands/DeleteProjectCommand";
-import {
+import type { CreateUserCommandInput, CreateUserCommandOutput } from "./commands/CreateUserCommand";
+import type { DeleteCollectionCommandInput, DeleteCollectionCommandOutput } from "./commands/DeleteCollectionCommand";
+import type { DeleteDatasetCommandInput, DeleteDatasetCommandOutput } from "./commands/DeleteDatasetCommand";
+import type { DeleteFacesCommandInput, DeleteFacesCommandOutput } from "./commands/DeleteFacesCommand";
+import type { DeleteProjectCommandInput, DeleteProjectCommandOutput } from "./commands/DeleteProjectCommand";
+import type {
   DeleteProjectPolicyCommandInput,
   DeleteProjectPolicyCommandOutput,
 } from "./commands/DeleteProjectPolicyCommand";
-import {
+import type {
   DeleteProjectVersionCommandInput,
   DeleteProjectVersionCommandOutput,
 } from "./commands/DeleteProjectVersionCommand";
-import {
+import type {
   DeleteStreamProcessorCommandInput,
   DeleteStreamProcessorCommandOutput,
 } from "./commands/DeleteStreamProcessorCommand";
-import { DescribeCollectionCommandInput, DescribeCollectionCommandOutput } from "./commands/DescribeCollectionCommand";
-import { DescribeDatasetCommandInput, DescribeDatasetCommandOutput } from "./commands/DescribeDatasetCommand";
-import { DescribeProjectsCommandInput, DescribeProjectsCommandOutput } from "./commands/DescribeProjectsCommand";
-import {
+import type { DeleteUserCommandInput, DeleteUserCommandOutput } from "./commands/DeleteUserCommand";
+import type {
+  DescribeCollectionCommandInput,
+  DescribeCollectionCommandOutput,
+} from "./commands/DescribeCollectionCommand";
+import type { DescribeDatasetCommandInput, DescribeDatasetCommandOutput } from "./commands/DescribeDatasetCommand";
+import type { DescribeProjectsCommandInput, DescribeProjectsCommandOutput } from "./commands/DescribeProjectsCommand";
+import type {
   DescribeProjectVersionsCommandInput,
   DescribeProjectVersionsCommandOutput,
 } from "./commands/DescribeProjectVersionsCommand";
-import {
+import type {
   DescribeStreamProcessorCommandInput,
   DescribeStreamProcessorCommandOutput,
 } from "./commands/DescribeStreamProcessorCommand";
-import { DetectCustomLabelsCommandInput, DetectCustomLabelsCommandOutput } from "./commands/DetectCustomLabelsCommand";
-import { DetectFacesCommandInput, DetectFacesCommandOutput } from "./commands/DetectFacesCommand";
-import { DetectLabelsCommandInput, DetectLabelsCommandOutput } from "./commands/DetectLabelsCommand";
-import {
+import type {
+  DetectCustomLabelsCommandInput,
+  DetectCustomLabelsCommandOutput,
+} from "./commands/DetectCustomLabelsCommand";
+import type { DetectFacesCommandInput, DetectFacesCommandOutput } from "./commands/DetectFacesCommand";
+import type { DetectLabelsCommandInput, DetectLabelsCommandOutput } from "./commands/DetectLabelsCommand";
+import type {
   DetectModerationLabelsCommandInput,
   DetectModerationLabelsCommandOutput,
 } from "./commands/DetectModerationLabelsCommand";
-import {
+import type {
   DetectProtectiveEquipmentCommandInput,
   DetectProtectiveEquipmentCommandOutput,
 } from "./commands/DetectProtectiveEquipmentCommand";
-import { DetectTextCommandInput, DetectTextCommandOutput } from "./commands/DetectTextCommand";
-import {
+import type { DetectTextCommandInput, DetectTextCommandOutput } from "./commands/DetectTextCommand";
+import type {
+  DisassociateFacesCommandInput,
+  DisassociateFacesCommandOutput,
+} from "./commands/DisassociateFacesCommand";
+import type {
   DistributeDatasetEntriesCommandInput,
   DistributeDatasetEntriesCommandOutput,
 } from "./commands/DistributeDatasetEntriesCommand";
-import { GetCelebrityInfoCommandInput, GetCelebrityInfoCommandOutput } from "./commands/GetCelebrityInfoCommand";
-import {
+import type { GetCelebrityInfoCommandInput, GetCelebrityInfoCommandOutput } from "./commands/GetCelebrityInfoCommand";
+import type {
   GetCelebrityRecognitionCommandInput,
   GetCelebrityRecognitionCommandOutput,
 } from "./commands/GetCelebrityRecognitionCommand";
-import {
+import type {
   GetContentModerationCommandInput,
   GetContentModerationCommandOutput,
 } from "./commands/GetContentModerationCommand";
-import { GetFaceDetectionCommandInput, GetFaceDetectionCommandOutput } from "./commands/GetFaceDetectionCommand";
-import { GetFaceSearchCommandInput, GetFaceSearchCommandOutput } from "./commands/GetFaceSearchCommand";
-import { GetLabelDetectionCommandInput, GetLabelDetectionCommandOutput } from "./commands/GetLabelDetectionCommand";
-import { GetPersonTrackingCommandInput, GetPersonTrackingCommandOutput } from "./commands/GetPersonTrackingCommand";
-import {
+import type { GetFaceDetectionCommandInput, GetFaceDetectionCommandOutput } from "./commands/GetFaceDetectionCommand";
+import type {
+  GetFaceLivenessSessionResultsCommandInput,
+  GetFaceLivenessSessionResultsCommandOutput,
+} from "./commands/GetFaceLivenessSessionResultsCommand";
+import type { GetFaceSearchCommandInput, GetFaceSearchCommandOutput } from "./commands/GetFaceSearchCommand";
+import type {
+  GetLabelDetectionCommandInput,
+  GetLabelDetectionCommandOutput,
+} from "./commands/GetLabelDetectionCommand";
+import type {
+  GetMediaAnalysisJobCommandInput,
+  GetMediaAnalysisJobCommandOutput,
+} from "./commands/GetMediaAnalysisJobCommand";
+import type {
+  GetPersonTrackingCommandInput,
+  GetPersonTrackingCommandOutput,
+} from "./commands/GetPersonTrackingCommand";
+import type {
   GetSegmentDetectionCommandInput,
   GetSegmentDetectionCommandOutput,
 } from "./commands/GetSegmentDetectionCommand";
-import { GetTextDetectionCommandInput, GetTextDetectionCommandOutput } from "./commands/GetTextDetectionCommand";
-import { IndexFacesCommandInput, IndexFacesCommandOutput } from "./commands/IndexFacesCommand";
-import { ListCollectionsCommandInput, ListCollectionsCommandOutput } from "./commands/ListCollectionsCommand";
-import { ListDatasetEntriesCommandInput, ListDatasetEntriesCommandOutput } from "./commands/ListDatasetEntriesCommand";
-import { ListDatasetLabelsCommandInput, ListDatasetLabelsCommandOutput } from "./commands/ListDatasetLabelsCommand";
-import { ListFacesCommandInput, ListFacesCommandOutput } from "./commands/ListFacesCommand";
-import {
+import type { GetTextDetectionCommandInput, GetTextDetectionCommandOutput } from "./commands/GetTextDetectionCommand";
+import type { IndexFacesCommandInput, IndexFacesCommandOutput } from "./commands/IndexFacesCommand";
+import type { ListCollectionsCommandInput, ListCollectionsCommandOutput } from "./commands/ListCollectionsCommand";
+import type {
+  ListDatasetEntriesCommandInput,
+  ListDatasetEntriesCommandOutput,
+} from "./commands/ListDatasetEntriesCommand";
+import type {
+  ListDatasetLabelsCommandInput,
+  ListDatasetLabelsCommandOutput,
+} from "./commands/ListDatasetLabelsCommand";
+import type { ListFacesCommandInput, ListFacesCommandOutput } from "./commands/ListFacesCommand";
+import type {
+  ListMediaAnalysisJobsCommandInput,
+  ListMediaAnalysisJobsCommandOutput,
+} from "./commands/ListMediaAnalysisJobsCommand";
+import type {
   ListProjectPoliciesCommandInput,
   ListProjectPoliciesCommandOutput,
 } from "./commands/ListProjectPoliciesCommand";
-import {
+import type {
   ListStreamProcessorsCommandInput,
   ListStreamProcessorsCommandOutput,
 } from "./commands/ListStreamProcessorsCommand";
-import {
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { PutProjectPolicyCommandInput, PutProjectPolicyCommandOutput } from "./commands/PutProjectPolicyCommand";
-import {
+import type { ListUsersCommandInput, ListUsersCommandOutput } from "./commands/ListUsersCommand";
+import type { PutProjectPolicyCommandInput, PutProjectPolicyCommandOutput } from "./commands/PutProjectPolicyCommand";
+import type {
   RecognizeCelebritiesCommandInput,
   RecognizeCelebritiesCommandOutput,
 } from "./commands/RecognizeCelebritiesCommand";
-import { SearchFacesByImageCommandInput, SearchFacesByImageCommandOutput } from "./commands/SearchFacesByImageCommand";
-import { SearchFacesCommandInput, SearchFacesCommandOutput } from "./commands/SearchFacesCommand";
-import {
+import type {
+  SearchFacesByImageCommandInput,
+  SearchFacesByImageCommandOutput,
+} from "./commands/SearchFacesByImageCommand";
+import type { SearchFacesCommandInput, SearchFacesCommandOutput } from "./commands/SearchFacesCommand";
+import type {
+  SearchUsersByImageCommandInput,
+  SearchUsersByImageCommandOutput,
+} from "./commands/SearchUsersByImageCommand";
+import type { SearchUsersCommandInput, SearchUsersCommandOutput } from "./commands/SearchUsersCommand";
+import type {
   StartCelebrityRecognitionCommandInput,
   StartCelebrityRecognitionCommandOutput,
 } from "./commands/StartCelebrityRecognitionCommand";
-import {
+import type {
   StartContentModerationCommandInput,
   StartContentModerationCommandOutput,
 } from "./commands/StartContentModerationCommand";
-import { StartFaceDetectionCommandInput, StartFaceDetectionCommandOutput } from "./commands/StartFaceDetectionCommand";
-import { StartFaceSearchCommandInput, StartFaceSearchCommandOutput } from "./commands/StartFaceSearchCommand";
-import {
+import type {
+  StartFaceDetectionCommandInput,
+  StartFaceDetectionCommandOutput,
+} from "./commands/StartFaceDetectionCommand";
+import type { StartFaceSearchCommandInput, StartFaceSearchCommandOutput } from "./commands/StartFaceSearchCommand";
+import type {
   StartLabelDetectionCommandInput,
   StartLabelDetectionCommandOutput,
 } from "./commands/StartLabelDetectionCommand";
-import {
+import type {
+  StartMediaAnalysisJobCommandInput,
+  StartMediaAnalysisJobCommandOutput,
+} from "./commands/StartMediaAnalysisJobCommand";
+import type {
   StartPersonTrackingCommandInput,
   StartPersonTrackingCommandOutput,
 } from "./commands/StartPersonTrackingCommand";
-import {
+import type {
   StartProjectVersionCommandInput,
   StartProjectVersionCommandOutput,
 } from "./commands/StartProjectVersionCommand";
-import {
+import type {
   StartSegmentDetectionCommandInput,
   StartSegmentDetectionCommandOutput,
 } from "./commands/StartSegmentDetectionCommand";
-import {
+import type {
   StartStreamProcessorCommandInput,
   StartStreamProcessorCommandOutput,
 } from "./commands/StartStreamProcessorCommand";
-import { StartTextDetectionCommandInput, StartTextDetectionCommandOutput } from "./commands/StartTextDetectionCommand";
-import { StopProjectVersionCommandInput, StopProjectVersionCommandOutput } from "./commands/StopProjectVersionCommand";
-import {
+import type {
+  StartTextDetectionCommandInput,
+  StartTextDetectionCommandOutput,
+} from "./commands/StartTextDetectionCommand";
+import type {
+  StopProjectVersionCommandInput,
+  StopProjectVersionCommandOutput,
+} from "./commands/StopProjectVersionCommand";
+import type {
   StopStreamProcessorCommandInput,
   StopStreamProcessorCommandOutput,
 } from "./commands/StopStreamProcessorCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateDatasetEntriesCommandInput,
   UpdateDatasetEntriesCommandOutput,
 } from "./commands/UpdateDatasetEntriesCommand";
-import {
+import type {
   UpdateStreamProcessorCommandInput,
   UpdateStreamProcessorCommandOutput,
 } from "./commands/UpdateStreamProcessorCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
+  | AssociateFacesCommandInput
   | CompareFacesCommandInput
   | CopyProjectVersionCommandInput
   | CreateCollectionCommandInput
   | CreateDatasetCommandInput
+  | CreateFaceLivenessSessionCommandInput
   | CreateProjectCommandInput
   | CreateProjectVersionCommandInput
   | CreateStreamProcessorCommandInput
+  | CreateUserCommandInput
   | DeleteCollectionCommandInput
   | DeleteDatasetCommandInput
   | DeleteFacesCommandInput
@@ -214,6 +296,7 @@ export type ServiceInputTypes =
   | DeleteProjectPolicyCommandInput
   | DeleteProjectVersionCommandInput
   | DeleteStreamProcessorCommandInput
+  | DeleteUserCommandInput
   | DescribeCollectionCommandInput
   | DescribeDatasetCommandInput
   | DescribeProjectVersionsCommandInput
@@ -225,13 +308,16 @@ export type ServiceInputTypes =
   | DetectModerationLabelsCommandInput
   | DetectProtectiveEquipmentCommandInput
   | DetectTextCommandInput
+  | DisassociateFacesCommandInput
   | DistributeDatasetEntriesCommandInput
   | GetCelebrityInfoCommandInput
   | GetCelebrityRecognitionCommandInput
   | GetContentModerationCommandInput
   | GetFaceDetectionCommandInput
+  | GetFaceLivenessSessionResultsCommandInput
   | GetFaceSearchCommandInput
   | GetLabelDetectionCommandInput
+  | GetMediaAnalysisJobCommandInput
   | GetPersonTrackingCommandInput
   | GetSegmentDetectionCommandInput
   | GetTextDetectionCommandInput
@@ -240,18 +326,23 @@ export type ServiceInputTypes =
   | ListDatasetEntriesCommandInput
   | ListDatasetLabelsCommandInput
   | ListFacesCommandInput
+  | ListMediaAnalysisJobsCommandInput
   | ListProjectPoliciesCommandInput
   | ListStreamProcessorsCommandInput
   | ListTagsForResourceCommandInput
+  | ListUsersCommandInput
   | PutProjectPolicyCommandInput
   | RecognizeCelebritiesCommandInput
   | SearchFacesByImageCommandInput
   | SearchFacesCommandInput
+  | SearchUsersByImageCommandInput
+  | SearchUsersCommandInput
   | StartCelebrityRecognitionCommandInput
   | StartContentModerationCommandInput
   | StartFaceDetectionCommandInput
   | StartFaceSearchCommandInput
   | StartLabelDetectionCommandInput
+  | StartMediaAnalysisJobCommandInput
   | StartPersonTrackingCommandInput
   | StartProjectVersionCommandInput
   | StartSegmentDetectionCommandInput
@@ -264,14 +355,20 @@ export type ServiceInputTypes =
   | UpdateDatasetEntriesCommandInput
   | UpdateStreamProcessorCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
+  | AssociateFacesCommandOutput
   | CompareFacesCommandOutput
   | CopyProjectVersionCommandOutput
   | CreateCollectionCommandOutput
   | CreateDatasetCommandOutput
+  | CreateFaceLivenessSessionCommandOutput
   | CreateProjectCommandOutput
   | CreateProjectVersionCommandOutput
   | CreateStreamProcessorCommandOutput
+  | CreateUserCommandOutput
   | DeleteCollectionCommandOutput
   | DeleteDatasetCommandOutput
   | DeleteFacesCommandOutput
@@ -279,6 +376,7 @@ export type ServiceOutputTypes =
   | DeleteProjectPolicyCommandOutput
   | DeleteProjectVersionCommandOutput
   | DeleteStreamProcessorCommandOutput
+  | DeleteUserCommandOutput
   | DescribeCollectionCommandOutput
   | DescribeDatasetCommandOutput
   | DescribeProjectVersionsCommandOutput
@@ -290,13 +388,16 @@ export type ServiceOutputTypes =
   | DetectModerationLabelsCommandOutput
   | DetectProtectiveEquipmentCommandOutput
   | DetectTextCommandOutput
+  | DisassociateFacesCommandOutput
   | DistributeDatasetEntriesCommandOutput
   | GetCelebrityInfoCommandOutput
   | GetCelebrityRecognitionCommandOutput
   | GetContentModerationCommandOutput
   | GetFaceDetectionCommandOutput
+  | GetFaceLivenessSessionResultsCommandOutput
   | GetFaceSearchCommandOutput
   | GetLabelDetectionCommandOutput
+  | GetMediaAnalysisJobCommandOutput
   | GetPersonTrackingCommandOutput
   | GetSegmentDetectionCommandOutput
   | GetTextDetectionCommandOutput
@@ -305,18 +406,23 @@ export type ServiceOutputTypes =
   | ListDatasetEntriesCommandOutput
   | ListDatasetLabelsCommandOutput
   | ListFacesCommandOutput
+  | ListMediaAnalysisJobsCommandOutput
   | ListProjectPoliciesCommandOutput
   | ListStreamProcessorsCommandOutput
   | ListTagsForResourceCommandOutput
+  | ListUsersCommandOutput
   | PutProjectPolicyCommandOutput
   | RecognizeCelebritiesCommandOutput
   | SearchFacesByImageCommandOutput
   | SearchFacesCommandOutput
+  | SearchUsersByImageCommandOutput
+  | SearchUsersCommandOutput
   | StartCelebrityRecognitionCommandOutput
   | StartContentModerationCommandOutput
   | StartFaceDetectionCommandOutput
   | StartFaceSearchCommandOutput
   | StartLabelDetectionCommandOutput
+  | StartMediaAnalysisJobCommandOutput
   | StartPersonTrackingCommandOutput
   | StartProjectVersionCommandOutput
   | StartSegmentDetectionCommandOutput
@@ -329,18 +435,21 @@ export type ServiceOutputTypes =
   | UpdateDatasetEntriesCommandOutput
   | UpdateStreamProcessorCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -391,25 +500,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -422,81 +522,128 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
   /**
-   * The {@link DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
    */
-  defaultsMode?: DefaultsMode | Provider<DefaultsMode>;
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type RekognitionClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of RekognitionClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type RekognitionClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of RekognitionClient class constructor that set the region, credentials and other options.
  */
 export interface RekognitionClientConfig extends RekognitionClientConfigType {}
 
-type RekognitionClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of RekognitionClient class. This is resolved and normalized from the {@link RekognitionClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type RekognitionClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of RekognitionClient class. This is resolved and normalized from the {@link RekognitionClientConfig | constructor configuration interface}.
  */
 export interface RekognitionClientResolvedConfig extends RekognitionClientResolvedConfigType {}
 
 /**
- * <p>This is the API Reference for <a href="https://docs.aws.amazon.com/rekognition/latest/dg/images.html">Amazon Rekognition Image</a>,
- *       <a href="https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/what-is.html">Amazon Rekognition Custom Labels</a>,
- *       <a href="https://docs.aws.amazon.com/rekognition/latest/dg/video.html">Amazon Rekognition Stored Video</a>,
- *       <a href="https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html">Amazon Rekognition Streaming Video</a>.
- *       It provides descriptions of actions, data types, common parameters,
- *       and common errors.</p>
- *
+ * <p>This is the API Reference for
+ *         <a href="https://docs.aws.amazon.com/rekognition/latest/dg/images.html">Amazon Rekognition Image</a>,
+ *         <a href="https://docs.aws.amazon.com/rekognition/latest/dg/bulk-analysis.html">Amazon Rekognition Bulk Image Analysis</a>,
+ *         <a href="https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/what-is.html">Amazon Rekognition Custom Labels</a>,
+ *         <a href="https://docs.aws.amazon.com/rekognition/latest/dg/video.html">Amazon Rekognition Stored Video</a>,
+ *         <a href="https://docs.aws.amazon.com/rekognition/latest/dg/face-liveness.html">Amazon Rekognition Face Liveness</a>,
+ *         <a href="https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html">Amazon Rekognition Streaming Video</a>.
+ *         It provides descriptions of actions, data types, common parameters, and common errors.</p>
  *          <p>
  *             <b>Amazon Rekognition Image</b>
  *          </p>
- *
- *
- *
  *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_AssociateFaces.html">AssociateFaces</a>
+ *                </p>
+ *             </li>
  *             <li>
  *                <p>
  *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CompareFaces.html">CompareFaces</a>
@@ -509,12 +656,22 @@ export interface RekognitionClientResolvedConfig extends RekognitionClientResolv
  *             </li>
  *             <li>
  *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateUser.html">CreateUser</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteCollection.html">DeleteCollection</a>
  *                </p>
  *             </li>
  *             <li>
  *                <p>
  *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteFaces.html">DeleteFaces</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DeleteUser.html">DeleteUser</a>
  *                </p>
  *             </li>
  *             <li>
@@ -549,6 +706,11 @@ export interface RekognitionClientResolvedConfig extends RekognitionClientResolv
  *             </li>
  *             <li>
  *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_DisassociateFaces.html">DisassociateFaces</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetCelebrityInfo.html">GetCelebrityInfo</a>
  *                </p>
  *             </li>
@@ -569,6 +731,11 @@ export interface RekognitionClientResolvedConfig extends RekognitionClientResolv
  *             </li>
  *             <li>
  *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListFaces.html">ListUsers</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
  *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_RecognizeCelebrities.html">RecognizeCelebrities</a>
  *                </p>
  *             </li>
@@ -582,9 +749,37 @@ export interface RekognitionClientResolvedConfig extends RekognitionClientResolv
  *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchFacesByImage.html">SearchFacesByImage</a>
  *                </p>
  *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchUsers.html">SearchUsers</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_SearchUsersByImage.html">SearchUsersByImage</a>
+ *                </p>
+ *             </li>
  *          </ul>
- *
- *
+ *          <p>
+ *             <b>Amazon Rekognition Bulk Image Analysis</b>
+ *          </p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetMediaAnalysisJob.html">GetMediaAnalysisJob</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_ListMediaAnalysisJob.html">ListMediaAnalysisJob</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_StartMediaAnalysisJob.html">StartMediaAnalysisJob</a>
+ *                </p>
+ *             </li>
+ *          </ul>
  *          <p>
  *             <b>Amazon Rekognition Custom Labels</b>
  *          </p>
@@ -690,12 +885,9 @@ export interface RekognitionClientResolvedConfig extends RekognitionClientResolv
  *                </p>
  *             </li>
  *          </ul>
- *
- *
  *          <p>
- *             <b>Amazon Rekognition Video Stored Video</b>
+ *             <b>Amazon Rekognition Stored Video</b>
  *          </p>
- *
  *          <ul>
  *             <li>
  *                <p>
@@ -778,11 +970,29 @@ export interface RekognitionClientResolvedConfig extends RekognitionClientResolv
  *                </p>
  *             </li>
  *          </ul>
- *
  *          <p>
- *             <b>Amazon Rekognition Video Streaming Video</b>
+ *             <b>Amazon Rekognition Face Liveness</b>
  *          </p>
- *
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CreateFaceLivenessSession.html">CreateFaceLivenessSession</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_GetFaceLivenessSessionResults.html">GetFaceLivenessSessionResults</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a href="https://docs.aws.amazon.com/rekognition/latest/APIReference/API_rekognitionstreaming_StartFaceLivenessSession.html">StartFaceLivenessSession</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ *          <p>
+ *             <b>Amazon Rekognition Streaming Video</b>
+ *          </p>
  *          <ul>
  *             <li>
  *                <p>
@@ -820,6 +1030,7 @@ export interface RekognitionClientResolvedConfig extends RekognitionClientResolv
  *                </p>
  *             </li>
  *          </ul>
+ * @public
  */
 export class RekognitionClient extends __Client<
   __HttpHandlerOptions,
@@ -832,23 +1043,36 @@ export class RekognitionClient extends __Client<
    */
   readonly config: RekognitionClientResolvedConfig;
 
-  constructor(configuration: RekognitionClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<RekognitionClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
     this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultRekognitionHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: RekognitionClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

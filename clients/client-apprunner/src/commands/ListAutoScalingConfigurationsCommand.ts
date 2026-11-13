@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppRunnerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppRunnerClient";
-import {
-  ListAutoScalingConfigurationsRequest,
-  ListAutoScalingConfigurationsRequestFilterSensitiveLog,
-  ListAutoScalingConfigurationsResponse,
-  ListAutoScalingConfigurationsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_0ListAutoScalingConfigurationsCommand,
-  serializeAws_json1_0ListAutoScalingConfigurationsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAutoScalingConfigurationsRequest, ListAutoScalingConfigurationsResponse } from "../models/models_0";
+import { ListAutoScalingConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAutoScalingConfigurationsCommand}.
+ */
 export interface ListAutoScalingConfigurationsCommandInput extends ListAutoScalingConfigurationsRequest {}
-export interface ListAutoScalingConfigurationsCommandOutput
-  extends ListAutoScalingConfigurationsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListAutoScalingConfigurationsCommand}.
+ */
+export interface ListAutoScalingConfigurationsCommandOutput extends ListAutoScalingConfigurationsResponse, __MetadataBearer {}
 
 /**
  * <p>Returns a list of active App Runner automatic scaling configurations in your Amazon Web Services account. You can query the revisions for a specific
@@ -40,71 +33,67 @@ export interface ListAutoScalingConfigurationsCommandOutput
  * ```javascript
  * import { AppRunnerClient, ListAutoScalingConfigurationsCommand } from "@aws-sdk/client-apprunner"; // ES Modules import
  * // const { AppRunnerClient, ListAutoScalingConfigurationsCommand } = require("@aws-sdk/client-apprunner"); // CommonJS import
+ * // import type { AppRunnerClientConfig } from "@aws-sdk/client-apprunner";
+ * const config = {}; // type is AppRunnerClientConfig
  * const client = new AppRunnerClient(config);
+ * const input = { // ListAutoScalingConfigurationsRequest
+ *   AutoScalingConfigurationName: "STRING_VALUE",
+ *   LatestOnly: true || false,
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListAutoScalingConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAutoScalingConfigurationsResponse
+ * //   AutoScalingConfigurationSummaryList: [ // AutoScalingConfigurationSummaryList // required
+ * //     { // AutoScalingConfigurationSummary
+ * //       AutoScalingConfigurationArn: "STRING_VALUE",
+ * //       AutoScalingConfigurationName: "STRING_VALUE",
+ * //       AutoScalingConfigurationRevision: Number("int"),
+ * //       Status: "ACTIVE" || "INACTIVE",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       HasAssociatedService: true || false,
+ * //       IsDefault: true || false,
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAutoScalingConfigurationsCommandInput - {@link ListAutoScalingConfigurationsCommandInput}
+ * @returns {@link ListAutoScalingConfigurationsCommandOutput}
  * @see {@link ListAutoScalingConfigurationsCommandInput} for command's `input` shape.
  * @see {@link ListAutoScalingConfigurationsCommandOutput} for command's `response` shape.
  * @see {@link AppRunnerClientResolvedConfig | config} for AppRunnerClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An unexpected service exception occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>
+ *
+ * @throws {@link AppRunnerServiceException}
+ * <p>Base exception class for all service exceptions from AppRunner service.</p>
+ *
+ *
+ * @public
  */
-export class ListAutoScalingConfigurationsCommand extends $Command<
-  ListAutoScalingConfigurationsCommandInput,
-  ListAutoScalingConfigurationsCommandOutput,
-  AppRunnerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAutoScalingConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppRunnerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAutoScalingConfigurationsCommandInput, ListAutoScalingConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppRunnerClient";
-    const commandName = "ListAutoScalingConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAutoScalingConfigurationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListAutoScalingConfigurationsResponseFilterSensitiveLog,
+export class ListAutoScalingConfigurationsCommand extends command<ListAutoScalingConfigurationsCommandInput, ListAutoScalingConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAutoScalingConfigurations",
+  ListAutoScalingConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAutoScalingConfigurationsRequest;
+      output: ListAutoScalingConfigurationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAutoScalingConfigurationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListAutoScalingConfigurationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListAutoScalingConfigurationsCommandOutput> {
-    return deserializeAws_json1_0ListAutoScalingConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAutoScalingConfigurationsCommandInput;
+      output: ListAutoScalingConfigurationsCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ModifySamlPropertiesRequest,
-  ModifySamlPropertiesRequestFilterSensitiveLog,
-  ModifySamlPropertiesResult,
-  ModifySamlPropertiesResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ModifySamlPropertiesCommand,
-  serializeAws_json1_1ModifySamlPropertiesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifySamlPropertiesRequest, ModifySamlPropertiesResult } from "../models/models_0";
+import { ModifySamlProperties$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifySamlPropertiesCommand}.
+ */
 export interface ModifySamlPropertiesCommandInput extends ModifySamlPropertiesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifySamlPropertiesCommand}.
+ */
 export interface ModifySamlPropertiesCommandOutput extends ModifySamlPropertiesResult, __MetadataBearer {}
 
 /**
@@ -36,68 +31,65 @@ export interface ModifySamlPropertiesCommandOutput extends ModifySamlPropertiesR
  * ```javascript
  * import { WorkSpacesClient, ModifySamlPropertiesCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, ModifySamlPropertiesCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // ModifySamlPropertiesRequest
+ *   ResourceId: "STRING_VALUE", // required
+ *   SamlProperties: { // SamlProperties
+ *     Status: "DISABLED" || "ENABLED" || "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK",
+ *     UserAccessUrl: "STRING_VALUE",
+ *     RelayStateParameterName: "STRING_VALUE",
+ *   },
+ *   PropertiesToDelete: [ // DeletableSamlPropertiesList
+ *     "SAML_PROPERTIES_USER_ACCESS_URL" || "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME",
+ *   ],
+ * };
  * const command = new ModifySamlPropertiesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param ModifySamlPropertiesCommandInput - {@link ModifySamlPropertiesCommandInput}
+ * @returns {@link ModifySamlPropertiesCommandOutput}
  * @see {@link ModifySamlPropertiesCommandInput} for command's `input` shape.
  * @see {@link ModifySamlPropertiesCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>This operation is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class ModifySamlPropertiesCommand extends $Command<
-  ModifySamlPropertiesCommandInput,
-  ModifySamlPropertiesCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifySamlPropertiesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifySamlPropertiesCommandInput, ModifySamlPropertiesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "ModifySamlPropertiesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifySamlPropertiesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ModifySamlPropertiesResultFilterSensitiveLog,
+export class ModifySamlPropertiesCommand extends command<ModifySamlPropertiesCommandInput, ModifySamlPropertiesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifySamlProperties",
+  ModifySamlProperties$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifySamlPropertiesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifySamlPropertiesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ModifySamlPropertiesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifySamlPropertiesCommandOutput> {
-    return deserializeAws_json1_1ModifySamlPropertiesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifySamlPropertiesCommandInput;
+      output: ModifySamlPropertiesCommandOutput;
+    };
+  };
 }

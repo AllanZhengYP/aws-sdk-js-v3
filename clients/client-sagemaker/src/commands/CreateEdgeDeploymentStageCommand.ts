@@ -1,28 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateEdgeDeploymentStageRequest,
-  CreateEdgeDeploymentStageRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateEdgeDeploymentStageCommand,
-  serializeAws_json1_1CreateEdgeDeploymentStageCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateEdgeDeploymentStageRequest } from "../models/models_1";
+import { CreateEdgeDeploymentStage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateEdgeDeploymentStageCommand}.
+ */
 export interface CreateEdgeDeploymentStageCommandInput extends CreateEdgeDeploymentStageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateEdgeDeploymentStageCommand}.
+ */
 export interface CreateEdgeDeploymentStageCommandOutput extends __MetadataBearer {}
 
 /**
@@ -32,71 +29,64 @@ export interface CreateEdgeDeploymentStageCommandOutput extends __MetadataBearer
  * ```javascript
  * import { SageMakerClient, CreateEdgeDeploymentStageCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, CreateEdgeDeploymentStageCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // CreateEdgeDeploymentStageRequest
+ *   EdgeDeploymentPlanName: "STRING_VALUE", // required
+ *   Stages: [ // DeploymentStages // required
+ *     { // DeploymentStage
+ *       StageName: "STRING_VALUE", // required
+ *       DeviceSelectionConfig: { // DeviceSelectionConfig
+ *         DeviceSubsetType: "PERCENTAGE" || "SELECTION" || "NAMECONTAINS", // required
+ *         Percentage: Number("int"),
+ *         DeviceNames: [ // DeviceNames
+ *           "STRING_VALUE",
+ *         ],
+ *         DeviceNameContains: "STRING_VALUE",
+ *       },
+ *       DeploymentConfig: { // EdgeDeploymentConfig
+ *         FailureHandlingPolicy: "ROLLBACK_ON_FAILURE" || "DO_NOTHING", // required
+ *       },
+ *     },
+ *   ],
+ * };
  * const command = new CreateEdgeDeploymentStageCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CreateEdgeDeploymentStageCommandInput - {@link CreateEdgeDeploymentStageCommandInput}
+ * @returns {@link CreateEdgeDeploymentStageCommandOutput}
  * @see {@link CreateEdgeDeploymentStageCommandInput} for command's `input` shape.
  * @see {@link CreateEdgeDeploymentStageCommandOutput} for command's `response` shape.
  * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceLimitExceeded} (client fault)
+ *  <p> You have exceeded an SageMaker resource limit. For example, you might have too many training jobs created. </p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class CreateEdgeDeploymentStageCommand extends $Command<
-  CreateEdgeDeploymentStageCommandInput,
-  CreateEdgeDeploymentStageCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateEdgeDeploymentStageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateEdgeDeploymentStageCommandInput, CreateEdgeDeploymentStageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "CreateEdgeDeploymentStageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateEdgeDeploymentStageRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class CreateEdgeDeploymentStageCommand extends command<CreateEdgeDeploymentStageCommandInput, CreateEdgeDeploymentStageCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateEdgeDeploymentStage",
+  CreateEdgeDeploymentStage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEdgeDeploymentStageRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateEdgeDeploymentStageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateEdgeDeploymentStageCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateEdgeDeploymentStageCommandOutput> {
-    return deserializeAws_json1_1CreateEdgeDeploymentStageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateEdgeDeploymentStageCommandInput;
+      output: CreateEdgeDeploymentStageCommandOutput;
+    };
+  };
 }

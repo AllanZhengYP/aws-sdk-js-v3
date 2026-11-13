@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListCidrCollectionsRequest,
-  ListCidrCollectionsRequestFilterSensitiveLog,
-  ListCidrCollectionsResponse,
-  ListCidrCollectionsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restXmlListCidrCollectionsCommand,
-  serializeAws_restXmlListCidrCollectionsCommand,
-} from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw2, command } from "../commandBuilder";
+import type { ListCidrCollectionsRequest, ListCidrCollectionsResponse } from "../models/models_0";
+import { ListCidrCollections$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCidrCollectionsCommand}.
+ */
 export interface ListCidrCollectionsCommandInput extends ListCidrCollectionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCidrCollectionsCommand}.
+ */
 export interface ListCidrCollectionsCommandOutput extends ListCidrCollectionsResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,59 @@ export interface ListCidrCollectionsCommandOutput extends ListCidrCollectionsRes
  * ```javascript
  * import { Route53Client, ListCidrCollectionsCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, ListCidrCollectionsCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = { // ListCidrCollectionsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListCidrCollectionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListCidrCollectionsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   CidrCollections: [ // CollectionSummaries
+ * //     { // CollectionSummary
+ * //       Arn: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       Version: Number("long"),
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListCidrCollectionsCommandInput - {@link ListCidrCollectionsCommandInput}
+ * @returns {@link ListCidrCollectionsCommandOutput}
  * @see {@link ListCidrCollectionsCommandInput} for command's `input` shape.
  * @see {@link ListCidrCollectionsCommandOutput} for command's `response` shape.
  * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The input is not valid.</p>
+ *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class ListCidrCollectionsCommand extends $Command<
-  ListCidrCollectionsCommandInput,
-  ListCidrCollectionsCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCidrCollectionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCidrCollectionsCommandInput, ListCidrCollectionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "ListCidrCollectionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCidrCollectionsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListCidrCollectionsResponseFilterSensitiveLog,
+export class ListCidrCollectionsCommand extends command<ListCidrCollectionsCommandInput, ListCidrCollectionsCommandOutput>(
+  _ep0,
+  _mw2,
+  "ListCidrCollections",
+  ListCidrCollections$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCidrCollectionsRequest;
+      output: ListCidrCollectionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListCidrCollectionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlListCidrCollectionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListCidrCollectionsCommandOutput> {
-    return deserializeAws_restXmlListCidrCollectionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCidrCollectionsCommandInput;
+      output: ListCidrCollectionsCommandOutput;
+    };
+  };
 }

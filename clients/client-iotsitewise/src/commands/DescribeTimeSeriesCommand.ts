@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import {
-  DescribeTimeSeriesRequest,
-  DescribeTimeSeriesRequestFilterSensitiveLog,
-  DescribeTimeSeriesResponse,
-  DescribeTimeSeriesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeTimeSeriesCommand,
-  serializeAws_restJson1DescribeTimeSeriesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTimeSeriesRequest, DescribeTimeSeriesResponse } from "../models/models_1";
+import { DescribeTimeSeries$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTimeSeriesCommand}.
+ */
 export interface DescribeTimeSeriesCommandInput extends DescribeTimeSeriesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTimeSeriesCommand}.
+ */
 export interface DescribeTimeSeriesCommandOutput extends DescribeTimeSeriesResponse, __MetadataBearer {}
 
 /**
@@ -53,68 +48,75 @@ export interface DescribeTimeSeriesCommandOutput extends DescribeTimeSeriesRespo
  * ```javascript
  * import { IoTSiteWiseClient, DescribeTimeSeriesCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, DescribeTimeSeriesCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // DescribeTimeSeriesRequest
+ *   alias: "STRING_VALUE",
+ *   assetId: "STRING_VALUE",
+ *   propertyId: "STRING_VALUE",
+ *   workspaceName: "STRING_VALUE",
+ * };
  * const command = new DescribeTimeSeriesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTimeSeriesResponse
+ * //   assetId: "STRING_VALUE",
+ * //   propertyId: "STRING_VALUE",
+ * //   alias: "STRING_VALUE",
+ * //   timeSeriesId: "STRING_VALUE", // required
+ * //   dataType: "STRING" || "INTEGER" || "DOUBLE" || "BOOLEAN" || "STRUCT" || "VIDEO" || "ANNOTATION" || "JSON", // required
+ * //   dataTypeSpec: "STRING_VALUE",
+ * //   timeSeriesCreationDate: new Date("TIMESTAMP"), // required
+ * //   timeSeriesLastUpdateDate: new Date("TIMESTAMP"), // required
+ * //   timeSeriesArn: "STRING_VALUE", // required
+ * //   workspaceName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeTimeSeriesCommandInput - {@link DescribeTimeSeriesCommandInput}
+ * @returns {@link DescribeTimeSeriesCommandOutput}
  * @see {@link DescribeTimeSeriesCommandInput} for command's `input` shape.
  * @see {@link DescribeTimeSeriesCommandOutput} for command's `response` shape.
  * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTimeSeriesCommand extends $Command<
-  DescribeTimeSeriesCommandInput,
-  DescribeTimeSeriesCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTimeSeriesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTimeSeriesCommandInput, DescribeTimeSeriesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "DescribeTimeSeriesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTimeSeriesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTimeSeriesResponseFilterSensitiveLog,
+export class DescribeTimeSeriesCommand extends command<DescribeTimeSeriesCommandInput, DescribeTimeSeriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTimeSeries",
+  DescribeTimeSeries$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTimeSeriesRequest;
+      output: DescribeTimeSeriesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTimeSeriesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeTimeSeriesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTimeSeriesCommandOutput> {
-    return deserializeAws_restJson1DescribeTimeSeriesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTimeSeriesCommandInput;
+      output: DescribeTimeSeriesCommandOutput;
+    };
+  };
 }

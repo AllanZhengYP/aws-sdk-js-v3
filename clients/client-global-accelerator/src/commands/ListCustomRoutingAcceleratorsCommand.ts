@@ -1,37 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import {
-  ListCustomRoutingAcceleratorsRequest,
-  ListCustomRoutingAcceleratorsRequestFilterSensitiveLog,
-  ListCustomRoutingAcceleratorsResponse,
-  ListCustomRoutingAcceleratorsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListCustomRoutingAcceleratorsCommand,
-  serializeAws_json1_1ListCustomRoutingAcceleratorsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListCustomRoutingAcceleratorsRequest, ListCustomRoutingAcceleratorsResponse } from "../models/models_0";
+import { ListCustomRoutingAccelerators$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCustomRoutingAcceleratorsCommand}.
+ */
 export interface ListCustomRoutingAcceleratorsCommandInput extends ListCustomRoutingAcceleratorsRequest {}
-export interface ListCustomRoutingAcceleratorsCommandOutput
-  extends ListCustomRoutingAcceleratorsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListCustomRoutingAcceleratorsCommand}.
+ */
+export interface ListCustomRoutingAcceleratorsCommandOutput extends ListCustomRoutingAcceleratorsResponse, __MetadataBearer {}
 
 /**
  * <p>List the custom routing accelerators for an Amazon Web Services account. </p>
@@ -40,71 +29,84 @@ export interface ListCustomRoutingAcceleratorsCommandOutput
  * ```javascript
  * import { GlobalAcceleratorClient, ListCustomRoutingAcceleratorsCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, ListCustomRoutingAcceleratorsCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // ListCustomRoutingAcceleratorsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListCustomRoutingAcceleratorsCommand(input);
  * const response = await client.send(command);
+ * // { // ListCustomRoutingAcceleratorsResponse
+ * //   Accelerators: [ // CustomRoutingAccelerators
+ * //     { // CustomRoutingAccelerator
+ * //       AcceleratorArn: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //       IpAddressType: "IPV4" || "DUAL_STACK",
+ * //       Enabled: true || false,
+ * //       IpSets: [ // IpSets
+ * //         { // IpSet
+ * //           IpFamily: "STRING_VALUE",
+ * //           IpAddresses: [ // IpAddresses
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           IpAddressFamily: "IPv4" || "IPv6",
+ * //           IpAddressDetails: [ // IpAddressDetails
+ * //             { // IpAddressDetail
+ * //               IpAddress: "STRING_VALUE",
+ * //               NetworkZone: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //       DnsName: "STRING_VALUE",
+ * //       Status: "DEPLOYED" || "IN_PROGRESS",
+ * //       CreatedTime: new Date("TIMESTAMP"),
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListCustomRoutingAcceleratorsCommandInput - {@link ListCustomRoutingAcceleratorsCommandInput}
+ * @returns {@link ListCustomRoutingAcceleratorsCommandOutput}
  * @see {@link ListCustomRoutingAcceleratorsCommandInput} for command's `input` shape.
  * @see {@link ListCustomRoutingAcceleratorsCommandOutput} for command's `response` shape.
  * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>There isn't another item to return.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class ListCustomRoutingAcceleratorsCommand extends $Command<
-  ListCustomRoutingAcceleratorsCommandInput,
-  ListCustomRoutingAcceleratorsCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCustomRoutingAcceleratorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCustomRoutingAcceleratorsCommandInput, ListCustomRoutingAcceleratorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "ListCustomRoutingAcceleratorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCustomRoutingAcceleratorsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListCustomRoutingAcceleratorsResponseFilterSensitiveLog,
+export class ListCustomRoutingAcceleratorsCommand extends command<ListCustomRoutingAcceleratorsCommandInput, ListCustomRoutingAcceleratorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCustomRoutingAccelerators",
+  ListCustomRoutingAccelerators$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCustomRoutingAcceleratorsRequest;
+      output: ListCustomRoutingAcceleratorsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListCustomRoutingAcceleratorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListCustomRoutingAcceleratorsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListCustomRoutingAcceleratorsCommandOutput> {
-    return deserializeAws_json1_1ListCustomRoutingAcceleratorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCustomRoutingAcceleratorsCommandInput;
+      output: ListCustomRoutingAcceleratorsCommandOutput;
+    };
+  };
 }

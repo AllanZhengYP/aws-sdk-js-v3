@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTClient";
-import {
-  DescribeManagedJobTemplateRequest,
-  DescribeManagedJobTemplateRequestFilterSensitiveLog,
-  DescribeManagedJobTemplateResponse,
-  DescribeManagedJobTemplateResponseFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_restJson1DescribeManagedJobTemplateCommand,
-  serializeAws_restJson1DescribeManagedJobTemplateCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeManagedJobTemplateRequest, DescribeManagedJobTemplateResponse } from "../models/models_1";
+import { DescribeManagedJobTemplate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeManagedJobTemplateCommand}.
+ */
 export interface DescribeManagedJobTemplateCommandInput extends DescribeManagedJobTemplateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeManagedJobTemplateCommand}.
+ */
 export interface DescribeManagedJobTemplateCommandOutput extends DescribeManagedJobTemplateResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,77 @@ export interface DescribeManagedJobTemplateCommandOutput extends DescribeManaged
  * ```javascript
  * import { IoTClient, DescribeManagedJobTemplateCommand } from "@aws-sdk/client-iot"; // ES Modules import
  * // const { IoTClient, DescribeManagedJobTemplateCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * // import type { IoTClientConfig } from "@aws-sdk/client-iot";
+ * const config = {}; // type is IoTClientConfig
  * const client = new IoTClient(config);
+ * const input = { // DescribeManagedJobTemplateRequest
+ *   templateName: "STRING_VALUE", // required
+ *   templateVersion: "STRING_VALUE",
+ * };
  * const command = new DescribeManagedJobTemplateCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeManagedJobTemplateResponse
+ * //   templateName: "STRING_VALUE",
+ * //   templateArn: "STRING_VALUE",
+ * //   description: "STRING_VALUE",
+ * //   templateVersion: "STRING_VALUE",
+ * //   environments: [ // Environments
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   documentParameters: [ // DocumentParameters
+ * //     { // DocumentParameter
+ * //       key: "STRING_VALUE",
+ * //       description: "STRING_VALUE",
+ * //       regex: "STRING_VALUE",
+ * //       example: "STRING_VALUE",
+ * //       optional: true || false,
+ * //     },
+ * //   ],
+ * //   document: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeManagedJobTemplateCommandInput - {@link DescribeManagedJobTemplateCommandInput}
+ * @returns {@link DescribeManagedJobTemplateCommandOutput}
  * @see {@link DescribeManagedJobTemplateCommandInput} for command's `input` shape.
  * @see {@link DescribeManagedJobTemplateCommandOutput} for command's `response` shape.
  * @see {@link IoTClientResolvedConfig | config} for IoTClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal error from the service that indicates an unexpected error or that the service
+ *             is unavailable.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link IoTServiceException}
+ * <p>Base exception class for all service exceptions from IoT service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeManagedJobTemplateCommand extends $Command<
-  DescribeManagedJobTemplateCommandInput,
-  DescribeManagedJobTemplateCommandOutput,
-  IoTClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeManagedJobTemplateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeManagedJobTemplateCommandInput, DescribeManagedJobTemplateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTClient";
-    const commandName = "DescribeManagedJobTemplateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeManagedJobTemplateRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeManagedJobTemplateResponseFilterSensitiveLog,
+export class DescribeManagedJobTemplateCommand extends command<DescribeManagedJobTemplateCommandInput, DescribeManagedJobTemplateCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeManagedJobTemplate",
+  DescribeManagedJobTemplate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeManagedJobTemplateRequest;
+      output: DescribeManagedJobTemplateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeManagedJobTemplateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeManagedJobTemplateCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeManagedJobTemplateCommandOutput> {
-    return deserializeAws_restJson1DescribeManagedJobTemplateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeManagedJobTemplateCommandInput;
+      output: DescribeManagedJobTemplateCommandOutput;
+    };
+  };
 }

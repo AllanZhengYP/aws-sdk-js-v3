@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  GetIpamAddressHistoryRequest,
-  GetIpamAddressHistoryRequestFilterSensitiveLog,
-  GetIpamAddressHistoryResult,
-  GetIpamAddressHistoryResultFilterSensitiveLog,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2GetIpamAddressHistoryCommand,
-  serializeAws_ec2GetIpamAddressHistoryCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIpamAddressHistoryRequest, GetIpamAddressHistoryResult } from "../models/models_6";
+import { GetIpamAddressHistory$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIpamAddressHistoryCommand}.
+ */
 export interface GetIpamAddressHistoryCommandInput extends GetIpamAddressHistoryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIpamAddressHistoryCommand}.
+ */
 export interface GetIpamAddressHistoryCommandOutput extends GetIpamAddressHistoryResult, __MetadataBearer {}
 
 /**
@@ -34,68 +29,69 @@ export interface GetIpamAddressHistoryCommandOutput extends GetIpamAddressHistor
  * ```javascript
  * import { EC2Client, GetIpamAddressHistoryCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetIpamAddressHistoryCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetIpamAddressHistoryRequest
+ *   DryRun: true || false,
+ *   Cidr: "STRING_VALUE", // required
+ *   IpamScopeId: "STRING_VALUE", // required
+ *   VpcId: "STRING_VALUE",
+ *   StartTime: new Date("TIMESTAMP"),
+ *   EndTime: new Date("TIMESTAMP"),
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetIpamAddressHistoryCommand(input);
  * const response = await client.send(command);
+ * // { // GetIpamAddressHistoryResult
+ * //   HistoryRecords: [ // IpamAddressHistoryRecordSet
+ * //     { // IpamAddressHistoryRecord
+ * //       ResourceOwnerId: "STRING_VALUE",
+ * //       ResourceRegion: "STRING_VALUE",
+ * //       ResourceType: "eip" || "vpc" || "subnet" || "network-interface" || "instance",
+ * //       ResourceId: "STRING_VALUE",
+ * //       ResourceCidr: "STRING_VALUE",
+ * //       ResourceName: "STRING_VALUE",
+ * //       ResourceComplianceStatus: "compliant" || "noncompliant" || "unmanaged" || "ignored",
+ * //       ResourceOverlapStatus: "overlapping" || "nonoverlapping" || "ignored",
+ * //       VpcId: "STRING_VALUE",
+ * //       SampledStartTime: new Date("TIMESTAMP"),
+ * //       SampledEndTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetIpamAddressHistoryCommandInput - {@link GetIpamAddressHistoryCommandInput}
+ * @returns {@link GetIpamAddressHistoryCommandOutput}
  * @see {@link GetIpamAddressHistoryCommandInput} for command's `input` shape.
  * @see {@link GetIpamAddressHistoryCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetIpamAddressHistoryCommand extends $Command<
-  GetIpamAddressHistoryCommandInput,
-  GetIpamAddressHistoryCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIpamAddressHistoryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIpamAddressHistoryCommandInput, GetIpamAddressHistoryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetIpamAddressHistoryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIpamAddressHistoryRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetIpamAddressHistoryResultFilterSensitiveLog,
+export class GetIpamAddressHistoryCommand extends command<GetIpamAddressHistoryCommandInput, GetIpamAddressHistoryCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIpamAddressHistory",
+  GetIpamAddressHistory$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIpamAddressHistoryRequest;
+      output: GetIpamAddressHistoryResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIpamAddressHistoryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2GetIpamAddressHistoryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIpamAddressHistoryCommandOutput> {
-    return deserializeAws_ec2GetIpamAddressHistoryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIpamAddressHistoryCommandInput;
+      output: GetIpamAddressHistoryCommandOutput;
+    };
+  };
 }

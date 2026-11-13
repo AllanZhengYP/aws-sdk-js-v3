@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DrsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DrsClient";
-import {
-  StartRecoveryRequest,
-  StartRecoveryRequestFilterSensitiveLog,
-  StartRecoveryResponse,
-  StartRecoveryResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1StartRecoveryCommand,
-  serializeAws_restJson1StartRecoveryCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartRecoveryRequest, StartRecoveryResponse } from "../models/models_0";
+import { StartRecovery$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartRecoveryCommand}.
+ */
 export interface StartRecoveryCommandInput extends StartRecoveryRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartRecoveryCommand}.
+ */
 export interface StartRecoveryCommandOutput extends StartRecoveryResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,125 @@ export interface StartRecoveryCommandOutput extends StartRecoveryResponse, __Met
  * ```javascript
  * import { DrsClient, StartRecoveryCommand } from "@aws-sdk/client-drs"; // ES Modules import
  * // const { DrsClient, StartRecoveryCommand } = require("@aws-sdk/client-drs"); // CommonJS import
+ * // import type { DrsClientConfig } from "@aws-sdk/client-drs";
+ * const config = {}; // type is DrsClientConfig
  * const client = new DrsClient(config);
+ * const input = { // StartRecoveryRequest
+ *   sourceServers: [ // StartRecoveryRequestSourceServers // required
+ *     { // StartRecoveryRequestSourceServer
+ *       sourceServerID: "STRING_VALUE", // required
+ *       recoverySnapshotID: "STRING_VALUE",
+ *     },
+ *   ],
+ *   isDrill: true || false,
+ *   tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new StartRecoveryCommand(input);
  * const response = await client.send(command);
+ * // { // StartRecoveryResponse
+ * //   job: { // Job
+ * //     jobID: "STRING_VALUE", // required
+ * //     arn: "STRING_VALUE",
+ * //     type: "STRING_VALUE",
+ * //     initiatedBy: "STRING_VALUE",
+ * //     creationDateTime: "STRING_VALUE",
+ * //     endDateTime: "STRING_VALUE",
+ * //     status: "STRING_VALUE",
+ * //     participatingServers: [ // ParticipatingServers
+ * //       { // ParticipatingServer
+ * //         sourceServerID: "STRING_VALUE",
+ * //         recoveryInstanceID: "STRING_VALUE",
+ * //         launchStatus: "STRING_VALUE",
+ * //         launchActionsStatus: { // LaunchActionsStatus
+ * //           ssmAgentDiscoveryDatetime: "STRING_VALUE",
+ * //           runs: [ // LaunchActionRuns
+ * //             { // LaunchActionRun
+ * //               action: { // LaunchAction
+ * //                 actionId: "STRING_VALUE",
+ * //                 actionCode: "STRING_VALUE",
+ * //                 type: "STRING_VALUE",
+ * //                 name: "STRING_VALUE",
+ * //                 active: true || false,
+ * //                 order: Number("int"),
+ * //                 actionVersion: "STRING_VALUE",
+ * //                 optional: true || false,
+ * //                 parameters: { // LaunchActionParameters
+ * //                   "<keys>": { // LaunchActionParameter
+ * //                     value: "STRING_VALUE",
+ * //                     type: "STRING_VALUE",
+ * //                   },
+ * //                 },
+ * //                 description: "STRING_VALUE",
+ * //                 category: "STRING_VALUE",
+ * //               },
+ * //               runId: "STRING_VALUE",
+ * //               status: "STRING_VALUE",
+ * //               failureReason: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //     tags: { // TagsMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     participatingResources: [ // ParticipatingResources
+ * //       { // ParticipatingResource
+ * //         participatingResourceID: { // ParticipatingResourceID Union: only one key present
+ * //           sourceNetworkID: "STRING_VALUE",
+ * //         },
+ * //         launchStatus: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartRecoveryCommandInput - {@link StartRecoveryCommandInput}
+ * @returns {@link StartRecoveryCommandOutput}
  * @see {@link StartRecoveryCommandInput} for command's `input` shape.
  * @see {@link StartRecoveryCommandOutput} for command's `response` shape.
  * @see {@link DrsClientResolvedConfig | config} for DrsClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request could not be completed due to a conflict with the current state of the target resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request could not be completed because its exceeded the service quota.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>The account performing the request has not been initialized.</p>
+ *
+ * @throws {@link DrsServiceException}
+ * <p>Base exception class for all service exceptions from Drs service.</p>
+ *
+ *
+ * @public
  */
-export class StartRecoveryCommand extends $Command<
-  StartRecoveryCommandInput,
-  StartRecoveryCommandOutput,
-  DrsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartRecoveryCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DrsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartRecoveryCommandInput, StartRecoveryCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DrsClient";
-    const commandName = "StartRecoveryCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartRecoveryRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StartRecoveryResponseFilterSensitiveLog,
+export class StartRecoveryCommand extends command<StartRecoveryCommandInput, StartRecoveryCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartRecovery",
+  StartRecovery$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartRecoveryRequest;
+      output: StartRecoveryResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartRecoveryCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartRecoveryCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartRecoveryCommandOutput> {
-    return deserializeAws_restJson1StartRecoveryCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartRecoveryCommandInput;
+      output: StartRecoveryCommandOutput;
+    };
+  };
 }

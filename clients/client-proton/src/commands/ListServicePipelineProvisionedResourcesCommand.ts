@@ -1,113 +1,103 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListServicePipelineProvisionedResourcesInput,
-  ListServicePipelineProvisionedResourcesInputFilterSensitiveLog,
   ListServicePipelineProvisionedResourcesOutput,
-  ListServicePipelineProvisionedResourcesOutputFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_0ListServicePipelineProvisionedResourcesCommand,
-  serializeAws_json1_0ListServicePipelineProvisionedResourcesCommand,
-} from "../protocols/Aws_json1_0";
-import { ProtonClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ProtonClient";
+import { ListServicePipelineProvisionedResources$ } from "../schemas/schemas_0";
 
-export interface ListServicePipelineProvisionedResourcesCommandInput
-  extends ListServicePipelineProvisionedResourcesInput {}
-export interface ListServicePipelineProvisionedResourcesCommandOutput
-  extends ListServicePipelineProvisionedResourcesOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListServicePipelineProvisionedResourcesCommand}.
+ */
+export interface ListServicePipelineProvisionedResourcesCommandInput extends ListServicePipelineProvisionedResourcesInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListServicePipelineProvisionedResourcesCommand}.
+ */
+export interface ListServicePipelineProvisionedResourcesCommandOutput extends ListServicePipelineProvisionedResourcesOutput, __MetadataBearer {}
 
 /**
  * <p>List provisioned resources for a service and pipeline with details.</p>
+ *
+ * @deprecated (since 10/07/2025) AWS Proton is not accepting new customers.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ProtonClient, ListServicePipelineProvisionedResourcesCommand } from "@aws-sdk/client-proton"; // ES Modules import
  * // const { ProtonClient, ListServicePipelineProvisionedResourcesCommand } = require("@aws-sdk/client-proton"); // CommonJS import
+ * // import type { ProtonClientConfig } from "@aws-sdk/client-proton";
+ * const config = {}; // type is ProtonClientConfig
  * const client = new ProtonClient(config);
+ * const input = { // ListServicePipelineProvisionedResourcesInput
+ *   serviceName: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListServicePipelineProvisionedResourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ListServicePipelineProvisionedResourcesOutput
+ * //   nextToken: "STRING_VALUE",
+ * //   provisionedResources: [ // ProvisionedResourceList // required
+ * //     { // ProvisionedResource
+ * //       name: "STRING_VALUE",
+ * //       identifier: "STRING_VALUE",
+ * //       provisioningEngine: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListServicePipelineProvisionedResourcesCommandInput - {@link ListServicePipelineProvisionedResourcesCommandInput}
+ * @returns {@link ListServicePipelineProvisionedResourcesCommandOutput}
  * @see {@link ListServicePipelineProvisionedResourcesCommandInput} for command's `input` shape.
  * @see {@link ListServicePipelineProvisionedResourcesCommandOutput} for command's `response` shape.
  * @see {@link ProtonClientResolvedConfig | config} for ProtonClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>There <i>isn't</i> sufficient access for performing this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request failed to register with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource <i>wasn't</i> found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input is invalid or an out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ProtonServiceException}
+ * <p>Base exception class for all service exceptions from Proton service.</p>
+ *
+ *
+ * @public
  */
-export class ListServicePipelineProvisionedResourcesCommand extends $Command<
-  ListServicePipelineProvisionedResourcesCommandInput,
-  ListServicePipelineProvisionedResourcesCommandOutput,
-  ProtonClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListServicePipelineProvisionedResourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ProtonClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ListServicePipelineProvisionedResourcesCommandInput,
-    ListServicePipelineProvisionedResourcesCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ProtonClient";
-    const commandName = "ListServicePipelineProvisionedResourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListServicePipelineProvisionedResourcesInputFilterSensitiveLog,
-      outputFilterSensitiveLog: ListServicePipelineProvisionedResourcesOutputFilterSensitiveLog,
+export class ListServicePipelineProvisionedResourcesCommand extends command<ListServicePipelineProvisionedResourcesCommandInput, ListServicePipelineProvisionedResourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListServicePipelineProvisionedResources",
+  ListServicePipelineProvisionedResources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListServicePipelineProvisionedResourcesInput;
+      output: ListServicePipelineProvisionedResourcesOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListServicePipelineProvisionedResourcesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListServicePipelineProvisionedResourcesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListServicePipelineProvisionedResourcesCommandOutput> {
-    return deserializeAws_json1_0ListServicePipelineProvisionedResourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListServicePipelineProvisionedResourcesCommandInput;
+      output: ListServicePipelineProvisionedResourcesCommandOutput;
+    };
+  };
 }

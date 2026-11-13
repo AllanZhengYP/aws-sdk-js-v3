@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DeleteAccountAliasRequest,
-  DeleteAccountAliasRequestFilterSensitiveLog,
-  DeleteAccountAliasResult,
-  DeleteAccountAliasResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteAccountAliasCommand,
-  serializeAws_restJson1DeleteAccountAliasCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SupportAppClientResolvedConfig } from "../SupportAppClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteAccountAliasRequest, DeleteAccountAliasResult } from "../models/models_0";
+import { DeleteAccountAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteAccountAliasCommand}.
+ */
 export interface DeleteAccountAliasCommandInput extends DeleteAccountAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteAccountAliasCommand}.
+ */
 export interface DeleteAccountAliasCommandOutput extends DeleteAccountAliasResult, __MetadataBearer {}
 
 /**
@@ -35,68 +30,53 @@ export interface DeleteAccountAliasCommandOutput extends DeleteAccountAliasResul
  * ```javascript
  * import { SupportAppClient, DeleteAccountAliasCommand } from "@aws-sdk/client-support-app"; // ES Modules import
  * // const { SupportAppClient, DeleteAccountAliasCommand } = require("@aws-sdk/client-support-app"); // CommonJS import
+ * // import type { SupportAppClientConfig } from "@aws-sdk/client-support-app";
+ * const config = {}; // type is SupportAppClientConfig
  * const client = new SupportAppClient(config);
+ * const input = {};
  * const command = new DeleteAccountAliasCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteAccountAliasCommandInput - {@link DeleteAccountAliasCommandInput}
+ * @returns {@link DeleteAccountAliasCommandOutput}
  * @see {@link DeleteAccountAliasCommandInput} for command's `input` shape.
  * @see {@link DeleteAccountAliasCommandOutput} for command's `response` shape.
  * @see {@link SupportAppClientResolvedConfig | config} for SupportAppClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>We can’t process your request right now because of a server issue. Try again later.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource is missing or doesn't exist, such as an account alias, Slack
+ *       channel configuration, or Slack workspace configuration.</p>
+ *
+ * @throws {@link SupportAppServiceException}
+ * <p>Base exception class for all service exceptions from SupportApp service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteAccountAliasCommand extends $Command<
-  DeleteAccountAliasCommandInput,
-  DeleteAccountAliasCommandOutput,
-  SupportAppClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteAccountAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SupportAppClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteAccountAliasCommandInput, DeleteAccountAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SupportAppClient";
-    const commandName = "DeleteAccountAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteAccountAliasRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteAccountAliasResultFilterSensitiveLog,
+export class DeleteAccountAliasCommand extends command<DeleteAccountAliasCommandInput, DeleteAccountAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteAccountAlias",
+  DeleteAccountAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteAccountAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteAccountAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteAccountAliasCommandOutput> {
-    return deserializeAws_restJson1DeleteAccountAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteAccountAliasCommandInput;
+      output: DeleteAccountAliasCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  UpdateCertificateRequest,
-  UpdateCertificateRequestFilterSensitiveLog,
-  UpdateCertificateResponse,
-  UpdateCertificateResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateCertificateCommand,
-  serializeAws_json1_1UpdateCertificateCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TransferClientResolvedConfig } from "../TransferClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateCertificateRequest, UpdateCertificateResponse } from "../models/models_0";
+import { UpdateCertificate$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateCertificateCommand}.
+ */
 export interface UpdateCertificateCommandInput extends UpdateCertificateRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateCertificateCommand}.
+ */
 export interface UpdateCertificateCommandOutput extends UpdateCertificateResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,65 @@ export interface UpdateCertificateCommandOutput extends UpdateCertificateRespons
  * ```javascript
  * import { TransferClient, UpdateCertificateCommand } from "@aws-sdk/client-transfer"; // ES Modules import
  * // const { TransferClient, UpdateCertificateCommand } = require("@aws-sdk/client-transfer"); // CommonJS import
+ * // import type { TransferClientConfig } from "@aws-sdk/client-transfer";
+ * const config = {}; // type is TransferClientConfig
  * const client = new TransferClient(config);
+ * const input = { // UpdateCertificateRequest
+ *   CertificateId: "STRING_VALUE", // required
+ *   ActiveDate: new Date("TIMESTAMP"),
+ *   InactiveDate: new Date("TIMESTAMP"),
+ *   Description: "STRING_VALUE",
+ * };
  * const command = new UpdateCertificateCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateCertificateResponse
+ * //   CertificateId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateCertificateCommandInput - {@link UpdateCertificateCommandInput}
+ * @returns {@link UpdateCertificateCommandOutput}
  * @see {@link UpdateCertificateCommandInput} for command's `input` shape.
  * @see {@link UpdateCertificateCommandOutput} for command's `response` shape.
  * @see {@link TransferClientResolvedConfig | config} for TransferClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link TransferServiceException}
+ * <p>Base exception class for all service exceptions from Transfer service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateCertificateCommand extends $Command<
-  UpdateCertificateCommandInput,
-  UpdateCertificateCommandOutput,
-  TransferClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateCertificateCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TransferClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateCertificateCommandInput, UpdateCertificateCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TransferClient";
-    const commandName = "UpdateCertificateCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateCertificateRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateCertificateResponseFilterSensitiveLog,
+export class UpdateCertificateCommand extends command<UpdateCertificateCommandInput, UpdateCertificateCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateCertificate",
+  UpdateCertificate$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCertificateRequest;
+      output: UpdateCertificateResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateCertificateCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateCertificateCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateCertificateCommandOutput> {
-    return deserializeAws_json1_1UpdateCertificateCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateCertificateCommandInput;
+      output: UpdateCertificateCommandOutput;
+    };
+  };
 }

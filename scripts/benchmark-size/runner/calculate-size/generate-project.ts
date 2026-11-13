@@ -1,9 +1,9 @@
 import { execa as exec } from "execa";
-import { promises as fsPromise } from "fs";
-import { join } from "path";
-import prettier from "prettier";
+import { promises as fsPromise } from "node:fs";
+import { join } from "node:path";
+import { format } from "oxfmt";
 
-import { PackageContext } from "../load-test-scope";
+import type { PackageContext } from "../load-test-scope";
 import type { PackageSizeReportOptions } from "./index";
 
 export const generateProject = async (projectDir: string, options: PackageSizeReportOptions) => {
@@ -14,9 +14,7 @@ export const generateProject = async (projectDir: string, options: PackageSizeRe
   };
   for (const [name, template] of Object.entries(options.templates)) {
     const filePath = join(projectDir, name);
-    const file = prettier.format(template(contextWithPeerDep), {
-      filepath: filePath,
-    });
+    const file = (await format(filePath, template(contextWithPeerDep))).code;
     await fsPromise.writeFile(filePath, file);
   }
 

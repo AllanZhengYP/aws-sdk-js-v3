@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
-  GetResourceEventConfigurationRequest,
-  GetResourceEventConfigurationRequestFilterSensitiveLog,
-  GetResourceEventConfigurationResponse,
-  GetResourceEventConfigurationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetResourceEventConfigurationCommand,
-  serializeAws_restJson1GetResourceEventConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetResourceEventConfigurationRequest, GetResourceEventConfigurationResponse } from "../models/models_0";
+import { GetResourceEventConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetResourceEventConfigurationCommand}.
+ */
 export interface GetResourceEventConfigurationCommandInput extends GetResourceEventConfigurationRequest {}
-export interface GetResourceEventConfigurationCommandOutput
-  extends GetResourceEventConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetResourceEventConfigurationCommand}.
+ */
+export interface GetResourceEventConfigurationCommandOutput extends GetResourceEventConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Get the event configuration for a particular resource identifier.</p>
@@ -36,71 +29,93 @@ export interface GetResourceEventConfigurationCommandOutput
  * ```javascript
  * import { IoTWirelessClient, GetResourceEventConfigurationCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, GetResourceEventConfigurationCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // GetResourceEventConfigurationRequest
+ *   Identifier: "STRING_VALUE", // required
+ *   IdentifierType: "PartnerAccountId" || "DevEui" || "GatewayEui" || "WirelessDeviceId" || "WirelessGatewayId", // required
+ *   PartnerType: "Sidewalk",
+ * };
  * const command = new GetResourceEventConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // GetResourceEventConfigurationResponse
+ * //   DeviceRegistrationState: { // DeviceRegistrationStateEventConfiguration
+ * //     Sidewalk: { // SidewalkEventNotificationConfigurations
+ * //       AmazonIdEventTopic: "Enabled" || "Disabled",
+ * //     },
+ * //     WirelessDeviceIdEventTopic: "Enabled" || "Disabled",
+ * //   },
+ * //   Proximity: { // ProximityEventConfiguration
+ * //     Sidewalk: {
+ * //       AmazonIdEventTopic: "Enabled" || "Disabled",
+ * //     },
+ * //     WirelessDeviceIdEventTopic: "Enabled" || "Disabled",
+ * //   },
+ * //   Join: { // JoinEventConfiguration
+ * //     LoRaWAN: { // LoRaWANJoinEventNotificationConfigurations
+ * //       DevEuiEventTopic: "Enabled" || "Disabled",
+ * //     },
+ * //     WirelessDeviceIdEventTopic: "Enabled" || "Disabled",
+ * //   },
+ * //   ConnectionStatus: { // ConnectionStatusEventConfiguration
+ * //     LoRaWAN: { // LoRaWANConnectionStatusEventNotificationConfigurations
+ * //       GatewayEuiEventTopic: "Enabled" || "Disabled",
+ * //     },
+ * //     WirelessGatewayIdEventTopic: "Enabled" || "Disabled",
+ * //   },
+ * //   MessageDeliveryStatus: { // MessageDeliveryStatusEventConfiguration
+ * //     Sidewalk: {
+ * //       AmazonIdEventTopic: "Enabled" || "Disabled",
+ * //     },
+ * //     WirelessDeviceIdEventTopic: "Enabled" || "Disabled",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetResourceEventConfigurationCommandInput - {@link GetResourceEventConfigurationCommandInput}
+ * @returns {@link GetResourceEventConfigurationCommandOutput}
  * @see {@link GetResourceEventConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetResourceEventConfigurationCommandOutput} for command's `response` shape.
  * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class GetResourceEventConfigurationCommand extends $Command<
-  GetResourceEventConfigurationCommandInput,
-  GetResourceEventConfigurationCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetResourceEventConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetResourceEventConfigurationCommandInput, GetResourceEventConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "GetResourceEventConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetResourceEventConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetResourceEventConfigurationResponseFilterSensitiveLog,
+export class GetResourceEventConfigurationCommand extends command<GetResourceEventConfigurationCommandInput, GetResourceEventConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetResourceEventConfiguration",
+  GetResourceEventConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetResourceEventConfigurationRequest;
+      output: GetResourceEventConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetResourceEventConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetResourceEventConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetResourceEventConfigurationCommandOutput> {
-    return deserializeAws_restJson1GetResourceEventConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetResourceEventConfigurationCommandInput;
+      output: GetResourceEventConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,25 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DrsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DrsClient";
-import { StopFailbackRequest, StopFailbackRequestFilterSensitiveLog } from "../models/models_0";
-import {
-  deserializeAws_restJson1StopFailbackCommand,
-  serializeAws_restJson1StopFailbackCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopFailbackRequest } from "../models/models_0";
+import { StopFailback$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopFailbackCommand}.
+ */
 export interface StopFailbackCommandInput extends StopFailbackRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopFailbackCommand}.
+ */
 export interface StopFailbackCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +29,57 @@ export interface StopFailbackCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { DrsClient, StopFailbackCommand } from "@aws-sdk/client-drs"; // ES Modules import
  * // const { DrsClient, StopFailbackCommand } = require("@aws-sdk/client-drs"); // CommonJS import
+ * // import type { DrsClientConfig } from "@aws-sdk/client-drs";
+ * const config = {}; // type is DrsClientConfig
  * const client = new DrsClient(config);
+ * const input = { // StopFailbackRequest
+ *   recoveryInstanceID: "STRING_VALUE", // required
+ * };
  * const command = new StopFailbackCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StopFailbackCommandInput - {@link StopFailbackCommandInput}
+ * @returns {@link StopFailbackCommandOutput}
  * @see {@link StopFailbackCommandInput} for command's `input` shape.
  * @see {@link StopFailbackCommandOutput} for command's `response` shape.
  * @see {@link DrsClientResolvedConfig | config} for DrsClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource for this operation was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>The account performing the request has not been initialized.</p>
+ *
+ * @throws {@link DrsServiceException}
+ * <p>Base exception class for all service exceptions from Drs service.</p>
+ *
+ *
+ * @public
  */
-export class StopFailbackCommand extends $Command<
-  StopFailbackCommandInput,
-  StopFailbackCommandOutput,
-  DrsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopFailbackCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DrsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopFailbackCommandInput, StopFailbackCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DrsClient";
-    const commandName = "StopFailbackCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopFailbackRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class StopFailbackCommand extends command<StopFailbackCommandInput, StopFailbackCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopFailback",
+  StopFailback$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopFailbackRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopFailbackCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopFailbackCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopFailbackCommandOutput> {
-    return deserializeAws_restJson1StopFailbackCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopFailbackCommandInput;
+      output: StopFailbackCommandOutput;
+    };
+  };
 }

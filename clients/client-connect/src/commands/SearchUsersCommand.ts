@@ -1,101 +1,256 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import {
-  SearchUsersRequest,
-  SearchUsersRequestFilterSensitiveLog,
-  SearchUsersResponse,
-  SearchUsersResponseFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_restJson1SearchUsersCommand,
-  serializeAws_restJson1SearchUsersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchUsersResponse } from "../models/models_3";
+import type { SearchUsersRequest } from "../models/models_4";
+import { SearchUsers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchUsersCommand}.
+ */
 export interface SearchUsersCommandInput extends SearchUsersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchUsersCommand}.
+ */
 export interface SearchUsersCommandOutput extends SearchUsersResponse, __MetadataBearer {}
 
 /**
- * <p>Searches users in an Amazon Connect instance, with optional filtering.</p>
+ * <p>Searches users in an Connect Customer instance, with optional filtering. </p>
+ *          <note>
+ *             <p>
+ *                <code>AfterContactWorkTimeLimit</code> is returned in milliseconds. </p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, SearchUsersCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, SearchUsersCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // SearchUsersRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   SearchFilter: { // UserSearchFilter
+ *     TagFilter: { // ControlPlaneTagFilter
+ *       OrConditions: [ // TagOrConditionList
+ *         [ // TagAndConditionList
+ *           { // TagCondition
+ *             TagKey: "STRING_VALUE",
+ *             TagValue: "STRING_VALUE",
+ *           },
+ *         ],
+ *       ],
+ *       AndConditions: [
+ *         {
+ *           TagKey: "STRING_VALUE",
+ *           TagValue: "STRING_VALUE",
+ *         },
+ *       ],
+ *       TagCondition: "<TagCondition>",
+ *     },
+ *     UserAttributeFilter: { // ControlPlaneUserAttributeFilter
+ *       OrConditions: [ // AttributeOrConditionList
+ *         { // AttributeAndCondition
+ *           TagConditions: "<TagAndConditionList>",
+ *           HierarchyGroupCondition: { // HierarchyGroupCondition
+ *             Value: "STRING_VALUE",
+ *             HierarchyGroupMatchType: "EXACT" || "WITH_CHILD_GROUPS",
+ *           },
+ *         },
+ *       ],
+ *       AndCondition: {
+ *         TagConditions: "<TagAndConditionList>",
+ *         HierarchyGroupCondition: {
+ *           Value: "STRING_VALUE",
+ *           HierarchyGroupMatchType: "EXACT" || "WITH_CHILD_GROUPS",
+ *         },
+ *       },
+ *       TagCondition: "<TagCondition>",
+ *       HierarchyGroupCondition: "<HierarchyGroupCondition>",
+ *     },
+ *   },
+ *   SearchCriteria: { // UserSearchCriteria
+ *     OrConditions: [ // UserSearchConditionList
+ *       {
+ *         OrConditions: [
+ *           "<UserSearchCriteria>",
+ *         ],
+ *         AndConditions: [
+ *           "<UserSearchCriteria>",
+ *         ],
+ *         StringCondition: { // StringCondition
+ *           FieldName: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *           ComparisonType: "STARTS_WITH" || "CONTAINS" || "EXACT",
+ *         },
+ *         ListCondition: { // ListCondition
+ *           TargetListType: "PROFICIENCIES",
+ *           Conditions: [ // Conditions
+ *             { // Condition
+ *               StringCondition: {
+ *                 FieldName: "STRING_VALUE",
+ *                 Value: "STRING_VALUE",
+ *                 ComparisonType: "STARTS_WITH" || "CONTAINS" || "EXACT",
+ *               },
+ *               NumberCondition: { // NumberCondition
+ *                 FieldName: "STRING_VALUE",
+ *                 MinValue: Number("int"),
+ *                 MaxValue: Number("int"),
+ *                 ComparisonType: "GREATER_OR_EQUAL" || "GREATER" || "LESSER_OR_EQUAL" || "LESSER" || "EQUAL" || "NOT_EQUAL" || "RANGE",
+ *               },
+ *             },
+ *           ],
+ *         },
+ *         HierarchyGroupCondition: "<HierarchyGroupCondition>",
+ *       },
+ *     ],
+ *     AndConditions: [
+ *       "<UserSearchCriteria>",
+ *     ],
+ *     StringCondition: "<StringCondition>",
+ *     ListCondition: {
+ *       TargetListType: "PROFICIENCIES",
+ *       Conditions: [
+ *         {
+ *           StringCondition: "<StringCondition>",
+ *           NumberCondition: {
+ *             FieldName: "STRING_VALUE",
+ *             MinValue: Number("int"),
+ *             MaxValue: Number("int"),
+ *             ComparisonType: "GREATER_OR_EQUAL" || "GREATER" || "LESSER_OR_EQUAL" || "LESSER" || "EQUAL" || "NOT_EQUAL" || "RANGE",
+ *           },
+ *         },
+ *       ],
+ *     },
+ *     HierarchyGroupCondition: "<HierarchyGroupCondition>",
+ *   },
+ * };
  * const command = new SearchUsersCommand(input);
  * const response = await client.send(command);
+ * // { // SearchUsersResponse
+ * //   Users: [ // UserSearchSummaryList
+ * //     { // UserSearchSummary
+ * //       Arn: "STRING_VALUE",
+ * //       DirectoryUserId: "STRING_VALUE",
+ * //       HierarchyGroupId: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       IdentityInfo: { // UserIdentityInfoLite
+ * //         FirstName: "STRING_VALUE",
+ * //         LastName: "STRING_VALUE",
+ * //       },
+ * //       PhoneConfig: { // UserPhoneConfig
+ * //         PhoneType: "SOFT_PHONE" || "DESK_PHONE",
+ * //         AutoAccept: true || false,
+ * //         AfterContactWorkTimeLimit: Number("int"),
+ * //         DeskPhoneNumber: "STRING_VALUE",
+ * //         PersistentConnection: true || false,
+ * //       },
+ * //       RoutingProfileId: "STRING_VALUE",
+ * //       SecurityProfileIds: [ // SecurityProfileIds
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Tags: { // TagMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       Username: "STRING_VALUE",
+ * //       AutoAcceptConfigs: [ // AutoAcceptConfigs
+ * //         { // AutoAcceptConfig
+ * //           Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //           AutoAccept: true || false, // required
+ * //           AgentFirstCallbackAutoAccept: true || false,
+ * //         },
+ * //       ],
+ * //       AfterContactWorkConfigs: [ // AfterContactWorkConfigs
+ * //         { // AfterContactWorkConfigPerChannel
+ * //           Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //           AfterContactWorkConfig: { // AfterContactWorkConfig
+ * //             AfterContactWorkTimeLimit: Number("int"),
+ * //           },
+ * //           AgentFirstCallbackAfterContactWorkConfig: {
+ * //             AfterContactWorkTimeLimit: Number("int"),
+ * //           },
+ * //         },
+ * //       ],
+ * //       PhoneNumberConfigs: [ // PhoneNumberConfigs
+ * //         { // PhoneNumberConfig
+ * //           Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //           PhoneType: "SOFT_PHONE" || "DESK_PHONE", // required
+ * //           PhoneNumber: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       PersistentConnectionConfigs: [ // PersistentConnectionConfigs
+ * //         { // PersistentConnectionConfig
+ * //           Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //           PersistentConnection: true || false, // required
+ * //         },
+ * //       ],
+ * //       VoiceEnhancementConfigs: [ // VoiceEnhancementConfigs
+ * //         { // VoiceEnhancementConfig
+ * //           Channel: "VOICE" || "CHAT" || "TASK" || "EMAIL", // required
+ * //           VoiceEnhancementMode: "VOICE_ISOLATION" || "NOISE_SUPPRESSION" || "NONE", // required
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   ApproximateTotalCount: Number("long"),
+ * // };
+ *
  * ```
  *
+ * @param SearchUsersCommandInput - {@link SearchUsersCommandInput}
+ * @returns {@link SearchUsersCommandOutput}
  * @see {@link SearchUsersCommandInput} for command's `input` shape.
  * @see {@link SearchUsersCommandOutput} for command's `response` shape.
  * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class SearchUsersCommand extends $Command<
-  SearchUsersCommandInput,
-  SearchUsersCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchUsersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchUsersCommandInput, SearchUsersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "SearchUsersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchUsersRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: SearchUsersResponseFilterSensitiveLog,
+export class SearchUsersCommand extends command<SearchUsersCommandInput, SearchUsersCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchUsers",
+  SearchUsers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchUsersRequest;
+      output: SearchUsersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchUsersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SearchUsersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchUsersCommandOutput> {
-    return deserializeAws_restJson1SearchUsersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchUsersCommandInput;
+      output: SearchUsersCommandOutput;
+    };
+  };
 }

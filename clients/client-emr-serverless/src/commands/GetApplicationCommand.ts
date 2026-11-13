@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRServerlessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRServerlessClient";
-import {
-  GetApplicationRequest,
-  GetApplicationRequestFilterSensitiveLog,
-  GetApplicationResponse,
-  GetApplicationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetApplicationCommand,
-  serializeAws_restJson1GetApplicationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetApplicationRequest, GetApplicationResponse } from "../models/models_0";
+import { GetApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApplicationCommand}.
+ */
 export interface GetApplicationCommandInput extends GetApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApplicationCommand}.
+ */
 export interface GetApplicationCommandOutput extends GetApplicationResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,179 @@ export interface GetApplicationCommandOutput extends GetApplicationResponse, __M
  * ```javascript
  * import { EMRServerlessClient, GetApplicationCommand } from "@aws-sdk/client-emr-serverless"; // ES Modules import
  * // const { EMRServerlessClient, GetApplicationCommand } = require("@aws-sdk/client-emr-serverless"); // CommonJS import
+ * // import type { EMRServerlessClientConfig } from "@aws-sdk/client-emr-serverless";
+ * const config = {}; // type is EMRServerlessClientConfig
  * const client = new EMRServerlessClient(config);
+ * const input = { // GetApplicationRequest
+ *   applicationId: "STRING_VALUE", // required
+ * };
  * const command = new GetApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // GetApplicationResponse
+ * //   application: { // Application
+ * //     applicationId: "STRING_VALUE", // required
+ * //     name: "STRING_VALUE",
+ * //     arn: "STRING_VALUE", // required
+ * //     releaseLabel: "STRING_VALUE", // required
+ * //     type: "STRING_VALUE", // required
+ * //     state: "STRING_VALUE", // required
+ * //     stateDetails: "STRING_VALUE",
+ * //     initialCapacity: { // InitialCapacityConfigMap
+ * //       "<keys>": { // InitialCapacityConfig
+ * //         workerCount: Number("long"), // required
+ * //         workerConfiguration: { // WorkerResourceConfig
+ * //           cpu: "STRING_VALUE", // required
+ * //           memory: "STRING_VALUE", // required
+ * //           disk: "STRING_VALUE",
+ * //           diskType: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //     },
+ * //     maximumCapacity: { // MaximumAllowedResources
+ * //       cpu: "STRING_VALUE", // required
+ * //       memory: "STRING_VALUE", // required
+ * //       disk: "STRING_VALUE",
+ * //     },
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     updatedAt: new Date("TIMESTAMP"), // required
+ * //     tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     autoStartConfiguration: { // AutoStartConfig
+ * //       enabled: true || false,
+ * //     },
+ * //     autoStopConfiguration: { // AutoStopConfig
+ * //       enabled: true || false,
+ * //       idleTimeoutMinutes: Number("int"),
+ * //     },
+ * //     networkConfiguration: { // NetworkConfiguration
+ * //       subnetIds: [ // SubnetIds
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       securityGroupIds: [ // SecurityGroupIds
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //     architecture: "STRING_VALUE",
+ * //     imageConfiguration: { // ImageConfiguration
+ * //       imageUri: "STRING_VALUE", // required
+ * //       resolvedImageDigest: "STRING_VALUE",
+ * //       applicationLevelDigestResolution: true || false,
+ * //     },
+ * //     workerTypeSpecifications: { // WorkerTypeSpecificationMap
+ * //       "<keys>": { // WorkerTypeSpecification
+ * //         imageConfiguration: {
+ * //           imageUri: "STRING_VALUE", // required
+ * //           resolvedImageDigest: "STRING_VALUE",
+ * //           applicationLevelDigestResolution: true || false,
+ * //         },
+ * //       },
+ * //     },
+ * //     runtimeConfiguration: [ // ConfigurationList
+ * //       { // Configuration
+ * //         classification: "STRING_VALUE", // required
+ * //         properties: { // SensitivePropertiesMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         configurations: [
+ * //           {
+ * //             classification: "STRING_VALUE", // required
+ * //             properties: {
+ * //               "<keys>": "STRING_VALUE",
+ * //             },
+ * //             configurations: "<ConfigurationList>",
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     monitoringConfiguration: { // MonitoringConfiguration
+ * //       s3MonitoringConfiguration: { // S3MonitoringConfiguration
+ * //         logUri: "STRING_VALUE",
+ * //         encryptionKeyArn: "STRING_VALUE",
+ * //       },
+ * //       managedPersistenceMonitoringConfiguration: { // ManagedPersistenceMonitoringConfiguration
+ * //         enabled: true || false,
+ * //         encryptionKeyArn: "STRING_VALUE",
+ * //       },
+ * //       cloudWatchLoggingConfiguration: { // CloudWatchLoggingConfiguration
+ * //         enabled: true || false, // required
+ * //         logGroupName: "STRING_VALUE",
+ * //         logStreamNamePrefix: "STRING_VALUE",
+ * //         encryptionKeyArn: "STRING_VALUE",
+ * //         logTypes: { // LogTypeMap
+ * //           "<keys>": [ // LogTypeList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //       prometheusMonitoringConfiguration: { // PrometheusMonitoringConfiguration
+ * //         remoteWriteUrl: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     diskEncryptionConfiguration: { // DiskEncryptionConfiguration
+ * //       encryptionContext: { // EncryptionContext
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       encryptionKeyArn: "STRING_VALUE",
+ * //     },
+ * //     interactiveConfiguration: { // InteractiveConfiguration
+ * //       studioEnabled: true || false,
+ * //       livyEndpointEnabled: true || false,
+ * //       sessionEnabled: true || false,
+ * //     },
+ * //     schedulerConfiguration: { // SchedulerConfiguration
+ * //       queueTimeoutMinutes: Number("int"),
+ * //       maxConcurrentRuns: Number("int"),
+ * //     },
+ * //     identityCenterConfiguration: { // IdentityCenterConfiguration
+ * //       identityCenterInstanceArn: "STRING_VALUE",
+ * //       identityCenterApplicationArn: "STRING_VALUE",
+ * //       userBackgroundSessionsEnabled: true || false,
+ * //     },
+ * //     jobLevelCostAllocationConfiguration: { // JobLevelCostAllocationConfiguration
+ * //       enabled: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetApplicationCommandInput - {@link GetApplicationCommandInput}
+ * @returns {@link GetApplicationCommandOutput}
  * @see {@link GetApplicationCommandInput} for command's `input` shape.
  * @see {@link GetApplicationCommandOutput} for command's `response` shape.
  * @see {@link EMRServerlessClientResolvedConfig | config} for EMRServerlessClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link EMRServerlessServiceException}
+ * <p>Base exception class for all service exceptions from EMRServerless service.</p>
+ *
+ *
+ * @public
  */
-export class GetApplicationCommand extends $Command<
-  GetApplicationCommandInput,
-  GetApplicationCommandOutput,
-  EMRServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetApplicationCommandInput, GetApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRServerlessClient";
-    const commandName = "GetApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetApplicationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetApplicationResponseFilterSensitiveLog,
+export class GetApplicationCommand extends command<GetApplicationCommandInput, GetApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApplication",
+  GetApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApplicationRequest;
+      output: GetApplicationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetApplicationCommandOutput> {
-    return deserializeAws_restJson1GetApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetApplicationCommandInput;
+      output: GetApplicationCommandOutput;
+    };
+  };
 }

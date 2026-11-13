@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DescribeEdgeDeploymentPlanRequest,
-  DescribeEdgeDeploymentPlanRequestFilterSensitiveLog,
-  DescribeEdgeDeploymentPlanResponse,
-  DescribeEdgeDeploymentPlanResponseFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribeEdgeDeploymentPlanCommand,
-  serializeAws_json1_1DescribeEdgeDeploymentPlanCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeEdgeDeploymentPlanRequest, DescribeEdgeDeploymentPlanResponse } from "../models/models_3";
+import { DescribeEdgeDeploymentPlan$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeEdgeDeploymentPlanCommand}.
+ */
 export interface DescribeEdgeDeploymentPlanCommandInput extends DescribeEdgeDeploymentPlanRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeEdgeDeploymentPlanCommand}.
+ */
 export interface DescribeEdgeDeploymentPlanCommandOutput extends DescribeEdgeDeploymentPlanResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,90 @@ export interface DescribeEdgeDeploymentPlanCommandOutput extends DescribeEdgeDep
  * ```javascript
  * import { SageMakerClient, DescribeEdgeDeploymentPlanCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeEdgeDeploymentPlanCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeEdgeDeploymentPlanRequest
+ *   EdgeDeploymentPlanName: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeEdgeDeploymentPlanCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeEdgeDeploymentPlanResponse
+ * //   EdgeDeploymentPlanArn: "STRING_VALUE", // required
+ * //   EdgeDeploymentPlanName: "STRING_VALUE", // required
+ * //   ModelConfigs: [ // EdgeDeploymentModelConfigs // required
+ * //     { // EdgeDeploymentModelConfig
+ * //       ModelHandle: "STRING_VALUE", // required
+ * //       EdgePackagingJobName: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   DeviceFleetName: "STRING_VALUE", // required
+ * //   EdgeDeploymentSuccess: Number("int"),
+ * //   EdgeDeploymentPending: Number("int"),
+ * //   EdgeDeploymentFailed: Number("int"),
+ * //   Stages: [ // DeploymentStageStatusSummaries // required
+ * //     { // DeploymentStageStatusSummary
+ * //       StageName: "STRING_VALUE", // required
+ * //       DeviceSelectionConfig: { // DeviceSelectionConfig
+ * //         DeviceSubsetType: "PERCENTAGE" || "SELECTION" || "NAMECONTAINS", // required
+ * //         Percentage: Number("int"),
+ * //         DeviceNames: [ // DeviceNames
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         DeviceNameContains: "STRING_VALUE",
+ * //       },
+ * //       DeploymentConfig: { // EdgeDeploymentConfig
+ * //         FailureHandlingPolicy: "ROLLBACK_ON_FAILURE" || "DO_NOTHING", // required
+ * //       },
+ * //       DeploymentStatus: { // EdgeDeploymentStatus
+ * //         StageStatus: "CREATING" || "READYTODEPLOY" || "STARTING" || "INPROGRESS" || "DEPLOYED" || "FAILED" || "STOPPING" || "STOPPED", // required
+ * //         EdgeDeploymentSuccessInStage: Number("int"), // required
+ * //         EdgeDeploymentPendingInStage: Number("int"), // required
+ * //         EdgeDeploymentFailedInStage: Number("int"), // required
+ * //         EdgeDeploymentStatusMessage: "STRING_VALUE",
+ * //         EdgeDeploymentStageStartTime: new Date("TIMESTAMP"),
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   CreationTime: new Date("TIMESTAMP"),
+ * //   LastModifiedTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param DescribeEdgeDeploymentPlanCommandInput - {@link DescribeEdgeDeploymentPlanCommandInput}
+ * @returns {@link DescribeEdgeDeploymentPlanCommandOutput}
  * @see {@link DescribeEdgeDeploymentPlanCommandInput} for command's `input` shape.
  * @see {@link DescribeEdgeDeploymentPlanCommandOutput} for command's `response` shape.
  * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeEdgeDeploymentPlanCommand extends $Command<
-  DescribeEdgeDeploymentPlanCommandInput,
-  DescribeEdgeDeploymentPlanCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeEdgeDeploymentPlanCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeEdgeDeploymentPlanCommandInput, DescribeEdgeDeploymentPlanCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeEdgeDeploymentPlanCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeEdgeDeploymentPlanRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeEdgeDeploymentPlanResponseFilterSensitiveLog,
+export class DescribeEdgeDeploymentPlanCommand extends command<DescribeEdgeDeploymentPlanCommandInput, DescribeEdgeDeploymentPlanCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeEdgeDeploymentPlan",
+  DescribeEdgeDeploymentPlan$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeEdgeDeploymentPlanRequest;
+      output: DescribeEdgeDeploymentPlanResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeEdgeDeploymentPlanCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeEdgeDeploymentPlanCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeEdgeDeploymentPlanCommandOutput> {
-    return deserializeAws_json1_1DescribeEdgeDeploymentPlanCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeEdgeDeploymentPlanCommandInput;
+      output: DescribeEdgeDeploymentPlanCommandOutput;
+    };
+  };
 }

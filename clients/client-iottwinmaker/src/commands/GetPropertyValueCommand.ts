@@ -1,102 +1,212 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTTwinMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTTwinMakerClient";
-import {
-  GetPropertyValueRequest,
-  GetPropertyValueRequestFilterSensitiveLog,
-  GetPropertyValueResponse,
-  GetPropertyValueResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetPropertyValueCommand,
-  serializeAws_restJson1GetPropertyValueCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPropertyValueRequest, GetPropertyValueResponse } from "../models/models_0";
+import { GetPropertyValue$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPropertyValueCommand}.
+ */
 export interface GetPropertyValueCommandInput extends GetPropertyValueRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPropertyValueCommand}.
+ */
 export interface GetPropertyValueCommandOutput extends GetPropertyValueResponse, __MetadataBearer {}
 
 /**
  * <p>Gets the property values for a component, component type, entity, or workspace.</p>
- *          <p>You must specify a value for either <code>componentName</code>, <code>componentTypeId</code>, <code>entityId</code>, or <code>workspaceId</code>.</p>
+ *          <p>You must specify a value for either <code>componentName</code>,
+ *             <code>componentTypeId</code>, <code>entityId</code>, or <code>workspaceId</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTTwinMakerClient, GetPropertyValueCommand } from "@aws-sdk/client-iottwinmaker"; // ES Modules import
  * // const { IoTTwinMakerClient, GetPropertyValueCommand } = require("@aws-sdk/client-iottwinmaker"); // CommonJS import
+ * // import type { IoTTwinMakerClientConfig } from "@aws-sdk/client-iottwinmaker";
+ * const config = {}; // type is IoTTwinMakerClientConfig
  * const client = new IoTTwinMakerClient(config);
+ * const input = { // GetPropertyValueRequest
+ *   componentName: "STRING_VALUE",
+ *   componentPath: "STRING_VALUE",
+ *   componentTypeId: "STRING_VALUE",
+ *   entityId: "STRING_VALUE",
+ *   selectedProperties: [ // SelectedPropertyList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   workspaceId: "STRING_VALUE", // required
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ *   propertyGroupName: "STRING_VALUE",
+ *   tabularConditions: { // TabularConditions
+ *     orderBy: [ // OrderByList
+ *       { // OrderBy
+ *         order: "STRING_VALUE",
+ *         propertyName: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *     propertyFilters: [ // PropertyFilters
+ *       { // PropertyFilter
+ *         propertyName: "STRING_VALUE",
+ *         operator: "STRING_VALUE",
+ *         value: { // DataValue
+ *           booleanValue: true || false,
+ *           doubleValue: Number("double"),
+ *           integerValue: Number("int"),
+ *           longValue: Number("long"),
+ *           stringValue: "STRING_VALUE",
+ *           listValue: [ // DataValueList
+ *             {
+ *               booleanValue: true || false,
+ *               doubleValue: Number("double"),
+ *               integerValue: Number("int"),
+ *               longValue: Number("long"),
+ *               stringValue: "STRING_VALUE",
+ *               listValue: [
+ *                 "<DataValue>",
+ *               ],
+ *               mapValue: { // DataValueMap
+ *                 "<keys>": "<DataValue>",
+ *               },
+ *               relationshipValue: { // RelationshipValue
+ *                 targetEntityId: "STRING_VALUE",
+ *                 targetComponentName: "STRING_VALUE",
+ *               },
+ *               expression: "STRING_VALUE",
+ *             },
+ *           ],
+ *           mapValue: {
+ *             "<keys>": "<DataValue>",
+ *           },
+ *           relationshipValue: {
+ *             targetEntityId: "STRING_VALUE",
+ *             targetComponentName: "STRING_VALUE",
+ *           },
+ *           expression: "STRING_VALUE",
+ *         },
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new GetPropertyValueCommand(input);
  * const response = await client.send(command);
+ * // { // GetPropertyValueResponse
+ * //   propertyValues: { // PropertyLatestValueMap
+ * //     "<keys>": { // PropertyLatestValue
+ * //       propertyReference: { // EntityPropertyReference
+ * //         componentName: "STRING_VALUE",
+ * //         componentPath: "STRING_VALUE",
+ * //         externalIdProperty: { // ExternalIdProperty
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         entityId: "STRING_VALUE",
+ * //         propertyName: "STRING_VALUE", // required
+ * //       },
+ * //       propertyValue: { // DataValue
+ * //         booleanValue: true || false,
+ * //         doubleValue: Number("double"),
+ * //         integerValue: Number("int"),
+ * //         longValue: Number("long"),
+ * //         stringValue: "STRING_VALUE",
+ * //         listValue: [ // DataValueList
+ * //           {
+ * //             booleanValue: true || false,
+ * //             doubleValue: Number("double"),
+ * //             integerValue: Number("int"),
+ * //             longValue: Number("long"),
+ * //             stringValue: "STRING_VALUE",
+ * //             listValue: [
+ * //               "<DataValue>",
+ * //             ],
+ * //             mapValue: { // DataValueMap
+ * //               "<keys>": "<DataValue>",
+ * //             },
+ * //             relationshipValue: { // RelationshipValue
+ * //               targetEntityId: "STRING_VALUE",
+ * //               targetComponentName: "STRING_VALUE",
+ * //             },
+ * //             expression: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         mapValue: {
+ * //           "<keys>": "<DataValue>",
+ * //         },
+ * //         relationshipValue: {
+ * //           targetEntityId: "STRING_VALUE",
+ * //           targetComponentName: "STRING_VALUE",
+ * //         },
+ * //         expression: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   },
+ * //   nextToken: "STRING_VALUE",
+ * //   tabularPropertyValues: [ // TabularPropertyValues
+ * //     [ // TabularPropertyValue
+ * //       { // PropertyTableValue
+ * //         "<keys>": "<DataValue>",
+ * //       },
+ * //     ],
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetPropertyValueCommandInput - {@link GetPropertyValueCommandInput}
+ * @returns {@link GetPropertyValueCommandOutput}
  * @see {@link GetPropertyValueCommandInput} for command's `input` shape.
  * @see {@link GetPropertyValueCommandOutput} for command's `response` shape.
  * @see {@link IoTTwinMakerClientResolvedConfig | config} for IoTTwinMakerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link ConnectorFailureException} (client fault)
+ *  <p>The connector failed.</p>
+ *
+ * @throws {@link ConnectorTimeoutException} (client fault)
+ *  <p>The connector timed out.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource wasn't found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Failed</p>
+ *
+ * @throws {@link IoTTwinMakerServiceException}
+ * <p>Base exception class for all service exceptions from IoTTwinMaker service.</p>
+ *
+ *
+ * @public
  */
-export class GetPropertyValueCommand extends $Command<
-  GetPropertyValueCommandInput,
-  GetPropertyValueCommandOutput,
-  IoTTwinMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPropertyValueCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTTwinMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPropertyValueCommandInput, GetPropertyValueCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTTwinMakerClient";
-    const commandName = "GetPropertyValueCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPropertyValueRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetPropertyValueResponseFilterSensitiveLog,
+export class GetPropertyValueCommand extends command<GetPropertyValueCommandInput, GetPropertyValueCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPropertyValue",
+  GetPropertyValue$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPropertyValueRequest;
+      output: GetPropertyValueResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPropertyValueCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetPropertyValueCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPropertyValueCommandOutput> {
-    return deserializeAws_restJson1GetPropertyValueCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPropertyValueCommandInput;
+      output: GetPropertyValueCommandOutput;
+    };
+  };
 }

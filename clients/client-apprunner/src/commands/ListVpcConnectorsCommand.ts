@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppRunnerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppRunnerClient";
-import {
-  ListVpcConnectorsRequest,
-  ListVpcConnectorsRequestFilterSensitiveLog,
-  ListVpcConnectorsResponse,
-  ListVpcConnectorsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_0ListVpcConnectorsCommand,
-  serializeAws_json1_0ListVpcConnectorsCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListVpcConnectorsRequest, ListVpcConnectorsResponse } from "../models/models_0";
+import { ListVpcConnectors$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListVpcConnectorsCommand}.
+ */
 export interface ListVpcConnectorsCommandInput extends ListVpcConnectorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListVpcConnectorsCommand}.
+ */
 export interface ListVpcConnectorsCommandOutput extends ListVpcConnectorsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,70 @@ export interface ListVpcConnectorsCommandOutput extends ListVpcConnectorsRespons
  * ```javascript
  * import { AppRunnerClient, ListVpcConnectorsCommand } from "@aws-sdk/client-apprunner"; // ES Modules import
  * // const { AppRunnerClient, ListVpcConnectorsCommand } = require("@aws-sdk/client-apprunner"); // CommonJS import
+ * // import type { AppRunnerClientConfig } from "@aws-sdk/client-apprunner";
+ * const config = {}; // type is AppRunnerClientConfig
  * const client = new AppRunnerClient(config);
+ * const input = { // ListVpcConnectorsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListVpcConnectorsCommand(input);
  * const response = await client.send(command);
+ * // { // ListVpcConnectorsResponse
+ * //   VpcConnectors: [ // VpcConnectors // required
+ * //     { // VpcConnector
+ * //       VpcConnectorName: "STRING_VALUE",
+ * //       VpcConnectorArn: "STRING_VALUE",
+ * //       VpcConnectorRevision: Number("int"),
+ * //       Subnets: [ // StringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       SecurityGroups: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Status: "ACTIVE" || "INACTIVE",
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       DeletedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListVpcConnectorsCommandInput - {@link ListVpcConnectorsCommandInput}
+ * @returns {@link ListVpcConnectorsCommandOutput}
  * @see {@link ListVpcConnectorsCommandInput} for command's `input` shape.
  * @see {@link ListVpcConnectorsCommandOutput} for command's `response` shape.
  * @see {@link AppRunnerClientResolvedConfig | config} for AppRunnerClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An unexpected service exception occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>
+ *
+ * @throws {@link AppRunnerServiceException}
+ * <p>Base exception class for all service exceptions from AppRunner service.</p>
+ *
+ *
+ * @public
  */
-export class ListVpcConnectorsCommand extends $Command<
-  ListVpcConnectorsCommandInput,
-  ListVpcConnectorsCommandOutput,
-  AppRunnerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListVpcConnectorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppRunnerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListVpcConnectorsCommandInput, ListVpcConnectorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppRunnerClient";
-    const commandName = "ListVpcConnectorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListVpcConnectorsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListVpcConnectorsResponseFilterSensitiveLog,
+export class ListVpcConnectorsCommand extends command<ListVpcConnectorsCommandInput, ListVpcConnectorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListVpcConnectors",
+  ListVpcConnectors$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListVpcConnectorsRequest;
+      output: ListVpcConnectorsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListVpcConnectorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0ListVpcConnectorsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListVpcConnectorsCommandOutput> {
-    return deserializeAws_json1_0ListVpcConnectorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListVpcConnectorsCommandInput;
+      output: ListVpcConnectorsCommandOutput;
+    };
+  };
 }

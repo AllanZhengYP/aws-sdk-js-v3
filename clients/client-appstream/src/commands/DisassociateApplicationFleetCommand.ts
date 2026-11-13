@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import {
-  DisassociateApplicationFleetRequest,
-  DisassociateApplicationFleetRequestFilterSensitiveLog,
-  DisassociateApplicationFleetResult,
-  DisassociateApplicationFleetResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DisassociateApplicationFleetCommand,
-  serializeAws_json1_1DisassociateApplicationFleetCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateApplicationFleetRequest, DisassociateApplicationFleetResult } from "../models/models_0";
+import { DisassociateApplicationFleet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateApplicationFleetCommand}.
+ */
 export interface DisassociateApplicationFleetCommandInput extends DisassociateApplicationFleetRequest {}
-export interface DisassociateApplicationFleetCommandOutput
-  extends DisassociateApplicationFleetResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateApplicationFleetCommand}.
+ */
+export interface DisassociateApplicationFleetCommandOutput extends DisassociateApplicationFleetResult, __MetadataBearer {}
 
 /**
  * <p>Disassociates the specified application from the fleet.</p>
@@ -36,71 +29,55 @@ export interface DisassociateApplicationFleetCommandOutput
  * ```javascript
  * import { AppStreamClient, DisassociateApplicationFleetCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, DisassociateApplicationFleetCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // DisassociateApplicationFleetRequest
+ *   FleetName: "STRING_VALUE", // required
+ *   ApplicationArn: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateApplicationFleetCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateApplicationFleetCommandInput - {@link DisassociateApplicationFleetCommandInput}
+ * @returns {@link DisassociateApplicationFleetCommandOutput}
  * @see {@link DisassociateApplicationFleetCommandInput} for command's `input` shape.
  * @see {@link DisassociateApplicationFleetCommandOutput} for command's `response` shape.
  * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>An API error occurred. Wait a few minutes and try again.</p>
+ *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Indicates an incorrect combination of parameters, or a missing parameter.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateApplicationFleetCommand extends $Command<
-  DisassociateApplicationFleetCommandInput,
-  DisassociateApplicationFleetCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateApplicationFleetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateApplicationFleetCommandInput, DisassociateApplicationFleetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "DisassociateApplicationFleetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateApplicationFleetRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateApplicationFleetResultFilterSensitiveLog,
+export class DisassociateApplicationFleetCommand extends command<DisassociateApplicationFleetCommandInput, DisassociateApplicationFleetCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateApplicationFleet",
+  DisassociateApplicationFleet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateApplicationFleetRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateApplicationFleetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DisassociateApplicationFleetCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateApplicationFleetCommandOutput> {
-    return deserializeAws_json1_1DisassociateApplicationFleetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateApplicationFleetCommandInput;
+      output: DisassociateApplicationFleetCommandOutput;
+    };
+  };
 }

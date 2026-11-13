@@ -1,675 +1,648 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import { BackupGatewayClient } from "./BackupGatewayClient";
 import {
+  type AssociateGatewayToServerCommandInput,
+  type AssociateGatewayToServerCommandOutput,
   AssociateGatewayToServerCommand,
-  AssociateGatewayToServerCommandInput,
-  AssociateGatewayToServerCommandOutput,
 } from "./commands/AssociateGatewayToServerCommand";
 import {
+  type CreateGatewayCommandInput,
+  type CreateGatewayCommandOutput,
   CreateGatewayCommand,
-  CreateGatewayCommandInput,
-  CreateGatewayCommandOutput,
 } from "./commands/CreateGatewayCommand";
 import {
+  type DeleteGatewayCommandInput,
+  type DeleteGatewayCommandOutput,
   DeleteGatewayCommand,
-  DeleteGatewayCommandInput,
-  DeleteGatewayCommandOutput,
 } from "./commands/DeleteGatewayCommand";
 import {
+  type DeleteHypervisorCommandInput,
+  type DeleteHypervisorCommandOutput,
   DeleteHypervisorCommand,
-  DeleteHypervisorCommandInput,
-  DeleteHypervisorCommandOutput,
 } from "./commands/DeleteHypervisorCommand";
 import {
+  type DisassociateGatewayFromServerCommandInput,
+  type DisassociateGatewayFromServerCommandOutput,
   DisassociateGatewayFromServerCommand,
-  DisassociateGatewayFromServerCommandInput,
-  DisassociateGatewayFromServerCommandOutput,
 } from "./commands/DisassociateGatewayFromServerCommand";
-import { GetGatewayCommand, GetGatewayCommandInput, GetGatewayCommandOutput } from "./commands/GetGatewayCommand";
 import {
+  type GetBandwidthRateLimitScheduleCommandInput,
+  type GetBandwidthRateLimitScheduleCommandOutput,
+  GetBandwidthRateLimitScheduleCommand,
+} from "./commands/GetBandwidthRateLimitScheduleCommand";
+import {
+  type GetGatewayCommandInput,
+  type GetGatewayCommandOutput,
+  GetGatewayCommand,
+} from "./commands/GetGatewayCommand";
+import {
+  type GetHypervisorCommandInput,
+  type GetHypervisorCommandOutput,
+  GetHypervisorCommand,
+} from "./commands/GetHypervisorCommand";
+import {
+  type GetHypervisorPropertyMappingsCommandInput,
+  type GetHypervisorPropertyMappingsCommandOutput,
+  GetHypervisorPropertyMappingsCommand,
+} from "./commands/GetHypervisorPropertyMappingsCommand";
+import {
+  type GetVirtualMachineCommandInput,
+  type GetVirtualMachineCommandOutput,
+  GetVirtualMachineCommand,
+} from "./commands/GetVirtualMachineCommand";
+import {
+  type ImportHypervisorConfigurationCommandInput,
+  type ImportHypervisorConfigurationCommandOutput,
   ImportHypervisorConfigurationCommand,
-  ImportHypervisorConfigurationCommandInput,
-  ImportHypervisorConfigurationCommandOutput,
 } from "./commands/ImportHypervisorConfigurationCommand";
 import {
+  type ListGatewaysCommandInput,
+  type ListGatewaysCommandOutput,
   ListGatewaysCommand,
-  ListGatewaysCommandInput,
-  ListGatewaysCommandOutput,
 } from "./commands/ListGatewaysCommand";
 import {
+  type ListHypervisorsCommandInput,
+  type ListHypervisorsCommandOutput,
   ListHypervisorsCommand,
-  ListHypervisorsCommandInput,
-  ListHypervisorsCommandOutput,
 } from "./commands/ListHypervisorsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListVirtualMachinesCommandInput,
+  type ListVirtualMachinesCommandOutput,
   ListVirtualMachinesCommand,
-  ListVirtualMachinesCommandInput,
-  ListVirtualMachinesCommandOutput,
 } from "./commands/ListVirtualMachinesCommand";
 import {
-  PutMaintenanceStartTimeCommand,
-  PutMaintenanceStartTimeCommandInput,
-  PutMaintenanceStartTimeCommandOutput,
-} from "./commands/PutMaintenanceStartTimeCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type PutBandwidthRateLimitScheduleCommandInput,
+  type PutBandwidthRateLimitScheduleCommandOutput,
+  PutBandwidthRateLimitScheduleCommand,
+} from "./commands/PutBandwidthRateLimitScheduleCommand";
 import {
+  type PutHypervisorPropertyMappingsCommandInput,
+  type PutHypervisorPropertyMappingsCommandOutput,
+  PutHypervisorPropertyMappingsCommand,
+} from "./commands/PutHypervisorPropertyMappingsCommand";
+import {
+  type PutMaintenanceStartTimeCommandInput,
+  type PutMaintenanceStartTimeCommandOutput,
+  PutMaintenanceStartTimeCommand,
+} from "./commands/PutMaintenanceStartTimeCommand";
+import {
+  type StartVirtualMachinesMetadataSyncCommandInput,
+  type StartVirtualMachinesMetadataSyncCommandOutput,
+  StartVirtualMachinesMetadataSyncCommand,
+} from "./commands/StartVirtualMachinesMetadataSyncCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type TestHypervisorConfigurationCommandInput,
+  type TestHypervisorConfigurationCommandOutput,
   TestHypervisorConfigurationCommand,
-  TestHypervisorConfigurationCommandInput,
-  TestHypervisorConfigurationCommandOutput,
 } from "./commands/TestHypervisorConfigurationCommand";
 import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateGatewayInformationCommandInput,
+  type UpdateGatewayInformationCommandOutput,
   UpdateGatewayInformationCommand,
-  UpdateGatewayInformationCommandInput,
-  UpdateGatewayInformationCommandOutput,
 } from "./commands/UpdateGatewayInformationCommand";
 import {
+  type UpdateGatewaySoftwareNowCommandInput,
+  type UpdateGatewaySoftwareNowCommandOutput,
   UpdateGatewaySoftwareNowCommand,
-  UpdateGatewaySoftwareNowCommandInput,
-  UpdateGatewaySoftwareNowCommandOutput,
 } from "./commands/UpdateGatewaySoftwareNowCommand";
 import {
+  type UpdateHypervisorCommandInput,
+  type UpdateHypervisorCommandOutput,
   UpdateHypervisorCommand,
-  UpdateHypervisorCommandInput,
-  UpdateHypervisorCommandOutput,
 } from "./commands/UpdateHypervisorCommand";
+import { paginateListGateways } from "./pagination/ListGatewaysPaginator";
+import { paginateListHypervisors } from "./pagination/ListHypervisorsPaginator";
+import { paginateListVirtualMachines } from "./pagination/ListVirtualMachinesPaginator";
+
+const commands = {
+  AssociateGatewayToServerCommand,
+  CreateGatewayCommand,
+  DeleteGatewayCommand,
+  DeleteHypervisorCommand,
+  DisassociateGatewayFromServerCommand,
+  GetBandwidthRateLimitScheduleCommand,
+  GetGatewayCommand,
+  GetHypervisorCommand,
+  GetHypervisorPropertyMappingsCommand,
+  GetVirtualMachineCommand,
+  ImportHypervisorConfigurationCommand,
+  ListGatewaysCommand,
+  ListHypervisorsCommand,
+  ListTagsForResourceCommand,
+  ListVirtualMachinesCommand,
+  PutBandwidthRateLimitScheduleCommand,
+  PutHypervisorPropertyMappingsCommand,
+  PutMaintenanceStartTimeCommand,
+  StartVirtualMachinesMetadataSyncCommand,
+  TagResourceCommand,
+  TestHypervisorConfigurationCommand,
+  UntagResourceCommand,
+  UpdateGatewayInformationCommand,
+  UpdateGatewaySoftwareNowCommand,
+  UpdateHypervisorCommand,
+};
+const paginators = {
+  paginateListGateways,
+  paginateListHypervisors,
+  paginateListVirtualMachines,
+};
 
 /**
- * <fullname>Backup gateway</fullname>
- *          <p>Backup gateway connects Backup to your hypervisor, so you can
- *       create, store, and restore backups of your virtual machines (VMs) anywhere, whether
- *       on-premises or in the VMware Cloud (VMC) on Amazon Web Services.</p>
- *          <p>Add on-premises resources by connecting to a hypervisor through a gateway. Backup will automatically discover the resources in your hypervisor.</p>
- *          <p>Use Backup to assign virtual or on-premises resources to a backup plan, or run
- *       on-demand backups. Once you have backed up your resources, you can view them and restore them
- *       like any resource supported by Backup.</p>
- *          <p>To download the Amazon Web Services software to get started, navigate to the Backup console, choose <b>Gateways</b>, then choose <b>Create gateway</b>.</p>
+ * @public
  */
-export class BackupGateway extends BackupGatewayClient {
+export interface BackupGatewayRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface BackupGateway {
   /**
-   * <p>Associates a backup gateway with your server. After you complete the association process,
-   *       you can back up and restore your VMs through the gateway.</p>
+   * @see {@link AssociateGatewayToServerCommand}
    */
-  public associateGatewayToServer(
+  associateGatewayToServer(
     args: AssociateGatewayToServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<AssociateGatewayToServerCommandOutput>;
-  public associateGatewayToServer(
+  associateGatewayToServer(
     args: AssociateGatewayToServerCommandInput,
     cb: (err: any, data?: AssociateGatewayToServerCommandOutput) => void
   ): void;
-  public associateGatewayToServer(
+  associateGatewayToServer(
     args: AssociateGatewayToServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: AssociateGatewayToServerCommandOutput) => void
   ): void;
-  public associateGatewayToServer(
-    args: AssociateGatewayToServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateGatewayToServerCommandOutput) => void),
-    cb?: (err: any, data?: AssociateGatewayToServerCommandOutput) => void
-  ): Promise<AssociateGatewayToServerCommandOutput> | void {
-    const command = new AssociateGatewayToServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a backup gateway. After you create a gateway, you can associate it with a server
-   *       using the <code>AssociateGatewayToServer</code> operation.</p>
+   * @see {@link CreateGatewayCommand}
    */
-  public createGateway(
+  createGateway(
     args: CreateGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<CreateGatewayCommandOutput>;
-  public createGateway(
+  createGateway(
     args: CreateGatewayCommandInput,
     cb: (err: any, data?: CreateGatewayCommandOutput) => void
   ): void;
-  public createGateway(
+  createGateway(
     args: CreateGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: CreateGatewayCommandOutput) => void
   ): void;
-  public createGateway(
-    args: CreateGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateGatewayCommandOutput) => void),
-    cb?: (err: any, data?: CreateGatewayCommandOutput) => void
-  ): Promise<CreateGatewayCommandOutput> | void {
-    const command = new CreateGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a backup gateway.</p>
+   * @see {@link DeleteGatewayCommand}
    */
-  public deleteGateway(
+  deleteGateway(
     args: DeleteGatewayCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<DeleteGatewayCommandOutput>;
-  public deleteGateway(
+  deleteGateway(
     args: DeleteGatewayCommandInput,
     cb: (err: any, data?: DeleteGatewayCommandOutput) => void
   ): void;
-  public deleteGateway(
+  deleteGateway(
     args: DeleteGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: DeleteGatewayCommandOutput) => void
   ): void;
-  public deleteGateway(
-    args: DeleteGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteGatewayCommandOutput) => void),
-    cb?: (err: any, data?: DeleteGatewayCommandOutput) => void
-  ): Promise<DeleteGatewayCommandOutput> | void {
-    const command = new DeleteGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a hypervisor.</p>
+   * @see {@link DeleteHypervisorCommand}
    */
-  public deleteHypervisor(
+  deleteHypervisor(
     args: DeleteHypervisorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<DeleteHypervisorCommandOutput>;
-  public deleteHypervisor(
+  deleteHypervisor(
     args: DeleteHypervisorCommandInput,
     cb: (err: any, data?: DeleteHypervisorCommandOutput) => void
   ): void;
-  public deleteHypervisor(
+  deleteHypervisor(
     args: DeleteHypervisorCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: DeleteHypervisorCommandOutput) => void
   ): void;
-  public deleteHypervisor(
-    args: DeleteHypervisorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteHypervisorCommandOutput) => void),
-    cb?: (err: any, data?: DeleteHypervisorCommandOutput) => void
-  ): Promise<DeleteHypervisorCommandOutput> | void {
-    const command = new DeleteHypervisorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a backup gateway from the specified server. After the disassociation process
-   *       finishes, the gateway can no longer access the virtual machines on the server.</p>
+   * @see {@link DisassociateGatewayFromServerCommand}
    */
-  public disassociateGatewayFromServer(
+  disassociateGatewayFromServer(
     args: DisassociateGatewayFromServerCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<DisassociateGatewayFromServerCommandOutput>;
-  public disassociateGatewayFromServer(
+  disassociateGatewayFromServer(
     args: DisassociateGatewayFromServerCommandInput,
     cb: (err: any, data?: DisassociateGatewayFromServerCommandOutput) => void
   ): void;
-  public disassociateGatewayFromServer(
+  disassociateGatewayFromServer(
     args: DisassociateGatewayFromServerCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: DisassociateGatewayFromServerCommandOutput) => void
   ): void;
-  public disassociateGatewayFromServer(
-    args: DisassociateGatewayFromServerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateGatewayFromServerCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateGatewayFromServerCommandOutput) => void
-  ): Promise<DisassociateGatewayFromServerCommandOutput> | void {
-    const command = new DisassociateGatewayFromServerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>By providing the ARN (Amazon Resource Name), this
-   *       API returns the gateway.</p>
+   * @see {@link GetBandwidthRateLimitScheduleCommand}
    */
-  public getGateway(args: GetGatewayCommandInput, options?: __HttpHandlerOptions): Promise<GetGatewayCommandOutput>;
-  public getGateway(args: GetGatewayCommandInput, cb: (err: any, data?: GetGatewayCommandOutput) => void): void;
-  public getGateway(
+  getBandwidthRateLimitSchedule(
+    args: GetBandwidthRateLimitScheduleCommandInput,
+    options?: BackupGatewayRequestOptions
+  ): Promise<GetBandwidthRateLimitScheduleCommandOutput>;
+  getBandwidthRateLimitSchedule(
+    args: GetBandwidthRateLimitScheduleCommandInput,
+    cb: (err: any, data?: GetBandwidthRateLimitScheduleCommandOutput) => void
+  ): void;
+  getBandwidthRateLimitSchedule(
+    args: GetBandwidthRateLimitScheduleCommandInput,
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: GetBandwidthRateLimitScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetGatewayCommand}
+   */
+  getGateway(
     args: GetGatewayCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BackupGatewayRequestOptions
+  ): Promise<GetGatewayCommandOutput>;
+  getGateway(
+    args: GetGatewayCommandInput,
     cb: (err: any, data?: GetGatewayCommandOutput) => void
   ): void;
-  public getGateway(
+  getGateway(
     args: GetGatewayCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetGatewayCommandOutput) => void),
-    cb?: (err: any, data?: GetGatewayCommandOutput) => void
-  ): Promise<GetGatewayCommandOutput> | void {
-    const command = new GetGatewayCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: GetGatewayCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Connect to a hypervisor by importing its configuration.</p>
+   * @see {@link GetHypervisorCommand}
    */
-  public importHypervisorConfiguration(
+  getHypervisor(
+    args: GetHypervisorCommandInput,
+    options?: BackupGatewayRequestOptions
+  ): Promise<GetHypervisorCommandOutput>;
+  getHypervisor(
+    args: GetHypervisorCommandInput,
+    cb: (err: any, data?: GetHypervisorCommandOutput) => void
+  ): void;
+  getHypervisor(
+    args: GetHypervisorCommandInput,
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: GetHypervisorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetHypervisorPropertyMappingsCommand}
+   */
+  getHypervisorPropertyMappings(
+    args: GetHypervisorPropertyMappingsCommandInput,
+    options?: BackupGatewayRequestOptions
+  ): Promise<GetHypervisorPropertyMappingsCommandOutput>;
+  getHypervisorPropertyMappings(
+    args: GetHypervisorPropertyMappingsCommandInput,
+    cb: (err: any, data?: GetHypervisorPropertyMappingsCommandOutput) => void
+  ): void;
+  getHypervisorPropertyMappings(
+    args: GetHypervisorPropertyMappingsCommandInput,
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: GetHypervisorPropertyMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVirtualMachineCommand}
+   */
+  getVirtualMachine(
+    args: GetVirtualMachineCommandInput,
+    options?: BackupGatewayRequestOptions
+  ): Promise<GetVirtualMachineCommandOutput>;
+  getVirtualMachine(
+    args: GetVirtualMachineCommandInput,
+    cb: (err: any, data?: GetVirtualMachineCommandOutput) => void
+  ): void;
+  getVirtualMachine(
+    args: GetVirtualMachineCommandInput,
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: GetVirtualMachineCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportHypervisorConfigurationCommand}
+   */
+  importHypervisorConfiguration(
     args: ImportHypervisorConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<ImportHypervisorConfigurationCommandOutput>;
-  public importHypervisorConfiguration(
+  importHypervisorConfiguration(
     args: ImportHypervisorConfigurationCommandInput,
     cb: (err: any, data?: ImportHypervisorConfigurationCommandOutput) => void
   ): void;
-  public importHypervisorConfiguration(
+  importHypervisorConfiguration(
     args: ImportHypervisorConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: ImportHypervisorConfigurationCommandOutput) => void
   ): void;
-  public importHypervisorConfiguration(
-    args: ImportHypervisorConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportHypervisorConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: ImportHypervisorConfigurationCommandOutput) => void
-  ): Promise<ImportHypervisorConfigurationCommandOutput> | void {
-    const command = new ImportHypervisorConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists backup gateways owned by an Amazon Web Services account in an Amazon Web Services Region. The returned list is ordered by gateway Amazon Resource Name (ARN).</p>
+   * @see {@link ListGatewaysCommand}
    */
-  public listGateways(
+  listGateways(): Promise<ListGatewaysCommandOutput>;
+  listGateways(
     args: ListGatewaysCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<ListGatewaysCommandOutput>;
-  public listGateways(args: ListGatewaysCommandInput, cb: (err: any, data?: ListGatewaysCommandOutput) => void): void;
-  public listGateways(
+  listGateways(
     args: ListGatewaysCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListGatewaysCommandOutput) => void
   ): void;
-  public listGateways(
+  listGateways(
     args: ListGatewaysCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListGatewaysCommandOutput) => void),
-    cb?: (err: any, data?: ListGatewaysCommandOutput) => void
-  ): Promise<ListGatewaysCommandOutput> | void {
-    const command = new ListGatewaysCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: ListGatewaysCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists your hypervisors.</p>
+   * @see {@link ListHypervisorsCommand}
    */
-  public listHypervisors(
+  listHypervisors(): Promise<ListHypervisorsCommandOutput>;
+  listHypervisors(
     args: ListHypervisorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<ListHypervisorsCommandOutput>;
-  public listHypervisors(
+  listHypervisors(
     args: ListHypervisorsCommandInput,
     cb: (err: any, data?: ListHypervisorsCommandOutput) => void
   ): void;
-  public listHypervisors(
+  listHypervisors(
     args: ListHypervisorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: ListHypervisorsCommandOutput) => void
   ): void;
-  public listHypervisors(
-    args: ListHypervisorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListHypervisorsCommandOutput) => void),
-    cb?: (err: any, data?: ListHypervisorsCommandOutput) => void
-  ): Promise<ListHypervisorsCommandOutput> | void {
-    const command = new ListHypervisorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags applied to the resource identified by its Amazon Resource Name
-   *       (ARN).</p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists your virtual machines.</p>
+   * @see {@link ListVirtualMachinesCommand}
    */
-  public listVirtualMachines(
+  listVirtualMachines(): Promise<ListVirtualMachinesCommandOutput>;
+  listVirtualMachines(
     args: ListVirtualMachinesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<ListVirtualMachinesCommandOutput>;
-  public listVirtualMachines(
+  listVirtualMachines(
     args: ListVirtualMachinesCommandInput,
     cb: (err: any, data?: ListVirtualMachinesCommandOutput) => void
   ): void;
-  public listVirtualMachines(
+  listVirtualMachines(
     args: ListVirtualMachinesCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: ListVirtualMachinesCommandOutput) => void
   ): void;
-  public listVirtualMachines(
-    args: ListVirtualMachinesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListVirtualMachinesCommandOutput) => void),
-    cb?: (err: any, data?: ListVirtualMachinesCommandOutput) => void
-  ): Promise<ListVirtualMachinesCommandOutput> | void {
-    const command = new ListVirtualMachinesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Set the maintenance start time for a gateway.</p>
+   * @see {@link PutBandwidthRateLimitScheduleCommand}
    */
-  public putMaintenanceStartTime(
+  putBandwidthRateLimitSchedule(
+    args: PutBandwidthRateLimitScheduleCommandInput,
+    options?: BackupGatewayRequestOptions
+  ): Promise<PutBandwidthRateLimitScheduleCommandOutput>;
+  putBandwidthRateLimitSchedule(
+    args: PutBandwidthRateLimitScheduleCommandInput,
+    cb: (err: any, data?: PutBandwidthRateLimitScheduleCommandOutput) => void
+  ): void;
+  putBandwidthRateLimitSchedule(
+    args: PutBandwidthRateLimitScheduleCommandInput,
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: PutBandwidthRateLimitScheduleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutHypervisorPropertyMappingsCommand}
+   */
+  putHypervisorPropertyMappings(
+    args: PutHypervisorPropertyMappingsCommandInput,
+    options?: BackupGatewayRequestOptions
+  ): Promise<PutHypervisorPropertyMappingsCommandOutput>;
+  putHypervisorPropertyMappings(
+    args: PutHypervisorPropertyMappingsCommandInput,
+    cb: (err: any, data?: PutHypervisorPropertyMappingsCommandOutput) => void
+  ): void;
+  putHypervisorPropertyMappings(
+    args: PutHypervisorPropertyMappingsCommandInput,
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: PutHypervisorPropertyMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutMaintenanceStartTimeCommand}
+   */
+  putMaintenanceStartTime(
     args: PutMaintenanceStartTimeCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<PutMaintenanceStartTimeCommandOutput>;
-  public putMaintenanceStartTime(
+  putMaintenanceStartTime(
     args: PutMaintenanceStartTimeCommandInput,
     cb: (err: any, data?: PutMaintenanceStartTimeCommandOutput) => void
   ): void;
-  public putMaintenanceStartTime(
+  putMaintenanceStartTime(
     args: PutMaintenanceStartTimeCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: PutMaintenanceStartTimeCommandOutput) => void
   ): void;
-  public putMaintenanceStartTime(
-    args: PutMaintenanceStartTimeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutMaintenanceStartTimeCommandOutput) => void),
-    cb?: (err: any, data?: PutMaintenanceStartTimeCommandOutput) => void
-  ): Promise<PutMaintenanceStartTimeCommandOutput> | void {
-    const command = new PutMaintenanceStartTimeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Tag the resource.</p>
+   * @see {@link StartVirtualMachinesMetadataSyncCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  startVirtualMachinesMetadataSync(
+    args: StartVirtualMachinesMetadataSyncCommandInput,
+    options?: BackupGatewayRequestOptions
+  ): Promise<StartVirtualMachinesMetadataSyncCommandOutput>;
+  startVirtualMachinesMetadataSync(
+    args: StartVirtualMachinesMetadataSyncCommandInput,
+    cb: (err: any, data?: StartVirtualMachinesMetadataSyncCommandOutput) => void
+  ): void;
+  startVirtualMachinesMetadataSync(
+    args: StartVirtualMachinesMetadataSyncCommandInput,
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: StartVirtualMachinesMetadataSyncCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: BackupGatewayRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: BackupGatewayRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Tests your hypervisor configuration to validate that backup gateway can connect with the
-   *       hypervisor and its resources.</p>
+   * @see {@link TestHypervisorConfigurationCommand}
    */
-  public testHypervisorConfiguration(
+  testHypervisorConfiguration(
     args: TestHypervisorConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<TestHypervisorConfigurationCommandOutput>;
-  public testHypervisorConfiguration(
+  testHypervisorConfiguration(
     args: TestHypervisorConfigurationCommandInput,
     cb: (err: any, data?: TestHypervisorConfigurationCommandOutput) => void
   ): void;
-  public testHypervisorConfiguration(
+  testHypervisorConfiguration(
     args: TestHypervisorConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: TestHypervisorConfigurationCommandOutput) => void
   ): void;
-  public testHypervisorConfiguration(
-    args: TestHypervisorConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TestHypervisorConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: TestHypervisorConfigurationCommandOutput) => void
-  ): Promise<TestHypervisorConfigurationCommandOutput> | void {
-    const command = new TestHypervisorConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes tags from the resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a gateway's name. Specify which gateway to update using the Amazon Resource Name
-   *       (ARN) of the gateway in your request.</p>
+   * @see {@link UpdateGatewayInformationCommand}
    */
-  public updateGatewayInformation(
+  updateGatewayInformation(
     args: UpdateGatewayInformationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<UpdateGatewayInformationCommandOutput>;
-  public updateGatewayInformation(
+  updateGatewayInformation(
     args: UpdateGatewayInformationCommandInput,
     cb: (err: any, data?: UpdateGatewayInformationCommandOutput) => void
   ): void;
-  public updateGatewayInformation(
+  updateGatewayInformation(
     args: UpdateGatewayInformationCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: UpdateGatewayInformationCommandOutput) => void
   ): void;
-  public updateGatewayInformation(
-    args: UpdateGatewayInformationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateGatewayInformationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateGatewayInformationCommandOutput) => void
-  ): Promise<UpdateGatewayInformationCommandOutput> | void {
-    const command = new UpdateGatewayInformationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the gateway virtual machine (VM) software.
-   *       The request immediately triggers the software update.</p>
-   *          <note>
-   *             <p>When you make this request, you get a <code>200 OK</code>
-   *         success response immediately. However, it might take some
-   *         time for the update to complete.</p>
-   *          </note>
+   * @see {@link UpdateGatewaySoftwareNowCommand}
    */
-  public updateGatewaySoftwareNow(
+  updateGatewaySoftwareNow(
     args: UpdateGatewaySoftwareNowCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<UpdateGatewaySoftwareNowCommandOutput>;
-  public updateGatewaySoftwareNow(
+  updateGatewaySoftwareNow(
     args: UpdateGatewaySoftwareNowCommandInput,
     cb: (err: any, data?: UpdateGatewaySoftwareNowCommandOutput) => void
   ): void;
-  public updateGatewaySoftwareNow(
+  updateGatewaySoftwareNow(
     args: UpdateGatewaySoftwareNowCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: UpdateGatewaySoftwareNowCommandOutput) => void
   ): void;
-  public updateGatewaySoftwareNow(
-    args: UpdateGatewaySoftwareNowCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateGatewaySoftwareNowCommandOutput) => void),
-    cb?: (err: any, data?: UpdateGatewaySoftwareNowCommandOutput) => void
-  ): Promise<UpdateGatewaySoftwareNowCommandOutput> | void {
-    const command = new UpdateGatewaySoftwareNowCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a hypervisor metadata, including its host, username, and password. Specify which
-   *       hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor in your
-   *       request.</p>
+   * @see {@link UpdateHypervisorCommand}
    */
-  public updateHypervisor(
+  updateHypervisor(
     args: UpdateHypervisorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: BackupGatewayRequestOptions
   ): Promise<UpdateHypervisorCommandOutput>;
-  public updateHypervisor(
+  updateHypervisor(
     args: UpdateHypervisorCommandInput,
     cb: (err: any, data?: UpdateHypervisorCommandOutput) => void
   ): void;
-  public updateHypervisor(
+  updateHypervisor(
     args: UpdateHypervisorCommandInput,
-    options: __HttpHandlerOptions,
+    options: BackupGatewayRequestOptions,
     cb: (err: any, data?: UpdateHypervisorCommandOutput) => void
   ): void;
-  public updateHypervisor(
-    args: UpdateHypervisorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateHypervisorCommandOutput) => void),
-    cb?: (err: any, data?: UpdateHypervisorCommandOutput) => void
-  ): Promise<UpdateHypervisorCommandOutput> | void {
-    const command = new UpdateHypervisorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListGatewaysCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListGatewaysCommandOutput}.
+   */
+  paginateListGateways(
+    args?: ListGatewaysCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListGatewaysCommandOutput>;
+
+  /**
+   * @see {@link ListHypervisorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListHypervisorsCommandOutput}.
+   */
+  paginateListHypervisors(
+    args?: ListHypervisorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListHypervisorsCommandOutput>;
+
+  /**
+   * @see {@link ListVirtualMachinesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVirtualMachinesCommandOutput}.
+   */
+  paginateListVirtualMachines(
+    args?: ListVirtualMachinesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVirtualMachinesCommandOutput>;
 }
+
+/**
+ * <fullname>Backup gateway</fullname> <p>Backup gateway connects Backup to your hypervisor, so you can create, store, and restore backups of your virtual machines (VMs) anywhere, whether on-premises or in the VMware Cloud (VMC) on Amazon Web Services.</p> <p>Add on-premises resources by connecting to a hypervisor through a gateway. Backup will automatically discover the resources in your hypervisor.</p> <p>Use Backup to assign virtual or on-premises resources to a backup plan, or run on-demand backups. Once you have backed up your resources, you can view them and restore them like any resource supported by Backup.</p> <p>To download the Amazon Web Services software to get started, navigate to the Backup console, choose <b>Gateways</b>, then choose <b>Create gateway</b>.</p>
+ * @public
+ */
+export class BackupGateway extends BackupGatewayClient implements BackupGateway {}
+createAggregatedClient(commands, BackupGateway, { paginators });

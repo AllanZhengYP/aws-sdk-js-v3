@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import {
-  AssociateApplicationFleetRequest,
-  AssociateApplicationFleetRequestFilterSensitiveLog,
-  AssociateApplicationFleetResult,
-  AssociateApplicationFleetResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1AssociateApplicationFleetCommand,
-  serializeAws_json1_1AssociateApplicationFleetCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociateApplicationFleetRequest, AssociateApplicationFleetResult } from "../models/models_0";
+import { AssociateApplicationFleet$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateApplicationFleetCommand}.
+ */
 export interface AssociateApplicationFleetCommandInput extends AssociateApplicationFleetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateApplicationFleetCommand}.
+ */
 export interface AssociateApplicationFleetCommandOutput extends AssociateApplicationFleetResult, __MetadataBearer {}
 
 /**
@@ -34,71 +29,66 @@ export interface AssociateApplicationFleetCommandOutput extends AssociateApplica
  * ```javascript
  * import { AppStreamClient, AssociateApplicationFleetCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, AssociateApplicationFleetCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // AssociateApplicationFleetRequest
+ *   FleetName: "STRING_VALUE", // required
+ *   ApplicationArn: "STRING_VALUE", // required
+ * };
  * const command = new AssociateApplicationFleetCommand(input);
  * const response = await client.send(command);
+ * // { // AssociateApplicationFleetResult
+ * //   ApplicationFleetAssociation: { // ApplicationFleetAssociation
+ * //     FleetName: "STRING_VALUE", // required
+ * //     ApplicationArn: "STRING_VALUE", // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param AssociateApplicationFleetCommandInput - {@link AssociateApplicationFleetCommandInput}
+ * @returns {@link AssociateApplicationFleetCommandOutput}
  * @see {@link AssociateApplicationFleetCommandInput} for command's `input` shape.
  * @see {@link AssociateApplicationFleetCommandOutput} for command's `response` shape.
  * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link ConcurrentModificationException} (client fault)
+ *  <p>An API error occurred. Wait a few minutes and try again.</p>
+ *
+ * @throws {@link InvalidParameterCombinationException} (client fault)
+ *  <p>Indicates an incorrect combination of parameters, or a missing parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The requested limit exceeds the permitted limit for an account.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateApplicationFleetCommand extends $Command<
-  AssociateApplicationFleetCommandInput,
-  AssociateApplicationFleetCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateApplicationFleetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociateApplicationFleetCommandInput, AssociateApplicationFleetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "AssociateApplicationFleetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateApplicationFleetRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: AssociateApplicationFleetResultFilterSensitiveLog,
+export class AssociateApplicationFleetCommand extends command<AssociateApplicationFleetCommandInput, AssociateApplicationFleetCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateApplicationFleet",
+  AssociateApplicationFleet$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateApplicationFleetRequest;
+      output: AssociateApplicationFleetResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: AssociateApplicationFleetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1AssociateApplicationFleetCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateApplicationFleetCommandOutput> {
-    return deserializeAws_json1_1AssociateApplicationFleetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateApplicationFleetCommandInput;
+      output: AssociateApplicationFleetCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BillingconductorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BillingconductorClient";
-import {
-  ListBillingGroupsInput,
-  ListBillingGroupsInputFilterSensitiveLog,
-  ListBillingGroupsOutput,
-  ListBillingGroupsOutputFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListBillingGroupsCommand,
-  serializeAws_restJson1ListBillingGroupsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListBillingGroupsInput, ListBillingGroupsOutput } from "../models/models_0";
+import { ListBillingGroups$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListBillingGroupsCommand}.
+ */
 export interface ListBillingGroupsCommandInput extends ListBillingGroupsInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListBillingGroupsCommand}.
+ */
 export interface ListBillingGroupsCommandOutput extends ListBillingGroupsOutput, __MetadataBearer {}
 
 /**
@@ -34,68 +29,110 @@ export interface ListBillingGroupsCommandOutput extends ListBillingGroupsOutput,
  * ```javascript
  * import { BillingconductorClient, ListBillingGroupsCommand } from "@aws-sdk/client-billingconductor"; // ES Modules import
  * // const { BillingconductorClient, ListBillingGroupsCommand } = require("@aws-sdk/client-billingconductor"); // CommonJS import
+ * // import type { BillingconductorClientConfig } from "@aws-sdk/client-billingconductor";
+ * const config = {}; // type is BillingconductorClientConfig
  * const client = new BillingconductorClient(config);
+ * const input = { // ListBillingGroupsInput
+ *   BillingPeriod: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   Filters: { // ListBillingGroupsFilter
+ *     Arns: [ // BillingGroupArnList
+ *       "STRING_VALUE",
+ *     ],
+ *     PricingPlan: "STRING_VALUE",
+ *     Statuses: [ // BillingGroupStatusList
+ *       "ACTIVE" || "PRIMARY_ACCOUNT_MISSING" || "PENDING",
+ *     ],
+ *     AutoAssociate: true || false,
+ *     PrimaryAccountIds: [ // PrimaryAccountIdList
+ *       "STRING_VALUE",
+ *     ],
+ *     BillingGroupTypes: [ // BillingGroupTypeList
+ *       "STANDARD" || "TRANSFER_BILLING",
+ *     ],
+ *     Names: [ // StringSearches
+ *       { // StringSearch
+ *         SearchOption: "STARTS_WITH", // required
+ *         SearchValue: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *     ResponsibilityTransferArns: [ // ResponsibilityTransferArnsList
+ *       "STRING_VALUE",
+ *     ],
+ *   },
+ * };
  * const command = new ListBillingGroupsCommand(input);
  * const response = await client.send(command);
+ * // { // ListBillingGroupsOutput
+ * //   BillingGroups: [ // BillingGroupList
+ * //     { // BillingGroupListElement
+ * //       Name: "STRING_VALUE",
+ * //       Arn: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       PrimaryAccountId: "STRING_VALUE",
+ * //       ComputationPreference: { // ComputationPreference
+ * //         PricingPlanArn: "STRING_VALUE", // required
+ * //       },
+ * //       Size: Number("long"),
+ * //       CreationTime: Number("long"),
+ * //       LastModifiedTime: Number("long"),
+ * //       Status: "ACTIVE" || "PRIMARY_ACCOUNT_MISSING" || "PENDING",
+ * //       StatusReason: "STRING_VALUE",
+ * //       AccountGrouping: { // ListBillingGroupAccountGrouping
+ * //         AutoAssociate: true || false,
+ * //         ResponsibilityTransferArn: "STRING_VALUE",
+ * //       },
+ * //       BillingGroupType: "STANDARD" || "TRANSFER_BILLING",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListBillingGroupsCommandInput - {@link ListBillingGroupsCommandInput}
+ * @returns {@link ListBillingGroupsCommandOutput}
  * @see {@link ListBillingGroupsCommandInput} for command's `input` shape.
  * @see {@link ListBillingGroupsCommandOutput} for command's `response` shape.
  * @see {@link BillingconductorClientResolvedConfig | config} for BillingconductorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that doesn't exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input doesn't match with the constraints specified by Amazon Web Services services.</p>
+ *
+ * @throws {@link BillingconductorServiceException}
+ * <p>Base exception class for all service exceptions from Billingconductor service.</p>
+ *
+ *
+ * @public
  */
-export class ListBillingGroupsCommand extends $Command<
-  ListBillingGroupsCommandInput,
-  ListBillingGroupsCommandOutput,
-  BillingconductorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListBillingGroupsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BillingconductorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListBillingGroupsCommandInput, ListBillingGroupsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BillingconductorClient";
-    const commandName = "ListBillingGroupsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListBillingGroupsInputFilterSensitiveLog,
-      outputFilterSensitiveLog: ListBillingGroupsOutputFilterSensitiveLog,
+export class ListBillingGroupsCommand extends command<ListBillingGroupsCommandInput, ListBillingGroupsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListBillingGroups",
+  ListBillingGroups$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListBillingGroupsInput;
+      output: ListBillingGroupsOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListBillingGroupsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListBillingGroupsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListBillingGroupsCommandOutput> {
-    return deserializeAws_restJson1ListBillingGroupsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListBillingGroupsCommandInput;
+      output: ListBillingGroupsCommandOutput;
+    };
+  };
 }

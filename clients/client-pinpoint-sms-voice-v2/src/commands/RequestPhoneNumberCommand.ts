@@ -1,107 +1,149 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  RequestPhoneNumberRequest,
-  RequestPhoneNumberRequestFilterSensitiveLog,
-  RequestPhoneNumberResult,
-  RequestPhoneNumberResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  PinpointSMSVoiceV2ClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../PinpointSMSVoiceV2Client";
-import {
-  deserializeAws_json1_0RequestPhoneNumberCommand,
-  serializeAws_json1_0RequestPhoneNumberCommand,
-} from "../protocols/Aws_json1_0";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RequestPhoneNumberRequest, RequestPhoneNumberResult } from "../models/models_0";
+import { RequestPhoneNumber$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RequestPhoneNumberCommand}.
+ */
 export interface RequestPhoneNumberCommandInput extends RequestPhoneNumberRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RequestPhoneNumberCommand}.
+ */
 export interface RequestPhoneNumberCommandOutput extends RequestPhoneNumberResult, __MetadataBearer {}
 
 /**
- * <p>Request an origination phone number for use in your account. For more information on
- *             phone number request see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html"> Requesting a
- *                 number </a> in the <i>Amazon Pinpoint User Guide</i>.</p>
+ * <p>Request an origination phone number for use in your account. For more information on phone number request see <a href="https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-request.html">Request a phone number</a> in the <i>End User Messaging SMS User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { PinpointSMSVoiceV2Client, RequestPhoneNumberCommand } from "@aws-sdk/client-pinpoint-sms-voice-v2"; // ES Modules import
  * // const { PinpointSMSVoiceV2Client, RequestPhoneNumberCommand } = require("@aws-sdk/client-pinpoint-sms-voice-v2"); // CommonJS import
+ * // import type { PinpointSMSVoiceV2ClientConfig } from "@aws-sdk/client-pinpoint-sms-voice-v2";
+ * const config = {}; // type is PinpointSMSVoiceV2ClientConfig
  * const client = new PinpointSMSVoiceV2Client(config);
+ * const input = { // RequestPhoneNumberRequest
+ *   IsoCountryCode: "STRING_VALUE", // required
+ *   MessageType: "STRING_VALUE", // required
+ *   NumberCapabilities: [ // NumberCapabilityList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   NumberType: "STRING_VALUE", // required
+ *   OptOutListName: "STRING_VALUE",
+ *   PoolId: "STRING_VALUE",
+ *   RegistrationId: "STRING_VALUE",
+ *   NumberPreference: [ // NumberPreferenceList
+ *     { // NumberPreferenceItem
+ *       PreferenceType: [ // PreferenceTypeList // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Filter: [ // NumberFilterList // required
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   InternationalSendingEnabled: true || false,
+ *   DeletionProtectionEnabled: true || false,
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   ClientToken: "STRING_VALUE",
+ * };
  * const command = new RequestPhoneNumberCommand(input);
  * const response = await client.send(command);
+ * // { // RequestPhoneNumberResult
+ * //   PhoneNumberArn: "STRING_VALUE",
+ * //   PhoneNumberId: "STRING_VALUE",
+ * //   PhoneNumber: "STRING_VALUE",
+ * //   Status: "STRING_VALUE",
+ * //   IsoCountryCode: "STRING_VALUE",
+ * //   MessageType: "STRING_VALUE",
+ * //   NumberCapabilities: [ // NumberCapabilityList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NumberType: "STRING_VALUE",
+ * //   MonthlyLeasingPrice: "STRING_VALUE",
+ * //   TwoWayEnabled: true || false,
+ * //   TwoWayChannelArn: "STRING_VALUE",
+ * //   TwoWayChannelRole: "STRING_VALUE",
+ * //   SelfManagedOptOutsEnabled: true || false,
+ * //   OptOutListName: "STRING_VALUE",
+ * //   InternationalSendingEnabled: true || false,
+ * //   DeletionProtectionEnabled: true || false,
+ * //   PoolId: "STRING_VALUE",
+ * //   RegistrationId: "STRING_VALUE",
+ * //   Tags: [ // TagList
+ * //     { // Tag
+ * //       Key: "STRING_VALUE", // required
+ * //       Value: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   CreatedTimestamp: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param RequestPhoneNumberCommandInput - {@link RequestPhoneNumberCommandInput}
+ * @returns {@link RequestPhoneNumberCommandOutput}
  * @see {@link RequestPhoneNumberCommandInput} for command's `input` shape.
  * @see {@link RequestPhoneNumberCommandOutput} for command's `response` shape.
  * @see {@link PinpointSMSVoiceV2ClientResolvedConfig | config} for PinpointSMSVoiceV2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request was denied because you don't have sufficient permissions to access the resource.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Your request has conflicting operations. This can occur if you're trying to perform more than one operation on the same resource at the same time or it could be that the requested action isn't valid for the current state or configuration of the resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The API encountered an unexpected error and couldn't complete the request. You might be able to successfully issue the request again in the future.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A requested resource couldn't be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request would cause a service quota to be exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>An error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A validation exception for a field.</p>
+ *
+ * @throws {@link PinpointSMSVoiceV2ServiceException}
+ * <p>Base exception class for all service exceptions from PinpointSMSVoiceV2 service.</p>
+ *
+ *
+ * @public
  */
-export class RequestPhoneNumberCommand extends $Command<
-  RequestPhoneNumberCommandInput,
-  RequestPhoneNumberCommandOutput,
-  PinpointSMSVoiceV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RequestPhoneNumberCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PinpointSMSVoiceV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RequestPhoneNumberCommandInput, RequestPhoneNumberCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PinpointSMSVoiceV2Client";
-    const commandName = "RequestPhoneNumberCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RequestPhoneNumberRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: RequestPhoneNumberResultFilterSensitiveLog,
+export class RequestPhoneNumberCommand extends command<RequestPhoneNumberCommandInput, RequestPhoneNumberCommandOutput>(
+  _ep0,
+  _mw0,
+  "RequestPhoneNumber",
+  RequestPhoneNumber$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RequestPhoneNumberRequest;
+      output: RequestPhoneNumberResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RequestPhoneNumberCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0RequestPhoneNumberCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RequestPhoneNumberCommandOutput> {
-    return deserializeAws_json1_0RequestPhoneNumberCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RequestPhoneNumberCommandInput;
+      output: RequestPhoneNumberCommandOutput;
+    };
+  };
 }

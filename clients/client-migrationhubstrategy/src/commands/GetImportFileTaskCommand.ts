@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MigrationHubStrategyClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MigrationHubStrategyClient";
-import {
-  GetImportFileTaskRequest,
-  GetImportFileTaskRequestFilterSensitiveLog,
-  GetImportFileTaskResponse,
-  GetImportFileTaskResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetImportFileTaskCommand,
-  serializeAws_restJson1GetImportFileTaskCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetImportFileTaskRequest, GetImportFileTaskResponse } from "../models/models_0";
+import { GetImportFileTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetImportFileTaskCommand}.
+ */
 export interface GetImportFileTaskCommandInput extends GetImportFileTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetImportFileTaskCommand}.
+ */
 export interface GetImportFileTaskCommandOutput extends GetImportFileTaskResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,73 @@ export interface GetImportFileTaskCommandOutput extends GetImportFileTaskRespons
  * ```javascript
  * import { MigrationHubStrategyClient, GetImportFileTaskCommand } from "@aws-sdk/client-migrationhubstrategy"; // ES Modules import
  * // const { MigrationHubStrategyClient, GetImportFileTaskCommand } = require("@aws-sdk/client-migrationhubstrategy"); // CommonJS import
+ * // import type { MigrationHubStrategyClientConfig } from "@aws-sdk/client-migrationhubstrategy";
+ * const config = {}; // type is MigrationHubStrategyClientConfig
  * const client = new MigrationHubStrategyClient(config);
+ * const input = { // GetImportFileTaskRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new GetImportFileTaskCommand(input);
  * const response = await client.send(command);
+ * // { // GetImportFileTaskResponse
+ * //   id: "STRING_VALUE",
+ * //   status: "STRING_VALUE",
+ * //   startTime: new Date("TIMESTAMP"),
+ * //   inputS3Bucket: "STRING_VALUE",
+ * //   inputS3Key: "STRING_VALUE",
+ * //   statusReportS3Bucket: "STRING_VALUE",
+ * //   statusReportS3Key: "STRING_VALUE",
+ * //   completionTime: new Date("TIMESTAMP"),
+ * //   numberOfRecordsSuccess: Number("int"),
+ * //   numberOfRecordsFailed: Number("int"),
+ * //   importName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetImportFileTaskCommandInput - {@link GetImportFileTaskCommandInput}
+ * @returns {@link GetImportFileTaskCommandOutput}
  * @see {@link GetImportFileTaskCommandInput} for command's `input` shape.
  * @see {@link GetImportFileTaskCommandOutput} for command's `response` shape.
  * @see {@link MigrationHubStrategyClientResolvedConfig | config} for MigrationHubStrategyClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> The user does not have permission to perform the action. Check the
+ *       AWS Identity and Access Management (IAM) policy associated with this user.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> The server experienced an internal error. Try again. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The specified ID in the request is not found. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p> The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request body isn't valid. </p>
+ *
+ * @throws {@link MigrationHubStrategyServiceException}
+ * <p>Base exception class for all service exceptions from MigrationHubStrategy service.</p>
+ *
+ *
+ * @public
  */
-export class GetImportFileTaskCommand extends $Command<
-  GetImportFileTaskCommandInput,
-  GetImportFileTaskCommandOutput,
-  MigrationHubStrategyClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetImportFileTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MigrationHubStrategyClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetImportFileTaskCommandInput, GetImportFileTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MigrationHubStrategyClient";
-    const commandName = "GetImportFileTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetImportFileTaskRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetImportFileTaskResponseFilterSensitiveLog,
+export class GetImportFileTaskCommand extends command<GetImportFileTaskCommandInput, GetImportFileTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetImportFileTask",
+  GetImportFileTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetImportFileTaskRequest;
+      output: GetImportFileTaskResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetImportFileTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetImportFileTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetImportFileTaskCommandOutput> {
-    return deserializeAws_restJson1GetImportFileTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetImportFileTaskCommandInput;
+      output: GetImportFileTaskCommandOutput;
+    };
+  };
 }

@@ -1,115 +1,101 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BillingconductorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BillingconductorClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListPricingPlansAssociatedWithPricingRuleInput,
-  ListPricingPlansAssociatedWithPricingRuleInputFilterSensitiveLog,
   ListPricingPlansAssociatedWithPricingRuleOutput,
-  ListPricingPlansAssociatedWithPricingRuleOutputFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListPricingPlansAssociatedWithPricingRuleCommand,
-  serializeAws_restJson1ListPricingPlansAssociatedWithPricingRuleCommand,
-} from "../protocols/Aws_restJson1";
-
-export interface ListPricingPlansAssociatedWithPricingRuleCommandInput
-  extends ListPricingPlansAssociatedWithPricingRuleInput {}
-export interface ListPricingPlansAssociatedWithPricingRuleCommandOutput
-  extends ListPricingPlansAssociatedWithPricingRuleOutput,
-    __MetadataBearer {}
+import { ListPricingPlansAssociatedWithPricingRule$ } from "../schemas/schemas_0";
 
 /**
- * <p>
- *       A list of the pricing plans associated with a pricing rule.
- *     </p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPricingPlansAssociatedWithPricingRuleCommand}.
+ */
+export interface ListPricingPlansAssociatedWithPricingRuleCommandInput extends ListPricingPlansAssociatedWithPricingRuleInput {}
+/**
+ * @public
+ *
+ * The output of {@link ListPricingPlansAssociatedWithPricingRuleCommand}.
+ */
+export interface ListPricingPlansAssociatedWithPricingRuleCommandOutput extends ListPricingPlansAssociatedWithPricingRuleOutput, __MetadataBearer {}
+
+/**
+ * <p> A list of the pricing plans that are associated with a pricing rule. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { BillingconductorClient, ListPricingPlansAssociatedWithPricingRuleCommand } from "@aws-sdk/client-billingconductor"; // ES Modules import
  * // const { BillingconductorClient, ListPricingPlansAssociatedWithPricingRuleCommand } = require("@aws-sdk/client-billingconductor"); // CommonJS import
+ * // import type { BillingconductorClientConfig } from "@aws-sdk/client-billingconductor";
+ * const config = {}; // type is BillingconductorClientConfig
  * const client = new BillingconductorClient(config);
+ * const input = { // ListPricingPlansAssociatedWithPricingRuleInput
+ *   BillingPeriod: "STRING_VALUE",
+ *   PricingRuleArn: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListPricingPlansAssociatedWithPricingRuleCommand(input);
  * const response = await client.send(command);
+ * // { // ListPricingPlansAssociatedWithPricingRuleOutput
+ * //   BillingPeriod: "STRING_VALUE",
+ * //   PricingRuleArn: "STRING_VALUE",
+ * //   PricingPlanArns: [ // PricingPlanArns
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPricingPlansAssociatedWithPricingRuleCommandInput - {@link ListPricingPlansAssociatedWithPricingRuleCommandInput}
+ * @returns {@link ListPricingPlansAssociatedWithPricingRuleCommandOutput}
  * @see {@link ListPricingPlansAssociatedWithPricingRuleCommandInput} for command's `input` shape.
  * @see {@link ListPricingPlansAssociatedWithPricingRuleCommandOutput} for command's `response` shape.
  * @see {@link BillingconductorClientResolvedConfig | config} for BillingconductorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that doesn't exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input doesn't match with the constraints specified by Amazon Web Services services.</p>
+ *
+ * @throws {@link BillingconductorServiceException}
+ * <p>Base exception class for all service exceptions from Billingconductor service.</p>
+ *
+ *
+ * @public
  */
-export class ListPricingPlansAssociatedWithPricingRuleCommand extends $Command<
-  ListPricingPlansAssociatedWithPricingRuleCommandInput,
-  ListPricingPlansAssociatedWithPricingRuleCommandOutput,
-  BillingconductorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPricingPlansAssociatedWithPricingRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BillingconductorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ListPricingPlansAssociatedWithPricingRuleCommandInput,
-    ListPricingPlansAssociatedWithPricingRuleCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BillingconductorClient";
-    const commandName = "ListPricingPlansAssociatedWithPricingRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPricingPlansAssociatedWithPricingRuleInputFilterSensitiveLog,
-      outputFilterSensitiveLog: ListPricingPlansAssociatedWithPricingRuleOutputFilterSensitiveLog,
+export class ListPricingPlansAssociatedWithPricingRuleCommand extends command<ListPricingPlansAssociatedWithPricingRuleCommandInput, ListPricingPlansAssociatedWithPricingRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPricingPlansAssociatedWithPricingRule",
+  ListPricingPlansAssociatedWithPricingRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPricingPlansAssociatedWithPricingRuleInput;
+      output: ListPricingPlansAssociatedWithPricingRuleOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListPricingPlansAssociatedWithPricingRuleCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListPricingPlansAssociatedWithPricingRuleCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListPricingPlansAssociatedWithPricingRuleCommandOutput> {
-    return deserializeAws_restJson1ListPricingPlansAssociatedWithPricingRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPricingPlansAssociatedWithPricingRuleCommandInput;
+      output: ListPricingPlansAssociatedWithPricingRuleCommandOutput;
+    };
+  };
 }

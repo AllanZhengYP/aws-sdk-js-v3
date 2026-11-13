@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import {
-  DeleteContactFlowModuleRequest,
-  DeleteContactFlowModuleRequestFilterSensitiveLog,
-  DeleteContactFlowModuleResponse,
-  DeleteContactFlowModuleResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteContactFlowModuleCommand,
-  serializeAws_restJson1DeleteContactFlowModuleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteContactFlowModuleRequest, DeleteContactFlowModuleResponse } from "../models/models_1";
+import { DeleteContactFlowModule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteContactFlowModuleCommand}.
+ */
 export interface DeleteContactFlowModuleCommandInput extends DeleteContactFlowModuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteContactFlowModuleCommand}.
+ */
 export interface DeleteContactFlowModuleCommandOutput extends DeleteContactFlowModuleResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,64 @@ export interface DeleteContactFlowModuleCommandOutput extends DeleteContactFlowM
  * ```javascript
  * import { ConnectClient, DeleteContactFlowModuleCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, DeleteContactFlowModuleCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // DeleteContactFlowModuleRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactFlowModuleId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteContactFlowModuleCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteContactFlowModuleCommandInput - {@link DeleteContactFlowModuleCommandInput}
+ * @returns {@link DeleteContactFlowModuleCommandOutput}
  * @see {@link DeleteContactFlowModuleCommandInput} for command's `input` shape.
  * @see {@link DeleteContactFlowModuleCommandOutput} for command's `response` shape.
  * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteContactFlowModuleCommand extends $Command<
-  DeleteContactFlowModuleCommandInput,
-  DeleteContactFlowModuleCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteContactFlowModuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteContactFlowModuleCommandInput, DeleteContactFlowModuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "DeleteContactFlowModuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteContactFlowModuleRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteContactFlowModuleResponseFilterSensitiveLog,
+export class DeleteContactFlowModuleCommand extends command<DeleteContactFlowModuleCommandInput, DeleteContactFlowModuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteContactFlowModule",
+  DeleteContactFlowModule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteContactFlowModuleRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteContactFlowModuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteContactFlowModuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteContactFlowModuleCommandOutput> {
-    return deserializeAws_restJson1DeleteContactFlowModuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteContactFlowModuleCommandInput;
+      output: DeleteContactFlowModuleCommandOutput;
+    };
+  };
 }

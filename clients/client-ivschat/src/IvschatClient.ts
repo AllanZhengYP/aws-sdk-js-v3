@@ -1,115 +1,164 @@
 // smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  DefaultsMode,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
   BodyLengthCalculator as __BodyLengthCalculator,
-  Credentials as __Credentials,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { CreateChatTokenCommandInput, CreateChatTokenCommandOutput } from "./commands/CreateChatTokenCommand";
-import { CreateRoomCommandInput, CreateRoomCommandOutput } from "./commands/CreateRoomCommand";
-import { DeleteMessageCommandInput, DeleteMessageCommandOutput } from "./commands/DeleteMessageCommand";
-import { DeleteRoomCommandInput, DeleteRoomCommandOutput } from "./commands/DeleteRoomCommand";
-import { DisconnectUserCommandInput, DisconnectUserCommandOutput } from "./commands/DisconnectUserCommand";
-import { GetRoomCommandInput, GetRoomCommandOutput } from "./commands/GetRoomCommand";
-import { ListRoomsCommandInput, ListRoomsCommandOutput } from "./commands/ListRoomsCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultIvschatHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { CreateChatTokenCommandInput, CreateChatTokenCommandOutput } from "./commands/CreateChatTokenCommand";
+import type {
+  CreateLoggingConfigurationCommandInput,
+  CreateLoggingConfigurationCommandOutput,
+} from "./commands/CreateLoggingConfigurationCommand";
+import type { CreateRoomCommandInput, CreateRoomCommandOutput } from "./commands/CreateRoomCommand";
+import type {
+  DeleteLoggingConfigurationCommandInput,
+  DeleteLoggingConfigurationCommandOutput,
+} from "./commands/DeleteLoggingConfigurationCommand";
+import type { DeleteMessageCommandInput, DeleteMessageCommandOutput } from "./commands/DeleteMessageCommand";
+import type { DeleteRoomCommandInput, DeleteRoomCommandOutput } from "./commands/DeleteRoomCommand";
+import type { DisconnectUserCommandInput, DisconnectUserCommandOutput } from "./commands/DisconnectUserCommand";
+import type {
+  GetLoggingConfigurationCommandInput,
+  GetLoggingConfigurationCommandOutput,
+} from "./commands/GetLoggingConfigurationCommand";
+import type { GetRoomCommandInput, GetRoomCommandOutput } from "./commands/GetRoomCommand";
+import type {
+  ListLoggingConfigurationsCommandInput,
+  ListLoggingConfigurationsCommandOutput,
+} from "./commands/ListLoggingConfigurationsCommand";
+import type { ListRoomsCommandInput, ListRoomsCommandOutput } from "./commands/ListRoomsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { SendEventCommandInput, SendEventCommandOutput } from "./commands/SendEventCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateRoomCommandInput, UpdateRoomCommandOutput } from "./commands/UpdateRoomCommand";
+import type { SendEventCommandInput, SendEventCommandOutput } from "./commands/SendEventCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateLoggingConfigurationCommandInput,
+  UpdateLoggingConfigurationCommandOutput,
+} from "./commands/UpdateLoggingConfigurationCommand";
+import type { UpdateRoomCommandInput, UpdateRoomCommandOutput } from "./commands/UpdateRoomCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | CreateChatTokenCommandInput
+  | CreateLoggingConfigurationCommandInput
   | CreateRoomCommandInput
+  | DeleteLoggingConfigurationCommandInput
   | DeleteMessageCommandInput
   | DeleteRoomCommandInput
   | DisconnectUserCommandInput
+  | GetLoggingConfigurationCommandInput
   | GetRoomCommandInput
+  | ListLoggingConfigurationsCommandInput
   | ListRoomsCommandInput
   | ListTagsForResourceCommandInput
   | SendEventCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateLoggingConfigurationCommandInput
   | UpdateRoomCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | CreateChatTokenCommandOutput
+  | CreateLoggingConfigurationCommandOutput
   | CreateRoomCommandOutput
+  | DeleteLoggingConfigurationCommandOutput
   | DeleteMessageCommandOutput
   | DeleteRoomCommandOutput
   | DisconnectUserCommandOutput
+  | GetLoggingConfigurationCommandOutput
   | GetRoomCommandOutput
+  | ListLoggingConfigurationsCommandOutput
   | ListRoomsCommandOutput
   | ListTagsForResourceCommandOutput
   | SendEventCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateLoggingConfigurationCommandOutput
   | UpdateRoomCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -160,25 +209,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -191,63 +231,107 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
   /**
-   * The {@link DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
    */
-  defaultsMode?: DefaultsMode | Provider<DefaultsMode>;
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type IvschatClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of IvschatClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type IvschatClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of IvschatClient class constructor that set the region, credentials and other options.
  */
 export interface IvschatClientConfig extends IvschatClientConfigType {}
 
-type IvschatClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of IvschatClient class. This is resolved and normalized from the {@link IvschatClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type IvschatClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of IvschatClient class. This is resolved and normalized from the {@link IvschatClientConfig | constructor configuration interface}.
  */
 export interface IvschatClientResolvedConfig extends IvschatClientResolvedConfigType {}
 
@@ -261,6 +345,9 @@ export interface IvschatClientResolvedConfig extends IvschatClientResolvedConfig
  *          <p>The API is an AWS regional service. For a list of supported regions and Amazon IVS Chat
  *       HTTPS service endpoints, see the Amazon IVS Chat information on the <a href="https://docs.aws.amazon.com/general/latest/gr/ivs.html">Amazon IVS page</a> in the
  *         <i>AWS General Reference</i>. </p>
+ *          <p>This document describes HTTP operations. There is a separate <i>messaging</i> API
+ *       for managing Chat resources; see the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html"> Amazon IVS Chat Messaging API
+ *         Reference</a>.</p>
  *          <p>
  *             <b>Notes on terminology:</b>
  *          </p>
@@ -277,8 +364,12 @@ export interface IvschatClientResolvedConfig extends IvschatClientResolvedConfig
  *          <p>
  *             <b>Resources</b>
  *          </p>
- *          <p>The following resource is part of Amazon IVS Chat:</p>
+ *          <p>The following resources are part of Amazon IVS Chat:</p>
  *          <ul>
+ *             <li>
+ *                <p>
+ *                   <b>LoggingConfiguration</b> — A configuration that allows customers to store and record sent messages in a chat room. See the Logging Configuration endpoints for more information.</p>
+ *             </li>
  *             <li>
  *                <p>
  *                   <b>Room</b> — The central Amazon IVS Chat resource through
@@ -292,13 +383,12 @@ export interface IvschatClientResolvedConfig extends IvschatClientResolvedConfig
  *          <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag
  *       comprises a <i>key</i> and a <i>value</i>, both set by you. For
  *       example, you might set a tag as <code>topic:nature</code> to label a particular video
- *       category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for more information, including restrictions that apply to
- *       tags and "Tag naming limits and requirements"; Amazon IVS Chat has no service-specific
+ *       category. See <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html">Best practices and strategies</a> in <i>Tagging Amazon Web Services Resources and Tag Editor</i> for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no service-specific
  *       constraints beyond what is documented there.</p>
  *          <p>Tags can help you identify and organize your AWS resources. For example, you can use the
  *       same tag for different resources to indicate that they are related. You can also use tags to
  *       manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Access Tags</a>).</p>
- *          <p>The Amazon IVS Chat API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and
+ *          <p>The Amazon IVS Chat API has these tag-related operations: <a>TagResource</a>, <a>UntagResource</a>, and
  *       <a>ListTagsForResource</a>. The following resource supports tagging: Room.</p>
  *          <p>At most 50 tags can be applied to a resource.</p>
  *          <p>
@@ -320,7 +410,7 @@ export interface IvschatClientResolvedConfig extends IvschatClientResolvedConfig
  *             </li>
  *          </ul>
  *          <p>Users (viewers) connect to a room using secure access tokens that you create using the
- *         <a>CreateChatToken</a> endpoint through the AWS SDK. You call CreateChatToken for
+ *         <a>CreateChatToken</a> operation through the AWS SDK. You call CreateChatToken for
  *       every user’s chat session, passing identity and authorization information about the
  *       user.</p>
  *          <p>
@@ -352,93 +442,7 @@ export interface IvschatClientResolvedConfig extends IvschatClientResolvedConfig
  *       resource unambiguously across all of AWS, such as in IAM policies and API calls. For more
  *       information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names</a> in the <i>AWS General
  *           Reference</i>.</p>
- *          <p>
- *             <b>Messaging Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>DeleteMessage</a> — Sends an event to a specific room which
- *           directs clients to delete a specific message; that is, unrender it from view and delete it
- *           from the client’s chat history. This event’s <code>EventName</code> is
- *             <code>aws:DELETE_MESSAGE</code>. This replicates the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html">
- *             DeleteMessage</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DisconnectUser</a> — Disconnects all connections using a specified
- *           user ID from a room. This replicates the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html">
- *             DisconnectUser</a> WebSocket operation in the Amazon IVS Chat Messaging API.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>SendEvent</a> — Sends an event to a room. Use this within your
- *           application’s business logic to send events to clients of a room; e.g., to notify clients
- *           to change the way the chat UI is rendered.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Chat Token Endpoint</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>CreateChatToken</a> — Creates an encrypted token that is used to
- *           establish an individual WebSocket connection to a room. The token is valid for one minute,
- *           and a connection (session) established with the token is valid for the specified
- *           duration.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Room Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>CreateRoom</a> — Creates a room that allows clients to connect and
- *           pass messages.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>DeleteRoom</a> — Deletes the specified room.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>GetRoom</a> — Gets the specified room.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>ListRooms</a> — Gets summary information about all your rooms in
- *           the AWS region where the API request is processed. </p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>UpdateRoom</a> — Updates a room’s configuration.</p>
- *             </li>
- *          </ul>
- *          <p>
- *             <b>Tags Endpoints</b>
- *          </p>
- *          <ul>
- *             <li>
- *                <p>
- *                   <a>ListTagsForResource</a> — Gets information about AWS tags for the
- *           specified ARN.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>TagResource</a> — Adds or updates tags for the AWS resource with
- *           the specified ARN.</p>
- *             </li>
- *             <li>
- *                <p>
- *                   <a>UntagResource</a> — Removes tags from the resource with the
- *           specified ARN.</p>
- *             </li>
- *          </ul>
- *          <p>All the above are HTTP operations. There is a separate <i>messaging</i> API
- *       for managing Chat resources; see the <a href="https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html"> Amazon IVS Chat Messaging API
- *         Reference</a>.</p>
+ * @public
  */
 export class IvschatClient extends __Client<
   __HttpHandlerOptions,
@@ -451,23 +455,36 @@ export class IvschatClient extends __Client<
    */
   readonly config: IvschatClientResolvedConfig;
 
-  constructor(configuration: IvschatClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<IvschatClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
     this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultIvschatHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: IvschatClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

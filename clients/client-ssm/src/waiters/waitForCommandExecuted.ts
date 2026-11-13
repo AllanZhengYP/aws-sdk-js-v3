@@ -1,18 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetCommandInvocationCommand, GetCommandInvocationCommandInput } from "../commands/GetCommandInvocationCommand";
-import { SSMClient } from "../SSMClient";
+import {
+  type GetCommandInvocationCommandInput,
+  type GetCommandInvocationCommandOutput,
+  GetCommandInvocationCommand,
+} from "../commands/GetCommandInvocationCommand";
+import type { SSMServiceException } from "../models/SSMServiceException";
+import type { SSMClient } from "../SSMClient";
 
-const checkState = async (client: SSMClient, input: GetCommandInvocationCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: SSMClient, input: GetCommandInvocationCommandInput): Promise<WaiterResult<GetCommandInvocationCommandOutput | SSMServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetCommandInvocationCommand(input));
+    let result: GetCommandInvocationCommandOutput & any = await client.send(new GetCommandInvocationCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "Pending") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -20,7 +31,7 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "InProgress") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -28,7 +39,7 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "Delayed") {
         return { state: WaiterState.RETRY, reason };
       }
@@ -36,7 +47,7 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "Success") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -44,7 +55,7 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "Cancelled") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -52,7 +63,7 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "TimedOut") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -60,7 +71,7 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -68,14 +79,14 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
     try {
       const returnComparator = () => {
         return result.Status;
-      };
+      }
       if (returnComparator() === "Cancelling") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "InvocationDoesNotExist") {
+    if (exception.name === "InvocationDoesNotExist") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -88,7 +99,7 @@ const checkState = async (client: SSMClient, input: GetCommandInvocationCommandI
 export const waitForCommandExecuted = async (
   params: WaiterConfiguration<SSMClient>,
   input: GetCommandInvocationCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetCommandInvocationCommandOutput | SSMServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -100,8 +111,8 @@ export const waitForCommandExecuted = async (
 export const waitUntilCommandExecuted = async (
   params: WaiterConfiguration<SSMClient>,
   input: GetCommandInvocationCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetCommandInvocationCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetCommandInvocationCommandOutput>;
 };

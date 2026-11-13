@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import {
-  ListWhatIfForecastsRequest,
-  ListWhatIfForecastsRequestFilterSensitiveLog,
-  ListWhatIfForecastsResponse,
-  ListWhatIfForecastsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListWhatIfForecastsCommand,
-  serializeAws_json1_1ListWhatIfForecastsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListWhatIfForecastsRequest, ListWhatIfForecastsResponse } from "../models/models_0";
+import { ListWhatIfForecasts$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListWhatIfForecastsCommand}.
+ */
 export interface ListWhatIfForecastsCommandInput extends ListWhatIfForecastsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListWhatIfForecastsCommand}.
+ */
 export interface ListWhatIfForecastsCommandOutput extends ListWhatIfForecastsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,73 @@ export interface ListWhatIfForecastsCommandOutput extends ListWhatIfForecastsRes
  * ```javascript
  * import { ForecastClient, ListWhatIfForecastsCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, ListWhatIfForecastsCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // ListWhatIfForecastsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Filters: [ // Filters
+ *     { // Filter
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *       Condition: "IS" || "IS_NOT", // required
+ *     },
+ *   ],
+ * };
  * const command = new ListWhatIfForecastsCommand(input);
  * const response = await client.send(command);
+ * // { // ListWhatIfForecastsResponse
+ * //   WhatIfForecasts: [ // WhatIfForecasts
+ * //     { // WhatIfForecastSummary
+ * //       WhatIfForecastArn: "STRING_VALUE",
+ * //       WhatIfForecastName: "STRING_VALUE",
+ * //       WhatIfAnalysisArn: "STRING_VALUE",
+ * //       Status: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       LastModificationTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListWhatIfForecastsCommandInput - {@link ListWhatIfForecastsCommandInput}
+ * @returns {@link ListWhatIfForecastsCommandOutput}
  * @see {@link ListWhatIfForecastsCommandInput} for command's `input` shape.
  * @see {@link ListWhatIfForecastsCommandOutput} for command's `response` shape.
  * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid. Tokens expire after 24 hours.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class ListWhatIfForecastsCommand extends $Command<
-  ListWhatIfForecastsCommandInput,
-  ListWhatIfForecastsCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListWhatIfForecastsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListWhatIfForecastsCommandInput, ListWhatIfForecastsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "ListWhatIfForecastsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListWhatIfForecastsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListWhatIfForecastsResponseFilterSensitiveLog,
+export class ListWhatIfForecastsCommand extends command<ListWhatIfForecastsCommandInput, ListWhatIfForecastsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListWhatIfForecasts",
+  ListWhatIfForecasts$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListWhatIfForecastsRequest;
+      output: ListWhatIfForecastsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListWhatIfForecastsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListWhatIfForecastsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListWhatIfForecastsCommandOutput> {
-    return deserializeAws_json1_1ListWhatIfForecastsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListWhatIfForecastsCommandInput;
+      output: ListWhatIfForecastsCommandOutput;
+    };
+  };
 }

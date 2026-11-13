@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { KinesisVideoClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../KinesisVideoClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeNotificationConfigurationInput,
-  DescribeNotificationConfigurationInputFilterSensitiveLog,
   DescribeNotificationConfigurationOutput,
-  DescribeNotificationConfigurationOutputFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeNotificationConfigurationCommand,
-  serializeAws_restJson1DescribeNotificationConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { DescribeNotificationConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeNotificationConfigurationCommand}.
+ */
 export interface DescribeNotificationConfigurationCommandInput extends DescribeNotificationConfigurationInput {}
-export interface DescribeNotificationConfigurationCommandOutput
-  extends DescribeNotificationConfigurationOutput,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeNotificationConfigurationCommand}.
+ */
+export interface DescribeNotificationConfigurationCommandOutput extends DescribeNotificationConfigurationOutput, __MetadataBearer {}
 
 /**
  * <p>Gets the <code>NotificationConfiguration</code> for a given Kinesis video stream.</p>
@@ -36,74 +32,66 @@ export interface DescribeNotificationConfigurationCommandOutput
  * ```javascript
  * import { KinesisVideoClient, DescribeNotificationConfigurationCommand } from "@aws-sdk/client-kinesis-video"; // ES Modules import
  * // const { KinesisVideoClient, DescribeNotificationConfigurationCommand } = require("@aws-sdk/client-kinesis-video"); // CommonJS import
+ * // import type { KinesisVideoClientConfig } from "@aws-sdk/client-kinesis-video";
+ * const config = {}; // type is KinesisVideoClientConfig
  * const client = new KinesisVideoClient(config);
+ * const input = { // DescribeNotificationConfigurationInput
+ *   StreamName: "STRING_VALUE",
+ *   StreamARN: "STRING_VALUE",
+ * };
  * const command = new DescribeNotificationConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeNotificationConfigurationOutput
+ * //   NotificationConfiguration: { // NotificationConfiguration
+ * //     Status: "ENABLED" || "DISABLED", // required
+ * //     DestinationConfig: { // NotificationDestinationConfig
+ * //       Uri: "STRING_VALUE", // required
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeNotificationConfigurationCommandInput - {@link DescribeNotificationConfigurationCommandInput}
+ * @returns {@link DescribeNotificationConfigurationCommandOutput}
  * @see {@link DescribeNotificationConfigurationCommandInput} for command's `input` shape.
  * @see {@link DescribeNotificationConfigurationCommandOutput} for command's `response` shape.
  * @see {@link KinesisVideoClientResolvedConfig | config} for KinesisVideoClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have required permissions to perform this operation.</p>
+ *
+ * @throws {@link ClientLimitExceededException} (client fault)
+ *  <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
+ *             allowed client calls. Try making the call later.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>The value for this input parameter is invalid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Amazon Kinesis Video Streams can't find the stream that you specified.</p>
+ *
+ * @throws {@link KinesisVideoServiceException}
+ * <p>Base exception class for all service exceptions from KinesisVideo service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeNotificationConfigurationCommand extends $Command<
-  DescribeNotificationConfigurationCommandInput,
-  DescribeNotificationConfigurationCommandOutput,
-  KinesisVideoClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeNotificationConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: KinesisVideoClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeNotificationConfigurationCommandInput, DescribeNotificationConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "KinesisVideoClient";
-    const commandName = "DescribeNotificationConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeNotificationConfigurationInputFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeNotificationConfigurationOutputFilterSensitiveLog,
+export class DescribeNotificationConfigurationCommand extends command<DescribeNotificationConfigurationCommandInput, DescribeNotificationConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeNotificationConfiguration",
+  DescribeNotificationConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeNotificationConfigurationInput;
+      output: DescribeNotificationConfigurationOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeNotificationConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeNotificationConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeNotificationConfigurationCommandOutput> {
-    return deserializeAws_restJson1DescribeNotificationConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeNotificationConfigurationCommandInput;
+      output: DescribeNotificationConfigurationCommandOutput;
+    };
+  };
 }

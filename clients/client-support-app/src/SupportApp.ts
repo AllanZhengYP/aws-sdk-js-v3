@@ -1,52 +1,287 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateSlackChannelConfigurationCommandInput,
+  type CreateSlackChannelConfigurationCommandOutput,
   CreateSlackChannelConfigurationCommand,
-  CreateSlackChannelConfigurationCommandInput,
-  CreateSlackChannelConfigurationCommandOutput,
 } from "./commands/CreateSlackChannelConfigurationCommand";
 import {
+  type DeleteAccountAliasCommandInput,
+  type DeleteAccountAliasCommandOutput,
   DeleteAccountAliasCommand,
-  DeleteAccountAliasCommandInput,
-  DeleteAccountAliasCommandOutput,
 } from "./commands/DeleteAccountAliasCommand";
 import {
+  type DeleteSlackChannelConfigurationCommandInput,
+  type DeleteSlackChannelConfigurationCommandOutput,
   DeleteSlackChannelConfigurationCommand,
-  DeleteSlackChannelConfigurationCommandInput,
-  DeleteSlackChannelConfigurationCommandOutput,
 } from "./commands/DeleteSlackChannelConfigurationCommand";
 import {
+  type DeleteSlackWorkspaceConfigurationCommandInput,
+  type DeleteSlackWorkspaceConfigurationCommandOutput,
   DeleteSlackWorkspaceConfigurationCommand,
-  DeleteSlackWorkspaceConfigurationCommandInput,
-  DeleteSlackWorkspaceConfigurationCommandOutput,
 } from "./commands/DeleteSlackWorkspaceConfigurationCommand";
 import {
+  type GetAccountAliasCommandInput,
+  type GetAccountAliasCommandOutput,
   GetAccountAliasCommand,
-  GetAccountAliasCommandInput,
-  GetAccountAliasCommandOutput,
 } from "./commands/GetAccountAliasCommand";
 import {
+  type ListSlackChannelConfigurationsCommandInput,
+  type ListSlackChannelConfigurationsCommandOutput,
   ListSlackChannelConfigurationsCommand,
-  ListSlackChannelConfigurationsCommandInput,
-  ListSlackChannelConfigurationsCommandOutput,
 } from "./commands/ListSlackChannelConfigurationsCommand";
 import {
+  type ListSlackWorkspaceConfigurationsCommandInput,
+  type ListSlackWorkspaceConfigurationsCommandOutput,
   ListSlackWorkspaceConfigurationsCommand,
-  ListSlackWorkspaceConfigurationsCommandInput,
-  ListSlackWorkspaceConfigurationsCommandOutput,
 } from "./commands/ListSlackWorkspaceConfigurationsCommand";
 import {
+  type PutAccountAliasCommandInput,
+  type PutAccountAliasCommandOutput,
   PutAccountAliasCommand,
-  PutAccountAliasCommandInput,
-  PutAccountAliasCommandOutput,
 } from "./commands/PutAccountAliasCommand";
 import {
+  type RegisterSlackWorkspaceForOrganizationCommandInput,
+  type RegisterSlackWorkspaceForOrganizationCommandOutput,
+  RegisterSlackWorkspaceForOrganizationCommand,
+} from "./commands/RegisterSlackWorkspaceForOrganizationCommand";
+import {
+  type UpdateSlackChannelConfigurationCommandInput,
+  type UpdateSlackChannelConfigurationCommandOutput,
   UpdateSlackChannelConfigurationCommand,
-  UpdateSlackChannelConfigurationCommandInput,
-  UpdateSlackChannelConfigurationCommandOutput,
 } from "./commands/UpdateSlackChannelConfigurationCommand";
+import { paginateListSlackChannelConfigurations } from "./pagination/ListSlackChannelConfigurationsPaginator";
+import { paginateListSlackWorkspaceConfigurations } from "./pagination/ListSlackWorkspaceConfigurationsPaginator";
 import { SupportAppClient } from "./SupportAppClient";
+
+const commands = {
+  CreateSlackChannelConfigurationCommand,
+  DeleteAccountAliasCommand,
+  DeleteSlackChannelConfigurationCommand,
+  DeleteSlackWorkspaceConfigurationCommand,
+  GetAccountAliasCommand,
+  ListSlackChannelConfigurationsCommand,
+  ListSlackWorkspaceConfigurationsCommand,
+  PutAccountAliasCommand,
+  RegisterSlackWorkspaceForOrganizationCommand,
+  UpdateSlackChannelConfigurationCommand,
+};
+const paginators = {
+  paginateListSlackChannelConfigurations,
+  paginateListSlackWorkspaceConfigurations,
+};
+
+/**
+ * @public
+ */
+export interface SupportAppRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface SupportApp {
+  /**
+   * @see {@link CreateSlackChannelConfigurationCommand}
+   */
+  createSlackChannelConfiguration(
+    args: CreateSlackChannelConfigurationCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<CreateSlackChannelConfigurationCommandOutput>;
+  createSlackChannelConfiguration(
+    args: CreateSlackChannelConfigurationCommandInput,
+    cb: (err: any, data?: CreateSlackChannelConfigurationCommandOutput) => void
+  ): void;
+  createSlackChannelConfiguration(
+    args: CreateSlackChannelConfigurationCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: CreateSlackChannelConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAccountAliasCommand}
+   */
+  deleteAccountAlias(): Promise<DeleteAccountAliasCommandOutput>;
+  deleteAccountAlias(
+    args: DeleteAccountAliasCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<DeleteAccountAliasCommandOutput>;
+  deleteAccountAlias(
+    args: DeleteAccountAliasCommandInput,
+    cb: (err: any, data?: DeleteAccountAliasCommandOutput) => void
+  ): void;
+  deleteAccountAlias(
+    args: DeleteAccountAliasCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: DeleteAccountAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSlackChannelConfigurationCommand}
+   */
+  deleteSlackChannelConfiguration(
+    args: DeleteSlackChannelConfigurationCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<DeleteSlackChannelConfigurationCommandOutput>;
+  deleteSlackChannelConfiguration(
+    args: DeleteSlackChannelConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSlackChannelConfigurationCommandOutput) => void
+  ): void;
+  deleteSlackChannelConfiguration(
+    args: DeleteSlackChannelConfigurationCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: DeleteSlackChannelConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSlackWorkspaceConfigurationCommand}
+   */
+  deleteSlackWorkspaceConfiguration(
+    args: DeleteSlackWorkspaceConfigurationCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<DeleteSlackWorkspaceConfigurationCommandOutput>;
+  deleteSlackWorkspaceConfiguration(
+    args: DeleteSlackWorkspaceConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSlackWorkspaceConfigurationCommandOutput) => void
+  ): void;
+  deleteSlackWorkspaceConfiguration(
+    args: DeleteSlackWorkspaceConfigurationCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: DeleteSlackWorkspaceConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAccountAliasCommand}
+   */
+  getAccountAlias(): Promise<GetAccountAliasCommandOutput>;
+  getAccountAlias(
+    args: GetAccountAliasCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<GetAccountAliasCommandOutput>;
+  getAccountAlias(
+    args: GetAccountAliasCommandInput,
+    cb: (err: any, data?: GetAccountAliasCommandOutput) => void
+  ): void;
+  getAccountAlias(
+    args: GetAccountAliasCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: GetAccountAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSlackChannelConfigurationsCommand}
+   */
+  listSlackChannelConfigurations(): Promise<ListSlackChannelConfigurationsCommandOutput>;
+  listSlackChannelConfigurations(
+    args: ListSlackChannelConfigurationsCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<ListSlackChannelConfigurationsCommandOutput>;
+  listSlackChannelConfigurations(
+    args: ListSlackChannelConfigurationsCommandInput,
+    cb: (err: any, data?: ListSlackChannelConfigurationsCommandOutput) => void
+  ): void;
+  listSlackChannelConfigurations(
+    args: ListSlackChannelConfigurationsCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: ListSlackChannelConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSlackWorkspaceConfigurationsCommand}
+   */
+  listSlackWorkspaceConfigurations(): Promise<ListSlackWorkspaceConfigurationsCommandOutput>;
+  listSlackWorkspaceConfigurations(
+    args: ListSlackWorkspaceConfigurationsCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<ListSlackWorkspaceConfigurationsCommandOutput>;
+  listSlackWorkspaceConfigurations(
+    args: ListSlackWorkspaceConfigurationsCommandInput,
+    cb: (err: any, data?: ListSlackWorkspaceConfigurationsCommandOutput) => void
+  ): void;
+  listSlackWorkspaceConfigurations(
+    args: ListSlackWorkspaceConfigurationsCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: ListSlackWorkspaceConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAccountAliasCommand}
+   */
+  putAccountAlias(
+    args: PutAccountAliasCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<PutAccountAliasCommandOutput>;
+  putAccountAlias(
+    args: PutAccountAliasCommandInput,
+    cb: (err: any, data?: PutAccountAliasCommandOutput) => void
+  ): void;
+  putAccountAlias(
+    args: PutAccountAliasCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: PutAccountAliasCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterSlackWorkspaceForOrganizationCommand}
+   */
+  registerSlackWorkspaceForOrganization(
+    args: RegisterSlackWorkspaceForOrganizationCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<RegisterSlackWorkspaceForOrganizationCommandOutput>;
+  registerSlackWorkspaceForOrganization(
+    args: RegisterSlackWorkspaceForOrganizationCommandInput,
+    cb: (err: any, data?: RegisterSlackWorkspaceForOrganizationCommandOutput) => void
+  ): void;
+  registerSlackWorkspaceForOrganization(
+    args: RegisterSlackWorkspaceForOrganizationCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: RegisterSlackWorkspaceForOrganizationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSlackChannelConfigurationCommand}
+   */
+  updateSlackChannelConfiguration(
+    args: UpdateSlackChannelConfigurationCommandInput,
+    options?: SupportAppRequestOptions
+  ): Promise<UpdateSlackChannelConfigurationCommandOutput>;
+  updateSlackChannelConfiguration(
+    args: UpdateSlackChannelConfigurationCommandInput,
+    cb: (err: any, data?: UpdateSlackChannelConfigurationCommandOutput) => void
+  ): void;
+  updateSlackChannelConfiguration(
+    args: UpdateSlackChannelConfigurationCommandInput,
+    options: SupportAppRequestOptions,
+    cb: (err: any, data?: UpdateSlackChannelConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSlackChannelConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSlackChannelConfigurationsCommandOutput}.
+   */
+  paginateListSlackChannelConfigurations(
+    args?: ListSlackChannelConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSlackChannelConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListSlackWorkspaceConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSlackWorkspaceConfigurationsCommandOutput}.
+   */
+  paginateListSlackWorkspaceConfigurations(
+    args?: ListSlackWorkspaceConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSlackWorkspaceConfigurationsCommandOutput>;
+}
 
 /**
  * <fullname>Amazon Web Services Support App in Slack</fullname>
@@ -92,7 +327,6 @@ import { SupportAppClient } from "./SupportAppClient";
  *          <p>You can also use the Amazon Web Services Management Console instead of the Amazon Web Services Support App API to manage your Slack
  *       configurations. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html">Authorize a
  *         Slack workspace to enable the Amazon Web Services Support App</a>.</p>
- *
  *          <note>
  *             <ul>
  *                <li>
@@ -104,319 +338,7 @@ import { SupportAppClient } from "./SupportAppClient";
  *                </li>
  *             </ul>
  *          </note>
+ * @public
  */
-export class SupportApp extends SupportAppClient {
-  /**
-   * <p>Creates a Slack channel configuration for your Amazon Web Services account.</p>
-   *          <note>
-   *             <ul>
-   *                <li>
-   *                   <p>You can add up to 5 Slack workspaces for your account.</p>
-   *                </li>
-   *                <li>
-   *                   <p>You can add up to 20 Slack channels for your account.</p>
-   *                </li>
-   *             </ul>
-   *          </note>
-   *          <p>A Slack channel can have up to 100 Amazon Web Services accounts. This means that only 100 accounts can
-   *       add the same Slack channel to the Amazon Web Services Support App. We recommend that you only add the accounts that
-   *       you need to manage support cases for your organization. This can reduce the notifications
-   *       about case updates that you receive in the Slack channel.</p>
-   *          <note>
-   *             <p>We recommend that you choose a private Slack channel so that only members in that
-   *         channel have read and write access to your support cases. Anyone in your Slack channel can
-   *         create, update, or resolve support cases for your account. Users require an invitation to
-   *         join private channels. </p>
-   *          </note>
-   */
-  public createSlackChannelConfiguration(
-    args: CreateSlackChannelConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSlackChannelConfigurationCommandOutput>;
-  public createSlackChannelConfiguration(
-    args: CreateSlackChannelConfigurationCommandInput,
-    cb: (err: any, data?: CreateSlackChannelConfigurationCommandOutput) => void
-  ): void;
-  public createSlackChannelConfiguration(
-    args: CreateSlackChannelConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSlackChannelConfigurationCommandOutput) => void
-  ): void;
-  public createSlackChannelConfiguration(
-    args: CreateSlackChannelConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSlackChannelConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: CreateSlackChannelConfigurationCommandOutput) => void
-  ): Promise<CreateSlackChannelConfigurationCommandOutput> | void {
-    const command = new CreateSlackChannelConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an alias for an Amazon Web Services account ID. The alias appears in the Amazon Web Services Support App page of the
-   *       Amazon Web Services Support Center. The alias also appears in Slack messages from the Amazon Web Services Support App.</p>
-   */
-  public deleteAccountAlias(
-    args: DeleteAccountAliasCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteAccountAliasCommandOutput>;
-  public deleteAccountAlias(
-    args: DeleteAccountAliasCommandInput,
-    cb: (err: any, data?: DeleteAccountAliasCommandOutput) => void
-  ): void;
-  public deleteAccountAlias(
-    args: DeleteAccountAliasCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAccountAliasCommandOutput) => void
-  ): void;
-  public deleteAccountAlias(
-    args: DeleteAccountAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAccountAliasCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAccountAliasCommandOutput) => void
-  ): Promise<DeleteAccountAliasCommandOutput> | void {
-    const command = new DeleteAccountAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Slack channel configuration from your Amazon Web Services account. This operation doesn't
-   *       delete your Slack channel.</p>
-   */
-  public deleteSlackChannelConfiguration(
-    args: DeleteSlackChannelConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSlackChannelConfigurationCommandOutput>;
-  public deleteSlackChannelConfiguration(
-    args: DeleteSlackChannelConfigurationCommandInput,
-    cb: (err: any, data?: DeleteSlackChannelConfigurationCommandOutput) => void
-  ): void;
-  public deleteSlackChannelConfiguration(
-    args: DeleteSlackChannelConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSlackChannelConfigurationCommandOutput) => void
-  ): void;
-  public deleteSlackChannelConfiguration(
-    args: DeleteSlackChannelConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSlackChannelConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSlackChannelConfigurationCommandOutput) => void
-  ): Promise<DeleteSlackChannelConfigurationCommandOutput> | void {
-    const command = new DeleteSlackChannelConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Slack workspace configuration from your Amazon Web Services account. This operation doesn't
-   *       delete your Slack workspace.</p>
-   */
-  public deleteSlackWorkspaceConfiguration(
-    args: DeleteSlackWorkspaceConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSlackWorkspaceConfigurationCommandOutput>;
-  public deleteSlackWorkspaceConfiguration(
-    args: DeleteSlackWorkspaceConfigurationCommandInput,
-    cb: (err: any, data?: DeleteSlackWorkspaceConfigurationCommandOutput) => void
-  ): void;
-  public deleteSlackWorkspaceConfiguration(
-    args: DeleteSlackWorkspaceConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSlackWorkspaceConfigurationCommandOutput) => void
-  ): void;
-  public deleteSlackWorkspaceConfiguration(
-    args: DeleteSlackWorkspaceConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSlackWorkspaceConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSlackWorkspaceConfigurationCommandOutput) => void
-  ): Promise<DeleteSlackWorkspaceConfigurationCommandOutput> | void {
-    const command = new DeleteSlackWorkspaceConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Retrieves the alias from an Amazon Web Services account ID. The alias appears in the Amazon Web Services Support App page of
-   *       the Amazon Web Services Support Center. The alias also appears in Slack messages from the Amazon Web Services Support App.</p>
-   */
-  public getAccountAlias(
-    args: GetAccountAliasCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetAccountAliasCommandOutput>;
-  public getAccountAlias(
-    args: GetAccountAliasCommandInput,
-    cb: (err: any, data?: GetAccountAliasCommandOutput) => void
-  ): void;
-  public getAccountAlias(
-    args: GetAccountAliasCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAccountAliasCommandOutput) => void
-  ): void;
-  public getAccountAlias(
-    args: GetAccountAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAccountAliasCommandOutput) => void),
-    cb?: (err: any, data?: GetAccountAliasCommandOutput) => void
-  ): Promise<GetAccountAliasCommandOutput> | void {
-    const command = new GetAccountAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the Slack channel configurations for an Amazon Web Services account.</p>
-   */
-  public listSlackChannelConfigurations(
-    args: ListSlackChannelConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSlackChannelConfigurationsCommandOutput>;
-  public listSlackChannelConfigurations(
-    args: ListSlackChannelConfigurationsCommandInput,
-    cb: (err: any, data?: ListSlackChannelConfigurationsCommandOutput) => void
-  ): void;
-  public listSlackChannelConfigurations(
-    args: ListSlackChannelConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSlackChannelConfigurationsCommandOutput) => void
-  ): void;
-  public listSlackChannelConfigurations(
-    args: ListSlackChannelConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSlackChannelConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListSlackChannelConfigurationsCommandOutput) => void
-  ): Promise<ListSlackChannelConfigurationsCommandOutput> | void {
-    const command = new ListSlackChannelConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the Slack workspace configurations for an Amazon Web Services account.</p>
-   */
-  public listSlackWorkspaceConfigurations(
-    args: ListSlackWorkspaceConfigurationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSlackWorkspaceConfigurationsCommandOutput>;
-  public listSlackWorkspaceConfigurations(
-    args: ListSlackWorkspaceConfigurationsCommandInput,
-    cb: (err: any, data?: ListSlackWorkspaceConfigurationsCommandOutput) => void
-  ): void;
-  public listSlackWorkspaceConfigurations(
-    args: ListSlackWorkspaceConfigurationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSlackWorkspaceConfigurationsCommandOutput) => void
-  ): void;
-  public listSlackWorkspaceConfigurations(
-    args: ListSlackWorkspaceConfigurationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSlackWorkspaceConfigurationsCommandOutput) => void),
-    cb?: (err: any, data?: ListSlackWorkspaceConfigurationsCommandOutput) => void
-  ): Promise<ListSlackWorkspaceConfigurationsCommandOutput> | void {
-    const command = new ListSlackWorkspaceConfigurationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates an individual alias for each Amazon Web Services account ID. The alias appears in the
-   *       Amazon Web Services Support App page of the Amazon Web Services Support Center. The alias also appears in Slack messages from the
-   *       Amazon Web Services Support App.</p>
-   */
-  public putAccountAlias(
-    args: PutAccountAliasCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutAccountAliasCommandOutput>;
-  public putAccountAlias(
-    args: PutAccountAliasCommandInput,
-    cb: (err: any, data?: PutAccountAliasCommandOutput) => void
-  ): void;
-  public putAccountAlias(
-    args: PutAccountAliasCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutAccountAliasCommandOutput) => void
-  ): void;
-  public putAccountAlias(
-    args: PutAccountAliasCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutAccountAliasCommandOutput) => void),
-    cb?: (err: any, data?: PutAccountAliasCommandOutput) => void
-  ): Promise<PutAccountAliasCommandOutput> | void {
-    const command = new PutAccountAliasCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the configuration for a Slack channel, such as case update notifications.</p>
-   */
-  public updateSlackChannelConfiguration(
-    args: UpdateSlackChannelConfigurationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSlackChannelConfigurationCommandOutput>;
-  public updateSlackChannelConfiguration(
-    args: UpdateSlackChannelConfigurationCommandInput,
-    cb: (err: any, data?: UpdateSlackChannelConfigurationCommandOutput) => void
-  ): void;
-  public updateSlackChannelConfiguration(
-    args: UpdateSlackChannelConfigurationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSlackChannelConfigurationCommandOutput) => void
-  ): void;
-  public updateSlackChannelConfiguration(
-    args: UpdateSlackChannelConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSlackChannelConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSlackChannelConfigurationCommandOutput) => void
-  ): Promise<UpdateSlackChannelConfigurationCommandOutput> | void {
-    const command = new UpdateSlackChannelConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class SupportApp extends SupportAppClient implements SupportApp {}
+createAggregatedClient(commands, SupportApp, { paginators });

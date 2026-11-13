@@ -1,103 +1,114 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  QueryLineageRequest,
-  QueryLineageRequestFilterSensitiveLog,
-  QueryLineageResponse,
-  QueryLineageResponseFilterSensitiveLog,
-} from "../models/models_3";
-import {
-  deserializeAws_json1_1QueryLineageCommand,
-  serializeAws_json1_1QueryLineageCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { QueryLineageRequest, QueryLineageResponse } from "../models/models_4";
+import { QueryLineage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link QueryLineageCommand}.
+ */
 export interface QueryLineageCommandInput extends QueryLineageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link QueryLineageCommand}.
+ */
 export interface QueryLineageCommandOutput extends QueryLineageResponse, __MetadataBearer {}
 
 /**
- * <p>Use this action to inspect your lineage and discover relationships between entities.
- *          For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html">
- *             Querying Lineage Entities</a> in the <i>Amazon SageMaker Developer Guide</i>.</p>
+ * <p>Use this action to inspect your lineage and discover relationships between entities. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html"> Querying Lineage Entities</a> in the <i>Amazon SageMaker Developer Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { SageMakerClient, QueryLineageCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, QueryLineageCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // QueryLineageRequest
+ *   StartArns: [ // QueryLineageStartArns
+ *     "STRING_VALUE",
+ *   ],
+ *   Direction: "Both" || "Ascendants" || "Descendants",
+ *   IncludeEdges: true || false,
+ *   Filters: { // QueryFilters
+ *     Types: [ // QueryTypes
+ *       "STRING_VALUE",
+ *     ],
+ *     LineageTypes: [ // QueryLineageTypes
+ *       "TrialComponent" || "Artifact" || "Context" || "Action",
+ *     ],
+ *     CreatedBefore: new Date("TIMESTAMP"),
+ *     CreatedAfter: new Date("TIMESTAMP"),
+ *     ModifiedBefore: new Date("TIMESTAMP"),
+ *     ModifiedAfter: new Date("TIMESTAMP"),
+ *     Properties: { // QueryProperties
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *   },
+ *   MaxDepth: Number("int"),
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new QueryLineageCommand(input);
  * const response = await client.send(command);
+ * // { // QueryLineageResponse
+ * //   Vertices: [ // Vertices
+ * //     { // Vertex
+ * //       Arn: "STRING_VALUE",
+ * //       Type: "STRING_VALUE",
+ * //       LineageType: "TrialComponent" || "Artifact" || "Context" || "Action",
+ * //     },
+ * //   ],
+ * //   Edges: [ // Edges
+ * //     { // Edge
+ * //       SourceArn: "STRING_VALUE",
+ * //       DestinationArn: "STRING_VALUE",
+ * //       AssociationType: "ContributedTo" || "AssociatedWith" || "DerivedFrom" || "Produced" || "SameAs",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param QueryLineageCommandInput - {@link QueryLineageCommandInput}
+ * @returns {@link QueryLineageCommandOutput}
  * @see {@link QueryLineageCommandInput} for command's `input` shape.
  * @see {@link QueryLineageCommandOutput} for command's `response` shape.
  * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class QueryLineageCommand extends $Command<
-  QueryLineageCommandInput,
-  QueryLineageCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: QueryLineageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<QueryLineageCommandInput, QueryLineageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "QueryLineageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: QueryLineageRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: QueryLineageResponseFilterSensitiveLog,
+export class QueryLineageCommand extends command<QueryLineageCommandInput, QueryLineageCommandOutput>(
+  _ep0,
+  _mw0,
+  "QueryLineage",
+  QueryLineage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: QueryLineageRequest;
+      output: QueryLineageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: QueryLineageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1QueryLineageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<QueryLineageCommandOutput> {
-    return deserializeAws_json1_1QueryLineageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: QueryLineageCommandInput;
+      output: QueryLineageCommandOutput;
+    };
+  };
 }

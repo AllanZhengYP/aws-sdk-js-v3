@@ -1,35 +1,31 @@
-export * from "./DescribeClusterDbRevisionsPaginator";
-
-export * from "./DescribeClusterParameterGroupsPaginator";
-
-export * from "./DescribeClusterParametersPaginator";
-
-export * from "./DescribeClusterSecurityGroupsPaginator";
-
-export * from "./DescribeClusterSnapshotsPaginator";
-
-export * from "./DescribeClusterSubnetGroupsPaginator";
-
-export * from "./DescribeClusterTracksPaginator";
-
-export * from "./DescribeClusterVersionsPaginator";
-
-export * from "./DescribeClustersPaginator";
-
-export * from "./DescribeDataSharesForConsumerPaginator";
 // smithy-typescript generated code
 export * from "./Interfaces";
-export * from "./DescribeDataSharesForProducerPaginator";
+export * from "./DescribeClusterDbRevisionsPaginator";
+export * from "./DescribeClusterParameterGroupsPaginator";
+export * from "./DescribeClusterParametersPaginator";
+export * from "./DescribeClustersPaginator";
+export * from "./DescribeClusterSecurityGroupsPaginator";
+export * from "./DescribeClusterSnapshotsPaginator";
+export * from "./DescribeClusterSubnetGroupsPaginator";
+export * from "./DescribeClusterTracksPaginator";
+export * from "./DescribeClusterVersionsPaginator";
+export * from "./DescribeCustomDomainAssociationsPaginator";
 export * from "./DescribeDataSharesPaginator";
+export * from "./DescribeDataSharesForConsumerPaginator";
+export * from "./DescribeDataSharesForProducerPaginator";
 export * from "./DescribeDefaultClusterParametersPaginator";
 export * from "./DescribeEndpointAccessPaginator";
 export * from "./DescribeEndpointAuthorizationPaginator";
-export * from "./DescribeEventSubscriptionsPaginator";
 export * from "./DescribeEventsPaginator";
+export * from "./DescribeEventSubscriptionsPaginator";
 export * from "./DescribeHsmClientCertificatesPaginator";
 export * from "./DescribeHsmConfigurationsPaginator";
+export * from "./DescribeInboundIntegrationsPaginator";
+export * from "./DescribeIntegrationsPaginator";
 export * from "./DescribeNodeConfigurationOptionsPaginator";
 export * from "./DescribeOrderableClusterOptionsPaginator";
+export * from "./DescribeQev2IdcApplicationsPaginator";
+export * from "./DescribeRedshiftIdcApplicationsPaginator";
 export * from "./DescribeReservedNodeExchangeStatusPaginator";
 export * from "./DescribeReservedNodeOfferingsPaginator";
 export * from "./DescribeReservedNodesPaginator";
@@ -41,3 +37,4 @@ export * from "./DescribeTagsPaginator";
 export * from "./DescribeUsageLimitsPaginator";
 export * from "./GetReservedNodeExchangeConfigurationOptionsPaginator";
 export * from "./GetReservedNodeExchangeOfferingsPaginator";
+export * from "./ListRecommendationsPaginator";

@@ -1,65 +1,378 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateSuiteDefinitionCommandInput,
+  type CreateSuiteDefinitionCommandOutput,
   CreateSuiteDefinitionCommand,
-  CreateSuiteDefinitionCommandInput,
-  CreateSuiteDefinitionCommandOutput,
 } from "./commands/CreateSuiteDefinitionCommand";
 import {
+  type DeleteSuiteDefinitionCommandInput,
+  type DeleteSuiteDefinitionCommandOutput,
   DeleteSuiteDefinitionCommand,
-  DeleteSuiteDefinitionCommandInput,
-  DeleteSuiteDefinitionCommandOutput,
 } from "./commands/DeleteSuiteDefinitionCommand";
-import { GetEndpointCommand, GetEndpointCommandInput, GetEndpointCommandOutput } from "./commands/GetEndpointCommand";
 import {
+  type GetEndpointCommandInput,
+  type GetEndpointCommandOutput,
+  GetEndpointCommand,
+} from "./commands/GetEndpointCommand";
+import {
+  type GetSuiteDefinitionCommandInput,
+  type GetSuiteDefinitionCommandOutput,
   GetSuiteDefinitionCommand,
-  GetSuiteDefinitionCommandInput,
-  GetSuiteDefinitionCommandOutput,
 } from "./commands/GetSuiteDefinitionCommand";
-import { GetSuiteRunCommand, GetSuiteRunCommandInput, GetSuiteRunCommandOutput } from "./commands/GetSuiteRunCommand";
 import {
+  type GetSuiteRunCommandInput,
+  type GetSuiteRunCommandOutput,
+  GetSuiteRunCommand,
+} from "./commands/GetSuiteRunCommand";
+import {
+  type GetSuiteRunReportCommandInput,
+  type GetSuiteRunReportCommandOutput,
   GetSuiteRunReportCommand,
-  GetSuiteRunReportCommandInput,
-  GetSuiteRunReportCommandOutput,
 } from "./commands/GetSuiteRunReportCommand";
 import {
+  type ListSuiteDefinitionsCommandInput,
+  type ListSuiteDefinitionsCommandOutput,
   ListSuiteDefinitionsCommand,
-  ListSuiteDefinitionsCommandInput,
-  ListSuiteDefinitionsCommandOutput,
 } from "./commands/ListSuiteDefinitionsCommand";
 import {
+  type ListSuiteRunsCommandInput,
+  type ListSuiteRunsCommandOutput,
   ListSuiteRunsCommand,
-  ListSuiteRunsCommandInput,
-  ListSuiteRunsCommandOutput,
 } from "./commands/ListSuiteRunsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type StartSuiteRunCommandInput,
+  type StartSuiteRunCommandOutput,
   StartSuiteRunCommand,
-  StartSuiteRunCommandInput,
-  StartSuiteRunCommandOutput,
 } from "./commands/StartSuiteRunCommand";
 import {
+  type StopSuiteRunCommandInput,
+  type StopSuiteRunCommandOutput,
   StopSuiteRunCommand,
-  StopSuiteRunCommandInput,
-  StopSuiteRunCommandOutput,
 } from "./commands/StopSuiteRunCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateSuiteDefinitionCommandInput,
+  type UpdateSuiteDefinitionCommandOutput,
   UpdateSuiteDefinitionCommand,
-  UpdateSuiteDefinitionCommandInput,
-  UpdateSuiteDefinitionCommandOutput,
 } from "./commands/UpdateSuiteDefinitionCommand";
 import { IotDeviceAdvisorClient } from "./IotDeviceAdvisorClient";
+import { paginateListSuiteDefinitions } from "./pagination/ListSuiteDefinitionsPaginator";
+import { paginateListSuiteRuns } from "./pagination/ListSuiteRunsPaginator";
+
+const commands = {
+  CreateSuiteDefinitionCommand,
+  DeleteSuiteDefinitionCommand,
+  GetEndpointCommand,
+  GetSuiteDefinitionCommand,
+  GetSuiteRunCommand,
+  GetSuiteRunReportCommand,
+  ListSuiteDefinitionsCommand,
+  ListSuiteRunsCommand,
+  ListTagsForResourceCommand,
+  StartSuiteRunCommand,
+  StopSuiteRunCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateSuiteDefinitionCommand,
+};
+const paginators = {
+  paginateListSuiteDefinitions,
+  paginateListSuiteRuns,
+};
+
+/**
+ * @public
+ */
+export interface IotDeviceAdvisorRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface IotDeviceAdvisor {
+  /**
+   * @see {@link CreateSuiteDefinitionCommand}
+   */
+  createSuiteDefinition(
+    args: CreateSuiteDefinitionCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<CreateSuiteDefinitionCommandOutput>;
+  createSuiteDefinition(
+    args: CreateSuiteDefinitionCommandInput,
+    cb: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
+  ): void;
+  createSuiteDefinition(
+    args: CreateSuiteDefinitionCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSuiteDefinitionCommand}
+   */
+  deleteSuiteDefinition(
+    args: DeleteSuiteDefinitionCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<DeleteSuiteDefinitionCommandOutput>;
+  deleteSuiteDefinition(
+    args: DeleteSuiteDefinitionCommandInput,
+    cb: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
+  ): void;
+  deleteSuiteDefinition(
+    args: DeleteSuiteDefinitionCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEndpointCommand}
+   */
+  getEndpoint(): Promise<GetEndpointCommandOutput>;
+  getEndpoint(
+    args: GetEndpointCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<GetEndpointCommandOutput>;
+  getEndpoint(
+    args: GetEndpointCommandInput,
+    cb: (err: any, data?: GetEndpointCommandOutput) => void
+  ): void;
+  getEndpoint(
+    args: GetEndpointCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: GetEndpointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSuiteDefinitionCommand}
+   */
+  getSuiteDefinition(
+    args: GetSuiteDefinitionCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<GetSuiteDefinitionCommandOutput>;
+  getSuiteDefinition(
+    args: GetSuiteDefinitionCommandInput,
+    cb: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
+  ): void;
+  getSuiteDefinition(
+    args: GetSuiteDefinitionCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSuiteRunCommand}
+   */
+  getSuiteRun(
+    args: GetSuiteRunCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<GetSuiteRunCommandOutput>;
+  getSuiteRun(
+    args: GetSuiteRunCommandInput,
+    cb: (err: any, data?: GetSuiteRunCommandOutput) => void
+  ): void;
+  getSuiteRun(
+    args: GetSuiteRunCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: GetSuiteRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSuiteRunReportCommand}
+   */
+  getSuiteRunReport(
+    args: GetSuiteRunReportCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<GetSuiteRunReportCommandOutput>;
+  getSuiteRunReport(
+    args: GetSuiteRunReportCommandInput,
+    cb: (err: any, data?: GetSuiteRunReportCommandOutput) => void
+  ): void;
+  getSuiteRunReport(
+    args: GetSuiteRunReportCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: GetSuiteRunReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSuiteDefinitionsCommand}
+   */
+  listSuiteDefinitions(): Promise<ListSuiteDefinitionsCommandOutput>;
+  listSuiteDefinitions(
+    args: ListSuiteDefinitionsCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<ListSuiteDefinitionsCommandOutput>;
+  listSuiteDefinitions(
+    args: ListSuiteDefinitionsCommandInput,
+    cb: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
+  ): void;
+  listSuiteDefinitions(
+    args: ListSuiteDefinitionsCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSuiteRunsCommand}
+   */
+  listSuiteRuns(): Promise<ListSuiteRunsCommandOutput>;
+  listSuiteRuns(
+    args: ListSuiteRunsCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<ListSuiteRunsCommandOutput>;
+  listSuiteRuns(
+    args: ListSuiteRunsCommandInput,
+    cb: (err: any, data?: ListSuiteRunsCommandOutput) => void
+  ): void;
+  listSuiteRuns(
+    args: ListSuiteRunsCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: ListSuiteRunsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartSuiteRunCommand}
+   */
+  startSuiteRun(
+    args: StartSuiteRunCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<StartSuiteRunCommandOutput>;
+  startSuiteRun(
+    args: StartSuiteRunCommandInput,
+    cb: (err: any, data?: StartSuiteRunCommandOutput) => void
+  ): void;
+  startSuiteRun(
+    args: StartSuiteRunCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: StartSuiteRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopSuiteRunCommand}
+   */
+  stopSuiteRun(
+    args: StopSuiteRunCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<StopSuiteRunCommandOutput>;
+  stopSuiteRun(
+    args: StopSuiteRunCommandInput,
+    cb: (err: any, data?: StopSuiteRunCommandOutput) => void
+  ): void;
+  stopSuiteRun(
+    args: StopSuiteRunCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: StopSuiteRunCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSuiteDefinitionCommand}
+   */
+  updateSuiteDefinition(
+    args: UpdateSuiteDefinitionCommandInput,
+    options?: IotDeviceAdvisorRequestOptions
+  ): Promise<UpdateSuiteDefinitionCommandOutput>;
+  updateSuiteDefinition(
+    args: UpdateSuiteDefinitionCommandInput,
+    cb: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
+  ): void;
+  updateSuiteDefinition(
+    args: UpdateSuiteDefinitionCommandInput,
+    options: IotDeviceAdvisorRequestOptions,
+    cb: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSuiteDefinitionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSuiteDefinitionsCommandOutput}.
+   */
+  paginateListSuiteDefinitions(
+    args?: ListSuiteDefinitionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSuiteDefinitionsCommandOutput>;
+
+  /**
+   * @see {@link ListSuiteRunsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSuiteRunsCommandOutput}.
+   */
+  paginateListSuiteRuns(
+    args?: ListSuiteRunsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSuiteRunsCommandOutput>;
+}
 
 /**
  * <p>Amazon Web Services IoT Core Device Advisor is a cloud-based, fully managed test capability for validating IoT
@@ -71,446 +384,7 @@ import { IotDeviceAdvisorClient } from "./IotDeviceAdvisorClient";
  *             qualification reports to submit to the Amazon Web Services Partner Network to get your device
  *             qualified for the Amazon Web Services Partner Device Catalog without the need to send your device in
  *             and wait for it to be tested.</p>
+ * @public
  */
-export class IotDeviceAdvisor extends IotDeviceAdvisorClient {
-  /**
-   * <p>Creates a Device Advisor test suite.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateSuiteDefinition</a> action.</p>
-   */
-  public createSuiteDefinition(
-    args: CreateSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateSuiteDefinitionCommandOutput>;
-  public createSuiteDefinition(
-    args: CreateSuiteDefinitionCommandInput,
-    cb: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
-  ): void;
-  public createSuiteDefinition(
-    args: CreateSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
-  ): void;
-  public createSuiteDefinition(
-    args: CreateSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: CreateSuiteDefinitionCommandOutput) => void
-  ): Promise<CreateSuiteDefinitionCommandOutput> | void {
-    const command = new CreateSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Device Advisor test suite.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeleteSuiteDefinition</a> action.</p>
-   */
-  public deleteSuiteDefinition(
-    args: DeleteSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteSuiteDefinitionCommandOutput>;
-  public deleteSuiteDefinition(
-    args: DeleteSuiteDefinitionCommandInput,
-    cb: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
-  ): void;
-  public deleteSuiteDefinition(
-    args: DeleteSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
-  ): void;
-  public deleteSuiteDefinition(
-    args: DeleteSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSuiteDefinitionCommandOutput) => void
-  ): Promise<DeleteSuiteDefinitionCommandOutput> | void {
-    const command = new DeleteSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets information about an Device Advisor endpoint.</p>
-   */
-  public getEndpoint(args: GetEndpointCommandInput, options?: __HttpHandlerOptions): Promise<GetEndpointCommandOutput>;
-  public getEndpoint(args: GetEndpointCommandInput, cb: (err: any, data?: GetEndpointCommandOutput) => void): void;
-  public getEndpoint(
-    args: GetEndpointCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetEndpointCommandOutput) => void
-  ): void;
-  public getEndpoint(
-    args: GetEndpointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEndpointCommandOutput) => void),
-    cb?: (err: any, data?: GetEndpointCommandOutput) => void
-  ): Promise<GetEndpointCommandOutput> | void {
-    const command = new GetEndpointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets information about a Device Advisor test suite.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetSuiteDefinition</a> action.</p>
-   */
-  public getSuiteDefinition(
-    args: GetSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSuiteDefinitionCommandOutput>;
-  public getSuiteDefinition(
-    args: GetSuiteDefinitionCommandInput,
-    cb: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
-  ): void;
-  public getSuiteDefinition(
-    args: GetSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
-  ): void;
-  public getSuiteDefinition(
-    args: GetSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: GetSuiteDefinitionCommandOutput) => void
-  ): Promise<GetSuiteDefinitionCommandOutput> | void {
-    const command = new GetSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets information about a Device Advisor test suite run.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetSuiteRun</a> action.</p>
-   */
-  public getSuiteRun(args: GetSuiteRunCommandInput, options?: __HttpHandlerOptions): Promise<GetSuiteRunCommandOutput>;
-  public getSuiteRun(args: GetSuiteRunCommandInput, cb: (err: any, data?: GetSuiteRunCommandOutput) => void): void;
-  public getSuiteRun(
-    args: GetSuiteRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSuiteRunCommandOutput) => void
-  ): void;
-  public getSuiteRun(
-    args: GetSuiteRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSuiteRunCommandOutput) => void),
-    cb?: (err: any, data?: GetSuiteRunCommandOutput) => void
-  ): Promise<GetSuiteRunCommandOutput> | void {
-    const command = new GetSuiteRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets a report download link for a successful Device Advisor qualifying test suite run.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetSuiteRunReport</a> action.</p>
-   */
-  public getSuiteRunReport(
-    args: GetSuiteRunReportCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetSuiteRunReportCommandOutput>;
-  public getSuiteRunReport(
-    args: GetSuiteRunReportCommandInput,
-    cb: (err: any, data?: GetSuiteRunReportCommandOutput) => void
-  ): void;
-  public getSuiteRunReport(
-    args: GetSuiteRunReportCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetSuiteRunReportCommandOutput) => void
-  ): void;
-  public getSuiteRunReport(
-    args: GetSuiteRunReportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSuiteRunReportCommandOutput) => void),
-    cb?: (err: any, data?: GetSuiteRunReportCommandOutput) => void
-  ): Promise<GetSuiteRunReportCommandOutput> | void {
-    const command = new GetSuiteRunReportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the Device Advisor test suites you have created.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListSuiteDefinitions</a> action.</p>
-   */
-  public listSuiteDefinitions(
-    args: ListSuiteDefinitionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSuiteDefinitionsCommandOutput>;
-  public listSuiteDefinitions(
-    args: ListSuiteDefinitionsCommandInput,
-    cb: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
-  ): void;
-  public listSuiteDefinitions(
-    args: ListSuiteDefinitionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
-  ): void;
-  public listSuiteDefinitions(
-    args: ListSuiteDefinitionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSuiteDefinitionsCommandOutput) => void),
-    cb?: (err: any, data?: ListSuiteDefinitionsCommandOutput) => void
-  ): Promise<ListSuiteDefinitionsCommandOutput> | void {
-    const command = new ListSuiteDefinitionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists runs of the specified Device Advisor test suite. You can list all runs of the test
-   *             suite, or the runs of a specific version of the test suite.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListSuiteRuns</a> action.</p>
-   */
-  public listSuiteRuns(
-    args: ListSuiteRunsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSuiteRunsCommandOutput>;
-  public listSuiteRuns(
-    args: ListSuiteRunsCommandInput,
-    cb: (err: any, data?: ListSuiteRunsCommandOutput) => void
-  ): void;
-  public listSuiteRuns(
-    args: ListSuiteRunsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSuiteRunsCommandOutput) => void
-  ): void;
-  public listSuiteRuns(
-    args: ListSuiteRunsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSuiteRunsCommandOutput) => void),
-    cb?: (err: any, data?: ListSuiteRunsCommandOutput) => void
-  ): Promise<ListSuiteRunsCommandOutput> | void {
-    const command = new ListSuiteRunsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the tags attached to an IoT Device Advisor resource.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListTagsForResource</a> action.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a Device Advisor test suite run.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StartSuiteRun</a> action.</p>
-   */
-  public startSuiteRun(
-    args: StartSuiteRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartSuiteRunCommandOutput>;
-  public startSuiteRun(
-    args: StartSuiteRunCommandInput,
-    cb: (err: any, data?: StartSuiteRunCommandOutput) => void
-  ): void;
-  public startSuiteRun(
-    args: StartSuiteRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartSuiteRunCommandOutput) => void
-  ): void;
-  public startSuiteRun(
-    args: StartSuiteRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartSuiteRunCommandOutput) => void),
-    cb?: (err: any, data?: StartSuiteRunCommandOutput) => void
-  ): Promise<StartSuiteRunCommandOutput> | void {
-    const command = new StartSuiteRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops a Device Advisor test suite run that is currently running.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">StopSuiteRun</a> action.</p>
-   */
-  public stopSuiteRun(
-    args: StopSuiteRunCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopSuiteRunCommandOutput>;
-  public stopSuiteRun(args: StopSuiteRunCommandInput, cb: (err: any, data?: StopSuiteRunCommandOutput) => void): void;
-  public stopSuiteRun(
-    args: StopSuiteRunCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopSuiteRunCommandOutput) => void
-  ): void;
-  public stopSuiteRun(
-    args: StopSuiteRunCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopSuiteRunCommandOutput) => void),
-    cb?: (err: any, data?: StopSuiteRunCommandOutput) => void
-  ): Promise<StopSuiteRunCommandOutput> | void {
-    const command = new StopSuiteRunCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds to and modifies existing tags of an IoT Device Advisor resource.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">TagResource</a> action.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes tags from an IoT Device Advisor resource.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UntagResource</a> action.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a Device Advisor test suite.</p>
-   *         <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdateSuiteDefinition</a> action.</p>
-   */
-  public updateSuiteDefinition(
-    args: UpdateSuiteDefinitionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateSuiteDefinitionCommandOutput>;
-  public updateSuiteDefinition(
-    args: UpdateSuiteDefinitionCommandInput,
-    cb: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
-  ): void;
-  public updateSuiteDefinition(
-    args: UpdateSuiteDefinitionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
-  ): void;
-  public updateSuiteDefinition(
-    args: UpdateSuiteDefinitionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSuiteDefinitionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSuiteDefinitionCommandOutput) => void
-  ): Promise<UpdateSuiteDefinitionCommandOutput> | void {
-    const command = new UpdateSuiteDefinitionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class IotDeviceAdvisor extends IotDeviceAdvisorClient implements IotDeviceAdvisor {}
+createAggregatedClient(commands, IotDeviceAdvisor, { paginators });

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvschatClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvschatClient";
-import {
-  DeleteMessageRequest,
-  DeleteMessageRequestFilterSensitiveLog,
-  DeleteMessageResponse,
-  DeleteMessageResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteMessageCommand,
-  serializeAws_restJson1DeleteMessageCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteMessageRequest, DeleteMessageResponse } from "../models/models_0";
+import { DeleteMessage$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteMessageCommand}.
+ */
 export interface DeleteMessageCommandInput extends DeleteMessageRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteMessageCommand}.
+ */
 export interface DeleteMessageCommandOutput extends DeleteMessageResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +32,64 @@ export interface DeleteMessageCommandOutput extends DeleteMessageResponse, __Met
  * ```javascript
  * import { IvschatClient, DeleteMessageCommand } from "@aws-sdk/client-ivschat"; // ES Modules import
  * // const { IvschatClient, DeleteMessageCommand } = require("@aws-sdk/client-ivschat"); // CommonJS import
+ * // import type { IvschatClientConfig } from "@aws-sdk/client-ivschat";
+ * const config = {}; // type is IvschatClientConfig
  * const client = new IvschatClient(config);
+ * const input = { // DeleteMessageRequest
+ *   roomIdentifier: "STRING_VALUE", // required
+ *   id: "STRING_VALUE", // required
+ *   reason: "STRING_VALUE",
+ * };
  * const command = new DeleteMessageCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteMessageResponse
+ * //   id: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DeleteMessageCommandInput - {@link DeleteMessageCommandInput}
+ * @returns {@link DeleteMessageCommandOutput}
  * @see {@link DeleteMessageCommandInput} for command's `input` shape.
  * @see {@link DeleteMessageCommandOutput} for command's `response` shape.
  * @see {@link IvschatClientResolvedConfig | config} for IvschatClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link PendingVerification} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link IvschatServiceException}
+ * <p>Base exception class for all service exceptions from Ivschat service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteMessageCommand extends $Command<
-  DeleteMessageCommandInput,
-  DeleteMessageCommandOutput,
-  IvschatClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteMessageCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvschatClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteMessageCommandInput, DeleteMessageCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvschatClient";
-    const commandName = "DeleteMessageCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteMessageRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteMessageResponseFilterSensitiveLog,
+export class DeleteMessageCommand extends command<DeleteMessageCommandInput, DeleteMessageCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteMessage",
+  DeleteMessage$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteMessageRequest;
+      output: DeleteMessageResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteMessageCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteMessageCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteMessageCommandOutput> {
-    return deserializeAws_restJson1DeleteMessageCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteMessageCommandInput;
+      output: DeleteMessageCommandOutput;
+    };
+  };
 }

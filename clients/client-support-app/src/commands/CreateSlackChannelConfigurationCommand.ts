@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateSlackChannelConfigurationRequest,
-  CreateSlackChannelConfigurationRequestFilterSensitiveLog,
-  CreateSlackChannelConfigurationResult,
-  CreateSlackChannelConfigurationResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateSlackChannelConfigurationCommand,
-  serializeAws_restJson1CreateSlackChannelConfigurationCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SupportAppClientResolvedConfig } from "../SupportAppClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateSlackChannelConfigurationRequest, CreateSlackChannelConfigurationResult } from "../models/models_0";
+import { CreateSlackChannelConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateSlackChannelConfigurationCommand}.
+ */
 export interface CreateSlackChannelConfigurationCommandInput extends CreateSlackChannelConfigurationRequest {}
-export interface CreateSlackChannelConfigurationCommandOutput
-  extends CreateSlackChannelConfigurationResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link CreateSlackChannelConfigurationCommand}.
+ */
+export interface CreateSlackChannelConfigurationCommandOutput extends CreateSlackChannelConfigurationResult, __MetadataBearer {}
 
 /**
  * <p>Creates a Slack channel configuration for your Amazon Web Services account.</p>
@@ -56,74 +49,95 @@ export interface CreateSlackChannelConfigurationCommandOutput
  * ```javascript
  * import { SupportAppClient, CreateSlackChannelConfigurationCommand } from "@aws-sdk/client-support-app"; // ES Modules import
  * // const { SupportAppClient, CreateSlackChannelConfigurationCommand } = require("@aws-sdk/client-support-app"); // CommonJS import
+ * // import type { SupportAppClientConfig } from "@aws-sdk/client-support-app";
+ * const config = {}; // type is SupportAppClientConfig
  * const client = new SupportAppClient(config);
+ * const input = { // CreateSlackChannelConfigurationRequest
+ *   teamId: "STRING_VALUE", // required
+ *   channelId: "STRING_VALUE", // required
+ *   channelName: "STRING_VALUE",
+ *   notifyOnCreateOrReopenCase: true || false,
+ *   notifyOnAddCorrespondenceToCase: true || false,
+ *   notifyOnResolveCase: true || false,
+ *   notifyOnCaseSeverity: "STRING_VALUE", // required
+ *   channelRoleArn: "STRING_VALUE", // required
+ * };
  * const command = new CreateSlackChannelConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param CreateSlackChannelConfigurationCommandInput - {@link CreateSlackChannelConfigurationCommandInput}
+ * @returns {@link CreateSlackChannelConfigurationCommandOutput}
  * @see {@link CreateSlackChannelConfigurationCommandInput} for command's `input` shape.
  * @see {@link CreateSlackChannelConfigurationCommandOutput} for command's `response` shape.
  * @see {@link SupportAppClientResolvedConfig | config} for SupportAppClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient permission to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Your request has a conflict. For example, you might receive this error if you try the
+ *       following:</p>
+ *          <ul>
+ *             <li>
+ *                <p>Add, update, or delete a Slack channel configuration before you add a Slack workspace
+ *           to your Amazon Web Services account.</p>
+ *             </li>
+ *             <li>
+ *                <p>Add a Slack channel configuration that already exists in your Amazon Web Services account.</p>
+ *             </li>
+ *             <li>
+ *                <p>Delete a Slack channel configuration for a live chat channel.</p>
+ *             </li>
+ *             <li>
+ *                <p>Delete a Slack workspace from your Amazon Web Services account that has an active live chat
+ *           channel.</p>
+ *             </li>
+ *             <li>
+ *                <p>Call the <code>RegisterSlackWorkspaceForOrganization</code> API from an Amazon Web Services account
+ *           that doesn't belong to an organization.</p>
+ *             </li>
+ *             <li>
+ *                <p>Call the <code>RegisterSlackWorkspaceForOrganization</code> API from a member account,
+ *           but the management account hasn't registered that workspace yet for the
+ *           organization.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>We can’t process your request right now because of a server issue. Try again later.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>Your Service Quotas request exceeds the quota for the service. For example, your Service Quotas request to
+ *       Amazon Web Services Support App might exceed the maximum number of workspaces or channels per account, or the maximum
+ *       number of accounts per Slack channel.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Your request input doesn't meet the constraints that the Amazon Web Services Support App specifies.</p>
+ *
+ * @throws {@link SupportAppServiceException}
+ * <p>Base exception class for all service exceptions from SupportApp service.</p>
+ *
+ *
+ * @public
  */
-export class CreateSlackChannelConfigurationCommand extends $Command<
-  CreateSlackChannelConfigurationCommandInput,
-  CreateSlackChannelConfigurationCommandOutput,
-  SupportAppClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateSlackChannelConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SupportAppClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateSlackChannelConfigurationCommandInput, CreateSlackChannelConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SupportAppClient";
-    const commandName = "CreateSlackChannelConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateSlackChannelConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateSlackChannelConfigurationResultFilterSensitiveLog,
+export class CreateSlackChannelConfigurationCommand extends command<CreateSlackChannelConfigurationCommandInput, CreateSlackChannelConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateSlackChannelConfiguration",
+  CreateSlackChannelConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateSlackChannelConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: CreateSlackChannelConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateSlackChannelConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<CreateSlackChannelConfigurationCommandOutput> {
-    return deserializeAws_restJson1CreateSlackChannelConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateSlackChannelConfigurationCommandInput;
+      output: CreateSlackChannelConfigurationCommandOutput;
+    };
+  };
 }

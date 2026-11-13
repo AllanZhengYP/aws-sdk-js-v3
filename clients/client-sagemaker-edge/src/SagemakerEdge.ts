@@ -1,120 +1,93 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type GetDeploymentsCommandInput,
+  type GetDeploymentsCommandOutput,
   GetDeploymentsCommand,
-  GetDeploymentsCommandInput,
-  GetDeploymentsCommandOutput,
 } from "./commands/GetDeploymentsCommand";
 import {
+  type GetDeviceRegistrationCommandInput,
+  type GetDeviceRegistrationCommandOutput,
   GetDeviceRegistrationCommand,
-  GetDeviceRegistrationCommandInput,
-  GetDeviceRegistrationCommandOutput,
 } from "./commands/GetDeviceRegistrationCommand";
 import {
+  type SendHeartbeatCommandInput,
+  type SendHeartbeatCommandOutput,
   SendHeartbeatCommand,
-  SendHeartbeatCommandInput,
-  SendHeartbeatCommandOutput,
 } from "./commands/SendHeartbeatCommand";
 import { SagemakerEdgeClient } from "./SagemakerEdgeClient";
 
+const commands = {
+  GetDeploymentsCommand,
+  GetDeviceRegistrationCommand,
+  SendHeartbeatCommand,
+};
+
+/**
+ * @public
+ */
+export interface SagemakerEdgeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface SagemakerEdge {
+  /**
+   * @see {@link GetDeploymentsCommand}
+   */
+  getDeployments(
+    args: GetDeploymentsCommandInput,
+    options?: SagemakerEdgeRequestOptions
+  ): Promise<GetDeploymentsCommandOutput>;
+  getDeployments(
+    args: GetDeploymentsCommandInput,
+    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
+  ): void;
+  getDeployments(
+    args: GetDeploymentsCommandInput,
+    options: SagemakerEdgeRequestOptions,
+    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDeviceRegistrationCommand}
+   */
+  getDeviceRegistration(
+    args: GetDeviceRegistrationCommandInput,
+    options?: SagemakerEdgeRequestOptions
+  ): Promise<GetDeviceRegistrationCommandOutput>;
+  getDeviceRegistration(
+    args: GetDeviceRegistrationCommandInput,
+    cb: (err: any, data?: GetDeviceRegistrationCommandOutput) => void
+  ): void;
+  getDeviceRegistration(
+    args: GetDeviceRegistrationCommandInput,
+    options: SagemakerEdgeRequestOptions,
+    cb: (err: any, data?: GetDeviceRegistrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendHeartbeatCommand}
+   */
+  sendHeartbeat(
+    args: SendHeartbeatCommandInput,
+    options?: SagemakerEdgeRequestOptions
+  ): Promise<SendHeartbeatCommandOutput>;
+  sendHeartbeat(
+    args: SendHeartbeatCommandInput,
+    cb: (err: any, data?: SendHeartbeatCommandOutput) => void
+  ): void;
+  sendHeartbeat(
+    args: SendHeartbeatCommandInput,
+    options: SagemakerEdgeRequestOptions,
+    cb: (err: any, data?: SendHeartbeatCommandOutput) => void
+  ): void;
+}
+
 /**
  * <p>SageMaker Edge Manager dataplane service for communicating with active agents.</p>
+ * @public
  */
-export class SagemakerEdge extends SagemakerEdgeClient {
-  /**
-   * <p>Use to get the active deployments from a device.</p>
-   */
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDeploymentsCommandOutput>;
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
-  ): void;
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDeploymentsCommandOutput) => void
-  ): void;
-  public getDeployments(
-    args: GetDeploymentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDeploymentsCommandOutput) => void),
-    cb?: (err: any, data?: GetDeploymentsCommandOutput) => void
-  ): Promise<GetDeploymentsCommandOutput> | void {
-    const command = new GetDeploymentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Use to check if a device is registered with SageMaker Edge Manager.</p>
-   */
-  public getDeviceRegistration(
-    args: GetDeviceRegistrationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDeviceRegistrationCommandOutput>;
-  public getDeviceRegistration(
-    args: GetDeviceRegistrationCommandInput,
-    cb: (err: any, data?: GetDeviceRegistrationCommandOutput) => void
-  ): void;
-  public getDeviceRegistration(
-    args: GetDeviceRegistrationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDeviceRegistrationCommandOutput) => void
-  ): void;
-  public getDeviceRegistration(
-    args: GetDeviceRegistrationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDeviceRegistrationCommandOutput) => void),
-    cb?: (err: any, data?: GetDeviceRegistrationCommandOutput) => void
-  ): Promise<GetDeviceRegistrationCommandOutput> | void {
-    const command = new GetDeviceRegistrationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Use to get the current status of devices registered on SageMaker Edge Manager.</p>
-   */
-  public sendHeartbeat(
-    args: SendHeartbeatCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<SendHeartbeatCommandOutput>;
-  public sendHeartbeat(
-    args: SendHeartbeatCommandInput,
-    cb: (err: any, data?: SendHeartbeatCommandOutput) => void
-  ): void;
-  public sendHeartbeat(
-    args: SendHeartbeatCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: SendHeartbeatCommandOutput) => void
-  ): void;
-  public sendHeartbeat(
-    args: SendHeartbeatCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SendHeartbeatCommandOutput) => void),
-    cb?: (err: any, data?: SendHeartbeatCommandOutput) => void
-  ): Promise<SendHeartbeatCommandOutput> | void {
-    const command = new SendHeartbeatCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class SagemakerEdge extends SagemakerEdgeClient implements SagemakerEdge {}
+createAggregatedClient(commands, SagemakerEdge);

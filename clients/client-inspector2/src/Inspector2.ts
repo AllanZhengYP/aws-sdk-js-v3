@@ -1,1123 +1,2266 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type AssociateMemberCommandInput,
+  type AssociateMemberCommandOutput,
   AssociateMemberCommand,
-  AssociateMemberCommandInput,
-  AssociateMemberCommandOutput,
 } from "./commands/AssociateMemberCommand";
 import {
+  type BatchAssociateCodeSecurityScanConfigurationCommandInput,
+  type BatchAssociateCodeSecurityScanConfigurationCommandOutput,
+  BatchAssociateCodeSecurityScanConfigurationCommand,
+} from "./commands/BatchAssociateCodeSecurityScanConfigurationCommand";
+import {
+  type BatchDisassociateCodeSecurityScanConfigurationCommandInput,
+  type BatchDisassociateCodeSecurityScanConfigurationCommandOutput,
+  BatchDisassociateCodeSecurityScanConfigurationCommand,
+} from "./commands/BatchDisassociateCodeSecurityScanConfigurationCommand";
+import {
+  type BatchGetAccountStatusCommandInput,
+  type BatchGetAccountStatusCommandOutput,
   BatchGetAccountStatusCommand,
-  BatchGetAccountStatusCommandInput,
-  BatchGetAccountStatusCommandOutput,
 } from "./commands/BatchGetAccountStatusCommand";
 import {
+  type BatchGetCodeSnippetCommandInput,
+  type BatchGetCodeSnippetCommandOutput,
+  BatchGetCodeSnippetCommand,
+} from "./commands/BatchGetCodeSnippetCommand";
+import {
+  type BatchGetFindingDetailsCommandInput,
+  type BatchGetFindingDetailsCommandOutput,
+  BatchGetFindingDetailsCommand,
+} from "./commands/BatchGetFindingDetailsCommand";
+import {
+  type BatchGetFreeTrialInfoCommandInput,
+  type BatchGetFreeTrialInfoCommandOutput,
   BatchGetFreeTrialInfoCommand,
-  BatchGetFreeTrialInfoCommandInput,
-  BatchGetFreeTrialInfoCommandOutput,
 } from "./commands/BatchGetFreeTrialInfoCommand";
 import {
+  type BatchGetMemberEc2DeepInspectionStatusCommandInput,
+  type BatchGetMemberEc2DeepInspectionStatusCommandOutput,
+  BatchGetMemberEc2DeepInspectionStatusCommand,
+} from "./commands/BatchGetMemberEc2DeepInspectionStatusCommand";
+import {
+  type BatchUpdateMemberEc2DeepInspectionStatusCommandInput,
+  type BatchUpdateMemberEc2DeepInspectionStatusCommandOutput,
+  BatchUpdateMemberEc2DeepInspectionStatusCommand,
+} from "./commands/BatchUpdateMemberEc2DeepInspectionStatusCommand";
+import {
+  type CancelFindingsReportCommandInput,
+  type CancelFindingsReportCommandOutput,
   CancelFindingsReportCommand,
-  CancelFindingsReportCommandInput,
-  CancelFindingsReportCommandOutput,
 } from "./commands/CancelFindingsReportCommand";
 import {
+  type CancelSbomExportCommandInput,
+  type CancelSbomExportCommandOutput,
+  CancelSbomExportCommand,
+} from "./commands/CancelSbomExportCommand";
+import {
+  type CreateCisScanConfigurationCommandInput,
+  type CreateCisScanConfigurationCommandOutput,
+  CreateCisScanConfigurationCommand,
+} from "./commands/CreateCisScanConfigurationCommand";
+import {
+  type CreateCodeSecurityIntegrationCommandInput,
+  type CreateCodeSecurityIntegrationCommandOutput,
+  CreateCodeSecurityIntegrationCommand,
+} from "./commands/CreateCodeSecurityIntegrationCommand";
+import {
+  type CreateCodeSecurityScanConfigurationCommandInput,
+  type CreateCodeSecurityScanConfigurationCommandOutput,
+  CreateCodeSecurityScanConfigurationCommand,
+} from "./commands/CreateCodeSecurityScanConfigurationCommand";
+import {
+  type CreateConnectorCommandInput,
+  type CreateConnectorCommandOutput,
+  CreateConnectorCommand,
+} from "./commands/CreateConnectorCommand";
+import {
+  type CreateFilterCommandInput,
+  type CreateFilterCommandOutput,
   CreateFilterCommand,
-  CreateFilterCommandInput,
-  CreateFilterCommandOutput,
 } from "./commands/CreateFilterCommand";
 import {
+  type CreateFindingsReportCommandInput,
+  type CreateFindingsReportCommandOutput,
   CreateFindingsReportCommand,
-  CreateFindingsReportCommandInput,
-  CreateFindingsReportCommandOutput,
 } from "./commands/CreateFindingsReportCommand";
 import {
+  type CreateSbomExportCommandInput,
+  type CreateSbomExportCommandOutput,
+  CreateSbomExportCommand,
+} from "./commands/CreateSbomExportCommand";
+import {
+  type DeleteCisScanConfigurationCommandInput,
+  type DeleteCisScanConfigurationCommandOutput,
+  DeleteCisScanConfigurationCommand,
+} from "./commands/DeleteCisScanConfigurationCommand";
+import {
+  type DeleteCodeSecurityIntegrationCommandInput,
+  type DeleteCodeSecurityIntegrationCommandOutput,
+  DeleteCodeSecurityIntegrationCommand,
+} from "./commands/DeleteCodeSecurityIntegrationCommand";
+import {
+  type DeleteCodeSecurityScanConfigurationCommandInput,
+  type DeleteCodeSecurityScanConfigurationCommandOutput,
+  DeleteCodeSecurityScanConfigurationCommand,
+} from "./commands/DeleteCodeSecurityScanConfigurationCommand";
+import {
+  type DeleteConnectorCommandInput,
+  type DeleteConnectorCommandOutput,
+  DeleteConnectorCommand,
+} from "./commands/DeleteConnectorCommand";
+import {
+  type DeleteFilterCommandInput,
+  type DeleteFilterCommandOutput,
   DeleteFilterCommand,
-  DeleteFilterCommandInput,
-  DeleteFilterCommandOutput,
 } from "./commands/DeleteFilterCommand";
 import {
+  type DescribeOrganizationConfigurationCommandInput,
+  type DescribeOrganizationConfigurationCommandOutput,
   DescribeOrganizationConfigurationCommand,
-  DescribeOrganizationConfigurationCommandInput,
-  DescribeOrganizationConfigurationCommandOutput,
 } from "./commands/DescribeOrganizationConfigurationCommand";
-import { DisableCommand, DisableCommandInput, DisableCommandOutput } from "./commands/DisableCommand";
+import { type DisableCommandInput, type DisableCommandOutput, DisableCommand } from "./commands/DisableCommand";
 import {
+  type DisableDelegatedAdminAccountCommandInput,
+  type DisableDelegatedAdminAccountCommandOutput,
   DisableDelegatedAdminAccountCommand,
-  DisableDelegatedAdminAccountCommandInput,
-  DisableDelegatedAdminAccountCommandOutput,
 } from "./commands/DisableDelegatedAdminAccountCommand";
 import {
+  type DisassociateMemberCommandInput,
+  type DisassociateMemberCommandOutput,
   DisassociateMemberCommand,
-  DisassociateMemberCommandInput,
-  DisassociateMemberCommandOutput,
 } from "./commands/DisassociateMemberCommand";
-import { EnableCommand, EnableCommandInput, EnableCommandOutput } from "./commands/EnableCommand";
+import { type EnableCommandInput, type EnableCommandOutput, EnableCommand } from "./commands/EnableCommand";
 import {
+  type EnableDelegatedAdminAccountCommandInput,
+  type EnableDelegatedAdminAccountCommandOutput,
   EnableDelegatedAdminAccountCommand,
-  EnableDelegatedAdminAccountCommandInput,
-  EnableDelegatedAdminAccountCommandOutput,
 } from "./commands/EnableDelegatedAdminAccountCommand";
 import {
+  type GetCisScanReportCommandInput,
+  type GetCisScanReportCommandOutput,
+  GetCisScanReportCommand,
+} from "./commands/GetCisScanReportCommand";
+import {
+  type GetCisScanResultDetailsCommandInput,
+  type GetCisScanResultDetailsCommandOutput,
+  GetCisScanResultDetailsCommand,
+} from "./commands/GetCisScanResultDetailsCommand";
+import {
+  type GetClustersForImageCommandInput,
+  type GetClustersForImageCommandOutput,
+  GetClustersForImageCommand,
+} from "./commands/GetClustersForImageCommand";
+import {
+  type GetCodeSecurityIntegrationCommandInput,
+  type GetCodeSecurityIntegrationCommandOutput,
+  GetCodeSecurityIntegrationCommand,
+} from "./commands/GetCodeSecurityIntegrationCommand";
+import {
+  type GetCodeSecurityScanCommandInput,
+  type GetCodeSecurityScanCommandOutput,
+  GetCodeSecurityScanCommand,
+} from "./commands/GetCodeSecurityScanCommand";
+import {
+  type GetCodeSecurityScanConfigurationCommandInput,
+  type GetCodeSecurityScanConfigurationCommandOutput,
+  GetCodeSecurityScanConfigurationCommand,
+} from "./commands/GetCodeSecurityScanConfigurationCommand";
+import {
+  type GetConfigurationCommandInput,
+  type GetConfigurationCommandOutput,
   GetConfigurationCommand,
-  GetConfigurationCommandInput,
-  GetConfigurationCommandOutput,
 } from "./commands/GetConfigurationCommand";
 import {
+  type GetDelegatedAdminAccountCommandInput,
+  type GetDelegatedAdminAccountCommandOutput,
   GetDelegatedAdminAccountCommand,
-  GetDelegatedAdminAccountCommandInput,
-  GetDelegatedAdminAccountCommandOutput,
 } from "./commands/GetDelegatedAdminAccountCommand";
 import {
-  GetFindingsReportStatusCommand,
-  GetFindingsReportStatusCommandInput,
-  GetFindingsReportStatusCommandOutput,
-} from "./commands/GetFindingsReportStatusCommand";
-import { GetMemberCommand, GetMemberCommandInput, GetMemberCommandOutput } from "./commands/GetMemberCommand";
+  type GetEc2DeepInspectionConfigurationCommandInput,
+  type GetEc2DeepInspectionConfigurationCommandOutput,
+  GetEc2DeepInspectionConfigurationCommand,
+} from "./commands/GetEc2DeepInspectionConfigurationCommand";
 import {
+  type GetEncryptionKeyCommandInput,
+  type GetEncryptionKeyCommandOutput,
+  GetEncryptionKeyCommand,
+} from "./commands/GetEncryptionKeyCommand";
+import {
+  type GetFindingsReportStatusCommandInput,
+  type GetFindingsReportStatusCommandOutput,
+  GetFindingsReportStatusCommand,
+} from "./commands/GetFindingsReportStatusCommand";
+import { type GetMemberCommandInput, type GetMemberCommandOutput, GetMemberCommand } from "./commands/GetMemberCommand";
+import {
+  type GetOnDemandScanStatusCommandInput,
+  type GetOnDemandScanStatusCommandOutput,
+  GetOnDemandScanStatusCommand,
+} from "./commands/GetOnDemandScanStatusCommand";
+import {
+  type GetSbomExportCommandInput,
+  type GetSbomExportCommandOutput,
+  GetSbomExportCommand,
+} from "./commands/GetSbomExportCommand";
+import {
+  type ListAccountPermissionsCommandInput,
+  type ListAccountPermissionsCommandOutput,
   ListAccountPermissionsCommand,
-  ListAccountPermissionsCommandInput,
-  ListAccountPermissionsCommandOutput,
 } from "./commands/ListAccountPermissionsCommand";
 import {
+  type ListCisScanConfigurationsCommandInput,
+  type ListCisScanConfigurationsCommandOutput,
+  ListCisScanConfigurationsCommand,
+} from "./commands/ListCisScanConfigurationsCommand";
+import {
+  type ListCisScanResultsAggregatedByChecksCommandInput,
+  type ListCisScanResultsAggregatedByChecksCommandOutput,
+  ListCisScanResultsAggregatedByChecksCommand,
+} from "./commands/ListCisScanResultsAggregatedByChecksCommand";
+import {
+  type ListCisScanResultsAggregatedByTargetResourceCommandInput,
+  type ListCisScanResultsAggregatedByTargetResourceCommandOutput,
+  ListCisScanResultsAggregatedByTargetResourceCommand,
+} from "./commands/ListCisScanResultsAggregatedByTargetResourceCommand";
+import {
+  type ListCisScansCommandInput,
+  type ListCisScansCommandOutput,
+  ListCisScansCommand,
+} from "./commands/ListCisScansCommand";
+import {
+  type ListCodeSecurityIntegrationsCommandInput,
+  type ListCodeSecurityIntegrationsCommandOutput,
+  ListCodeSecurityIntegrationsCommand,
+} from "./commands/ListCodeSecurityIntegrationsCommand";
+import {
+  type ListCodeSecurityScanConfigurationAssociationsCommandInput,
+  type ListCodeSecurityScanConfigurationAssociationsCommandOutput,
+  ListCodeSecurityScanConfigurationAssociationsCommand,
+} from "./commands/ListCodeSecurityScanConfigurationAssociationsCommand";
+import {
+  type ListCodeSecurityScanConfigurationsCommandInput,
+  type ListCodeSecurityScanConfigurationsCommandOutput,
+  ListCodeSecurityScanConfigurationsCommand,
+} from "./commands/ListCodeSecurityScanConfigurationsCommand";
+import {
+  type ListConnectorScanConfigurationsCommandInput,
+  type ListConnectorScanConfigurationsCommandOutput,
+  ListConnectorScanConfigurationsCommand,
+} from "./commands/ListConnectorScanConfigurationsCommand";
+import {
+  type ListConnectorsCommandInput,
+  type ListConnectorsCommandOutput,
+  ListConnectorsCommand,
+} from "./commands/ListConnectorsCommand";
+import {
+  type ListCoverageCommandInput,
+  type ListCoverageCommandOutput,
   ListCoverageCommand,
-  ListCoverageCommandInput,
-  ListCoverageCommandOutput,
 } from "./commands/ListCoverageCommand";
 import {
+  type ListCoverageStatisticsCommandInput,
+  type ListCoverageStatisticsCommandOutput,
   ListCoverageStatisticsCommand,
-  ListCoverageStatisticsCommandInput,
-  ListCoverageStatisticsCommandOutput,
 } from "./commands/ListCoverageStatisticsCommand";
 import {
+  type ListDelegatedAdminAccountsCommandInput,
+  type ListDelegatedAdminAccountsCommandOutput,
   ListDelegatedAdminAccountsCommand,
-  ListDelegatedAdminAccountsCommandInput,
-  ListDelegatedAdminAccountsCommandOutput,
 } from "./commands/ListDelegatedAdminAccountsCommand";
-import { ListFiltersCommand, ListFiltersCommandInput, ListFiltersCommandOutput } from "./commands/ListFiltersCommand";
 import {
+  type ListFiltersCommandInput,
+  type ListFiltersCommandOutput,
+  ListFiltersCommand,
+} from "./commands/ListFiltersCommand";
+import {
+  type ListFindingAggregationsCommandInput,
+  type ListFindingAggregationsCommandOutput,
   ListFindingAggregationsCommand,
-  ListFindingAggregationsCommandInput,
-  ListFindingAggregationsCommandOutput,
 } from "./commands/ListFindingAggregationsCommand";
 import {
+  type ListFindingsCommandInput,
+  type ListFindingsCommandOutput,
   ListFindingsCommand,
-  ListFindingsCommandInput,
-  ListFindingsCommandOutput,
 } from "./commands/ListFindingsCommand";
-import { ListMembersCommand, ListMembersCommandInput, ListMembersCommandOutput } from "./commands/ListMembersCommand";
 import {
+  type ListMembersCommandInput,
+  type ListMembersCommandOutput,
+  ListMembersCommand,
+} from "./commands/ListMembersCommand";
+import {
+  type ListOnDemandScansCommandInput,
+  type ListOnDemandScansCommandOutput,
+  ListOnDemandScansCommand,
+} from "./commands/ListOnDemandScansCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListUsageTotalsCommandInput,
+  type ListUsageTotalsCommandOutput,
   ListUsageTotalsCommand,
-  ListUsageTotalsCommandInput,
-  ListUsageTotalsCommandOutput,
 } from "./commands/ListUsageTotalsCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type ResetEncryptionKeyCommandInput,
+  type ResetEncryptionKeyCommandOutput,
+  ResetEncryptionKeyCommand,
+} from "./commands/ResetEncryptionKeyCommand";
+import {
+  type SearchVulnerabilitiesCommandInput,
+  type SearchVulnerabilitiesCommandOutput,
+  SearchVulnerabilitiesCommand,
+} from "./commands/SearchVulnerabilitiesCommand";
+import {
+  type SendCisSessionHealthCommandInput,
+  type SendCisSessionHealthCommandOutput,
+  SendCisSessionHealthCommand,
+} from "./commands/SendCisSessionHealthCommand";
+import {
+  type SendCisSessionTelemetryCommandInput,
+  type SendCisSessionTelemetryCommandOutput,
+  SendCisSessionTelemetryCommand,
+} from "./commands/SendCisSessionTelemetryCommand";
+import {
+  type StartCisSessionCommandInput,
+  type StartCisSessionCommandOutput,
+  StartCisSessionCommand,
+} from "./commands/StartCisSessionCommand";
+import {
+  type StartCodeSecurityScanCommandInput,
+  type StartCodeSecurityScanCommandOutput,
+  StartCodeSecurityScanCommand,
+} from "./commands/StartCodeSecurityScanCommand";
+import {
+  type StartOnDemandScanCommandInput,
+  type StartOnDemandScanCommandOutput,
+  StartOnDemandScanCommand,
+} from "./commands/StartOnDemandScanCommand";
+import {
+  type StopCisSessionCommandInput,
+  type StopCisSessionCommandOutput,
+  StopCisSessionCommand,
+} from "./commands/StopCisSessionCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateCisScanConfigurationCommandInput,
+  type UpdateCisScanConfigurationCommandOutput,
+  UpdateCisScanConfigurationCommand,
+} from "./commands/UpdateCisScanConfigurationCommand";
+import {
+  type UpdateCodeSecurityIntegrationCommandInput,
+  type UpdateCodeSecurityIntegrationCommandOutput,
+  UpdateCodeSecurityIntegrationCommand,
+} from "./commands/UpdateCodeSecurityIntegrationCommand";
+import {
+  type UpdateCodeSecurityScanConfigurationCommandInput,
+  type UpdateCodeSecurityScanConfigurationCommandOutput,
+  UpdateCodeSecurityScanConfigurationCommand,
+} from "./commands/UpdateCodeSecurityScanConfigurationCommand";
+import {
+  type UpdateConfigurationCommandInput,
+  type UpdateConfigurationCommandOutput,
   UpdateConfigurationCommand,
-  UpdateConfigurationCommandInput,
-  UpdateConfigurationCommandOutput,
 } from "./commands/UpdateConfigurationCommand";
 import {
+  type UpdateConnectorCommandInput,
+  type UpdateConnectorCommandOutput,
+  UpdateConnectorCommand,
+} from "./commands/UpdateConnectorCommand";
+import {
+  type UpdateConnectorScanConfigurationCommandInput,
+  type UpdateConnectorScanConfigurationCommandOutput,
+  UpdateConnectorScanConfigurationCommand,
+} from "./commands/UpdateConnectorScanConfigurationCommand";
+import {
+  type UpdateEc2DeepInspectionConfigurationCommandInput,
+  type UpdateEc2DeepInspectionConfigurationCommandOutput,
+  UpdateEc2DeepInspectionConfigurationCommand,
+} from "./commands/UpdateEc2DeepInspectionConfigurationCommand";
+import {
+  type UpdateEncryptionKeyCommandInput,
+  type UpdateEncryptionKeyCommandOutput,
+  UpdateEncryptionKeyCommand,
+} from "./commands/UpdateEncryptionKeyCommand";
+import {
+  type UpdateFilterCommandInput,
+  type UpdateFilterCommandOutput,
   UpdateFilterCommand,
-  UpdateFilterCommandInput,
-  UpdateFilterCommandOutput,
 } from "./commands/UpdateFilterCommand";
 import {
+  type UpdateOrganizationConfigurationCommandInput,
+  type UpdateOrganizationConfigurationCommandOutput,
   UpdateOrganizationConfigurationCommand,
-  UpdateOrganizationConfigurationCommandInput,
-  UpdateOrganizationConfigurationCommandOutput,
 } from "./commands/UpdateOrganizationConfigurationCommand";
+import {
+  type UpdateOrgEc2DeepInspectionConfigurationCommandInput,
+  type UpdateOrgEc2DeepInspectionConfigurationCommandOutput,
+  UpdateOrgEc2DeepInspectionConfigurationCommand,
+} from "./commands/UpdateOrgEc2DeepInspectionConfigurationCommand";
 import { Inspector2Client } from "./Inspector2Client";
+import type { Inspector2ServiceException } from "./models/Inspector2ServiceException";
+import { paginateGetCisScanResultDetails } from "./pagination/GetCisScanResultDetailsPaginator";
+import { paginateGetClustersForImage } from "./pagination/GetClustersForImagePaginator";
+import { paginateListAccountPermissions } from "./pagination/ListAccountPermissionsPaginator";
+import { paginateListCisScanConfigurations } from "./pagination/ListCisScanConfigurationsPaginator";
+import {
+  paginateListCisScanResultsAggregatedByChecks,
+} from "./pagination/ListCisScanResultsAggregatedByChecksPaginator";
+import {
+  paginateListCisScanResultsAggregatedByTargetResource,
+} from "./pagination/ListCisScanResultsAggregatedByTargetResourcePaginator";
+import { paginateListCisScans } from "./pagination/ListCisScansPaginator";
+import { paginateListConnectorScanConfigurations } from "./pagination/ListConnectorScanConfigurationsPaginator";
+import { paginateListConnectors } from "./pagination/ListConnectorsPaginator";
+import { paginateListCoverage } from "./pagination/ListCoveragePaginator";
+import { paginateListCoverageStatistics } from "./pagination/ListCoverageStatisticsPaginator";
+import { paginateListDelegatedAdminAccounts } from "./pagination/ListDelegatedAdminAccountsPaginator";
+import { paginateListFilters } from "./pagination/ListFiltersPaginator";
+import { paginateListFindingAggregations } from "./pagination/ListFindingAggregationsPaginator";
+import { paginateListFindings } from "./pagination/ListFindingsPaginator";
+import { paginateListMembers } from "./pagination/ListMembersPaginator";
+import { paginateListOnDemandScans } from "./pagination/ListOnDemandScansPaginator";
+import { paginateListUsageTotals } from "./pagination/ListUsageTotalsPaginator";
+import { paginateSearchVulnerabilities } from "./pagination/SearchVulnerabilitiesPaginator";
+import { waitUntilConnectorConnected } from "./waiters/waitForConnectorConnected";
+import { waitUntilConnectorDeleted } from "./waiters/waitForConnectorDeleted";
+import { waitUntilConnectorEnabled } from "./waiters/waitForConnectorEnabled";
+
+const commands = {
+  AssociateMemberCommand,
+  BatchAssociateCodeSecurityScanConfigurationCommand,
+  BatchDisassociateCodeSecurityScanConfigurationCommand,
+  BatchGetAccountStatusCommand,
+  BatchGetCodeSnippetCommand,
+  BatchGetFindingDetailsCommand,
+  BatchGetFreeTrialInfoCommand,
+  BatchGetMemberEc2DeepInspectionStatusCommand,
+  BatchUpdateMemberEc2DeepInspectionStatusCommand,
+  CancelFindingsReportCommand,
+  CancelSbomExportCommand,
+  CreateCisScanConfigurationCommand,
+  CreateCodeSecurityIntegrationCommand,
+  CreateCodeSecurityScanConfigurationCommand,
+  CreateConnectorCommand,
+  CreateFilterCommand,
+  CreateFindingsReportCommand,
+  CreateSbomExportCommand,
+  DeleteCisScanConfigurationCommand,
+  DeleteCodeSecurityIntegrationCommand,
+  DeleteCodeSecurityScanConfigurationCommand,
+  DeleteConnectorCommand,
+  DeleteFilterCommand,
+  DescribeOrganizationConfigurationCommand,
+  DisableCommand,
+  DisableDelegatedAdminAccountCommand,
+  DisassociateMemberCommand,
+  EnableCommand,
+  EnableDelegatedAdminAccountCommand,
+  GetCisScanReportCommand,
+  GetCisScanResultDetailsCommand,
+  GetClustersForImageCommand,
+  GetCodeSecurityIntegrationCommand,
+  GetCodeSecurityScanCommand,
+  GetCodeSecurityScanConfigurationCommand,
+  GetConfigurationCommand,
+  GetDelegatedAdminAccountCommand,
+  GetEc2DeepInspectionConfigurationCommand,
+  GetEncryptionKeyCommand,
+  GetFindingsReportStatusCommand,
+  GetMemberCommand,
+  GetOnDemandScanStatusCommand,
+  GetSbomExportCommand,
+  ListAccountPermissionsCommand,
+  ListCisScanConfigurationsCommand,
+  ListCisScanResultsAggregatedByChecksCommand,
+  ListCisScanResultsAggregatedByTargetResourceCommand,
+  ListCisScansCommand,
+  ListCodeSecurityIntegrationsCommand,
+  ListCodeSecurityScanConfigurationAssociationsCommand,
+  ListCodeSecurityScanConfigurationsCommand,
+  ListConnectorsCommand,
+  ListConnectorScanConfigurationsCommand,
+  ListCoverageCommand,
+  ListCoverageStatisticsCommand,
+  ListDelegatedAdminAccountsCommand,
+  ListFiltersCommand,
+  ListFindingAggregationsCommand,
+  ListFindingsCommand,
+  ListMembersCommand,
+  ListOnDemandScansCommand,
+  ListTagsForResourceCommand,
+  ListUsageTotalsCommand,
+  ResetEncryptionKeyCommand,
+  SearchVulnerabilitiesCommand,
+  SendCisSessionHealthCommand,
+  SendCisSessionTelemetryCommand,
+  StartCisSessionCommand,
+  StartCodeSecurityScanCommand,
+  StartOnDemandScanCommand,
+  StopCisSessionCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCisScanConfigurationCommand,
+  UpdateCodeSecurityIntegrationCommand,
+  UpdateCodeSecurityScanConfigurationCommand,
+  UpdateConfigurationCommand,
+  UpdateConnectorCommand,
+  UpdateConnectorScanConfigurationCommand,
+  UpdateEc2DeepInspectionConfigurationCommand,
+  UpdateEncryptionKeyCommand,
+  UpdateFilterCommand,
+  UpdateOrganizationConfigurationCommand,
+  UpdateOrgEc2DeepInspectionConfigurationCommand,
+};
+const paginators = {
+  paginateGetCisScanResultDetails,
+  paginateGetClustersForImage,
+  paginateListAccountPermissions,
+  paginateListCisScanConfigurations,
+  paginateListCisScanResultsAggregatedByChecks,
+  paginateListCisScanResultsAggregatedByTargetResource,
+  paginateListCisScans,
+  paginateListConnectors,
+  paginateListConnectorScanConfigurations,
+  paginateListCoverage,
+  paginateListCoverageStatistics,
+  paginateListDelegatedAdminAccounts,
+  paginateListFilters,
+  paginateListFindingAggregations,
+  paginateListFindings,
+  paginateListMembers,
+  paginateListOnDemandScans,
+  paginateListUsageTotals,
+  paginateSearchVulnerabilities,
+};
+const waiters = {
+  waitUntilConnectorEnabled,
+  waitUntilConnectorDeleted,
+  waitUntilConnectorConnected,
+};
 
 /**
- * <p>Amazon Inspector is a vulnerability discovery service that automates continuous scanning for
- *          security vulnerabilities within your Amazon EC2 and Amazon ECR environments.</p>
+ * @public
  */
-export class Inspector2 extends Inspector2Client {
+export interface Inspector2RequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Inspector2 {
   /**
-   * <p>Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.</p>
+   * @see {@link AssociateMemberCommand}
    */
-  public associateMember(
+  associateMember(
     args: AssociateMemberCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<AssociateMemberCommandOutput>;
-  public associateMember(
+  associateMember(
     args: AssociateMemberCommandInput,
     cb: (err: any, data?: AssociateMemberCommandOutput) => void
   ): void;
-  public associateMember(
+  associateMember(
     args: AssociateMemberCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: AssociateMemberCommandOutput) => void
   ): void;
-  public associateMember(
-    args: AssociateMemberCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateMemberCommandOutput) => void),
-    cb?: (err: any, data?: AssociateMemberCommandOutput) => void
-  ): Promise<AssociateMemberCommandOutput> | void {
-    const command = new AssociateMemberCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves the Amazon Inspector status of multiple Amazon Web Services accounts within your environment.</p>
+   * @see {@link BatchAssociateCodeSecurityScanConfigurationCommand}
    */
-  public batchGetAccountStatus(
+  batchAssociateCodeSecurityScanConfiguration(
+    args: BatchAssociateCodeSecurityScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<BatchAssociateCodeSecurityScanConfigurationCommandOutput>;
+  batchAssociateCodeSecurityScanConfiguration(
+    args: BatchAssociateCodeSecurityScanConfigurationCommandInput,
+    cb: (err: any, data?: BatchAssociateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+  batchAssociateCodeSecurityScanConfiguration(
+    args: BatchAssociateCodeSecurityScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: BatchAssociateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchDisassociateCodeSecurityScanConfigurationCommand}
+   */
+  batchDisassociateCodeSecurityScanConfiguration(
+    args: BatchDisassociateCodeSecurityScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<BatchDisassociateCodeSecurityScanConfigurationCommandOutput>;
+  batchDisassociateCodeSecurityScanConfiguration(
+    args: BatchDisassociateCodeSecurityScanConfigurationCommandInput,
+    cb: (err: any, data?: BatchDisassociateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+  batchDisassociateCodeSecurityScanConfiguration(
+    args: BatchDisassociateCodeSecurityScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: BatchDisassociateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetAccountStatusCommand}
+   */
+  batchGetAccountStatus(): Promise<BatchGetAccountStatusCommandOutput>;
+  batchGetAccountStatus(
     args: BatchGetAccountStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<BatchGetAccountStatusCommandOutput>;
-  public batchGetAccountStatus(
+  batchGetAccountStatus(
     args: BatchGetAccountStatusCommandInput,
     cb: (err: any, data?: BatchGetAccountStatusCommandOutput) => void
   ): void;
-  public batchGetAccountStatus(
+  batchGetAccountStatus(
     args: BatchGetAccountStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: BatchGetAccountStatusCommandOutput) => void
   ): void;
-  public batchGetAccountStatus(
-    args: BatchGetAccountStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetAccountStatusCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetAccountStatusCommandOutput) => void
-  ): Promise<BatchGetAccountStatusCommandOutput> | void {
-    const command = new BatchGetAccountStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets free trial status for multiple Amazon Web Services accounts.</p>
+   * @see {@link BatchGetCodeSnippetCommand}
    */
-  public batchGetFreeTrialInfo(
+  batchGetCodeSnippet(
+    args: BatchGetCodeSnippetCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<BatchGetCodeSnippetCommandOutput>;
+  batchGetCodeSnippet(
+    args: BatchGetCodeSnippetCommandInput,
+    cb: (err: any, data?: BatchGetCodeSnippetCommandOutput) => void
+  ): void;
+  batchGetCodeSnippet(
+    args: BatchGetCodeSnippetCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: BatchGetCodeSnippetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetFindingDetailsCommand}
+   */
+  batchGetFindingDetails(
+    args: BatchGetFindingDetailsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<BatchGetFindingDetailsCommandOutput>;
+  batchGetFindingDetails(
+    args: BatchGetFindingDetailsCommandInput,
+    cb: (err: any, data?: BatchGetFindingDetailsCommandOutput) => void
+  ): void;
+  batchGetFindingDetails(
+    args: BatchGetFindingDetailsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: BatchGetFindingDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchGetFreeTrialInfoCommand}
+   */
+  batchGetFreeTrialInfo(
     args: BatchGetFreeTrialInfoCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<BatchGetFreeTrialInfoCommandOutput>;
-  public batchGetFreeTrialInfo(
+  batchGetFreeTrialInfo(
     args: BatchGetFreeTrialInfoCommandInput,
     cb: (err: any, data?: BatchGetFreeTrialInfoCommandOutput) => void
   ): void;
-  public batchGetFreeTrialInfo(
+  batchGetFreeTrialInfo(
     args: BatchGetFreeTrialInfoCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: BatchGetFreeTrialInfoCommandOutput) => void
   ): void;
-  public batchGetFreeTrialInfo(
-    args: BatchGetFreeTrialInfoCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: BatchGetFreeTrialInfoCommandOutput) => void),
-    cb?: (err: any, data?: BatchGetFreeTrialInfoCommandOutput) => void
-  ): Promise<BatchGetFreeTrialInfoCommandOutput> | void {
-    const command = new BatchGetFreeTrialInfoCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Cancels the given findings report.</p>
+   * @see {@link BatchGetMemberEc2DeepInspectionStatusCommand}
    */
-  public cancelFindingsReport(
+  batchGetMemberEc2DeepInspectionStatus(): Promise<BatchGetMemberEc2DeepInspectionStatusCommandOutput>;
+  batchGetMemberEc2DeepInspectionStatus(
+    args: BatchGetMemberEc2DeepInspectionStatusCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<BatchGetMemberEc2DeepInspectionStatusCommandOutput>;
+  batchGetMemberEc2DeepInspectionStatus(
+    args: BatchGetMemberEc2DeepInspectionStatusCommandInput,
+    cb: (err: any, data?: BatchGetMemberEc2DeepInspectionStatusCommandOutput) => void
+  ): void;
+  batchGetMemberEc2DeepInspectionStatus(
+    args: BatchGetMemberEc2DeepInspectionStatusCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: BatchGetMemberEc2DeepInspectionStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateMemberEc2DeepInspectionStatusCommand}
+   */
+  batchUpdateMemberEc2DeepInspectionStatus(
+    args: BatchUpdateMemberEc2DeepInspectionStatusCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<BatchUpdateMemberEc2DeepInspectionStatusCommandOutput>;
+  batchUpdateMemberEc2DeepInspectionStatus(
+    args: BatchUpdateMemberEc2DeepInspectionStatusCommandInput,
+    cb: (err: any, data?: BatchUpdateMemberEc2DeepInspectionStatusCommandOutput) => void
+  ): void;
+  batchUpdateMemberEc2DeepInspectionStatus(
+    args: BatchUpdateMemberEc2DeepInspectionStatusCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: BatchUpdateMemberEc2DeepInspectionStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CancelFindingsReportCommand}
+   */
+  cancelFindingsReport(
     args: CancelFindingsReportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<CancelFindingsReportCommandOutput>;
-  public cancelFindingsReport(
+  cancelFindingsReport(
     args: CancelFindingsReportCommandInput,
     cb: (err: any, data?: CancelFindingsReportCommandOutput) => void
   ): void;
-  public cancelFindingsReport(
+  cancelFindingsReport(
     args: CancelFindingsReportCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: CancelFindingsReportCommandOutput) => void
   ): void;
-  public cancelFindingsReport(
-    args: CancelFindingsReportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CancelFindingsReportCommandOutput) => void),
-    cb?: (err: any, data?: CancelFindingsReportCommandOutput) => void
-  ): Promise<CancelFindingsReportCommandOutput> | void {
-    const command = new CancelFindingsReportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a filter resource using specified filter criteria.</p>
+   * @see {@link CancelSbomExportCommand}
    */
-  public createFilter(
+  cancelSbomExport(
+    args: CancelSbomExportCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<CancelSbomExportCommandOutput>;
+  cancelSbomExport(
+    args: CancelSbomExportCommandInput,
+    cb: (err: any, data?: CancelSbomExportCommandOutput) => void
+  ): void;
+  cancelSbomExport(
+    args: CancelSbomExportCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: CancelSbomExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCisScanConfigurationCommand}
+   */
+  createCisScanConfiguration(
+    args: CreateCisScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<CreateCisScanConfigurationCommandOutput>;
+  createCisScanConfiguration(
+    args: CreateCisScanConfigurationCommandInput,
+    cb: (err: any, data?: CreateCisScanConfigurationCommandOutput) => void
+  ): void;
+  createCisScanConfiguration(
+    args: CreateCisScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: CreateCisScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCodeSecurityIntegrationCommand}
+   */
+  createCodeSecurityIntegration(
+    args: CreateCodeSecurityIntegrationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<CreateCodeSecurityIntegrationCommandOutput>;
+  createCodeSecurityIntegration(
+    args: CreateCodeSecurityIntegrationCommandInput,
+    cb: (err: any, data?: CreateCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+  createCodeSecurityIntegration(
+    args: CreateCodeSecurityIntegrationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: CreateCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCodeSecurityScanConfigurationCommand}
+   */
+  createCodeSecurityScanConfiguration(
+    args: CreateCodeSecurityScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<CreateCodeSecurityScanConfigurationCommandOutput>;
+  createCodeSecurityScanConfiguration(
+    args: CreateCodeSecurityScanConfigurationCommandInput,
+    cb: (err: any, data?: CreateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+  createCodeSecurityScanConfiguration(
+    args: CreateCodeSecurityScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: CreateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateConnectorCommand}
+   */
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<CreateConnectorCommandOutput>;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+  createConnector(
+    args: CreateConnectorCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: CreateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateFilterCommand}
+   */
+  createFilter(
     args: CreateFilterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<CreateFilterCommandOutput>;
-  public createFilter(args: CreateFilterCommandInput, cb: (err: any, data?: CreateFilterCommandOutput) => void): void;
-  public createFilter(
+  createFilter(
     args: CreateFilterCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: CreateFilterCommandOutput) => void
   ): void;
-  public createFilter(
+  createFilter(
     args: CreateFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFilterCommandOutput) => void),
-    cb?: (err: any, data?: CreateFilterCommandOutput) => void
-  ): Promise<CreateFilterCommandOutput> | void {
-    const command = new CreateFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: CreateFilterCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Creates a finding report.</p>
+   * @see {@link CreateFindingsReportCommand}
    */
-  public createFindingsReport(
+  createFindingsReport(
     args: CreateFindingsReportCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<CreateFindingsReportCommandOutput>;
-  public createFindingsReport(
+  createFindingsReport(
     args: CreateFindingsReportCommandInput,
     cb: (err: any, data?: CreateFindingsReportCommandOutput) => void
   ): void;
-  public createFindingsReport(
+  createFindingsReport(
     args: CreateFindingsReportCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: CreateFindingsReportCommandOutput) => void
   ): void;
-  public createFindingsReport(
-    args: CreateFindingsReportCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateFindingsReportCommandOutput) => void),
-    cb?: (err: any, data?: CreateFindingsReportCommandOutput) => void
-  ): Promise<CreateFindingsReportCommandOutput> | void {
-    const command = new CreateFindingsReportCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a filter resource.</p>
+   * @see {@link CreateSbomExportCommand}
    */
-  public deleteFilter(
+  createSbomExport(
+    args: CreateSbomExportCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<CreateSbomExportCommandOutput>;
+  createSbomExport(
+    args: CreateSbomExportCommandInput,
+    cb: (err: any, data?: CreateSbomExportCommandOutput) => void
+  ): void;
+  createSbomExport(
+    args: CreateSbomExportCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: CreateSbomExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCisScanConfigurationCommand}
+   */
+  deleteCisScanConfiguration(
+    args: DeleteCisScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<DeleteCisScanConfigurationCommandOutput>;
+  deleteCisScanConfiguration(
+    args: DeleteCisScanConfigurationCommandInput,
+    cb: (err: any, data?: DeleteCisScanConfigurationCommandOutput) => void
+  ): void;
+  deleteCisScanConfiguration(
+    args: DeleteCisScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: DeleteCisScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCodeSecurityIntegrationCommand}
+   */
+  deleteCodeSecurityIntegration(
+    args: DeleteCodeSecurityIntegrationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<DeleteCodeSecurityIntegrationCommandOutput>;
+  deleteCodeSecurityIntegration(
+    args: DeleteCodeSecurityIntegrationCommandInput,
+    cb: (err: any, data?: DeleteCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+  deleteCodeSecurityIntegration(
+    args: DeleteCodeSecurityIntegrationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: DeleteCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCodeSecurityScanConfigurationCommand}
+   */
+  deleteCodeSecurityScanConfiguration(
+    args: DeleteCodeSecurityScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<DeleteCodeSecurityScanConfigurationCommandOutput>;
+  deleteCodeSecurityScanConfiguration(
+    args: DeleteCodeSecurityScanConfigurationCommandInput,
+    cb: (err: any, data?: DeleteCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+  deleteCodeSecurityScanConfiguration(
+    args: DeleteCodeSecurityScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: DeleteCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteConnectorCommand}
+   */
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<DeleteConnectorCommandOutput>;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+  deleteConnector(
+    args: DeleteConnectorCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: DeleteConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteFilterCommand}
+   */
+  deleteFilter(
     args: DeleteFilterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<DeleteFilterCommandOutput>;
-  public deleteFilter(args: DeleteFilterCommandInput, cb: (err: any, data?: DeleteFilterCommandOutput) => void): void;
-  public deleteFilter(
+  deleteFilter(
     args: DeleteFilterCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: DeleteFilterCommandOutput) => void
   ): void;
-  public deleteFilter(
+  deleteFilter(
     args: DeleteFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteFilterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteFilterCommandOutput) => void
-  ): Promise<DeleteFilterCommandOutput> | void {
-    const command = new DeleteFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: DeleteFilterCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Describe Amazon Inspector configuration settings for an Amazon Web Services organization</p>
+   * @see {@link DescribeOrganizationConfigurationCommand}
    */
-  public describeOrganizationConfiguration(
+  describeOrganizationConfiguration(): Promise<DescribeOrganizationConfigurationCommandOutput>;
+  describeOrganizationConfiguration(
     args: DescribeOrganizationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<DescribeOrganizationConfigurationCommandOutput>;
-  public describeOrganizationConfiguration(
+  describeOrganizationConfiguration(
     args: DescribeOrganizationConfigurationCommandInput,
     cb: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
   ): void;
-  public describeOrganizationConfiguration(
+  describeOrganizationConfiguration(
     args: DescribeOrganizationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
   ): void;
-  public describeOrganizationConfiguration(
-    args: DescribeOrganizationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeOrganizationConfigurationCommandOutput) => void
-  ): Promise<DescribeOrganizationConfigurationCommandOutput> | void {
-    const command = new DescribeOrganizationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disables Amazon Inspector scans for one or more Amazon Web Services accounts. Disabling all scan types in an account
-   *          disables the Amazon Inspector service.</p>
+   * @see {@link DisableCommand}
    */
-  public disable(args: DisableCommandInput, options?: __HttpHandlerOptions): Promise<DisableCommandOutput>;
-  public disable(args: DisableCommandInput, cb: (err: any, data?: DisableCommandOutput) => void): void;
-  public disable(
+  disable(): Promise<DisableCommandOutput>;
+  disable(
     args: DisableCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Inspector2RequestOptions
+  ): Promise<DisableCommandOutput>;
+  disable(
+    args: DisableCommandInput,
     cb: (err: any, data?: DisableCommandOutput) => void
   ): void;
-  public disable(
+  disable(
     args: DisableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableCommandOutput) => void),
-    cb?: (err: any, data?: DisableCommandOutput) => void
-  ): Promise<DisableCommandOutput> | void {
-    const command = new DisableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: DisableCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Disables the Amazon Inspector delegated administrator for your organization.</p>
+   * @see {@link DisableDelegatedAdminAccountCommand}
    */
-  public disableDelegatedAdminAccount(
+  disableDelegatedAdminAccount(
     args: DisableDelegatedAdminAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<DisableDelegatedAdminAccountCommandOutput>;
-  public disableDelegatedAdminAccount(
+  disableDelegatedAdminAccount(
     args: DisableDelegatedAdminAccountCommandInput,
     cb: (err: any, data?: DisableDelegatedAdminAccountCommandOutput) => void
   ): void;
-  public disableDelegatedAdminAccount(
+  disableDelegatedAdminAccount(
     args: DisableDelegatedAdminAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: DisableDelegatedAdminAccountCommandOutput) => void
   ): void;
-  public disableDelegatedAdminAccount(
-    args: DisableDelegatedAdminAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableDelegatedAdminAccountCommandOutput) => void),
-    cb?: (err: any, data?: DisableDelegatedAdminAccountCommandOutput) => void
-  ): Promise<DisableDelegatedAdminAccountCommandOutput> | void {
-    const command = new DisableDelegatedAdminAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disassociates a member account from an Amazon Inspector delegated administrator.</p>
+   * @see {@link DisassociateMemberCommand}
    */
-  public disassociateMember(
+  disassociateMember(
     args: DisassociateMemberCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<DisassociateMemberCommandOutput>;
-  public disassociateMember(
+  disassociateMember(
     args: DisassociateMemberCommandInput,
     cb: (err: any, data?: DisassociateMemberCommandOutput) => void
   ): void;
-  public disassociateMember(
+  disassociateMember(
     args: DisassociateMemberCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: DisassociateMemberCommandOutput) => void
   ): void;
-  public disassociateMember(
-    args: DisassociateMemberCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateMemberCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateMemberCommandOutput) => void
-  ): Promise<DisassociateMemberCommandOutput> | void {
-    const command = new DisassociateMemberCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Enables Amazon Inspector scans for one or more Amazon Web Services accounts.</p>
+   * @see {@link EnableCommand}
    */
-  public enable(args: EnableCommandInput, options?: __HttpHandlerOptions): Promise<EnableCommandOutput>;
-  public enable(args: EnableCommandInput, cb: (err: any, data?: EnableCommandOutput) => void): void;
-  public enable(
+  enable(
     args: EnableCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Inspector2RequestOptions
+  ): Promise<EnableCommandOutput>;
+  enable(
+    args: EnableCommandInput,
     cb: (err: any, data?: EnableCommandOutput) => void
   ): void;
-  public enable(
+  enable(
     args: EnableCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableCommandOutput) => void),
-    cb?: (err: any, data?: EnableCommandOutput) => void
-  ): Promise<EnableCommandOutput> | void {
-    const command = new EnableCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: EnableCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Enables the Amazon Inspector delegated administrator for your Organizations organization.</p>
+   * @see {@link EnableDelegatedAdminAccountCommand}
    */
-  public enableDelegatedAdminAccount(
+  enableDelegatedAdminAccount(
     args: EnableDelegatedAdminAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<EnableDelegatedAdminAccountCommandOutput>;
-  public enableDelegatedAdminAccount(
+  enableDelegatedAdminAccount(
     args: EnableDelegatedAdminAccountCommandInput,
     cb: (err: any, data?: EnableDelegatedAdminAccountCommandOutput) => void
   ): void;
-  public enableDelegatedAdminAccount(
+  enableDelegatedAdminAccount(
     args: EnableDelegatedAdminAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: EnableDelegatedAdminAccountCommandOutput) => void
   ): void;
-  public enableDelegatedAdminAccount(
-    args: EnableDelegatedAdminAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableDelegatedAdminAccountCommandOutput) => void),
-    cb?: (err: any, data?: EnableDelegatedAdminAccountCommandOutput) => void
-  ): Promise<EnableDelegatedAdminAccountCommandOutput> | void {
-    const command = new EnableDelegatedAdminAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves setting configurations for Inspector scans.</p>
+   * @see {@link GetCisScanReportCommand}
    */
-  public getConfiguration(
+  getCisScanReport(
+    args: GetCisScanReportCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetCisScanReportCommandOutput>;
+  getCisScanReport(
+    args: GetCisScanReportCommandInput,
+    cb: (err: any, data?: GetCisScanReportCommandOutput) => void
+  ): void;
+  getCisScanReport(
+    args: GetCisScanReportCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetCisScanReportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCisScanResultDetailsCommand}
+   */
+  getCisScanResultDetails(
+    args: GetCisScanResultDetailsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetCisScanResultDetailsCommandOutput>;
+  getCisScanResultDetails(
+    args: GetCisScanResultDetailsCommandInput,
+    cb: (err: any, data?: GetCisScanResultDetailsCommandOutput) => void
+  ): void;
+  getCisScanResultDetails(
+    args: GetCisScanResultDetailsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetCisScanResultDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetClustersForImageCommand}
+   */
+  getClustersForImage(
+    args: GetClustersForImageCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetClustersForImageCommandOutput>;
+  getClustersForImage(
+    args: GetClustersForImageCommandInput,
+    cb: (err: any, data?: GetClustersForImageCommandOutput) => void
+  ): void;
+  getClustersForImage(
+    args: GetClustersForImageCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetClustersForImageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCodeSecurityIntegrationCommand}
+   */
+  getCodeSecurityIntegration(
+    args: GetCodeSecurityIntegrationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetCodeSecurityIntegrationCommandOutput>;
+  getCodeSecurityIntegration(
+    args: GetCodeSecurityIntegrationCommandInput,
+    cb: (err: any, data?: GetCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+  getCodeSecurityIntegration(
+    args: GetCodeSecurityIntegrationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCodeSecurityScanCommand}
+   */
+  getCodeSecurityScan(
+    args: GetCodeSecurityScanCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetCodeSecurityScanCommandOutput>;
+  getCodeSecurityScan(
+    args: GetCodeSecurityScanCommandInput,
+    cb: (err: any, data?: GetCodeSecurityScanCommandOutput) => void
+  ): void;
+  getCodeSecurityScan(
+    args: GetCodeSecurityScanCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetCodeSecurityScanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCodeSecurityScanConfigurationCommand}
+   */
+  getCodeSecurityScanConfiguration(
+    args: GetCodeSecurityScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetCodeSecurityScanConfigurationCommandOutput>;
+  getCodeSecurityScanConfiguration(
+    args: GetCodeSecurityScanConfigurationCommandInput,
+    cb: (err: any, data?: GetCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+  getCodeSecurityScanConfiguration(
+    args: GetCodeSecurityScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetConfigurationCommand}
+   */
+  getConfiguration(): Promise<GetConfigurationCommandOutput>;
+  getConfiguration(
     args: GetConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<GetConfigurationCommandOutput>;
-  public getConfiguration(
+  getConfiguration(
     args: GetConfigurationCommandInput,
     cb: (err: any, data?: GetConfigurationCommandOutput) => void
   ): void;
-  public getConfiguration(
+  getConfiguration(
     args: GetConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: GetConfigurationCommandOutput) => void
   ): void;
-  public getConfiguration(
-    args: GetConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: GetConfigurationCommandOutput) => void
-  ): Promise<GetConfigurationCommandOutput> | void {
-    const command = new GetConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Retrieves information about the Amazon Inspector delegated administrator for your
-   *          organization.</p>
+   * @see {@link GetDelegatedAdminAccountCommand}
    */
-  public getDelegatedAdminAccount(
+  getDelegatedAdminAccount(): Promise<GetDelegatedAdminAccountCommandOutput>;
+  getDelegatedAdminAccount(
     args: GetDelegatedAdminAccountCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<GetDelegatedAdminAccountCommandOutput>;
-  public getDelegatedAdminAccount(
+  getDelegatedAdminAccount(
     args: GetDelegatedAdminAccountCommandInput,
     cb: (err: any, data?: GetDelegatedAdminAccountCommandOutput) => void
   ): void;
-  public getDelegatedAdminAccount(
+  getDelegatedAdminAccount(
     args: GetDelegatedAdminAccountCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: GetDelegatedAdminAccountCommandOutput) => void
   ): void;
-  public getDelegatedAdminAccount(
-    args: GetDelegatedAdminAccountCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDelegatedAdminAccountCommandOutput) => void),
-    cb?: (err: any, data?: GetDelegatedAdminAccountCommandOutput) => void
-  ): Promise<GetDelegatedAdminAccountCommandOutput> | void {
-    const command = new GetDelegatedAdminAccountCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets the status of a findings report.</p>
+   * @see {@link GetEc2DeepInspectionConfigurationCommand}
    */
-  public getFindingsReportStatus(
+  getEc2DeepInspectionConfiguration(): Promise<GetEc2DeepInspectionConfigurationCommandOutput>;
+  getEc2DeepInspectionConfiguration(
+    args: GetEc2DeepInspectionConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetEc2DeepInspectionConfigurationCommandOutput>;
+  getEc2DeepInspectionConfiguration(
+    args: GetEc2DeepInspectionConfigurationCommandInput,
+    cb: (err: any, data?: GetEc2DeepInspectionConfigurationCommandOutput) => void
+  ): void;
+  getEc2DeepInspectionConfiguration(
+    args: GetEc2DeepInspectionConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetEc2DeepInspectionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEncryptionKeyCommand}
+   */
+  getEncryptionKey(
+    args: GetEncryptionKeyCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetEncryptionKeyCommandOutput>;
+  getEncryptionKey(
+    args: GetEncryptionKeyCommandInput,
+    cb: (err: any, data?: GetEncryptionKeyCommandOutput) => void
+  ): void;
+  getEncryptionKey(
+    args: GetEncryptionKeyCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetEncryptionKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetFindingsReportStatusCommand}
+   */
+  getFindingsReportStatus(): Promise<GetFindingsReportStatusCommandOutput>;
+  getFindingsReportStatus(
     args: GetFindingsReportStatusCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<GetFindingsReportStatusCommandOutput>;
-  public getFindingsReportStatus(
+  getFindingsReportStatus(
     args: GetFindingsReportStatusCommandInput,
     cb: (err: any, data?: GetFindingsReportStatusCommandOutput) => void
   ): void;
-  public getFindingsReportStatus(
+  getFindingsReportStatus(
     args: GetFindingsReportStatusCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: GetFindingsReportStatusCommandOutput) => void
   ): void;
-  public getFindingsReportStatus(
-    args: GetFindingsReportStatusCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetFindingsReportStatusCommandOutput) => void),
-    cb?: (err: any, data?: GetFindingsReportStatusCommandOutput) => void
-  ): Promise<GetFindingsReportStatusCommandOutput> | void {
-    const command = new GetFindingsReportStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets member information for your organization.</p>
+   * @see {@link GetMemberCommand}
    */
-  public getMember(args: GetMemberCommandInput, options?: __HttpHandlerOptions): Promise<GetMemberCommandOutput>;
-  public getMember(args: GetMemberCommandInput, cb: (err: any, data?: GetMemberCommandOutput) => void): void;
-  public getMember(
+  getMember(
     args: GetMemberCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Inspector2RequestOptions
+  ): Promise<GetMemberCommandOutput>;
+  getMember(
+    args: GetMemberCommandInput,
     cb: (err: any, data?: GetMemberCommandOutput) => void
   ): void;
-  public getMember(
+  getMember(
     args: GetMemberCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMemberCommandOutput) => void),
-    cb?: (err: any, data?: GetMemberCommandOutput) => void
-  ): Promise<GetMemberCommandOutput> | void {
-    const command = new GetMemberCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetMemberCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the permissions an account has to configure Amazon Inspector.</p>
+   * @see {@link GetOnDemandScanStatusCommand}
    */
-  public listAccountPermissions(
+  getOnDemandScanStatus(
+    args: GetOnDemandScanStatusCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetOnDemandScanStatusCommandOutput>;
+  getOnDemandScanStatus(
+    args: GetOnDemandScanStatusCommandInput,
+    cb: (err: any, data?: GetOnDemandScanStatusCommandOutput) => void
+  ): void;
+  getOnDemandScanStatus(
+    args: GetOnDemandScanStatusCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetOnDemandScanStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSbomExportCommand}
+   */
+  getSbomExport(
+    args: GetSbomExportCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<GetSbomExportCommandOutput>;
+  getSbomExport(
+    args: GetSbomExportCommandInput,
+    cb: (err: any, data?: GetSbomExportCommandOutput) => void
+  ): void;
+  getSbomExport(
+    args: GetSbomExportCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: GetSbomExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAccountPermissionsCommand}
+   */
+  listAccountPermissions(): Promise<ListAccountPermissionsCommandOutput>;
+  listAccountPermissions(
     args: ListAccountPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListAccountPermissionsCommandOutput>;
-  public listAccountPermissions(
+  listAccountPermissions(
     args: ListAccountPermissionsCommandInput,
     cb: (err: any, data?: ListAccountPermissionsCommandOutput) => void
   ): void;
-  public listAccountPermissions(
+  listAccountPermissions(
     args: ListAccountPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: ListAccountPermissionsCommandOutput) => void
   ): void;
-  public listAccountPermissions(
-    args: ListAccountPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAccountPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: ListAccountPermissionsCommandOutput) => void
-  ): Promise<ListAccountPermissionsCommandOutput> | void {
-    const command = new ListAccountPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists coverage details for you environment.</p>
+   * @see {@link ListCisScanConfigurationsCommand}
    */
-  public listCoverage(
+  listCisScanConfigurations(): Promise<ListCisScanConfigurationsCommandOutput>;
+  listCisScanConfigurations(
+    args: ListCisScanConfigurationsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListCisScanConfigurationsCommandOutput>;
+  listCisScanConfigurations(
+    args: ListCisScanConfigurationsCommandInput,
+    cb: (err: any, data?: ListCisScanConfigurationsCommandOutput) => void
+  ): void;
+  listCisScanConfigurations(
+    args: ListCisScanConfigurationsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCisScanConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCisScanResultsAggregatedByChecksCommand}
+   */
+  listCisScanResultsAggregatedByChecks(
+    args: ListCisScanResultsAggregatedByChecksCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListCisScanResultsAggregatedByChecksCommandOutput>;
+  listCisScanResultsAggregatedByChecks(
+    args: ListCisScanResultsAggregatedByChecksCommandInput,
+    cb: (err: any, data?: ListCisScanResultsAggregatedByChecksCommandOutput) => void
+  ): void;
+  listCisScanResultsAggregatedByChecks(
+    args: ListCisScanResultsAggregatedByChecksCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCisScanResultsAggregatedByChecksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCisScanResultsAggregatedByTargetResourceCommand}
+   */
+  listCisScanResultsAggregatedByTargetResource(
+    args: ListCisScanResultsAggregatedByTargetResourceCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListCisScanResultsAggregatedByTargetResourceCommandOutput>;
+  listCisScanResultsAggregatedByTargetResource(
+    args: ListCisScanResultsAggregatedByTargetResourceCommandInput,
+    cb: (err: any, data?: ListCisScanResultsAggregatedByTargetResourceCommandOutput) => void
+  ): void;
+  listCisScanResultsAggregatedByTargetResource(
+    args: ListCisScanResultsAggregatedByTargetResourceCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCisScanResultsAggregatedByTargetResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCisScansCommand}
+   */
+  listCisScans(): Promise<ListCisScansCommandOutput>;
+  listCisScans(
+    args: ListCisScansCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListCisScansCommandOutput>;
+  listCisScans(
+    args: ListCisScansCommandInput,
+    cb: (err: any, data?: ListCisScansCommandOutput) => void
+  ): void;
+  listCisScans(
+    args: ListCisScansCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCisScansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCodeSecurityIntegrationsCommand}
+   */
+  listCodeSecurityIntegrations(): Promise<ListCodeSecurityIntegrationsCommandOutput>;
+  listCodeSecurityIntegrations(
+    args: ListCodeSecurityIntegrationsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListCodeSecurityIntegrationsCommandOutput>;
+  listCodeSecurityIntegrations(
+    args: ListCodeSecurityIntegrationsCommandInput,
+    cb: (err: any, data?: ListCodeSecurityIntegrationsCommandOutput) => void
+  ): void;
+  listCodeSecurityIntegrations(
+    args: ListCodeSecurityIntegrationsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCodeSecurityIntegrationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCodeSecurityScanConfigurationAssociationsCommand}
+   */
+  listCodeSecurityScanConfigurationAssociations(
+    args: ListCodeSecurityScanConfigurationAssociationsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListCodeSecurityScanConfigurationAssociationsCommandOutput>;
+  listCodeSecurityScanConfigurationAssociations(
+    args: ListCodeSecurityScanConfigurationAssociationsCommandInput,
+    cb: (err: any, data?: ListCodeSecurityScanConfigurationAssociationsCommandOutput) => void
+  ): void;
+  listCodeSecurityScanConfigurationAssociations(
+    args: ListCodeSecurityScanConfigurationAssociationsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCodeSecurityScanConfigurationAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCodeSecurityScanConfigurationsCommand}
+   */
+  listCodeSecurityScanConfigurations(): Promise<ListCodeSecurityScanConfigurationsCommandOutput>;
+  listCodeSecurityScanConfigurations(
+    args: ListCodeSecurityScanConfigurationsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListCodeSecurityScanConfigurationsCommandOutput>;
+  listCodeSecurityScanConfigurations(
+    args: ListCodeSecurityScanConfigurationsCommandInput,
+    cb: (err: any, data?: ListCodeSecurityScanConfigurationsCommandOutput) => void
+  ): void;
+  listCodeSecurityScanConfigurations(
+    args: ListCodeSecurityScanConfigurationsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCodeSecurityScanConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   */
+  listConnectors(): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListConnectorsCommandOutput>;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+  listConnectors(
+    args: ListConnectorsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListConnectorsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListConnectorScanConfigurationsCommand}
+   */
+  listConnectorScanConfigurations(): Promise<ListConnectorScanConfigurationsCommandOutput>;
+  listConnectorScanConfigurations(
+    args: ListConnectorScanConfigurationsCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListConnectorScanConfigurationsCommandOutput>;
+  listConnectorScanConfigurations(
+    args: ListConnectorScanConfigurationsCommandInput,
+    cb: (err: any, data?: ListConnectorScanConfigurationsCommandOutput) => void
+  ): void;
+  listConnectorScanConfigurations(
+    args: ListConnectorScanConfigurationsCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListConnectorScanConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCoverageCommand}
+   */
+  listCoverage(): Promise<ListCoverageCommandOutput>;
+  listCoverage(
     args: ListCoverageCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListCoverageCommandOutput>;
-  public listCoverage(args: ListCoverageCommandInput, cb: (err: any, data?: ListCoverageCommandOutput) => void): void;
-  public listCoverage(
+  listCoverage(
     args: ListCoverageCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListCoverageCommandOutput) => void
   ): void;
-  public listCoverage(
+  listCoverage(
     args: ListCoverageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCoverageCommandOutput) => void),
-    cb?: (err: any, data?: ListCoverageCommandOutput) => void
-  ): Promise<ListCoverageCommandOutput> | void {
-    const command = new ListCoverageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListCoverageCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists Amazon Inspector coverage statistics for your environment.</p>
+   * @see {@link ListCoverageStatisticsCommand}
    */
-  public listCoverageStatistics(
+  listCoverageStatistics(): Promise<ListCoverageStatisticsCommandOutput>;
+  listCoverageStatistics(
     args: ListCoverageStatisticsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListCoverageStatisticsCommandOutput>;
-  public listCoverageStatistics(
+  listCoverageStatistics(
     args: ListCoverageStatisticsCommandInput,
     cb: (err: any, data?: ListCoverageStatisticsCommandOutput) => void
   ): void;
-  public listCoverageStatistics(
+  listCoverageStatistics(
     args: ListCoverageStatisticsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: ListCoverageStatisticsCommandOutput) => void
   ): void;
-  public listCoverageStatistics(
-    args: ListCoverageStatisticsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCoverageStatisticsCommandOutput) => void),
-    cb?: (err: any, data?: ListCoverageStatisticsCommandOutput) => void
-  ): Promise<ListCoverageStatisticsCommandOutput> | void {
-    const command = new ListCoverageStatisticsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists information about the Amazon Inspector delegated administrator of your
-   *          organization.</p>
+   * @see {@link ListDelegatedAdminAccountsCommand}
    */
-  public listDelegatedAdminAccounts(
+  listDelegatedAdminAccounts(): Promise<ListDelegatedAdminAccountsCommandOutput>;
+  listDelegatedAdminAccounts(
     args: ListDelegatedAdminAccountsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListDelegatedAdminAccountsCommandOutput>;
-  public listDelegatedAdminAccounts(
+  listDelegatedAdminAccounts(
     args: ListDelegatedAdminAccountsCommandInput,
     cb: (err: any, data?: ListDelegatedAdminAccountsCommandOutput) => void
   ): void;
-  public listDelegatedAdminAccounts(
+  listDelegatedAdminAccounts(
     args: ListDelegatedAdminAccountsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: ListDelegatedAdminAccountsCommandOutput) => void
   ): void;
-  public listDelegatedAdminAccounts(
-    args: ListDelegatedAdminAccountsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListDelegatedAdminAccountsCommandOutput) => void),
-    cb?: (err: any, data?: ListDelegatedAdminAccountsCommandOutput) => void
-  ): Promise<ListDelegatedAdminAccountsCommandOutput> | void {
-    const command = new ListDelegatedAdminAccountsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the filters associated with your account.</p>
+   * @see {@link ListFiltersCommand}
    */
-  public listFilters(args: ListFiltersCommandInput, options?: __HttpHandlerOptions): Promise<ListFiltersCommandOutput>;
-  public listFilters(args: ListFiltersCommandInput, cb: (err: any, data?: ListFiltersCommandOutput) => void): void;
-  public listFilters(
+  listFilters(): Promise<ListFiltersCommandOutput>;
+  listFilters(
     args: ListFiltersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Inspector2RequestOptions
+  ): Promise<ListFiltersCommandOutput>;
+  listFilters(
+    args: ListFiltersCommandInput,
     cb: (err: any, data?: ListFiltersCommandOutput) => void
   ): void;
-  public listFilters(
+  listFilters(
     args: ListFiltersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFiltersCommandOutput) => void),
-    cb?: (err: any, data?: ListFiltersCommandOutput) => void
-  ): Promise<ListFiltersCommandOutput> | void {
-    const command = new ListFiltersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListFiltersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists aggregated finding data for your environment based on specific criteria.</p>
+   * @see {@link ListFindingAggregationsCommand}
    */
-  public listFindingAggregations(
+  listFindingAggregations(
     args: ListFindingAggregationsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListFindingAggregationsCommandOutput>;
-  public listFindingAggregations(
+  listFindingAggregations(
     args: ListFindingAggregationsCommandInput,
     cb: (err: any, data?: ListFindingAggregationsCommandOutput) => void
   ): void;
-  public listFindingAggregations(
+  listFindingAggregations(
     args: ListFindingAggregationsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: ListFindingAggregationsCommandOutput) => void
   ): void;
-  public listFindingAggregations(
-    args: ListFindingAggregationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFindingAggregationsCommandOutput) => void),
-    cb?: (err: any, data?: ListFindingAggregationsCommandOutput) => void
-  ): Promise<ListFindingAggregationsCommandOutput> | void {
-    const command = new ListFindingAggregationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists findings for your environment.</p>
+   * @see {@link ListFindingsCommand}
    */
-  public listFindings(
+  listFindings(): Promise<ListFindingsCommandOutput>;
+  listFindings(
     args: ListFindingsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListFindingsCommandOutput>;
-  public listFindings(args: ListFindingsCommandInput, cb: (err: any, data?: ListFindingsCommandOutput) => void): void;
-  public listFindings(
+  listFindings(
     args: ListFindingsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListFindingsCommandOutput) => void
   ): void;
-  public listFindings(
+  listFindings(
     args: ListFindingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListFindingsCommandOutput) => void),
-    cb?: (err: any, data?: ListFindingsCommandOutput) => void
-  ): Promise<ListFindingsCommandOutput> | void {
-    const command = new ListFindingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListFindingsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>List members associated with the Amazon Inspector delegated administrator for your
-   *          organization.</p>
+   * @see {@link ListMembersCommand}
    */
-  public listMembers(args: ListMembersCommandInput, options?: __HttpHandlerOptions): Promise<ListMembersCommandOutput>;
-  public listMembers(args: ListMembersCommandInput, cb: (err: any, data?: ListMembersCommandOutput) => void): void;
-  public listMembers(
+  listMembers(): Promise<ListMembersCommandOutput>;
+  listMembers(
     args: ListMembersCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Inspector2RequestOptions
+  ): Promise<ListMembersCommandOutput>;
+  listMembers(
+    args: ListMembersCommandInput,
     cb: (err: any, data?: ListMembersCommandOutput) => void
   ): void;
-  public listMembers(
+  listMembers(
     args: ListMembersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMembersCommandOutput) => void),
-    cb?: (err: any, data?: ListMembersCommandOutput) => void
-  ): Promise<ListMembersCommandOutput> | void {
-    const command = new ListMembersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListMembersCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all tags attached to a given resource.</p>
+   * @see {@link ListOnDemandScansCommand}
    */
-  public listTagsForResource(
+  listOnDemandScans(
+    args: ListOnDemandScansCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ListOnDemandScansCommandOutput>;
+  listOnDemandScans(
+    args: ListOnDemandScansCommandInput,
+    cb: (err: any, data?: ListOnDemandScansCommandOutput) => void
+  ): void;
+  listOnDemandScans(
+    args: ListOnDemandScansCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ListOnDemandScansCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the Amazon Inspector usage totals over the last 30 days.</p>
+   * @see {@link ListUsageTotalsCommand}
    */
-  public listUsageTotals(
+  listUsageTotals(): Promise<ListUsageTotalsCommandOutput>;
+  listUsageTotals(
     args: ListUsageTotalsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<ListUsageTotalsCommandOutput>;
-  public listUsageTotals(
+  listUsageTotals(
     args: ListUsageTotalsCommandInput,
     cb: (err: any, data?: ListUsageTotalsCommandOutput) => void
   ): void;
-  public listUsageTotals(
+  listUsageTotals(
     args: ListUsageTotalsCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: ListUsageTotalsCommandOutput) => void
   ): void;
-  public listUsageTotals(
-    args: ListUsageTotalsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUsageTotalsCommandOutput) => void),
-    cb?: (err: any, data?: ListUsageTotalsCommandOutput) => void
-  ): Promise<ListUsageTotalsCommandOutput> | void {
-    const command = new ListUsageTotalsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Adds tags to a resource.</p>
+   * @see {@link ResetEncryptionKeyCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  resetEncryptionKey(
+    args: ResetEncryptionKeyCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<ResetEncryptionKeyCommandOutput>;
+  resetEncryptionKey(
+    args: ResetEncryptionKeyCommandInput,
+    cb: (err: any, data?: ResetEncryptionKeyCommandOutput) => void
+  ): void;
+  resetEncryptionKey(
+    args: ResetEncryptionKeyCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: ResetEncryptionKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SearchVulnerabilitiesCommand}
+   */
+  searchVulnerabilities(
+    args: SearchVulnerabilitiesCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<SearchVulnerabilitiesCommandOutput>;
+  searchVulnerabilities(
+    args: SearchVulnerabilitiesCommandInput,
+    cb: (err: any, data?: SearchVulnerabilitiesCommandOutput) => void
+  ): void;
+  searchVulnerabilities(
+    args: SearchVulnerabilitiesCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: SearchVulnerabilitiesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendCisSessionHealthCommand}
+   */
+  sendCisSessionHealth(
+    args: SendCisSessionHealthCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<SendCisSessionHealthCommandOutput>;
+  sendCisSessionHealth(
+    args: SendCisSessionHealthCommandInput,
+    cb: (err: any, data?: SendCisSessionHealthCommandOutput) => void
+  ): void;
+  sendCisSessionHealth(
+    args: SendCisSessionHealthCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: SendCisSessionHealthCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendCisSessionTelemetryCommand}
+   */
+  sendCisSessionTelemetry(
+    args: SendCisSessionTelemetryCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<SendCisSessionTelemetryCommandOutput>;
+  sendCisSessionTelemetry(
+    args: SendCisSessionTelemetryCommandInput,
+    cb: (err: any, data?: SendCisSessionTelemetryCommandOutput) => void
+  ): void;
+  sendCisSessionTelemetry(
+    args: SendCisSessionTelemetryCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: SendCisSessionTelemetryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCisSessionCommand}
+   */
+  startCisSession(
+    args: StartCisSessionCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<StartCisSessionCommandOutput>;
+  startCisSession(
+    args: StartCisSessionCommandInput,
+    cb: (err: any, data?: StartCisSessionCommandOutput) => void
+  ): void;
+  startCisSession(
+    args: StartCisSessionCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: StartCisSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCodeSecurityScanCommand}
+   */
+  startCodeSecurityScan(
+    args: StartCodeSecurityScanCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<StartCodeSecurityScanCommandOutput>;
+  startCodeSecurityScan(
+    args: StartCodeSecurityScanCommandInput,
+    cb: (err: any, data?: StartCodeSecurityScanCommandOutput) => void
+  ): void;
+  startCodeSecurityScan(
+    args: StartCodeSecurityScanCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: StartCodeSecurityScanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartOnDemandScanCommand}
+   */
+  startOnDemandScan(
+    args: StartOnDemandScanCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<StartOnDemandScanCommandOutput>;
+  startOnDemandScan(
+    args: StartOnDemandScanCommandInput,
+    cb: (err: any, data?: StartOnDemandScanCommandOutput) => void
+  ): void;
+  startOnDemandScan(
+    args: StartOnDemandScanCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: StartOnDemandScanCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopCisSessionCommand}
+   */
+  stopCisSession(
+    args: StopCisSessionCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<StopCisSessionCommandOutput>;
+  stopCisSession(
+    args: StopCisSessionCommandInput,
+    cb: (err: any, data?: StopCisSessionCommandOutput) => void
+  ): void;
+  stopCisSession(
+    args: StopCisSessionCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: StopCisSessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: Inspector2RequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates setting configurations for your Amazon Inspector account. When you use this API as an Amazon Inspector delegated administrator this updates the setting for all accounts you manage. Member accounts in an organization cannot update this setting.</p>
+   * @see {@link UpdateCisScanConfigurationCommand}
    */
-  public updateConfiguration(
+  updateCisScanConfiguration(
+    args: UpdateCisScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateCisScanConfigurationCommandOutput>;
+  updateCisScanConfiguration(
+    args: UpdateCisScanConfigurationCommandInput,
+    cb: (err: any, data?: UpdateCisScanConfigurationCommandOutput) => void
+  ): void;
+  updateCisScanConfiguration(
+    args: UpdateCisScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateCisScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCodeSecurityIntegrationCommand}
+   */
+  updateCodeSecurityIntegration(
+    args: UpdateCodeSecurityIntegrationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateCodeSecurityIntegrationCommandOutput>;
+  updateCodeSecurityIntegration(
+    args: UpdateCodeSecurityIntegrationCommandInput,
+    cb: (err: any, data?: UpdateCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+  updateCodeSecurityIntegration(
+    args: UpdateCodeSecurityIntegrationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateCodeSecurityIntegrationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCodeSecurityScanConfigurationCommand}
+   */
+  updateCodeSecurityScanConfiguration(
+    args: UpdateCodeSecurityScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateCodeSecurityScanConfigurationCommandOutput>;
+  updateCodeSecurityScanConfiguration(
+    args: UpdateCodeSecurityScanConfigurationCommandInput,
+    cb: (err: any, data?: UpdateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+  updateCodeSecurityScanConfiguration(
+    args: UpdateCodeSecurityScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateCodeSecurityScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConfigurationCommand}
+   */
+  updateConfiguration(): Promise<UpdateConfigurationCommandOutput>;
+  updateConfiguration(
     args: UpdateConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<UpdateConfigurationCommandOutput>;
-  public updateConfiguration(
+  updateConfiguration(
     args: UpdateConfigurationCommandInput,
     cb: (err: any, data?: UpdateConfigurationCommandOutput) => void
   ): void;
-  public updateConfiguration(
+  updateConfiguration(
     args: UpdateConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: UpdateConfigurationCommandOutput) => void
   ): void;
-  public updateConfiguration(
-    args: UpdateConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateConfigurationCommandOutput) => void
-  ): Promise<UpdateConfigurationCommandOutput> | void {
-    const command = new UpdateConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Specifies the action that is to be applied to the findings that match the filter.</p>
+   * @see {@link UpdateConnectorCommand}
    */
-  public updateFilter(
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateConnectorCommandOutput>;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+  updateConnector(
+    args: UpdateConnectorCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateConnectorCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateConnectorScanConfigurationCommand}
+   */
+  updateConnectorScanConfiguration(
+    args: UpdateConnectorScanConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateConnectorScanConfigurationCommandOutput>;
+  updateConnectorScanConfiguration(
+    args: UpdateConnectorScanConfigurationCommandInput,
+    cb: (err: any, data?: UpdateConnectorScanConfigurationCommandOutput) => void
+  ): void;
+  updateConnectorScanConfiguration(
+    args: UpdateConnectorScanConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateConnectorScanConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEc2DeepInspectionConfigurationCommand}
+   */
+  updateEc2DeepInspectionConfiguration(): Promise<UpdateEc2DeepInspectionConfigurationCommandOutput>;
+  updateEc2DeepInspectionConfiguration(
+    args: UpdateEc2DeepInspectionConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateEc2DeepInspectionConfigurationCommandOutput>;
+  updateEc2DeepInspectionConfiguration(
+    args: UpdateEc2DeepInspectionConfigurationCommandInput,
+    cb: (err: any, data?: UpdateEc2DeepInspectionConfigurationCommandOutput) => void
+  ): void;
+  updateEc2DeepInspectionConfiguration(
+    args: UpdateEc2DeepInspectionConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateEc2DeepInspectionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEncryptionKeyCommand}
+   */
+  updateEncryptionKey(
+    args: UpdateEncryptionKeyCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateEncryptionKeyCommandOutput>;
+  updateEncryptionKey(
+    args: UpdateEncryptionKeyCommandInput,
+    cb: (err: any, data?: UpdateEncryptionKeyCommandOutput) => void
+  ): void;
+  updateEncryptionKey(
+    args: UpdateEncryptionKeyCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateEncryptionKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateFilterCommand}
+   */
+  updateFilter(
     args: UpdateFilterCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<UpdateFilterCommandOutput>;
-  public updateFilter(args: UpdateFilterCommandInput, cb: (err: any, data?: UpdateFilterCommandOutput) => void): void;
-  public updateFilter(
+  updateFilter(
     args: UpdateFilterCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: UpdateFilterCommandOutput) => void
   ): void;
-  public updateFilter(
+  updateFilter(
     args: UpdateFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateFilterCommandOutput) => void),
-    cb?: (err: any, data?: UpdateFilterCommandOutput) => void
-  ): Promise<UpdateFilterCommandOutput> | void {
-    const command = new UpdateFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateFilterCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the configurations for your Amazon Inspector organization.</p>
+   * @see {@link UpdateOrganizationConfigurationCommand}
    */
-  public updateOrganizationConfiguration(
+  updateOrganizationConfiguration(
     args: UpdateOrganizationConfigurationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: Inspector2RequestOptions
   ): Promise<UpdateOrganizationConfigurationCommandOutput>;
-  public updateOrganizationConfiguration(
+  updateOrganizationConfiguration(
     args: UpdateOrganizationConfigurationCommandInput,
     cb: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
   ): void;
-  public updateOrganizationConfiguration(
+  updateOrganizationConfiguration(
     args: UpdateOrganizationConfigurationCommandInput,
-    options: __HttpHandlerOptions,
+    options: Inspector2RequestOptions,
     cb: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
   ): void;
-  public updateOrganizationConfiguration(
-    args: UpdateOrganizationConfigurationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateOrganizationConfigurationCommandOutput) => void
-  ): Promise<UpdateOrganizationConfigurationCommandOutput> | void {
-    const command = new UpdateOrganizationConfigurationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateOrgEc2DeepInspectionConfigurationCommand}
+   */
+  updateOrgEc2DeepInspectionConfiguration(
+    args: UpdateOrgEc2DeepInspectionConfigurationCommandInput,
+    options?: Inspector2RequestOptions
+  ): Promise<UpdateOrgEc2DeepInspectionConfigurationCommandOutput>;
+  updateOrgEc2DeepInspectionConfiguration(
+    args: UpdateOrgEc2DeepInspectionConfigurationCommandInput,
+    cb: (err: any, data?: UpdateOrgEc2DeepInspectionConfigurationCommandOutput) => void
+  ): void;
+  updateOrgEc2DeepInspectionConfiguration(
+    args: UpdateOrgEc2DeepInspectionConfigurationCommandInput,
+    options: Inspector2RequestOptions,
+    cb: (err: any, data?: UpdateOrgEc2DeepInspectionConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCisScanResultDetailsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetCisScanResultDetailsCommandOutput}.
+   */
+  paginateGetCisScanResultDetails(
+    args: GetCisScanResultDetailsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetCisScanResultDetailsCommandOutput>;
+
+  /**
+   * @see {@link GetClustersForImageCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link GetClustersForImageCommandOutput}.
+   */
+  paginateGetClustersForImage(
+    args: GetClustersForImageCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<GetClustersForImageCommandOutput>;
+
+  /**
+   * @see {@link ListAccountPermissionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAccountPermissionsCommandOutput}.
+   */
+  paginateListAccountPermissions(
+    args?: ListAccountPermissionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAccountPermissionsCommandOutput>;
+
+  /**
+   * @see {@link ListCisScanConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCisScanConfigurationsCommandOutput}.
+   */
+  paginateListCisScanConfigurations(
+    args?: ListCisScanConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCisScanConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListCisScanResultsAggregatedByChecksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCisScanResultsAggregatedByChecksCommandOutput}.
+   */
+  paginateListCisScanResultsAggregatedByChecks(
+    args: ListCisScanResultsAggregatedByChecksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCisScanResultsAggregatedByChecksCommandOutput>;
+
+  /**
+   * @see {@link ListCisScanResultsAggregatedByTargetResourceCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCisScanResultsAggregatedByTargetResourceCommandOutput}.
+   */
+  paginateListCisScanResultsAggregatedByTargetResource(
+    args: ListCisScanResultsAggregatedByTargetResourceCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCisScanResultsAggregatedByTargetResourceCommandOutput>;
+
+  /**
+   * @see {@link ListCisScansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCisScansCommandOutput}.
+   */
+  paginateListCisScans(
+    args?: ListCisScansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCisScansCommandOutput>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorsCommandOutput}.
+   */
+  paginateListConnectors(
+    args?: ListConnectorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorsCommandOutput>;
+
+  /**
+   * @see {@link ListConnectorScanConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListConnectorScanConfigurationsCommandOutput}.
+   */
+  paginateListConnectorScanConfigurations(
+    args?: ListConnectorScanConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListConnectorScanConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListCoverageCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCoverageCommandOutput}.
+   */
+  paginateListCoverage(
+    args?: ListCoverageCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCoverageCommandOutput>;
+
+  /**
+   * @see {@link ListCoverageStatisticsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCoverageStatisticsCommandOutput}.
+   */
+  paginateListCoverageStatistics(
+    args?: ListCoverageStatisticsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCoverageStatisticsCommandOutput>;
+
+  /**
+   * @see {@link ListDelegatedAdminAccountsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListDelegatedAdminAccountsCommandOutput}.
+   */
+  paginateListDelegatedAdminAccounts(
+    args?: ListDelegatedAdminAccountsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListDelegatedAdminAccountsCommandOutput>;
+
+  /**
+   * @see {@link ListFiltersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFiltersCommandOutput}.
+   */
+  paginateListFilters(
+    args?: ListFiltersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFiltersCommandOutput>;
+
+  /**
+   * @see {@link ListFindingAggregationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFindingAggregationsCommandOutput}.
+   */
+  paginateListFindingAggregations(
+    args: ListFindingAggregationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFindingAggregationsCommandOutput>;
+
+  /**
+   * @see {@link ListFindingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListFindingsCommandOutput}.
+   */
+  paginateListFindings(
+    args?: ListFindingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListFindingsCommandOutput>;
+
+  /**
+   * @see {@link ListMembersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMembersCommandOutput}.
+   */
+  paginateListMembers(
+    args?: ListMembersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMembersCommandOutput>;
+
+  /**
+   * @see {@link ListOnDemandScansCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListOnDemandScansCommandOutput}.
+   */
+  paginateListOnDemandScans(
+    args: ListOnDemandScansCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListOnDemandScansCommandOutput>;
+
+  /**
+   * @see {@link ListUsageTotalsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsageTotalsCommandOutput}.
+   */
+  paginateListUsageTotals(
+    args?: ListUsageTotalsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsageTotalsCommandOutput>;
+
+  /**
+   * @see {@link SearchVulnerabilitiesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link SearchVulnerabilitiesCommandOutput}.
+   */
+  paginateSearchVulnerabilities(
+    args: SearchVulnerabilitiesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<SearchVulnerabilitiesCommandOutput>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilConnectorEnabled(
+    args: ListConnectorsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Inspector2>, "client">
+  ): Promise<WaiterResult<ListConnectorsCommandOutput>>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilConnectorDeleted(
+    args: ListConnectorsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Inspector2>, "client">
+  ): Promise<WaiterResult<ListConnectorsCommandOutput>>;
+
+  /**
+   * @see {@link ListConnectorsCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilConnectorConnected(
+    args: ListConnectorsCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Inspector2>, "client">
+  ): Promise<WaiterResult<ListConnectorsCommandOutput>>;
 }
+
+/**
+ * <p>Amazon Inspector is a vulnerability discovery service that automates continuous scanning for security vulnerabilities within your Amazon EC2, Amazon ECR, and Amazon Web Services Lambda environments.</p>
+ * @public
+ */
+export class Inspector2 extends Inspector2Client implements Inspector2 {}
+createAggregatedClient(commands, Inspector2, { paginators, waiters });

@@ -1,107 +1,140 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
-import {
-  DescribeBulkImportJobRequest,
-  DescribeBulkImportJobRequestFilterSensitiveLog,
-  DescribeBulkImportJobResponse,
-  DescribeBulkImportJobResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeBulkImportJobCommand,
-  serializeAws_restJson1DescribeBulkImportJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeBulkImportJobRequest, DescribeBulkImportJobResponse } from "../models/models_0";
+import { DescribeBulkImportJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeBulkImportJobCommand}.
+ */
 export interface DescribeBulkImportJobCommandInput extends DescribeBulkImportJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeBulkImportJobCommand}.
+ */
 export interface DescribeBulkImportJobCommandOutput extends DescribeBulkImportJobResponse, __MetadataBearer {}
 
 /**
- * <note>
- *             <p>This API operation is in preview release for IoT SiteWise and is subject to change.
- *       We recommend that you use this operation only with test data, and not in production environments.</p>
- *          </note>
- *          <p>Retrieves information about a bulk import job request. For more information,
- *     see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html">Describe a bulk import job (CLI)</a>
- *     in the <i>Amazon Simple Storage Service User Guide</i>.</p>
+ * <p>Retrieves information about a bulk import job request. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html">Describe
+ *         a bulk import job (CLI)</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTSiteWiseClient, DescribeBulkImportJobCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
  * // const { IoTSiteWiseClient, DescribeBulkImportJobCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * // import type { IoTSiteWiseClientConfig } from "@aws-sdk/client-iotsitewise";
+ * const config = {}; // type is IoTSiteWiseClientConfig
  * const client = new IoTSiteWiseClient(config);
+ * const input = { // DescribeBulkImportJobRequest
+ *   jobId: "STRING_VALUE", // required
+ *   workspaceName: "STRING_VALUE",
+ * };
  * const command = new DescribeBulkImportJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeBulkImportJobResponse
+ * //   jobId: "STRING_VALUE", // required
+ * //   jobName: "STRING_VALUE", // required
+ * //   jobStatus: "PENDING" || "CANCELLED" || "RUNNING" || "COMPLETED" || "FAILED" || "COMPLETED_WITH_FAILURES", // required
+ * //   jobRoleArn: "STRING_VALUE", // required
+ * //   files: [ // Files // required
+ * //     { // File
+ * //       bucket: "STRING_VALUE", // required
+ * //       key: "STRING_VALUE", // required
+ * //       versionId: "STRING_VALUE",
+ * //       alias: "STRING_VALUE",
+ * //       startTime: { // TimeInNanos
+ * //         timeInSeconds: Number("long"), // required
+ * //         offsetInNanos: Number("int"),
+ * //       },
+ * //       fileFormat: { // FileFormat
+ * //         csv: { // Csv
+ * //           columnNames: [ // ColumnNames // required
+ * //             "ALIAS" || "ASSET_ID" || "PROPERTY_ID" || "DATA_TYPE" || "TIMESTAMP_SECONDS" || "TIMESTAMP_NANO_OFFSET" || "QUALITY" || "VALUE",
+ * //           ],
+ * //         },
+ * //         parquet: {},
+ * //         mp4: {},
+ * //         annotation: {},
+ * //       },
+ * //     },
+ * //   ],
+ * //   errorReportLocation: { // ErrorReportLocation
+ * //     bucket: "STRING_VALUE", // required
+ * //     prefix: "STRING_VALUE", // required
+ * //   },
+ * //   jobConfiguration: { // JobConfiguration
+ * //     fileFormat: {
+ * //       csv: {
+ * //         columnNames: [ // required
+ * //           "ALIAS" || "ASSET_ID" || "PROPERTY_ID" || "DATA_TYPE" || "TIMESTAMP_SECONDS" || "TIMESTAMP_NANO_OFFSET" || "QUALITY" || "VALUE",
+ * //         ],
+ * //       },
+ * //       parquet: {},
+ * //       mp4: {},
+ * //       annotation: {},
+ * //     },
+ * //   },
+ * //   jobCreationDate: new Date("TIMESTAMP"), // required
+ * //   jobLastUpdateDate: new Date("TIMESTAMP"), // required
+ * //   adaptiveIngestion: true || false,
+ * //   deleteFilesAfterImport: true || false,
+ * //   datasetId: "STRING_VALUE",
+ * //   workspaceName: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeBulkImportJobCommandInput - {@link DescribeBulkImportJobCommandInput}
+ * @returns {@link DescribeBulkImportJobCommandOutput}
  * @see {@link DescribeBulkImportJobCommandInput} for command's `input` shape.
  * @see {@link DescribeBulkImportJobCommandOutput} for command's `response` shape.
  * @see {@link IoTSiteWiseClientResolvedConfig | config} for IoTSiteWiseClient's `config` shape.
  *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>IoT SiteWise can't process your request right now. Try again later.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request isn't valid. This can occur if your request contains malformed JSON or
+ *       unsupported characters. Check your request and try again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource can't be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Your request exceeded a rate limit. For example, you might have exceeded the number of
+ *       IoT SiteWise assets that can be created per second, the allowed number of messages per second, and so
+ *       on.</p>
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
+ *
+ * @throws {@link IoTSiteWiseServiceException}
+ * <p>Base exception class for all service exceptions from IoTSiteWise service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeBulkImportJobCommand extends $Command<
-  DescribeBulkImportJobCommandInput,
-  DescribeBulkImportJobCommandOutput,
-  IoTSiteWiseClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeBulkImportJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTSiteWiseClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeBulkImportJobCommandInput, DescribeBulkImportJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTSiteWiseClient";
-    const commandName = "DescribeBulkImportJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeBulkImportJobRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeBulkImportJobResponseFilterSensitiveLog,
+export class DescribeBulkImportJobCommand extends command<DescribeBulkImportJobCommandInput, DescribeBulkImportJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeBulkImportJob",
+  DescribeBulkImportJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeBulkImportJobRequest;
+      output: DescribeBulkImportJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeBulkImportJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeBulkImportJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeBulkImportJobCommandOutput> {
-    return deserializeAws_restJson1DescribeBulkImportJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeBulkImportJobCommandInput;
+      output: DescribeBulkImportJobCommandOutput;
+    };
+  };
 }

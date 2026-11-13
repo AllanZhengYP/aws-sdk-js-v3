@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListTrustStoresRequest,
-  ListTrustStoresRequestFilterSensitiveLog,
-  ListTrustStoresResponse,
-  ListTrustStoresResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListTrustStoresCommand,
-  serializeAws_restJson1ListTrustStoresCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListTrustStoresRequest, ListTrustStoresResponse } from "../models/models_0";
+import { ListTrustStores$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListTrustStoresCommand}.
+ */
 export interface ListTrustStoresCommandInput extends ListTrustStoresRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListTrustStoresCommand}.
+ */
 export interface ListTrustStoresCommandOutput extends ListTrustStoresResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,65 @@ export interface ListTrustStoresCommandOutput extends ListTrustStoresResponse, _
  * ```javascript
  * import { WorkSpacesWebClient, ListTrustStoresCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, ListTrustStoresCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // ListTrustStoresRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListTrustStoresCommand(input);
  * const response = await client.send(command);
+ * // { // ListTrustStoresResponse
+ * //   trustStores: [ // TrustStoreSummaryList
+ * //     { // TrustStoreSummary
+ * //       trustStoreArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListTrustStoresCommandInput - {@link ListTrustStoresCommandInput}
+ * @returns {@link ListTrustStoresCommandOutput}
  * @see {@link ListTrustStoresCommandInput} for command's `input` shape.
  * @see {@link ListTrustStoresCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class ListTrustStoresCommand extends $Command<
-  ListTrustStoresCommandInput,
-  ListTrustStoresCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListTrustStoresCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListTrustStoresCommandInput, ListTrustStoresCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "ListTrustStoresCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListTrustStoresRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListTrustStoresResponseFilterSensitiveLog,
+export class ListTrustStoresCommand extends command<ListTrustStoresCommandInput, ListTrustStoresCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListTrustStores",
+  ListTrustStores$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListTrustStoresRequest;
+      output: ListTrustStoresResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListTrustStoresCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListTrustStoresCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListTrustStoresCommandOutput> {
-    return deserializeAws_restJson1ListTrustStoresCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListTrustStoresCommandInput;
+      output: ListTrustStoresCommandOutput;
+    };
+  };
 }

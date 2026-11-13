@@ -1,23 +1,34 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeServicesCommand, DescribeServicesCommandInput } from "../commands/DescribeServicesCommand";
-import { ECSClient } from "../ECSClient";
+import {
+  type DescribeServicesCommandInput,
+  type DescribeServicesCommandOutput,
+  DescribeServicesCommand,
+} from "../commands/DescribeServicesCommand";
+import type { ECSClient } from "../ECSClient";
+import type { ECSServiceException } from "../models/ECSServiceException";
 
-const checkState = async (client: ECSClient, input: DescribeServicesCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ECSClient, input: DescribeServicesCommandInput): Promise<WaiterResult<DescribeServicesCommandOutput | ECSServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeServicesCommand(input));
+    let result: DescribeServicesCommandOutput & any = await client.send(new DescribeServicesCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.failures);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.failures);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.reason;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "MISSING") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -25,13 +36,13 @@ const checkState = async (client: ECSClient, input: DescribeServicesCommandInput
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.services);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.services);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "DRAINING") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -39,13 +50,13 @@ const checkState = async (client: ECSClient, input: DescribeServicesCommandInput
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const flat_1: any[] = [].concat(...result.services);
-        const projection_3 = flat_1.map((element_2: any) => {
+        let flat_1: any[] = [].concat(...result.services);
+        let projection_3 = flat_1.map((element_2: any) => {
           return element_2.status;
         });
         return projection_3;
-      };
-      for (const anyStringEq_4 of returnComparator()) {
+      }
+      for (let anyStringEq_4 of returnComparator()) {
         if (anyStringEq_4 == "INACTIVE") {
           return { state: WaiterState.FAILURE, reason };
         }
@@ -53,11 +64,11 @@ const checkState = async (client: ECSClient, input: DescribeServicesCommandInput
     } catch (e) {}
     try {
       const returnComparator = () => {
-        const filterRes_2 = result.services.filter((element_1: any) => {
-          return !(element_1.deployments.length == 1.0 && element_1.runningCount == element_1.desiredCount);
+        let filterRes_2 = result.services.filter((element_1: any) => {
+          return (!((element_1.deployments.length == 1) && (element_1.runningCount == element_1.desiredCount)));
         });
-        return filterRes_2.length == 0.0;
-      };
+        return (filterRes_2.length == 0);
+      }
       if (returnComparator() == true) {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -74,8 +85,8 @@ const checkState = async (client: ECSClient, input: DescribeServicesCommandInput
 export const waitForServicesStable = async (
   params: WaiterConfiguration<ECSClient>,
   input: DescribeServicesCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 15, maxDelay: 120 };
+): Promise<WaiterResult<DescribeServicesCommandOutput | ECSServiceException>> => {
+  const serviceDefaults = { minDelay: 15, maxDelay: 600 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
 /**
@@ -86,8 +97,8 @@ export const waitForServicesStable = async (
 export const waitUntilServicesStable = async (
   params: WaiterConfiguration<ECSClient>,
   input: DescribeServicesCommandInput
-): Promise<WaiterResult> => {
-  const serviceDefaults = { minDelay: 15, maxDelay: 120 };
+): Promise<WaiterResult<DescribeServicesCommandOutput>> => {
+  const serviceDefaults = { minDelay: 15, maxDelay: 600 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeServicesCommandOutput>;
 };

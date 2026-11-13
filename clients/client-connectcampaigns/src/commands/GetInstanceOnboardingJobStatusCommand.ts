@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectCampaignsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectCampaignsClient";
-import {
-  GetInstanceOnboardingJobStatusRequest,
-  GetInstanceOnboardingJobStatusRequestFilterSensitiveLog,
-  GetInstanceOnboardingJobStatusResponse,
-  GetInstanceOnboardingJobStatusResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetInstanceOnboardingJobStatusCommand,
-  serializeAws_restJson1GetInstanceOnboardingJobStatusCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetInstanceOnboardingJobStatusRequest, GetInstanceOnboardingJobStatusResponse } from "../models/models_0";
+import { GetInstanceOnboardingJobStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetInstanceOnboardingJobStatusCommand}.
+ */
 export interface GetInstanceOnboardingJobStatusCommandInput extends GetInstanceOnboardingJobStatusRequest {}
-export interface GetInstanceOnboardingJobStatusCommandOutput
-  extends GetInstanceOnboardingJobStatusResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetInstanceOnboardingJobStatusCommand}.
+ */
+export interface GetInstanceOnboardingJobStatusCommandOutput extends GetInstanceOnboardingJobStatusResponse, __MetadataBearer {}
 
 /**
  * Get the specific instance onboarding job status.
@@ -36,74 +29,63 @@ export interface GetInstanceOnboardingJobStatusCommandOutput
  * ```javascript
  * import { ConnectCampaignsClient, GetInstanceOnboardingJobStatusCommand } from "@aws-sdk/client-connectcampaigns"; // ES Modules import
  * // const { ConnectCampaignsClient, GetInstanceOnboardingJobStatusCommand } = require("@aws-sdk/client-connectcampaigns"); // CommonJS import
+ * // import type { ConnectCampaignsClientConfig } from "@aws-sdk/client-connectcampaigns";
+ * const config = {}; // type is ConnectCampaignsClientConfig
  * const client = new ConnectCampaignsClient(config);
+ * const input = { // GetInstanceOnboardingJobStatusRequest
+ *   connectInstanceId: "STRING_VALUE", // required
+ * };
  * const command = new GetInstanceOnboardingJobStatusCommand(input);
  * const response = await client.send(command);
+ * // { // GetInstanceOnboardingJobStatusResponse
+ * //   connectInstanceOnboardingJobStatus: { // InstanceOnboardingJobStatus
+ * //     connectInstanceId: "STRING_VALUE", // required
+ * //     status: "STRING_VALUE", // required
+ * //     failureCode: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetInstanceOnboardingJobStatusCommandInput - {@link GetInstanceOnboardingJobStatusCommandInput}
+ * @returns {@link GetInstanceOnboardingJobStatusCommandOutput}
  * @see {@link GetInstanceOnboardingJobStatusCommandInput} for command's `input` shape.
  * @see {@link GetInstanceOnboardingJobStatusCommandOutput} for command's `response` shape.
  * @see {@link ConnectCampaignsClientResolvedConfig | config} for ConnectCampaignsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You do not have sufficient access to perform this action.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  Request processing failed because of an error or failure with the service.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The specified resource was not found.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link ConnectCampaignsServiceException}
+ * <p>Base exception class for all service exceptions from ConnectCampaigns service.</p>
+ *
+ *
+ * @public
  */
-export class GetInstanceOnboardingJobStatusCommand extends $Command<
-  GetInstanceOnboardingJobStatusCommandInput,
-  GetInstanceOnboardingJobStatusCommandOutput,
-  ConnectCampaignsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetInstanceOnboardingJobStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectCampaignsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetInstanceOnboardingJobStatusCommandInput, GetInstanceOnboardingJobStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectCampaignsClient";
-    const commandName = "GetInstanceOnboardingJobStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetInstanceOnboardingJobStatusRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetInstanceOnboardingJobStatusResponseFilterSensitiveLog,
+export class GetInstanceOnboardingJobStatusCommand extends command<GetInstanceOnboardingJobStatusCommandInput, GetInstanceOnboardingJobStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetInstanceOnboardingJobStatus",
+  GetInstanceOnboardingJobStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetInstanceOnboardingJobStatusRequest;
+      output: GetInstanceOnboardingJobStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetInstanceOnboardingJobStatusCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetInstanceOnboardingJobStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetInstanceOnboardingJobStatusCommandOutput> {
-    return deserializeAws_restJson1GetInstanceOnboardingJobStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetInstanceOnboardingJobStatusCommandInput;
+      output: GetInstanceOnboardingJobStatusCommandOutput;
+    };
+  };
 }

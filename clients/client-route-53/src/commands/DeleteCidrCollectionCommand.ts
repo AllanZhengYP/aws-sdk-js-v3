@@ -1,31 +1,25 @@
 // smithy-typescript generated code
-import { getIdNormalizerPlugin } from "@aws-sdk/middleware-sdk-route53";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DeleteCidrCollectionRequest,
-  DeleteCidrCollectionRequestFilterSensitiveLog,
-  DeleteCidrCollectionResponse,
-  DeleteCidrCollectionResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restXmlDeleteCidrCollectionCommand,
-  serializeAws_restXmlDeleteCidrCollectionCommand,
-} from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteCidrCollectionRequest, DeleteCidrCollectionResponse } from "../models/models_0";
+import { DeleteCidrCollection$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCidrCollectionCommand}.
+ */
 export interface DeleteCidrCollectionCommandInput extends DeleteCidrCollectionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCidrCollectionCommand}.
+ */
 export interface DeleteCidrCollectionCommandOutput extends DeleteCidrCollectionResponse, __MetadataBearer {}
 
 /**
@@ -36,69 +30,58 @@ export interface DeleteCidrCollectionCommandOutput extends DeleteCidrCollectionR
  * ```javascript
  * import { Route53Client, DeleteCidrCollectionCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, DeleteCidrCollectionCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = { // DeleteCidrCollectionRequest
+ *   Id: "STRING_VALUE", // required
+ * };
  * const command = new DeleteCidrCollectionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteCidrCollectionCommandInput - {@link DeleteCidrCollectionCommandInput}
+ * @returns {@link DeleteCidrCollectionCommandOutput}
  * @see {@link DeleteCidrCollectionCommandInput} for command's `input` shape.
  * @see {@link DeleteCidrCollectionCommandOutput} for command's `response` shape.
  * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link CidrCollectionInUseException} (client fault)
+ *  <p>This CIDR collection is in use, and isn't empty.</p>
+ *
+ * @throws {@link ConcurrentModification} (client fault)
+ *  <p>Another user submitted a request to create, update, or delete the object at the same
+ * 			time that you did. Retry the request. </p>
+ *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The input is not valid.</p>
+ *
+ * @throws {@link NoSuchCidrCollectionException} (client fault)
+ *  <p>The CIDR collection you specified, doesn't exist.</p>
+ *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteCidrCollectionCommand extends $Command<
-  DeleteCidrCollectionCommandInput,
-  DeleteCidrCollectionCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCidrCollectionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCidrCollectionCommandInput, DeleteCidrCollectionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getIdNormalizerPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "DeleteCidrCollectionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteCidrCollectionRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteCidrCollectionResponseFilterSensitiveLog,
+export class DeleteCidrCollectionCommand extends command<DeleteCidrCollectionCommandInput, DeleteCidrCollectionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCidrCollection",
+  DeleteCidrCollection$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCidrCollectionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteCidrCollectionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteCidrCollectionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteCidrCollectionCommandOutput> {
-    return deserializeAws_restXmlDeleteCidrCollectionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCidrCollectionCommandInput;
+      output: DeleteCidrCollectionCommandOutput;
+    };
+  };
 }

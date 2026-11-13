@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  UpdateEnvironmentInput,
-  UpdateEnvironmentInputFilterSensitiveLog,
-  UpdateEnvironmentOutput,
-  UpdateEnvironmentOutputFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_0UpdateEnvironmentCommand,
-  serializeAws_json1_0UpdateEnvironmentCommand,
-} from "../protocols/Aws_json1_0";
-import { ProtonClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ProtonClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateEnvironmentInput, UpdateEnvironmentOutput } from "../models/models_0";
+import { UpdateEnvironment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateEnvironmentCommand}.
+ */
 export interface UpdateEnvironmentCommandInput extends UpdateEnvironmentInput {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateEnvironmentCommand}.
+ */
 export interface UpdateEnvironmentCommandOutput extends UpdateEnvironmentOutput, __MetadataBearer {}
 
 /**
@@ -41,7 +36,7 @@ export interface UpdateEnvironmentCommandOutput extends UpdateEnvironmentOutput,
  *          <p>If the environment was configured for Amazon Web Services-managed provisioning, omit the <code>provisioningRepository</code> parameter.</p>
  *          <p>If the environment was configured for self-managed provisioning, specify the <code>provisioningRepository</code> parameter and omit the
  *         <code>protonServiceRoleArn</code> and <code>environmentAccountConnectionId</code> parameters.</p>
- *          <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html">Environments</a> and <a href="https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html">Provisioning methods</a> in the <i>Proton Administrator
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html">Environments</a> and <a href="https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html">Provisioning methods</a> in the <i>Proton User
  *         Guide</i>.</p>
  *          <p>There are four modes for updating an environment. The <code>deploymentType</code> field defines the mode.</p>
  *          <dl>
@@ -77,73 +72,113 @@ export interface UpdateEnvironmentCommandOutput extends UpdateEnvironmentOutput,
  *             by default. You can also specify a different major version that's higher than the major version in use and a minor version.</p>
  *             </dd>
  *          </dl>
+ *
+ * @deprecated (since 10/07/2025) AWS Proton is not accepting new customers.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ProtonClient, UpdateEnvironmentCommand } from "@aws-sdk/client-proton"; // ES Modules import
  * // const { ProtonClient, UpdateEnvironmentCommand } = require("@aws-sdk/client-proton"); // CommonJS import
+ * // import type { ProtonClientConfig } from "@aws-sdk/client-proton";
+ * const config = {}; // type is ProtonClientConfig
  * const client = new ProtonClient(config);
+ * const input = { // UpdateEnvironmentInput
+ *   name: "STRING_VALUE", // required
+ *   description: "STRING_VALUE",
+ *   spec: "STRING_VALUE",
+ *   templateMajorVersion: "STRING_VALUE",
+ *   templateMinorVersion: "STRING_VALUE",
+ *   protonServiceRoleArn: "STRING_VALUE",
+ *   deploymentType: "STRING_VALUE", // required
+ *   environmentAccountConnectionId: "STRING_VALUE",
+ *   provisioningRepository: { // RepositoryBranchInput
+ *     provider: "STRING_VALUE", // required
+ *     name: "STRING_VALUE", // required
+ *     branch: "STRING_VALUE", // required
+ *   },
+ *   componentRoleArn: "STRING_VALUE",
+ *   codebuildRoleArn: "STRING_VALUE",
+ * };
  * const command = new UpdateEnvironmentCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateEnvironmentOutput
+ * //   environment: { // Environment
+ * //     name: "STRING_VALUE", // required
+ * //     description: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     lastDeploymentAttemptedAt: new Date("TIMESTAMP"), // required
+ * //     lastDeploymentSucceededAt: new Date("TIMESTAMP"), // required
+ * //     arn: "STRING_VALUE", // required
+ * //     templateName: "STRING_VALUE", // required
+ * //     templateMajorVersion: "STRING_VALUE", // required
+ * //     templateMinorVersion: "STRING_VALUE", // required
+ * //     deploymentStatus: "STRING_VALUE", // required
+ * //     deploymentStatusMessage: "STRING_VALUE",
+ * //     protonServiceRoleArn: "STRING_VALUE",
+ * //     environmentAccountConnectionId: "STRING_VALUE",
+ * //     environmentAccountId: "STRING_VALUE",
+ * //     spec: "STRING_VALUE",
+ * //     provisioning: "STRING_VALUE",
+ * //     provisioningRepository: { // RepositoryBranch
+ * //       arn: "STRING_VALUE", // required
+ * //       provider: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE", // required
+ * //       branch: "STRING_VALUE", // required
+ * //     },
+ * //     componentRoleArn: "STRING_VALUE",
+ * //     codebuildRoleArn: "STRING_VALUE",
+ * //     lastAttemptedDeploymentId: "STRING_VALUE",
+ * //     lastSucceededDeploymentId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateEnvironmentCommandInput - {@link UpdateEnvironmentCommandInput}
+ * @returns {@link UpdateEnvironmentCommandOutput}
  * @see {@link UpdateEnvironmentCommandInput} for command's `input` shape.
  * @see {@link UpdateEnvironmentCommandOutput} for command's `response` shape.
  * @see {@link ProtonClientResolvedConfig | config} for ProtonClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>There <i>isn't</i> sufficient access for performing this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The request <i>couldn't</i> be made due to a conflicting operation or resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request failed to register with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource <i>wasn't</i> found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input is invalid or an out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ProtonServiceException}
+ * <p>Base exception class for all service exceptions from Proton service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateEnvironmentCommand extends $Command<
-  UpdateEnvironmentCommandInput,
-  UpdateEnvironmentCommandOutput,
-  ProtonClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateEnvironmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ProtonClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateEnvironmentCommandInput, UpdateEnvironmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ProtonClient";
-    const commandName = "UpdateEnvironmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateEnvironmentInputFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateEnvironmentOutputFilterSensitiveLog,
+export class UpdateEnvironmentCommand extends command<UpdateEnvironmentCommandInput, UpdateEnvironmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateEnvironment",
+  UpdateEnvironment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateEnvironmentInput;
+      output: UpdateEnvironmentOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateEnvironmentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0UpdateEnvironmentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateEnvironmentCommandOutput> {
-    return deserializeAws_json1_0UpdateEnvironmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateEnvironmentCommandInput;
+      output: UpdateEnvironmentCommandOutput;
+    };
+  };
 }

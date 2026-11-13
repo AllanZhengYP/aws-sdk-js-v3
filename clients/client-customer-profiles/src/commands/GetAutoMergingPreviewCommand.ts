@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CustomerProfilesClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CustomerProfilesClient";
-import {
-  GetAutoMergingPreviewRequest,
-  GetAutoMergingPreviewRequestFilterSensitiveLog,
-  GetAutoMergingPreviewResponse,
-  GetAutoMergingPreviewResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetAutoMergingPreviewCommand,
-  serializeAws_restJson1GetAutoMergingPreviewCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAutoMergingPreviewRequest, GetAutoMergingPreviewResponse } from "../models/models_0";
+import { GetAutoMergingPreview$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAutoMergingPreviewCommand}.
+ */
 export interface GetAutoMergingPreviewCommandInput extends GetAutoMergingPreviewRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAutoMergingPreviewCommand}.
+ */
 export interface GetAutoMergingPreviewCommandOutput extends GetAutoMergingPreviewResponse, __MetadataBearer {}
 
 /**
@@ -35,7 +30,6 @@ export interface GetAutoMergingPreviewCommandOutput extends GetAutoMergingPrevie
  *          enables you to evaluate the accuracy of the attributes in your matching list. </p>
  *          <p>You can't view which profiles are matched and would be merged.</p>
  *          <important>
- *
  *             <p>We strongly recommend you use this API to do a dry run of the automerging process
  *             before running the Identity Resolution Job. Include <b>at least</b> two matching
  *             attributes. If your matching list includes too few attributes (such as only
@@ -47,68 +41,77 @@ export interface GetAutoMergingPreviewCommandOutput extends GetAutoMergingPrevie
  * ```javascript
  * import { CustomerProfilesClient, GetAutoMergingPreviewCommand } from "@aws-sdk/client-customer-profiles"; // ES Modules import
  * // const { CustomerProfilesClient, GetAutoMergingPreviewCommand } = require("@aws-sdk/client-customer-profiles"); // CommonJS import
+ * // import type { CustomerProfilesClientConfig } from "@aws-sdk/client-customer-profiles";
+ * const config = {}; // type is CustomerProfilesClientConfig
  * const client = new CustomerProfilesClient(config);
+ * const input = { // GetAutoMergingPreviewRequest
+ *   DomainName: "STRING_VALUE", // required
+ *   Consolidation: { // Consolidation
+ *     MatchingAttributesList: [ // MatchingAttributesList // required
+ *       [ // MatchingAttributes
+ *         "STRING_VALUE",
+ *       ],
+ *     ],
+ *   },
+ *   ConflictResolution: { // ConflictResolution
+ *     ConflictResolvingModel: "RECENCY" || "SOURCE", // required
+ *     SourceName: "STRING_VALUE",
+ *   },
+ *   MinAllowedConfidenceScoreForMerging: Number("double"),
+ * };
  * const command = new GetAutoMergingPreviewCommand(input);
  * const response = await client.send(command);
+ * // { // GetAutoMergingPreviewResponse
+ * //   DomainName: "STRING_VALUE", // required
+ * //   NumberOfMatchesInSample: Number("long"),
+ * //   NumberOfProfilesInSample: Number("long"),
+ * //   NumberOfProfilesWillBeMerged: Number("long"),
+ * // };
+ *
  * ```
  *
+ * @param GetAutoMergingPreviewCommandInput - {@link GetAutoMergingPreviewCommandInput}
+ * @returns {@link GetAutoMergingPreviewCommandOutput}
  * @see {@link GetAutoMergingPreviewCommandInput} for command's `input` shape.
  * @see {@link GetAutoMergingPreviewCommandOutput} for command's `response` shape.
  * @see {@link CustomerProfilesClientResolvedConfig | config} for CustomerProfilesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input you provided is invalid.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource does not exist, or access was denied.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>You exceeded the maximum number of requests.</p>
+ *
+ * @throws {@link CustomerProfilesServiceException}
+ * <p>Base exception class for all service exceptions from CustomerProfiles service.</p>
+ *
+ *
+ * @public
  */
-export class GetAutoMergingPreviewCommand extends $Command<
-  GetAutoMergingPreviewCommandInput,
-  GetAutoMergingPreviewCommandOutput,
-  CustomerProfilesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAutoMergingPreviewCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CustomerProfilesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAutoMergingPreviewCommandInput, GetAutoMergingPreviewCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CustomerProfilesClient";
-    const commandName = "GetAutoMergingPreviewCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAutoMergingPreviewRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetAutoMergingPreviewResponseFilterSensitiveLog,
+export class GetAutoMergingPreviewCommand extends command<GetAutoMergingPreviewCommandInput, GetAutoMergingPreviewCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAutoMergingPreview",
+  GetAutoMergingPreview$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetAutoMergingPreviewRequest;
+      output: GetAutoMergingPreviewResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAutoMergingPreviewCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetAutoMergingPreviewCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAutoMergingPreviewCommandOutput> {
-    return deserializeAws_restJson1GetAutoMergingPreviewCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAutoMergingPreviewCommandInput;
+      output: GetAutoMergingPreviewCommandOutput;
+    };
+  };
 }

@@ -1,628 +1,673 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type AssociateLicenseCommandInput,
+  type AssociateLicenseCommandOutput,
   AssociateLicenseCommand,
-  AssociateLicenseCommandInput,
-  AssociateLicenseCommandOutput,
 } from "./commands/AssociateLicenseCommand";
 import {
+  type CreateWorkspaceApiKeyCommandInput,
+  type CreateWorkspaceApiKeyCommandOutput,
   CreateWorkspaceApiKeyCommand,
-  CreateWorkspaceApiKeyCommandInput,
-  CreateWorkspaceApiKeyCommandOutput,
 } from "./commands/CreateWorkspaceApiKeyCommand";
 import {
+  type CreateWorkspaceCommandInput,
+  type CreateWorkspaceCommandOutput,
   CreateWorkspaceCommand,
-  CreateWorkspaceCommandInput,
-  CreateWorkspaceCommandOutput,
 } from "./commands/CreateWorkspaceCommand";
 import {
+  type CreateWorkspaceServiceAccountCommandInput,
+  type CreateWorkspaceServiceAccountCommandOutput,
+  CreateWorkspaceServiceAccountCommand,
+} from "./commands/CreateWorkspaceServiceAccountCommand";
+import {
+  type CreateWorkspaceServiceAccountTokenCommandInput,
+  type CreateWorkspaceServiceAccountTokenCommandOutput,
+  CreateWorkspaceServiceAccountTokenCommand,
+} from "./commands/CreateWorkspaceServiceAccountTokenCommand";
+import {
+  type DeleteWorkspaceApiKeyCommandInput,
+  type DeleteWorkspaceApiKeyCommandOutput,
   DeleteWorkspaceApiKeyCommand,
-  DeleteWorkspaceApiKeyCommandInput,
-  DeleteWorkspaceApiKeyCommandOutput,
 } from "./commands/DeleteWorkspaceApiKeyCommand";
 import {
+  type DeleteWorkspaceCommandInput,
+  type DeleteWorkspaceCommandOutput,
   DeleteWorkspaceCommand,
-  DeleteWorkspaceCommandInput,
-  DeleteWorkspaceCommandOutput,
 } from "./commands/DeleteWorkspaceCommand";
 import {
+  type DeleteWorkspaceServiceAccountCommandInput,
+  type DeleteWorkspaceServiceAccountCommandOutput,
+  DeleteWorkspaceServiceAccountCommand,
+} from "./commands/DeleteWorkspaceServiceAccountCommand";
+import {
+  type DeleteWorkspaceServiceAccountTokenCommandInput,
+  type DeleteWorkspaceServiceAccountTokenCommandOutput,
+  DeleteWorkspaceServiceAccountTokenCommand,
+} from "./commands/DeleteWorkspaceServiceAccountTokenCommand";
+import {
+  type DescribeWorkspaceAuthenticationCommandInput,
+  type DescribeWorkspaceAuthenticationCommandOutput,
   DescribeWorkspaceAuthenticationCommand,
-  DescribeWorkspaceAuthenticationCommandInput,
-  DescribeWorkspaceAuthenticationCommandOutput,
 } from "./commands/DescribeWorkspaceAuthenticationCommand";
 import {
+  type DescribeWorkspaceCommandInput,
+  type DescribeWorkspaceCommandOutput,
   DescribeWorkspaceCommand,
-  DescribeWorkspaceCommandInput,
-  DescribeWorkspaceCommandOutput,
 } from "./commands/DescribeWorkspaceCommand";
 import {
+  type DescribeWorkspaceConfigurationCommandInput,
+  type DescribeWorkspaceConfigurationCommandOutput,
+  DescribeWorkspaceConfigurationCommand,
+} from "./commands/DescribeWorkspaceConfigurationCommand";
+import {
+  type DisassociateLicenseCommandInput,
+  type DisassociateLicenseCommandOutput,
   DisassociateLicenseCommand,
-  DisassociateLicenseCommandInput,
-  DisassociateLicenseCommandOutput,
 } from "./commands/DisassociateLicenseCommand";
 import {
+  type ListPermissionsCommandInput,
+  type ListPermissionsCommandOutput,
   ListPermissionsCommand,
-  ListPermissionsCommandInput,
-  ListPermissionsCommandOutput,
 } from "./commands/ListPermissionsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
-  ListWorkspacesCommand,
-  ListWorkspacesCommandInput,
-  ListWorkspacesCommandOutput,
-} from "./commands/ListWorkspacesCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+  type ListVersionsCommandInput,
+  type ListVersionsCommandOutput,
+  ListVersionsCommand,
+} from "./commands/ListVersionsCommand";
 import {
+  type ListWorkspacesCommandInput,
+  type ListWorkspacesCommandOutput,
+  ListWorkspacesCommand,
+} from "./commands/ListWorkspacesCommand";
+import {
+  type ListWorkspaceServiceAccountsCommandInput,
+  type ListWorkspaceServiceAccountsCommandOutput,
+  ListWorkspaceServiceAccountsCommand,
+} from "./commands/ListWorkspaceServiceAccountsCommand";
+import {
+  type ListWorkspaceServiceAccountTokensCommandInput,
+  type ListWorkspaceServiceAccountTokensCommandOutput,
+  ListWorkspaceServiceAccountTokensCommand,
+} from "./commands/ListWorkspaceServiceAccountTokensCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdatePermissionsCommandInput,
+  type UpdatePermissionsCommandOutput,
   UpdatePermissionsCommand,
-  UpdatePermissionsCommandInput,
-  UpdatePermissionsCommandOutput,
 } from "./commands/UpdatePermissionsCommand";
 import {
+  type UpdateWorkspaceAuthenticationCommandInput,
+  type UpdateWorkspaceAuthenticationCommandOutput,
   UpdateWorkspaceAuthenticationCommand,
-  UpdateWorkspaceAuthenticationCommandInput,
-  UpdateWorkspaceAuthenticationCommandOutput,
 } from "./commands/UpdateWorkspaceAuthenticationCommand";
 import {
+  type UpdateWorkspaceCommandInput,
+  type UpdateWorkspaceCommandOutput,
   UpdateWorkspaceCommand,
-  UpdateWorkspaceCommandInput,
-  UpdateWorkspaceCommandOutput,
 } from "./commands/UpdateWorkspaceCommand";
+import {
+  type UpdateWorkspaceConfigurationCommandInput,
+  type UpdateWorkspaceConfigurationCommandOutput,
+  UpdateWorkspaceConfigurationCommand,
+} from "./commands/UpdateWorkspaceConfigurationCommand";
 import { GrafanaClient } from "./GrafanaClient";
+import { paginateListPermissions } from "./pagination/ListPermissionsPaginator";
+import { paginateListVersions } from "./pagination/ListVersionsPaginator";
+import { paginateListWorkspaceServiceAccounts } from "./pagination/ListWorkspaceServiceAccountsPaginator";
+import { paginateListWorkspaceServiceAccountTokens } from "./pagination/ListWorkspaceServiceAccountTokensPaginator";
+import { paginateListWorkspaces } from "./pagination/ListWorkspacesPaginator";
+
+const commands = {
+  AssociateLicenseCommand,
+  CreateWorkspaceCommand,
+  CreateWorkspaceApiKeyCommand,
+  CreateWorkspaceServiceAccountCommand,
+  CreateWorkspaceServiceAccountTokenCommand,
+  DeleteWorkspaceCommand,
+  DeleteWorkspaceApiKeyCommand,
+  DeleteWorkspaceServiceAccountCommand,
+  DeleteWorkspaceServiceAccountTokenCommand,
+  DescribeWorkspaceCommand,
+  DescribeWorkspaceAuthenticationCommand,
+  DescribeWorkspaceConfigurationCommand,
+  DisassociateLicenseCommand,
+  ListPermissionsCommand,
+  ListTagsForResourceCommand,
+  ListVersionsCommand,
+  ListWorkspacesCommand,
+  ListWorkspaceServiceAccountsCommand,
+  ListWorkspaceServiceAccountTokensCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdatePermissionsCommand,
+  UpdateWorkspaceCommand,
+  UpdateWorkspaceAuthenticationCommand,
+  UpdateWorkspaceConfigurationCommand,
+};
+const paginators = {
+  paginateListPermissions,
+  paginateListVersions,
+  paginateListWorkspaces,
+  paginateListWorkspaceServiceAccounts,
+  paginateListWorkspaceServiceAccountTokens,
+};
 
 /**
- * <p>Amazon Managed Grafana is a fully managed and secure data visualization service that you can use to
- *        instantly query, correlate, and visualize operational metrics, logs, and traces from multiple sources.
- *        Amazon Managed Grafana makes it easy to deploy, operate, and scale Grafana, a widely deployed data visualization tool
- *        that is popular for its extensible data support.</p>
- *          <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called <i>workspaces</i>. In
- *         a workspace,  you can create  Grafana dashboards and visualizations to analyze your metrics, logs, and traces without having to
- *        build, package, or deploy any hardware to run Grafana servers.  </p>
+ * @public
  */
-export class Grafana extends GrafanaClient {
+export interface GrafanaRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Grafana {
   /**
-   * <p>Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana Enterprise
-   *          incurs additional fees. For more information, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html">Upgrade a workspace to
-   *             Grafana Enterprise</a>.</p>
+   * @see {@link AssociateLicenseCommand}
    */
-  public associateLicense(
+  associateLicense(
     args: AssociateLicenseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<AssociateLicenseCommandOutput>;
-  public associateLicense(
+  associateLicense(
     args: AssociateLicenseCommandInput,
     cb: (err: any, data?: AssociateLicenseCommandOutput) => void
   ): void;
-  public associateLicense(
+  associateLicense(
     args: AssociateLicenseCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: AssociateLicenseCommandOutput) => void
   ): void;
-  public associateLicense(
-    args: AssociateLicenseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AssociateLicenseCommandOutput) => void),
-    cb?: (err: any, data?: AssociateLicenseCommandOutput) => void
-  ): Promise<AssociateLicenseCommandOutput> | void {
-    const command = new AssociateLicenseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a <i>workspace</i>. In a workspace, you can create Grafana
-   *          dashboards and visualizations to analyze your metrics, logs, and traces. You don't have to
-   *          build, package, or deploy any hardware to run the Grafana server.</p>
-   *          <p>Don't use <code>CreateWorkspace</code> to modify an existing workspace. Instead,
-   *          use <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html">UpdateWorkspace</a>.</p>
+   * @see {@link CreateWorkspaceCommand}
    */
-  public createWorkspace(
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<CreateWorkspaceCommandOutput>;
-  public createWorkspace(
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
     cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
   ): void;
-  public createWorkspace(
+  createWorkspace(
     args: CreateWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: CreateWorkspaceCommandOutput) => void
   ): void;
-  public createWorkspace(
-    args: CreateWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkspaceCommandOutput) => void
-  ): Promise<CreateWorkspaceCommandOutput> | void {
-    const command = new CreateWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an API key for the workspace.  This key can be used to authenticate
-   *          requests sent to the workspace's HTTP API.  See
-   *          <a href=" https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html"> https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html</a>
-   *          for available APIs and example requests.</p>
+   * @see {@link CreateWorkspaceApiKeyCommand}
    */
-  public createWorkspaceApiKey(
+  createWorkspaceApiKey(
     args: CreateWorkspaceApiKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<CreateWorkspaceApiKeyCommandOutput>;
-  public createWorkspaceApiKey(
+  createWorkspaceApiKey(
     args: CreateWorkspaceApiKeyCommandInput,
     cb: (err: any, data?: CreateWorkspaceApiKeyCommandOutput) => void
   ): void;
-  public createWorkspaceApiKey(
+  createWorkspaceApiKey(
     args: CreateWorkspaceApiKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: CreateWorkspaceApiKeyCommandOutput) => void
   ): void;
-  public createWorkspaceApiKey(
-    args: CreateWorkspaceApiKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkspaceApiKeyCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkspaceApiKeyCommandOutput) => void
-  ): Promise<CreateWorkspaceApiKeyCommandOutput> | void {
-    const command = new CreateWorkspaceApiKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an Amazon Managed Grafana workspace.</p>
+   * @see {@link CreateWorkspaceServiceAccountCommand}
    */
-  public deleteWorkspace(
+  createWorkspaceServiceAccount(
+    args: CreateWorkspaceServiceAccountCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<CreateWorkspaceServiceAccountCommandOutput>;
+  createWorkspaceServiceAccount(
+    args: CreateWorkspaceServiceAccountCommandInput,
+    cb: (err: any, data?: CreateWorkspaceServiceAccountCommandOutput) => void
+  ): void;
+  createWorkspaceServiceAccount(
+    args: CreateWorkspaceServiceAccountCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: CreateWorkspaceServiceAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateWorkspaceServiceAccountTokenCommand}
+   */
+  createWorkspaceServiceAccountToken(
+    args: CreateWorkspaceServiceAccountTokenCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<CreateWorkspaceServiceAccountTokenCommandOutput>;
+  createWorkspaceServiceAccountToken(
+    args: CreateWorkspaceServiceAccountTokenCommandInput,
+    cb: (err: any, data?: CreateWorkspaceServiceAccountTokenCommandOutput) => void
+  ): void;
+  createWorkspaceServiceAccountToken(
+    args: CreateWorkspaceServiceAccountTokenCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: CreateWorkspaceServiceAccountTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkspaceCommand}
+   */
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<DeleteWorkspaceCommandOutput>;
-  public deleteWorkspace(
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
     cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
   ): void;
-  public deleteWorkspace(
+  deleteWorkspace(
     args: DeleteWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: DeleteWorkspaceCommandOutput) => void
   ): void;
-  public deleteWorkspace(
-    args: DeleteWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkspaceCommandOutput) => void
-  ): Promise<DeleteWorkspaceCommandOutput> | void {
-    const command = new DeleteWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an API key for a workspace.</p>
+   * @see {@link DeleteWorkspaceApiKeyCommand}
    */
-  public deleteWorkspaceApiKey(
+  deleteWorkspaceApiKey(
     args: DeleteWorkspaceApiKeyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<DeleteWorkspaceApiKeyCommandOutput>;
-  public deleteWorkspaceApiKey(
+  deleteWorkspaceApiKey(
     args: DeleteWorkspaceApiKeyCommandInput,
     cb: (err: any, data?: DeleteWorkspaceApiKeyCommandOutput) => void
   ): void;
-  public deleteWorkspaceApiKey(
+  deleteWorkspaceApiKey(
     args: DeleteWorkspaceApiKeyCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: DeleteWorkspaceApiKeyCommandOutput) => void
   ): void;
-  public deleteWorkspaceApiKey(
-    args: DeleteWorkspaceApiKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkspaceApiKeyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkspaceApiKeyCommandOutput) => void
-  ): Promise<DeleteWorkspaceApiKeyCommandOutput> | void {
-    const command = new DeleteWorkspaceApiKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays information about one Amazon Managed Grafana workspace.</p>
+   * @see {@link DeleteWorkspaceServiceAccountCommand}
    */
-  public describeWorkspace(
+  deleteWorkspaceServiceAccount(
+    args: DeleteWorkspaceServiceAccountCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<DeleteWorkspaceServiceAccountCommandOutput>;
+  deleteWorkspaceServiceAccount(
+    args: DeleteWorkspaceServiceAccountCommandInput,
+    cb: (err: any, data?: DeleteWorkspaceServiceAccountCommandOutput) => void
+  ): void;
+  deleteWorkspaceServiceAccount(
+    args: DeleteWorkspaceServiceAccountCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: DeleteWorkspaceServiceAccountCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteWorkspaceServiceAccountTokenCommand}
+   */
+  deleteWorkspaceServiceAccountToken(
+    args: DeleteWorkspaceServiceAccountTokenCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<DeleteWorkspaceServiceAccountTokenCommandOutput>;
+  deleteWorkspaceServiceAccountToken(
+    args: DeleteWorkspaceServiceAccountTokenCommandInput,
+    cb: (err: any, data?: DeleteWorkspaceServiceAccountTokenCommandOutput) => void
+  ): void;
+  deleteWorkspaceServiceAccountToken(
+    args: DeleteWorkspaceServiceAccountTokenCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: DeleteWorkspaceServiceAccountTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeWorkspaceCommand}
+   */
+  describeWorkspace(
     args: DescribeWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<DescribeWorkspaceCommandOutput>;
-  public describeWorkspace(
+  describeWorkspace(
     args: DescribeWorkspaceCommandInput,
     cb: (err: any, data?: DescribeWorkspaceCommandOutput) => void
   ): void;
-  public describeWorkspace(
+  describeWorkspace(
     args: DescribeWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: DescribeWorkspaceCommandOutput) => void
   ): void;
-  public describeWorkspace(
-    args: DescribeWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: DescribeWorkspaceCommandOutput) => void
-  ): Promise<DescribeWorkspaceCommandOutput> | void {
-    const command = new DescribeWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Displays information about the authentication methods used in one Amazon Managed Grafana workspace.</p>
+   * @see {@link DescribeWorkspaceAuthenticationCommand}
    */
-  public describeWorkspaceAuthentication(
+  describeWorkspaceAuthentication(
     args: DescribeWorkspaceAuthenticationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<DescribeWorkspaceAuthenticationCommandOutput>;
-  public describeWorkspaceAuthentication(
+  describeWorkspaceAuthentication(
     args: DescribeWorkspaceAuthenticationCommandInput,
     cb: (err: any, data?: DescribeWorkspaceAuthenticationCommandOutput) => void
   ): void;
-  public describeWorkspaceAuthentication(
+  describeWorkspaceAuthentication(
     args: DescribeWorkspaceAuthenticationCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: DescribeWorkspaceAuthenticationCommandOutput) => void
   ): void;
-  public describeWorkspaceAuthentication(
-    args: DescribeWorkspaceAuthenticationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeWorkspaceAuthenticationCommandOutput) => void),
-    cb?: (err: any, data?: DescribeWorkspaceAuthenticationCommandOutput) => void
-  ): Promise<DescribeWorkspaceAuthenticationCommandOutput> | void {
-    const command = new DescribeWorkspaceAuthenticationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Removes the Grafana Enterprise license from a workspace.</p>
+   * @see {@link DescribeWorkspaceConfigurationCommand}
    */
-  public disassociateLicense(
+  describeWorkspaceConfiguration(
+    args: DescribeWorkspaceConfigurationCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<DescribeWorkspaceConfigurationCommandOutput>;
+  describeWorkspaceConfiguration(
+    args: DescribeWorkspaceConfigurationCommandInput,
+    cb: (err: any, data?: DescribeWorkspaceConfigurationCommandOutput) => void
+  ): void;
+  describeWorkspaceConfiguration(
+    args: DescribeWorkspaceConfigurationCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: DescribeWorkspaceConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisassociateLicenseCommand}
+   */
+  disassociateLicense(
     args: DisassociateLicenseCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<DisassociateLicenseCommandOutput>;
-  public disassociateLicense(
+  disassociateLicense(
     args: DisassociateLicenseCommandInput,
     cb: (err: any, data?: DisassociateLicenseCommandOutput) => void
   ): void;
-  public disassociateLicense(
+  disassociateLicense(
     args: DisassociateLicenseCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: DisassociateLicenseCommandOutput) => void
   ): void;
-  public disassociateLicense(
-    args: DisassociateLicenseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisassociateLicenseCommandOutput) => void),
-    cb?: (err: any, data?: DisassociateLicenseCommandOutput) => void
-  ): Promise<DisassociateLicenseCommandOutput> | void {
-    const command = new DisassociateLicenseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the users and groups who have the Grafana <code>Admin</code> and
-   *          <code>Editor</code> roles in this workspace. If you use this
-   *       operation without specifying <code>userId</code> or <code>groupId</code>, the operation returns
-   *          the roles of all users
-   *          and groups. If you specify a <code>userId</code> or a <code>groupId</code>, only the roles
-   *          for that user or group are returned. If you do this, you can specify only one <code>userId</code> or
-   *          one <code>groupId</code>.</p>
+   * @see {@link ListPermissionsCommand}
    */
-  public listPermissions(
+  listPermissions(
     args: ListPermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<ListPermissionsCommandOutput>;
-  public listPermissions(
+  listPermissions(
     args: ListPermissionsCommandInput,
     cb: (err: any, data?: ListPermissionsCommandOutput) => void
   ): void;
-  public listPermissions(
+  listPermissions(
     args: ListPermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: ListPermissionsCommandOutput) => void
   ): void;
-  public listPermissions(
-    args: ListPermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListPermissionsCommandOutput) => void),
-    cb?: (err: any, data?: ListPermissionsCommandOutput) => void
-  ): Promise<ListPermissionsCommandOutput> | void {
-    const command = new ListPermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>The <code>ListTagsForResource</code> operation returns the tags that
-   *          are associated with the Amazon Managed Service for Grafana resource specified by the <code>resourceArn</code>.
-   *          Currently, the only resource that can be tagged is a workspace. </p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of Amazon Managed Grafana workspaces in the account, with some information
-   *          about each workspace. For more complete information about one workspace, use <a href="https://docs.aws.amazon.com/AAMG/latest/APIReference/API_DescribeWorkspace.html">DescribeWorkspace</a>.</p>
+   * @see {@link ListVersionsCommand}
    */
-  public listWorkspaces(
+  listVersions(): Promise<ListVersionsCommandOutput>;
+  listVersions(
+    args: ListVersionsCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<ListVersionsCommandOutput>;
+  listVersions(
+    args: ListVersionsCommandInput,
+    cb: (err: any, data?: ListVersionsCommandOutput) => void
+  ): void;
+  listVersions(
+    args: ListVersionsCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: ListVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkspacesCommand}
+   */
+  listWorkspaces(): Promise<ListWorkspacesCommandOutput>;
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<ListWorkspacesCommandOutput>;
-  public listWorkspaces(
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
     cb: (err: any, data?: ListWorkspacesCommandOutput) => void
   ): void;
-  public listWorkspaces(
+  listWorkspaces(
     args: ListWorkspacesCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: ListWorkspacesCommandOutput) => void
   ): void;
-  public listWorkspaces(
-    args: ListWorkspacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkspacesCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkspacesCommandOutput) => void
-  ): Promise<ListWorkspacesCommandOutput> | void {
-    const command = new ListWorkspacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>The <code>TagResource</code> operation associates tags with an Amazon Managed Grafana resource.
-   *          Currently, the only resource that can be tagged is workspaces. </p>
-   *          <p>If you specify a new tag key for the resource, this tag is appended to the list of tags associated
-   *          with the resource.  If you specify a tag key that is already associated with the resource, the new tag
-   *          value that you specify replaces the previous value for that tag.</p>
+   * @see {@link ListWorkspaceServiceAccountsCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  listWorkspaceServiceAccounts(
+    args: ListWorkspaceServiceAccountsCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<ListWorkspaceServiceAccountsCommandOutput>;
+  listWorkspaceServiceAccounts(
+    args: ListWorkspaceServiceAccountsCommandInput,
+    cb: (err: any, data?: ListWorkspaceServiceAccountsCommandOutput) => void
+  ): void;
+  listWorkspaceServiceAccounts(
+    args: ListWorkspaceServiceAccountsCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: ListWorkspaceServiceAccountsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListWorkspaceServiceAccountTokensCommand}
+   */
+  listWorkspaceServiceAccountTokens(
+    args: ListWorkspaceServiceAccountTokensCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<ListWorkspaceServiceAccountTokensCommandOutput>;
+  listWorkspaceServiceAccountTokens(
+    args: ListWorkspaceServiceAccountTokensCommandInput,
+    cb: (err: any, data?: ListWorkspaceServiceAccountTokensCommandOutput) => void
+  ): void;
+  listWorkspaceServiceAccountTokens(
+    args: ListWorkspaceServiceAccountTokensCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: ListWorkspaceServiceAccountTokensCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: GrafanaRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>The <code>UntagResource</code> operation removes the association of the tag with the Amazon Managed Grafana resource.
-   *          </p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates which users in a workspace have the Grafana <code>Admin</code> or <code>Editor</code> roles.</p>
+   * @see {@link UpdatePermissionsCommand}
    */
-  public updatePermissions(
+  updatePermissions(
     args: UpdatePermissionsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<UpdatePermissionsCommandOutput>;
-  public updatePermissions(
+  updatePermissions(
     args: UpdatePermissionsCommandInput,
     cb: (err: any, data?: UpdatePermissionsCommandOutput) => void
   ): void;
-  public updatePermissions(
+  updatePermissions(
     args: UpdatePermissionsCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: UpdatePermissionsCommandOutput) => void
   ): void;
-  public updatePermissions(
-    args: UpdatePermissionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdatePermissionsCommandOutput) => void),
-    cb?: (err: any, data?: UpdatePermissionsCommandOutput) => void
-  ): Promise<UpdatePermissionsCommandOutput> | void {
-    const command = new UpdatePermissionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Modifies an existing Amazon Managed Grafana workspace. If you use this operation and omit any
-   *       optional parameters, the existing values of those parameters are not changed.</p>
-   *          <p>To modify the user authentication methods that the workspace uses, such as SAML or Amazon Web Services SSO,
-   *          use <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html">UpdateWorkspaceAuthentication</a>.</p>
-   *          <p>To modify which users in the workspace have the <code>Admin</code> and <code>Editor</code> Grafana roles,
-   *          use <a href="https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdatePermissions.html">UpdatePermissions</a>.</p>
+   * @see {@link UpdateWorkspaceCommand}
    */
-  public updateWorkspace(
+  updateWorkspace(
     args: UpdateWorkspaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<UpdateWorkspaceCommandOutput>;
-  public updateWorkspace(
+  updateWorkspace(
     args: UpdateWorkspaceCommandInput,
     cb: (err: any, data?: UpdateWorkspaceCommandOutput) => void
   ): void;
-  public updateWorkspace(
+  updateWorkspace(
     args: UpdateWorkspaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: UpdateWorkspaceCommandOutput) => void
   ): void;
-  public updateWorkspace(
-    args: UpdateWorkspaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkspaceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkspaceCommandOutput) => void
-  ): Promise<UpdateWorkspaceCommandOutput> | void {
-    const command = new UpdateWorkspaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Use this operation to define the identity provider (IdP) that this workspace
-   *          authenticates users from, using SAML. You can also map SAML assertion attributes to
-   *          workspace user information and define which groups in the assertion attribute are to have
-   *          the <code>Admin</code> and <code>Editor</code> roles in the workspace.</p>
+   * @see {@link UpdateWorkspaceAuthenticationCommand}
    */
-  public updateWorkspaceAuthentication(
+  updateWorkspaceAuthentication(
     args: UpdateWorkspaceAuthenticationCommandInput,
-    options?: __HttpHandlerOptions
+    options?: GrafanaRequestOptions
   ): Promise<UpdateWorkspaceAuthenticationCommandOutput>;
-  public updateWorkspaceAuthentication(
+  updateWorkspaceAuthentication(
     args: UpdateWorkspaceAuthenticationCommandInput,
     cb: (err: any, data?: UpdateWorkspaceAuthenticationCommandOutput) => void
   ): void;
-  public updateWorkspaceAuthentication(
+  updateWorkspaceAuthentication(
     args: UpdateWorkspaceAuthenticationCommandInput,
-    options: __HttpHandlerOptions,
+    options: GrafanaRequestOptions,
     cb: (err: any, data?: UpdateWorkspaceAuthenticationCommandOutput) => void
   ): void;
-  public updateWorkspaceAuthentication(
-    args: UpdateWorkspaceAuthenticationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkspaceAuthenticationCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkspaceAuthenticationCommandOutput) => void
-  ): Promise<UpdateWorkspaceAuthenticationCommandOutput> | void {
-    const command = new UpdateWorkspaceAuthenticationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link UpdateWorkspaceConfigurationCommand}
+   */
+  updateWorkspaceConfiguration(
+    args: UpdateWorkspaceConfigurationCommandInput,
+    options?: GrafanaRequestOptions
+  ): Promise<UpdateWorkspaceConfigurationCommandOutput>;
+  updateWorkspaceConfiguration(
+    args: UpdateWorkspaceConfigurationCommandInput,
+    cb: (err: any, data?: UpdateWorkspaceConfigurationCommandOutput) => void
+  ): void;
+  updateWorkspaceConfiguration(
+    args: UpdateWorkspaceConfigurationCommandInput,
+    options: GrafanaRequestOptions,
+    cb: (err: any, data?: UpdateWorkspaceConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListPermissionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListPermissionsCommandOutput}.
+   */
+  paginateListPermissions(
+    args: ListPermissionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListPermissionsCommandOutput>;
+
+  /**
+   * @see {@link ListVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVersionsCommandOutput}.
+   */
+  paginateListVersions(
+    args?: ListVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkspacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkspacesCommandOutput}.
+   */
+  paginateListWorkspaces(
+    args?: ListWorkspacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkspacesCommandOutput>;
+
+  /**
+   * @see {@link ListWorkspaceServiceAccountsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkspaceServiceAccountsCommandOutput}.
+   */
+  paginateListWorkspaceServiceAccounts(
+    args: ListWorkspaceServiceAccountsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkspaceServiceAccountsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkspaceServiceAccountTokensCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkspaceServiceAccountTokensCommandOutput}.
+   */
+  paginateListWorkspaceServiceAccountTokens(
+    args: ListWorkspaceServiceAccountTokensCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkspaceServiceAccountTokensCommandOutput>;
 }
+
+/**
+ * <p> Amazon Managed Grafana is a fully managed and secure data visualization service that you can use to instantly query, correlate, and visualize operational metrics, logs, and traces from multiple sources. Amazon Managed Grafana makes it easy to deploy, operate, and scale Grafana, a widely deployed data visualization tool that is popular for its extensible data support.</p> <p>With Amazon Managed Grafana, you create logically isolated Grafana servers called <i>workspaces</i>. In a workspace, you can create Grafana dashboards and visualizations to analyze your metrics, logs, and traces without having to build, package, or deploy any hardware to run Grafana servers. </p>
+ * @public
+ */
+export class Grafana extends GrafanaClient implements Grafana {}
+createAggregatedClient(commands, Grafana, { paginators });

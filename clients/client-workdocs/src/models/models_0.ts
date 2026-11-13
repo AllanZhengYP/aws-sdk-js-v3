@@ -1,707 +1,618 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
+import type {
+  ActivityType,
+  AdditionalResponseFieldType,
+  BooleanEnumType,
+  CommentStatusType,
+  CommentVisibilityType,
+  ContentCategoryType,
+  DocumentSourceType,
+  DocumentStatusType,
+  DocumentThumbnailType,
+  DocumentVersionStatus,
+  FolderContentType,
+  LanguageCodeType,
+  LocaleType,
+  OrderByFieldType,
+  OrderType,
+  PrincipalRoleType,
+  PrincipalType,
+  ResourceCollectionType,
+  ResourceSortType,
+  ResourceStateType,
+  ResourceType,
+  ResponseItemType,
+  RolePermissionType,
+  RoleType,
+  SearchCollectionType,
+  SearchQueryScopeType,
+  SearchResourceType,
+  ShareStatusType,
+  SortOrder,
+  StorageType,
+  SubscriptionProtocolType,
+  SubscriptionType,
+  UserFilterType,
+  UserSortType,
+  UserStatusType,
+  UserType,
+} from "./enums";
 
-import { WorkDocsServiceException as __BaseException } from "./WorkDocsServiceException";
-
+/**
+ * @public
+ */
 export interface AbortDocumentVersionUploadRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the version.</p>
+   * @public
    */
   VersionId: string | undefined;
 }
 
 /**
- * <p>The resource does not exist.</p>
+ * @public
  */
-export class EntityNotExistsException extends __BaseException {
-  readonly name: "EntityNotExistsException" = "EntityNotExistsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  EntityIds?: string[];
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<EntityNotExistsException, __BaseException>) {
-    super({
-      name: "EntityNotExistsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, EntityNotExistsException.prototype);
-    this.Message = opts.Message;
-    this.EntityIds = opts.EntityIds;
-  }
-}
-
-/**
- * <p>The AWS Directory Service cannot reach an on-premises instance. Or a dependency
- *             under the control of the organization is failing, such as a connected Active
- *             Directory.</p>
- */
-export class FailedDependencyException extends __BaseException {
-  readonly name: "FailedDependencyException" = "FailedDependencyException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<FailedDependencyException, __BaseException>) {
-    super({
-      name: "FailedDependencyException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, FailedDependencyException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The specified document version is not in the INITIALIZED state.</p>
- */
-export class ProhibitedStateException extends __BaseException {
-  readonly name: "ProhibitedStateException" = "ProhibitedStateException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ProhibitedStateException, __BaseException>) {
-    super({
-      name: "ProhibitedStateException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ProhibitedStateException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>One or more of the dependencies is unavailable.</p>
- */
-export class ServiceUnavailableException extends __BaseException {
-  readonly name: "ServiceUnavailableException" = "ServiceUnavailableException";
-  readonly $fault: "server" = "server";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServiceUnavailableException, __BaseException>) {
-    super({
-      name: "ServiceUnavailableException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServiceUnavailableException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The operation is not permitted.</p>
- */
-export class UnauthorizedOperationException extends __BaseException {
-  readonly name: "UnauthorizedOperationException" = "UnauthorizedOperationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  Code?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<UnauthorizedOperationException, __BaseException>) {
-    super({
-      name: "UnauthorizedOperationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, UnauthorizedOperationException.prototype);
-    this.Message = opts.Message;
-    this.Code = opts.Code;
-  }
-}
-
-/**
- * <p>The caller does not have access to perform the action on the resource.</p>
- */
-export class UnauthorizedResourceAccessException extends __BaseException {
-  readonly name: "UnauthorizedResourceAccessException" = "UnauthorizedResourceAccessException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<UnauthorizedResourceAccessException, __BaseException>) {
-    super({
-      name: "UnauthorizedResourceAccessException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, UnauthorizedResourceAccessException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface ActivateUserRequest {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
-}
-
-export enum LocaleType {
-  DE = "de",
-  DEFAULT = "default",
-  EN = "en",
-  ES = "es",
-  FR = "fr",
-  JA = "ja",
-  KO = "ko",
-  PT_BR = "pt_BR",
-  RU = "ru",
-  ZH_CN = "zh_CN",
-  ZH_TW = "zh_TW",
-}
-
-export enum UserStatusType {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
-  PENDING = "PENDING",
-}
-
-export enum StorageType {
-  QUOTA = "QUOTA",
-  UNLIMITED = "UNLIMITED",
+  AuthenticationToken?: string | undefined;
 }
 
 /**
  * <p>Describes the storage for a user.</p>
+ * @public
  */
 export interface StorageRuleType {
   /**
    * <p>The amount of storage allocated, in bytes.</p>
+   * @public
    */
-  StorageAllocatedInBytes?: number;
+  StorageAllocatedInBytes?: number | undefined;
 
   /**
    * <p>The type of storage.</p>
+   * @public
    */
-  StorageType?: StorageType | string;
+  StorageType?: StorageType | undefined;
 }
 
 /**
  * <p>Describes the storage for a user.</p>
+ * @public
  */
 export interface UserStorageMetadata {
   /**
    * <p>The amount of storage used, in bytes.</p>
+   * @public
    */
-  StorageUtilizedInBytes?: number;
+  StorageUtilizedInBytes?: number | undefined;
 
   /**
    * <p>The storage for a user.</p>
+   * @public
    */
-  StorageRule?: StorageRuleType;
-}
-
-export enum UserType {
-  ADMIN = "ADMIN",
-  MINIMALUSER = "MINIMALUSER",
-  POWERUSER = "POWERUSER",
-  USER = "USER",
-  WORKSPACESUSER = "WORKSPACESUSER",
+  StorageRule?: StorageRuleType | undefined;
 }
 
 /**
  * <p>Describes a user.</p>
+ * @public
  */
 export interface User {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The login name of the user.</p>
+   * @public
    */
-  Username?: string;
+  Username?: string | undefined;
 
   /**
    * <p>The email address of the user.</p>
+   * @public
    */
-  EmailAddress?: string;
+  EmailAddress?: string | undefined;
 
   /**
    * <p>The given name of the user.</p>
+   * @public
    */
-  GivenName?: string;
+  GivenName?: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
-  Surname?: string;
+  Surname?: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The ID of the root folder.</p>
+   * @public
    */
-  RootFolderId?: string;
+  RootFolderId?: string | undefined;
 
   /**
    * <p>The ID of the recycle bin folder.</p>
+   * @public
    */
-  RecycleBinFolderId?: string;
+  RecycleBinFolderId?: string | undefined;
 
   /**
    * <p>The status of the user.</p>
+   * @public
    */
-  Status?: UserStatusType | string;
+  Status?: UserStatusType | undefined;
 
   /**
    * <p>The type of user.</p>
+   * @public
    */
-  Type?: UserType | string;
+  Type?: UserType | undefined;
 
   /**
    * <p>The time when the user was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The time when the user was modified.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The time zone ID of the user.</p>
+   * @public
    */
-  TimeZoneId?: string;
+  TimeZoneId?: string | undefined;
 
   /**
    * <p>The locale of the user.</p>
+   * @public
    */
-  Locale?: LocaleType | string;
+  Locale?: LocaleType | undefined;
 
   /**
    * <p>The storage for the user.</p>
+   * @public
    */
-  Storage?: UserStorageMetadata;
+  Storage?: UserStorageMetadata | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ActivateUserResponse {
   /**
    * <p>The user information.</p>
+   * @public
    */
-  User?: User;
-}
-
-export enum CommentStatusType {
-  DELETED = "DELETED",
-  DRAFT = "DRAFT",
-  PUBLISHED = "PUBLISHED",
+  User?: User | undefined;
 }
 
 /**
  * <p>Describes the metadata of a comment.</p>
+ * @public
  */
 export interface CommentMetadata {
   /**
    * <p>The ID of the comment.</p>
+   * @public
    */
-  CommentId?: string;
+  CommentId?: string | undefined;
 
   /**
    * <p>The user who made the comment.</p>
+   * @public
    */
-  Contributor?: User;
+  Contributor?: User | undefined;
 
   /**
    * <p>The timestamp that the comment was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The status of the comment.</p>
+   * @public
    */
-  CommentStatus?: CommentStatusType | string;
+  CommentStatus?: CommentStatusType | undefined;
 
   /**
    * <p>The ID of the user being replied to.</p>
+   * @public
    */
-  RecipientId?: string;
+  RecipientId?: string | undefined;
+
+  /**
+   * <p>The ID of the user who made the comment.</p>
+   * @public
+   */
+  ContributorId?: string | undefined;
 }
 
 /**
  * <p>Describes the metadata of the user.</p>
+ * @public
  */
 export interface UserMetadata {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the user.</p>
+   * @public
    */
-  Username?: string;
+  Username?: string | undefined;
 
   /**
    * <p>The given name of the user before a rename operation.</p>
+   * @public
    */
-  GivenName?: string;
+  GivenName?: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
-  Surname?: string;
+  Surname?: string | undefined;
 
   /**
    * <p>The email address of the user.</p>
+   * @public
    */
-  EmailAddress?: string;
-}
-
-export enum ResourceType {
-  DOCUMENT = "DOCUMENT",
-  FOLDER = "FOLDER",
+  EmailAddress?: string | undefined;
 }
 
 /**
  * <p>Describes the metadata of a resource.</p>
+ * @public
  */
 export interface ResourceMetadata {
   /**
    * <p>The type of resource.</p>
+   * @public
    */
-  Type?: ResourceType | string;
+  Type?: ResourceType | undefined;
 
   /**
    * <p>The name of the resource.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The original name of the resource before a rename operation.</p>
+   * @public
    */
-  OriginalName?: string;
+  OriginalName?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The version ID of the resource. This is an optional field and is filled for action
    *             on document version.</p>
+   * @public
    */
-  VersionId?: string;
+  VersionId?: string | undefined;
 
   /**
    * <p>The owner of the resource.</p>
+   * @public
    */
-  Owner?: UserMetadata;
+  Owner?: UserMetadata | undefined;
 
   /**
    * <p>The parent ID of the resource before a rename operation.</p>
+   * @public
    */
-  ParentId?: string;
+  ParentId?: string | undefined;
 }
 
 /**
  * <p>Describes the metadata of a user group.</p>
+ * @public
  */
 export interface GroupMetadata {
   /**
    * <p>The ID of the user group.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the group.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
 /**
  * <p>Describes the users or user groups.</p>
+ * @public
  */
 export interface Participants {
   /**
    * <p>The list of users.</p>
+   * @public
    */
-  Users?: UserMetadata[];
+  Users?: UserMetadata[] | undefined;
 
   /**
    * <p>The list of user groups.</p>
+   * @public
    */
-  Groups?: GroupMetadata[];
-}
-
-export enum ActivityType {
-  DOCUMENT_ANNOTATION_ADDED = "DOCUMENT_ANNOTATION_ADDED",
-  DOCUMENT_ANNOTATION_DELETED = "DOCUMENT_ANNOTATION_DELETED",
-  DOCUMENT_CHECKED_IN = "DOCUMENT_CHECKED_IN",
-  DOCUMENT_CHECKED_OUT = "DOCUMENT_CHECKED_OUT",
-  DOCUMENT_COMMENT_ADDED = "DOCUMENT_COMMENT_ADDED",
-  DOCUMENT_COMMENT_DELETED = "DOCUMENT_COMMENT_DELETED",
-  DOCUMENT_MOVED = "DOCUMENT_MOVED",
-  DOCUMENT_RECYCLED = "DOCUMENT_RECYCLED",
-  DOCUMENT_RENAMED = "DOCUMENT_RENAMED",
-  DOCUMENT_RESTORED = "DOCUMENT_RESTORED",
-  DOCUMENT_REVERTED = "DOCUMENT_REVERTED",
-  DOCUMENT_SHAREABLE_LINK_CREATED = "DOCUMENT_SHAREABLE_LINK_CREATED",
-  DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED = "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED",
-  DOCUMENT_SHAREABLE_LINK_REMOVED = "DOCUMENT_SHAREABLE_LINK_REMOVED",
-  DOCUMENT_SHARED = "DOCUMENT_SHARED",
-  DOCUMENT_SHARE_PERMISSION_CHANGED = "DOCUMENT_SHARE_PERMISSION_CHANGED",
-  DOCUMENT_UNSHARED = "DOCUMENT_UNSHARED",
-  DOCUMENT_VERSION_DELETED = "DOCUMENT_VERSION_DELETED",
-  DOCUMENT_VERSION_DOWNLOADED = "DOCUMENT_VERSION_DOWNLOADED",
-  DOCUMENT_VERSION_UPLOADED = "DOCUMENT_VERSION_UPLOADED",
-  DOCUMENT_VERSION_VIEWED = "DOCUMENT_VERSION_VIEWED",
-  FOLDER_CREATED = "FOLDER_CREATED",
-  FOLDER_DELETED = "FOLDER_DELETED",
-  FOLDER_MOVED = "FOLDER_MOVED",
-  FOLDER_RECYCLED = "FOLDER_RECYCLED",
-  FOLDER_RENAMED = "FOLDER_RENAMED",
-  FOLDER_RESTORED = "FOLDER_RESTORED",
-  FOLDER_SHAREABLE_LINK_CREATED = "FOLDER_SHAREABLE_LINK_CREATED",
-  FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED = "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED",
-  FOLDER_SHAREABLE_LINK_REMOVED = "FOLDER_SHAREABLE_LINK_REMOVED",
-  FOLDER_SHARED = "FOLDER_SHARED",
-  FOLDER_SHARE_PERMISSION_CHANGED = "FOLDER_SHARE_PERMISSION_CHANGED",
-  FOLDER_UNSHARED = "FOLDER_UNSHARED",
+  Groups?: GroupMetadata[] | undefined;
 }
 
 /**
  * <p>Describes the activity information.</p>
+ * @public
  */
 export interface Activity {
   /**
    * <p>The activity type.</p>
+   * @public
    */
-  Type?: ActivityType | string;
+  Type?: ActivityType | undefined;
 
   /**
    * <p>The timestamp when the action was performed.</p>
+   * @public
    */
-  TimeStamp?: Date;
+  TimeStamp?: Date | undefined;
 
   /**
    * <p>Indicates whether an activity is indirect or direct. An indirect activity results
    *             from a direct activity performed on a parent resource. For example, sharing a parent
    *             folder (the direct activity) shares all of the subfolders and documents within the
    *             parent folder (the indirect activity).</p>
+   * @public
    */
-  IsIndirectActivity?: boolean;
+  IsIndirectActivity?: boolean | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The user who performed the action.</p>
+   * @public
    */
-  Initiator?: UserMetadata;
+  Initiator?: UserMetadata | undefined;
 
   /**
    * <p>The list of users or groups impacted by this action. This is an optional field and
    *             is filled for the following sharing activities: DOCUMENT_SHARED, DOCUMENT_SHARED,
    *             DOCUMENT_UNSHARED, FOLDER_SHARED, FOLDER_UNSHARED.</p>
+   * @public
    */
-  Participants?: Participants;
+  Participants?: Participants | undefined;
 
   /**
    * <p>The metadata of the resource involved in the user action.</p>
+   * @public
    */
-  ResourceMetadata?: ResourceMetadata;
+  ResourceMetadata?: ResourceMetadata | undefined;
 
   /**
    * <p>The original parent of the resource. This is an optional field and is filled for
    *             move activities.</p>
+   * @public
    */
-  OriginalParent?: ResourceMetadata;
+  OriginalParent?: ResourceMetadata | undefined;
 
   /**
    * <p>Metadata of the commenting activity. This is an optional field and is filled for
    *             commenting activities.</p>
+   * @public
    */
-  CommentMetadata?: CommentMetadata;
+  CommentMetadata?: CommentMetadata | undefined;
 }
 
 /**
  * <p>Set of options which defines notification preferences of given action.</p>
+ * @public
  */
 export interface NotificationOptions {
   /**
    * <p>Boolean value to indicate an email notification should be sent to the
-   *             receipients.</p>
+   *             recipients.</p>
+   * @public
    */
-  SendEmail?: boolean;
+  SendEmail?: boolean | undefined;
 
   /**
    * <p>Text value to be included in the email body.</p>
+   * @public
    */
-  EmailMessage?: string;
-}
-
-export enum RoleType {
-  CONTRIBUTOR = "CONTRIBUTOR",
-  COOWNER = "COOWNER",
-  OWNER = "OWNER",
-  VIEWER = "VIEWER",
-}
-
-export enum PrincipalType {
-  ANONYMOUS = "ANONYMOUS",
-  GROUP = "GROUP",
-  INVITE = "INVITE",
-  ORGANIZATION = "ORGANIZATION",
-  USER = "USER",
+  EmailMessage?: string | undefined;
 }
 
 /**
  * <p>Describes the recipient type and ID, if available.</p>
+ * @public
  */
 export interface SharePrincipal {
   /**
    * <p>The ID of the recipient.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
    * <p>The type of the recipient.</p>
+   * @public
    */
-  Type: PrincipalType | string | undefined;
+  Type: PrincipalType | undefined;
 
   /**
    * <p>The role of the recipient.</p>
+   * @public
    */
-  Role: RoleType | string | undefined;
+  Role: RoleType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AddResourcePermissionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The users, groups, or organization being granted permission.</p>
+   * @public
    */
   Principals: SharePrincipal[] | undefined;
 
   /**
    * <p>The notification options.</p>
+   * @public
    */
-  NotificationOptions?: NotificationOptions;
-}
-
-export enum ShareStatusType {
-  FAILURE = "FAILURE",
-  SUCCESS = "SUCCESS",
+  NotificationOptions?: NotificationOptions | undefined;
 }
 
 /**
  * <p>Describes the share results of a resource.</p>
+ * @public
  */
 export interface ShareResult {
   /**
    * <p>The ID of the principal.</p>
+   * @public
    */
-  PrincipalId?: string;
+  PrincipalId?: string | undefined;
 
   /**
    * <p>The ID of the invited user.</p>
+   * @public
    */
-  InviteePrincipalId?: string;
+  InviteePrincipalId?: string | undefined;
 
   /**
    * <p>The role.</p>
+   * @public
    */
-  Role?: RoleType | string;
+  Role?: RoleType | undefined;
 
   /**
    * <p>The status.</p>
+   * @public
    */
-  Status?: ShareStatusType | string;
+  Status?: ShareStatusType | undefined;
 
   /**
    * <p>The ID of the resource that was shared.</p>
+   * @public
    */
-  ShareId?: string;
+  ShareId?: string | undefined;
 
   /**
    * <p>The status message.</p>
+   * @public
    */
-  StatusMessage?: string;
+  StatusMessage?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AddResourcePermissionsResponse {
   /**
    * <p>The share results.</p>
+   * @public
    */
-  ShareResults?: ShareResult[];
+  ShareResults?: ShareResult[] | undefined;
 }
 
-export enum CommentVisibilityType {
-  PRIVATE = "PRIVATE",
-  PUBLIC = "PUBLIC",
-}
-
+/**
+ * @public
+ */
 export interface CreateCommentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the document version.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The ID of the parent comment.</p>
+   * @public
    */
-  ParentId?: string;
+  ParentId?: string | undefined;
 
   /**
    * <p>The ID of the root comment in the thread.</p>
+   * @public
    */
-  ThreadId?: string;
+  ThreadId?: string | undefined;
 
   /**
    * <p>The text of the comment.</p>
+   * @public
    */
   Text: string | undefined;
 
@@ -709,2739 +620,2315 @@ export interface CreateCommentRequest {
    * <p>The visibility of the comment. Options are either PRIVATE, where the comment is
    *             visible only to the comment author and document owner and co-owners, or PUBLIC, where
    *             the comment is visible to document owners, co-owners, and contributors.</p>
+   * @public
    */
-  Visibility?: CommentVisibilityType | string;
+  Visibility?: CommentVisibilityType | undefined;
 
   /**
    * <p>Set this parameter to TRUE to send an email out to the document collaborators after
    *             the comment is created.</p>
+   * @public
    */
-  NotifyCollaborators?: boolean;
+  NotifyCollaborators?: boolean | undefined;
 }
 
 /**
  * <p>Describes a comment.</p>
+ * @public
  */
 export interface Comment {
   /**
    * <p>The ID of the comment.</p>
+   * @public
    */
   CommentId: string | undefined;
 
   /**
    * <p>The ID of the parent comment.</p>
+   * @public
    */
-  ParentId?: string;
+  ParentId?: string | undefined;
 
   /**
    * <p>The ID of the root comment in the thread.</p>
+   * @public
    */
-  ThreadId?: string;
+  ThreadId?: string | undefined;
 
   /**
    * <p>The text of the comment.</p>
+   * @public
    */
-  Text?: string;
+  Text?: string | undefined;
 
   /**
    * <p>The details of the user who made the comment.</p>
+   * @public
    */
-  Contributor?: User;
+  Contributor?: User | undefined;
 
   /**
    * <p>The time that the comment was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The status of the comment.</p>
+   * @public
    */
-  Status?: CommentStatusType | string;
+  Status?: CommentStatusType | undefined;
 
   /**
    * <p>The visibility of the comment. Options are either PRIVATE, where the comment is
    *             visible only to the comment author and document owner and co-owners, or PUBLIC, where
    *             the comment is visible to document owners, co-owners, and contributors.</p>
+   * @public
    */
-  Visibility?: CommentVisibilityType | string;
+  Visibility?: CommentVisibilityType | undefined;
 
   /**
    * <p>If the comment is a reply to another user's comment, this field contains the user
    *             ID of the user being replied to.</p>
+   * @public
    */
-  RecipientId?: string;
+  RecipientId?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateCommentResponse {
   /**
    * <p>The comment that has been created.</p>
+   * @public
    */
-  Comment?: Comment;
+  Comment?: Comment | undefined;
 }
 
 /**
- * <p>This exception is thrown when the document is locked for comments and user tries to
- *             create or delete a comment on that document.</p>
+ * @public
  */
-export class DocumentLockedForCommentsException extends __BaseException {
-  readonly name: "DocumentLockedForCommentsException" = "DocumentLockedForCommentsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<DocumentLockedForCommentsException, __BaseException>) {
-    super({
-      name: "DocumentLockedForCommentsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, DocumentLockedForCommentsException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The requested operation is not allowed on the specified comment object.</p>
- */
-export class InvalidCommentOperationException extends __BaseException {
-  readonly name: "InvalidCommentOperationException" = "InvalidCommentOperationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidCommentOperationException, __BaseException>) {
-    super({
-      name: "InvalidCommentOperationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidCommentOperationException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface CreateCustomMetadataRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The ID of the version, if the custom metadata is being added to a document
    *             version.</p>
+   * @public
    */
-  VersionId?: string;
+  VersionId?: string | undefined;
 
   /**
    * <p>Custom metadata in the form of name-value pairs.</p>
+   * @public
    */
   CustomMetadata: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateCustomMetadataResponse {}
 
 /**
- * <p>The limit has been reached on the number of custom properties for the specified
- *             resource.</p>
+ * @public
  */
-export class CustomMetadataLimitExceededException extends __BaseException {
-  readonly name: "CustomMetadataLimitExceededException" = "CustomMetadataLimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<CustomMetadataLimitExceededException, __BaseException>) {
-    super({
-      name: "CustomMetadataLimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, CustomMetadataLimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>Another operation is in progress on the resource that conflicts with the current operation.</p>
- */
-export class ConflictingOperationException extends __BaseException {
-  readonly name: "ConflictingOperationException" = "ConflictingOperationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ConflictingOperationException, __BaseException>) {
-    super({
-      name: "ConflictingOperationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConflictingOperationException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface CreateFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The name of the new folder.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
   ParentFolderId: string | undefined;
 }
 
-export enum ResourceStateType {
-  ACTIVE = "ACTIVE",
-  RECYCLED = "RECYCLED",
-  RECYCLING = "RECYCLING",
-  RESTORING = "RESTORING",
-}
-
 /**
  * <p>Describes a folder.</p>
+ * @public
  */
 export interface FolderMetadata {
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the folder.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the creator.</p>
+   * @public
    */
-  CreatorId?: string;
+  CreatorId?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The time when the folder was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The time when the folder was updated.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The resource state of the folder.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
+  ResourceState?: ResourceStateType | undefined;
 
   /**
    * <p>The unique identifier created from the subfolders and documents of the
    *             folder.</p>
+   * @public
    */
-  Signature?: string;
+  Signature?: string | undefined;
 
   /**
    * <p>List of labels on the folder.</p>
+   * @public
    */
-  Labels?: string[];
+  Labels?: string[] | undefined;
 
   /**
    * <p>The size of the folder metadata.</p>
+   * @public
    */
-  Size?: number;
+  Size?: number | undefined;
 
   /**
    * <p>The size of the latest version of the folder metadata.</p>
+   * @public
    */
-  LatestVersionSize?: number;
+  LatestVersionSize?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateFolderResponse {
   /**
    * <p>The metadata of the folder.</p>
+   * @public
    */
-  Metadata?: FolderMetadata;
+  Metadata?: FolderMetadata | undefined;
 }
 
 /**
- * <p>The resource already exists.</p>
+ * @public
  */
-export class EntityAlreadyExistsException extends __BaseException {
-  readonly name: "EntityAlreadyExistsException" = "EntityAlreadyExistsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<EntityAlreadyExistsException, __BaseException>) {
-    super({
-      name: "EntityAlreadyExistsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, EntityAlreadyExistsException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The maximum of 100,000 folders under the parent folder has been exceeded.</p>
- */
-export class LimitExceededException extends __BaseException {
-  readonly name: "LimitExceededException" = "LimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<LimitExceededException, __BaseException>) {
-    super({
-      name: "LimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface CreateLabelsRequest {
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>List of labels to add to the resource.</p>
+   * @public
    */
   Labels: string[] | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateLabelsResponse {}
 
 /**
- * <p>The limit has been reached on the number of labels for the specified
- *             resource.</p>
+ * @public
  */
-export class TooManyLabelsException extends __BaseException {
-  readonly name: "TooManyLabelsException" = "TooManyLabelsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<TooManyLabelsException, __BaseException>) {
-    super({
-      name: "TooManyLabelsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, TooManyLabelsException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum SubscriptionProtocolType {
-  HTTPS = "HTTPS",
-}
-
-export enum SubscriptionType {
-  ALL = "ALL",
-}
-
 export interface CreateNotificationSubscriptionRequest {
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
   OrganizationId: string | undefined;
 
   /**
    * <p>The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint
    *             is a URL that begins with <code>https</code>.</p>
+   * @public
    */
   Endpoint: string | undefined;
 
   /**
    * <p>The protocol to use. The supported value is https, which delivers JSON-encoded
    *             messages using HTTPS POST.</p>
+   * @public
    */
-  Protocol: SubscriptionProtocolType | string | undefined;
+  Protocol: SubscriptionProtocolType | undefined;
 
   /**
    * <p>The notification type.</p>
+   * @public
    */
-  SubscriptionType: SubscriptionType | string | undefined;
+  SubscriptionType: SubscriptionType | undefined;
 }
 
 /**
  * <p>Describes a subscription.</p>
+ * @public
  */
 export interface Subscription {
   /**
    * <p>The ID of the subscription.</p>
+   * @public
    */
-  SubscriptionId?: string;
+  SubscriptionId?: string | undefined;
 
   /**
    * <p>The endpoint of the subscription.</p>
+   * @public
    */
-  EndPoint?: string;
+  EndPoint?: string | undefined;
 
   /**
    * <p>The protocol of the subscription.</p>
+   * @public
    */
-  Protocol?: SubscriptionProtocolType | string;
-}
-
-export interface CreateNotificationSubscriptionResponse {
-  /**
-   * <p>The subscription.</p>
-   */
-  Subscription?: Subscription;
+  Protocol?: SubscriptionProtocolType | undefined;
 }
 
 /**
- * <p>You've reached the limit on the number of subscriptions for the WorkDocs
- *             instance.</p>
+ * @public
  */
-export class TooManySubscriptionsException extends __BaseException {
-  readonly name: "TooManySubscriptionsException" = "TooManySubscriptionsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface CreateNotificationSubscriptionResponse {
   /**
-   * @internal
+   * <p>The subscription.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<TooManySubscriptionsException, __BaseException>) {
-    super({
-      name: "TooManySubscriptionsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, TooManySubscriptionsException.prototype);
-    this.Message = opts.Message;
-  }
+  Subscription?: Subscription | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateUserRequest {
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The login name of the user.</p>
+   * @public
    */
   Username: string | undefined;
 
   /**
    * <p>The email address of the user.</p>
+   * @public
    */
-  EmailAddress?: string;
+  EmailAddress?: string | undefined;
 
   /**
    * <p>The given name of the user.</p>
+   * @public
    */
   GivenName: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
   Surname: string | undefined;
 
   /**
    * <p>The password of the user.</p>
+   * @public
    */
   Password: string | undefined;
 
   /**
    * <p>The time zone ID of the user.</p>
+   * @public
    */
-  TimeZoneId?: string;
+  TimeZoneId?: string | undefined;
 
   /**
    * <p>The amount of storage for the user.</p>
+   * @public
    */
-  StorageRule?: StorageRuleType;
+  StorageRule?: StorageRuleType | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateUserResponse {
   /**
    * <p>The user information.</p>
+   * @public
    */
-  User?: User;
+  User?: User | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeactivateUserRequest {
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteCommentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the document version.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The ID of the comment.</p>
+   * @public
    */
   CommentId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteCustomMetadataRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource, either a document or folder.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The ID of the version, if the custom metadata is being deleted from a document
    *             version.</p>
+   * @public
    */
-  VersionId?: string;
+  VersionId?: string | undefined;
 
   /**
    * <p>List of properties to remove.</p>
+   * @public
    */
-  Keys?: string[];
+  Keys?: string[] | undefined;
 
   /**
    * <p>Flag to indicate removal of all custom metadata properties from the specified
    *             resource.</p>
+   * @public
    */
-  DeleteAll?: boolean;
+  DeleteAll?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteCustomMetadataResponse {}
 
 /**
- * <p>The resource hierarchy is changing.</p>
+ * @public
  */
-export class ConcurrentModificationException extends __BaseException {
-  readonly name: "ConcurrentModificationException" = "ConcurrentModificationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ConcurrentModificationException, __BaseException>) {
-    super({
-      name: "ConcurrentModificationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConcurrentModificationException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface DeleteDocumentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface DeleteDocumentVersionRequest {
+  /**
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
+   */
+  AuthenticationToken?: string | undefined;
+
+  /**
+   * <p>The ID of the document associated with the version being deleted.</p>
+   * @public
+   */
+  DocumentId: string | undefined;
+
+  /**
+   * <p>The ID of the version being deleted.</p>
+   * @public
+   */
+  VersionId: string | undefined;
+
+  /**
+   * <p>Deletes all versions of a document prior to the current version.</p>
+   * @public
+   */
+  DeletePriorVersions: boolean | undefined;
+}
+
+/**
+ * @public
+ */
 export interface DeleteFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteFolderContentsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteLabelsRequest {
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>List of labels to delete from the resource.</p>
+   * @public
    */
-  Labels?: string[];
+  Labels?: string[] | undefined;
 
   /**
    * <p>Flag to request removal of all labels from the specified resource.</p>
+   * @public
    */
-  DeleteAll?: boolean;
+  DeleteAll?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteLabelsResponse {}
 
+/**
+ * @public
+ */
 export interface DeleteNotificationSubscriptionRequest {
   /**
    * <p>The ID of the subscription.</p>
+   * @public
    */
   SubscriptionId: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
   OrganizationId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteUserRequest {
   /**
    * <p>Amazon WorkDocs authentication token. Do not set this field when using
-   *             administrative API actions, as in accessing the API using AWS credentials.</p>
+   *             administrative API actions, as in accessing the API using Amazon Web Services credentials.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeActivitiesRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The timestamp that determines the starting time of the activities. The response
    *             includes the activities performed after the specified timestamp.</p>
+   * @public
    */
-  StartTime?: Date;
+  StartTime?: Date | undefined;
 
   /**
    * <p>The timestamp that determines the end time of the activities. The response includes
    *             the activities performed before the specified timestamp.</p>
+   * @public
    */
-  EndTime?: Date;
+  EndTime?: Date | undefined;
 
   /**
    * <p>The ID of the organization. This is a mandatory parameter when using administrative
    *             API (SigV4) requests.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>Specifies which activity types to include in the response. If this field is left
    *             empty, all activity types are returned.</p>
+   * @public
    */
-  ActivityTypes?: string;
+  ActivityTypes?: string | undefined;
 
   /**
    * <p>The document or folder ID for which to describe activity types.</p>
+   * @public
    */
-  ResourceId?: string;
+  ResourceId?: string | undefined;
 
   /**
    * <p>The ID of the user who performed the action. The response includes activities
    *             pertaining to this user. This is an optional parameter and is only applicable for
    *             administrative API (SigV4) requests.</p>
+   * @public
    */
-  UserId?: string;
+  UserId?: string | undefined;
 
   /**
    * <p>Includes indirect activities. An indirect activity results from a direct activity
    *             performed on a parent resource. For example, sharing a parent folder (the direct
    *             activity) shares all of the subfolders and documents within the parent folder (the
    *             indirect activity).</p>
+   * @public
    */
-  IncludeIndirectActivities?: boolean;
+  IncludeIndirectActivities?: boolean | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results.</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export interface DescribeActivitiesResponse {
-  /**
-   * <p>The list of activities for the specified user and time period.</p>
-   */
-  UserActivities?: Activity[];
-
-  /**
-   * <p>The marker for the next set of results.</p>
-   */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
 /**
- * <p>The pagination marker or limit fields are not valid.</p>
+ * @public
  */
-export class InvalidArgumentException extends __BaseException {
-  readonly name: "InvalidArgumentException" = "InvalidArgumentException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface DescribeActivitiesResponse {
   /**
-   * @internal
+   * <p>The list of activities for the specified user and time period.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidArgumentException, __BaseException>) {
-    super({
-      name: "InvalidArgumentException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidArgumentException.prototype);
-    this.Message = opts.Message;
-  }
+  UserActivities?: Activity[] | undefined;
+
+  /**
+   * <p>The marker for the next set of results.</p>
+   * @public
+   */
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeCommentsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The ID of the document version.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous
    *             call.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeCommentsResponse {
   /**
    * <p>The list of comments for the specified document version.</p>
+   * @public
    */
-  Comments?: Comment[];
+  Comments?: Comment[] | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous
    *             call.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeDocumentVersionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of versions to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "INITIALIZED" to include incomplete
    *             versions.</p>
+   * @public
    */
-  Include?: string;
+  Include?: string | undefined;
 
   /**
    * <p>Specify "SOURCE" to include initialized versions and a URL for the source
    *             document.</p>
+   * @public
    */
-  Fields?: string;
-}
-
-export enum DocumentSourceType {
-  ORIGINAL = "ORIGINAL",
-  WITH_COMMENTS = "WITH_COMMENTS",
-}
-
-export enum DocumentStatusType {
-  ACTIVE = "ACTIVE",
-  INITIALIZED = "INITIALIZED",
-}
-
-export enum DocumentThumbnailType {
-  LARGE = "LARGE",
-  SMALL = "SMALL",
-  SMALL_HQ = "SMALL_HQ",
+  Fields?: string | undefined;
 }
 
 /**
  * <p>Describes a version of a document.</p>
+ * @public
  */
 export interface DocumentVersionMetadata {
   /**
    * <p>The ID of the version.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the version.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The content type of the document.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The size of the document, in bytes.</p>
+   * @public
    */
-  Size?: number;
+  Size?: number | undefined;
 
   /**
    * <p>The signature of the document.</p>
+   * @public
    */
-  Signature?: string;
+  Signature?: string | undefined;
 
   /**
    * <p>The status of the document.</p>
+   * @public
    */
-  Status?: DocumentStatusType | string;
+  Status?: DocumentStatusType | undefined;
 
   /**
    * <p>The timestamp when the document was first uploaded.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the document was last uploaded.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the content of the document was originally created.</p>
+   * @public
    */
-  ContentCreatedTimestamp?: Date;
+  ContentCreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the content of the document was modified.</p>
+   * @public
    */
-  ContentModifiedTimestamp?: Date;
+  ContentModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The ID of the creator.</p>
+   * @public
    */
-  CreatorId?: string;
+  CreatorId?: string | undefined;
 
   /**
    * <p>The thumbnail of the document.</p>
+   * @public
    */
-  Thumbnail?: Record<string, string>;
+  Thumbnail?: Partial<Record<DocumentThumbnailType, string>> | undefined;
 
   /**
    * <p>The source of the document.</p>
+   * @public
    */
-  Source?: Record<string, string>;
+  Source?: Partial<Record<DocumentSourceType, string>> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeDocumentVersionsResponse {
   /**
    * <p>The document versions.</p>
+   * @public
    */
-  DocumentVersions?: DocumentVersionMetadata[];
+  DocumentVersions?: DocumentVersionMetadata[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export enum OrderType {
-  ASCENDING = "ASCENDING",
-  DESCENDING = "DESCENDING",
-}
-
-export enum ResourceSortType {
-  DATE = "DATE",
-  NAME = "NAME",
-}
-
-export enum FolderContentType {
-  ALL = "ALL",
-  DOCUMENT = "DOCUMENT",
-  FOLDER = "FOLDER",
-}
-
+/**
+ * @public
+ */
 export interface DescribeFolderContentsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>The sorting criteria.</p>
+   * @public
    */
-  Sort?: ResourceSortType | string;
+  Sort?: ResourceSortType | undefined;
 
   /**
    * <p>The order for the contents of the folder.</p>
+   * @public
    */
-  Order?: OrderType | string;
+  Order?: OrderType | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous
    *             call.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The type of items.</p>
+   * @public
    */
-  Type?: FolderContentType | string;
+  Type?: FolderContentType | undefined;
 
   /**
    * <p>The contents to include. Specify "INITIALIZED" to include initialized
    *             documents.</p>
+   * @public
    */
-  Include?: string;
+  Include?: string | undefined;
 }
 
 /**
  * <p>Describes the document.</p>
+ * @public
  */
 export interface DocumentMetadata {
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The ID of the creator.</p>
+   * @public
    */
-  CreatorId?: string;
+  CreatorId?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The time when the document was created.</p>
+   * @public
    */
-  CreatedTimestamp?: Date;
+  CreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The time when the document was updated.</p>
+   * @public
    */
-  ModifiedTimestamp?: Date;
+  ModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The latest version of the document.</p>
+   * @public
    */
-  LatestVersionMetadata?: DocumentVersionMetadata;
+  LatestVersionMetadata?: DocumentVersionMetadata | undefined;
 
   /**
    * <p>The resource state.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
+  ResourceState?: ResourceStateType | undefined;
 
   /**
    * <p>List of labels on the document.</p>
+   * @public
    */
-  Labels?: string[];
+  Labels?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeFolderContentsResponse {
   /**
    * <p>The subfolders in the specified folder.</p>
+   * @public
    */
-  Folders?: FolderMetadata[];
+  Folders?: FolderMetadata[] | undefined;
 
   /**
    * <p>The documents in the specified folder.</p>
+   * @public
    */
-  Documents?: DocumentMetadata[];
+  Documents?: DocumentMetadata[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeGroupsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>A query to describe groups by group name.</p>
+   * @public
    */
   SearchQuery: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeGroupsResponse {
   /**
    * <p>The list of groups.</p>
+   * @public
    */
-  Groups?: GroupMetadata[];
+  Groups?: GroupMetadata[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no additional
    *             results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeNotificationSubscriptionsRequest {
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
   OrganizationId: string | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeNotificationSubscriptionsResponse {
   /**
    * <p>The subscriptions.</p>
+   * @public
    */
-  Subscriptions?: Subscription[];
+  Subscriptions?: Subscription[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeResourcePermissionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The ID of the principal to filter permissions by.</p>
+   * @public
    */
-  PrincipalId?: string;
+  PrincipalId?: string | undefined;
 
   /**
    * <p>The maximum number of items to return with this call.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call)</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export enum RolePermissionType {
-  DIRECT = "DIRECT",
-  INHERITED = "INHERITED",
+  Marker?: string | undefined;
 }
 
 /**
  * <p>Describes the permissions.</p>
+ * @public
  */
 export interface PermissionInfo {
   /**
    * <p>The role of the user.</p>
+   * @public
    */
-  Role?: RoleType | string;
+  Role?: RoleType | undefined;
 
   /**
    * <p>The type of permissions.</p>
+   * @public
    */
-  Type?: RolePermissionType | string;
+  Type?: RolePermissionType | undefined;
 }
 
 /**
  * <p>Describes a resource.</p>
+ * @public
  */
 export interface Principal {
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The type of resource.</p>
+   * @public
    */
-  Type?: PrincipalType | string;
+  Type?: PrincipalType | undefined;
 
   /**
    * <p>The permission information for the resource.</p>
+   * @public
    */
-  Roles?: PermissionInfo[];
+  Roles?: PermissionInfo[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeResourcePermissionsResponse {
   /**
    * <p>The principals.</p>
+   * @public
    */
-  Principals?: Principal[];
+  Principals?: Principal[] | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeRootFoldersRequest {
   /**
    * <p>Amazon WorkDocs authentication token.</p>
+   * @public
    */
   AuthenticationToken: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeRootFoldersResponse {
   /**
    * <p>The user's special folders.</p>
+   * @public
    */
-  Folders?: FolderMetadata[];
+  Folders?: FolderMetadata[] | undefined;
 
   /**
    * <p>The marker for the next set of results.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
-export enum UserFilterType {
-  ACTIVE_PENDING = "ACTIVE_PENDING",
-  ALL = "ALL",
-}
-
-export enum UserSortType {
-  FULL_NAME = "FULL_NAME",
-  STORAGE_LIMIT = "STORAGE_LIMIT",
-  STORAGE_USED = "STORAGE_USED",
-  USER_NAME = "USER_NAME",
-  USER_STATUS = "USER_STATUS",
-}
-
+/**
+ * @public
+ */
 export interface DescribeUsersRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the organization.</p>
+   * @public
    */
-  OrganizationId?: string;
+  OrganizationId?: string | undefined;
 
   /**
    * <p>The IDs of the users.</p>
+   * @public
    */
-  UserIds?: string;
+  UserIds?: string | undefined;
 
   /**
-   * <p>A query to filter users by user name.</p>
+   * <p>A query to filter users by user name. Remember the following about the <code>Userids</code> and <code>Query</code> parameters:</p>
+   *          <ul>
+   *             <li>
+   *                <p>If you don't use either parameter, the API returns a paginated list of all users on the site.</p>
+   *             </li>
+   *             <li>
+   *                <p>If you use both parameters, the API ignores the <code>Query</code> parameter.</p>
+   *             </li>
+   *             <li>
+   *                <p>The <code>Userid</code> parameter only returns user names that match a corresponding user ID.</p>
+   *             </li>
+   *             <li>
+   *                <p>The <code>Query</code> parameter runs a "prefix" search for users by the <code>GivenName</code>, <code>SurName</code>, or <code>UserName</code> fields included in a
+   *                 <a href="https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html">CreateUser</a> API call. For example, querying on
+   *                 <code>Ma</code> returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on <code>Ma J</code> only
+   *                 returns Mateo Jackson.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  Query?: string;
+  Query?: string | undefined;
 
   /**
    * <p>The state of the users. Specify "ALL" to include inactive users.</p>
+   * @public
    */
-  Include?: UserFilterType | string;
+  Include?: UserFilterType | undefined;
 
   /**
    * <p>The order for the results.</p>
+   * @public
    */
-  Order?: OrderType | string;
+  Order?: OrderType | undefined;
 
   /**
    * <p>The sorting criteria.</p>
+   * @public
    */
-  Sort?: UserSortType | string;
+  Sort?: UserSortType | undefined;
 
   /**
    * <p>The marker for the next set of results. (You received this marker from a previous
    *             call.)</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 
   /**
    * <p>The maximum number of items to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "STORAGE_METADATA" to include the user
    *             storage quota and utilization information.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeUsersResponse {
   /**
    * <p>The users.</p>
+   * @public
    */
-  Users?: User[];
+  Users?: User[] | undefined;
 
   /**
-   * @deprecated
-   *
    * <p>The total number of users included in the results.</p>
+   *
+   * @deprecated deprecated.
+   * @public
    */
-  TotalNumberOfUsers?: number;
+  TotalNumberOfUsers?: number | undefined;
 
   /**
    * <p>The marker to use when requesting the next set of results. If there are no
    *             additional results, the string is empty.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
 /**
- * <p>The response is too large to return. The request must include a filter to reduce the size of the response.</p>
+ * @public
  */
-export class RequestedEntityTooLargeException extends __BaseException {
-  readonly name: "RequestedEntityTooLargeException" = "RequestedEntityTooLargeException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<RequestedEntityTooLargeException, __BaseException>) {
-    super({
-      name: "RequestedEntityTooLargeException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, RequestedEntityTooLargeException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface GetCurrentUserRequest {
   /**
    * <p>Amazon WorkDocs authentication token.</p>
+   * @public
    */
   AuthenticationToken: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetCurrentUserResponse {
   /**
    * <p>Metadata of the user.</p>
+   * @public
    */
-  User?: User;
+  User?: User | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetDocumentRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>Set this to <code>TRUE</code> to include custom metadata in the response.</p>
+   * @public
    */
-  IncludeCustomMetadata?: boolean;
-}
-
-export interface GetDocumentResponse {
-  /**
-   * <p>The metadata details of the document.</p>
-   */
-  Metadata?: DocumentMetadata;
-
-  /**
-   * <p>The custom metadata on the document.</p>
-   */
-  CustomMetadata?: Record<string, string>;
+  IncludeCustomMetadata?: boolean | undefined;
 }
 
 /**
- * <p>The password is invalid.</p>
+ * @public
  */
-export class InvalidPasswordException extends __BaseException {
-  readonly name: "InvalidPasswordException" = "InvalidPasswordException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface GetDocumentResponse {
   /**
-   * @internal
+   * <p>The metadata details of the document.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidPasswordException, __BaseException>) {
-    super({
-      name: "InvalidPasswordException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidPasswordException.prototype);
-    this.Message = opts.Message;
-  }
+  Metadata?: DocumentMetadata | undefined;
+
+  /**
+   * <p>The custom metadata on the document.</p>
+   * @public
+   */
+  CustomMetadata?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetDocumentPathRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The maximum number of levels in the hierarchy to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify <code>NAME</code> to include the names of
    *             the parent folders.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 
   /**
    * <p>This value is not supported.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
 /**
  * <p>Describes the resource path.</p>
+ * @public
  */
 export interface ResourcePathComponent {
   /**
    * <p>The ID of the resource path.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the resource path.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
 /**
  * <p>Describes the path information of a resource.</p>
+ * @public
  */
 export interface ResourcePath {
   /**
    * <p>The components of the resource path.</p>
+   * @public
    */
-  Components?: ResourcePathComponent[];
+  Components?: ResourcePathComponent[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetDocumentPathResponse {
   /**
    * <p>The path information.</p>
+   * @public
    */
-  Path?: ResourcePath;
+  Path?: ResourcePath | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetDocumentVersionRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The version ID of the document.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "SOURCE" to include a URL for the source
    *             document.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 
   /**
    * <p>Set this to TRUE to include custom metadata in the response.</p>
+   * @public
    */
-  IncludeCustomMetadata?: boolean;
+  IncludeCustomMetadata?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetDocumentVersionResponse {
   /**
    * <p>The version metadata.</p>
+   * @public
    */
-  Metadata?: DocumentVersionMetadata;
+  Metadata?: DocumentVersionMetadata | undefined;
 
   /**
    * <p>The custom metadata on the document version.</p>
+   * @public
    */
-  CustomMetadata?: Record<string, string>;
+  CustomMetadata?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>Set to TRUE to include custom metadata in the response.</p>
+   * @public
    */
-  IncludeCustomMetadata?: boolean;
+  IncludeCustomMetadata?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetFolderResponse {
   /**
    * <p>The metadata of the folder.</p>
+   * @public
    */
-  Metadata?: FolderMetadata;
+  Metadata?: FolderMetadata | undefined;
 
   /**
    * <p>The custom metadata on the folder.</p>
+   * @public
    */
-  CustomMetadata?: Record<string, string>;
+  CustomMetadata?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetFolderPathRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>The maximum number of levels in the hierarchy to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>A comma-separated list of values. Specify "NAME" to include the names of the parent
    *             folders.</p>
+   * @public
    */
-  Fields?: string;
+  Fields?: string | undefined;
 
   /**
    * <p>This value is not supported.</p>
+   * @public
    */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetFolderPathResponse {
   /**
    * <p>The path information.</p>
+   * @public
    */
-  Path?: ResourcePath;
+  Path?: ResourcePath | undefined;
 }
 
-export enum ResourceCollectionType {
-  SHARED_WITH_ME = "SHARED_WITH_ME",
-}
-
+/**
+ * @public
+ */
 export interface GetResourcesRequest {
   /**
-   * <p>The Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>The Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The user ID for the resource collection. This is a required field for accessing the
    *             API operation using IAM credentials.</p>
+   * @public
    */
-  UserId?: string;
+  UserId?: string | undefined;
 
   /**
    * <p>The collection type.</p>
+   * @public
    */
-  CollectionType?: ResourceCollectionType | string;
+  CollectionType?: ResourceCollectionType | undefined;
 
   /**
    * <p>The maximum number of resources to return.</p>
+   * @public
    */
-  Limit?: number;
+  Limit?: number | undefined;
 
   /**
    * <p>The marker for the next set of results. This marker was received from a previous call.</p>
+   * @public
    */
-  Marker?: string;
-}
-
-export interface GetResourcesResponse {
-  /**
-   * <p>The folders in the specified folder.</p>
-   */
-  Folders?: FolderMetadata[];
-
-  /**
-   * <p>The documents in the specified collection.</p>
-   */
-  Documents?: DocumentMetadata[];
-
-  /**
-   * <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
-   */
-  Marker?: string;
+  Marker?: string | undefined;
 }
 
 /**
- * <p>This exception is thrown when a valid checkout ID is not presented on document
- *             version upload calls for a document that has been checked out from Web client.</p>
+ * @public
  */
-export class DraftUploadOutOfSyncException extends __BaseException {
-  readonly name: "DraftUploadOutOfSyncException" = "DraftUploadOutOfSyncException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface GetResourcesResponse {
   /**
-   * @internal
+   * <p>The folders in the specified folder.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<DraftUploadOutOfSyncException, __BaseException>) {
-    super({
-      name: "DraftUploadOutOfSyncException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, DraftUploadOutOfSyncException.prototype);
-    this.Message = opts.Message;
-  }
+  Folders?: FolderMetadata[] | undefined;
+
+  /**
+   * <p>The documents in the specified collection.</p>
+   * @public
+   */
+  Documents?: DocumentMetadata[] | undefined;
+
+  /**
+   * <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
+   * @public
+   */
+  Marker?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface InitiateDocumentVersionUploadRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The name of the document.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The timestamp when the content of the document was originally created.</p>
+   * @public
    */
-  ContentCreatedTimestamp?: Date;
+  ContentCreatedTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the content of the document was modified.</p>
+   * @public
    */
-  ContentModifiedTimestamp?: Date;
+  ContentModifiedTimestamp?: Date | undefined;
 
   /**
    * <p>The content type of the document.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>The size of the document, in bytes.</p>
+   * @public
    */
-  DocumentSizeInBytes?: number;
+  DocumentSizeInBytes?: number | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId: string | undefined;
+  ParentFolderId?: string | undefined;
 }
 
 /**
  * <p>Describes the upload.</p>
+ * @public
  */
 export interface UploadMetadata {
   /**
    * <p>The URL of the upload.</p>
+   * @public
    */
-  UploadUrl?: string;
+  UploadUrl?: string | undefined;
 
   /**
    * <p>The signed headers.</p>
+   * @public
    */
-  SignedHeaders?: Record<string, string>;
+  SignedHeaders?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface InitiateDocumentVersionUploadResponse {
   /**
    * <p>The document metadata.</p>
+   * @public
    */
-  Metadata?: DocumentMetadata;
+  Metadata?: DocumentMetadata | undefined;
 
   /**
    * <p>The upload metadata.</p>
+   * @public
    */
-  UploadMetadata?: UploadMetadata;
+  UploadMetadata?: UploadMetadata | undefined;
 }
 
 /**
- * <p>The resource is already checked out.</p>
+ * @public
  */
-export class ResourceAlreadyCheckedOutException extends __BaseException {
-  readonly name: "ResourceAlreadyCheckedOutException" = "ResourceAlreadyCheckedOutException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceAlreadyCheckedOutException, __BaseException>) {
-    super({
-      name: "ResourceAlreadyCheckedOutException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceAlreadyCheckedOutException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The storage limit has been exceeded.</p>
- */
-export class StorageLimitExceededException extends __BaseException {
-  readonly name: "StorageLimitExceededException" = "StorageLimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<StorageLimitExceededException, __BaseException>) {
-    super({
-      name: "StorageLimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, StorageLimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The storage limit will be exceeded.</p>
- */
-export class StorageLimitWillExceedException extends __BaseException {
-  readonly name: "StorageLimitWillExceedException" = "StorageLimitWillExceedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<StorageLimitWillExceedException, __BaseException>) {
-    super({
-      name: "StorageLimitWillExceedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, StorageLimitWillExceedException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface RemoveAllResourcePermissionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RemoveResourcePermissionRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the resource.</p>
+   * @public
    */
   ResourceId: string | undefined;
 
   /**
    * <p>The principal ID of the resource.</p>
+   * @public
    */
   PrincipalId: string | undefined;
 
   /**
    * <p>The principal type of the resource.</p>
+   * @public
    */
-  PrincipalType?: PrincipalType | string;
+  PrincipalType?: PrincipalType | undefined;
 }
 
-export interface UpdateDocumentRequest {
+/**
+ * @public
+ */
+export interface RestoreDocumentVersionsRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
+   */
+  DocumentId: string | undefined;
+}
+
+/**
+ * <p>Filters results based on timestamp range (in epochs).</p>
+ * @public
+ */
+export interface DateRangeType {
+  /**
+   * <p>Timestamp range start value (in epochs)</p>
+   * @public
+   */
+  StartValue?: Date | undefined;
+
+  /**
+   * <p>Timestamp range end value (in epochs).</p>
+   * @public
+   */
+  EndValue?: Date | undefined;
+}
+
+/**
+ * <p>Filter based on UserIds or GroupIds.</p>
+ * @public
+ */
+export interface SearchPrincipalType {
+  /**
+   * <p>UserIds or GroupIds.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Role of a User or Group.</p>
+   * @public
+   */
+  Roles?: PrincipalRoleType[] | undefined;
+}
+
+/**
+ * <p>Filter based on size (in bytes).</p>
+ * @public
+ */
+export interface LongRangeType {
+  /**
+   * <p>The size start range (in bytes).</p>
+   * @public
+   */
+  StartValue?: number | undefined;
+
+  /**
+   * <p>The size end range (in bytes).</p>
+   * @public
+   */
+  EndValue?: number | undefined;
+}
+
+/**
+ * <p>Filters results based on entity metadata.</p>
+ * @public
+ */
+export interface Filters {
+  /**
+   * <p>Filters by the locale of the content or comment.</p>
+   * @public
+   */
+  TextLocales?: LanguageCodeType[] | undefined;
+
+  /**
+   * <p>Filters by content category.</p>
+   * @public
+   */
+  ContentCategories?: ContentCategoryType[] | undefined;
+
+  /**
+   * <p>Filters based on entity type.</p>
+   * @public
+   */
+  ResourceTypes?: SearchResourceType[] | undefined;
+
+  /**
+   * <p>Filter by labels using exact match.</p>
+   * @public
+   */
+  Labels?: string[] | undefined;
+
+  /**
+   * <p>Filter based on UserIds or GroupIds.</p>
+   * @public
+   */
+  Principals?: SearchPrincipalType[] | undefined;
+
+  /**
+   * <p>Filter based on resource’s path.</p>
+   * @public
+   */
+  AncestorIds?: string[] | undefined;
+
+  /**
+   * <p>Filter based on file groupings.</p>
+   * @public
+   */
+  SearchCollectionTypes?: SearchCollectionType[] | undefined;
+
+  /**
+   * <p>Filter based on size (in bytes).</p>
+   * @public
+   */
+  SizeRange?: LongRangeType | undefined;
+
+  /**
+   * <p>Filter based on resource’s creation timestamp.</p>
+   * @public
+   */
+  CreatedRange?: DateRangeType | undefined;
+
+  /**
+   * <p>Filter based on resource’s modified timestamp.</p>
+   * @public
+   */
+  ModifiedRange?: DateRangeType | undefined;
+}
+
+/**
+ * <p>The result of the sort operation.</p>
+ * @public
+ */
+export interface SearchSortResult {
+  /**
+   * <p>Sort search results based on this field name.</p>
+   * @public
+   */
+  Field?: OrderByFieldType | undefined;
+
+  /**
+   * <p>Sort direction.</p>
+   * @public
+   */
+  Order?: SortOrder | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SearchResourcesRequest {
+  /**
+   * <p>WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
+   */
+  AuthenticationToken?: string | undefined;
+
+  /**
+   * <p>The String to search for. Searches across different text fields based on request parameters. Use double quotes around the query string for exact phrase matches.</p>
+   * @public
+   */
+  QueryText?: string | undefined;
+
+  /**
+   * <p>Filter based on the text field type. A Folder has only a name and no content. A Comment has only content and no name. A Document or Document Version has a name and content</p>
+   * @public
+   */
+  QueryScopes?: SearchQueryScopeType[] | undefined;
+
+  /**
+   * <p>Filters based on the resource owner OrgId. This is a mandatory parameter when using Admin SigV4 credentials.</p>
+   * @public
+   */
+  OrganizationId?: string | undefined;
+
+  /**
+   * <p>A list of attributes to include in the response. Used to request fields that are not normally
+   *             returned in a standard response.</p>
+   * @public
+   */
+  AdditionalResponseFields?: AdditionalResponseFieldType[] | undefined;
+
+  /**
+   * <p>Filters results based on entity metadata.</p>
+   * @public
+   */
+  Filters?: Filters | undefined;
+
+  /**
+   * <p>Order by results in one or more categories.</p>
+   * @public
+   */
+  OrderBy?: SearchSortResult[] | undefined;
+
+  /**
+   * <p>Max results count per page.</p>
+   * @public
+   */
+  Limit?: number | undefined;
+
+  /**
+   * <p>The marker for the next set of results.</p>
+   * @public
+   */
+  Marker?: string | undefined;
+}
+
+/**
+ * <p>List of Documents, Folders, Comments, and Document Versions matching the query.</p>
+ * @public
+ */
+export interface ResponseItem {
+  /**
+   * <p>The type of item being returned.</p>
+   * @public
+   */
+  ResourceType?: ResponseItemType | undefined;
+
+  /**
+   * <p>The webUrl of the item being returned.</p>
+   * @public
+   */
+  WebUrl?: string | undefined;
+
+  /**
+   * <p>The document that matches the query.</p>
+   * @public
+   */
+  DocumentMetadata?: DocumentMetadata | undefined;
+
+  /**
+   * <p>The folder that matches the query.</p>
+   * @public
+   */
+  FolderMetadata?: FolderMetadata | undefined;
+
+  /**
+   * <p>The comment that matches the query.</p>
+   * @public
+   */
+  CommentMetadata?: CommentMetadata | undefined;
+
+  /**
+   * <p>The document version that matches the metadata.</p>
+   * @public
+   */
+  DocumentVersionMetadata?: DocumentVersionMetadata | undefined;
+}
+
+/**
+ * @public
+ */
+export interface SearchResourcesResponse {
+  /**
+   * <p>List of Documents, Folders, Comments, and Document Versions matching the query.</p>
+   * @public
+   */
+  Items?: ResponseItem[] | undefined;
+
+  /**
+   * <p>The marker to use when requesting the next set of results. If there are no additional results, the string is empty.</p>
+   * @public
+   */
+  Marker?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface UpdateDocumentRequest {
+  /**
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
+   */
+  AuthenticationToken?: string | undefined;
+
+  /**
+   * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The name of the document.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The resource state of the document. Only ACTIVE and RECYCLED are
    *             supported.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
+  ResourceState?: ResourceStateType | undefined;
 }
 
 /**
- * <p>The operation is invalid.</p>
+ * @public
  */
-export class InvalidOperationException extends __BaseException {
-  readonly name: "InvalidOperationException" = "InvalidOperationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidOperationException, __BaseException>) {
-    super({
-      name: "InvalidOperationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidOperationException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum DocumentVersionStatus {
-  ACTIVE = "ACTIVE",
-}
-
 export interface UpdateDocumentVersionRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the document.</p>
+   * @public
    */
   DocumentId: string | undefined;
 
   /**
    * <p>The version ID of the document.</p>
+   * @public
    */
   VersionId: string | undefined;
 
   /**
    * <p>The status of the version.</p>
+   * @public
    */
-  VersionStatus?: DocumentVersionStatus | string;
+  VersionStatus?: DocumentVersionStatus | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateFolderRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the folder.</p>
+   * @public
    */
   FolderId: string | undefined;
 
   /**
    * <p>The name of the folder.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The ID of the parent folder.</p>
+   * @public
    */
-  ParentFolderId?: string;
+  ParentFolderId?: string | undefined;
 
   /**
    * <p>The resource state of the folder. Only ACTIVE and RECYCLED are accepted values from
    *             the API.</p>
+   * @public
    */
-  ResourceState?: ResourceStateType | string;
+  ResourceState?: ResourceStateType | undefined;
 }
 
 /**
- * <p>The last user in the organization is being deactivated.</p>
+ * @public
  */
-export class DeactivatingLastSystemUserException extends __BaseException {
-  readonly name: "DeactivatingLastSystemUserException" = "DeactivatingLastSystemUserException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  Code?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<DeactivatingLastSystemUserException, __BaseException>) {
-    super({
-      name: "DeactivatingLastSystemUserException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, DeactivatingLastSystemUserException.prototype);
-    this.Message = opts.Message;
-    this.Code = opts.Code;
-  }
-}
-
-/**
- * <p>The user is undergoing transfer of ownership.</p>
- */
-export class IllegalUserStateException extends __BaseException {
-  readonly name: "IllegalUserStateException" = "IllegalUserStateException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<IllegalUserStateException, __BaseException>) {
-    super({
-      name: "IllegalUserStateException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, IllegalUserStateException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum BooleanEnumType {
-  FALSE = "FALSE",
-  TRUE = "TRUE",
-}
-
 export interface UpdateUserRequest {
   /**
-   * <p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>
+   * <p>Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.</p>
+   * @public
    */
-  AuthenticationToken?: string;
+  AuthenticationToken?: string | undefined;
 
   /**
    * <p>The ID of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 
   /**
    * <p>The given name of the user.</p>
+   * @public
    */
-  GivenName?: string;
+  GivenName?: string | undefined;
 
   /**
    * <p>The surname of the user.</p>
+   * @public
    */
-  Surname?: string;
+  Surname?: string | undefined;
 
   /**
    * <p>The type of the user.</p>
+   * @public
    */
-  Type?: UserType | string;
+  Type?: UserType | undefined;
 
   /**
    * <p>The amount of storage for the user.</p>
+   * @public
    */
-  StorageRule?: StorageRuleType;
+  StorageRule?: StorageRuleType | undefined;
 
   /**
    * <p>The time zone ID of the user.</p>
+   * @public
    */
-  TimeZoneId?: string;
+  TimeZoneId?: string | undefined;
 
   /**
    * <p>The locale of the user.</p>
+   * @public
    */
-  Locale?: LocaleType | string;
+  Locale?: LocaleType | undefined;
 
   /**
-   * <p>Boolean value to determine whether the user is granted Poweruser privileges.</p>
+   * <p>Boolean value to determine whether the user is granted Power user privileges.</p>
+   * @public
    */
-  GrantPoweruserPrivileges?: BooleanEnumType | string;
+  GrantPoweruserPrivileges?: BooleanEnumType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateUserResponse {
   /**
    * <p>The user information.</p>
+   * @public
    */
-  User?: User;
+  User?: User | undefined;
 }
-
-/**
- * @internal
- */
-export const AbortDocumentVersionUploadRequestFilterSensitiveLog = (obj: AbortDocumentVersionUploadRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const ActivateUserRequestFilterSensitiveLog = (obj: ActivateUserRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const StorageRuleTypeFilterSensitiveLog = (obj: StorageRuleType): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserStorageMetadataFilterSensitiveLog = (obj: UserStorageMetadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserFilterSensitiveLog = (obj: User): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ActivateUserResponseFilterSensitiveLog = (obj: ActivateUserResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CommentMetadataFilterSensitiveLog = (obj: CommentMetadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserMetadataFilterSensitiveLog = (obj: UserMetadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ResourceMetadataFilterSensitiveLog = (obj: ResourceMetadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GroupMetadataFilterSensitiveLog = (obj: GroupMetadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ParticipantsFilterSensitiveLog = (obj: Participants): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ActivityFilterSensitiveLog = (obj: Activity): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NotificationOptionsFilterSensitiveLog = (obj: NotificationOptions): any => ({
-  ...obj,
-  ...(obj.EmailMessage && { EmailMessage: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const SharePrincipalFilterSensitiveLog = (obj: SharePrincipal): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AddResourcePermissionsRequestFilterSensitiveLog = (obj: AddResourcePermissionsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  ...(obj.NotificationOptions && {
-    NotificationOptions: NotificationOptionsFilterSensitiveLog(obj.NotificationOptions),
-  }),
-});
-
-/**
- * @internal
- */
-export const ShareResultFilterSensitiveLog = (obj: ShareResult): any => ({
-  ...obj,
-  ...(obj.StatusMessage && { StatusMessage: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const AddResourcePermissionsResponseFilterSensitiveLog = (obj: AddResourcePermissionsResponse): any => ({
-  ...obj,
-  ...(obj.ShareResults && { ShareResults: obj.ShareResults.map((item) => ShareResultFilterSensitiveLog(item)) }),
-});
-
-/**
- * @internal
- */
-export const CreateCommentRequestFilterSensitiveLog = (obj: CreateCommentRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  ...(obj.Text && { Text: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const CommentFilterSensitiveLog = (obj: Comment): any => ({
-  ...obj,
-  ...(obj.Text && { Text: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const CreateCommentResponseFilterSensitiveLog = (obj: CreateCommentResponse): any => ({
-  ...obj,
-  ...(obj.Comment && { Comment: CommentFilterSensitiveLog(obj.Comment) }),
-});
-
-/**
- * @internal
- */
-export const CreateCustomMetadataRequestFilterSensitiveLog = (obj: CreateCustomMetadataRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const CreateCustomMetadataResponseFilterSensitiveLog = (obj: CreateCustomMetadataResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateFolderRequestFilterSensitiveLog = (obj: CreateFolderRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const FolderMetadataFilterSensitiveLog = (obj: FolderMetadata): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateFolderResponseFilterSensitiveLog = (obj: CreateFolderResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateLabelsRequestFilterSensitiveLog = (obj: CreateLabelsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const CreateLabelsResponseFilterSensitiveLog = (obj: CreateLabelsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateNotificationSubscriptionRequestFilterSensitiveLog = (
-  obj: CreateNotificationSubscriptionRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SubscriptionFilterSensitiveLog = (obj: Subscription): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateNotificationSubscriptionResponseFilterSensitiveLog = (
-  obj: CreateNotificationSubscriptionResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateUserRequestFilterSensitiveLog = (obj: CreateUserRequest): any => ({
-  ...obj,
-  ...(obj.Password && { Password: SENSITIVE_STRING }),
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const CreateUserResponseFilterSensitiveLog = (obj: CreateUserResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeactivateUserRequestFilterSensitiveLog = (obj: DeactivateUserRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DeleteCommentRequestFilterSensitiveLog = (obj: DeleteCommentRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DeleteCustomMetadataRequestFilterSensitiveLog = (obj: DeleteCustomMetadataRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DeleteCustomMetadataResponseFilterSensitiveLog = (obj: DeleteCustomMetadataResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteDocumentRequestFilterSensitiveLog = (obj: DeleteDocumentRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DeleteFolderRequestFilterSensitiveLog = (obj: DeleteFolderRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DeleteFolderContentsRequestFilterSensitiveLog = (obj: DeleteFolderContentsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DeleteLabelsRequestFilterSensitiveLog = (obj: DeleteLabelsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DeleteLabelsResponseFilterSensitiveLog = (obj: DeleteLabelsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteNotificationSubscriptionRequestFilterSensitiveLog = (
-  obj: DeleteNotificationSubscriptionRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteUserRequestFilterSensitiveLog = (obj: DeleteUserRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeActivitiesRequestFilterSensitiveLog = (obj: DescribeActivitiesRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeActivitiesResponseFilterSensitiveLog = (obj: DescribeActivitiesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeCommentsRequestFilterSensitiveLog = (obj: DescribeCommentsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeCommentsResponseFilterSensitiveLog = (obj: DescribeCommentsResponse): any => ({
-  ...obj,
-  ...(obj.Comments && { Comments: obj.Comments.map((item) => CommentFilterSensitiveLog(item)) }),
-});
-
-/**
- * @internal
- */
-export const DescribeDocumentVersionsRequestFilterSensitiveLog = (obj: DescribeDocumentVersionsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DocumentVersionMetadataFilterSensitiveLog = (obj: DocumentVersionMetadata): any => ({
-  ...obj,
-  ...(obj.Thumbnail && { Thumbnail: SENSITIVE_STRING }),
-  ...(obj.Source && { Source: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeDocumentVersionsResponseFilterSensitiveLog = (obj: DescribeDocumentVersionsResponse): any => ({
-  ...obj,
-  ...(obj.DocumentVersions && {
-    DocumentVersions: obj.DocumentVersions.map((item) => DocumentVersionMetadataFilterSensitiveLog(item)),
-  }),
-});
-
-/**
- * @internal
- */
-export const DescribeFolderContentsRequestFilterSensitiveLog = (obj: DescribeFolderContentsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DocumentMetadataFilterSensitiveLog = (obj: DocumentMetadata): any => ({
-  ...obj,
-  ...(obj.LatestVersionMetadata && {
-    LatestVersionMetadata: DocumentVersionMetadataFilterSensitiveLog(obj.LatestVersionMetadata),
-  }),
-});
-
-/**
- * @internal
- */
-export const DescribeFolderContentsResponseFilterSensitiveLog = (obj: DescribeFolderContentsResponse): any => ({
-  ...obj,
-  ...(obj.Documents && { Documents: obj.Documents.map((item) => DocumentMetadataFilterSensitiveLog(item)) }),
-});
-
-/**
- * @internal
- */
-export const DescribeGroupsRequestFilterSensitiveLog = (obj: DescribeGroupsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  ...(obj.SearchQuery && { SearchQuery: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeGroupsResponseFilterSensitiveLog = (obj: DescribeGroupsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeNotificationSubscriptionsRequestFilterSensitiveLog = (
-  obj: DescribeNotificationSubscriptionsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeNotificationSubscriptionsResponseFilterSensitiveLog = (
-  obj: DescribeNotificationSubscriptionsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeResourcePermissionsRequestFilterSensitiveLog = (obj: DescribeResourcePermissionsRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const PermissionInfoFilterSensitiveLog = (obj: PermissionInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PrincipalFilterSensitiveLog = (obj: Principal): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeResourcePermissionsResponseFilterSensitiveLog = (
-  obj: DescribeResourcePermissionsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeRootFoldersRequestFilterSensitiveLog = (obj: DescribeRootFoldersRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeRootFoldersResponseFilterSensitiveLog = (obj: DescribeRootFoldersResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeUsersRequestFilterSensitiveLog = (obj: DescribeUsersRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-  ...(obj.Query && { Query: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeUsersResponseFilterSensitiveLog = (obj: DescribeUsersResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetCurrentUserRequestFilterSensitiveLog = (obj: GetCurrentUserRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const GetCurrentUserResponseFilterSensitiveLog = (obj: GetCurrentUserResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetDocumentRequestFilterSensitiveLog = (obj: GetDocumentRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const GetDocumentResponseFilterSensitiveLog = (obj: GetDocumentResponse): any => ({
-  ...obj,
-  ...(obj.Metadata && { Metadata: DocumentMetadataFilterSensitiveLog(obj.Metadata) }),
-});
-
-/**
- * @internal
- */
-export const GetDocumentPathRequestFilterSensitiveLog = (obj: GetDocumentPathRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const ResourcePathComponentFilterSensitiveLog = (obj: ResourcePathComponent): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ResourcePathFilterSensitiveLog = (obj: ResourcePath): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetDocumentPathResponseFilterSensitiveLog = (obj: GetDocumentPathResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetDocumentVersionRequestFilterSensitiveLog = (obj: GetDocumentVersionRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const GetDocumentVersionResponseFilterSensitiveLog = (obj: GetDocumentVersionResponse): any => ({
-  ...obj,
-  ...(obj.Metadata && { Metadata: DocumentVersionMetadataFilterSensitiveLog(obj.Metadata) }),
-});
-
-/**
- * @internal
- */
-export const GetFolderRequestFilterSensitiveLog = (obj: GetFolderRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const GetFolderResponseFilterSensitiveLog = (obj: GetFolderResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetFolderPathRequestFilterSensitiveLog = (obj: GetFolderPathRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const GetFolderPathResponseFilterSensitiveLog = (obj: GetFolderPathResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetResourcesRequestFilterSensitiveLog = (obj: GetResourcesRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const GetResourcesResponseFilterSensitiveLog = (obj: GetResourcesResponse): any => ({
-  ...obj,
-  ...(obj.Documents && { Documents: obj.Documents.map((item) => DocumentMetadataFilterSensitiveLog(item)) }),
-});
-
-/**
- * @internal
- */
-export const InitiateDocumentVersionUploadRequestFilterSensitiveLog = (
-  obj: InitiateDocumentVersionUploadRequest
-): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const UploadMetadataFilterSensitiveLog = (obj: UploadMetadata): any => ({
-  ...obj,
-  ...(obj.UploadUrl && { UploadUrl: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const InitiateDocumentVersionUploadResponseFilterSensitiveLog = (
-  obj: InitiateDocumentVersionUploadResponse
-): any => ({
-  ...obj,
-  ...(obj.Metadata && { Metadata: DocumentMetadataFilterSensitiveLog(obj.Metadata) }),
-  ...(obj.UploadMetadata && { UploadMetadata: UploadMetadataFilterSensitiveLog(obj.UploadMetadata) }),
-});
-
-/**
- * @internal
- */
-export const RemoveAllResourcePermissionsRequestFilterSensitiveLog = (
-  obj: RemoveAllResourcePermissionsRequest
-): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const RemoveResourcePermissionRequestFilterSensitiveLog = (obj: RemoveResourcePermissionRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const UpdateDocumentRequestFilterSensitiveLog = (obj: UpdateDocumentRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const UpdateDocumentVersionRequestFilterSensitiveLog = (obj: UpdateDocumentVersionRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const UpdateFolderRequestFilterSensitiveLog = (obj: UpdateFolderRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const UpdateUserRequestFilterSensitiveLog = (obj: UpdateUserRequest): any => ({
-  ...obj,
-  ...(obj.AuthenticationToken && { AuthenticationToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const UpdateUserResponseFilterSensitiveLog = (obj: UpdateUserResponse): any => ({
-  ...obj,
-});

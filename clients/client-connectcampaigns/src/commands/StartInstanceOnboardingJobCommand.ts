@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectCampaignsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectCampaignsClient";
-import {
-  StartInstanceOnboardingJobRequest,
-  StartInstanceOnboardingJobRequestFilterSensitiveLog,
-  StartInstanceOnboardingJobResponse,
-  StartInstanceOnboardingJobResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1StartInstanceOnboardingJobCommand,
-  serializeAws_restJson1StartInstanceOnboardingJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartInstanceOnboardingJobRequest, StartInstanceOnboardingJobResponse } from "../models/models_0";
+import { StartInstanceOnboardingJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartInstanceOnboardingJobCommand}.
+ */
 export interface StartInstanceOnboardingJobCommandInput extends StartInstanceOnboardingJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartInstanceOnboardingJobCommand}.
+ */
 export interface StartInstanceOnboardingJobCommandOutput extends StartInstanceOnboardingJobResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,74 @@ export interface StartInstanceOnboardingJobCommandOutput extends StartInstanceOn
  * ```javascript
  * import { ConnectCampaignsClient, StartInstanceOnboardingJobCommand } from "@aws-sdk/client-connectcampaigns"; // ES Modules import
  * // const { ConnectCampaignsClient, StartInstanceOnboardingJobCommand } = require("@aws-sdk/client-connectcampaigns"); // CommonJS import
+ * // import type { ConnectCampaignsClientConfig } from "@aws-sdk/client-connectcampaigns";
+ * const config = {}; // type is ConnectCampaignsClientConfig
  * const client = new ConnectCampaignsClient(config);
+ * const input = { // StartInstanceOnboardingJobRequest
+ *   connectInstanceId: "STRING_VALUE", // required
+ *   encryptionConfig: { // EncryptionConfig
+ *     enabled: true || false, // required
+ *     encryptionType: "STRING_VALUE",
+ *     keyArn: "STRING_VALUE",
+ *   },
+ * };
  * const command = new StartInstanceOnboardingJobCommand(input);
  * const response = await client.send(command);
+ * // { // StartInstanceOnboardingJobResponse
+ * //   connectInstanceOnboardingJobStatus: { // InstanceOnboardingJobStatus
+ * //     connectInstanceId: "STRING_VALUE", // required
+ * //     status: "STRING_VALUE", // required
+ * //     failureCode: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StartInstanceOnboardingJobCommandInput - {@link StartInstanceOnboardingJobCommandInput}
+ * @returns {@link StartInstanceOnboardingJobCommandOutput}
  * @see {@link StartInstanceOnboardingJobCommandInput} for command's `input` shape.
  * @see {@link StartInstanceOnboardingJobCommandOutput} for command's `response` shape.
  * @see {@link ConnectCampaignsClientResolvedConfig | config} for ConnectCampaignsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You do not have sufficient access to perform this action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The request could not be processed because of conflict in the current state of the resource.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  Request processing failed because of an error or failure with the service.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The specified resource was not found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  The request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link ConnectCampaignsServiceException}
+ * <p>Base exception class for all service exceptions from ConnectCampaigns service.</p>
+ *
+ *
+ * @public
  */
-export class StartInstanceOnboardingJobCommand extends $Command<
-  StartInstanceOnboardingJobCommandInput,
-  StartInstanceOnboardingJobCommandOutput,
-  ConnectCampaignsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartInstanceOnboardingJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectCampaignsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartInstanceOnboardingJobCommandInput, StartInstanceOnboardingJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectCampaignsClient";
-    const commandName = "StartInstanceOnboardingJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartInstanceOnboardingJobRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StartInstanceOnboardingJobResponseFilterSensitiveLog,
+export class StartInstanceOnboardingJobCommand extends command<StartInstanceOnboardingJobCommandInput, StartInstanceOnboardingJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartInstanceOnboardingJob",
+  StartInstanceOnboardingJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartInstanceOnboardingJobRequest;
+      output: StartInstanceOnboardingJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartInstanceOnboardingJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartInstanceOnboardingJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartInstanceOnboardingJobCommandOutput> {
-    return deserializeAws_restJson1StartInstanceOnboardingJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartInstanceOnboardingJobCommandInput;
+      output: StartInstanceOnboardingJobCommandOutput;
+    };
+  };
 }

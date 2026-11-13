@@ -1,31 +1,25 @@
 // smithy-typescript generated code
-import { getProcessArnablesPlugin } from "@aws-sdk/middleware-sdk-s3-control";
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  PutJobTaggingRequest,
-  PutJobTaggingRequestFilterSensitiveLog,
-  PutJobTaggingResult,
-  PutJobTaggingResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restXmlPutJobTaggingCommand,
-  serializeAws_restXmlPutJobTaggingCommand,
-} from "../protocols/Aws_restXml";
-import { S3ControlClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../S3ControlClient";
+import { _ep0, _mw1, command } from "../commandBuilder";
+import type { PutJobTaggingRequest, PutJobTaggingResult } from "../models/models_0";
+import { PutJobTagging$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutJobTaggingCommand}.
+ */
 export interface PutJobTaggingCommandInput extends PutJobTaggingRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutJobTaggingCommand}.
+ */
 export interface PutJobTaggingCommandOutput extends PutJobTaggingResult, __MetadataBearer {}
 
 /**
@@ -33,10 +27,9 @@ export interface PutJobTaggingCommandOutput extends PutJobTaggingResult, __Metad
  *          <p>A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending
  *          a PUT request against the tagging subresource that is associated with the job. To modify
  *          the existing tag set, you can either replace the existing tag set entirely, or make changes
- *          within the existing tag set by retrieving the existing tag set using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html">GetJobTagging</a>, modify that tag set, and use this action to replace the tag set
+ *          within the existing tag set by retrieving the existing tag set using <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html">GetJobTagging</a>, modify that tag set, and use this operation to replace the tag set
  *          with the one you modified. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags">Controlling
  *             access and labeling jobs using tags</a> in the <i>Amazon S3 User Guide</i>. </p>
- *          <p></p>
  *          <note>
  *             <ul>
  *                <li>
@@ -73,9 +66,14 @@ export interface PutJobTaggingCommandOutput extends PutJobTaggingResult, __Metad
  *                </li>
  *             </ul>
  *          </note>
- *          <p></p>
- *          <p>To use this action, you must have permission to perform the
- *             <code>s3:PutJobTagging</code> action.</p>
+ *          <dl>
+ *             <dt>Permissions</dt>
+ *             <dd>
+ *                <p>To use the
+ *                   <code>PutJobTagging</code> operation, you must have permission to
+ *                   perform the <code>s3:PutJobTagging</code> action.</p>
+ *             </dd>
+ *          </dl>
  *          <p>Related actions include:</p>
  *          <ul>
  *             <li>
@@ -99,69 +97,64 @@ export interface PutJobTaggingCommandOutput extends PutJobTaggingResult, __Metad
  * ```javascript
  * import { S3ControlClient, PutJobTaggingCommand } from "@aws-sdk/client-s3-control"; // ES Modules import
  * // const { S3ControlClient, PutJobTaggingCommand } = require("@aws-sdk/client-s3-control"); // CommonJS import
+ * // import type { S3ControlClientConfig } from "@aws-sdk/client-s3-control";
+ * const config = {}; // type is S3ControlClientConfig
  * const client = new S3ControlClient(config);
+ * const input = { // PutJobTaggingRequest
+ *   AccountId: "STRING_VALUE",
+ *   JobId: "STRING_VALUE", // required
+ *   Tags: [ // S3TagSet // required
+ *     { // S3Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new PutJobTaggingCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutJobTaggingCommandInput - {@link PutJobTaggingCommandInput}
+ * @returns {@link PutJobTaggingCommandOutput}
  * @see {@link PutJobTaggingCommandInput} for command's `input` shape.
  * @see {@link PutJobTaggingCommandOutput} for command's `response` shape.
  * @see {@link S3ControlClientResolvedConfig | config} for S3ControlClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p></p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p></p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>Amazon S3 throws this exception if you have too many tags in your tag set.</p>
+ *
+ * @throws {@link S3ControlServiceException}
+ * <p>Base exception class for all service exceptions from S3Control service.</p>
+ *
+ *
+ * @public
  */
-export class PutJobTaggingCommand extends $Command<
-  PutJobTaggingCommandInput,
-  PutJobTaggingCommandOutput,
-  S3ControlClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutJobTaggingCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: S3ControlClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutJobTaggingCommandInput, PutJobTaggingCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-    this.middlewareStack.use(getProcessArnablesPlugin(configuration));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "S3ControlClient";
-    const commandName = "PutJobTaggingCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutJobTaggingRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: PutJobTaggingResultFilterSensitiveLog,
+export class PutJobTaggingCommand extends command<PutJobTaggingCommandInput, PutJobTaggingCommandOutput>(
+  _ep0,
+  _mw1,
+  "PutJobTagging",
+  PutJobTagging$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutJobTaggingRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutJobTaggingCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlPutJobTaggingCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutJobTaggingCommandOutput> {
-    return deserializeAws_restXmlPutJobTaggingCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutJobTaggingCommandInput;
+      output: PutJobTaggingCommandOutput;
+    };
+  };
 }

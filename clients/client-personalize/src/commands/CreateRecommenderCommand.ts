@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateRecommenderRequest,
-  CreateRecommenderRequestFilterSensitiveLog,
-  CreateRecommenderResponse,
-  CreateRecommenderResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1CreateRecommenderCommand,
-  serializeAws_json1_1CreateRecommenderCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRecommenderRequest, CreateRecommenderResponse } from "../models/models_0";
+import { CreateRecommender$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRecommenderCommand}.
+ */
 export interface CreateRecommenderCommandInput extends CreateRecommenderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRecommenderCommand}.
+ */
 export interface CreateRecommenderCommandOutput extends CreateRecommenderResponse, __MetadataBearer {}
 
 /**
@@ -33,11 +28,14 @@ export interface CreateRecommenderCommandOutput extends CreateRecommenderRespons
  *       <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html">GetRecommendations</a>
  *       request.
  *      </p>
- *
  *          <p>
  *             <b>Minimum recommendation requests per second</b>
  *          </p>
- *
+ *          <important>
+ *             <p>A high <code>minRecommendationRequestsPerSecond</code> will increase your bill. We recommend starting with 1 for <code>minRecommendationRequestsPerSecond</code> (the default). Track
+ *         your usage using Amazon CloudWatch metrics, and increase the <code>minRecommendationRequestsPerSecond</code>
+ *         as necessary.</p>
+ *          </important>
  *          <p>When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second
  *       (<code>minRecommendationRequestsPerSecond</code>) specifies the baseline recommendation request throughput provisioned by
  *       Amazon Personalize. The default minRecommendationRequestsPerSecond is <code>1</code>. A recommendation request is a single <code>GetRecommendations</code> operation.
@@ -58,7 +56,6 @@ export interface CreateRecommenderCommandOutput extends CreateRecommenderRespons
  *       your usage using Amazon CloudWatch metrics, and then increase the <code>minRecommendationRequestsPerSecond</code>
  *       as necessary.
  *     </p>
- *
  *          <p>
  *             <b>Status</b>
  *          </p>
@@ -109,68 +106,92 @@ export interface CreateRecommenderCommandOutput extends CreateRecommenderRespons
  * ```javascript
  * import { PersonalizeClient, CreateRecommenderCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, CreateRecommenderCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // CreateRecommenderRequest
+ *   name: "STRING_VALUE", // required
+ *   datasetGroupArn: "STRING_VALUE", // required
+ *   recipeArn: "STRING_VALUE", // required
+ *   recommenderConfig: { // RecommenderConfig
+ *     itemExplorationConfig: { // HyperParameters
+ *       "<keys>": "STRING_VALUE",
+ *     },
+ *     minRecommendationRequestsPerSecond: Number("int"),
+ *     trainingDataConfig: { // TrainingDataConfig
+ *       excludedDatasetColumns: { // ExcludedDatasetColumns
+ *         "<keys>": [ // ColumnNamesList
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *       includedDatasetColumns: { // IncludedDatasetColumns
+ *         "<keys>": [
+ *           "STRING_VALUE",
+ *         ],
+ *       },
+ *     },
+ *     enableMetadataWithRecommendations: true || false,
+ *   },
+ *   tags: [ // Tags
+ *     { // Tag
+ *       tagKey: "STRING_VALUE", // required
+ *       tagValue: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateRecommenderCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRecommenderResponse
+ * //   recommenderArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateRecommenderCommandInput - {@link CreateRecommenderCommandInput}
+ * @returns {@link CreateRecommenderCommandOutput}
  * @see {@link CreateRecommenderCommandInput} for command's `input` shape.
  * @see {@link CreateRecommenderCommandOutput} for command's `response` shape.
  * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The limit on the number of requests per second has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The specified resource already exists.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link TooManyTagsException} (client fault)
+ *  <p>You have exceeded the maximum number of tags you can apply to this resource. </p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRecommenderCommand extends $Command<
-  CreateRecommenderCommandInput,
-  CreateRecommenderCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRecommenderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRecommenderCommandInput, CreateRecommenderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "CreateRecommenderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRecommenderRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateRecommenderResponseFilterSensitiveLog,
+export class CreateRecommenderCommand extends command<CreateRecommenderCommandInput, CreateRecommenderCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRecommender",
+  CreateRecommender$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRecommenderRequest;
+      output: CreateRecommenderResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRecommenderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateRecommenderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRecommenderCommandOutput> {
-    return deserializeAws_json1_1CreateRecommenderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRecommenderCommandInput;
+      output: CreateRecommenderCommandOutput;
+    };
+  };
 }

@@ -1,27 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  ModifyIpamScopeRequest,
-  ModifyIpamScopeRequestFilterSensitiveLog,
-  ModifyIpamScopeResult,
-  ModifyIpamScopeResultFilterSensitiveLog,
-} from "../models/models_5";
-import { deserializeAws_ec2ModifyIpamScopeCommand, serializeAws_ec2ModifyIpamScopeCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyIpamScopeRequest, ModifyIpamScopeResult } from "../models/models_7";
+import { ModifyIpamScope$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyIpamScopeCommand}.
+ */
 export interface ModifyIpamScopeCommandInput extends ModifyIpamScopeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyIpamScopeCommand}.
+ */
 export interface ModifyIpamScopeCommandOutput extends ModifyIpamScopeResult, __MetadataBearer {}
 
 /**
@@ -31,68 +29,75 @@ export interface ModifyIpamScopeCommandOutput extends ModifyIpamScopeResult, __M
  * ```javascript
  * import { EC2Client, ModifyIpamScopeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyIpamScopeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyIpamScopeRequest
+ *   DryRun: true || false,
+ *   IpamScopeId: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   ExternalAuthorityConfiguration: { // ExternalAuthorityConfiguration
+ *     Type: "infoblox",
+ *     ExternalResourceIdentifier: "STRING_VALUE",
+ *   },
+ *   RemoveExternalAuthorityConfiguration: true || false,
+ * };
  * const command = new ModifyIpamScopeCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyIpamScopeResult
+ * //   IpamScope: { // IpamScope
+ * //     OwnerId: "STRING_VALUE",
+ * //     IpamScopeId: "STRING_VALUE",
+ * //     IpamScopeArn: "STRING_VALUE",
+ * //     IpamArn: "STRING_VALUE",
+ * //     IpamRegion: "STRING_VALUE",
+ * //     IpamScopeType: "public" || "private",
+ * //     IsDefault: true || false,
+ * //     Description: "STRING_VALUE",
+ * //     PoolCount: Number("int"),
+ * //     State: "create-in-progress" || "create-complete" || "create-failed" || "modify-in-progress" || "modify-complete" || "modify-failed" || "delete-in-progress" || "delete-complete" || "delete-failed" || "isolate-in-progress" || "isolate-complete" || "restore-in-progress",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     ExternalAuthorityConfiguration: { // IpamScopeExternalAuthorityConfiguration
+ * //       Type: "infoblox",
+ * //       ExternalResourceIdentifier: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyIpamScopeCommandInput - {@link ModifyIpamScopeCommandInput}
+ * @returns {@link ModifyIpamScopeCommandOutput}
  * @see {@link ModifyIpamScopeCommandInput} for command's `input` shape.
  * @see {@link ModifyIpamScopeCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyIpamScopeCommand extends $Command<
-  ModifyIpamScopeCommandInput,
-  ModifyIpamScopeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyIpamScopeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyIpamScopeCommandInput, ModifyIpamScopeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyIpamScopeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyIpamScopeRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ModifyIpamScopeResultFilterSensitiveLog,
+export class ModifyIpamScopeCommand extends command<ModifyIpamScopeCommandInput, ModifyIpamScopeCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyIpamScope",
+  ModifyIpamScope$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyIpamScopeRequest;
+      output: ModifyIpamScopeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyIpamScopeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyIpamScopeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyIpamScopeCommandOutput> {
-    return deserializeAws_ec2ModifyIpamScopeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyIpamScopeCommandInput;
+      output: ModifyIpamScopeCommandOutput;
+    };
+  };
 }

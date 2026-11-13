@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DeleteEndpointAccessRequest,
-  DeleteEndpointAccessRequestFilterSensitiveLog,
-  DeleteEndpointAccessResponse,
-  DeleteEndpointAccessResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteEndpointAccessCommand,
-  serializeAws_json1_1DeleteEndpointAccessCommand,
-} from "../protocols/Aws_json1_1";
-import {
-  RedshiftServerlessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../RedshiftServerlessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteEndpointAccessRequest, DeleteEndpointAccessResponse } from "../models/models_0";
+import { DeleteEndpointAccess$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteEndpointAccessCommand}.
+ */
 export interface DeleteEndpointAccessCommandInput extends DeleteEndpointAccessRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteEndpointAccessCommand}.
+ */
 export interface DeleteEndpointAccessCommandOutput extends DeleteEndpointAccessResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,89 @@ export interface DeleteEndpointAccessCommandOutput extends DeleteEndpointAccessR
  * ```javascript
  * import { RedshiftServerlessClient, DeleteEndpointAccessCommand } from "@aws-sdk/client-redshift-serverless"; // ES Modules import
  * // const { RedshiftServerlessClient, DeleteEndpointAccessCommand } = require("@aws-sdk/client-redshift-serverless"); // CommonJS import
+ * // import type { RedshiftServerlessClientConfig } from "@aws-sdk/client-redshift-serverless";
+ * const config = {}; // type is RedshiftServerlessClientConfig
  * const client = new RedshiftServerlessClient(config);
+ * const input = { // DeleteEndpointAccessRequest
+ *   endpointName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteEndpointAccessCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteEndpointAccessResponse
+ * //   endpoint: { // EndpointAccess
+ * //     endpointName: "STRING_VALUE",
+ * //     endpointStatus: "STRING_VALUE",
+ * //     workgroupName: "STRING_VALUE",
+ * //     endpointCreateTime: new Date("TIMESTAMP"),
+ * //     port: Number("int"),
+ * //     address: "STRING_VALUE",
+ * //     subnetIds: [ // SubnetIdList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     vpcSecurityGroups: [ // VpcSecurityGroupMembershipList
+ * //       { // VpcSecurityGroupMembership
+ * //         vpcSecurityGroupId: "STRING_VALUE",
+ * //         status: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     vpcEndpoint: { // VpcEndpoint
+ * //       vpcEndpointId: "STRING_VALUE",
+ * //       vpcId: "STRING_VALUE",
+ * //       networkInterfaces: [ // NetworkInterfaceList
+ * //         { // NetworkInterface
+ * //           networkInterfaceId: "STRING_VALUE",
+ * //           subnetId: "STRING_VALUE",
+ * //           privateIpAddress: "STRING_VALUE",
+ * //           availabilityZone: "STRING_VALUE",
+ * //           ipv6Address: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //     endpointArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteEndpointAccessCommandInput - {@link DeleteEndpointAccessCommandInput}
+ * @returns {@link DeleteEndpointAccessCommandOutput}
  * @see {@link DeleteEndpointAccessCommandInput} for command's `input` shape.
  * @see {@link DeleteEndpointAccessCommandOutput} for command's `response` shape.
  * @see {@link RedshiftServerlessClientResolvedConfig | config} for RedshiftServerlessClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The submitted action has conflicts.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link RedshiftServerlessServiceException}
+ * <p>Base exception class for all service exceptions from RedshiftServerless service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteEndpointAccessCommand extends $Command<
-  DeleteEndpointAccessCommandInput,
-  DeleteEndpointAccessCommandOutput,
-  RedshiftServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteEndpointAccessCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteEndpointAccessCommandInput, DeleteEndpointAccessCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftServerlessClient";
-    const commandName = "DeleteEndpointAccessCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteEndpointAccessRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteEndpointAccessResponseFilterSensitiveLog,
+export class DeleteEndpointAccessCommand extends command<DeleteEndpointAccessCommandInput, DeleteEndpointAccessCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteEndpointAccess",
+  DeleteEndpointAccess$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteEndpointAccessRequest;
+      output: DeleteEndpointAccessResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteEndpointAccessCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteEndpointAccessCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteEndpointAccessCommandOutput> {
-    return deserializeAws_json1_1DeleteEndpointAccessCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteEndpointAccessCommandInput;
+      output: DeleteEndpointAccessCommandOutput;
+    };
+  };
 }

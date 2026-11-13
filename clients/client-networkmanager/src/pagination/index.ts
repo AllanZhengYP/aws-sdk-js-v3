@@ -1,32 +1,28 @@
-export * from "./DescribeGlobalNetworksPaginator";
-
-export * from "./GetConnectPeerAssociationsPaginator";
-
-export * from "./GetConnectionsPaginator";
-
-export * from "./GetCoreNetworkChangeEventsPaginator";
-
-export * from "./GetCoreNetworkChangeSetPaginator";
-
-export * from "./GetCustomerGatewayAssociationsPaginator";
-
-export * from "./GetDevicesPaginator";
-
-export * from "./GetLinkAssociationsPaginator";
-
-export * from "./GetLinksPaginator";
-
-export * from "./GetNetworkResourceCountsPaginator";
 // smithy-typescript generated code
 export * from "./Interfaces";
+export * from "./DescribeGlobalNetworksPaginator";
+export * from "./GetConnectionsPaginator";
+export * from "./GetConnectPeerAssociationsPaginator";
+export * from "./GetCoreNetworkChangeEventsPaginator";
+export * from "./GetCoreNetworkChangeSetPaginator";
+export * from "./GetCustomerGatewayAssociationsPaginator";
+export * from "./GetDevicesPaginator";
+export * from "./GetLinkAssociationsPaginator";
+export * from "./GetLinksPaginator";
+export * from "./GetNetworkResourceCountsPaginator";
 export * from "./GetNetworkResourceRelationshipsPaginator";
 export * from "./GetNetworkResourcesPaginator";
+export * from "./GetNetworkRoutesPaginator";
 export * from "./GetNetworkTelemetryPaginator";
 export * from "./GetSitesPaginator";
 export * from "./GetTransitGatewayConnectPeerAssociationsPaginator";
 export * from "./GetTransitGatewayRegistrationsPaginator";
+export * from "./ListAttachmentNatConfigurationsPaginator";
+export * from "./ListAttachmentRoutingPolicyAssociationsPaginator";
 export * from "./ListAttachmentsPaginator";
 export * from "./ListConnectPeersPaginator";
 export * from "./ListCoreNetworkPolicyVersionsPaginator";
+export * from "./ListCoreNetworkPrefixListAssociationsPaginator";
+export * from "./ListCoreNetworkRoutingInformationPaginator";
 export * from "./ListCoreNetworksPaginator";
 export * from "./ListPeeringsPaginator";

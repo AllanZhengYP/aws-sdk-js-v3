@@ -1,105 +1,82 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  ModifySnapshotTierRequest,
-  ModifySnapshotTierRequestFilterSensitiveLog,
-  ModifySnapshotTierResult,
-  ModifySnapshotTierResultFilterSensitiveLog,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2ModifySnapshotTierCommand,
-  serializeAws_ec2ModifySnapshotTierCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifySnapshotTierRequest, ModifySnapshotTierResult } from "../models/models_7";
+import { ModifySnapshotTier$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifySnapshotTierCommand}.
+ */
 export interface ModifySnapshotTierCommandInput extends ModifySnapshotTierRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifySnapshotTierCommand}.
+ */
 export interface ModifySnapshotTierCommandOutput extends ModifySnapshotTierResult, __MetadataBearer {}
 
 /**
  * <p>Archives an Amazon EBS snapshot. When you archive a snapshot, it is converted to a full
  *       snapshot that includes all of the blocks of data that were written to the volume at the
  *       time the snapshot was created, and moved from the standard tier to the archive
- *       tier. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-archive.html">Archive Amazon EBS snapshots</a>
- *       in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+ *       tier. For more information, see <a href="https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html">Archive Amazon EBS snapshots</a>
+ *       in the <i>Amazon EBS User Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, ModifySnapshotTierCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifySnapshotTierCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifySnapshotTierRequest
+ *   SnapshotId: "STRING_VALUE", // required
+ *   StorageTier: "archive",
+ *   DryRun: true || false,
+ * };
  * const command = new ModifySnapshotTierCommand(input);
  * const response = await client.send(command);
+ * // { // ModifySnapshotTierResult
+ * //   SnapshotId: "STRING_VALUE",
+ * //   TieringStartTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param ModifySnapshotTierCommandInput - {@link ModifySnapshotTierCommandInput}
+ * @returns {@link ModifySnapshotTierCommandOutput}
  * @see {@link ModifySnapshotTierCommandInput} for command's `input` shape.
  * @see {@link ModifySnapshotTierCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifySnapshotTierCommand extends $Command<
-  ModifySnapshotTierCommandInput,
-  ModifySnapshotTierCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifySnapshotTierCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifySnapshotTierCommandInput, ModifySnapshotTierCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifySnapshotTierCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifySnapshotTierRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ModifySnapshotTierResultFilterSensitiveLog,
+export class ModifySnapshotTierCommand extends command<ModifySnapshotTierCommandInput, ModifySnapshotTierCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifySnapshotTier",
+  ModifySnapshotTier$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifySnapshotTierRequest;
+      output: ModifySnapshotTierResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifySnapshotTierCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifySnapshotTierCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifySnapshotTierCommandOutput> {
-    return deserializeAws_ec2ModifySnapshotTierCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifySnapshotTierCommandInput;
+      output: ModifySnapshotTierCommandOutput;
+    };
+  };
 }

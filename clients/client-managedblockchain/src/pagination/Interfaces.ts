@@ -1,9 +1,11 @@
 // smithy-typescript generated code
-import { PaginationConfiguration } from "@aws-sdk/types";
+import type { PaginationConfiguration } from "@smithy/types";
 
-import { ManagedBlockchain } from "../ManagedBlockchain";
 import { ManagedBlockchainClient } from "../ManagedBlockchainClient";
 
+/**
+ * @public
+ */
 export interface ManagedBlockchainPaginationConfiguration extends PaginationConfiguration {
-  client: ManagedBlockchain | ManagedBlockchainClient;
+  client: ManagedBlockchainClient;
 }

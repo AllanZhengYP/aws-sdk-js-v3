@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DescribeFeatureMetadataRequest,
-  DescribeFeatureMetadataRequestFilterSensitiveLog,
-  DescribeFeatureMetadataResponse,
-  DescribeFeatureMetadataResponseFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_json1_1DescribeFeatureMetadataCommand,
-  serializeAws_json1_1DescribeFeatureMetadataCommand,
-} from "../protocols/Aws_json1_1";
-import { SageMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SageMakerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeFeatureMetadataRequest, DescribeFeatureMetadataResponse } from "../models/models_3";
+import { DescribeFeatureMetadata$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeFeatureMetadataCommand}.
+ */
 export interface DescribeFeatureMetadataCommandInput extends DescribeFeatureMetadataRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeFeatureMetadataCommand}.
+ */
 export interface DescribeFeatureMetadataCommandOutput extends DescribeFeatureMetadataResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,63 @@ export interface DescribeFeatureMetadataCommandOutput extends DescribeFeatureMet
  * ```javascript
  * import { SageMakerClient, DescribeFeatureMetadataCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
  * // const { SageMakerClient, DescribeFeatureMetadataCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * // import type { SageMakerClientConfig } from "@aws-sdk/client-sagemaker";
+ * const config = {}; // type is SageMakerClientConfig
  * const client = new SageMakerClient(config);
+ * const input = { // DescribeFeatureMetadataRequest
+ *   FeatureGroupName: "STRING_VALUE", // required
+ *   FeatureName: "STRING_VALUE", // required
+ * };
  * const command = new DescribeFeatureMetadataCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeFeatureMetadataResponse
+ * //   FeatureGroupArn: "STRING_VALUE", // required
+ * //   FeatureGroupName: "STRING_VALUE", // required
+ * //   FeatureName: "STRING_VALUE", // required
+ * //   FeatureType: "Integral" || "Fractional" || "String", // required
+ * //   CreationTime: new Date("TIMESTAMP"), // required
+ * //   LastModifiedTime: new Date("TIMESTAMP"), // required
+ * //   Description: "STRING_VALUE",
+ * //   Parameters: [ // FeatureParameters
+ * //     { // FeatureParameter
+ * //       Key: "STRING_VALUE",
+ * //       Value: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeFeatureMetadataCommandInput - {@link DescribeFeatureMetadataCommandInput}
+ * @returns {@link DescribeFeatureMetadataCommandOutput}
  * @see {@link DescribeFeatureMetadataCommandInput} for command's `input` shape.
  * @see {@link DescribeFeatureMetadataCommandOutput} for command's `response` shape.
  * @see {@link SageMakerClientResolvedConfig | config} for SageMakerClient's `config` shape.
  *
+ * @throws {@link ResourceNotFound} (client fault)
+ *  <p>Resource being access is not found.</p>
+ *
+ * @throws {@link SageMakerServiceException}
+ * <p>Base exception class for all service exceptions from SageMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeFeatureMetadataCommand extends $Command<
-  DescribeFeatureMetadataCommandInput,
-  DescribeFeatureMetadataCommandOutput,
-  SageMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeFeatureMetadataCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SageMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeFeatureMetadataCommandInput, DescribeFeatureMetadataCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SageMakerClient";
-    const commandName = "DescribeFeatureMetadataCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeFeatureMetadataRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeFeatureMetadataResponseFilterSensitiveLog,
+export class DescribeFeatureMetadataCommand extends command<DescribeFeatureMetadataCommandInput, DescribeFeatureMetadataCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeFeatureMetadata",
+  DescribeFeatureMetadata$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeFeatureMetadataRequest;
+      output: DescribeFeatureMetadataResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeFeatureMetadataCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeFeatureMetadataCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeFeatureMetadataCommandOutput> {
-    return deserializeAws_json1_1DescribeFeatureMetadataCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeFeatureMetadataCommandInput;
+      output: DescribeFeatureMetadataCommandOutput;
+    };
+  };
 }

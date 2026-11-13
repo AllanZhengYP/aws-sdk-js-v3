@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  PutAccountAliasRequest,
-  PutAccountAliasRequestFilterSensitiveLog,
-  PutAccountAliasResult,
-  PutAccountAliasResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1PutAccountAliasCommand,
-  serializeAws_restJson1PutAccountAliasCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SupportAppClientResolvedConfig } from "../SupportAppClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PutAccountAliasRequest, PutAccountAliasResult } from "../models/models_0";
+import { PutAccountAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PutAccountAliasCommand}.
+ */
 export interface PutAccountAliasCommandInput extends PutAccountAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PutAccountAliasCommand}.
+ */
 export interface PutAccountAliasCommandOutput extends PutAccountAliasResult, __MetadataBearer {}
 
 /**
@@ -36,68 +31,54 @@ export interface PutAccountAliasCommandOutput extends PutAccountAliasResult, __M
  * ```javascript
  * import { SupportAppClient, PutAccountAliasCommand } from "@aws-sdk/client-support-app"; // ES Modules import
  * // const { SupportAppClient, PutAccountAliasCommand } = require("@aws-sdk/client-support-app"); // CommonJS import
+ * // import type { SupportAppClientConfig } from "@aws-sdk/client-support-app";
+ * const config = {}; // type is SupportAppClientConfig
  * const client = new SupportAppClient(config);
+ * const input = { // PutAccountAliasRequest
+ *   accountAlias: "STRING_VALUE", // required
+ * };
  * const command = new PutAccountAliasCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PutAccountAliasCommandInput - {@link PutAccountAliasCommandInput}
+ * @returns {@link PutAccountAliasCommandOutput}
  * @see {@link PutAccountAliasCommandInput} for command's `input` shape.
  * @see {@link PutAccountAliasCommandOutput} for command's `response` shape.
  * @see {@link SupportAppClientResolvedConfig | config} for SupportAppClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>We can’t process your request right now because of a server issue. Try again later.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Your request input doesn't meet the constraints that the Amazon Web Services Support App specifies.</p>
+ *
+ * @throws {@link SupportAppServiceException}
+ * <p>Base exception class for all service exceptions from SupportApp service.</p>
+ *
+ *
+ * @public
  */
-export class PutAccountAliasCommand extends $Command<
-  PutAccountAliasCommandInput,
-  PutAccountAliasCommandOutput,
-  SupportAppClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PutAccountAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SupportAppClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PutAccountAliasCommandInput, PutAccountAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SupportAppClient";
-    const commandName = "PutAccountAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PutAccountAliasRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: PutAccountAliasResultFilterSensitiveLog,
+export class PutAccountAliasCommand extends command<PutAccountAliasCommandInput, PutAccountAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "PutAccountAlias",
+  PutAccountAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PutAccountAliasRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PutAccountAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PutAccountAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PutAccountAliasCommandOutput> {
-    return deserializeAws_restJson1PutAccountAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PutAccountAliasCommandInput;
+      output: PutAccountAliasCommandOutput;
+    };
+  };
 }

@@ -1,319 +1,185 @@
 // smithy-typescript generated code
-import {
-  DeviceSettingsSyncState,
-  DeviceUpdateStatus,
-  Input,
-  InputDeviceConnectionState,
-  InputDeviceHdSettings,
-  InputDeviceNetworkSettings,
-  InputDeviceType,
-  InputDeviceUhdSettings,
-  InputSecurityGroup,
-  InputWhitelistRuleCidr,
-} from "./models_0";
-import {
-  InputDeviceConfigurableSettings,
-  Multiplex,
-  MultiplexProgram,
-  MultiplexProgramSettings,
-  MultiplexSettings,
-  RenewalSettings,
-  Reservation,
-} from "./models_1";
+import type {
+  NodeConnectionState,
+  NodeRole,
+  NodeState,
+  SdiSourceMode,
+  SdiSourceType,
+  UpdateNodeStateShape,
+} from "./enums";
+import type { NodeInterfaceMapping, RenewalSettings, Reservation, SdiSourceMapping } from "./models_0";
+import type { SdiSource } from "./models_1";
 
 /**
- * Placeholder documentation for UpdateInputResponse
+ * A request to update the state of a node.
+ * @public
  */
-export interface UpdateInputResponse {
+export interface UpdateNodeStateRequest {
   /**
-   * Placeholder documentation for Input
+   * The ID of the cluster
+   * @public
    */
-  Input?: Input;
+  ClusterId: string | undefined;
+
+  /**
+   * The ID of the node.
+   * @public
+   */
+  NodeId: string | undefined;
+
+  /**
+   * The state to apply to the Node. Set to ACTIVE (COMMISSIONED) to indicate that the Node is deployable. MediaLive Anywhere will consider this node it needs a Node to run a Channel on, or when it needs a Node to promote from a backup node to an active node. Set to DRAINING to isolate the Node so that MediaLive Anywhere won't use it.
+   * @public
+   */
+  State?: UpdateNodeStateShape | undefined;
 }
 
 /**
- * A request to update an input device.
+ * Placeholder documentation for UpdateNodeStateResponse
+ * @public
  */
-export interface UpdateInputDeviceRequest {
+export interface UpdateNodeStateResponse {
   /**
-   * The settings that you want to apply to the HD input device.
+   * The ARN of the Node. It is automatically assigned when the Node is created.
+   * @public
    */
-  HdDeviceSettings?: InputDeviceConfigurableSettings;
+  Arn?: string | undefined;
 
   /**
-   * The unique ID of the input device. For example, hd-123456789abcdef.
+   * An array of IDs. Each ID is one ChannelPlacementGroup that is associated with this Node. Empty if the Node is not yet associated with any groups.
+   * @public
    */
-  InputDeviceId: string | undefined;
+  ChannelPlacementGroups?: string[] | undefined;
 
   /**
-   * The name that you assigned to this input device (not the unique ID).
+   * The ID of the Cluster that the Node belongs to.
+   * @public
    */
-  Name?: string;
+  ClusterId?: string | undefined;
 
   /**
-   * The settings that you want to apply to the UHD input device.
+   * The current connection state of the Node.
+   * @public
    */
-  UhdDeviceSettings?: InputDeviceConfigurableSettings;
-}
-
-/**
- * Placeholder documentation for UpdateInputDeviceResponse
- */
-export interface UpdateInputDeviceResponse {
-  /**
-   * The unique ARN of the input device.
-   */
-  Arn?: string;
+  ConnectionState?: NodeConnectionState | undefined;
 
   /**
-   * The state of the connection between the input device and AWS.
+   * The unique ID of the Node. Unique in the Cluster. The ID is the resource-id portion of the ARN.
+   * @public
    */
-  ConnectionState?: InputDeviceConnectionState | string;
+  Id?: string | undefined;
 
   /**
-   * The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.
+   * The ARN of the EC2 instance hosting the Node.
+   * @public
    */
-  DeviceSettingsSyncState?: DeviceSettingsSyncState | string;
+  InstanceArn?: string | undefined;
 
   /**
-   * The status of software on the input device.
+   * The name that you specified for the Node.
+   * @public
    */
-  DeviceUpdateStatus?: DeviceUpdateStatus | string;
+  Name?: string | undefined;
 
   /**
-   * Settings that describe an input device that is type HD.
+   * Documentation update needed
+   * @public
    */
-  HdDeviceSettings?: InputDeviceHdSettings;
+  NodeInterfaceMappings?: NodeInterfaceMapping[] | undefined;
 
   /**
-   * The unique ID of the input device.
+   * The initial role current role of the Node in the Cluster. ACTIVE means the Node is available for encoding. BACKUP means the Node is a redundant Node and might get used if an ACTIVE Node fails.
+   * @public
    */
-  Id?: string;
+  Role?: NodeRole | undefined;
 
   /**
-   * The network MAC address of the input device.
+   * The current state of the Node.
+   * @public
    */
-  MacAddress?: string;
+  State?: NodeState | undefined;
 
   /**
-   * A name that you specify for the input device.
+   * An array of SDI source mappings. Each mapping connects one logical SdiSource to the physical SDI card and port that the physical SDI source uses.
+   * @public
    */
-  Name?: string;
-
-  /**
-   * The network settings for the input device.
-   */
-  NetworkSettings?: InputDeviceNetworkSettings;
-
-  /**
-   * The unique serial number of the input device.
-   */
-  SerialNumber?: string;
-
-  /**
-   * The type of the input device.
-   */
-  Type?: InputDeviceType | string;
-
-  /**
-   * Settings that describe an input device that is type UHD.
-   */
-  UhdDeviceSettings?: InputDeviceUhdSettings;
-}
-
-/**
- * The request to update some combination of the Input Security Group name and the IPv4 CIDRs the Input Security Group should allow.
- */
-export interface UpdateInputSecurityGroupRequest {
-  /**
-   * The id of the Input Security Group to update.
-   */
-  InputSecurityGroupId: string | undefined;
-
-  /**
-   * A collection of key-value pairs.
-   */
-  Tags?: Record<string, string>;
-
-  /**
-   * List of IPv4 CIDR addresses to whitelist
-   */
-  WhitelistRules?: InputWhitelistRuleCidr[];
-}
-
-/**
- * Placeholder documentation for UpdateInputSecurityGroupResponse
- */
-export interface UpdateInputSecurityGroupResponse {
-  /**
-   * An Input Security Group
-   */
-  SecurityGroup?: InputSecurityGroup;
-}
-
-/**
- * A request to update a multiplex.
- */
-export interface UpdateMultiplexRequest {
-  /**
-   * ID of the multiplex to update.
-   */
-  MultiplexId: string | undefined;
-
-  /**
-   * The new settings for a multiplex.
-   */
-  MultiplexSettings?: MultiplexSettings;
-
-  /**
-   * Name of the multiplex.
-   */
-  Name?: string;
-}
-
-/**
- * Placeholder documentation for UpdateMultiplexResponse
- */
-export interface UpdateMultiplexResponse {
-  /**
-   * The updated multiplex.
-   */
-  Multiplex?: Multiplex;
-}
-
-/**
- * A request to update a program in a multiplex.
- */
-export interface UpdateMultiplexProgramRequest {
-  /**
-   * The ID of the multiplex of the program to update.
-   */
-  MultiplexId: string | undefined;
-
-  /**
-   * The new settings for a multiplex program.
-   */
-  MultiplexProgramSettings?: MultiplexProgramSettings;
-
-  /**
-   * The name of the program to update.
-   */
-  ProgramName: string | undefined;
-}
-
-/**
- * Placeholder documentation for UpdateMultiplexProgramResponse
- */
-export interface UpdateMultiplexProgramResponse {
-  /**
-   * The updated multiplex program.
-   */
-  MultiplexProgram?: MultiplexProgram;
+  SdiSourceMappings?: SdiSourceMapping[] | undefined;
 }
 
 /**
  * Request to update a reservation
+ * @public
  */
 export interface UpdateReservationRequest {
   /**
    * Name of the reservation
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * Renewal settings for the reservation
+   * @public
    */
-  RenewalSettings?: RenewalSettings;
+  RenewalSettings?: RenewalSettings | undefined;
 
   /**
    * Unique reservation ID, e.g. '1234567'
+   * @public
    */
   ReservationId: string | undefined;
 }
 
 /**
  * Placeholder documentation for UpdateReservationResponse
+ * @public
  */
 export interface UpdateReservationResponse {
   /**
    * Reserved resources available to use
+   * @public
    */
-  Reservation?: Reservation;
+  Reservation?: Reservation | undefined;
 }
 
 /**
- * @internal
+ * A request to update the SdiSource.
+ * @public
  */
-export const UpdateInputResponseFilterSensitiveLog = (obj: UpdateInputResponse): any => ({
-  ...obj,
-});
+export interface UpdateSdiSourceRequest {
+  /**
+   * Include this parameter only if you want to change the name of the SdiSource. Specify a name that is unique in the AWS account. We recommend you assign a name that describes the source, for example curling-cameraA. Names are case-sensitive.
+   * @public
+   */
+  Mode?: SdiSourceMode | undefined;
+
+  /**
+   * Include this parameter only if you want to change the name of the SdiSource. Specify a name that is unique in the AWS account. We recommend you assign a name that describes the source, for example curling-cameraA. Names are case-sensitive.
+   * @public
+   */
+  Name?: string | undefined;
+
+  /**
+   * The ID of the SdiSource
+   * @public
+   */
+  SdiSourceId: string | undefined;
+
+  /**
+   * Include this parameter only if you want to change the mode. Specify the type of the SDI source: SINGLE: The source is a single-link source. QUAD: The source is one part of a quad-link source.
+   * @public
+   */
+  Type?: SdiSourceType | undefined;
+}
 
 /**
- * @internal
+ * Placeholder documentation for UpdateSdiSourceResponse
+ * @public
  */
-export const UpdateInputDeviceRequestFilterSensitiveLog = (obj: UpdateInputDeviceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateInputDeviceResponseFilterSensitiveLog = (obj: UpdateInputDeviceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateInputSecurityGroupRequestFilterSensitiveLog = (obj: UpdateInputSecurityGroupRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateInputSecurityGroupResponseFilterSensitiveLog = (obj: UpdateInputSecurityGroupResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateMultiplexRequestFilterSensitiveLog = (obj: UpdateMultiplexRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateMultiplexResponseFilterSensitiveLog = (obj: UpdateMultiplexResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateMultiplexProgramRequestFilterSensitiveLog = (obj: UpdateMultiplexProgramRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateMultiplexProgramResponseFilterSensitiveLog = (obj: UpdateMultiplexProgramResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateReservationRequestFilterSensitiveLog = (obj: UpdateReservationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateReservationResponseFilterSensitiveLog = (obj: UpdateReservationResponse): any => ({
-  ...obj,
-});
+export interface UpdateSdiSourceResponse {
+  /**
+   * Settings for the SDI source.
+   * @public
+   */
+  SdiSource?: SdiSource | undefined;
+}

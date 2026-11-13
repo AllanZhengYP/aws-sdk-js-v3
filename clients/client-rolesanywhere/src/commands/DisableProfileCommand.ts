@@ -1,105 +1,115 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ProfileDetailResponse,
-  ProfileDetailResponseFilterSensitiveLog,
-  ScalarProfileRequest,
-  ScalarProfileRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DisableProfileCommand,
-  serializeAws_restJson1DisableProfileCommand,
-} from "../protocols/Aws_restJson1";
-import { RolesAnywhereClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RolesAnywhereClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ProfileDetailResponse, ScalarProfileRequest } from "../models/models_0";
+import { DisableProfile$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisableProfileCommand}.
+ */
 export interface DisableProfileCommandInput extends ScalarProfileRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisableProfileCommand}.
+ */
 export interface DisableProfileCommandOutput extends ProfileDetailResponse, __MetadataBearer {}
 
 /**
- * <p>Disables a profile. When disabled, <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile fail.</p>
- *          <p>
- *             <b>Required permissions: </b>
- *             <code>rolesanywhere:DisableProfile</code>.
- *          </p>
+ * <p>Disables a profile. When disabled, temporary credential requests with this profile fail.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableProfile</code>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RolesAnywhereClient, DisableProfileCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
  * // const { RolesAnywhereClient, DisableProfileCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
  * const client = new RolesAnywhereClient(config);
+ * const input = { // ScalarProfileRequest
+ *   profileId: "STRING_VALUE", // required
+ * };
  * const command = new DisableProfileCommand(input);
  * const response = await client.send(command);
+ * // { // ProfileDetailResponse
+ * //   profile: { // ProfileDetail
+ * //     profileId: "STRING_VALUE",
+ * //     profileArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     requireInstanceProperties: true || false,
+ * //     enabled: true || false,
+ * //     createdBy: "STRING_VALUE",
+ * //     sessionPolicy: "STRING_VALUE",
+ * //     roleArns: [ // RoleArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     managedPolicyArns: [ // ManagedPolicyList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     durationSeconds: Number("int"),
+ * //     acceptRoleSessionName: true || false,
+ * //     attributeMappings: [ // AttributeMappings
+ * //       { // AttributeMapping
+ * //         certificateField: "STRING_VALUE",
+ * //         mappingRules: [ // MappingRules
+ * //           { // MappingRule
+ * //             specifier: "STRING_VALUE", // required
+ * //           },
+ * //         ],
+ * //       },
+ * //     ],
+ * //     aliasName: "STRING_VALUE",
+ * //     aliasArn: "STRING_VALUE",
+ * //     previousAliasName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DisableProfileCommandInput - {@link DisableProfileCommandInput}
+ * @returns {@link DisableProfileCommandOutput}
  * @see {@link DisableProfileCommandInput} for command's `input` shape.
  * @see {@link DisableProfileCommandOutput} for command's `response` shape.
  * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
  */
-export class DisableProfileCommand extends $Command<
-  DisableProfileCommandInput,
-  DisableProfileCommandOutput,
-  RolesAnywhereClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisableProfileCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RolesAnywhereClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisableProfileCommandInput, DisableProfileCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RolesAnywhereClient";
-    const commandName = "DisableProfileCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ScalarProfileRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ProfileDetailResponseFilterSensitiveLog,
+export class DisableProfileCommand extends command<DisableProfileCommandInput, DisableProfileCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisableProfile",
+  DisableProfile$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ScalarProfileRequest;
+      output: ProfileDetailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisableProfileCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisableProfileCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisableProfileCommandOutput> {
-    return deserializeAws_restJson1DisableProfileCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisableProfileCommandInput;
+      output: DisableProfileCommandOutput;
+    };
+  };
 }

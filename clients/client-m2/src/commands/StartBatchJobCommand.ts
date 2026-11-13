@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { M2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../M2Client";
-import {
-  StartBatchJobRequest,
-  StartBatchJobRequestFilterSensitiveLog,
-  StartBatchJobResponse,
-  StartBatchJobResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1StartBatchJobCommand,
-  serializeAws_restJson1StartBatchJobCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartBatchJobRequest, StartBatchJobResponse } from "../models/models_0";
+import { StartBatchJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartBatchJobCommand}.
+ */
 export interface StartBatchJobCommandInput extends StartBatchJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartBatchJobCommand}.
+ */
 export interface StartBatchJobCommandOutput extends StartBatchJobResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,97 @@ export interface StartBatchJobCommandOutput extends StartBatchJobResponse, __Met
  * ```javascript
  * import { M2Client, StartBatchJobCommand } from "@aws-sdk/client-m2"; // ES Modules import
  * // const { M2Client, StartBatchJobCommand } = require("@aws-sdk/client-m2"); // CommonJS import
+ * // import type { M2ClientConfig } from "@aws-sdk/client-m2";
+ * const config = {}; // type is M2ClientConfig
  * const client = new M2Client(config);
+ * const input = { // StartBatchJobRequest
+ *   applicationId: "STRING_VALUE", // required
+ *   batchJobIdentifier: { // BatchJobIdentifier Union: only one key present
+ *     fileBatchJobIdentifier: { // FileBatchJobIdentifier
+ *       fileName: "STRING_VALUE", // required
+ *       folderPath: "STRING_VALUE",
+ *     },
+ *     scriptBatchJobIdentifier: { // ScriptBatchJobIdentifier
+ *       scriptName: "STRING_VALUE", // required
+ *     },
+ *     s3BatchJobIdentifier: { // S3BatchJobIdentifier
+ *       bucket: "STRING_VALUE", // required
+ *       keyPrefix: "STRING_VALUE",
+ *       identifier: { // JobIdentifier Union: only one key present
+ *         fileName: "STRING_VALUE",
+ *         scriptName: "STRING_VALUE",
+ *       },
+ *     },
+ *     restartBatchJobIdentifier: { // RestartBatchJobIdentifier
+ *       executionId: "STRING_VALUE", // required
+ *       jobStepRestartMarker: { // JobStepRestartMarker
+ *         fromStep: "STRING_VALUE", // required
+ *         fromProcStep: "STRING_VALUE",
+ *         toStep: "STRING_VALUE",
+ *         toProcStep: "STRING_VALUE",
+ *         stepCheckpoint: Number("int"),
+ *         skip: true || false,
+ *       },
+ *     },
+ *   },
+ *   jobParams: { // BatchJobParametersMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   authSecretsManagerArn: "STRING_VALUE",
+ * };
  * const command = new StartBatchJobCommand(input);
  * const response = await client.send(command);
+ * // { // StartBatchJobResponse
+ * //   executionId: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param StartBatchJobCommandInput - {@link StartBatchJobCommandInput}
+ * @returns {@link StartBatchJobCommandOutput}
  * @see {@link StartBatchJobCommandInput} for command's `input` shape.
  * @see {@link StartBatchJobCommandOutput} for command's `response` shape.
  * @see {@link M2ClientResolvedConfig | config} for M2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The account or role doesn't have the right permissions to make the request.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The parameters provided in the request conflict with existing resources.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during the processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of requests made exceeds the limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameters provided in the request is not valid.</p>
+ *
+ * @throws {@link M2ServiceException}
+ * <p>Base exception class for all service exceptions from M2 service.</p>
+ *
+ *
+ * @public
  */
-export class StartBatchJobCommand extends $Command<
-  StartBatchJobCommandInput,
-  StartBatchJobCommandOutput,
-  M2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartBatchJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: M2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartBatchJobCommandInput, StartBatchJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "M2Client";
-    const commandName = "StartBatchJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartBatchJobRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StartBatchJobResponseFilterSensitiveLog,
+export class StartBatchJobCommand extends command<StartBatchJobCommandInput, StartBatchJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartBatchJob",
+  StartBatchJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartBatchJobRequest;
+      output: StartBatchJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartBatchJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartBatchJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StartBatchJobCommandOutput> {
-    return deserializeAws_restJson1StartBatchJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartBatchJobCommandInput;
+      output: StartBatchJobCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  FailoverGlobalClusterMessage,
-  FailoverGlobalClusterMessageFilterSensitiveLog,
-  FailoverGlobalClusterResult,
-  FailoverGlobalClusterResultFilterSensitiveLog,
-} from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryFailoverGlobalClusterCommand,
-  serializeAws_queryFailoverGlobalClusterCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { FailoverGlobalClusterMessage, FailoverGlobalClusterResult } from "../models/models_0";
+import { FailoverGlobalCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link FailoverGlobalClusterCommand}.
+ */
 export interface FailoverGlobalClusterCommandInput extends FailoverGlobalClusterMessage {}
+/**
+ * @public
+ *
+ * The output of {@link FailoverGlobalClusterCommand}.
+ */
 export interface FailoverGlobalClusterCommandOutput extends FailoverGlobalClusterResult, __MetadataBearer {}
 
 /**
@@ -35,7 +30,6 @@ export interface FailoverGlobalClusterCommandOutput extends FailoverGlobalCluste
  *       words, the role of the current primary DB cluster and the selected
  *       target secondary DB cluster are switched. The selected secondary DB cluster
  *       assumes full read/write capabilities for the Neptune global database.</p>
- *
  *          <note>
  *             <p>This action applies <b>only</b> to
  *       Neptune global databases. This action is only intended for use on healthy
@@ -48,68 +42,94 @@ export interface FailoverGlobalClusterCommandOutput extends FailoverGlobalCluste
  * ```javascript
  * import { NeptuneClient, FailoverGlobalClusterCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, FailoverGlobalClusterCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // FailoverGlobalClusterMessage
+ *   GlobalClusterIdentifier: "STRING_VALUE", // required
+ *   TargetDbClusterIdentifier: "STRING_VALUE", // required
+ *   AllowDataLoss: true || false,
+ *   Switchover: true || false,
+ * };
  * const command = new FailoverGlobalClusterCommand(input);
  * const response = await client.send(command);
+ * // { // FailoverGlobalClusterResult
+ * //   GlobalCluster: { // GlobalCluster
+ * //     GlobalClusterIdentifier: "STRING_VALUE",
+ * //     GlobalClusterResourceId: "STRING_VALUE",
+ * //     GlobalClusterArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     DatabaseName: "STRING_VALUE",
+ * //     StorageEncrypted: true || false,
+ * //     DeletionProtection: true || false,
+ * //     GlobalClusterMembers: [ // GlobalClusterMemberList
+ * //       { // GlobalClusterMember
+ * //         DBClusterArn: "STRING_VALUE",
+ * //         Readers: [ // ReadersArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         IsWriter: true || false,
+ * //       },
+ * //     ],
+ * //     FailoverState: { // FailoverState
+ * //       Status: "pending" || "failing-over" || "cancelling",
+ * //       FromDbClusterArn: "STRING_VALUE",
+ * //       ToDbClusterArn: "STRING_VALUE",
+ * //       IsDataLossAllowed: true || false,
+ * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param FailoverGlobalClusterCommandInput - {@link FailoverGlobalClusterCommandInput}
+ * @returns {@link FailoverGlobalClusterCommandOutput}
  * @see {@link FailoverGlobalClusterCommandInput} for command's `input` shape.
  * @see {@link FailoverGlobalClusterCommandOutput} for command's `response` shape.
  * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link DBClusterNotFoundFault} (client fault)
+ *  <p>
+ *             <i>DBClusterIdentifier</i> does not refer to an existing DB cluster.</p>
+ *
+ * @throws {@link GlobalClusterNotFoundFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> doesn't refer to an existing global database cluster. </p>
+ *
+ * @throws {@link InvalidDBClusterStateFault} (client fault)
+ *  <p>The DB cluster is not in a valid state.</p>
+ *
+ * @throws {@link InvalidGlobalClusterStateFault} (client fault)
+ *  <p>The global cluster is in an invalid state and can't perform the requested operation. </p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class FailoverGlobalClusterCommand extends $Command<
-  FailoverGlobalClusterCommandInput,
-  FailoverGlobalClusterCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: FailoverGlobalClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<FailoverGlobalClusterCommandInput, FailoverGlobalClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "FailoverGlobalClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: FailoverGlobalClusterMessageFilterSensitiveLog,
-      outputFilterSensitiveLog: FailoverGlobalClusterResultFilterSensitiveLog,
+export class FailoverGlobalClusterCommand extends command<FailoverGlobalClusterCommandInput, FailoverGlobalClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "FailoverGlobalCluster",
+  FailoverGlobalCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: FailoverGlobalClusterMessage;
+      output: FailoverGlobalClusterResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: FailoverGlobalClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryFailoverGlobalClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<FailoverGlobalClusterCommandOutput> {
-    return deserializeAws_queryFailoverGlobalClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: FailoverGlobalClusterCommandInput;
+      output: FailoverGlobalClusterCommandOutput;
+    };
+  };
 }

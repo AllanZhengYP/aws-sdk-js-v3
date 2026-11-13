@@ -1,13 +1,20 @@
 // smithy-typescript generated code
 import {
+  type ServiceExceptionOptions as __ServiceExceptionOptions,
   ServiceException as __ServiceException,
-  ServiceExceptionOptions as __ServiceExceptionOptions,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+
+export type { __ServiceExceptionOptions };
+
+export { __ServiceException };
 
 /**
+ * @public
+ *
  * Base exception class for all service exceptions from Cloud9 service.
  */
 export class Cloud9ServiceException extends __ServiceException {
+  public static readonly shapeId: string = "smithy.ts.sdk.synthetic.com.amazonaws.cloud9#Cloud9ServiceException";
   /**
    * @internal
    */

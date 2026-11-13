@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTTwinMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTTwinMakerClient";
-import {
-  DeleteComponentTypeRequest,
-  DeleteComponentTypeRequestFilterSensitiveLog,
-  DeleteComponentTypeResponse,
-  DeleteComponentTypeResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteComponentTypeCommand,
-  serializeAws_restJson1DeleteComponentTypeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteComponentTypeRequest, DeleteComponentTypeResponse } from "../models/models_0";
+import { DeleteComponentType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteComponentTypeCommand}.
+ */
 export interface DeleteComponentTypeCommandInput extends DeleteComponentTypeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteComponentTypeCommand}.
+ */
 export interface DeleteComponentTypeCommandOutput extends DeleteComponentTypeResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,63 @@ export interface DeleteComponentTypeCommandOutput extends DeleteComponentTypeRes
  * ```javascript
  * import { IoTTwinMakerClient, DeleteComponentTypeCommand } from "@aws-sdk/client-iottwinmaker"; // ES Modules import
  * // const { IoTTwinMakerClient, DeleteComponentTypeCommand } = require("@aws-sdk/client-iottwinmaker"); // CommonJS import
+ * // import type { IoTTwinMakerClientConfig } from "@aws-sdk/client-iottwinmaker";
+ * const config = {}; // type is IoTTwinMakerClientConfig
  * const client = new IoTTwinMakerClient(config);
+ * const input = { // DeleteComponentTypeRequest
+ *   workspaceId: "STRING_VALUE", // required
+ *   componentTypeId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteComponentTypeCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteComponentTypeResponse
+ * //   state: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteComponentTypeCommandInput - {@link DeleteComponentTypeCommandInput}
+ * @returns {@link DeleteComponentTypeCommandOutput}
  * @see {@link DeleteComponentTypeCommandInput} for command's `input` shape.
  * @see {@link DeleteComponentTypeCommandOutput} for command's `response` shape.
  * @see {@link IoTTwinMakerClientResolvedConfig | config} for IoTTwinMakerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource wasn't found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Failed</p>
+ *
+ * @throws {@link IoTTwinMakerServiceException}
+ * <p>Base exception class for all service exceptions from IoTTwinMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteComponentTypeCommand extends $Command<
-  DeleteComponentTypeCommandInput,
-  DeleteComponentTypeCommandOutput,
-  IoTTwinMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteComponentTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTTwinMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteComponentTypeCommandInput, DeleteComponentTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTTwinMakerClient";
-    const commandName = "DeleteComponentTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteComponentTypeRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteComponentTypeResponseFilterSensitiveLog,
+export class DeleteComponentTypeCommand extends command<DeleteComponentTypeCommandInput, DeleteComponentTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteComponentType",
+  DeleteComponentType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteComponentTypeRequest;
+      output: DeleteComponentTypeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteComponentTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteComponentTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteComponentTypeCommandOutput> {
-    return deserializeAws_restJson1DeleteComponentTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteComponentTypeCommandInput;
+      output: DeleteComponentTypeCommandOutput;
+    };
+  };
 }

@@ -1,61 +1,24 @@
 // smithy-typescript generated code
-import { Paginator } from "@aws-sdk/types";
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListApplicationsCommand,
   ListApplicationsCommandInput,
   ListApplicationsCommandOutput,
 } from "../commands/ListApplicationsCommand";
-import { MigrationHubRefactorSpaces } from "../MigrationHubRefactorSpaces";
 import { MigrationHubRefactorSpacesClient } from "../MigrationHubRefactorSpacesClient";
-import { MigrationHubRefactorSpacesPaginationConfiguration } from "./Interfaces";
+import type { MigrationHubRefactorSpacesPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: MigrationHubRefactorSpacesClient,
-  input: ListApplicationsCommandInput,
-  ...args: any
-): Promise<ListApplicationsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListApplicationsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: MigrationHubRefactorSpaces,
-  input: ListApplicationsCommandInput,
-  ...args: any
-): Promise<ListApplicationsCommandOutput> => {
-  // @ts-ignore
-  return await client.listApplications(input, ...args);
-};
-export async function* paginateListApplications(
+export const paginateListApplications: (
   config: MigrationHubRefactorSpacesPaginationConfiguration,
   input: ListApplicationsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListApplicationsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.NextToken
-  let token: typeof input.NextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListApplicationsCommandOutput;
-  while (hasNext) {
-    input.NextToken = token;
-    input["MaxResults"] = config.pageSize;
-    if (config.client instanceof MigrationHubRefactorSpaces) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof MigrationHubRefactorSpacesClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected MigrationHubRefactorSpaces | MigrationHubRefactorSpacesClient");
-    }
-    yield page;
-    const prevToken = token;
-    token = page.NextToken;
-    hasNext = !!(token && (!config.stopOnSameToken || token !== prevToken));
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListApplicationsCommandOutput> = createPaginator<
+  MigrationHubRefactorSpacesPaginationConfiguration,
+  ListApplicationsCommandInput,
+  ListApplicationsCommandOutput
+>(MigrationHubRefactorSpacesClient, ListApplicationsCommand, "NextToken", "NextToken", "MaxResults");

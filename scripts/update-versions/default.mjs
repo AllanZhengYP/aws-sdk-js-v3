@@ -1,9 +1,9 @@
 // @ts-check
 
-// Updates versions for internal packages `@aws-sdk/*` to `*`
-// in dependencies/devDependencies/peerDependencies
+// Updates versions for `@aws-sdk/*` local package interdependencies to `workspace:(actual version)`
+// or `workspace:^(actual version)` for free-range packages.
 
 import { getDepToDefaultVersionHash } from "./getDepToDefaultVersionHash.mjs";
 import { updateVersions } from "./updateVersions.mjs";
 
-updateVersions(getDepToDefaultVersionHash());
+await updateVersions(getDepToDefaultVersionHash());

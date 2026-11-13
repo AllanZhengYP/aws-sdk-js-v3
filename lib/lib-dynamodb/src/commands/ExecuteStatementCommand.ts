@@ -1,30 +1,44 @@
 // smithy-typescript generated code
-import {
-  ExecuteStatementCommand as __ExecuteStatementCommand,
-  ExecuteStatementCommandInput as __ExecuteStatementCommandInput,
-  ExecuteStatementCommandOutput as __ExecuteStatementCommandOutput,
-} from "@aws-sdk/client-dynamodb";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
 import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { ALL_MEMBERS, ALL_VALUES } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { ExecuteStatementCommand as __ExecuteStatementCommand } from "@aws-sdk/client-dynamodb";
 
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
 export type ExecuteStatementCommandInput = Omit<__ExecuteStatementCommandInput, "Parameters"> & {
-  Parameters?: NativeAttributeValue[];
+  Parameters?: NativeAttributeValue[] | undefined;
 };
 
+/**
+ * @public
+ */
 export type ExecuteStatementCommandOutput = Omit<__ExecuteStatementCommandOutput, "Items" | "LastEvaluatedKey"> & {
-  Items?: Record<string, NativeAttributeValue>[];
-  LastEvaluatedKey?: Record<string, NativeAttributeValue>;
+  Items?: Record<string, NativeAttributeValue>[] | undefined;
+  LastEvaluatedKey?: Record<string, NativeAttributeValue> | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * ExecuteStatementCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * ExecuteStatementCommand operation from {@link @aws-sdk/client-dynamodb#ExecuteStatementCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
 export class ExecuteStatementCommand extends DynamoDBDocumentClientCommand<
   ExecuteStatementCommandInput,
@@ -33,14 +47,19 @@ export class ExecuteStatementCommand extends DynamoDBDocumentClientCommand<
   __ExecuteStatementCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  protected readonly inputKeyNodes = [{ key: "Parameters" }];
-  protected readonly outputKeyNodes = [{ key: "Items" }, { key: "LastEvaluatedKey" }];
+  protected readonly inputKeyNodes = {
+    Parameters: ALL_MEMBERS, // set/list of AttributeValue
+  };
+  protected readonly outputKeyNodes = {
+    Items: {
+      "*": ALL_VALUES, // map with AttributeValue
+    },
+    LastEvaluatedKey: ALL_VALUES, // map with AttributeValue
+  };
 
   protected readonly clientCommand: __ExecuteStatementCommand;
-  public readonly middlewareStack: MiddlewareStack<
-    ExecuteStatementCommandInput | __ExecuteStatementCommandInput,
-    ExecuteStatementCommandOutput | __ExecuteStatementCommandOutput
-  >;
+  public readonly middlewareStack: MiddlewareStack<ExecuteStatementCommandInput | __ExecuteStatementCommandInput,
+  ExecuteStatementCommandOutput | __ExecuteStatementCommandOutput>;
 
   constructor(readonly input: ExecuteStatementCommandInput) {
     super();
@@ -63,3 +82,11 @@ export class ExecuteStatementCommand extends DynamoDBDocumentClientCommand<
     return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  ExecuteStatementCommandInput as __ExecuteStatementCommandInput,
+  ExecuteStatementCommandOutput as __ExecuteStatementCommandOutput,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

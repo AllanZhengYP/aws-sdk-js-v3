@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MgnClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MgnClient";
-import {
-  DescribeVcenterClientsRequest,
-  DescribeVcenterClientsRequestFilterSensitiveLog,
-  DescribeVcenterClientsResponse,
-  DescribeVcenterClientsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeVcenterClientsCommand,
-  serializeAws_restJson1DescribeVcenterClientsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeVcenterClientsRequest, DescribeVcenterClientsResponse } from "../models/models_0";
+import { DescribeVcenterClients$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeVcenterClientsCommand}.
+ */
 export interface DescribeVcenterClientsCommandInput extends DescribeVcenterClientsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeVcenterClientsCommand}.
+ */
 export interface DescribeVcenterClientsCommandOutput extends DescribeVcenterClientsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,73 @@ export interface DescribeVcenterClientsCommandOutput extends DescribeVcenterClie
  * ```javascript
  * import { MgnClient, DescribeVcenterClientsCommand } from "@aws-sdk/client-mgn"; // ES Modules import
  * // const { MgnClient, DescribeVcenterClientsCommand } = require("@aws-sdk/client-mgn"); // CommonJS import
+ * // import type { MgnClientConfig } from "@aws-sdk/client-mgn";
+ * const config = {}; // type is MgnClientConfig
  * const client = new MgnClient(config);
+ * const input = { // DescribeVcenterClientsRequest
+ *   maxResults: Number("int"),
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new DescribeVcenterClientsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeVcenterClientsResponse
+ * //   items: [ // VcenterClientList
+ * //     { // VcenterClient
+ * //       vcenterClientID: "STRING_VALUE",
+ * //       arn: "STRING_VALUE",
+ * //       hostname: "STRING_VALUE",
+ * //       vcenterUUID: "STRING_VALUE",
+ * //       datacenterName: "STRING_VALUE",
+ * //       lastSeenDatetime: "STRING_VALUE",
+ * //       sourceServerTags: { // TagsMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       tags: {
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeVcenterClientsCommandInput - {@link DescribeVcenterClientsCommandInput}
+ * @returns {@link DescribeVcenterClientsCommandOutput}
  * @see {@link DescribeVcenterClientsCommandInput} for command's `input` shape.
  * @see {@link DescribeVcenterClientsCommandOutput} for command's `response` shape.
  * @see {@link MgnClientResolvedConfig | config} for MgnClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource not found exception.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>Uninitialized account exception.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validate exception.</p>
+ *
+ * @throws {@link MgnServiceException}
+ * <p>Base exception class for all service exceptions from Mgn service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeVcenterClientsCommand extends $Command<
-  DescribeVcenterClientsCommandInput,
-  DescribeVcenterClientsCommandOutput,
-  MgnClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeVcenterClientsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MgnClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeVcenterClientsCommandInput, DescribeVcenterClientsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MgnClient";
-    const commandName = "DescribeVcenterClientsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeVcenterClientsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeVcenterClientsResponseFilterSensitiveLog,
+export class DescribeVcenterClientsCommand extends command<DescribeVcenterClientsCommandInput, DescribeVcenterClientsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeVcenterClients",
+  DescribeVcenterClients$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeVcenterClientsRequest;
+      output: DescribeVcenterClientsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeVcenterClientsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeVcenterClientsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeVcenterClientsCommandOutput> {
-    return deserializeAws_restJson1DescribeVcenterClientsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeVcenterClientsCommandInput;
+      output: DescribeVcenterClientsCommandOutput;
+    };
+  };
 }

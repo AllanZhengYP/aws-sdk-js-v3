@@ -1,105 +1,135 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateTrustAnchorRequest,
-  CreateTrustAnchorRequestFilterSensitiveLog,
-  TrustAnchorDetailResponse,
-  TrustAnchorDetailResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateTrustAnchorCommand,
-  serializeAws_restJson1CreateTrustAnchorCommand,
-} from "../protocols/Aws_restJson1";
-import { RolesAnywhereClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RolesAnywhereClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateTrustAnchorRequest, TrustAnchorDetailResponse } from "../models/models_0";
+import { CreateTrustAnchor$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateTrustAnchorCommand}.
+ */
 export interface CreateTrustAnchorCommandInput extends CreateTrustAnchorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateTrustAnchorCommand}.
+ */
 export interface CreateTrustAnchorCommandOutput extends TrustAnchorDetailResponse, __MetadataBearer {}
 
 /**
- * <p>Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p>
- *          <p>
- *             <b>Required permissions: </b>
- *             <code>rolesanywhere:CreateTrustAnchor</code>.
- *          </p>
+ * <p>Creates a trust anchor to establish trust between IAM Roles Anywhere and your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateTrustAnchor</code>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RolesAnywhereClient, CreateTrustAnchorCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
  * // const { RolesAnywhereClient, CreateTrustAnchorCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
  * const client = new RolesAnywhereClient(config);
+ * const input = { // CreateTrustAnchorRequest
+ *   name: "STRING_VALUE", // required
+ *   source: { // Source
+ *     sourceType: "STRING_VALUE",
+ *     sourceData: { // SourceData Union: only one key present
+ *       x509CertificateData: "STRING_VALUE",
+ *       acmPcaArn: "STRING_VALUE",
+ *     },
+ *   },
+ *   enabled: true || false,
+ *   crlDpRevocationEnabled: true || false,
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   notificationSettings: [ // NotificationSettings
+ *     { // NotificationSetting
+ *       enabled: true || false, // required
+ *       event: "STRING_VALUE", // required
+ *       threshold: Number("int"),
+ *       channel: "STRING_VALUE",
+ *     },
+ *   ],
+ *   aliasName: "STRING_VALUE",
+ * };
  * const command = new CreateTrustAnchorCommand(input);
  * const response = await client.send(command);
+ * // { // TrustAnchorDetailResponse
+ * //   trustAnchor: { // TrustAnchorDetail
+ * //     trustAnchorId: "STRING_VALUE",
+ * //     trustAnchorArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     source: { // Source
+ * //       sourceType: "STRING_VALUE",
+ * //       sourceData: { // SourceData Union: only one key present
+ * //         x509CertificateData: "STRING_VALUE",
+ * //         acmPcaArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     enabled: true || false,
+ * //     crlDpRevocationEnabled: true || false,
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     notificationSettings: [ // NotificationSettingDetails
+ * //       { // NotificationSettingDetail
+ * //         enabled: true || false, // required
+ * //         event: "STRING_VALUE", // required
+ * //         threshold: Number("int"),
+ * //         channel: "STRING_VALUE",
+ * //         configuredBy: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     aliasName: "STRING_VALUE",
+ * //     aliasArn: "STRING_VALUE",
+ * //     previousAliasName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateTrustAnchorCommandInput - {@link CreateTrustAnchorCommandInput}
+ * @returns {@link CreateTrustAnchorCommandOutput}
  * @see {@link CreateTrustAnchorCommandInput} for command's `input` shape.
  * @see {@link CreateTrustAnchorCommandOutput} for command's `response` shape.
  * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
  */
-export class CreateTrustAnchorCommand extends $Command<
-  CreateTrustAnchorCommandInput,
-  CreateTrustAnchorCommandOutput,
-  RolesAnywhereClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateTrustAnchorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RolesAnywhereClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateTrustAnchorCommandInput, CreateTrustAnchorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RolesAnywhereClient";
-    const commandName = "CreateTrustAnchorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateTrustAnchorRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: TrustAnchorDetailResponseFilterSensitiveLog,
+export class CreateTrustAnchorCommand extends command<CreateTrustAnchorCommandInput, CreateTrustAnchorCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateTrustAnchor",
+  CreateTrustAnchor$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateTrustAnchorRequest;
+      output: TrustAnchorDetailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateTrustAnchorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateTrustAnchorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateTrustAnchorCommandOutput> {
-    return deserializeAws_restJson1CreateTrustAnchorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateTrustAnchorCommandInput;
+      output: CreateTrustAnchorCommandOutput;
+    };
+  };
 }

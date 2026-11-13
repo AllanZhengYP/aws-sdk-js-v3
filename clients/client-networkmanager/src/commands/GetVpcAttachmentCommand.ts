@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetVpcAttachmentRequest,
-  GetVpcAttachmentRequestFilterSensitiveLog,
-  GetVpcAttachmentResponse,
-  GetVpcAttachmentResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { NetworkManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkManagerClient";
-import {
-  deserializeAws_restJson1GetVpcAttachmentCommand,
-  serializeAws_restJson1GetVpcAttachmentCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetVpcAttachmentRequest, GetVpcAttachmentResponse } from "../models/models_0";
+import { GetVpcAttachment$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetVpcAttachmentCommand}.
+ */
 export interface GetVpcAttachmentCommandInput extends GetVpcAttachmentRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetVpcAttachmentCommand}.
+ */
 export interface GetVpcAttachmentCommandOutput extends GetVpcAttachmentResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,126 @@ export interface GetVpcAttachmentCommandOutput extends GetVpcAttachmentResponse,
  * ```javascript
  * import { NetworkManagerClient, GetVpcAttachmentCommand } from "@aws-sdk/client-networkmanager"; // ES Modules import
  * // const { NetworkManagerClient, GetVpcAttachmentCommand } = require("@aws-sdk/client-networkmanager"); // CommonJS import
+ * // import type { NetworkManagerClientConfig } from "@aws-sdk/client-networkmanager";
+ * const config = {}; // type is NetworkManagerClientConfig
  * const client = new NetworkManagerClient(config);
+ * const input = { // GetVpcAttachmentRequest
+ *   AttachmentId: "STRING_VALUE", // required
+ * };
  * const command = new GetVpcAttachmentCommand(input);
  * const response = await client.send(command);
+ * // { // GetVpcAttachmentResponse
+ * //   VpcAttachment: { // VpcAttachment
+ * //     Attachment: { // Attachment
+ * //       CoreNetworkId: "STRING_VALUE",
+ * //       CoreNetworkArn: "STRING_VALUE",
+ * //       AttachmentId: "STRING_VALUE",
+ * //       OwnerAccountId: "STRING_VALUE",
+ * //       AttachmentType: "CONNECT" || "SITE_TO_SITE_VPN" || "VPC" || "DIRECT_CONNECT_GATEWAY" || "TRANSIT_GATEWAY_ROUTE_TABLE",
+ * //       State: "REJECTED" || "PENDING_ATTACHMENT_ACCEPTANCE" || "CREATING" || "FAILED" || "AVAILABLE" || "UPDATING" || "PENDING_NETWORK_UPDATE" || "PENDING_TAG_ACCEPTANCE" || "DELETING",
+ * //       EdgeLocation: "STRING_VALUE",
+ * //       EdgeLocations: [ // ExternalRegionCodeList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ResourceArn: "STRING_VALUE",
+ * //       AttachmentPolicyRuleNumber: Number("int"),
+ * //       SegmentName: "STRING_VALUE",
+ * //       NetworkFunctionGroupName: "STRING_VALUE",
+ * //       NatGatewaySupport: "ENABLED" || "ENABLING" || "DISABLED" || "DISABLING" || "PENDING_ATTACHMENT_ACCEPTANCE",
+ * //       NatSystemRouteSupport: true || false,
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       ProposedSegmentChange: { // ProposedSegmentChange
+ * //         Tags: [
+ * //           {
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         AttachmentPolicyRuleNumber: Number("int"),
+ * //         SegmentName: "STRING_VALUE",
+ * //       },
+ * //       ProposedNetworkFunctionGroupChange: { // ProposedNetworkFunctionGroupChange
+ * //         Tags: [
+ * //           {
+ * //             Key: "STRING_VALUE",
+ * //             Value: "STRING_VALUE",
+ * //           },
+ * //         ],
+ * //         AttachmentPolicyRuleNumber: Number("int"),
+ * //         NetworkFunctionGroupName: "STRING_VALUE",
+ * //       },
+ * //       CreatedAt: new Date("TIMESTAMP"),
+ * //       UpdatedAt: new Date("TIMESTAMP"),
+ * //       LastModificationErrors: [ // AttachmentErrorList
+ * //         { // AttachmentError
+ * //           Code: "VPC_NOT_FOUND" || "SUBNET_NOT_FOUND" || "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE" || "SUBNET_NO_FREE_ADDRESSES" || "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE" || "SUBNET_NO_IPV6_CIDRS" || "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE" || "VPN_CONNECTION_NOT_FOUND" || "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED" || "DIRECT_CONNECT_GATEWAY_NOT_FOUND" || "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS" || "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF" || "VPN_EXISTING_ASSOCIATIONS" || "VPN_STATIC_ROUTES_NAT_UNSUPPORTED" || "VPC_UNSUPPORTED_FEATURES" || "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS" || "CREATION_FAILED" || "UPDATE_FAILED" || "DELETION_FAILED",
+ * //           Message: "STRING_VALUE",
+ * //           ResourceArn: "STRING_VALUE",
+ * //           RequestId: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //     SubnetArns: [ // SubnetArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     Options: { // VpcOptions
+ * //       Ipv6Support: true || false,
+ * //       ApplianceModeSupport: true || false,
+ * //       DnsSupport: true || false,
+ * //       SecurityGroupReferencingSupport: true || false,
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetVpcAttachmentCommandInput - {@link GetVpcAttachmentCommandInput}
+ * @returns {@link GetVpcAttachmentCommandOutput}
  * @see {@link GetVpcAttachmentCommandInput} for command's `input` shape.
  * @see {@link GetVpcAttachmentCommandOutput} for command's `response` shape.
  * @see {@link NetworkManagerClientResolvedConfig | config} for NetworkManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints.</p>
+ *
+ * @throws {@link NetworkManagerServiceException}
+ * <p>Base exception class for all service exceptions from NetworkManager service.</p>
+ *
+ *
+ * @public
  */
-export class GetVpcAttachmentCommand extends $Command<
-  GetVpcAttachmentCommandInput,
-  GetVpcAttachmentCommandOutput,
-  NetworkManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetVpcAttachmentCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetVpcAttachmentCommandInput, GetVpcAttachmentCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkManagerClient";
-    const commandName = "GetVpcAttachmentCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetVpcAttachmentRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetVpcAttachmentResponseFilterSensitiveLog,
+export class GetVpcAttachmentCommand extends command<GetVpcAttachmentCommandInput, GetVpcAttachmentCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetVpcAttachment",
+  GetVpcAttachment$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetVpcAttachmentRequest;
+      output: GetVpcAttachmentResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetVpcAttachmentCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetVpcAttachmentCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetVpcAttachmentCommandOutput> {
-    return deserializeAws_restJson1GetVpcAttachmentCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetVpcAttachmentCommandInput;
+      output: GetVpcAttachmentCommandOutput;
+    };
+  };
 }

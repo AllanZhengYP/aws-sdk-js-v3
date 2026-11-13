@@ -1,277 +1,89 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
-
-import { ServiceQuotasServiceException as __BaseException } from "./ServiceQuotasServiceException";
+import type {
+  AdjustableAtLevelEnum,
+  AppliedLevelEnum,
+  ErrorCode,
+  OptInLevel,
+  OptInStatus,
+  OptInType,
+  PeriodUnit,
+  QuotaContextScope,
+  ReportStatus,
+  RequestStatus,
+  RequestType,
+  ServiceQuotaTemplateAssociationStatus,
+} from "./enums";
 
 /**
- * <p>You do not have sufficient permission to perform this action.</p>
+ * @public
  */
-export class AccessDeniedException extends __BaseException {
-  readonly name: "AccessDeniedException" = "AccessDeniedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
-    super({
-      name: "AccessDeniedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AccessDeniedException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface AssociateServiceQuotaTemplateRequest {}
 
+/**
+ * @public
+ */
 export interface AssociateServiceQuotaTemplateResponse {}
 
 /**
- * <p>The action you attempted is not allowed unless Service Access with Service Quotas is
- *       enabled in your organization.</p>
+ * @public
  */
-export class AWSServiceAccessNotEnabledException extends __BaseException {
-  readonly name: "AWSServiceAccessNotEnabledException" = "AWSServiceAccessNotEnabledException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface CreateSupportCaseRequest {
   /**
-   * @internal
+   * <p>The ID of the pending quota increase request for which you want to open a Support case. </p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<AWSServiceAccessNotEnabledException, __BaseException>) {
-    super({
-      name: "AWSServiceAccessNotEnabledException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AWSServiceAccessNotEnabledException.prototype);
-    this.Message = opts.Message;
-  }
+  RequestId: string | undefined;
 }
 
 /**
- * <p>You can't perform this action because a dependency does not have access.</p>
+ * @public
  */
-export class DependencyAccessDeniedException extends __BaseException {
-  readonly name: "DependencyAccessDeniedException" = "DependencyAccessDeniedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<DependencyAccessDeniedException, __BaseException>) {
-    super({
-      name: "DependencyAccessDeniedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, DependencyAccessDeniedException.prototype);
-    this.Message = opts.Message;
-  }
-}
+export interface CreateSupportCaseResponse {}
 
 /**
- * <p>The account making this call is not a member of an organization.</p>
+ * @public
  */
-export class NoAvailableOrganizationException extends __BaseException {
-  readonly name: "NoAvailableOrganizationException" = "NoAvailableOrganizationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<NoAvailableOrganizationException, __BaseException>) {
-    super({
-      name: "NoAvailableOrganizationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, NoAvailableOrganizationException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The organization that your account belongs to is not in All Features mode.</p>
- */
-export class OrganizationNotInAllFeaturesModeException extends __BaseException {
-  readonly name: "OrganizationNotInAllFeaturesModeException" = "OrganizationNotInAllFeaturesModeException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<OrganizationNotInAllFeaturesModeException, __BaseException>) {
-    super({
-      name: "OrganizationNotInAllFeaturesModeException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, OrganizationNotInAllFeaturesModeException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>Something went wrong.</p>
- */
-export class ServiceException extends __BaseException {
-  readonly name: "ServiceException" = "ServiceException";
-  readonly $fault: "server" = "server";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServiceException, __BaseException>) {
-    super({
-      name: "ServiceException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServiceException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The Service Quotas template is not available in this AWS Region.</p>
- */
-export class TemplatesNotAvailableInRegionException extends __BaseException {
-  readonly name: "TemplatesNotAvailableInRegionException" = "TemplatesNotAvailableInRegionException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<TemplatesNotAvailableInRegionException, __BaseException>) {
-    super({
-      name: "TemplatesNotAvailableInRegionException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, TemplatesNotAvailableInRegionException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>Due to throttling, the request was denied. Slow down the rate of request calls, or request
- *       an increase for this quota.</p>
- */
-export class TooManyRequestsException extends __BaseException {
-  readonly name: "TooManyRequestsException" = "TooManyRequestsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<TooManyRequestsException, __BaseException>) {
-    super({
-      name: "TooManyRequestsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, TooManyRequestsException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface DeleteServiceQuotaIncreaseRequestFromTemplateRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
   QuotaCode: string | undefined;
 
   /**
-   * <p>The AWS Region.</p>
+   * <p>Specifies the Amazon Web Services Region for which the request was made.</p>
+   * @public
    */
   AwsRegion: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteServiceQuotaIncreaseRequestFromTemplateResponse {}
 
 /**
- * <p>Invalid input was provided.</p>
+ * @public
  */
-export class IllegalArgumentException extends __BaseException {
-  readonly name: "IllegalArgumentException" = "IllegalArgumentException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<IllegalArgumentException, __BaseException>) {
-    super({
-      name: "IllegalArgumentException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, IllegalArgumentException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The specified resource does not exist.</p>
- */
-export class NoSuchResourceException extends __BaseException {
-  readonly name: "NoSuchResourceException" = "NoSuchResourceException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<NoSuchResourceException, __BaseException>) {
-    super({
-      name: "NoSuchResourceException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, NoSuchResourceException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface DisassociateServiceQuotaTemplateRequest {}
 
+/**
+ * @public
+ */
 export interface DisassociateServiceQuotaTemplateResponse {}
 
 /**
- * <p>The quota request template is not associated with your organization.</p>
- */
-export class ServiceQuotaTemplateNotInUseException extends __BaseException {
-  readonly name: "ServiceQuotaTemplateNotInUseException" = "ServiceQuotaTemplateNotInUseException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServiceQuotaTemplateNotInUseException, __BaseException>) {
-    super({
-      name: "ServiceQuotaTemplateNotInUseException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServiceQuotaTemplateNotInUseException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum ErrorCode {
-  DEPENDENCY_ACCESS_DENIED_ERROR = "DEPENDENCY_ACCESS_DENIED_ERROR",
-  DEPENDENCY_SERVICE_ERROR = "DEPENDENCY_SERVICE_ERROR",
-  DEPENDENCY_THROTTLING_ERROR = "DEPENDENCY_THROTTLING_ERROR",
-  SERVICE_QUOTA_NOT_AVAILABLE_ERROR = "SERVICE_QUOTA_NOT_AVAILABLE_ERROR",
-}
-
-/**
  * <p>An error that explains why an action did not succeed.</p>
+ * @public
  */
 export interface ErrorReason {
   /**
@@ -279,1198 +91,1533 @@ export interface ErrorReason {
    *          <ul>
    *             <li>
    *                <p>
-   *                   <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the required
-   *           permissions to complete the action. To resolve the error, you must have permission to
-   *           access the service or quota.</p>
+   *                   <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> - The caller does not have the
+   *                     required permissions to complete the action. To resolve the error, you must have
+   *                     permission to access the Amazon Web Services service or quota.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>DEPENDENCY_THROTTLING_ERROR</code> - The service is throttling Service
-   *           Quotas.</p>
+   *                   <code>DEPENDENCY_THROTTLING_ERROR</code> - The Amazon Web Services service is throttling
+   *                     Service Quotas. </p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>DEPENDENCY_SERVICE_ERROR</code> - The service is not available.</p>
+   *                   <code>DEPENDENCY_SERVICE_ERROR</code> - The Amazon Web Services service is not
+   *                     available.</p>
    *             </li>
    *             <li>
    *                <p>
-   *                   <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in Service
-   *           Quotas.</p>
+   *                   <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> - There was an error in
+   *                     Service Quotas.</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  ErrorCode?: ErrorCode | string;
+  ErrorCode?: ErrorCode | undefined;
 
   /**
    * <p>The error message.</p>
+   * @public
    */
-  ErrorMessage?: string;
+  ErrorMessage?: string | undefined;
 }
 
+/**
+ * <p>Information on your Service Quotas for <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/automatic-management.html">Service Quotas Automatic Management</a>. Automatic Management monitors your Service Quotas utilization and notifies you before you
+ *             run out of your allocated quotas.</p>
+ * @public
+ */
+export interface QuotaInfo {
+  /**
+   * <p>The Service Quotas code for the Amazon Web Services service monitored with Automatic Management.</p>
+   * @public
+   */
+  QuotaCode?: string | undefined;
+
+  /**
+   * <p>The Service Quotas name for the Amazon Web Services service monitored with Automatic Management.</p>
+   * @public
+   */
+  QuotaName?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetAssociationForServiceQuotaTemplateRequest {}
 
-export enum ServiceQuotaTemplateAssociationStatus {
-  ASSOCIATED = "ASSOCIATED",
-  DISASSOCIATED = "DISASSOCIATED",
-}
-
+/**
+ * @public
+ */
 export interface GetAssociationForServiceQuotaTemplateResponse {
   /**
    * <p>The association status. If the status is <code>ASSOCIATED</code>, the quota increase
-   *       requests in the template are automatically applied to new accounts in your
-   *       organization.</p>
+   *             requests in the template are automatically applied to new Amazon Web Services accounts in your
+   *             organization.</p>
+   * @public
    */
-  ServiceQuotaTemplateAssociationStatus?: ServiceQuotaTemplateAssociationStatus | string;
+  ServiceQuotaTemplateAssociationStatus?: ServiceQuotaTemplateAssociationStatus | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetAutoManagementConfigurationRequest {}
+
+/**
+ * @public
+ */
+export interface GetAutoManagementConfigurationResponse {
+  /**
+   * <p>Information on the opt-in level for Automatic Management. Only Amazon Web Services account level is supported.</p>
+   * @public
+   */
+  OptInLevel?: OptInLevel | undefined;
+
+  /**
+   * <p>Information on the opt-in type for Automatic Management. There are two modes: Notify only and Notify and Auto-Adjust. Currently, only
+   *                                 NotifyOnly is available.</p>
+   * @public
+   */
+  OptInType?: OptInType | undefined;
+
+  /**
+   * <p>The <a href="https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications.</p>
+   * @public
+   */
+  NotificationArn?: string | undefined;
+
+  /**
+   * <p>Status on whether Automatic Management is started or stopped.</p>
+   * @public
+   */
+  OptInStatus?: OptInStatus | undefined;
+
+  /**
+   * <p>List of Amazon Web Services services excluded from Automatic Management.
+   *             You won't be notified of Service Quotas utilization for Amazon Web Services services added to the
+   *                 Automatic Management exclusion list.
+   *          </p>
+   * @public
+   */
+  ExclusionList?: Record<string, QuotaInfo[]> | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetAWSDefaultServiceQuotaRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
   QuotaCode: string | undefined;
-}
-
-export enum PeriodUnit {
-  DAY = "DAY",
-  HOUR = "HOUR",
-  MICROSECOND = "MICROSECOND",
-  MILLISECOND = "MILLISECOND",
-  MINUTE = "MINUTE",
-  SECOND = "SECOND",
-  WEEK = "WEEK",
 }
 
 /**
  * <p>Information about the quota period.</p>
+ * @public
  */
 export interface QuotaPeriod {
   /**
-   * <p>The value.</p>
+   * <p>The value associated with the reported <code>PeriodUnit</code>.</p>
+   * @public
    */
-  PeriodValue?: number;
+  PeriodValue?: number | undefined;
 
   /**
    * <p>The time unit.</p>
+   * @public
    */
-  PeriodUnit?: PeriodUnit | string;
+  PeriodUnit?: PeriodUnit | undefined;
+}
+
+/**
+ * <p>A structure that describes the context for a resource-level quota. For resource-level quotas, such as <code>Instances per OpenSearch Service Domain</code>, you can apply the quota value at the resource-level for each OpenSearch Service Domain in your Amazon Web Services account. Together the attributes of this structure help you understand how the quota is implemented by Amazon Web Services and how you can manage it. For quotas such as <code>Amazon OpenSearch Service Domains</code> which can be managed at the account-level for each Amazon Web Services Region, the <code>QuotaContext</code> field is absent. See the attribute descriptions below to further understand how to use them.</p>
+ * @public
+ */
+export interface QuotaContextInfo {
+  /**
+   * <p>Specifies the scope to which the quota value is applied. If the scope is <code>RESOURCE</code>, the quota value is applied to each resource in the Amazon Web Services account. If the scope is <code>ACCOUNT</code>, the quota value is applied to the Amazon Web Services account.</p>
+   * @public
+   */
+  ContextScope?: QuotaContextScope | undefined;
+
+  /**
+   * <p>Specifies the resource type to which the quota can be applied.</p>
+   * @public
+   */
+  ContextScopeType?: string | undefined;
+
+  /**
+   * <p>Specifies the resource, or resources, to which the quota applies. The value for this field is either an Amazon Resource Name (ARN) or *. If the value is an ARN, the quota value applies to that resource. If the value is *, then the quota value applies to all resources listed in the <code>ContextScopeType</code> field. The quota value applies to all resources for which you haven’t previously applied a quota value, and any new resources you create in your Amazon Web Services account.</p>
+   * @public
+   */
+  ContextId?: string | undefined;
+
+  /**
+   * <p>Specifies the level at which you can request an increase for this quota:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ACCOUNT</code> – You can request an increase only at the account level.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PER_RESOURCE</code> – You can request an increase only for an individual resource.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>ALL</code> – You can request an increase at either the account level or for an individual resource.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  AdjustableAtLevel?: AdjustableAtLevelEnum | undefined;
 }
 
 /**
  * <p>Information about the CloudWatch metric that reflects quota usage.</p>
+ * @public
  */
 export interface MetricInfo {
   /**
    * <p>The namespace of the metric.</p>
+   * @public
    */
-  MetricNamespace?: string;
+  MetricNamespace?: string | undefined;
 
   /**
    * <p>The name of the metric.</p>
+   * @public
    */
-  MetricName?: string;
+  MetricName?: string | undefined;
 
   /**
    * <p>The metric dimension. This is a name/value pair that is part of the identity of a
-   *       metric.</p>
+   *             metric.</p>
+   * @public
    */
-  MetricDimensions?: Record<string, string>;
+  MetricDimensions?: Record<string, string> | undefined;
 
   /**
    * <p>The metric statistic that we recommend you use when determining quota usage.</p>
+   * @public
    */
-  MetricStatisticRecommendation?: string;
+  MetricStatisticRecommendation?: string | undefined;
 }
 
 /**
  * <p>Information about a quota.</p>
+ * @public
  */
 export interface ServiceQuota {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
-  ServiceCode?: string;
+  ServiceCode?: string | undefined;
 
   /**
-   * <p>The service name.</p>
+   * <p>Specifies the service name.</p>
+   * @public
    */
-  ServiceName?: string;
+  ServiceName?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the quota.</p>
+   * @public
    */
-  QuotaArn?: string;
+  QuotaArn?: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
-  QuotaCode?: string;
+  QuotaCode?: string | undefined;
 
   /**
-   * <p>The quota name.</p>
+   * <p>Specifies the quota name.</p>
+   * @public
    */
-  QuotaName?: string;
+  QuotaName?: string | undefined;
 
   /**
    * <p>The quota value.</p>
+   * @public
    */
-  Value?: number;
+  Value?: number | undefined;
 
   /**
    * <p>The unit of measurement.</p>
+   * @public
    */
-  Unit?: string;
+  Unit?: string | undefined;
 
   /**
    * <p>Indicates whether the quota value can be increased.</p>
+   * @public
    */
-  Adjustable?: boolean;
+  Adjustable?: boolean | undefined;
 
   /**
    * <p>Indicates whether the quota is global.</p>
+   * @public
    */
-  GlobalQuota?: boolean;
+  GlobalQuota?: boolean | undefined;
 
   /**
    * <p>Information about the measurement.</p>
+   * @public
    */
-  UsageMetric?: MetricInfo;
+  UsageMetric?: MetricInfo | undefined;
 
   /**
    * <p>The period of time.</p>
+   * @public
    */
-  Period?: QuotaPeriod;
+  Period?: QuotaPeriod | undefined;
 
   /**
    * <p>The error code and error reason.</p>
+   * @public
    */
-  ErrorReason?: ErrorReason;
+  ErrorReason?: ErrorReason | undefined;
+
+  /**
+   * <p>Filters the response to return applied quota values for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
+   * @public
+   */
+  QuotaAppliedAtLevel?: AppliedLevelEnum | undefined;
+
+  /**
+   * <p>The context for this service quota.</p>
+   * @public
+   */
+  QuotaContext?: QuotaContextInfo | undefined;
+
+  /**
+   * <p>The quota description. </p>
+   * @public
+   */
+  Description?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetAWSDefaultServiceQuotaResponse {
   /**
    * <p>Information about the quota.</p>
+   * @public
    */
-  Quota?: ServiceQuota;
+  Quota?: ServiceQuota | undefined;
 }
 
+/**
+ * @public
+ */
+export interface GetQuotaUtilizationReportRequest {
+  /**
+   * <p>The unique identifier for the quota utilization report. This identifier is returned by
+   *             the <code>StartQuotaUtilizationReport</code> operation.</p>
+   * @public
+   */
+  ReportId: string | undefined;
+
+  /**
+   * <p>A token that indicates the next page of results to retrieve. This token is returned in
+   *             the response when there are more results available. Omit this parameter for the first request.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>The maximum number of results to return per page. The default value is 1,000 and the
+   *             maximum allowed value is 1,000.</p>
+   * @public
+   */
+  MaxResults?: number | undefined;
+}
+
+/**
+ * <p>Information about a quota's utilization, including the quota code, service information,
+ *             current usage, and applied limits.</p>
+ * @public
+ */
+export interface QuotaUtilizationInfo {
+  /**
+   * <p>The quota identifier.</p>
+   * @public
+   */
+  QuotaCode?: string | undefined;
+
+  /**
+   * <p>The service identifier.</p>
+   * @public
+   */
+  ServiceCode?: string | undefined;
+
+  /**
+   * <p>The quota name.</p>
+   * @public
+   */
+  QuotaName?: string | undefined;
+
+  /**
+   * <p>The namespace of the metric used to track quota usage.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The utilization percentage of the quota, calculated as (current usage / applied value) × 100.
+   *             Values range from 0.0 to 100.0 or higher if usage exceeds the quota limit.</p>
+   * @public
+   */
+  Utilization?: number | undefined;
+
+  /**
+   * <p>The default value of the quota.</p>
+   * @public
+   */
+  DefaultValue?: number | undefined;
+
+  /**
+   * <p>The applied value of the quota, which may be higher than the default value if a quota
+   *             increase has been requested and approved.</p>
+   * @public
+   */
+  AppliedValue?: number | undefined;
+
+  /**
+   * <p>The service name.</p>
+   * @public
+   */
+  ServiceName?: string | undefined;
+
+  /**
+   * <p>Indicates whether the quota value can be increased.</p>
+   * @public
+   */
+  Adjustable?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface GetQuotaUtilizationReportResponse {
+  /**
+   * <p>The unique identifier for the quota utilization report.</p>
+   * @public
+   */
+  ReportId?: string | undefined;
+
+  /**
+   * <p>The current status of the report generation. Possible values are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PENDING</code> - The report generation is in progress. Retry this operation
+   *                     after a few seconds.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>IN_PROGRESS</code> - The report is being processed. Continue polling until
+   *                     the status changes to <code>COMPLETED</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>COMPLETED</code> - The report is ready and quota utilization data is available
+   *                     in the response.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAILED</code> - The report generation failed. Check the <code>ErrorCode</code>
+   *                     and <code>ErrorMessage</code> fields for details.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  Status?: ReportStatus | undefined;
+
+  /**
+   * <p>The timestamp when the report was generated, in ISO 8601 format.</p>
+   * @public
+   */
+  GeneratedAt?: Date | undefined;
+
+  /**
+   * <p>The total number of quotas included in the report across all pages.</p>
+   * @public
+   */
+  TotalCount?: number | undefined;
+
+  /**
+   * <p>A list of quota utilization records, sorted by utilization percentage in descending order.
+   *             Each record includes the quota code, service code, service name, quota name, namespace,
+   *             utilization percentage, default value, applied value, and whether the quota is adjustable.
+   *             Up to 1,000 records are returned per page.</p>
+   * @public
+   */
+  Quotas?: QuotaUtilizationInfo[] | undefined;
+
+  /**
+   * <p>A token that indicates more results are available. Include this token in the next request
+   *             to retrieve the next page of results. If this field is not present, you have retrieved all
+   *             available results.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>An error code indicating the reason for failure when the report status is <code>FAILED</code>.
+   *             This field is only present when the status is <code>FAILED</code>.</p>
+   * @public
+   */
+  ErrorCode?: string | undefined;
+
+  /**
+   * <p>A detailed error message describing the failure when the report status is <code>FAILED</code>.
+   *             This field is only present when the status is <code>FAILED</code>.</p>
+   * @public
+   */
+  ErrorMessage?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface GetRequestedServiceQuotaChangeRequest {
   /**
-   * <p>The ID of the quota increase request.</p>
+   * <p>Specifies the ID of the quota increase request.</p>
+   * @public
    */
   RequestId: string | undefined;
 }
 
-export enum RequestStatus {
-  APPROVED = "APPROVED",
-  CASE_CLOSED = "CASE_CLOSED",
-  CASE_OPENED = "CASE_OPENED",
-  DENIED = "DENIED",
-  PENDING = "PENDING",
-}
-
 /**
  * <p>Information about a quota increase request.</p>
+ * @public
  */
 export interface RequestedServiceQuotaChange {
   /**
    * <p>The unique identifier.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
+
+  /**
+   * <p>The type of quota increase request. Possible values include:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>AutomaticManagement</code> - The request was automatically created by
+   *                     Service Quotas Automatic Management when quota utilization approached the limit.</p>
+   *             </li>
+   *          </ul>
+   *          <p>If this field is not present, the request was manually created by a user.</p>
+   * @public
+   */
+  RequestType?: RequestType | undefined;
 
   /**
    * <p>The case ID.</p>
+   * @public
    */
-  CaseId?: string;
+  CaseId?: string | undefined;
 
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
-  ServiceCode?: string;
+  ServiceCode?: string | undefined;
 
   /**
-   * <p>The service name.</p>
+   * <p>Specifies the service name.</p>
+   * @public
    */
-  ServiceName?: string;
+  ServiceName?: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
-  QuotaCode?: string;
+  QuotaCode?: string | undefined;
 
   /**
-   * <p>The quota name.</p>
+   * <p>Specifies the quota name.</p>
+   * @public
    */
-  QuotaName?: string;
+  QuotaName?: string | undefined;
 
   /**
    * <p>The new, increased value for the quota.</p>
+   * @public
    */
-  DesiredValue?: number;
+  DesiredValue?: number | undefined;
 
   /**
    * <p>The state of the quota increase request.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>PENDING</code>: The quota increase request is under review by Amazon Web Services. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CASE_OPENED</code>: Service Quotas opened a support case to process the quota increase
+   *                 request. Follow-up on the support case for more information.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>APPROVED</code>: The quota increase request is approved. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>DENIED</code>: The quota increase request can't be approved by Service Quotas. Contact
+   *                Amazon Web Services Support for more details.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>NOT APPROVED</code>: The quota increase request can't be approved by Service Quotas. Contact
+   *                 Amazon Web Services Support for more details.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CASE_CLOSED</code>: The support case associated with this quota increase request was closed.
+   *             Check the support case correspondence for the outcome of your quota request.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INVALID_REQUEST</code>: Service Quotas couldn't process your resource-level quota increase request because the
+   *             Amazon Resource Name (ARN) specified as part of the <code>ContextId</code> is invalid.</p>
+   *             </li>
+   *          </ul>
+   * @public
    */
-  Status?: RequestStatus | string;
+  Status?: RequestStatus | undefined;
 
   /**
    * <p>The date and time when the quota increase request was received and the case ID was
-   *       created.</p>
+   *             created.</p>
+   * @public
    */
-  Created?: Date;
+  Created?: Date | undefined;
 
   /**
    * <p>The date and time of the most recent change.</p>
+   * @public
    */
-  LastUpdated?: Date;
+  LastUpdated?: Date | undefined;
 
   /**
    * <p>The IAM identity of the requester.</p>
+   * @public
    */
-  Requester?: string;
+  Requester?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the quota.</p>
+   * @public
    */
-  QuotaArn?: string;
+  QuotaArn?: string | undefined;
 
   /**
    * <p>Indicates whether the quota is global.</p>
+   * @public
    */
-  GlobalQuota?: boolean;
+  GlobalQuota?: boolean | undefined;
 
   /**
    * <p>The unit of measurement.</p>
+   * @public
    */
-  Unit?: string;
+  Unit?: string | undefined;
+
+  /**
+   * <p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
+   * @public
+   */
+  QuotaRequestedAtLevel?: AppliedLevelEnum | undefined;
+
+  /**
+   * <p>The context for this service quota.</p>
+   * @public
+   */
+  QuotaContext?: QuotaContextInfo | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetRequestedServiceQuotaChangeResponse {
   /**
    * <p>Information about the quota increase request.</p>
+   * @public
    */
-  RequestedQuota?: RequestedServiceQuotaChange;
+  RequestedQuota?: RequestedServiceQuotaChange | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServiceQuotaRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
   QuotaCode: string | undefined;
+
+  /**
+   * <p>Specifies the resource with an Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  ContextId?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServiceQuotaResponse {
   /**
    * <p>Information about the quota.</p>
+   * @public
    */
-  Quota?: ServiceQuota;
+  Quota?: ServiceQuota | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServiceQuotaIncreaseRequestFromTemplateRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
   QuotaCode: string | undefined;
 
   /**
-   * <p>The AWS Region.</p>
+   * <p>Specifies the Amazon Web Services Region for which you made the request.</p>
+   * @public
    */
   AwsRegion: string | undefined;
 }
 
 /**
  * <p>Information about a quota increase request.</p>
+ * @public
  */
 export interface ServiceQuotaIncreaseRequestInTemplate {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
-  ServiceCode?: string;
+  ServiceCode?: string | undefined;
 
   /**
-   * <p>The service name.</p>
+   * <p>Specifies the service name.</p>
+   * @public
    */
-  ServiceName?: string;
+  ServiceName?: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
-  QuotaCode?: string;
+  QuotaCode?: string | undefined;
 
   /**
-   * <p>The quota name.</p>
+   * <p>Specifies the quota name.</p>
+   * @public
    */
-  QuotaName?: string;
+  QuotaName?: string | undefined;
 
   /**
    * <p>The new, increased value of the quota.</p>
+   * @public
    */
-  DesiredValue?: number;
+  DesiredValue?: number | undefined;
 
   /**
-   * <p>The AWS Region.</p>
+   * <p>The Amazon Web Services Region.</p>
+   * @public
    */
-  AwsRegion?: string;
+  AwsRegion?: string | undefined;
 
   /**
    * <p>The unit of measurement.</p>
+   * @public
    */
-  Unit?: string;
+  Unit?: string | undefined;
 
   /**
    * <p>Indicates whether the quota is global.</p>
+   * @public
    */
-  GlobalQuota?: boolean;
+  GlobalQuota?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServiceQuotaIncreaseRequestFromTemplateResponse {
   /**
    * <p>Information about the quota increase request.</p>
+   * @public
    */
-  ServiceQuotaIncreaseRequestInTemplate?: ServiceQuotaIncreaseRequestInTemplate;
+  ServiceQuotaIncreaseRequestInTemplate?: ServiceQuotaIncreaseRequestInTemplate | undefined;
 }
 
 /**
  * <p>A complex data type that contains a tag key and tag value.</p>
+ * @public
  */
 export interface Tag {
   /**
    * <p>A string that contains a tag key. The string length should be between 1 and 128
-   *       characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ - . :
-   *       / = + @.</p>
+   *             characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _
+   *             - . : / = + @.</p>
+   * @public
    */
   Key: string | undefined;
 
   /**
-   * <p>A string that contains an optional tag value. The string length should be between 0 and
-   *       256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special characters _ -
-   *       . : / = + @.</p>
+   * <p>A string that contains an optional tag value. The string length should be between 0
+   *             and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and the special
+   *             characters _ - . : / = + @.</p>
+   * @public
    */
   Value: string | undefined;
 }
 
 /**
- * <p>Invalid input was provided.</p>
+ * @public
  */
-export class InvalidPaginationTokenException extends __BaseException {
-  readonly name: "InvalidPaginationTokenException" = "InvalidPaginationTokenException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface ListAWSDefaultServiceQuotasRequest {
   /**
-   * @internal
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidPaginationTokenException, __BaseException>) {
-    super({
-      name: "InvalidPaginationTokenException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidPaginationTokenException.prototype);
-    this.Message = opts.Message;
-  }
+  ServiceCode: string | undefined;
+
+  /**
+   * <p>Specifies a value for receiving additional results after you
+   *     receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+   *     response indicates that more output is available. Set this parameter to the value of the previous
+   *     call's <code>NextToken</code> response to indicate where the output should continue
+   *     from.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Specifies the maximum number of results that you want included on each
+   *     page of the response. If you do not include this parameter, it defaults to a value appropriate
+   *     to the operation. If additional items exist beyond those included in the current response, the
+   *     <code>NextToken</code> response element is present and has a value (is not null). Include that
+   *     value as the <code>NextToken</code> request parameter in the next call to the operation to get
+   *     the next part of the results.</p>
+   *          <note>
+   *             <p>An API operation can return fewer results than the maximum even when there are
+   *     more results available. You should check <code>NextToken</code> after every operation to ensure
+   *     that you receive all of the results.</p>
+   *          </note>
+   * @public
+   */
+  MaxResults?: number | undefined;
 }
 
 /**
- * <p>The resource is in an invalid state.</p>
+ * @public
  */
-export class InvalidResourceStateException extends __BaseException {
-  readonly name: "InvalidResourceStateException" = "InvalidResourceStateException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidResourceStateException, __BaseException>) {
-    super({
-      name: "InvalidResourceStateException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidResourceStateException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export interface ListAWSDefaultServiceQuotasRequest {
-  /**
-   * <p>The service identifier.</p>
-   */
-  ServiceCode: string | undefined;
-
-  /**
-   * <p>The token for the next page of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return with a single call. To retrieve the remaining
-   *       results, if any, make another call with the token returned from this call.</p>
-   */
-  MaxResults?: number;
-}
-
 export interface ListAWSDefaultServiceQuotasResponse {
   /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are
-   *       no more results to return.</p>
+   * <p>If present, indicates that more output is available than is
+   *     included in the current response. Use this value in the <code>NextToken</code> request parameter
+   *     in a subsequent call to the operation to get the next part of the output. You should repeat this
+   *     until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Information about the quotas.</p>
+   * @public
    */
-  Quotas?: ServiceQuota[];
+  Quotas?: ServiceQuota[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRequestedServiceQuotaChangeHistoryRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
-  ServiceCode?: string;
+  ServiceCode?: string | undefined;
 
   /**
-   * <p>The status of the quota increase request.</p>
+   * <p>Specifies that you want to filter the results to only the requests with the matching
+   *             status.</p>
+   * @public
    */
-  Status?: RequestStatus | string;
+  Status?: RequestStatus | undefined;
 
   /**
-   * <p>The token for the next page of results.</p>
+   * <p>Specifies a value for receiving additional results after you
+   *     receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+   *     response indicates that more output is available. Set this parameter to the value of the previous
+   *     call's <code>NextToken</code> response to indicate where the output should continue
+   *     from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>The maximum number of results to return with a single call. To retrieve the remaining
-   *       results, if any, make another call with the token returned from this call.</p>
+   * <p>Specifies the maximum number of results that you want included on each
+   *     page of the response. If you do not include this parameter, it defaults to a value appropriate
+   *     to the operation. If additional items exist beyond those included in the current response, the
+   *     <code>NextToken</code> response element is present and has a value (is not null). Include that
+   *     value as the <code>NextToken</code> request parameter in the next call to the operation to get
+   *     the next part of the results.</p>
+   *          <note>
+   *             <p>An API operation can return fewer results than the maximum even when there are
+   *     more results available. You should check <code>NextToken</code> after every operation to ensure
+   *     that you receive all of the results.</p>
+   *          </note>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
+   * @public
+   */
+  QuotaRequestedAtLevel?: AppliedLevelEnum | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRequestedServiceQuotaChangeHistoryResponse {
   /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are
-   *       no more results to return.</p>
+   * <p>If present, indicates that more output is available than is
+   *     included in the current response. Use this value in the <code>NextToken</code> request parameter
+   *     in a subsequent call to the operation to get the next part of the output. You should repeat this
+   *     until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Information about the quota increase requests.</p>
+   * @public
    */
-  RequestedQuotas?: RequestedServiceQuotaChange[];
+  RequestedQuotas?: RequestedServiceQuotaChange[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRequestedServiceQuotaChangeHistoryByQuotaRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
   QuotaCode: string | undefined;
 
   /**
-   * <p>The status value of the quota increase request.</p>
+   * <p>Specifies that you want to filter the results to only the requests with the matching
+   *             status.</p>
+   * @public
    */
-  Status?: RequestStatus | string;
+  Status?: RequestStatus | undefined;
 
   /**
-   * <p>The token for the next page of results.</p>
+   * <p>Specifies a value for receiving additional results after you
+   *     receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+   *     response indicates that more output is available. Set this parameter to the value of the previous
+   *     call's <code>NextToken</code> response to indicate where the output should continue
+   *     from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>The maximum number of results to return with a single call. To retrieve the remaining
-   *       results, if any, make another call with the token returned from this call.</p>
+   * <p>Specifies the maximum number of results that you want included on each
+   *     page of the response. If you do not include this parameter, it defaults to a value appropriate
+   *     to the operation. If additional items exist beyond those included in the current response, the
+   *     <code>NextToken</code> response element is present and has a value (is not null). Include that
+   *     value as the <code>NextToken</code> request parameter in the next call to the operation to get
+   *     the next part of the results.</p>
+   *          <note>
+   *             <p>An API operation can return fewer results than the maximum even when there are
+   *     more results available. You should check <code>NextToken</code> after every operation to ensure
+   *     that you receive all of the results.</p>
+   *          </note>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
+
+  /**
+   * <p>Filters the response to return quota requests for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
+   * @public
+   */
+  QuotaRequestedAtLevel?: AppliedLevelEnum | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRequestedServiceQuotaChangeHistoryByQuotaResponse {
   /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are
-   *       no more results to return.</p>
+   * <p>If present, indicates that more output is available than is
+   *     included in the current response. Use this value in the <code>NextToken</code> request parameter
+   *     in a subsequent call to the operation to get the next part of the output. You should repeat this
+   *     until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Information about the quota increase requests.</p>
+   * @public
    */
-  RequestedQuotas?: RequestedServiceQuotaChange[];
+  RequestedQuotas?: RequestedServiceQuotaChange[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListServiceQuotaIncreaseRequestsInTemplateRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
-  ServiceCode?: string;
+  ServiceCode?: string | undefined;
 
   /**
-   * <p>The AWS Region.</p>
+   * <p>Specifies the Amazon Web Services Region for which you made the request.</p>
+   * @public
    */
-  AwsRegion?: string;
+  AwsRegion?: string | undefined;
 
   /**
-   * <p>The token for the next page of results.</p>
+   * <p>Specifies a value for receiving additional results after you
+   *     receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+   *     response indicates that more output is available. Set this parameter to the value of the previous
+   *     call's <code>NextToken</code> response to indicate where the output should continue
+   *     from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>The maximum number of results to return with a single call. To retrieve the remaining
-   *       results, if any, make another call with the token returned from this call.</p>
+   * <p>Specifies the maximum number of results that you want included on each
+   *     page of the response. If you do not include this parameter, it defaults to a value appropriate
+   *     to the operation. If additional items exist beyond those included in the current response, the
+   *     <code>NextToken</code> response element is present and has a value (is not null). Include that
+   *     value as the <code>NextToken</code> request parameter in the next call to the operation to get
+   *     the next part of the results.</p>
+   *          <note>
+   *             <p>An API operation can return fewer results than the maximum even when there are
+   *     more results available. You should check <code>NextToken</code> after every operation to ensure
+   *     that you receive all of the results.</p>
+   *          </note>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListServiceQuotaIncreaseRequestsInTemplateResponse {
   /**
    * <p>Information about the quota increase requests.</p>
+   * @public
    */
-  ServiceQuotaIncreaseRequestInTemplateList?: ServiceQuotaIncreaseRequestInTemplate[];
+  ServiceQuotaIncreaseRequestInTemplateList?: ServiceQuotaIncreaseRequestInTemplate[] | undefined;
 
   /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are
-   *       no more results to return.</p>
+   * <p>If present, indicates that more output is available than is
+   *     included in the current response. Use this value in the <code>NextToken</code> request parameter
+   *     in a subsequent call to the operation to get the next part of the output. You should repeat this
+   *     until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListServiceQuotasRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The token for the next page of results.</p>
+   * <p>Specifies a value for receiving additional results after you
+   *     receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+   *     response indicates that more output is available. Set this parameter to the value of the previous
+   *     call's <code>NextToken</code> response to indicate where the output should continue
+   *     from.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>The maximum number of results to return with a single call. To retrieve the remaining
-   *       results, if any, make another call with the token returned from this call.</p>
+   * <p>Specifies the maximum number of results that you want included on each
+   *     page of the response. If you do not include this parameter, it defaults to a value appropriate
+   *     to the operation. If additional items exist beyond those included in the current response, the
+   *     <code>NextToken</code> response element is present and has a value (is not null). Include that
+   *     value as the <code>NextToken</code> request parameter in the next call to the operation to get
+   *     the next part of the results.</p>
+   *          <note>
+   *             <p>An API operation can return fewer results than the maximum even when there are
+   *     more results available. You should check <code>NextToken</code> after every operation to ensure
+   *     that you receive all of the results.</p>
+   *          </note>
+   * @public
    */
-  MaxResults?: number;
-}
-
-export interface ListServiceQuotasResponse {
-  /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are
-   *       no more results to return.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Information about the quotas.</p>
-   */
-  Quotas?: ServiceQuota[];
-}
-
-export interface ListServicesRequest {
-  /**
-   * <p>The token for the next page of results.</p>
-   */
-  NextToken?: string;
+  MaxResults?: number | undefined;
 
   /**
-   * <p>The maximum number of results to return with a single call. To retrieve the remaining
-   *       results, if any, make another call with the token returned from this call.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
-  MaxResults?: number;
+  QuotaCode?: string | undefined;
+
+  /**
+   * <p>Filters the response to return applied quota values for the <code>ACCOUNT</code>, <code>RESOURCE</code>, or <code>ALL</code> levels. <code>ACCOUNT</code> is the default.</p>
+   * @public
+   */
+  QuotaAppliedAtLevel?: AppliedLevelEnum | undefined;
 }
 
 /**
- * <p>Information about a service.</p>
+ * @public
+ */
+export interface ListServiceQuotasResponse {
+  /**
+   * <p>If present, indicates that more output is available than is
+   *     included in the current response. Use this value in the <code>NextToken</code> request parameter
+   *     in a subsequent call to the operation to get the next part of the output. You should repeat this
+   *     until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Information about the quotas.</p>
+   * @public
+   */
+  Quotas?: ServiceQuota[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ListServicesRequest {
+  /**
+   * <p>Specifies a value for receiving additional results after you
+   *     receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code>
+   *     response indicates that more output is available. Set this parameter to the value of the previous
+   *     call's <code>NextToken</code> response to indicate where the output should continue
+   *     from.</p>
+   * @public
+   */
+  NextToken?: string | undefined;
+
+  /**
+   * <p>Specifies the maximum number of results that you want included on each
+   *     page of the response. If you do not include this parameter, it defaults to a value appropriate
+   *     to the operation. If additional items exist beyond those included in the current response, the
+   *     <code>NextToken</code> response element is present and has a value (is not null). Include that
+   *     value as the <code>NextToken</code> request parameter in the next call to the operation to get
+   *     the next part of the results.</p>
+   *          <note>
+   *             <p>An API operation can return fewer results than the maximum even when there are
+   *     more results available. You should check <code>NextToken</code> after every operation to ensure
+   *     that you receive all of the results.</p>
+   *          </note>
+   * @public
+   */
+  MaxResults?: number | undefined;
+}
+
+/**
+ * <p>Information about an Amazon Web Services service.</p>
+ * @public
  */
 export interface ServiceInfo {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
-  ServiceCode?: string;
+  ServiceCode?: string | undefined;
 
   /**
-   * <p>The service name.</p>
+   * <p>Specifies the service name.</p>
+   * @public
    */
-  ServiceName?: string;
+  ServiceName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListServicesResponse {
   /**
-   * <p>The token to use to retrieve the next page of results. This value is null when there are
-   *       no more results to return.</p>
+   * <p>If present, indicates that more output is available than is
+   *     included in the current response. Use this value in the <code>NextToken</code> request parameter
+   *     in a subsequent call to the operation to get the next part of the output. You should repeat this
+   *     until the <code>NextToken</code> response element comes back as <code>null</code>.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
-   * <p>Information about the services.</p>
+   * <p>The list of the Amazon Web Services service names and service codes.</p>
+   * @public
    */
-  Services?: ServiceInfo[];
+  Services?: ServiceInfo[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTagsForResourceRequest {
   /**
-   * <p>The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You
-   *       can get this information by using the Service Quotas console, or by listing the quotas using the
-   *         <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.</p>
+   * <p>The Amazon Resource Name (ARN) for the applied quota for which you want to list tags.
+   *             You can get this information by using the Service Quotas console, or by listing the quotas
+   *             using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> Amazon Web Services API operation.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListTagsForResourceResponse {
   /**
    * <p>A complex data type that contains zero or more tag elements.</p>
+   * @public
    */
-  Tags?: Tag[];
+  Tags?: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutServiceQuotaIncreaseRequestIntoTemplateRequest {
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
   QuotaCode: string | undefined;
 
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The AWS Region.</p>
+   * <p>Specifies the Amazon Web Services Region to which the template applies.</p>
+   * @public
    */
   AwsRegion: string | undefined;
 
   /**
-   * <p>The new, increased value for the quota.</p>
+   * <p>Specifies the new, increased value for the quota.</p>
+   * @public
    */
   DesiredValue: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutServiceQuotaIncreaseRequestIntoTemplateResponse {
   /**
    * <p>Information about the quota increase request.</p>
+   * @public
    */
-  ServiceQuotaIncreaseRequestInTemplate?: ServiceQuotaIncreaseRequestInTemplate;
+  ServiceQuotaIncreaseRequestInTemplate?: ServiceQuotaIncreaseRequestInTemplate | undefined;
 }
 
 /**
- * <p>You have exceeded your service quota. To perform the requested action, remove some of the
- *       relevant resources, or use Service Quotas to request a service quota increase.</p>
+ * @public
  */
-export class QuotaExceededException extends __BaseException {
-  readonly name: "QuotaExceededException" = "QuotaExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<QuotaExceededException, __BaseException>) {
-    super({
-      name: "QuotaExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, QuotaExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface RequestServiceQuotaIncreaseRequest {
   /**
-   * <p>The service identifier.</p>
+   * <p>Specifies the service identifier. To find the service code value
+   *              for an Amazon Web Services service, use the <a>ListServices</a> operation.</p>
+   * @public
    */
   ServiceCode: string | undefined;
 
   /**
-   * <p>The quota identifier.</p>
+   * <p>Specifies the quota identifier. To find the quota code for a specific
+   *              quota, use the <a>ListServiceQuotas</a> operation, and look for the
+   *              <code>QuotaCode</code> response in the output for the quota you want.</p>
+   * @public
    */
   QuotaCode: string | undefined;
 
   /**
-   * <p>The new, increased value for the quota.</p>
+   * <p>Specifies the new, increased value for the quota.</p>
+   * @public
    */
   DesiredValue: number | undefined;
+
+  /**
+   * <p>Specifies the resource with an Amazon Resource Name (ARN).</p>
+   * @public
+   */
+  ContextId?: string | undefined;
+
+  /**
+   * <p>Specifies if an Amazon Web Services Support case can be opened for the quota increase request. This parameter is optional. </p>
+   *          <p>By default, this flag is set to <code>True</code> and Amazon Web Services may create a support case for some quota increase requests.
+   *             You can set this flag to <code>False</code>
+   *            if you do not want a support case created when you request a quota increase. If you set the flag to <code>False</code>,
+   *             Amazon Web Services does not open a support case and updates the request status to <code>Not approved</code>. </p>
+   * @public
+   */
+  SupportCaseAllowed?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface RequestServiceQuotaIncreaseResponse {
   /**
    * <p>Information about the quota increase request.</p>
+   * @public
    */
-  RequestedQuota?: RequestedServiceQuotaChange;
+  RequestedQuota?: RequestedServiceQuotaChange | undefined;
 }
 
 /**
- * <p>The specified resource already exists.</p>
+ * @public
  */
-export class ResourceAlreadyExistsException extends __BaseException {
-  readonly name: "ResourceAlreadyExistsException" = "ResourceAlreadyExistsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface StartAutoManagementRequest {
   /**
-   * @internal
+   * <p>Sets the opt-in level for Automatic Management. Only Amazon Web Services account level is supported.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<ResourceAlreadyExistsException, __BaseException>) {
-    super({
-      name: "ResourceAlreadyExistsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceAlreadyExistsException.prototype);
-    this.Message = opts.Message;
-  }
+  OptInLevel: OptInLevel | undefined;
+
+  /**
+   * <p>Sets the opt-in type for Automatic Management. There are two modes: Notify only and Notify and Auto-Adjust. Currently, only
+   *                                 NotifyOnly is available.</p>
+   * @public
+   */
+  OptInType: OptInType | undefined;
+
+  /**
+   * <p>The <a href="https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications.</p>
+   * @public
+   */
+  NotificationArn?: string | undefined;
+
+  /**
+   * <p>List of Amazon Web Services services excluded from Automatic Management.
+   *             You won't be notified of Service Quotas utilization for Amazon Web Services services added to the
+   *                 Automatic Management exclusion list.
+   *          </p>
+   * @public
+   */
+  ExclusionList?: Record<string, string[]> | undefined;
 }
 
 /**
- * <p>The specified tag is a reserved word and cannot be used.</p>
+ * @public
  */
-export class TagPolicyViolationException extends __BaseException {
-  readonly name: "TagPolicyViolationException" = "TagPolicyViolationException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface StartAutoManagementResponse {}
+
+/**
+ * @public
+ */
+export interface StartQuotaUtilizationReportRequest {}
+
+/**
+ * @public
+ */
+export interface StartQuotaUtilizationReportResponse {
   /**
-   * @internal
+   * <p>A unique identifier for the quota utilization report. Use this identifier with the
+   *             <code>GetQuotaUtilizationReport</code> operation to retrieve the report results.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<TagPolicyViolationException, __BaseException>) {
-    super({
-      name: "TagPolicyViolationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, TagPolicyViolationException.prototype);
-    this.Message = opts.Message;
-  }
+  ReportId?: string | undefined;
+
+  /**
+   * <p>The current status of the report generation. The status will be <code>PENDING</code>
+   *             when the report is first initiated.</p>
+   * @public
+   */
+  Status?: ReportStatus | undefined;
+
+  /**
+   * <p>An optional message providing additional information about the report generation status.
+   *             This field may contain details about the report initiation or indicate if an existing recent
+   *             report is being reused.</p>
+   * @public
+   */
+  Message?: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface StopAutoManagementRequest {}
+
+/**
+ * @public
+ */
+export interface StopAutoManagementResponse {}
+
+/**
+ * @public
+ */
 export interface TagResourceRequest {
   /**
    * <p>The Amazon Resource Name (ARN) for the applied quota. You can get this information by
-   *       using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.</p>
+   *             using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> Amazon Web Services API operation.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 
   /**
    * <p>The tags that you want to add to the resource.</p>
+   * @public
    */
   Tags: Tag[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface TagResourceResponse {}
 
 /**
- * <p>You've exceeded the number of tags allowed for a resource. For more information, see
- *         <a href="https://docs.aws.amazon.com/servicequotas/latest/userguide/sq-tagging.html#sq-tagging-restrictions">Tag
- *         restrictions</a> in the <i>Service Quotas User Guide</i>.</p>
+ * @public
  */
-export class TooManyTagsException extends __BaseException {
-  readonly name: "TooManyTagsException" = "TooManyTagsException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<TooManyTagsException, __BaseException>) {
-    super({
-      name: "TooManyTagsException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, TooManyTagsException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
 export interface UntagResourceRequest {
   /**
-   * <p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get
-   *       this information by using the Service Quotas console, or by listing the quotas using the <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> AWS CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> AWS API operation.</p>
+   * <p>The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can
+   *             get this information by using the Service Quotas console, or by listing the quotas using the
+   *                 <a href="https://docs.aws.amazon.com/cli/latest/reference/service-quotas/list-service-quotas.html">list-service-quotas</a> CLI command or the <a href="https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_ListServiceQuotas.html">ListServiceQuotas</a> Amazon Web Services API operation.</p>
+   * @public
    */
   ResourceARN: string | undefined;
 
   /**
    * <p>The keys of the tags that you want to remove from the resource.</p>
+   * @public
    */
   TagKeys: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UntagResourceResponse {}
 
 /**
- * @internal
+ * @public
  */
-export const AssociateServiceQuotaTemplateRequestFilterSensitiveLog = (
-  obj: AssociateServiceQuotaTemplateRequest
-): any => ({
-  ...obj,
-});
+export interface UpdateAutoManagementRequest {
+  /**
+   * <p>Information on the opt-in type for your Automatic Management configuration.
+   *             There are two modes: Notify only and Notify and Auto-Adjust. Currently, only
+   *                                 NotifyOnly is available.</p>
+   * @public
+   */
+  OptInType?: OptInType | undefined;
+
+  /**
+   * <p>The <a href="https://docs.aws.amazon.com/notifications/latest/userguide/resource-level-permissions.html#rlp-table">User Notifications</a> Amazon Resource Name (ARN) for Automatic Management notifications you want
+   *             to update.</p>
+   * @public
+   */
+  NotificationArn?: string | undefined;
+
+  /**
+   * <p>List of Amazon Web Services services you want to exclude from Automatic Management.
+   *             You won't be notified of Service Quotas utilization for Amazon Web Services services added to the
+   *                 Automatic Management exclusion list.
+   *          </p>
+   * @public
+   */
+  ExclusionList?: Record<string, string[]> | undefined;
+}
 
 /**
- * @internal
+ * @public
  */
-export const AssociateServiceQuotaTemplateResponseFilterSensitiveLog = (
-  obj: AssociateServiceQuotaTemplateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteServiceQuotaIncreaseRequestFromTemplateRequestFilterSensitiveLog = (
-  obj: DeleteServiceQuotaIncreaseRequestFromTemplateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteServiceQuotaIncreaseRequestFromTemplateResponseFilterSensitiveLog = (
-  obj: DeleteServiceQuotaIncreaseRequestFromTemplateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateServiceQuotaTemplateRequestFilterSensitiveLog = (
-  obj: DisassociateServiceQuotaTemplateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateServiceQuotaTemplateResponseFilterSensitiveLog = (
-  obj: DisassociateServiceQuotaTemplateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ErrorReasonFilterSensitiveLog = (obj: ErrorReason): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAssociationForServiceQuotaTemplateRequestFilterSensitiveLog = (
-  obj: GetAssociationForServiceQuotaTemplateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAssociationForServiceQuotaTemplateResponseFilterSensitiveLog = (
-  obj: GetAssociationForServiceQuotaTemplateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAWSDefaultServiceQuotaRequestFilterSensitiveLog = (obj: GetAWSDefaultServiceQuotaRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const QuotaPeriodFilterSensitiveLog = (obj: QuotaPeriod): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const MetricInfoFilterSensitiveLog = (obj: MetricInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ServiceQuotaFilterSensitiveLog = (obj: ServiceQuota): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAWSDefaultServiceQuotaResponseFilterSensitiveLog = (obj: GetAWSDefaultServiceQuotaResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetRequestedServiceQuotaChangeRequestFilterSensitiveLog = (
-  obj: GetRequestedServiceQuotaChangeRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RequestedServiceQuotaChangeFilterSensitiveLog = (obj: RequestedServiceQuotaChange): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetRequestedServiceQuotaChangeResponseFilterSensitiveLog = (
-  obj: GetRequestedServiceQuotaChangeResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServiceQuotaRequestFilterSensitiveLog = (obj: GetServiceQuotaRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServiceQuotaResponseFilterSensitiveLog = (obj: GetServiceQuotaResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServiceQuotaIncreaseRequestFromTemplateRequestFilterSensitiveLog = (
-  obj: GetServiceQuotaIncreaseRequestFromTemplateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ServiceQuotaIncreaseRequestInTemplateFilterSensitiveLog = (
-  obj: ServiceQuotaIncreaseRequestInTemplate
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServiceQuotaIncreaseRequestFromTemplateResponseFilterSensitiveLog = (
-  obj: GetServiceQuotaIncreaseRequestFromTemplateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagFilterSensitiveLog = (obj: Tag): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListAWSDefaultServiceQuotasRequestFilterSensitiveLog = (obj: ListAWSDefaultServiceQuotasRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListAWSDefaultServiceQuotasResponseFilterSensitiveLog = (
-  obj: ListAWSDefaultServiceQuotasResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRequestedServiceQuotaChangeHistoryRequestFilterSensitiveLog = (
-  obj: ListRequestedServiceQuotaChangeHistoryRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRequestedServiceQuotaChangeHistoryResponseFilterSensitiveLog = (
-  obj: ListRequestedServiceQuotaChangeHistoryResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRequestedServiceQuotaChangeHistoryByQuotaRequestFilterSensitiveLog = (
-  obj: ListRequestedServiceQuotaChangeHistoryByQuotaRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRequestedServiceQuotaChangeHistoryByQuotaResponseFilterSensitiveLog = (
-  obj: ListRequestedServiceQuotaChangeHistoryByQuotaResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServiceQuotaIncreaseRequestsInTemplateRequestFilterSensitiveLog = (
-  obj: ListServiceQuotaIncreaseRequestsInTemplateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServiceQuotaIncreaseRequestsInTemplateResponseFilterSensitiveLog = (
-  obj: ListServiceQuotaIncreaseRequestsInTemplateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServiceQuotasRequestFilterSensitiveLog = (obj: ListServiceQuotasRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServiceQuotasResponseFilterSensitiveLog = (obj: ListServiceQuotasResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServicesRequestFilterSensitiveLog = (obj: ListServicesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ServiceInfoFilterSensitiveLog = (obj: ServiceInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServicesResponseFilterSensitiveLog = (obj: ListServicesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsForResourceRequestFilterSensitiveLog = (obj: ListTagsForResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListTagsForResourceResponseFilterSensitiveLog = (obj: ListTagsForResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutServiceQuotaIncreaseRequestIntoTemplateRequestFilterSensitiveLog = (
-  obj: PutServiceQuotaIncreaseRequestIntoTemplateRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutServiceQuotaIncreaseRequestIntoTemplateResponseFilterSensitiveLog = (
-  obj: PutServiceQuotaIncreaseRequestIntoTemplateResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RequestServiceQuotaIncreaseRequestFilterSensitiveLog = (obj: RequestServiceQuotaIncreaseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RequestServiceQuotaIncreaseResponseFilterSensitiveLog = (
-  obj: RequestServiceQuotaIncreaseResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagResourceRequestFilterSensitiveLog = (obj: TagResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TagResourceResponseFilterSensitiveLog = (obj: TagResourceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UntagResourceRequestFilterSensitiveLog = (obj: UntagResourceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UntagResourceResponseFilterSensitiveLog = (obj: UntagResourceResponse): any => ({
-  ...obj,
-});
+export interface UpdateAutoManagementResponse {}

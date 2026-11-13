@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListAvailableResourceDimensionsRequest,
-  ListAvailableResourceDimensionsRequestFilterSensitiveLog,
   ListAvailableResourceDimensionsResponse,
-  ListAvailableResourceDimensionsResponseFilterSensitiveLog,
 } from "../models/models_0";
-import { PIClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PIClient";
-import {
-  deserializeAws_json1_1ListAvailableResourceDimensionsCommand,
-  serializeAws_json1_1ListAvailableResourceDimensionsCommand,
-} from "../protocols/Aws_json1_1";
+import { ListAvailableResourceDimensions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAvailableResourceDimensionsCommand}.
+ */
 export interface ListAvailableResourceDimensionsCommandInput extends ListAvailableResourceDimensionsRequest {}
-export interface ListAvailableResourceDimensionsCommandOutput
-  extends ListAvailableResourceDimensionsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListAvailableResourceDimensionsCommand}.
+ */
+export interface ListAvailableResourceDimensionsCommandOutput extends ListAvailableResourceDimensionsResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieve the dimensions that can be queried for each specified metric type on a specified DB instance.</p>
@@ -36,74 +32,80 @@ export interface ListAvailableResourceDimensionsCommandOutput
  * ```javascript
  * import { PIClient, ListAvailableResourceDimensionsCommand } from "@aws-sdk/client-pi"; // ES Modules import
  * // const { PIClient, ListAvailableResourceDimensionsCommand } = require("@aws-sdk/client-pi"); // CommonJS import
+ * // import type { PIClientConfig } from "@aws-sdk/client-pi";
+ * const config = {}; // type is PIClientConfig
  * const client = new PIClient(config);
+ * const input = { // ListAvailableResourceDimensionsRequest
+ *   ServiceType: "RDS" || "DOCDB", // required
+ *   Identifier: "STRING_VALUE", // required
+ *   Metrics: [ // DimensionsMetricList // required
+ *     "STRING_VALUE",
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   AuthorizedActions: [ // AuthorizedActionsList
+ *     "DescribeDimensionKeys" || "GetDimensionKeyDetails" || "GetResourceMetrics",
+ *   ],
+ * };
  * const command = new ListAvailableResourceDimensionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAvailableResourceDimensionsResponse
+ * //   MetricDimensions: [ // MetricDimensionsList
+ * //     { // MetricDimensionGroups
+ * //       Metric: "STRING_VALUE",
+ * //       Groups: [ // DimensionGroupDetailList
+ * //         { // DimensionGroupDetail
+ * //           Group: "STRING_VALUE",
+ * //           Dimensions: [ // DimensionDetailList
+ * //             { // DimensionDetail
+ * //               Identifier: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAvailableResourceDimensionsCommandInput - {@link ListAvailableResourceDimensionsCommandInput}
+ * @returns {@link ListAvailableResourceDimensionsCommandOutput}
  * @see {@link ListAvailableResourceDimensionsCommandInput} for command's `input` shape.
  * @see {@link ListAvailableResourceDimensionsCommandOutput} for command's `response` shape.
  * @see {@link PIClientResolvedConfig | config} for PIClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>The request failed due to an unknown error.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>One of the arguments provided is invalid for this request.</p>
+ *
+ * @throws {@link NotAuthorizedException} (client fault)
+ *  <p>The user is not authorized to perform this request.</p>
+ *
+ * @throws {@link PIServiceException}
+ * <p>Base exception class for all service exceptions from PI service.</p>
+ *
+ *
+ * @public
  */
-export class ListAvailableResourceDimensionsCommand extends $Command<
-  ListAvailableResourceDimensionsCommandInput,
-  ListAvailableResourceDimensionsCommandOutput,
-  PIClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAvailableResourceDimensionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PIClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAvailableResourceDimensionsCommandInput, ListAvailableResourceDimensionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PIClient";
-    const commandName = "ListAvailableResourceDimensionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAvailableResourceDimensionsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListAvailableResourceDimensionsResponseFilterSensitiveLog,
+export class ListAvailableResourceDimensionsCommand extends command<ListAvailableResourceDimensionsCommandInput, ListAvailableResourceDimensionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAvailableResourceDimensions",
+  ListAvailableResourceDimensions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAvailableResourceDimensionsRequest;
+      output: ListAvailableResourceDimensionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListAvailableResourceDimensionsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListAvailableResourceDimensionsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListAvailableResourceDimensionsCommandOutput> {
-    return deserializeAws_json1_1ListAvailableResourceDimensionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAvailableResourceDimensionsCommandInput;
+      output: ListAvailableResourceDimensionsCommandOutput;
+    };
+  };
 }

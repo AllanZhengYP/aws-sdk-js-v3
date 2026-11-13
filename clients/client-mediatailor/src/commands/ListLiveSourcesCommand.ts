@@ -1,101 +1,96 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { MediaTailorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../MediaTailorClient";
-import {
-  ListLiveSourcesRequest,
-  ListLiveSourcesRequestFilterSensitiveLog,
-  ListLiveSourcesResponse,
-  ListLiveSourcesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListLiveSourcesCommand,
-  serializeAws_restJson1ListLiveSourcesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLiveSourcesRequest, ListLiveSourcesResponse } from "../models/models_0";
+import { ListLiveSources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLiveSourcesCommand}.
+ */
 export interface ListLiveSourcesCommandInput extends ListLiveSourcesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListLiveSourcesCommand}.
+ */
 export interface ListLiveSourcesCommandOutput extends ListLiveSourcesResponse, __MetadataBearer {}
 
 /**
- * <p>lists all the live sources in a source location.</p>
+ * <p>Lists the live sources contained in a source location. A source represents a piece of content.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { MediaTailorClient, ListLiveSourcesCommand } from "@aws-sdk/client-mediatailor"; // ES Modules import
  * // const { MediaTailorClient, ListLiveSourcesCommand } = require("@aws-sdk/client-mediatailor"); // CommonJS import
+ * // import type { MediaTailorClientConfig } from "@aws-sdk/client-mediatailor";
+ * const config = {}; // type is MediaTailorClientConfig
  * const client = new MediaTailorClient(config);
+ * const input = { // ListLiveSourcesRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   SourceLocationName: "STRING_VALUE", // required
+ * };
  * const command = new ListLiveSourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ListLiveSourcesResponse
+ * //   Items: [ // __listOfLiveSource
+ * //     { // LiveSource
+ * //       Arn: "STRING_VALUE", // required
+ * //       CreationTime: new Date("TIMESTAMP"),
+ * //       HttpPackageConfigurations: [ // HttpPackageConfigurations // required
+ * //         { // HttpPackageConfiguration
+ * //           Path: "STRING_VALUE", // required
+ * //           SourceGroup: "STRING_VALUE", // required
+ * //           Type: "DASH" || "HLS", // required
+ * //         },
+ * //       ],
+ * //       LastModifiedTime: new Date("TIMESTAMP"),
+ * //       LiveSourceName: "STRING_VALUE", // required
+ * //       SourceLocationName: "STRING_VALUE", // required
+ * //       Tags: { // __mapOf__string
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListLiveSourcesCommandInput - {@link ListLiveSourcesCommandInput}
+ * @returns {@link ListLiveSourcesCommandOutput}
  * @see {@link ListLiveSourcesCommandInput} for command's `input` shape.
  * @see {@link ListLiveSourcesCommandOutput} for command's `response` shape.
  * @see {@link MediaTailorClientResolvedConfig | config} for MediaTailorClient's `config` shape.
  *
+ * @throws {@link MediaTailorServiceException}
+ * <p>Base exception class for all service exceptions from MediaTailor service.</p>
+ *
+ *
+ * @public
  */
-export class ListLiveSourcesCommand extends $Command<
-  ListLiveSourcesCommandInput,
-  ListLiveSourcesCommandOutput,
-  MediaTailorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLiveSourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MediaTailorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLiveSourcesCommandInput, ListLiveSourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MediaTailorClient";
-    const commandName = "ListLiveSourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLiveSourcesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListLiveSourcesResponseFilterSensitiveLog,
+export class ListLiveSourcesCommand extends command<ListLiveSourcesCommandInput, ListLiveSourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLiveSources",
+  ListLiveSources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLiveSourcesRequest;
+      output: ListLiveSourcesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLiveSourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListLiveSourcesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListLiveSourcesCommandOutput> {
-    return deserializeAws_restJson1ListLiveSourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLiveSourcesCommandInput;
+      output: ListLiveSourcesCommandOutput;
+    };
+  };
 }

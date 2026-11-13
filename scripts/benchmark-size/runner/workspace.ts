@@ -1,6 +1,6 @@
 import { execa as exec } from "execa";
-import { promises as fsPromise } from "fs";
-import { join } from "path";
+import { promises as fsPromise } from "node:fs";
+import { join } from "node:path";
 
 import { PROJECT_ROOT } from "./constants.js";
 import { isFile } from "./utils.js";
@@ -44,7 +44,7 @@ export const loadWorkspacePackages = async (options?: {
     }
   }
 
-  const { stdout } = await exec("./node_modules/.bin/lerna", args, {
+  const { stdout } = await exec("npx", ["lerna", ...args], {
     cwd: PROJECT_ROOT,
     encoding: "utf8",
   });

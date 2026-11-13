@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListLanguagesRequest,
-  ListLanguagesRequestFilterSensitiveLog,
-  ListLanguagesResponse,
-  ListLanguagesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListLanguagesCommand,
-  serializeAws_json1_1ListLanguagesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TranslateClientResolvedConfig } from "../TranslateClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListLanguagesRequest, ListLanguagesResponse } from "../models/models_0";
+import { ListLanguages$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListLanguagesCommand}.
+ */
 export interface ListLanguagesCommandInput extends ListLanguagesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListLanguagesCommand}.
+ */
 export interface ListLanguagesCommandOutput extends ListLanguagesResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,70 @@ export interface ListLanguagesCommandOutput extends ListLanguagesResponse, __Met
  * ```javascript
  * import { TranslateClient, ListLanguagesCommand } from "@aws-sdk/client-translate"; // ES Modules import
  * // const { TranslateClient, ListLanguagesCommand } = require("@aws-sdk/client-translate"); // CommonJS import
+ * // import type { TranslateClientConfig } from "@aws-sdk/client-translate";
+ * const config = {}; // type is TranslateClientConfig
  * const client = new TranslateClient(config);
+ * const input = { // ListLanguagesRequest
+ *   DisplayLanguageCode: "de" || "en" || "es" || "fr" || "it" || "ja" || "ko" || "pt" || "zh" || "zh-TW",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListLanguagesCommand(input);
  * const response = await client.send(command);
+ * // { // ListLanguagesResponse
+ * //   Languages: [ // LanguagesList
+ * //     { // Language
+ * //       LanguageName: "STRING_VALUE", // required
+ * //       LanguageCode: "STRING_VALUE", // required
+ * //     },
+ * //   ],
+ * //   DisplayLanguageCode: "de" || "en" || "es" || "fr" || "it" || "ja" || "ko" || "pt" || "zh" || "zh-TW",
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListLanguagesCommandInput - {@link ListLanguagesCommandInput}
+ * @returns {@link ListLanguagesCommandOutput}
  * @see {@link ListLanguagesCommandInput} for command's `input` shape.
  * @see {@link ListLanguagesCommandOutput} for command's `response` shape.
  * @see {@link TranslateClientResolvedConfig | config} for TranslateClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value of the parameter is not valid. Review the value of the parameter you are using
+ *       to correct it, and then retry your operation.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p> You have made too many requests within a short period of time. Wait for a short time and
+ *       then try your request again.</p>
+ *
+ * @throws {@link UnsupportedDisplayLanguageCodeException} (client fault)
+ *  <p>Requested display language code is not supported.</p>
+ *
+ * @throws {@link TranslateServiceException}
+ * <p>Base exception class for all service exceptions from Translate service.</p>
+ *
+ *
+ * @public
  */
-export class ListLanguagesCommand extends $Command<
-  ListLanguagesCommandInput,
-  ListLanguagesCommandOutput,
-  TranslateClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListLanguagesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TranslateClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListLanguagesCommandInput, ListLanguagesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TranslateClient";
-    const commandName = "ListLanguagesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListLanguagesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListLanguagesResponseFilterSensitiveLog,
+export class ListLanguagesCommand extends command<ListLanguagesCommandInput, ListLanguagesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListLanguages",
+  ListLanguages$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListLanguagesRequest;
+      output: ListLanguagesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListLanguagesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListLanguagesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListLanguagesCommandOutput> {
-    return deserializeAws_json1_1ListLanguagesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListLanguagesCommandInput;
+      output: ListLanguagesCommandOutput;
+    };
+  };
 }

@@ -1,28 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import {
-  DeleteExplainabilityExportRequest,
-  DeleteExplainabilityExportRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteExplainabilityExportCommand,
-  serializeAws_json1_1DeleteExplainabilityExportCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteExplainabilityExportRequest } from "../models/models_0";
+import { DeleteExplainabilityExport$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteExplainabilityExportCommand}.
+ */
 export interface DeleteExplainabilityExportCommandInput extends DeleteExplainabilityExportRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteExplainabilityExportCommand}.
+ */
 export interface DeleteExplainabilityExportCommandOutput extends __MetadataBearer {}
 
 /**
@@ -32,71 +29,56 @@ export interface DeleteExplainabilityExportCommandOutput extends __MetadataBeare
  * ```javascript
  * import { ForecastClient, DeleteExplainabilityExportCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, DeleteExplainabilityExportCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // DeleteExplainabilityExportRequest
+ *   ExplainabilityExportArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteExplainabilityExportCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteExplainabilityExportCommandInput - {@link DeleteExplainabilityExportCommandInput}
+ * @returns {@link DeleteExplainabilityExportCommandOutput}
  * @see {@link DeleteExplainabilityExportCommandInput} for command's `input` shape.
  * @see {@link DeleteExplainabilityExportCommandOutput} for command's `response` shape.
  * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteExplainabilityExportCommand extends $Command<
-  DeleteExplainabilityExportCommandInput,
-  DeleteExplainabilityExportCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteExplainabilityExportCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteExplainabilityExportCommandInput, DeleteExplainabilityExportCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "DeleteExplainabilityExportCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteExplainabilityExportRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteExplainabilityExportCommand extends command<DeleteExplainabilityExportCommandInput, DeleteExplainabilityExportCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteExplainabilityExport",
+  DeleteExplainabilityExport$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteExplainabilityExportRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteExplainabilityExportCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteExplainabilityExportCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteExplainabilityExportCommandOutput> {
-    return deserializeAws_json1_1DeleteExplainabilityExportCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteExplainabilityExportCommandInput;
+      output: DeleteExplainabilityExportCommandOutput;
+    };
+  };
 }

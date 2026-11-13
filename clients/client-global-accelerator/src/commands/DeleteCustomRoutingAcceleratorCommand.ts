@@ -1,32 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GlobalAcceleratorClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../GlobalAcceleratorClient";
-import {
-  DeleteCustomRoutingAcceleratorRequest,
-  DeleteCustomRoutingAcceleratorRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteCustomRoutingAcceleratorCommand,
-  serializeAws_json1_1DeleteCustomRoutingAcceleratorCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteCustomRoutingAcceleratorRequest } from "../models/models_0";
+import { DeleteCustomRoutingAccelerator$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteCustomRoutingAcceleratorCommand}.
+ */
 export interface DeleteCustomRoutingAcceleratorCommandInput extends DeleteCustomRoutingAcceleratorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteCustomRoutingAcceleratorCommand}.
+ */
 export interface DeleteCustomRoutingAcceleratorCommandOutput extends __MetadataBearer {}
 
 /**
@@ -35,7 +28,7 @@ export interface DeleteCustomRoutingAcceleratorCommandOutput extends __MetadataB
  *          <important>
  *             <p>When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.
  * 	</p>
- * 		          <p>The IP
+ *             <p>The IP
  * 			addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and
  * 			it no longer accepts or routes traffic. However, when you <i>delete</i> an accelerator, you lose the
  * 			static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them.
@@ -49,74 +42,64 @@ export interface DeleteCustomRoutingAcceleratorCommandOutput extends __MetadataB
  * ```javascript
  * import { GlobalAcceleratorClient, DeleteCustomRoutingAcceleratorCommand } from "@aws-sdk/client-global-accelerator"; // ES Modules import
  * // const { GlobalAcceleratorClient, DeleteCustomRoutingAcceleratorCommand } = require("@aws-sdk/client-global-accelerator"); // CommonJS import
+ * // import type { GlobalAcceleratorClientConfig } from "@aws-sdk/client-global-accelerator";
+ * const config = {}; // type is GlobalAcceleratorClientConfig
  * const client = new GlobalAcceleratorClient(config);
+ * const input = { // DeleteCustomRoutingAcceleratorRequest
+ *   AcceleratorArn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteCustomRoutingAcceleratorCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteCustomRoutingAcceleratorCommandInput - {@link DeleteCustomRoutingAcceleratorCommandInput}
+ * @returns {@link DeleteCustomRoutingAcceleratorCommandOutput}
  * @see {@link DeleteCustomRoutingAcceleratorCommandInput} for command's `input` shape.
  * @see {@link DeleteCustomRoutingAcceleratorCommandOutput} for command's `response` shape.
  * @see {@link GlobalAcceleratorClientResolvedConfig | config} for GlobalAcceleratorClient's `config` shape.
  *
+ * @throws {@link AcceleratorNotDisabledException} (client fault)
+ *  <p>The accelerator that you specified could not be disabled.</p>
+ *
+ * @throws {@link AcceleratorNotFoundException} (client fault)
+ *  <p>The accelerator that you specified doesn't exist.</p>
+ *
+ * @throws {@link AssociatedListenerFoundException} (client fault)
+ *  <p>The accelerator that you specified has a listener associated with it. You must remove all dependent resources from an
+ * 			accelerator before you can delete it.</p>
+ *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>There was an internal error for Global Accelerator.</p>
+ *
+ * @throws {@link InvalidArgumentException} (client fault)
+ *  <p>An argument that you specified is invalid.</p>
+ *
+ * @throws {@link TransactionInProgressException} (client fault)
+ *  <p>There's already a transaction in progress. Another transaction can't be processed.</p>
+ *
+ * @throws {@link GlobalAcceleratorServiceException}
+ * <p>Base exception class for all service exceptions from GlobalAccelerator service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteCustomRoutingAcceleratorCommand extends $Command<
-  DeleteCustomRoutingAcceleratorCommandInput,
-  DeleteCustomRoutingAcceleratorCommandOutput,
-  GlobalAcceleratorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteCustomRoutingAcceleratorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlobalAcceleratorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteCustomRoutingAcceleratorCommandInput, DeleteCustomRoutingAcceleratorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlobalAcceleratorClient";
-    const commandName = "DeleteCustomRoutingAcceleratorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteCustomRoutingAcceleratorRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteCustomRoutingAcceleratorCommand extends command<DeleteCustomRoutingAcceleratorCommandInput, DeleteCustomRoutingAcceleratorCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteCustomRoutingAccelerator",
+  DeleteCustomRoutingAccelerator$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteCustomRoutingAcceleratorRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteCustomRoutingAcceleratorCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteCustomRoutingAcceleratorCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteCustomRoutingAcceleratorCommandOutput> {
-    return deserializeAws_json1_1DeleteCustomRoutingAcceleratorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteCustomRoutingAcceleratorCommandInput;
+      output: DeleteCustomRoutingAcceleratorCommandOutput;
+    };
+  };
 }

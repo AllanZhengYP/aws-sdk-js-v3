@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  UpdateTrustStoreRequest,
-  UpdateTrustStoreRequestFilterSensitiveLog,
-  UpdateTrustStoreResponse,
-  UpdateTrustStoreResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateTrustStoreCommand,
-  serializeAws_restJson1UpdateTrustStoreCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateTrustStoreRequest, UpdateTrustStoreResponse } from "../models/models_0";
+import { UpdateTrustStore$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateTrustStoreCommand}.
+ */
 export interface UpdateTrustStoreCommandInput extends UpdateTrustStoreRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateTrustStoreCommand}.
+ */
 export interface UpdateTrustStoreCommandOutput extends UpdateTrustStoreResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,72 @@ export interface UpdateTrustStoreCommandOutput extends UpdateTrustStoreResponse,
  * ```javascript
  * import { WorkSpacesWebClient, UpdateTrustStoreCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, UpdateTrustStoreCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // UpdateTrustStoreRequest
+ *   trustStoreArn: "STRING_VALUE", // required
+ *   certificatesToAdd: [ // CertificateList
+ *     new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")
+ *   ],
+ *   certificatesToDelete: [ // CertificateThumbprintList
+ *     "STRING_VALUE",
+ *   ],
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new UpdateTrustStoreCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateTrustStoreResponse
+ * //   trustStoreArn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param UpdateTrustStoreCommandInput - {@link UpdateTrustStoreCommandInput}
+ * @returns {@link UpdateTrustStoreCommandOutput}
  * @see {@link UpdateTrustStoreCommandInput} for command's `input` shape.
  * @see {@link UpdateTrustStoreCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The service quota has been exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateTrustStoreCommand extends $Command<
-  UpdateTrustStoreCommandInput,
-  UpdateTrustStoreCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateTrustStoreCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateTrustStoreCommandInput, UpdateTrustStoreCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "UpdateTrustStoreCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateTrustStoreRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateTrustStoreResponseFilterSensitiveLog,
+export class UpdateTrustStoreCommand extends command<UpdateTrustStoreCommandInput, UpdateTrustStoreCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTrustStore",
+  UpdateTrustStore$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateTrustStoreRequest;
+      output: UpdateTrustStoreResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateTrustStoreCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateTrustStoreCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateTrustStoreCommandOutput> {
-    return deserializeAws_restJson1UpdateTrustStoreCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateTrustStoreCommandInput;
+      output: UpdateTrustStoreCommandOutput;
+    };
+  };
 }

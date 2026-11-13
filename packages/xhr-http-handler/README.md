@@ -8,7 +8,7 @@ requiring a specific use case not covered by `fetch`.
 
 ## Warning :warning:
 
-The recommended `HttpHandler` for browser-like environments is `@aws-sdk/fetch-http-handler`,
+The recommended `HttpHandler` for browser-like environments is `@smithy/fetch-http-handler`,
 which is the default.
 This alternative has only been tested against `S3` in browsers.
 
@@ -42,9 +42,7 @@ const client = new S3Client({
 
 const upload = new Upload({
   client,
-  params: {
-    /* ... */
-  },
+  params: {/* ... */},
 });
 
 upload.on("httpUploadProgress", (progress) => {
@@ -82,12 +80,12 @@ handler.on(XhrHttpHandler.EVENTS.PROGRESS, (progress, request) => {
   if (progress.lengthComputable) {
     console.log(
       progress.loaded, // bytes
-      progress.total, // bytes
+      progress.total // bytes
     );
     console.log(
       request // contains the request information to differentiate
-              // requests from the same handler.
-    )
+      // requests from the same handler.
+    );
   }
 });
 
@@ -101,7 +99,7 @@ await client.send(new GetObjectCommand(/*...*/));
 ##### Accessing the `XMLHttpRequest` object.
 
 You can access the `XMLHttpRequest` object to inspect it or to
-attach addiional event listeners.
+attach additional event listeners.
 
 ```javascript
 import { XhrHttpHandler } from "@aws-sdk/xhr-http-handler";
@@ -127,5 +125,5 @@ await client.send(new GetObjectCommand(/*...*/));
 ```
 
 You can check the source `.ts` file or published `.d.ts` file
-for the full list of events, or inspect the `XhrHttpHandler.EVENTS` 
+for the full list of events, or inspect the `XhrHttpHandler.EVENTS`
 object at runtime.

@@ -1,105 +1,98 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectClient";
-import {
-  AssociatePhoneNumberContactFlowRequest,
-  AssociatePhoneNumberContactFlowRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1AssociatePhoneNumberContactFlowCommand,
-  serializeAws_restJson1AssociatePhoneNumberContactFlowCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { AssociatePhoneNumberContactFlowRequest } from "../models/models_0";
+import { AssociatePhoneNumberContactFlow$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociatePhoneNumberContactFlowCommand}.
+ */
 export interface AssociatePhoneNumberContactFlowCommandInput extends AssociatePhoneNumberContactFlowRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociatePhoneNumberContactFlowCommand}.
+ */
 export interface AssociatePhoneNumberContactFlowCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Associates a flow with a phone number claimed to your Amazon Connect instance.</p>
+ * <p>Associates a flow with a phone number claimed to your Connect Customer instance.</p>
+ *          <important>
+ *             <p>If the number is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the
+ *      <code>PhoneNumberId</code> URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling
+ *     this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a
+ *     full phone number ARN. If a UUID is provided
+ *     in
+ *     this scenario, you will receive a <code>ResourceNotFoundException</code>.</p>
+ *          </important>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ConnectClient, AssociatePhoneNumberContactFlowCommand } from "@aws-sdk/client-connect"; // ES Modules import
  * // const { ConnectClient, AssociatePhoneNumberContactFlowCommand } = require("@aws-sdk/client-connect"); // CommonJS import
+ * // import type { ConnectClientConfig } from "@aws-sdk/client-connect";
+ * const config = {}; // type is ConnectClientConfig
  * const client = new ConnectClient(config);
+ * const input = { // AssociatePhoneNumberContactFlowRequest
+ *   PhoneNumberId: "STRING_VALUE", // required
+ *   InstanceId: "STRING_VALUE", // required
+ *   ContactFlowId: "STRING_VALUE", // required
+ * };
  * const command = new AssociatePhoneNumberContactFlowCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociatePhoneNumberContactFlowCommandInput - {@link AssociatePhoneNumberContactFlowCommandInput}
+ * @returns {@link AssociatePhoneNumberContactFlowCommandOutput}
  * @see {@link AssociatePhoneNumberContactFlowCommandInput} for command's `input` shape.
  * @see {@link AssociatePhoneNumberContactFlowCommandOutput} for command's `response` shape.
  * @see {@link ConnectClientResolvedConfig | config} for ConnectClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>One or more of the specified parameters are not valid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The throttling limit has been exceeded.</p>
+ *
+ * @throws {@link ConnectServiceException}
+ * <p>Base exception class for all service exceptions from Connect service.</p>
+ *
+ *
+ * @public
  */
-export class AssociatePhoneNumberContactFlowCommand extends $Command<
-  AssociatePhoneNumberContactFlowCommandInput,
-  AssociatePhoneNumberContactFlowCommandOutput,
-  ConnectClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociatePhoneNumberContactFlowCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<AssociatePhoneNumberContactFlowCommandInput, AssociatePhoneNumberContactFlowCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectClient";
-    const commandName = "AssociatePhoneNumberContactFlowCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociatePhoneNumberContactFlowRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class AssociatePhoneNumberContactFlowCommand extends command<AssociatePhoneNumberContactFlowCommandInput, AssociatePhoneNumberContactFlowCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociatePhoneNumberContactFlow",
+  AssociatePhoneNumberContactFlow$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociatePhoneNumberContactFlowRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociatePhoneNumberContactFlowCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1AssociatePhoneNumberContactFlowCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociatePhoneNumberContactFlowCommandOutput> {
-    return deserializeAws_restJson1AssociatePhoneNumberContactFlowCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociatePhoneNumberContactFlowCommandInput;
+      output: AssociatePhoneNumberContactFlowCommandOutput;
+    };
+  };
 }

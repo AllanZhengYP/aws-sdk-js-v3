@@ -1,104 +1,102 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Macie2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Macie2Client";
-import {
-  UpdateRevealConfigurationRequest,
-  UpdateRevealConfigurationRequestFilterSensitiveLog,
-  UpdateRevealConfigurationResponse,
-  UpdateRevealConfigurationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateRevealConfigurationCommand,
-  serializeAws_restJson1UpdateRevealConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateRevealConfigurationRequest, UpdateRevealConfigurationResponse } from "../models/models_1";
+import { UpdateRevealConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateRevealConfigurationCommand}.
+ */
 export interface UpdateRevealConfigurationCommandInput extends UpdateRevealConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateRevealConfigurationCommand}.
+ */
 export interface UpdateRevealConfigurationCommandOutput extends UpdateRevealConfigurationResponse, __MetadataBearer {}
 
 /**
- * <p>Updates the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.</p>
+ * <p>Updates the status and configuration settings for retrieving occurrences of sensitive data reported by findings.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { Macie2Client, UpdateRevealConfigurationCommand } from "@aws-sdk/client-macie2"; // ES Modules import
  * // const { Macie2Client, UpdateRevealConfigurationCommand } = require("@aws-sdk/client-macie2"); // CommonJS import
+ * // import type { Macie2ClientConfig } from "@aws-sdk/client-macie2";
+ * const config = {}; // type is Macie2ClientConfig
  * const client = new Macie2Client(config);
+ * const input = { // UpdateRevealConfigurationRequest
+ *   configuration: { // RevealConfiguration
+ *     kmsKeyId: "STRING_VALUE",
+ *     status: "ENABLED" || "DISABLED", // required
+ *   },
+ *   retrievalConfiguration: { // UpdateRetrievalConfiguration
+ *     retrievalMode: "CALLER_CREDENTIALS" || "ASSUME_ROLE", // required
+ *     roleName: "STRING_VALUE",
+ *   },
+ * };
  * const command = new UpdateRevealConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateRevealConfigurationResponse
+ * //   configuration: { // RevealConfiguration
+ * //     kmsKeyId: "STRING_VALUE",
+ * //     status: "ENABLED" || "DISABLED", // required
+ * //   },
+ * //   retrievalConfiguration: { // RetrievalConfiguration
+ * //     externalId: "STRING_VALUE",
+ * //     retrievalMode: "CALLER_CREDENTIALS" || "ASSUME_ROLE", // required
+ * //     roleName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateRevealConfigurationCommandInput - {@link UpdateRevealConfigurationCommandInput}
+ * @returns {@link UpdateRevealConfigurationCommandOutput}
  * @see {@link UpdateRevealConfigurationCommandInput} for command's `input` shape.
  * @see {@link UpdateRevealConfigurationCommandOutput} for command's `response` shape.
  * @see {@link Macie2ClientResolvedConfig | config} for Macie2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Provides information about an error that occurred due to insufficient access to a specified resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Provides information about an error that occurred due to an unknown internal server error, exception, or failure.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Provides information about an error that occurred because too many requests were sent during a certain amount of time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Provides information about an error that occurred due to a syntax error in a request.</p>
+ *
+ * @throws {@link Macie2ServiceException}
+ * <p>Base exception class for all service exceptions from Macie2 service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateRevealConfigurationCommand extends $Command<
-  UpdateRevealConfigurationCommandInput,
-  UpdateRevealConfigurationCommandOutput,
-  Macie2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateRevealConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Macie2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateRevealConfigurationCommandInput, UpdateRevealConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Macie2Client";
-    const commandName = "UpdateRevealConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateRevealConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateRevealConfigurationResponseFilterSensitiveLog,
+export class UpdateRevealConfigurationCommand extends command<UpdateRevealConfigurationCommandInput, UpdateRevealConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateRevealConfiguration",
+  UpdateRevealConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateRevealConfigurationRequest;
+      output: UpdateRevealConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateRevealConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateRevealConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateRevealConfigurationCommandOutput> {
-    return deserializeAws_restJson1UpdateRevealConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateRevealConfigurationCommandInput;
+      output: UpdateRevealConfigurationCommandOutput;
+    };
+  };
 }

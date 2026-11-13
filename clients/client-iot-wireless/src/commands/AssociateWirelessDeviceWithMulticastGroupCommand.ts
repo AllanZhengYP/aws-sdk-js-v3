@@ -1,34 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   AssociateWirelessDeviceWithMulticastGroupRequest,
-  AssociateWirelessDeviceWithMulticastGroupRequestFilterSensitiveLog,
   AssociateWirelessDeviceWithMulticastGroupResponse,
-  AssociateWirelessDeviceWithMulticastGroupResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1AssociateWirelessDeviceWithMulticastGroupCommand,
-  serializeAws_restJson1AssociateWirelessDeviceWithMulticastGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { AssociateWirelessDeviceWithMulticastGroup$ } from "../schemas/schemas_0";
 
-export interface AssociateWirelessDeviceWithMulticastGroupCommandInput
-  extends AssociateWirelessDeviceWithMulticastGroupRequest {}
-export interface AssociateWirelessDeviceWithMulticastGroupCommandOutput
-  extends AssociateWirelessDeviceWithMulticastGroupResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link AssociateWirelessDeviceWithMulticastGroupCommand}.
+ */
+export interface AssociateWirelessDeviceWithMulticastGroupCommandInput extends AssociateWirelessDeviceWithMulticastGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link AssociateWirelessDeviceWithMulticastGroupCommand}.
+ */
+export interface AssociateWirelessDeviceWithMulticastGroupCommandOutput extends AssociateWirelessDeviceWithMulticastGroupResponse, __MetadataBearer {}
 
 /**
  * <p>Associates a wireless device with a multicast group.</p>
@@ -37,77 +32,64 @@ export interface AssociateWirelessDeviceWithMulticastGroupCommandOutput
  * ```javascript
  * import { IoTWirelessClient, AssociateWirelessDeviceWithMulticastGroupCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, AssociateWirelessDeviceWithMulticastGroupCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // AssociateWirelessDeviceWithMulticastGroupRequest
+ *   Id: "STRING_VALUE", // required
+ *   WirelessDeviceId: "STRING_VALUE", // required
+ * };
  * const command = new AssociateWirelessDeviceWithMulticastGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param AssociateWirelessDeviceWithMulticastGroupCommandInput - {@link AssociateWirelessDeviceWithMulticastGroupCommandInput}
+ * @returns {@link AssociateWirelessDeviceWithMulticastGroupCommandOutput}
  * @see {@link AssociateWirelessDeviceWithMulticastGroupCommandInput} for command's `input` shape.
  * @see {@link AssociateWirelessDeviceWithMulticastGroupCommandOutput} for command's `response` shape.
  * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class AssociateWirelessDeviceWithMulticastGroupCommand extends $Command<
-  AssociateWirelessDeviceWithMulticastGroupCommandInput,
-  AssociateWirelessDeviceWithMulticastGroupCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: AssociateWirelessDeviceWithMulticastGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    AssociateWirelessDeviceWithMulticastGroupCommandInput,
-    AssociateWirelessDeviceWithMulticastGroupCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "AssociateWirelessDeviceWithMulticastGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: AssociateWirelessDeviceWithMulticastGroupRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: AssociateWirelessDeviceWithMulticastGroupResponseFilterSensitiveLog,
+export class AssociateWirelessDeviceWithMulticastGroupCommand extends command<AssociateWirelessDeviceWithMulticastGroupCommandInput, AssociateWirelessDeviceWithMulticastGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "AssociateWirelessDeviceWithMulticastGroup",
+  AssociateWirelessDeviceWithMulticastGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: AssociateWirelessDeviceWithMulticastGroupRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: AssociateWirelessDeviceWithMulticastGroupCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1AssociateWirelessDeviceWithMulticastGroupCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<AssociateWirelessDeviceWithMulticastGroupCommandOutput> {
-    return deserializeAws_restJson1AssociateWirelessDeviceWithMulticastGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: AssociateWirelessDeviceWithMulticastGroupCommandInput;
+      output: AssociateWirelessDeviceWithMulticastGroupCommandOutput;
+    };
+  };
 }

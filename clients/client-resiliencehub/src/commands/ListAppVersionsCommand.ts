@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListAppVersionsRequest,
-  ListAppVersionsRequestFilterSensitiveLog,
-  ListAppVersionsResponse,
-  ListAppVersionsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListAppVersionsCommand,
-  serializeAws_restJson1ListAppVersionsCommand,
-} from "../protocols/Aws_restJson1";
-import { ResiliencehubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResiliencehubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAppVersionsRequest, ListAppVersionsResponse } from "../models/models_0";
+import { ListAppVersions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAppVersionsCommand}.
+ */
 export interface ListAppVersionsCommandInput extends ListAppVersionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAppVersionsCommand}.
+ */
 export interface ListAppVersionsCommandOutput extends ListAppVersionsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,74 @@ export interface ListAppVersionsCommandOutput extends ListAppVersionsResponse, _
  * ```javascript
  * import { ResiliencehubClient, ListAppVersionsCommand } from "@aws-sdk/client-resiliencehub"; // ES Modules import
  * // const { ResiliencehubClient, ListAppVersionsCommand } = require("@aws-sdk/client-resiliencehub"); // CommonJS import
+ * // import type { ResiliencehubClientConfig } from "@aws-sdk/client-resiliencehub";
+ * const config = {}; // type is ResiliencehubClientConfig
  * const client = new ResiliencehubClient(config);
+ * const input = { // ListAppVersionsRequest
+ *   appArn: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   startTime: new Date("TIMESTAMP"),
+ *   endTime: new Date("TIMESTAMP"),
+ * };
  * const command = new ListAppVersionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAppVersionsResponse
+ * //   appVersions: [ // AppVersionList // required
+ * //     { // AppVersionSummary
+ * //       appVersion: "STRING_VALUE", // required
+ * //       identifier: Number("long"),
+ * //       creationTime: new Date("TIMESTAMP"),
+ * //       versionName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAppVersionsCommandInput - {@link ListAppVersionsCommandInput}
+ * @returns {@link ListAppVersionsCommandOutput}
  * @see {@link ListAppVersionsCommandInput} for command's `input` shape.
  * @see {@link ListAppVersionsCommandOutput} for command's `response` shape.
  * @see {@link ResiliencehubClientResolvedConfig | config} for ResiliencehubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permissions to perform the requested operation. The user or role that is
+ *       making the request must have at least one IAM permissions policy attached that grants the
+ *       required permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Resilience Hub
+ *       service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception occurs when the specified resource could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>This exception occurs when a request is not valid.</p>
+ *
+ * @throws {@link ResiliencehubServiceException}
+ * <p>Base exception class for all service exceptions from Resiliencehub service.</p>
+ *
+ *
+ * @public
  */
-export class ListAppVersionsCommand extends $Command<
-  ListAppVersionsCommandInput,
-  ListAppVersionsCommandOutput,
-  ResiliencehubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAppVersionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResiliencehubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAppVersionsCommandInput, ListAppVersionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResiliencehubClient";
-    const commandName = "ListAppVersionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAppVersionsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListAppVersionsResponseFilterSensitiveLog,
+export class ListAppVersionsCommand extends command<ListAppVersionsCommandInput, ListAppVersionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAppVersions",
+  ListAppVersions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppVersionsRequest;
+      output: ListAppVersionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAppVersionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAppVersionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAppVersionsCommandOutput> {
-    return deserializeAws_restJson1ListAppVersionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAppVersionsCommandInput;
+      output: ListAppVersionsCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
-import {
-  DescribeSchedulingPoliciesRequest,
-  DescribeSchedulingPoliciesRequestFilterSensitiveLog,
-  DescribeSchedulingPoliciesResponse,
-  DescribeSchedulingPoliciesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeSchedulingPoliciesCommand,
-  serializeAws_restJson1DescribeSchedulingPoliciesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSchedulingPoliciesRequest, DescribeSchedulingPoliciesResponse } from "../models/models_0";
+import { DescribeSchedulingPolicies$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSchedulingPoliciesCommand}.
+ */
 export interface DescribeSchedulingPoliciesCommandInput extends DescribeSchedulingPoliciesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSchedulingPoliciesCommand}.
+ */
 export interface DescribeSchedulingPoliciesCommandOutput extends DescribeSchedulingPoliciesResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,78 @@ export interface DescribeSchedulingPoliciesCommandOutput extends DescribeSchedul
  * ```javascript
  * import { BatchClient, DescribeSchedulingPoliciesCommand } from "@aws-sdk/client-batch"; // ES Modules import
  * // const { BatchClient, DescribeSchedulingPoliciesCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
  * const client = new BatchClient(config);
+ * const input = { // DescribeSchedulingPoliciesRequest
+ *   arns: [ // StringList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DescribeSchedulingPoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSchedulingPoliciesResponse
+ * //   schedulingPolicies: [ // SchedulingPolicyDetailList
+ * //     { // SchedulingPolicyDetail
+ * //       name: "STRING_VALUE", // required
+ * //       arn: "STRING_VALUE", // required
+ * //       quotaSharePolicy: { // QuotaSharePolicy
+ * //         idleResourceAssignmentStrategy: "FIFO", // required
+ * //       },
+ * //       fairsharePolicy: { // FairsharePolicy
+ * //         shareDecaySeconds: Number("int"),
+ * //         computeReservation: Number("int"),
+ * //         shareDistribution: [ // ShareAttributesList
+ * //           { // ShareAttributes
+ * //             shareIdentifier: "STRING_VALUE", // required
+ * //             weightFactor: Number("float"),
+ * //           },
+ * //         ],
+ * //       },
+ * //       tags: { // TagrisTagsMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DescribeSchedulingPoliciesCommandInput - {@link DescribeSchedulingPoliciesCommandInput}
+ * @returns {@link DescribeSchedulingPoliciesCommandOutput}
  * @see {@link DescribeSchedulingPoliciesCommandInput} for command's `input` shape.
  * @see {@link DescribeSchedulingPoliciesCommandOutput} for command's `response` shape.
  * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSchedulingPoliciesCommand extends $Command<
-  DescribeSchedulingPoliciesCommandInput,
-  DescribeSchedulingPoliciesCommandOutput,
-  BatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSchedulingPoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSchedulingPoliciesCommandInput, DescribeSchedulingPoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BatchClient";
-    const commandName = "DescribeSchedulingPoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSchedulingPoliciesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSchedulingPoliciesResponseFilterSensitiveLog,
+export class DescribeSchedulingPoliciesCommand extends command<DescribeSchedulingPoliciesCommandInput, DescribeSchedulingPoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSchedulingPolicies",
+  DescribeSchedulingPolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSchedulingPoliciesRequest;
+      output: DescribeSchedulingPoliciesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSchedulingPoliciesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeSchedulingPoliciesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeSchedulingPoliciesCommandOutput> {
-    return deserializeAws_restJson1DescribeSchedulingPoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSchedulingPoliciesCommandInput;
+      output: DescribeSchedulingPoliciesCommandOutput;
+    };
+  };
 }

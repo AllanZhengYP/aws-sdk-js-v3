@@ -1,102 +1,125 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListAppAssessmentsRequest,
-  ListAppAssessmentsRequestFilterSensitiveLog,
-  ListAppAssessmentsResponse,
-  ListAppAssessmentsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListAppAssessmentsCommand,
-  serializeAws_restJson1ListAppAssessmentsCommand,
-} from "../protocols/Aws_restJson1";
-import { ResiliencehubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResiliencehubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAppAssessmentsRequest, ListAppAssessmentsResponse } from "../models/models_0";
+import { ListAppAssessments$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAppAssessmentsCommand}.
+ */
 export interface ListAppAssessmentsCommandInput extends ListAppAssessmentsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAppAssessmentsCommand}.
+ */
 export interface ListAppAssessmentsCommandOutput extends ListAppAssessmentsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the assessments for an AWS Resilience Hub application. You can use request parameters to
- *       refine the results for the response object.</p>
+ * <p>Lists the assessments for an Resilience Hub application. You can use request
+ *       parameters to refine the results for the response object.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ResiliencehubClient, ListAppAssessmentsCommand } from "@aws-sdk/client-resiliencehub"; // ES Modules import
  * // const { ResiliencehubClient, ListAppAssessmentsCommand } = require("@aws-sdk/client-resiliencehub"); // CommonJS import
+ * // import type { ResiliencehubClientConfig } from "@aws-sdk/client-resiliencehub";
+ * const config = {}; // type is ResiliencehubClientConfig
  * const client = new ResiliencehubClient(config);
+ * const input = { // ListAppAssessmentsRequest
+ *   appArn: "STRING_VALUE",
+ *   assessmentName: "STRING_VALUE",
+ *   assessmentStatus: [ // AssessmentStatusList
+ *     "Pending" || "InProgress" || "Failed" || "Success",
+ *   ],
+ *   complianceStatus: "PolicyBreached" || "PolicyMet" || "NotApplicable" || "MissingPolicy",
+ *   invoker: "User" || "System",
+ *   reverseOrder: true || false,
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListAppAssessmentsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAppAssessmentsResponse
+ * //   nextToken: "STRING_VALUE",
+ * //   assessmentSummaries: [ // AppAssessmentSummaryList // required
+ * //     { // AppAssessmentSummary
+ * //       appArn: "STRING_VALUE",
+ * //       appVersion: "STRING_VALUE",
+ * //       assessmentStatus: "Pending" || "InProgress" || "Failed" || "Success", // required
+ * //       invoker: "User" || "System",
+ * //       startTime: new Date("TIMESTAMP"),
+ * //       endTime: new Date("TIMESTAMP"),
+ * //       message: "STRING_VALUE",
+ * //       assessmentName: "STRING_VALUE",
+ * //       assessmentArn: "STRING_VALUE", // required
+ * //       complianceStatus: "PolicyBreached" || "PolicyMet" || "NotApplicable" || "MissingPolicy",
+ * //       cost: { // Cost
+ * //         amount: Number("double"), // required
+ * //         currency: "STRING_VALUE", // required
+ * //         frequency: "Hourly" || "Daily" || "Monthly" || "Yearly", // required
+ * //       },
+ * //       resiliencyScore: Number("double"),
+ * //       versionName: "STRING_VALUE",
+ * //       driftStatus: "NotChecked" || "NotDetected" || "Detected",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListAppAssessmentsCommandInput - {@link ListAppAssessmentsCommandInput}
+ * @returns {@link ListAppAssessmentsCommandOutput}
  * @see {@link ListAppAssessmentsCommandInput} for command's `input` shape.
  * @see {@link ListAppAssessmentsCommandOutput} for command's `response` shape.
  * @see {@link ResiliencehubClientResolvedConfig | config} for ResiliencehubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permissions to perform the requested operation. The user or role that is
+ *       making the request must have at least one IAM permissions policy attached that grants the
+ *       required permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Resilience Hub
+ *       service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception occurs when the specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>This exception occurs when you have exceeded the limit on the number of requests per second.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>This exception occurs when a request is not valid.</p>
+ *
+ * @throws {@link ResiliencehubServiceException}
+ * <p>Base exception class for all service exceptions from Resiliencehub service.</p>
+ *
+ *
+ * @public
  */
-export class ListAppAssessmentsCommand extends $Command<
-  ListAppAssessmentsCommandInput,
-  ListAppAssessmentsCommandOutput,
-  ResiliencehubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAppAssessmentsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResiliencehubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAppAssessmentsCommandInput, ListAppAssessmentsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResiliencehubClient";
-    const commandName = "ListAppAssessmentsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAppAssessmentsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListAppAssessmentsResponseFilterSensitiveLog,
+export class ListAppAssessmentsCommand extends command<ListAppAssessmentsCommandInput, ListAppAssessmentsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAppAssessments",
+  ListAppAssessments$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppAssessmentsRequest;
+      output: ListAppAssessmentsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAppAssessmentsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAppAssessmentsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAppAssessmentsCommandOutput> {
-    return deserializeAws_restJson1ListAppAssessmentsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAppAssessmentsCommandInput;
+      output: ListAppAssessmentsCommandOutput;
+    };
+  };
 }

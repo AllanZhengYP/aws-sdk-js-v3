@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DetectiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DetectiveClient";
-import {
-  BatchGetGraphMemberDatasourcesRequest,
-  BatchGetGraphMemberDatasourcesRequestFilterSensitiveLog,
-  BatchGetGraphMemberDatasourcesResponse,
-  BatchGetGraphMemberDatasourcesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1BatchGetGraphMemberDatasourcesCommand,
-  serializeAws_restJson1BatchGetGraphMemberDatasourcesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetGraphMemberDatasourcesRequest, BatchGetGraphMemberDatasourcesResponse } from "../models/models_0";
+import { BatchGetGraphMemberDatasources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetGraphMemberDatasourcesCommand}.
+ */
 export interface BatchGetGraphMemberDatasourcesCommandInput extends BatchGetGraphMemberDatasourcesRequest {}
-export interface BatchGetGraphMemberDatasourcesCommandOutput
-  extends BatchGetGraphMemberDatasourcesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetGraphMemberDatasourcesCommand}.
+ */
+export interface BatchGetGraphMemberDatasourcesCommandOutput extends BatchGetGraphMemberDatasourcesResponse, __MetadataBearer {}
 
 /**
  * <p>Gets data source package information for the behavior graph.</p>
@@ -36,74 +29,81 @@ export interface BatchGetGraphMemberDatasourcesCommandOutput
  * ```javascript
  * import { DetectiveClient, BatchGetGraphMemberDatasourcesCommand } from "@aws-sdk/client-detective"; // ES Modules import
  * // const { DetectiveClient, BatchGetGraphMemberDatasourcesCommand } = require("@aws-sdk/client-detective"); // CommonJS import
+ * // import type { DetectiveClientConfig } from "@aws-sdk/client-detective";
+ * const config = {}; // type is DetectiveClientConfig
  * const client = new DetectiveClient(config);
+ * const input = { // BatchGetGraphMemberDatasourcesRequest
+ *   GraphArn: "STRING_VALUE", // required
+ *   AccountIds: [ // AccountIdExtendedList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetGraphMemberDatasourcesCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetGraphMemberDatasourcesResponse
+ * //   MemberDatasources: [ // MembershipDatasourcesList
+ * //     { // MembershipDatasources
+ * //       AccountId: "STRING_VALUE",
+ * //       GraphArn: "STRING_VALUE",
+ * //       DatasourcePackageIngestHistory: { // DatasourcePackageIngestHistory
+ * //         "<keys>": { // LastIngestStateChangeDates
+ * //           "<keys>": { // TimestampForCollection
+ * //             Timestamp: new Date("TIMESTAMP"),
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //   ],
+ * //   UnprocessedAccounts: [ // UnprocessedAccountList
+ * //     { // UnprocessedAccount
+ * //       AccountId: "STRING_VALUE",
+ * //       Reason: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetGraphMemberDatasourcesCommandInput - {@link BatchGetGraphMemberDatasourcesCommandInput}
+ * @returns {@link BatchGetGraphMemberDatasourcesCommandOutput}
  * @see {@link BatchGetGraphMemberDatasourcesCommandInput} for command's `input` shape.
  * @see {@link BatchGetGraphMemberDatasourcesCommandOutput} for command's `response` shape.
  * @see {@link DetectiveClientResolvedConfig | config} for DetectiveClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request issuer does not have permission to access this resource or perform this
+ *          operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request was valid but failed because of a problem with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request refers to a nonexistent resource.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request parameters are invalid.</p>
+ *
+ * @throws {@link DetectiveServiceException}
+ * <p>Base exception class for all service exceptions from Detective service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetGraphMemberDatasourcesCommand extends $Command<
-  BatchGetGraphMemberDatasourcesCommandInput,
-  BatchGetGraphMemberDatasourcesCommandOutput,
-  DetectiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetGraphMemberDatasourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DetectiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetGraphMemberDatasourcesCommandInput, BatchGetGraphMemberDatasourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DetectiveClient";
-    const commandName = "BatchGetGraphMemberDatasourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetGraphMemberDatasourcesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetGraphMemberDatasourcesResponseFilterSensitiveLog,
+export class BatchGetGraphMemberDatasourcesCommand extends command<BatchGetGraphMemberDatasourcesCommandInput, BatchGetGraphMemberDatasourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetGraphMemberDatasources",
+  BatchGetGraphMemberDatasources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetGraphMemberDatasourcesRequest;
+      output: BatchGetGraphMemberDatasourcesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: BatchGetGraphMemberDatasourcesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1BatchGetGraphMemberDatasourcesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchGetGraphMemberDatasourcesCommandOutput> {
-    return deserializeAws_restJson1BatchGetGraphMemberDatasourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetGraphMemberDatasourcesCommandInput;
+      output: BatchGetGraphMemberDatasourcesCommandOutput;
+    };
+  };
 }

@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppRunnerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppRunnerClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeObservabilityConfigurationRequest,
-  DescribeObservabilityConfigurationRequestFilterSensitiveLog,
   DescribeObservabilityConfigurationResponse,
-  DescribeObservabilityConfigurationResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_0DescribeObservabilityConfigurationCommand,
-  serializeAws_json1_0DescribeObservabilityConfigurationCommand,
-} from "../protocols/Aws_json1_0";
+import { DescribeObservabilityConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeObservabilityConfigurationCommand}.
+ */
 export interface DescribeObservabilityConfigurationCommandInput extends DescribeObservabilityConfigurationRequest {}
-export interface DescribeObservabilityConfigurationCommandOutput
-  extends DescribeObservabilityConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeObservabilityConfigurationCommand}.
+ */
+export interface DescribeObservabilityConfigurationCommandOutput extends DescribeObservabilityConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Return a full description of an App Runner observability configuration resource.</p>
@@ -36,74 +32,67 @@ export interface DescribeObservabilityConfigurationCommandOutput
  * ```javascript
  * import { AppRunnerClient, DescribeObservabilityConfigurationCommand } from "@aws-sdk/client-apprunner"; // ES Modules import
  * // const { AppRunnerClient, DescribeObservabilityConfigurationCommand } = require("@aws-sdk/client-apprunner"); // CommonJS import
+ * // import type { AppRunnerClientConfig } from "@aws-sdk/client-apprunner";
+ * const config = {}; // type is AppRunnerClientConfig
  * const client = new AppRunnerClient(config);
+ * const input = { // DescribeObservabilityConfigurationRequest
+ *   ObservabilityConfigurationArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeObservabilityConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeObservabilityConfigurationResponse
+ * //   ObservabilityConfiguration: { // ObservabilityConfiguration
+ * //     ObservabilityConfigurationArn: "STRING_VALUE",
+ * //     ObservabilityConfigurationName: "STRING_VALUE",
+ * //     TraceConfiguration: { // TraceConfiguration
+ * //       Vendor: "AWSXRAY", // required
+ * //     },
+ * //     ObservabilityConfigurationRevision: Number("int"),
+ * //     Latest: true || false,
+ * //     Status: "ACTIVE" || "INACTIVE",
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     DeletedAt: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeObservabilityConfigurationCommandInput - {@link DescribeObservabilityConfigurationCommandInput}
+ * @returns {@link DescribeObservabilityConfigurationCommandOutput}
  * @see {@link DescribeObservabilityConfigurationCommandInput} for command's `input` shape.
  * @see {@link DescribeObservabilityConfigurationCommandOutput} for command's `response` shape.
  * @see {@link AppRunnerClientResolvedConfig | config} for AppRunnerClient's `config` shape.
  *
+ * @throws {@link InternalServiceErrorException} (server fault)
+ *  <p>An unexpected service exception occurred.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource doesn't exist for the specified Amazon Resource Name (ARN) in your Amazon Web Services account.</p>
+ *
+ * @throws {@link AppRunnerServiceException}
+ * <p>Base exception class for all service exceptions from AppRunner service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeObservabilityConfigurationCommand extends $Command<
-  DescribeObservabilityConfigurationCommandInput,
-  DescribeObservabilityConfigurationCommandOutput,
-  AppRunnerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeObservabilityConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppRunnerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeObservabilityConfigurationCommandInput, DescribeObservabilityConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppRunnerClient";
-    const commandName = "DescribeObservabilityConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeObservabilityConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeObservabilityConfigurationResponseFilterSensitiveLog,
+export class DescribeObservabilityConfigurationCommand extends command<DescribeObservabilityConfigurationCommandInput, DescribeObservabilityConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeObservabilityConfiguration",
+  DescribeObservabilityConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeObservabilityConfigurationRequest;
+      output: DescribeObservabilityConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeObservabilityConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0DescribeObservabilityConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeObservabilityConfigurationCommandOutput> {
-    return deserializeAws_json1_0DescribeObservabilityConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeObservabilityConfigurationCommandInput;
+      output: DescribeObservabilityConfigurationCommandOutput;
+    };
+  };
 }

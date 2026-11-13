@@ -1,34 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetTransitGatewayPolicyTableAssociationsRequest,
-  GetTransitGatewayPolicyTableAssociationsRequestFilterSensitiveLog,
   GetTransitGatewayPolicyTableAssociationsResult,
-  GetTransitGatewayPolicyTableAssociationsResultFilterSensitiveLog,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2GetTransitGatewayPolicyTableAssociationsCommand,
-  serializeAws_ec2GetTransitGatewayPolicyTableAssociationsCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_7";
+import { GetTransitGatewayPolicyTableAssociations$ } from "../schemas/schemas_0";
 
-export interface GetTransitGatewayPolicyTableAssociationsCommandInput
-  extends GetTransitGatewayPolicyTableAssociationsRequest {}
-export interface GetTransitGatewayPolicyTableAssociationsCommandOutput
-  extends GetTransitGatewayPolicyTableAssociationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTransitGatewayPolicyTableAssociationsCommand}.
+ */
+export interface GetTransitGatewayPolicyTableAssociationsCommandInput extends GetTransitGatewayPolicyTableAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTransitGatewayPolicyTableAssociationsCommand}.
+ */
+export interface GetTransitGatewayPolicyTableAssociationsCommandOutput extends GetTransitGatewayPolicyTableAssociationsResult, __MetadataBearer {}
 
 /**
  * <p>Gets a list of the transit gateway policy table associations.</p>
@@ -37,77 +32,67 @@ export interface GetTransitGatewayPolicyTableAssociationsCommandOutput
  * ```javascript
  * import { EC2Client, GetTransitGatewayPolicyTableAssociationsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetTransitGatewayPolicyTableAssociationsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetTransitGatewayPolicyTableAssociationsRequest
+ *   TransitGatewayPolicyTableId: "STRING_VALUE", // required
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new GetTransitGatewayPolicyTableAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // GetTransitGatewayPolicyTableAssociationsResult
+ * //   Associations: [ // TransitGatewayPolicyTableAssociationList
+ * //     { // TransitGatewayPolicyTableAssociation
+ * //       TransitGatewayPolicyTableId: "STRING_VALUE",
+ * //       TransitGatewayAttachmentId: "STRING_VALUE",
+ * //       ResourceId: "STRING_VALUE",
+ * //       ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //       State: "associating" || "associated" || "disassociating" || "disassociated",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetTransitGatewayPolicyTableAssociationsCommandInput - {@link GetTransitGatewayPolicyTableAssociationsCommandInput}
+ * @returns {@link GetTransitGatewayPolicyTableAssociationsCommandOutput}
  * @see {@link GetTransitGatewayPolicyTableAssociationsCommandInput} for command's `input` shape.
  * @see {@link GetTransitGatewayPolicyTableAssociationsCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetTransitGatewayPolicyTableAssociationsCommand extends $Command<
-  GetTransitGatewayPolicyTableAssociationsCommandInput,
-  GetTransitGatewayPolicyTableAssociationsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTransitGatewayPolicyTableAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    GetTransitGatewayPolicyTableAssociationsCommandInput,
-    GetTransitGatewayPolicyTableAssociationsCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetTransitGatewayPolicyTableAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTransitGatewayPolicyTableAssociationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetTransitGatewayPolicyTableAssociationsResultFilterSensitiveLog,
+export class GetTransitGatewayPolicyTableAssociationsCommand extends command<GetTransitGatewayPolicyTableAssociationsCommandInput, GetTransitGatewayPolicyTableAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTransitGatewayPolicyTableAssociations",
+  GetTransitGatewayPolicyTableAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTransitGatewayPolicyTableAssociationsRequest;
+      output: GetTransitGatewayPolicyTableAssociationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetTransitGatewayPolicyTableAssociationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2GetTransitGatewayPolicyTableAssociationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetTransitGatewayPolicyTableAssociationsCommandOutput> {
-    return deserializeAws_ec2GetTransitGatewayPolicyTableAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTransitGatewayPolicyTableAssociationsCommandInput;
+      output: GetTransitGatewayPolicyTableAssociationsCommandOutput;
+    };
+  };
 }

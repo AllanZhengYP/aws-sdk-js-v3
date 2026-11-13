@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListCidrLocationsRequest,
-  ListCidrLocationsRequestFilterSensitiveLog,
-  ListCidrLocationsResponse,
-  ListCidrLocationsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restXmlListCidrLocationsCommand,
-  serializeAws_restXmlListCidrLocationsCommand,
-} from "../protocols/Aws_restXml";
-import { Route53ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Route53Client";
+import { _ep0, _mw2, command } from "../commandBuilder";
+import type { ListCidrLocationsRequest, ListCidrLocationsResponse } from "../models/models_0";
+import { ListCidrLocations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCidrLocationsCommand}.
+ */
 export interface ListCidrLocationsCommandInput extends ListCidrLocationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCidrLocationsCommand}.
+ */
 export interface ListCidrLocationsCommandOutput extends ListCidrLocationsResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,60 @@ export interface ListCidrLocationsCommandOutput extends ListCidrLocationsRespons
  * ```javascript
  * import { Route53Client, ListCidrLocationsCommand } from "@aws-sdk/client-route-53"; // ES Modules import
  * // const { Route53Client, ListCidrLocationsCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * // import type { Route53ClientConfig } from "@aws-sdk/client-route-53";
+ * const config = {}; // type is Route53ClientConfig
  * const client = new Route53Client(config);
+ * const input = { // ListCidrLocationsRequest
+ *   CollectionId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListCidrLocationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListCidrLocationsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   CidrLocations: [ // LocationSummaries
+ * //     { // LocationSummary
+ * //       LocationName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListCidrLocationsCommandInput - {@link ListCidrLocationsCommandInput}
+ * @returns {@link ListCidrLocationsCommandOutput}
  * @see {@link ListCidrLocationsCommandInput} for command's `input` shape.
  * @see {@link ListCidrLocationsCommandOutput} for command's `response` shape.
  * @see {@link Route53ClientResolvedConfig | config} for Route53Client's `config` shape.
  *
+ * @throws {@link InvalidInput} (client fault)
+ *  <p>The input is not valid.</p>
+ *
+ * @throws {@link NoSuchCidrCollectionException} (client fault)
+ *  <p>The CIDR collection you specified, doesn't exist.</p>
+ *
+ * @throws {@link Route53ServiceException}
+ * <p>Base exception class for all service exceptions from Route53 service.</p>
+ *
+ *
+ * @public
  */
-export class ListCidrLocationsCommand extends $Command<
-  ListCidrLocationsCommandInput,
-  ListCidrLocationsCommandOutput,
-  Route53ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCidrLocationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Route53ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCidrLocationsCommandInput, ListCidrLocationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Route53Client";
-    const commandName = "ListCidrLocationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCidrLocationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListCidrLocationsResponseFilterSensitiveLog,
+export class ListCidrLocationsCommand extends command<ListCidrLocationsCommandInput, ListCidrLocationsCommandOutput>(
+  _ep0,
+  _mw2,
+  "ListCidrLocations",
+  ListCidrLocations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCidrLocationsRequest;
+      output: ListCidrLocationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListCidrLocationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlListCidrLocationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListCidrLocationsCommandOutput> {
-    return deserializeAws_restXmlListCidrLocationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCidrLocationsCommandInput;
+      output: ListCidrLocationsCommandOutput;
+    };
+  };
 }

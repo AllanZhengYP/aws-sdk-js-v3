@@ -1,464 +1,652 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-
-import { MigrationHubStrategyServiceException as __BaseException } from "./MigrationHubStrategyServiceException";
+import type {
+  AnalysisType,
+  AntipatternReportStatus,
+  ApplicationComponentCriteria,
+  ApplicationMode,
+  AppType,
+  AppUnitErrorCategory,
+  AssessmentDataSourceType,
+  AssessmentStatus,
+  AuthType,
+  AwsManagedTargetDestination,
+  BinaryAnalyzerName,
+  CollectorHealth,
+  Condition,
+  DatabaseManagementPreference,
+  DataSourceType,
+  GroupName,
+  HeterogeneousTargetDatabaseEngine,
+  HomogeneousTargetDatabaseEngine,
+  ImportFileTaskStatus,
+  InclusionStatus,
+  NoPreferenceTargetDestination,
+  OSType,
+  OutputFormat,
+  PipelineType,
+  RecommendationReportStatus,
+  ResourceSubType,
+  RuntimeAnalysisStatus,
+  RunTimeAnalyzerName,
+  RunTimeAssessmentStatus,
+  SelfManageTargetDestination,
+  ServerCriteria,
+  ServerErrorCategory,
+  ServerOsType,
+  Severity,
+  SortOrder,
+  SourceCodeAnalyzerName,
+  SrcCodeOrDbAnalysisStatus,
+  Strategy,
+  StrategyRecommendation,
+  TargetDatabaseEngine,
+  TargetDestination,
+  TransformationToolName,
+  VersionControl,
+  VersionControlType,
+} from "./enums";
 
 /**
- * <p> The AWS user account does not have permission to perform the action. Check the
- *       AWS Identity and Access Management (IAM) policy associated with this account.</p>
+ * <p>A combination of existing analysis statuses.</p>
+ * @public
  */
-export class AccessDeniedException extends __BaseException {
-  readonly name: "AccessDeniedException" = "AccessDeniedException";
-  readonly $fault: "client" = "client";
+export type AnalysisStatusUnion =
+  | AnalysisStatusUnion.RuntimeAnalysisStatusMember
+  | AnalysisStatusUnion.SrcCodeOrDbAnalysisStatusMember
+  | AnalysisStatusUnion.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace AnalysisStatusUnion {
   /**
-   * @internal
+   * <p>The status of the analysis.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
-    super({
-      name: "AccessDeniedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AccessDeniedException.prototype);
+  export interface RuntimeAnalysisStatusMember {
+    runtimeAnalysisStatus: RuntimeAnalysisStatus;
+    srcCodeOrDbAnalysisStatus?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The status of the source code or database analysis.</p>
+   * @public
+   */
+  export interface SrcCodeOrDbAnalysisStatusMember {
+    runtimeAnalysisStatus?: never;
+    srcCodeOrDbAnalysisStatus: SrcCodeOrDbAnalysisStatus;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    runtimeAnalysisStatus?: never;
+    srcCodeOrDbAnalysisStatus?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    runtimeAnalysisStatus: (value: RuntimeAnalysisStatus) => T;
+    srcCodeOrDbAnalysisStatus: (value: SrcCodeOrDbAnalysisStatus) => T;
+    _: (name: string, value: any) => T;
   }
 }
 
-export enum AntipatternReportStatus {
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  SUCCESS = "SUCCESS",
-}
+/**
+ * Summary information about an analyzable server.
+ * @public
+ */
+export interface AnalyzableServerSummary {
+  /**
+   * The host name of the analyzable server.
+   * @public
+   */
+  hostname?: string | undefined;
 
-export enum Severity {
-  HIGH = "HIGH",
-  LOW = "LOW",
-  MEDIUM = "MEDIUM",
+  /**
+   * The ip address of the analyzable server.
+   * @public
+   */
+  ipAddress?: string | undefined;
+
+  /**
+   * The data source of the analyzable server.
+   * @public
+   */
+  source?: string | undefined;
+
+  /**
+   * The virtual machine id of the analyzable server.
+   * @public
+   */
+  vmId?: string | undefined;
 }
 
 /**
- * <p>
- *       Contains the summary of anti-patterns and their severity.
- *     </p>
+ * <p>The combination of the existing analyzers.</p>
+ * @public
  */
-export interface AntipatternSeveritySummary {
+export type AnalyzerNameUnion =
+  | AnalyzerNameUnion.BinaryAnalyzerNameMember
+  | AnalyzerNameUnion.RunTimeAnalyzerNameMember
+  | AnalyzerNameUnion.SourceCodeAnalyzerNameMember
+  | AnalyzerNameUnion.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace AnalyzerNameUnion {
   /**
-   * <p>
-   *       Contains the severity of anti-patterns.
-   *     </p>
+   * <p>The binary analyzer names.</p>
+   * @public
    */
-  severity?: Severity | string;
+  export interface BinaryAnalyzerNameMember {
+    binaryAnalyzerName: BinaryAnalyzerName;
+    runTimeAnalyzerName?: never;
+    sourceCodeAnalyzerName?: never;
+    $unknown?: never;
+  }
 
   /**
-   * <p>
-   *       Contains the count of anti-patterns.
-   *     </p>
+   * <p>The assessment analyzer names.</p>
+   * @public
    */
-  count?: number;
-}
+  export interface RunTimeAnalyzerNameMember {
+    binaryAnalyzerName?: never;
+    runTimeAnalyzerName: RunTimeAnalyzerName;
+    sourceCodeAnalyzerName?: never;
+    $unknown?: never;
+  }
 
-export enum ApplicationComponentCriteria {
-  APP_NAME = "APP_NAME",
-  APP_TYPE = "APP_TYPE",
-  DESTINATION = "DESTINATION",
-  NOT_DEFINED = "NOT_DEFINED",
-  SERVER_ID = "SERVER_ID",
-  STRATEGY = "STRATEGY",
-}
+  /**
+   * <p>The source code analyzer names.</p>
+   * @public
+   */
+  export interface SourceCodeAnalyzerNameMember {
+    binaryAnalyzerName?: never;
+    runTimeAnalyzerName?: never;
+    sourceCodeAnalyzerName: SourceCodeAnalyzerName;
+    $unknown?: never;
+  }
 
-export enum SrcCodeOrDbAnalysisStatus {
-  ANALYSIS_FAILED = "ANALYSIS_FAILED",
-  ANALYSIS_STARTED = "ANALYSIS_STARTED",
-  ANALYSIS_SUCCESS = "ANALYSIS_SUCCESS",
-  ANALYSIS_TO_BE_SCHEDULED = "ANALYSIS_TO_BE_SCHEDULED",
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    binaryAnalyzerName?: never;
+    runTimeAnalyzerName?: never;
+    sourceCodeAnalyzerName?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    binaryAnalyzerName: (value: BinaryAnalyzerName) => T;
+    runTimeAnalyzerName: (value: RunTimeAnalyzerName) => T;
+    sourceCodeAnalyzerName: (value: SourceCodeAnalyzerName) => T;
+    _: (name: string, value: any) => T;
+  }
 }
 
 /**
  * <p> Contains the S3 bucket name and the Amazon S3 key name. </p>
+ * @public
  */
 export interface S3Object {
   /**
    * <p> The S3 bucket name. </p>
+   * @public
    */
-  s3Bucket?: string;
+  s3Bucket?: string | undefined;
 
   /**
    * <p> The Amazon S3 key name. </p>
+   * @public
    */
-  s3key?: string;
-}
-
-export enum AppType {
-  IIS = "IIS",
-  dotNetFramework = "DotNetFramework",
-  java = "Java",
-  oracle = "Oracle",
-  other = "Other",
-  sqlServer = "SQLServer",
+  s3key?: string | undefined;
 }
 
 /**
- * <p>
- *       Configuration information used for assessing databases.
- *     </p>
+ * <p>The anti-pattern report result.</p>
+ * @public
+ */
+export interface AntipatternReportResult {
+  /**
+   * <p>The analyzer name.</p>
+   * @public
+   */
+  analyzerName?: AnalyzerNameUnion | undefined;
+
+  /**
+   * <p> Contains the S3 bucket name and the Amazon S3 key name. </p>
+   * @public
+   */
+  antiPatternReportS3Object?: S3Object | undefined;
+
+  /**
+   * <p>The status of the anti-pattern report generation.</p>
+   * @public
+   */
+  antipatternReportStatus?: AntipatternReportStatus | undefined;
+
+  /**
+   * <p>The status message for the anti-pattern.</p>
+   * @public
+   */
+  antipatternReportStatusMessage?: string | undefined;
+}
+
+/**
+ * <p> Contains the summary of anti-patterns and their severity. </p>
+ * @public
+ */
+export interface AntipatternSeveritySummary {
+  /**
+   * <p> Contains the severity of anti-patterns. </p>
+   * @public
+   */
+  severity?: Severity | undefined;
+
+  /**
+   * <p> Contains the count of anti-patterns. </p>
+   * @public
+   */
+  count?: number | undefined;
+}
+
+/**
+ * <p>Error in the analysis of the application unit.</p>
+ * @public
+ */
+export interface AppUnitError {
+  /**
+   * <p>The category of the error.</p>
+   * @public
+   */
+  appUnitErrorCategory?: AppUnitErrorCategory | undefined;
+}
+
+/**
+ * <p> Configuration information used for assessing databases. </p>
+ * @public
  */
 export interface DatabaseConfigDetail {
   /**
-   * <p>
-   *       AWS Secrets Manager key that holds the credentials that you use to connect to a database.
+   * <p> AWS Secrets Manager key that holds the credentials that you use to connect to a database.
    *     </p>
+   * @public
    */
-  secretName?: string;
-}
-
-export enum InclusionStatus {
-  EXCLUDE_FROM_RECOMMENDATION = "excludeFromAssessment",
-  INCLUDE_IN_RECOMMENDATION = "includeInAssessment",
-}
-
-export enum Strategy {
-  REFACTOR = "Refactor",
-  REHOST = "Rehost",
-  RELOCATE = "Relocate",
-  REPLATFORM = "Replatform",
-  REPURCHASE = "Repurchase",
-  RETAIN = "Retain",
-  RETIREMENT = "Retirement",
-}
-
-export enum TargetDestination {
-  AMAZON_DOCUMENTDB = "Amazon DocumentDB",
-  AMAZON_DYNAMODB = "Amazon DynamoDB",
-  AMAZON_ELASTIC_CLOUD_COMPUTE = "Amazon Elastic Cloud Compute (EC2)",
-  AMAZON_ELASTIC_CONTAINER_SERVICE = "Amazon Elastic Container Service (ECS)",
-  AMAZON_ELASTIC_KUBERNETES_SERVICE = "Amazon Elastic Kubernetes Service (EKS)",
-  AMAZON_RDS = "Amazon Relational Database Service",
-  AMAZON_RDS_MYSQL = "Amazon Relational Database Service on MySQL",
-  AMAZON_RDS_POSTGRESQL = "Amazon Relational Database Service on PostgreSQL",
-  AURORA_MYSQL = "Aurora MySQL",
-  AURORA_POSTGRESQL = "Aurora PostgreSQL",
-  AWS_ELASTIC_BEANSTALK = "AWS Elastic BeanStalk",
-  AWS_FARGATE = "AWS Fargate",
-  NONE_SPECIFIED = "None specified",
-}
-
-export enum TransformationToolName {
-  APP2CONTAINER = "App2Container",
-  DMS = "Database Migration Service",
-  EMP = "End of Support Migration",
-  IN_PLACE_OS_UPGRADE = "In Place Operating System Upgrade",
-  MGN = "Application Migration Service",
-  NATIVE_SQL = "Native SQL Server Backup/Restore",
-  PORTING_ASSISTANT = "Porting Assistant For .NET",
-  SCT = "Schema Conversion Tool",
-  STRATEGY_RECOMMENDATION_SUPPORT = "Strategy Recommendation Support",
-  WWAMA = "Windows Web Application Migration Assistant",
+  secretName?: string | undefined;
 }
 
 /**
- * <p>
- *       Information of the transformation tool that can be used to migrate and modernize the application.
- *     </p>
+ * <p> Information of the transformation tool that can be used to migrate and modernize the
+ *       application. </p>
+ * @public
  */
 export interface TransformationTool {
   /**
-   * <p>
-   *       Name of the tool.
-   *     </p>
+   * <p> Name of the tool. </p>
+   * @public
    */
-  name?: TransformationToolName | string;
+  name?: TransformationToolName | undefined;
 
   /**
-   * <p>
-   *       Description of the tool.
-   *     </p>
+   * <p> Description of the tool. </p>
+   * @public
    */
-  description?: string;
+  description?: string | undefined;
 
   /**
-   * <p>
-   *       URL for installing the tool.
-   *     </p>
+   * <p> URL for installing the tool. </p>
+   * @public
    */
-  tranformationToolInstallationLink?: string;
+  tranformationToolInstallationLink?: string | undefined;
 }
 
 /**
- * <p>
- *       Contains a recommendation set.
- *     </p>
+ * <p> Contains a recommendation set. </p>
+ * @public
  */
 export interface RecommendationSet {
   /**
-   * <p>
-   *       The target destination for the recommendation set.
-   *     </p>
+   * <p> The target destination for the recommendation set. </p>
+   * @public
    */
-  transformationTool?: TransformationTool;
+  transformationTool?: TransformationTool | undefined;
 
   /**
-   * <p>
-   *       The recommended target destination.
-   *     </p>
+   * <p> The recommended target destination. </p>
+   * @public
    */
-  targetDestination?: TargetDestination | string;
+  targetDestination?: TargetDestination | undefined;
 
   /**
-   * <p>
-   *       The recommended strategy.
-   *     </p>
+   * <p> The recommended strategy. </p>
+   * @public
    */
-  strategy?: Strategy | string;
-}
-
-export enum ResourceSubType {
-  DATABASE = "Database",
-  DATABASE_PROCESS = "DatabaseProcess",
-  PROCESS = "Process",
+  strategy?: Strategy | undefined;
 }
 
 /**
- * <p>
- *       Object containing source code information that is linked to an application component.
+ * <p>The error in server analysis.</p>
+ * @public
+ */
+export interface Result {
+  /**
+   * <p>The error in server analysis.</p>
+   * @public
+   */
+  analysisType?: AnalysisType | undefined;
+
+  /**
+   * <p>The error in server analysis.</p>
+   * @public
+   */
+  analysisStatus?: AnalysisStatusUnion | undefined;
+
+  /**
+   * <p>The error in server analysis.</p>
+   * @public
+   */
+  statusMessage?: string | undefined;
+
+  /**
+   * <p>The error in server analysis.</p>
+   * @public
+   */
+  antipatternReportResultList?: AntipatternReportResult[] | undefined;
+}
+
+/**
+ * <p> Object containing source code information that is linked to an application component.
  *     </p>
+ * @public
  */
 export interface SourceCodeRepository {
   /**
-   * <p>
-   *       The repository name for the source code.
-   *     </p>
+   * <p> The repository name for the source code. </p>
+   * @public
    */
-  repository?: string;
+  repository?: string | undefined;
 
   /**
-   * <p>
-   *       The branch of the source code.
-   *     </p>
+   * <p> The branch of the source code. </p>
+   * @public
    */
-  branch?: string;
+  branch?: string | undefined;
 
   /**
-   * <p>
-   *       The type of repository to use for the source code.
-   *     </p>
+   * <p> The type of repository to use for the source code. </p>
+   * @public
    */
-  versionControlType?: string;
+  versionControlType?: string | undefined;
+
+  /**
+   * <p>The name of the project.</p>
+   * @public
+   */
+  projectName?: string | undefined;
 }
 
 /**
  * <p> Contains detailed information about an application component. </p>
+ * @public
  */
 export interface ApplicationComponentDetail {
   /**
    * <p> The ID of the application component. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of application component. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> The top recommendation set for the application component. </p>
+   * @public
    */
-  recommendationSet?: RecommendationSet;
+  recommendationSet?: RecommendationSet | undefined;
 
   /**
    * <p> The status of analysis, if the application component has source code or an associated
    *       database. </p>
+   * @public
    */
-  analysisStatus?: SrcCodeOrDbAnalysisStatus | string;
+  analysisStatus?: SrcCodeOrDbAnalysisStatus | undefined;
 
   /**
    * <p> A detailed description of the analysis status and any failure message. </p>
+   * @public
    */
-  statusMessage?: string;
+  statusMessage?: string | undefined;
 
   /**
    * <p> A list of anti-pattern severity summaries. </p>
+   * @public
    */
-  listAntipatternSeveritySummary?: AntipatternSeveritySummary[];
+  listAntipatternSeveritySummary?: AntipatternSeveritySummary[] | undefined;
 
   /**
    * <p> Configuration details for the database associated with the application component. </p>
+   * @public
    */
-  databaseConfigDetail?: DatabaseConfigDetail;
+  databaseConfigDetail?: DatabaseConfigDetail | undefined;
 
   /**
    * <p> Details about the source code repository associated with the application component.
    *     </p>
+   * @public
    */
-  sourceCodeRepositories?: SourceCodeRepository[];
+  sourceCodeRepositories?: SourceCodeRepository[] | undefined;
 
   /**
    * <p> The type of application component. </p>
+   * @public
    */
-  appType?: AppType | string;
+  appType?: AppType | undefined;
 
   /**
    * <p> The application component subtype.</p>
+   * @public
    */
-  resourceSubType?: ResourceSubType | string;
+  resourceSubType?: ResourceSubType | undefined;
 
   /**
    * <p> Indicates whether the application component has been included for server recommendation
    *       or not. </p>
+   * @public
    */
-  inclusionStatus?: InclusionStatus | string;
+  inclusionStatus?: InclusionStatus | undefined;
 
   /**
    * <p> The S3 bucket name and the Amazon S3 key name for the anti-pattern report. </p>
+   * @public
    */
-  antipatternReportS3Object?: S3Object;
+  antipatternReportS3Object?: S3Object | undefined;
 
   /**
    * <p> The status of the anti-pattern report generation.</p>
+   * @public
    */
-  antipatternReportStatus?: AntipatternReportStatus | string;
+  antipatternReportStatus?: AntipatternReportStatus | undefined;
 
   /**
    * <p> The status message for the anti-pattern. </p>
+   * @public
    */
-  antipatternReportStatusMessage?: string;
+  antipatternReportStatusMessage?: string | undefined;
 
   /**
    * <p> OS version. </p>
+   * @public
    */
-  osVersion?: string;
+  osVersion?: string | undefined;
 
   /**
    * <p> OS driver. </p>
+   * @public
    */
-  osDriver?: string;
+  osDriver?: string | undefined;
 
   /**
    * <p> The timestamp of when the application component was assessed. </p>
+   * @public
    */
-  lastAnalyzedTimestamp?: Date;
+  lastAnalyzedTimestamp?: Date | undefined;
 
   /**
    * <p> The ID of the server that the application component is running on. </p>
+   * @public
    */
-  associatedServerId?: string;
+  associatedServerId?: string | undefined;
 
   /**
    * <p> Set to true if the application component is running on multiple servers.</p>
+   * @public
    */
-  moreServerAssociationExists?: boolean;
+  moreServerAssociationExists?: boolean | undefined;
+
+  /**
+   * <p>The status of the application unit.</p>
+   * @public
+   */
+  runtimeStatus?: RuntimeAnalysisStatus | undefined;
+
+  /**
+   * <p>The status message for the application unit.</p>
+   * @public
+   */
+  runtimeStatusMessage?: string | undefined;
+
+  /**
+   * <p>The error in the analysis of the source code or database.</p>
+   * @public
+   */
+  appUnitError?: AppUnitError | undefined;
+
+  /**
+   * <p>A list of the analysis results.</p>
+   * @public
+   */
+  resultList?: Result[] | undefined;
 }
 
-export enum StrategyRecommendation {
-  NOT_RECOMMENDED = "notRecommended",
-  RECOMMENDED = "recommended",
-  VIABLE_OPTION = "viableOption",
+/**
+ * <p>Summary of the analysis status of the application component.</p>
+ * @public
+ */
+export interface ApplicationComponentStatusSummary {
+  /**
+   * <p>The status of database analysis.</p>
+   * @public
+   */
+  srcCodeOrDbAnalysisStatus?: SrcCodeOrDbAnalysisStatus | undefined;
+
+  /**
+   * <p>The number of application components successfully analyzed, partially successful or failed
+   *       analysis.</p>
+   * @public
+   */
+  count?: number | undefined;
 }
 
 /**
  * <p> Contains information about a strategy recommendation for an application component.
  *     </p>
+ * @public
  */
 export interface ApplicationComponentStrategy {
   /**
    * <p> Strategy recommendation for the application component. </p>
+   * @public
    */
-  recommendation?: RecommendationSet;
+  recommendation?: RecommendationSet | undefined;
 
   /**
    * <p> The recommendation status of a strategy for an application component. </p>
+   * @public
    */
-  status?: StrategyRecommendation | string;
+  status?: StrategyRecommendation | undefined;
 
   /**
    * <p> Set to true if the recommendation is set as preferred. </p>
+   * @public
    */
-  isPreferred?: boolean;
+  isPreferred?: boolean | undefined;
 }
 
 /**
- * <p>
- *       Contains the summary of application components.
- *     </p>
+ * <p> Contains the summary of application components. </p>
+ * @public
  */
 export interface ApplicationComponentSummary {
   /**
-   * <p>
-   *       Contains the name of application types.
-   *     </p>
+   * <p> Contains the name of application types. </p>
+   * @public
    */
-  appType?: AppType | string;
+  appType?: AppType | undefined;
 
   /**
-   * <p>
-   *       Contains the count of application type.
-   *     </p>
+   * <p> Contains the count of application type. </p>
+   * @public
    */
-  count?: number;
-}
-
-export enum AwsManagedTargetDestination {
-  AWS_ELASTIC_BEANSTALK = "AWS Elastic BeanStalk",
-  AWS_FARGATE = "AWS Fargate",
-  NONE_SPECIFIED = "None specified",
+  count?: number | undefined;
 }
 
 /**
- * <p>
- *       Object containing the choice of application destination that you specify.
- *     </p>
+ * <p> Object containing the choice of application destination that you specify. </p>
+ * @public
  */
 export interface AwsManagedResources {
   /**
-   * <p>
-   *       The choice of application destination that you specify.
-   *     </p>
+   * <p> The choice of application destination that you specify. </p>
+   * @public
    */
-  targetDestination: (AwsManagedTargetDestination | string)[] | undefined;
-}
-
-export enum NoPreferenceTargetDestination {
-  AMAZON_ELASTIC_CLOUD_COMPUTE = "Amazon Elastic Cloud Compute (EC2)",
-  AMAZON_ELASTIC_CONTAINER_SERVICE = "Amazon Elastic Container Service (ECS)",
-  AMAZON_ELASTIC_KUBERNETES_SERVICE = "Amazon Elastic Kubernetes Service (EKS)",
-  AWS_ELASTIC_BEANSTALK = "AWS Elastic BeanStalk",
-  AWS_FARGATE = "AWS Fargate",
-  NONE_SPECIFIED = "None specified",
+  targetDestination: AwsManagedTargetDestination[] | undefined;
 }
 
 /**
- * <p>
- *       Object containing the choice of application destination that you specify.
- *     </p>
+ * <p> Object containing the choice of application destination that you specify. </p>
+ * @public
  */
 export interface NoManagementPreference {
   /**
-   * <p>
-   *       The choice of application destination that you specify.
-   *     </p>
+   * <p> The choice of application destination that you specify. </p>
+   * @public
    */
-  targetDestination: (NoPreferenceTargetDestination | string)[] | undefined;
-}
-
-export enum SelfManageTargetDestination {
-  AMAZON_ELASTIC_CLOUD_COMPUTE = "Amazon Elastic Cloud Compute (EC2)",
-  AMAZON_ELASTIC_CONTAINER_SERVICE = "Amazon Elastic Container Service (ECS)",
-  AMAZON_ELASTIC_KUBERNETES_SERVICE = "Amazon Elastic Kubernetes Service (EKS)",
-  NONE_SPECIFIED = "None specified",
+  targetDestination: NoPreferenceTargetDestination[] | undefined;
 }
 
 /**
  * <p> Self-managed resources. </p>
+ * @public
  */
 export interface SelfManageResources {
   /**
    * <p> Self-managed resources target destination. </p>
+   * @public
    */
-  targetDestination: (SelfManageTargetDestination | string)[] | undefined;
+  targetDestination: SelfManageTargetDestination[] | undefined;
 }
 
 /**
- * <p>
- *       Preferences for migrating an application to AWS.
- *     </p>
+ * <p> Preferences for migrating an application to AWS. </p>
+ * @public
  */
 export type ManagementPreference =
   | ManagementPreference.AwsManagedResourcesMember
@@ -466,11 +654,13 @@ export type ManagementPreference =
   | ManagementPreference.SelfManageResourcesMember
   | ManagementPreference.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace ManagementPreference {
   /**
-   * <p>
-   *       Indicates interest in solutions that are managed by AWS.
-   *     </p>
+   * <p> Indicates interest in solutions that are managed by AWS. </p>
+   * @public
    */
   export interface AwsManagedResourcesMember {
     awsManagedResources: AwsManagedResources;
@@ -480,9 +670,8 @@ export namespace ManagementPreference {
   }
 
   /**
-   * <p>
-   *       Indicates interest in managing your own resources on AWS.
-   *     </p>
+   * <p> Indicates interest in managing your own resources on AWS. </p>
+   * @public
    */
   export interface SelfManageResourcesMember {
     awsManagedResources?: never;
@@ -492,9 +681,8 @@ export namespace ManagementPreference {
   }
 
   /**
-   * <p>
-   *       No specific preference.
-   *     </p>
+   * <p> No specific preference. </p>
+   * @public
    */
   export interface NoPreferenceMember {
     awsManagedResources?: never;
@@ -503,6 +691,9 @@ export namespace ManagementPreference {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     awsManagedResources?: never;
     selfManageResources?: never;
@@ -510,522 +701,494 @@ export namespace ManagementPreference {
     $unknown: [string, any];
   }
 
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
   export interface Visitor<T> {
     awsManagedResources: (value: AwsManagedResources) => T;
     selfManageResources: (value: SelfManageResources) => T;
     noPreference: (value: NoManagementPreference) => T;
     _: (name: string, value: any) => T;
   }
-
-  export const visit = <T>(value: ManagementPreference, visitor: Visitor<T>): T => {
-    if (value.awsManagedResources !== undefined) return visitor.awsManagedResources(value.awsManagedResources);
-    if (value.selfManageResources !== undefined) return visitor.selfManageResources(value.selfManageResources);
-    if (value.noPreference !== undefined) return visitor.noPreference(value.noPreference);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
 }
 
 /**
- * <p>
- *       Application preferences that you specify.
- *     </p>
+ * <p> Application preferences that you specify. </p>
+ * @public
  */
 export interface ApplicationPreferences {
   /**
-   * <p>
-   *       Application preferences that you specify to prefer managed environment.
-   *     </p>
+   * <p> Application preferences that you specify to prefer managed environment. </p>
+   * @public
    */
-  managementPreference?: ManagementPreference;
-}
-
-export enum AssessmentStatus {
-  COMPLETE = "COMPLETE",
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  STOPPED = "STOPPED",
+  managementPreference?: ManagementPreference | undefined;
 }
 
 /**
- * <p>
- *       Object containing the summary of the strategy recommendations.
- *     </p>
+ * <p> Object containing the summary of the strategy recommendations. </p>
+ * @public
  */
 export interface StrategySummary {
   /**
-   * <p>
-   *       The name of recommended strategy.
-   *     </p>
+   * <p> The name of recommended strategy. </p>
+   * @public
    */
-  strategy?: Strategy | string;
+  strategy?: Strategy | undefined;
 
   /**
-   * <p>
-   *       The count of recommendations per strategy.
-   *     </p>
+   * <p> The count of recommendations per strategy. </p>
+   * @public
    */
-  count?: number;
-}
-
-export enum ServerOsType {
-  amazonLinux = "AmazonLinux",
-  endOfSupportWindowsServer = "EndOfSupportWindowsServer",
-  other = "Other",
-  redhat = "Redhat",
-  windowsServer = "WindowsServer",
+  count?: number | undefined;
 }
 
 /**
- * <p>
- *       Object containing details about the servers imported by Application Discovery Service
- *     </p>
+ * <p>The status summary of the server analysis.</p>
+ * @public
+ */
+export interface ServerStatusSummary {
+  /**
+   * <p>The status of the run time.</p>
+   * @public
+   */
+  runTimeAssessmentStatus?: RunTimeAssessmentStatus | undefined;
+
+  /**
+   * <p>The number of servers successfully analyzed, partially successful or failed
+   *       analysis.</p>
+   * @public
+   */
+  count?: number | undefined;
+}
+
+/**
+ * <p> Object containing details about the servers imported by Application Discovery Service </p>
+ * @public
  */
 export interface ServerSummary {
   /**
-   * <p>
-   *       Type of operating system for the servers.
-   *     </p>
+   * <p> Type of operating system for the servers. </p>
+   * @public
    */
-  ServerOsType?: ServerOsType | string;
+  ServerOsType?: ServerOsType | undefined;
 
   /**
-   * <p>
-   *       Number of servers.
-   *     </p>
+   * <p> Number of servers. </p>
+   * @public
    */
-  count?: number;
+  count?: number | undefined;
 }
 
 /**
- * <p>
- *       Contains the summary of the assessment results.
- *     </p>
+ * <p> Contains the summary of the assessment results. </p>
+ * @public
  */
 export interface AssessmentSummary {
   /**
-   * <p>
-   *       List of ServerStrategySummary.
-   *     </p>
+   * <p> List of ServerStrategySummary. </p>
+   * @public
    */
-  listServerStrategySummary?: StrategySummary[];
+  listServerStrategySummary?: StrategySummary[] | undefined;
 
   /**
-   * <p>
-   *       List of ApplicationComponentStrategySummary.
-   *     </p>
+   * <p> List of ApplicationComponentStrategySummary. </p>
+   * @public
    */
-  listApplicationComponentStrategySummary?: StrategySummary[];
+  listApplicationComponentStrategySummary?: StrategySummary[] | undefined;
 
   /**
-   * <p>
-   *       List of AntipatternSeveritySummary.
-   *     </p>
+   * <p> List of AntipatternSeveritySummary. </p>
+   * @public
    */
-  listAntipatternSeveritySummary?: AntipatternSeveritySummary[];
+  listAntipatternSeveritySummary?: AntipatternSeveritySummary[] | undefined;
 
   /**
-   * <p>
-   *       List of ApplicationComponentSummary.
-   *     </p>
+   * <p> List of ApplicationComponentSummary. </p>
+   * @public
    */
-  listApplicationComponentSummary?: ApplicationComponentSummary[];
+  listApplicationComponentSummary?: ApplicationComponentSummary[] | undefined;
 
   /**
-   * <p>
-   *       List of ServerSummary.
-   *     </p>
+   * <p> List of ServerSummary. </p>
+   * @public
    */
-  listServerSummary?: ServerSummary[];
+  listServerSummary?: ServerSummary[] | undefined;
 
   /**
-   * <p>
-   *       The Amazon S3 object containing the anti-pattern report.
-   *     </p>
+   * <p> The Amazon S3 object containing the anti-pattern report. </p>
+   * @public
    */
-  antipatternReportS3Object?: S3Object;
+  antipatternReportS3Object?: S3Object | undefined;
 
   /**
-   * <p>
-   *       The status of the anti-pattern report.
-   *     </p>
+   * <p> The status of the anti-pattern report. </p>
+   * @public
    */
-  antipatternReportStatus?: AntipatternReportStatus | string;
+  antipatternReportStatus?: AntipatternReportStatus | undefined;
 
   /**
-   * <p>
-   *       The status message of the anti-pattern report.
-   *     </p>
+   * <p> The status message of the anti-pattern report. </p>
+   * @public
    */
-  antipatternReportStatusMessage?: string;
+  antipatternReportStatusMessage?: string | undefined;
 
   /**
-   * <p>
-   *       The time the assessment was performed.
-   *     </p>
+   * <p> The time the assessment was performed. </p>
+   * @public
    */
-  lastAnalyzedTimestamp?: Date;
+  lastAnalyzedTimestamp?: Date | undefined;
+
+  /**
+   * <p>List of status summaries of the analyzed application components.</p>
+   * @public
+   */
+  listApplicationComponentStatusSummary?: ApplicationComponentStatusSummary[] | undefined;
+
+  /**
+   * <p>List of status summaries of the analyzed servers.</p>
+   * @public
+   */
+  listServerStatusSummary?: ServerStatusSummary[] | undefined;
 }
 
 /**
- * <p>
- *       Object containing details about applications as defined in Application Discovery Service.
- *     </p>
+ * <p>Defines the criteria of assessment.</p>
+ * @public
+ */
+export interface AssessmentTarget {
+  /**
+   * <p>Condition of an assessment.</p>
+   * @public
+   */
+  condition: Condition | undefined;
+
+  /**
+   * <p>Name of an assessment.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>Values of an assessment.</p>
+   * @public
+   */
+  values: string[] | undefined;
+}
+
+/**
+ * <p> Object containing details about applications as defined in Application Discovery Service. </p>
+ * @public
  */
 export interface AssociatedApplication {
   /**
-   * <p>
-   *       Name of the application as defined in Application Discovery Service.
-   *     </p>
+   * <p> Name of the application as defined in Application Discovery Service. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
-   * <p>
-   *       ID of the application as defined in Application Discovery Service.
-   *     </p>
+   * <p> ID of the application as defined in Application Discovery Service. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetApplicationComponentDetailsRequest {
   /**
    * <p> The ID of the application component. The ID is unique within an AWS account.</p>
+   * @public
    */
   applicationComponentId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetApplicationComponentDetailsResponse {
   /**
    * <p> Detailed information about an application component. </p>
+   * @public
    */
-  applicationComponentDetail?: ApplicationComponentDetail;
+  applicationComponentDetail?: ApplicationComponentDetail | undefined;
 
   /**
    * <p> The associated application group as defined in AWS Application Discovery Service. </p>
+   * @public
    */
-  associatedApplications?: AssociatedApplication[];
+  associatedApplications?: AssociatedApplication[] | undefined;
 
   /**
    * <p> Set to true if the application component belongs to more than one application group.
    *     </p>
+   * @public
    */
-  moreApplicationResource?: boolean;
+  moreApplicationResource?: boolean | undefined;
 
   /**
    * <p> A list of the IDs of the servers on which the application component is running. </p>
+   * @public
    */
-  associatedServerIds?: string[];
+  associatedServerIds?: string[] | undefined;
 }
 
 /**
- * <p> The server experienced an internal error. Try again. </p>
+ * @public
  */
-export class InternalServerException extends __BaseException {
-  readonly name: "InternalServerException" = "InternalServerException";
-  readonly $fault: "server" = "server";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InternalServerException, __BaseException>) {
-    super({
-      name: "InternalServerException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InternalServerException.prototype);
-  }
-}
-
-/**
- * <p> The specified ID in the request is not found. </p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-  }
-}
-
-/**
- * <p> The request was denied due to request throttling. </p>
- */
-export class ThrottlingException extends __BaseException {
-  readonly name: "ThrottlingException" = "ThrottlingException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ThrottlingException, __BaseException>) {
-    super({
-      name: "ThrottlingException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ThrottlingException.prototype);
-  }
-}
-
 export interface GetApplicationComponentStrategiesRequest {
   /**
    * <p> The ID of the application component. The ID is unique within an AWS account.</p>
+   * @public
    */
   applicationComponentId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetApplicationComponentStrategiesResponse {
   /**
    * <p> A list of application component strategy recommendations. </p>
+   * @public
    */
-  applicationComponentStrategies?: ApplicationComponentStrategy[];
+  applicationComponentStrategies?: ApplicationComponentStrategy[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetAssessmentRequest {
   /**
    * <p> The <code>assessmentid</code> returned by <a>StartAssessment</a>.</p>
+   * @public
    */
   id: string | undefined;
 }
 
 /**
  * <p> Detailed information about an assessment. </p>
+ * @public
  */
 export interface DataCollectionDetails {
   /**
    * <p> The status of the assessment. </p>
+   * @public
    */
-  status?: AssessmentStatus | string;
+  status?: AssessmentStatus | undefined;
 
   /**
    * <p> The total number of servers in the assessment. </p>
+   * @public
    */
-  servers?: number;
+  servers?: number | undefined;
 
   /**
    * <p> The number of failed servers in the assessment. </p>
+   * @public
    */
-  failed?: number;
+  failed?: number | undefined;
 
   /**
    * <p> The number of successful servers in the assessment. </p>
+   * @public
    */
-  success?: number;
+  success?: number | undefined;
 
   /**
    * <p> The number of servers with the assessment status <code>IN_PROGESS</code>. </p>
+   * @public
    */
-  inProgress?: number;
+  inProgress?: number | undefined;
 
   /**
    * <p> The start time of assessment. </p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p> The time the assessment completes. </p>
+   * @public
    */
-  completionTime?: Date;
+  completionTime?: Date | undefined;
+
+  /**
+   * <p>The status message of the assessment.</p>
+   * @public
+   */
+  statusMessage?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetAssessmentResponse {
   /**
    * <p> The ID for the specific assessment task. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> Detailed information about the assessment. </p>
+   * @public
    */
-  dataCollectionDetails?: DataCollectionDetails;
+  dataCollectionDetails?: DataCollectionDetails | undefined;
+
+  /**
+   * <p>List of criteria for assessment.</p>
+   * @public
+   */
+  assessmentTargets?: AssessmentTarget[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetImportFileTaskRequest {
   /**
-   * <p> The ID of the import file task. This ID is returned in the response of
-   *       <a>StartImportFileTask</a>. </p>
+   * <p> The ID of the import file task. This ID is returned in the response of <a>StartImportFileTask</a>. </p>
+   * @public
    */
   id: string | undefined;
 }
 
-export enum ImportFileTaskStatus {
-  DELETE_FAILED = "DeleteFailed",
-  DELETE_IN_PROGRESS = "DeleteInProgress",
-  DELETE_PARTIAL_SUCCESS = "DeletePartialSuccess",
-  DELETE_SUCCESS = "DeleteSuccess",
-  IMPORT_FAILED = "ImportFailed",
-  IMPORT_IN_PROGRESS = "ImportInProgress",
-  IMPORT_PARTIAL_SUCCESS = "ImportPartialSuccess",
-  IMPORT_SUCCESS = "ImportSuccess",
-}
-
+/**
+ * @public
+ */
 export interface GetImportFileTaskResponse {
   /**
    * <p> The import file task <code>id</code> returned in the response of <a>StartImportFileTask</a>. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> Status of import file task. </p>
+   * @public
    */
-  status?: ImportFileTaskStatus | string;
+  status?: ImportFileTaskStatus | undefined;
 
   /**
    * <p> Start time of the import task. </p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p> The S3 bucket where import file is located. </p>
+   * @public
    */
-  inputS3Bucket?: string;
+  inputS3Bucket?: string | undefined;
 
   /**
    * <p> The Amazon S3 key name of the import file. </p>
+   * @public
    */
-  inputS3Key?: string;
+  inputS3Key?: string | undefined;
 
   /**
    * <p> The S3 bucket name for status report of import task. </p>
+   * @public
    */
-  statusReportS3Bucket?: string;
+  statusReportS3Bucket?: string | undefined;
 
   /**
    * <p> The Amazon S3 key name for status report of import task. The report contains details about
    *       whether each record imported successfully or why it did not.</p>
+   * @public
    */
-  statusReportS3Key?: string;
+  statusReportS3Key?: string | undefined;
 
   /**
    * <p> The time that the import task completed. </p>
+   * @public
    */
-  completionTime?: Date;
+  completionTime?: Date | undefined;
 
   /**
    * <p> The number of records successfully imported. </p>
+   * @public
    */
-  numberOfRecordsSuccess?: number;
+  numberOfRecordsSuccess?: number | undefined;
 
   /**
    * <p> The number of records that failed to be imported. </p>
+   * @public
    */
-  numberOfRecordsFailed?: number;
+  numberOfRecordsFailed?: number | undefined;
 
   /**
    * <p> The name of the import task given in <a>StartImportFileTask</a>. </p>
+   * @public
    */
-  importName?: string;
+  importName?: string | undefined;
 }
 
 /**
- * <p> The request body isn't valid. </p>
+ * @public
  */
-export class ValidationException extends __BaseException {
-  readonly name: "ValidationException" = "ValidationException";
-  readonly $fault: "client" = "client";
+export interface GetLatestAssessmentIdRequest {}
+
+/**
+ * @public
+ */
+export interface GetLatestAssessmentIdResponse {
   /**
-   * @internal
+   * <p>The latest ID for the specific assessment task.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<ValidationException, __BaseException>) {
-    super({
-      name: "ValidationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ValidationException.prototype);
-  }
+  id?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetPortfolioPreferencesRequest {}
 
-export enum DatabaseManagementPreference {
-  AWS_MANAGED = "AWS-managed",
-  NO_PREFERENCE = "No preference",
-  SELF_MANAGE = "Self-manage",
-}
-
-export enum HeterogeneousTargetDatabaseEngine {
-  AMAZON_AURORA = "Amazon Aurora",
-  AWS_POSTGRESQL = "AWS PostgreSQL",
-  DB2_LUW = "Db2 LUW",
-  MARIA_DB = "MariaDB",
-  MICROSOFT_SQL_SERVER = "Microsoft SQL Server",
-  MONGO_DB = "MongoDB",
-  MYSQL = "MySQL",
-  NONE_SPECIFIED = "None specified",
-  ORACLE_DATABASE = "Oracle Database",
-  SAP = "SAP",
-}
-
 /**
- * <p>
- *       The object containing details about heterogeneous database preferences.
- *     </p>
+ * <p> The object containing details about heterogeneous database preferences. </p>
+ * @public
  */
 export interface Heterogeneous {
   /**
-   * <p>
-   *       The target database engine for heterogeneous database migration preference.
-   *     </p>
+   * <p> The target database engine for heterogeneous database migration preference. </p>
+   * @public
    */
-  targetDatabaseEngine: (HeterogeneousTargetDatabaseEngine | string)[] | undefined;
-}
-
-export enum HomogeneousTargetDatabaseEngine {
-  NONE_SPECIFIED = "None specified",
+  targetDatabaseEngine: HeterogeneousTargetDatabaseEngine[] | undefined;
 }
 
 /**
- * <p>
- *       The object containing details about homogeneous database preferences.
- *     </p>
+ * <p> The object containing details about homogeneous database preferences. </p>
+ * @public
  */
 export interface Homogeneous {
   /**
-   * <p>
-   *       The target database engine for homogeneous database migration preferences.
-   *     </p>
+   * <p> The target database engine for homogeneous database migration preferences. </p>
+   * @public
    */
-  targetDatabaseEngine?: (HomogeneousTargetDatabaseEngine | string)[];
-}
-
-export enum TargetDatabaseEngine {
-  AMAZON_AURORA = "Amazon Aurora",
-  AWS_POSTGRESQL = "AWS PostgreSQL",
-  DB2_LUW = "Db2 LUW",
-  MARIA_DB = "MariaDB",
-  MICROSOFT_SQL_SERVER = "Microsoft SQL Server",
-  MONGO_DB = "MongoDB",
-  MYSQL = "MySQL",
-  NONE_SPECIFIED = "None specified",
-  ORACLE_DATABASE = "Oracle Database",
-  SAP = "SAP",
+  targetDatabaseEngine?: HomogeneousTargetDatabaseEngine[] | undefined;
 }
 
 /**
  * <p> The object containing details about database migration preferences, when you have no
  *       particular preference. </p>
+ * @public
  */
 export interface NoDatabaseMigrationPreference {
   /**
-   * <p>
-   *       The target database engine for database migration preference that you specify.
-   *     </p>
+   * <p> The target database engine for database migration preference that you specify. </p>
+   * @public
    */
-  targetDatabaseEngine: (TargetDatabaseEngine | string)[] | undefined;
+  targetDatabaseEngine: TargetDatabaseEngine[] | undefined;
 }
 
 /**
- * <p>
- *       Preferences for migrating a database to AWS.
- *     </p>
+ * <p> Preferences for migrating a database to AWS. </p>
+ * @public
  */
 export type DatabaseMigrationPreference =
   | DatabaseMigrationPreference.HeterogeneousMember
@@ -1033,10 +1196,14 @@ export type DatabaseMigrationPreference =
   | DatabaseMigrationPreference.NoPreferenceMember
   | DatabaseMigrationPreference.$UnknownMember;
 
+/**
+ * @public
+ */
 export namespace DatabaseMigrationPreference {
   /**
    * <p> Indicates whether you are interested in moving from one type of database to another. For
    *       example, from SQL Server to Amazon Aurora MySQL-Compatible Edition. </p>
+   * @public
    */
   export interface HeterogeneousMember {
     heterogeneous: Heterogeneous;
@@ -1048,6 +1215,7 @@ export namespace DatabaseMigrationPreference {
   /**
    * <p> Indicates whether you are interested in moving to the same type of database into AWS.
    *       For example, from SQL Server in your environment to SQL Server on AWS. </p>
+   * @public
    */
   export interface HomogeneousMember {
     heterogeneous?: never;
@@ -1057,9 +1225,8 @@ export namespace DatabaseMigrationPreference {
   }
 
   /**
-   * <p>
-   *       Indicated that you do not prefer heterogeneous or homogeneous.
-   *     </p>
+   * <p> Indicated that you do not prefer heterogeneous or homogeneous. </p>
+   * @public
    */
   export interface NoPreferenceMember {
     heterogeneous?: never;
@@ -1068,6 +1235,9 @@ export namespace DatabaseMigrationPreference {
     $unknown?: never;
   }
 
+  /**
+   * @public
+   */
   export interface $UnknownMember {
     heterogeneous?: never;
     homogeneous?: never;
@@ -1075,195 +1245,203 @@ export namespace DatabaseMigrationPreference {
     $unknown: [string, any];
   }
 
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
   export interface Visitor<T> {
     heterogeneous: (value: Heterogeneous) => T;
     homogeneous: (value: Homogeneous) => T;
     noPreference: (value: NoDatabaseMigrationPreference) => T;
     _: (name: string, value: any) => T;
   }
-
-  export const visit = <T>(value: DatabaseMigrationPreference, visitor: Visitor<T>): T => {
-    if (value.heterogeneous !== undefined) return visitor.heterogeneous(value.heterogeneous);
-    if (value.homogeneous !== undefined) return visitor.homogeneous(value.homogeneous);
-    if (value.noPreference !== undefined) return visitor.noPreference(value.noPreference);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
 }
 
 /**
- * <p>
- *       Preferences on managing your databases on AWS.
- *     </p>
+ * <p> Preferences on managing your databases on AWS. </p>
+ * @public
  */
 export interface DatabasePreferences {
   /**
    * <p> Specifies whether you're interested in self-managed databases or databases managed by
    *       AWS. </p>
+   * @public
    */
-  databaseManagementPreference?: DatabaseManagementPreference | string;
+  databaseManagementPreference?: DatabaseManagementPreference | undefined;
 
   /**
-   * <p>
-   *       Specifies your preferred migration path.
-   *     </p>
+   * <p> Specifies your preferred migration path. </p>
+   * @public
    */
-  databaseMigrationPreference?: DatabaseMigrationPreference;
+  databaseMigrationPreference?: DatabaseMigrationPreference | undefined;
 }
 
 /**
- * <p>
- *       Business goals that you specify.
- *     </p>
+ * <p> Business goals that you specify. </p>
+ * @public
  */
 export interface BusinessGoals {
   /**
-   * <p>
-   *       Business goal to achieve migration at a fast pace.
-   *     </p>
+   * <p> Business goal to achieve migration at a fast pace. </p>
+   * @public
    */
-  speedOfMigration?: number;
+  speedOfMigration?: number | undefined;
 
   /**
-   * <p>
-   *       Business goal to reduce the operational overhead on the team by moving into managed services.
-   *     </p>
+   * <p> Business goal to reduce the operational overhead on the team by moving into managed
+   *       services. </p>
+   * @public
    */
-  reduceOperationalOverheadWithManagedServices?: number;
+  reduceOperationalOverheadWithManagedServices?: number | undefined;
 
   /**
-   * <p>
-   *       Business goal to modernize infrastructure by moving to cloud native technologies.
-   *     </p>
+   * <p> Business goal to modernize infrastructure by moving to cloud native technologies. </p>
+   * @public
    */
-  modernizeInfrastructureWithCloudNativeTechnologies?: number;
+  modernizeInfrastructureWithCloudNativeTechnologies?: number | undefined;
 
   /**
-   * <p>
-   *       Business goal to reduce license costs.
-   *     </p>
+   * <p> Business goal to reduce license costs. </p>
+   * @public
    */
-  licenseCostReduction?: number;
+  licenseCostReduction?: number | undefined;
 }
 
 /**
- * <p>
- *       Rank of business goals based on priority.
- *     </p>
+ * <p> Rank of business goals based on priority. </p>
+ * @public
  */
 export interface PrioritizeBusinessGoals {
   /**
-   * <p>
-   *       Rank of business goals based on priority.
-   *     </p>
+   * <p> Rank of business goals based on priority. </p>
+   * @public
    */
-  businessGoals?: BusinessGoals;
+  businessGoals?: BusinessGoals | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetPortfolioPreferencesResponse {
   /**
    * <p> The rank of business goals based on priority. </p>
+   * @public
    */
-  prioritizeBusinessGoals?: PrioritizeBusinessGoals;
+  prioritizeBusinessGoals?: PrioritizeBusinessGoals | undefined;
 
   /**
    * <p> The transformation preferences for non-database applications. </p>
+   * @public
    */
-  applicationPreferences?: ApplicationPreferences;
+  applicationPreferences?: ApplicationPreferences | undefined;
 
   /**
    * <p> The transformation preferences for database applications. </p>
+   * @public
    */
-  databasePreferences?: DatabasePreferences;
+  databasePreferences?: DatabasePreferences | undefined;
+
+  /**
+   * <p>The classification for application component types.</p>
+   * @public
+   */
+  applicationMode?: ApplicationMode | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetPortfolioSummaryRequest {}
 
+/**
+ * @public
+ */
 export interface GetPortfolioSummaryResponse {
   /**
    * <p> An assessment summary for the portfolio including the number of servers to rehost and the
    *       overall number of anti-patterns. </p>
+   * @public
    */
-  assessmentSummary?: AssessmentSummary;
+  assessmentSummary?: AssessmentSummary | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetRecommendationReportDetailsRequest {
   /**
-   * <p> The recommendation report generation task <code>id</code> returned by
-   *       <a>StartRecommendationReportGeneration</a>. </p>
+   * <p> The recommendation report generation task <code>id</code> returned by <a>StartRecommendationReportGeneration</a>. </p>
+   * @public
    */
   id: string | undefined;
 }
 
-export enum RecommendationReportStatus {
-  FAILED = "FAILED",
-  IN_PROGRESS = "IN_PROGRESS",
-  SUCCESS = "SUCCESS",
-}
-
 /**
- * <p>
- *      Contains detailed information about a recommendation report.
- *     </p>
+ * <p> Contains detailed information about a recommendation report. </p>
+ * @public
  */
 export interface RecommendationReportDetails {
   /**
-   * <p>
-   *       The status of the recommendation report generation task.
-   *     </p>
+   * <p> The status of the recommendation report generation task. </p>
+   * @public
    */
-  status?: RecommendationReportStatus | string;
+  status?: RecommendationReportStatus | undefined;
 
   /**
-   * <p>
-   *       The status message for recommendation report generation.
-   *     </p>
+   * <p> The status message for recommendation report generation. </p>
+   * @public
    */
-  statusMessage?: string;
+  statusMessage?: string | undefined;
 
   /**
-   * <p>
-   *       The time that the recommendation report generation task starts.
-   *     </p>
+   * <p> The time that the recommendation report generation task starts. </p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
-   * <p>
-   *       The time that the recommendation report generation task completes.
-   *     </p>
+   * <p> The time that the recommendation report generation task completes. </p>
+   * @public
    */
-  completionTime?: Date;
+  completionTime?: Date | undefined;
 
   /**
-   * <p>
-   *       The S3 bucket where the report file is located.
-   *     </p>
+   * <p> The S3 bucket where the report file is located. </p>
+   * @public
    */
-  s3Bucket?: string;
+  s3Bucket?: string | undefined;
 
   /**
-   * <p>
-   *       The Amazon S3 key name of the report file.
-   *     </p>
+   * <p> The Amazon S3 key name of the report file. </p>
+   * @public
    */
-  s3Keys?: string[];
+  s3Keys?: string[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetRecommendationReportDetailsResponse {
   /**
    * <p> The ID of the recommendation report generation task. See the response of <a>StartRecommendationReportGeneration</a>. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> Detailed information about the recommendation report. </p>
+   * @public
    */
-  recommendationReportDetails?: RecommendationReportDetails;
+  recommendationReportDetails?: RecommendationReportDetails | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServerDetailsRequest {
   /**
    * <p> The ID of the server. </p>
+   * @public
    */
   serverId: string | undefined;
 
@@ -1271,1449 +1449,1105 @@ export interface GetServerDetailsRequest {
    * <p> The token from a previous call that you use to retrieve the next set of results. For example,
    * if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You'll receive a set of 10 results along
    *       with a token. You then use the returned token to retrieve the next set of 10. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> The maximum number of items to include in the response. The maximum value is 100. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export enum RunTimeAssessmentStatus {
-  DC_FAILED = "dataCollectionTaskFailed",
-  DC_PARTIAL_SUCCESS = "dataCollectionTaskPartialSuccess",
-  DC_REQ_SENT = "dataCollectionTaskScheduled",
-  DC_STARTED = "dataCollectionTaskStarted",
-  DC_STOPPED = "dataCollectionTaskStopped",
-  DC_SUCCESS = "dataCollectionTaskSuccess",
-  DC_TO_BE_SCHEDULED = "dataCollectionTaskToBeScheduled",
+  maxResults?: number | undefined;
 }
 
 /**
- * <p>
- *       Information about the server's network for which the assessment was run.
- *     </p>
+ * <p>The error in server analysis.</p>
+ * @public
+ */
+export interface ServerError {
+  /**
+   * <p>The error category of server analysis.</p>
+   * @public
+   */
+  serverErrorCategory?: ServerErrorCategory | undefined;
+}
+
+/**
+ * <p> Information about the server's network for which the assessment was run. </p>
+ * @public
  */
 export interface NetworkInfo {
   /**
-   * <p>
-   *       Information about the name of the interface of the server for which the assessment was run.
-   *     </p>
+   * <p> Information about the name of the interface of the server for which the assessment was
+   *       run. </p>
+   * @public
    */
   interfaceName: string | undefined;
 
   /**
-   * <p>
-   *       Information about the IP address of the server for which the assessment was run.
-   *     </p>
+   * <p> Information about the IP address of the server for which the assessment was run. </p>
+   * @public
    */
   ipAddress: string | undefined;
 
   /**
-   * <p>
-   *       Information about the MAC address of the server for which the assessment was run.
-   *     </p>
+   * <p> Information about the MAC address of the server for which the assessment was run. </p>
+   * @public
    */
   macAddress: string | undefined;
 
   /**
-   * <p>
-   *       Information about the subnet mask of the server for which the assessment was run.
-   *     </p>
+   * <p> Information about the subnet mask of the server for which the assessment was run. </p>
+   * @public
    */
   netMask: string | undefined;
 }
 
-export enum OSType {
-  LINUX = "LINUX",
-  WINDOWS = "WINDOWS",
-}
-
 /**
- * <p>
- *       Information about the operating system.
- *     </p>
+ * <p> Information about the operating system. </p>
+ * @public
  */
 export interface OSInfo {
   /**
-   * <p>
-   *       Information about the type of operating system.
-   *     </p>
+   * <p> Information about the type of operating system. </p>
+   * @public
    */
-  type?: OSType | string;
+  type?: OSType | undefined;
 
   /**
-   * <p>
-   *       Information about the version of operating system.
-   *     </p>
+   * <p> Information about the version of operating system. </p>
+   * @public
    */
-  version?: string;
+  version?: string | undefined;
 }
 
 /**
- * <p>
- *       Information about the server that hosts application components.
- *     </p>
+ * <p> Information about the server that hosts application components. </p>
+ * @public
  */
 export interface SystemInfo {
   /**
-   * <p>
-   *       Operating system corresponding to a server.
-   *     </p>
+   * <p> Operating system corresponding to a server. </p>
+   * @public
    */
-  osInfo?: OSInfo;
+  osInfo?: OSInfo | undefined;
 
   /**
-   * <p>
-   *       File system type for the server.
-   *     </p>
+   * <p> File system type for the server. </p>
+   * @public
    */
-  fileSystemType?: string;
+  fileSystemType?: string | undefined;
 
   /**
-   * <p>
-   *       Networking information related to a server.
-   *     </p>
+   * <p> Networking information related to a server. </p>
+   * @public
    */
-  networkInfoList?: NetworkInfo[];
+  networkInfoList?: NetworkInfo[] | undefined;
 
   /**
-   * <p>
-   *       CPU architecture type for the server.
-   *     </p>
+   * <p> CPU architecture type for the server. </p>
+   * @public
    */
-  cpuArchitecture?: string;
+  cpuArchitecture?: string | undefined;
 }
 
 /**
  * <p> Detailed information about a server. </p>
+ * @public
  */
 export interface ServerDetail {
   /**
    * <p> The server ID. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> The name of the server. </p>
+   * @public
    */
-  name?: string;
+  name?: string | undefined;
 
   /**
    * <p> A set of recommendations. </p>
+   * @public
    */
-  recommendationSet?: RecommendationSet;
+  recommendationSet?: RecommendationSet | undefined;
 
   /**
    * <p> The status of assessment for the server. </p>
+   * @public
    */
-  dataCollectionStatus?: RunTimeAssessmentStatus | string;
+  dataCollectionStatus?: RunTimeAssessmentStatus | undefined;
 
   /**
    * <p> A message about the status of data collection, which contains detailed descriptions of
    *       any error messages. </p>
+   * @public
    */
-  statusMessage?: string;
+  statusMessage?: string | undefined;
 
   /**
    * <p> A list of anti-pattern severity summaries. </p>
+   * @public
    */
-  listAntipatternSeveritySummary?: AntipatternSeveritySummary[];
+  listAntipatternSeveritySummary?: AntipatternSeveritySummary[] | undefined;
 
   /**
    * <p> System information about the server. </p>
+   * @public
    */
-  systemInfo?: SystemInfo;
+  systemInfo?: SystemInfo | undefined;
 
   /**
    * <p> A list of strategy summaries. </p>
+   * @public
    */
-  applicationComponentStrategySummary?: StrategySummary[];
+  applicationComponentStrategySummary?: StrategySummary[] | undefined;
 
   /**
    * <p> The S3 bucket name and Amazon S3 key name for anti-pattern report. </p>
+   * @public
    */
-  antipatternReportS3Object?: S3Object;
+  antipatternReportS3Object?: S3Object | undefined;
 
   /**
    * <p> The status of the anti-pattern report generation. </p>
+   * @public
    */
-  antipatternReportStatus?: AntipatternReportStatus | string;
+  antipatternReportStatus?: AntipatternReportStatus | undefined;
 
   /**
    * <p> A message about the status of the anti-pattern report generation. </p>
+   * @public
    */
-  antipatternReportStatusMessage?: string;
+  antipatternReportStatusMessage?: string | undefined;
 
   /**
    * <p> The type of server. </p>
+   * @public
    */
-  serverType?: string;
+  serverType?: string | undefined;
 
   /**
    * <p> The timestamp of when the server was assessed. </p>
+   * @public
    */
-  lastAnalyzedTimestamp?: Date;
+  lastAnalyzedTimestamp?: Date | undefined;
+
+  /**
+   * <p>The error in server analysis.</p>
+   * @public
+   */
+  serverError?: ServerError | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServerDetailsResponse {
   /**
    * <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> Detailed information about the server. </p>
+   * @public
    */
-  serverDetail?: ServerDetail;
+  serverDetail?: ServerDetail | undefined;
 
   /**
    * <p> The associated application group the server belongs to, as defined in AWS Application Discovery Service.
    *     </p>
+   * @public
    */
-  associatedApplications?: AssociatedApplication[];
+  associatedApplications?: AssociatedApplication[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetServerStrategiesRequest {
   /**
    * <p> The ID of the server. </p>
+   * @public
    */
   serverId: string | undefined;
 }
 
 /**
  * <p> Contains information about a strategy recommendation for a server. </p>
+ * @public
  */
 export interface ServerStrategy {
   /**
    * <p> Strategy recommendation for the server. </p>
+   * @public
    */
-  recommendation?: RecommendationSet;
+  recommendation?: RecommendationSet | undefined;
 
   /**
    * <p> The recommendation status of the strategy for the server. </p>
+   * @public
    */
-  status?: StrategyRecommendation | string;
+  status?: StrategyRecommendation | undefined;
 
   /**
    * <p> The number of application components with this strategy recommendation running on the
    *       server. </p>
+   * @public
    */
-  numberOfApplicationComponents?: number;
+  numberOfApplicationComponents?: number | undefined;
 
   /**
    * <p> Set to true if the recommendation is set as preferred. </p>
+   * @public
    */
-  isPreferred?: boolean;
-}
-
-export interface GetServerStrategiesResponse {
-  /**
-   * <p> A list of strategy recommendations for the server. </p>
-   */
-  serverStrategies?: ServerStrategy[];
-}
-
-export enum GroupName {
-  EXTERNAL_ID = "ExternalId",
+  isPreferred?: boolean | undefined;
 }
 
 /**
- * <p>
- *       The object containing information about distinct imports or groups for Strategy Recommendations.
- *     </p>
+ * @public
+ */
+export interface GetServerStrategiesResponse {
+  /**
+   * <p> A list of strategy recommendations for the server. </p>
+   * @public
+   */
+  serverStrategies?: ServerStrategy[] | undefined;
+}
+
+/**
+ * Represents input for ListAnalyzableServers operation.
+ * @public
+ */
+export interface ListAnalyzableServersRequest {
+  /**
+   * Specifies whether to sort by ascending (ASC) or descending (DESC) order.
+   * @public
+   */
+  sort?: SortOrder | undefined;
+
+  /**
+   * The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set maxResults to 10. You'll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10.
+   * @public
+   */
+  nextToken?: string | undefined;
+
+  /**
+   * The maximum number of items to include in the response. The maximum value is 100.
+   * @public
+   */
+  maxResults?: number | undefined;
+}
+
+/**
+ * Represents output for ListAnalyzableServers operation.
+ * @public
+ */
+export interface ListAnalyzableServersResponse {
+  /**
+   * The list of analyzable servers with summary information about each server.
+   * @public
+   */
+  analyzableServers?: AnalyzableServerSummary[] | undefined;
+
+  /**
+   * The token you use to retrieve the next set of results, or null if there are no more results.
+   * @public
+   */
+  nextToken?: string | undefined;
+}
+
+/**
+ * <p> The object containing information about distinct imports or groups for Strategy Recommendations. </p>
+ * @public
  */
 export interface Group {
   /**
-   * <p>
-   *       The key of the specific import group.
-   *     </p>
+   * <p> The key of the specific import group. </p>
+   * @public
    */
-  name?: GroupName | string;
+  name?: GroupName | undefined;
 
   /**
-   * <p>
-   *       The value of the specific import group.
-   *     </p>
+   * <p> The value of the specific import group. </p>
+   * @public
    */
-  value?: string;
+  value?: string | undefined;
 }
 
-export enum SortOrder {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
+/**
+ * @public
+ */
 export interface ListApplicationComponentsRequest {
   /**
    * <p> Criteria for filtering the list of application components. </p>
+   * @public
    */
-  applicationComponentCriteria?: ApplicationComponentCriteria | string;
+  applicationComponentCriteria?: ApplicationComponentCriteria | undefined;
 
   /**
    * <p> Specify the value based on the application component criteria type. For example, if
    *         <code>applicationComponentCriteria</code> is set to <code>SERVER_ID</code> and
    *         <code>filterValue</code> is set to <code>server1</code>, then <a>ListApplicationComponents</a> returns all the application components running on
    *       server1. </p>
+   * @public
    */
-  filterValue?: string;
+  filterValue?: string | undefined;
 
   /**
    * <p> Specifies whether to sort by ascending (<code>ASC</code>) or descending
-   *       (<code>DESC</code>) order. </p>
+   *         (<code>DESC</code>) order. </p>
+   * @public
    */
-  sort?: SortOrder | string;
+  sort?: SortOrder | undefined;
 
   /**
    * <p> The group ID specified in to filter on. </p>
+   * @public
    */
-  groupIdFilter?: Group[];
+  groupIdFilter?: Group[] | undefined;
 
   /**
    * <p> The token from a previous call that you use to retrieve the next set of results. For example,
    * if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You'll receive a set of 10 results along
    *       with a token. You then use the returned token to retrieve the next set of 10. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> The maximum number of items to include in the response. The maximum value is 100. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListApplicationComponentsResponse {
   /**
    * <p> The list of application components with detailed information about each component.
    *     </p>
+   * @public
    */
-  applicationComponentInfos?: ApplicationComponentDetail[];
+  applicationComponentInfos?: ApplicationComponentDetail[] | undefined;
 
   /**
    * <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
 /**
- * <p>
- *       Exception to indicate that the service-linked role (SLR) is locked.
- *     </p>
+ * @public
  */
-export class ServiceLinkedRoleLockClientException extends __BaseException {
-  readonly name: "ServiceLinkedRoleLockClientException" = "ServiceLinkedRoleLockClientException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServiceLinkedRoleLockClientException, __BaseException>) {
-    super({
-      name: "ServiceLinkedRoleLockClientException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServiceLinkedRoleLockClientException.prototype);
-  }
-}
-
 export interface ListCollectorsRequest {
   /**
    * <p> The token from a previous call that you use to retrieve the next set of results. For example,
    * if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You'll receive a set of 10 results along
    *       with a token. You then use the returned token to retrieve the next set of 10. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> The maximum number of items to include in the response. The maximum value is 100. </p>
+   * @public
    */
-  maxResults?: number;
-}
-
-export enum CollectorHealth {
-  COLLECTOR_HEALTHY = "COLLECTOR_HEALTHY",
-  COLLECTOR_UNHEALTHY = "COLLECTOR_UNHEALTHY",
+  maxResults?: number | undefined;
 }
 
 /**
- * <p>
- *       Process data collector that runs in the environment that you specify.
- *     </p>
+ * <p>IP address based configurations.</p>
+ * @public
+ */
+export interface IPAddressBasedRemoteInfo {
+  /**
+   * <p>The time stamp of the configuration.</p>
+   * @public
+   */
+  ipAddressConfigurationTimeStamp?: string | undefined;
+
+  /**
+   * <p>The type of authorization.</p>
+   * @public
+   */
+  authType?: AuthType | undefined;
+
+  /**
+   * <p>The type of the operating system.</p>
+   * @public
+   */
+  osType?: OSType | undefined;
+}
+
+/**
+ * <p>Detailed information of the pipeline.</p>
+ * @public
+ */
+export interface PipelineInfo {
+  /**
+   * <p>The type of pipeline.</p>
+   * @public
+   */
+  pipelineType?: PipelineType | undefined;
+
+  /**
+   * <p>The time when the pipeline info was configured.</p>
+   * @public
+   */
+  pipelineConfigurationTimeStamp?: string | undefined;
+}
+
+/**
+ * <p>Information about the server configured for source code analysis.</p>
+ * @public
+ */
+export interface RemoteSourceCodeAnalysisServerInfo {
+  /**
+   * <p>The time when the remote source code server was configured.</p>
+   * @public
+   */
+  remoteSourceCodeAnalysisServerConfigurationTimestamp?: string | undefined;
+}
+
+/**
+ * <p>Details about the server in vCenter.</p>
+ * @public
+ */
+export interface VcenterBasedRemoteInfo {
+  /**
+   * <p>The time when the remote server based on vCenter was last configured.</p>
+   * @public
+   */
+  vcenterConfigurationTimeStamp?: string | undefined;
+
+  /**
+   * <p>The type of the operating system.</p>
+   * @public
+   */
+  osType?: OSType | undefined;
+}
+
+/**
+ * <p>Details about the version control configuration.</p>
+ * @public
+ */
+export interface VersionControlInfo {
+  /**
+   * <p>The type of version control.</p>
+   * @public
+   */
+  versionControlType?: VersionControlType | undefined;
+
+  /**
+   * <p>The time when the version control system was last configured.</p>
+   * @public
+   */
+  versionControlConfigurationTimeStamp?: string | undefined;
+}
+
+/**
+ * <p>Summary of the collector configuration.</p>
+ * @public
+ */
+export interface ConfigurationSummary {
+  /**
+   * <p>The list of vCenter configurations.</p>
+   * @public
+   */
+  vcenterBasedRemoteInfoList?: VcenterBasedRemoteInfo[] | undefined;
+
+  /**
+   * <p>IP address based configurations.</p>
+   * @public
+   */
+  ipAddressBasedRemoteInfoList?: IPAddressBasedRemoteInfo[] | undefined;
+
+  /**
+   * <p>The list of the version control configurations.</p>
+   * @public
+   */
+  versionControlInfoList?: VersionControlInfo[] | undefined;
+
+  /**
+   * <p>The list of pipeline info configurations.</p>
+   * @public
+   */
+  pipelineInfoList?: PipelineInfo[] | undefined;
+
+  /**
+   * <p>Info about the remote server source code configuration.</p>
+   * @public
+   */
+  remoteSourceCodeAnalysisServerInfo?: RemoteSourceCodeAnalysisServerInfo | undefined;
+}
+
+/**
+ * <p> Process data collector that runs in the environment that you specify. </p>
+ * @public
  */
 export interface Collector {
   /**
-   * <p>
-   *       The ID of the collector.
-   *     </p>
+   * <p> The ID of the collector. </p>
+   * @public
    */
-  collectorId?: string;
+  collectorId?: string | undefined;
 
   /**
-   * <p>
-   *       IP address of the server that is hosting the collector.
-   *     </p>
+   * <p> IP address of the server that is hosting the collector. </p>
+   * @public
    */
-  ipAddress?: string;
+  ipAddress?: string | undefined;
 
   /**
-   * <p>
-   *       Hostname of the server that is hosting the collector.
-   *     </p>
+   * <p> Hostname of the server that is hosting the collector. </p>
+   * @public
    */
-  hostName?: string;
+  hostName?: string | undefined;
 
   /**
-   * <p>
-   *       Indicates the health of a collector.
-   *     </p>
+   * <p> Indicates the health of a collector. </p>
+   * @public
    */
-  collectorHealth?: CollectorHealth | string;
+  collectorHealth?: CollectorHealth | undefined;
 
   /**
-   * <p>
-   *       Current version of the collector that is running in the environment that you specify.
+   * <p> Current version of the collector that is running in the environment that you specify.
    *     </p>
+   * @public
    */
-  collectorVersion?: string;
+  collectorVersion?: string | undefined;
 
   /**
-   * <p>
-   *       Time when the collector registered with the service.
-   *     </p>
+   * <p> Time when the collector registered with the service. </p>
+   * @public
    */
-  registeredTimeStamp?: string;
+  registeredTimeStamp?: string | undefined;
 
   /**
-   * <p>
-   *       Time when the collector last pinged the service.
-   *     </p>
+   * <p> Time when the collector last pinged the service. </p>
+   * @public
    */
-  lastActivityTimeStamp?: string;
+  lastActivityTimeStamp?: string | undefined;
+
+  /**
+   * <p>Summary of the collector configuration.</p>
+   * @public
+   */
+  configurationSummary?: ConfigurationSummary | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListCollectorsResponse {
   /**
    * <p> The list of all the installed collectors. </p>
+   * @public
    */
-  Collectors?: Collector[];
+  Collectors?: Collector[] | undefined;
 
   /**
    * <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListImportFileTaskRequest {
   /**
    * <p> The token from a previous call that you use to retrieve the next set of results. For example,
    * if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You'll receive a set of 10 results along
    *       with a token. You then use the returned token to retrieve the next set of 10. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> The total number of items to return. The maximum value is 100. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
 /**
  * <p> Information about the import file tasks you request. </p>
+ * @public
  */
 export interface ImportFileTaskInformation {
   /**
    * <p> The ID of the import file task. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 
   /**
    * <p> Status of import file task. </p>
+   * @public
    */
-  status?: ImportFileTaskStatus | string;
+  status?: ImportFileTaskStatus | undefined;
 
   /**
    * <p> Start time of the import task. </p>
+   * @public
    */
-  startTime?: Date;
+  startTime?: Date | undefined;
 
   /**
    * <p> The S3 bucket where the import file is located. </p>
+   * @public
    */
-  inputS3Bucket?: string;
+  inputS3Bucket?: string | undefined;
 
   /**
    * <p> The Amazon S3 key name of the import file. </p>
+   * @public
    */
-  inputS3Key?: string;
+  inputS3Key?: string | undefined;
 
   /**
    * <p> The S3 bucket name for status report of import task. </p>
+   * @public
    */
-  statusReportS3Bucket?: string;
+  statusReportS3Bucket?: string | undefined;
 
   /**
-   * <p> The Amazon S3 key name for status report of import task. The report contains  details about
+   * <p> The Amazon S3 key name for status report of import task. The report contains details about
    *       whether each record imported successfully or why it did not. </p>
+   * @public
    */
-  statusReportS3Key?: string;
+  statusReportS3Key?: string | undefined;
 
   /**
    * <p> The time that the import task completes. </p>
+   * @public
    */
-  completionTime?: Date;
+  completionTime?: Date | undefined;
 
   /**
    * <p> The number of records successfully imported. </p>
+   * @public
    */
-  numberOfRecordsSuccess?: number;
+  numberOfRecordsSuccess?: number | undefined;
 
   /**
    * <p> The number of records that failed to be imported. </p>
+   * @public
    */
-  numberOfRecordsFailed?: number;
+  numberOfRecordsFailed?: number | undefined;
 
   /**
    * <p> The name of the import task given in <code>StartImportFileTask</code>. </p>
+   * @public
    */
-  importName?: string;
+  importName?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListImportFileTaskResponse {
   /**
    * <p> Lists information about the files you import.</p>
+   * @public
    */
-  taskInfos?: ImportFileTaskInformation[];
+  taskInfos?: ImportFileTaskInformation[] | undefined;
 
   /**
    * <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
-export enum ServerCriteria {
-  DESTINATION = "DESTINATION",
-  NOT_DEFINED = "NOT_DEFINED",
-  OS_NAME = "OS_NAME",
-  SERVER_ID = "SERVER_ID",
-  STRATEGY = "STRATEGY",
-}
-
+/**
+ * @public
+ */
 export interface ListServersRequest {
   /**
    * <p> Criteria for filtering servers. </p>
+   * @public
    */
-  serverCriteria?: ServerCriteria | string;
+  serverCriteria?: ServerCriteria | undefined;
 
   /**
    * <p> Specifies the filter value, which is based on the type of server criteria. For example,
    *       if <code>serverCriteria</code> is <code>OS_NAME</code>, and the <code>filterValue</code> is
    *       equal to <code>WindowsServer</code>, then <code>ListServers</code> returns all of the servers
    *       matching the OS name <code>WindowsServer</code>. </p>
+   * @public
    */
-  filterValue?: string;
+  filterValue?: string | undefined;
 
   /**
    * <p> Specifies whether to sort by ascending (<code>ASC</code>) or descending
-   *       (<code>DESC</code>) order. </p>
+   *         (<code>DESC</code>) order. </p>
+   * @public
    */
-  sort?: SortOrder | string;
+  sort?: SortOrder | undefined;
 
   /**
    * <p> Specifies the group ID to filter on. </p>
+   * @public
    */
-  groupIdFilter?: Group[];
+  groupIdFilter?: Group[] | undefined;
 
   /**
    * <p> The token from a previous call that you use to retrieve the next set of results. For example,
    * if a previous call to this action returned 100 items, but you set <code>maxResults</code> to 10. You'll receive a set of 10 results along
    *       with a token. You then use the returned token to retrieve the next set of 10. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 
   /**
    * <p> The maximum number of items to include in the response. The maximum value is 100. </p>
+   * @public
    */
-  maxResults?: number;
+  maxResults?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListServersResponse {
   /**
    * <p> The list of servers with detailed information about each server. </p>
+   * @public
    */
-  serverInfos?: ServerDetail[];
+  serverInfos?: ServerDetail[] | undefined;
 
   /**
    * <p> The token you use to retrieve the next set of results, or null if there are no more results. </p>
+   * @public
    */
-  nextToken?: string;
+  nextToken?: string | undefined;
 }
 
 /**
- * <p>
- *       Exception to indicate that there is an ongoing task when a new task is created.
- *       Return when once the existing tasks are complete.
- *     </p>
+ * @public
  */
-export class ConflictException extends __BaseException {
-  readonly name: "ConflictException" = "ConflictException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ConflictException, __BaseException>) {
-    super({
-      name: "ConflictException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConflictException.prototype);
-  }
-}
-
 export interface PutPortfolioPreferencesRequest {
   /**
    * <p> The rank of the business goals based on priority. </p>
+   * @public
    */
-  prioritizeBusinessGoals?: PrioritizeBusinessGoals;
+  prioritizeBusinessGoals?: PrioritizeBusinessGoals | undefined;
 
   /**
    * <p> The transformation preferences for non-database applications. </p>
+   * @public
    */
-  applicationPreferences?: ApplicationPreferences;
+  applicationPreferences?: ApplicationPreferences | undefined;
 
   /**
    * <p> The transformation preferences for database applications. </p>
+   * @public
    */
-  databasePreferences?: DatabasePreferences;
+  databasePreferences?: DatabasePreferences | undefined;
+
+  /**
+   * <p>The classification for application component types.</p>
+   * @public
+   */
+  applicationMode?: ApplicationMode | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutPortfolioPreferencesResponse {}
 
 /**
- * <p> The AWS account has reached its quota of imports. Contact AWS Support to increase the
- *       quota for this account. </p>
+ * @public
  */
-export class ServiceQuotaExceededException extends __BaseException {
-  readonly name: "ServiceQuotaExceededException" = "ServiceQuotaExceededException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServiceQuotaExceededException, __BaseException>) {
-    super({
-      name: "ServiceQuotaExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServiceQuotaExceededException.prototype);
-  }
-}
-
 export interface StartAssessmentRequest {
   /**
-   * <p>
-   *       The S3 bucket used by the collectors to send analysis data to the service.
-   *       The bucket name must begin with <code>migrationhub-strategy-</code>.
-   *     </p>
+   * <p> The S3 bucket used by the collectors to send analysis data to the service. The bucket
+   *       name must begin with <code>migrationhub-strategy-</code>. </p>
+   * @public
    */
-  s3bucketForAnalysisData?: string;
+  s3bucketForAnalysisData?: string | undefined;
 
   /**
-   * <p>
-   *       The S3 bucket where all the reports generated by the service are stored.
-   *       The bucket name must begin with <code>migrationhub-strategy-</code>.
-   *     </p>
+   * <p> The S3 bucket where all the reports generated by the service are stored. The bucket name
+   *       must begin with <code>migrationhub-strategy-</code>. </p>
+   * @public
    */
-  s3bucketForReportData?: string;
+  s3bucketForReportData?: string | undefined;
+
+  /**
+   * <p>List of criteria for assessment.</p>
+   * @public
+   */
+  assessmentTargets?: AssessmentTarget[] | undefined;
+
+  /**
+   * The data source type of an assessment to be started.
+   * @public
+   */
+  assessmentDataSourceType?: AssessmentDataSourceType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartAssessmentResponse {
   /**
-   * <p>
-   *       The ID of the assessment.
-   *     </p>
+   * <p> The ID of the assessment. </p>
+   * @public
    */
-  assessmentId?: string;
+  assessmentId?: string | undefined;
 }
 
-export enum DataSourceType {
-  ADS = "ApplicationDiscoveryService",
-  MPA = "MPA",
-}
-
+/**
+ * @public
+ */
 export interface StartImportFileTaskRequest {
   /**
    * <p> A descriptive name for the request. </p>
+   * @public
    */
   name: string | undefined;
 
   /**
    * <p> The S3 bucket where the import file is located. The bucket name is required to begin with
    *         <code>migrationhub-strategy-</code>.</p>
+   * @public
    */
   S3Bucket: string | undefined;
 
   /**
    * <p> The Amazon S3 key name of the import file. </p>
+   * @public
    */
   s3key: string | undefined;
 
   /**
    * <p>Specifies the source that the servers are coming from. By default, Strategy Recommendations assumes that
    *       the servers specified in the import file are available in AWS Application Discovery Service. </p>
+   * @public
    */
-  dataSourceType?: DataSourceType | string;
+  dataSourceType?: DataSourceType | undefined;
 
   /**
    * <p>Groups the resources in the import file together with a unique name. This ID can be as
    *       filter in <code>ListApplicationComponents</code> and <code>ListServers</code>. </p>
+   * @public
    */
-  groupId?: Group[];
+  groupId?: Group[] | undefined;
 
   /**
    * <p> The S3 bucket where Strategy Recommendations uploads import results. The bucket name is required to
    *       begin with migrationhub-strategy-. </p>
+   * @public
    */
-  s3bucketForReportData?: string;
+  s3bucketForReportData?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartImportFileTaskResponse {
   /**
    * <p> The ID for a specific import task. The ID is unique within an AWS account. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 }
 
-export enum OutputFormat {
-  Excel = "Excel",
-  Json = "Json",
-}
-
+/**
+ * @public
+ */
 export interface StartRecommendationReportGenerationRequest {
   /**
-   * <p> The output format for the recommendation report file. The default format is Microsoft Excel. </p>
+   * <p> The output format for the recommendation report file. The default format is Microsoft
+   *       Excel. </p>
+   * @public
    */
-  outputFormat?: OutputFormat | string;
+  outputFormat?: OutputFormat | undefined;
 
   /**
    * <p> Groups the resources in the recommendation report with a unique name. </p>
+   * @public
    */
-  groupIdFilter?: Group[];
+  groupIdFilter?: Group[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartRecommendationReportGenerationResponse {
   /**
    * <p> The ID of the recommendation report generation task. </p>
+   * @public
    */
-  id?: string;
+  id?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StopAssessmentRequest {
   /**
    * <p> The <code>assessmentId</code> returned by <a>StartAssessment</a>. </p>
+   * @public
    */
   assessmentId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StopAssessmentResponse {}
 
-export enum VersionControl {
-  GITHUB = "GITHUB",
-  GITHUB_ENTERPRISE = "GITHUB_ENTERPRISE",
-}
-
 /**
- * <p>
- *       Object containing source code information that is linked to an application component.
+ * <p> Object containing source code information that is linked to an application component.
  *     </p>
+ * @public
  */
 export interface SourceCode {
   /**
-   * <p>
-   *       The type of repository to use for the source code.
-   *     </p>
+   * <p> The type of repository to use for the source code. </p>
+   * @public
    */
-  versionControl?: VersionControl | string;
+  versionControl?: VersionControl | undefined;
 
   /**
-   * <p>
-   *       The branch of the source code.
-   *     </p>
+   * <p> The branch of the source code. </p>
+   * @public
    */
-  sourceVersion?: string;
+  sourceVersion?: string | undefined;
 
   /**
-   * <p>
-   *       The repository name for the source code.
-   *     </p>
+   * <p> The repository name for the source code. </p>
+   * @public
    */
-  location?: string;
+  location?: string | undefined;
+
+  /**
+   * <p>The name of the project.</p>
+   * @public
+   */
+  projectName?: string | undefined;
 }
 
 /**
- * <p>
- *       Information about all the available strategy options for migrating and modernizing an application component.
- *     </p>
+ * <p> Information about all the available strategy options for migrating and modernizing an
+ *       application component. </p>
+ * @public
  */
 export interface StrategyOption {
   /**
-   * <p>
-   *       Type of transformation. For example, Rehost, Replatform, and so on.
-   *     </p>
+   * <p> Type of transformation. For example, Rehost, Replatform, and so on. </p>
+   * @public
    */
-  strategy?: Strategy | string;
+  strategy?: Strategy | undefined;
 
   /**
-   * <p>
-   *       The name of the tool that can be used to transform an application component using this strategy.
-   *     </p>
+   * <p> The name of the tool that can be used to transform an application component using this
+   *       strategy. </p>
+   * @public
    */
-  toolName?: TransformationToolName | string;
+  toolName?: TransformationToolName | undefined;
 
   /**
-   * <p>
-   *       Destination information about where the application component can migrate to. For example, <code>EC2</code>, <code>ECS</code>, and so on.
-   *     </p>
+   * <p> Destination information about where the application component can migrate to. For
+   *       example, <code>EC2</code>, <code>ECS</code>, and so on. </p>
+   * @public
    */
-  targetDestination?: TargetDestination | string;
+  targetDestination?: TargetDestination | undefined;
 
   /**
-   * <p>
-   *       Indicates if a specific strategy is preferred for the application component.
-   *     </p>
+   * <p> Indicates if a specific strategy is preferred for the application component. </p>
+   * @public
    */
-  isPreferred?: boolean;
+  isPreferred?: boolean | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateApplicationComponentConfigRequest {
   /**
    * <p> The ID of the application component. The ID is unique within an AWS account. </p>
+   * @public
    */
   applicationComponentId: string | undefined;
 
   /**
    * <p> Indicates whether the application component has been included for server recommendation
    *       or not. </p>
+   * @public
    */
-  inclusionStatus?: InclusionStatus | string;
+  inclusionStatus?: InclusionStatus | undefined;
 
   /**
    * <p> The preferred strategy options for the application component. Use values from the <a>GetApplicationComponentStrategies</a> response. </p>
+   * @public
    */
-  strategyOption?: StrategyOption;
+  strategyOption?: StrategyOption | undefined;
 
   /**
    * <p> The list of source code configurations to update for the application component. </p>
+   * @public
    */
-  sourceCodeList?: SourceCode[];
+  sourceCodeList?: SourceCode[] | undefined;
 
   /**
    * <p> Database credentials. </p>
+   * @public
    */
-  secretsManagerKey?: string;
+  secretsManagerKey?: string | undefined;
+
+  /**
+   * <p>Update the configuration request of an application component. If it is set to true, the
+   *       source code and/or database credentials are updated. If it is set to false, the source code
+   *       and/or database credentials are updated and an analysis is initiated.</p>
+   * @public
+   */
+  configureOnly?: boolean | undefined;
+
+  /**
+   * <p>The type of known component.</p>
+   * @public
+   */
+  appType?: AppType | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateApplicationComponentConfigResponse {}
 
+/**
+ * @public
+ */
 export interface UpdateServerConfigRequest {
   /**
    * <p> The ID of the server. </p>
+   * @public
    */
   serverId: string | undefined;
 
   /**
    * <p> The preferred strategy options for the application component. See the response from <a>GetServerStrategies</a>.</p>
+   * @public
    */
-  strategyOption?: StrategyOption;
+  strategyOption?: StrategyOption | undefined;
 }
 
+/**
+ * @public
+ */
 export interface UpdateServerConfigResponse {}
-
-/**
- * @internal
- */
-export const AntipatternSeveritySummaryFilterSensitiveLog = (obj: AntipatternSeveritySummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const S3ObjectFilterSensitiveLog = (obj: S3Object): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DatabaseConfigDetailFilterSensitiveLog = (obj: DatabaseConfigDetail): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TransformationToolFilterSensitiveLog = (obj: TransformationTool): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RecommendationSetFilterSensitiveLog = (obj: RecommendationSet): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SourceCodeRepositoryFilterSensitiveLog = (obj: SourceCodeRepository): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ApplicationComponentDetailFilterSensitiveLog = (obj: ApplicationComponentDetail): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ApplicationComponentStrategyFilterSensitiveLog = (obj: ApplicationComponentStrategy): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ApplicationComponentSummaryFilterSensitiveLog = (obj: ApplicationComponentSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AwsManagedResourcesFilterSensitiveLog = (obj: AwsManagedResources): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NoManagementPreferenceFilterSensitiveLog = (obj: NoManagementPreference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SelfManageResourcesFilterSensitiveLog = (obj: SelfManageResources): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ManagementPreferenceFilterSensitiveLog = (obj: ManagementPreference): any => {
-  if (obj.awsManagedResources !== undefined)
-    return { awsManagedResources: AwsManagedResourcesFilterSensitiveLog(obj.awsManagedResources) };
-  if (obj.selfManageResources !== undefined)
-    return { selfManageResources: SelfManageResourcesFilterSensitiveLog(obj.selfManageResources) };
-  if (obj.noPreference !== undefined)
-    return { noPreference: NoManagementPreferenceFilterSensitiveLog(obj.noPreference) };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
-
-/**
- * @internal
- */
-export const ApplicationPreferencesFilterSensitiveLog = (obj: ApplicationPreferences): any => ({
-  ...obj,
-  ...(obj.managementPreference && {
-    managementPreference: ManagementPreferenceFilterSensitiveLog(obj.managementPreference),
-  }),
-});
-
-/**
- * @internal
- */
-export const StrategySummaryFilterSensitiveLog = (obj: StrategySummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ServerSummaryFilterSensitiveLog = (obj: ServerSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssessmentSummaryFilterSensitiveLog = (obj: AssessmentSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociatedApplicationFilterSensitiveLog = (obj: AssociatedApplication): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetApplicationComponentDetailsRequestFilterSensitiveLog = (
-  obj: GetApplicationComponentDetailsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetApplicationComponentDetailsResponseFilterSensitiveLog = (
-  obj: GetApplicationComponentDetailsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetApplicationComponentStrategiesRequestFilterSensitiveLog = (
-  obj: GetApplicationComponentStrategiesRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetApplicationComponentStrategiesResponseFilterSensitiveLog = (
-  obj: GetApplicationComponentStrategiesResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAssessmentRequestFilterSensitiveLog = (obj: GetAssessmentRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DataCollectionDetailsFilterSensitiveLog = (obj: DataCollectionDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetAssessmentResponseFilterSensitiveLog = (obj: GetAssessmentResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetImportFileTaskRequestFilterSensitiveLog = (obj: GetImportFileTaskRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetImportFileTaskResponseFilterSensitiveLog = (obj: GetImportFileTaskResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetPortfolioPreferencesRequestFilterSensitiveLog = (obj: GetPortfolioPreferencesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HeterogeneousFilterSensitiveLog = (obj: Heterogeneous): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HomogeneousFilterSensitiveLog = (obj: Homogeneous): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NoDatabaseMigrationPreferenceFilterSensitiveLog = (obj: NoDatabaseMigrationPreference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DatabaseMigrationPreferenceFilterSensitiveLog = (obj: DatabaseMigrationPreference): any => {
-  if (obj.heterogeneous !== undefined) return { heterogeneous: HeterogeneousFilterSensitiveLog(obj.heterogeneous) };
-  if (obj.homogeneous !== undefined) return { homogeneous: HomogeneousFilterSensitiveLog(obj.homogeneous) };
-  if (obj.noPreference !== undefined)
-    return { noPreference: NoDatabaseMigrationPreferenceFilterSensitiveLog(obj.noPreference) };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
-
-/**
- * @internal
- */
-export const DatabasePreferencesFilterSensitiveLog = (obj: DatabasePreferences): any => ({
-  ...obj,
-  ...(obj.databaseMigrationPreference && {
-    databaseMigrationPreference: DatabaseMigrationPreferenceFilterSensitiveLog(obj.databaseMigrationPreference),
-  }),
-});
-
-/**
- * @internal
- */
-export const BusinessGoalsFilterSensitiveLog = (obj: BusinessGoals): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PrioritizeBusinessGoalsFilterSensitiveLog = (obj: PrioritizeBusinessGoals): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetPortfolioPreferencesResponseFilterSensitiveLog = (obj: GetPortfolioPreferencesResponse): any => ({
-  ...obj,
-  ...(obj.applicationPreferences && {
-    applicationPreferences: ApplicationPreferencesFilterSensitiveLog(obj.applicationPreferences),
-  }),
-  ...(obj.databasePreferences && {
-    databasePreferences: DatabasePreferencesFilterSensitiveLog(obj.databasePreferences),
-  }),
-});
-
-/**
- * @internal
- */
-export const GetPortfolioSummaryRequestFilterSensitiveLog = (obj: GetPortfolioSummaryRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetPortfolioSummaryResponseFilterSensitiveLog = (obj: GetPortfolioSummaryResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetRecommendationReportDetailsRequestFilterSensitiveLog = (
-  obj: GetRecommendationReportDetailsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RecommendationReportDetailsFilterSensitiveLog = (obj: RecommendationReportDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetRecommendationReportDetailsResponseFilterSensitiveLog = (
-  obj: GetRecommendationReportDetailsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServerDetailsRequestFilterSensitiveLog = (obj: GetServerDetailsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NetworkInfoFilterSensitiveLog = (obj: NetworkInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const OSInfoFilterSensitiveLog = (obj: OSInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SystemInfoFilterSensitiveLog = (obj: SystemInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ServerDetailFilterSensitiveLog = (obj: ServerDetail): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServerDetailsResponseFilterSensitiveLog = (obj: GetServerDetailsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServerStrategiesRequestFilterSensitiveLog = (obj: GetServerStrategiesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ServerStrategyFilterSensitiveLog = (obj: ServerStrategy): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetServerStrategiesResponseFilterSensitiveLog = (obj: GetServerStrategiesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GroupFilterSensitiveLog = (obj: Group): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListApplicationComponentsRequestFilterSensitiveLog = (obj: ListApplicationComponentsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListApplicationComponentsResponseFilterSensitiveLog = (obj: ListApplicationComponentsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListCollectorsRequestFilterSensitiveLog = (obj: ListCollectorsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CollectorFilterSensitiveLog = (obj: Collector): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListCollectorsResponseFilterSensitiveLog = (obj: ListCollectorsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListImportFileTaskRequestFilterSensitiveLog = (obj: ListImportFileTaskRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ImportFileTaskInformationFilterSensitiveLog = (obj: ImportFileTaskInformation): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListImportFileTaskResponseFilterSensitiveLog = (obj: ListImportFileTaskResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServersRequestFilterSensitiveLog = (obj: ListServersRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListServersResponseFilterSensitiveLog = (obj: ListServersResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutPortfolioPreferencesRequestFilterSensitiveLog = (obj: PutPortfolioPreferencesRequest): any => ({
-  ...obj,
-  ...(obj.applicationPreferences && {
-    applicationPreferences: ApplicationPreferencesFilterSensitiveLog(obj.applicationPreferences),
-  }),
-  ...(obj.databasePreferences && {
-    databasePreferences: DatabasePreferencesFilterSensitiveLog(obj.databasePreferences),
-  }),
-});
-
-/**
- * @internal
- */
-export const PutPortfolioPreferencesResponseFilterSensitiveLog = (obj: PutPortfolioPreferencesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartAssessmentRequestFilterSensitiveLog = (obj: StartAssessmentRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartAssessmentResponseFilterSensitiveLog = (obj: StartAssessmentResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartImportFileTaskRequestFilterSensitiveLog = (obj: StartImportFileTaskRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartImportFileTaskResponseFilterSensitiveLog = (obj: StartImportFileTaskResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartRecommendationReportGenerationRequestFilterSensitiveLog = (
-  obj: StartRecommendationReportGenerationRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartRecommendationReportGenerationResponseFilterSensitiveLog = (
-  obj: StartRecommendationReportGenerationResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StopAssessmentRequestFilterSensitiveLog = (obj: StopAssessmentRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StopAssessmentResponseFilterSensitiveLog = (obj: StopAssessmentResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SourceCodeFilterSensitiveLog = (obj: SourceCode): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StrategyOptionFilterSensitiveLog = (obj: StrategyOption): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateApplicationComponentConfigRequestFilterSensitiveLog = (
-  obj: UpdateApplicationComponentConfigRequest
-): any => ({
-  ...obj,
-  ...(obj.secretsManagerKey && { secretsManagerKey: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const UpdateApplicationComponentConfigResponseFilterSensitiveLog = (
-  obj: UpdateApplicationComponentConfigResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateServerConfigRequestFilterSensitiveLog = (obj: UpdateServerConfigRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UpdateServerConfigResponseFilterSensitiveLog = (obj: UpdateServerConfigResponse): any => ({
-  ...obj,
-});

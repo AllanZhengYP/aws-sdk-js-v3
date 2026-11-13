@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ChimeSDKMediaPipelinesClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ChimeSDKMediaPipelinesClient";
-import {
-  GetMediaCapturePipelineRequest,
-  GetMediaCapturePipelineRequestFilterSensitiveLog,
-  GetMediaCapturePipelineResponse,
-  GetMediaCapturePipelineResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetMediaCapturePipelineCommand,
-  serializeAws_restJson1GetMediaCapturePipelineCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetMediaCapturePipelineRequest, GetMediaCapturePipelineResponse } from "../models/models_0";
+import { GetMediaCapturePipeline$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetMediaCapturePipelineCommand}.
+ */
 export interface GetMediaCapturePipelineCommandInput extends GetMediaCapturePipelineRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetMediaCapturePipelineCommand}.
+ */
 export interface GetMediaCapturePipelineCommandOutput extends GetMediaCapturePipelineResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,140 @@ export interface GetMediaCapturePipelineCommandOutput extends GetMediaCapturePip
  * ```javascript
  * import { ChimeSDKMediaPipelinesClient, GetMediaCapturePipelineCommand } from "@aws-sdk/client-chime-sdk-media-pipelines"; // ES Modules import
  * // const { ChimeSDKMediaPipelinesClient, GetMediaCapturePipelineCommand } = require("@aws-sdk/client-chime-sdk-media-pipelines"); // CommonJS import
+ * // import type { ChimeSDKMediaPipelinesClientConfig } from "@aws-sdk/client-chime-sdk-media-pipelines";
+ * const config = {}; // type is ChimeSDKMediaPipelinesClientConfig
  * const client = new ChimeSDKMediaPipelinesClient(config);
+ * const input = { // GetMediaCapturePipelineRequest
+ *   MediaPipelineId: "STRING_VALUE", // required
+ * };
  * const command = new GetMediaCapturePipelineCommand(input);
  * const response = await client.send(command);
+ * // { // GetMediaCapturePipelineResponse
+ * //   MediaCapturePipeline: { // MediaCapturePipeline
+ * //     MediaPipelineId: "STRING_VALUE",
+ * //     MediaPipelineArn: "STRING_VALUE",
+ * //     SourceType: "ChimeSdkMeeting",
+ * //     SourceArn: "STRING_VALUE",
+ * //     Status: "Initializing" || "InProgress" || "Failed" || "Stopping" || "Stopped" || "Paused" || "NotStarted",
+ * //     SinkType: "S3Bucket",
+ * //     SinkArn: "STRING_VALUE",
+ * //     CreatedTimestamp: new Date("TIMESTAMP"),
+ * //     UpdatedTimestamp: new Date("TIMESTAMP"),
+ * //     ChimeSdkMeetingConfiguration: { // ChimeSdkMeetingConfiguration
+ * //       SourceConfiguration: { // SourceConfiguration
+ * //         SelectedVideoStreams: { // SelectedVideoStreams
+ * //           AttendeeIds: [ // AttendeeIdList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           ExternalUserIds: [ // ExternalUserIdList
+ * //             "STRING_VALUE",
+ * //           ],
+ * //         },
+ * //       },
+ * //       ArtifactsConfiguration: { // ArtifactsConfiguration
+ * //         Audio: { // AudioArtifactsConfiguration
+ * //           MuxType: "AudioOnly" || "AudioWithActiveSpeakerVideo" || "AudioWithCompositedVideo", // required
+ * //         },
+ * //         Video: { // VideoArtifactsConfiguration
+ * //           State: "Enabled" || "Disabled", // required
+ * //           MuxType: "VideoOnly",
+ * //         },
+ * //         Content: { // ContentArtifactsConfiguration
+ * //           State: "Enabled" || "Disabled", // required
+ * //           MuxType: "ContentOnly",
+ * //         },
+ * //         CompositedVideo: { // CompositedVideoArtifactsConfiguration
+ * //           Layout: "GridView",
+ * //           Resolution: "HD" || "FHD",
+ * //           GridViewConfiguration: { // GridViewConfiguration
+ * //             ContentShareLayout: "PresenterOnly" || "Horizontal" || "Vertical" || "ActiveSpeakerOnly", // required
+ * //             PresenterOnlyConfiguration: { // PresenterOnlyConfiguration
+ * //               PresenterPosition: "TopLeft" || "TopRight" || "BottomLeft" || "BottomRight",
+ * //             },
+ * //             ActiveSpeakerOnlyConfiguration: { // ActiveSpeakerOnlyConfiguration
+ * //               ActiveSpeakerPosition: "TopLeft" || "TopRight" || "BottomLeft" || "BottomRight",
+ * //             },
+ * //             HorizontalLayoutConfiguration: { // HorizontalLayoutConfiguration
+ * //               TileOrder: "JoinSequence" || "SpeakerSequence",
+ * //               TilePosition: "Top" || "Bottom",
+ * //               TileCount: Number("int"),
+ * //               TileAspectRatio: "STRING_VALUE",
+ * //             },
+ * //             VerticalLayoutConfiguration: { // VerticalLayoutConfiguration
+ * //               TileOrder: "JoinSequence" || "SpeakerSequence",
+ * //               TilePosition: "Left" || "Right",
+ * //               TileCount: Number("int"),
+ * //               TileAspectRatio: "STRING_VALUE",
+ * //             },
+ * //             VideoAttribute: { // VideoAttribute
+ * //               CornerRadius: Number("int"),
+ * //               BorderColor: "Black" || "Blue" || "Red" || "Green" || "White" || "Yellow",
+ * //               HighlightColor: "Black" || "Blue" || "Red" || "Green" || "White" || "Yellow",
+ * //               BorderThickness: Number("int"),
+ * //             },
+ * //             CanvasOrientation: "Landscape" || "Portrait",
+ * //           },
+ * //         },
+ * //       },
+ * //     },
+ * //     SseAwsKeyManagementParams: { // SseAwsKeyManagementParams
+ * //       AwsKmsKeyId: "STRING_VALUE", // required
+ * //       AwsKmsEncryptionContext: "STRING_VALUE",
+ * //     },
+ * //     SinkIamRoleArn: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetMediaCapturePipelineCommandInput - {@link GetMediaCapturePipelineCommandInput}
+ * @returns {@link GetMediaCapturePipelineCommandOutput}
  * @see {@link GetMediaCapturePipelineCommandInput} for command's `input` shape.
  * @see {@link GetMediaCapturePipelineCommandOutput} for command's `response` shape.
  * @see {@link ChimeSDKMediaPipelinesClientResolvedConfig | config} for ChimeSDKMediaPipelinesClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeSDKMediaPipelinesServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKMediaPipelines service.</p>
+ *
+ *
+ * @public
  */
-export class GetMediaCapturePipelineCommand extends $Command<
-  GetMediaCapturePipelineCommandInput,
-  GetMediaCapturePipelineCommandOutput,
-  ChimeSDKMediaPipelinesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetMediaCapturePipelineCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeSDKMediaPipelinesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetMediaCapturePipelineCommandInput, GetMediaCapturePipelineCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeSDKMediaPipelinesClient";
-    const commandName = "GetMediaCapturePipelineCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetMediaCapturePipelineRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetMediaCapturePipelineResponseFilterSensitiveLog,
+export class GetMediaCapturePipelineCommand extends command<GetMediaCapturePipelineCommandInput, GetMediaCapturePipelineCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetMediaCapturePipeline",
+  GetMediaCapturePipeline$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetMediaCapturePipelineRequest;
+      output: GetMediaCapturePipelineResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetMediaCapturePipelineCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetMediaCapturePipelineCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetMediaCapturePipelineCommandOutput> {
-    return deserializeAws_restJson1GetMediaCapturePipelineCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetMediaCapturePipelineCommandInput;
+      output: GetMediaCapturePipelineCommandOutput;
+    };
+  };
 }

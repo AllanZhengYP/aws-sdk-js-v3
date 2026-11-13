@@ -1,101 +1,100 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
-  DeleteLFTagRequest,
-  DeleteLFTagRequestFilterSensitiveLog,
-  DeleteLFTagResponse,
-  DeleteLFTagResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteLFTagCommand,
-  serializeAws_restJson1DeleteLFTagCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteLFTagRequest, DeleteLFTagResponse } from "../models/models_0";
+import { DeleteLFTag$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteLFTagCommand}.
+ */
 export interface DeleteLFTagCommandInput extends DeleteLFTagRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteLFTagCommand}.
+ */
 export interface DeleteLFTagCommandOutput extends DeleteLFTagResponse, __MetadataBearer {}
 
 /**
- * <p>Deletes the specified LF-tag given a key name. If the input parameter tag key was not found, then the operation will throw an exception. When you delete an LF-tag, the <code>LFTagPolicy</code> attached to the LF-tag becomes invalid. If the deleted LF-tag was still assigned to any resource, the tag policy attach to the deleted LF-tag will no longer be applied to the resource.</p>
+ * <p> Deletes an LF-tag by its key name. The operation fails if the specified tag key doesn't
+ *       exist. When you delete an LF-Tag: </p>
+ *          <ul>
+ *             <li>
+ *                <p>The associated LF-Tag policy becomes invalid.</p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *      Resources that had this tag assigned will no longer have the tag policy applied to
+ *      them.</p>
+ *             </li>
+ *          </ul>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { LakeFormationClient, DeleteLFTagCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, DeleteLFTagCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // DeleteLFTagRequest
+ *   CatalogId: "STRING_VALUE",
+ *   TagKey: "STRING_VALUE", // required
+ * };
  * const command = new DeleteLFTagCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteLFTagCommandInput - {@link DeleteLFTagCommandInput}
+ * @returns {@link DeleteLFTagCommandOutput}
  * @see {@link DeleteLFTagCommandInput} for command's `input` shape.
  * @see {@link DeleteLFTagCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteLFTagCommand extends $Command<
-  DeleteLFTagCommandInput,
-  DeleteLFTagCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteLFTagCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteLFTagCommandInput, DeleteLFTagCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "DeleteLFTagCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteLFTagRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteLFTagResponseFilterSensitiveLog,
+export class DeleteLFTagCommand extends command<DeleteLFTagCommandInput, DeleteLFTagCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteLFTag",
+  DeleteLFTag$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteLFTagRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteLFTagCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteLFTagCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteLFTagCommandOutput> {
-    return deserializeAws_restJson1DeleteLFTagCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteLFTagCommandInput;
+      output: DeleteLFTagCommandOutput;
+    };
+  };
 }

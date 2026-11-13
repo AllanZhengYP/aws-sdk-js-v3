@@ -1,61 +1,7 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
-import { Readable } from "stream";
+import type { StreamingBlobTypes } from "@smithy/types";
 
-import { KinesisVideoMediaServiceException as __BaseException } from "./KinesisVideoMediaServiceException";
-
-/**
- * <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
- *       allowed client calls. Try making the call later.</p>
- */
-export class ClientLimitExceededException extends __BaseException {
-  readonly name: "ClientLimitExceededException" = "ClientLimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ClientLimitExceededException, __BaseException>) {
-    super({
-      name: "ClientLimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ClientLimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>Kinesis Video Streams has throttled the request because you have exceeded the limit of
- *       allowed client connections.</p>
- */
-export class ConnectionLimitExceededException extends __BaseException {
-  readonly name: "ConnectionLimitExceededException" = "ConnectionLimitExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ConnectionLimitExceededException, __BaseException>) {
-    super({
-      name: "ConnectionLimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ConnectionLimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum StartSelectorType {
-  CONTINUATION_TOKEN = "CONTINUATION_TOKEN",
-  EARLIEST = "EARLIEST",
-  FRAGMENT_NUMBER = "FRAGMENT_NUMBER",
-  NOW = "NOW",
-  PRODUCER_TIMESTAMP = "PRODUCER_TIMESTAMP",
-  SERVER_TIMESTAMP = "SERVER_TIMESTAMP",
-}
+import type { StartSelectorType } from "./enums";
 
 /**
  * <p>Identifies the chunk on the Kinesis video stream where you want the
@@ -77,6 +23,7 @@ export enum StartSelectorType {
  *           last API ended.</p>
  *             </li>
  *          </ul>
+ * @public
  */
 export interface StartSelector {
   /**
@@ -107,55 +54,69 @@ export interface StartSelector {
    *           <code>startSelectorType</code>, you don't provide any additional information in the
    *           <code>startSelector</code>.</p>
    *          </note>
+   * @public
    */
-  StartSelectorType: StartSelectorType | string | undefined;
+  StartSelectorType: StartSelectorType | undefined;
 
   /**
    * <p>Specifies the fragment number from where you want the <code>GetMedia</code> API to
    *       start returning the fragments. </p>
+   * @public
    */
-  AfterFragmentNumber?: string;
+  AfterFragmentNumber?: string | undefined;
 
   /**
    * <p>A timestamp value. This value is required if you choose the PRODUCER_TIMESTAMP or the
    *       SERVER_TIMESTAMP as the <code>startSelectorType</code>. The <code>GetMedia</code> API then
    *       starts with the chunk containing the fragment that has the specified timestamp.</p>
+   * @public
    */
-  StartTimestamp?: Date;
+  StartTimestamp?: Date | undefined;
 
   /**
    * <p>Continuation token that Kinesis Video Streams returned in the previous
    *         <code>GetMedia</code> response. The <code>GetMedia</code> API then starts with the chunk
    *       identified by the continuation token.</p>
+   * @public
    */
-  ContinuationToken?: string;
+  ContinuationToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetMediaInput {
   /**
    * <p>The Kinesis video stream name from where you want to get the media content. If you
    *       don't specify the <code>streamName</code>, you must specify the
    *       <code>streamARN</code>.</p>
+   * @public
    */
-  StreamName?: string;
+  StreamName?: string | undefined;
 
   /**
    * <p>The ARN of the stream from where you want to get the media content. If you don't
    *       specify the <code>streamARN</code>, you must specify the <code>streamName</code>.</p>
+   * @public
    */
-  StreamARN?: string;
+  StreamARN?: string | undefined;
 
   /**
    * <p>Identifies the starting chunk to get from the specified stream. </p>
+   * @public
    */
   StartSelector: StartSelector | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetMediaOutput {
   /**
    * <p>The content type of the requested media.</p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p> The payload Kinesis Video Streams returns is a sequence of chunks from the specified
@@ -226,115 +187,7 @@ export interface GetMediaOutput {
    *                <p>5000 - Internal error</p>
    *             </li>
    *          </ul>
+   * @public
    */
-  Payload?: Readable | ReadableStream | Blob;
+  Payload?: StreamingBlobTypes | undefined;
 }
-
-/**
- * <p>The value for this input parameter is invalid.</p>
- */
-export class InvalidArgumentException extends __BaseException {
-  readonly name: "InvalidArgumentException" = "InvalidArgumentException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidArgumentException, __BaseException>) {
-    super({
-      name: "InvalidArgumentException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidArgumentException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p> Status Code: 400, Caller used wrong endpoint to write data to a stream. On receiving
- *       such an exception, the user must call <code>GetDataEndpoint</code> with
- *         <code>AccessMode</code> set to "READ" and use the endpoint Kinesis Video returns in the next
- *         <code>GetMedia</code> call. </p>
- */
-export class InvalidEndpointException extends __BaseException {
-  readonly name: "InvalidEndpointException" = "InvalidEndpointException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidEndpointException, __BaseException>) {
-    super({
-      name: "InvalidEndpointException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidEndpointException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>Status Code: 403, The caller is not authorized to perform an operation on the given
- *       stream, or the token has expired.</p>
- */
-export class NotAuthorizedException extends __BaseException {
-  readonly name: "NotAuthorizedException" = "NotAuthorizedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<NotAuthorizedException, __BaseException>) {
-    super({
-      name: "NotAuthorizedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, NotAuthorizedException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>Status Code: 404, The stream with the given name does not exist.</p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * @internal
- */
-export const StartSelectorFilterSensitiveLog = (obj: StartSelector): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetMediaInputFilterSensitiveLog = (obj: GetMediaInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetMediaOutputFilterSensitiveLog = (obj: GetMediaOutput): any => ({
-  ...obj,
-});

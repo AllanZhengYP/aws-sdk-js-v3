@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListRecommendersRequest,
-  ListRecommendersRequestFilterSensitiveLog,
-  ListRecommendersResponse,
-  ListRecommendersResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1ListRecommendersCommand,
-  serializeAws_json1_1ListRecommendersCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRecommendersRequest, ListRecommendersResponse } from "../models/models_0";
+import { ListRecommenders$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRecommendersCommand}.
+ */
 export interface ListRecommendersCommandInput extends ListRecommendersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRecommendersCommand}.
+ */
 export interface ListRecommendersCommandOutput extends ListRecommendersResponse, __MetadataBearer {}
 
 /**
@@ -37,68 +32,85 @@ export interface ListRecommendersCommandOutput extends ListRecommendersResponse,
  * ```javascript
  * import { PersonalizeClient, ListRecommendersCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, ListRecommendersCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // ListRecommendersRequest
+ *   datasetGroupArn: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListRecommendersCommand(input);
  * const response = await client.send(command);
+ * // { // ListRecommendersResponse
+ * //   recommenders: [ // Recommenders
+ * //     { // RecommenderSummary
+ * //       name: "STRING_VALUE",
+ * //       recommenderArn: "STRING_VALUE",
+ * //       datasetGroupArn: "STRING_VALUE",
+ * //       recipeArn: "STRING_VALUE",
+ * //       recommenderConfig: { // RecommenderConfig
+ * //         itemExplorationConfig: { // HyperParameters
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //         minRecommendationRequestsPerSecond: Number("int"),
+ * //         trainingDataConfig: { // TrainingDataConfig
+ * //           excludedDatasetColumns: { // ExcludedDatasetColumns
+ * //             "<keys>": [ // ColumnNamesList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //           includedDatasetColumns: { // IncludedDatasetColumns
+ * //             "<keys>": [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //         enableMetadataWithRecommendations: true || false,
+ * //       },
+ * //       status: "STRING_VALUE",
+ * //       creationDateTime: new Date("TIMESTAMP"),
+ * //       lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRecommendersCommandInput - {@link ListRecommendersCommandInput}
+ * @returns {@link ListRecommendersCommandOutput}
  * @see {@link ListRecommendersCommandInput} for command's `input` shape.
  * @see {@link ListRecommendersCommandOutput} for command's `response` shape.
  * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The token is not valid.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class ListRecommendersCommand extends $Command<
-  ListRecommendersCommandInput,
-  ListRecommendersCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRecommendersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRecommendersCommandInput, ListRecommendersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "ListRecommendersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRecommendersRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListRecommendersResponseFilterSensitiveLog,
+export class ListRecommendersCommand extends command<ListRecommendersCommandInput, ListRecommendersCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRecommenders",
+  ListRecommenders$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRecommendersRequest;
+      output: ListRecommendersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRecommendersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListRecommendersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRecommendersCommandOutput> {
-    return deserializeAws_json1_1ListRecommendersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRecommendersCommandInput;
+      output: ListRecommendersCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetCoreNetworkChangeEventsRequest,
-  GetCoreNetworkChangeEventsRequestFilterSensitiveLog,
-  GetCoreNetworkChangeEventsResponse,
-  GetCoreNetworkChangeEventsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { NetworkManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkManagerClient";
-import {
-  deserializeAws_restJson1GetCoreNetworkChangeEventsCommand,
-  serializeAws_restJson1GetCoreNetworkChangeEventsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetCoreNetworkChangeEventsRequest, GetCoreNetworkChangeEventsResponse } from "../models/models_0";
+import { GetCoreNetworkChangeEvents$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetCoreNetworkChangeEventsCommand}.
+ */
 export interface GetCoreNetworkChangeEventsCommandInput extends GetCoreNetworkChangeEventsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetCoreNetworkChangeEventsCommand}.
+ */
 export interface GetCoreNetworkChangeEventsCommandOutput extends GetCoreNetworkChangeEventsResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,93 @@ export interface GetCoreNetworkChangeEventsCommandOutput extends GetCoreNetworkC
  * ```javascript
  * import { NetworkManagerClient, GetCoreNetworkChangeEventsCommand } from "@aws-sdk/client-networkmanager"; // ES Modules import
  * // const { NetworkManagerClient, GetCoreNetworkChangeEventsCommand } = require("@aws-sdk/client-networkmanager"); // CommonJS import
+ * // import type { NetworkManagerClientConfig } from "@aws-sdk/client-networkmanager";
+ * const config = {}; // type is NetworkManagerClientConfig
  * const client = new NetworkManagerClient(config);
+ * const input = { // GetCoreNetworkChangeEventsRequest
+ *   CoreNetworkId: "STRING_VALUE", // required
+ *   PolicyVersionId: Number("int"), // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetCoreNetworkChangeEventsCommand(input);
  * const response = await client.send(command);
+ * // { // GetCoreNetworkChangeEventsResponse
+ * //   CoreNetworkChangeEvents: [ // CoreNetworkChangeEventList
+ * //     { // CoreNetworkChangeEvent
+ * //       Type: "CORE_NETWORK_SEGMENT" || "NETWORK_FUNCTION_GROUP" || "CORE_NETWORK_EDGE" || "ATTACHMENT_MAPPING" || "ATTACHMENT_ROUTE_PROPAGATION" || "ATTACHMENT_ROUTE_STATIC" || "ROUTING_POLICY" || "ROUTING_POLICY_SEGMENT_ASSOCIATION" || "ROUTING_POLICY_EDGE_ASSOCIATION" || "ROUTING_POLICY_ATTACHMENT_ASSOCIATION" || "CORE_NETWORK_CONFIGURATION" || "SEGMENTS_CONFIGURATION" || "SEGMENT_ACTIONS_CONFIGURATION" || "ATTACHMENT_POLICIES_CONFIGURATION",
+ * //       Action: "ADD" || "MODIFY" || "REMOVE",
+ * //       IdentifierPath: "STRING_VALUE",
+ * //       EventTime: new Date("TIMESTAMP"),
+ * //       Status: "NOT_STARTED" || "IN_PROGRESS" || "COMPLETE" || "FAILED",
+ * //       Values: { // CoreNetworkChangeEventValues
+ * //         EdgeLocation: "STRING_VALUE",
+ * //         PeerEdgeLocation: "STRING_VALUE",
+ * //         RoutingPolicyDirection: "inbound" || "outbound",
+ * //         SegmentName: "STRING_VALUE",
+ * //         NetworkFunctionGroupName: "STRING_VALUE",
+ * //         AttachmentId: "STRING_VALUE",
+ * //         Cidr: "STRING_VALUE",
+ * //         RoutingPolicyAssociationDetails: [ // RoutingPolicyAssociationDetailsList
+ * //           { // RoutingPolicyAssociationDetail
+ * //             RoutingPolicyNames: [ // ConstrainedStringList
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             SharedSegments: [
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         ],
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetCoreNetworkChangeEventsCommandInput - {@link GetCoreNetworkChangeEventsCommandInput}
+ * @returns {@link GetCoreNetworkChangeEventsCommandOutput}
  * @see {@link GetCoreNetworkChangeEventsCommandInput} for command's `input` shape.
  * @see {@link GetCoreNetworkChangeEventsCommandOutput} for command's `response` shape.
  * @see {@link NetworkManagerClientResolvedConfig | config} for NetworkManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints.</p>
+ *
+ * @throws {@link NetworkManagerServiceException}
+ * <p>Base exception class for all service exceptions from NetworkManager service.</p>
+ *
+ *
+ * @public
  */
-export class GetCoreNetworkChangeEventsCommand extends $Command<
-  GetCoreNetworkChangeEventsCommandInput,
-  GetCoreNetworkChangeEventsCommandOutput,
-  NetworkManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetCoreNetworkChangeEventsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetCoreNetworkChangeEventsCommandInput, GetCoreNetworkChangeEventsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkManagerClient";
-    const commandName = "GetCoreNetworkChangeEventsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetCoreNetworkChangeEventsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetCoreNetworkChangeEventsResponseFilterSensitiveLog,
+export class GetCoreNetworkChangeEventsCommand extends command<GetCoreNetworkChangeEventsCommandInput, GetCoreNetworkChangeEventsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetCoreNetworkChangeEvents",
+  GetCoreNetworkChangeEvents$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetCoreNetworkChangeEventsRequest;
+      output: GetCoreNetworkChangeEventsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetCoreNetworkChangeEventsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetCoreNetworkChangeEventsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetCoreNetworkChangeEventsCommandOutput> {
-    return deserializeAws_restJson1GetCoreNetworkChangeEventsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetCoreNetworkChangeEventsCommandInput;
+      output: GetCoreNetworkChangeEventsCommandOutput;
+    };
+  };
 }

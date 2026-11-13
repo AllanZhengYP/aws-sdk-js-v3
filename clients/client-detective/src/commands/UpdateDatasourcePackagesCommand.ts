@@ -1,96 +1,102 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DetectiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DetectiveClient";
-import { UpdateDatasourcePackagesRequest, UpdateDatasourcePackagesRequestFilterSensitiveLog } from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateDatasourcePackagesCommand,
-  serializeAws_restJson1UpdateDatasourcePackagesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateDatasourcePackagesRequest } from "../models/models_0";
+import { UpdateDatasourcePackages$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateDatasourcePackagesCommand}.
+ */
 export interface UpdateDatasourcePackagesCommandInput extends UpdateDatasourcePackagesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateDatasourcePackagesCommand}.
+ */
 export interface UpdateDatasourcePackagesCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Starts a data source packages for the behavior graph.</p>
+ * <p>Starts a data source package for the Detective behavior graph.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DetectiveClient, UpdateDatasourcePackagesCommand } from "@aws-sdk/client-detective"; // ES Modules import
  * // const { DetectiveClient, UpdateDatasourcePackagesCommand } = require("@aws-sdk/client-detective"); // CommonJS import
+ * // import type { DetectiveClientConfig } from "@aws-sdk/client-detective";
+ * const config = {}; // type is DetectiveClientConfig
  * const client = new DetectiveClient(config);
+ * const input = { // UpdateDatasourcePackagesRequest
+ *   GraphArn: "STRING_VALUE", // required
+ *   DatasourcePackages: [ // DatasourcePackageList // required
+ *     "DETECTIVE_CORE" || "EKS_AUDIT" || "ASFF_SECURITYHUB_FINDING",
+ *   ],
+ * };
  * const command = new UpdateDatasourcePackagesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateDatasourcePackagesCommandInput - {@link UpdateDatasourcePackagesCommandInput}
+ * @returns {@link UpdateDatasourcePackagesCommandOutput}
  * @see {@link UpdateDatasourcePackagesCommandInput} for command's `input` shape.
  * @see {@link UpdateDatasourcePackagesCommandOutput} for command's `response` shape.
  * @see {@link DetectiveClientResolvedConfig | config} for DetectiveClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request issuer does not have permission to access this resource or perform this
+ *          operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request was valid but failed because of a problem with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request refers to a nonexistent resource.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>This request cannot be completed for one of the following reasons.</p>
+ *          <ul>
+ *             <li>
+ *                <p>This request cannot be completed if it would cause the number of member accounts in the
+ *             behavior graph to exceed the maximum allowed. A behavior graph cannot have more than 1,200
+ *             member accounts.</p>
+ *             </li>
+ *             <li>
+ *                <p>This request cannot be completed if the current volume ingested is above the limit of 10 TB per day. Detective will not allow you to add additional member accounts.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request parameters are invalid.</p>
+ *
+ * @throws {@link DetectiveServiceException}
+ * <p>Base exception class for all service exceptions from Detective service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateDatasourcePackagesCommand extends $Command<
-  UpdateDatasourcePackagesCommandInput,
-  UpdateDatasourcePackagesCommandOutput,
-  DetectiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateDatasourcePackagesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DetectiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateDatasourcePackagesCommandInput, UpdateDatasourcePackagesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DetectiveClient";
-    const commandName = "UpdateDatasourcePackagesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateDatasourcePackagesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateDatasourcePackagesCommand extends command<UpdateDatasourcePackagesCommandInput, UpdateDatasourcePackagesCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateDatasourcePackages",
+  UpdateDatasourcePackages$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateDatasourcePackagesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateDatasourcePackagesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateDatasourcePackagesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateDatasourcePackagesCommandOutput> {
-    return deserializeAws_restJson1UpdateDatasourcePackagesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateDatasourcePackagesCommandInput;
+      output: UpdateDatasourcePackagesCommandOutput;
+    };
+  };
 }

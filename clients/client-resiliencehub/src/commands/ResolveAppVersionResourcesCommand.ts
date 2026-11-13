@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ResolveAppVersionResourcesRequest,
-  ResolveAppVersionResourcesRequestFilterSensitiveLog,
-  ResolveAppVersionResourcesResponse,
-  ResolveAppVersionResourcesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ResolveAppVersionResourcesCommand,
-  serializeAws_restJson1ResolveAppVersionResourcesCommand,
-} from "../protocols/Aws_restJson1";
-import { ResiliencehubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResiliencehubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ResolveAppVersionResourcesRequest, ResolveAppVersionResourcesResponse } from "../models/models_0";
+import { ResolveAppVersionResources$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ResolveAppVersionResourcesCommand}.
+ */
 export interface ResolveAppVersionResourcesCommandInput extends ResolveAppVersionResourcesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ResolveAppVersionResourcesCommand}.
+ */
 export interface ResolveAppVersionResourcesCommandOutput extends ResolveAppVersionResourcesResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,75 @@ export interface ResolveAppVersionResourcesCommandOutput extends ResolveAppVersi
  * ```javascript
  * import { ResiliencehubClient, ResolveAppVersionResourcesCommand } from "@aws-sdk/client-resiliencehub"; // ES Modules import
  * // const { ResiliencehubClient, ResolveAppVersionResourcesCommand } = require("@aws-sdk/client-resiliencehub"); // CommonJS import
+ * // import type { ResiliencehubClientConfig } from "@aws-sdk/client-resiliencehub";
+ * const config = {}; // type is ResiliencehubClientConfig
  * const client = new ResiliencehubClient(config);
+ * const input = { // ResolveAppVersionResourcesRequest
+ *   appArn: "STRING_VALUE", // required
+ *   appVersion: "STRING_VALUE", // required
+ * };
  * const command = new ResolveAppVersionResourcesCommand(input);
  * const response = await client.send(command);
+ * // { // ResolveAppVersionResourcesResponse
+ * //   appArn: "STRING_VALUE", // required
+ * //   appVersion: "STRING_VALUE", // required
+ * //   resolutionId: "STRING_VALUE", // required
+ * //   status: "Pending" || "InProgress" || "Failed" || "Success", // required
+ * // };
+ *
  * ```
  *
+ * @param ResolveAppVersionResourcesCommandInput - {@link ResolveAppVersionResourcesCommandInput}
+ * @returns {@link ResolveAppVersionResourcesCommandOutput}
  * @see {@link ResolveAppVersionResourcesCommandInput} for command's `input` shape.
  * @see {@link ResolveAppVersionResourcesCommandOutput} for command's `response` shape.
  * @see {@link ResiliencehubClientResolvedConfig | config} for ResiliencehubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permissions to perform the requested operation. The user or role that is
+ *       making the request must have at least one IAM permissions policy attached that grants the
+ *       required permissions.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>This exception occurs when a conflict with a previous successful write is detected. This generally occurs
+ *       when the previous write did not have time to propagate to the host serving the current
+ *       request. A retry (with appropriate backoff logic) is the recommended response to this
+ *       exception.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Resilience Hub
+ *       service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception occurs when the specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>This exception occurs when you have exceeded the limit on the number of requests per second.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>This exception occurs when a request is not valid.</p>
+ *
+ * @throws {@link ResiliencehubServiceException}
+ * <p>Base exception class for all service exceptions from Resiliencehub service.</p>
+ *
+ *
+ * @public
  */
-export class ResolveAppVersionResourcesCommand extends $Command<
-  ResolveAppVersionResourcesCommandInput,
-  ResolveAppVersionResourcesCommandOutput,
-  ResiliencehubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ResolveAppVersionResourcesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResiliencehubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ResolveAppVersionResourcesCommandInput, ResolveAppVersionResourcesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResiliencehubClient";
-    const commandName = "ResolveAppVersionResourcesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ResolveAppVersionResourcesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ResolveAppVersionResourcesResponseFilterSensitiveLog,
+export class ResolveAppVersionResourcesCommand extends command<ResolveAppVersionResourcesCommandInput, ResolveAppVersionResourcesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ResolveAppVersionResources",
+  ResolveAppVersionResources$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ResolveAppVersionResourcesRequest;
+      output: ResolveAppVersionResourcesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ResolveAppVersionResourcesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ResolveAppVersionResourcesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ResolveAppVersionResourcesCommandOutput> {
-    return deserializeAws_restJson1ResolveAppVersionResourcesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ResolveAppVersionResourcesCommandInput;
+      output: ResolveAppVersionResourcesCommandOutput;
+    };
+  };
 }

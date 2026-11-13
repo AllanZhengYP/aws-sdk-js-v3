@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateIpGroupRequest,
-  CreateIpGroupRequestFilterSensitiveLog,
-  CreateIpGroupResult,
-  CreateIpGroupResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateIpGroupCommand,
-  serializeAws_json1_1CreateIpGroupCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesClientResolvedConfig } from "../WorkSpacesClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateIpGroupRequest, CreateIpGroupResult } from "../models/models_0";
+import { CreateIpGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateIpGroupCommand}.
+ */
 export interface CreateIpGroupCommandInput extends CreateIpGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateIpGroupCommand}.
+ */
 export interface CreateIpGroupCommandOutput extends CreateIpGroupResult, __MetadataBearer {}
 
 /**
@@ -42,68 +37,75 @@ export interface CreateIpGroupCommandOutput extends CreateIpGroupResult, __Metad
  * ```javascript
  * import { WorkSpacesClient, CreateIpGroupCommand } from "@aws-sdk/client-workspaces"; // ES Modules import
  * // const { WorkSpacesClient, CreateIpGroupCommand } = require("@aws-sdk/client-workspaces"); // CommonJS import
+ * // import type { WorkSpacesClientConfig } from "@aws-sdk/client-workspaces";
+ * const config = {}; // type is WorkSpacesClientConfig
  * const client = new WorkSpacesClient(config);
+ * const input = { // CreateIpGroupRequest
+ *   GroupName: "STRING_VALUE", // required
+ *   GroupDesc: "STRING_VALUE",
+ *   UserRules: [ // IpRuleList
+ *     { // IpRuleItem
+ *       ipRule: "STRING_VALUE",
+ *       ruleDesc: "STRING_VALUE",
+ *     },
+ *   ],
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ * };
  * const command = new CreateIpGroupCommand(input);
  * const response = await client.send(command);
+ * // { // CreateIpGroupResult
+ * //   GroupId: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreateIpGroupCommandInput - {@link CreateIpGroupCommandInput}
+ * @returns {@link CreateIpGroupCommandOutput}
  * @see {@link CreateIpGroupCommandInput} for command's `input` shape.
  * @see {@link CreateIpGroupCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesClientResolvedConfig | config} for WorkSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user is not authorized to access a resource.</p>
+ *
+ * @throws {@link InvalidParameterValuesException} (client fault)
+ *  <p>One or more parameter values are not valid.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>The specified resource already exists.</p>
+ *
+ * @throws {@link ResourceCreationFailedException} (client fault)
+ *  <p>The resource could not be created.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>Your resource limits have been exceeded.</p>
+ *
+ * @throws {@link WorkSpacesServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class CreateIpGroupCommand extends $Command<
-  CreateIpGroupCommandInput,
-  CreateIpGroupCommandOutput,
-  WorkSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateIpGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateIpGroupCommandInput, CreateIpGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesClient";
-    const commandName = "CreateIpGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateIpGroupRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateIpGroupResultFilterSensitiveLog,
+export class CreateIpGroupCommand extends command<CreateIpGroupCommandInput, CreateIpGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateIpGroup",
+  CreateIpGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateIpGroupRequest;
+      output: CreateIpGroupResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateIpGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateIpGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateIpGroupCommandOutput> {
-    return deserializeAws_json1_1CreateIpGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateIpGroupCommandInput;
+      output: CreateIpGroupCommandOutput;
+    };
+  };
 }

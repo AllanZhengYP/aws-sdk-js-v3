@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BatchClient";
-import {
-  UpdateSchedulingPolicyRequest,
-  UpdateSchedulingPolicyRequestFilterSensitiveLog,
-  UpdateSchedulingPolicyResponse,
-  UpdateSchedulingPolicyResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateSchedulingPolicyCommand,
-  serializeAws_restJson1UpdateSchedulingPolicyCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateSchedulingPolicyRequest, UpdateSchedulingPolicyResponse } from "../models/models_0";
+import { UpdateSchedulingPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateSchedulingPolicyCommand}.
+ */
 export interface UpdateSchedulingPolicyCommandInput extends UpdateSchedulingPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateSchedulingPolicyCommand}.
+ */
 export interface UpdateSchedulingPolicyCommandOutput extends UpdateSchedulingPolicyResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,66 @@ export interface UpdateSchedulingPolicyCommandOutput extends UpdateSchedulingPol
  * ```javascript
  * import { BatchClient, UpdateSchedulingPolicyCommand } from "@aws-sdk/client-batch"; // ES Modules import
  * // const { BatchClient, UpdateSchedulingPolicyCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * // import type { BatchClientConfig } from "@aws-sdk/client-batch";
+ * const config = {}; // type is BatchClientConfig
  * const client = new BatchClient(config);
+ * const input = { // UpdateSchedulingPolicyRequest
+ *   arn: "STRING_VALUE", // required
+ *   quotaSharePolicy: { // QuotaSharePolicy
+ *     idleResourceAssignmentStrategy: "FIFO", // required
+ *   },
+ *   fairsharePolicy: { // FairsharePolicy
+ *     shareDecaySeconds: Number("int"),
+ *     computeReservation: Number("int"),
+ *     shareDistribution: [ // ShareAttributesList
+ *       { // ShareAttributes
+ *         shareIdentifier: "STRING_VALUE", // required
+ *         weightFactor: Number("float"),
+ *       },
+ *     ],
+ *   },
+ * };
  * const command = new UpdateSchedulingPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateSchedulingPolicyCommandInput - {@link UpdateSchedulingPolicyCommandInput}
+ * @returns {@link UpdateSchedulingPolicyCommandOutput}
  * @see {@link UpdateSchedulingPolicyCommandInput} for command's `input` shape.
  * @see {@link UpdateSchedulingPolicyCommandOutput} for command's `response` shape.
  * @see {@link BatchClientResolvedConfig | config} for BatchClient's `config` shape.
  *
+ * @throws {@link ClientException} (client fault)
+ *  <p>These errors are usually caused by a client action. One example cause is using an action or resource on behalf
+ *    of a user that doesn't have permissions to use the action or resource. Another cause is specifying an identifier
+ *    that's not valid.</p>
+ *
+ * @throws {@link ServerException} (server fault)
+ *  <p>These errors are usually caused by a server issue.</p>
+ *
+ * @throws {@link BatchServiceException}
+ * <p>Base exception class for all service exceptions from Batch service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateSchedulingPolicyCommand extends $Command<
-  UpdateSchedulingPolicyCommandInput,
-  UpdateSchedulingPolicyCommandOutput,
-  BatchClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateSchedulingPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BatchClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateSchedulingPolicyCommandInput, UpdateSchedulingPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BatchClient";
-    const commandName = "UpdateSchedulingPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateSchedulingPolicyRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateSchedulingPolicyResponseFilterSensitiveLog,
+export class UpdateSchedulingPolicyCommand extends command<UpdateSchedulingPolicyCommandInput, UpdateSchedulingPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateSchedulingPolicy",
+  UpdateSchedulingPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateSchedulingPolicyRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateSchedulingPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateSchedulingPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateSchedulingPolicyCommandOutput> {
-    return deserializeAws_restJson1UpdateSchedulingPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateSchedulingPolicyCommandInput;
+      output: UpdateSchedulingPolicyCommandOutput;
+    };
+  };
 }

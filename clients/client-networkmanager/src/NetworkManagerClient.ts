@@ -1,277 +1,362 @@
 // smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  DefaultsMode,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
   BodyLengthCalculator as __BodyLengthCalculator,
-  Credentials as __Credentials,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { AcceptAttachmentCommandInput, AcceptAttachmentCommandOutput } from "./commands/AcceptAttachmentCommand";
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultNetworkManagerHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type { AcceptAttachmentCommandInput, AcceptAttachmentCommandOutput } from "./commands/AcceptAttachmentCommand";
+import type {
   AssociateConnectPeerCommandInput,
   AssociateConnectPeerCommandOutput,
 } from "./commands/AssociateConnectPeerCommand";
-import {
+import type {
   AssociateCustomerGatewayCommandInput,
   AssociateCustomerGatewayCommandOutput,
 } from "./commands/AssociateCustomerGatewayCommand";
-import { AssociateLinkCommandInput, AssociateLinkCommandOutput } from "./commands/AssociateLinkCommand";
-import {
+import type { AssociateLinkCommandInput, AssociateLinkCommandOutput } from "./commands/AssociateLinkCommand";
+import type {
   AssociateTransitGatewayConnectPeerCommandInput,
   AssociateTransitGatewayConnectPeerCommandOutput,
 } from "./commands/AssociateTransitGatewayConnectPeerCommand";
-import {
+import type {
   CreateConnectAttachmentCommandInput,
   CreateConnectAttachmentCommandOutput,
 } from "./commands/CreateConnectAttachmentCommand";
-import { CreateConnectionCommandInput, CreateConnectionCommandOutput } from "./commands/CreateConnectionCommand";
-import { CreateConnectPeerCommandInput, CreateConnectPeerCommandOutput } from "./commands/CreateConnectPeerCommand";
-import { CreateCoreNetworkCommandInput, CreateCoreNetworkCommandOutput } from "./commands/CreateCoreNetworkCommand";
-import { CreateDeviceCommandInput, CreateDeviceCommandOutput } from "./commands/CreateDeviceCommand";
-import {
+import type { CreateConnectionCommandInput, CreateConnectionCommandOutput } from "./commands/CreateConnectionCommand";
+import type {
+  CreateConnectPeerCommandInput,
+  CreateConnectPeerCommandOutput,
+} from "./commands/CreateConnectPeerCommand";
+import type {
+  CreateCoreNetworkCommandInput,
+  CreateCoreNetworkCommandOutput,
+} from "./commands/CreateCoreNetworkCommand";
+import type {
+  CreateCoreNetworkPrefixListAssociationCommandInput,
+  CreateCoreNetworkPrefixListAssociationCommandOutput,
+} from "./commands/CreateCoreNetworkPrefixListAssociationCommand";
+import type { CreateDeviceCommandInput, CreateDeviceCommandOutput } from "./commands/CreateDeviceCommand";
+import type {
+  CreateDirectConnectGatewayAttachmentCommandInput,
+  CreateDirectConnectGatewayAttachmentCommandOutput,
+} from "./commands/CreateDirectConnectGatewayAttachmentCommand";
+import type {
   CreateGlobalNetworkCommandInput,
   CreateGlobalNetworkCommandOutput,
 } from "./commands/CreateGlobalNetworkCommand";
-import { CreateLinkCommandInput, CreateLinkCommandOutput } from "./commands/CreateLinkCommand";
-import { CreateSiteCommandInput, CreateSiteCommandOutput } from "./commands/CreateSiteCommand";
-import {
+import type { CreateLinkCommandInput, CreateLinkCommandOutput } from "./commands/CreateLinkCommand";
+import type { CreateSiteCommandInput, CreateSiteCommandOutput } from "./commands/CreateSiteCommand";
+import type {
   CreateSiteToSiteVpnAttachmentCommandInput,
   CreateSiteToSiteVpnAttachmentCommandOutput,
 } from "./commands/CreateSiteToSiteVpnAttachmentCommand";
-import {
+import type {
   CreateTransitGatewayPeeringCommandInput,
   CreateTransitGatewayPeeringCommandOutput,
 } from "./commands/CreateTransitGatewayPeeringCommand";
-import {
+import type {
   CreateTransitGatewayRouteTableAttachmentCommandInput,
   CreateTransitGatewayRouteTableAttachmentCommandOutput,
 } from "./commands/CreateTransitGatewayRouteTableAttachmentCommand";
-import {
+import type {
   CreateVpcAttachmentCommandInput,
   CreateVpcAttachmentCommandOutput,
 } from "./commands/CreateVpcAttachmentCommand";
-import { DeleteAttachmentCommandInput, DeleteAttachmentCommandOutput } from "./commands/DeleteAttachmentCommand";
-import { DeleteConnectionCommandInput, DeleteConnectionCommandOutput } from "./commands/DeleteConnectionCommand";
-import { DeleteConnectPeerCommandInput, DeleteConnectPeerCommandOutput } from "./commands/DeleteConnectPeerCommand";
-import { DeleteCoreNetworkCommandInput, DeleteCoreNetworkCommandOutput } from "./commands/DeleteCoreNetworkCommand";
-import {
+import type { DeleteAttachmentCommandInput, DeleteAttachmentCommandOutput } from "./commands/DeleteAttachmentCommand";
+import type { DeleteConnectionCommandInput, DeleteConnectionCommandOutput } from "./commands/DeleteConnectionCommand";
+import type {
+  DeleteConnectPeerCommandInput,
+  DeleteConnectPeerCommandOutput,
+} from "./commands/DeleteConnectPeerCommand";
+import type {
+  DeleteCoreNetworkCommandInput,
+  DeleteCoreNetworkCommandOutput,
+} from "./commands/DeleteCoreNetworkCommand";
+import type {
   DeleteCoreNetworkPolicyVersionCommandInput,
   DeleteCoreNetworkPolicyVersionCommandOutput,
 } from "./commands/DeleteCoreNetworkPolicyVersionCommand";
-import { DeleteDeviceCommandInput, DeleteDeviceCommandOutput } from "./commands/DeleteDeviceCommand";
-import {
+import type {
+  DeleteCoreNetworkPrefixListAssociationCommandInput,
+  DeleteCoreNetworkPrefixListAssociationCommandOutput,
+} from "./commands/DeleteCoreNetworkPrefixListAssociationCommand";
+import type { DeleteDeviceCommandInput, DeleteDeviceCommandOutput } from "./commands/DeleteDeviceCommand";
+import type {
   DeleteGlobalNetworkCommandInput,
   DeleteGlobalNetworkCommandOutput,
 } from "./commands/DeleteGlobalNetworkCommand";
-import { DeleteLinkCommandInput, DeleteLinkCommandOutput } from "./commands/DeleteLinkCommand";
-import { DeletePeeringCommandInput, DeletePeeringCommandOutput } from "./commands/DeletePeeringCommand";
-import {
+import type { DeleteLinkCommandInput, DeleteLinkCommandOutput } from "./commands/DeleteLinkCommand";
+import type { DeletePeeringCommandInput, DeletePeeringCommandOutput } from "./commands/DeletePeeringCommand";
+import type {
   DeleteResourcePolicyCommandInput,
   DeleteResourcePolicyCommandOutput,
 } from "./commands/DeleteResourcePolicyCommand";
-import { DeleteSiteCommandInput, DeleteSiteCommandOutput } from "./commands/DeleteSiteCommand";
-import {
+import type { DeleteSiteCommandInput, DeleteSiteCommandOutput } from "./commands/DeleteSiteCommand";
+import type {
   DeregisterTransitGatewayCommandInput,
   DeregisterTransitGatewayCommandOutput,
 } from "./commands/DeregisterTransitGatewayCommand";
-import {
+import type {
   DescribeGlobalNetworksCommandInput,
   DescribeGlobalNetworksCommandOutput,
 } from "./commands/DescribeGlobalNetworksCommand";
-import {
+import type {
   DisassociateConnectPeerCommandInput,
   DisassociateConnectPeerCommandOutput,
 } from "./commands/DisassociateConnectPeerCommand";
-import {
+import type {
   DisassociateCustomerGatewayCommandInput,
   DisassociateCustomerGatewayCommandOutput,
 } from "./commands/DisassociateCustomerGatewayCommand";
-import { DisassociateLinkCommandInput, DisassociateLinkCommandOutput } from "./commands/DisassociateLinkCommand";
-import {
+import type { DisassociateLinkCommandInput, DisassociateLinkCommandOutput } from "./commands/DisassociateLinkCommand";
+import type {
   DisassociateTransitGatewayConnectPeerCommandInput,
   DisassociateTransitGatewayConnectPeerCommandOutput,
 } from "./commands/DisassociateTransitGatewayConnectPeerCommand";
-import {
+import type {
   ExecuteCoreNetworkChangeSetCommandInput,
   ExecuteCoreNetworkChangeSetCommandOutput,
 } from "./commands/ExecuteCoreNetworkChangeSetCommand";
-import {
+import type {
   GetConnectAttachmentCommandInput,
   GetConnectAttachmentCommandOutput,
 } from "./commands/GetConnectAttachmentCommand";
-import { GetConnectionsCommandInput, GetConnectionsCommandOutput } from "./commands/GetConnectionsCommand";
-import {
+import type { GetConnectionsCommandInput, GetConnectionsCommandOutput } from "./commands/GetConnectionsCommand";
+import type {
   GetConnectPeerAssociationsCommandInput,
   GetConnectPeerAssociationsCommandOutput,
 } from "./commands/GetConnectPeerAssociationsCommand";
-import { GetConnectPeerCommandInput, GetConnectPeerCommandOutput } from "./commands/GetConnectPeerCommand";
-import {
+import type { GetConnectPeerCommandInput, GetConnectPeerCommandOutput } from "./commands/GetConnectPeerCommand";
+import type {
   GetCoreNetworkChangeEventsCommandInput,
   GetCoreNetworkChangeEventsCommandOutput,
 } from "./commands/GetCoreNetworkChangeEventsCommand";
-import {
+import type {
   GetCoreNetworkChangeSetCommandInput,
   GetCoreNetworkChangeSetCommandOutput,
 } from "./commands/GetCoreNetworkChangeSetCommand";
-import { GetCoreNetworkCommandInput, GetCoreNetworkCommandOutput } from "./commands/GetCoreNetworkCommand";
-import {
+import type { GetCoreNetworkCommandInput, GetCoreNetworkCommandOutput } from "./commands/GetCoreNetworkCommand";
+import type {
   GetCoreNetworkPolicyCommandInput,
   GetCoreNetworkPolicyCommandOutput,
 } from "./commands/GetCoreNetworkPolicyCommand";
-import {
+import type {
   GetCustomerGatewayAssociationsCommandInput,
   GetCustomerGatewayAssociationsCommandOutput,
 } from "./commands/GetCustomerGatewayAssociationsCommand";
-import { GetDevicesCommandInput, GetDevicesCommandOutput } from "./commands/GetDevicesCommand";
-import {
+import type { GetDevicesCommandInput, GetDevicesCommandOutput } from "./commands/GetDevicesCommand";
+import type {
+  GetDirectConnectGatewayAttachmentCommandInput,
+  GetDirectConnectGatewayAttachmentCommandOutput,
+} from "./commands/GetDirectConnectGatewayAttachmentCommand";
+import type {
   GetLinkAssociationsCommandInput,
   GetLinkAssociationsCommandOutput,
 } from "./commands/GetLinkAssociationsCommand";
-import { GetLinksCommandInput, GetLinksCommandOutput } from "./commands/GetLinksCommand";
-import {
+import type { GetLinksCommandInput, GetLinksCommandOutput } from "./commands/GetLinksCommand";
+import type {
   GetNetworkResourceCountsCommandInput,
   GetNetworkResourceCountsCommandOutput,
 } from "./commands/GetNetworkResourceCountsCommand";
-import {
+import type {
   GetNetworkResourceRelationshipsCommandInput,
   GetNetworkResourceRelationshipsCommandOutput,
 } from "./commands/GetNetworkResourceRelationshipsCommand";
-import {
+import type {
   GetNetworkResourcesCommandInput,
   GetNetworkResourcesCommandOutput,
 } from "./commands/GetNetworkResourcesCommand";
-import { GetNetworkRoutesCommandInput, GetNetworkRoutesCommandOutput } from "./commands/GetNetworkRoutesCommand";
-import {
+import type { GetNetworkRoutesCommandInput, GetNetworkRoutesCommandOutput } from "./commands/GetNetworkRoutesCommand";
+import type {
   GetNetworkTelemetryCommandInput,
   GetNetworkTelemetryCommandOutput,
 } from "./commands/GetNetworkTelemetryCommand";
-import { GetResourcePolicyCommandInput, GetResourcePolicyCommandOutput } from "./commands/GetResourcePolicyCommand";
-import { GetRouteAnalysisCommandInput, GetRouteAnalysisCommandOutput } from "./commands/GetRouteAnalysisCommand";
-import { GetSitesCommandInput, GetSitesCommandOutput } from "./commands/GetSitesCommand";
-import {
+import type {
+  GetResourcePolicyCommandInput,
+  GetResourcePolicyCommandOutput,
+} from "./commands/GetResourcePolicyCommand";
+import type { GetRouteAnalysisCommandInput, GetRouteAnalysisCommandOutput } from "./commands/GetRouteAnalysisCommand";
+import type { GetSitesCommandInput, GetSitesCommandOutput } from "./commands/GetSitesCommand";
+import type {
   GetSiteToSiteVpnAttachmentCommandInput,
   GetSiteToSiteVpnAttachmentCommandOutput,
 } from "./commands/GetSiteToSiteVpnAttachmentCommand";
-import {
+import type {
   GetTransitGatewayConnectPeerAssociationsCommandInput,
   GetTransitGatewayConnectPeerAssociationsCommandOutput,
 } from "./commands/GetTransitGatewayConnectPeerAssociationsCommand";
-import {
+import type {
   GetTransitGatewayPeeringCommandInput,
   GetTransitGatewayPeeringCommandOutput,
 } from "./commands/GetTransitGatewayPeeringCommand";
-import {
+import type {
   GetTransitGatewayRegistrationsCommandInput,
   GetTransitGatewayRegistrationsCommandOutput,
 } from "./commands/GetTransitGatewayRegistrationsCommand";
-import {
+import type {
   GetTransitGatewayRouteTableAttachmentCommandInput,
   GetTransitGatewayRouteTableAttachmentCommandOutput,
 } from "./commands/GetTransitGatewayRouteTableAttachmentCommand";
-import { GetVpcAttachmentCommandInput, GetVpcAttachmentCommandOutput } from "./commands/GetVpcAttachmentCommand";
-import { ListAttachmentsCommandInput, ListAttachmentsCommandOutput } from "./commands/ListAttachmentsCommand";
-import { ListConnectPeersCommandInput, ListConnectPeersCommandOutput } from "./commands/ListConnectPeersCommand";
-import {
+import type { GetVpcAttachmentCommandInput, GetVpcAttachmentCommandOutput } from "./commands/GetVpcAttachmentCommand";
+import type {
+  ListAttachmentNatConfigurationsCommandInput,
+  ListAttachmentNatConfigurationsCommandOutput,
+} from "./commands/ListAttachmentNatConfigurationsCommand";
+import type {
+  ListAttachmentRoutingPolicyAssociationsCommandInput,
+  ListAttachmentRoutingPolicyAssociationsCommandOutput,
+} from "./commands/ListAttachmentRoutingPolicyAssociationsCommand";
+import type { ListAttachmentsCommandInput, ListAttachmentsCommandOutput } from "./commands/ListAttachmentsCommand";
+import type { ListConnectPeersCommandInput, ListConnectPeersCommandOutput } from "./commands/ListConnectPeersCommand";
+import type {
   ListCoreNetworkPolicyVersionsCommandInput,
   ListCoreNetworkPolicyVersionsCommandOutput,
 } from "./commands/ListCoreNetworkPolicyVersionsCommand";
-import { ListCoreNetworksCommandInput, ListCoreNetworksCommandOutput } from "./commands/ListCoreNetworksCommand";
-import {
+import type {
+  ListCoreNetworkPrefixListAssociationsCommandInput,
+  ListCoreNetworkPrefixListAssociationsCommandOutput,
+} from "./commands/ListCoreNetworkPrefixListAssociationsCommand";
+import type {
+  ListCoreNetworkRoutingInformationCommandInput,
+  ListCoreNetworkRoutingInformationCommandOutput,
+} from "./commands/ListCoreNetworkRoutingInformationCommand";
+import type { ListCoreNetworksCommandInput, ListCoreNetworksCommandOutput } from "./commands/ListCoreNetworksCommand";
+import type {
   ListOrganizationServiceAccessStatusCommandInput,
   ListOrganizationServiceAccessStatusCommandOutput,
 } from "./commands/ListOrganizationServiceAccessStatusCommand";
-import { ListPeeringsCommandInput, ListPeeringsCommandOutput } from "./commands/ListPeeringsCommand";
-import {
+import type { ListPeeringsCommandInput, ListPeeringsCommandOutput } from "./commands/ListPeeringsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
+  PutAttachmentRoutingPolicyLabelCommandInput,
+  PutAttachmentRoutingPolicyLabelCommandOutput,
+} from "./commands/PutAttachmentRoutingPolicyLabelCommand";
+import type {
   PutCoreNetworkPolicyCommandInput,
   PutCoreNetworkPolicyCommandOutput,
 } from "./commands/PutCoreNetworkPolicyCommand";
-import { PutResourcePolicyCommandInput, PutResourcePolicyCommandOutput } from "./commands/PutResourcePolicyCommand";
-import {
+import type {
+  PutResourcePolicyCommandInput,
+  PutResourcePolicyCommandOutput,
+} from "./commands/PutResourcePolicyCommand";
+import type {
   RegisterTransitGatewayCommandInput,
   RegisterTransitGatewayCommandOutput,
 } from "./commands/RegisterTransitGatewayCommand";
-import { RejectAttachmentCommandInput, RejectAttachmentCommandOutput } from "./commands/RejectAttachmentCommand";
-import {
+import type { RejectAttachmentCommandInput, RejectAttachmentCommandOutput } from "./commands/RejectAttachmentCommand";
+import type {
+  RemoveAttachmentRoutingPolicyLabelCommandInput,
+  RemoveAttachmentRoutingPolicyLabelCommandOutput,
+} from "./commands/RemoveAttachmentRoutingPolicyLabelCommand";
+import type {
   RestoreCoreNetworkPolicyVersionCommandInput,
   RestoreCoreNetworkPolicyVersionCommandOutput,
 } from "./commands/RestoreCoreNetworkPolicyVersionCommand";
-import {
+import type {
   StartOrganizationServiceAccessUpdateCommandInput,
   StartOrganizationServiceAccessUpdateCommandOutput,
 } from "./commands/StartOrganizationServiceAccessUpdateCommand";
-import { StartRouteAnalysisCommandInput, StartRouteAnalysisCommandOutput } from "./commands/StartRouteAnalysisCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateConnectionCommandInput, UpdateConnectionCommandOutput } from "./commands/UpdateConnectionCommand";
-import { UpdateCoreNetworkCommandInput, UpdateCoreNetworkCommandOutput } from "./commands/UpdateCoreNetworkCommand";
-import { UpdateDeviceCommandInput, UpdateDeviceCommandOutput } from "./commands/UpdateDeviceCommand";
-import {
+import type {
+  StartRouteAnalysisCommandInput,
+  StartRouteAnalysisCommandOutput,
+} from "./commands/StartRouteAnalysisCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateAttachmentNatConfigurationCommandInput,
+  UpdateAttachmentNatConfigurationCommandOutput,
+} from "./commands/UpdateAttachmentNatConfigurationCommand";
+import type { UpdateConnectionCommandInput, UpdateConnectionCommandOutput } from "./commands/UpdateConnectionCommand";
+import type {
+  UpdateCoreNetworkCommandInput,
+  UpdateCoreNetworkCommandOutput,
+} from "./commands/UpdateCoreNetworkCommand";
+import type { UpdateDeviceCommandInput, UpdateDeviceCommandOutput } from "./commands/UpdateDeviceCommand";
+import type {
+  UpdateDirectConnectGatewayAttachmentCommandInput,
+  UpdateDirectConnectGatewayAttachmentCommandOutput,
+} from "./commands/UpdateDirectConnectGatewayAttachmentCommand";
+import type {
   UpdateGlobalNetworkCommandInput,
   UpdateGlobalNetworkCommandOutput,
 } from "./commands/UpdateGlobalNetworkCommand";
-import { UpdateLinkCommandInput, UpdateLinkCommandOutput } from "./commands/UpdateLinkCommand";
-import {
+import type { UpdateLinkCommandInput, UpdateLinkCommandOutput } from "./commands/UpdateLinkCommand";
+import type {
   UpdateNetworkResourceMetadataCommandInput,
   UpdateNetworkResourceMetadataCommandOutput,
 } from "./commands/UpdateNetworkResourceMetadataCommand";
-import { UpdateSiteCommandInput, UpdateSiteCommandOutput } from "./commands/UpdateSiteCommand";
-import {
+import type { UpdateSiteCommandInput, UpdateSiteCommandOutput } from "./commands/UpdateSiteCommand";
+import type {
   UpdateVpcAttachmentCommandInput,
   UpdateVpcAttachmentCommandOutput,
 } from "./commands/UpdateVpcAttachmentCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AcceptAttachmentCommandInput
   | AssociateConnectPeerCommandInput
@@ -282,7 +367,9 @@ export type ServiceInputTypes =
   | CreateConnectPeerCommandInput
   | CreateConnectionCommandInput
   | CreateCoreNetworkCommandInput
+  | CreateCoreNetworkPrefixListAssociationCommandInput
   | CreateDeviceCommandInput
+  | CreateDirectConnectGatewayAttachmentCommandInput
   | CreateGlobalNetworkCommandInput
   | CreateLinkCommandInput
   | CreateSiteCommandInput
@@ -295,6 +382,7 @@ export type ServiceInputTypes =
   | DeleteConnectionCommandInput
   | DeleteCoreNetworkCommandInput
   | DeleteCoreNetworkPolicyVersionCommandInput
+  | DeleteCoreNetworkPrefixListAssociationCommandInput
   | DeleteDeviceCommandInput
   | DeleteGlobalNetworkCommandInput
   | DeleteLinkCommandInput
@@ -318,6 +406,7 @@ export type ServiceInputTypes =
   | GetCoreNetworkPolicyCommandInput
   | GetCustomerGatewayAssociationsCommandInput
   | GetDevicesCommandInput
+  | GetDirectConnectGatewayAttachmentCommandInput
   | GetLinkAssociationsCommandInput
   | GetLinksCommandInput
   | GetNetworkResourceCountsCommandInput
@@ -334,31 +423,42 @@ export type ServiceInputTypes =
   | GetTransitGatewayRegistrationsCommandInput
   | GetTransitGatewayRouteTableAttachmentCommandInput
   | GetVpcAttachmentCommandInput
+  | ListAttachmentNatConfigurationsCommandInput
+  | ListAttachmentRoutingPolicyAssociationsCommandInput
   | ListAttachmentsCommandInput
   | ListConnectPeersCommandInput
   | ListCoreNetworkPolicyVersionsCommandInput
+  | ListCoreNetworkPrefixListAssociationsCommandInput
+  | ListCoreNetworkRoutingInformationCommandInput
   | ListCoreNetworksCommandInput
   | ListOrganizationServiceAccessStatusCommandInput
   | ListPeeringsCommandInput
   | ListTagsForResourceCommandInput
+  | PutAttachmentRoutingPolicyLabelCommandInput
   | PutCoreNetworkPolicyCommandInput
   | PutResourcePolicyCommandInput
   | RegisterTransitGatewayCommandInput
   | RejectAttachmentCommandInput
+  | RemoveAttachmentRoutingPolicyLabelCommandInput
   | RestoreCoreNetworkPolicyVersionCommandInput
   | StartOrganizationServiceAccessUpdateCommandInput
   | StartRouteAnalysisCommandInput
   | TagResourceCommandInput
   | UntagResourceCommandInput
+  | UpdateAttachmentNatConfigurationCommandInput
   | UpdateConnectionCommandInput
   | UpdateCoreNetworkCommandInput
   | UpdateDeviceCommandInput
+  | UpdateDirectConnectGatewayAttachmentCommandInput
   | UpdateGlobalNetworkCommandInput
   | UpdateLinkCommandInput
   | UpdateNetworkResourceMetadataCommandInput
   | UpdateSiteCommandInput
   | UpdateVpcAttachmentCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AcceptAttachmentCommandOutput
   | AssociateConnectPeerCommandOutput
@@ -369,7 +469,9 @@ export type ServiceOutputTypes =
   | CreateConnectPeerCommandOutput
   | CreateConnectionCommandOutput
   | CreateCoreNetworkCommandOutput
+  | CreateCoreNetworkPrefixListAssociationCommandOutput
   | CreateDeviceCommandOutput
+  | CreateDirectConnectGatewayAttachmentCommandOutput
   | CreateGlobalNetworkCommandOutput
   | CreateLinkCommandOutput
   | CreateSiteCommandOutput
@@ -382,6 +484,7 @@ export type ServiceOutputTypes =
   | DeleteConnectionCommandOutput
   | DeleteCoreNetworkCommandOutput
   | DeleteCoreNetworkPolicyVersionCommandOutput
+  | DeleteCoreNetworkPrefixListAssociationCommandOutput
   | DeleteDeviceCommandOutput
   | DeleteGlobalNetworkCommandOutput
   | DeleteLinkCommandOutput
@@ -405,6 +508,7 @@ export type ServiceOutputTypes =
   | GetCoreNetworkPolicyCommandOutput
   | GetCustomerGatewayAssociationsCommandOutput
   | GetDevicesCommandOutput
+  | GetDirectConnectGatewayAttachmentCommandOutput
   | GetLinkAssociationsCommandOutput
   | GetLinksCommandOutput
   | GetNetworkResourceCountsCommandOutput
@@ -421,43 +525,54 @@ export type ServiceOutputTypes =
   | GetTransitGatewayRegistrationsCommandOutput
   | GetTransitGatewayRouteTableAttachmentCommandOutput
   | GetVpcAttachmentCommandOutput
+  | ListAttachmentNatConfigurationsCommandOutput
+  | ListAttachmentRoutingPolicyAssociationsCommandOutput
   | ListAttachmentsCommandOutput
   | ListConnectPeersCommandOutput
   | ListCoreNetworkPolicyVersionsCommandOutput
+  | ListCoreNetworkPrefixListAssociationsCommandOutput
+  | ListCoreNetworkRoutingInformationCommandOutput
   | ListCoreNetworksCommandOutput
   | ListOrganizationServiceAccessStatusCommandOutput
   | ListPeeringsCommandOutput
   | ListTagsForResourceCommandOutput
+  | PutAttachmentRoutingPolicyLabelCommandOutput
   | PutCoreNetworkPolicyCommandOutput
   | PutResourcePolicyCommandOutput
   | RegisterTransitGatewayCommandOutput
   | RejectAttachmentCommandOutput
+  | RemoveAttachmentRoutingPolicyLabelCommandOutput
   | RestoreCoreNetworkPolicyVersionCommandOutput
   | StartOrganizationServiceAccessUpdateCommandOutput
   | StartRouteAnalysisCommandOutput
   | TagResourceCommandOutput
   | UntagResourceCommandOutput
+  | UpdateAttachmentNatConfigurationCommandOutput
   | UpdateConnectionCommandOutput
   | UpdateCoreNetworkCommandOutput
   | UpdateDeviceCommandOutput
+  | UpdateDirectConnectGatewayAttachmentCommandOutput
   | UpdateGlobalNetworkCommandOutput
   | UpdateLinkCommandOutput
   | UpdateNetworkResourceMetadataCommandOutput
   | UpdateSiteCommandOutput
   | UpdateVpcAttachmentCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -508,25 +623,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -539,68 +645,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
   /**
-   * The {@link DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
    */
-  defaultsMode?: DefaultsMode | Provider<DefaultsMode>;
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type NetworkManagerClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of NetworkManagerClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type NetworkManagerClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of NetworkManagerClient class constructor that set the region, credentials and other options.
  */
 export interface NetworkManagerClientConfig extends NetworkManagerClientConfigType {}
 
-type NetworkManagerClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of NetworkManagerClient class. This is resolved and normalized from the {@link NetworkManagerClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type NetworkManagerClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of NetworkManagerClient class. This is resolved and normalized from the {@link NetworkManagerClientConfig | constructor configuration interface}.
  */
 export interface NetworkManagerClientResolvedConfig extends NetworkManagerClientResolvedConfigType {}
 
 /**
  * <p>Amazon Web Services enables you to centrally manage your Amazon Web Services Cloud WAN core network and your Transit Gateway network across Amazon Web Services accounts, Regions, and on-premises locations.</p>
+ * @public
  */
 export class NetworkManagerClient extends __Client<
   __HttpHandlerOptions,
@@ -613,23 +764,36 @@ export class NetworkManagerClient extends __Client<
    */
   readonly config: NetworkManagerClientResolvedConfig;
 
-  constructor(configuration: NetworkManagerClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<NetworkManagerClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
     this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultNetworkManagerHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: NetworkManagerClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

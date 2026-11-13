@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  ProvisionPublicIpv4PoolCidrRequest,
-  ProvisionPublicIpv4PoolCidrRequestFilterSensitiveLog,
-  ProvisionPublicIpv4PoolCidrResult,
-  ProvisionPublicIpv4PoolCidrResultFilterSensitiveLog,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2ProvisionPublicIpv4PoolCidrCommand,
-  serializeAws_ec2ProvisionPublicIpv4PoolCidrCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ProvisionPublicIpv4PoolCidrRequest, ProvisionPublicIpv4PoolCidrResult } from "../models/models_8";
+import { ProvisionPublicIpv4PoolCidr$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ProvisionPublicIpv4PoolCidrCommand}.
+ */
 export interface ProvisionPublicIpv4PoolCidrCommandInput extends ProvisionPublicIpv4PoolCidrRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ProvisionPublicIpv4PoolCidrCommand}.
+ */
 export interface ProvisionPublicIpv4PoolCidrCommandOutput extends ProvisionPublicIpv4PoolCidrResult, __MetadataBearer {}
 
 /**
@@ -35,71 +30,57 @@ export interface ProvisionPublicIpv4PoolCidrCommandOutput extends ProvisionPubli
  * ```javascript
  * import { EC2Client, ProvisionPublicIpv4PoolCidrCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ProvisionPublicIpv4PoolCidrCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ProvisionPublicIpv4PoolCidrRequest
+ *   DryRun: true || false,
+ *   IpamPoolId: "STRING_VALUE", // required
+ *   PoolId: "STRING_VALUE", // required
+ *   NetmaskLength: Number("int"), // required
+ *   NetworkBorderGroup: "STRING_VALUE",
+ * };
  * const command = new ProvisionPublicIpv4PoolCidrCommand(input);
  * const response = await client.send(command);
+ * // { // ProvisionPublicIpv4PoolCidrResult
+ * //   PoolId: "STRING_VALUE",
+ * //   PoolAddressRange: { // PublicIpv4PoolRange
+ * //     FirstAddress: "STRING_VALUE",
+ * //     LastAddress: "STRING_VALUE",
+ * //     AddressCount: Number("int"),
+ * //     AvailableAddressCount: Number("int"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ProvisionPublicIpv4PoolCidrCommandInput - {@link ProvisionPublicIpv4PoolCidrCommandInput}
+ * @returns {@link ProvisionPublicIpv4PoolCidrCommandOutput}
  * @see {@link ProvisionPublicIpv4PoolCidrCommandInput} for command's `input` shape.
  * @see {@link ProvisionPublicIpv4PoolCidrCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ProvisionPublicIpv4PoolCidrCommand extends $Command<
-  ProvisionPublicIpv4PoolCidrCommandInput,
-  ProvisionPublicIpv4PoolCidrCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ProvisionPublicIpv4PoolCidrCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ProvisionPublicIpv4PoolCidrCommandInput, ProvisionPublicIpv4PoolCidrCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ProvisionPublicIpv4PoolCidrCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ProvisionPublicIpv4PoolCidrRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ProvisionPublicIpv4PoolCidrResultFilterSensitiveLog,
+export class ProvisionPublicIpv4PoolCidrCommand extends command<ProvisionPublicIpv4PoolCidrCommandInput, ProvisionPublicIpv4PoolCidrCommandOutput>(
+  _ep0,
+  _mw0,
+  "ProvisionPublicIpv4PoolCidr",
+  ProvisionPublicIpv4PoolCidr$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ProvisionPublicIpv4PoolCidrRequest;
+      output: ProvisionPublicIpv4PoolCidrResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ProvisionPublicIpv4PoolCidrCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ProvisionPublicIpv4PoolCidrCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ProvisionPublicIpv4PoolCidrCommandOutput> {
-    return deserializeAws_ec2ProvisionPublicIpv4PoolCidrCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ProvisionPublicIpv4PoolCidrCommandInput;
+      output: ProvisionPublicIpv4PoolCidrCommandOutput;
+    };
+  };
 }

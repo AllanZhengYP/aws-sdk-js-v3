@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DisassociateTrustStoreRequest,
-  DisassociateTrustStoreRequestFilterSensitiveLog,
-  DisassociateTrustStoreResponse,
-  DisassociateTrustStoreResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DisassociateTrustStoreCommand,
-  serializeAws_restJson1DisassociateTrustStoreCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateTrustStoreRequest, DisassociateTrustStoreResponse } from "../models/models_0";
+import { DisassociateTrustStore$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateTrustStoreCommand}.
+ */
 export interface DisassociateTrustStoreCommandInput extends DisassociateTrustStoreRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateTrustStoreCommand}.
+ */
 export interface DisassociateTrustStoreCommandOutput extends DisassociateTrustStoreResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,63 @@ export interface DisassociateTrustStoreCommandOutput extends DisassociateTrustSt
  * ```javascript
  * import { WorkSpacesWebClient, DisassociateTrustStoreCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, DisassociateTrustStoreCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // DisassociateTrustStoreRequest
+ *   portalArn: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateTrustStoreCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateTrustStoreCommandInput - {@link DisassociateTrustStoreCommandInput}
+ * @returns {@link DisassociateTrustStoreCommandOutput}
  * @see {@link DisassociateTrustStoreCommandInput} for command's `input` shape.
  * @see {@link DisassociateTrustStoreCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There is a conflict.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateTrustStoreCommand extends $Command<
-  DisassociateTrustStoreCommandInput,
-  DisassociateTrustStoreCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateTrustStoreCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateTrustStoreCommandInput, DisassociateTrustStoreCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "DisassociateTrustStoreCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateTrustStoreRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateTrustStoreResponseFilterSensitiveLog,
+export class DisassociateTrustStoreCommand extends command<DisassociateTrustStoreCommandInput, DisassociateTrustStoreCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateTrustStore",
+  DisassociateTrustStore$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateTrustStoreRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateTrustStoreCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateTrustStoreCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DisassociateTrustStoreCommandOutput> {
-    return deserializeAws_restJson1DisassociateTrustStoreCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateTrustStoreCommandInput;
+      output: DisassociateTrustStoreCommandOutput;
+    };
+  };
 }

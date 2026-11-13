@@ -1,101 +1,105 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
-  GetPositionConfigurationRequest,
-  GetPositionConfigurationRequestFilterSensitiveLog,
-  GetPositionConfigurationResponse,
-  GetPositionConfigurationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetPositionConfigurationCommand,
-  serializeAws_restJson1GetPositionConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetPositionConfigurationRequest, GetPositionConfigurationResponse } from "../models/models_0";
+import { GetPositionConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetPositionConfigurationCommand}.
+ */
 export interface GetPositionConfigurationCommandInput extends GetPositionConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetPositionConfigurationCommand}.
+ */
 export interface GetPositionConfigurationCommandOutput extends GetPositionConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Get position configuration for a given resource.</p>
+ *          <important>
+ *             <p>This action is no longer supported. Calls to retrieve the position configuration
+ *                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_GetResourcePosition.html">GetResourcePosition</a> API operation instead.</p>
+ *          </important>
+ *
+ * @deprecated This operation is no longer supported.
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { IoTWirelessClient, GetPositionConfigurationCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, GetPositionConfigurationCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // GetPositionConfigurationRequest
+ *   ResourceIdentifier: "STRING_VALUE", // required
+ *   ResourceType: "WirelessDevice" || "WirelessGateway", // required
+ * };
  * const command = new GetPositionConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // GetPositionConfigurationResponse
+ * //   Solvers: { // PositionSolverDetails
+ * //     SemtechGnss: { // SemtechGnssDetail
+ * //       Provider: "Semtech",
+ * //       Type: "GNSS",
+ * //       Status: "Enabled" || "Disabled",
+ * //       Fec: "ROSE" || "NONE",
+ * //     },
+ * //   },
+ * //   Destination: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetPositionConfigurationCommandInput - {@link GetPositionConfigurationCommandInput}
+ * @returns {@link GetPositionConfigurationCommandOutput}
  * @see {@link GetPositionConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetPositionConfigurationCommandOutput} for command's `response` shape.
  * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class GetPositionConfigurationCommand extends $Command<
-  GetPositionConfigurationCommandInput,
-  GetPositionConfigurationCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetPositionConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetPositionConfigurationCommandInput, GetPositionConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "GetPositionConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetPositionConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetPositionConfigurationResponseFilterSensitiveLog,
+export class GetPositionConfigurationCommand extends command<GetPositionConfigurationCommandInput, GetPositionConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetPositionConfiguration",
+  GetPositionConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetPositionConfigurationRequest;
+      output: GetPositionConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetPositionConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetPositionConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetPositionConfigurationCommandOutput> {
-    return deserializeAws_restJson1GetPositionConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetPositionConfigurationCommandInput;
+      output: GetPositionConfigurationCommandOutput;
+    };
+  };
 }

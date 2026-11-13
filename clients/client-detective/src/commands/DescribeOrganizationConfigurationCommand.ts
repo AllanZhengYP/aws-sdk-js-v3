@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DetectiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DetectiveClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeOrganizationConfigurationRequest,
-  DescribeOrganizationConfigurationRequestFilterSensitiveLog,
   DescribeOrganizationConfigurationResponse,
-  DescribeOrganizationConfigurationResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeOrganizationConfigurationCommand,
-  serializeAws_restJson1DescribeOrganizationConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { DescribeOrganizationConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeOrganizationConfigurationCommand}.
+ */
 export interface DescribeOrganizationConfigurationCommandInput extends DescribeOrganizationConfigurationRequest {}
-export interface DescribeOrganizationConfigurationCommandOutput
-  extends DescribeOrganizationConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeOrganizationConfigurationCommand}.
+ */
+export interface DescribeOrganizationConfigurationCommandOutput extends DescribeOrganizationConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Returns information about the configuration for the organization behavior graph.
@@ -39,74 +35,61 @@ export interface DescribeOrganizationConfigurationCommandOutput
  * ```javascript
  * import { DetectiveClient, DescribeOrganizationConfigurationCommand } from "@aws-sdk/client-detective"; // ES Modules import
  * // const { DetectiveClient, DescribeOrganizationConfigurationCommand } = require("@aws-sdk/client-detective"); // CommonJS import
+ * // import type { DetectiveClientConfig } from "@aws-sdk/client-detective";
+ * const config = {}; // type is DetectiveClientConfig
  * const client = new DetectiveClient(config);
+ * const input = { // DescribeOrganizationConfigurationRequest
+ *   GraphArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeOrganizationConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeOrganizationConfigurationResponse
+ * //   AutoEnable: true || false,
+ * // };
+ *
  * ```
  *
+ * @param DescribeOrganizationConfigurationCommandInput - {@link DescribeOrganizationConfigurationCommandInput}
+ * @returns {@link DescribeOrganizationConfigurationCommandOutput}
  * @see {@link DescribeOrganizationConfigurationCommandInput} for command's `input` shape.
  * @see {@link DescribeOrganizationConfigurationCommandOutput} for command's `response` shape.
  * @see {@link DetectiveClientResolvedConfig | config} for DetectiveClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request issuer does not have permission to access this resource or perform this
+ *          operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request was valid but failed because of a problem with the service.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request cannot be completed because too many other requests are occurring at the
+ *          same time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request parameters are invalid.</p>
+ *
+ * @throws {@link DetectiveServiceException}
+ * <p>Base exception class for all service exceptions from Detective service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeOrganizationConfigurationCommand extends $Command<
-  DescribeOrganizationConfigurationCommandInput,
-  DescribeOrganizationConfigurationCommandOutput,
-  DetectiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeOrganizationConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DetectiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeOrganizationConfigurationCommandInput, DescribeOrganizationConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DetectiveClient";
-    const commandName = "DescribeOrganizationConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeOrganizationConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeOrganizationConfigurationResponseFilterSensitiveLog,
+export class DescribeOrganizationConfigurationCommand extends command<DescribeOrganizationConfigurationCommandInput, DescribeOrganizationConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeOrganizationConfiguration",
+  DescribeOrganizationConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeOrganizationConfigurationRequest;
+      output: DescribeOrganizationConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeOrganizationConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeOrganizationConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeOrganizationConfigurationCommandOutput> {
-    return deserializeAws_restJson1DescribeOrganizationConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeOrganizationConfigurationCommandInput;
+      output: DescribeOrganizationConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,105 +1,103 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListCertificatesRequest,
-  ListCertificatesRequestFilterSensitiveLog,
-  ListCertificatesResponse,
-  ListCertificatesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListCertificatesCommand,
-  serializeAws_json1_1ListCertificatesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, TransferClientResolvedConfig } from "../TransferClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListCertificatesRequest, ListCertificatesResponse } from "../models/models_0";
+import { ListCertificates$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCertificatesCommand}.
+ */
 export interface ListCertificatesCommandInput extends ListCertificatesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCertificatesCommand}.
+ */
 export interface ListCertificatesCommandOutput extends ListCertificatesResponse, __MetadataBearer {}
 
 /**
- * <p>Returns a list of the current certificates that have been imported into Transfer Family. If you want to
- *       limit the results to a certain number, supply a value for the <code>MaxResults</code>
- *       parameter. If you ran the command previously and received a value for the
- *         <code>NextToken</code> parameter, you can supply that value to continue listing certificates
- *       from where you left off.</p>
+ * <p>Returns a list of the current certificates that have been imported into Transfer Family. If you want to limit the results to a certain number, supply a value for the <code>MaxResults</code> parameter. If you ran the command previously and received a value for the <code>NextToken</code> parameter, you can supply that value to continue listing certificates from where you left off.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { TransferClient, ListCertificatesCommand } from "@aws-sdk/client-transfer"; // ES Modules import
  * // const { TransferClient, ListCertificatesCommand } = require("@aws-sdk/client-transfer"); // CommonJS import
+ * // import type { TransferClientConfig } from "@aws-sdk/client-transfer";
+ * const config = {}; // type is TransferClientConfig
  * const client = new TransferClient(config);
+ * const input = { // ListCertificatesRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListCertificatesCommand(input);
  * const response = await client.send(command);
+ * // { // ListCertificatesResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   Certificates: [ // ListedCertificates // required
+ * //     { // ListedCertificate
+ * //       Arn: "STRING_VALUE",
+ * //       CertificateId: "STRING_VALUE",
+ * //       Usage: "SIGNING" || "ENCRYPTION" || "TLS",
+ * //       Status: "ACTIVE" || "PENDING_ROTATION" || "INACTIVE",
+ * //       ActiveDate: new Date("TIMESTAMP"),
+ * //       InactiveDate: new Date("TIMESTAMP"),
+ * //       Type: "CERTIFICATE" || "CERTIFICATE_WITH_PRIVATE_KEY",
+ * //       Description: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListCertificatesCommandInput - {@link ListCertificatesCommandInput}
+ * @returns {@link ListCertificatesCommandOutput}
  * @see {@link ListCertificatesCommandInput} for command's `input` shape.
  * @see {@link ListCertificatesCommandOutput} for command's `response` shape.
  * @see {@link TransferClientResolvedConfig | config} for TransferClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>This exception is thrown when an error occurs in the Transfer Family service.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> parameter that was passed is invalid.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>This exception is thrown when the client submits a malformed request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception is thrown when a resource is not found by the Amazon Web ServicesTransfer Family service.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>
+ *
+ * @throws {@link TransferServiceException}
+ * <p>Base exception class for all service exceptions from Transfer service.</p>
+ *
+ *
+ * @public
  */
-export class ListCertificatesCommand extends $Command<
-  ListCertificatesCommandInput,
-  ListCertificatesCommandOutput,
-  TransferClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCertificatesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: TransferClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCertificatesCommandInput, ListCertificatesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "TransferClient";
-    const commandName = "ListCertificatesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCertificatesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListCertificatesResponseFilterSensitiveLog,
+export class ListCertificatesCommand extends command<ListCertificatesCommandInput, ListCertificatesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCertificates",
+  ListCertificates$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCertificatesRequest;
+      output: ListCertificatesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListCertificatesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListCertificatesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListCertificatesCommandOutput> {
-    return deserializeAws_json1_1ListCertificatesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCertificatesCommandInput;
+      output: ListCertificatesCommandOutput;
+    };
+  };
 }

@@ -1,25 +1,27 @@
 {
+  "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "downlevelIteration": true,
-    "esModuleInterop": true,
-    "incremental": true,
-    "lib": ["es2015", "dom"],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "types": ["node"],
+    "importHelpers": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmitHelpers": false,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@aws-sdk/*": ["packages/*/src"],
-      "@aws-sdk/client-*": ["clients/client-*/"],
-      "@aws-sdk/aws-*": ["private/aws-*/"],
-      "@aws-sdk/lib-*": ["lib/*"]
+      "@aws-sdk/*": ["./packages/*/"],
+      "@aws-sdk/client-*": ["./clients/client-*/"],
+      "@aws-sdk/aws-*": ["./private/aws-*/"],
+      "@aws-sdk/lib-*": ["./lib/*"]
     },
     "preserveConstEnums": true,
     "removeComments": true,
     "resolveJsonModule": true,
-    "target": "es5",
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "jsxFactory": "JSX.createElement",
+    "jsxFragmentFactory": "JSX.Fragment"
   },
-  "include": ["packages/", "lib/"],
-  "exclude": ["node_modules/", "**/*.spec.ts"]
+  "include": ["packages/", "packages-internal/", "lib/"],
+  "exclude": ["node_modules/", "**/*.spec.ts", "**/*.fixture.ts", "vitest.*.ts"]
 }

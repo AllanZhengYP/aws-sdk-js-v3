@@ -1,41 +1,44 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListSecretVersionIdsRequest,
-  ListSecretVersionIdsRequestFilterSensitiveLog,
-  ListSecretVersionIdsResponse,
-  ListSecretVersionIdsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListSecretVersionIdsCommand,
-  serializeAws_json1_1ListSecretVersionIdsCommand,
-} from "../protocols/Aws_json1_1";
-import { SecretsManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../SecretsManagerClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSecretVersionIdsRequest, ListSecretVersionIdsResponse } from "../models/models_0";
+import { ListSecretVersionIds$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSecretVersionIdsCommand}.
+ */
 export interface ListSecretVersionIdsCommandInput extends ListSecretVersionIdsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSecretVersionIdsCommand}.
+ */
 export interface ListSecretVersionIdsCommandOutput extends ListSecretVersionIdsResponse, __MetadataBearer {}
 
 /**
- * <p>Lists the versions of a secret. Secrets Manager uses staging labels to indicate the different versions
- *     of a secret. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version">
- *     Secrets Manager concepts: Versions</a>.</p>
+ * <p>Lists the versions of a secret. Secrets Manager uses staging labels to indicate the different
+ *             versions of a secret. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version"> Secrets Manager
+ *                 concepts: Versions</a>.</p>
  *          <p>To list the secrets in the account, use <a>ListSecrets</a>.</p>
+ *          <note>
+ *             <p>
+ *                <code>ListSecretVersionIds</code> only returns versions that contain a secret
+ *                 value. To see all version IDs that have staging labels attached, including ones
+ *                 without a secret value, call <code>DescribeSecret</code> and check
+ *                     <code>VersionIdsToStages</code>.</p>
+ *          </note>
+ *          <p>Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html">Logging Secrets Manager events with CloudTrail</a>.</p>
  *          <p>
- *             <b>Required permissions: </b>
- *             <code>secretsmanager:ListSecretVersionIds</code>.
- *       For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions">
+ *             <b>Required permissions:
+ *                 </b>
+ *             <code>secretsmanager:ListSecretVersionIds</code>. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions">
  *       IAM policy actions for Secrets Manager</a> and <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html">Authentication
  *       and access control in Secrets Manager</a>. </p>
  * @example
@@ -43,68 +46,114 @@ export interface ListSecretVersionIdsCommandOutput extends ListSecretVersionIdsR
  * ```javascript
  * import { SecretsManagerClient, ListSecretVersionIdsCommand } from "@aws-sdk/client-secrets-manager"; // ES Modules import
  * // const { SecretsManagerClient, ListSecretVersionIdsCommand } = require("@aws-sdk/client-secrets-manager"); // CommonJS import
+ * // import type { SecretsManagerClientConfig } from "@aws-sdk/client-secrets-manager";
+ * const config = {}; // type is SecretsManagerClientConfig
  * const client = new SecretsManagerClient(config);
+ * const input = { // ListSecretVersionIdsRequest
+ *   SecretId: "STRING_VALUE", // required
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   IncludeDeprecated: true || false,
+ * };
  * const command = new ListSecretVersionIdsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSecretVersionIdsResponse
+ * //   Versions: [ // SecretVersionsListType
+ * //     { // SecretVersionsListEntry
+ * //       VersionId: "STRING_VALUE",
+ * //       VersionStages: [ // SecretVersionStagesType
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       LastAccessedDate: new Date("TIMESTAMP"),
+ * //       CreatedDate: new Date("TIMESTAMP"),
+ * //       KmsKeyIds: [ // KmsKeyIdListType
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * //   ARN: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSecretVersionIdsCommandInput - {@link ListSecretVersionIdsCommandInput}
+ * @returns {@link ListSecretVersionIdsCommandOutput}
  * @see {@link ListSecretVersionIdsCommandInput} for command's `input` shape.
  * @see {@link ListSecretVersionIdsCommandOutput} for command's `response` shape.
  * @see {@link SecretsManagerClientResolvedConfig | config} for SecretsManagerClient's `config` shape.
  *
+ * @throws {@link InternalServiceError} (server fault)
+ *  <p>An error occurred on the server side.</p>
+ *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The <code>NextToken</code> value is invalid.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>The parameter name or value is invalid.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Secrets Manager can't find the resource that you asked for.</p>
+ *
+ * @throws {@link SecretsManagerServiceException}
+ * <p>Base exception class for all service exceptions from SecretsManager service.</p>
+ *
+ *
+ * @example To list all of the secret versions associated with a secret
+ * ```javascript
+ * // The following example shows how to retrieve a list of all of the versions of a secret, including those without any staging labels.
+ * const input = {
+ *   IncludeDeprecated: true,
+ *   SecretId: "MyTestDatabaseSecret"
+ * };
+ * const command = new ListSecretVersionIdsCommand(input);
+ * const response = await client.send(command);
+ * /* response is
+ * {
+ *   ARN: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3",
+ *   Name: "MyTestDatabaseSecret",
+ *   Versions: [
+ *     {
+ *       CreatedDate: 1.523477145713E9,
+ *       VersionId: "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE",
+ *       VersionStages: [
+ *         "AWSPREVIOUS"
+ *       ]
+ *     },
+ *     {
+ *       CreatedDate: 1.523486221391E9,
+ *       VersionId: "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE",
+ *       VersionStages: [
+ *         "AWSCURRENT"
+ *       ]
+ *     },
+ *     {
+ *       CreatedDate: 1.51197446236E9,
+ *       VersionId: "EXAMPLE3-90ab-cdef-fedc-ba987EXAMPLE;"
+ *     }
+ *   ]
+ * }
+ * *\/
+ * ```
+ *
+ * @public
  */
-export class ListSecretVersionIdsCommand extends $Command<
-  ListSecretVersionIdsCommandInput,
-  ListSecretVersionIdsCommandOutput,
-  SecretsManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSecretVersionIdsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SecretsManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSecretVersionIdsCommandInput, ListSecretVersionIdsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SecretsManagerClient";
-    const commandName = "ListSecretVersionIdsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSecretVersionIdsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListSecretVersionIdsResponseFilterSensitiveLog,
+export class ListSecretVersionIdsCommand extends command<ListSecretVersionIdsCommandInput, ListSecretVersionIdsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSecretVersionIds",
+  ListSecretVersionIds$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSecretVersionIdsRequest;
+      output: ListSecretVersionIdsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSecretVersionIdsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListSecretVersionIdsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSecretVersionIdsCommandOutput> {
-    return deserializeAws_json1_1ListSecretVersionIdsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSecretVersionIdsCommandInput;
+      output: ListSecretVersionIdsCommandOutput;
+    };
+  };
 }

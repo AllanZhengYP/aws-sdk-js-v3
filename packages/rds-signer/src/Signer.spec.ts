@@ -1,24 +1,25 @@
+import { formatUrl } from "@aws-sdk/core/util";
 import { fromNodeProviderChain } from "@aws-sdk/credential-providers";
-import { loadConfig } from "@aws-sdk/node-config-provider";
-import { HttpRequest } from "@aws-sdk/protocol-http";
-import { SignatureV4 } from "@aws-sdk/signature-v4";
-import { formatUrl } from "@aws-sdk/util-format-url";
+import { loadConfig } from "@smithy/core/config";
+import { HttpRequest } from "@smithy/core/protocols";
+import { SignatureV4 } from "@smithy/signature-v4";
+import { beforeAll, beforeEach, describe, expect, test as it, vi } from "vitest";
 
-import { Signer, SignerConfig } from "./Signer";
+import type { SignerConfig } from "./Signer";
+import { Signer } from "./Signer";
 
-const mockPresign = jest.fn();
-jest.mock("@aws-sdk/signature-v4", () => {
+const mockPresign = vi.fn();
+vi.mock("@smithy/signature-v4", function () {
   return {
-    SignatureV4: jest.fn().mockImplementation(() => {
+    SignatureV4: vi.fn(function () {
       return { presign: mockPresign };
     }),
   };
 });
 
-jest.mock("@aws-sdk/node-config-provider");
-jest.mock("@aws-sdk/config-resolver");
-jest.mock("@aws-sdk/credential-providers");
-jest.mock("@aws-sdk/util-format-url");
+vi.mock("@smithy/core/config");
+vi.mock("@aws-sdk/credential-providers");
+vi.mock("@aws-sdk/core/util");
 
 describe("rds-signer", () => {
   const minimalParams: SignerConfig = {
@@ -28,11 +29,11 @@ describe("rds-signer", () => {
   };
 
   beforeAll(() => {
-    (formatUrl as jest.Mock).mockReturnValue("https://testhost:5432?other=url&parameters=here");
+    vi.mocked(formatUrl).mockReturnValue("https://testhost:5432?other=url&parameters=here");
   });
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should provide correct parameters to the SigV4 signer", async () => {
@@ -40,8 +41,8 @@ describe("rds-signer", () => {
       accessKeyId: "xyz",
       secretAccessKey: "123",
     };
-    (loadConfig as jest.Mock).mockReturnValue(async () => "us-foo-1");
-    (fromNodeProviderChain as jest.Mock).mockReturnValue(async () => credentials);
+    vi.mocked(loadConfig).mockReturnValue(async () => "us-foo-1");
+    vi.mocked(fromNodeProviderChain).mockReturnValue(async () => credentials);
     const signer = new Signer(minimalParams);
     await signer.getAuthToken();
     //@ts-ignore
@@ -102,5 +103,109 @@ describe("rds-signer", () => {
     const signer = new Signer(minimalParams);
     const token = await signer.getAuthToken();
     expect(token).toBe("testhost:5432?other=url&parameters=here");
+  });
+
+  describe("credential refresh wrapper", () => {
+    it("should not force refresh when credentials have no expiration", async () => {
+      const provider = vi.fn().mockResolvedValue({
+        accessKeyId: "key",
+        secretAccessKey: "secret",
+      });
+      const signer = new Signer({ ...minimalParams, credentials: provider });
+      await signer.getAuthToken();
+      //@ts-ignore
+      const wrappedProvider = SignatureV4.mock.calls[0][0].credentials;
+      await wrappedProvider();
+      expect(provider).toHaveBeenCalledTimes(1);
+    });
+
+    it("should not force refresh when credentials expire in more than 15 minutes", async () => {
+      const provider = vi.fn().mockResolvedValue({
+        accessKeyId: "key",
+        secretAccessKey: "secret",
+        expiration: new Date(Date.now() + 20 * 60_000),
+      });
+      const signer = new Signer({ ...minimalParams, credentials: provider });
+      await signer.getAuthToken();
+      //@ts-ignore
+      const wrappedProvider = SignatureV4.mock.calls[0][0].credentials;
+      await wrappedProvider();
+      expect(provider).toHaveBeenCalledTimes(1);
+    });
+
+    it("should force refresh when credentials expire within 15 minutes", async () => {
+      const refreshedCreds = {
+        accessKeyId: "refreshed",
+        secretAccessKey: "secret",
+        expiration: new Date(Date.now() + 60 * 60_000),
+      };
+      const provider = vi
+        .fn()
+        .mockResolvedValueOnce({
+          accessKeyId: "expiring",
+          secretAccessKey: "secret",
+          expiration: new Date(Date.now() + 2 * 60_000),
+        })
+        .mockResolvedValueOnce(refreshedCreds);
+      const signer = new Signer({ ...minimalParams, credentials: provider });
+      await signer.getAuthToken();
+      //@ts-ignore
+      const wrappedProvider = SignatureV4.mock.calls[0][0].credentials;
+      const result = await wrappedProvider();
+      expect(provider).toHaveBeenCalledTimes(2);
+      expect(provider).toHaveBeenLastCalledWith(expect.objectContaining({ forceRefresh: true }));
+      expect(result).toEqual(refreshedCreds);
+    });
+
+    it("should return original credentials if refresh still expires within 15 minutes", async () => {
+      const originalCreds = {
+        accessKeyId: "expiring",
+        secretAccessKey: "secret",
+        expiration: new Date(Date.now() + 2 * 60_000),
+      };
+      const provider = vi
+        .fn()
+        .mockResolvedValueOnce(originalCreds)
+        .mockResolvedValueOnce({
+          accessKeyId: "still-expiring",
+          secretAccessKey: "secret",
+          expiration: new Date(Date.now() + 3 * 60_000),
+        });
+      const signer = new Signer({ ...minimalParams, credentials: provider });
+      await signer.getAuthToken();
+      //@ts-ignore
+      const wrappedProvider = SignatureV4.mock.calls[0][0].credentials;
+      const result = await wrappedProvider();
+      expect(provider).toHaveBeenCalledTimes(2);
+      expect(result).toEqual(originalCreds);
+    });
+
+    it("should return original credentials if force refresh throws", async () => {
+      const originalCreds = {
+        accessKeyId: "expiring",
+        secretAccessKey: "secret",
+        expiration: new Date(Date.now() + 2 * 60_000),
+      };
+      const provider = vi.fn().mockResolvedValueOnce(originalCreds).mockRejectedValueOnce(new Error("refresh failed"));
+      const signer = new Signer({ ...minimalParams, credentials: provider });
+      await signer.getAuthToken();
+      //@ts-ignore
+      const wrappedProvider = SignatureV4.mock.calls[0][0].credentials;
+      const result = await wrappedProvider();
+      expect(provider).toHaveBeenCalledTimes(2);
+      expect(result).toEqual(originalCreds);
+    });
+
+    it("should not wrap static credential objects", async () => {
+      const staticCreds = {
+        accessKeyId: "static",
+        secretAccessKey: "secret",
+        expiration: new Date(Date.now() + 2 * 60_000),
+      };
+      const signer = new Signer({ ...minimalParams, credentials: staticCreds });
+      await signer.getAuthToken();
+      //@ts-ignore
+      expect(SignatureV4.mock.calls[0][0].credentials).toEqual(staticCreds);
+    });
   });
 });

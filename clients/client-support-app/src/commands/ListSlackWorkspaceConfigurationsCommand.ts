@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListSlackWorkspaceConfigurationsRequest,
-  ListSlackWorkspaceConfigurationsRequestFilterSensitiveLog,
   ListSlackWorkspaceConfigurationsResult,
-  ListSlackWorkspaceConfigurationsResultFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1ListSlackWorkspaceConfigurationsCommand,
-  serializeAws_restJson1ListSlackWorkspaceConfigurationsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SupportAppClientResolvedConfig } from "../SupportAppClient";
+import { ListSlackWorkspaceConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSlackWorkspaceConfigurationsCommand}.
+ */
 export interface ListSlackWorkspaceConfigurationsCommandInput extends ListSlackWorkspaceConfigurationsRequest {}
-export interface ListSlackWorkspaceConfigurationsCommandOutput
-  extends ListSlackWorkspaceConfigurationsResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link ListSlackWorkspaceConfigurationsCommand}.
+ */
+export interface ListSlackWorkspaceConfigurationsCommandOutput extends ListSlackWorkspaceConfigurationsResult, __MetadataBearer {}
 
 /**
  * <p>Lists the Slack workspace configurations for an Amazon Web Services account.</p>
@@ -36,74 +32,60 @@ export interface ListSlackWorkspaceConfigurationsCommandOutput
  * ```javascript
  * import { SupportAppClient, ListSlackWorkspaceConfigurationsCommand } from "@aws-sdk/client-support-app"; // ES Modules import
  * // const { SupportAppClient, ListSlackWorkspaceConfigurationsCommand } = require("@aws-sdk/client-support-app"); // CommonJS import
+ * // import type { SupportAppClientConfig } from "@aws-sdk/client-support-app";
+ * const config = {}; // type is SupportAppClientConfig
  * const client = new SupportAppClient(config);
+ * const input = { // ListSlackWorkspaceConfigurationsRequest
+ *   nextToken: "STRING_VALUE",
+ * };
  * const command = new ListSlackWorkspaceConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSlackWorkspaceConfigurationsResult
+ * //   nextToken: "STRING_VALUE",
+ * //   slackWorkspaceConfigurations: [ // SlackWorkspaceConfigurationList
+ * //     { // SlackWorkspaceConfiguration
+ * //       teamId: "STRING_VALUE", // required
+ * //       teamName: "STRING_VALUE",
+ * //       allowOrganizationMemberAccount: true || false,
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListSlackWorkspaceConfigurationsCommandInput - {@link ListSlackWorkspaceConfigurationsCommandInput}
+ * @returns {@link ListSlackWorkspaceConfigurationsCommandOutput}
  * @see {@link ListSlackWorkspaceConfigurationsCommandInput} for command's `input` shape.
  * @see {@link ListSlackWorkspaceConfigurationsCommandOutput} for command's `response` shape.
  * @see {@link SupportAppClientResolvedConfig | config} for SupportAppClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>We can’t process your request right now because of a server issue. Try again later.</p>
+ *
+ * @throws {@link SupportAppServiceException}
+ * <p>Base exception class for all service exceptions from SupportApp service.</p>
+ *
+ *
+ * @public
  */
-export class ListSlackWorkspaceConfigurationsCommand extends $Command<
-  ListSlackWorkspaceConfigurationsCommandInput,
-  ListSlackWorkspaceConfigurationsCommandOutput,
-  SupportAppClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSlackWorkspaceConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SupportAppClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSlackWorkspaceConfigurationsCommandInput, ListSlackWorkspaceConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SupportAppClient";
-    const commandName = "ListSlackWorkspaceConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSlackWorkspaceConfigurationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListSlackWorkspaceConfigurationsResultFilterSensitiveLog,
+export class ListSlackWorkspaceConfigurationsCommand extends command<ListSlackWorkspaceConfigurationsCommandInput, ListSlackWorkspaceConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSlackWorkspaceConfigurations",
+  ListSlackWorkspaceConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSlackWorkspaceConfigurationsRequest;
+      output: ListSlackWorkspaceConfigurationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListSlackWorkspaceConfigurationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListSlackWorkspaceConfigurationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListSlackWorkspaceConfigurationsCommandOutput> {
-    return deserializeAws_restJson1ListSlackWorkspaceConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSlackWorkspaceConfigurationsCommandInput;
+      output: ListSlackWorkspaceConfigurationsCommandOutput;
+    };
+  };
 }

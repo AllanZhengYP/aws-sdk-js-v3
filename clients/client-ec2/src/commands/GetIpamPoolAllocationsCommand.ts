@@ -1,101 +1,107 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  GetIpamPoolAllocationsRequest,
-  GetIpamPoolAllocationsRequestFilterSensitiveLog,
-  GetIpamPoolAllocationsResult,
-  GetIpamPoolAllocationsResultFilterSensitiveLog,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2GetIpamPoolAllocationsCommand,
-  serializeAws_ec2GetIpamPoolAllocationsCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetIpamPoolAllocationsRequest, GetIpamPoolAllocationsResult } from "../models/models_6";
+import { GetIpamPoolAllocations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetIpamPoolAllocationsCommand}.
+ */
 export interface GetIpamPoolAllocationsCommandInput extends GetIpamPoolAllocationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetIpamPoolAllocationsCommand}.
+ */
 export interface GetIpamPoolAllocationsCommandOutput extends GetIpamPoolAllocationsResult, __MetadataBearer {}
 
 /**
- * <p>Get a list of all the CIDR allocations in an IPAM pool.</p>
+ * <p>Get a list of all the CIDR allocations in an IPAM pool. The Region you use should be the IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM pool is available for allocations.</p>
+ *          <note>
+ *             <p>If you use this action after <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html">AllocateIpamPoolCidr</a> or <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html">ReleaseIpamPoolAllocation</a>, note that all EC2 API actions follow an <a href="https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html">eventual consistency</a> model.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { EC2Client, GetIpamPoolAllocationsCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetIpamPoolAllocationsCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetIpamPoolAllocationsRequest
+ *   DryRun: true || false,
+ *   IpamPoolId: "STRING_VALUE", // required
+ *   IpamPoolAllocationId: "STRING_VALUE",
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetIpamPoolAllocationsCommand(input);
  * const response = await client.send(command);
+ * // { // GetIpamPoolAllocationsResult
+ * //   IpamPoolAllocations: [ // IpamPoolAllocationSet
+ * //     { // IpamPoolAllocation
+ * //       Cidr: "STRING_VALUE",
+ * //       IpamPoolAllocationId: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       ResourceId: "STRING_VALUE",
+ * //       ResourceType: "ipam-pool" || "vpc" || "ec2-public-ipv4-pool" || "custom" || "subnet" || "eip" || "anycast-ip-list",
+ * //       ResourceRegion: "STRING_VALUE",
+ * //       ResourceOwner: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetIpamPoolAllocationsCommandInput - {@link GetIpamPoolAllocationsCommandInput}
+ * @returns {@link GetIpamPoolAllocationsCommandOutput}
  * @see {@link GetIpamPoolAllocationsCommandInput} for command's `input` shape.
  * @see {@link GetIpamPoolAllocationsCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetIpamPoolAllocationsCommand extends $Command<
-  GetIpamPoolAllocationsCommandInput,
-  GetIpamPoolAllocationsCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetIpamPoolAllocationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetIpamPoolAllocationsCommandInput, GetIpamPoolAllocationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetIpamPoolAllocationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetIpamPoolAllocationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetIpamPoolAllocationsResultFilterSensitiveLog,
+export class GetIpamPoolAllocationsCommand extends command<GetIpamPoolAllocationsCommandInput, GetIpamPoolAllocationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetIpamPoolAllocations",
+  GetIpamPoolAllocations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetIpamPoolAllocationsRequest;
+      output: GetIpamPoolAllocationsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetIpamPoolAllocationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2GetIpamPoolAllocationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetIpamPoolAllocationsCommandOutput> {
-    return deserializeAws_ec2GetIpamPoolAllocationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetIpamPoolAllocationsCommandInput;
+      output: GetIpamPoolAllocationsCommandOutput;
+    };
+  };
 }

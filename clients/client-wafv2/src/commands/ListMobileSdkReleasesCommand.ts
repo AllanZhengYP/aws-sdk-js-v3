@@ -1,104 +1,114 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListMobileSdkReleasesRequest,
-  ListMobileSdkReleasesRequestFilterSensitiveLog,
-  ListMobileSdkReleasesResponse,
-  ListMobileSdkReleasesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListMobileSdkReleasesCommand,
-  serializeAws_json1_1ListMobileSdkReleasesCommand,
-} from "../protocols/Aws_json1_1";
-import { ServiceInputTypes, ServiceOutputTypes, WAFV2ClientResolvedConfig } from "../WAFV2Client";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListMobileSdkReleasesRequest, ListMobileSdkReleasesResponse } from "../models/models_0";
+import { ListMobileSdkReleases$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListMobileSdkReleasesCommand}.
+ */
 export interface ListMobileSdkReleasesCommandInput extends ListMobileSdkReleasesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListMobileSdkReleasesCommand}.
+ */
 export interface ListMobileSdkReleasesCommandOutput extends ListMobileSdkReleasesResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves a list of the available releases for the mobile SDK and the specified device
  *          platform. </p>
- *          <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage Security Token Service (STS) security tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see
+ *          <p>The mobile SDK is not generally available. Customers who have access to the mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S) requests from a mobile device to WAF. For more information, see
  * <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html">WAF client application integration</a> in the <i>WAF Developer Guide</i>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { WAFV2Client, ListMobileSdkReleasesCommand } from "@aws-sdk/client-wafv2"; // ES Modules import
  * // const { WAFV2Client, ListMobileSdkReleasesCommand } = require("@aws-sdk/client-wafv2"); // CommonJS import
+ * // import type { WAFV2ClientConfig } from "@aws-sdk/client-wafv2";
+ * const config = {}; // type is WAFV2ClientConfig
  * const client = new WAFV2Client(config);
+ * const input = { // ListMobileSdkReleasesRequest
+ *   Platform: "IOS" || "ANDROID", // required
+ *   NextMarker: "STRING_VALUE",
+ *   Limit: Number("int"),
+ * };
  * const command = new ListMobileSdkReleasesCommand(input);
  * const response = await client.send(command);
+ * // { // ListMobileSdkReleasesResponse
+ * //   ReleaseSummaries: [ // ReleaseSummaries
+ * //     { // ReleaseSummary
+ * //       ReleaseVersion: "STRING_VALUE",
+ * //       Timestamp: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextMarker: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListMobileSdkReleasesCommandInput - {@link ListMobileSdkReleasesCommandInput}
+ * @returns {@link ListMobileSdkReleasesCommandOutput}
  * @see {@link ListMobileSdkReleasesCommandInput} for command's `input` shape.
  * @see {@link ListMobileSdkReleasesCommandOutput} for command's `response` shape.
  * @see {@link WAFV2ClientResolvedConfig | config} for WAFV2Client's `config` shape.
  *
+ * @throws {@link WAFInternalErrorException} (server fault)
+ *  <p>Your request is valid, but WAF couldn’t perform the operation because of a system
+ *          problem. Retry your request. </p>
+ *
+ * @throws {@link WAFInvalidOperationException} (client fault)
+ *  <p>The operation isn't valid. </p>
+ *
+ * @throws {@link WAFInvalidParameterException} (client fault)
+ *  <p>The operation failed because WAF didn't recognize a parameter in the request. For
+ *          example: </p>
+ *          <ul>
+ *             <li>
+ *                <p>You specified a parameter name or value that isn't valid.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your nested statement isn't valid. You might have tried to nest a statement that
+ *                can’t be nested. </p>
+ *             </li>
+ *             <li>
+ *                <p>You tried to update a <code>WebACL</code> with a <code>DefaultAction</code> that
+ *                isn't among the types available at <a>DefaultAction</a>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Your request references an ARN that is malformed, or corresponds to a resource
+ *                with which a web ACL can't be associated.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link WAFV2ServiceException}
+ * <p>Base exception class for all service exceptions from WAFV2 service.</p>
+ *
+ *
+ * @public
  */
-export class ListMobileSdkReleasesCommand extends $Command<
-  ListMobileSdkReleasesCommandInput,
-  ListMobileSdkReleasesCommandOutput,
-  WAFV2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListMobileSdkReleasesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WAFV2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListMobileSdkReleasesCommandInput, ListMobileSdkReleasesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WAFV2Client";
-    const commandName = "ListMobileSdkReleasesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListMobileSdkReleasesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListMobileSdkReleasesResponseFilterSensitiveLog,
+export class ListMobileSdkReleasesCommand extends command<ListMobileSdkReleasesCommandInput, ListMobileSdkReleasesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListMobileSdkReleases",
+  ListMobileSdkReleases$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMobileSdkReleasesRequest;
+      output: ListMobileSdkReleasesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListMobileSdkReleasesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListMobileSdkReleasesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListMobileSdkReleasesCommandOutput> {
-    return deserializeAws_json1_1ListMobileSdkReleasesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListMobileSdkReleasesCommandInput;
+      output: ListMobileSdkReleasesCommandOutput;
+    };
+  };
 }

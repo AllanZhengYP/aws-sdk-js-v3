@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DeleteConnectPeerRequest,
-  DeleteConnectPeerRequestFilterSensitiveLog,
-  DeleteConnectPeerResponse,
-  DeleteConnectPeerResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { NetworkManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkManagerClient";
-import {
-  deserializeAws_restJson1DeleteConnectPeerCommand,
-  serializeAws_restJson1DeleteConnectPeerCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteConnectPeerRequest, DeleteConnectPeerResponse } from "../models/models_0";
+import { DeleteConnectPeer$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteConnectPeerCommand}.
+ */
 export interface DeleteConnectPeerCommandInput extends DeleteConnectPeerRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteConnectPeerCommand}.
+ */
 export interface DeleteConnectPeerCommandOutput extends DeleteConnectPeerResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,104 @@ export interface DeleteConnectPeerCommandOutput extends DeleteConnectPeerRespons
  * ```javascript
  * import { NetworkManagerClient, DeleteConnectPeerCommand } from "@aws-sdk/client-networkmanager"; // ES Modules import
  * // const { NetworkManagerClient, DeleteConnectPeerCommand } = require("@aws-sdk/client-networkmanager"); // CommonJS import
+ * // import type { NetworkManagerClientConfig } from "@aws-sdk/client-networkmanager";
+ * const config = {}; // type is NetworkManagerClientConfig
  * const client = new NetworkManagerClient(config);
+ * const input = { // DeleteConnectPeerRequest
+ *   ConnectPeerId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteConnectPeerCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteConnectPeerResponse
+ * //   ConnectPeer: { // ConnectPeer
+ * //     CoreNetworkId: "STRING_VALUE",
+ * //     ConnectAttachmentId: "STRING_VALUE",
+ * //     ConnectPeerId: "STRING_VALUE",
+ * //     EdgeLocation: "STRING_VALUE",
+ * //     State: "CREATING" || "FAILED" || "AVAILABLE" || "DELETING",
+ * //     CreatedAt: new Date("TIMESTAMP"),
+ * //     Configuration: { // ConnectPeerConfiguration
+ * //       CoreNetworkAddress: "STRING_VALUE",
+ * //       PeerAddress: "STRING_VALUE",
+ * //       InsideCidrBlocks: [ // ConstrainedStringList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Protocol: "GRE" || "NO_ENCAP",
+ * //       BgpConfigurations: [ // ConnectPeerBgpConfigurationList
+ * //         { // ConnectPeerBgpConfiguration
+ * //           CoreNetworkAsn: Number("long"),
+ * //           PeerAsn: Number("long"),
+ * //           CoreNetworkAddress: "STRING_VALUE",
+ * //           PeerAddress: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     SubnetArn: "STRING_VALUE",
+ * //     LastModificationErrors: [ // ConnectPeerErrorList
+ * //       { // ConnectPeerError
+ * //         Code: "EDGE_LOCATION_NO_FREE_IPS" || "EDGE_LOCATION_PEER_DUPLICATE" || "SUBNET_NOT_FOUND" || "IP_OUTSIDE_SUBNET_CIDR_RANGE" || "INVALID_INSIDE_CIDR_BLOCK" || "NO_ASSOCIATED_CIDR_BLOCK" || "CREATION_FAILED" || "DELETION_FAILED",
+ * //         Message: "STRING_VALUE",
+ * //         ResourceArn: "STRING_VALUE",
+ * //         RequestId: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteConnectPeerCommandInput - {@link DeleteConnectPeerCommandInput}
+ * @returns {@link DeleteConnectPeerCommandOutput}
  * @see {@link DeleteConnectPeerCommandInput} for command's `input` shape.
  * @see {@link DeleteConnectPeerCommandOutput} for command's `response` shape.
  * @see {@link NetworkManagerClientResolvedConfig | config} for NetworkManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There was a conflict processing the request. Updating or deleting the resource can
+ *             cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints.</p>
+ *
+ * @throws {@link NetworkManagerServiceException}
+ * <p>Base exception class for all service exceptions from NetworkManager service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteConnectPeerCommand extends $Command<
-  DeleteConnectPeerCommandInput,
-  DeleteConnectPeerCommandOutput,
-  NetworkManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteConnectPeerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteConnectPeerCommandInput, DeleteConnectPeerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkManagerClient";
-    const commandName = "DeleteConnectPeerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteConnectPeerRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteConnectPeerResponseFilterSensitiveLog,
+export class DeleteConnectPeerCommand extends command<DeleteConnectPeerCommandInput, DeleteConnectPeerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteConnectPeer",
+  DeleteConnectPeer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteConnectPeerRequest;
+      output: DeleteConnectPeerResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteConnectPeerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteConnectPeerCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteConnectPeerCommandOutput> {
-    return deserializeAws_restJson1DeleteConnectPeerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteConnectPeerCommandInput;
+      output: DeleteConnectPeerCommandOutput;
+    };
+  };
 }

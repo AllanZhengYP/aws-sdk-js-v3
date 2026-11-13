@@ -1,59 +1,61 @@
-import { getDefaultRoleAssumer, getDefaultRoleAssumerWithWebIdentity } from "@aws-sdk/client-sts";
 import { fromIni as coreProvider } from "@aws-sdk/credential-provider-ini";
+import { getDefaultRoleAssumer, getDefaultRoleAssumerWithWebIdentity } from "@aws-sdk/nested-clients/sts";
+import { beforeEach, describe, expect, test as it, vi } from "vitest";
 
 import { fromIni } from "./fromIni";
 
-const mockRoleAssumer = jest.fn().mockResolvedValue("ROLE_ASSUMER");
-const mockRoleAssumerWithWebIdentity = jest.fn().mockResolvedValue("ROLE_ASSUMER_WITH_WEB_IDENTITY");
+const mockRoleAssumer = vi.fn().mockResolvedValue("ROLE_ASSUMER");
+const mockRoleAssumerWithWebIdentity = vi.fn().mockResolvedValue("ROLE_ASSUMER_WITH_WEB_IDENTITY");
 
-jest.mock("@aws-sdk/client-sts", () => ({
-  getDefaultRoleAssumer: jest.fn().mockImplementation(() => mockRoleAssumer),
-  getDefaultRoleAssumerWithWebIdentity: jest.fn().mockImplementation(() => mockRoleAssumerWithWebIdentity),
+vi.mock("@aws-sdk/nested-clients/sts", () => ({
+  getDefaultRoleAssumer: vi.fn().mockImplementation(() => mockRoleAssumer),
+  getDefaultRoleAssumerWithWebIdentity: vi.fn().mockImplementation(() => mockRoleAssumerWithWebIdentity),
 }));
 
-jest.mock("@aws-sdk/credential-provider-ini", () => ({
-  fromIni: jest.fn(),
+vi.mock("@aws-sdk/credential-provider-ini", () => ({
+  fromIni: vi.fn().mockReturnValue(vi.fn()),
 }));
 
 describe("fromIni", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it("should inject default role assumers", () => {
+  it("should not inject default role assumers", async () => {
+    // these role assumers are now dynamically loaded.
     const profile = "profile";
-    fromIni({ profile });
-    expect(coreProvider).toBeCalledWith({
+    const provider = fromIni({ profile });
+    await provider({});
+    expect(coreProvider).toHaveBeenCalledWith({
       profile,
-      roleAssumer: mockRoleAssumer,
-      roleAssumerWithWebIdentity: mockRoleAssumerWithWebIdentity,
     });
-    expect(getDefaultRoleAssumer).toBeCalled();
-    expect(getDefaultRoleAssumerWithWebIdentity).toBeCalled();
+    expect(getDefaultRoleAssumer).not.toHaveBeenCalled();
+    expect(getDefaultRoleAssumerWithWebIdentity).not.toHaveBeenCalled();
   });
 
-  it("should use supplied role assumers", () => {
+  it("should use supplied role assumers", async () => {
     const profile = "profile";
-    const roleAssumer = jest.fn();
-    const roleAssumerWithWebIdentity = jest.fn();
-    fromIni({ profile, roleAssumer, roleAssumerWithWebIdentity });
-    expect(coreProvider).toBeCalledWith({
+    const roleAssumer = vi.fn();
+    const roleAssumerWithWebIdentity = vi.fn();
+    const provider = fromIni({ profile, roleAssumer, roleAssumerWithWebIdentity });
+    await provider({});
+    expect(coreProvider).toHaveBeenCalledWith({
       profile,
       roleAssumer,
       roleAssumerWithWebIdentity,
     });
-    expect(getDefaultRoleAssumer).not.toBeCalled();
-    expect(getDefaultRoleAssumerWithWebIdentity).not.toBeCalled();
+    expect(getDefaultRoleAssumer).not.toHaveBeenCalled();
+    expect(getDefaultRoleAssumerWithWebIdentity).not.toHaveBeenCalled();
   });
 
-  it("should use supplied sts and plugins options", () => {
+  it("defers to @aws-sdk/credential-provider-ini", async () => {
     const profile = "profile";
     const clientConfig = {
       region: "US_BAR_1",
     };
     const plugin = { applyToStack: () => {} };
-    fromIni({ profile, clientConfig, clientPlugins: [plugin] });
-    expect(getDefaultRoleAssumer).toBeCalledWith(clientConfig, [plugin]);
-    expect(getDefaultRoleAssumerWithWebIdentity).toBeCalledWith(clientConfig, [plugin]);
+    const provider = fromIni({ profile, clientConfig, clientPlugins: [plugin] });
+    await provider({});
+    expect(coreProvider).toHaveBeenCalledWith({ profile, clientConfig, clientPlugins: [plugin] });
   });
 });

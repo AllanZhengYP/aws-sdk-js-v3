@@ -1,18 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeClusterCommand, DescribeClusterCommandInput } from "../commands/DescribeClusterCommand";
-import { EKSClient } from "../EKSClient";
+import {
+  type DescribeClusterCommandInput,
+  type DescribeClusterCommandOutput,
+  DescribeClusterCommand,
+} from "../commands/DescribeClusterCommand";
+import type { EKSClient } from "../EKSClient";
+import type { EKSServiceException } from "../models/EKSServiceException";
 
-const checkState = async (client: EKSClient, input: DescribeClusterCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: EKSClient, input: DescribeClusterCommandInput): Promise<WaiterResult<DescribeClusterCommandOutput | EKSServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeClusterCommand(input));
+    let result: DescribeClusterCommandOutput & any = await client.send(new DescribeClusterCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.cluster.status;
-      };
+      }
       if (returnComparator() === "DELETING") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -20,7 +31,7 @@ const checkState = async (client: EKSClient, input: DescribeClusterCommandInput)
     try {
       const returnComparator = () => {
         return result.cluster.status;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -28,7 +39,7 @@ const checkState = async (client: EKSClient, input: DescribeClusterCommandInput)
     try {
       const returnComparator = () => {
         return result.cluster.status;
-      };
+      }
       if (returnComparator() === "ACTIVE") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -45,7 +56,7 @@ const checkState = async (client: EKSClient, input: DescribeClusterCommandInput)
 export const waitForClusterActive = async (
   params: WaiterConfiguration<EKSClient>,
   input: DescribeClusterCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterCommandOutput | EKSServiceException>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -57,8 +68,8 @@ export const waitForClusterActive = async (
 export const waitUntilClusterActive = async (
   params: WaiterConfiguration<EKSClient>,
   input: DescribeClusterCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeClusterCommandOutput>> => {
   const serviceDefaults = { minDelay: 30, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeClusterCommandOutput>;
 };

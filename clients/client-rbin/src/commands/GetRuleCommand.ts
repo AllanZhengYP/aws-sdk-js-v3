@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetRuleRequest,
-  GetRuleRequestFilterSensitiveLog,
-  GetRuleResponse,
-  GetRuleResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRuleCommand,
-  serializeAws_restJson1GetRuleCommand,
-} from "../protocols/Aws_restJson1";
-import { RbinClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RbinClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRuleRequest, GetRuleResponse } from "../models/models_0";
+import { GetRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRuleCommand}.
+ */
 export interface GetRuleCommandInput extends GetRuleRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRuleCommand}.
+ */
 export interface GetRuleCommandOutput extends GetRuleResponse, __MetadataBearer {}
 
 /**
@@ -34,64 +29,84 @@ export interface GetRuleCommandOutput extends GetRuleResponse, __MetadataBearer 
  * ```javascript
  * import { RbinClient, GetRuleCommand } from "@aws-sdk/client-rbin"; // ES Modules import
  * // const { RbinClient, GetRuleCommand } = require("@aws-sdk/client-rbin"); // CommonJS import
+ * // import type { RbinClientConfig } from "@aws-sdk/client-rbin";
+ * const config = {}; // type is RbinClientConfig
  * const client = new RbinClient(config);
+ * const input = { // GetRuleRequest
+ *   Identifier: "STRING_VALUE", // required
+ * };
  * const command = new GetRuleCommand(input);
  * const response = await client.send(command);
+ * // { // GetRuleResponse
+ * //   Identifier: "STRING_VALUE",
+ * //   Description: "STRING_VALUE",
+ * //   ResourceType: "EBS_SNAPSHOT" || "EC2_IMAGE" || "EBS_VOLUME",
+ * //   RetentionPeriod: { // RetentionPeriod
+ * //     RetentionPeriodValue: Number("int"), // required
+ * //     RetentionPeriodUnit: "DAYS", // required
+ * //   },
+ * //   ResourceTags: [ // ResourceTags
+ * //     { // ResourceTag
+ * //       ResourceTagKey: "STRING_VALUE", // required
+ * //       ResourceTagValue: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   Status: "pending" || "available",
+ * //   LockConfiguration: { // LockConfiguration
+ * //     UnlockDelay: { // UnlockDelay
+ * //       UnlockDelayValue: Number("int"), // required
+ * //       UnlockDelayUnit: "DAYS", // required
+ * //     },
+ * //   },
+ * //   LockState: "locked" || "pending_unlock" || "unlocked",
+ * //   LockEndTime: new Date("TIMESTAMP"),
+ * //   RuleArn: "STRING_VALUE",
+ * //   ExcludeResourceTags: [ // ExcludeResourceTags
+ * //     {
+ * //       ResourceTagKey: "STRING_VALUE", // required
+ * //       ResourceTagValue: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetRuleCommandInput - {@link GetRuleCommandInput}
+ * @returns {@link GetRuleCommandOutput}
  * @see {@link GetRuleCommandInput} for command's `input` shape.
  * @see {@link GetRuleCommandOutput} for command's `response` shape.
  * @see {@link RbinClientResolvedConfig | config} for RbinClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The service could not respond to the request due to an internal problem.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more of the parameters in the request is not valid.</p>
+ *
+ * @throws {@link RbinServiceException}
+ * <p>Base exception class for all service exceptions from Rbin service.</p>
+ *
+ *
+ * @public
  */
-export class GetRuleCommand extends $Command<GetRuleCommandInput, GetRuleCommandOutput, RbinClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RbinClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRuleCommandInput, GetRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RbinClient";
-    const commandName = "GetRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRuleRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetRuleResponseFilterSensitiveLog,
+export class GetRuleCommand extends command<GetRuleCommandInput, GetRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRule",
+  GetRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRuleRequest;
+      output: GetRuleResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRuleCommandOutput> {
-    return deserializeAws_restJson1GetRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRuleCommandInput;
+      output: GetRuleCommandOutput;
+    };
+  };
 }

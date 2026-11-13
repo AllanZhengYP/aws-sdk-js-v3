@@ -1,105 +1,106 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CrlDetailResponse,
-  CrlDetailResponseFilterSensitiveLog,
-  ImportCrlRequest,
-  ImportCrlRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ImportCrlCommand,
-  serializeAws_restJson1ImportCrlCommand,
-} from "../protocols/Aws_restJson1";
-import { RolesAnywhereClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RolesAnywhereClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CrlDetailResponse, ImportCrlRequest } from "../models/models_0";
+import { ImportCrl$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ImportCrlCommand}.
+ */
 export interface ImportCrlCommandInput extends ImportCrlRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ImportCrlCommand}.
+ */
 export interface ImportCrlCommandOutput extends CrlDetailResponse, __MetadataBearer {}
 
 /**
- * <p>Imports the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials. </p>
- *          <p>
- *             <b>Required permissions: </b>
- *             <code>rolesanywhere:ImportCrl</code>.
- *          </p>
+ * <p>Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA).In order to be properly imported, a CRL must be in PEM format. IAM Roles Anywhere validates against the CRL before issuing credentials. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ImportCrl</code>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { RolesAnywhereClient, ImportCrlCommand } from "@aws-sdk/client-rolesanywhere"; // ES Modules import
  * // const { RolesAnywhereClient, ImportCrlCommand } = require("@aws-sdk/client-rolesanywhere"); // CommonJS import
+ * // import type { RolesAnywhereClientConfig } from "@aws-sdk/client-rolesanywhere";
+ * const config = {}; // type is RolesAnywhereClientConfig
  * const client = new RolesAnywhereClient(config);
+ * const input = { // ImportCrlRequest
+ *   name: "STRING_VALUE", // required
+ *   crlData: new Uint8Array(), // e.g. Buffer.from("") or new TextEncoder().encode("")   // required
+ *   enabled: true || false,
+ *   tags: [ // TagList
+ *     { // Tag
+ *       key: "STRING_VALUE", // required
+ *       value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   trustAnchorArn: "STRING_VALUE", // required
+ *   aliasName: "STRING_VALUE",
+ * };
  * const command = new ImportCrlCommand(input);
  * const response = await client.send(command);
+ * // { // CrlDetailResponse
+ * //   crl: { // CrlDetail
+ * //     crlId: "STRING_VALUE",
+ * //     crlArn: "STRING_VALUE",
+ * //     name: "STRING_VALUE",
+ * //     enabled: true || false,
+ * //     crlData: new Uint8Array(),
+ * //     trustAnchorArn: "STRING_VALUE",
+ * //     createdAt: new Date("TIMESTAMP"),
+ * //     updatedAt: new Date("TIMESTAMP"),
+ * //     aliasName: "STRING_VALUE",
+ * //     aliasArn: "STRING_VALUE",
+ * //     previousAliasName: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ImportCrlCommandInput - {@link ImportCrlCommandInput}
+ * @returns {@link ImportCrlCommandOutput}
  * @see {@link ImportCrlCommandInput} for command's `input` shape.
  * @see {@link ImportCrlCommandOutput} for command's `response` shape.
  * @see {@link RolesAnywhereClientResolvedConfig | config} for RolesAnywhereClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the service.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Validation exception error.</p>
+ *
+ * @throws {@link RolesAnywhereServiceException}
+ * <p>Base exception class for all service exceptions from RolesAnywhere service.</p>
+ *
+ *
+ * @public
  */
-export class ImportCrlCommand extends $Command<
-  ImportCrlCommandInput,
-  ImportCrlCommandOutput,
-  RolesAnywhereClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ImportCrlCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RolesAnywhereClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ImportCrlCommandInput, ImportCrlCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RolesAnywhereClient";
-    const commandName = "ImportCrlCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ImportCrlRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CrlDetailResponseFilterSensitiveLog,
+export class ImportCrlCommand extends command<ImportCrlCommandInput, ImportCrlCommandOutput>(
+  _ep0,
+  _mw0,
+  "ImportCrl",
+  ImportCrl$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ImportCrlRequest;
+      output: CrlDetailResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ImportCrlCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ImportCrlCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ImportCrlCommandOutput> {
-    return deserializeAws_restJson1ImportCrlCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ImportCrlCommandInput;
+      output: ImportCrlCommandOutput;
+    };
+  };
 }

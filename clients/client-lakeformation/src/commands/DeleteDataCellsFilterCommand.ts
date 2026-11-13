@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
-  DeleteDataCellsFilterRequest,
-  DeleteDataCellsFilterRequestFilterSensitiveLog,
-  DeleteDataCellsFilterResponse,
-  DeleteDataCellsFilterResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteDataCellsFilterCommand,
-  serializeAws_restJson1DeleteDataCellsFilterCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteDataCellsFilterRequest, DeleteDataCellsFilterResponse } from "../models/models_0";
+import { DeleteDataCellsFilter$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteDataCellsFilterCommand}.
+ */
 export interface DeleteDataCellsFilterCommandInput extends DeleteDataCellsFilterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteDataCellsFilterCommand}.
+ */
 export interface DeleteDataCellsFilterCommandOutput extends DeleteDataCellsFilterResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,63 @@ export interface DeleteDataCellsFilterCommandOutput extends DeleteDataCellsFilte
  * ```javascript
  * import { LakeFormationClient, DeleteDataCellsFilterCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, DeleteDataCellsFilterCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // DeleteDataCellsFilterRequest
+ *   TableCatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE",
+ *   TableName: "STRING_VALUE",
+ *   Name: "STRING_VALUE",
+ * };
  * const command = new DeleteDataCellsFilterCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteDataCellsFilterCommandInput - {@link DeleteDataCellsFilterCommandInput}
+ * @returns {@link DeleteDataCellsFilterCommandOutput}
  * @see {@link DeleteDataCellsFilterCommandInput} for command's `input` shape.
  * @see {@link DeleteDataCellsFilterCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteDataCellsFilterCommand extends $Command<
-  DeleteDataCellsFilterCommandInput,
-  DeleteDataCellsFilterCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteDataCellsFilterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteDataCellsFilterCommandInput, DeleteDataCellsFilterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "DeleteDataCellsFilterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteDataCellsFilterRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteDataCellsFilterResponseFilterSensitiveLog,
+export class DeleteDataCellsFilterCommand extends command<DeleteDataCellsFilterCommandInput, DeleteDataCellsFilterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteDataCellsFilter",
+  DeleteDataCellsFilter$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteDataCellsFilterRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteDataCellsFilterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteDataCellsFilterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteDataCellsFilterCommandOutput> {
-    return deserializeAws_restJson1DeleteDataCellsFilterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteDataCellsFilterCommandInput;
+      output: DeleteDataCellsFilterCommandOutput;
+    };
+  };
 }

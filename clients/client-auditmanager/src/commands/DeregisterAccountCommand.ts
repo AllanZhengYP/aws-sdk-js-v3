@@ -1,140 +1,96 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AuditManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AuditManagerClient";
-import {
-  DeregisterAccountRequest,
-  DeregisterAccountRequestFilterSensitiveLog,
-  DeregisterAccountResponse,
-  DeregisterAccountResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeregisterAccountCommand,
-  serializeAws_restJson1DeregisterAccountCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeregisterAccountRequest, DeregisterAccountResponse } from "../models/models_0";
+import { DeregisterAccount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeregisterAccountCommand}.
+ */
 export interface DeregisterAccountCommandInput extends DeregisterAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeregisterAccountCommand}.
+ */
 export interface DeregisterAccountCommandOutput extends DeregisterAccountResponse, __MetadataBearer {}
 
 /**
  * <p> Deregisters an account in Audit Manager. </p>
  *          <note>
- *             <p>When you deregister your account from Audit Manager, your data isn’t deleted. If
- *             you want to delete your resource data, you must perform that task separately before you
- *             deregister your account. Either, you can do this in the Audit Manager console. Or,
- *             you can use one of the delete API operations that are provided by Audit Manager. </p>
- *             <p>To delete your Audit Manager resource data, see the following instructions: </p>
- *             <ul>
- *                <li>
- *                   <p>
- *                      <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html">DeleteAssessment</a> (see also: <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html">Deleting an
- *                      assessment</a> in the <i>Audit Manager User
- *                   Guide</i>)</p>
- *                </li>
- *                <li>
- *                   <p>
- *                      <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html">DeleteAssessmentFramework</a> (see also: <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html">Deleting a
- *                      custom framework</a> in the <i>Audit Manager User
- *                      Guide</i>)</p>
- *                </li>
- *                <li>
- *                   <p>
- *                      <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html">DeleteAssessmentFrameworkShare</a> (see also: <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html">Deleting a share request</a> in the <i>Audit Manager User
- *                      Guide</i>)</p>
- *                </li>
- *                <li>
- *                   <p>
- *                      <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html">DeleteAssessmentReport</a> (see also: <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps">Deleting an assessment report</a> in the <i>Audit Manager
- *                      User Guide</i>)</p>
- *                </li>
- *                <li>
- *                   <p>
- *                      <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html">DeleteControl</a> (see also: <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html">Deleting a custom
- *                      control</a> in the <i>Audit Manager User
- *                   Guide</i>)</p>
- *                </li>
- *             </ul>
- *             <p>At this time, Audit Manager doesn't provide an option to delete evidence. All
- *             available delete operations are listed above.</p>
+ *             <p>Before you deregister, you can use the <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_UpdateSettings.html">UpdateSettings</a> API operation to set your preferred data retention policy. By
+ *             default, Audit Manager retains your data. If you want to delete your data, you can
+ *             use the <code>DeregistrationPolicy</code> attribute to request the deletion of your
+ *             data. </p>
+ *             <p>For more information about data retention, see <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/data-protection.html">Data
+ *                Protection</a> in the <i>Audit Manager User Guide</i>.
+ *          </p>
  *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AuditManagerClient, DeregisterAccountCommand } from "@aws-sdk/client-auditmanager"; // ES Modules import
  * // const { AuditManagerClient, DeregisterAccountCommand } = require("@aws-sdk/client-auditmanager"); // CommonJS import
+ * // import type { AuditManagerClientConfig } from "@aws-sdk/client-auditmanager";
+ * const config = {}; // type is AuditManagerClientConfig
  * const client = new AuditManagerClient(config);
+ * const input = {};
  * const command = new DeregisterAccountCommand(input);
  * const response = await client.send(command);
+ * // { // DeregisterAccountResponse
+ * //   status: "ACTIVE" || "INACTIVE" || "PENDING_ACTIVATION",
+ * // };
+ *
  * ```
  *
+ * @param DeregisterAccountCommandInput - {@link DeregisterAccountCommandInput}
+ * @returns {@link DeregisterAccountCommandOutput}
  * @see {@link DeregisterAccountCommandInput} for command's `input` shape.
  * @see {@link DeregisterAccountCommandOutput} for command's `response` shape.
  * @see {@link AuditManagerClientResolvedConfig | config} for AuditManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p> Your account isn't registered with Audit Manager. Check the delegated
+ *          administrator setup on the Audit Manager settings page, and try again. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p> An internal service error occurred during the processing of your request. Try again
+ *          later. </p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p> The resource that's specified in the request can't be found. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p> The request has invalid or missing parameters. </p>
+ *
+ * @throws {@link AuditManagerServiceException}
+ * <p>Base exception class for all service exceptions from AuditManager service.</p>
+ *
+ *
+ * @public
  */
-export class DeregisterAccountCommand extends $Command<
-  DeregisterAccountCommandInput,
-  DeregisterAccountCommandOutput,
-  AuditManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeregisterAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AuditManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeregisterAccountCommandInput, DeregisterAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AuditManagerClient";
-    const commandName = "DeregisterAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeregisterAccountRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeregisterAccountResponseFilterSensitiveLog,
+export class DeregisterAccountCommand extends command<DeregisterAccountCommandInput, DeregisterAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeregisterAccount",
+  DeregisterAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: DeregisterAccountResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeregisterAccountCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeregisterAccountCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeregisterAccountCommandOutput> {
-    return deserializeAws_restJson1DeregisterAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeregisterAccountCommandInput;
+      output: DeregisterAccountCommandOutput;
+    };
+  };
 }

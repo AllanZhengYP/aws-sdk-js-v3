@@ -1,355 +1,472 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
-
-import { ConnectContactLensServiceException as __BaseException } from "./ConnectContactLensServiceException";
+import type {
+  ExtractedInformationFailureCode,
+  PostContactSummaryFailureCode,
+  PostContactSummaryStatus,
+  SentimentValue,
+  TagComparisonType,
+} from "./enums";
 
 /**
- * <p>You do not have sufficient access to perform this action.</p>
+ * <p>A tag condition that consists of a tag key, a tag value, and a comparison
+ *             operator.</p>
+ * @public
  */
-export class AccessDeniedException extends __BaseException {
-  readonly name: "AccessDeniedException" = "AccessDeniedException";
-  readonly $fault: "client" = "client";
-  Message: string | undefined;
+export interface TagCondition {
   /**
-   * @internal
+   * <p>The tag key in the tag condition.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
-    super({
-      name: "AccessDeniedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AccessDeniedException.prototype);
-    this.Message = opts.Message;
-  }
+  TagKey?: string | undefined;
+
+  /**
+   * <p>The tag value in the tag condition.</p>
+   * @public
+   */
+  TagValue?: string | undefined;
+
+  /**
+   * <p>The comparison operator for the tag condition. Valid values: <code>EQUALS</code> |
+   *             <code>NOT_EQUALS</code>.</p>
+   * @public
+   */
+  ComparisonType?: TagComparisonType | undefined;
 }
 
 /**
- * <p>Request processing failed due to an error or failure with the service.</p>
+ * <p>A list of tag conditions that the filter evaluates together using AND logic. A
+ *             category segment matches only when the tags on its rule satisfy every tag condition in
+ *             the list.</p>
+ * @public
  */
-export class InternalServiceException extends __BaseException {
-  readonly name: "InternalServiceException" = "InternalServiceException";
-  readonly $fault: "server" = "server";
-  Message?: string;
+export interface CategoriesAttributeAndCondition {
   /**
-   * @internal
+   * <p>A list of tag conditions. All of the tag conditions must be met for the condition to
+   *             match.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InternalServiceException, __BaseException>) {
-    super({
-      name: "InternalServiceException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InternalServiceException.prototype);
-    this.Message = opts.Message;
-  }
+  TagConditions?: TagCondition[] | undefined;
 }
 
 /**
- * <p>The request is not valid.</p>
+ * <p>A filter that matches category segments based on the tags assigned to the rules that
+ *             create the categories. Provide exactly one of <code>OrConditions</code>,
+ *             <code>AndCondition</code>, or <code>TagCondition</code>.</p>
+ * @public
  */
-export class InvalidRequestException extends __BaseException {
-  readonly name: "InvalidRequestException" = "InvalidRequestException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface CategoriesAttributeFilter {
   /**
-   * @internal
+   * <p>A list of conditions that the filter evaluates using OR logic. A category segment
+   *             matches when at least one of the conditions in the list is met.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidRequestException, __BaseException>) {
-    super({
-      name: "InvalidRequestException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidRequestException.prototype);
-    this.Message = opts.Message;
-  }
+  OrConditions?: CategoriesAttributeAndCondition[] | undefined;
+
+  /**
+   * <p>A condition that the filter evaluates using AND logic. A category segment matches only
+   *             when all of the tag conditions in the condition are met.</p>
+   * @public
+   */
+  AndCondition?: CategoriesAttributeAndCondition | undefined;
+
+  /**
+   * <p>A single tag condition that a category segment must match. The category's rule must
+   *             have the specified tag.</p>
+   * @public
+   */
+  TagCondition?: TagCondition | undefined;
 }
 
+/**
+ * <p>A filter that restricts the segments returned by
+ *             <code>ListRealtimeContactAnalysisSegments</code>. It supports filtering category
+ *             segments by the tags on the rules that create them, which enforces tag-based access
+ *             control on the categories a caller can view.</p>
+ * @public
+ */
+export interface RealTimeContactAnalysisSegmentsFilter {
+  /**
+   * <p>A filter applied to category segments based on the tags of the rules that create the
+   *             matched categories.</p>
+   * @public
+   */
+  CategoriesAttributeFilter?: CategoriesAttributeFilter | undefined;
+}
+
+/**
+ * @public
+ */
 export interface ListRealtimeContactAnalysisSegmentsRequest {
   /**
    * <p>The identifier of the Amazon Connect instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The identifier of the contact.</p>
+   * @public
    */
   ContactId: string | undefined;
 
   /**
-   * <p>The maximimum number of results to return per page.</p>
+   * <p>The maximum number of results to return per page.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The token for the next set of results. Use the value returned in the previous
    * response in the next request to retrieve the next set of results.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
+
+  /**
+   * <p>A filter that limits the category segments returned by the operation. When provided,
+   *             use <code>CategoriesAttributeFilter</code> to return only the category segments whose
+   *             rules have tags that match the filter. This enforces tag-based access control on the
+   *             categories that the caller can view.</p>
+   * @public
+   */
+  ListFilter?: RealTimeContactAnalysisSegmentsFilter | undefined;
 }
 
 /**
- * <p>The section of the contact audio where that category rule was detected.</p>
+ * <p>The section of the contact audio where a match was detected.</p>
+ * @public
  */
 export interface PointOfInterest {
   /**
-   * <p>The beginning offset in milliseconds where the category rule was detected.</p>
+   * <p>The beginning offset (in milliseconds) where the match was detected.</p>
+   * @public
    */
   BeginOffsetMillis: number | undefined;
 
   /**
-   * <p>The ending offset in milliseconds where the category rule was detected.</p>
+   * <p>The ending offset (in milliseconds) where the match was detected.</p>
+   * @public
    */
   EndOffsetMillis: number | undefined;
 }
 
 /**
  * <p>Provides information about the category rule that was matched.</p>
+ * @public
  */
 export interface CategoryDetails {
   /**
    * <p>The section of audio where the category rule was detected.</p>
+   * @public
    */
   PointsOfInterest: PointOfInterest[] | undefined;
+
+  /**
+   * <p>The unique identifier of the rule that created the matched category.</p>
+   * @public
+   */
+  RuleId?: string | undefined;
 }
 
 /**
- * <p>Provides the category rules that are used to automatically categorize contacts based on
- *       uttered keywords and phrases.</p>
+ * <p>Provides the category rules that are used to automatically categorize contacts based
+ *             on uttered keywords and phrases.</p>
+ * @public
  */
 export interface Categories {
   /**
    * <p>The category rules that have been matched in the analyzed segment.</p>
+   * @public
    */
   MatchedCategories: string[] | undefined;
 
   /**
    * <p>The category rule that was matched and when it occurred in the transcript.</p>
+   * @public
    */
   MatchedDetails: Record<string, CategoryDetails> | undefined;
 }
 
 /**
- * <p>For characters that were detected as issues, where they occur in the transcript.</p>
+ * <p>An individual value extracted from the conversation, including its content and the
+ *             locations where it was found.</p>
+ * @public
+ */
+export interface ExtractedInformationValue {
+  /**
+   * <p>The text content of the extracted value.</p>
+   * @public
+   */
+  Content: string | undefined;
+
+  /**
+   * <p>The sections in the conversation that indicate where the extracted value was
+   *             found.</p>
+   * @public
+   */
+  PointsOfInterest: PointOfInterest[] | undefined;
+}
+
+/**
+ * <p>Segment containing information extracted from the conversation. Each segment
+ *             represents the results for a single extraction definition.</p>
+ * @public
+ */
+export interface ExtractedInformation {
+  /**
+   * <p>The identifier of the extraction definition that produced this result.</p>
+   * @public
+   */
+  ExtractionDefinitionId: string | undefined;
+
+  /**
+   * <p>The name of the extraction definition that produced this result.</p>
+   * @public
+   */
+  ExtractionDefinitionName: string | undefined;
+
+  /**
+   * <p>The display label of the extraction definition that produced this result.</p>
+   * @public
+   */
+  ExtractionDefinitionDisplayLabel?: string | undefined;
+
+  /**
+   * <p>The list of values extracted from the conversation for this extraction definition.
+   *             This field is empty when a <code>FailureCode</code> is present.</p>
+   * @public
+   */
+  ExtractedValues?: ExtractedInformationValue[] | undefined;
+
+  /**
+   * <p>If the information failed to be extracted, one of the following failure codes
+   *             occurs:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached
+   *                     your service quota.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: Information extraction requires a
+   *                     conversation with at least one turn from each participant.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAILED_SAFETY_GUIDELINES</code>: The extracted information cannot be
+   *                     provided because it failed to meet system safety guidelines.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INTERNAL_ERROR</code>: Internal system error.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>MAX_PACKAGE_FEATURE_ONLY</code>: Information extraction is only available
+   *                     in Amazon Connect Customer instances.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  FailureCode?: ExtractedInformationFailureCode | undefined;
+}
+
+/**
+ * <p>Information about the post-contact summary.</p>
+ * @public
+ */
+export interface PostContactSummary {
+  /**
+   * <p>The content of the summary.</p>
+   * @public
+   */
+  Content?: string | undefined;
+
+  /**
+   * <p>Whether the summary was successfully COMPLETED or FAILED to be generated.</p>
+   * @public
+   */
+  Status: PostContactSummaryStatus | undefined;
+
+  /**
+   * <p>If the summary failed to be generated, one of the following failure codes
+   *             occurs:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached
+   *                     your service quota.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: The conversation needs to have
+   *                     at least one turn from both the participants in order to generate the
+   *                     summary.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FAILED_SAFETY_GUIDELINES</code>: The generated summary cannot be
+   *                     provided because it failed to meet system safety guidelines.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INVALID_ANALYSIS_CONFIGURATION</code>: This code occurs when, for
+   *                     example, you're using a <a href="https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens">language</a> that isn't supported by generative AI-powered post-contact
+   *                     summaries. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>INTERNAL_ERROR</code>: Internal system error.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  FailureCode?: PostContactSummaryFailureCode | undefined;
+}
+
+/**
+ * <p>For characters that were detected as issues, where they occur in the
+ *             transcript.</p>
+ * @public
  */
 export interface CharacterOffsets {
   /**
    * <p>The beginning of the issue.</p>
+   * @public
    */
   BeginOffsetChar: number | undefined;
 
   /**
    * <p>The end of the issue.</p>
+   * @public
    */
   EndOffsetChar: number | undefined;
 }
 
 /**
- * <p>Potential issues that are detected based on an artificial intelligence analysis of each
- *       turn in the conversation.</p>
+ * <p>Potential issues that are detected based on an artificial intelligence analysis of
+ *             each turn in the conversation.</p>
+ * @public
  */
 export interface IssueDetected {
   /**
    * <p>The offset for when the issue was detected in the segment.</p>
+   * @public
    */
   CharacterOffsets: CharacterOffsets | undefined;
 }
 
-export enum SentimentValue {
-  NEGATIVE = "NEGATIVE",
-  NEUTRAL = "NEUTRAL",
-  POSITIVE = "POSITIVE",
-}
-
 /**
  * <p>A list of messages in the session.</p>
+ * @public
  */
 export interface Transcript {
   /**
    * <p>The identifier of the transcript.</p>
+   * @public
    */
   Id: string | undefined;
 
   /**
-   * <p>The identifier of the participant.</p>
+   * <p>The identifier of the participant. Valid values are CUSTOMER or AGENT.</p>
+   * @public
    */
   ParticipantId: string | undefined;
 
   /**
    * <p>The role of participant. For example, is it a customer, agent, or system.</p>
+   * @public
    */
   ParticipantRole: string | undefined;
 
   /**
    * <p>The content of the transcript.</p>
+   * @public
    */
   Content: string | undefined;
 
   /**
    * <p>The beginning offset in the contact for this transcript.</p>
+   * @public
    */
   BeginOffsetMillis: number | undefined;
 
   /**
    * <p>The end offset in the contact for this transcript.</p>
+   * @public
    */
   EndOffsetMillis: number | undefined;
 
   /**
-   * <p>The sentiment of the detected for this piece of transcript.</p>
+   * <p>The sentiment detected for this piece of transcript.</p>
+   * @public
    */
-  Sentiment: SentimentValue | string | undefined;
+  Sentiment?: SentimentValue | undefined;
 
   /**
    * <p>List of positions where issues were detected on the transcript.</p>
+   * @public
    */
-  IssuesDetected?: IssueDetected[];
+  IssuesDetected?: IssueDetected[] | undefined;
 }
 
 /**
  * <p>An analyzed segment for a real-time analysis session.</p>
+ * @public
  */
 export interface RealtimeContactAnalysisSegment {
   /**
    * <p>The analyzed transcript.</p>
+   * @public
    */
-  Transcript?: Transcript;
+  Transcript?: Transcript | undefined;
 
   /**
    * <p>The matched category rules.</p>
+   * @public
    */
-  Categories?: Categories;
+  Categories?: Categories | undefined;
+
+  /**
+   * <p>Information about the post-contact summary.</p>
+   * @public
+   */
+  PostContactSummary?: PostContactSummary | undefined;
+
+  /**
+   * <p>The extracted information from the conversation.</p>
+   * @public
+   */
+  ExtractedInformation?: ExtractedInformation | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListRealtimeContactAnalysisSegmentsResponse {
   /**
    * <p>An analyzed transcript or category.</p>
+   * @public
    */
   Segments: RealtimeContactAnalysisSegment[] | undefined;
 
   /**
-   * <p>If there are additional results, this is the token for the next set of results. If response includes <code>nextToken</code> there are two possible scenarios:</p>
+   * <p>If there are additional results, this is the token for the next set of results. If response includes <code>nextToken</code> there are two possible
+   *             scenarios:</p>
    *          <ul>
    *             <li>
    *                <p>There are more segments so another call is required to get them.</p>
    *             </li>
    *             <li>
-   *                <p>There are no more segments at this time, but more may be available later (real-time
-   *           analysis is in progress) so the client should call the operation again to get new
-   *           segments.</p>
+   *                <p>There are no more segments at this time, but more may be available later
+   *                     (real-time analysis is in progress) so the client should call the operation
+   *                     again to get new segments.</p>
    *             </li>
    *          </ul>
-   *          <p>If response does not include <code>nextToken</code>, the analysis is completed (successfully or failed) and there are no more segments to retrieve.</p>
+   *          <p>If response does not include <code>nextToken</code>, the analysis is completed
+   *             (successfully or failed) and there are no more segments to retrieve.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
-
-/**
- * <p>The specified resource was not found.</p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The throttling limit has been exceeded.</p>
- */
-export class ThrottlingException extends __BaseException {
-  readonly name: "ThrottlingException" = "ThrottlingException";
-  readonly $fault: "client" = "client";
-  Message: string | undefined;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ThrottlingException, __BaseException>) {
-    super({
-      name: "ThrottlingException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ThrottlingException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * @internal
- */
-export const ListRealtimeContactAnalysisSegmentsRequestFilterSensitiveLog = (
-  obj: ListRealtimeContactAnalysisSegmentsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PointOfInterestFilterSensitiveLog = (obj: PointOfInterest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CategoryDetailsFilterSensitiveLog = (obj: CategoryDetails): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CategoriesFilterSensitiveLog = (obj: Categories): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CharacterOffsetsFilterSensitiveLog = (obj: CharacterOffsets): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const IssueDetectedFilterSensitiveLog = (obj: IssueDetected): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TranscriptFilterSensitiveLog = (obj: Transcript): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RealtimeContactAnalysisSegmentFilterSensitiveLog = (obj: RealtimeContactAnalysisSegment): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListRealtimeContactAnalysisSegmentsResponseFilterSensitiveLog = (
-  obj: ListRealtimeContactAnalysisSegmentsResponse
-): any => ({
-  ...obj,
-});

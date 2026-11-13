@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CostExplorerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CostExplorerClient";
-import {
-  UpdateCostAllocationTagsStatusRequest,
-  UpdateCostAllocationTagsStatusRequestFilterSensitiveLog,
-  UpdateCostAllocationTagsStatusResponse,
-  UpdateCostAllocationTagsStatusResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateCostAllocationTagsStatusCommand,
-  serializeAws_json1_1UpdateCostAllocationTagsStatusCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateCostAllocationTagsStatusRequest, UpdateCostAllocationTagsStatusResponse } from "../models/models_0";
+import { UpdateCostAllocationTagsStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateCostAllocationTagsStatusCommand}.
+ */
 export interface UpdateCostAllocationTagsStatusCommandInput extends UpdateCostAllocationTagsStatusRequest {}
-export interface UpdateCostAllocationTagsStatusCommandOutput
-  extends UpdateCostAllocationTagsStatusResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateCostAllocationTagsStatusCommand}.
+ */
+export interface UpdateCostAllocationTagsStatusCommandOutput extends UpdateCostAllocationTagsStatusResponse, __MetadataBearer {}
 
 /**
  * <p>Updates status for cost allocation tags in bulk, with maximum batch size of 20. If the tag
@@ -39,74 +32,61 @@ export interface UpdateCostAllocationTagsStatusCommandOutput
  * ```javascript
  * import { CostExplorerClient, UpdateCostAllocationTagsStatusCommand } from "@aws-sdk/client-cost-explorer"; // ES Modules import
  * // const { CostExplorerClient, UpdateCostAllocationTagsStatusCommand } = require("@aws-sdk/client-cost-explorer"); // CommonJS import
+ * // import type { CostExplorerClientConfig } from "@aws-sdk/client-cost-explorer";
+ * const config = {}; // type is CostExplorerClientConfig
  * const client = new CostExplorerClient(config);
+ * const input = { // UpdateCostAllocationTagsStatusRequest
+ *   CostAllocationTagsStatus: [ // CostAllocationTagStatusList // required
+ *     { // CostAllocationTagStatusEntry
+ *       TagKey: "STRING_VALUE", // required
+ *       Status: "Active" || "Inactive", // required
+ *     },
+ *   ],
+ * };
  * const command = new UpdateCostAllocationTagsStatusCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateCostAllocationTagsStatusResponse
+ * //   Errors: [ // UpdateCostAllocationTagsStatusErrors
+ * //     { // UpdateCostAllocationTagsStatusError
+ * //       TagKey: "STRING_VALUE",
+ * //       Code: "STRING_VALUE",
+ * //       Message: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param UpdateCostAllocationTagsStatusCommandInput - {@link UpdateCostAllocationTagsStatusCommandInput}
+ * @returns {@link UpdateCostAllocationTagsStatusCommandOutput}
  * @see {@link UpdateCostAllocationTagsStatusCommandInput} for command's `input` shape.
  * @see {@link UpdateCostAllocationTagsStatusCommandOutput} for command's `response` shape.
  * @see {@link CostExplorerClientResolvedConfig | config} for CostExplorerClient's `config` shape.
  *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You made too many calls in a short period of time. Try again later.</p>
+ *
+ * @throws {@link CostExplorerServiceException}
+ * <p>Base exception class for all service exceptions from CostExplorer service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateCostAllocationTagsStatusCommand extends $Command<
-  UpdateCostAllocationTagsStatusCommandInput,
-  UpdateCostAllocationTagsStatusCommandOutput,
-  CostExplorerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateCostAllocationTagsStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CostExplorerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateCostAllocationTagsStatusCommandInput, UpdateCostAllocationTagsStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CostExplorerClient";
-    const commandName = "UpdateCostAllocationTagsStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateCostAllocationTagsStatusRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateCostAllocationTagsStatusResponseFilterSensitiveLog,
+export class UpdateCostAllocationTagsStatusCommand extends command<UpdateCostAllocationTagsStatusCommandInput, UpdateCostAllocationTagsStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateCostAllocationTagsStatus",
+  UpdateCostAllocationTagsStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateCostAllocationTagsStatusRequest;
+      output: UpdateCostAllocationTagsStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateCostAllocationTagsStatusCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateCostAllocationTagsStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateCostAllocationTagsStatusCommandOutput> {
-    return deserializeAws_json1_1UpdateCostAllocationTagsStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateCostAllocationTagsStatusCommandInput;
+      output: UpdateCostAllocationTagsStatusCommandOutput;
+    };
+  };
 }

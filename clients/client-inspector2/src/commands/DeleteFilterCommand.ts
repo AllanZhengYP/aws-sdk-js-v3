@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { Inspector2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../Inspector2Client";
-import {
-  DeleteFilterRequest,
-  DeleteFilterRequestFilterSensitiveLog,
-  DeleteFilterResponse,
-  DeleteFilterResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteFilterCommand,
-  serializeAws_restJson1DeleteFilterCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFilterRequest, DeleteFilterResponse } from "../models/models_0";
+import { DeleteFilter$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFilterCommand}.
+ */
 export interface DeleteFilterCommandInput extends DeleteFilterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFilterCommand}.
+ */
 export interface DeleteFilterCommandOutput extends DeleteFilterResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,62 @@ export interface DeleteFilterCommandOutput extends DeleteFilterResponse, __Metad
  * ```javascript
  * import { Inspector2Client, DeleteFilterCommand } from "@aws-sdk/client-inspector2"; // ES Modules import
  * // const { Inspector2Client, DeleteFilterCommand } = require("@aws-sdk/client-inspector2"); // CommonJS import
+ * // import type { Inspector2ClientConfig } from "@aws-sdk/client-inspector2";
+ * const config = {}; // type is Inspector2ClientConfig
  * const client = new Inspector2Client(config);
+ * const input = { // DeleteFilterRequest
+ *   arn: "STRING_VALUE", // required
+ * };
  * const command = new DeleteFilterCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteFilterResponse
+ * //   arn: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteFilterCommandInput - {@link DeleteFilterCommandInput}
+ * @returns {@link DeleteFilterCommandOutput}
  * @see {@link DeleteFilterCommandInput} for command's `input` shape.
  * @see {@link DeleteFilterCommandOutput} for command's `response` shape.
  * @see {@link Inspector2ClientResolvedConfig | config} for Inspector2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p> <p> For <code>Enable</code>, you receive this error if you attempt to use a feature in an unsupported Amazon Web Services Region. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal failure of the Amazon Inspector service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The operation tried to access an invalid resource. Make sure the resource is specified correctly.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The limit on the number of requests per second was exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request has failed validation due to missing required fields or having invalid inputs.</p>
+ *
+ * @throws {@link Inspector2ServiceException}
+ * <p>Base exception class for all service exceptions from Inspector2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFilterCommand extends $Command<
-  DeleteFilterCommandInput,
-  DeleteFilterCommandOutput,
-  Inspector2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFilterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: Inspector2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFilterCommandInput, DeleteFilterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "Inspector2Client";
-    const commandName = "DeleteFilterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFilterRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteFilterResponseFilterSensitiveLog,
+export class DeleteFilterCommand extends command<DeleteFilterCommandInput, DeleteFilterCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFilter",
+  DeleteFilter$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFilterRequest;
+      output: DeleteFilterResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFilterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteFilterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteFilterCommandOutput> {
-    return deserializeAws_restJson1DeleteFilterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFilterCommandInput;
+      output: DeleteFilterCommandOutput;
+    };
+  };
 }

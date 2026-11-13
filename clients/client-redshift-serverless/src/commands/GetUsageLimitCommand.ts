@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetUsageLimitRequest,
-  GetUsageLimitRequestFilterSensitiveLog,
-  GetUsageLimitResponse,
-  GetUsageLimitResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1GetUsageLimitCommand,
-  serializeAws_json1_1GetUsageLimitCommand,
-} from "../protocols/Aws_json1_1";
-import {
-  RedshiftServerlessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../RedshiftServerlessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetUsageLimitRequest, GetUsageLimitResponse } from "../models/models_0";
+import { GetUsageLimit$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetUsageLimitCommand}.
+ */
 export interface GetUsageLimitCommandInput extends GetUsageLimitRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetUsageLimitCommand}.
+ */
 export interface GetUsageLimitCommandOutput extends GetUsageLimitResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,67 @@ export interface GetUsageLimitCommandOutput extends GetUsageLimitResponse, __Met
  * ```javascript
  * import { RedshiftServerlessClient, GetUsageLimitCommand } from "@aws-sdk/client-redshift-serverless"; // ES Modules import
  * // const { RedshiftServerlessClient, GetUsageLimitCommand } = require("@aws-sdk/client-redshift-serverless"); // CommonJS import
+ * // import type { RedshiftServerlessClientConfig } from "@aws-sdk/client-redshift-serverless";
+ * const config = {}; // type is RedshiftServerlessClientConfig
  * const client = new RedshiftServerlessClient(config);
+ * const input = { // GetUsageLimitRequest
+ *   usageLimitId: "STRING_VALUE", // required
+ * };
  * const command = new GetUsageLimitCommand(input);
  * const response = await client.send(command);
+ * // { // GetUsageLimitResponse
+ * //   usageLimit: { // UsageLimit
+ * //     usageLimitId: "STRING_VALUE",
+ * //     usageLimitArn: "STRING_VALUE",
+ * //     resourceArn: "STRING_VALUE",
+ * //     usageType: "STRING_VALUE",
+ * //     amount: Number("long"),
+ * //     period: "STRING_VALUE",
+ * //     breachAction: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetUsageLimitCommandInput - {@link GetUsageLimitCommandInput}
+ * @returns {@link GetUsageLimitCommandOutput}
  * @see {@link GetUsageLimitCommandInput} for command's `input` shape.
  * @see {@link GetUsageLimitCommandOutput} for command's `response` shape.
  * @see {@link RedshiftServerlessClientResolvedConfig | config} for RedshiftServerlessClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The submitted action has conflicts.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link RedshiftServerlessServiceException}
+ * <p>Base exception class for all service exceptions from RedshiftServerless service.</p>
+ *
+ *
+ * @public
  */
-export class GetUsageLimitCommand extends $Command<
-  GetUsageLimitCommandInput,
-  GetUsageLimitCommandOutput,
-  RedshiftServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetUsageLimitCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetUsageLimitCommandInput, GetUsageLimitCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftServerlessClient";
-    const commandName = "GetUsageLimitCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetUsageLimitRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetUsageLimitResponseFilterSensitiveLog,
+export class GetUsageLimitCommand extends command<GetUsageLimitCommandInput, GetUsageLimitCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetUsageLimit",
+  GetUsageLimit$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetUsageLimitRequest;
+      output: GetUsageLimitResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetUsageLimitCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetUsageLimitCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetUsageLimitCommandOutput> {
-    return deserializeAws_json1_1GetUsageLimitCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetUsageLimitCommandInput;
+      output: GetUsageLimitCommandOutput;
+    };
+  };
 }

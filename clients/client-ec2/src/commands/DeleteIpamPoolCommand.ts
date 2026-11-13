@@ -1,27 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  DeleteIpamPoolRequest,
-  DeleteIpamPoolRequestFilterSensitiveLog,
-  DeleteIpamPoolResult,
-  DeleteIpamPoolResultFilterSensitiveLog,
-} from "../models/models_2";
-import { deserializeAws_ec2DeleteIpamPoolCommand, serializeAws_ec2DeleteIpamPoolCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteIpamPoolRequest, DeleteIpamPoolResult } from "../models/models_3";
+import { DeleteIpamPool$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteIpamPoolCommand}.
+ */
 export interface DeleteIpamPoolCommandInput extends DeleteIpamPoolRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteIpamPoolCommand}.
+ */
 export interface DeleteIpamPoolCommandOutput extends DeleteIpamPoolResult, __MetadataBearer {}
 
 /**
@@ -38,68 +36,89 @@ export interface DeleteIpamPoolCommandOutput extends DeleteIpamPoolResult, __Met
  * ```javascript
  * import { EC2Client, DeleteIpamPoolCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteIpamPoolCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteIpamPoolRequest
+ *   DryRun: true || false,
+ *   IpamPoolId: "STRING_VALUE", // required
+ *   Cascade: true || false,
+ * };
  * const command = new DeleteIpamPoolCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteIpamPoolResult
+ * //   IpamPool: { // IpamPool
+ * //     OwnerId: "STRING_VALUE",
+ * //     IpamPoolId: "STRING_VALUE",
+ * //     SourceIpamPoolId: "STRING_VALUE",
+ * //     IpamPoolArn: "STRING_VALUE",
+ * //     IpamScopeArn: "STRING_VALUE",
+ * //     IpamScopeType: "public" || "private",
+ * //     IpamArn: "STRING_VALUE",
+ * //     IpamRegion: "STRING_VALUE",
+ * //     Locale: "STRING_VALUE",
+ * //     PoolDepth: Number("int"),
+ * //     State: "create-in-progress" || "create-complete" || "create-failed" || "modify-in-progress" || "modify-complete" || "modify-failed" || "delete-in-progress" || "delete-complete" || "delete-failed" || "isolate-in-progress" || "isolate-complete" || "restore-in-progress",
+ * //     StateMessage: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     AutoImport: true || false,
+ * //     PubliclyAdvertisable: true || false,
+ * //     AddressFamily: "ipv4" || "ipv6",
+ * //     AllocationMinNetmaskLength: Number("int"),
+ * //     AllocationMaxNetmaskLength: Number("int"),
+ * //     AllocationDefaultNetmaskLength: Number("int"),
+ * //     AllocationResourceTags: [ // IpamResourceTagList
+ * //       { // IpamResourceTag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     AwsService: "ec2" || "global-services",
+ * //     PublicIpSource: "amazon" || "byoip",
+ * //     SourceResource: { // IpamPoolSourceResource
+ * //       ResourceId: "STRING_VALUE",
+ * //       ResourceType: "vpc",
+ * //       ResourceRegion: "STRING_VALUE",
+ * //       ResourceOwner: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteIpamPoolCommandInput - {@link DeleteIpamPoolCommandInput}
+ * @returns {@link DeleteIpamPoolCommandOutput}
  * @see {@link DeleteIpamPoolCommandInput} for command's `input` shape.
  * @see {@link DeleteIpamPoolCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteIpamPoolCommand extends $Command<
-  DeleteIpamPoolCommandInput,
-  DeleteIpamPoolCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteIpamPoolCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteIpamPoolCommandInput, DeleteIpamPoolCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteIpamPoolCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteIpamPoolRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteIpamPoolResultFilterSensitiveLog,
+export class DeleteIpamPoolCommand extends command<DeleteIpamPoolCommandInput, DeleteIpamPoolCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteIpamPool",
+  DeleteIpamPool$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIpamPoolRequest;
+      output: DeleteIpamPoolResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteIpamPoolCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteIpamPoolCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteIpamPoolCommandOutput> {
-    return deserializeAws_ec2DeleteIpamPoolCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteIpamPoolCommandInput;
+      output: DeleteIpamPoolCommandOutput;
+    };
+  };
 }

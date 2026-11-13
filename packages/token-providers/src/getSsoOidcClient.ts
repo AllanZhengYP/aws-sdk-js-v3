@@ -1,21 +1,27 @@
-import { SSOOIDCClient } from "@aws-sdk/client-sso-oidc";
+import type { AwsIdentityProperties } from "@aws-sdk/types";
 
-const ssoOidcClientsHash: Record<string, SSOOIDCClient> = {};
+import type { FromSsoInit } from "./fromSso";
 
 /**
- * Returns a SSOOIDC client for the given region. If the client has already been created,
- * it will be returned from the hash.
+ * Returns a SSOOIDC client for the given region.
+ * @internal
  */
-export const getSsoOidcClient = (ssoRegion: string) => {
-  // return ssoOidsClient if already created.
-  if (ssoOidcClientsHash[ssoRegion]) {
-    return ssoOidcClientsHash[ssoRegion];
-  }
+export const getSsoOidcClient = async (
+  ssoRegion: string,
+  init: FromSsoInit = {},
+  callerClientConfig?: AwsIdentityProperties["callerClientConfig"]
+) => {
+  const { SSOOIDCClient } = await import("@aws-sdk/nested-clients/sso-oidc");
 
-  // Create new SSOOIDC client, and store is in hash.
-  // If we need to support configuration of SsoOidc client in future through code,
-  // the provision to pass region from client configuration needs to be added.
-  const ssoOidcClient = new SSOOIDCClient({ region: ssoRegion });
-  ssoOidcClientsHash[ssoRegion] = ssoOidcClient;
+  const coalesce = (prop: "logger" | "userAgentAppId") =>
+    init.clientConfig?.[prop] ?? init.parentClientConfig?.[prop] ?? callerClientConfig?.[prop];
+
+  const ssoOidcClient = new SSOOIDCClient(
+    Object.assign({}, init.clientConfig ?? {}, {
+      region: ssoRegion ?? init.clientConfig?.region,
+      logger: coalesce("logger"),
+      userAgentAppId: coalesce("userAgentAppId"),
+    })
+  );
   return ssoOidcClient;
 };

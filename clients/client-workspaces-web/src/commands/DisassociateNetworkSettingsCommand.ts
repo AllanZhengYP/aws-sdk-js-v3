@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DisassociateNetworkSettingsRequest,
-  DisassociateNetworkSettingsRequestFilterSensitiveLog,
-  DisassociateNetworkSettingsResponse,
-  DisassociateNetworkSettingsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DisassociateNetworkSettingsCommand,
-  serializeAws_restJson1DisassociateNetworkSettingsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateNetworkSettingsRequest, DisassociateNetworkSettingsResponse } from "../models/models_0";
+import { DisassociateNetworkSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateNetworkSettingsCommand}.
+ */
 export interface DisassociateNetworkSettingsCommandInput extends DisassociateNetworkSettingsRequest {}
-export interface DisassociateNetworkSettingsCommandOutput
-  extends DisassociateNetworkSettingsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateNetworkSettingsCommand}.
+ */
+export interface DisassociateNetworkSettingsCommandOutput extends DisassociateNetworkSettingsResponse, __MetadataBearer {}
 
 /**
  * <p>Disassociates network settings from a web portal.</p>
@@ -36,71 +29,63 @@ export interface DisassociateNetworkSettingsCommandOutput
  * ```javascript
  * import { WorkSpacesWebClient, DisassociateNetworkSettingsCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, DisassociateNetworkSettingsCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // DisassociateNetworkSettingsRequest
+ *   portalArn: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateNetworkSettingsCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DisassociateNetworkSettingsCommandInput - {@link DisassociateNetworkSettingsCommandInput}
+ * @returns {@link DisassociateNetworkSettingsCommandOutput}
  * @see {@link DisassociateNetworkSettingsCommandInput} for command's `input` shape.
  * @see {@link DisassociateNetworkSettingsCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There is a conflict.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateNetworkSettingsCommand extends $Command<
-  DisassociateNetworkSettingsCommandInput,
-  DisassociateNetworkSettingsCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateNetworkSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateNetworkSettingsCommandInput, DisassociateNetworkSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "DisassociateNetworkSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateNetworkSettingsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateNetworkSettingsResponseFilterSensitiveLog,
+export class DisassociateNetworkSettingsCommand extends command<DisassociateNetworkSettingsCommandInput, DisassociateNetworkSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateNetworkSettings",
+  DisassociateNetworkSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateNetworkSettingsRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateNetworkSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DisassociateNetworkSettingsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateNetworkSettingsCommandOutput> {
-    return deserializeAws_restJson1DisassociateNetworkSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateNetworkSettingsCommandInput;
+      output: DisassociateNetworkSettingsCommandOutput;
+    };
+  };
 }

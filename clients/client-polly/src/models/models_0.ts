@@ -1,115 +1,80 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-import { Readable } from "stream";
+import type { StreamingBlobTypes } from "@smithy/types";
 
-import { PollyServiceException as __BaseException } from "./PollyServiceException";
+import type {
+  Engine,
+  Gender,
+  LanguageCode,
+  OutputFormat,
+  SpeechMarkType,
+  TaskStatus,
+  TextType,
+  VoiceId,
+} from "./enums";
+import type {
+  ServiceFailureException,
+  ServiceQuotaExceededException,
+  ThrottlingException,
+  ValidationException,
+} from "./errors";
 
+/**
+ * <p>Contains a chunk of synthesized audio data.</p>
+ * @public
+ */
+export interface AudioEvent {
+  /**
+   * <p>A chunk of synthesized audio data encoded in the format specified by the
+   *       <code>OutputFormat</code> parameter.</p>
+   * @public
+   */
+  AudioChunk?: Uint8Array | undefined;
+}
+
+/**
+ * <p>Indicates the end of the input stream. After sending this event, the input stream
+ *      will be closed and all audio will be returned.</p>
+ * @public
+ */
+export interface CloseStreamEvent {}
+
+/**
+ * @public
+ */
 export interface DeleteLexiconInput {
   /**
    * <p>The name of the lexicon to delete. Must be an existing lexicon in
    *       the region.</p>
+   * @public
    */
   Name: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DeleteLexiconOutput {}
 
 /**
- * <p>Amazon Polly can't find the specified lexicon. This could be caused by a
- *       lexicon that is missing, its name is misspelled or specifying a lexicon
- *       that is in a different region.</p>
- *          <p>Verify that the lexicon exists, is in the region (see <a>ListLexicons</a>) and that you spelled its name is spelled
- *       correctly. Then try again.</p>
+ * @public
  */
-export class LexiconNotFoundException extends __BaseException {
-  readonly name: "LexiconNotFoundException" = "LexiconNotFoundException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<LexiconNotFoundException, __BaseException>) {
-    super({
-      name: "LexiconNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LexiconNotFoundException.prototype);
-  }
-}
-
-/**
- * <p>An unknown condition has caused a service failure.</p>
- */
-export class ServiceFailureException extends __BaseException {
-  readonly name: "ServiceFailureException" = "ServiceFailureException";
-  readonly $fault: "server" = "server";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServiceFailureException, __BaseException>) {
-    super({
-      name: "ServiceFailureException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServiceFailureException.prototype);
-  }
-}
-
-export enum Engine {
-  NEURAL = "neural",
-  STANDARD = "standard",
-}
-
-export type LanguageCode =
-  | "arb"
-  | "ca-ES"
-  | "cmn-CN"
-  | "cy-GB"
-  | "da-DK"
-  | "de-AT"
-  | "de-DE"
-  | "en-AU"
-  | "en-GB"
-  | "en-GB-WLS"
-  | "en-IN"
-  | "en-NZ"
-  | "en-US"
-  | "en-ZA"
-  | "es-ES"
-  | "es-MX"
-  | "es-US"
-  | "fr-CA"
-  | "fr-FR"
-  | "hi-IN"
-  | "is-IS"
-  | "it-IT"
-  | "ja-JP"
-  | "ko-KR"
-  | "nb-NO"
-  | "nl-NL"
-  | "pl-PL"
-  | "pt-BR"
-  | "pt-PT"
-  | "ro-RO"
-  | "ru-RU"
-  | "sv-SE"
-  | "tr-TR";
-
 export interface DescribeVoicesInput {
   /**
-   * <p>Specifies the engine (<code>standard</code> or <code>neural</code>)
-   *       used by Amazon Polly when processing input text for speech synthesis. </p>
+   * <p>Specifies the engine (<code>standard</code>, <code>neural</code>,
+   *       <code>long-form</code> or <code>generative</code>) used by Amazon Polly when
+   *       processing input text for speech synthesis. </p>
+   * @public
    */
-  Engine?: Engine | string;
+  Engine?: Engine | undefined;
 
   /**
    * <p> The language identification tag (ISO 639 code for the language
    *       name-ISO 3166 country code) for filtering the list of voices returned. If
    *       you don't specify this optional parameter, all available voices are
    *       returned. </p>
+   * @public
    */
-  LanguageCode?: LanguageCode | string;
+  LanguageCode?: LanguageCode | undefined;
 
   /**
    * <p>Boolean value indicating whether to return any bilingual voices that
@@ -118,124 +83,56 @@ export interface DescribeVoicesInput {
    *       voice that speaks both Italian (it-IT) and US English, that voice will be
    *       included if you specify <code>yes</code> but not if you specify
    *         <code>no</code>.</p>
+   * @public
    */
-  IncludeAdditionalLanguageCodes?: boolean;
+  IncludeAdditionalLanguageCodes?: boolean | undefined;
 
   /**
    * <p>An opaque pagination token returned from the previous
    *         <code>DescribeVoices</code> operation. If present, this indicates where
    *       to continue the listing.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
-
-export type Gender = "Female" | "Male";
-
-export type VoiceId =
-  | "Aditi"
-  | "Amy"
-  | "Aria"
-  | "Arlet"
-  | "Arthur"
-  | "Astrid"
-  | "Ayanda"
-  | "Bianca"
-  | "Brian"
-  | "Camila"
-  | "Carla"
-  | "Carmen"
-  | "Celine"
-  | "Chantal"
-  | "Conchita"
-  | "Cristiano"
-  | "Daniel"
-  | "Dora"
-  | "Emma"
-  | "Enrique"
-  | "Ewa"
-  | "Filiz"
-  | "Gabrielle"
-  | "Geraint"
-  | "Giorgio"
-  | "Gwyneth"
-  | "Hannah"
-  | "Hans"
-  | "Ines"
-  | "Ivy"
-  | "Jacek"
-  | "Jan"
-  | "Joanna"
-  | "Joey"
-  | "Justin"
-  | "Kajal"
-  | "Karl"
-  | "Kendra"
-  | "Kevin"
-  | "Kimberly"
-  | "Lea"
-  | "Liam"
-  | "Liv"
-  | "Lotte"
-  | "Lucia"
-  | "Lupe"
-  | "Mads"
-  | "Maja"
-  | "Marlene"
-  | "Mathieu"
-  | "Matthew"
-  | "Maxim"
-  | "Mia"
-  | "Miguel"
-  | "Mizuki"
-  | "Naja"
-  | "Nicole"
-  | "Olivia"
-  | "Pedro"
-  | "Penelope"
-  | "Raveena"
-  | "Ricardo"
-  | "Ruben"
-  | "Russell"
-  | "Salli"
-  | "Seoyeon"
-  | "Takumi"
-  | "Tatyana"
-  | "Vicki"
-  | "Vitoria"
-  | "Zeina"
-  | "Zhiyu";
 
 /**
  * <p>Description of the voice.</p>
+ * @public
  */
 export interface Voice {
   /**
    * <p>Gender of the voice.</p>
+   * @public
    */
-  Gender?: Gender | string;
+  Gender?: Gender | undefined;
 
   /**
    * <p>Amazon Polly assigned voice ID. This is the ID that you specify when
    *       calling the <code>SynthesizeSpeech</code> operation.</p>
+   * @public
    */
-  Id?: VoiceId | string;
+  Id?: VoiceId | undefined;
 
   /**
    * <p>Language code of the voice.</p>
+   * @public
    */
-  LanguageCode?: LanguageCode | string;
+  LanguageCode?: LanguageCode | undefined;
 
   /**
    * <p>Human readable name of the language in English.</p>
+   * @public
    */
-  LanguageName?: string;
+  LanguageName?: string | undefined;
 
   /**
    * <p>Name of the voice (for example, Salli, Kendra, etc.). This provides
    *       a human readable voice name that you might display in your
    *       application.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>Additional codes for languages available for the specified voice in
@@ -244,74 +141,57 @@ export interface Voice {
    *       because it was first used for that language. Since Aditi is bilingual and
    *       fluent in both Indian English and Hindi, this parameter would show the
    *       code <code>hi-IN</code>.</p>
+   * @public
    */
-  AdditionalLanguageCodes?: (LanguageCode | string)[];
+  AdditionalLanguageCodes?: LanguageCode[] | undefined;
 
   /**
-   * <p>Specifies which engines (<code>standard</code> or <code>neural</code>)
-   *       that are supported by a given voice.</p>
+   * <p>Specifies which engines (<code>standard</code>, <code>neural</code>,
+   *       <code>long-form</code> or <code>generative</code>) are supported by a given voice.</p>
+   * @public
    */
-  SupportedEngines?: (Engine | string)[];
+  SupportedEngines?: Engine[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface DescribeVoicesOutput {
   /**
    * <p>A list of voices with their properties.</p>
+   * @public
    */
-  Voices?: Voice[];
+  Voices?: Voice[] | undefined;
 
   /**
    * <p>The pagination token to use in the next request to continue the
    *       listing of voices. <code>NextToken</code> is returned only if the response
    *       is truncated.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
 /**
- * <p>The NextToken is invalid. Verify that it's spelled correctly, and
- *       then try again.</p>
+ * <p>Configuration that controls when synthesized audio data is sent on the output stream.</p>
+ * @public
  */
-export class InvalidNextTokenException extends __BaseException {
-  readonly name: "InvalidNextTokenException" = "InvalidNextTokenException";
-  readonly $fault: "client" = "client";
+export interface FlushStreamConfiguration {
   /**
-   * @internal
+   * <p>Specifies whether to force the synthesis engine to immediately
+   *       write buffered audio data to the output stream.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidNextTokenException, __BaseException>) {
-    super({
-      name: "InvalidNextTokenException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidNextTokenException.prototype);
-  }
+  Force?: boolean | undefined;
 }
 
 /**
- * <p>This engine is not compatible with the voice that you have designated.
- *       Choose a new voice that is compatible with the engine or change the engine
- *       and restart the operation.</p>
+ * @public
  */
-export class EngineNotSupportedException extends __BaseException {
-  readonly name: "EngineNotSupportedException" = "EngineNotSupportedException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<EngineNotSupportedException, __BaseException>) {
-    super({
-      name: "EngineNotSupportedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, EngineNotSupportedException.prototype);
-  }
-}
-
 export interface GetLexiconInput {
   /**
    * <p>Name of the lexicon.</p>
+   * @public
    */
   Name: string | undefined;
 }
@@ -320,196 +200,209 @@ export interface GetLexiconInput {
  * <p>Provides lexicon name and lexicon content in string format. For
  *       more information, see <a href="https://www.w3.org/TR/pronunciation-lexicon/">Pronunciation Lexicon
  *         Specification (PLS) Version 1.0</a>.</p>
+ * @public
  */
 export interface Lexicon {
   /**
    * <p>Lexicon content in string format. The content of a lexicon must be
    *       in PLS format.</p>
+   * @public
    */
-  Content?: string;
+  Content?: string | undefined;
 
   /**
    * <p>Name of the lexicon.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
 /**
  * <p>Contains metadata describing the lexicon such as the number of
  *       lexemes, language code, and so on. For more information, see <a href="https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html">Managing Lexicons</a>.</p>
+ * @public
  */
 export interface LexiconAttributes {
   /**
    * <p>Phonetic alphabet used in the lexicon. Valid values are
-   *         <code>ipa</code> and <code>x-sampa</code>.</p>
+   *         <code>ipa</code>, <code>x-sampa</code>, <code>x-amazon-pinyin</code>,
+   *         <code>x-amazon-jyutping</code>, <code>x-amazon-pron-kana</code>, and
+   *         <code>x-amazon-yomigana</code>.</p>
+   * @public
    */
-  Alphabet?: string;
+  Alphabet?: string | undefined;
 
   /**
    * <p>Language code that the lexicon applies to. A lexicon with a
    *       language code such as "en" would be applied to all English languages
    *       (en-GB, en-US, en-AUS, en-WLS, and so on.</p>
+   * @public
    */
-  LanguageCode?: LanguageCode | string;
+  LanguageCode?: LanguageCode | undefined;
 
   /**
    * <p>Date lexicon was last modified (a timestamp value).</p>
+   * @public
    */
-  LastModified?: Date;
+  LastModified?: Date | undefined;
 
   /**
    * <p>Amazon Resource Name (ARN) of the lexicon.</p>
+   * @public
    */
-  LexiconArn?: string;
+  LexiconArn?: string | undefined;
 
   /**
    * <p>Number of lexemes in the lexicon.</p>
+   * @public
    */
-  LexemesCount?: number;
+  LexemesCount?: number | undefined;
 
   /**
    * <p>Total size of the lexicon, in characters.</p>
+   * @public
    */
-  Size?: number;
+  Size?: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetLexiconOutput {
   /**
    * <p>Lexicon object that provides name and the string content of the
    *       lexicon. </p>
+   * @public
    */
-  Lexicon?: Lexicon;
+  Lexicon?: Lexicon | undefined;
 
   /**
    * <p>Metadata of the lexicon, including phonetic alphabetic used,
    *       language code, lexicon ARN, number of lexemes defined in the lexicon, and
    *       size of lexicon in bytes.</p>
+   * @public
    */
-  LexiconAttributes?: LexiconAttributes;
+  LexiconAttributes?: LexiconAttributes | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetSpeechSynthesisTaskInput {
   /**
    * <p>The Amazon Polly generated identifier for a speech synthesis task.</p>
+   * @public
    */
   TaskId: string | undefined;
-}
-
-export enum OutputFormat {
-  JSON = "json",
-  MP3 = "mp3",
-  OGG_VORBIS = "ogg_vorbis",
-  PCM = "pcm",
-}
-
-export enum SpeechMarkType {
-  SENTENCE = "sentence",
-  SSML = "ssml",
-  VISEME = "viseme",
-  WORD = "word",
-}
-
-export enum TaskStatus {
-  COMPLETED = "completed",
-  FAILED = "failed",
-  IN_PROGRESS = "inProgress",
-  SCHEDULED = "scheduled",
-}
-
-export enum TextType {
-  SSML = "ssml",
-  TEXT = "text",
 }
 
 /**
  * <p>SynthesisTask object that provides information about a speech
  *       synthesis task.</p>
+ * @public
  */
 export interface SynthesisTask {
   /**
-   * <p>Specifies the engine (<code>standard</code> or <code>neural</code>)
-   *       for Amazon Polly to use when processing input text for speech synthesis. Using a
-   *       voice that is not supported for the engine selected will result in an
-   *       error.</p>
+   * <p>Specifies the engine (<code>standard</code>, <code>neural</code>,
+   *       <code>long-form</code> or <code>generative</code>) for Amazon Polly to use
+   *       when processing input text for speech synthesis. Using a voice that
+   *       is not supported for the engine selected will result in an error.</p>
+   * @public
    */
-  Engine?: Engine | string;
+  Engine?: Engine | undefined;
 
   /**
    * <p>The Amazon Polly generated identifier for a speech synthesis task.</p>
+   * @public
    */
-  TaskId?: string;
+  TaskId?: string | undefined;
 
   /**
    * <p>Current status of the individual speech synthesis task.</p>
+   * @public
    */
-  TaskStatus?: TaskStatus | string;
+  TaskStatus?: TaskStatus | undefined;
 
   /**
    * <p>Reason for the current status of a specific speech synthesis task,
    *       including errors if the task has failed.</p>
+   * @public
    */
-  TaskStatusReason?: string;
+  TaskStatusReason?: string | undefined;
 
   /**
    * <p>Pathway for the output speech file.</p>
+   * @public
    */
-  OutputUri?: string;
+  OutputUri?: string | undefined;
 
   /**
    * <p>Timestamp for the time the synthesis task was started.</p>
+   * @public
    */
-  CreationTime?: Date;
+  CreationTime?: Date | undefined;
 
   /**
    * <p>Number of billable characters synthesized.</p>
+   * @public
    */
-  RequestCharacters?: number;
+  RequestCharacters?: number | undefined;
 
   /**
    * <p>ARN for the SNS topic optionally used for providing status
    *       notification for a speech synthesis task.</p>
+   * @public
    */
-  SnsTopicArn?: string;
+  SnsTopicArn?: string | undefined;
 
   /**
    * <p>List of one or more pronunciation lexicon names you want the service
    *       to apply during synthesis. Lexicons are applied only if the language of
    *       the lexicon is the same as the language of the voice. </p>
+   * @public
    */
-  LexiconNames?: string[];
+  LexiconNames?: string[] | undefined;
 
   /**
    * <p>The format in which the returned output will be encoded. For audio
-   *       stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+   *       stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this will
    *       be json. </p>
+   * @public
    */
-  OutputFormat?: OutputFormat | string;
+  OutputFormat?: OutputFormat | undefined;
 
   /**
    * <p>The audio frequency specified in Hz.</p>
    *          <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050",
    *       and "24000". The default value for standard voices is "22050". The default
-   *       value for neural voices is "24000".</p>
+   *       value for neural voices is "24000". The default value for long-form voices
+   *       is "24000". The default value for generative voices is "24000".</p>
    *          <p>Valid values for pcm are "8000" and "16000" The default value is
    *       "16000". </p>
+   *          <p>Valid value for ogg_opus is "48000". </p>
+   *          <p>Valid value for mu-law and a-law is "8000". </p>
+   * @public
    */
-  SampleRate?: string;
+  SampleRate?: string | undefined;
 
   /**
    * <p>The type of speech marks returned for the input text.</p>
+   * @public
    */
-  SpeechMarkTypes?: (SpeechMarkType | string)[];
+  SpeechMarkTypes?: SpeechMarkType[] | undefined;
 
   /**
    * <p>Specifies whether the input text is plain text or SSML. The default
    *       value is plain text. </p>
+   * @public
    */
-  TextType?: TextType | string;
+  TextType?: TextType | undefined;
 
   /**
    * <p>Voice ID to use for the synthesis. </p>
+   * @public
    */
-  VoiceId?: VoiceId | string;
+  VoiceId?: VoiceId | undefined;
 
   /**
    * <p>Optional language code for a synthesis task. This is only necessary if
@@ -520,437 +413,510 @@ export interface SynthesisTask {
    *       any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code>
    *       parameter. For example, if no language code is specified, Aditi will use
    *       Indian English rather than Hindi.</p>
+   * @public
    */
-  LanguageCode?: LanguageCode | string;
+  LanguageCode?: LanguageCode | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetSpeechSynthesisTaskOutput {
   /**
    * <p>SynthesisTask object that provides information from the requested
    *       task, including output format, creation time, task status, and so
    *       on.</p>
+   * @public
    */
-  SynthesisTask?: SynthesisTask;
-}
-
-/**
- * <p>The provided Task ID is not valid. Please provide a valid Task ID and
- *       try again.</p>
- */
-export class InvalidTaskIdException extends __BaseException {
-  readonly name: "InvalidTaskIdException" = "InvalidTaskIdException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidTaskIdException, __BaseException>) {
-    super({
-      name: "InvalidTaskIdException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidTaskIdException.prototype);
-  }
-}
-
-/**
- * <p>The Speech Synthesis task with requested Task ID cannot be
- *       found.</p>
- */
-export class SynthesisTaskNotFoundException extends __BaseException {
-  readonly name: "SynthesisTaskNotFoundException" = "SynthesisTaskNotFoundException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<SynthesisTaskNotFoundException, __BaseException>) {
-    super({
-      name: "SynthesisTaskNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, SynthesisTaskNotFoundException.prototype);
-  }
-}
-
-/**
- * <p>Amazon Polly can't find the specified lexicon. Verify that the lexicon's
- *       name is spelled correctly, and then try again.</p>
- */
-export class InvalidLexiconException extends __BaseException {
-  readonly name: "InvalidLexiconException" = "InvalidLexiconException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidLexiconException, __BaseException>) {
-    super({
-      name: "InvalidLexiconException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidLexiconException.prototype);
-  }
-}
-
-/**
- * <p>The provided Amazon S3 bucket name is invalid. Please check your input
- *       with S3 bucket naming requirements and try again.</p>
- */
-export class InvalidS3BucketException extends __BaseException {
-  readonly name: "InvalidS3BucketException" = "InvalidS3BucketException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidS3BucketException, __BaseException>) {
-    super({
-      name: "InvalidS3BucketException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidS3BucketException.prototype);
-  }
-}
-
-/**
- * <p>The provided Amazon S3 key prefix is invalid. Please provide a valid
- *       S3 object key name.</p>
- */
-export class InvalidS3KeyException extends __BaseException {
-  readonly name: "InvalidS3KeyException" = "InvalidS3KeyException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidS3KeyException, __BaseException>) {
-    super({
-      name: "InvalidS3KeyException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidS3KeyException.prototype);
-  }
-}
-
-/**
- * <p>The specified sample rate is not valid.</p>
- */
-export class InvalidSampleRateException extends __BaseException {
-  readonly name: "InvalidSampleRateException" = "InvalidSampleRateException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidSampleRateException, __BaseException>) {
-    super({
-      name: "InvalidSampleRateException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidSampleRateException.prototype);
-  }
-}
-
-/**
- * <p>The provided SNS topic ARN is invalid. Please provide a valid SNS
- *       topic ARN and try again.</p>
- */
-export class InvalidSnsTopicArnException extends __BaseException {
-  readonly name: "InvalidSnsTopicArnException" = "InvalidSnsTopicArnException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidSnsTopicArnException, __BaseException>) {
-    super({
-      name: "InvalidSnsTopicArnException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidSnsTopicArnException.prototype);
-  }
-}
-
-/**
- * <p>The SSML you provided is invalid. Verify the SSML syntax, spelling
- *       of tags and values, and then try again.</p>
- */
-export class InvalidSsmlException extends __BaseException {
-  readonly name: "InvalidSsmlException" = "InvalidSsmlException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidSsmlException, __BaseException>) {
-    super({
-      name: "InvalidSsmlException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidSsmlException.prototype);
-  }
-}
-
-/**
- * <p>The language specified is not currently supported by Amazon Polly in this
- *       capacity.</p>
- */
-export class LanguageNotSupportedException extends __BaseException {
-  readonly name: "LanguageNotSupportedException" = "LanguageNotSupportedException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<LanguageNotSupportedException, __BaseException>) {
-    super({
-      name: "LanguageNotSupportedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LanguageNotSupportedException.prototype);
-  }
+  SynthesisTask?: SynthesisTask | undefined;
 }
 
 /**
  * <p>Describes the content of the lexicon.</p>
+ * @public
  */
 export interface LexiconDescription {
   /**
    * <p>Name of the lexicon.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>Provides lexicon metadata.</p>
+   * @public
    */
-  Attributes?: LexiconAttributes;
+  Attributes?: LexiconAttributes | undefined;
 }
 
 /**
- * <p>The maximum size of the specified lexicon would be exceeded by this
- *       operation.</p>
+ * @public
  */
-export class LexiconSizeExceededException extends __BaseException {
-  readonly name: "LexiconSizeExceededException" = "LexiconSizeExceededException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<LexiconSizeExceededException, __BaseException>) {
-    super({
-      name: "LexiconSizeExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LexiconSizeExceededException.prototype);
-  }
-}
-
 export interface ListLexiconsInput {
   /**
    * <p>An opaque pagination token returned from previous
    *         <code>ListLexicons</code> operation. If present, indicates where to
    *       continue the list of lexicons.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListLexiconsOutput {
   /**
    * <p>A list of lexicon names and attributes.</p>
+   * @public
    */
-  Lexicons?: LexiconDescription[];
+  Lexicons?: LexiconDescription[] | undefined;
 
   /**
    * <p>The pagination token to use in the next request to continue the
    *       listing of lexicons. <code>NextToken</code> is returned only if the
    *       response is truncated.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListSpeechSynthesisTasksInput {
   /**
    * <p>Maximum number of speech synthesis tasks returned in a List
    *       operation.</p>
+   * @public
    */
-  MaxResults?: number;
+  MaxResults?: number | undefined;
 
   /**
    * <p>The pagination token to use in the next request to continue the
    *       listing of speech synthesis tasks. </p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>Status of the speech synthesis tasks returned in a List
    *       operation</p>
+   * @public
    */
-  Status?: TaskStatus | string;
+  Status?: TaskStatus | undefined;
 }
 
+/**
+ * @public
+ */
 export interface ListSpeechSynthesisTasksOutput {
   /**
    * <p>An opaque pagination token returned from the previous List operation
    *       in this request. If present, this indicates where to continue the
    *       listing.</p>
+   * @public
    */
-  NextToken?: string;
+  NextToken?: string | undefined;
 
   /**
    * <p>List of SynthesisTask objects that provides information from the
    *       specified task in the list request, including output format, creation
    *       time, task status, and so on.</p>
+   * @public
    */
-  SynthesisTasks?: SynthesisTask[];
+  SynthesisTasks?: SynthesisTask[] | undefined;
 }
 
 /**
- * <p>Speech marks are not supported for the <code>OutputFormat</code>
- *       selected. Speech marks are only available for content in <code>json</code>
- *       format.</p>
+ * @public
  */
-export class MarksNotSupportedForFormatException extends __BaseException {
-  readonly name: "MarksNotSupportedForFormatException" = "MarksNotSupportedForFormatException";
-  readonly $fault: "client" = "client";
+export interface ListTagsForResourceInput {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) that identifies the resource for which
+   *       to list the tags. Currently, the only supported resource is an Amazon Polly
+   *       lexicon.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<MarksNotSupportedForFormatException, __BaseException>) {
-    super({
-      name: "MarksNotSupportedForFormatException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, MarksNotSupportedForFormatException.prototype);
-  }
+  ResourceArn: string | undefined;
 }
 
 /**
- * <p>The maximum size of the lexeme would be exceeded by this
- *       operation.</p>
+ * @public
  */
-export class MaxLexemeLengthExceededException extends __BaseException {
-  readonly name: "MaxLexemeLengthExceededException" = "MaxLexemeLengthExceededException";
-  readonly $fault: "client" = "client";
+export interface ListTagsForResourceOutput {
   /**
-   * @internal
+   * <p>The tags for the resource.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<MaxLexemeLengthExceededException, __BaseException>) {
-    super({
-      name: "MaxLexemeLengthExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, MaxLexemeLengthExceededException.prototype);
-  }
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p>The maximum number of lexicons would be exceeded by this
- *       operation.</p>
+ * <p>Provides information about a specific throttling reason.</p>
+ * @public
  */
-export class MaxLexiconsNumberExceededException extends __BaseException {
-  readonly name: "MaxLexiconsNumberExceededException" = "MaxLexiconsNumberExceededException";
-  readonly $fault: "client" = "client";
+export interface ThrottlingReason {
   /**
-   * @internal
+   * <p>The reason code explaining why the request was throttled.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<MaxLexiconsNumberExceededException, __BaseException>) {
-    super({
-      name: "MaxLexiconsNumberExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, MaxLexiconsNumberExceededException.prototype);
-  }
+  reason?: string | undefined;
+
+  /**
+   * <p>The resource that caused the throttling.</p>
+   * @public
+   */
+  resource?: string | undefined;
 }
 
+/**
+ * <p>Information about a field that failed validation.</p>
+ * @public
+ */
+export interface ValidationExceptionField {
+  /**
+   * <p>The name of the field that failed validation.</p>
+   * @public
+   */
+  name: string | undefined;
+
+  /**
+   * <p>A message describing why the field failed validation.</p>
+   * @public
+   */
+  message: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface PutLexiconInput {
   /**
-   * <p>Name of the lexicon. The name must follow the regular express
-   *       format [0-9A-Za-z]{1,20}. That is, the name is a case-sensitive
+   * <p>Name of the lexicon. The name must follow the regular expression
+   *       format [0-9A-Za-z]\{1,20\}. That is, the name is a case-sensitive
    *       alphanumeric string up to 20 characters long. </p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Content of the PLS lexicon as string data.</p>
+   * @public
    */
   Content: string | undefined;
+
+  /**
+   * <p>The metadata that you apply to the lexicon to help you categorize and
+   *       organize it. Each tag consists of a key and an optional value, both of
+   *       which you define. Tag keys can have a maximum character length of 128
+   *       characters, and tag values can have a maximum length of 256
+   *       characters. You can't replace the tags of an existing lexicon by
+   *       overwriting it with PutLexicon.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutLexiconOutput {}
 
 /**
- * <p>The alphabet specified by the lexicon is not a supported alphabet.
- *       Valid values are <code>x-sampa</code> and <code>ipa</code>.</p>
+ * <p>Contains text content to be synthesized into speech.</p>
+ * @public
  */
-export class UnsupportedPlsAlphabetException extends __BaseException {
-  readonly name: "UnsupportedPlsAlphabetException" = "UnsupportedPlsAlphabetException";
-  readonly $fault: "client" = "client";
+export interface TextEvent {
   /**
-   * @internal
+   * <p>The text content to synthesize. If you specify <code>ssml</code> as the
+   *       <code>TextType</code>, follow the SSML format for the input text.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<UnsupportedPlsAlphabetException, __BaseException>) {
-    super({
-      name: "UnsupportedPlsAlphabetException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, UnsupportedPlsAlphabetException.prototype);
+  Text: string | undefined;
+
+  /**
+   * <p>Specifies whether the input text is plain text or SSML. Default: plain text.</p>
+   * @public
+   */
+  TextType?: TextType | undefined;
+
+  /**
+   * <p>Configuration for controlling when synthesized audio flushes to the output stream.</p>
+   * @public
+   */
+  FlushStreamConfiguration?: FlushStreamConfiguration | undefined;
+}
+
+/**
+ * <p>Inbound event stream for sending input and control events to manage bidirectional speech synthesis.</p>
+ * @public
+ */
+export type StartSpeechSynthesisStreamActionStream =
+  | StartSpeechSynthesisStreamActionStream.CloseStreamEventMember
+  | StartSpeechSynthesisStreamActionStream.TextEventMember
+  | StartSpeechSynthesisStreamActionStream.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace StartSpeechSynthesisStreamActionStream {
+  /**
+   * <p>A text event containing content to be synthesized.</p>
+   * @public
+   */
+  export interface TextEventMember {
+    TextEvent: TextEvent;
+    CloseStreamEvent?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An event indicating the end of the input stream.</p>
+   * @public
+   */
+  export interface CloseStreamEventMember {
+    TextEvent?: never;
+    CloseStreamEvent: CloseStreamEvent;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    TextEvent?: never;
+    CloseStreamEvent?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    TextEvent: (value: TextEvent) => T;
+    CloseStreamEvent: (value: CloseStreamEvent) => T;
+    _: (name: string, value: any) => T;
   }
 }
 
 /**
- * <p>The language specified in the lexicon is unsupported. For a list of
- *       supported languages, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html">Lexicon Attributes</a>.</p>
+ * @public
  */
-export class UnsupportedPlsLanguageException extends __BaseException {
-  readonly name: "UnsupportedPlsLanguageException" = "UnsupportedPlsLanguageException";
-  readonly $fault: "client" = "client";
+export interface StartSpeechSynthesisStreamInput {
   /**
-   * @internal
+   * <p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis.
+   *       Currently, only the <code>generative</code> engine is supported.
+   *       If you specify a voice that the selected engine doesn't support, Amazon Polly returns an error.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<UnsupportedPlsLanguageException, __BaseException>) {
-    super({
-      name: "UnsupportedPlsLanguageException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, UnsupportedPlsLanguageException.prototype);
+  Engine: Engine | undefined;
+
+  /**
+   * <p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only
+   *       when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly
+   *       uses the default language of the bilingual voice.</p>
+   * @public
+   */
+  LanguageCode?: LanguageCode | undefined;
+
+  /**
+   * <p>The names of one or more pronunciation lexicons for the service to apply
+   *       during synthesis. Amazon Polly applies lexicons only when the lexicon language matches the voice language.</p>
+   * @public
+   */
+  LexiconNames?: string[] | undefined;
+
+  /**
+   * <p>The audio format for the synthesized speech. Currently, Amazon Polly does not support JSON speech marks.</p>
+   * @public
+   */
+  OutputFormat: OutputFormat | undefined;
+
+  /**
+   * <p>The audio frequency, specified in Hz.</p>
+   * @public
+   */
+  SampleRate?: string | undefined;
+
+  /**
+   * <p>The voice to use in synthesis. To get a list of available voice IDs, use the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation.</p>
+   * @public
+   */
+  VoiceId: VoiceId | undefined;
+
+  /**
+   * <p>The input event stream that contains text events and stream control events.</p>
+   * @public
+   */
+  ActionStream?: AsyncIterable<StartSpeechSynthesisStreamActionStream> | undefined;
+}
+
+/**
+ * <p>Indicates that the synthesis stream is closed and provides summary information.</p>
+ * @public
+ */
+export interface StreamClosedEvent {
+  /**
+   * <p>The total number of characters synthesized during the streaming session.</p>
+   * @public
+   */
+  RequestCharacters?: number | undefined;
+}
+
+/**
+ * <p>Outbound event stream that contains synthesized audio data and stream status events.</p>
+ * @public
+ */
+export type StartSpeechSynthesisStreamEventStream =
+  | StartSpeechSynthesisStreamEventStream.AudioEventMember
+  | StartSpeechSynthesisStreamEventStream.ServiceFailureExceptionMember
+  | StartSpeechSynthesisStreamEventStream.ServiceQuotaExceededExceptionMember
+  | StartSpeechSynthesisStreamEventStream.StreamClosedEventMember
+  | StartSpeechSynthesisStreamEventStream.ThrottlingExceptionMember
+  | StartSpeechSynthesisStreamEventStream.ValidationExceptionMember
+  | StartSpeechSynthesisStreamEventStream.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace StartSpeechSynthesisStreamEventStream {
+  /**
+   * <p>An audio event containing synthesized speech.</p>
+   * @public
+   */
+  export interface AudioEventMember {
+    AudioEvent: AudioEvent;
+    StreamClosedEvent?: never;
+    ValidationException?: never;
+    ServiceQuotaExceededException?: never;
+    ServiceFailureException?: never;
+    ThrottlingException?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An event, with summary information, indicating the stream has closed.</p>
+   * @public
+   */
+  export interface StreamClosedEventMember {
+    AudioEvent?: never;
+    StreamClosedEvent: StreamClosedEvent;
+    ValidationException?: never;
+    ServiceQuotaExceededException?: never;
+    ServiceFailureException?: never;
+    ThrottlingException?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An exception indicating the input failed validation.</p>
+   * @public
+   */
+  export interface ValidationExceptionMember {
+    AudioEvent?: never;
+    StreamClosedEvent?: never;
+    ValidationException: ValidationException;
+    ServiceQuotaExceededException?: never;
+    ServiceFailureException?: never;
+    ThrottlingException?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An exception indicating a service quota would be exceeded.</p>
+   * @public
+   */
+  export interface ServiceQuotaExceededExceptionMember {
+    AudioEvent?: never;
+    StreamClosedEvent?: never;
+    ValidationException?: never;
+    ServiceQuotaExceededException: ServiceQuotaExceededException;
+    ServiceFailureException?: never;
+    ThrottlingException?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An unknown condition has caused a service failure.</p>
+   * @public
+   */
+  export interface ServiceFailureExceptionMember {
+    AudioEvent?: never;
+    StreamClosedEvent?: never;
+    ValidationException?: never;
+    ServiceQuotaExceededException?: never;
+    ServiceFailureException: ServiceFailureException;
+    ThrottlingException?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>An exception indicating the request was throttled.</p>
+   * @public
+   */
+  export interface ThrottlingExceptionMember {
+    AudioEvent?: never;
+    StreamClosedEvent?: never;
+    ValidationException?: never;
+    ServiceQuotaExceededException?: never;
+    ServiceFailureException?: never;
+    ThrottlingException: ThrottlingException;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AudioEvent?: never;
+    StreamClosedEvent?: never;
+    ValidationException?: never;
+    ServiceQuotaExceededException?: never;
+    ServiceFailureException?: never;
+    ThrottlingException?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AudioEvent: (value: AudioEvent) => T;
+    StreamClosedEvent: (value: StreamClosedEvent) => T;
+    ValidationException: (value: ValidationException) => T;
+    ServiceQuotaExceededException: (value: ServiceQuotaExceededException) => T;
+    ServiceFailureException: (value: ServiceFailureException) => T;
+    ThrottlingException: (value: ThrottlingException) => T;
+    _: (name: string, value: any) => T;
   }
 }
 
 /**
- * <p>SSML speech marks are not supported for plain text-type
- *       input.</p>
+ * @public
  */
-export class SsmlMarksNotSupportedForTextTypeException extends __BaseException {
-  readonly name: "SsmlMarksNotSupportedForTextTypeException" = "SsmlMarksNotSupportedForTextTypeException";
-  readonly $fault: "client" = "client";
+export interface StartSpeechSynthesisStreamOutput {
   /**
-   * @internal
+   * <p>The output event stream that contains synthesized audio events and stream status events.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<SsmlMarksNotSupportedForTextTypeException, __BaseException>) {
-    super({
-      name: "SsmlMarksNotSupportedForTextTypeException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, SsmlMarksNotSupportedForTextTypeException.prototype);
-  }
+  EventStream?: AsyncIterable<StartSpeechSynthesisStreamEventStream> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartSpeechSynthesisTaskInput {
   /**
-   * <p>Specifies the engine (<code>standard</code> or <code>neural</code>)
-   *       for Amazon Polly to use when processing input text for speech synthesis. Using a
-   *       voice that is not supported for the engine selected will result in an
-   *       error.</p>
+   * <p>Specifies the engine (<code>standard</code>, <code>neural</code>,
+   *       <code>long-form</code> or <code>generative</code>) for Amazon Polly to use
+   *       when processing input text for speech synthesis. Using a voice that
+   *       is not supported for the engine selected will result in an error.</p>
+   * @public
    */
-  Engine?: Engine | string;
+  Engine?: Engine | undefined;
 
   /**
    * <p>Optional language code for the Speech Synthesis request. This is only
@@ -961,132 +927,113 @@ export interface StartSpeechSynthesisTaskInput {
    *       any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code>
    *       parameter. For example, if no language code is specified, Aditi will use
    *       Indian English rather than Hindi.</p>
+   * @public
    */
-  LanguageCode?: LanguageCode | string;
+  LanguageCode?: LanguageCode | undefined;
 
   /**
    * <p>List of one or more pronunciation lexicon names you want the service
    *       to apply during synthesis. Lexicons are applied only if the language of
    *       the lexicon is the same as the language of the voice. </p>
+   * @public
    */
-  LexiconNames?: string[];
+  LexiconNames?: string[] | undefined;
 
   /**
    * <p>The format in which the returned output will be encoded. For audio
-   *       stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+   *       stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this will
    *       be json. </p>
+   * @public
    */
-  OutputFormat: OutputFormat | string | undefined;
+  OutputFormat: OutputFormat | undefined;
 
   /**
    * <p>Amazon S3 bucket name to which the output file will be saved.</p>
+   * @public
    */
   OutputS3BucketName: string | undefined;
 
   /**
    * <p>The Amazon S3 key prefix for the output speech file.</p>
+   * @public
    */
-  OutputS3KeyPrefix?: string;
+  OutputS3KeyPrefix?: string | undefined;
 
   /**
    * <p>The audio frequency specified in Hz.</p>
    *          <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050",
    *       and "24000". The default value for standard voices is "22050". The default
-   *       value for neural voices is "24000".</p>
+   *       value for neural voices is "24000". The default value for long-form voices
+   *       is "24000". The default value for generative voices is "24000".</p>
    *          <p>Valid values for pcm are "8000" and "16000" The default value is
    *       "16000". </p>
+   *          <p>Valid value for ogg_opus is "48000". </p>
+   *          <p>Valid value for mu-law and a-law is "8000". </p>
+   * @public
    */
-  SampleRate?: string;
+  SampleRate?: string | undefined;
 
   /**
    * <p>ARN for the SNS topic optionally used for providing status
    *       notification for a speech synthesis task.</p>
+   * @public
    */
-  SnsTopicArn?: string;
+  SnsTopicArn?: string | undefined;
 
   /**
    * <p>The type of speech marks returned for the input text.</p>
+   * @public
    */
-  SpeechMarkTypes?: (SpeechMarkType | string)[];
+  SpeechMarkTypes?: SpeechMarkType[] | undefined;
 
   /**
    * <p>The input text to synthesize. If you specify ssml as the TextType,
    *       follow the SSML format for the input text. </p>
+   * @public
    */
   Text: string | undefined;
 
   /**
    * <p>Specifies whether the input text is plain text or SSML. The default
    *       value is plain text. </p>
+   * @public
    */
-  TextType?: TextType | string;
+  TextType?: TextType | undefined;
 
   /**
    * <p>Voice ID to use for the synthesis. </p>
+   * @public
    */
-  VoiceId: VoiceId | string | undefined;
+  VoiceId: VoiceId | undefined;
 }
 
+/**
+ * @public
+ */
 export interface StartSpeechSynthesisTaskOutput {
   /**
    * <p>SynthesisTask object that provides information and attributes about a
    *       newly submitted speech synthesis task.</p>
+   * @public
    */
-  SynthesisTask?: SynthesisTask;
+  SynthesisTask?: SynthesisTask | undefined;
 }
 
 /**
- * <p>The value of the "Text" parameter is longer than the accepted
- *       limits. For the <code>SynthesizeSpeech</code> API, the limit for input
- *       text is a maximum of 6000 characters total, of which no more than 3000 can
- *       be billed characters. For the <code>StartSpeechSynthesisTask</code> API,
- *       the maximum is 200,000 characters, of which no more than 100,000 can be
- *       billed characters. SSML tags are not counted as billed
- *       characters.</p>
+ * @public
  */
-export class TextLengthExceededException extends __BaseException {
-  readonly name: "TextLengthExceededException" = "TextLengthExceededException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<TextLengthExceededException, __BaseException>) {
-    super({
-      name: "TextLengthExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, TextLengthExceededException.prototype);
-  }
-}
-
 export interface SynthesizeSpeechInput {
   /**
-   * <p>Specifies the engine (<code>standard</code> or <code>neural</code>)
-   *       for Amazon Polly to use when processing input text for speech synthesis. For
-   *       information on Amazon Polly voices and which voices are available in
-   *       standard-only, NTTS-only, and both standard and NTTS formats, see <a href="https://docs.aws.amazon.com/polly/latest/dg/voicelist.html">Available Voices</a>.</p>
-   *          <p>
-   *             <b>NTTS-only voices</b>
-   *          </p>
-   *          <p>When using NTTS-only voices such as Kevin (en-US), this parameter is
-   *       required and must be set to <code>neural</code>. If the engine is not
-   *       specified, or is set to <code>standard</code>, this will result in an
-   *       error. </p>
-   *          <p>Type: String</p>
-   *          <p>Valid Values: <code>standard</code> | <code>neural</code>
-   *          </p>
-   *          <p>Required: Yes</p>
-   *
-   *          <p>
-   *             <b>Standard voices</b>
-   *          </p>
-   *          <p>For standard voices, this is not required; the engine parameter
-   *       defaults to <code>standard</code>. If the engine is not specified, or is
-   *       set to <code>standard</code> and an NTTS-only voice is selected, this will
-   *       result in an error. </p>
+   * <p>Specifies the engine (<code>standard</code>, <code>neural</code>,
+   *       <code>long-form</code>, or <code>generative</code>) for Amazon Polly
+   *       to use when processing input text for speech synthesis. Provide an engine
+   *       that is supported by the voice you select. If you don't provide an engine,
+   *       the standard engine is selected by default. If a chosen voice isn't supported
+   *       by the standard engine, this will result in an error. For information on
+   *       Amazon Polly voices and which voices are available for each engine, see <a href="https://docs.aws.amazon.com/polly/latest/dg/voicelist.html">Available Voices</a>.</p>
+   * @public
    */
-  Engine?: Engine | string;
+  Engine?: Engine | undefined;
 
   /**
    * <p>Optional language code for the Synthesize Speech request. This is only
@@ -1097,45 +1044,53 @@ export interface SynthesizeSpeechInput {
    *       any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code>
    *       parameter. For example, if no language code is specified, Aditi will use
    *       Indian English rather than Hindi.</p>
+   * @public
    */
-  LanguageCode?: LanguageCode | string;
+  LanguageCode?: LanguageCode | undefined;
 
   /**
    * <p>List of one or more pronunciation lexicon names you want the
    *       service to apply during synthesis. Lexicons are applied only if the
    *       language of the lexicon is the same as the language of the voice. For
    *       information about storing lexicons, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.</p>
+   * @public
    */
-  LexiconNames?: string[];
+  LexiconNames?: string[] | undefined;
 
   /**
    * <p> The format in which the returned output will be encoded. For audio
-   *       stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+   *       stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law or pcm. For speech marks, this will
    *       be json. </p>
    *          <p>When pcm is used, the content returned is audio/pcm in a signed
    *       16-bit, 1 channel (mono), little-endian format. </p>
+   * @public
    */
-  OutputFormat: OutputFormat | string | undefined;
+  OutputFormat: OutputFormat | undefined;
 
   /**
    * <p>The audio frequency specified in Hz.</p>
-   *          <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050",
-   *       and "24000". The default value for standard voices is "22050". The default
-   *       value for neural voices is "24000".</p>
+   *          <p>The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", "24000", "44100" and "48000". The default value for standard voices is "22050". The default
+   *       value for neural voices is "24000". The default value for long-form voices
+   *       is "24000". The default value for generative voices is "24000".</p>
    *          <p>Valid values for pcm are "8000" and "16000" The default value is
    *       "16000". </p>
+   *          <p>Valid value for ogg_opus is "48000". </p>
+   *          <p>Valid value for mu-law and a-law is "8000". </p>
+   * @public
    */
-  SampleRate?: string;
+  SampleRate?: string | undefined;
 
   /**
    * <p>The type of speech marks returned for the input text.</p>
+   * @public
    */
-  SpeechMarkTypes?: (SpeechMarkType | string)[];
+  SpeechMarkTypes?: SpeechMarkType[] | undefined;
 
   /**
    * <p> Input text to synthesize. If you specify <code>ssml</code> as the
    *         <code>TextType</code>, follow the SSML format for the input text.
    *     </p>
+   * @public
    */
   Text: string | undefined;
 
@@ -1143,21 +1098,27 @@ export interface SynthesizeSpeechInput {
    * <p> Specifies whether the input text is plain text or SSML. The
    *       default value is plain text. For more information, see <a href="https://docs.aws.amazon.com/polly/latest/dg/ssml.html">Using
    *         SSML</a>.</p>
+   * @public
    */
-  TextType?: TextType | string;
+  TextType?: TextType | undefined;
 
   /**
    * <p> Voice ID to use for the synthesis. You can get a list of available
    *       voice IDs by calling the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation. </p>
+   * @public
    */
-  VoiceId: VoiceId | string | undefined;
+  VoiceId: VoiceId | undefined;
 }
 
+/**
+ * @public
+ */
 export interface SynthesizeSpeechOutput {
   /**
    * <p> Stream containing the synthesized speech. </p>
+   * @public
    */
-  AudioStream?: Readable | ReadableStream | Blob;
+  AudioStream?: StreamingBlobTypes | undefined;
 
   /**
    * <p> Specifies the type audio stream. This should reflect the
@@ -1174,9 +1135,26 @@ export interface SynthesizeSpeechOutput {
    *           audio/ogg. </p>
    *             </li>
    *             <li>
+   *                <p> If you request <code>ogg_opus</code> as the
+   *             <code>OutputFormat</code>, the <code>ContentType</code> returned is
+   *           audio/ogg. </p>
+   *             </li>
+   *             <li>
    *                <p> If you request <code>pcm</code> as the
    *             <code>OutputFormat</code>, the <code>ContentType</code> returned is
    *           audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format.
+   *         </p>
+   *             </li>
+   *             <li>
+   *                <p> If you request <code>mu-law</code> as the
+   *             <code>OutputFormat</code>, the <code>ContentType</code> returned is
+   *           audio/mulaw.
+   *         </p>
+   *             </li>
+   *             <li>
+   *                <p> If you request <code>a-law</code> as the
+   *             <code>OutputFormat</code>, the <code>ContentType</code> returned is
+   *           audio/alaw.
    *         </p>
    *             </li>
    *             <li>
@@ -1186,175 +1164,61 @@ export interface SynthesizeSpeechOutput {
    *             </li>
    *          </ul>
    *          <p> </p>
+   * @public
    */
-  ContentType?: string;
+  ContentType?: string | undefined;
 
   /**
    * <p>Number of characters synthesized.</p>
+   * @public
    */
-  RequestCharacters?: number;
+  RequestCharacters?: number | undefined;
 }
 
 /**
- * @internal
+ * @public
  */
-export const DeleteLexiconInputFilterSensitiveLog = (obj: DeleteLexiconInput): any => ({
-  ...obj,
-});
+export interface TagResourceInput {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the resource to which to add tags.
+   *       Currently, the only supported resource is an Amazon Polly lexicon.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+
+  /**
+   * <p>The tags to add to the resource, as key-value pairs. Tag keys can have
+   *       a maximum character length of 128 characters, and tag values can have a
+   *       maximum length of 256 characters.</p>
+   * @public
+   */
+  Tags: Record<string, string> | undefined;
+}
 
 /**
- * @internal
+ * @public
  */
-export const DeleteLexiconOutputFilterSensitiveLog = (obj: DeleteLexiconOutput): any => ({
-  ...obj,
-});
+export interface TagResourceOutput {}
 
 /**
- * @internal
+ * @public
  */
-export const DescribeVoicesInputFilterSensitiveLog = (obj: DescribeVoicesInput): any => ({
-  ...obj,
-});
+export interface UntagResourceInput {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the resource from which to remove
+   *       tags. Currently, the only supported resource is an Amazon Polly lexicon.</p>
+   * @public
+   */
+  ResourceArn: string | undefined;
+
+  /**
+   * <p>The keys of the tags to be removed.</p>
+   * @public
+   */
+  TagKeys: string[] | undefined;
+}
 
 /**
- * @internal
+ * @public
  */
-export const VoiceFilterSensitiveLog = (obj: Voice): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeVoicesOutputFilterSensitiveLog = (obj: DescribeVoicesOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLexiconInputFilterSensitiveLog = (obj: GetLexiconInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LexiconFilterSensitiveLog = (obj: Lexicon): any => ({
-  ...obj,
-  ...(obj.Content && { Content: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const LexiconAttributesFilterSensitiveLog = (obj: LexiconAttributes): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetLexiconOutputFilterSensitiveLog = (obj: GetLexiconOutput): any => ({
-  ...obj,
-  ...(obj.Lexicon && { Lexicon: LexiconFilterSensitiveLog(obj.Lexicon) }),
-});
-
-/**
- * @internal
- */
-export const GetSpeechSynthesisTaskInputFilterSensitiveLog = (obj: GetSpeechSynthesisTaskInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SynthesisTaskFilterSensitiveLog = (obj: SynthesisTask): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetSpeechSynthesisTaskOutputFilterSensitiveLog = (obj: GetSpeechSynthesisTaskOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LexiconDescriptionFilterSensitiveLog = (obj: LexiconDescription): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLexiconsInputFilterSensitiveLog = (obj: ListLexiconsInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLexiconsOutputFilterSensitiveLog = (obj: ListLexiconsOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListSpeechSynthesisTasksInputFilterSensitiveLog = (obj: ListSpeechSynthesisTasksInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListSpeechSynthesisTasksOutputFilterSensitiveLog = (obj: ListSpeechSynthesisTasksOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutLexiconInputFilterSensitiveLog = (obj: PutLexiconInput): any => ({
-  ...obj,
-  ...(obj.Content && { Content: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const PutLexiconOutputFilterSensitiveLog = (obj: PutLexiconOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartSpeechSynthesisTaskInputFilterSensitiveLog = (obj: StartSpeechSynthesisTaskInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StartSpeechSynthesisTaskOutputFilterSensitiveLog = (obj: StartSpeechSynthesisTaskOutput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SynthesizeSpeechInputFilterSensitiveLog = (obj: SynthesizeSpeechInput): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SynthesizeSpeechOutputFilterSensitiveLog = (obj: SynthesizeSpeechOutput): any => ({
-  ...obj,
-});
+export interface UntagResourceOutput {}

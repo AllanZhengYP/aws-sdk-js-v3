@@ -1,9 +1,11 @@
 // smithy-typescript generated code
-import { PaginationConfiguration } from "@aws-sdk/types";
+import type { PaginationConfiguration } from "@smithy/types";
 
-import { KMS } from "../KMS";
 import { KMSClient } from "../KMSClient";
 
+/**
+ * @public
+ */
 export interface KMSPaginationConfiguration extends PaginationConfiguration {
-  client: KMS | KMSClient;
+  client: KMSClient;
 }

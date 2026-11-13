@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  UpdateIdentityProviderRequest,
-  UpdateIdentityProviderRequestFilterSensitiveLog,
-  UpdateIdentityProviderResponse,
-  UpdateIdentityProviderResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateIdentityProviderCommand,
-  serializeAws_restJson1UpdateIdentityProviderCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateIdentityProviderRequest, UpdateIdentityProviderResponse } from "../models/models_0";
+import { UpdateIdentityProvider$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateIdentityProviderCommand}.
+ */
 export interface UpdateIdentityProviderCommandInput extends UpdateIdentityProviderRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateIdentityProviderCommand}.
+ */
 export interface UpdateIdentityProviderCommandOutput extends UpdateIdentityProviderResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,75 @@ export interface UpdateIdentityProviderCommandOutput extends UpdateIdentityProvi
  * ```javascript
  * import { WorkSpacesWebClient, UpdateIdentityProviderCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, UpdateIdentityProviderCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // UpdateIdentityProviderRequest
+ *   identityProviderArn: "STRING_VALUE", // required
+ *   identityProviderName: "STRING_VALUE",
+ *   identityProviderType: "STRING_VALUE",
+ *   identityProviderDetails: { // IdentityProviderDetails
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   clientToken: "STRING_VALUE",
+ * };
  * const command = new UpdateIdentityProviderCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateIdentityProviderResponse
+ * //   identityProvider: { // IdentityProvider
+ * //     identityProviderArn: "STRING_VALUE", // required
+ * //     identityProviderName: "STRING_VALUE",
+ * //     identityProviderType: "STRING_VALUE",
+ * //     identityProviderDetails: { // IdentityProviderDetails
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateIdentityProviderCommandInput - {@link UpdateIdentityProviderCommandInput}
+ * @returns {@link UpdateIdentityProviderCommandOutput}
  * @see {@link UpdateIdentityProviderCommandInput} for command's `input` shape.
  * @see {@link UpdateIdentityProviderCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateIdentityProviderCommand extends $Command<
-  UpdateIdentityProviderCommandInput,
-  UpdateIdentityProviderCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateIdentityProviderCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateIdentityProviderCommandInput, UpdateIdentityProviderCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "UpdateIdentityProviderCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateIdentityProviderRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateIdentityProviderResponseFilterSensitiveLog,
+export class UpdateIdentityProviderCommand extends command<UpdateIdentityProviderCommandInput, UpdateIdentityProviderCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateIdentityProvider",
+  UpdateIdentityProvider$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateIdentityProviderRequest;
+      output: UpdateIdentityProviderResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateIdentityProviderCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateIdentityProviderCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateIdentityProviderCommandOutput> {
-    return deserializeAws_restJson1UpdateIdentityProviderCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateIdentityProviderCommandInput;
+      output: UpdateIdentityProviderCommandOutput;
+    };
+  };
 }

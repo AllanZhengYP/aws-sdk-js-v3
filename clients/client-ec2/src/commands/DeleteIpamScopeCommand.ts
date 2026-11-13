@@ -1,27 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  DeleteIpamScopeRequest,
-  DeleteIpamScopeRequestFilterSensitiveLog,
-  DeleteIpamScopeResult,
-  DeleteIpamScopeResultFilterSensitiveLog,
-} from "../models/models_2";
-import { deserializeAws_ec2DeleteIpamScopeCommand, serializeAws_ec2DeleteIpamScopeCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteIpamScopeRequest, DeleteIpamScopeResult } from "../models/models_3";
+import { DeleteIpamScope$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteIpamScopeCommand}.
+ */
 export interface DeleteIpamScopeCommandInput extends DeleteIpamScopeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteIpamScopeCommand}.
+ */
 export interface DeleteIpamScopeCommandOutput extends DeleteIpamScopeResult, __MetadataBearer {}
 
 /**
@@ -33,68 +31,69 @@ export interface DeleteIpamScopeCommandOutput extends DeleteIpamScopeResult, __M
  * ```javascript
  * import { EC2Client, DeleteIpamScopeCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteIpamScopeCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteIpamScopeRequest
+ *   DryRun: true || false,
+ *   IpamScopeId: "STRING_VALUE", // required
+ * };
  * const command = new DeleteIpamScopeCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteIpamScopeResult
+ * //   IpamScope: { // IpamScope
+ * //     OwnerId: "STRING_VALUE",
+ * //     IpamScopeId: "STRING_VALUE",
+ * //     IpamScopeArn: "STRING_VALUE",
+ * //     IpamArn: "STRING_VALUE",
+ * //     IpamRegion: "STRING_VALUE",
+ * //     IpamScopeType: "public" || "private",
+ * //     IsDefault: true || false,
+ * //     Description: "STRING_VALUE",
+ * //     PoolCount: Number("int"),
+ * //     State: "create-in-progress" || "create-complete" || "create-failed" || "modify-in-progress" || "modify-complete" || "modify-failed" || "delete-in-progress" || "delete-complete" || "delete-failed" || "isolate-in-progress" || "isolate-complete" || "restore-in-progress",
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     ExternalAuthorityConfiguration: { // IpamScopeExternalAuthorityConfiguration
+ * //       Type: "infoblox",
+ * //       ExternalResourceIdentifier: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteIpamScopeCommandInput - {@link DeleteIpamScopeCommandInput}
+ * @returns {@link DeleteIpamScopeCommandOutput}
  * @see {@link DeleteIpamScopeCommandInput} for command's `input` shape.
  * @see {@link DeleteIpamScopeCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteIpamScopeCommand extends $Command<
-  DeleteIpamScopeCommandInput,
-  DeleteIpamScopeCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteIpamScopeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteIpamScopeCommandInput, DeleteIpamScopeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteIpamScopeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteIpamScopeRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteIpamScopeResultFilterSensitiveLog,
+export class DeleteIpamScopeCommand extends command<DeleteIpamScopeCommandInput, DeleteIpamScopeCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteIpamScope",
+  DeleteIpamScope$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteIpamScopeRequest;
+      output: DeleteIpamScopeResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteIpamScopeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteIpamScopeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteIpamScopeCommandOutput> {
-    return deserializeAws_ec2DeleteIpamScopeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteIpamScopeCommandInput;
+      output: DeleteIpamScopeCommandOutput;
+    };
+  };
 }

@@ -1,13 +1,12 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
+  "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "downlevelIteration": true,
+    "types": ["node"],
     "importHelpers": true,
-    "incremental": true,
     "removeComments": true,
     "resolveJsonModule": true,
     "rootDir": "src",
     "useUnknownInCatchVariables": false
   },
-  "exclude": ["test/"]
+  "include": ["src"]
 }

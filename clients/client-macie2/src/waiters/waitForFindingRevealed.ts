@@ -1,24 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
 import {
+  type GetSensitiveDataOccurrencesCommandInput,
+  type GetSensitiveDataOccurrencesCommandOutput,
   GetSensitiveDataOccurrencesCommand,
-  GetSensitiveDataOccurrencesCommandInput,
 } from "../commands/GetSensitiveDataOccurrencesCommand";
-import { Macie2Client } from "../Macie2Client";
+import type { Macie2Client } from "../Macie2Client";
+import type { Macie2ServiceException } from "../models/Macie2ServiceException";
 
-const checkState = async (
-  client: Macie2Client,
-  input: GetSensitiveDataOccurrencesCommandInput
-): Promise<WaiterResult> => {
+const checkState = async (client: Macie2Client, input: GetSensitiveDataOccurrencesCommandInput): Promise<WaiterResult<GetSensitiveDataOccurrencesCommandOutput | Macie2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetSensitiveDataOccurrencesCommand(input));
+    let result: GetSensitiveDataOccurrencesCommandOutput & any = await client.send(new GetSensitiveDataOccurrencesCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.status;
-      };
+      }
       if (returnComparator() === "SUCCESS") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -26,7 +31,7 @@ const checkState = async (
     try {
       const returnComparator = () => {
         return result.status;
-      };
+      }
       if (returnComparator() === "ERROR") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -43,7 +48,7 @@ const checkState = async (
 export const waitForFindingRevealed = async (
   params: WaiterConfiguration<Macie2Client>,
   input: GetSensitiveDataOccurrencesCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetSensitiveDataOccurrencesCommandOutput | Macie2ServiceException>> => {
   const serviceDefaults = { minDelay: 2, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -55,8 +60,8 @@ export const waitForFindingRevealed = async (
 export const waitUntilFindingRevealed = async (
   params: WaiterConfiguration<Macie2Client>,
   input: GetSensitiveDataOccurrencesCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetSensitiveDataOccurrencesCommandOutput>> => {
   const serviceDefaults = { minDelay: 2, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetSensitiveDataOccurrencesCommandOutput>;
 };

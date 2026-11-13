@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  MigrationHubRefactorSpacesClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../MigrationHubRefactorSpacesClient";
-import {
-  GetApplicationRequest,
-  GetApplicationRequestFilterSensitiveLog,
-  GetApplicationResponse,
-  GetApplicationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetApplicationCommand,
-  serializeAws_restJson1GetApplicationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetApplicationRequest, GetApplicationResponse } from "../models/models_0";
+import { GetApplication$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApplicationCommand}.
+ */
 export interface GetApplicationCommandInput extends GetApplicationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApplicationCommand}.
+ */
 export interface GetApplicationCommandOutput extends GetApplicationResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,96 @@ export interface GetApplicationCommandOutput extends GetApplicationResponse, __M
  * ```javascript
  * import { MigrationHubRefactorSpacesClient, GetApplicationCommand } from "@aws-sdk/client-migration-hub-refactor-spaces"; // ES Modules import
  * // const { MigrationHubRefactorSpacesClient, GetApplicationCommand } = require("@aws-sdk/client-migration-hub-refactor-spaces"); // CommonJS import
+ * // import type { MigrationHubRefactorSpacesClientConfig } from "@aws-sdk/client-migration-hub-refactor-spaces";
+ * const config = {}; // type is MigrationHubRefactorSpacesClientConfig
  * const client = new MigrationHubRefactorSpacesClient(config);
+ * const input = { // GetApplicationRequest
+ *   EnvironmentIdentifier: "STRING_VALUE", // required
+ *   ApplicationIdentifier: "STRING_VALUE", // required
+ * };
  * const command = new GetApplicationCommand(input);
  * const response = await client.send(command);
+ * // { // GetApplicationResponse
+ * //   Name: "STRING_VALUE",
+ * //   Arn: "STRING_VALUE",
+ * //   OwnerAccountId: "STRING_VALUE",
+ * //   CreatedByAccountId: "STRING_VALUE",
+ * //   ApplicationId: "STRING_VALUE",
+ * //   EnvironmentId: "STRING_VALUE",
+ * //   VpcId: "STRING_VALUE",
+ * //   ProxyType: "STRING_VALUE",
+ * //   ApiGatewayProxy: { // ApiGatewayProxyConfig
+ * //     ProxyUrl: "STRING_VALUE",
+ * //     ApiGatewayId: "STRING_VALUE",
+ * //     VpcLinkId: "STRING_VALUE",
+ * //     NlbArn: "STRING_VALUE",
+ * //     NlbName: "STRING_VALUE",
+ * //     EndpointType: "STRING_VALUE",
+ * //     StageName: "STRING_VALUE",
+ * //   },
+ * //   State: "STRING_VALUE",
+ * //   Tags: { // TagMap
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   Error: { // ErrorResponse
+ * //     Code: "STRING_VALUE",
+ * //     Message: "STRING_VALUE",
+ * //     AccountId: "STRING_VALUE",
+ * //     ResourceIdentifier: "STRING_VALUE",
+ * //     ResourceType: "STRING_VALUE",
+ * //     AdditionalDetails: { // AdditionalDetails
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * //   LastUpdatedTime: new Date("TIMESTAMP"),
+ * //   CreatedTime: new Date("TIMESTAMP"),
+ * // };
+ *
  * ```
  *
+ * @param GetApplicationCommandInput - {@link GetApplicationCommandInput}
+ * @returns {@link GetApplicationCommandOutput}
  * @see {@link GetApplicationCommandInput} for command's `input` shape.
  * @see {@link GetApplicationCommandOutput} for command's `response` shape.
  * @see {@link MigrationHubRefactorSpacesClientResolvedConfig | config} for MigrationHubRefactorSpacesClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The user does not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request references a resource that does not exist. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>Request was denied because the request was throttled. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input does not satisfy the constraints specified by an Amazon Web Service.
+ *     </p>
+ *
+ * @throws {@link MigrationHubRefactorSpacesServiceException}
+ * <p>Base exception class for all service exceptions from MigrationHubRefactorSpaces service.</p>
+ *
+ *
+ * @public
  */
-export class GetApplicationCommand extends $Command<
-  GetApplicationCommandInput,
-  GetApplicationCommandOutput,
-  MigrationHubRefactorSpacesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetApplicationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: MigrationHubRefactorSpacesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetApplicationCommandInput, GetApplicationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "MigrationHubRefactorSpacesClient";
-    const commandName = "GetApplicationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetApplicationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetApplicationResponseFilterSensitiveLog,
+export class GetApplicationCommand extends command<GetApplicationCommandInput, GetApplicationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApplication",
+  GetApplication$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApplicationRequest;
+      output: GetApplicationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetApplicationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetApplicationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetApplicationCommandOutput> {
-    return deserializeAws_restJson1GetApplicationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetApplicationCommandInput;
+      output: GetApplicationCommandOutput;
+    };
+  };
 }

@@ -1,18 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { CodeDeployClient } from "../CodeDeployClient";
-import { GetDeploymentCommand, GetDeploymentCommandInput } from "../commands/GetDeploymentCommand";
+import type { CodeDeployClient } from "../CodeDeployClient";
+import {
+  type GetDeploymentCommandInput,
+  type GetDeploymentCommandOutput,
+  GetDeploymentCommand,
+} from "../commands/GetDeploymentCommand";
+import type { CodeDeployServiceException } from "../models/CodeDeployServiceException";
 
-const checkState = async (client: CodeDeployClient, input: GetDeploymentCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: CodeDeployClient, input: GetDeploymentCommandInput): Promise<WaiterResult<GetDeploymentCommandOutput | CodeDeployServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetDeploymentCommand(input));
+    let result: GetDeploymentCommandOutput & any = await client.send(new GetDeploymentCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.deploymentInfo.status;
-      };
+      }
       if (returnComparator() === "Succeeded") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -20,7 +31,7 @@ const checkState = async (client: CodeDeployClient, input: GetDeploymentCommandI
     try {
       const returnComparator = () => {
         return result.deploymentInfo.status;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -28,7 +39,7 @@ const checkState = async (client: CodeDeployClient, input: GetDeploymentCommandI
     try {
       const returnComparator = () => {
         return result.deploymentInfo.status;
-      };
+      }
       if (returnComparator() === "Stopped") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -45,7 +56,7 @@ const checkState = async (client: CodeDeployClient, input: GetDeploymentCommandI
 export const waitForDeploymentSuccessful = async (
   params: WaiterConfiguration<CodeDeployClient>,
   input: GetDeploymentCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetDeploymentCommandOutput | CodeDeployServiceException>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -57,8 +68,8 @@ export const waitForDeploymentSuccessful = async (
 export const waitUntilDeploymentSuccessful = async (
   params: WaiterConfiguration<CodeDeployClient>,
   input: GetDeploymentCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetDeploymentCommandOutput>> => {
   const serviceDefaults = { minDelay: 15, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetDeploymentCommandOutput>;
 };

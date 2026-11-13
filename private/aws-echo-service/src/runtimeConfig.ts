@@ -3,26 +3,22 @@
 import packageInfo from "../package.json"; // eslint-disable-line
 
 import {
-  NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS,
-  NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS,
-} from "@aws-sdk/config-resolver";
-import { Hash } from "@aws-sdk/hash-node";
+  createDefaultUserAgentProvider,
+  getDefaultSocketTimeout,
+  NODE_APP_ID_CONFIG_OPTIONS,
+} from "@aws-sdk/core/client";
+import { emitWarningIfUnsupportedVersion, loadConfigsForDefaultMode } from "@smithy/core/client";
+import { loadConfig as loadNodeConfig, resolveDefaultsModeConfig } from "@smithy/core/config";
 import {
   DEFAULT_RETRY_MODE,
   NODE_MAX_ATTEMPT_CONFIG_OPTIONS,
   NODE_RETRY_MODE_CONFIG_OPTIONS,
-} from "@aws-sdk/middleware-retry";
-import { loadConfig as loadNodeConfig } from "@aws-sdk/node-config-provider";
-import { NodeHttpHandler as RequestHandler, streamCollector } from "@aws-sdk/node-http-handler";
-import { fromBase64, toBase64 } from "@aws-sdk/util-base64-node";
-import { calculateBodyLength } from "@aws-sdk/util-body-length-node";
-import { defaultUserAgent } from "@aws-sdk/util-user-agent-node";
-import { fromUtf8, toUtf8 } from "@aws-sdk/util-utf8-node";
-import { EchoServiceClientConfig } from "./EchoServiceClient";
+} from "@smithy/core/retry";
+import { calculateBodyLength } from "@smithy/core/serde";
+import { NodeHttpHandler as RequestHandler, streamCollector } from "@smithy/node-http-handler";
+
+import type { EchoServiceClientConfig } from "./EchoServiceClient";
 import { getRuntimeConfig as getSharedRuntimeConfig } from "./runtimeConfig.shared";
-import { loadConfigsForDefaultMode } from "@aws-sdk/smithy-client";
-import { resolveDefaultsModeConfig } from "@aws-sdk/util-defaults-mode-node";
-import { emitWarningIfUnsupportedVersion } from "@aws-sdk/smithy-client";
 
 /**
  * @internal
@@ -32,29 +28,30 @@ export const getRuntimeConfig = (config: EchoServiceClientConfig) => {
   const defaultsMode = resolveDefaultsModeConfig(config);
   const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
   const clientSharedValues = getSharedRuntimeConfig(config);
+    const loaderConfig = {
+    profile: config?.profile,
+    logger: clientSharedValues.logger,
+  };
   return {
     ...clientSharedValues,
     ...config,
     runtime: "node",
     defaultsMode,
-    base64Decoder: config?.base64Decoder ?? fromBase64,
-    base64Encoder: config?.base64Encoder ?? toBase64,
     bodyLengthChecker: config?.bodyLengthChecker ?? calculateBodyLength,
-    defaultUserAgentProvider:
-      config?.defaultUserAgentProvider ?? defaultUserAgent({ clientVersion: packageInfo.version }),
-    maxAttempts: config?.maxAttempts ?? loadNodeConfig(NODE_MAX_ATTEMPT_CONFIG_OPTIONS),
-    requestHandler: config?.requestHandler ?? new RequestHandler(defaultConfigProvider),
+    defaultSocketTimeout: getDefaultSocketTimeout(config?.requestHandler, 300_000),
+    defaultUserAgentProvider: config?.defaultUserAgentProvider ?? createDefaultUserAgentProvider({clientVersion: packageInfo.version}),
+    maxAttempts: config?.maxAttempts ?? loadNodeConfig(NODE_MAX_ATTEMPT_CONFIG_OPTIONS, config),
+    requestHandler: RequestHandler.create(config?.requestHandler ?? defaultConfigProvider),
     retryMode:
       config?.retryMode ??
-      loadNodeConfig({
-        ...NODE_RETRY_MODE_CONFIG_OPTIONS,
-        default: async () => (await defaultConfigProvider()).retryMode || DEFAULT_RETRY_MODE,
-      }),
-    sha256: config?.sha256 ?? Hash.bind(null, "sha256"),
+      loadNodeConfig(
+        {
+          ...NODE_RETRY_MODE_CONFIG_OPTIONS,
+          default: async () => (await defaultConfigProvider()).retryMode || DEFAULT_RETRY_MODE,
+        },
+        config
+      ),
     streamCollector: config?.streamCollector ?? streamCollector,
-    useDualstackEndpoint: config?.useDualstackEndpoint ?? loadNodeConfig(NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
-    useFipsEndpoint: config?.useFipsEndpoint ?? loadNodeConfig(NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-    utf8Decoder: config?.utf8Decoder ?? fromUtf8,
-    utf8Encoder: config?.utf8Encoder ?? toUtf8,
+    userAgentAppId: config?.userAgentAppId ?? loadNodeConfig(NODE_APP_ID_CONFIG_OPTIONS, loaderConfig),
   };
 };

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreatePortalRequest,
-  CreatePortalRequestFilterSensitiveLog,
-  CreatePortalResponse,
-  CreatePortalResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreatePortalCommand,
-  serializeAws_restJson1CreatePortalCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePortalRequest, CreatePortalResponse } from "../models/models_0";
+import { CreatePortal$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePortalCommand}.
+ */
 export interface CreatePortalCommandInput extends CreatePortalRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePortalCommand}.
+ */
 export interface CreatePortalCommandOutput extends CreatePortalResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,84 @@ export interface CreatePortalCommandOutput extends CreatePortalResponse, __Metad
  * ```javascript
  * import { WorkSpacesWebClient, CreatePortalCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, CreatePortalCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // CreatePortalRequest
+ *   displayName: "STRING_VALUE",
+ *   tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   customerManagedKey: "STRING_VALUE",
+ *   additionalEncryptionContext: { // EncryptionContextMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   clientToken: "STRING_VALUE",
+ *   authenticationType: "STRING_VALUE",
+ *   instanceType: "STRING_VALUE",
+ *   maxConcurrentSessions: Number("int"),
+ *   portalCustomDomain: "STRING_VALUE",
+ * };
  * const command = new CreatePortalCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePortalResponse
+ * //   portalArn: "STRING_VALUE", // required
+ * //   portalEndpoint: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreatePortalCommandInput - {@link CreatePortalCommandInput}
+ * @returns {@link CreatePortalCommandOutput}
  * @see {@link CreatePortalCommandInput} for command's `input` shape.
  * @see {@link CreatePortalCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>There is a conflict.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The service quota has been exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePortalCommand extends $Command<
-  CreatePortalCommandInput,
-  CreatePortalCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePortalCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePortalCommandInput, CreatePortalCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "CreatePortalCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePortalRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreatePortalResponseFilterSensitiveLog,
+export class CreatePortalCommand extends command<CreatePortalCommandInput, CreatePortalCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePortal",
+  CreatePortal$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePortalRequest;
+      output: CreatePortalResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePortalCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreatePortalCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePortalCommandOutput> {
-    return deserializeAws_restJson1CreatePortalCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePortalCommandInput;
+      output: CreatePortalCommandOutput;
+    };
+  };
 }

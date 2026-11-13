@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyBackendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyBackendClient";
-import {
-  ListS3BucketsRequest,
-  ListS3BucketsRequestFilterSensitiveLog,
-  ListS3BucketsResponse,
-  ListS3BucketsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListS3BucketsCommand,
-  serializeAws_restJson1ListS3BucketsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListS3BucketsRequest, ListS3BucketsResponse } from "../models/models_0";
+import { ListS3Buckets$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListS3BucketsCommand}.
+ */
 export interface ListS3BucketsCommandInput extends ListS3BucketsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListS3BucketsCommand}.
+ */
 export interface ListS3BucketsCommandOutput extends ListS3BucketsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,65 @@ export interface ListS3BucketsCommandOutput extends ListS3BucketsResponse, __Met
  * ```javascript
  * import { AmplifyBackendClient, ListS3BucketsCommand } from "@aws-sdk/client-amplifybackend"; // ES Modules import
  * // const { AmplifyBackendClient, ListS3BucketsCommand } = require("@aws-sdk/client-amplifybackend"); // CommonJS import
+ * // import type { AmplifyBackendClientConfig } from "@aws-sdk/client-amplifybackend";
+ * const config = {}; // type is AmplifyBackendClientConfig
  * const client = new AmplifyBackendClient(config);
+ * const input = { // ListS3BucketsRequest
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListS3BucketsCommand(input);
  * const response = await client.send(command);
+ * // { // ListS3BucketsResponse
+ * //   Buckets: [ // ListOfS3BucketInfo
+ * //     { // S3BucketInfo
+ * //       CreationDate: "STRING_VALUE",
+ * //       Name: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListS3BucketsCommandInput - {@link ListS3BucketsCommandInput}
+ * @returns {@link ListS3BucketsCommandOutput}
  * @see {@link ListS3BucketsCommandInput} for command's `input` shape.
  * @see {@link ListS3BucketsCommandOutput} for command's `response` shape.
  * @see {@link AmplifyBackendClientResolvedConfig | config} for AmplifyBackendClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>An error returned if a request is not formed properly.</p>
+ *
+ * @throws {@link GatewayTimeoutException} (server fault)
+ *  <p>An error returned if there's a temporary issue with the service.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>An error returned when a specific resource type is not found.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>An error that is returned when a limit of a specific type has been exceeded.</p>
+ *
+ * @throws {@link AmplifyBackendServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyBackend service.</p>
+ *
+ *
+ * @public
  */
-export class ListS3BucketsCommand extends $Command<
-  ListS3BucketsCommandInput,
-  ListS3BucketsCommandOutput,
-  AmplifyBackendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListS3BucketsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyBackendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListS3BucketsCommandInput, ListS3BucketsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyBackendClient";
-    const commandName = "ListS3BucketsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListS3BucketsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListS3BucketsResponseFilterSensitiveLog,
+export class ListS3BucketsCommand extends command<ListS3BucketsCommandInput, ListS3BucketsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListS3Buckets",
+  ListS3Buckets$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListS3BucketsRequest;
+      output: ListS3BucketsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListS3BucketsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListS3BucketsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListS3BucketsCommandOutput> {
-    return deserializeAws_restJson1ListS3BucketsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListS3BucketsCommandInput;
+      output: ListS3BucketsCommandOutput;
+    };
+  };
 }

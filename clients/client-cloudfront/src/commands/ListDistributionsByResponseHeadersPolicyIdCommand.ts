@@ -1,119 +1,98 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListDistributionsByResponseHeadersPolicyIdRequest,
-  ListDistributionsByResponseHeadersPolicyIdRequestFilterSensitiveLog,
   ListDistributionsByResponseHeadersPolicyIdResult,
-  ListDistributionsByResponseHeadersPolicyIdResultFilterSensitiveLog,
 } from "../models/models_1";
-import {
-  deserializeAws_restXmlListDistributionsByResponseHeadersPolicyIdCommand,
-  serializeAws_restXmlListDistributionsByResponseHeadersPolicyIdCommand,
-} from "../protocols/Aws_restXml";
-
-export interface ListDistributionsByResponseHeadersPolicyIdCommandInput
-  extends ListDistributionsByResponseHeadersPolicyIdRequest {}
-export interface ListDistributionsByResponseHeadersPolicyIdCommandOutput
-  extends ListDistributionsByResponseHeadersPolicyIdResult,
-    __MetadataBearer {}
+import { ListDistributionsByResponseHeadersPolicyId$ } from "../schemas/schemas_0";
 
 /**
- * <p>Gets a list of distribution IDs for distributions that have a cache behavior that’s
- * 			associated with the specified response headers policy.</p>
- * 		       <p>You can optionally specify the maximum number of items to receive in the response. If
- * 			the total number of items in the list exceeds the maximum that you specify, or the
- * 			default maximum, the response is paginated. To get the next page of items, send a
- * 			subsequent request that specifies the <code>NextMarker</code> value from the current
- * 			response as the <code>Marker</code> value in the subsequent request.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDistributionsByResponseHeadersPolicyIdCommand}.
+ */
+export interface ListDistributionsByResponseHeadersPolicyIdCommandInput extends ListDistributionsByResponseHeadersPolicyIdRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDistributionsByResponseHeadersPolicyIdCommand}.
+ */
+export interface ListDistributionsByResponseHeadersPolicyIdCommandOutput extends ListDistributionsByResponseHeadersPolicyIdResult, __MetadataBearer {}
+
+/**
+ * <p>Gets a list of distribution IDs for distributions that have a cache behavior that's associated with the specified response headers policy.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, ListDistributionsByResponseHeadersPolicyIdCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, ListDistributionsByResponseHeadersPolicyIdCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // ListDistributionsByResponseHeadersPolicyIdRequest
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ *   ResponseHeadersPolicyId: "STRING_VALUE", // required
+ * };
  * const command = new ListDistributionsByResponseHeadersPolicyIdCommand(input);
  * const response = await client.send(command);
+ * // { // ListDistributionsByResponseHeadersPolicyIdResult
+ * //   DistributionIdList: { // DistributionIdList
+ * //     Marker: "STRING_VALUE", // required
+ * //     NextMarker: "STRING_VALUE",
+ * //     MaxItems: Number("int"), // required
+ * //     IsTruncated: true || false, // required
+ * //     Quantity: Number("int"), // required
+ * //     Items: [ // DistributionIdListSummary
+ * //       "STRING_VALUE",
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ListDistributionsByResponseHeadersPolicyIdCommandInput - {@link ListDistributionsByResponseHeadersPolicyIdCommandInput}
+ * @returns {@link ListDistributionsByResponseHeadersPolicyIdCommandOutput}
  * @see {@link ListDistributionsByResponseHeadersPolicyIdCommandInput} for command's `input` shape.
  * @see {@link ListDistributionsByResponseHeadersPolicyIdCommandOutput} for command's `response` shape.
  * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>An argument is invalid.</p>
+ *
+ * @throws {@link NoSuchResponseHeadersPolicy} (client fault)
+ *  <p>The response headers policy does not exist.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class ListDistributionsByResponseHeadersPolicyIdCommand extends $Command<
-  ListDistributionsByResponseHeadersPolicyIdCommandInput,
-  ListDistributionsByResponseHeadersPolicyIdCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDistributionsByResponseHeadersPolicyIdCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    ListDistributionsByResponseHeadersPolicyIdCommandInput,
-    ListDistributionsByResponseHeadersPolicyIdCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "ListDistributionsByResponseHeadersPolicyIdCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDistributionsByResponseHeadersPolicyIdRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListDistributionsByResponseHeadersPolicyIdResultFilterSensitiveLog,
+export class ListDistributionsByResponseHeadersPolicyIdCommand extends command<ListDistributionsByResponseHeadersPolicyIdCommandInput, ListDistributionsByResponseHeadersPolicyIdCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDistributionsByResponseHeadersPolicyId",
+  ListDistributionsByResponseHeadersPolicyId$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDistributionsByResponseHeadersPolicyIdRequest;
+      output: ListDistributionsByResponseHeadersPolicyIdResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListDistributionsByResponseHeadersPolicyIdCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restXmlListDistributionsByResponseHeadersPolicyIdCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListDistributionsByResponseHeadersPolicyIdCommandOutput> {
-    return deserializeAws_restXmlListDistributionsByResponseHeadersPolicyIdCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDistributionsByResponseHeadersPolicyIdCommandInput;
+      output: ListDistributionsByResponseHeadersPolicyIdCommandOutput;
+    };
+  };
 }

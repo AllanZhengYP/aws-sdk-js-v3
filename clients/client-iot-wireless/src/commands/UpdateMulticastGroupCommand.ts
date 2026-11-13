@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
-  UpdateMulticastGroupRequest,
-  UpdateMulticastGroupRequestFilterSensitiveLog,
-  UpdateMulticastGroupResponse,
-  UpdateMulticastGroupResponseFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_restJson1UpdateMulticastGroupCommand,
-  serializeAws_restJson1UpdateMulticastGroupCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateMulticastGroupRequest, UpdateMulticastGroupResponse } from "../models/models_1";
+import { UpdateMulticastGroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateMulticastGroupCommand}.
+ */
 export interface UpdateMulticastGroupCommandInput extends UpdateMulticastGroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateMulticastGroupCommand}.
+ */
 export interface UpdateMulticastGroupCommandOutput extends UpdateMulticastGroupResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,79 @@ export interface UpdateMulticastGroupCommandOutput extends UpdateMulticastGroupR
  * ```javascript
  * import { IoTWirelessClient, UpdateMulticastGroupCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, UpdateMulticastGroupCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // UpdateMulticastGroupRequest
+ *   Id: "STRING_VALUE", // required
+ *   Name: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   LoRaWAN: { // LoRaWANMulticast
+ *     RfRegion: "EU868" || "US915" || "AU915" || "AS923-1" || "AS923-2" || "AS923-3" || "AS923-4" || "EU433" || "CN470" || "CN779" || "RU864" || "KR920" || "IN865",
+ *     DlClass: "ClassB" || "ClassC",
+ *     ParticipatingGateways: { // ParticipatingGatewaysMulticast
+ *       GatewayList: [ // GatewayListMulticast
+ *         "STRING_VALUE",
+ *       ],
+ *       TransmissionInterval: Number("int"),
+ *     },
+ *     DefaultSessionParameters: { // DefaultSessionParametersMulticast
+ *       DlDr: Number("int"),
+ *       DlFreq: Number("int"),
+ *     },
+ *   },
+ * };
  * const command = new UpdateMulticastGroupCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateMulticastGroupCommandInput - {@link UpdateMulticastGroupCommandInput}
+ * @returns {@link UpdateMulticastGroupCommandOutput}
  * @see {@link UpdateMulticastGroupCommandInput} for command's `input` shape.
  * @see {@link UpdateMulticastGroupCommandOutput} for command's `response` shape.
  * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateMulticastGroupCommand extends $Command<
-  UpdateMulticastGroupCommandInput,
-  UpdateMulticastGroupCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateMulticastGroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateMulticastGroupCommandInput, UpdateMulticastGroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "UpdateMulticastGroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateMulticastGroupRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateMulticastGroupResponseFilterSensitiveLog,
+export class UpdateMulticastGroupCommand extends command<UpdateMulticastGroupCommandInput, UpdateMulticastGroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateMulticastGroup",
+  UpdateMulticastGroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateMulticastGroupRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateMulticastGroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateMulticastGroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateMulticastGroupCommandOutput> {
-    return deserializeAws_restJson1UpdateMulticastGroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateMulticastGroupCommandInput;
+      output: UpdateMulticastGroupCommandOutput;
+    };
+  };
 }

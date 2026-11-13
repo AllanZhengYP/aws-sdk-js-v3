@@ -1,12 +1,11 @@
-export * from "./DescribeImageScanFindingsPaginator";
-
-export * from "./DescribeImagesPaginator";
-
-export * from "./DescribePullThroughCacheRulesPaginator";
-
-export * from "./DescribeRepositoriesPaginator";
-
-export * from "./GetLifecyclePolicyPreviewPaginator";
 // smithy-typescript generated code
 export * from "./Interfaces";
+export * from "./DescribeImagesPaginator";
+export * from "./DescribeImageScanFindingsPaginator";
+export * from "./DescribePullThroughCacheRulesPaginator";
+export * from "./DescribeReplicationBackfillResultsPaginator";
+export * from "./DescribeRepositoriesPaginator";
+export * from "./DescribeRepositoryCreationTemplatesPaginator";
+export * from "./GetLifecyclePolicyPreviewPaginator";
 export * from "./ListImagesPaginator";
+export * from "./ListReplicationBackfillsPaginator";

@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetTransitGatewayPolicyTableEntriesRequest,
-  GetTransitGatewayPolicyTableEntriesRequestFilterSensitiveLog,
   GetTransitGatewayPolicyTableEntriesResult,
-  GetTransitGatewayPolicyTableEntriesResultFilterSensitiveLog,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2GetTransitGatewayPolicyTableEntriesCommand,
-  serializeAws_ec2GetTransitGatewayPolicyTableEntriesCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_7";
+import { GetTransitGatewayPolicyTableEntries$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTransitGatewayPolicyTableEntriesCommand}.
+ */
 export interface GetTransitGatewayPolicyTableEntriesCommandInput extends GetTransitGatewayPolicyTableEntriesRequest {}
-export interface GetTransitGatewayPolicyTableEntriesCommandOutput
-  extends GetTransitGatewayPolicyTableEntriesResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetTransitGatewayPolicyTableEntriesCommand}.
+ */
+export interface GetTransitGatewayPolicyTableEntriesCommandOutput extends GetTransitGatewayPolicyTableEntriesResult, __MetadataBearer {}
 
 /**
  * <p>Returns a list of transit gateway policy table entries.</p>
@@ -36,74 +32,76 @@ export interface GetTransitGatewayPolicyTableEntriesCommandOutput
  * ```javascript
  * import { EC2Client, GetTransitGatewayPolicyTableEntriesCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, GetTransitGatewayPolicyTableEntriesCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // GetTransitGatewayPolicyTableEntriesRequest
+ *   TransitGatewayPolicyTableId: "STRING_VALUE", // required
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ *   DryRun: true || false,
+ * };
  * const command = new GetTransitGatewayPolicyTableEntriesCommand(input);
  * const response = await client.send(command);
+ * // { // GetTransitGatewayPolicyTableEntriesResult
+ * //   TransitGatewayPolicyTableEntries: [ // TransitGatewayPolicyTableEntryList
+ * //     { // TransitGatewayPolicyTableEntry
+ * //       PolicyRuleNumber: "STRING_VALUE",
+ * //       PolicyRule: { // TransitGatewayPolicyRule
+ * //         SourceCidrBlock: "STRING_VALUE",
+ * //         SourcePortRange: "STRING_VALUE",
+ * //         DestinationCidrBlock: "STRING_VALUE",
+ * //         DestinationPortRange: "STRING_VALUE",
+ * //         Protocol: "STRING_VALUE",
+ * //         MetaData: { // TransitGatewayPolicyRuleMetaData
+ * //           MetaDataKey: "STRING_VALUE",
+ * //           MetaDataValue: "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       TargetRouteTableId: "STRING_VALUE",
+ * //       State: "active" || "deleted",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetTransitGatewayPolicyTableEntriesCommandInput - {@link GetTransitGatewayPolicyTableEntriesCommandInput}
+ * @returns {@link GetTransitGatewayPolicyTableEntriesCommandOutput}
  * @see {@link GetTransitGatewayPolicyTableEntriesCommandInput} for command's `input` shape.
  * @see {@link GetTransitGatewayPolicyTableEntriesCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetTransitGatewayPolicyTableEntriesCommand extends $Command<
-  GetTransitGatewayPolicyTableEntriesCommandInput,
-  GetTransitGatewayPolicyTableEntriesCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTransitGatewayPolicyTableEntriesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTransitGatewayPolicyTableEntriesCommandInput, GetTransitGatewayPolicyTableEntriesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "GetTransitGatewayPolicyTableEntriesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTransitGatewayPolicyTableEntriesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetTransitGatewayPolicyTableEntriesResultFilterSensitiveLog,
+export class GetTransitGatewayPolicyTableEntriesCommand extends command<GetTransitGatewayPolicyTableEntriesCommandInput, GetTransitGatewayPolicyTableEntriesCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTransitGatewayPolicyTableEntries",
+  GetTransitGatewayPolicyTableEntries$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTransitGatewayPolicyTableEntriesRequest;
+      output: GetTransitGatewayPolicyTableEntriesResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetTransitGatewayPolicyTableEntriesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2GetTransitGatewayPolicyTableEntriesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetTransitGatewayPolicyTableEntriesCommandOutput> {
-    return deserializeAws_ec2GetTransitGatewayPolicyTableEntriesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTransitGatewayPolicyTableEntriesCommandInput;
+      output: GetTransitGatewayPolicyTableEntriesCommandOutput;
+    };
+  };
 }

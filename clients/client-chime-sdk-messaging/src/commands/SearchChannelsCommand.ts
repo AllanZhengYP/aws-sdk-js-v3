@@ -1,106 +1,122 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ChimeSDKMessagingClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ChimeSDKMessagingClient";
-import {
-  SearchChannelsRequest,
-  SearchChannelsRequestFilterSensitiveLog,
-  SearchChannelsResponse,
-  SearchChannelsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1SearchChannelsCommand,
-  serializeAws_restJson1SearchChannelsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { SearchChannelsRequest, SearchChannelsResponse } from "../models/models_0";
+import { SearchChannels$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link SearchChannelsCommand}.
+ */
 export interface SearchChannelsCommandInput extends SearchChannelsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link SearchChannelsCommand}.
+ */
 export interface SearchChannelsCommandOutput extends SearchChannelsResponse, __MetadataBearer {}
 
 /**
- * <p>Allows an <code>AppInstanceUser</code> to search the channels that they belong to. The <code>AppInstanceUser</code> can search by membership or external ID.
- *          An <code>AppInstanceAdmin</code> can search across all channels within the <code>AppInstance</code>.</p>
+ * <p>Allows the <code>ChimeBearer</code> to search channels by channel members. Users or bots can search
+ *          across the channels that they belong to. Users in the <code>AppInstanceAdmin</code> role can search across
+ *          all channels.</p>
+ *          <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the
+ *          ARN of the <code>AppInstanceUser</code> or <code>AppInstanceBot</code> that makes the API call as the value in
+ *          the header.</p>
+ *          <note>
+ *             <p>This operation isn't supported for <code>AppInstanceUsers</code> with a large number of memberships.</p>
+ *          </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ChimeSDKMessagingClient, SearchChannelsCommand } from "@aws-sdk/client-chime-sdk-messaging"; // ES Modules import
  * // const { ChimeSDKMessagingClient, SearchChannelsCommand } = require("@aws-sdk/client-chime-sdk-messaging"); // CommonJS import
+ * // import type { ChimeSDKMessagingClientConfig } from "@aws-sdk/client-chime-sdk-messaging";
+ * const config = {}; // type is ChimeSDKMessagingClientConfig
  * const client = new ChimeSDKMessagingClient(config);
+ * const input = { // SearchChannelsRequest
+ *   ChimeBearer: "STRING_VALUE",
+ *   Fields: [ // SearchFields // required
+ *     { // SearchField
+ *       Key: "MEMBERS", // required
+ *       Values: [ // SearchFieldValues // required
+ *         "STRING_VALUE",
+ *       ],
+ *       Operator: "EQUALS" || "INCLUDES", // required
+ *     },
+ *   ],
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new SearchChannelsCommand(input);
  * const response = await client.send(command);
+ * // { // SearchChannelsResponse
+ * //   Channels: [ // ChannelSummaryList
+ * //     { // ChannelSummary
+ * //       Name: "STRING_VALUE",
+ * //       ChannelArn: "STRING_VALUE",
+ * //       Mode: "UNRESTRICTED" || "RESTRICTED",
+ * //       Privacy: "PUBLIC" || "PRIVATE",
+ * //       Metadata: "STRING_VALUE",
+ * //       LastMessageTimestamp: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param SearchChannelsCommandInput - {@link SearchChannelsCommandInput}
+ * @returns {@link SearchChannelsCommandOutput}
  * @see {@link SearchChannelsCommandInput} for command's `input` shape.
  * @see {@link SearchChannelsCommandOutput} for command's `response` shape.
  * @see {@link ChimeSDKMessagingClientResolvedConfig | config} for ChimeSDKMessagingClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeSDKMessagingServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKMessaging service.</p>
+ *
+ *
+ * @public
  */
-export class SearchChannelsCommand extends $Command<
-  SearchChannelsCommandInput,
-  SearchChannelsCommandOutput,
-  ChimeSDKMessagingClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: SearchChannelsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeSDKMessagingClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<SearchChannelsCommandInput, SearchChannelsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeSDKMessagingClient";
-    const commandName = "SearchChannelsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: SearchChannelsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: SearchChannelsResponseFilterSensitiveLog,
+export class SearchChannelsCommand extends command<SearchChannelsCommandInput, SearchChannelsCommandOutput>(
+  _ep0,
+  _mw0,
+  "SearchChannels",
+  SearchChannels$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: SearchChannelsRequest;
+      output: SearchChannelsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: SearchChannelsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1SearchChannelsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<SearchChannelsCommandOutput> {
-    return deserializeAws_restJson1SearchChannelsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: SearchChannelsCommandInput;
+      output: SearchChannelsCommandOutput;
+    };
+  };
 }

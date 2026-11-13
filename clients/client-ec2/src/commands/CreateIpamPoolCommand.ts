@@ -1,27 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  CreateIpamPoolRequest,
-  CreateIpamPoolRequestFilterSensitiveLog,
-  CreateIpamPoolResult,
-  CreateIpamPoolResultFilterSensitiveLog,
-} from "../models/models_1";
-import { deserializeAws_ec2CreateIpamPoolCommand, serializeAws_ec2CreateIpamPoolCommand } from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateIpamPoolRequest, CreateIpamPoolResult } from "../models/models_1";
+import { CreateIpamPool$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateIpamPoolCommand}.
+ */
 export interface CreateIpamPoolCommandInput extends CreateIpamPoolRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateIpamPoolCommand}.
+ */
 export interface CreateIpamPoolCommandOutput extends CreateIpamPoolResult, __MetadataBearer {}
 
 /**
@@ -33,68 +31,123 @@ export interface CreateIpamPoolCommandOutput extends CreateIpamPoolResult, __Met
  * ```javascript
  * import { EC2Client, CreateIpamPoolCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, CreateIpamPoolCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // CreateIpamPoolRequest
+ *   DryRun: true || false,
+ *   IpamScopeId: "STRING_VALUE", // required
+ *   Locale: "STRING_VALUE",
+ *   SourceIpamPoolId: "STRING_VALUE",
+ *   Description: "STRING_VALUE",
+ *   AddressFamily: "ipv4" || "ipv6", // required
+ *   AutoImport: true || false,
+ *   PubliclyAdvertisable: true || false,
+ *   AllocationMinNetmaskLength: Number("int"),
+ *   AllocationMaxNetmaskLength: Number("int"),
+ *   AllocationDefaultNetmaskLength: Number("int"),
+ *   AllocationResourceTags: [ // RequestIpamResourceTagList
+ *     { // RequestIpamResourceTag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   TagSpecifications: [ // TagSpecificationList
+ *     { // TagSpecification
+ *       ResourceType: "capacity-reservation" || "client-vpn-endpoint" || "customer-gateway" || "carrier-gateway" || "coip-pool" || "declarative-policies-report" || "dedicated-host" || "dhcp-options" || "egress-only-internet-gateway" || "elastic-ip" || "elastic-gpu" || "export-image-task" || "export-instance-task" || "fca-policy" || "fleet" || "fpga-image" || "host-reservation" || "image" || "image-usage-report" || "import-image-task" || "import-snapshot-task" || "instance" || "instance-event-window" || "internet-gateway" || "ipam" || "ipam-pool" || "ipam-scope" || "ipv4pool-ec2" || "ipv6pool-ec2" || "key-pair" || "launch-template" || "local-gateway" || "local-gateway-route-table" || "local-gateway-virtual-interface" || "local-gateway-virtual-interface-group" || "local-gateway-route-table-vpc-association" || "local-gateway-route-table-virtual-interface-group-association" || "natgateway" || "network-acl" || "network-interface" || "network-insights-analysis" || "network-insights-path" || "network-insights-access-scope" || "network-insights-access-scope-analysis" || "outpost-lag" || "placement-group" || "prefix-list" || "replace-root-volume-task" || "reserved-instances" || "route-table" || "security-group" || "security-group-rule" || "service-link-virtual-interface" || "snapshot" || "spot-fleet-request" || "spot-instances-request" || "subnet" || "subnet-cidr-reservation" || "traffic-mirror-filter" || "traffic-mirror-session" || "traffic-mirror-target" || "transit-gateway" || "transit-gateway-attachment" || "transit-gateway-connect-peer" || "transit-gateway-multicast-domain" || "transit-gateway-policy-table" || "transit-gateway-metering-policy" || "transit-gateway-route-table" || "transit-gateway-route-table-announcement" || "volume" || "vpc" || "vpc-endpoint" || "vpc-endpoint-connection" || "vpc-endpoint-service" || "vpc-endpoint-service-permission" || "vpc-peering-connection" || "vpn-connection" || "vpn-gateway" || "vpc-flow-log" || "capacity-reservation-fleet" || "traffic-mirror-filter-rule" || "vpc-endpoint-connection-device-type" || "verified-access-instance" || "verified-access-group" || "verified-access-endpoint" || "verified-access-policy" || "verified-access-trust-provider" || "vpn-connection-device-type" || "vpc-block-public-access-exclusion" || "vpc-encryption-control" || "route-server" || "route-server-endpoint" || "route-server-peer" || "ipam-resource-discovery" || "ipam-resource-discovery-association" || "instance-connect-endpoint" || "verified-access-endpoint-target" || "ipam-external-resource-verification-token" || "capacity-block" || "mac-modification-task" || "ipam-prefix-list-resolver" || "ipam-policy" || "ipam-prefix-list-resolver-target" || "ipam-internet-registry-association" || "secondary-interface" || "secondary-network" || "secondary-subnet" || "capacity-manager-data-export" || "vpn-concentrator" || "ipam-pool-allocation" || "capacity-reservation-cancellation-quote" || "application-status-check" || "capacity-reservation-modification-quote" || "metric-category",
+ *       Tags: [ // TagList
+ *         { // Tag
+ *           Key: "STRING_VALUE",
+ *           Value: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   ClientToken: "STRING_VALUE",
+ *   AwsService: "ec2" || "global-services",
+ *   PublicIpSource: "amazon" || "byoip",
+ *   SourceResource: { // IpamPoolSourceResourceRequest
+ *     ResourceId: "STRING_VALUE",
+ *     ResourceType: "vpc",
+ *     ResourceRegion: "STRING_VALUE",
+ *     ResourceOwner: "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateIpamPoolCommand(input);
  * const response = await client.send(command);
+ * // { // CreateIpamPoolResult
+ * //   IpamPool: { // IpamPool
+ * //     OwnerId: "STRING_VALUE",
+ * //     IpamPoolId: "STRING_VALUE",
+ * //     SourceIpamPoolId: "STRING_VALUE",
+ * //     IpamPoolArn: "STRING_VALUE",
+ * //     IpamScopeArn: "STRING_VALUE",
+ * //     IpamScopeType: "public" || "private",
+ * //     IpamArn: "STRING_VALUE",
+ * //     IpamRegion: "STRING_VALUE",
+ * //     Locale: "STRING_VALUE",
+ * //     PoolDepth: Number("int"),
+ * //     State: "create-in-progress" || "create-complete" || "create-failed" || "modify-in-progress" || "modify-complete" || "modify-failed" || "delete-in-progress" || "delete-complete" || "delete-failed" || "isolate-in-progress" || "isolate-complete" || "restore-in-progress",
+ * //     StateMessage: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     AutoImport: true || false,
+ * //     PubliclyAdvertisable: true || false,
+ * //     AddressFamily: "ipv4" || "ipv6",
+ * //     AllocationMinNetmaskLength: Number("int"),
+ * //     AllocationMaxNetmaskLength: Number("int"),
+ * //     AllocationDefaultNetmaskLength: Number("int"),
+ * //     AllocationResourceTags: [ // IpamResourceTagList
+ * //       { // IpamResourceTag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     AwsService: "ec2" || "global-services",
+ * //     PublicIpSource: "amazon" || "byoip",
+ * //     SourceResource: { // IpamPoolSourceResource
+ * //       ResourceId: "STRING_VALUE",
+ * //       ResourceType: "vpc",
+ * //       ResourceRegion: "STRING_VALUE",
+ * //       ResourceOwner: "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateIpamPoolCommandInput - {@link CreateIpamPoolCommandInput}
+ * @returns {@link CreateIpamPoolCommandOutput}
  * @see {@link CreateIpamPoolCommandInput} for command's `input` shape.
  * @see {@link CreateIpamPoolCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class CreateIpamPoolCommand extends $Command<
-  CreateIpamPoolCommandInput,
-  CreateIpamPoolCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateIpamPoolCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateIpamPoolCommandInput, CreateIpamPoolCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "CreateIpamPoolCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateIpamPoolRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateIpamPoolResultFilterSensitiveLog,
+export class CreateIpamPoolCommand extends command<CreateIpamPoolCommandInput, CreateIpamPoolCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateIpamPool",
+  CreateIpamPool$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateIpamPoolRequest;
+      output: CreateIpamPoolResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateIpamPoolCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2CreateIpamPoolCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateIpamPoolCommandOutput> {
-    return deserializeAws_ec2CreateIpamPoolCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateIpamPoolCommandInput;
+      output: CreateIpamPoolCommandOutput;
+    };
+  };
 }

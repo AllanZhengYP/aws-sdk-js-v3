@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvschatClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvschatClient";
-import {
-  CreateRoomRequest,
-  CreateRoomRequestFilterSensitiveLog,
-  CreateRoomResponse,
-  CreateRoomResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateRoomCommand,
-  serializeAws_restJson1CreateRoomCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRoomRequest, CreateRoomResponse } from "../models/models_0";
+import { CreateRoom$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRoomCommand}.
+ */
 export interface CreateRoomCommandInput extends CreateRoomRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRoomCommand}.
+ */
 export interface CreateRoomCommandOutput extends CreateRoomResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,93 @@ export interface CreateRoomCommandOutput extends CreateRoomResponse, __MetadataB
  * ```javascript
  * import { IvschatClient, CreateRoomCommand } from "@aws-sdk/client-ivschat"; // ES Modules import
  * // const { IvschatClient, CreateRoomCommand } = require("@aws-sdk/client-ivschat"); // CommonJS import
+ * // import type { IvschatClientConfig } from "@aws-sdk/client-ivschat";
+ * const config = {}; // type is IvschatClientConfig
  * const client = new IvschatClient(config);
+ * const input = { // CreateRoomRequest
+ *   name: "STRING_VALUE",
+ *   maximumMessageRatePerSecond: Number("int"),
+ *   maximumMessageLength: Number("int"),
+ *   messageReviewHandler: { // MessageReviewHandler
+ *     uri: "STRING_VALUE",
+ *     fallbackResult: "STRING_VALUE",
+ *   },
+ *   tags: { // Tags
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   loggingConfigurationIdentifiers: [ // LoggingConfigurationIdentifierList
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new CreateRoomCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRoomResponse
+ * //   arn: "STRING_VALUE",
+ * //   id: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   createTime: new Date("TIMESTAMP"),
+ * //   updateTime: new Date("TIMESTAMP"),
+ * //   maximumMessageRatePerSecond: Number("int"),
+ * //   maximumMessageLength: Number("int"),
+ * //   messageReviewHandler: { // MessageReviewHandler
+ * //     uri: "STRING_VALUE",
+ * //     fallbackResult: "STRING_VALUE",
+ * //   },
+ * //   tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   loggingConfigurationIdentifiers: [ // LoggingConfigurationIdentifierList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param CreateRoomCommandInput - {@link CreateRoomCommandInput}
+ * @returns {@link CreateRoomCommandOutput}
  * @see {@link CreateRoomCommandInput} for command's `input` shape.
  * @see {@link CreateRoomCommandOutput} for command's `response` shape.
  * @see {@link IvschatClientResolvedConfig | config} for IvschatClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link PendingVerification} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link IvschatServiceException}
+ * <p>Base exception class for all service exceptions from Ivschat service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRoomCommand extends $Command<
-  CreateRoomCommandInput,
-  CreateRoomCommandOutput,
-  IvschatClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRoomCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvschatClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRoomCommandInput, CreateRoomCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvschatClient";
-    const commandName = "CreateRoomCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRoomRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateRoomResponseFilterSensitiveLog,
+export class CreateRoomCommand extends command<CreateRoomCommandInput, CreateRoomCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRoom",
+  CreateRoom$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRoomRequest;
+      output: CreateRoomResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRoomCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateRoomCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRoomCommandOutput> {
-    return deserializeAws_restJson1CreateRoomCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRoomCommandInput;
+      output: CreateRoomCommandOutput;
+    };
+  };
 }

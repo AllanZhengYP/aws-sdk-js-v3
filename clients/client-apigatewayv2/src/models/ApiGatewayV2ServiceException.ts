@@ -1,13 +1,20 @@
 // smithy-typescript generated code
 import {
+  type ServiceExceptionOptions as __ServiceExceptionOptions,
   ServiceException as __ServiceException,
-  ServiceExceptionOptions as __ServiceExceptionOptions,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+
+export type { __ServiceExceptionOptions };
+
+export { __ServiceException };
 
 /**
+ * @public
+ *
  * Base exception class for all service exceptions from ApiGatewayV2 service.
  */
 export class ApiGatewayV2ServiceException extends __ServiceException {
+  public static readonly shapeId: string = "smithy.ts.sdk.synthetic.com.amazonaws.apigatewayv2#ApiGatewayV2ServiceException";
   /**
    * @internal
    */

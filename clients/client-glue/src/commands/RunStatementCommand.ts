@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import {
-  RunStatementRequest,
-  RunStatementRequestFilterSensitiveLog,
-  RunStatementResponse,
-  RunStatementResponseFilterSensitiveLog,
-} from "../models/models_2";
-import {
-  deserializeAws_json1_1RunStatementCommand,
-  serializeAws_json1_1RunStatementCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RunStatementRequest, RunStatementResponse } from "../models/models_3";
+import { RunStatement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RunStatementCommand}.
+ */
 export interface RunStatementCommandInput extends RunStatementRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RunStatementCommand}.
+ */
 export interface RunStatementCommandOutput extends RunStatementResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,79 @@ export interface RunStatementCommandOutput extends RunStatementResponse, __Metad
  * ```javascript
  * import { GlueClient, RunStatementCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, RunStatementCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // RunStatementRequest
+ *   SessionId: "STRING_VALUE", // required
+ *   Code: "STRING_VALUE", // required
+ *   RequestOrigin: "STRING_VALUE",
+ * };
  * const command = new RunStatementCommand(input);
  * const response = await client.send(command);
+ * // { // RunStatementResponse
+ * //   Id: Number("int"),
+ * // };
+ *
  * ```
  *
+ * @param RunStatementCommandInput - {@link RunStatementCommandInput}
+ * @returns {@link RunStatementCommandOutput}
  * @see {@link RunStatementCommandInput} for command's `input` shape.
  * @see {@link RunStatementCommandOutput} for command's `response` shape.
  * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist</p>
+ *
+ * @throws {@link IllegalSessionStateException} (client fault)
+ *  <p>The session is in an invalid state to perform a requested operation.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationNotSupportedException} (client fault)
+ *  <p>The operation is not available in the region.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNumberLimitExceededException} (client fault)
+ *  <p>A resource numerical limit was exceeded.</p>
+ *
+ * @throws {@link SessionBusyException} (client fault)
+ *  <p>The session is currently busy processing another request and cannot accept new operations.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A value could not be validated.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class RunStatementCommand extends $Command<
-  RunStatementCommandInput,
-  RunStatementCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RunStatementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RunStatementCommandInput, RunStatementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "RunStatementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RunStatementRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: RunStatementResponseFilterSensitiveLog,
+export class RunStatementCommand extends command<RunStatementCommandInput, RunStatementCommandOutput>(
+  _ep0,
+  _mw0,
+  "RunStatement",
+  RunStatement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RunStatementRequest;
+      output: RunStatementResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RunStatementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RunStatementCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RunStatementCommandOutput> {
-    return deserializeAws_json1_1RunStatementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RunStatementCommandInput;
+      output: RunStatementCommandOutput;
+    };
+  };
 }

@@ -1,9 +1,11 @@
 // smithy-typescript generated code
-import { PaginationConfiguration } from "@aws-sdk/types";
+import type { PaginationConfiguration } from "@smithy/types";
 
-import { EFS } from "../EFS";
 import { EFSClient } from "../EFSClient";
 
+/**
+ * @public
+ */
 export interface EFSPaginationConfiguration extends PaginationConfiguration {
-  client: EFS | EFSClient;
+  client: EFSClient;
 }

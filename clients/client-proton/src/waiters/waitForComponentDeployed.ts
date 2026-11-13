@@ -1,18 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { GetComponentCommand, GetComponentCommandInput } from "../commands/GetComponentCommand";
-import { ProtonClient } from "../ProtonClient";
+import {
+  type GetComponentCommandInput,
+  type GetComponentCommandOutput,
+  GetComponentCommand,
+} from "../commands/GetComponentCommand";
+import type { ProtonServiceException } from "../models/ProtonServiceException";
+import type { ProtonClient } from "../ProtonClient";
 
-const checkState = async (client: ProtonClient, input: GetComponentCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: ProtonClient, input: GetComponentCommandInput): Promise<WaiterResult<GetComponentCommandOutput | ProtonServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new GetComponentCommand(input));
+    let result: GetComponentCommandOutput & any = await client.send(new GetComponentCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.component.deploymentStatus;
-      };
+      }
       if (returnComparator() === "SUCCEEDED") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -20,7 +31,7 @@ const checkState = async (client: ProtonClient, input: GetComponentCommandInput)
     try {
       const returnComparator = () => {
         return result.component.deploymentStatus;
-      };
+      }
       if (returnComparator() === "FAILED") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -37,7 +48,7 @@ const checkState = async (client: ProtonClient, input: GetComponentCommandInput)
 export const waitForComponentDeployed = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetComponentCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetComponentCommandOutput | ProtonServiceException>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 4999 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -49,8 +60,8 @@ export const waitForComponentDeployed = async (
 export const waitUntilComponentDeployed = async (
   params: WaiterConfiguration<ProtonClient>,
   input: GetComponentCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<GetComponentCommandOutput>> => {
   const serviceDefaults = { minDelay: 5, maxDelay: 4999 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<GetComponentCommandOutput>;
 };

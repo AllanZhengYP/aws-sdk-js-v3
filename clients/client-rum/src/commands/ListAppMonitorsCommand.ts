@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListAppMonitorsRequest,
-  ListAppMonitorsRequestFilterSensitiveLog,
-  ListAppMonitorsResponse,
-  ListAppMonitorsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListAppMonitorsCommand,
-  serializeAws_restJson1ListAppMonitorsCommand,
-} from "../protocols/Aws_restJson1";
-import { RUMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../RUMClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAppMonitorsRequest, ListAppMonitorsResponse } from "../models/models_0";
+import { ListAppMonitors$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAppMonitorsCommand}.
+ */
 export interface ListAppMonitorsCommandInput extends ListAppMonitorsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAppMonitorsCommand}.
+ */
 export interface ListAppMonitorsCommandOutput extends ListAppMonitorsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,70 @@ export interface ListAppMonitorsCommandOutput extends ListAppMonitorsResponse, _
  * ```javascript
  * import { RUMClient, ListAppMonitorsCommand } from "@aws-sdk/client-rum"; // ES Modules import
  * // const { RUMClient, ListAppMonitorsCommand } = require("@aws-sdk/client-rum"); // CommonJS import
+ * // import type { RUMClientConfig } from "@aws-sdk/client-rum";
+ * const config = {}; // type is RUMClientConfig
  * const client = new RUMClient(config);
+ * const input = { // ListAppMonitorsRequest
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListAppMonitorsCommand(input);
  * const response = await client.send(command);
+ * // { // ListAppMonitorsResponse
+ * //   NextToken: "STRING_VALUE",
+ * //   AppMonitorSummaries: [ // AppMonitorSummaryList
+ * //     { // AppMonitorSummary
+ * //       Name: "STRING_VALUE",
+ * //       Id: "STRING_VALUE",
+ * //       Created: "STRING_VALUE",
+ * //       LastModified: "STRING_VALUE",
+ * //       State: "STRING_VALUE",
+ * //       Platform: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param ListAppMonitorsCommandInput - {@link ListAppMonitorsCommandInput}
+ * @returns {@link ListAppMonitorsCommandOutput}
  * @see {@link ListAppMonitorsCommandInput} for command's `input` shape.
  * @see {@link ListAppMonitorsCommandOutput} for command's `response` shape.
  * @see {@link RUMClientResolvedConfig | config} for RUMClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient permissions to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Internal service exception.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was throttled because of quota limits.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One of the arguments for the request is not valid.</p>
+ *
+ * @throws {@link RUMServiceException}
+ * <p>Base exception class for all service exceptions from RUM service.</p>
+ *
+ *
+ * @public
  */
-export class ListAppMonitorsCommand extends $Command<
-  ListAppMonitorsCommandInput,
-  ListAppMonitorsCommandOutput,
-  RUMClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAppMonitorsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RUMClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAppMonitorsCommandInput, ListAppMonitorsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RUMClient";
-    const commandName = "ListAppMonitorsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAppMonitorsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListAppMonitorsResponseFilterSensitiveLog,
+export class ListAppMonitorsCommand extends command<ListAppMonitorsCommandInput, ListAppMonitorsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAppMonitors",
+  ListAppMonitors$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAppMonitorsRequest;
+      output: ListAppMonitorsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAppMonitorsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAppMonitorsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAppMonitorsCommandOutput> {
-    return deserializeAws_restJson1ListAppMonitorsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAppMonitorsCommandInput;
+      output: ListAppMonitorsCommandOutput;
+    };
+  };
 }

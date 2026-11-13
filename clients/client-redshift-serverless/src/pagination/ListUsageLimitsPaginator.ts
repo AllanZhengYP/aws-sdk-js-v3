@@ -1,61 +1,24 @@
 // smithy-typescript generated code
-import { Paginator } from "@aws-sdk/types";
+import { createPaginator } from "@smithy/core";
+import type { Paginator } from "@smithy/types";
 
 import {
   ListUsageLimitsCommand,
   ListUsageLimitsCommandInput,
   ListUsageLimitsCommandOutput,
 } from "../commands/ListUsageLimitsCommand";
-import { RedshiftServerless } from "../RedshiftServerless";
 import { RedshiftServerlessClient } from "../RedshiftServerlessClient";
-import { RedshiftServerlessPaginationConfiguration } from "./Interfaces";
+import type { RedshiftServerlessPaginationConfiguration } from "./Interfaces";
 
 /**
- * @private
+ * @public
  */
-const makePagedClientRequest = async (
-  client: RedshiftServerlessClient,
-  input: ListUsageLimitsCommandInput,
-  ...args: any
-): Promise<ListUsageLimitsCommandOutput> => {
-  // @ts-ignore
-  return await client.send(new ListUsageLimitsCommand(input), ...args);
-};
-/**
- * @private
- */
-const makePagedRequest = async (
-  client: RedshiftServerless,
-  input: ListUsageLimitsCommandInput,
-  ...args: any
-): Promise<ListUsageLimitsCommandOutput> => {
-  // @ts-ignore
-  return await client.listUsageLimits(input, ...args);
-};
-export async function* paginateListUsageLimits(
+export const paginateListUsageLimits: (
   config: RedshiftServerlessPaginationConfiguration,
   input: ListUsageLimitsCommandInput,
-  ...additionalArguments: any
-): Paginator<ListUsageLimitsCommandOutput> {
-  // ToDo: replace with actual type instead of typeof input.nextToken
-  let token: typeof input.nextToken | undefined = config.startingToken || undefined;
-  let hasNext = true;
-  let page: ListUsageLimitsCommandOutput;
-  while (hasNext) {
-    input.nextToken = token;
-    input["maxResults"] = config.pageSize;
-    if (config.client instanceof RedshiftServerless) {
-      page = await makePagedRequest(config.client, input, ...additionalArguments);
-    } else if (config.client instanceof RedshiftServerlessClient) {
-      page = await makePagedClientRequest(config.client, input, ...additionalArguments);
-    } else {
-      throw new Error("Invalid client, expected RedshiftServerless | RedshiftServerlessClient");
-    }
-    yield page;
-    const prevToken = token;
-    token = page.nextToken;
-    hasNext = !!(token && (!config.stopOnSameToken || token !== prevToken));
-  }
-  // @ts-ignore
-  return undefined;
-}
+  ...rest: any[]
+) => Paginator<ListUsageLimitsCommandOutput> = createPaginator<
+  RedshiftServerlessPaginationConfiguration,
+  ListUsageLimitsCommandInput,
+  ListUsageLimitsCommandOutput
+>(RedshiftServerlessClient, ListUsageLimitsCommand, "nextToken", "nextToken", "maxResults");

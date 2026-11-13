@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  DescribeSnapshotTierStatusRequest,
-  DescribeSnapshotTierStatusRequestFilterSensitiveLog,
-  DescribeSnapshotTierStatusResult,
-  DescribeSnapshotTierStatusResultFilterSensitiveLog,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2DescribeSnapshotTierStatusCommand,
-  serializeAws_ec2DescribeSnapshotTierStatusCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeSnapshotTierStatusRequest, DescribeSnapshotTierStatusResult } from "../models/models_5";
+import { DescribeSnapshotTierStatus$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeSnapshotTierStatusCommand}.
+ */
 export interface DescribeSnapshotTierStatusCommandInput extends DescribeSnapshotTierStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeSnapshotTierStatusCommand}.
+ */
 export interface DescribeSnapshotTierStatusCommandOutput extends DescribeSnapshotTierStatusResult, __MetadataBearer {}
 
 /**
@@ -34,71 +29,78 @@ export interface DescribeSnapshotTierStatusCommandOutput extends DescribeSnapsho
  * ```javascript
  * import { EC2Client, DescribeSnapshotTierStatusCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DescribeSnapshotTierStatusCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DescribeSnapshotTierStatusRequest
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Name: "STRING_VALUE",
+ *       Values: [ // ValueStringList
+ *         "STRING_VALUE",
+ *       ],
+ *     },
+ *   ],
+ *   DryRun: true || false,
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeSnapshotTierStatusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeSnapshotTierStatusResult
+ * //   SnapshotTierStatuses: [ // snapshotTierStatusSet
+ * //     { // SnapshotTierStatus
+ * //       SnapshotId: "STRING_VALUE",
+ * //       VolumeId: "STRING_VALUE",
+ * //       Status: "pending" || "completed" || "error" || "recoverable" || "recovering",
+ * //       OwnerId: "STRING_VALUE",
+ * //       Tags: [ // TagList
+ * //         { // Tag
+ * //           Key: "STRING_VALUE",
+ * //           Value: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       StorageTier: "archive" || "standard",
+ * //       LastTieringStartTime: new Date("TIMESTAMP"),
+ * //       LastTieringProgress: Number("int"),
+ * //       LastTieringOperationStatus: "archival-in-progress" || "archival-completed" || "archival-failed" || "temporary-restore-in-progress" || "temporary-restore-completed" || "temporary-restore-failed" || "permanent-restore-in-progress" || "permanent-restore-completed" || "permanent-restore-failed",
+ * //       LastTieringOperationStatusDetail: "STRING_VALUE",
+ * //       ArchivalCompleteTime: new Date("TIMESTAMP"),
+ * //       RestoreExpiryTime: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeSnapshotTierStatusCommandInput - {@link DescribeSnapshotTierStatusCommandInput}
+ * @returns {@link DescribeSnapshotTierStatusCommandOutput}
  * @see {@link DescribeSnapshotTierStatusCommandInput} for command's `input` shape.
  * @see {@link DescribeSnapshotTierStatusCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeSnapshotTierStatusCommand extends $Command<
-  DescribeSnapshotTierStatusCommandInput,
-  DescribeSnapshotTierStatusCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeSnapshotTierStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeSnapshotTierStatusCommandInput, DescribeSnapshotTierStatusCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DescribeSnapshotTierStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeSnapshotTierStatusRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeSnapshotTierStatusResultFilterSensitiveLog,
+export class DescribeSnapshotTierStatusCommand extends command<DescribeSnapshotTierStatusCommandInput, DescribeSnapshotTierStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeSnapshotTierStatus",
+  DescribeSnapshotTierStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeSnapshotTierStatusRequest;
+      output: DescribeSnapshotTierStatusResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeSnapshotTierStatusCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2DescribeSnapshotTierStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeSnapshotTierStatusCommandOutput> {
-    return deserializeAws_ec2DescribeSnapshotTierStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeSnapshotTierStatusCommandInput;
+      output: DescribeSnapshotTierStatusCommandOutput;
+    };
+  };
 }

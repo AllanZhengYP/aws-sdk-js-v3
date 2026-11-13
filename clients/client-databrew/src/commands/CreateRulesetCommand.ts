@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DataBrewClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DataBrewClient";
-import {
-  CreateRulesetRequest,
-  CreateRulesetRequestFilterSensitiveLog,
-  CreateRulesetResponse,
-  CreateRulesetResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateRulesetCommand,
-  serializeAws_restJson1CreateRulesetCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateRulesetRequest, CreateRulesetResponse } from "../models/models_0";
+import { CreateRuleset$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateRulesetCommand}.
+ */
 export interface CreateRulesetCommandInput extends CreateRulesetRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateRulesetCommand}.
+ */
 export interface CreateRulesetCommandOutput extends CreateRulesetResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,82 @@ export interface CreateRulesetCommandOutput extends CreateRulesetResponse, __Met
  * ```javascript
  * import { DataBrewClient, CreateRulesetCommand } from "@aws-sdk/client-databrew"; // ES Modules import
  * // const { DataBrewClient, CreateRulesetCommand } = require("@aws-sdk/client-databrew"); // CommonJS import
+ * // import type { DataBrewClientConfig } from "@aws-sdk/client-databrew";
+ * const config = {}; // type is DataBrewClientConfig
  * const client = new DataBrewClient(config);
+ * const input = { // CreateRulesetRequest
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   TargetArn: "STRING_VALUE", // required
+ *   Rules: [ // RuleList // required
+ *     { // Rule
+ *       Name: "STRING_VALUE", // required
+ *       Disabled: true || false,
+ *       CheckExpression: "STRING_VALUE", // required
+ *       SubstitutionMap: { // ValuesMap
+ *         "<keys>": "STRING_VALUE",
+ *       },
+ *       Threshold: { // Threshold
+ *         Value: Number("double"), // required
+ *         Type: "GREATER_THAN_OR_EQUAL" || "LESS_THAN_OR_EQUAL" || "GREATER_THAN" || "LESS_THAN",
+ *         Unit: "COUNT" || "PERCENTAGE",
+ *       },
+ *       ColumnSelectors: [ // ColumnSelectorList
+ *         { // ColumnSelector
+ *           Regex: "STRING_VALUE",
+ *           Name: "STRING_VALUE",
+ *         },
+ *       ],
+ *     },
+ *   ],
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ * };
  * const command = new CreateRulesetCommand(input);
  * const response = await client.send(command);
+ * // { // CreateRulesetResponse
+ * //   Name: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param CreateRulesetCommandInput - {@link CreateRulesetCommandInput}
+ * @returns {@link CreateRulesetCommandOutput}
  * @see {@link CreateRulesetCommandInput} for command's `input` shape.
  * @see {@link CreateRulesetCommandOutput} for command's `response` shape.
  * @see {@link DataBrewClientResolvedConfig | config} for DataBrewClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Updating or deleting a resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>A service quota is exceeded.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input parameters for this request failed validation.</p>
+ *
+ * @throws {@link DataBrewServiceException}
+ * <p>Base exception class for all service exceptions from DataBrew service.</p>
+ *
+ *
+ * @public
  */
-export class CreateRulesetCommand extends $Command<
-  CreateRulesetCommandInput,
-  CreateRulesetCommandOutput,
-  DataBrewClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateRulesetCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DataBrewClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateRulesetCommandInput, CreateRulesetCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DataBrewClient";
-    const commandName = "CreateRulesetCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateRulesetRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateRulesetResponseFilterSensitiveLog,
+export class CreateRulesetCommand extends command<CreateRulesetCommandInput, CreateRulesetCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateRuleset",
+  CreateRuleset$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateRulesetRequest;
+      output: CreateRulesetResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateRulesetCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateRulesetCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateRulesetCommandOutput> {
-    return deserializeAws_restJson1CreateRulesetCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateRulesetCommandInput;
+      output: CreateRulesetCommandOutput;
+    };
+  };
 }

@@ -1,39 +1,34 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DetectiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DetectiveClient";
-import {
-  CreateMembersRequest,
-  CreateMembersRequestFilterSensitiveLog,
-  CreateMembersResponse,
-  CreateMembersResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreateMembersCommand,
-  serializeAws_restJson1CreateMembersCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateMembersRequest, CreateMembersResponse } from "../models/models_0";
+import { CreateMembers$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateMembersCommand}.
+ */
 export interface CreateMembersCommandInput extends CreateMembersRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateMembersCommand}.
+ */
 export interface CreateMembersCommandOutput extends CreateMembersResponse, __MetadataBearer {}
 
 /**
  * <p>
  *             <code>CreateMembers</code> is used to send invitations to accounts. For the organization
  *          behavior graph, the Detective administrator account uses
- *             <code>CreateMembers</code> to enable organization accounts as member accounts.</p>
+ *          <code>CreateMembers</code> to enable organization accounts as member accounts.</p>
  *          <p>For invited accounts, <code>CreateMembers</code> sends a request to invite the specified
- *             Amazon Web Services accounts to be member accounts in the behavior graph. This operation
+ *          Amazon Web Services accounts to be member accounts in the behavior graph. This operation
  *          can only be called by the administrator account for a behavior graph. </p>
  *          <p>
  *             <code>CreateMembers</code> verifies the accounts and then invites the verified accounts.
@@ -65,68 +60,113 @@ export interface CreateMembersCommandOutput extends CreateMembersResponse, __Met
  * ```javascript
  * import { DetectiveClient, CreateMembersCommand } from "@aws-sdk/client-detective"; // ES Modules import
  * // const { DetectiveClient, CreateMembersCommand } = require("@aws-sdk/client-detective"); // CommonJS import
+ * // import type { DetectiveClientConfig } from "@aws-sdk/client-detective";
+ * const config = {}; // type is DetectiveClientConfig
  * const client = new DetectiveClient(config);
+ * const input = { // CreateMembersRequest
+ *   GraphArn: "STRING_VALUE", // required
+ *   Message: "STRING_VALUE",
+ *   DisableEmailNotification: true || false,
+ *   Accounts: [ // AccountList // required
+ *     { // Account
+ *       AccountId: "STRING_VALUE", // required
+ *       EmailAddress: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateMembersCommand(input);
  * const response = await client.send(command);
+ * // { // CreateMembersResponse
+ * //   Members: [ // MemberDetailList
+ * //     { // MemberDetail
+ * //       AccountId: "STRING_VALUE",
+ * //       EmailAddress: "STRING_VALUE",
+ * //       GraphArn: "STRING_VALUE",
+ * //       MasterId: "STRING_VALUE",
+ * //       AdministratorId: "STRING_VALUE",
+ * //       Status: "INVITED" || "VERIFICATION_IN_PROGRESS" || "VERIFICATION_FAILED" || "ENABLED" || "ACCEPTED_BUT_DISABLED",
+ * //       DisabledReason: "VOLUME_TOO_HIGH" || "VOLUME_UNKNOWN",
+ * //       InvitedTime: new Date("TIMESTAMP"),
+ * //       UpdatedTime: new Date("TIMESTAMP"),
+ * //       VolumeUsageInBytes: Number("long"),
+ * //       VolumeUsageUpdatedTime: new Date("TIMESTAMP"),
+ * //       PercentOfGraphUtilization: Number("double"),
+ * //       PercentOfGraphUtilizationUpdatedTime: new Date("TIMESTAMP"),
+ * //       InvitationType: "INVITATION" || "ORGANIZATION",
+ * //       VolumeUsageByDatasourcePackage: { // VolumeUsageByDatasourcePackage
+ * //         "<keys>": { // DatasourcePackageUsageInfo
+ * //           VolumeUsageInBytes: Number("long"),
+ * //           VolumeUsageUpdateTime: new Date("TIMESTAMP"),
+ * //         },
+ * //       },
+ * //       DatasourcePackageIngestStates: { // DatasourcePackageIngestStates
+ * //         "<keys>": "STARTED" || "STOPPED" || "DISABLED",
+ * //       },
+ * //     },
+ * //   ],
+ * //   UnprocessedAccounts: [ // UnprocessedAccountList
+ * //     { // UnprocessedAccount
+ * //       AccountId: "STRING_VALUE",
+ * //       Reason: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param CreateMembersCommandInput - {@link CreateMembersCommandInput}
+ * @returns {@link CreateMembersCommandOutput}
  * @see {@link CreateMembersCommandInput} for command's `input` shape.
  * @see {@link CreateMembersCommandOutput} for command's `response` shape.
  * @see {@link DetectiveClientResolvedConfig | config} for DetectiveClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request issuer does not have permission to access this resource or perform this
+ *          operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request was valid but failed because of a problem with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The request refers to a nonexistent resource.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>This request cannot be completed for one of the following reasons.</p>
+ *          <ul>
+ *             <li>
+ *                <p>This request cannot be completed if it would cause the number of member accounts in the
+ *             behavior graph to exceed the maximum allowed. A behavior graph cannot have more than 1,200
+ *             member accounts.</p>
+ *             </li>
+ *             <li>
+ *                <p>This request cannot be completed if the current volume ingested is above the limit of 10 TB per day. Detective will not allow you to add additional member accounts.</p>
+ *             </li>
+ *          </ul>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request parameters are invalid.</p>
+ *
+ * @throws {@link DetectiveServiceException}
+ * <p>Base exception class for all service exceptions from Detective service.</p>
+ *
+ *
+ * @public
  */
-export class CreateMembersCommand extends $Command<
-  CreateMembersCommandInput,
-  CreateMembersCommandOutput,
-  DetectiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateMembersCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DetectiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateMembersCommandInput, CreateMembersCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DetectiveClient";
-    const commandName = "CreateMembersCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateMembersRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateMembersResponseFilterSensitiveLog,
+export class CreateMembersCommand extends command<CreateMembersCommandInput, CreateMembersCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateMembers",
+  CreateMembers$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateMembersRequest;
+      output: CreateMembersResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateMembersCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreateMembersCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateMembersCommandOutput> {
-    return deserializeAws_restJson1CreateMembersCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateMembersCommandInput;
+      output: CreateMembersCommandOutput;
+    };
+  };
 }

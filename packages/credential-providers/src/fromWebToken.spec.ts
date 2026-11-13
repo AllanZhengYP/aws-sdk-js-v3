@@ -1,16 +1,17 @@
-import { getDefaultRoleAssumerWithWebIdentity } from "@aws-sdk/client-sts";
 import { fromWebToken as coreProvider } from "@aws-sdk/credential-provider-web-identity";
+import { getDefaultRoleAssumerWithWebIdentity } from "@aws-sdk/nested-clients/sts";
+import { beforeEach, describe, expect, test as it, vi } from "vitest";
 
 import { fromWebToken } from "./fromWebToken";
 
-const mockRoleAssumerWithWebIdentity = jest.fn().mockResolvedValue("ROLE_ASSUMER_WITH_WEB_IDENTITY");
+const mockRoleAssumerWithWebIdentity = vi.fn().mockResolvedValue("ROLE_ASSUMER_WITH_WEB_IDENTITY");
 
-jest.mock("@aws-sdk/client-sts", () => ({
-  getDefaultRoleAssumerWithWebIdentity: jest.fn().mockImplementation(() => mockRoleAssumerWithWebIdentity),
+vi.mock("@aws-sdk/nested-clients/sts", () => ({
+  getDefaultRoleAssumerWithWebIdentity: vi.fn().mockImplementation(() => mockRoleAssumerWithWebIdentity),
 }));
 
-jest.mock("@aws-sdk/credential-provider-web-identity", () => ({
-  fromWebToken: jest.fn(),
+vi.mock("@aws-sdk/credential-provider-web-identity", () => ({
+  fromWebToken: vi.fn().mockReturnValue(vi.fn()),
 }));
 
 describe("fromWebToken", () => {
@@ -18,36 +19,39 @@ describe("fromWebToken", () => {
   const webIdentityToken = "WEB_IDENTITY_TOKEN";
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
-  it("should inject default role assumer", () => {
-    fromWebToken({
+  it("should not inject default role assumer", async () => {
+    const provider = fromWebToken({
       roleArn,
       webIdentityToken,
     });
-    expect(coreProvider).toBeCalledWith({
+    await provider({});
+    expect(coreProvider).toHaveBeenCalledWith({
       roleArn,
       webIdentityToken,
-      roleAssumerWithWebIdentity: mockRoleAssumerWithWebIdentity,
     });
-    expect(getDefaultRoleAssumerWithWebIdentity).toBeCalled();
+    expect(getDefaultRoleAssumerWithWebIdentity).not.toHaveBeenCalled();
   });
 
-  it("should supply sts config and plugins to role assumer", () => {
+  it("defers to @aws-sdk/credential-provider-web-identity", async () => {
     const clientConfig = {
       region: "US_FOO_0",
     };
     const plugin = { applyToStack: () => {} };
-    fromWebToken({
+    const provider = fromWebToken({
       roleArn,
       webIdentityToken,
       clientConfig,
       clientPlugins: [plugin],
     });
-    expect((coreProvider as jest.Mock).mock.calls[0][0]).toMatchObject({
-      roleAssumerWithWebIdentity: mockRoleAssumerWithWebIdentity,
+    await provider({});
+    expect(coreProvider).toHaveBeenCalledWith({
+      roleArn,
+      webIdentityToken,
+      clientConfig,
+      clientPlugins: [plugin],
     });
-    expect(getDefaultRoleAssumerWithWebIdentity).toBeCalledWith(clientConfig, [plugin]);
   });
 });

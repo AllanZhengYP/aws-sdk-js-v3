@@ -1,13 +1,14 @@
-import { CreateTokenCommand } from "@aws-sdk/client-sso-oidc";
+import { CreateTokenCommand } from "@aws-sdk/nested-clients/sso-oidc";
+import { beforeEach, describe, expect, test as it, vi } from "vitest";
 
 import { getNewSsoOidcToken } from "./getNewSsoOidcToken";
 import { getSsoOidcClient } from "./getSsoOidcClient";
 
-jest.mock("@aws-sdk/client-sso-oidc");
-jest.mock("./getSsoOidcClient");
+vi.mock("@aws-sdk/nested-clients/sso-oidc");
+vi.mock("./getSsoOidcClient");
 
 describe(getNewSsoOidcToken.name, () => {
-  let mockSend;
+  let mockSend: any;
 
   const mockSsoRegion = "mockSsoRegion";
   const mockSsoToken = {
@@ -30,54 +31,56 @@ describe(getNewSsoOidcToken.name, () => {
   };
 
   beforeEach(() => {
-    mockSend = jest.fn().mockResolvedValueOnce(mockNewToken);
-    (getSsoOidcClient as jest.Mock).mockReturnValue({ send: mockSend });
-    (CreateTokenCommand as jest.Mock).mockImplementation((args) => args);
+    mockSend = vi.fn().mockResolvedValueOnce(mockNewToken);
+    vi.mocked(getSsoOidcClient as any).mockReturnValue({ send: mockSend });
+    vi.mocked(CreateTokenCommand).mockImplementation(function (args: any) {
+      return args;
+    });
   });
 
   describe("re-throws", () => {
     const mockError = new Error("mockError");
 
     it("if getSsoOidcClient throws", async () => {
-      (getSsoOidcClient as jest.Mock).mockImplementationOnce(() => {
+      vi.mocked(getSsoOidcClient).mockImplementationOnce(() => {
         throw mockError;
       });
       try {
         await getNewSsoOidcToken(mockSsoToken, mockSsoRegion);
-        fail(`expected ${mockError}`);
+        expect.fail(`expected ${mockError}`);
       } catch (error) {
         expect(error).toStrictEqual(mockError);
       }
-      expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion);
+      expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion, {}, undefined);
       expect(mockSend).not.toHaveBeenCalled();
       expect(CreateTokenCommand).not.toHaveBeenCalled();
     });
 
     it("if client.send() throws", async () => {
-      const mockSendWithError = jest.fn().mockRejectedValueOnce(mockError);
-      (getSsoOidcClient as jest.Mock).mockReturnValueOnce({ send: mockSendWithError });
+      const mockSendWithError = vi.fn().mockRejectedValueOnce(mockError);
+      vi.mocked(getSsoOidcClient as any).mockReturnValueOnce({ send: mockSendWithError });
       try {
         await getNewSsoOidcToken(mockSsoToken, mockSsoRegion);
-        fail(`expected ${mockError}`);
+        expect.fail(`expected ${mockError}`);
       } catch (error) {
         expect(error).toStrictEqual(mockError);
       }
-      expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion);
+      expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion, {}, undefined);
       expect(mockSendWithError).toHaveBeenCalledWith(mockCreateTokenArgs);
       expect(CreateTokenCommand).toHaveBeenCalledWith(mockCreateTokenArgs);
     });
 
     it("if CreateTokenCommand throws", async () => {
-      (CreateTokenCommand as jest.Mock).mockImplementation(() => {
+      vi.mocked(CreateTokenCommand).mockImplementation(function () {
         throw mockError;
       });
       try {
         await getNewSsoOidcToken(mockSsoToken, mockSsoRegion);
-        fail(`expected ${mockError}`);
+        expect.fail(`expected ${mockError}`);
       } catch (error) {
         expect(error).toStrictEqual(mockError);
       }
-      expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion);
+      expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion, {}, undefined);
       expect(mockSend).not.toHaveBeenCalled();
       expect(CreateTokenCommand).toHaveBeenCalledWith(mockCreateTokenArgs);
     });
@@ -89,6 +92,6 @@ describe(getNewSsoOidcToken.name, () => {
     expect(newSsoOidcToken).toEqual(mockNewToken as any);
     expect(CreateTokenCommand).toHaveBeenCalledWith(mockCreateTokenArgs);
     expect(mockSend).toHaveBeenCalledWith(mockCreateTokenArgs);
-    expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion);
+    expect(getSsoOidcClient).toHaveBeenCalledWith(mockSsoRegion, {}, undefined);
   });
 });

@@ -1,103 +1,117 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BillingconductorClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BillingconductorClient";
-import {
-  CreatePricingRuleInput,
-  CreatePricingRuleInputFilterSensitiveLog,
-  CreatePricingRuleOutput,
-  CreatePricingRuleOutputFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1CreatePricingRuleCommand,
-  serializeAws_restJson1CreatePricingRuleCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePricingRuleInput, CreatePricingRuleOutput } from "../models/models_0";
+import { CreatePricingRule$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePricingRuleCommand}.
+ */
 export interface CreatePricingRuleCommandInput extends CreatePricingRuleInput {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePricingRuleCommand}.
+ */
 export interface CreatePricingRuleCommandOutput extends CreatePricingRuleOutput, __MetadataBearer {}
 
 /**
- * <p>
- *       Creates a pricing rule can be associated to a pricing plan, or a set of pricing plans.
- *     </p>
+ * <p> Creates a pricing rule can be associated to a pricing plan, or a set of pricing plans. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { BillingconductorClient, CreatePricingRuleCommand } from "@aws-sdk/client-billingconductor"; // ES Modules import
  * // const { BillingconductorClient, CreatePricingRuleCommand } = require("@aws-sdk/client-billingconductor"); // CommonJS import
+ * // import type { BillingconductorClientConfig } from "@aws-sdk/client-billingconductor";
+ * const config = {}; // type is BillingconductorClientConfig
  * const client = new BillingconductorClient(config);
+ * const input = { // CreatePricingRuleInput
+ *   ClientToken: "STRING_VALUE",
+ *   Name: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   Scope: "GLOBAL" || "SERVICE" || "BILLING_ENTITY" || "SKU", // required
+ *   Type: "MARKUP" || "DISCOUNT" || "TIERING", // required
+ *   ModifierPercentage: Number("double"),
+ *   Service: "STRING_VALUE",
+ *   Tags: { // TagMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   BillingEntity: "STRING_VALUE",
+ *   Tiering: { // CreateTieringInput
+ *     FreeTier: { // CreateFreeTierConfig
+ *       Activated: true || false, // required
+ *     },
+ *     CustomTiers: [ // CustomTiersList
+ *       { // CustomTier
+ *         BeginRangeInclusive: Number("double"), // required
+ *         EndRangeExclusive: Number("double"),
+ *         RateValue: Number("double"), // required
+ *       },
+ *     ],
+ *   },
+ *   UsageType: "STRING_VALUE",
+ *   Operation: "STRING_VALUE",
+ * };
  * const command = new CreatePricingRuleCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePricingRuleOutput
+ * //   Arn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreatePricingRuleCommandInput - {@link CreatePricingRuleCommandInput}
+ * @returns {@link CreatePricingRuleCommandOutput}
  * @see {@link CreatePricingRuleCommandInput} for command's `input` shape.
  * @see {@link CreatePricingRuleCommandOutput} for command's `response` shape.
  * @see {@link BillingconductorClientResolvedConfig | config} for BillingconductorClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action. </p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>You can cause an inconsistent state by updating or deleting a resource. </p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request. </p>
+ *
+ * @throws {@link ServiceLimitExceededException} (client fault)
+ *  <p>The request would cause a service limit to exceed. </p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling. </p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input doesn't match with the constraints specified by Amazon Web Services services.</p>
+ *
+ * @throws {@link BillingconductorServiceException}
+ * <p>Base exception class for all service exceptions from Billingconductor service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePricingRuleCommand extends $Command<
-  CreatePricingRuleCommandInput,
-  CreatePricingRuleCommandOutput,
-  BillingconductorClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePricingRuleCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BillingconductorClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePricingRuleCommandInput, CreatePricingRuleCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BillingconductorClient";
-    const commandName = "CreatePricingRuleCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePricingRuleInputFilterSensitiveLog,
-      outputFilterSensitiveLog: CreatePricingRuleOutputFilterSensitiveLog,
+export class CreatePricingRuleCommand extends command<CreatePricingRuleCommandInput, CreatePricingRuleCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePricingRule",
+  CreatePricingRule$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePricingRuleInput;
+      output: CreatePricingRuleOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePricingRuleCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1CreatePricingRuleCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePricingRuleCommandOutput> {
-    return deserializeAws_restJson1CreatePricingRuleCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePricingRuleCommandInput;
+      output: CreatePricingRuleCommandOutput;
+    };
+  };
 }

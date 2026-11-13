@@ -1,1425 +1,1736 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
-  AddDraftAppVersionResourceMappingsCommand,
-  AddDraftAppVersionResourceMappingsCommandInput,
-  AddDraftAppVersionResourceMappingsCommandOutput,
-} from "./commands/AddDraftAppVersionResourceMappingsCommand";
-import { CreateAppCommand, CreateAppCommandInput, CreateAppCommandOutput } from "./commands/CreateAppCommand";
+  type AcceptResourceGroupingRecommendationsCommandInput,
+  type AcceptResourceGroupingRecommendationsCommandOutput,
+  AcceptResourceGroupingRecommendationsCommand,
+} from "./commands/AcceptResourceGroupingRecommendationsCommand";
 import {
+  type AddDraftAppVersionResourceMappingsCommandInput,
+  type AddDraftAppVersionResourceMappingsCommandOutput,
+  AddDraftAppVersionResourceMappingsCommand,
+} from "./commands/AddDraftAppVersionResourceMappingsCommand";
+import {
+  type BatchUpdateRecommendationStatusCommandInput,
+  type BatchUpdateRecommendationStatusCommandOutput,
+  BatchUpdateRecommendationStatusCommand,
+} from "./commands/BatchUpdateRecommendationStatusCommand";
+import { type CreateAppCommandInput, type CreateAppCommandOutput, CreateAppCommand } from "./commands/CreateAppCommand";
+import {
+  type CreateAppVersionAppComponentCommandInput,
+  type CreateAppVersionAppComponentCommandOutput,
+  CreateAppVersionAppComponentCommand,
+} from "./commands/CreateAppVersionAppComponentCommand";
+import {
+  type CreateAppVersionResourceCommandInput,
+  type CreateAppVersionResourceCommandOutput,
+  CreateAppVersionResourceCommand,
+} from "./commands/CreateAppVersionResourceCommand";
+import {
+  type CreateRecommendationTemplateCommandInput,
+  type CreateRecommendationTemplateCommandOutput,
   CreateRecommendationTemplateCommand,
-  CreateRecommendationTemplateCommandInput,
-  CreateRecommendationTemplateCommandOutput,
 } from "./commands/CreateRecommendationTemplateCommand";
 import {
+  type CreateResiliencyPolicyCommandInput,
+  type CreateResiliencyPolicyCommandOutput,
   CreateResiliencyPolicyCommand,
-  CreateResiliencyPolicyCommandInput,
-  CreateResiliencyPolicyCommandOutput,
 } from "./commands/CreateResiliencyPolicyCommand";
 import {
+  type DeleteAppAssessmentCommandInput,
+  type DeleteAppAssessmentCommandOutput,
   DeleteAppAssessmentCommand,
-  DeleteAppAssessmentCommandInput,
-  DeleteAppAssessmentCommandOutput,
 } from "./commands/DeleteAppAssessmentCommand";
-import { DeleteAppCommand, DeleteAppCommandInput, DeleteAppCommandOutput } from "./commands/DeleteAppCommand";
+import { type DeleteAppCommandInput, type DeleteAppCommandOutput, DeleteAppCommand } from "./commands/DeleteAppCommand";
 import {
+  type DeleteAppInputSourceCommandInput,
+  type DeleteAppInputSourceCommandOutput,
+  DeleteAppInputSourceCommand,
+} from "./commands/DeleteAppInputSourceCommand";
+import {
+  type DeleteAppVersionAppComponentCommandInput,
+  type DeleteAppVersionAppComponentCommandOutput,
+  DeleteAppVersionAppComponentCommand,
+} from "./commands/DeleteAppVersionAppComponentCommand";
+import {
+  type DeleteAppVersionResourceCommandInput,
+  type DeleteAppVersionResourceCommandOutput,
+  DeleteAppVersionResourceCommand,
+} from "./commands/DeleteAppVersionResourceCommand";
+import {
+  type DeleteRecommendationTemplateCommandInput,
+  type DeleteRecommendationTemplateCommandOutput,
   DeleteRecommendationTemplateCommand,
-  DeleteRecommendationTemplateCommandInput,
-  DeleteRecommendationTemplateCommandOutput,
 } from "./commands/DeleteRecommendationTemplateCommand";
 import {
+  type DeleteResiliencyPolicyCommandInput,
+  type DeleteResiliencyPolicyCommandOutput,
   DeleteResiliencyPolicyCommand,
-  DeleteResiliencyPolicyCommandInput,
-  DeleteResiliencyPolicyCommandOutput,
 } from "./commands/DeleteResiliencyPolicyCommand";
 import {
+  type DescribeAppAssessmentCommandInput,
+  type DescribeAppAssessmentCommandOutput,
   DescribeAppAssessmentCommand,
-  DescribeAppAssessmentCommandInput,
-  DescribeAppAssessmentCommandOutput,
 } from "./commands/DescribeAppAssessmentCommand";
-import { DescribeAppCommand, DescribeAppCommandInput, DescribeAppCommandOutput } from "./commands/DescribeAppCommand";
 import {
+  type DescribeAppCommandInput,
+  type DescribeAppCommandOutput,
+  DescribeAppCommand,
+} from "./commands/DescribeAppCommand";
+import {
+  type DescribeAppVersionAppComponentCommandInput,
+  type DescribeAppVersionAppComponentCommandOutput,
+  DescribeAppVersionAppComponentCommand,
+} from "./commands/DescribeAppVersionAppComponentCommand";
+import {
+  type DescribeAppVersionCommandInput,
+  type DescribeAppVersionCommandOutput,
+  DescribeAppVersionCommand,
+} from "./commands/DescribeAppVersionCommand";
+import {
+  type DescribeAppVersionResourceCommandInput,
+  type DescribeAppVersionResourceCommandOutput,
+  DescribeAppVersionResourceCommand,
+} from "./commands/DescribeAppVersionResourceCommand";
+import {
+  type DescribeAppVersionResourcesResolutionStatusCommandInput,
+  type DescribeAppVersionResourcesResolutionStatusCommandOutput,
   DescribeAppVersionResourcesResolutionStatusCommand,
-  DescribeAppVersionResourcesResolutionStatusCommandInput,
-  DescribeAppVersionResourcesResolutionStatusCommandOutput,
 } from "./commands/DescribeAppVersionResourcesResolutionStatusCommand";
 import {
+  type DescribeAppVersionTemplateCommandInput,
+  type DescribeAppVersionTemplateCommandOutput,
   DescribeAppVersionTemplateCommand,
-  DescribeAppVersionTemplateCommandInput,
-  DescribeAppVersionTemplateCommandOutput,
 } from "./commands/DescribeAppVersionTemplateCommand";
 import {
+  type DescribeDraftAppVersionResourcesImportStatusCommandInput,
+  type DescribeDraftAppVersionResourcesImportStatusCommandOutput,
   DescribeDraftAppVersionResourcesImportStatusCommand,
-  DescribeDraftAppVersionResourcesImportStatusCommandInput,
-  DescribeDraftAppVersionResourcesImportStatusCommandOutput,
 } from "./commands/DescribeDraftAppVersionResourcesImportStatusCommand";
 import {
+  type DescribeMetricsExportCommandInput,
+  type DescribeMetricsExportCommandOutput,
+  DescribeMetricsExportCommand,
+} from "./commands/DescribeMetricsExportCommand";
+import {
+  type DescribeResiliencyPolicyCommandInput,
+  type DescribeResiliencyPolicyCommandOutput,
   DescribeResiliencyPolicyCommand,
-  DescribeResiliencyPolicyCommandInput,
-  DescribeResiliencyPolicyCommandOutput,
 } from "./commands/DescribeResiliencyPolicyCommand";
 import {
+  type DescribeResourceGroupingRecommendationTaskCommandInput,
+  type DescribeResourceGroupingRecommendationTaskCommandOutput,
+  DescribeResourceGroupingRecommendationTaskCommand,
+} from "./commands/DescribeResourceGroupingRecommendationTaskCommand";
+import {
+  type ImportResourcesToDraftAppVersionCommandInput,
+  type ImportResourcesToDraftAppVersionCommandOutput,
   ImportResourcesToDraftAppVersionCommand,
-  ImportResourcesToDraftAppVersionCommandInput,
-  ImportResourcesToDraftAppVersionCommandOutput,
 } from "./commands/ImportResourcesToDraftAppVersionCommand";
 import {
+  type ListAlarmRecommendationsCommandInput,
+  type ListAlarmRecommendationsCommandOutput,
   ListAlarmRecommendationsCommand,
-  ListAlarmRecommendationsCommandInput,
-  ListAlarmRecommendationsCommandOutput,
 } from "./commands/ListAlarmRecommendationsCommand";
 import {
+  type ListAppAssessmentComplianceDriftsCommandInput,
+  type ListAppAssessmentComplianceDriftsCommandOutput,
+  ListAppAssessmentComplianceDriftsCommand,
+} from "./commands/ListAppAssessmentComplianceDriftsCommand";
+import {
+  type ListAppAssessmentResourceDriftsCommandInput,
+  type ListAppAssessmentResourceDriftsCommandOutput,
+  ListAppAssessmentResourceDriftsCommand,
+} from "./commands/ListAppAssessmentResourceDriftsCommand";
+import {
+  type ListAppAssessmentsCommandInput,
+  type ListAppAssessmentsCommandOutput,
   ListAppAssessmentsCommand,
-  ListAppAssessmentsCommandInput,
-  ListAppAssessmentsCommandOutput,
 } from "./commands/ListAppAssessmentsCommand";
 import {
+  type ListAppComponentCompliancesCommandInput,
+  type ListAppComponentCompliancesCommandOutput,
   ListAppComponentCompliancesCommand,
-  ListAppComponentCompliancesCommandInput,
-  ListAppComponentCompliancesCommandOutput,
 } from "./commands/ListAppComponentCompliancesCommand";
 import {
+  type ListAppComponentRecommendationsCommandInput,
+  type ListAppComponentRecommendationsCommandOutput,
   ListAppComponentRecommendationsCommand,
-  ListAppComponentRecommendationsCommandInput,
-  ListAppComponentRecommendationsCommandOutput,
 } from "./commands/ListAppComponentRecommendationsCommand";
-import { ListAppsCommand, ListAppsCommandInput, ListAppsCommandOutput } from "./commands/ListAppsCommand";
 import {
+  type ListAppInputSourcesCommandInput,
+  type ListAppInputSourcesCommandOutput,
+  ListAppInputSourcesCommand,
+} from "./commands/ListAppInputSourcesCommand";
+import { type ListAppsCommandInput, type ListAppsCommandOutput, ListAppsCommand } from "./commands/ListAppsCommand";
+import {
+  type ListAppVersionAppComponentsCommandInput,
+  type ListAppVersionAppComponentsCommandOutput,
+  ListAppVersionAppComponentsCommand,
+} from "./commands/ListAppVersionAppComponentsCommand";
+import {
+  type ListAppVersionResourceMappingsCommandInput,
+  type ListAppVersionResourceMappingsCommandOutput,
   ListAppVersionResourceMappingsCommand,
-  ListAppVersionResourceMappingsCommandInput,
-  ListAppVersionResourceMappingsCommandOutput,
 } from "./commands/ListAppVersionResourceMappingsCommand";
 import {
+  type ListAppVersionResourcesCommandInput,
+  type ListAppVersionResourcesCommandOutput,
   ListAppVersionResourcesCommand,
-  ListAppVersionResourcesCommandInput,
-  ListAppVersionResourcesCommandOutput,
 } from "./commands/ListAppVersionResourcesCommand";
 import {
+  type ListAppVersionsCommandInput,
+  type ListAppVersionsCommandOutput,
   ListAppVersionsCommand,
-  ListAppVersionsCommandInput,
-  ListAppVersionsCommandOutput,
 } from "./commands/ListAppVersionsCommand";
 import {
+  type ListMetricsCommandInput,
+  type ListMetricsCommandOutput,
+  ListMetricsCommand,
+} from "./commands/ListMetricsCommand";
+import {
+  type ListRecommendationTemplatesCommandInput,
+  type ListRecommendationTemplatesCommandOutput,
   ListRecommendationTemplatesCommand,
-  ListRecommendationTemplatesCommandInput,
-  ListRecommendationTemplatesCommandOutput,
 } from "./commands/ListRecommendationTemplatesCommand";
 import {
+  type ListResiliencyPoliciesCommandInput,
+  type ListResiliencyPoliciesCommandOutput,
   ListResiliencyPoliciesCommand,
-  ListResiliencyPoliciesCommandInput,
-  ListResiliencyPoliciesCommandOutput,
 } from "./commands/ListResiliencyPoliciesCommand";
 import {
+  type ListResourceGroupingRecommendationsCommandInput,
+  type ListResourceGroupingRecommendationsCommandOutput,
+  ListResourceGroupingRecommendationsCommand,
+} from "./commands/ListResourceGroupingRecommendationsCommand";
+import {
+  type ListSopRecommendationsCommandInput,
+  type ListSopRecommendationsCommandOutput,
   ListSopRecommendationsCommand,
-  ListSopRecommendationsCommandInput,
-  ListSopRecommendationsCommandOutput,
 } from "./commands/ListSopRecommendationsCommand";
 import {
+  type ListSuggestedResiliencyPoliciesCommandInput,
+  type ListSuggestedResiliencyPoliciesCommandOutput,
   ListSuggestedResiliencyPoliciesCommand,
-  ListSuggestedResiliencyPoliciesCommandInput,
-  ListSuggestedResiliencyPoliciesCommandOutput,
 } from "./commands/ListSuggestedResiliencyPoliciesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTestRecommendationsCommandInput,
+  type ListTestRecommendationsCommandOutput,
   ListTestRecommendationsCommand,
-  ListTestRecommendationsCommandInput,
-  ListTestRecommendationsCommandOutput,
 } from "./commands/ListTestRecommendationsCommand";
 import {
+  type ListUnsupportedAppVersionResourcesCommandInput,
+  type ListUnsupportedAppVersionResourcesCommandOutput,
   ListUnsupportedAppVersionResourcesCommand,
-  ListUnsupportedAppVersionResourcesCommandInput,
-  ListUnsupportedAppVersionResourcesCommandOutput,
 } from "./commands/ListUnsupportedAppVersionResourcesCommand";
 import {
+  type PublishAppVersionCommandInput,
+  type PublishAppVersionCommandOutput,
   PublishAppVersionCommand,
-  PublishAppVersionCommandInput,
-  PublishAppVersionCommandOutput,
 } from "./commands/PublishAppVersionCommand";
 import {
+  type PutDraftAppVersionTemplateCommandInput,
+  type PutDraftAppVersionTemplateCommandOutput,
   PutDraftAppVersionTemplateCommand,
-  PutDraftAppVersionTemplateCommandInput,
-  PutDraftAppVersionTemplateCommandOutput,
 } from "./commands/PutDraftAppVersionTemplateCommand";
 import {
+  type RejectResourceGroupingRecommendationsCommandInput,
+  type RejectResourceGroupingRecommendationsCommandOutput,
+  RejectResourceGroupingRecommendationsCommand,
+} from "./commands/RejectResourceGroupingRecommendationsCommand";
+import {
+  type RemoveDraftAppVersionResourceMappingsCommandInput,
+  type RemoveDraftAppVersionResourceMappingsCommandOutput,
   RemoveDraftAppVersionResourceMappingsCommand,
-  RemoveDraftAppVersionResourceMappingsCommandInput,
-  RemoveDraftAppVersionResourceMappingsCommandOutput,
 } from "./commands/RemoveDraftAppVersionResourceMappingsCommand";
 import {
+  type ResolveAppVersionResourcesCommandInput,
+  type ResolveAppVersionResourcesCommandOutput,
   ResolveAppVersionResourcesCommand,
-  ResolveAppVersionResourcesCommandInput,
-  ResolveAppVersionResourcesCommandOutput,
 } from "./commands/ResolveAppVersionResourcesCommand";
 import {
+  type StartAppAssessmentCommandInput,
+  type StartAppAssessmentCommandOutput,
   StartAppAssessmentCommand,
-  StartAppAssessmentCommandInput,
-  StartAppAssessmentCommandOutput,
 } from "./commands/StartAppAssessmentCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type StartMetricsExportCommandInput,
+  type StartMetricsExportCommandOutput,
+  StartMetricsExportCommand,
+} from "./commands/StartMetricsExportCommand";
+import {
+  type StartResourceGroupingRecommendationTaskCommandInput,
+  type StartResourceGroupingRecommendationTaskCommandOutput,
+  StartResourceGroupingRecommendationTaskCommand,
+} from "./commands/StartResourceGroupingRecommendationTaskCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateAppCommand, UpdateAppCommandInput, UpdateAppCommandOutput } from "./commands/UpdateAppCommand";
+import { type UpdateAppCommandInput, type UpdateAppCommandOutput, UpdateAppCommand } from "./commands/UpdateAppCommand";
 import {
+  type UpdateAppVersionAppComponentCommandInput,
+  type UpdateAppVersionAppComponentCommandOutput,
+  UpdateAppVersionAppComponentCommand,
+} from "./commands/UpdateAppVersionAppComponentCommand";
+import {
+  type UpdateAppVersionCommandInput,
+  type UpdateAppVersionCommandOutput,
+  UpdateAppVersionCommand,
+} from "./commands/UpdateAppVersionCommand";
+import {
+  type UpdateAppVersionResourceCommandInput,
+  type UpdateAppVersionResourceCommandOutput,
+  UpdateAppVersionResourceCommand,
+} from "./commands/UpdateAppVersionResourceCommand";
+import {
+  type UpdateResiliencyPolicyCommandInput,
+  type UpdateResiliencyPolicyCommandOutput,
   UpdateResiliencyPolicyCommand,
-  UpdateResiliencyPolicyCommandInput,
-  UpdateResiliencyPolicyCommandOutput,
 } from "./commands/UpdateResiliencyPolicyCommand";
+import { paginateListAlarmRecommendations } from "./pagination/ListAlarmRecommendationsPaginator";
+import { paginateListAppAssessmentComplianceDrifts } from "./pagination/ListAppAssessmentComplianceDriftsPaginator";
+import { paginateListAppAssessmentResourceDrifts } from "./pagination/ListAppAssessmentResourceDriftsPaginator";
+import { paginateListAppAssessments } from "./pagination/ListAppAssessmentsPaginator";
+import { paginateListAppComponentCompliances } from "./pagination/ListAppComponentCompliancesPaginator";
+import { paginateListAppComponentRecommendations } from "./pagination/ListAppComponentRecommendationsPaginator";
+import { paginateListAppInputSources } from "./pagination/ListAppInputSourcesPaginator";
+import { paginateListApps } from "./pagination/ListAppsPaginator";
+import { paginateListAppVersionAppComponents } from "./pagination/ListAppVersionAppComponentsPaginator";
+import { paginateListAppVersionResourceMappings } from "./pagination/ListAppVersionResourceMappingsPaginator";
+import { paginateListAppVersionResources } from "./pagination/ListAppVersionResourcesPaginator";
+import { paginateListAppVersions } from "./pagination/ListAppVersionsPaginator";
+import { paginateListMetrics } from "./pagination/ListMetricsPaginator";
+import { paginateListRecommendationTemplates } from "./pagination/ListRecommendationTemplatesPaginator";
+import { paginateListResiliencyPolicies } from "./pagination/ListResiliencyPoliciesPaginator";
+import { paginateListResourceGroupingRecommendations } from "./pagination/ListResourceGroupingRecommendationsPaginator";
+import { paginateListSopRecommendations } from "./pagination/ListSopRecommendationsPaginator";
+import { paginateListSuggestedResiliencyPolicies } from "./pagination/ListSuggestedResiliencyPoliciesPaginator";
+import { paginateListTestRecommendations } from "./pagination/ListTestRecommendationsPaginator";
+import { paginateListUnsupportedAppVersionResources } from "./pagination/ListUnsupportedAppVersionResourcesPaginator";
 import { ResiliencehubClient } from "./ResiliencehubClient";
 
+const commands = {
+  AcceptResourceGroupingRecommendationsCommand,
+  AddDraftAppVersionResourceMappingsCommand,
+  BatchUpdateRecommendationStatusCommand,
+  CreateAppCommand,
+  CreateAppVersionAppComponentCommand,
+  CreateAppVersionResourceCommand,
+  CreateRecommendationTemplateCommand,
+  CreateResiliencyPolicyCommand,
+  DeleteAppCommand,
+  DeleteAppAssessmentCommand,
+  DeleteAppInputSourceCommand,
+  DeleteAppVersionAppComponentCommand,
+  DeleteAppVersionResourceCommand,
+  DeleteRecommendationTemplateCommand,
+  DeleteResiliencyPolicyCommand,
+  DescribeAppCommand,
+  DescribeAppAssessmentCommand,
+  DescribeAppVersionCommand,
+  DescribeAppVersionAppComponentCommand,
+  DescribeAppVersionResourceCommand,
+  DescribeAppVersionResourcesResolutionStatusCommand,
+  DescribeAppVersionTemplateCommand,
+  DescribeDraftAppVersionResourcesImportStatusCommand,
+  DescribeMetricsExportCommand,
+  DescribeResiliencyPolicyCommand,
+  DescribeResourceGroupingRecommendationTaskCommand,
+  ImportResourcesToDraftAppVersionCommand,
+  ListAlarmRecommendationsCommand,
+  ListAppAssessmentComplianceDriftsCommand,
+  ListAppAssessmentResourceDriftsCommand,
+  ListAppAssessmentsCommand,
+  ListAppComponentCompliancesCommand,
+  ListAppComponentRecommendationsCommand,
+  ListAppInputSourcesCommand,
+  ListAppsCommand,
+  ListAppVersionAppComponentsCommand,
+  ListAppVersionResourceMappingsCommand,
+  ListAppVersionResourcesCommand,
+  ListAppVersionsCommand,
+  ListMetricsCommand,
+  ListRecommendationTemplatesCommand,
+  ListResiliencyPoliciesCommand,
+  ListResourceGroupingRecommendationsCommand,
+  ListSopRecommendationsCommand,
+  ListSuggestedResiliencyPoliciesCommand,
+  ListTagsForResourceCommand,
+  ListTestRecommendationsCommand,
+  ListUnsupportedAppVersionResourcesCommand,
+  PublishAppVersionCommand,
+  PutDraftAppVersionTemplateCommand,
+  RejectResourceGroupingRecommendationsCommand,
+  RemoveDraftAppVersionResourceMappingsCommand,
+  ResolveAppVersionResourcesCommand,
+  StartAppAssessmentCommand,
+  StartMetricsExportCommand,
+  StartResourceGroupingRecommendationTaskCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateAppCommand,
+  UpdateAppVersionCommand,
+  UpdateAppVersionAppComponentCommand,
+  UpdateAppVersionResourceCommand,
+  UpdateResiliencyPolicyCommand,
+};
+const paginators = {
+  paginateListAlarmRecommendations,
+  paginateListAppAssessmentComplianceDrifts,
+  paginateListAppAssessmentResourceDrifts,
+  paginateListAppAssessments,
+  paginateListAppComponentCompliances,
+  paginateListAppComponentRecommendations,
+  paginateListAppInputSources,
+  paginateListApps,
+  paginateListAppVersionAppComponents,
+  paginateListAppVersionResourceMappings,
+  paginateListAppVersionResources,
+  paginateListAppVersions,
+  paginateListMetrics,
+  paginateListRecommendationTemplates,
+  paginateListResiliencyPolicies,
+  paginateListResourceGroupingRecommendations,
+  paginateListSopRecommendations,
+  paginateListSuggestedResiliencyPolicies,
+  paginateListTestRecommendations,
+  paginateListUnsupportedAppVersionResources,
+};
+
 /**
- * <p>AWS Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from
- *       disruptions. Resilience Hub offers continuous resiliency assessment and validation that integrates
+ * @public
+ */
+export interface ResiliencehubRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Resiliencehub {
+  /**
+   * @see {@link AcceptResourceGroupingRecommendationsCommand}
+   */
+  acceptResourceGroupingRecommendations(
+    args: AcceptResourceGroupingRecommendationsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<AcceptResourceGroupingRecommendationsCommandOutput>;
+  acceptResourceGroupingRecommendations(
+    args: AcceptResourceGroupingRecommendationsCommandInput,
+    cb: (err: any, data?: AcceptResourceGroupingRecommendationsCommandOutput) => void
+  ): void;
+  acceptResourceGroupingRecommendations(
+    args: AcceptResourceGroupingRecommendationsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: AcceptResourceGroupingRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AddDraftAppVersionResourceMappingsCommand}
+   */
+  addDraftAppVersionResourceMappings(
+    args: AddDraftAppVersionResourceMappingsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<AddDraftAppVersionResourceMappingsCommandOutput>;
+  addDraftAppVersionResourceMappings(
+    args: AddDraftAppVersionResourceMappingsCommandInput,
+    cb: (err: any, data?: AddDraftAppVersionResourceMappingsCommandOutput) => void
+  ): void;
+  addDraftAppVersionResourceMappings(
+    args: AddDraftAppVersionResourceMappingsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: AddDraftAppVersionResourceMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link BatchUpdateRecommendationStatusCommand}
+   */
+  batchUpdateRecommendationStatus(
+    args: BatchUpdateRecommendationStatusCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<BatchUpdateRecommendationStatusCommandOutput>;
+  batchUpdateRecommendationStatus(
+    args: BatchUpdateRecommendationStatusCommandInput,
+    cb: (err: any, data?: BatchUpdateRecommendationStatusCommandOutput) => void
+  ): void;
+  batchUpdateRecommendationStatus(
+    args: BatchUpdateRecommendationStatusCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: BatchUpdateRecommendationStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAppCommand}
+   */
+  createApp(
+    args: CreateAppCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<CreateAppCommandOutput>;
+  createApp(
+    args: CreateAppCommandInput,
+    cb: (err: any, data?: CreateAppCommandOutput) => void
+  ): void;
+  createApp(
+    args: CreateAppCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: CreateAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAppVersionAppComponentCommand}
+   */
+  createAppVersionAppComponent(
+    args: CreateAppVersionAppComponentCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<CreateAppVersionAppComponentCommandOutput>;
+  createAppVersionAppComponent(
+    args: CreateAppVersionAppComponentCommandInput,
+    cb: (err: any, data?: CreateAppVersionAppComponentCommandOutput) => void
+  ): void;
+  createAppVersionAppComponent(
+    args: CreateAppVersionAppComponentCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: CreateAppVersionAppComponentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateAppVersionResourceCommand}
+   */
+  createAppVersionResource(
+    args: CreateAppVersionResourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<CreateAppVersionResourceCommandOutput>;
+  createAppVersionResource(
+    args: CreateAppVersionResourceCommandInput,
+    cb: (err: any, data?: CreateAppVersionResourceCommandOutput) => void
+  ): void;
+  createAppVersionResource(
+    args: CreateAppVersionResourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: CreateAppVersionResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRecommendationTemplateCommand}
+   */
+  createRecommendationTemplate(
+    args: CreateRecommendationTemplateCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<CreateRecommendationTemplateCommandOutput>;
+  createRecommendationTemplate(
+    args: CreateRecommendationTemplateCommandInput,
+    cb: (err: any, data?: CreateRecommendationTemplateCommandOutput) => void
+  ): void;
+  createRecommendationTemplate(
+    args: CreateRecommendationTemplateCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: CreateRecommendationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateResiliencyPolicyCommand}
+   */
+  createResiliencyPolicy(
+    args: CreateResiliencyPolicyCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<CreateResiliencyPolicyCommandOutput>;
+  createResiliencyPolicy(
+    args: CreateResiliencyPolicyCommandInput,
+    cb: (err: any, data?: CreateResiliencyPolicyCommandOutput) => void
+  ): void;
+  createResiliencyPolicy(
+    args: CreateResiliencyPolicyCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: CreateResiliencyPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAppCommand}
+   */
+  deleteApp(
+    args: DeleteAppCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DeleteAppCommandOutput>;
+  deleteApp(
+    args: DeleteAppCommandInput,
+    cb: (err: any, data?: DeleteAppCommandOutput) => void
+  ): void;
+  deleteApp(
+    args: DeleteAppCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DeleteAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAppAssessmentCommand}
+   */
+  deleteAppAssessment(
+    args: DeleteAppAssessmentCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DeleteAppAssessmentCommandOutput>;
+  deleteAppAssessment(
+    args: DeleteAppAssessmentCommandInput,
+    cb: (err: any, data?: DeleteAppAssessmentCommandOutput) => void
+  ): void;
+  deleteAppAssessment(
+    args: DeleteAppAssessmentCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DeleteAppAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAppInputSourceCommand}
+   */
+  deleteAppInputSource(
+    args: DeleteAppInputSourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DeleteAppInputSourceCommandOutput>;
+  deleteAppInputSource(
+    args: DeleteAppInputSourceCommandInput,
+    cb: (err: any, data?: DeleteAppInputSourceCommandOutput) => void
+  ): void;
+  deleteAppInputSource(
+    args: DeleteAppInputSourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DeleteAppInputSourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAppVersionAppComponentCommand}
+   */
+  deleteAppVersionAppComponent(
+    args: DeleteAppVersionAppComponentCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DeleteAppVersionAppComponentCommandOutput>;
+  deleteAppVersionAppComponent(
+    args: DeleteAppVersionAppComponentCommandInput,
+    cb: (err: any, data?: DeleteAppVersionAppComponentCommandOutput) => void
+  ): void;
+  deleteAppVersionAppComponent(
+    args: DeleteAppVersionAppComponentCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DeleteAppVersionAppComponentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAppVersionResourceCommand}
+   */
+  deleteAppVersionResource(
+    args: DeleteAppVersionResourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DeleteAppVersionResourceCommandOutput>;
+  deleteAppVersionResource(
+    args: DeleteAppVersionResourceCommandInput,
+    cb: (err: any, data?: DeleteAppVersionResourceCommandOutput) => void
+  ): void;
+  deleteAppVersionResource(
+    args: DeleteAppVersionResourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DeleteAppVersionResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRecommendationTemplateCommand}
+   */
+  deleteRecommendationTemplate(
+    args: DeleteRecommendationTemplateCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DeleteRecommendationTemplateCommandOutput>;
+  deleteRecommendationTemplate(
+    args: DeleteRecommendationTemplateCommandInput,
+    cb: (err: any, data?: DeleteRecommendationTemplateCommandOutput) => void
+  ): void;
+  deleteRecommendationTemplate(
+    args: DeleteRecommendationTemplateCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DeleteRecommendationTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteResiliencyPolicyCommand}
+   */
+  deleteResiliencyPolicy(
+    args: DeleteResiliencyPolicyCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DeleteResiliencyPolicyCommandOutput>;
+  deleteResiliencyPolicy(
+    args: DeleteResiliencyPolicyCommandInput,
+    cb: (err: any, data?: DeleteResiliencyPolicyCommandOutput) => void
+  ): void;
+  deleteResiliencyPolicy(
+    args: DeleteResiliencyPolicyCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DeleteResiliencyPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppCommand}
+   */
+  describeApp(
+    args: DescribeAppCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeAppCommandOutput>;
+  describeApp(
+    args: DescribeAppCommandInput,
+    cb: (err: any, data?: DescribeAppCommandOutput) => void
+  ): void;
+  describeApp(
+    args: DescribeAppCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppAssessmentCommand}
+   */
+  describeAppAssessment(
+    args: DescribeAppAssessmentCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeAppAssessmentCommandOutput>;
+  describeAppAssessment(
+    args: DescribeAppAssessmentCommandInput,
+    cb: (err: any, data?: DescribeAppAssessmentCommandOutput) => void
+  ): void;
+  describeAppAssessment(
+    args: DescribeAppAssessmentCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeAppAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppVersionCommand}
+   */
+  describeAppVersion(
+    args: DescribeAppVersionCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeAppVersionCommandOutput>;
+  describeAppVersion(
+    args: DescribeAppVersionCommandInput,
+    cb: (err: any, data?: DescribeAppVersionCommandOutput) => void
+  ): void;
+  describeAppVersion(
+    args: DescribeAppVersionCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeAppVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppVersionAppComponentCommand}
+   */
+  describeAppVersionAppComponent(
+    args: DescribeAppVersionAppComponentCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeAppVersionAppComponentCommandOutput>;
+  describeAppVersionAppComponent(
+    args: DescribeAppVersionAppComponentCommandInput,
+    cb: (err: any, data?: DescribeAppVersionAppComponentCommandOutput) => void
+  ): void;
+  describeAppVersionAppComponent(
+    args: DescribeAppVersionAppComponentCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeAppVersionAppComponentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppVersionResourceCommand}
+   */
+  describeAppVersionResource(
+    args: DescribeAppVersionResourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeAppVersionResourceCommandOutput>;
+  describeAppVersionResource(
+    args: DescribeAppVersionResourceCommandInput,
+    cb: (err: any, data?: DescribeAppVersionResourceCommandOutput) => void
+  ): void;
+  describeAppVersionResource(
+    args: DescribeAppVersionResourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeAppVersionResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppVersionResourcesResolutionStatusCommand}
+   */
+  describeAppVersionResourcesResolutionStatus(
+    args: DescribeAppVersionResourcesResolutionStatusCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeAppVersionResourcesResolutionStatusCommandOutput>;
+  describeAppVersionResourcesResolutionStatus(
+    args: DescribeAppVersionResourcesResolutionStatusCommandInput,
+    cb: (err: any, data?: DescribeAppVersionResourcesResolutionStatusCommandOutput) => void
+  ): void;
+  describeAppVersionResourcesResolutionStatus(
+    args: DescribeAppVersionResourcesResolutionStatusCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeAppVersionResourcesResolutionStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeAppVersionTemplateCommand}
+   */
+  describeAppVersionTemplate(
+    args: DescribeAppVersionTemplateCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeAppVersionTemplateCommandOutput>;
+  describeAppVersionTemplate(
+    args: DescribeAppVersionTemplateCommandInput,
+    cb: (err: any, data?: DescribeAppVersionTemplateCommandOutput) => void
+  ): void;
+  describeAppVersionTemplate(
+    args: DescribeAppVersionTemplateCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeAppVersionTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeDraftAppVersionResourcesImportStatusCommand}
+   */
+  describeDraftAppVersionResourcesImportStatus(
+    args: DescribeDraftAppVersionResourcesImportStatusCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeDraftAppVersionResourcesImportStatusCommandOutput>;
+  describeDraftAppVersionResourcesImportStatus(
+    args: DescribeDraftAppVersionResourcesImportStatusCommandInput,
+    cb: (err: any, data?: DescribeDraftAppVersionResourcesImportStatusCommandOutput) => void
+  ): void;
+  describeDraftAppVersionResourcesImportStatus(
+    args: DescribeDraftAppVersionResourcesImportStatusCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeDraftAppVersionResourcesImportStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeMetricsExportCommand}
+   */
+  describeMetricsExport(
+    args: DescribeMetricsExportCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeMetricsExportCommandOutput>;
+  describeMetricsExport(
+    args: DescribeMetricsExportCommandInput,
+    cb: (err: any, data?: DescribeMetricsExportCommandOutput) => void
+  ): void;
+  describeMetricsExport(
+    args: DescribeMetricsExportCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeMetricsExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResiliencyPolicyCommand}
+   */
+  describeResiliencyPolicy(
+    args: DescribeResiliencyPolicyCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeResiliencyPolicyCommandOutput>;
+  describeResiliencyPolicy(
+    args: DescribeResiliencyPolicyCommandInput,
+    cb: (err: any, data?: DescribeResiliencyPolicyCommandOutput) => void
+  ): void;
+  describeResiliencyPolicy(
+    args: DescribeResiliencyPolicyCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeResiliencyPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeResourceGroupingRecommendationTaskCommand}
+   */
+  describeResourceGroupingRecommendationTask(
+    args: DescribeResourceGroupingRecommendationTaskCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<DescribeResourceGroupingRecommendationTaskCommandOutput>;
+  describeResourceGroupingRecommendationTask(
+    args: DescribeResourceGroupingRecommendationTaskCommandInput,
+    cb: (err: any, data?: DescribeResourceGroupingRecommendationTaskCommandOutput) => void
+  ): void;
+  describeResourceGroupingRecommendationTask(
+    args: DescribeResourceGroupingRecommendationTaskCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: DescribeResourceGroupingRecommendationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportResourcesToDraftAppVersionCommand}
+   */
+  importResourcesToDraftAppVersion(
+    args: ImportResourcesToDraftAppVersionCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ImportResourcesToDraftAppVersionCommandOutput>;
+  importResourcesToDraftAppVersion(
+    args: ImportResourcesToDraftAppVersionCommandInput,
+    cb: (err: any, data?: ImportResourcesToDraftAppVersionCommandOutput) => void
+  ): void;
+  importResourcesToDraftAppVersion(
+    args: ImportResourcesToDraftAppVersionCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ImportResourcesToDraftAppVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAlarmRecommendationsCommand}
+   */
+  listAlarmRecommendations(
+    args: ListAlarmRecommendationsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAlarmRecommendationsCommandOutput>;
+  listAlarmRecommendations(
+    args: ListAlarmRecommendationsCommandInput,
+    cb: (err: any, data?: ListAlarmRecommendationsCommandOutput) => void
+  ): void;
+  listAlarmRecommendations(
+    args: ListAlarmRecommendationsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAlarmRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppAssessmentComplianceDriftsCommand}
+   */
+  listAppAssessmentComplianceDrifts(
+    args: ListAppAssessmentComplianceDriftsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppAssessmentComplianceDriftsCommandOutput>;
+  listAppAssessmentComplianceDrifts(
+    args: ListAppAssessmentComplianceDriftsCommandInput,
+    cb: (err: any, data?: ListAppAssessmentComplianceDriftsCommandOutput) => void
+  ): void;
+  listAppAssessmentComplianceDrifts(
+    args: ListAppAssessmentComplianceDriftsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppAssessmentComplianceDriftsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppAssessmentResourceDriftsCommand}
+   */
+  listAppAssessmentResourceDrifts(
+    args: ListAppAssessmentResourceDriftsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppAssessmentResourceDriftsCommandOutput>;
+  listAppAssessmentResourceDrifts(
+    args: ListAppAssessmentResourceDriftsCommandInput,
+    cb: (err: any, data?: ListAppAssessmentResourceDriftsCommandOutput) => void
+  ): void;
+  listAppAssessmentResourceDrifts(
+    args: ListAppAssessmentResourceDriftsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppAssessmentResourceDriftsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppAssessmentsCommand}
+   */
+  listAppAssessments(): Promise<ListAppAssessmentsCommandOutput>;
+  listAppAssessments(
+    args: ListAppAssessmentsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppAssessmentsCommandOutput>;
+  listAppAssessments(
+    args: ListAppAssessmentsCommandInput,
+    cb: (err: any, data?: ListAppAssessmentsCommandOutput) => void
+  ): void;
+  listAppAssessments(
+    args: ListAppAssessmentsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppAssessmentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppComponentCompliancesCommand}
+   */
+  listAppComponentCompliances(
+    args: ListAppComponentCompliancesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppComponentCompliancesCommandOutput>;
+  listAppComponentCompliances(
+    args: ListAppComponentCompliancesCommandInput,
+    cb: (err: any, data?: ListAppComponentCompliancesCommandOutput) => void
+  ): void;
+  listAppComponentCompliances(
+    args: ListAppComponentCompliancesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppComponentCompliancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppComponentRecommendationsCommand}
+   */
+  listAppComponentRecommendations(
+    args: ListAppComponentRecommendationsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppComponentRecommendationsCommandOutput>;
+  listAppComponentRecommendations(
+    args: ListAppComponentRecommendationsCommandInput,
+    cb: (err: any, data?: ListAppComponentRecommendationsCommandOutput) => void
+  ): void;
+  listAppComponentRecommendations(
+    args: ListAppComponentRecommendationsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppComponentRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppInputSourcesCommand}
+   */
+  listAppInputSources(
+    args: ListAppInputSourcesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppInputSourcesCommandOutput>;
+  listAppInputSources(
+    args: ListAppInputSourcesCommandInput,
+    cb: (err: any, data?: ListAppInputSourcesCommandOutput) => void
+  ): void;
+  listAppInputSources(
+    args: ListAppInputSourcesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppInputSourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppsCommand}
+   */
+  listApps(): Promise<ListAppsCommandOutput>;
+  listApps(
+    args: ListAppsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppsCommandOutput>;
+  listApps(
+    args: ListAppsCommandInput,
+    cb: (err: any, data?: ListAppsCommandOutput) => void
+  ): void;
+  listApps(
+    args: ListAppsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppVersionAppComponentsCommand}
+   */
+  listAppVersionAppComponents(
+    args: ListAppVersionAppComponentsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppVersionAppComponentsCommandOutput>;
+  listAppVersionAppComponents(
+    args: ListAppVersionAppComponentsCommandInput,
+    cb: (err: any, data?: ListAppVersionAppComponentsCommandOutput) => void
+  ): void;
+  listAppVersionAppComponents(
+    args: ListAppVersionAppComponentsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppVersionAppComponentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppVersionResourceMappingsCommand}
+   */
+  listAppVersionResourceMappings(
+    args: ListAppVersionResourceMappingsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppVersionResourceMappingsCommandOutput>;
+  listAppVersionResourceMappings(
+    args: ListAppVersionResourceMappingsCommandInput,
+    cb: (err: any, data?: ListAppVersionResourceMappingsCommandOutput) => void
+  ): void;
+  listAppVersionResourceMappings(
+    args: ListAppVersionResourceMappingsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppVersionResourceMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppVersionResourcesCommand}
+   */
+  listAppVersionResources(
+    args: ListAppVersionResourcesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppVersionResourcesCommandOutput>;
+  listAppVersionResources(
+    args: ListAppVersionResourcesCommandInput,
+    cb: (err: any, data?: ListAppVersionResourcesCommandOutput) => void
+  ): void;
+  listAppVersionResources(
+    args: ListAppVersionResourcesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppVersionResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAppVersionsCommand}
+   */
+  listAppVersions(
+    args: ListAppVersionsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListAppVersionsCommandOutput>;
+  listAppVersions(
+    args: ListAppVersionsCommandInput,
+    cb: (err: any, data?: ListAppVersionsCommandOutput) => void
+  ): void;
+  listAppVersions(
+    args: ListAppVersionsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListAppVersionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMetricsCommand}
+   */
+  listMetrics(): Promise<ListMetricsCommandOutput>;
+  listMetrics(
+    args: ListMetricsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListMetricsCommandOutput>;
+  listMetrics(
+    args: ListMetricsCommandInput,
+    cb: (err: any, data?: ListMetricsCommandOutput) => void
+  ): void;
+  listMetrics(
+    args: ListMetricsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListMetricsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListRecommendationTemplatesCommand}
+   */
+  listRecommendationTemplates(): Promise<ListRecommendationTemplatesCommandOutput>;
+  listRecommendationTemplates(
+    args: ListRecommendationTemplatesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListRecommendationTemplatesCommandOutput>;
+  listRecommendationTemplates(
+    args: ListRecommendationTemplatesCommandInput,
+    cb: (err: any, data?: ListRecommendationTemplatesCommandOutput) => void
+  ): void;
+  listRecommendationTemplates(
+    args: ListRecommendationTemplatesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListRecommendationTemplatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListResiliencyPoliciesCommand}
+   */
+  listResiliencyPolicies(): Promise<ListResiliencyPoliciesCommandOutput>;
+  listResiliencyPolicies(
+    args: ListResiliencyPoliciesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListResiliencyPoliciesCommandOutput>;
+  listResiliencyPolicies(
+    args: ListResiliencyPoliciesCommandInput,
+    cb: (err: any, data?: ListResiliencyPoliciesCommandOutput) => void
+  ): void;
+  listResiliencyPolicies(
+    args: ListResiliencyPoliciesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListResiliencyPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListResourceGroupingRecommendationsCommand}
+   */
+  listResourceGroupingRecommendations(): Promise<ListResourceGroupingRecommendationsCommandOutput>;
+  listResourceGroupingRecommendations(
+    args: ListResourceGroupingRecommendationsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListResourceGroupingRecommendationsCommandOutput>;
+  listResourceGroupingRecommendations(
+    args: ListResourceGroupingRecommendationsCommandInput,
+    cb: (err: any, data?: ListResourceGroupingRecommendationsCommandOutput) => void
+  ): void;
+  listResourceGroupingRecommendations(
+    args: ListResourceGroupingRecommendationsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListResourceGroupingRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSopRecommendationsCommand}
+   */
+  listSopRecommendations(
+    args: ListSopRecommendationsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListSopRecommendationsCommandOutput>;
+  listSopRecommendations(
+    args: ListSopRecommendationsCommandInput,
+    cb: (err: any, data?: ListSopRecommendationsCommandOutput) => void
+  ): void;
+  listSopRecommendations(
+    args: ListSopRecommendationsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListSopRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSuggestedResiliencyPoliciesCommand}
+   */
+  listSuggestedResiliencyPolicies(): Promise<ListSuggestedResiliencyPoliciesCommandOutput>;
+  listSuggestedResiliencyPolicies(
+    args: ListSuggestedResiliencyPoliciesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListSuggestedResiliencyPoliciesCommandOutput>;
+  listSuggestedResiliencyPolicies(
+    args: ListSuggestedResiliencyPoliciesCommandInput,
+    cb: (err: any, data?: ListSuggestedResiliencyPoliciesCommandOutput) => void
+  ): void;
+  listSuggestedResiliencyPolicies(
+    args: ListSuggestedResiliencyPoliciesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListSuggestedResiliencyPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTestRecommendationsCommand}
+   */
+  listTestRecommendations(
+    args: ListTestRecommendationsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListTestRecommendationsCommandOutput>;
+  listTestRecommendations(
+    args: ListTestRecommendationsCommandInput,
+    cb: (err: any, data?: ListTestRecommendationsCommandOutput) => void
+  ): void;
+  listTestRecommendations(
+    args: ListTestRecommendationsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListTestRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUnsupportedAppVersionResourcesCommand}
+   */
+  listUnsupportedAppVersionResources(
+    args: ListUnsupportedAppVersionResourcesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ListUnsupportedAppVersionResourcesCommandOutput>;
+  listUnsupportedAppVersionResources(
+    args: ListUnsupportedAppVersionResourcesCommandInput,
+    cb: (err: any, data?: ListUnsupportedAppVersionResourcesCommandOutput) => void
+  ): void;
+  listUnsupportedAppVersionResources(
+    args: ListUnsupportedAppVersionResourcesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ListUnsupportedAppVersionResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PublishAppVersionCommand}
+   */
+  publishAppVersion(
+    args: PublishAppVersionCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<PublishAppVersionCommandOutput>;
+  publishAppVersion(
+    args: PublishAppVersionCommandInput,
+    cb: (err: any, data?: PublishAppVersionCommandOutput) => void
+  ): void;
+  publishAppVersion(
+    args: PublishAppVersionCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: PublishAppVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutDraftAppVersionTemplateCommand}
+   */
+  putDraftAppVersionTemplate(
+    args: PutDraftAppVersionTemplateCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<PutDraftAppVersionTemplateCommandOutput>;
+  putDraftAppVersionTemplate(
+    args: PutDraftAppVersionTemplateCommandInput,
+    cb: (err: any, data?: PutDraftAppVersionTemplateCommandOutput) => void
+  ): void;
+  putDraftAppVersionTemplate(
+    args: PutDraftAppVersionTemplateCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: PutDraftAppVersionTemplateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RejectResourceGroupingRecommendationsCommand}
+   */
+  rejectResourceGroupingRecommendations(
+    args: RejectResourceGroupingRecommendationsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<RejectResourceGroupingRecommendationsCommandOutput>;
+  rejectResourceGroupingRecommendations(
+    args: RejectResourceGroupingRecommendationsCommandInput,
+    cb: (err: any, data?: RejectResourceGroupingRecommendationsCommandOutput) => void
+  ): void;
+  rejectResourceGroupingRecommendations(
+    args: RejectResourceGroupingRecommendationsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: RejectResourceGroupingRecommendationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RemoveDraftAppVersionResourceMappingsCommand}
+   */
+  removeDraftAppVersionResourceMappings(
+    args: RemoveDraftAppVersionResourceMappingsCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<RemoveDraftAppVersionResourceMappingsCommandOutput>;
+  removeDraftAppVersionResourceMappings(
+    args: RemoveDraftAppVersionResourceMappingsCommandInput,
+    cb: (err: any, data?: RemoveDraftAppVersionResourceMappingsCommandOutput) => void
+  ): void;
+  removeDraftAppVersionResourceMappings(
+    args: RemoveDraftAppVersionResourceMappingsCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: RemoveDraftAppVersionResourceMappingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResolveAppVersionResourcesCommand}
+   */
+  resolveAppVersionResources(
+    args: ResolveAppVersionResourcesCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<ResolveAppVersionResourcesCommandOutput>;
+  resolveAppVersionResources(
+    args: ResolveAppVersionResourcesCommandInput,
+    cb: (err: any, data?: ResolveAppVersionResourcesCommandOutput) => void
+  ): void;
+  resolveAppVersionResources(
+    args: ResolveAppVersionResourcesCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: ResolveAppVersionResourcesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartAppAssessmentCommand}
+   */
+  startAppAssessment(
+    args: StartAppAssessmentCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<StartAppAssessmentCommandOutput>;
+  startAppAssessment(
+    args: StartAppAssessmentCommandInput,
+    cb: (err: any, data?: StartAppAssessmentCommandOutput) => void
+  ): void;
+  startAppAssessment(
+    args: StartAppAssessmentCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: StartAppAssessmentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMetricsExportCommand}
+   */
+  startMetricsExport(): Promise<StartMetricsExportCommandOutput>;
+  startMetricsExport(
+    args: StartMetricsExportCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<StartMetricsExportCommandOutput>;
+  startMetricsExport(
+    args: StartMetricsExportCommandInput,
+    cb: (err: any, data?: StartMetricsExportCommandOutput) => void
+  ): void;
+  startMetricsExport(
+    args: StartMetricsExportCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: StartMetricsExportCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartResourceGroupingRecommendationTaskCommand}
+   */
+  startResourceGroupingRecommendationTask(
+    args: StartResourceGroupingRecommendationTaskCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<StartResourceGroupingRecommendationTaskCommandOutput>;
+  startResourceGroupingRecommendationTask(
+    args: StartResourceGroupingRecommendationTaskCommandInput,
+    cb: (err: any, data?: StartResourceGroupingRecommendationTaskCommandOutput) => void
+  ): void;
+  startResourceGroupingRecommendationTask(
+    args: StartResourceGroupingRecommendationTaskCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: StartResourceGroupingRecommendationTaskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAppCommand}
+   */
+  updateApp(
+    args: UpdateAppCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<UpdateAppCommandOutput>;
+  updateApp(
+    args: UpdateAppCommandInput,
+    cb: (err: any, data?: UpdateAppCommandOutput) => void
+  ): void;
+  updateApp(
+    args: UpdateAppCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: UpdateAppCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAppVersionCommand}
+   */
+  updateAppVersion(
+    args: UpdateAppVersionCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<UpdateAppVersionCommandOutput>;
+  updateAppVersion(
+    args: UpdateAppVersionCommandInput,
+    cb: (err: any, data?: UpdateAppVersionCommandOutput) => void
+  ): void;
+  updateAppVersion(
+    args: UpdateAppVersionCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: UpdateAppVersionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAppVersionAppComponentCommand}
+   */
+  updateAppVersionAppComponent(
+    args: UpdateAppVersionAppComponentCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<UpdateAppVersionAppComponentCommandOutput>;
+  updateAppVersionAppComponent(
+    args: UpdateAppVersionAppComponentCommandInput,
+    cb: (err: any, data?: UpdateAppVersionAppComponentCommandOutput) => void
+  ): void;
+  updateAppVersionAppComponent(
+    args: UpdateAppVersionAppComponentCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: UpdateAppVersionAppComponentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateAppVersionResourceCommand}
+   */
+  updateAppVersionResource(
+    args: UpdateAppVersionResourceCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<UpdateAppVersionResourceCommandOutput>;
+  updateAppVersionResource(
+    args: UpdateAppVersionResourceCommandInput,
+    cb: (err: any, data?: UpdateAppVersionResourceCommandOutput) => void
+  ): void;
+  updateAppVersionResource(
+    args: UpdateAppVersionResourceCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: UpdateAppVersionResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateResiliencyPolicyCommand}
+   */
+  updateResiliencyPolicy(
+    args: UpdateResiliencyPolicyCommandInput,
+    options?: ResiliencehubRequestOptions
+  ): Promise<UpdateResiliencyPolicyCommandOutput>;
+  updateResiliencyPolicy(
+    args: UpdateResiliencyPolicyCommandInput,
+    cb: (err: any, data?: UpdateResiliencyPolicyCommandOutput) => void
+  ): void;
+  updateResiliencyPolicy(
+    args: UpdateResiliencyPolicyCommandInput,
+    options: ResiliencehubRequestOptions,
+    cb: (err: any, data?: UpdateResiliencyPolicyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListAlarmRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAlarmRecommendationsCommandOutput}.
+   */
+  paginateListAlarmRecommendations(
+    args: ListAlarmRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAlarmRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListAppAssessmentComplianceDriftsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppAssessmentComplianceDriftsCommandOutput}.
+   */
+  paginateListAppAssessmentComplianceDrifts(
+    args: ListAppAssessmentComplianceDriftsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppAssessmentComplianceDriftsCommandOutput>;
+
+  /**
+   * @see {@link ListAppAssessmentResourceDriftsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppAssessmentResourceDriftsCommandOutput}.
+   */
+  paginateListAppAssessmentResourceDrifts(
+    args: ListAppAssessmentResourceDriftsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppAssessmentResourceDriftsCommandOutput>;
+
+  /**
+   * @see {@link ListAppAssessmentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppAssessmentsCommandOutput}.
+   */
+  paginateListAppAssessments(
+    args?: ListAppAssessmentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppAssessmentsCommandOutput>;
+
+  /**
+   * @see {@link ListAppComponentCompliancesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppComponentCompliancesCommandOutput}.
+   */
+  paginateListAppComponentCompliances(
+    args: ListAppComponentCompliancesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppComponentCompliancesCommandOutput>;
+
+  /**
+   * @see {@link ListAppComponentRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppComponentRecommendationsCommandOutput}.
+   */
+  paginateListAppComponentRecommendations(
+    args: ListAppComponentRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppComponentRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListAppInputSourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppInputSourcesCommandOutput}.
+   */
+  paginateListAppInputSources(
+    args: ListAppInputSourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppInputSourcesCommandOutput>;
+
+  /**
+   * @see {@link ListAppsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppsCommandOutput}.
+   */
+  paginateListApps(
+    args?: ListAppsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppsCommandOutput>;
+
+  /**
+   * @see {@link ListAppVersionAppComponentsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppVersionAppComponentsCommandOutput}.
+   */
+  paginateListAppVersionAppComponents(
+    args: ListAppVersionAppComponentsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppVersionAppComponentsCommandOutput>;
+
+  /**
+   * @see {@link ListAppVersionResourceMappingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppVersionResourceMappingsCommandOutput}.
+   */
+  paginateListAppVersionResourceMappings(
+    args: ListAppVersionResourceMappingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppVersionResourceMappingsCommandOutput>;
+
+  /**
+   * @see {@link ListAppVersionResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppVersionResourcesCommandOutput}.
+   */
+  paginateListAppVersionResources(
+    args: ListAppVersionResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppVersionResourcesCommandOutput>;
+
+  /**
+   * @see {@link ListAppVersionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListAppVersionsCommandOutput}.
+   */
+  paginateListAppVersions(
+    args: ListAppVersionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListAppVersionsCommandOutput>;
+
+  /**
+   * @see {@link ListMetricsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMetricsCommandOutput}.
+   */
+  paginateListMetrics(
+    args?: ListMetricsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMetricsCommandOutput>;
+
+  /**
+   * @see {@link ListRecommendationTemplatesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecommendationTemplatesCommandOutput}.
+   */
+  paginateListRecommendationTemplates(
+    args?: ListRecommendationTemplatesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecommendationTemplatesCommandOutput>;
+
+  /**
+   * @see {@link ListResiliencyPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResiliencyPoliciesCommandOutput}.
+   */
+  paginateListResiliencyPolicies(
+    args?: ListResiliencyPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResiliencyPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListResourceGroupingRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListResourceGroupingRecommendationsCommandOutput}.
+   */
+  paginateListResourceGroupingRecommendations(
+    args?: ListResourceGroupingRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListResourceGroupingRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListSopRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSopRecommendationsCommandOutput}.
+   */
+  paginateListSopRecommendations(
+    args: ListSopRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSopRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListSuggestedResiliencyPoliciesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSuggestedResiliencyPoliciesCommandOutput}.
+   */
+  paginateListSuggestedResiliencyPolicies(
+    args?: ListSuggestedResiliencyPoliciesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSuggestedResiliencyPoliciesCommandOutput>;
+
+  /**
+   * @see {@link ListTestRecommendationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTestRecommendationsCommandOutput}.
+   */
+  paginateListTestRecommendations(
+    args: ListTestRecommendationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTestRecommendationsCommandOutput>;
+
+  /**
+   * @see {@link ListUnsupportedAppVersionResourcesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUnsupportedAppVersionResourcesCommandOutput}.
+   */
+  paginateListUnsupportedAppVersionResources(
+    args: ListUnsupportedAppVersionResourcesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUnsupportedAppVersionResourcesCommandOutput>;
+}
+
+/**
+ * <p>Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from
+ *       disruptions. It offers continual resiliency assessment and validation that integrates
  *       into your software development lifecycle. This enables you to uncover resiliency weaknesses,
  *       ensure recovery time objective (RTO) and recovery point objective (RPO) targets for your
  *       applications are met, and resolve issues before they are released into production. </p>
+ * @public
  */
-export class Resiliencehub extends ResiliencehubClient {
-  /**
-   * <p>Adds the resource mapping for the draft application version.</p>
-   */
-  public addDraftAppVersionResourceMappings(
-    args: AddDraftAppVersionResourceMappingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AddDraftAppVersionResourceMappingsCommandOutput>;
-  public addDraftAppVersionResourceMappings(
-    args: AddDraftAppVersionResourceMappingsCommandInput,
-    cb: (err: any, data?: AddDraftAppVersionResourceMappingsCommandOutput) => void
-  ): void;
-  public addDraftAppVersionResourceMappings(
-    args: AddDraftAppVersionResourceMappingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AddDraftAppVersionResourceMappingsCommandOutput) => void
-  ): void;
-  public addDraftAppVersionResourceMappings(
-    args: AddDraftAppVersionResourceMappingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AddDraftAppVersionResourceMappingsCommandOutput) => void),
-    cb?: (err: any, data?: AddDraftAppVersionResourceMappingsCommandOutput) => void
-  ): Promise<AddDraftAppVersionResourceMappingsCommandOutput> | void {
-    const command = new AddDraftAppVersionResourceMappingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a Resilience Hub application. A Resilience Hub application is a collection of Amazon Web Services
-   *       resources structured to prevent and recover Amazon Web Services application disruptions. To describe a
-   *       Resilience Hub application, you provide an application name, resources from one or more–up to
-   *       five–CloudFormation stacks, and an appropriate resiliency policy.</p>
-   *
-   *          <p>After you create a Resilience Hub application, you publish it so that you can run a resiliency
-   *       assessment on it. You can then use recommendations from the assessment to improve resiliency
-   *       by running another assessment, comparing results, and then iterating the process until you
-   *       achieve your goals for recovery time objective (RTO) and recovery point objective
-   *       (RPO).</p>
-   */
-  public createApp(args: CreateAppCommandInput, options?: __HttpHandlerOptions): Promise<CreateAppCommandOutput>;
-  public createApp(args: CreateAppCommandInput, cb: (err: any, data?: CreateAppCommandOutput) => void): void;
-  public createApp(
-    args: CreateAppCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateAppCommandOutput) => void
-  ): void;
-  public createApp(
-    args: CreateAppCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateAppCommandOutput) => void),
-    cb?: (err: any, data?: CreateAppCommandOutput) => void
-  ): Promise<CreateAppCommandOutput> | void {
-    const command = new CreateAppCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new recommendation template.</p>
-   */
-  public createRecommendationTemplate(
-    args: CreateRecommendationTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRecommendationTemplateCommandOutput>;
-  public createRecommendationTemplate(
-    args: CreateRecommendationTemplateCommandInput,
-    cb: (err: any, data?: CreateRecommendationTemplateCommandOutput) => void
-  ): void;
-  public createRecommendationTemplate(
-    args: CreateRecommendationTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRecommendationTemplateCommandOutput) => void
-  ): void;
-  public createRecommendationTemplate(
-    args: CreateRecommendationTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRecommendationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: CreateRecommendationTemplateCommandOutput) => void
-  ): Promise<CreateRecommendationTemplateCommandOutput> | void {
-    const command = new CreateRecommendationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a resiliency policy for an application.</p>
-   */
-  public createResiliencyPolicy(
-    args: CreateResiliencyPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateResiliencyPolicyCommandOutput>;
-  public createResiliencyPolicy(
-    args: CreateResiliencyPolicyCommandInput,
-    cb: (err: any, data?: CreateResiliencyPolicyCommandOutput) => void
-  ): void;
-  public createResiliencyPolicy(
-    args: CreateResiliencyPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateResiliencyPolicyCommandOutput) => void
-  ): void;
-  public createResiliencyPolicy(
-    args: CreateResiliencyPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateResiliencyPolicyCommandOutput) => void),
-    cb?: (err: any, data?: CreateResiliencyPolicyCommandOutput) => void
-  ): Promise<CreateResiliencyPolicyCommandOutput> | void {
-    const command = new CreateResiliencyPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an AWS Resilience Hub application. This is a destructive action that can't be
-   *       undone.</p>
-   */
-  public deleteApp(args: DeleteAppCommandInput, options?: __HttpHandlerOptions): Promise<DeleteAppCommandOutput>;
-  public deleteApp(args: DeleteAppCommandInput, cb: (err: any, data?: DeleteAppCommandOutput) => void): void;
-  public deleteApp(
-    args: DeleteAppCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAppCommandOutput) => void
-  ): void;
-  public deleteApp(
-    args: DeleteAppCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAppCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAppCommandOutput) => void
-  ): Promise<DeleteAppCommandOutput> | void {
-    const command = new DeleteAppCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an AWS Resilience Hub application assessment. This is a destructive action that can't
-   *       be undone.</p>
-   */
-  public deleteAppAssessment(
-    args: DeleteAppAssessmentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteAppAssessmentCommandOutput>;
-  public deleteAppAssessment(
-    args: DeleteAppAssessmentCommandInput,
-    cb: (err: any, data?: DeleteAppAssessmentCommandOutput) => void
-  ): void;
-  public deleteAppAssessment(
-    args: DeleteAppAssessmentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAppAssessmentCommandOutput) => void
-  ): void;
-  public deleteAppAssessment(
-    args: DeleteAppAssessmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAppAssessmentCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAppAssessmentCommandOutput) => void
-  ): Promise<DeleteAppAssessmentCommandOutput> | void {
-    const command = new DeleteAppAssessmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a recommendation template. This is a destructive action that can't be
-   *       undone.</p>
-   */
-  public deleteRecommendationTemplate(
-    args: DeleteRecommendationTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRecommendationTemplateCommandOutput>;
-  public deleteRecommendationTemplate(
-    args: DeleteRecommendationTemplateCommandInput,
-    cb: (err: any, data?: DeleteRecommendationTemplateCommandOutput) => void
-  ): void;
-  public deleteRecommendationTemplate(
-    args: DeleteRecommendationTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRecommendationTemplateCommandOutput) => void
-  ): void;
-  public deleteRecommendationTemplate(
-    args: DeleteRecommendationTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRecommendationTemplateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRecommendationTemplateCommandOutput) => void
-  ): Promise<DeleteRecommendationTemplateCommandOutput> | void {
-    const command = new DeleteRecommendationTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a resiliency policy. This is a destructive action that can't be undone.</p>
-   */
-  public deleteResiliencyPolicy(
-    args: DeleteResiliencyPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteResiliencyPolicyCommandOutput>;
-  public deleteResiliencyPolicy(
-    args: DeleteResiliencyPolicyCommandInput,
-    cb: (err: any, data?: DeleteResiliencyPolicyCommandOutput) => void
-  ): void;
-  public deleteResiliencyPolicy(
-    args: DeleteResiliencyPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteResiliencyPolicyCommandOutput) => void
-  ): void;
-  public deleteResiliencyPolicy(
-    args: DeleteResiliencyPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResiliencyPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResiliencyPolicyCommandOutput) => void
-  ): Promise<DeleteResiliencyPolicyCommandOutput> | void {
-    const command = new DeleteResiliencyPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes an AWS Resilience Hub application.</p>
-   */
-  public describeApp(args: DescribeAppCommandInput, options?: __HttpHandlerOptions): Promise<DescribeAppCommandOutput>;
-  public describeApp(args: DescribeAppCommandInput, cb: (err: any, data?: DescribeAppCommandOutput) => void): void;
-  public describeApp(
-    args: DescribeAppCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAppCommandOutput) => void
-  ): void;
-  public describeApp(
-    args: DescribeAppCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAppCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAppCommandOutput) => void
-  ): Promise<DescribeAppCommandOutput> | void {
-    const command = new DescribeAppCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes an assessment for an AWS Resilience Hub application.</p>
-   */
-  public describeAppAssessment(
-    args: DescribeAppAssessmentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAppAssessmentCommandOutput>;
-  public describeAppAssessment(
-    args: DescribeAppAssessmentCommandInput,
-    cb: (err: any, data?: DescribeAppAssessmentCommandOutput) => void
-  ): void;
-  public describeAppAssessment(
-    args: DescribeAppAssessmentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAppAssessmentCommandOutput) => void
-  ): void;
-  public describeAppAssessment(
-    args: DescribeAppAssessmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAppAssessmentCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAppAssessmentCommandOutput) => void
-  ): Promise<DescribeAppAssessmentCommandOutput> | void {
-    const command = new DescribeAppAssessmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the resolution status for the specified resolution identifier for an application
-   *       version. If <code>resolutionId</code> is not specified, the current resolution status is
-   *       returned.</p>
-   */
-  public describeAppVersionResourcesResolutionStatus(
-    args: DescribeAppVersionResourcesResolutionStatusCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAppVersionResourcesResolutionStatusCommandOutput>;
-  public describeAppVersionResourcesResolutionStatus(
-    args: DescribeAppVersionResourcesResolutionStatusCommandInput,
-    cb: (err: any, data?: DescribeAppVersionResourcesResolutionStatusCommandOutput) => void
-  ): void;
-  public describeAppVersionResourcesResolutionStatus(
-    args: DescribeAppVersionResourcesResolutionStatusCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAppVersionResourcesResolutionStatusCommandOutput) => void
-  ): void;
-  public describeAppVersionResourcesResolutionStatus(
-    args: DescribeAppVersionResourcesResolutionStatusCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeAppVersionResourcesResolutionStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAppVersionResourcesResolutionStatusCommandOutput) => void
-  ): Promise<DescribeAppVersionResourcesResolutionStatusCommandOutput> | void {
-    const command = new DescribeAppVersionResourcesResolutionStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes details about an AWS Resilience Hub </p>
-   */
-  public describeAppVersionTemplate(
-    args: DescribeAppVersionTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeAppVersionTemplateCommandOutput>;
-  public describeAppVersionTemplate(
-    args: DescribeAppVersionTemplateCommandInput,
-    cb: (err: any, data?: DescribeAppVersionTemplateCommandOutput) => void
-  ): void;
-  public describeAppVersionTemplate(
-    args: DescribeAppVersionTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeAppVersionTemplateCommandOutput) => void
-  ): void;
-  public describeAppVersionTemplate(
-    args: DescribeAppVersionTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeAppVersionTemplateCommandOutput) => void),
-    cb?: (err: any, data?: DescribeAppVersionTemplateCommandOutput) => void
-  ): Promise<DescribeAppVersionTemplateCommandOutput> | void {
-    const command = new DescribeAppVersionTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes the status of importing resources to an application version.</p>
-   */
-  public describeDraftAppVersionResourcesImportStatus(
-    args: DescribeDraftAppVersionResourcesImportStatusCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeDraftAppVersionResourcesImportStatusCommandOutput>;
-  public describeDraftAppVersionResourcesImportStatus(
-    args: DescribeDraftAppVersionResourcesImportStatusCommandInput,
-    cb: (err: any, data?: DescribeDraftAppVersionResourcesImportStatusCommandOutput) => void
-  ): void;
-  public describeDraftAppVersionResourcesImportStatus(
-    args: DescribeDraftAppVersionResourcesImportStatusCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeDraftAppVersionResourcesImportStatusCommandOutput) => void
-  ): void;
-  public describeDraftAppVersionResourcesImportStatus(
-    args: DescribeDraftAppVersionResourcesImportStatusCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: DescribeDraftAppVersionResourcesImportStatusCommandOutput) => void),
-    cb?: (err: any, data?: DescribeDraftAppVersionResourcesImportStatusCommandOutput) => void
-  ): Promise<DescribeDraftAppVersionResourcesImportStatusCommandOutput> | void {
-    const command = new DescribeDraftAppVersionResourcesImportStatusCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Describes a specified resiliency policy for an AWS Resilience Hub application. The returned
-   *       policy object includes creation time, data location constraints, the Amazon Resource Name
-   *       (ARN) for the policy, tags, tier, and more.</p>
-   */
-  public describeResiliencyPolicy(
-    args: DescribeResiliencyPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeResiliencyPolicyCommandOutput>;
-  public describeResiliencyPolicy(
-    args: DescribeResiliencyPolicyCommandInput,
-    cb: (err: any, data?: DescribeResiliencyPolicyCommandOutput) => void
-  ): void;
-  public describeResiliencyPolicy(
-    args: DescribeResiliencyPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeResiliencyPolicyCommandOutput) => void
-  ): void;
-  public describeResiliencyPolicy(
-    args: DescribeResiliencyPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeResiliencyPolicyCommandOutput) => void),
-    cb?: (err: any, data?: DescribeResiliencyPolicyCommandOutput) => void
-  ): Promise<DescribeResiliencyPolicyCommandOutput> | void {
-    const command = new DescribeResiliencyPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Imports resources from sources such as a CloudFormation stack, resource-groups, or application
-   *       registry app to a draft application version.</p>
-   */
-  public importResourcesToDraftAppVersion(
-    args: ImportResourcesToDraftAppVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ImportResourcesToDraftAppVersionCommandOutput>;
-  public importResourcesToDraftAppVersion(
-    args: ImportResourcesToDraftAppVersionCommandInput,
-    cb: (err: any, data?: ImportResourcesToDraftAppVersionCommandOutput) => void
-  ): void;
-  public importResourcesToDraftAppVersion(
-    args: ImportResourcesToDraftAppVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ImportResourcesToDraftAppVersionCommandOutput) => void
-  ): void;
-  public importResourcesToDraftAppVersion(
-    args: ImportResourcesToDraftAppVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportResourcesToDraftAppVersionCommandOutput) => void),
-    cb?: (err: any, data?: ImportResourcesToDraftAppVersionCommandOutput) => void
-  ): Promise<ImportResourcesToDraftAppVersionCommandOutput> | void {
-    const command = new ImportResourcesToDraftAppVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the alarm recommendations for a AWS Resilience Hub application.</p>
-   */
-  public listAlarmRecommendations(
-    args: ListAlarmRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAlarmRecommendationsCommandOutput>;
-  public listAlarmRecommendations(
-    args: ListAlarmRecommendationsCommandInput,
-    cb: (err: any, data?: ListAlarmRecommendationsCommandOutput) => void
-  ): void;
-  public listAlarmRecommendations(
-    args: ListAlarmRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAlarmRecommendationsCommandOutput) => void
-  ): void;
-  public listAlarmRecommendations(
-    args: ListAlarmRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAlarmRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ListAlarmRecommendationsCommandOutput) => void
-  ): Promise<ListAlarmRecommendationsCommandOutput> | void {
-    const command = new ListAlarmRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the assessments for an AWS Resilience Hub application. You can use request parameters to
-   *       refine the results for the response object.</p>
-   */
-  public listAppAssessments(
-    args: ListAppAssessmentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAppAssessmentsCommandOutput>;
-  public listAppAssessments(
-    args: ListAppAssessmentsCommandInput,
-    cb: (err: any, data?: ListAppAssessmentsCommandOutput) => void
-  ): void;
-  public listAppAssessments(
-    args: ListAppAssessmentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAppAssessmentsCommandOutput) => void
-  ): void;
-  public listAppAssessments(
-    args: ListAppAssessmentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppAssessmentsCommandOutput) => void),
-    cb?: (err: any, data?: ListAppAssessmentsCommandOutput) => void
-  ): Promise<ListAppAssessmentsCommandOutput> | void {
-    const command = new ListAppAssessmentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the compliances for an AWS Resilience Hub component.</p>
-   */
-  public listAppComponentCompliances(
-    args: ListAppComponentCompliancesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAppComponentCompliancesCommandOutput>;
-  public listAppComponentCompliances(
-    args: ListAppComponentCompliancesCommandInput,
-    cb: (err: any, data?: ListAppComponentCompliancesCommandOutput) => void
-  ): void;
-  public listAppComponentCompliances(
-    args: ListAppComponentCompliancesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAppComponentCompliancesCommandOutput) => void
-  ): void;
-  public listAppComponentCompliances(
-    args: ListAppComponentCompliancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppComponentCompliancesCommandOutput) => void),
-    cb?: (err: any, data?: ListAppComponentCompliancesCommandOutput) => void
-  ): Promise<ListAppComponentCompliancesCommandOutput> | void {
-    const command = new ListAppComponentCompliancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the recommendations for an AWS Resilience Hub component.</p>
-   */
-  public listAppComponentRecommendations(
-    args: ListAppComponentRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAppComponentRecommendationsCommandOutput>;
-  public listAppComponentRecommendations(
-    args: ListAppComponentRecommendationsCommandInput,
-    cb: (err: any, data?: ListAppComponentRecommendationsCommandOutput) => void
-  ): void;
-  public listAppComponentRecommendations(
-    args: ListAppComponentRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAppComponentRecommendationsCommandOutput) => void
-  ): void;
-  public listAppComponentRecommendations(
-    args: ListAppComponentRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppComponentRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ListAppComponentRecommendationsCommandOutput) => void
-  ): Promise<ListAppComponentRecommendationsCommandOutput> | void {
-    const command = new ListAppComponentRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists your Resilience Hub applications.</p>
-   */
-  public listApps(args: ListAppsCommandInput, options?: __HttpHandlerOptions): Promise<ListAppsCommandOutput>;
-  public listApps(args: ListAppsCommandInput, cb: (err: any, data?: ListAppsCommandOutput) => void): void;
-  public listApps(
-    args: ListAppsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAppsCommandOutput) => void
-  ): void;
-  public listApps(
-    args: ListAppsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppsCommandOutput) => void),
-    cb?: (err: any, data?: ListAppsCommandOutput) => void
-  ): Promise<ListAppsCommandOutput> | void {
-    const command = new ListAppsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists how the resources in an application version are mapped/sourced from. Mappings can be
-   *       physical resource identifiers, CloudFormation stacks, resource-groups, or an application registry
-   *       app.</p>
-   */
-  public listAppVersionResourceMappings(
-    args: ListAppVersionResourceMappingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAppVersionResourceMappingsCommandOutput>;
-  public listAppVersionResourceMappings(
-    args: ListAppVersionResourceMappingsCommandInput,
-    cb: (err: any, data?: ListAppVersionResourceMappingsCommandOutput) => void
-  ): void;
-  public listAppVersionResourceMappings(
-    args: ListAppVersionResourceMappingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAppVersionResourceMappingsCommandOutput) => void
-  ): void;
-  public listAppVersionResourceMappings(
-    args: ListAppVersionResourceMappingsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppVersionResourceMappingsCommandOutput) => void),
-    cb?: (err: any, data?: ListAppVersionResourceMappingsCommandOutput) => void
-  ): Promise<ListAppVersionResourceMappingsCommandOutput> | void {
-    const command = new ListAppVersionResourceMappingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all the resources in an application version.</p>
-   */
-  public listAppVersionResources(
-    args: ListAppVersionResourcesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAppVersionResourcesCommandOutput>;
-  public listAppVersionResources(
-    args: ListAppVersionResourcesCommandInput,
-    cb: (err: any, data?: ListAppVersionResourcesCommandOutput) => void
-  ): void;
-  public listAppVersionResources(
-    args: ListAppVersionResourcesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAppVersionResourcesCommandOutput) => void
-  ): void;
-  public listAppVersionResources(
-    args: ListAppVersionResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppVersionResourcesCommandOutput) => void),
-    cb?: (err: any, data?: ListAppVersionResourcesCommandOutput) => void
-  ): Promise<ListAppVersionResourcesCommandOutput> | void {
-    const command = new ListAppVersionResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the different versions for the Resilience Hub applications.</p>
-   */
-  public listAppVersions(
-    args: ListAppVersionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListAppVersionsCommandOutput>;
-  public listAppVersions(
-    args: ListAppVersionsCommandInput,
-    cb: (err: any, data?: ListAppVersionsCommandOutput) => void
-  ): void;
-  public listAppVersions(
-    args: ListAppVersionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListAppVersionsCommandOutput) => void
-  ): void;
-  public listAppVersions(
-    args: ListAppVersionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListAppVersionsCommandOutput) => void),
-    cb?: (err: any, data?: ListAppVersionsCommandOutput) => void
-  ): Promise<ListAppVersionsCommandOutput> | void {
-    const command = new ListAppVersionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the recommendation templates for the Resilience Hub applications.</p>
-   */
-  public listRecommendationTemplates(
-    args: ListRecommendationTemplatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListRecommendationTemplatesCommandOutput>;
-  public listRecommendationTemplates(
-    args: ListRecommendationTemplatesCommandInput,
-    cb: (err: any, data?: ListRecommendationTemplatesCommandOutput) => void
-  ): void;
-  public listRecommendationTemplates(
-    args: ListRecommendationTemplatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListRecommendationTemplatesCommandOutput) => void
-  ): void;
-  public listRecommendationTemplates(
-    args: ListRecommendationTemplatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRecommendationTemplatesCommandOutput) => void),
-    cb?: (err: any, data?: ListRecommendationTemplatesCommandOutput) => void
-  ): Promise<ListRecommendationTemplatesCommandOutput> | void {
-    const command = new ListRecommendationTemplatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the resiliency policies for the Resilience Hub applications.</p>
-   */
-  public listResiliencyPolicies(
-    args: ListResiliencyPoliciesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListResiliencyPoliciesCommandOutput>;
-  public listResiliencyPolicies(
-    args: ListResiliencyPoliciesCommandInput,
-    cb: (err: any, data?: ListResiliencyPoliciesCommandOutput) => void
-  ): void;
-  public listResiliencyPolicies(
-    args: ListResiliencyPoliciesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListResiliencyPoliciesCommandOutput) => void
-  ): void;
-  public listResiliencyPolicies(
-    args: ListResiliencyPoliciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListResiliencyPoliciesCommandOutput) => void),
-    cb?: (err: any, data?: ListResiliencyPoliciesCommandOutput) => void
-  ): Promise<ListResiliencyPoliciesCommandOutput> | void {
-    const command = new ListResiliencyPoliciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the standard operating procedure (SOP) recommendations for the Resilience Hub
-   *       applications.</p>
-   */
-  public listSopRecommendations(
-    args: ListSopRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSopRecommendationsCommandOutput>;
-  public listSopRecommendations(
-    args: ListSopRecommendationsCommandInput,
-    cb: (err: any, data?: ListSopRecommendationsCommandOutput) => void
-  ): void;
-  public listSopRecommendations(
-    args: ListSopRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSopRecommendationsCommandOutput) => void
-  ): void;
-  public listSopRecommendations(
-    args: ListSopRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSopRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ListSopRecommendationsCommandOutput) => void
-  ): Promise<ListSopRecommendationsCommandOutput> | void {
-    const command = new ListSopRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the suggested resiliency policies for the Resilience Hub applications.</p>
-   */
-  public listSuggestedResiliencyPolicies(
-    args: ListSuggestedResiliencyPoliciesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListSuggestedResiliencyPoliciesCommandOutput>;
-  public listSuggestedResiliencyPolicies(
-    args: ListSuggestedResiliencyPoliciesCommandInput,
-    cb: (err: any, data?: ListSuggestedResiliencyPoliciesCommandOutput) => void
-  ): void;
-  public listSuggestedResiliencyPolicies(
-    args: ListSuggestedResiliencyPoliciesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListSuggestedResiliencyPoliciesCommandOutput) => void
-  ): void;
-  public listSuggestedResiliencyPolicies(
-    args: ListSuggestedResiliencyPoliciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSuggestedResiliencyPoliciesCommandOutput) => void),
-    cb?: (err: any, data?: ListSuggestedResiliencyPoliciesCommandOutput) => void
-  ): Promise<ListSuggestedResiliencyPoliciesCommandOutput> | void {
-    const command = new ListSuggestedResiliencyPoliciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the tags for your resources in your Resilience Hub applications.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the test recommendations for the Resilience Hub application.</p>
-   */
-  public listTestRecommendations(
-    args: ListTestRecommendationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTestRecommendationsCommandOutput>;
-  public listTestRecommendations(
-    args: ListTestRecommendationsCommandInput,
-    cb: (err: any, data?: ListTestRecommendationsCommandOutput) => void
-  ): void;
-  public listTestRecommendations(
-    args: ListTestRecommendationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTestRecommendationsCommandOutput) => void
-  ): void;
-  public listTestRecommendations(
-    args: ListTestRecommendationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTestRecommendationsCommandOutput) => void),
-    cb?: (err: any, data?: ListTestRecommendationsCommandOutput) => void
-  ): Promise<ListTestRecommendationsCommandOutput> | void {
-    const command = new ListTestRecommendationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists the resources that are not currently supported in AWS Resilience Hub. An unsupported
-   *       resource is a resource that exists in the object that was used to create an app, but is not
-   *       supported by Resilience Hub.</p>
-   */
-  public listUnsupportedAppVersionResources(
-    args: ListUnsupportedAppVersionResourcesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListUnsupportedAppVersionResourcesCommandOutput>;
-  public listUnsupportedAppVersionResources(
-    args: ListUnsupportedAppVersionResourcesCommandInput,
-    cb: (err: any, data?: ListUnsupportedAppVersionResourcesCommandOutput) => void
-  ): void;
-  public listUnsupportedAppVersionResources(
-    args: ListUnsupportedAppVersionResourcesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListUnsupportedAppVersionResourcesCommandOutput) => void
-  ): void;
-  public listUnsupportedAppVersionResources(
-    args: ListUnsupportedAppVersionResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUnsupportedAppVersionResourcesCommandOutput) => void),
-    cb?: (err: any, data?: ListUnsupportedAppVersionResourcesCommandOutput) => void
-  ): Promise<ListUnsupportedAppVersionResourcesCommandOutput> | void {
-    const command = new ListUnsupportedAppVersionResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Publishes a new version of a specific Resilience Hub application.</p>
-   */
-  public publishAppVersion(
-    args: PublishAppVersionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PublishAppVersionCommandOutput>;
-  public publishAppVersion(
-    args: PublishAppVersionCommandInput,
-    cb: (err: any, data?: PublishAppVersionCommandOutput) => void
-  ): void;
-  public publishAppVersion(
-    args: PublishAppVersionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PublishAppVersionCommandOutput) => void
-  ): void;
-  public publishAppVersion(
-    args: PublishAppVersionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PublishAppVersionCommandOutput) => void),
-    cb?: (err: any, data?: PublishAppVersionCommandOutput) => void
-  ): Promise<PublishAppVersionCommandOutput> | void {
-    const command = new PublishAppVersionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds or updates the app template for a draft version of a Resilience Hub app.</p>
-   */
-  public putDraftAppVersionTemplate(
-    args: PutDraftAppVersionTemplateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutDraftAppVersionTemplateCommandOutput>;
-  public putDraftAppVersionTemplate(
-    args: PutDraftAppVersionTemplateCommandInput,
-    cb: (err: any, data?: PutDraftAppVersionTemplateCommandOutput) => void
-  ): void;
-  public putDraftAppVersionTemplate(
-    args: PutDraftAppVersionTemplateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutDraftAppVersionTemplateCommandOutput) => void
-  ): void;
-  public putDraftAppVersionTemplate(
-    args: PutDraftAppVersionTemplateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutDraftAppVersionTemplateCommandOutput) => void),
-    cb?: (err: any, data?: PutDraftAppVersionTemplateCommandOutput) => void
-  ): Promise<PutDraftAppVersionTemplateCommandOutput> | void {
-    const command = new PutDraftAppVersionTemplateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes resource mappings from a draft application version.</p>
-   */
-  public removeDraftAppVersionResourceMappings(
-    args: RemoveDraftAppVersionResourceMappingsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RemoveDraftAppVersionResourceMappingsCommandOutput>;
-  public removeDraftAppVersionResourceMappings(
-    args: RemoveDraftAppVersionResourceMappingsCommandInput,
-    cb: (err: any, data?: RemoveDraftAppVersionResourceMappingsCommandOutput) => void
-  ): void;
-  public removeDraftAppVersionResourceMappings(
-    args: RemoveDraftAppVersionResourceMappingsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RemoveDraftAppVersionResourceMappingsCommandOutput) => void
-  ): void;
-  public removeDraftAppVersionResourceMappings(
-    args: RemoveDraftAppVersionResourceMappingsCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: RemoveDraftAppVersionResourceMappingsCommandOutput) => void),
-    cb?: (err: any, data?: RemoveDraftAppVersionResourceMappingsCommandOutput) => void
-  ): Promise<RemoveDraftAppVersionResourceMappingsCommandOutput> | void {
-    const command = new RemoveDraftAppVersionResourceMappingsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Resolves the resources for an application version.</p>
-   */
-  public resolveAppVersionResources(
-    args: ResolveAppVersionResourcesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ResolveAppVersionResourcesCommandOutput>;
-  public resolveAppVersionResources(
-    args: ResolveAppVersionResourcesCommandInput,
-    cb: (err: any, data?: ResolveAppVersionResourcesCommandOutput) => void
-  ): void;
-  public resolveAppVersionResources(
-    args: ResolveAppVersionResourcesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ResolveAppVersionResourcesCommandOutput) => void
-  ): void;
-  public resolveAppVersionResources(
-    args: ResolveAppVersionResourcesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResolveAppVersionResourcesCommandOutput) => void),
-    cb?: (err: any, data?: ResolveAppVersionResourcesCommandOutput) => void
-  ): Promise<ResolveAppVersionResourcesCommandOutput> | void {
-    const command = new ResolveAppVersionResourcesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new application assessment for an application.</p>
-   */
-  public startAppAssessment(
-    args: StartAppAssessmentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartAppAssessmentCommandOutput>;
-  public startAppAssessment(
-    args: StartAppAssessmentCommandInput,
-    cb: (err: any, data?: StartAppAssessmentCommandOutput) => void
-  ): void;
-  public startAppAssessment(
-    args: StartAppAssessmentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartAppAssessmentCommandOutput) => void
-  ): void;
-  public startAppAssessment(
-    args: StartAppAssessmentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartAppAssessmentCommandOutput) => void),
-    cb?: (err: any, data?: StartAppAssessmentCommandOutput) => void
-  ): Promise<StartAppAssessmentCommandOutput> | void {
-    const command = new StartAppAssessmentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Applies one or more tags to a resource.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes one or more tags from a resource.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an application.</p>
-   */
-  public updateApp(args: UpdateAppCommandInput, options?: __HttpHandlerOptions): Promise<UpdateAppCommandOutput>;
-  public updateApp(args: UpdateAppCommandInput, cb: (err: any, data?: UpdateAppCommandOutput) => void): void;
-  public updateApp(
-    args: UpdateAppCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateAppCommandOutput) => void
-  ): void;
-  public updateApp(
-    args: UpdateAppCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateAppCommandOutput) => void),
-    cb?: (err: any, data?: UpdateAppCommandOutput) => void
-  ): Promise<UpdateAppCommandOutput> | void {
-    const command = new UpdateAppCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a resiliency policy.</p>
-   */
-  public updateResiliencyPolicy(
-    args: UpdateResiliencyPolicyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateResiliencyPolicyCommandOutput>;
-  public updateResiliencyPolicy(
-    args: UpdateResiliencyPolicyCommandInput,
-    cb: (err: any, data?: UpdateResiliencyPolicyCommandOutput) => void
-  ): void;
-  public updateResiliencyPolicy(
-    args: UpdateResiliencyPolicyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateResiliencyPolicyCommandOutput) => void
-  ): void;
-  public updateResiliencyPolicy(
-    args: UpdateResiliencyPolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateResiliencyPolicyCommandOutput) => void),
-    cb?: (err: any, data?: UpdateResiliencyPolicyCommandOutput) => void
-  ): Promise<UpdateResiliencyPolicyCommandOutput> | void {
-    const command = new UpdateResiliencyPolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Resiliencehub extends ResiliencehubClient implements Resiliencehub {}
+createAggregatedClient(commands, Resiliencehub, { paginators });

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CostExplorerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CostExplorerClient";
-import {
-  ListCostAllocationTagsRequest,
-  ListCostAllocationTagsRequestFilterSensitiveLog,
-  ListCostAllocationTagsResponse,
-  ListCostAllocationTagsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1ListCostAllocationTagsCommand,
-  serializeAws_json1_1ListCostAllocationTagsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListCostAllocationTagsRequest, ListCostAllocationTagsResponse } from "../models/models_0";
+import { ListCostAllocationTags$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListCostAllocationTagsCommand}.
+ */
 export interface ListCostAllocationTagsCommandInput extends ListCostAllocationTagsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListCostAllocationTagsCommand}.
+ */
 export interface ListCostAllocationTagsCommandOutput extends ListCostAllocationTagsResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,68 @@ export interface ListCostAllocationTagsCommandOutput extends ListCostAllocationT
  * ```javascript
  * import { CostExplorerClient, ListCostAllocationTagsCommand } from "@aws-sdk/client-cost-explorer"; // ES Modules import
  * // const { CostExplorerClient, ListCostAllocationTagsCommand } = require("@aws-sdk/client-cost-explorer"); // CommonJS import
+ * // import type { CostExplorerClientConfig } from "@aws-sdk/client-cost-explorer";
+ * const config = {}; // type is CostExplorerClientConfig
  * const client = new CostExplorerClient(config);
+ * const input = { // ListCostAllocationTagsRequest
+ *   Status: "Active" || "Inactive",
+ *   TagKeys: [ // CostAllocationTagKeyList
+ *     "STRING_VALUE",
+ *   ],
+ *   Type: "AWSGenerated" || "UserDefined",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListCostAllocationTagsCommand(input);
  * const response = await client.send(command);
+ * // { // ListCostAllocationTagsResponse
+ * //   CostAllocationTags: [ // CostAllocationTagList
+ * //     { // CostAllocationTag
+ * //       TagKey: "STRING_VALUE", // required
+ * //       Type: "AWSGenerated" || "UserDefined", // required
+ * //       Status: "Active" || "Inactive", // required
+ * //       LastUpdatedDate: "STRING_VALUE",
+ * //       LastUsedDate: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListCostAllocationTagsCommandInput - {@link ListCostAllocationTagsCommandInput}
+ * @returns {@link ListCostAllocationTagsCommandOutput}
  * @see {@link ListCostAllocationTagsCommandInput} for command's `input` shape.
  * @see {@link ListCostAllocationTagsCommandOutput} for command's `response` shape.
  * @see {@link CostExplorerClientResolvedConfig | config} for CostExplorerClient's `config` shape.
  *
+ * @throws {@link InvalidNextTokenException} (client fault)
+ *  <p>The pagination token is invalid. Try again without a pagination token.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>You made too many calls in a short period of time. Try again later.</p>
+ *
+ * @throws {@link CostExplorerServiceException}
+ * <p>Base exception class for all service exceptions from CostExplorer service.</p>
+ *
+ *
+ * @public
  */
-export class ListCostAllocationTagsCommand extends $Command<
-  ListCostAllocationTagsCommandInput,
-  ListCostAllocationTagsCommandOutput,
-  CostExplorerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListCostAllocationTagsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CostExplorerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListCostAllocationTagsCommandInput, ListCostAllocationTagsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CostExplorerClient";
-    const commandName = "ListCostAllocationTagsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListCostAllocationTagsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListCostAllocationTagsResponseFilterSensitiveLog,
+export class ListCostAllocationTagsCommand extends command<ListCostAllocationTagsCommandInput, ListCostAllocationTagsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListCostAllocationTags",
+  ListCostAllocationTags$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListCostAllocationTagsRequest;
+      output: ListCostAllocationTagsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListCostAllocationTagsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListCostAllocationTagsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListCostAllocationTagsCommandOutput> {
-    return deserializeAws_json1_1ListCostAllocationTagsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListCostAllocationTagsCommandInput;
+      output: ListCostAllocationTagsCommandOutput;
+    };
+  };
 }

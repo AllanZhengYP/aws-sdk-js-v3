@@ -1,36 +1,31 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ChimeSDKMeetingsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ChimeSDKMeetingsClient";
-import {
-  ListAttendeesRequest,
-  ListAttendeesRequestFilterSensitiveLog,
-  ListAttendeesResponse,
-  ListAttendeesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListAttendeesCommand,
-  serializeAws_restJson1ListAttendeesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListAttendeesRequest, ListAttendeesResponse } from "../models/models_0";
+import { ListAttendees$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListAttendeesCommand}.
+ */
 export interface ListAttendeesCommandInput extends ListAttendeesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListAttendeesCommand}.
+ */
 export interface ListAttendeesCommandOutput extends ListAttendeesResponse, __MetadataBearer {}
 
 /**
  * <p>
  *             Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see
- *             <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
+ *             <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a>
  *             in the <i>Amazon Chime Developer Guide</i>.
  *         </p>
  * @example
@@ -38,68 +33,82 @@ export interface ListAttendeesCommandOutput extends ListAttendeesResponse, __Met
  * ```javascript
  * import { ChimeSDKMeetingsClient, ListAttendeesCommand } from "@aws-sdk/client-chime-sdk-meetings"; // ES Modules import
  * // const { ChimeSDKMeetingsClient, ListAttendeesCommand } = require("@aws-sdk/client-chime-sdk-meetings"); // CommonJS import
+ * // import type { ChimeSDKMeetingsClientConfig } from "@aws-sdk/client-chime-sdk-meetings";
+ * const config = {}; // type is ChimeSDKMeetingsClientConfig
  * const client = new ChimeSDKMeetingsClient(config);
+ * const input = { // ListAttendeesRequest
+ *   MeetingId: "STRING_VALUE", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListAttendeesCommand(input);
  * const response = await client.send(command);
+ * // { // ListAttendeesResponse
+ * //   Attendees: [ // AttendeeList
+ * //     { // Attendee
+ * //       ExternalUserId: "STRING_VALUE",
+ * //       AttendeeId: "STRING_VALUE",
+ * //       JoinToken: "STRING_VALUE",
+ * //       Capabilities: { // AttendeeCapabilities
+ * //         Audio: "SendReceive" || "Send" || "Receive" || "None", // required
+ * //         Video: "SendReceive" || "Send" || "Receive" || "None", // required
+ * //         Content: "SendReceive" || "Send" || "Receive" || "None", // required
+ * //       },
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListAttendeesCommandInput - {@link ListAttendeesCommandInput}
+ * @returns {@link ListAttendeesCommandOutput}
  * @see {@link ListAttendeesCommandInput} for command's `input` shape.
  * @see {@link ListAttendeesCommandOutput} for command's `response` shape.
  * @see {@link ChimeSDKMeetingsClientResolvedConfig | config} for ChimeSDKMeetingsClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>One or more of the resources in the request does not exist in the system.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of customer requests exceeds the request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedException} (client fault)
+ *  <p>The user isn't authorized to request a resource.</p>
+ *
+ * @throws {@link ChimeSDKMeetingsServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKMeetings service.</p>
+ *
+ *
+ * @public
  */
-export class ListAttendeesCommand extends $Command<
-  ListAttendeesCommandInput,
-  ListAttendeesCommandOutput,
-  ChimeSDKMeetingsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListAttendeesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeSDKMeetingsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListAttendeesCommandInput, ListAttendeesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeSDKMeetingsClient";
-    const commandName = "ListAttendeesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListAttendeesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListAttendeesResponseFilterSensitiveLog,
+export class ListAttendeesCommand extends command<ListAttendeesCommandInput, ListAttendeesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListAttendees",
+  ListAttendees$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListAttendeesRequest;
+      output: ListAttendeesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListAttendeesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListAttendeesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListAttendeesCommandOutput> {
-    return deserializeAws_restJson1ListAttendeesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListAttendeesCommandInput;
+      output: ListAttendeesCommandOutput;
+    };
+  };
 }

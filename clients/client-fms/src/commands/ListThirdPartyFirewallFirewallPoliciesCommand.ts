@@ -1,34 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FMSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FMSClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   ListThirdPartyFirewallFirewallPoliciesRequest,
-  ListThirdPartyFirewallFirewallPoliciesRequestFilterSensitiveLog,
   ListThirdPartyFirewallFirewallPoliciesResponse,
-  ListThirdPartyFirewallFirewallPoliciesResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1ListThirdPartyFirewallFirewallPoliciesCommand,
-  serializeAws_json1_1ListThirdPartyFirewallFirewallPoliciesCommand,
-} from "../protocols/Aws_json1_1";
+import { ListThirdPartyFirewallFirewallPolicies$ } from "../schemas/schemas_0";
 
-export interface ListThirdPartyFirewallFirewallPoliciesCommandInput
-  extends ListThirdPartyFirewallFirewallPoliciesRequest {}
-export interface ListThirdPartyFirewallFirewallPoliciesCommandOutput
-  extends ListThirdPartyFirewallFirewallPoliciesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListThirdPartyFirewallFirewallPoliciesCommand}.
+ */
+export interface ListThirdPartyFirewallFirewallPoliciesCommandInput extends ListThirdPartyFirewallFirewallPoliciesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListThirdPartyFirewallFirewallPoliciesCommand}.
+ */
+export interface ListThirdPartyFirewallFirewallPoliciesCommandOutput extends ListThirdPartyFirewallFirewallPoliciesResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves a list of all of the third-party firewall policies that are associated with the third-party firewall administrator's account.</p>
@@ -37,74 +32,72 @@ export interface ListThirdPartyFirewallFirewallPoliciesCommandOutput
  * ```javascript
  * import { FMSClient, ListThirdPartyFirewallFirewallPoliciesCommand } from "@aws-sdk/client-fms"; // ES Modules import
  * // const { FMSClient, ListThirdPartyFirewallFirewallPoliciesCommand } = require("@aws-sdk/client-fms"); // CommonJS import
+ * // import type { FMSClientConfig } from "@aws-sdk/client-fms";
+ * const config = {}; // type is FMSClientConfig
  * const client = new FMSClient(config);
+ * const input = { // ListThirdPartyFirewallFirewallPoliciesRequest
+ *   ThirdPartyFirewall: "PALO_ALTO_NETWORKS_CLOUD_NGFW" || "FORTIGATE_CLOUD_NATIVE_FIREWALL", // required
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"), // required
+ * };
  * const command = new ListThirdPartyFirewallFirewallPoliciesCommand(input);
  * const response = await client.send(command);
+ * // { // ListThirdPartyFirewallFirewallPoliciesResponse
+ * //   ThirdPartyFirewallFirewallPolicies: [ // ThirdPartyFirewallFirewallPolicies
+ * //     { // ThirdPartyFirewallFirewallPolicy
+ * //       FirewallPolicyId: "STRING_VALUE",
+ * //       FirewallPolicyName: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListThirdPartyFirewallFirewallPoliciesCommandInput - {@link ListThirdPartyFirewallFirewallPoliciesCommandInput}
+ * @returns {@link ListThirdPartyFirewallFirewallPoliciesCommandOutput}
  * @see {@link ListThirdPartyFirewallFirewallPoliciesCommandInput} for command's `input` shape.
  * @see {@link ListThirdPartyFirewallFirewallPoliciesCommandOutput} for command's `response` shape.
  * @see {@link FMSClientResolvedConfig | config} for FMSClient's `config` shape.
  *
+ * @throws {@link InternalErrorException} (client fault)
+ *  <p>The operation failed because of a system problem, even though the request was valid. Retry
+ *       your request.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The parameters of the request were invalid.</p>
+ *
+ * @throws {@link InvalidOperationException} (client fault)
+ *  <p>The operation failed because there was nothing to do or the operation wasn't possible. For example, you might have
+ *         submitted an <code>AssociateAdminAccount</code> request for an account ID that
+ *             was already set as the Firewall Manager administrator. Or you might have tried to access a Region
+ *   that's disabled by default, and that you need to enable for the Firewall Manager
+ *   administrator account and for Organizations before you can access it.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link FMSServiceException}
+ * <p>Base exception class for all service exceptions from FMS service.</p>
+ *
+ *
+ * @public
  */
-export class ListThirdPartyFirewallFirewallPoliciesCommand extends $Command<
-  ListThirdPartyFirewallFirewallPoliciesCommandInput,
-  ListThirdPartyFirewallFirewallPoliciesCommandOutput,
-  FMSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListThirdPartyFirewallFirewallPoliciesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FMSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListThirdPartyFirewallFirewallPoliciesCommandInput, ListThirdPartyFirewallFirewallPoliciesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FMSClient";
-    const commandName = "ListThirdPartyFirewallFirewallPoliciesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListThirdPartyFirewallFirewallPoliciesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListThirdPartyFirewallFirewallPoliciesResponseFilterSensitiveLog,
+export class ListThirdPartyFirewallFirewallPoliciesCommand extends command<ListThirdPartyFirewallFirewallPoliciesCommandInput, ListThirdPartyFirewallFirewallPoliciesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListThirdPartyFirewallFirewallPolicies",
+  ListThirdPartyFirewallFirewallPolicies$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListThirdPartyFirewallFirewallPoliciesRequest;
+      output: ListThirdPartyFirewallFirewallPoliciesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: ListThirdPartyFirewallFirewallPoliciesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListThirdPartyFirewallFirewallPoliciesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<ListThirdPartyFirewallFirewallPoliciesCommandOutput> {
-    return deserializeAws_json1_1ListThirdPartyFirewallFirewallPoliciesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListThirdPartyFirewallFirewallPoliciesCommandInput;
+      output: ListThirdPartyFirewallFirewallPoliciesCommandOutput;
+    };
+  };
 }

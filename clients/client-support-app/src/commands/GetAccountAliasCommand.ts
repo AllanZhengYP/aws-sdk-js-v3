@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetAccountAliasRequest,
-  GetAccountAliasRequestFilterSensitiveLog,
-  GetAccountAliasResult,
-  GetAccountAliasResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetAccountAliasCommand,
-  serializeAws_restJson1GetAccountAliasCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, SupportAppClientResolvedConfig } from "../SupportAppClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetAccountAliasRequest, GetAccountAliasResult } from "../models/models_0";
+import { GetAccountAlias$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetAccountAliasCommand}.
+ */
 export interface GetAccountAliasCommandInput extends GetAccountAliasRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetAccountAliasCommand}.
+ */
 export interface GetAccountAliasCommandOutput extends GetAccountAliasResult, __MetadataBearer {}
 
 /**
@@ -35,68 +30,48 @@ export interface GetAccountAliasCommandOutput extends GetAccountAliasResult, __M
  * ```javascript
  * import { SupportAppClient, GetAccountAliasCommand } from "@aws-sdk/client-support-app"; // ES Modules import
  * // const { SupportAppClient, GetAccountAliasCommand } = require("@aws-sdk/client-support-app"); // CommonJS import
+ * // import type { SupportAppClientConfig } from "@aws-sdk/client-support-app";
+ * const config = {}; // type is SupportAppClientConfig
  * const client = new SupportAppClient(config);
+ * const input = {};
  * const command = new GetAccountAliasCommand(input);
  * const response = await client.send(command);
+ * // { // GetAccountAliasResult
+ * //   accountAlias: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetAccountAliasCommandInput - {@link GetAccountAliasCommandInput}
+ * @returns {@link GetAccountAliasCommandOutput}
  * @see {@link GetAccountAliasCommandInput} for command's `input` shape.
  * @see {@link GetAccountAliasCommandOutput} for command's `response` shape.
  * @see {@link SupportAppClientResolvedConfig | config} for SupportAppClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>We can’t process your request right now because of a server issue. Try again later.</p>
+ *
+ * @throws {@link SupportAppServiceException}
+ * <p>Base exception class for all service exceptions from SupportApp service.</p>
+ *
+ *
+ * @public
  */
-export class GetAccountAliasCommand extends $Command<
-  GetAccountAliasCommandInput,
-  GetAccountAliasCommandOutput,
-  SupportAppClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetAccountAliasCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: SupportAppClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetAccountAliasCommandInput, GetAccountAliasCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "SupportAppClient";
-    const commandName = "GetAccountAliasCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetAccountAliasRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetAccountAliasResultFilterSensitiveLog,
+export class GetAccountAliasCommand extends command<GetAccountAliasCommandInput, GetAccountAliasCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetAccountAlias",
+  GetAccountAlias$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: {};
+      output: GetAccountAliasResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetAccountAliasCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetAccountAliasCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetAccountAliasCommandOutput> {
-    return deserializeAws_restJson1GetAccountAliasCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetAccountAliasCommandInput;
+      output: GetAccountAliasCommandOutput;
+    };
+  };
 }

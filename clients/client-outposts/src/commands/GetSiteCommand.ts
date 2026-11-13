@@ -1,99 +1,111 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetSiteInput,
-  GetSiteInputFilterSensitiveLog,
-  GetSiteOutput,
-  GetSiteOutputFilterSensitiveLog,
-} from "../models/models_0";
-import { OutpostsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OutpostsClient";
-import {
-  deserializeAws_restJson1GetSiteCommand,
-  serializeAws_restJson1GetSiteCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSiteInput, GetSiteOutput } from "../models/models_0";
+import { GetSite$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSiteCommand}.
+ */
 export interface GetSiteCommandInput extends GetSiteInput {}
+/**
+ * @public
+ *
+ * The output of {@link GetSiteCommand}.
+ */
 export interface GetSiteCommandOutput extends GetSiteOutput, __MetadataBearer {}
 
 /**
- * <p>
- *       Gets information about the specified Outpost site.
- *     </p>
+ * <p>Gets information about the specified Outpost site.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { OutpostsClient, GetSiteCommand } from "@aws-sdk/client-outposts"; // ES Modules import
  * // const { OutpostsClient, GetSiteCommand } = require("@aws-sdk/client-outposts"); // CommonJS import
+ * // import type { OutpostsClientConfig } from "@aws-sdk/client-outposts";
+ * const config = {}; // type is OutpostsClientConfig
  * const client = new OutpostsClient(config);
+ * const input = { // GetSiteInput
+ *   SiteId: "STRING_VALUE", // required
+ * };
  * const command = new GetSiteCommand(input);
  * const response = await client.send(command);
+ * // { // GetSiteOutput
+ * //   Site: { // Site
+ * //     SiteId: "STRING_VALUE",
+ * //     AccountId: "STRING_VALUE",
+ * //     Name: "STRING_VALUE",
+ * //     Description: "STRING_VALUE",
+ * //     Tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     SiteArn: "STRING_VALUE",
+ * //     Notes: "STRING_VALUE",
+ * //     OperatingAddressCountryCode: "STRING_VALUE",
+ * //     OperatingAddressStateOrRegion: "STRING_VALUE",
+ * //     OperatingAddressCity: "STRING_VALUE",
+ * //     RackPhysicalProperties: { // RackPhysicalProperties
+ * //       PowerDrawKva: "POWER_5_KVA" || "POWER_10_KVA" || "POWER_15_KVA" || "POWER_30_KVA",
+ * //       PowerPhase: "SINGLE_PHASE" || "THREE_PHASE",
+ * //       PowerConnector: "L6_30P" || "IEC309" || "AH530P7W" || "AH532P6W" || "CS8365C",
+ * //       PowerFeedDrop: "ABOVE_RACK" || "BELOW_RACK",
+ * //       UplinkGbps: "UPLINK_1G" || "UPLINK_10G" || "UPLINK_40G" || "UPLINK_100G",
+ * //       UplinkCount: "UPLINK_COUNT_1" || "UPLINK_COUNT_2" || "UPLINK_COUNT_3" || "UPLINK_COUNT_4" || "UPLINK_COUNT_5" || "UPLINK_COUNT_6" || "UPLINK_COUNT_7" || "UPLINK_COUNT_8" || "UPLINK_COUNT_12" || "UPLINK_COUNT_16",
+ * //       FiberOpticCableType: "SINGLE_MODE" || "MULTI_MODE",
+ * //       OpticalStandard: "OPTIC_10GBASE_SR" || "OPTIC_10GBASE_IR" || "OPTIC_10GBASE_LR" || "OPTIC_40GBASE_SR" || "OPTIC_40GBASE_ESR" || "OPTIC_40GBASE_IR4_LR4L" || "OPTIC_40GBASE_LR4" || "OPTIC_100GBASE_SR4" || "OPTIC_100GBASE_CWDM4" || "OPTIC_100GBASE_LR4" || "OPTIC_100G_PSM4_MSA" || "OPTIC_1000BASE_LX" || "OPTIC_1000BASE_SX",
+ * //       MaximumSupportedWeightLbs: "NO_LIMIT" || "MAX_1400_LBS" || "MAX_1600_LBS" || "MAX_1800_LBS" || "MAX_2000_LBS",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSiteCommandInput - {@link GetSiteCommandInput}
+ * @returns {@link GetSiteCommandOutput}
  * @see {@link GetSiteCommandInput} for command's `input` shape.
  * @see {@link GetSiteCommandOutput} for command's `response` shape.
  * @see {@link OutpostsClientResolvedConfig | config} for OutpostsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have permission to perform this operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The specified request is not valid.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link OutpostsServiceException}
+ * <p>Base exception class for all service exceptions from Outposts service.</p>
+ *
+ *
+ * @public
  */
-export class GetSiteCommand extends $Command<GetSiteCommandInput, GetSiteCommandOutput, OutpostsClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSiteCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: OutpostsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSiteCommandInput, GetSiteCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "OutpostsClient";
-    const commandName = "GetSiteCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSiteInputFilterSensitiveLog,
-      outputFilterSensitiveLog: GetSiteOutputFilterSensitiveLog,
+export class GetSiteCommand extends command<GetSiteCommandInput, GetSiteCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSite",
+  GetSite$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSiteInput;
+      output: GetSiteOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSiteCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetSiteCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSiteCommandOutput> {
-    return deserializeAws_restJson1GetSiteCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSiteCommandInput;
+      output: GetSiteCommandOutput;
+    };
+  };
 }

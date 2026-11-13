@@ -1,107 +1,90 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { BackupGatewayClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../BackupGatewayClient";
-import {
-  DisassociateGatewayFromServerInput,
-  DisassociateGatewayFromServerInputFilterSensitiveLog,
-  DisassociateGatewayFromServerOutput,
-  DisassociateGatewayFromServerOutputFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_0DisassociateGatewayFromServerCommand,
-  serializeAws_json1_0DisassociateGatewayFromServerCommand,
-} from "../protocols/Aws_json1_0";
-
-export interface DisassociateGatewayFromServerCommandInput extends DisassociateGatewayFromServerInput {}
-export interface DisassociateGatewayFromServerCommandOutput
-  extends DisassociateGatewayFromServerOutput,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DisassociateGatewayFromServerInput, DisassociateGatewayFromServerOutput } from "../models/models_0";
+import { DisassociateGatewayFromServer$ } from "../schemas/schemas_0";
 
 /**
- * <p>Disassociates a backup gateway from the specified server. After the disassociation process
- *       finishes, the gateway can no longer access the virtual machines on the server.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateGatewayFromServerCommand}.
+ */
+export interface DisassociateGatewayFromServerCommandInput extends DisassociateGatewayFromServerInput {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateGatewayFromServerCommand}.
+ */
+export interface DisassociateGatewayFromServerCommandOutput extends DisassociateGatewayFromServerOutput, __MetadataBearer {}
+
+/**
+ * <p>Disassociates a backup gateway from the specified server. After the disassociation process finishes, the gateway can no longer access the virtual machines on the server.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { BackupGatewayClient, DisassociateGatewayFromServerCommand } from "@aws-sdk/client-backup-gateway"; // ES Modules import
  * // const { BackupGatewayClient, DisassociateGatewayFromServerCommand } = require("@aws-sdk/client-backup-gateway"); // CommonJS import
+ * // import type { BackupGatewayClientConfig } from "@aws-sdk/client-backup-gateway";
+ * const config = {}; // type is BackupGatewayClientConfig
  * const client = new BackupGatewayClient(config);
+ * const input = { // DisassociateGatewayFromServerInput
+ *   GatewayArn: "STRING_VALUE", // required
+ * };
  * const command = new DisassociateGatewayFromServerCommand(input);
  * const response = await client.send(command);
+ * // { // DisassociateGatewayFromServerOutput
+ * //   GatewayArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DisassociateGatewayFromServerCommandInput - {@link DisassociateGatewayFromServerCommandInput}
+ * @returns {@link DisassociateGatewayFromServerCommandOutput}
  * @see {@link DisassociateGatewayFromServerCommandInput} for command's `input` shape.
  * @see {@link DisassociateGatewayFromServerCommandOutput} for command's `response` shape.
  * @see {@link BackupGatewayClientResolvedConfig | config} for BackupGatewayClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The operation cannot proceed because it is not supported.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource that is required for the action wasn't found.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The operation did not succeed because an internal error occurred. Try again later.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>TPS has been limited to protect against intentional or unintentional high request volumes.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The operation did not succeed because a validation error occurred.</p>
+ *
+ * @throws {@link BackupGatewayServiceException}
+ * <p>Base exception class for all service exceptions from BackupGateway service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateGatewayFromServerCommand extends $Command<
-  DisassociateGatewayFromServerCommandInput,
-  DisassociateGatewayFromServerCommandOutput,
-  BackupGatewayClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateGatewayFromServerCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: BackupGatewayClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateGatewayFromServerCommandInput, DisassociateGatewayFromServerCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "BackupGatewayClient";
-    const commandName = "DisassociateGatewayFromServerCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateGatewayFromServerInputFilterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateGatewayFromServerOutputFilterSensitiveLog,
+export class DisassociateGatewayFromServerCommand extends command<DisassociateGatewayFromServerCommandInput, DisassociateGatewayFromServerCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateGatewayFromServer",
+  DisassociateGatewayFromServer$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateGatewayFromServerInput;
+      output: DisassociateGatewayFromServerOutput;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DisassociateGatewayFromServerCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_0DisassociateGatewayFromServerCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateGatewayFromServerCommandOutput> {
-    return deserializeAws_json1_0DisassociateGatewayFromServerCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateGatewayFromServerCommandInput;
+      output: DisassociateGatewayFromServerCommandOutput;
+    };
+  };
 }

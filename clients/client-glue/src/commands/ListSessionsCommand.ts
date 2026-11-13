@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import {
-  ListSessionsRequest,
-  ListSessionsRequestFilterSensitiveLog,
-  ListSessionsResponse,
-  ListSessionsResponseFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_json1_1ListSessionsCommand,
-  serializeAws_json1_1ListSessionsCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListSessionsRequest, ListSessionsResponse } from "../models/models_2";
+import { ListSessions$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListSessionsCommand}.
+ */
 export interface ListSessionsCommandInput extends ListSessionsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListSessionsCommand}.
+ */
 export interface ListSessionsCommandOutput extends ListSessionsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,101 @@ export interface ListSessionsCommandOutput extends ListSessionsResponse, __Metad
  * ```javascript
  * import { GlueClient, ListSessionsCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, ListSessionsCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // ListSessionsRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   Tags: { // TagsMap
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   RequestOrigin: "STRING_VALUE",
+ * };
  * const command = new ListSessionsCommand(input);
  * const response = await client.send(command);
+ * // { // ListSessionsResponse
+ * //   Ids: [ // SessionIdList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Sessions: [ // SessionList
+ * //     { // Session
+ * //       Id: "STRING_VALUE",
+ * //       CreatedOn: new Date("TIMESTAMP"),
+ * //       Status: "PROVISIONING" || "READY" || "FAILED" || "TIMEOUT" || "STOPPING" || "STOPPED",
+ * //       ErrorMessage: "STRING_VALUE",
+ * //       Description: "STRING_VALUE",
+ * //       Role: "STRING_VALUE",
+ * //       Command: { // SessionCommand
+ * //         Name: "STRING_VALUE",
+ * //         PythonVersion: "STRING_VALUE",
+ * //       },
+ * //       DefaultArguments: { // OrchestrationArgumentsMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       Connections: { // ConnectionsList
+ * //         Connections: [ // ConnectionStringList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       Progress: Number("double"),
+ * //       MaxCapacity: Number("double"),
+ * //       SecurityConfiguration: "STRING_VALUE",
+ * //       GlueVersion: "STRING_VALUE",
+ * //       NumberOfWorkers: Number("int"),
+ * //       WorkerType: "Standard" || "G.1X" || "G.2X" || "G.4X" || "G.8X" || "G.025X" || "Z.2X" || "G.12X" || "G.16X" || "R.1X" || "R.2X" || "R.4X" || "R.8X",
+ * //       CompletedOn: new Date("TIMESTAMP"),
+ * //       ExecutionTime: Number("double"),
+ * //       DPUSeconds: Number("double"),
+ * //       IdleTimeout: Number("int"),
+ * //       ProfileName: "STRING_VALUE",
+ * //       SessionType: "LIVY" || "SPARK_CONNECT",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListSessionsCommandInput - {@link ListSessionsCommandInput}
+ * @returns {@link ListSessionsCommandOutput}
  * @see {@link ListSessionsCommandInput} for command's `input` shape.
  * @see {@link ListSessionsCommandOutput} for command's `response` shape.
  * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class ListSessionsCommand extends $Command<
-  ListSessionsCommandInput,
-  ListSessionsCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListSessionsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListSessionsCommandInput, ListSessionsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "ListSessionsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListSessionsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListSessionsResponseFilterSensitiveLog,
+export class ListSessionsCommand extends command<ListSessionsCommandInput, ListSessionsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListSessions",
+  ListSessions$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListSessionsRequest;
+      output: ListSessionsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListSessionsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1ListSessionsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListSessionsCommandOutput> {
-    return deserializeAws_json1_1ListSessionsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListSessionsCommandInput;
+      output: ListSessionsCommandOutput;
+    };
+  };
 }

@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DeleteWorkgroupRequest,
-  DeleteWorkgroupRequestFilterSensitiveLog,
-  DeleteWorkgroupResponse,
-  DeleteWorkgroupResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteWorkgroupCommand,
-  serializeAws_json1_1DeleteWorkgroupCommand,
-} from "../protocols/Aws_json1_1";
-import {
-  RedshiftServerlessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../RedshiftServerlessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteWorkgroupRequest, DeleteWorkgroupResponse } from "../models/models_0";
+import { DeleteWorkgroup$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteWorkgroupCommand}.
+ */
 export interface DeleteWorkgroupCommandInput extends DeleteWorkgroupRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteWorkgroupCommand}.
+ */
 export interface DeleteWorkgroupCommandOutput extends DeleteWorkgroupResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,118 @@ export interface DeleteWorkgroupCommandOutput extends DeleteWorkgroupResponse, _
  * ```javascript
  * import { RedshiftServerlessClient, DeleteWorkgroupCommand } from "@aws-sdk/client-redshift-serverless"; // ES Modules import
  * // const { RedshiftServerlessClient, DeleteWorkgroupCommand } = require("@aws-sdk/client-redshift-serverless"); // CommonJS import
+ * // import type { RedshiftServerlessClientConfig } from "@aws-sdk/client-redshift-serverless";
+ * const config = {}; // type is RedshiftServerlessClientConfig
  * const client = new RedshiftServerlessClient(config);
+ * const input = { // DeleteWorkgroupRequest
+ *   workgroupName: "STRING_VALUE", // required
+ * };
  * const command = new DeleteWorkgroupCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteWorkgroupResponse
+ * //   workgroup: { // Workgroup
+ * //     workgroupId: "STRING_VALUE",
+ * //     workgroupArn: "STRING_VALUE",
+ * //     workgroupName: "STRING_VALUE",
+ * //     namespaceName: "STRING_VALUE",
+ * //     baseCapacity: Number("int"),
+ * //     enhancedVpcRouting: true || false,
+ * //     configParameters: [ // ConfigParameterList
+ * //       { // ConfigParameter
+ * //         parameterKey: "STRING_VALUE",
+ * //         parameterValue: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     securityGroupIds: [ // SecurityGroupIdList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     subnetIds: [ // SubnetIdList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     status: "STRING_VALUE",
+ * //     endpoint: { // Endpoint
+ * //       address: "STRING_VALUE",
+ * //       port: Number("int"),
+ * //       vpcEndpoints: [ // VpcEndpointList
+ * //         { // VpcEndpoint
+ * //           vpcEndpointId: "STRING_VALUE",
+ * //           vpcId: "STRING_VALUE",
+ * //           networkInterfaces: [ // NetworkInterfaceList
+ * //             { // NetworkInterface
+ * //               networkInterfaceId: "STRING_VALUE",
+ * //               subnetId: "STRING_VALUE",
+ * //               privateIpAddress: "STRING_VALUE",
+ * //               availabilityZone: "STRING_VALUE",
+ * //               ipv6Address: "STRING_VALUE",
+ * //             },
+ * //           ],
+ * //         },
+ * //       ],
+ * //     },
+ * //     publiclyAccessible: true || false,
+ * //     creationDate: new Date("TIMESTAMP"),
+ * //     port: Number("int"),
+ * //     customDomainName: "STRING_VALUE",
+ * //     customDomainCertificateArn: "STRING_VALUE",
+ * //     customDomainCertificateExpiryTime: new Date("TIMESTAMP"),
+ * //     workgroupVersion: "STRING_VALUE",
+ * //     patchVersion: "STRING_VALUE",
+ * //     maxCapacity: Number("int"),
+ * //     crossAccountVpcs: [ // VpcIds
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     ipAddressType: "STRING_VALUE",
+ * //     pricePerformanceTarget: { // PerformanceTarget
+ * //       status: "STRING_VALUE",
+ * //       level: Number("int"),
+ * //     },
+ * //     trackName: "STRING_VALUE",
+ * //     pendingTrackName: "STRING_VALUE",
+ * //     extraComputeForAutomaticOptimization: true || false,
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteWorkgroupCommandInput - {@link DeleteWorkgroupCommandInput}
+ * @returns {@link DeleteWorkgroupCommandOutput}
  * @see {@link DeleteWorkgroupCommandInput} for command's `input` shape.
  * @see {@link DeleteWorkgroupCommandOutput} for command's `response` shape.
  * @see {@link RedshiftServerlessClientResolvedConfig | config} for RedshiftServerlessClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The submitted action has conflicts.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link RedshiftServerlessServiceException}
+ * <p>Base exception class for all service exceptions from RedshiftServerless service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteWorkgroupCommand extends $Command<
-  DeleteWorkgroupCommandInput,
-  DeleteWorkgroupCommandOutput,
-  RedshiftServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteWorkgroupCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteWorkgroupCommandInput, DeleteWorkgroupCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftServerlessClient";
-    const commandName = "DeleteWorkgroupCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteWorkgroupRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteWorkgroupResponseFilterSensitiveLog,
+export class DeleteWorkgroupCommand extends command<DeleteWorkgroupCommandInput, DeleteWorkgroupCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteWorkgroup",
+  DeleteWorkgroup$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteWorkgroupRequest;
+      output: DeleteWorkgroupResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteWorkgroupCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteWorkgroupCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteWorkgroupCommandOutput> {
-    return deserializeAws_json1_1DeleteWorkgroupCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteWorkgroupCommandInput;
+      output: DeleteWorkgroupCommandOutput;
+    };
+  };
 }

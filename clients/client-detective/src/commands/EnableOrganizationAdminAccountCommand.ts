@@ -1,28 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DetectiveClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DetectiveClient";
-import {
-  EnableOrganizationAdminAccountRequest,
-  EnableOrganizationAdminAccountRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1EnableOrganizationAdminAccountCommand,
-  serializeAws_restJson1EnableOrganizationAdminAccountCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { EnableOrganizationAdminAccountRequest } from "../models/models_0";
+import { EnableOrganizationAdminAccount$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link EnableOrganizationAdminAccountCommand}.
+ */
 export interface EnableOrganizationAdminAccountCommandInput extends EnableOrganizationAdminAccountRequest {}
+/**
+ * @public
+ *
+ * The output of {@link EnableOrganizationAdminAccountCommand}.
+ */
 export interface EnableOrganizationAdminAccountCommandOutput extends __MetadataBearer {}
 
 /**
@@ -43,74 +40,59 @@ export interface EnableOrganizationAdminAccountCommandOutput extends __MetadataB
  * ```javascript
  * import { DetectiveClient, EnableOrganizationAdminAccountCommand } from "@aws-sdk/client-detective"; // ES Modules import
  * // const { DetectiveClient, EnableOrganizationAdminAccountCommand } = require("@aws-sdk/client-detective"); // CommonJS import
+ * // import type { DetectiveClientConfig } from "@aws-sdk/client-detective";
+ * const config = {}; // type is DetectiveClientConfig
  * const client = new DetectiveClient(config);
+ * const input = { // EnableOrganizationAdminAccountRequest
+ *   AccountId: "STRING_VALUE", // required
+ * };
  * const command = new EnableOrganizationAdminAccountCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param EnableOrganizationAdminAccountCommandInput - {@link EnableOrganizationAdminAccountCommandInput}
+ * @returns {@link EnableOrganizationAdminAccountCommandOutput}
  * @see {@link EnableOrganizationAdminAccountCommandInput} for command's `input` shape.
  * @see {@link EnableOrganizationAdminAccountCommandOutput} for command's `response` shape.
  * @see {@link DetectiveClientResolvedConfig | config} for DetectiveClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The request issuer does not have permission to access this resource or perform this
+ *          operation.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request was valid but failed because of a problem with the service.</p>
+ *
+ * @throws {@link TooManyRequestsException} (client fault)
+ *  <p>The request cannot be completed because too many other requests are occurring at the
+ *          same time.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The request parameters are invalid.</p>
+ *
+ * @throws {@link DetectiveServiceException}
+ * <p>Base exception class for all service exceptions from Detective service.</p>
+ *
+ *
+ * @public
  */
-export class EnableOrganizationAdminAccountCommand extends $Command<
-  EnableOrganizationAdminAccountCommandInput,
-  EnableOrganizationAdminAccountCommandOutput,
-  DetectiveClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: EnableOrganizationAdminAccountCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DetectiveClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<EnableOrganizationAdminAccountCommandInput, EnableOrganizationAdminAccountCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DetectiveClient";
-    const commandName = "EnableOrganizationAdminAccountCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: EnableOrganizationAdminAccountRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class EnableOrganizationAdminAccountCommand extends command<EnableOrganizationAdminAccountCommandInput, EnableOrganizationAdminAccountCommandOutput>(
+  _ep0,
+  _mw0,
+  "EnableOrganizationAdminAccount",
+  EnableOrganizationAdminAccount$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: EnableOrganizationAdminAccountRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: EnableOrganizationAdminAccountCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1EnableOrganizationAdminAccountCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<EnableOrganizationAdminAccountCommandOutput> {
-    return deserializeAws_restJson1EnableOrganizationAdminAccountCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: EnableOrganizationAdminAccountCommandInput;
+      output: EnableOrganizationAdminAccountCommandOutput;
+    };
+  };
 }

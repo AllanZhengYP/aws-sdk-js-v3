@@ -1,29 +1,43 @@
 // smithy-typescript generated code
-import {
-  GetItemCommand as __GetItemCommand,
-  GetItemCommandInput as __GetItemCommandInput,
-  GetItemCommandOutput as __GetItemCommandOutput,
-} from "@aws-sdk/client-dynamodb";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
 import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { ALL_VALUES } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { GetItemCommand as __GetItemCommand } from "@aws-sdk/client-dynamodb";
 
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
 export type GetCommandInput = Omit<__GetItemCommandInput, "Key"> & {
   Key: Record<string, NativeAttributeValue> | undefined;
 };
 
+/**
+ * @public
+ */
 export type GetCommandOutput = Omit<__GetItemCommandOutput, "Item"> & {
-  Item?: Record<string, NativeAttributeValue>;
+  Item?: Record<string, NativeAttributeValue> | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * GetItemCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * GetItemCommand operation from {@link @aws-sdk/client-dynamodb#GetItemCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
 export class GetCommand extends DynamoDBDocumentClientCommand<
   GetCommandInput,
@@ -32,14 +46,16 @@ export class GetCommand extends DynamoDBDocumentClientCommand<
   __GetItemCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  protected readonly inputKeyNodes = [{ key: "Key" }];
-  protected readonly outputKeyNodes = [{ key: "Item" }];
+  protected readonly inputKeyNodes = {
+    Key: ALL_VALUES, // map with AttributeValue
+  };
+  protected readonly outputKeyNodes = {
+    Item: ALL_VALUES, // map with AttributeValue
+  };
 
   protected readonly clientCommand: __GetItemCommand;
-  public readonly middlewareStack: MiddlewareStack<
-    GetCommandInput | __GetItemCommandInput,
-    GetCommandOutput | __GetItemCommandOutput
-  >;
+  public readonly middlewareStack: MiddlewareStack<GetCommandInput | __GetItemCommandInput,
+  GetCommandOutput | __GetItemCommandOutput>;
 
   constructor(readonly input: GetCommandInput) {
     super();
@@ -62,3 +78,11 @@ export class GetCommand extends DynamoDBDocumentClientCommand<
     return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  GetItemCommandInput as __GetItemCommandInput,
+  GetItemCommandOutput as __GetItemCommandOutput,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

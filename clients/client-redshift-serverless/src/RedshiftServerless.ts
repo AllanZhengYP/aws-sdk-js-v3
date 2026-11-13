@@ -1,1382 +1,1720 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type ConvertRecoveryPointToSnapshotCommandInput,
+  type ConvertRecoveryPointToSnapshotCommandOutput,
   ConvertRecoveryPointToSnapshotCommand,
-  ConvertRecoveryPointToSnapshotCommandInput,
-  ConvertRecoveryPointToSnapshotCommandOutput,
 } from "./commands/ConvertRecoveryPointToSnapshotCommand";
 import {
+  type CreateCustomDomainAssociationCommandInput,
+  type CreateCustomDomainAssociationCommandOutput,
+  CreateCustomDomainAssociationCommand,
+} from "./commands/CreateCustomDomainAssociationCommand";
+import {
+  type CreateEndpointAccessCommandInput,
+  type CreateEndpointAccessCommandOutput,
   CreateEndpointAccessCommand,
-  CreateEndpointAccessCommandInput,
-  CreateEndpointAccessCommandOutput,
 } from "./commands/CreateEndpointAccessCommand";
 import {
+  type CreateNamespaceCommandInput,
+  type CreateNamespaceCommandOutput,
   CreateNamespaceCommand,
-  CreateNamespaceCommandInput,
-  CreateNamespaceCommandOutput,
 } from "./commands/CreateNamespaceCommand";
 import {
+  type CreateReservationCommandInput,
+  type CreateReservationCommandOutput,
+  CreateReservationCommand,
+} from "./commands/CreateReservationCommand";
+import {
+  type CreateScheduledActionCommandInput,
+  type CreateScheduledActionCommandOutput,
+  CreateScheduledActionCommand,
+} from "./commands/CreateScheduledActionCommand";
+import {
+  type CreateSnapshotCommandInput,
+  type CreateSnapshotCommandOutput,
   CreateSnapshotCommand,
-  CreateSnapshotCommandInput,
-  CreateSnapshotCommandOutput,
 } from "./commands/CreateSnapshotCommand";
 import {
+  type CreateSnapshotCopyConfigurationCommandInput,
+  type CreateSnapshotCopyConfigurationCommandOutput,
+  CreateSnapshotCopyConfigurationCommand,
+} from "./commands/CreateSnapshotCopyConfigurationCommand";
+import {
+  type CreateUsageLimitCommandInput,
+  type CreateUsageLimitCommandOutput,
   CreateUsageLimitCommand,
-  CreateUsageLimitCommandInput,
-  CreateUsageLimitCommandOutput,
 } from "./commands/CreateUsageLimitCommand";
 import {
+  type CreateWorkgroupCommandInput,
+  type CreateWorkgroupCommandOutput,
   CreateWorkgroupCommand,
-  CreateWorkgroupCommandInput,
-  CreateWorkgroupCommandOutput,
 } from "./commands/CreateWorkgroupCommand";
 import {
+  type DeleteCustomDomainAssociationCommandInput,
+  type DeleteCustomDomainAssociationCommandOutput,
+  DeleteCustomDomainAssociationCommand,
+} from "./commands/DeleteCustomDomainAssociationCommand";
+import {
+  type DeleteEndpointAccessCommandInput,
+  type DeleteEndpointAccessCommandOutput,
   DeleteEndpointAccessCommand,
-  DeleteEndpointAccessCommandInput,
-  DeleteEndpointAccessCommandOutput,
 } from "./commands/DeleteEndpointAccessCommand";
 import {
+  type DeleteNamespaceCommandInput,
+  type DeleteNamespaceCommandOutput,
   DeleteNamespaceCommand,
-  DeleteNamespaceCommandInput,
-  DeleteNamespaceCommandOutput,
 } from "./commands/DeleteNamespaceCommand";
 import {
+  type DeleteResourcePolicyCommandInput,
+  type DeleteResourcePolicyCommandOutput,
   DeleteResourcePolicyCommand,
-  DeleteResourcePolicyCommandInput,
-  DeleteResourcePolicyCommandOutput,
 } from "./commands/DeleteResourcePolicyCommand";
 import {
+  type DeleteScheduledActionCommandInput,
+  type DeleteScheduledActionCommandOutput,
+  DeleteScheduledActionCommand,
+} from "./commands/DeleteScheduledActionCommand";
+import {
+  type DeleteSnapshotCommandInput,
+  type DeleteSnapshotCommandOutput,
   DeleteSnapshotCommand,
-  DeleteSnapshotCommandInput,
-  DeleteSnapshotCommandOutput,
 } from "./commands/DeleteSnapshotCommand";
 import {
+  type DeleteSnapshotCopyConfigurationCommandInput,
+  type DeleteSnapshotCopyConfigurationCommandOutput,
+  DeleteSnapshotCopyConfigurationCommand,
+} from "./commands/DeleteSnapshotCopyConfigurationCommand";
+import {
+  type DeleteUsageLimitCommandInput,
+  type DeleteUsageLimitCommandOutput,
   DeleteUsageLimitCommand,
-  DeleteUsageLimitCommandInput,
-  DeleteUsageLimitCommandOutput,
 } from "./commands/DeleteUsageLimitCommand";
 import {
+  type DeleteWorkgroupCommandInput,
+  type DeleteWorkgroupCommandOutput,
   DeleteWorkgroupCommand,
-  DeleteWorkgroupCommandInput,
-  DeleteWorkgroupCommandOutput,
 } from "./commands/DeleteWorkgroupCommand";
 import {
+  type GetCredentialsCommandInput,
+  type GetCredentialsCommandOutput,
   GetCredentialsCommand,
-  GetCredentialsCommandInput,
-  GetCredentialsCommandOutput,
 } from "./commands/GetCredentialsCommand";
 import {
+  type GetCustomDomainAssociationCommandInput,
+  type GetCustomDomainAssociationCommandOutput,
+  GetCustomDomainAssociationCommand,
+} from "./commands/GetCustomDomainAssociationCommand";
+import {
+  type GetEndpointAccessCommandInput,
+  type GetEndpointAccessCommandOutput,
   GetEndpointAccessCommand,
-  GetEndpointAccessCommandInput,
-  GetEndpointAccessCommandOutput,
 } from "./commands/GetEndpointAccessCommand";
 import {
+  type GetIdentityCenterAuthTokenCommandInput,
+  type GetIdentityCenterAuthTokenCommandOutput,
+  GetIdentityCenterAuthTokenCommand,
+} from "./commands/GetIdentityCenterAuthTokenCommand";
+import {
+  type GetNamespaceCommandInput,
+  type GetNamespaceCommandOutput,
   GetNamespaceCommand,
-  GetNamespaceCommandInput,
-  GetNamespaceCommandOutput,
 } from "./commands/GetNamespaceCommand";
 import {
+  type GetRecoveryPointCommandInput,
+  type GetRecoveryPointCommandOutput,
   GetRecoveryPointCommand,
-  GetRecoveryPointCommandInput,
-  GetRecoveryPointCommandOutput,
 } from "./commands/GetRecoveryPointCommand";
 import {
-  GetResourcePolicyCommand,
-  GetResourcePolicyCommandInput,
-  GetResourcePolicyCommandOutput,
-} from "./commands/GetResourcePolicyCommand";
-import { GetSnapshotCommand, GetSnapshotCommandInput, GetSnapshotCommandOutput } from "./commands/GetSnapshotCommand";
+  type GetReservationCommandInput,
+  type GetReservationCommandOutput,
+  GetReservationCommand,
+} from "./commands/GetReservationCommand";
 import {
+  type GetReservationOfferingCommandInput,
+  type GetReservationOfferingCommandOutput,
+  GetReservationOfferingCommand,
+} from "./commands/GetReservationOfferingCommand";
+import {
+  type GetResourcePolicyCommandInput,
+  type GetResourcePolicyCommandOutput,
+  GetResourcePolicyCommand,
+} from "./commands/GetResourcePolicyCommand";
+import {
+  type GetScheduledActionCommandInput,
+  type GetScheduledActionCommandOutput,
+  GetScheduledActionCommand,
+} from "./commands/GetScheduledActionCommand";
+import {
+  type GetSnapshotCommandInput,
+  type GetSnapshotCommandOutput,
+  GetSnapshotCommand,
+} from "./commands/GetSnapshotCommand";
+import {
+  type GetTableRestoreStatusCommandInput,
+  type GetTableRestoreStatusCommandOutput,
+  GetTableRestoreStatusCommand,
+} from "./commands/GetTableRestoreStatusCommand";
+import { type GetTrackCommandInput, type GetTrackCommandOutput, GetTrackCommand } from "./commands/GetTrackCommand";
+import {
+  type GetUsageLimitCommandInput,
+  type GetUsageLimitCommandOutput,
   GetUsageLimitCommand,
-  GetUsageLimitCommandInput,
-  GetUsageLimitCommandOutput,
 } from "./commands/GetUsageLimitCommand";
 import {
+  type GetWorkgroupCommandInput,
+  type GetWorkgroupCommandOutput,
   GetWorkgroupCommand,
-  GetWorkgroupCommandInput,
-  GetWorkgroupCommandOutput,
 } from "./commands/GetWorkgroupCommand";
 import {
+  type ListCustomDomainAssociationsCommandInput,
+  type ListCustomDomainAssociationsCommandOutput,
+  ListCustomDomainAssociationsCommand,
+} from "./commands/ListCustomDomainAssociationsCommand";
+import {
+  type ListEndpointAccessCommandInput,
+  type ListEndpointAccessCommandOutput,
   ListEndpointAccessCommand,
-  ListEndpointAccessCommandInput,
-  ListEndpointAccessCommandOutput,
 } from "./commands/ListEndpointAccessCommand";
 import {
+  type ListManagedWorkgroupsCommandInput,
+  type ListManagedWorkgroupsCommandOutput,
+  ListManagedWorkgroupsCommand,
+} from "./commands/ListManagedWorkgroupsCommand";
+import {
+  type ListNamespacesCommandInput,
+  type ListNamespacesCommandOutput,
   ListNamespacesCommand,
-  ListNamespacesCommandInput,
-  ListNamespacesCommandOutput,
 } from "./commands/ListNamespacesCommand";
 import {
+  type ListRecoveryPointsCommandInput,
+  type ListRecoveryPointsCommandOutput,
   ListRecoveryPointsCommand,
-  ListRecoveryPointsCommandInput,
-  ListRecoveryPointsCommandOutput,
 } from "./commands/ListRecoveryPointsCommand";
 import {
+  type ListReservationOfferingsCommandInput,
+  type ListReservationOfferingsCommandOutput,
+  ListReservationOfferingsCommand,
+} from "./commands/ListReservationOfferingsCommand";
+import {
+  type ListReservationsCommandInput,
+  type ListReservationsCommandOutput,
+  ListReservationsCommand,
+} from "./commands/ListReservationsCommand";
+import {
+  type ListScheduledActionsCommandInput,
+  type ListScheduledActionsCommandOutput,
+  ListScheduledActionsCommand,
+} from "./commands/ListScheduledActionsCommand";
+import {
+  type ListSnapshotCopyConfigurationsCommandInput,
+  type ListSnapshotCopyConfigurationsCommandOutput,
+  ListSnapshotCopyConfigurationsCommand,
+} from "./commands/ListSnapshotCopyConfigurationsCommand";
+import {
+  type ListSnapshotsCommandInput,
+  type ListSnapshotsCommandOutput,
   ListSnapshotsCommand,
-  ListSnapshotsCommandInput,
-  ListSnapshotsCommandOutput,
 } from "./commands/ListSnapshotsCommand";
 import {
+  type ListTableRestoreStatusCommandInput,
+  type ListTableRestoreStatusCommandOutput,
+  ListTableRestoreStatusCommand,
+} from "./commands/ListTableRestoreStatusCommand";
+import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTracksCommandInput,
+  type ListTracksCommandOutput,
+  ListTracksCommand,
+} from "./commands/ListTracksCommand";
+import {
+  type ListUsageLimitsCommandInput,
+  type ListUsageLimitsCommandOutput,
   ListUsageLimitsCommand,
-  ListUsageLimitsCommandInput,
-  ListUsageLimitsCommandOutput,
 } from "./commands/ListUsageLimitsCommand";
 import {
+  type ListWorkgroupsCommandInput,
+  type ListWorkgroupsCommandOutput,
   ListWorkgroupsCommand,
-  ListWorkgroupsCommandInput,
-  ListWorkgroupsCommandOutput,
 } from "./commands/ListWorkgroupsCommand";
 import {
+  type PutResourcePolicyCommandInput,
+  type PutResourcePolicyCommandOutput,
   PutResourcePolicyCommand,
-  PutResourcePolicyCommandInput,
-  PutResourcePolicyCommandOutput,
 } from "./commands/PutResourcePolicyCommand";
 import {
+  type RestoreFromRecoveryPointCommandInput,
+  type RestoreFromRecoveryPointCommandOutput,
   RestoreFromRecoveryPointCommand,
-  RestoreFromRecoveryPointCommandInput,
-  RestoreFromRecoveryPointCommandOutput,
 } from "./commands/RestoreFromRecoveryPointCommand";
 import {
+  type RestoreFromSnapshotCommandInput,
+  type RestoreFromSnapshotCommandOutput,
   RestoreFromSnapshotCommand,
-  RestoreFromSnapshotCommandInput,
-  RestoreFromSnapshotCommandOutput,
 } from "./commands/RestoreFromSnapshotCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type RestoreTableFromRecoveryPointCommandInput,
+  type RestoreTableFromRecoveryPointCommandOutput,
+  RestoreTableFromRecoveryPointCommand,
+} from "./commands/RestoreTableFromRecoveryPointCommand";
+import {
+  type RestoreTableFromSnapshotCommandInput,
+  type RestoreTableFromSnapshotCommandOutput,
+  RestoreTableFromSnapshotCommand,
+} from "./commands/RestoreTableFromSnapshotCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateCustomDomainAssociationCommandInput,
+  type UpdateCustomDomainAssociationCommandOutput,
+  UpdateCustomDomainAssociationCommand,
+} from "./commands/UpdateCustomDomainAssociationCommand";
+import {
+  type UpdateEndpointAccessCommandInput,
+  type UpdateEndpointAccessCommandOutput,
   UpdateEndpointAccessCommand,
-  UpdateEndpointAccessCommandInput,
-  UpdateEndpointAccessCommandOutput,
 } from "./commands/UpdateEndpointAccessCommand";
 import {
+  type UpdateLakehouseConfigurationCommandInput,
+  type UpdateLakehouseConfigurationCommandOutput,
+  UpdateLakehouseConfigurationCommand,
+} from "./commands/UpdateLakehouseConfigurationCommand";
+import {
+  type UpdateNamespaceCommandInput,
+  type UpdateNamespaceCommandOutput,
   UpdateNamespaceCommand,
-  UpdateNamespaceCommandInput,
-  UpdateNamespaceCommandOutput,
 } from "./commands/UpdateNamespaceCommand";
 import {
+  type UpdateScheduledActionCommandInput,
+  type UpdateScheduledActionCommandOutput,
+  UpdateScheduledActionCommand,
+} from "./commands/UpdateScheduledActionCommand";
+import {
+  type UpdateSnapshotCommandInput,
+  type UpdateSnapshotCommandOutput,
   UpdateSnapshotCommand,
-  UpdateSnapshotCommandInput,
-  UpdateSnapshotCommandOutput,
 } from "./commands/UpdateSnapshotCommand";
 import {
+  type UpdateSnapshotCopyConfigurationCommandInput,
+  type UpdateSnapshotCopyConfigurationCommandOutput,
+  UpdateSnapshotCopyConfigurationCommand,
+} from "./commands/UpdateSnapshotCopyConfigurationCommand";
+import {
+  type UpdateUsageLimitCommandInput,
+  type UpdateUsageLimitCommandOutput,
   UpdateUsageLimitCommand,
-  UpdateUsageLimitCommandInput,
-  UpdateUsageLimitCommandOutput,
 } from "./commands/UpdateUsageLimitCommand";
 import {
+  type UpdateWorkgroupCommandInput,
+  type UpdateWorkgroupCommandOutput,
   UpdateWorkgroupCommand,
-  UpdateWorkgroupCommandInput,
-  UpdateWorkgroupCommandOutput,
 } from "./commands/UpdateWorkgroupCommand";
+import { paginateListCustomDomainAssociations } from "./pagination/ListCustomDomainAssociationsPaginator";
+import { paginateListEndpointAccess } from "./pagination/ListEndpointAccessPaginator";
+import { paginateListManagedWorkgroups } from "./pagination/ListManagedWorkgroupsPaginator";
+import { paginateListNamespaces } from "./pagination/ListNamespacesPaginator";
+import { paginateListRecoveryPoints } from "./pagination/ListRecoveryPointsPaginator";
+import { paginateListReservationOfferings } from "./pagination/ListReservationOfferingsPaginator";
+import { paginateListReservations } from "./pagination/ListReservationsPaginator";
+import { paginateListScheduledActions } from "./pagination/ListScheduledActionsPaginator";
+import { paginateListSnapshotCopyConfigurations } from "./pagination/ListSnapshotCopyConfigurationsPaginator";
+import { paginateListSnapshots } from "./pagination/ListSnapshotsPaginator";
+import { paginateListTableRestoreStatus } from "./pagination/ListTableRestoreStatusPaginator";
+import { paginateListTracks } from "./pagination/ListTracksPaginator";
+import { paginateListUsageLimits } from "./pagination/ListUsageLimitsPaginator";
+import { paginateListWorkgroups } from "./pagination/ListWorkgroupsPaginator";
 import { RedshiftServerlessClient } from "./RedshiftServerlessClient";
 
+const commands = {
+  ConvertRecoveryPointToSnapshotCommand,
+  CreateCustomDomainAssociationCommand,
+  CreateEndpointAccessCommand,
+  CreateNamespaceCommand,
+  CreateReservationCommand,
+  CreateScheduledActionCommand,
+  CreateSnapshotCommand,
+  CreateSnapshotCopyConfigurationCommand,
+  CreateUsageLimitCommand,
+  CreateWorkgroupCommand,
+  DeleteCustomDomainAssociationCommand,
+  DeleteEndpointAccessCommand,
+  DeleteNamespaceCommand,
+  DeleteResourcePolicyCommand,
+  DeleteScheduledActionCommand,
+  DeleteSnapshotCommand,
+  DeleteSnapshotCopyConfigurationCommand,
+  DeleteUsageLimitCommand,
+  DeleteWorkgroupCommand,
+  GetCredentialsCommand,
+  GetCustomDomainAssociationCommand,
+  GetEndpointAccessCommand,
+  GetIdentityCenterAuthTokenCommand,
+  GetNamespaceCommand,
+  GetRecoveryPointCommand,
+  GetReservationCommand,
+  GetReservationOfferingCommand,
+  GetResourcePolicyCommand,
+  GetScheduledActionCommand,
+  GetSnapshotCommand,
+  GetTableRestoreStatusCommand,
+  GetTrackCommand,
+  GetUsageLimitCommand,
+  GetWorkgroupCommand,
+  ListCustomDomainAssociationsCommand,
+  ListEndpointAccessCommand,
+  ListManagedWorkgroupsCommand,
+  ListNamespacesCommand,
+  ListRecoveryPointsCommand,
+  ListReservationOfferingsCommand,
+  ListReservationsCommand,
+  ListScheduledActionsCommand,
+  ListSnapshotCopyConfigurationsCommand,
+  ListSnapshotsCommand,
+  ListTableRestoreStatusCommand,
+  ListTagsForResourceCommand,
+  ListTracksCommand,
+  ListUsageLimitsCommand,
+  ListWorkgroupsCommand,
+  PutResourcePolicyCommand,
+  RestoreFromRecoveryPointCommand,
+  RestoreFromSnapshotCommand,
+  RestoreTableFromRecoveryPointCommand,
+  RestoreTableFromSnapshotCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCustomDomainAssociationCommand,
+  UpdateEndpointAccessCommand,
+  UpdateLakehouseConfigurationCommand,
+  UpdateNamespaceCommand,
+  UpdateScheduledActionCommand,
+  UpdateSnapshotCommand,
+  UpdateSnapshotCopyConfigurationCommand,
+  UpdateUsageLimitCommand,
+  UpdateWorkgroupCommand,
+};
+const paginators = {
+  paginateListCustomDomainAssociations,
+  paginateListEndpointAccess,
+  paginateListManagedWorkgroups,
+  paginateListNamespaces,
+  paginateListRecoveryPoints,
+  paginateListReservationOfferings,
+  paginateListReservations,
+  paginateListScheduledActions,
+  paginateListSnapshotCopyConfigurations,
+  paginateListSnapshots,
+  paginateListTableRestoreStatus,
+  paginateListTracks,
+  paginateListUsageLimits,
+  paginateListWorkgroups,
+};
+
 /**
- * <p>This is an interface reference for Amazon Redshift Serverless.
- *            It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless.
- *         </p>
- *         <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the
- *            underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high
- *            performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you
- *            focus on using your data to acquire new insights for your business and customers.
- *         </p>
- *         <p>
- *            To learn more about Amazon Redshift Serverless,
- *            see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html">What is Amazon Redshift Serverless</a>.
- *         </p>
+ * @public
  */
-export class RedshiftServerless extends RedshiftServerlessClient {
+export interface RedshiftServerlessRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface RedshiftServerless {
   /**
-   * <p>Converts a recovery point to a snapshot. For more information about recovery points and snapshots,
-   *          see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html">Working with snapshots and recovery points</a>.</p>
+   * @see {@link ConvertRecoveryPointToSnapshotCommand}
    */
-  public convertRecoveryPointToSnapshot(
+  convertRecoveryPointToSnapshot(
     args: ConvertRecoveryPointToSnapshotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ConvertRecoveryPointToSnapshotCommandOutput>;
-  public convertRecoveryPointToSnapshot(
+  convertRecoveryPointToSnapshot(
     args: ConvertRecoveryPointToSnapshotCommandInput,
     cb: (err: any, data?: ConvertRecoveryPointToSnapshotCommandOutput) => void
   ): void;
-  public convertRecoveryPointToSnapshot(
+  convertRecoveryPointToSnapshot(
     args: ConvertRecoveryPointToSnapshotCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ConvertRecoveryPointToSnapshotCommandOutput) => void
   ): void;
-  public convertRecoveryPointToSnapshot(
-    args: ConvertRecoveryPointToSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ConvertRecoveryPointToSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: ConvertRecoveryPointToSnapshotCommandOutput) => void
-  ): Promise<ConvertRecoveryPointToSnapshotCommandOutput> | void {
-    const command = new ConvertRecoveryPointToSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an Amazon Redshift Serverless managed VPC endpoint.</p>
+   * @see {@link CreateCustomDomainAssociationCommand}
    */
-  public createEndpointAccess(
+  createCustomDomainAssociation(
+    args: CreateCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateCustomDomainAssociationCommandOutput>;
+  createCustomDomainAssociation(
+    args: CreateCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: CreateCustomDomainAssociationCommandOutput) => void
+  ): void;
+  createCustomDomainAssociation(
+    args: CreateCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateEndpointAccessCommand}
+   */
+  createEndpointAccess(
     args: CreateEndpointAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<CreateEndpointAccessCommandOutput>;
-  public createEndpointAccess(
+  createEndpointAccess(
     args: CreateEndpointAccessCommandInput,
     cb: (err: any, data?: CreateEndpointAccessCommandOutput) => void
   ): void;
-  public createEndpointAccess(
+  createEndpointAccess(
     args: CreateEndpointAccessCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: CreateEndpointAccessCommandOutput) => void
   ): void;
-  public createEndpointAccess(
-    args: CreateEndpointAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateEndpointAccessCommandOutput) => void),
-    cb?: (err: any, data?: CreateEndpointAccessCommandOutput) => void
-  ): Promise<CreateEndpointAccessCommandOutput> | void {
-    const command = new CreateEndpointAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a namespace in Amazon Redshift Serverless.</p>
+   * @see {@link CreateNamespaceCommand}
    */
-  public createNamespace(
+  createNamespace(
     args: CreateNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<CreateNamespaceCommandOutput>;
-  public createNamespace(
+  createNamespace(
     args: CreateNamespaceCommandInput,
     cb: (err: any, data?: CreateNamespaceCommandOutput) => void
   ): void;
-  public createNamespace(
+  createNamespace(
     args: CreateNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: CreateNamespaceCommandOutput) => void
   ): void;
-  public createNamespace(
-    args: CreateNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: CreateNamespaceCommandOutput) => void
-  ): Promise<CreateNamespaceCommandOutput> | void {
-    const command = new CreateNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a snapshot of all databases in a namespace.
-   *          For more information about snapshots, see
-   *          <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html">
-   *          Working with snapshots and recovery points</a>.</p>
+   * @see {@link CreateReservationCommand}
    */
-  public createSnapshot(
+  createReservation(
+    args: CreateReservationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateReservationCommandOutput>;
+  createReservation(
+    args: CreateReservationCommandInput,
+    cb: (err: any, data?: CreateReservationCommandOutput) => void
+  ): void;
+  createReservation(
+    args: CreateReservationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateReservationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateScheduledActionCommand}
+   */
+  createScheduledAction(
+    args: CreateScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateScheduledActionCommandOutput>;
+  createScheduledAction(
+    args: CreateScheduledActionCommandInput,
+    cb: (err: any, data?: CreateScheduledActionCommandOutput) => void
+  ): void;
+  createScheduledAction(
+    args: CreateScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSnapshotCommand}
+   */
+  createSnapshot(
     args: CreateSnapshotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<CreateSnapshotCommandOutput>;
-  public createSnapshot(
+  createSnapshot(
     args: CreateSnapshotCommandInput,
     cb: (err: any, data?: CreateSnapshotCommandOutput) => void
   ): void;
-  public createSnapshot(
+  createSnapshot(
     args: CreateSnapshotCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: CreateSnapshotCommandOutput) => void
   ): void;
-  public createSnapshot(
-    args: CreateSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CreateSnapshotCommandOutput) => void
-  ): Promise<CreateSnapshotCommandOutput> | void {
-    const command = new CreateSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier.
-   *       </p>
+   * @see {@link CreateSnapshotCopyConfigurationCommand}
    */
-  public createUsageLimit(
+  createSnapshotCopyConfiguration(
+    args: CreateSnapshotCopyConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<CreateSnapshotCopyConfigurationCommandOutput>;
+  createSnapshotCopyConfiguration(
+    args: CreateSnapshotCopyConfigurationCommandInput,
+    cb: (err: any, data?: CreateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+  createSnapshotCopyConfiguration(
+    args: CreateSnapshotCopyConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: CreateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateUsageLimitCommand}
+   */
+  createUsageLimit(
     args: CreateUsageLimitCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<CreateUsageLimitCommandOutput>;
-  public createUsageLimit(
+  createUsageLimit(
     args: CreateUsageLimitCommandInput,
     cb: (err: any, data?: CreateUsageLimitCommandOutput) => void
   ): void;
-  public createUsageLimit(
+  createUsageLimit(
     args: CreateUsageLimitCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: CreateUsageLimitCommandOutput) => void
   ): void;
-  public createUsageLimit(
-    args: CreateUsageLimitCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateUsageLimitCommandOutput) => void),
-    cb?: (err: any, data?: CreateUsageLimitCommandOutput) => void
-  ): Promise<CreateUsageLimitCommandOutput> | void {
-    const command = new CreateUsageLimitCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates an workgroup in Amazon Redshift Serverless.</p>
+   * @see {@link CreateWorkgroupCommand}
    */
-  public createWorkgroup(
+  createWorkgroup(
     args: CreateWorkgroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<CreateWorkgroupCommandOutput>;
-  public createWorkgroup(
+  createWorkgroup(
     args: CreateWorkgroupCommandInput,
     cb: (err: any, data?: CreateWorkgroupCommandOutput) => void
   ): void;
-  public createWorkgroup(
+  createWorkgroup(
     args: CreateWorkgroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: CreateWorkgroupCommandOutput) => void
   ): void;
-  public createWorkgroup(
-    args: CreateWorkgroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateWorkgroupCommandOutput) => void),
-    cb?: (err: any, data?: CreateWorkgroupCommandOutput) => void
-  ): Promise<CreateWorkgroupCommandOutput> | void {
-    const command = new CreateWorkgroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes an Amazon Redshift Serverless managed VPC endpoint.</p>
+   * @see {@link DeleteCustomDomainAssociationCommand}
    */
-  public deleteEndpointAccess(
+  deleteCustomDomainAssociation(
+    args: DeleteCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteCustomDomainAssociationCommandOutput>;
+  deleteCustomDomainAssociation(
+    args: DeleteCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: DeleteCustomDomainAssociationCommandOutput) => void
+  ): void;
+  deleteCustomDomainAssociation(
+    args: DeleteCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteEndpointAccessCommand}
+   */
+  deleteEndpointAccess(
     args: DeleteEndpointAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<DeleteEndpointAccessCommandOutput>;
-  public deleteEndpointAccess(
+  deleteEndpointAccess(
     args: DeleteEndpointAccessCommandInput,
     cb: (err: any, data?: DeleteEndpointAccessCommandOutput) => void
   ): void;
-  public deleteEndpointAccess(
+  deleteEndpointAccess(
     args: DeleteEndpointAccessCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: DeleteEndpointAccessCommandOutput) => void
   ): void;
-  public deleteEndpointAccess(
-    args: DeleteEndpointAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteEndpointAccessCommandOutput) => void),
-    cb?: (err: any, data?: DeleteEndpointAccessCommandOutput) => void
-  ): Promise<DeleteEndpointAccessCommandOutput> | void {
-    const command = new DeleteEndpointAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a namespace from Amazon Redshift Serverless.
-   *          Before you delete the namespace, you can create a final snapshot that has all of the data within the namespace.</p>
+   * @see {@link DeleteNamespaceCommand}
    */
-  public deleteNamespace(
+  deleteNamespace(
     args: DeleteNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<DeleteNamespaceCommandOutput>;
-  public deleteNamespace(
+  deleteNamespace(
     args: DeleteNamespaceCommandInput,
     cb: (err: any, data?: DeleteNamespaceCommandOutput) => void
   ): void;
-  public deleteNamespace(
+  deleteNamespace(
     args: DeleteNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: DeleteNamespaceCommandOutput) => void
   ): void;
-  public deleteNamespace(
-    args: DeleteNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteNamespaceCommandOutput) => void
-  ): Promise<DeleteNamespaceCommandOutput> | void {
-    const command = new DeleteNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes the specified resource policy.</p>
+   * @see {@link DeleteResourcePolicyCommand}
    */
-  public deleteResourcePolicy(
+  deleteResourcePolicy(
     args: DeleteResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<DeleteResourcePolicyCommandOutput>;
-  public deleteResourcePolicy(
+  deleteResourcePolicy(
     args: DeleteResourcePolicyCommandInput,
     cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
   ): void;
-  public deleteResourcePolicy(
+  deleteResourcePolicy(
     args: DeleteResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
   ): void;
-  public deleteResourcePolicy(
-    args: DeleteResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteResourcePolicyCommandOutput) => void
-  ): Promise<DeleteResourcePolicyCommandOutput> | void {
-    const command = new DeleteResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a snapshot from Amazon Redshift Serverless.</p>
+   * @see {@link DeleteScheduledActionCommand}
    */
-  public deleteSnapshot(
+  deleteScheduledAction(
+    args: DeleteScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteScheduledActionCommandOutput>;
+  deleteScheduledAction(
+    args: DeleteScheduledActionCommandInput,
+    cb: (err: any, data?: DeleteScheduledActionCommandOutput) => void
+  ): void;
+  deleteScheduledAction(
+    args: DeleteScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSnapshotCommand}
+   */
+  deleteSnapshot(
     args: DeleteSnapshotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<DeleteSnapshotCommandOutput>;
-  public deleteSnapshot(
+  deleteSnapshot(
     args: DeleteSnapshotCommandInput,
     cb: (err: any, data?: DeleteSnapshotCommandOutput) => void
   ): void;
-  public deleteSnapshot(
+  deleteSnapshot(
     args: DeleteSnapshotCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: DeleteSnapshotCommandOutput) => void
   ): void;
-  public deleteSnapshot(
-    args: DeleteSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: DeleteSnapshotCommandOutput) => void
-  ): Promise<DeleteSnapshotCommandOutput> | void {
-    const command = new DeleteSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a usage limit from Amazon Redshift Serverless.</p>
+   * @see {@link DeleteSnapshotCopyConfigurationCommand}
    */
-  public deleteUsageLimit(
+  deleteSnapshotCopyConfiguration(
+    args: DeleteSnapshotCopyConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<DeleteSnapshotCopyConfigurationCommandOutput>;
+  deleteSnapshotCopyConfiguration(
+    args: DeleteSnapshotCopyConfigurationCommandInput,
+    cb: (err: any, data?: DeleteSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+  deleteSnapshotCopyConfiguration(
+    args: DeleteSnapshotCopyConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: DeleteSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteUsageLimitCommand}
+   */
+  deleteUsageLimit(
     args: DeleteUsageLimitCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<DeleteUsageLimitCommandOutput>;
-  public deleteUsageLimit(
+  deleteUsageLimit(
     args: DeleteUsageLimitCommandInput,
     cb: (err: any, data?: DeleteUsageLimitCommandOutput) => void
   ): void;
-  public deleteUsageLimit(
+  deleteUsageLimit(
     args: DeleteUsageLimitCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: DeleteUsageLimitCommandOutput) => void
   ): void;
-  public deleteUsageLimit(
-    args: DeleteUsageLimitCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteUsageLimitCommandOutput) => void),
-    cb?: (err: any, data?: DeleteUsageLimitCommandOutput) => void
-  ): Promise<DeleteUsageLimitCommandOutput> | void {
-    const command = new DeleteUsageLimitCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a workgroup.</p>
+   * @see {@link DeleteWorkgroupCommand}
    */
-  public deleteWorkgroup(
+  deleteWorkgroup(
     args: DeleteWorkgroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<DeleteWorkgroupCommandOutput>;
-  public deleteWorkgroup(
+  deleteWorkgroup(
     args: DeleteWorkgroupCommandInput,
     cb: (err: any, data?: DeleteWorkgroupCommandOutput) => void
   ): void;
-  public deleteWorkgroup(
+  deleteWorkgroup(
     args: DeleteWorkgroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: DeleteWorkgroupCommandOutput) => void
   ): void;
-  public deleteWorkgroup(
-    args: DeleteWorkgroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteWorkgroupCommandOutput) => void),
-    cb?: (err: any, data?: DeleteWorkgroupCommandOutput) => void
-  ): Promise<DeleteWorkgroupCommandOutput> | void {
-    const command = new DeleteWorkgroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a database user name and temporary password with
-   *          temporary authorization to log in to Amazon Redshift Serverless.</p>
-   *          <p>By default, the temporary credentials expire in 900 seconds.
-   *          You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).</p>
-   *
-   *          <p>
-   *          The Identity and Access Management (IAM) user or role that runs
-   *          GetCredentials must have an IAM policy attached that allows access to all
-   *          necessary actions and resources.
-   *          </p>
-   *
-   *          <p>
-   *          If the <code>DbName</code> parameter is specified, the IAM policy must
-   *          allow access to the resource dbname for the specified database name.</p>
+   * @see {@link GetCredentialsCommand}
    */
-  public getCredentials(
+  getCredentials(): Promise<GetCredentialsCommandOutput>;
+  getCredentials(
     args: GetCredentialsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<GetCredentialsCommandOutput>;
-  public getCredentials(
+  getCredentials(
     args: GetCredentialsCommandInput,
     cb: (err: any, data?: GetCredentialsCommandOutput) => void
   ): void;
-  public getCredentials(
+  getCredentials(
     args: GetCredentialsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: GetCredentialsCommandOutput) => void
   ): void;
-  public getCredentials(
-    args: GetCredentialsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCredentialsCommandOutput) => void),
-    cb?: (err: any, data?: GetCredentialsCommandOutput) => void
-  ): Promise<GetCredentialsCommandOutput> | void {
-    const command = new GetCredentialsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information, such as the name, about a VPC endpoint.</p>
+   * @see {@link GetCustomDomainAssociationCommand}
    */
-  public getEndpointAccess(
+  getCustomDomainAssociation(
+    args: GetCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetCustomDomainAssociationCommandOutput>;
+  getCustomDomainAssociation(
+    args: GetCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: GetCustomDomainAssociationCommandOutput) => void
+  ): void;
+  getCustomDomainAssociation(
+    args: GetCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetEndpointAccessCommand}
+   */
+  getEndpointAccess(
     args: GetEndpointAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<GetEndpointAccessCommandOutput>;
-  public getEndpointAccess(
+  getEndpointAccess(
     args: GetEndpointAccessCommandInput,
     cb: (err: any, data?: GetEndpointAccessCommandOutput) => void
   ): void;
-  public getEndpointAccess(
+  getEndpointAccess(
     args: GetEndpointAccessCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: GetEndpointAccessCommandOutput) => void
   ): void;
-  public getEndpointAccess(
-    args: GetEndpointAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetEndpointAccessCommandOutput) => void),
-    cb?: (err: any, data?: GetEndpointAccessCommandOutput) => void
-  ): Promise<GetEndpointAccessCommandOutput> | void {
-    const command = new GetEndpointAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a namespace in Amazon Redshift Serverless.</p>
+   * @see {@link GetIdentityCenterAuthTokenCommand}
    */
-  public getNamespace(
+  getIdentityCenterAuthToken(
+    args: GetIdentityCenterAuthTokenCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetIdentityCenterAuthTokenCommandOutput>;
+  getIdentityCenterAuthToken(
+    args: GetIdentityCenterAuthTokenCommandInput,
+    cb: (err: any, data?: GetIdentityCenterAuthTokenCommandOutput) => void
+  ): void;
+  getIdentityCenterAuthToken(
+    args: GetIdentityCenterAuthTokenCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetIdentityCenterAuthTokenCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetNamespaceCommand}
+   */
+  getNamespace(
     args: GetNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<GetNamespaceCommandOutput>;
-  public getNamespace(args: GetNamespaceCommandInput, cb: (err: any, data?: GetNamespaceCommandOutput) => void): void;
-  public getNamespace(
+  getNamespace(
     args: GetNamespaceCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetNamespaceCommandOutput) => void
   ): void;
-  public getNamespace(
+  getNamespace(
     args: GetNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: GetNamespaceCommandOutput) => void
-  ): Promise<GetNamespaceCommandOutput> | void {
-    const command = new GetNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetNamespaceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns information about a recovery point.</p>
+   * @see {@link GetRecoveryPointCommand}
    */
-  public getRecoveryPoint(
+  getRecoveryPoint(
     args: GetRecoveryPointCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<GetRecoveryPointCommandOutput>;
-  public getRecoveryPoint(
+  getRecoveryPoint(
     args: GetRecoveryPointCommandInput,
     cb: (err: any, data?: GetRecoveryPointCommandOutput) => void
   ): void;
-  public getRecoveryPoint(
+  getRecoveryPoint(
     args: GetRecoveryPointCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: GetRecoveryPointCommandOutput) => void
   ): void;
-  public getRecoveryPoint(
-    args: GetRecoveryPointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRecoveryPointCommandOutput) => void),
-    cb?: (err: any, data?: GetRecoveryPointCommandOutput) => void
-  ): Promise<GetRecoveryPointCommandOutput> | void {
-    const command = new GetRecoveryPointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a resource policy.</p>
+   * @see {@link GetReservationCommand}
    */
-  public getResourcePolicy(
+  getReservation(
+    args: GetReservationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetReservationCommandOutput>;
+  getReservation(
+    args: GetReservationCommandInput,
+    cb: (err: any, data?: GetReservationCommandOutput) => void
+  ): void;
+  getReservation(
+    args: GetReservationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetReservationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetReservationOfferingCommand}
+   */
+  getReservationOffering(
+    args: GetReservationOfferingCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetReservationOfferingCommandOutput>;
+  getReservationOffering(
+    args: GetReservationOfferingCommandInput,
+    cb: (err: any, data?: GetReservationOfferingCommandOutput) => void
+  ): void;
+  getReservationOffering(
+    args: GetReservationOfferingCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetReservationOfferingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetResourcePolicyCommand}
+   */
+  getResourcePolicy(
     args: GetResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<GetResourcePolicyCommandOutput>;
-  public getResourcePolicy(
+  getResourcePolicy(
     args: GetResourcePolicyCommandInput,
     cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
   ): void;
-  public getResourcePolicy(
+  getResourcePolicy(
     args: GetResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: GetResourcePolicyCommandOutput) => void
   ): void;
-  public getResourcePolicy(
-    args: GetResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: GetResourcePolicyCommandOutput) => void
-  ): Promise<GetResourcePolicyCommandOutput> | void {
-    const command = new GetResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a specific snapshot.</p>
+   * @see {@link GetScheduledActionCommand}
    */
-  public getSnapshot(args: GetSnapshotCommandInput, options?: __HttpHandlerOptions): Promise<GetSnapshotCommandOutput>;
-  public getSnapshot(args: GetSnapshotCommandInput, cb: (err: any, data?: GetSnapshotCommandOutput) => void): void;
-  public getSnapshot(
+  getScheduledAction(
+    args: GetScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetScheduledActionCommandOutput>;
+  getScheduledAction(
+    args: GetScheduledActionCommandInput,
+    cb: (err: any, data?: GetScheduledActionCommandOutput) => void
+  ): void;
+  getScheduledAction(
+    args: GetScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSnapshotCommand}
+   */
+  getSnapshot(): Promise<GetSnapshotCommandOutput>;
+  getSnapshot(
     args: GetSnapshotCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetSnapshotCommandOutput>;
+  getSnapshot(
+    args: GetSnapshotCommandInput,
     cb: (err: any, data?: GetSnapshotCommandOutput) => void
   ): void;
-  public getSnapshot(
+  getSnapshot(
     args: GetSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: GetSnapshotCommandOutput) => void
-  ): Promise<GetSnapshotCommandOutput> | void {
-    const command = new GetSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetSnapshotCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns information about a usage limit.</p>
+   * @see {@link GetTableRestoreStatusCommand}
    */
-  public getUsageLimit(
+  getTableRestoreStatus(
+    args: GetTableRestoreStatusCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetTableRestoreStatusCommandOutput>;
+  getTableRestoreStatus(
+    args: GetTableRestoreStatusCommandInput,
+    cb: (err: any, data?: GetTableRestoreStatusCommandOutput) => void
+  ): void;
+  getTableRestoreStatus(
+    args: GetTableRestoreStatusCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetTableRestoreStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTrackCommand}
+   */
+  getTrack(
+    args: GetTrackCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<GetTrackCommandOutput>;
+  getTrack(
+    args: GetTrackCommandInput,
+    cb: (err: any, data?: GetTrackCommandOutput) => void
+  ): void;
+  getTrack(
+    args: GetTrackCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetTrackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetUsageLimitCommand}
+   */
+  getUsageLimit(
     args: GetUsageLimitCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<GetUsageLimitCommandOutput>;
-  public getUsageLimit(
+  getUsageLimit(
     args: GetUsageLimitCommandInput,
     cb: (err: any, data?: GetUsageLimitCommandOutput) => void
   ): void;
-  public getUsageLimit(
+  getUsageLimit(
     args: GetUsageLimitCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: GetUsageLimitCommandOutput) => void
   ): void;
-  public getUsageLimit(
-    args: GetUsageLimitCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetUsageLimitCommandOutput) => void),
-    cb?: (err: any, data?: GetUsageLimitCommandOutput) => void
-  ): Promise<GetUsageLimitCommandOutput> | void {
-    const command = new GetUsageLimitCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a specific workgroup.</p>
+   * @see {@link GetWorkgroupCommand}
    */
-  public getWorkgroup(
+  getWorkgroup(
     args: GetWorkgroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<GetWorkgroupCommandOutput>;
-  public getWorkgroup(args: GetWorkgroupCommandInput, cb: (err: any, data?: GetWorkgroupCommandOutput) => void): void;
-  public getWorkgroup(
+  getWorkgroup(
     args: GetWorkgroupCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: GetWorkgroupCommandOutput) => void
   ): void;
-  public getWorkgroup(
+  getWorkgroup(
     args: GetWorkgroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetWorkgroupCommandOutput) => void),
-    cb?: (err: any, data?: GetWorkgroupCommandOutput) => void
-  ): Promise<GetWorkgroupCommandOutput> | void {
-    const command = new GetWorkgroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: GetWorkgroupCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Returns an array of <code>EndpointAccess</code> objects and relevant information.</p>
+   * @see {@link ListCustomDomainAssociationsCommand}
    */
-  public listEndpointAccess(
+  listCustomDomainAssociations(): Promise<ListCustomDomainAssociationsCommandOutput>;
+  listCustomDomainAssociations(
+    args: ListCustomDomainAssociationsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListCustomDomainAssociationsCommandOutput>;
+  listCustomDomainAssociations(
+    args: ListCustomDomainAssociationsCommandInput,
+    cb: (err: any, data?: ListCustomDomainAssociationsCommandOutput) => void
+  ): void;
+  listCustomDomainAssociations(
+    args: ListCustomDomainAssociationsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListCustomDomainAssociationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListEndpointAccessCommand}
+   */
+  listEndpointAccess(): Promise<ListEndpointAccessCommandOutput>;
+  listEndpointAccess(
     args: ListEndpointAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ListEndpointAccessCommandOutput>;
-  public listEndpointAccess(
+  listEndpointAccess(
     args: ListEndpointAccessCommandInput,
     cb: (err: any, data?: ListEndpointAccessCommandOutput) => void
   ): void;
-  public listEndpointAccess(
+  listEndpointAccess(
     args: ListEndpointAccessCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ListEndpointAccessCommandOutput) => void
   ): void;
-  public listEndpointAccess(
-    args: ListEndpointAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListEndpointAccessCommandOutput) => void),
-    cb?: (err: any, data?: ListEndpointAccessCommandOutput) => void
-  ): Promise<ListEndpointAccessCommandOutput> | void {
-    const command = new ListEndpointAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a list of specified namespaces.</p>
+   * @see {@link ListManagedWorkgroupsCommand}
    */
-  public listNamespaces(
+  listManagedWorkgroups(): Promise<ListManagedWorkgroupsCommandOutput>;
+  listManagedWorkgroups(
+    args: ListManagedWorkgroupsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListManagedWorkgroupsCommandOutput>;
+  listManagedWorkgroups(
+    args: ListManagedWorkgroupsCommandInput,
+    cb: (err: any, data?: ListManagedWorkgroupsCommandOutput) => void
+  ): void;
+  listManagedWorkgroups(
+    args: ListManagedWorkgroupsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListManagedWorkgroupsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListNamespacesCommand}
+   */
+  listNamespaces(): Promise<ListNamespacesCommandOutput>;
+  listNamespaces(
     args: ListNamespacesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ListNamespacesCommandOutput>;
-  public listNamespaces(
+  listNamespaces(
     args: ListNamespacesCommandInput,
     cb: (err: any, data?: ListNamespacesCommandOutput) => void
   ): void;
-  public listNamespaces(
+  listNamespaces(
     args: ListNamespacesCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ListNamespacesCommandOutput) => void
   ): void;
-  public listNamespaces(
-    args: ListNamespacesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListNamespacesCommandOutput) => void),
-    cb?: (err: any, data?: ListNamespacesCommandOutput) => void
-  ): Promise<ListNamespacesCommandOutput> | void {
-    const command = new ListNamespacesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns an array of recovery points.</p>
+   * @see {@link ListRecoveryPointsCommand}
    */
-  public listRecoveryPoints(
+  listRecoveryPoints(): Promise<ListRecoveryPointsCommandOutput>;
+  listRecoveryPoints(
     args: ListRecoveryPointsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ListRecoveryPointsCommandOutput>;
-  public listRecoveryPoints(
+  listRecoveryPoints(
     args: ListRecoveryPointsCommandInput,
     cb: (err: any, data?: ListRecoveryPointsCommandOutput) => void
   ): void;
-  public listRecoveryPoints(
+  listRecoveryPoints(
     args: ListRecoveryPointsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ListRecoveryPointsCommandOutput) => void
   ): void;
-  public listRecoveryPoints(
-    args: ListRecoveryPointsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListRecoveryPointsCommandOutput) => void),
-    cb?: (err: any, data?: ListRecoveryPointsCommandOutput) => void
-  ): Promise<ListRecoveryPointsCommandOutput> | void {
-    const command = new ListRecoveryPointsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns a list of snapshots.</p>
+   * @see {@link ListReservationOfferingsCommand}
    */
-  public listSnapshots(
+  listReservationOfferings(): Promise<ListReservationOfferingsCommandOutput>;
+  listReservationOfferings(
+    args: ListReservationOfferingsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListReservationOfferingsCommandOutput>;
+  listReservationOfferings(
+    args: ListReservationOfferingsCommandInput,
+    cb: (err: any, data?: ListReservationOfferingsCommandOutput) => void
+  ): void;
+  listReservationOfferings(
+    args: ListReservationOfferingsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListReservationOfferingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListReservationsCommand}
+   */
+  listReservations(): Promise<ListReservationsCommandOutput>;
+  listReservations(
+    args: ListReservationsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListReservationsCommandOutput>;
+  listReservations(
+    args: ListReservationsCommandInput,
+    cb: (err: any, data?: ListReservationsCommandOutput) => void
+  ): void;
+  listReservations(
+    args: ListReservationsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListReservationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListScheduledActionsCommand}
+   */
+  listScheduledActions(): Promise<ListScheduledActionsCommandOutput>;
+  listScheduledActions(
+    args: ListScheduledActionsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListScheduledActionsCommandOutput>;
+  listScheduledActions(
+    args: ListScheduledActionsCommandInput,
+    cb: (err: any, data?: ListScheduledActionsCommandOutput) => void
+  ): void;
+  listScheduledActions(
+    args: ListScheduledActionsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListScheduledActionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSnapshotCopyConfigurationsCommand}
+   */
+  listSnapshotCopyConfigurations(): Promise<ListSnapshotCopyConfigurationsCommandOutput>;
+  listSnapshotCopyConfigurations(
+    args: ListSnapshotCopyConfigurationsCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListSnapshotCopyConfigurationsCommandOutput>;
+  listSnapshotCopyConfigurations(
+    args: ListSnapshotCopyConfigurationsCommandInput,
+    cb: (err: any, data?: ListSnapshotCopyConfigurationsCommandOutput) => void
+  ): void;
+  listSnapshotCopyConfigurations(
+    args: ListSnapshotCopyConfigurationsCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListSnapshotCopyConfigurationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListSnapshotsCommand}
+   */
+  listSnapshots(): Promise<ListSnapshotsCommandOutput>;
+  listSnapshots(
     args: ListSnapshotsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ListSnapshotsCommandOutput>;
-  public listSnapshots(
+  listSnapshots(
     args: ListSnapshotsCommandInput,
     cb: (err: any, data?: ListSnapshotsCommandOutput) => void
   ): void;
-  public listSnapshots(
+  listSnapshots(
     args: ListSnapshotsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ListSnapshotsCommandOutput) => void
   ): void;
-  public listSnapshots(
-    args: ListSnapshotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSnapshotsCommandOutput) => void),
-    cb?: (err: any, data?: ListSnapshotsCommandOutput) => void
-  ): Promise<ListSnapshotsCommandOutput> | void {
-    const command = new ListSnapshotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the tags assigned to a resource.</p>
+   * @see {@link ListTableRestoreStatusCommand}
    */
-  public listTagsForResource(
+  listTableRestoreStatus(): Promise<ListTableRestoreStatusCommandOutput>;
+  listTableRestoreStatus(
+    args: ListTableRestoreStatusCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListTableRestoreStatusCommandOutput>;
+  listTableRestoreStatus(
+    args: ListTableRestoreStatusCommandInput,
+    cb: (err: any, data?: ListTableRestoreStatusCommandOutput) => void
+  ): void;
+  listTableRestoreStatus(
+    args: ListTableRestoreStatusCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListTableRestoreStatusCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists all usage limits within Amazon Redshift Serverless.</p>
+   * @see {@link ListTracksCommand}
    */
-  public listUsageLimits(
+  listTracks(): Promise<ListTracksCommandOutput>;
+  listTracks(
+    args: ListTracksCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<ListTracksCommandOutput>;
+  listTracks(
+    args: ListTracksCommandInput,
+    cb: (err: any, data?: ListTracksCommandOutput) => void
+  ): void;
+  listTracks(
+    args: ListTracksCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: ListTracksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListUsageLimitsCommand}
+   */
+  listUsageLimits(): Promise<ListUsageLimitsCommandOutput>;
+  listUsageLimits(
     args: ListUsageLimitsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ListUsageLimitsCommandOutput>;
-  public listUsageLimits(
+  listUsageLimits(
     args: ListUsageLimitsCommandInput,
     cb: (err: any, data?: ListUsageLimitsCommandOutput) => void
   ): void;
-  public listUsageLimits(
+  listUsageLimits(
     args: ListUsageLimitsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ListUsageLimitsCommandOutput) => void
   ): void;
-  public listUsageLimits(
-    args: ListUsageLimitsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListUsageLimitsCommandOutput) => void),
-    cb?: (err: any, data?: ListUsageLimitsCommandOutput) => void
-  ): Promise<ListUsageLimitsCommandOutput> | void {
-    const command = new ListUsageLimitsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Returns information about a list of specified workgroups.</p>
+   * @see {@link ListWorkgroupsCommand}
    */
-  public listWorkgroups(
+  listWorkgroups(): Promise<ListWorkgroupsCommandOutput>;
+  listWorkgroups(
     args: ListWorkgroupsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<ListWorkgroupsCommandOutput>;
-  public listWorkgroups(
+  listWorkgroups(
     args: ListWorkgroupsCommandInput,
     cb: (err: any, data?: ListWorkgroupsCommandOutput) => void
   ): void;
-  public listWorkgroups(
+  listWorkgroups(
     args: ListWorkgroupsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: ListWorkgroupsCommandOutput) => void
   ): void;
-  public listWorkgroups(
-    args: ListWorkgroupsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListWorkgroupsCommandOutput) => void),
-    cb?: (err: any, data?: ListWorkgroupsCommandOutput) => void
-  ): Promise<ListWorkgroupsCommandOutput> | void {
-    const command = new ListWorkgroupsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates or updates a resource policy. Currently, you can use policies to share snapshots across Amazon Web Services accounts.</p>
+   * @see {@link PutResourcePolicyCommand}
    */
-  public putResourcePolicy(
+  putResourcePolicy(
     args: PutResourcePolicyCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<PutResourcePolicyCommandOutput>;
-  public putResourcePolicy(
+  putResourcePolicy(
     args: PutResourcePolicyCommandInput,
     cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
   ): void;
-  public putResourcePolicy(
+  putResourcePolicy(
     args: PutResourcePolicyCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: PutResourcePolicyCommandOutput) => void
   ): void;
-  public putResourcePolicy(
-    args: PutResourcePolicyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutResourcePolicyCommandOutput) => void),
-    cb?: (err: any, data?: PutResourcePolicyCommandOutput) => void
-  ): Promise<PutResourcePolicyCommandOutput> | void {
-    const command = new PutResourcePolicyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Restore the data from a recovery point.</p>
+   * @see {@link RestoreFromRecoveryPointCommand}
    */
-  public restoreFromRecoveryPoint(
+  restoreFromRecoveryPoint(
     args: RestoreFromRecoveryPointCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<RestoreFromRecoveryPointCommandOutput>;
-  public restoreFromRecoveryPoint(
+  restoreFromRecoveryPoint(
     args: RestoreFromRecoveryPointCommandInput,
     cb: (err: any, data?: RestoreFromRecoveryPointCommandOutput) => void
   ): void;
-  public restoreFromRecoveryPoint(
+  restoreFromRecoveryPoint(
     args: RestoreFromRecoveryPointCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: RestoreFromRecoveryPointCommandOutput) => void
   ): void;
-  public restoreFromRecoveryPoint(
-    args: RestoreFromRecoveryPointCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RestoreFromRecoveryPointCommandOutput) => void),
-    cb?: (err: any, data?: RestoreFromRecoveryPointCommandOutput) => void
-  ): Promise<RestoreFromRecoveryPointCommandOutput> | void {
-    const command = new RestoreFromRecoveryPointCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Restores a namespace from a snapshot.</p>
+   * @see {@link RestoreFromSnapshotCommand}
    */
-  public restoreFromSnapshot(
+  restoreFromSnapshot(
     args: RestoreFromSnapshotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<RestoreFromSnapshotCommandOutput>;
-  public restoreFromSnapshot(
+  restoreFromSnapshot(
     args: RestoreFromSnapshotCommandInput,
     cb: (err: any, data?: RestoreFromSnapshotCommandOutput) => void
   ): void;
-  public restoreFromSnapshot(
+  restoreFromSnapshot(
     args: RestoreFromSnapshotCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: RestoreFromSnapshotCommandOutput) => void
   ): void;
-  public restoreFromSnapshot(
-    args: RestoreFromSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RestoreFromSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: RestoreFromSnapshotCommandOutput) => void
-  ): Promise<RestoreFromSnapshotCommandOutput> | void {
-    const command = new RestoreFromSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Assigns one or more tags to a resource.</p>
+   * @see {@link RestoreTableFromRecoveryPointCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  restoreTableFromRecoveryPoint(
+    args: RestoreTableFromRecoveryPointCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<RestoreTableFromRecoveryPointCommandOutput>;
+  restoreTableFromRecoveryPoint(
+    args: RestoreTableFromRecoveryPointCommandInput,
+    cb: (err: any, data?: RestoreTableFromRecoveryPointCommandOutput) => void
+  ): void;
+  restoreTableFromRecoveryPoint(
+    args: RestoreTableFromRecoveryPointCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: RestoreTableFromRecoveryPointCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RestoreTableFromSnapshotCommand}
+   */
+  restoreTableFromSnapshot(
+    args: RestoreTableFromSnapshotCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<RestoreTableFromSnapshotCommandOutput>;
+  restoreTableFromSnapshot(
+    args: RestoreTableFromSnapshotCommandInput,
+    cb: (err: any, data?: RestoreTableFromSnapshotCommandOutput) => void
+  ): void;
+  restoreTableFromSnapshot(
+    args: RestoreTableFromSnapshotCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: RestoreTableFromSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes a tag or set of tags from a resource.</p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates an Amazon Redshift Serverless managed endpoint.</p>
+   * @see {@link UpdateCustomDomainAssociationCommand}
    */
-  public updateEndpointAccess(
+  updateCustomDomainAssociation(
+    args: UpdateCustomDomainAssociationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateCustomDomainAssociationCommandOutput>;
+  updateCustomDomainAssociation(
+    args: UpdateCustomDomainAssociationCommandInput,
+    cb: (err: any, data?: UpdateCustomDomainAssociationCommandOutput) => void
+  ): void;
+  updateCustomDomainAssociation(
+    args: UpdateCustomDomainAssociationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateCustomDomainAssociationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateEndpointAccessCommand}
+   */
+  updateEndpointAccess(
     args: UpdateEndpointAccessCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<UpdateEndpointAccessCommandOutput>;
-  public updateEndpointAccess(
+  updateEndpointAccess(
     args: UpdateEndpointAccessCommandInput,
     cb: (err: any, data?: UpdateEndpointAccessCommandOutput) => void
   ): void;
-  public updateEndpointAccess(
+  updateEndpointAccess(
     args: UpdateEndpointAccessCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: UpdateEndpointAccessCommandOutput) => void
   ): void;
-  public updateEndpointAccess(
-    args: UpdateEndpointAccessCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateEndpointAccessCommandOutput) => void),
-    cb?: (err: any, data?: UpdateEndpointAccessCommandOutput) => void
-  ): Promise<UpdateEndpointAccessCommandOutput> | void {
-    const command = new UpdateEndpointAccessCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a namespace with the specified settings.</p>
+   * @see {@link UpdateLakehouseConfigurationCommand}
    */
-  public updateNamespace(
+  updateLakehouseConfiguration(
+    args: UpdateLakehouseConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateLakehouseConfigurationCommandOutput>;
+  updateLakehouseConfiguration(
+    args: UpdateLakehouseConfigurationCommandInput,
+    cb: (err: any, data?: UpdateLakehouseConfigurationCommandOutput) => void
+  ): void;
+  updateLakehouseConfiguration(
+    args: UpdateLakehouseConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateLakehouseConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateNamespaceCommand}
+   */
+  updateNamespace(
     args: UpdateNamespaceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<UpdateNamespaceCommandOutput>;
-  public updateNamespace(
+  updateNamespace(
     args: UpdateNamespaceCommandInput,
     cb: (err: any, data?: UpdateNamespaceCommandOutput) => void
   ): void;
-  public updateNamespace(
+  updateNamespace(
     args: UpdateNamespaceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: UpdateNamespaceCommandOutput) => void
   ): void;
-  public updateNamespace(
-    args: UpdateNamespaceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateNamespaceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateNamespaceCommandOutput) => void
-  ): Promise<UpdateNamespaceCommandOutput> | void {
-    const command = new UpdateNamespaceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a snapshot.</p>
+   * @see {@link UpdateScheduledActionCommand}
    */
-  public updateSnapshot(
+  updateScheduledAction(
+    args: UpdateScheduledActionCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateScheduledActionCommandOutput>;
+  updateScheduledAction(
+    args: UpdateScheduledActionCommandInput,
+    cb: (err: any, data?: UpdateScheduledActionCommandOutput) => void
+  ): void;
+  updateScheduledAction(
+    args: UpdateScheduledActionCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateScheduledActionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSnapshotCommand}
+   */
+  updateSnapshot(
     args: UpdateSnapshotCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<UpdateSnapshotCommandOutput>;
-  public updateSnapshot(
+  updateSnapshot(
     args: UpdateSnapshotCommandInput,
     cb: (err: any, data?: UpdateSnapshotCommandOutput) => void
   ): void;
-  public updateSnapshot(
+  updateSnapshot(
     args: UpdateSnapshotCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: UpdateSnapshotCommandOutput) => void
   ): void;
-  public updateSnapshot(
-    args: UpdateSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: UpdateSnapshotCommandOutput) => void
-  ): Promise<UpdateSnapshotCommandOutput> | void {
-    const command = new UpdateSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Update a usage limit in Amazon Redshift Serverless. You can't update the usage type or period of a usage limit.</p>
+   * @see {@link UpdateSnapshotCopyConfigurationCommand}
    */
-  public updateUsageLimit(
+  updateSnapshotCopyConfiguration(
+    args: UpdateSnapshotCopyConfigurationCommandInput,
+    options?: RedshiftServerlessRequestOptions
+  ): Promise<UpdateSnapshotCopyConfigurationCommandOutput>;
+  updateSnapshotCopyConfiguration(
+    args: UpdateSnapshotCopyConfigurationCommandInput,
+    cb: (err: any, data?: UpdateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+  updateSnapshotCopyConfiguration(
+    args: UpdateSnapshotCopyConfigurationCommandInput,
+    options: RedshiftServerlessRequestOptions,
+    cb: (err: any, data?: UpdateSnapshotCopyConfigurationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateUsageLimitCommand}
+   */
+  updateUsageLimit(
     args: UpdateUsageLimitCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<UpdateUsageLimitCommandOutput>;
-  public updateUsageLimit(
+  updateUsageLimit(
     args: UpdateUsageLimitCommandInput,
     cb: (err: any, data?: UpdateUsageLimitCommandOutput) => void
   ): void;
-  public updateUsageLimit(
+  updateUsageLimit(
     args: UpdateUsageLimitCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: UpdateUsageLimitCommandOutput) => void
   ): void;
-  public updateUsageLimit(
-    args: UpdateUsageLimitCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateUsageLimitCommandOutput) => void),
-    cb?: (err: any, data?: UpdateUsageLimitCommandOutput) => void
-  ): Promise<UpdateUsageLimitCommandOutput> | void {
-    const command = new UpdateUsageLimitCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates a workgroup with the specified configuration settings.</p>
+   * @see {@link UpdateWorkgroupCommand}
    */
-  public updateWorkgroup(
+  updateWorkgroup(
     args: UpdateWorkgroupCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RedshiftServerlessRequestOptions
   ): Promise<UpdateWorkgroupCommandOutput>;
-  public updateWorkgroup(
+  updateWorkgroup(
     args: UpdateWorkgroupCommandInput,
     cb: (err: any, data?: UpdateWorkgroupCommandOutput) => void
   ): void;
-  public updateWorkgroup(
+  updateWorkgroup(
     args: UpdateWorkgroupCommandInput,
-    options: __HttpHandlerOptions,
+    options: RedshiftServerlessRequestOptions,
     cb: (err: any, data?: UpdateWorkgroupCommandOutput) => void
   ): void;
-  public updateWorkgroup(
-    args: UpdateWorkgroupCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateWorkgroupCommandOutput) => void),
-    cb?: (err: any, data?: UpdateWorkgroupCommandOutput) => void
-  ): Promise<UpdateWorkgroupCommandOutput> | void {
-    const command = new UpdateWorkgroupCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListCustomDomainAssociationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCustomDomainAssociationsCommandOutput}.
+   */
+  paginateListCustomDomainAssociations(
+    args?: ListCustomDomainAssociationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCustomDomainAssociationsCommandOutput>;
+
+  /**
+   * @see {@link ListEndpointAccessCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListEndpointAccessCommandOutput}.
+   */
+  paginateListEndpointAccess(
+    args?: ListEndpointAccessCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListEndpointAccessCommandOutput>;
+
+  /**
+   * @see {@link ListManagedWorkgroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListManagedWorkgroupsCommandOutput}.
+   */
+  paginateListManagedWorkgroups(
+    args?: ListManagedWorkgroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListManagedWorkgroupsCommandOutput>;
+
+  /**
+   * @see {@link ListNamespacesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListNamespacesCommandOutput}.
+   */
+  paginateListNamespaces(
+    args?: ListNamespacesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListNamespacesCommandOutput>;
+
+  /**
+   * @see {@link ListRecoveryPointsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListRecoveryPointsCommandOutput}.
+   */
+  paginateListRecoveryPoints(
+    args?: ListRecoveryPointsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListRecoveryPointsCommandOutput>;
+
+  /**
+   * @see {@link ListReservationOfferingsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReservationOfferingsCommandOutput}.
+   */
+  paginateListReservationOfferings(
+    args?: ListReservationOfferingsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReservationOfferingsCommandOutput>;
+
+  /**
+   * @see {@link ListReservationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListReservationsCommandOutput}.
+   */
+  paginateListReservations(
+    args?: ListReservationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListReservationsCommandOutput>;
+
+  /**
+   * @see {@link ListScheduledActionsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListScheduledActionsCommandOutput}.
+   */
+  paginateListScheduledActions(
+    args?: ListScheduledActionsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListScheduledActionsCommandOutput>;
+
+  /**
+   * @see {@link ListSnapshotCopyConfigurationsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSnapshotCopyConfigurationsCommandOutput}.
+   */
+  paginateListSnapshotCopyConfigurations(
+    args?: ListSnapshotCopyConfigurationsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSnapshotCopyConfigurationsCommandOutput>;
+
+  /**
+   * @see {@link ListSnapshotsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSnapshotsCommandOutput}.
+   */
+  paginateListSnapshots(
+    args?: ListSnapshotsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSnapshotsCommandOutput>;
+
+  /**
+   * @see {@link ListTableRestoreStatusCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTableRestoreStatusCommandOutput}.
+   */
+  paginateListTableRestoreStatus(
+    args?: ListTableRestoreStatusCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTableRestoreStatusCommandOutput>;
+
+  /**
+   * @see {@link ListTracksCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTracksCommandOutput}.
+   */
+  paginateListTracks(
+    args?: ListTracksCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTracksCommandOutput>;
+
+  /**
+   * @see {@link ListUsageLimitsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListUsageLimitsCommandOutput}.
+   */
+  paginateListUsageLimits(
+    args?: ListUsageLimitsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListUsageLimitsCommandOutput>;
+
+  /**
+   * @see {@link ListWorkgroupsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListWorkgroupsCommandOutput}.
+   */
+  paginateListWorkgroups(
+    args?: ListWorkgroupsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListWorkgroupsCommandOutput>;
 }
+
+/**
+ * <p>This is an interface reference for Amazon Redshift Serverless. It contains documentation for one of the programming or command line interfaces you can use to manage Amazon Redshift Serverless. </p> <p>Amazon Redshift Serverless automatically provisions data warehouse capacity and intelligently scales the underlying resources based on workload demands. Amazon Redshift Serverless adjusts capacity in seconds to deliver consistently high performance and simplified operations for even the most demanding and volatile workloads. Amazon Redshift Serverless lets you focus on using your data to acquire new insights for your business and customers. </p> <p> To learn more about Amazon Redshift Serverless, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-whatis.html">What is Amazon Redshift Serverless?</a>.</p>
+ * @public
+ */
+export class RedshiftServerless extends RedshiftServerlessClient implements RedshiftServerless {}
+createAggregatedClient(commands, RedshiftServerless, { paginators });

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvschatClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvschatClient";
-import {
-  ListRoomsRequest,
-  ListRoomsRequestFilterSensitiveLog,
-  ListRoomsResponse,
-  ListRoomsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListRoomsCommand,
-  serializeAws_restJson1ListRoomsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListRoomsRequest, ListRoomsResponse } from "../models/models_0";
+import { ListRooms$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListRoomsCommand}.
+ */
 export interface ListRoomsCommandInput extends ListRoomsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListRoomsCommand}.
+ */
 export interface ListRoomsCommandOutput extends ListRoomsResponse, __MetadataBearer {}
 
 /**
@@ -35,68 +30,79 @@ export interface ListRoomsCommandOutput extends ListRoomsResponse, __MetadataBea
  * ```javascript
  * import { IvschatClient, ListRoomsCommand } from "@aws-sdk/client-ivschat"; // ES Modules import
  * // const { IvschatClient, ListRoomsCommand } = require("@aws-sdk/client-ivschat"); // CommonJS import
+ * // import type { IvschatClientConfig } from "@aws-sdk/client-ivschat";
+ * const config = {}; // type is IvschatClientConfig
  * const client = new IvschatClient(config);
+ * const input = { // ListRoomsRequest
+ *   name: "STRING_VALUE",
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   messageReviewHandlerUri: "STRING_VALUE",
+ *   loggingConfigurationIdentifier: "STRING_VALUE",
+ * };
  * const command = new ListRoomsCommand(input);
  * const response = await client.send(command);
+ * // { // ListRoomsResponse
+ * //   rooms: [ // RoomList // required
+ * //     { // RoomSummary
+ * //       arn: "STRING_VALUE",
+ * //       id: "STRING_VALUE",
+ * //       name: "STRING_VALUE",
+ * //       messageReviewHandler: { // MessageReviewHandler
+ * //         uri: "STRING_VALUE",
+ * //         fallbackResult: "STRING_VALUE",
+ * //       },
+ * //       createTime: new Date("TIMESTAMP"),
+ * //       updateTime: new Date("TIMESTAMP"),
+ * //       tags: { // Tags
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //       loggingConfigurationIdentifiers: [ // LoggingConfigurationIdentifierList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListRoomsCommandInput - {@link ListRoomsCommandInput}
+ * @returns {@link ListRoomsCommandOutput}
  * @see {@link ListRoomsCommandInput} for command's `input` shape.
  * @see {@link ListRoomsCommandOutput} for command's `response` shape.
  * @see {@link IvschatClientResolvedConfig | config} for IvschatClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link IvschatServiceException}
+ * <p>Base exception class for all service exceptions from Ivschat service.</p>
+ *
+ *
+ * @public
  */
-export class ListRoomsCommand extends $Command<
-  ListRoomsCommandInput,
-  ListRoomsCommandOutput,
-  IvschatClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListRoomsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvschatClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListRoomsCommandInput, ListRoomsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvschatClient";
-    const commandName = "ListRoomsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListRoomsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListRoomsResponseFilterSensitiveLog,
+export class ListRoomsCommand extends command<ListRoomsCommandInput, ListRoomsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListRooms",
+  ListRooms$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListRoomsRequest;
+      output: ListRoomsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListRoomsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListRoomsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListRoomsCommandOutput> {
-    return deserializeAws_restJson1ListRoomsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListRoomsCommandInput;
+      output: ListRoomsCommandOutput;
+    };
+  };
 }

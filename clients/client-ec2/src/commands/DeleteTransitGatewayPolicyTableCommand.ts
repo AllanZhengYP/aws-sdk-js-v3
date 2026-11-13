@@ -1,33 +1,26 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  DeleteTransitGatewayPolicyTableRequest,
-  DeleteTransitGatewayPolicyTableRequestFilterSensitiveLog,
-  DeleteTransitGatewayPolicyTableResult,
-  DeleteTransitGatewayPolicyTableResultFilterSensitiveLog,
-} from "../models/models_2";
-import {
-  deserializeAws_ec2DeleteTransitGatewayPolicyTableCommand,
-  serializeAws_ec2DeleteTransitGatewayPolicyTableCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteTransitGatewayPolicyTableRequest, DeleteTransitGatewayPolicyTableResult } from "../models/models_3";
+import { DeleteTransitGatewayPolicyTable$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteTransitGatewayPolicyTableCommand}.
+ */
 export interface DeleteTransitGatewayPolicyTableCommandInput extends DeleteTransitGatewayPolicyTableRequest {}
-export interface DeleteTransitGatewayPolicyTableCommandOutput
-  extends DeleteTransitGatewayPolicyTableResult,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteTransitGatewayPolicyTableCommand}.
+ */
+export interface DeleteTransitGatewayPolicyTableCommandOutput extends DeleteTransitGatewayPolicyTableResult, __MetadataBearer {}
 
 /**
  * <p>Deletes the specified transit gateway policy table.</p>
@@ -36,74 +29,59 @@ export interface DeleteTransitGatewayPolicyTableCommandOutput
  * ```javascript
  * import { EC2Client, DeleteTransitGatewayPolicyTableCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DeleteTransitGatewayPolicyTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DeleteTransitGatewayPolicyTableRequest
+ *   TransitGatewayPolicyTableId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DeleteTransitGatewayPolicyTableCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteTransitGatewayPolicyTableResult
+ * //   TransitGatewayPolicyTable: { // TransitGatewayPolicyTable
+ * //     TransitGatewayPolicyTableId: "STRING_VALUE",
+ * //     TransitGatewayId: "STRING_VALUE",
+ * //     State: "pending" || "available" || "deleting" || "deleted",
+ * //     CreationTime: new Date("TIMESTAMP"),
+ * //     Tags: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DeleteTransitGatewayPolicyTableCommandInput - {@link DeleteTransitGatewayPolicyTableCommandInput}
+ * @returns {@link DeleteTransitGatewayPolicyTableCommandOutput}
  * @see {@link DeleteTransitGatewayPolicyTableCommandInput} for command's `input` shape.
  * @see {@link DeleteTransitGatewayPolicyTableCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteTransitGatewayPolicyTableCommand extends $Command<
-  DeleteTransitGatewayPolicyTableCommandInput,
-  DeleteTransitGatewayPolicyTableCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteTransitGatewayPolicyTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteTransitGatewayPolicyTableCommandInput, DeleteTransitGatewayPolicyTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DeleteTransitGatewayPolicyTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteTransitGatewayPolicyTableRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteTransitGatewayPolicyTableResultFilterSensitiveLog,
+export class DeleteTransitGatewayPolicyTableCommand extends command<DeleteTransitGatewayPolicyTableCommandInput, DeleteTransitGatewayPolicyTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteTransitGatewayPolicyTable",
+  DeleteTransitGatewayPolicyTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteTransitGatewayPolicyTableRequest;
+      output: DeleteTransitGatewayPolicyTableResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteTransitGatewayPolicyTableCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DeleteTransitGatewayPolicyTableCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteTransitGatewayPolicyTableCommandOutput> {
-    return deserializeAws_ec2DeleteTransitGatewayPolicyTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteTransitGatewayPolicyTableCommandInput;
+      output: DeleteTransitGatewayPolicyTableCommandOutput;
+    };
+  };
 }

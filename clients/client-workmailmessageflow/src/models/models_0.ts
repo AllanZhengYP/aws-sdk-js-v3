@@ -1,114 +1,26 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType } from "@aws-sdk/smithy-client";
-import { Readable } from "stream";
+import type { StreamingBlobTypes } from "@smithy/types";
 
-import { WorkMailMessageFlowServiceException as __BaseException } from "./WorkMailMessageFlowServiceException";
-
+/**
+ * @public
+ */
 export interface GetRawMessageContentRequest {
   /**
    * <p>The identifier of the email message to retrieve.</p>
+   * @public
    */
   messageId: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface GetRawMessageContentResponse {
   /**
    * <p>The raw content of the email message, in MIME format.</p>
+   * @public
    */
-  messageContent: Readable | ReadableStream | Blob | undefined;
-}
-
-/**
- * <p>The requested email message is not found.</p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-  }
-}
-
-/**
- * <p>WorkMail could not access the updated email content. Possible reasons:</p>
- *          <ul>
- *             <li>
- *                <p>You made the request in a region other than your S3 bucket region.</p>
- *             </li>
- *             <li>
- *                <p>The <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-owner-condition.html">S3 bucket owner</a> is not the
- *         same as the calling AWS account.</p>
- *             </li>
- *             <li>
- *                <p>You have an incomplete or missing S3 bucket policy. For more information about policies, see
- *         <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html">
- *           Updating message content with AWS Lambda
- *         </a> in the <i>WorkMail Administrator
- *           Guide</i>.</p>
- *             </li>
- *          </ul>
- */
-export class InvalidContentLocation extends __BaseException {
-  readonly name: "InvalidContentLocation" = "InvalidContentLocation";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidContentLocation, __BaseException>) {
-    super({
-      name: "InvalidContentLocation",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidContentLocation.prototype);
-  }
-}
-
-/**
- * <p>The requested email is not eligible for update. This is usually the case for a redirected email.</p>
- */
-export class MessageFrozen extends __BaseException {
-  readonly name: "MessageFrozen" = "MessageFrozen";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<MessageFrozen, __BaseException>) {
-    super({
-      name: "MessageFrozen",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, MessageFrozen.prototype);
-  }
-}
-
-/**
- * <p>The requested email could not be updated due to an error in the MIME content. Check the error message for more information about
- *       what caused the error.</p>
- */
-export class MessageRejected extends __BaseException {
-  readonly name: "MessageRejected" = "MessageRejected";
-  readonly $fault: "client" = "client";
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<MessageRejected, __BaseException>) {
-    super({
-      name: "MessageRejected",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, MessageRejected.prototype);
-  }
+  messageContent: StreamingBlobTypes | undefined;
 }
 
 /**
@@ -119,22 +31,26 @@ export class MessageRejected extends __BaseException {
  *       <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html">
  *         Updating message content with AWS Lambda</a>.</p>
  *          </note>
+ * @public
  */
 export interface S3Reference {
   /**
    * <p>The S3 bucket name.</p>
+   * @public
    */
   bucket: string | undefined;
 
   /**
    * <p>The S3 key object name.</p>
+   * @public
    */
   key: string | undefined;
 
   /**
    * <p>If you enable versioning for the bucket, you can specify the object version.</p>
+   * @public
    */
-  objectVersion?: string;
+  objectVersion?: string | undefined;
 }
 
 /**
@@ -165,66 +81,34 @@ export interface S3Reference {
  *                <p>Certain unique headers can only appear once. Check the returned error message for more information.</p>
  *             </li>
  *          </ul>
+ * @public
  */
 export interface RawMessageContent {
   /**
    * <p>The S3 reference of an email message.</p>
+   * @public
    */
   s3Reference: S3Reference | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutRawMessageContentRequest {
   /**
    * <p>The identifier of the email message being updated.</p>
+   * @public
    */
   messageId: string | undefined;
 
   /**
    * <p>Describes the raw message content of the updated email message.</p>
+   * @public
    */
   content: RawMessageContent | undefined;
 }
 
+/**
+ * @public
+ */
 export interface PutRawMessageContentResponse {}
-
-/**
- * @internal
- */
-export const GetRawMessageContentRequestFilterSensitiveLog = (obj: GetRawMessageContentRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetRawMessageContentResponseFilterSensitiveLog = (obj: GetRawMessageContentResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const S3ReferenceFilterSensitiveLog = (obj: S3Reference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RawMessageContentFilterSensitiveLog = (obj: RawMessageContent): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutRawMessageContentRequestFilterSensitiveLog = (obj: PutRawMessageContentRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PutRawMessageContentResponseFilterSensitiveLog = (obj: PutRawMessageContentResponse): any => ({
-  ...obj,
-});

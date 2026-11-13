@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DescribeDatasetExportJobRequest,
-  DescribeDatasetExportJobRequestFilterSensitiveLog,
-  DescribeDatasetExportJobResponse,
-  DescribeDatasetExportJobResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { PersonalizeClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../PersonalizeClient";
-import {
-  deserializeAws_json1_1DescribeDatasetExportJobCommand,
-  serializeAws_json1_1DescribeDatasetExportJobCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeDatasetExportJobRequest, DescribeDatasetExportJobResponse } from "../models/models_0";
+import { DescribeDatasetExportJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeDatasetExportJobCommand}.
+ */
 export interface DescribeDatasetExportJobCommandInput extends DescribeDatasetExportJobRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeDatasetExportJobCommand}.
+ */
 export interface DescribeDatasetExportJobCommandOutput extends DescribeDatasetExportJobResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,69 @@ export interface DescribeDatasetExportJobCommandOutput extends DescribeDatasetEx
  * ```javascript
  * import { PersonalizeClient, DescribeDatasetExportJobCommand } from "@aws-sdk/client-personalize"; // ES Modules import
  * // const { PersonalizeClient, DescribeDatasetExportJobCommand } = require("@aws-sdk/client-personalize"); // CommonJS import
+ * // import type { PersonalizeClientConfig } from "@aws-sdk/client-personalize";
+ * const config = {}; // type is PersonalizeClientConfig
  * const client = new PersonalizeClient(config);
+ * const input = { // DescribeDatasetExportJobRequest
+ *   datasetExportJobArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeDatasetExportJobCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeDatasetExportJobResponse
+ * //   datasetExportJob: { // DatasetExportJob
+ * //     jobName: "STRING_VALUE",
+ * //     datasetExportJobArn: "STRING_VALUE",
+ * //     datasetArn: "STRING_VALUE",
+ * //     ingestionMode: "BULK" || "PUT" || "ALL",
+ * //     roleArn: "STRING_VALUE",
+ * //     status: "STRING_VALUE",
+ * //     jobOutput: { // DatasetExportJobOutput
+ * //       s3DataDestination: { // S3DataConfig
+ * //         path: "STRING_VALUE", // required
+ * //         kmsKeyArn: "STRING_VALUE",
+ * //       },
+ * //     },
+ * //     creationDateTime: new Date("TIMESTAMP"),
+ * //     lastUpdatedDateTime: new Date("TIMESTAMP"),
+ * //     failureReason: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeDatasetExportJobCommandInput - {@link DescribeDatasetExportJobCommandInput}
+ * @returns {@link DescribeDatasetExportJobCommandOutput}
  * @see {@link DescribeDatasetExportJobCommandInput} for command's `input` shape.
  * @see {@link DescribeDatasetExportJobCommandOutput} for command's `response` shape.
  * @see {@link PersonalizeClientResolvedConfig | config} for PersonalizeClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>Provide a valid value for the field or parameter.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Could not find the specified resource.</p>
+ *
+ * @throws {@link PersonalizeServiceException}
+ * <p>Base exception class for all service exceptions from Personalize service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeDatasetExportJobCommand extends $Command<
-  DescribeDatasetExportJobCommandInput,
-  DescribeDatasetExportJobCommandOutput,
-  PersonalizeClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeDatasetExportJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: PersonalizeClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeDatasetExportJobCommandInput, DescribeDatasetExportJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "PersonalizeClient";
-    const commandName = "DescribeDatasetExportJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeDatasetExportJobRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeDatasetExportJobResponseFilterSensitiveLog,
+export class DescribeDatasetExportJobCommand extends command<DescribeDatasetExportJobCommandInput, DescribeDatasetExportJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeDatasetExportJob",
+  DescribeDatasetExportJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeDatasetExportJobRequest;
+      output: DescribeDatasetExportJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeDatasetExportJobCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DescribeDatasetExportJobCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeDatasetExportJobCommandOutput> {
-    return deserializeAws_json1_1DescribeDatasetExportJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeDatasetExportJobCommandInput;
+      output: DescribeDatasetExportJobCommandOutput;
+    };
+  };
 }

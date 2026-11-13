@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IvschatClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IvschatClient";
-import {
-  GetRoomRequest,
-  GetRoomRequestFilterSensitiveLog,
-  GetRoomResponse,
-  GetRoomResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetRoomCommand,
-  serializeAws_restJson1GetRoomCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRoomRequest, GetRoomResponse } from "../models/models_0";
+import { GetRoom$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRoomCommand}.
+ */
 export interface GetRoomCommandInput extends GetRoomRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRoomCommand}.
+ */
 export interface GetRoomCommandOutput extends GetRoomResponse, __MetadataBearer {}
 
 /**
@@ -34,64 +29,72 @@ export interface GetRoomCommandOutput extends GetRoomResponse, __MetadataBearer 
  * ```javascript
  * import { IvschatClient, GetRoomCommand } from "@aws-sdk/client-ivschat"; // ES Modules import
  * // const { IvschatClient, GetRoomCommand } = require("@aws-sdk/client-ivschat"); // CommonJS import
+ * // import type { IvschatClientConfig } from "@aws-sdk/client-ivschat";
+ * const config = {}; // type is IvschatClientConfig
  * const client = new IvschatClient(config);
+ * const input = { // GetRoomRequest
+ *   identifier: "STRING_VALUE", // required
+ * };
  * const command = new GetRoomCommand(input);
  * const response = await client.send(command);
+ * // { // GetRoomResponse
+ * //   arn: "STRING_VALUE",
+ * //   id: "STRING_VALUE",
+ * //   name: "STRING_VALUE",
+ * //   createTime: new Date("TIMESTAMP"),
+ * //   updateTime: new Date("TIMESTAMP"),
+ * //   maximumMessageRatePerSecond: Number("int"),
+ * //   maximumMessageLength: Number("int"),
+ * //   messageReviewHandler: { // MessageReviewHandler
+ * //     uri: "STRING_VALUE",
+ * //     fallbackResult: "STRING_VALUE",
+ * //   },
+ * //   tags: { // Tags
+ * //     "<keys>": "STRING_VALUE",
+ * //   },
+ * //   loggingConfigurationIdentifiers: [ // LoggingConfigurationIdentifierList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetRoomCommandInput - {@link GetRoomCommandInput}
+ * @returns {@link GetRoomCommandOutput}
  * @see {@link GetRoomCommandInput} for command's `input` shape.
  * @see {@link GetRoomCommandOutput} for command's `response` shape.
  * @see {@link IvschatClientResolvedConfig | config} for IvschatClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p/>
+ *
+ * @throws {@link IvschatServiceException}
+ * <p>Base exception class for all service exceptions from Ivschat service.</p>
+ *
+ *
+ * @public
  */
-export class GetRoomCommand extends $Command<GetRoomCommandInput, GetRoomCommandOutput, IvschatClientResolvedConfig> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRoomCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IvschatClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRoomCommandInput, GetRoomCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IvschatClient";
-    const commandName = "GetRoomCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRoomRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetRoomResponseFilterSensitiveLog,
+export class GetRoomCommand extends command<GetRoomCommandInput, GetRoomCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRoom",
+  GetRoom$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRoomRequest;
+      output: GetRoomResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRoomCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRoomCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRoomCommandOutput> {
-    return deserializeAws_restJson1GetRoomCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRoomCommandInput;
+      output: GetRoomCommandOutput;
+    };
+  };
 }

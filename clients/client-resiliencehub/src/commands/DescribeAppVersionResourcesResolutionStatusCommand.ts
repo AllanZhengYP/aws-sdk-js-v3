@@ -1,34 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeAppVersionResourcesResolutionStatusRequest,
-  DescribeAppVersionResourcesResolutionStatusRequestFilterSensitiveLog,
   DescribeAppVersionResourcesResolutionStatusResponse,
-  DescribeAppVersionResourcesResolutionStatusResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeAppVersionResourcesResolutionStatusCommand,
-  serializeAws_restJson1DescribeAppVersionResourcesResolutionStatusCommand,
-} from "../protocols/Aws_restJson1";
-import { ResiliencehubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResiliencehubClient";
+import { DescribeAppVersionResourcesResolutionStatus$ } from "../schemas/schemas_0";
 
-export interface DescribeAppVersionResourcesResolutionStatusCommandInput
-  extends DescribeAppVersionResourcesResolutionStatusRequest {}
-export interface DescribeAppVersionResourcesResolutionStatusCommandOutput
-  extends DescribeAppVersionResourcesResolutionStatusResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeAppVersionResourcesResolutionStatusCommand}.
+ */
+export interface DescribeAppVersionResourcesResolutionStatusCommandInput extends DescribeAppVersionResourcesResolutionStatusRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeAppVersionResourcesResolutionStatusCommand}.
+ */
+export interface DescribeAppVersionResourcesResolutionStatusCommandOutput extends DescribeAppVersionResourcesResolutionStatusResponse, __MetadataBearer {}
 
 /**
  * <p>Returns the resolution status for the specified resolution identifier for an application
@@ -39,77 +34,71 @@ export interface DescribeAppVersionResourcesResolutionStatusCommandOutput
  * ```javascript
  * import { ResiliencehubClient, DescribeAppVersionResourcesResolutionStatusCommand } from "@aws-sdk/client-resiliencehub"; // ES Modules import
  * // const { ResiliencehubClient, DescribeAppVersionResourcesResolutionStatusCommand } = require("@aws-sdk/client-resiliencehub"); // CommonJS import
+ * // import type { ResiliencehubClientConfig } from "@aws-sdk/client-resiliencehub";
+ * const config = {}; // type is ResiliencehubClientConfig
  * const client = new ResiliencehubClient(config);
+ * const input = { // DescribeAppVersionResourcesResolutionStatusRequest
+ *   appArn: "STRING_VALUE", // required
+ *   appVersion: "STRING_VALUE", // required
+ *   resolutionId: "STRING_VALUE",
+ * };
  * const command = new DescribeAppVersionResourcesResolutionStatusCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeAppVersionResourcesResolutionStatusResponse
+ * //   appArn: "STRING_VALUE", // required
+ * //   appVersion: "STRING_VALUE", // required
+ * //   resolutionId: "STRING_VALUE", // required
+ * //   status: "Pending" || "InProgress" || "Failed" || "Success", // required
+ * //   errorMessage: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeAppVersionResourcesResolutionStatusCommandInput - {@link DescribeAppVersionResourcesResolutionStatusCommandInput}
+ * @returns {@link DescribeAppVersionResourcesResolutionStatusCommandOutput}
  * @see {@link DescribeAppVersionResourcesResolutionStatusCommandInput} for command's `input` shape.
  * @see {@link DescribeAppVersionResourcesResolutionStatusCommandOutput} for command's `response` shape.
  * @see {@link ResiliencehubClientResolvedConfig | config} for ResiliencehubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permissions to perform the requested operation. The user or role that is
+ *       making the request must have at least one IAM permissions policy attached that grants the
+ *       required permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Resilience Hub
+ *       service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception occurs when the specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>This exception occurs when you have exceeded the limit on the number of requests per second.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>This exception occurs when a request is not valid.</p>
+ *
+ * @throws {@link ResiliencehubServiceException}
+ * <p>Base exception class for all service exceptions from Resiliencehub service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeAppVersionResourcesResolutionStatusCommand extends $Command<
-  DescribeAppVersionResourcesResolutionStatusCommandInput,
-  DescribeAppVersionResourcesResolutionStatusCommandOutput,
-  ResiliencehubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeAppVersionResourcesResolutionStatusCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResiliencehubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<
-    DescribeAppVersionResourcesResolutionStatusCommandInput,
-    DescribeAppVersionResourcesResolutionStatusCommandOutput
-  > {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResiliencehubClient";
-    const commandName = "DescribeAppVersionResourcesResolutionStatusCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeAppVersionResourcesResolutionStatusRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeAppVersionResourcesResolutionStatusResponseFilterSensitiveLog,
+export class DescribeAppVersionResourcesResolutionStatusCommand extends command<DescribeAppVersionResourcesResolutionStatusCommandInput, DescribeAppVersionResourcesResolutionStatusCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeAppVersionResourcesResolutionStatus",
+  DescribeAppVersionResourcesResolutionStatus$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeAppVersionResourcesResolutionStatusRequest;
+      output: DescribeAppVersionResourcesResolutionStatusResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeAppVersionResourcesResolutionStatusCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeAppVersionResourcesResolutionStatusCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeAppVersionResourcesResolutionStatusCommandOutput> {
-    return deserializeAws_restJson1DescribeAppVersionResourcesResolutionStatusCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeAppVersionResourcesResolutionStatusCommandInput;
+      output: DescribeAppVersionResourcesResolutionStatusCommandOutput;
+    };
+  };
 }

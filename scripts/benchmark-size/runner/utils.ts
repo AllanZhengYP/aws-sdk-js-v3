@@ -1,5 +1,5 @@
 import { execa as exec } from "execa";
-import { existsSync, promises as fsPromise } from "fs";
+import { existsSync, promises as fsPromise } from "node:fs";
 
 import { PROJECT_ROOT } from "./constants.js";
 
@@ -13,13 +13,13 @@ export const sleep = (ms: number) =>
 
 export const validateRuntime = async () => {
   try {
-    await exec("yarn", ["--version"]);
+    await exec("npx", ["--version"]);
   } catch (e) {
-    console.error("yarn is not available, please install yarn globally");
+    console.error("npx is not available, please install npx globally");
     throw e;
   }
   try {
-    await exec("./node_modules/.bin/lerna", ["--version"], {
+    await exec("npx", ["lerna", "--version"], {
       cwd: PROJECT_ROOT,
     });
   } catch (e) {

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EMRServerlessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EMRServerlessClient";
-import {
-  ListJobRunsRequest,
-  ListJobRunsRequestFilterSensitiveLog,
-  ListJobRunsResponse,
-  ListJobRunsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListJobRunsCommand,
-  serializeAws_restJson1ListJobRunsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListJobRunsRequest, ListJobRunsResponse } from "../models/models_0";
+import { ListJobRuns$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListJobRunsCommand}.
+ */
 export interface ListJobRunsCommandInput extends ListJobRunsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListJobRunsCommand}.
+ */
 export interface ListJobRunsCommandOutput extends ListJobRunsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,81 @@ export interface ListJobRunsCommandOutput extends ListJobRunsResponse, __Metadat
  * ```javascript
  * import { EMRServerlessClient, ListJobRunsCommand } from "@aws-sdk/client-emr-serverless"; // ES Modules import
  * // const { EMRServerlessClient, ListJobRunsCommand } = require("@aws-sdk/client-emr-serverless"); // CommonJS import
+ * // import type { EMRServerlessClientConfig } from "@aws-sdk/client-emr-serverless";
+ * const config = {}; // type is EMRServerlessClientConfig
  * const client = new EMRServerlessClient(config);
+ * const input = { // ListJobRunsRequest
+ *   applicationId: "STRING_VALUE", // required
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ *   createdAtAfter: new Date("TIMESTAMP"),
+ *   createdAtBefore: new Date("TIMESTAMP"),
+ *   states: [ // JobRunStateSet
+ *     "STRING_VALUE",
+ *   ],
+ *   mode: "STRING_VALUE",
+ * };
  * const command = new ListJobRunsCommand(input);
  * const response = await client.send(command);
+ * // { // ListJobRunsResponse
+ * //   jobRuns: [ // JobRuns // required
+ * //     { // JobRunSummary
+ * //       applicationId: "STRING_VALUE", // required
+ * //       id: "STRING_VALUE", // required
+ * //       name: "STRING_VALUE",
+ * //       mode: "STRING_VALUE",
+ * //       arn: "STRING_VALUE", // required
+ * //       createdBy: "STRING_VALUE", // required
+ * //       createdAt: new Date("TIMESTAMP"), // required
+ * //       updatedAt: new Date("TIMESTAMP"), // required
+ * //       executionRole: "STRING_VALUE", // required
+ * //       state: "STRING_VALUE", // required
+ * //       stateDetails: "STRING_VALUE", // required
+ * //       releaseLabel: "STRING_VALUE", // required
+ * //       type: "STRING_VALUE",
+ * //       attempt: Number("int"),
+ * //       attemptCreatedAt: new Date("TIMESTAMP"),
+ * //       attemptUpdatedAt: new Date("TIMESTAMP"),
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListJobRunsCommandInput - {@link ListJobRunsCommandInput}
+ * @returns {@link ListJobRunsCommandOutput}
  * @see {@link ListJobRunsCommandInput} for command's `input` shape.
  * @see {@link ListJobRunsCommandOutput} for command's `response` shape.
  * @see {@link EMRServerlessClientResolvedConfig | config} for EMRServerlessClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>Request processing failed because of an error or failure with the service.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link EMRServerlessServiceException}
+ * <p>Base exception class for all service exceptions from EMRServerless service.</p>
+ *
+ *
+ * @public
  */
-export class ListJobRunsCommand extends $Command<
-  ListJobRunsCommandInput,
-  ListJobRunsCommandOutput,
-  EMRServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListJobRunsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EMRServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListJobRunsCommandInput, ListJobRunsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EMRServerlessClient";
-    const commandName = "ListJobRunsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListJobRunsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListJobRunsResponseFilterSensitiveLog,
+export class ListJobRunsCommand extends command<ListJobRunsCommandInput, ListJobRunsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListJobRuns",
+  ListJobRuns$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListJobRunsRequest;
+      output: ListJobRunsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListJobRunsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListJobRunsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListJobRunsCommandOutput> {
-    return deserializeAws_restJson1ListJobRunsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListJobRunsCommandInput;
+      output: ListJobRunsCommandOutput;
+    };
+  };
 }

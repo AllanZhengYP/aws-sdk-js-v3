@@ -1,34 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DisassociateTransitGatewayPolicyTableRequest,
-  DisassociateTransitGatewayPolicyTableRequestFilterSensitiveLog,
   DisassociateTransitGatewayPolicyTableResult,
-  DisassociateTransitGatewayPolicyTableResultFilterSensitiveLog,
-} from "../models/models_4";
-import {
-  deserializeAws_ec2DisassociateTransitGatewayPolicyTableCommand,
-  serializeAws_ec2DisassociateTransitGatewayPolicyTableCommand,
-} from "../protocols/Aws_ec2";
+} from "../models/models_6";
+import { DisassociateTransitGatewayPolicyTable$ } from "../schemas/schemas_0";
 
-export interface DisassociateTransitGatewayPolicyTableCommandInput
-  extends DisassociateTransitGatewayPolicyTableRequest {}
-export interface DisassociateTransitGatewayPolicyTableCommandOutput
-  extends DisassociateTransitGatewayPolicyTableResult,
-    __MetadataBearer {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DisassociateTransitGatewayPolicyTableCommand}.
+ */
+export interface DisassociateTransitGatewayPolicyTableCommandInput extends DisassociateTransitGatewayPolicyTableRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DisassociateTransitGatewayPolicyTableCommand}.
+ */
+export interface DisassociateTransitGatewayPolicyTableCommandOutput extends DisassociateTransitGatewayPolicyTableResult, __MetadataBearer {}
 
 /**
  * <p>Removes the association between an an attachment and a policy table.</p>
@@ -37,74 +32,55 @@ export interface DisassociateTransitGatewayPolicyTableCommandOutput
  * ```javascript
  * import { EC2Client, DisassociateTransitGatewayPolicyTableCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, DisassociateTransitGatewayPolicyTableCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // DisassociateTransitGatewayPolicyTableRequest
+ *   TransitGatewayPolicyTableId: "STRING_VALUE", // required
+ *   TransitGatewayAttachmentId: "STRING_VALUE", // required
+ *   DryRun: true || false,
+ * };
  * const command = new DisassociateTransitGatewayPolicyTableCommand(input);
  * const response = await client.send(command);
+ * // { // DisassociateTransitGatewayPolicyTableResult
+ * //   Association: { // TransitGatewayPolicyTableAssociation
+ * //     TransitGatewayPolicyTableId: "STRING_VALUE",
+ * //     TransitGatewayAttachmentId: "STRING_VALUE",
+ * //     ResourceId: "STRING_VALUE",
+ * //     ResourceType: "vpc" || "vpn" || "vpn-concentrator" || "direct-connect-gateway" || "connect" || "peering" || "tgw-peering" || "network-function" || "client-vpn",
+ * //     State: "associating" || "associated" || "disassociating" || "disassociated",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DisassociateTransitGatewayPolicyTableCommandInput - {@link DisassociateTransitGatewayPolicyTableCommandInput}
+ * @returns {@link DisassociateTransitGatewayPolicyTableCommandOutput}
  * @see {@link DisassociateTransitGatewayPolicyTableCommandInput} for command's `input` shape.
  * @see {@link DisassociateTransitGatewayPolicyTableCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class DisassociateTransitGatewayPolicyTableCommand extends $Command<
-  DisassociateTransitGatewayPolicyTableCommandInput,
-  DisassociateTransitGatewayPolicyTableCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DisassociateTransitGatewayPolicyTableCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DisassociateTransitGatewayPolicyTableCommandInput, DisassociateTransitGatewayPolicyTableCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "DisassociateTransitGatewayPolicyTableCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DisassociateTransitGatewayPolicyTableRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DisassociateTransitGatewayPolicyTableResultFilterSensitiveLog,
+export class DisassociateTransitGatewayPolicyTableCommand extends command<DisassociateTransitGatewayPolicyTableCommandInput, DisassociateTransitGatewayPolicyTableCommandOutput>(
+  _ep0,
+  _mw0,
+  "DisassociateTransitGatewayPolicyTable",
+  DisassociateTransitGatewayPolicyTable$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DisassociateTransitGatewayPolicyTableRequest;
+      output: DisassociateTransitGatewayPolicyTableResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DisassociateTransitGatewayPolicyTableCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_ec2DisassociateTransitGatewayPolicyTableCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DisassociateTransitGatewayPolicyTableCommandOutput> {
-    return deserializeAws_ec2DisassociateTransitGatewayPolicyTableCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DisassociateTransitGatewayPolicyTableCommandInput;
+      output: DisassociateTransitGatewayPolicyTableCommandOutput;
+    };
+  };
 }

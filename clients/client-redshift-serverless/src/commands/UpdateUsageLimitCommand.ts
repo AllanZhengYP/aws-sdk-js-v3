@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  UpdateUsageLimitRequest,
-  UpdateUsageLimitRequestFilterSensitiveLog,
-  UpdateUsageLimitResponse,
-  UpdateUsageLimitResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1UpdateUsageLimitCommand,
-  serializeAws_json1_1UpdateUsageLimitCommand,
-} from "../protocols/Aws_json1_1";
-import {
-  RedshiftServerlessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../RedshiftServerlessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateUsageLimitRequest, UpdateUsageLimitResponse } from "../models/models_0";
+import { UpdateUsageLimit$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateUsageLimitCommand}.
+ */
 export interface UpdateUsageLimitCommandInput extends UpdateUsageLimitRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateUsageLimitCommand}.
+ */
 export interface UpdateUsageLimitCommandOutput extends UpdateUsageLimitResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,69 @@ export interface UpdateUsageLimitCommandOutput extends UpdateUsageLimitResponse,
  * ```javascript
  * import { RedshiftServerlessClient, UpdateUsageLimitCommand } from "@aws-sdk/client-redshift-serverless"; // ES Modules import
  * // const { RedshiftServerlessClient, UpdateUsageLimitCommand } = require("@aws-sdk/client-redshift-serverless"); // CommonJS import
+ * // import type { RedshiftServerlessClientConfig } from "@aws-sdk/client-redshift-serverless";
+ * const config = {}; // type is RedshiftServerlessClientConfig
  * const client = new RedshiftServerlessClient(config);
+ * const input = { // UpdateUsageLimitRequest
+ *   usageLimitId: "STRING_VALUE", // required
+ *   amount: Number("long"),
+ *   breachAction: "STRING_VALUE",
+ * };
  * const command = new UpdateUsageLimitCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateUsageLimitResponse
+ * //   usageLimit: { // UsageLimit
+ * //     usageLimitId: "STRING_VALUE",
+ * //     usageLimitArn: "STRING_VALUE",
+ * //     resourceArn: "STRING_VALUE",
+ * //     usageType: "STRING_VALUE",
+ * //     amount: Number("long"),
+ * //     period: "STRING_VALUE",
+ * //     breachAction: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateUsageLimitCommandInput - {@link UpdateUsageLimitCommandInput}
+ * @returns {@link UpdateUsageLimitCommandOutput}
  * @see {@link UpdateUsageLimitCommandInput} for command's `input` shape.
  * @see {@link UpdateUsageLimitCommandOutput} for command's `response` shape.
  * @see {@link RedshiftServerlessClientResolvedConfig | config} for RedshiftServerlessClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The submitted action has conflicts.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link RedshiftServerlessServiceException}
+ * <p>Base exception class for all service exceptions from RedshiftServerless service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateUsageLimitCommand extends $Command<
-  UpdateUsageLimitCommandInput,
-  UpdateUsageLimitCommandOutput,
-  RedshiftServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateUsageLimitCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateUsageLimitCommandInput, UpdateUsageLimitCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftServerlessClient";
-    const commandName = "UpdateUsageLimitCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateUsageLimitRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateUsageLimitResponseFilterSensitiveLog,
+export class UpdateUsageLimitCommand extends command<UpdateUsageLimitCommandInput, UpdateUsageLimitCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateUsageLimit",
+  UpdateUsageLimit$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateUsageLimitRequest;
+      output: UpdateUsageLimitResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateUsageLimitCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1UpdateUsageLimitCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateUsageLimitCommandOutput> {
-    return deserializeAws_json1_1UpdateUsageLimitCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateUsageLimitCommandInput;
+      output: UpdateUsageLimitCommandOutput;
+    };
+  };
 }

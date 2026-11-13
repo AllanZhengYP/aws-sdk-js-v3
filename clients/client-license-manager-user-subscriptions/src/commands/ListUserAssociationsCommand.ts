@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LicenseManagerUserSubscriptionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LicenseManagerUserSubscriptionsClient";
-import {
-  ListUserAssociationsRequest,
-  ListUserAssociationsRequestFilterSensitiveLog,
-  ListUserAssociationsResponse,
-  ListUserAssociationsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListUserAssociationsCommand,
-  serializeAws_restJson1ListUserAssociationsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListUserAssociationsRequest, ListUserAssociationsResponse } from "../models/models_0";
+import { ListUserAssociations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListUserAssociationsCommand}.
+ */
 export interface ListUserAssociationsCommandInput extends ListUserAssociationsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListUserAssociationsCommand}.
+ */
 export interface ListUserAssociationsCommandOutput extends ListUserAssociationsResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,141 @@ export interface ListUserAssociationsCommandOutput extends ListUserAssociationsR
  * ```javascript
  * import { LicenseManagerUserSubscriptionsClient, ListUserAssociationsCommand } from "@aws-sdk/client-license-manager-user-subscriptions"; // ES Modules import
  * // const { LicenseManagerUserSubscriptionsClient, ListUserAssociationsCommand } = require("@aws-sdk/client-license-manager-user-subscriptions"); // CommonJS import
+ * // import type { LicenseManagerUserSubscriptionsClientConfig } from "@aws-sdk/client-license-manager-user-subscriptions";
+ * const config = {}; // type is LicenseManagerUserSubscriptionsClientConfig
  * const client = new LicenseManagerUserSubscriptionsClient(config);
+ * const input = { // ListUserAssociationsRequest
+ *   InstanceId: "STRING_VALUE", // required
+ *   IdentityProvider: { // IdentityProvider Union: only one key present
+ *     ActiveDirectoryIdentityProvider: { // ActiveDirectoryIdentityProvider
+ *       DirectoryId: "STRING_VALUE",
+ *       ActiveDirectorySettings: { // ActiveDirectorySettings
+ *         DomainName: "STRING_VALUE",
+ *         DomainIpv4List: [ // IpV4List
+ *           "STRING_VALUE",
+ *         ],
+ *         DomainIpv6List: [ // IpV6List
+ *           "STRING_VALUE",
+ *         ],
+ *         DomainCredentialsProvider: { // CredentialsProvider Union: only one key present
+ *           SecretsManagerCredentialsProvider: { // SecretsManagerCredentialsProvider
+ *             SecretId: "STRING_VALUE",
+ *           },
+ *         },
+ *         DomainNetworkSettings: { // DomainNetworkSettings
+ *           Subnets: [ // Subnets // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       },
+ *       ActiveDirectoryType: "STRING_VALUE",
+ *       IsSharedActiveDirectory: true || false,
+ *     },
+ *   },
+ *   MaxResults: Number("int"),
+ *   Filters: [ // FilterList
+ *     { // Filter
+ *       Attribute: "STRING_VALUE",
+ *       Operation: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new ListUserAssociationsCommand(input);
  * const response = await client.send(command);
+ * // { // ListUserAssociationsResponse
+ * //   InstanceUserSummaries: [ // InstanceUserSummaryList
+ * //     { // InstanceUserSummary
+ * //       Username: "STRING_VALUE", // required
+ * //       InstanceId: "STRING_VALUE", // required
+ * //       IdentityProvider: { // IdentityProvider Union: only one key present
+ * //         ActiveDirectoryIdentityProvider: { // ActiveDirectoryIdentityProvider
+ * //           DirectoryId: "STRING_VALUE",
+ * //           ActiveDirectorySettings: { // ActiveDirectorySettings
+ * //             DomainName: "STRING_VALUE",
+ * //             DomainIpv4List: [ // IpV4List
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             DomainIpv6List: [ // IpV6List
+ * //               "STRING_VALUE",
+ * //             ],
+ * //             DomainCredentialsProvider: { // CredentialsProvider Union: only one key present
+ * //               SecretsManagerCredentialsProvider: { // SecretsManagerCredentialsProvider
+ * //                 SecretId: "STRING_VALUE",
+ * //               },
+ * //             },
+ * //             DomainNetworkSettings: { // DomainNetworkSettings
+ * //               Subnets: [ // Subnets // required
+ * //                 "STRING_VALUE",
+ * //               ],
+ * //             },
+ * //           },
+ * //           ActiveDirectoryType: "STRING_VALUE",
+ * //           IsSharedActiveDirectory: true || false,
+ * //         },
+ * //       },
+ * //       Status: "STRING_VALUE", // required
+ * //       InstanceUserArn: "STRING_VALUE",
+ * //       StatusMessage: "STRING_VALUE",
+ * //       Domain: "STRING_VALUE",
+ * //       AssociationDate: "STRING_VALUE",
+ * //       DisassociationDate: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListUserAssociationsCommandInput - {@link ListUserAssociationsCommandInput}
+ * @returns {@link ListUserAssociationsCommandOutput}
  * @see {@link ListUserAssociationsCommandInput} for command's `input` shape.
  * @see {@link ListUserAssociationsCommandOutput} for command's `response` shape.
  * @see {@link LicenseManagerUserSubscriptionsClientResolvedConfig | config} for LicenseManagerUserSubscriptionsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (server fault)
+ *  <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception occurred with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request failed because a service quota is exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling. Retry the request.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link LicenseManagerUserSubscriptionsServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManagerUserSubscriptions service.</p>
+ *
+ *
+ * @public
  */
-export class ListUserAssociationsCommand extends $Command<
-  ListUserAssociationsCommandInput,
-  ListUserAssociationsCommandOutput,
-  LicenseManagerUserSubscriptionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListUserAssociationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerUserSubscriptionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListUserAssociationsCommandInput, ListUserAssociationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerUserSubscriptionsClient";
-    const commandName = "ListUserAssociationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListUserAssociationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListUserAssociationsResponseFilterSensitiveLog,
+export class ListUserAssociationsCommand extends command<ListUserAssociationsCommandInput, ListUserAssociationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListUserAssociations",
+  ListUserAssociations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListUserAssociationsRequest;
+      output: ListUserAssociationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListUserAssociationsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListUserAssociationsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListUserAssociationsCommandOutput> {
-    return deserializeAws_restJson1ListUserAssociationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListUserAssociationsCommandInput;
+      output: ListUserAssociationsCommandOutput;
+    };
+  };
 }

@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
-  GetTableObjectsRequest,
-  GetTableObjectsRequestFilterSensitiveLog,
-  GetTableObjectsResponse,
-  GetTableObjectsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetTableObjectsCommand,
-  serializeAws_restJson1GetTableObjectsCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetTableObjectsRequest, GetTableObjectsResponse } from "../models/models_0";
+import { GetTableObjects$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTableObjectsCommand}.
+ */
 export interface GetTableObjectsCommandInput extends GetTableObjectsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTableObjectsCommand}.
+ */
 export interface GetTableObjectsCommandOutput extends GetTableObjectsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,89 @@ export interface GetTableObjectsCommandOutput extends GetTableObjectsResponse, _
  * ```javascript
  * import { LakeFormationClient, GetTableObjectsCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, GetTableObjectsCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // GetTableObjectsRequest
+ *   CatalogId: "STRING_VALUE",
+ *   DatabaseName: "STRING_VALUE", // required
+ *   TableName: "STRING_VALUE", // required
+ *   TransactionId: "STRING_VALUE",
+ *   QueryAsOfTime: new Date("TIMESTAMP"),
+ *   PartitionPredicate: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ *   NextToken: "STRING_VALUE",
+ * };
  * const command = new GetTableObjectsCommand(input);
  * const response = await client.send(command);
+ * // { // GetTableObjectsResponse
+ * //   Objects: [ // PartitionedTableObjectsList
+ * //     { // PartitionObjects
+ * //       PartitionValues: [ // PartitionValuesList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       Objects: [ // TableObjectList
+ * //         { // TableObject
+ * //           Uri: "STRING_VALUE",
+ * //           ETag: "STRING_VALUE",
+ * //           Size: Number("long"),
+ * //         },
+ * //       ],
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetTableObjectsCommandInput - {@link GetTableObjectsCommandInput}
+ * @returns {@link GetTableObjectsCommandOutput}
  * @see {@link GetTableObjectsCommandInput} for command's `input` shape.
  * @see {@link GetTableObjectsCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link ResourceNotReadyException} (client fault)
+ *  <p>Contains details about an error related to a resource which is not ready for a transaction.</p>
+ *
+ * @throws {@link TransactionCanceledException} (client fault)
+ *  <p>Contains details about an error related to a transaction that was cancelled.</p>
+ *
+ * @throws {@link TransactionCommittedException} (client fault)
+ *  <p>Contains details about an error where the specified transaction has already been committed and cannot be used for <code>UpdateTableObjects</code>.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class GetTableObjectsCommand extends $Command<
-  GetTableObjectsCommandInput,
-  GetTableObjectsCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTableObjectsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTableObjectsCommandInput, GetTableObjectsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "GetTableObjectsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTableObjectsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetTableObjectsResponseFilterSensitiveLog,
+export class GetTableObjectsCommand extends command<GetTableObjectsCommandInput, GetTableObjectsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTableObjects",
+  GetTableObjects$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTableObjectsRequest;
+      output: GetTableObjectsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetTableObjectsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetTableObjectsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetTableObjectsCommandOutput> {
-    return deserializeAws_restJson1GetTableObjectsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTableObjectsCommandInput;
+      output: GetTableObjectsCommandOutput;
+    };
+  };
 }

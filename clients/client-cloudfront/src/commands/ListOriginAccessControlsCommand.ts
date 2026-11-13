@@ -1,106 +1,95 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import {
-  ListOriginAccessControlsRequest,
-  ListOriginAccessControlsRequestFilterSensitiveLog,
-  ListOriginAccessControlsResult,
-  ListOriginAccessControlsResultFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_restXmlListOriginAccessControlsCommand,
-  serializeAws_restXmlListOriginAccessControlsCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListOriginAccessControlsRequest, ListOriginAccessControlsResult } from "../models/models_1";
+import { ListOriginAccessControls$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListOriginAccessControlsCommand}.
+ */
 export interface ListOriginAccessControlsCommandInput extends ListOriginAccessControlsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListOriginAccessControlsCommand}.
+ */
 export interface ListOriginAccessControlsCommandOutput extends ListOriginAccessControlsResult, __MetadataBearer {}
 
 /**
- * <p>Gets the list of CloudFront origin access controls in this Amazon Web Services account.</p>
- * 		       <p>You can optionally specify the maximum number of items to receive in the response. If the
- * 			total number of items in the list exceeds the maximum that you specify, or the default
- * 			maximum, the response is paginated. To get the next page of items, send another request
- * 			that specifies the <code>NextMarker</code> value from the current response as the
- * 			<code>Marker</code> value in the next request.</p>
+ * <p>Gets the list of CloudFront origin access controls (OACs) in this Amazon Web Services account.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send another request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the next request.</p> <note> <p>If you're not using origin access controls for your Amazon Web Services account, the <code>ListOriginAccessControls</code> operation doesn't return the <code>Items</code> element in the response.</p> </note>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, ListOriginAccessControlsCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, ListOriginAccessControlsCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // ListOriginAccessControlsRequest
+ *   Marker: "STRING_VALUE",
+ *   MaxItems: Number("int"),
+ * };
  * const command = new ListOriginAccessControlsCommand(input);
  * const response = await client.send(command);
+ * // { // ListOriginAccessControlsResult
+ * //   OriginAccessControlList: { // OriginAccessControlList
+ * //     Marker: "STRING_VALUE", // required
+ * //     NextMarker: "STRING_VALUE",
+ * //     MaxItems: Number("int"), // required
+ * //     IsTruncated: true || false, // required
+ * //     Quantity: Number("int"), // required
+ * //     Items: [ // OriginAccessControlSummaryList
+ * //       { // OriginAccessControlSummary
+ * //         Id: "STRING_VALUE", // required
+ * //         Description: "STRING_VALUE", // required
+ * //         Name: "STRING_VALUE", // required
+ * //         SigningProtocol: "sigv4" || "sigv4a", // required
+ * //         SigningBehavior: "never" || "always" || "no-override" || "always-amz-auth", // required
+ * //         OriginAccessControlOriginType: "s3" || "mediastore" || "mediapackagev2" || "lambda", // required
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ListOriginAccessControlsCommandInput - {@link ListOriginAccessControlsCommandInput}
+ * @returns {@link ListOriginAccessControlsCommandOutput}
  * @see {@link ListOriginAccessControlsCommandInput} for command's `input` shape.
  * @see {@link ListOriginAccessControlsCommandOutput} for command's `response` shape.
  * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link InvalidArgument} (client fault)
+ *  <p>An argument is invalid.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class ListOriginAccessControlsCommand extends $Command<
-  ListOriginAccessControlsCommandInput,
-  ListOriginAccessControlsCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListOriginAccessControlsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListOriginAccessControlsCommandInput, ListOriginAccessControlsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "ListOriginAccessControlsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListOriginAccessControlsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListOriginAccessControlsResultFilterSensitiveLog,
+export class ListOriginAccessControlsCommand extends command<ListOriginAccessControlsCommandInput, ListOriginAccessControlsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListOriginAccessControls",
+  ListOriginAccessControls$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListOriginAccessControlsRequest;
+      output: ListOriginAccessControlsResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListOriginAccessControlsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlListOriginAccessControlsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListOriginAccessControlsCommandOutput> {
-    return deserializeAws_restXmlListOriginAccessControlsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListOriginAccessControlsCommandInput;
+      output: ListOriginAccessControlsCommandOutput;
+    };
+  };
 }

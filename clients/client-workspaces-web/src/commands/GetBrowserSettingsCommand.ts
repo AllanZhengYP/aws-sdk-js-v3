@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetBrowserSettingsRequest,
-  GetBrowserSettingsRequestFilterSensitiveLog,
-  GetBrowserSettingsResponse,
-  GetBrowserSettingsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetBrowserSettingsCommand,
-  serializeAws_restJson1GetBrowserSettingsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetBrowserSettingsRequest, GetBrowserSettingsResponse } from "../models/models_0";
+import { GetBrowserSettings$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetBrowserSettingsCommand}.
+ */
 export interface GetBrowserSettingsCommandInput extends GetBrowserSettingsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetBrowserSettingsCommand}.
+ */
 export interface GetBrowserSettingsCommandOutput extends GetBrowserSettingsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,83 @@ export interface GetBrowserSettingsCommandOutput extends GetBrowserSettingsRespo
  * ```javascript
  * import { WorkSpacesWebClient, GetBrowserSettingsCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, GetBrowserSettingsCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // GetBrowserSettingsRequest
+ *   browserSettingsArn: "STRING_VALUE", // required
+ * };
  * const command = new GetBrowserSettingsCommand(input);
  * const response = await client.send(command);
+ * // { // GetBrowserSettingsResponse
+ * //   browserSettings: { // BrowserSettings
+ * //     browserSettingsArn: "STRING_VALUE", // required
+ * //     associatedPortalArns: [ // ArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     browserPolicy: "STRING_VALUE",
+ * //     customerManagedKey: "STRING_VALUE",
+ * //     additionalEncryptionContext: { // EncryptionContextMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //     webContentFilteringPolicy: { // WebContentFilteringPolicy
+ * //       blockedCategories: [ // BlockedCategories
+ * //         "Cults" || "Gambling" || "Nudity" || "Pornography" || "SexEducation" || "Tasteless" || "Violence" || "DownloadSites" || "ImageSharing" || "PeerToPeer" || "StreamingMediaAndDownloads" || "GenerativeAI" || "CriminalActivity" || "Hacking" || "HateAndIntolerance" || "IllegalDrug" || "IllegalSoftware" || "SchoolCheating" || "SelfHarm" || "Weapons" || "Chat" || "Games" || "InstantMessaging" || "ProfessionalNetwork" || "SocialNetworking" || "WebBasedEmail" || "ParkedDomains",
+ * //       ],
+ * //       allowedUrls: [ // UrlPatternList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       blockedUrls: [
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetBrowserSettingsCommandInput - {@link GetBrowserSettingsCommandInput}
+ * @returns {@link GetBrowserSettingsCommandOutput}
  * @see {@link GetBrowserSettingsCommandInput} for command's `input` shape.
  * @see {@link GetBrowserSettingsCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource cannot be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class GetBrowserSettingsCommand extends $Command<
-  GetBrowserSettingsCommandInput,
-  GetBrowserSettingsCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetBrowserSettingsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetBrowserSettingsCommandInput, GetBrowserSettingsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "GetBrowserSettingsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetBrowserSettingsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetBrowserSettingsResponseFilterSensitiveLog,
+export class GetBrowserSettingsCommand extends command<GetBrowserSettingsCommandInput, GetBrowserSettingsCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetBrowserSettings",
+  GetBrowserSettings$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetBrowserSettingsRequest;
+      output: GetBrowserSettingsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetBrowserSettingsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetBrowserSettingsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetBrowserSettingsCommandOutput> {
-    return deserializeAws_restJson1GetBrowserSettingsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetBrowserSettingsCommandInput;
+      output: GetBrowserSettingsCommandOutput;
+    };
+  };
 }

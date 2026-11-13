@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  RestoreFromRecoveryPointRequest,
-  RestoreFromRecoveryPointRequestFilterSensitiveLog,
-  RestoreFromRecoveryPointResponse,
-  RestoreFromRecoveryPointResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1RestoreFromRecoveryPointCommand,
-  serializeAws_json1_1RestoreFromRecoveryPointCommand,
-} from "../protocols/Aws_json1_1";
-import {
-  RedshiftServerlessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../RedshiftServerlessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { RestoreFromRecoveryPointRequest, RestoreFromRecoveryPointResponse } from "../models/models_0";
+import { RestoreFromRecoveryPoint$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link RestoreFromRecoveryPointCommand}.
+ */
 export interface RestoreFromRecoveryPointCommandInput extends RestoreFromRecoveryPointRequest {}
+/**
+ * @public
+ *
+ * The output of {@link RestoreFromRecoveryPointCommand}.
+ */
 export interface RestoreFromRecoveryPointCommandOutput extends RestoreFromRecoveryPointResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,94 @@ export interface RestoreFromRecoveryPointCommandOutput extends RestoreFromRecove
  * ```javascript
  * import { RedshiftServerlessClient, RestoreFromRecoveryPointCommand } from "@aws-sdk/client-redshift-serverless"; // ES Modules import
  * // const { RedshiftServerlessClient, RestoreFromRecoveryPointCommand } = require("@aws-sdk/client-redshift-serverless"); // CommonJS import
+ * // import type { RedshiftServerlessClientConfig } from "@aws-sdk/client-redshift-serverless";
+ * const config = {}; // type is RedshiftServerlessClientConfig
  * const client = new RedshiftServerlessClient(config);
+ * const input = { // RestoreFromRecoveryPointRequest
+ *   recoveryPointId: "STRING_VALUE", // required
+ *   namespaceName: "STRING_VALUE", // required
+ *   workgroupName: "STRING_VALUE", // required
+ *   maintainIntegration: true || false,
+ * };
  * const command = new RestoreFromRecoveryPointCommand(input);
  * const response = await client.send(command);
+ * // { // RestoreFromRecoveryPointResponse
+ * //   recoveryPointId: "STRING_VALUE",
+ * //   namespace: { // Namespace
+ * //     namespaceArn: "STRING_VALUE",
+ * //     namespaceId: "STRING_VALUE",
+ * //     namespaceName: "STRING_VALUE",
+ * //     adminUsername: "STRING_VALUE",
+ * //     dbName: "STRING_VALUE",
+ * //     kmsKeyId: "STRING_VALUE",
+ * //     defaultIamRoleArn: "STRING_VALUE",
+ * //     iamRoles: [ // IamRoleArnList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     logExports: [ // LogExportList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     status: "STRING_VALUE",
+ * //     creationDate: new Date("TIMESTAMP"),
+ * //     adminPasswordSecretArn: "STRING_VALUE",
+ * //     adminPasswordSecretKmsKeyId: "STRING_VALUE",
+ * //     lakehouseRegistrationStatus: "STRING_VALUE",
+ * //     catalogArn: "STRING_VALUE",
+ * //     s3TablePublishStatus: { // S3TablePublishStatus
+ * //       s3Tables: [ // S3TableNameList
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       s3TableNamespace: "STRING_VALUE",
+ * //       s3TableGranularity: "STRING_VALUE",
+ * //       enabledAll: true || false,
+ * //       lastIngestionTimes: { // S3TableLastIngestionTimeMap
+ * //         "<keys>": "STRING_VALUE",
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param RestoreFromRecoveryPointCommandInput - {@link RestoreFromRecoveryPointCommandInput}
+ * @returns {@link RestoreFromRecoveryPointCommandOutput}
  * @see {@link RestoreFromRecoveryPointCommandInput} for command's `input` shape.
  * @see {@link RestoreFromRecoveryPointCommandOutput} for command's `response` shape.
  * @see {@link RedshiftServerlessClientResolvedConfig | config} for RedshiftServerlessClient's `config` shape.
  *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>The submitted action has conflicts.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link RedshiftServerlessServiceException}
+ * <p>Base exception class for all service exceptions from RedshiftServerless service.</p>
+ *
+ *
+ * @public
  */
-export class RestoreFromRecoveryPointCommand extends $Command<
-  RestoreFromRecoveryPointCommandInput,
-  RestoreFromRecoveryPointCommandOutput,
-  RedshiftServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: RestoreFromRecoveryPointCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<RestoreFromRecoveryPointCommandInput, RestoreFromRecoveryPointCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftServerlessClient";
-    const commandName = "RestoreFromRecoveryPointCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: RestoreFromRecoveryPointRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: RestoreFromRecoveryPointResponseFilterSensitiveLog,
+export class RestoreFromRecoveryPointCommand extends command<RestoreFromRecoveryPointCommandInput, RestoreFromRecoveryPointCommandOutput>(
+  _ep0,
+  _mw0,
+  "RestoreFromRecoveryPoint",
+  RestoreFromRecoveryPoint$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: RestoreFromRecoveryPointRequest;
+      output: RestoreFromRecoveryPointResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: RestoreFromRecoveryPointCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1RestoreFromRecoveryPointCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<RestoreFromRecoveryPointCommandOutput> {
-    return deserializeAws_json1_1RestoreFromRecoveryPointCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: RestoreFromRecoveryPointCommandInput;
+      output: RestoreFromRecoveryPointCommandOutput;
+    };
+  };
 }

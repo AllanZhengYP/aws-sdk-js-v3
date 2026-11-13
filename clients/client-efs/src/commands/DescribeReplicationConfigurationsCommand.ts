@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EFSClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EFSClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DescribeReplicationConfigurationsRequest,
-  DescribeReplicationConfigurationsRequestFilterSensitiveLog,
   DescribeReplicationConfigurationsResponse,
-  DescribeReplicationConfigurationsResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeReplicationConfigurationsCommand,
-  serializeAws_restJson1DescribeReplicationConfigurationsCommand,
-} from "../protocols/Aws_restJson1";
+import { DescribeReplicationConfigurations$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeReplicationConfigurationsCommand}.
+ */
 export interface DescribeReplicationConfigurationsCommandInput extends DescribeReplicationConfigurationsRequest {}
-export interface DescribeReplicationConfigurationsCommandOutput
-  extends DescribeReplicationConfigurationsResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeReplicationConfigurationsCommand}.
+ */
+export interface DescribeReplicationConfigurationsCommandOutput extends DescribeReplicationConfigurationsResponse, __MetadataBearer {}
 
 /**
  * <p>Retrieves the replication configuration for a specific file system. If a file system is
@@ -38,74 +34,88 @@ export interface DescribeReplicationConfigurationsCommandOutput
  * ```javascript
  * import { EFSClient, DescribeReplicationConfigurationsCommand } from "@aws-sdk/client-efs"; // ES Modules import
  * // const { EFSClient, DescribeReplicationConfigurationsCommand } = require("@aws-sdk/client-efs"); // CommonJS import
+ * // import type { EFSClientConfig } from "@aws-sdk/client-efs";
+ * const config = {}; // type is EFSClientConfig
  * const client = new EFSClient(config);
+ * const input = { // DescribeReplicationConfigurationsRequest
+ *   FileSystemId: "STRING_VALUE",
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new DescribeReplicationConfigurationsCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeReplicationConfigurationsResponse
+ * //   Replications: [ // ReplicationConfigurationDescriptions
+ * //     { // ReplicationConfigurationDescription
+ * //       SourceFileSystemId: "STRING_VALUE", // required
+ * //       SourceFileSystemRegion: "STRING_VALUE", // required
+ * //       SourceFileSystemArn: "STRING_VALUE", // required
+ * //       OriginalSourceFileSystemArn: "STRING_VALUE", // required
+ * //       CreationTime: new Date("TIMESTAMP"), // required
+ * //       Destinations: [ // Destinations // required
+ * //         { // Destination
+ * //           Status: "ENABLED" || "ENABLING" || "DELETING" || "ERROR" || "PAUSED" || "PAUSING", // required
+ * //           FileSystemId: "STRING_VALUE", // required
+ * //           Region: "STRING_VALUE", // required
+ * //           LastReplicatedTimestamp: new Date("TIMESTAMP"),
+ * //           OwnerId: "STRING_VALUE",
+ * //           StatusMessage: "STRING_VALUE",
+ * //           RoleArn: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //       SourceFileSystemOwnerId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param DescribeReplicationConfigurationsCommandInput - {@link DescribeReplicationConfigurationsCommandInput}
+ * @returns {@link DescribeReplicationConfigurationsCommandOutput}
  * @see {@link DescribeReplicationConfigurationsCommandInput} for command's `input` shape.
  * @see {@link DescribeReplicationConfigurationsCommandOutput} for command's `response` shape.
  * @see {@link EFSClientResolvedConfig | config} for EFSClient's `config` shape.
  *
+ * @throws {@link BadRequest} (client fault)
+ *  <p>Returned if the request is malformed or contains an error such as an invalid
+ *             parameter value or a missing required parameter.</p>
+ *
+ * @throws {@link FileSystemNotFound} (client fault)
+ *  <p>Returned if the specified <code>FileSystemId</code> value doesn't exist in the
+ *             requester's Amazon Web Services account.</p>
+ *
+ * @throws {@link InternalServerError} (server fault)
+ *  <p>Returned if an error occurred on the server side.</p>
+ *
+ * @throws {@link ReplicationNotFound} (client fault)
+ *  <p>Returned if the specified file system does not have a replication
+ *             configuration.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Returned if the Backup service is not available in the Amazon Web Services Region in which the request was made.</p>
+ *
+ * @throws {@link EFSServiceException}
+ * <p>Base exception class for all service exceptions from EFS service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeReplicationConfigurationsCommand extends $Command<
-  DescribeReplicationConfigurationsCommandInput,
-  DescribeReplicationConfigurationsCommandOutput,
-  EFSClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeReplicationConfigurationsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EFSClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeReplicationConfigurationsCommandInput, DescribeReplicationConfigurationsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EFSClient";
-    const commandName = "DescribeReplicationConfigurationsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeReplicationConfigurationsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeReplicationConfigurationsResponseFilterSensitiveLog,
+export class DescribeReplicationConfigurationsCommand extends command<DescribeReplicationConfigurationsCommandInput, DescribeReplicationConfigurationsCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeReplicationConfigurations",
+  DescribeReplicationConfigurations$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeReplicationConfigurationsRequest;
+      output: DescribeReplicationConfigurationsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DescribeReplicationConfigurationsCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeReplicationConfigurationsCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DescribeReplicationConfigurationsCommandOutput> {
-    return deserializeAws_restJson1DescribeReplicationConfigurationsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeReplicationConfigurationsCommandInput;
+      output: DescribeReplicationConfigurationsCommandOutput;
+    };
+  };
 }

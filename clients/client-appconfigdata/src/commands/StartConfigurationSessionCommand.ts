@@ -1,107 +1,93 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigDataClient";
-import {
-  StartConfigurationSessionRequest,
-  StartConfigurationSessionRequestFilterSensitiveLog,
-  StartConfigurationSessionResponse,
-  StartConfigurationSessionResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1StartConfigurationSessionCommand,
-  serializeAws_restJson1StartConfigurationSessionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartConfigurationSessionRequest, StartConfigurationSessionResponse } from "../models/models_0";
+import { StartConfigurationSession$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartConfigurationSessionCommand}.
+ */
 export interface StartConfigurationSessionCommandInput extends StartConfigurationSessionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartConfigurationSessionCommand}.
+ */
 export interface StartConfigurationSessionCommandOutput extends StartConfigurationSessionResponse, __MetadataBearer {}
 
 /**
  * <p>Starts a configuration session used to retrieve a deployed configuration. For more
  *          information about this API action and to view example CLI commands that show how to use
- *          it with the <a>GetLatestConfiguration</a> API action, see <a href="http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration">Receiving the
+ *          it with the <a>GetLatestConfiguration</a> API action, see <a href="http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration">Retrieving the
  *             configuration</a> in the <i>AppConfig User Guide</i>. </p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { AppConfigDataClient, StartConfigurationSessionCommand } from "@aws-sdk/client-appconfigdata"; // ES Modules import
  * // const { AppConfigDataClient, StartConfigurationSessionCommand } = require("@aws-sdk/client-appconfigdata"); // CommonJS import
+ * // import type { AppConfigDataClientConfig } from "@aws-sdk/client-appconfigdata";
+ * const config = {}; // type is AppConfigDataClientConfig
  * const client = new AppConfigDataClient(config);
+ * const input = { // StartConfigurationSessionRequest
+ *   ApplicationIdentifier: "STRING_VALUE", // required
+ *   EnvironmentIdentifier: "STRING_VALUE", // required
+ *   ConfigurationProfileIdentifier: "STRING_VALUE", // required
+ *   RequiredMinimumPollIntervalInSeconds: Number("int"),
+ * };
  * const command = new StartConfigurationSessionCommand(input);
  * const response = await client.send(command);
+ * // { // StartConfigurationSessionResponse
+ * //   InitialConfigurationToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param StartConfigurationSessionCommandInput - {@link StartConfigurationSessionCommandInput}
+ * @returns {@link StartConfigurationSessionCommandOutput}
  * @see {@link StartConfigurationSessionCommandInput} for command's `input` shape.
  * @see {@link StartConfigurationSessionCommandOutput} for command's `response` shape.
  * @see {@link AppConfigDataClientResolvedConfig | config} for AppConfigDataClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by the service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link AppConfigDataServiceException}
+ * <p>Base exception class for all service exceptions from AppConfigData service.</p>
+ *
+ *
+ * @public
  */
-export class StartConfigurationSessionCommand extends $Command<
-  StartConfigurationSessionCommandInput,
-  StartConfigurationSessionCommandOutput,
-  AppConfigDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartConfigurationSessionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartConfigurationSessionCommandInput, StartConfigurationSessionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigDataClient";
-    const commandName = "StartConfigurationSessionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartConfigurationSessionRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StartConfigurationSessionResponseFilterSensitiveLog,
+export class StartConfigurationSessionCommand extends command<StartConfigurationSessionCommandInput, StartConfigurationSessionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartConfigurationSession",
+  StartConfigurationSession$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartConfigurationSessionRequest;
+      output: StartConfigurationSessionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartConfigurationSessionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartConfigurationSessionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartConfigurationSessionCommandOutput> {
-    return deserializeAws_restJson1StartConfigurationSessionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartConfigurationSessionCommandInput;
+      output: StartConfigurationSessionCommandOutput;
+    };
+  };
 }

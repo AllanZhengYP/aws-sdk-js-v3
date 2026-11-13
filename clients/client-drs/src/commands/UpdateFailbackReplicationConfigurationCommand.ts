@@ -1,29 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { DrsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DrsClient";
-import {
-  UpdateFailbackReplicationConfigurationRequest,
-  UpdateFailbackReplicationConfigurationRequestFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateFailbackReplicationConfigurationCommand,
-  serializeAws_restJson1UpdateFailbackReplicationConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateFailbackReplicationConfigurationRequest } from "../models/models_0";
+import { UpdateFailbackReplicationConfiguration$ } from "../schemas/schemas_0";
 
-export interface UpdateFailbackReplicationConfigurationCommandInput
-  extends UpdateFailbackReplicationConfigurationRequest {}
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateFailbackReplicationConfigurationCommand}.
+ */
+export interface UpdateFailbackReplicationConfigurationCommandInput extends UpdateFailbackReplicationConfigurationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateFailbackReplicationConfigurationCommand}.
+ */
 export interface UpdateFailbackReplicationConfigurationCommandOutput extends __MetadataBearer {}
 
 /**
@@ -33,74 +29,64 @@ export interface UpdateFailbackReplicationConfigurationCommandOutput extends __M
  * ```javascript
  * import { DrsClient, UpdateFailbackReplicationConfigurationCommand } from "@aws-sdk/client-drs"; // ES Modules import
  * // const { DrsClient, UpdateFailbackReplicationConfigurationCommand } = require("@aws-sdk/client-drs"); // CommonJS import
+ * // import type { DrsClientConfig } from "@aws-sdk/client-drs";
+ * const config = {}; // type is DrsClientConfig
  * const client = new DrsClient(config);
+ * const input = { // UpdateFailbackReplicationConfigurationRequest
+ *   recoveryInstanceID: "STRING_VALUE", // required
+ *   name: "STRING_VALUE",
+ *   bandwidthThrottling: Number("long"),
+ *   usePrivateIP: true || false,
+ *   internetProtocol: "STRING_VALUE",
+ * };
  * const command = new UpdateFailbackReplicationConfigurationCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param UpdateFailbackReplicationConfigurationCommandInput - {@link UpdateFailbackReplicationConfigurationCommandInput}
+ * @returns {@link UpdateFailbackReplicationConfigurationCommandOutput}
  * @see {@link UpdateFailbackReplicationConfigurationCommandInput} for command's `input` shape.
  * @see {@link UpdateFailbackReplicationConfigurationCommandOutput} for command's `response` shape.
  * @see {@link DrsClientResolvedConfig | config} for DrsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource for this operation was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link UninitializedAccountException} (client fault)
+ *  <p>The account performing the request has not been initialized.</p>
+ *
+ * @throws {@link DrsServiceException}
+ * <p>Base exception class for all service exceptions from Drs service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateFailbackReplicationConfigurationCommand extends $Command<
-  UpdateFailbackReplicationConfigurationCommandInput,
-  UpdateFailbackReplicationConfigurationCommandOutput,
-  DrsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateFailbackReplicationConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DrsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateFailbackReplicationConfigurationCommandInput, UpdateFailbackReplicationConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DrsClient";
-    const commandName = "UpdateFailbackReplicationConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateFailbackReplicationConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class UpdateFailbackReplicationConfigurationCommand extends command<UpdateFailbackReplicationConfigurationCommandInput, UpdateFailbackReplicationConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateFailbackReplicationConfiguration",
+  UpdateFailbackReplicationConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateFailbackReplicationConfigurationRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: UpdateFailbackReplicationConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateFailbackReplicationConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<UpdateFailbackReplicationConfigurationCommandOutput> {
-    return deserializeAws_restJson1UpdateFailbackReplicationConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateFailbackReplicationConfigurationCommandInput;
+      output: UpdateFailbackReplicationConfigurationCommandOutput;
+    };
+  };
 }

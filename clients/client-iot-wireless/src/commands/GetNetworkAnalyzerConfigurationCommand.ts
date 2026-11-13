@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   GetNetworkAnalyzerConfigurationRequest,
-  GetNetworkAnalyzerConfigurationRequestFilterSensitiveLog,
   GetNetworkAnalyzerConfigurationResponse,
-  GetNetworkAnalyzerConfigurationResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_restJson1GetNetworkAnalyzerConfigurationCommand,
-  serializeAws_restJson1GetNetworkAnalyzerConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { GetNetworkAnalyzerConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetNetworkAnalyzerConfigurationCommand}.
+ */
 export interface GetNetworkAnalyzerConfigurationCommandInput extends GetNetworkAnalyzerConfigurationRequest {}
-export interface GetNetworkAnalyzerConfigurationCommandOutput
-  extends GetNetworkAnalyzerConfigurationResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link GetNetworkAnalyzerConfigurationCommand}.
+ */
+export interface GetNetworkAnalyzerConfigurationCommandOutput extends GetNetworkAnalyzerConfigurationResponse, __MetadataBearer {}
 
 /**
  * <p>Get network analyzer configuration.</p>
@@ -36,74 +32,78 @@ export interface GetNetworkAnalyzerConfigurationCommandOutput
  * ```javascript
  * import { IoTWirelessClient, GetNetworkAnalyzerConfigurationCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, GetNetworkAnalyzerConfigurationCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // GetNetworkAnalyzerConfigurationRequest
+ *   ConfigurationName: "STRING_VALUE", // required
+ * };
  * const command = new GetNetworkAnalyzerConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // GetNetworkAnalyzerConfigurationResponse
+ * //   TraceContent: { // TraceContent
+ * //     WirelessDeviceFrameInfo: "ENABLED" || "DISABLED",
+ * //     LogLevel: "INFO" || "ERROR" || "DISABLED",
+ * //     MulticastFrameInfo: "ENABLED" || "DISABLED",
+ * //   },
+ * //   WirelessDevices: [ // WirelessDeviceList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   WirelessGateways: [ // WirelessGatewayList
+ * //     "STRING_VALUE",
+ * //   ],
+ * //   Description: "STRING_VALUE",
+ * //   Arn: "STRING_VALUE",
+ * //   Name: "STRING_VALUE",
+ * //   MulticastGroups: [ // NetworkAnalyzerMulticastGroupList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param GetNetworkAnalyzerConfigurationCommandInput - {@link GetNetworkAnalyzerConfigurationCommandInput}
+ * @returns {@link GetNetworkAnalyzerConfigurationCommandOutput}
  * @see {@link GetNetworkAnalyzerConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetNetworkAnalyzerConfigurationCommandOutput} for command's `response` shape.
  * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class GetNetworkAnalyzerConfigurationCommand extends $Command<
-  GetNetworkAnalyzerConfigurationCommandInput,
-  GetNetworkAnalyzerConfigurationCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetNetworkAnalyzerConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetNetworkAnalyzerConfigurationCommandInput, GetNetworkAnalyzerConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "GetNetworkAnalyzerConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetNetworkAnalyzerConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetNetworkAnalyzerConfigurationResponseFilterSensitiveLog,
+export class GetNetworkAnalyzerConfigurationCommand extends command<GetNetworkAnalyzerConfigurationCommandInput, GetNetworkAnalyzerConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetNetworkAnalyzerConfiguration",
+  GetNetworkAnalyzerConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetNetworkAnalyzerConfigurationRequest;
+      output: GetNetworkAnalyzerConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: GetNetworkAnalyzerConfigurationCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetNetworkAnalyzerConfigurationCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<GetNetworkAnalyzerConfigurationCommandOutput> {
-    return deserializeAws_restJson1GetNetworkAnalyzerConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetNetworkAnalyzerConfigurationCommandInput;
+      output: GetNetworkAnalyzerConfigurationCommandOutput;
+    };
+  };
 }

@@ -1,25 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ConnectCampaignsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ConnectCampaignsClient";
-import { PauseCampaignRequest, PauseCampaignRequestFilterSensitiveLog } from "../models/models_0";
-import {
-  deserializeAws_restJson1PauseCampaignCommand,
-  serializeAws_restJson1PauseCampaignCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { PauseCampaignRequest } from "../models/models_0";
+import { PauseCampaign$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link PauseCampaignCommand}.
+ */
 export interface PauseCampaignCommandInput extends PauseCampaignRequest {}
+/**
+ * @public
+ *
+ * The output of {@link PauseCampaignCommand}.
+ */
 export interface PauseCampaignCommandOutput extends __MetadataBearer {}
 
 /**
@@ -29,68 +29,66 @@ export interface PauseCampaignCommandOutput extends __MetadataBearer {}
  * ```javascript
  * import { ConnectCampaignsClient, PauseCampaignCommand } from "@aws-sdk/client-connectcampaigns"; // ES Modules import
  * // const { ConnectCampaignsClient, PauseCampaignCommand } = require("@aws-sdk/client-connectcampaigns"); // CommonJS import
+ * // import type { ConnectCampaignsClientConfig } from "@aws-sdk/client-connectcampaigns";
+ * const config = {}; // type is ConnectCampaignsClientConfig
  * const client = new ConnectCampaignsClient(config);
+ * const input = { // PauseCampaignRequest
+ *   id: "STRING_VALUE", // required
+ * };
  * const command = new PauseCampaignCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param PauseCampaignCommandInput - {@link PauseCampaignCommandInput}
+ * @returns {@link PauseCampaignCommandOutput}
  * @see {@link PauseCampaignCommandInput} for command's `input` shape.
  * @see {@link PauseCampaignCommandOutput} for command's `response` shape.
  * @see {@link ConnectCampaignsClientResolvedConfig | config} for ConnectCampaignsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  You do not have sufficient access to perform this action.
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  The request could not be processed because of conflict in the current state of the resource.
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  Request processing failed because of an error or failure with the service.
+ *
+ * @throws {@link InvalidCampaignStateException} (client fault)
+ *  The request could not be processed because of conflict in the current state of the campaign.
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  The specified resource was not found.
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  The request was denied due to request throttling.
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  The input fails to satisfy the constraints specified by an AWS service.
+ *
+ * @throws {@link ConnectCampaignsServiceException}
+ * <p>Base exception class for all service exceptions from ConnectCampaigns service.</p>
+ *
+ *
+ * @public
  */
-export class PauseCampaignCommand extends $Command<
-  PauseCampaignCommandInput,
-  PauseCampaignCommandOutput,
-  ConnectCampaignsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: PauseCampaignCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ConnectCampaignsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<PauseCampaignCommandInput, PauseCampaignCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ConnectCampaignsClient";
-    const commandName = "PauseCampaignCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: PauseCampaignRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class PauseCampaignCommand extends command<PauseCampaignCommandInput, PauseCampaignCommandOutput>(
+  _ep0,
+  _mw0,
+  "PauseCampaign",
+  PauseCampaign$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: PauseCampaignRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: PauseCampaignCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1PauseCampaignCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<PauseCampaignCommandOutput> {
-    return deserializeAws_restJson1PauseCampaignCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: PauseCampaignCommandInput;
+      output: PauseCampaignCommandOutput;
+    };
+  };
 }

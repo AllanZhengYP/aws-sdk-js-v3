@@ -1,37 +1,69 @@
 // smithy-typescript generated code
-import {
-  BatchExecuteStatementCommand as __BatchExecuteStatementCommand,
-  BatchExecuteStatementCommandInput as __BatchExecuteStatementCommandInput,
-  BatchExecuteStatementCommandOutput as __BatchExecuteStatementCommandOutput,
-  BatchStatementRequest,
-  BatchStatementResponse,
-} from "@aws-sdk/client-dynamodb";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
 import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { ALL_MEMBERS, ALL_VALUES } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { BatchExecuteStatementCommand as __BatchExecuteStatementCommand } from "@aws-sdk/client-dynamodb";
 
-export type BatchExecuteStatementCommandInput = Omit<__BatchExecuteStatementCommandInput, "Statements"> & {
-  Statements:
-    | (Omit<BatchStatementRequest, "Parameters"> & {
-        Parameters?: NativeAttributeValue[];
-      })[]
-    | undefined;
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type BatchExecuteStatementBatchStatementRequest = Omit<BatchStatementRequest, "Parameters"> & {
+  Parameters?: NativeAttributeValue[] | undefined;
 };
 
+/**
+ * @public
+ */
+export type BatchExecuteStatementBatchStatementError = Omit<BatchStatementError, "Item"> & {
+  Item?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type BatchExecuteStatementBatchStatementResponse = Omit<BatchStatementResponse, "Error" | "Item"> & {
+  Error?: BatchExecuteStatementBatchStatementError | undefined;
+  Item?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
+export type BatchExecuteStatementCommandInput = Omit<__BatchExecuteStatementCommandInput, "Statements"> & {
+  Statements: (
+    BatchExecuteStatementBatchStatementRequest
+  )[] | undefined;
+};
+
+/**
+ * @public
+ */
 export type BatchExecuteStatementCommandOutput = Omit<__BatchExecuteStatementCommandOutput, "Responses"> & {
-  Responses?: (Omit<BatchStatementResponse, "Item"> & {
-    Item?: Record<string, NativeAttributeValue>;
-  })[];
+  Responses?: (
+    BatchExecuteStatementBatchStatementResponse
+  )[] | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * BatchExecuteStatementCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * BatchExecuteStatementCommand operation from {@link @aws-sdk/client-dynamodb#BatchExecuteStatementCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
 export class BatchExecuteStatementCommand extends DynamoDBDocumentClientCommand<
   BatchExecuteStatementCommandInput,
@@ -40,14 +72,27 @@ export class BatchExecuteStatementCommand extends DynamoDBDocumentClientCommand<
   __BatchExecuteStatementCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  protected readonly inputKeyNodes = [{ key: "Statements", children: [{ key: "Parameters" }] }];
-  protected readonly outputKeyNodes = [{ key: "Responses", children: [{ key: "Item" }] }];
+  protected readonly inputKeyNodes = {
+    Statements: {
+      "*": {
+        Parameters: ALL_MEMBERS, // set/list of AttributeValue
+      },
+    },
+  };
+  protected readonly outputKeyNodes = {
+    Responses: {
+      "*": {
+        Error: {
+          Item: ALL_VALUES, // map with AttributeValue
+        },
+        Item: ALL_VALUES, // map with AttributeValue
+      },
+    },
+  };
 
   protected readonly clientCommand: __BatchExecuteStatementCommand;
-  public readonly middlewareStack: MiddlewareStack<
-    BatchExecuteStatementCommandInput | __BatchExecuteStatementCommandInput,
-    BatchExecuteStatementCommandOutput | __BatchExecuteStatementCommandOutput
-  >;
+  public readonly middlewareStack: MiddlewareStack<BatchExecuteStatementCommandInput | __BatchExecuteStatementCommandInput,
+  BatchExecuteStatementCommandOutput | __BatchExecuteStatementCommandOutput>;
 
   constructor(readonly input: BatchExecuteStatementCommandInput) {
     super();
@@ -70,3 +115,14 @@ export class BatchExecuteStatementCommand extends DynamoDBDocumentClientCommand<
     return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  BatchExecuteStatementCommandInput as __BatchExecuteStatementCommandInput,
+  BatchExecuteStatementCommandOutput as __BatchExecuteStatementCommandOutput,
+  BatchStatementError,
+  BatchStatementRequest,
+  BatchStatementResponse,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

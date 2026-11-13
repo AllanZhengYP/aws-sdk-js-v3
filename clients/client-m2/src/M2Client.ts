@@ -1,128 +1,186 @@
 // smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  DefaultsMode,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
   BodyLengthCalculator as __BodyLengthCalculator,
-  Credentials as __Credentials,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultM2HttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   CancelBatchJobExecutionCommandInput,
   CancelBatchJobExecutionCommandOutput,
 } from "./commands/CancelBatchJobExecutionCommand";
-import { CreateApplicationCommandInput, CreateApplicationCommandOutput } from "./commands/CreateApplicationCommand";
-import {
+import type {
+  CreateApplicationCommandInput,
+  CreateApplicationCommandOutput,
+} from "./commands/CreateApplicationCommand";
+import type {
+  CreateDataSetExportTaskCommandInput,
+  CreateDataSetExportTaskCommandOutput,
+} from "./commands/CreateDataSetExportTaskCommand";
+import type {
   CreateDataSetImportTaskCommandInput,
   CreateDataSetImportTaskCommandOutput,
 } from "./commands/CreateDataSetImportTaskCommand";
-import { CreateDeploymentCommandInput, CreateDeploymentCommandOutput } from "./commands/CreateDeploymentCommand";
-import { CreateEnvironmentCommandInput, CreateEnvironmentCommandOutput } from "./commands/CreateEnvironmentCommand";
-import { DeleteApplicationCommandInput, DeleteApplicationCommandOutput } from "./commands/DeleteApplicationCommand";
-import {
+import type { CreateDeploymentCommandInput, CreateDeploymentCommandOutput } from "./commands/CreateDeploymentCommand";
+import type {
+  CreateEnvironmentCommandInput,
+  CreateEnvironmentCommandOutput,
+} from "./commands/CreateEnvironmentCommand";
+import type {
+  DeleteApplicationCommandInput,
+  DeleteApplicationCommandOutput,
+} from "./commands/DeleteApplicationCommand";
+import type {
   DeleteApplicationFromEnvironmentCommandInput,
   DeleteApplicationFromEnvironmentCommandOutput,
 } from "./commands/DeleteApplicationFromEnvironmentCommand";
-import { DeleteEnvironmentCommandInput, DeleteEnvironmentCommandOutput } from "./commands/DeleteEnvironmentCommand";
-import { GetApplicationCommandInput, GetApplicationCommandOutput } from "./commands/GetApplicationCommand";
-import {
+import type {
+  DeleteEnvironmentCommandInput,
+  DeleteEnvironmentCommandOutput,
+} from "./commands/DeleteEnvironmentCommand";
+import type { GetApplicationCommandInput, GetApplicationCommandOutput } from "./commands/GetApplicationCommand";
+import type {
   GetApplicationVersionCommandInput,
   GetApplicationVersionCommandOutput,
 } from "./commands/GetApplicationVersionCommand";
-import {
+import type {
   GetBatchJobExecutionCommandInput,
   GetBatchJobExecutionCommandOutput,
 } from "./commands/GetBatchJobExecutionCommand";
-import { GetDataSetDetailsCommandInput, GetDataSetDetailsCommandOutput } from "./commands/GetDataSetDetailsCommand";
-import {
+import type {
+  GetDataSetDetailsCommandInput,
+  GetDataSetDetailsCommandOutput,
+} from "./commands/GetDataSetDetailsCommand";
+import type {
+  GetDataSetExportTaskCommandInput,
+  GetDataSetExportTaskCommandOutput,
+} from "./commands/GetDataSetExportTaskCommand";
+import type {
   GetDataSetImportTaskCommandInput,
   GetDataSetImportTaskCommandOutput,
 } from "./commands/GetDataSetImportTaskCommand";
-import { GetDeploymentCommandInput, GetDeploymentCommandOutput } from "./commands/GetDeploymentCommand";
-import { GetEnvironmentCommandInput, GetEnvironmentCommandOutput } from "./commands/GetEnvironmentCommand";
-import { ListApplicationsCommandInput, ListApplicationsCommandOutput } from "./commands/ListApplicationsCommand";
-import {
+import type { GetDeploymentCommandInput, GetDeploymentCommandOutput } from "./commands/GetDeploymentCommand";
+import type { GetEnvironmentCommandInput, GetEnvironmentCommandOutput } from "./commands/GetEnvironmentCommand";
+import type {
+  GetSignedBluinsightsUrlCommandInput,
+  GetSignedBluinsightsUrlCommandOutput,
+} from "./commands/GetSignedBluinsightsUrlCommand";
+import type { ListApplicationsCommandInput, ListApplicationsCommandOutput } from "./commands/ListApplicationsCommand";
+import type {
   ListApplicationVersionsCommandInput,
   ListApplicationVersionsCommandOutput,
 } from "./commands/ListApplicationVersionsCommand";
-import {
+import type {
   ListBatchJobDefinitionsCommandInput,
   ListBatchJobDefinitionsCommandOutput,
 } from "./commands/ListBatchJobDefinitionsCommand";
-import {
+import type {
   ListBatchJobExecutionsCommandInput,
   ListBatchJobExecutionsCommandOutput,
 } from "./commands/ListBatchJobExecutionsCommand";
-import {
+import type {
+  ListBatchJobRestartPointsCommandInput,
+  ListBatchJobRestartPointsCommandOutput,
+} from "./commands/ListBatchJobRestartPointsCommand";
+import type {
+  ListDataSetExportHistoryCommandInput,
+  ListDataSetExportHistoryCommandOutput,
+} from "./commands/ListDataSetExportHistoryCommand";
+import type {
   ListDataSetImportHistoryCommandInput,
   ListDataSetImportHistoryCommandOutput,
 } from "./commands/ListDataSetImportHistoryCommand";
-import { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "./commands/ListDataSetsCommand";
-import { ListDeploymentsCommandInput, ListDeploymentsCommandOutput } from "./commands/ListDeploymentsCommand";
-import { ListEngineVersionsCommandInput, ListEngineVersionsCommandOutput } from "./commands/ListEngineVersionsCommand";
-import { ListEnvironmentsCommandInput, ListEnvironmentsCommandOutput } from "./commands/ListEnvironmentsCommand";
-import {
+import type { ListDataSetsCommandInput, ListDataSetsCommandOutput } from "./commands/ListDataSetsCommand";
+import type { ListDeploymentsCommandInput, ListDeploymentsCommandOutput } from "./commands/ListDeploymentsCommand";
+import type {
+  ListEngineVersionsCommandInput,
+  ListEngineVersionsCommandOutput,
+} from "./commands/ListEngineVersionsCommand";
+import type { ListEnvironmentsCommandInput, ListEnvironmentsCommandOutput } from "./commands/ListEnvironmentsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import { StartApplicationCommandInput, StartApplicationCommandOutput } from "./commands/StartApplicationCommand";
-import { StartBatchJobCommandInput, StartBatchJobCommandOutput } from "./commands/StartBatchJobCommand";
-import { StopApplicationCommandInput, StopApplicationCommandOutput } from "./commands/StopApplicationCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import { UpdateApplicationCommandInput, UpdateApplicationCommandOutput } from "./commands/UpdateApplicationCommand";
-import { UpdateEnvironmentCommandInput, UpdateEnvironmentCommandOutput } from "./commands/UpdateEnvironmentCommand";
+import type { StartApplicationCommandInput, StartApplicationCommandOutput } from "./commands/StartApplicationCommand";
+import type { StartBatchJobCommandInput, StartBatchJobCommandOutput } from "./commands/StartBatchJobCommand";
+import type { StopApplicationCommandInput, StopApplicationCommandOutput } from "./commands/StopApplicationCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
+  UpdateApplicationCommandInput,
+  UpdateApplicationCommandOutput,
+} from "./commands/UpdateApplicationCommand";
+import type {
+  UpdateEnvironmentCommandInput,
+  UpdateEnvironmentCommandOutput,
+} from "./commands/UpdateEnvironmentCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | CancelBatchJobExecutionCommandInput
   | CreateApplicationCommandInput
+  | CreateDataSetExportTaskCommandInput
   | CreateDataSetImportTaskCommandInput
   | CreateDeploymentCommandInput
   | CreateEnvironmentCommandInput
@@ -133,13 +191,17 @@ export type ServiceInputTypes =
   | GetApplicationVersionCommandInput
   | GetBatchJobExecutionCommandInput
   | GetDataSetDetailsCommandInput
+  | GetDataSetExportTaskCommandInput
   | GetDataSetImportTaskCommandInput
   | GetDeploymentCommandInput
   | GetEnvironmentCommandInput
+  | GetSignedBluinsightsUrlCommandInput
   | ListApplicationVersionsCommandInput
   | ListApplicationsCommandInput
   | ListBatchJobDefinitionsCommandInput
   | ListBatchJobExecutionsCommandInput
+  | ListBatchJobRestartPointsCommandInput
+  | ListDataSetExportHistoryCommandInput
   | ListDataSetImportHistoryCommandInput
   | ListDataSetsCommandInput
   | ListDeploymentsCommandInput
@@ -154,9 +216,13 @@ export type ServiceInputTypes =
   | UpdateApplicationCommandInput
   | UpdateEnvironmentCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | CancelBatchJobExecutionCommandOutput
   | CreateApplicationCommandOutput
+  | CreateDataSetExportTaskCommandOutput
   | CreateDataSetImportTaskCommandOutput
   | CreateDeploymentCommandOutput
   | CreateEnvironmentCommandOutput
@@ -167,13 +233,17 @@ export type ServiceOutputTypes =
   | GetApplicationVersionCommandOutput
   | GetBatchJobExecutionCommandOutput
   | GetDataSetDetailsCommandOutput
+  | GetDataSetExportTaskCommandOutput
   | GetDataSetImportTaskCommandOutput
   | GetDeploymentCommandOutput
   | GetEnvironmentCommandOutput
+  | GetSignedBluinsightsUrlCommandOutput
   | ListApplicationVersionsCommandOutput
   | ListApplicationsCommandOutput
   | ListBatchJobDefinitionsCommandOutput
   | ListBatchJobExecutionsCommandOutput
+  | ListBatchJobRestartPointsCommandOutput
+  | ListDataSetExportHistoryCommandOutput
   | ListDataSetImportHistoryCommandOutput
   | ListDataSetsCommandOutput
   | ListDeploymentsCommandOutput
@@ -188,18 +258,21 @@ export type ServiceOutputTypes =
   | UpdateApplicationCommandOutput
   | UpdateEnvironmentCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -250,25 +323,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -281,63 +345,107 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
   /**
-   * The {@link DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
    */
-  defaultsMode?: DefaultsMode | Provider<DefaultsMode>;
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type M2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of M2Client class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type M2ClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of M2Client class constructor that set the region, credentials and other options.
  */
 export interface M2ClientConfig extends M2ClientConfigType {}
 
-type M2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of M2Client class. This is resolved and normalized from the {@link M2ClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type M2ClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of M2Client class. This is resolved and normalized from the {@link M2ClientConfig | constructor configuration interface}.
  */
 export interface M2ClientResolvedConfig extends M2ClientResolvedConfigType {}
 
@@ -347,6 +455,7 @@ export interface M2ClientResolvedConfig extends M2ClientResolvedConfigType {}
  *          analyzing existing mainframe applications, developing or updating mainframe applications
  *          using COBOL or PL/I, and implementing an automated pipeline for continuous integration and
  *          continuous delivery (CI/CD) of the applications.</p>
+ * @public
  */
 export class M2Client extends __Client<
   __HttpHandlerOptions,
@@ -359,23 +468,36 @@ export class M2Client extends __Client<
    */
   readonly config: M2ClientResolvedConfig;
 
-  constructor(configuration: M2ClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<M2ClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
     this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultM2HttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: M2ClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

@@ -1,37 +1,33 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComputeOptimizerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComputeOptimizerClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   DeleteRecommendationPreferencesRequest,
-  DeleteRecommendationPreferencesRequestFilterSensitiveLog,
   DeleteRecommendationPreferencesResponse,
-  DeleteRecommendationPreferencesResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_0DeleteRecommendationPreferencesCommand,
-  serializeAws_json1_0DeleteRecommendationPreferencesCommand,
-} from "../protocols/Aws_json1_0";
+import { DeleteRecommendationPreferences$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteRecommendationPreferencesCommand}.
+ */
 export interface DeleteRecommendationPreferencesCommandInput extends DeleteRecommendationPreferencesRequest {}
-export interface DeleteRecommendationPreferencesCommandOutput
-  extends DeleteRecommendationPreferencesResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteRecommendationPreferencesCommand}.
+ */
+export interface DeleteRecommendationPreferencesCommandOutput extends DeleteRecommendationPreferencesResponse, __MetadataBearer {}
 
 /**
  * <p>Deletes a recommendation preference, such as enhanced infrastructure metrics.</p>
- *         <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating
+ *          <p>For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html">Activating
  *                 enhanced infrastructure metrics</a> in the <i>Compute Optimizer User
  *                 Guide</i>.</p>
  * @example
@@ -39,74 +35,77 @@ export interface DeleteRecommendationPreferencesCommandOutput
  * ```javascript
  * import { ComputeOptimizerClient, DeleteRecommendationPreferencesCommand } from "@aws-sdk/client-compute-optimizer"; // ES Modules import
  * // const { ComputeOptimizerClient, DeleteRecommendationPreferencesCommand } = require("@aws-sdk/client-compute-optimizer"); // CommonJS import
+ * // import type { ComputeOptimizerClientConfig } from "@aws-sdk/client-compute-optimizer";
+ * const config = {}; // type is ComputeOptimizerClientConfig
  * const client = new ComputeOptimizerClient(config);
+ * const input = { // DeleteRecommendationPreferencesRequest
+ *   resourceType: "Ec2Instance" || "AutoScalingGroup" || "EbsVolume" || "LambdaFunction" || "NotApplicable" || "EcsService" || "License" || "RdsDBInstance" || "AuroraDBClusterStorage" || "Idle", // required
+ *   scope: { // Scope
+ *     name: "Organization" || "AccountId" || "ResourceArn",
+ *     value: "STRING_VALUE",
+ *   },
+ *   recommendationPreferenceNames: [ // RecommendationPreferenceNames // required
+ *     "EnhancedInfrastructureMetrics" || "InferredWorkloadTypes" || "ExternalMetricsPreference" || "LookBackPeriodPreference" || "PreferredResources" || "UtilizationPreferences",
+ *   ],
+ * };
  * const command = new DeleteRecommendationPreferencesCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteRecommendationPreferencesCommandInput - {@link DeleteRecommendationPreferencesCommandInput}
+ * @returns {@link DeleteRecommendationPreferencesCommandOutput}
  * @see {@link DeleteRecommendationPreferencesCommandInput} for command's `input` shape.
  * @see {@link DeleteRecommendationPreferencesCommandOutput} for command's `response` shape.
  * @see {@link ComputeOptimizerClientResolvedConfig | config} for ComputeOptimizerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred. Try your call again.</p>
+ *
+ * @throws {@link InvalidParameterValueException} (client fault)
+ *  <p>The value supplied for the input parameter is out of range or not valid.</p>
+ *
+ * @throws {@link MissingAuthenticationToken} (client fault)
+ *  <p>The request must contain either a valid (registered) Amazon Web Services access key ID
+ *             or X.509 certificate.</p>
+ *
+ * @throws {@link OptInRequiredException} (client fault)
+ *  <p>The account is not opted in to Compute Optimizer.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>A resource that is required for the action doesn't exist.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The request has failed due to a temporary failure of the server.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ComputeOptimizerServiceException}
+ * <p>Base exception class for all service exceptions from ComputeOptimizer service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteRecommendationPreferencesCommand extends $Command<
-  DeleteRecommendationPreferencesCommandInput,
-  DeleteRecommendationPreferencesCommandOutput,
-  ComputeOptimizerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteRecommendationPreferencesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComputeOptimizerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteRecommendationPreferencesCommandInput, DeleteRecommendationPreferencesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComputeOptimizerClient";
-    const commandName = "DeleteRecommendationPreferencesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteRecommendationPreferencesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteRecommendationPreferencesResponseFilterSensitiveLog,
+export class DeleteRecommendationPreferencesCommand extends command<DeleteRecommendationPreferencesCommandInput, DeleteRecommendationPreferencesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteRecommendationPreferences",
+  DeleteRecommendationPreferences$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteRecommendationPreferencesRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: DeleteRecommendationPreferencesCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_0DeleteRecommendationPreferencesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteRecommendationPreferencesCommandOutput> {
-    return deserializeAws_json1_0DeleteRecommendationPreferencesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteRecommendationPreferencesCommandInput;
+      output: DeleteRecommendationPreferencesCommandOutput;
+    };
+  };
 }

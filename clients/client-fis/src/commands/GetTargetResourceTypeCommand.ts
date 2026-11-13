@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { FisClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../FisClient";
-import {
-  GetTargetResourceTypeRequest,
-  GetTargetResourceTypeRequestFilterSensitiveLog,
-  GetTargetResourceTypeResponse,
-  GetTargetResourceTypeResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetTargetResourceTypeCommand,
-  serializeAws_restJson1GetTargetResourceTypeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetTargetResourceTypeRequest, GetTargetResourceTypeResponse } from "../models/models_0";
+import { GetTargetResourceType$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetTargetResourceTypeCommand}.
+ */
 export interface GetTargetResourceTypeCommandInput extends GetTargetResourceTypeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetTargetResourceTypeCommand}.
+ */
 export interface GetTargetResourceTypeCommandOutput extends GetTargetResourceTypeResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,62 @@ export interface GetTargetResourceTypeCommandOutput extends GetTargetResourceTyp
  * ```javascript
  * import { FisClient, GetTargetResourceTypeCommand } from "@aws-sdk/client-fis"; // ES Modules import
  * // const { FisClient, GetTargetResourceTypeCommand } = require("@aws-sdk/client-fis"); // CommonJS import
+ * // import type { FisClientConfig } from "@aws-sdk/client-fis";
+ * const config = {}; // type is FisClientConfig
  * const client = new FisClient(config);
+ * const input = { // GetTargetResourceTypeRequest
+ *   resourceType: "STRING_VALUE", // required
+ * };
  * const command = new GetTargetResourceTypeCommand(input);
  * const response = await client.send(command);
+ * // { // GetTargetResourceTypeResponse
+ * //   targetResourceType: { // TargetResourceType
+ * //     resourceType: "STRING_VALUE",
+ * //     description: "STRING_VALUE",
+ * //     parameters: { // TargetResourceTypeParameterMap
+ * //       "<keys>": { // TargetResourceTypeParameter
+ * //         description: "STRING_VALUE",
+ * //         required: true || false,
+ * //       },
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetTargetResourceTypeCommandInput - {@link GetTargetResourceTypeCommandInput}
+ * @returns {@link GetTargetResourceTypeCommandOutput}
  * @see {@link GetTargetResourceTypeCommandInput} for command's `input` shape.
  * @see {@link GetTargetResourceTypeCommandOutput} for command's `response` shape.
  * @see {@link FisClientResolvedConfig | config} for FisClient's `config` shape.
  *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource cannot be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The specified input is not valid, or fails to satisfy the constraints for the request.</p>
+ *
+ * @throws {@link FisServiceException}
+ * <p>Base exception class for all service exceptions from Fis service.</p>
+ *
+ *
+ * @public
  */
-export class GetTargetResourceTypeCommand extends $Command<
-  GetTargetResourceTypeCommandInput,
-  GetTargetResourceTypeCommandOutput,
-  FisClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetTargetResourceTypeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: FisClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetTargetResourceTypeCommandInput, GetTargetResourceTypeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "FisClient";
-    const commandName = "GetTargetResourceTypeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetTargetResourceTypeRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetTargetResourceTypeResponseFilterSensitiveLog,
+export class GetTargetResourceTypeCommand extends command<GetTargetResourceTypeCommandInput, GetTargetResourceTypeCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetTargetResourceType",
+  GetTargetResourceType$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetTargetResourceTypeRequest;
+      output: GetTargetResourceTypeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetTargetResourceTypeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetTargetResourceTypeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetTargetResourceTypeCommandOutput> {
-    return deserializeAws_restJson1GetTargetResourceTypeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetTargetResourceTypeCommandInput;
+      output: GetTargetResourceTypeCommandOutput;
+    };
+  };
 }

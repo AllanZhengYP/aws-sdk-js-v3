@@ -1,45 +1,49 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import { Uint8ArrayBlobAdapter } from "@smithy/core/serde";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppConfigDataClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigDataClient";
-import {
-  GetLatestConfigurationRequest,
-  GetLatestConfigurationRequestFilterSensitiveLog,
-  GetLatestConfigurationResponse,
-  GetLatestConfigurationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetLatestConfigurationCommand,
-  serializeAws_restJson1GetLatestConfigurationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetLatestConfigurationRequest, GetLatestConfigurationResponse } from "../models/models_0";
+import { GetLatestConfiguration$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetLatestConfigurationCommand}.
+ */
 export interface GetLatestConfigurationCommandInput extends GetLatestConfigurationRequest {}
-export interface GetLatestConfigurationCommandOutput extends GetLatestConfigurationResponse, __MetadataBearer {}
+/**
+ * @public
+ */
+export type GetLatestConfigurationCommandOutputType = Omit<GetLatestConfigurationResponse, "Configuration"> & {
+  Configuration?: Uint8ArrayBlobAdapter;
+};
+
+/**
+ * @public
+ *
+ * The output of {@link GetLatestConfigurationCommand}.
+ */
+export interface GetLatestConfigurationCommandOutput extends GetLatestConfigurationCommandOutputType, __MetadataBearer {}
 
 /**
  * <p>Retrieves the latest deployed configuration. This API may return empty configuration
  *          data if the client already has the latest version. For more information about this API
- *          action and to view example CLI commands that show how to use it with the <a>StartConfigurationSession</a> API action, see <a href="http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration">Receiving the
+ *          action and to view example CLI commands that show how to use it with the <a>StartConfigurationSession</a> API action, see <a href="http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration">Retrieving the
  *             configuration</a> in the <i>AppConfig User Guide</i>. </p>
  *          <important>
  *             <p>Note the following important information.</p>
  *             <ul>
  *                <li>
- *                   <p>Each configuration token is only valid for one call to <code>GetLatestConfiguration</code>.
- *                   The <code>GetLatestConfiguration</code> response includes a <code>NextPollConfigurationToken</code> that
- *                   should always replace the token used for the just-completed call in preparation
- *                   for the next one. </p>
+ *                   <p>Each configuration token is only valid for one call to
+ *                      <code>GetLatestConfiguration</code>. The <code>GetLatestConfiguration</code>
+ *                   response includes a <code>NextPollConfigurationToken</code> that should always
+ *                   replace the token used for the just-completed call in preparation for the next
+ *                   one. </p>
  *                </li>
  *                <li>
  *                   <p>
@@ -53,68 +57,63 @@ export interface GetLatestConfigurationCommandOutput extends GetLatestConfigurat
  * ```javascript
  * import { AppConfigDataClient, GetLatestConfigurationCommand } from "@aws-sdk/client-appconfigdata"; // ES Modules import
  * // const { AppConfigDataClient, GetLatestConfigurationCommand } = require("@aws-sdk/client-appconfigdata"); // CommonJS import
+ * // import type { AppConfigDataClientConfig } from "@aws-sdk/client-appconfigdata";
+ * const config = {}; // type is AppConfigDataClientConfig
  * const client = new AppConfigDataClient(config);
+ * const input = { // GetLatestConfigurationRequest
+ *   ConfigurationToken: "STRING_VALUE", // required
+ * };
  * const command = new GetLatestConfigurationCommand(input);
  * const response = await client.send(command);
+ * // { // GetLatestConfigurationResponse
+ * //   NextPollConfigurationToken: "STRING_VALUE",
+ * //   NextPollIntervalInSeconds: Number("int"),
+ * //   ContentType: "STRING_VALUE",
+ * //   Configuration: new Uint8Array(),
+ * //   VersionLabel: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param GetLatestConfigurationCommandInput - {@link GetLatestConfigurationCommandInput}
+ * @returns {@link GetLatestConfigurationCommandOutput}
  * @see {@link GetLatestConfigurationCommandInput} for command's `input` shape.
  * @see {@link GetLatestConfigurationCommandOutput} for command's `response` shape.
  * @see {@link AppConfigDataClientResolvedConfig | config} for AppConfigDataClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input fails to satisfy the constraints specified by the service.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There was an internal failure in the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The requested resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link AppConfigDataServiceException}
+ * <p>Base exception class for all service exceptions from AppConfigData service.</p>
+ *
+ *
+ * @public
  */
-export class GetLatestConfigurationCommand extends $Command<
-  GetLatestConfigurationCommandInput,
-  GetLatestConfigurationCommandOutput,
-  AppConfigDataClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetLatestConfigurationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppConfigDataClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetLatestConfigurationCommandInput, GetLatestConfigurationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppConfigDataClient";
-    const commandName = "GetLatestConfigurationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetLatestConfigurationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetLatestConfigurationResponseFilterSensitiveLog,
+export class GetLatestConfigurationCommand extends command<GetLatestConfigurationCommandInput, GetLatestConfigurationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetLatestConfiguration",
+  GetLatestConfiguration$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetLatestConfigurationRequest;
+      output: GetLatestConfigurationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetLatestConfigurationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetLatestConfigurationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetLatestConfigurationCommandOutput> {
-    return deserializeAws_restJson1GetLatestConfigurationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetLatestConfigurationCommandInput;
+      output: GetLatestConfigurationCommandOutput;
+    };
+  };
 }

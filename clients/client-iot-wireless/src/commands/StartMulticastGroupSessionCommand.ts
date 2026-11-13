@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTWirelessClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTWirelessClient";
-import {
-  StartMulticastGroupSessionRequest,
-  StartMulticastGroupSessionRequestFilterSensitiveLog,
-  StartMulticastGroupSessionResponse,
-  StartMulticastGroupSessionResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1StartMulticastGroupSessionCommand,
-  serializeAws_restJson1StartMulticastGroupSessionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StartMulticastGroupSessionRequest, StartMulticastGroupSessionResponse } from "../models/models_1";
+import { StartMulticastGroupSession$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StartMulticastGroupSessionCommand}.
+ */
 export interface StartMulticastGroupSessionCommandInput extends StartMulticastGroupSessionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StartMulticastGroupSessionCommand}.
+ */
 export interface StartMulticastGroupSessionCommandOutput extends StartMulticastGroupSessionResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,70 @@ export interface StartMulticastGroupSessionCommandOutput extends StartMulticastG
  * ```javascript
  * import { IoTWirelessClient, StartMulticastGroupSessionCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
  * // const { IoTWirelessClient, StartMulticastGroupSessionCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * // import type { IoTWirelessClientConfig } from "@aws-sdk/client-iot-wireless";
+ * const config = {}; // type is IoTWirelessClientConfig
  * const client = new IoTWirelessClient(config);
+ * const input = { // StartMulticastGroupSessionRequest
+ *   Id: "STRING_VALUE", // required
+ *   LoRaWAN: { // LoRaWANMulticastSession
+ *     DlDr: Number("int"),
+ *     DlFreq: Number("int"),
+ *     SessionStartTime: new Date("TIMESTAMP"),
+ *     SessionTimeout: Number("int"),
+ *     PingSlotPeriod: Number("int"),
+ *   },
+ * };
  * const command = new StartMulticastGroupSessionCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param StartMulticastGroupSessionCommandInput - {@link StartMulticastGroupSessionCommandInput}
+ * @returns {@link StartMulticastGroupSessionCommandOutput}
  * @see {@link StartMulticastGroupSessionCommandInput} for command's `input` shape.
  * @see {@link StartMulticastGroupSessionCommandOutput} for command's `response` shape.
  * @see {@link IoTWirelessClientResolvedConfig | config} for IoTWirelessClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>User does not have permission to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (client fault)
+ *  <p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred while processing a request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>Resource does not exist.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because it exceeded the allowed API request rate.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input did not meet the specified constraints.</p>
+ *
+ * @throws {@link IoTWirelessServiceException}
+ * <p>Base exception class for all service exceptions from IoTWireless service.</p>
+ *
+ *
+ * @public
  */
-export class StartMulticastGroupSessionCommand extends $Command<
-  StartMulticastGroupSessionCommandInput,
-  StartMulticastGroupSessionCommandOutput,
-  IoTWirelessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StartMulticastGroupSessionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTWirelessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StartMulticastGroupSessionCommandInput, StartMulticastGroupSessionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTWirelessClient";
-    const commandName = "StartMulticastGroupSessionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StartMulticastGroupSessionRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StartMulticastGroupSessionResponseFilterSensitiveLog,
+export class StartMulticastGroupSessionCommand extends command<StartMulticastGroupSessionCommandInput, StartMulticastGroupSessionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StartMulticastGroupSession",
+  StartMulticastGroupSession$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StartMulticastGroupSessionRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StartMulticastGroupSessionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StartMulticastGroupSessionCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StartMulticastGroupSessionCommandOutput> {
-    return deserializeAws_restJson1StartMulticastGroupSessionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StartMulticastGroupSessionCommandInput;
+      output: StartMulticastGroupSessionCommandOutput;
+    };
+  };
 }

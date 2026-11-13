@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ChimeSDKMediaPipelinesClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../ChimeSDKMediaPipelinesClient";
-import {
-  ListMediaPipelinesRequest,
-  ListMediaPipelinesRequestFilterSensitiveLog,
-  ListMediaPipelinesResponse,
-  ListMediaPipelinesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListMediaPipelinesCommand,
-  serializeAws_restJson1ListMediaPipelinesCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListMediaPipelinesRequest, ListMediaPipelinesResponse } from "../models/models_0";
+import { ListMediaPipelines$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListMediaPipelinesCommand}.
+ */
 export interface ListMediaPipelinesCommandInput extends ListMediaPipelinesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListMediaPipelinesCommand}.
+ */
 export interface ListMediaPipelinesCommandOutput extends ListMediaPipelinesResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,75 @@ export interface ListMediaPipelinesCommandOutput extends ListMediaPipelinesRespo
  * ```javascript
  * import { ChimeSDKMediaPipelinesClient, ListMediaPipelinesCommand } from "@aws-sdk/client-chime-sdk-media-pipelines"; // ES Modules import
  * // const { ChimeSDKMediaPipelinesClient, ListMediaPipelinesCommand } = require("@aws-sdk/client-chime-sdk-media-pipelines"); // CommonJS import
+ * // import type { ChimeSDKMediaPipelinesClientConfig } from "@aws-sdk/client-chime-sdk-media-pipelines";
+ * const config = {}; // type is ChimeSDKMediaPipelinesClientConfig
  * const client = new ChimeSDKMediaPipelinesClient(config);
+ * const input = { // ListMediaPipelinesRequest
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListMediaPipelinesCommand(input);
  * const response = await client.send(command);
+ * // { // ListMediaPipelinesResponse
+ * //   MediaPipelines: [ // MediaPipelineList
+ * //     { // MediaPipelineSummary
+ * //       MediaPipelineId: "STRING_VALUE",
+ * //       MediaPipelineArn: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListMediaPipelinesCommandInput - {@link ListMediaPipelinesCommandInput}
+ * @returns {@link ListMediaPipelinesCommandOutput}
  * @see {@link ListMediaPipelinesCommandInput} for command's `input` shape.
  * @see {@link ListMediaPipelinesCommandOutput} for command's `response` shape.
  * @see {@link ChimeSDKMediaPipelinesClientResolvedConfig | config} for ChimeSDKMediaPipelinesClient's `config` shape.
  *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The input parameters don't match the service's restrictions.</p>
+ *
+ * @throws {@link ForbiddenException} (client fault)
+ *  <p>The client is permanently forbidden from making the request.</p>
+ *
+ * @throws {@link ResourceLimitExceededException} (client fault)
+ *  <p>The request exceeds the resource limit.</p>
+ *
+ * @throws {@link ServiceFailureException} (server fault)
+ *  <p>The service encountered an unexpected error.</p>
+ *
+ * @throws {@link ServiceUnavailableException} (server fault)
+ *  <p>The service is currently unavailable.</p>
+ *
+ * @throws {@link ThrottledClientException} (client fault)
+ *  <p>The client exceeded its request rate limit.</p>
+ *
+ * @throws {@link UnauthorizedClientException} (client fault)
+ *  <p>The client is not currently authorized to make the request.</p>
+ *
+ * @throws {@link ChimeSDKMediaPipelinesServiceException}
+ * <p>Base exception class for all service exceptions from ChimeSDKMediaPipelines service.</p>
+ *
+ *
+ * @public
  */
-export class ListMediaPipelinesCommand extends $Command<
-  ListMediaPipelinesCommandInput,
-  ListMediaPipelinesCommandOutput,
-  ChimeSDKMediaPipelinesClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListMediaPipelinesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ChimeSDKMediaPipelinesClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListMediaPipelinesCommandInput, ListMediaPipelinesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ChimeSDKMediaPipelinesClient";
-    const commandName = "ListMediaPipelinesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListMediaPipelinesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListMediaPipelinesResponseFilterSensitiveLog,
+export class ListMediaPipelinesCommand extends command<ListMediaPipelinesCommandInput, ListMediaPipelinesCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListMediaPipelines",
+  ListMediaPipelines$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListMediaPipelinesRequest;
+      output: ListMediaPipelinesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListMediaPipelinesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListMediaPipelinesCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListMediaPipelinesCommandOutput> {
-    return deserializeAws_restJson1ListMediaPipelinesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListMediaPipelinesCommandInput;
+      output: ListMediaPipelinesCommandOutput;
+    };
+  };
 }

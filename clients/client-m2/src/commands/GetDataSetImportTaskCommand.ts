@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { M2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../M2Client";
-import {
-  GetDataSetImportTaskRequest,
-  GetDataSetImportTaskRequestFilterSensitiveLog,
-  GetDataSetImportTaskResponse,
-  GetDataSetImportTaskResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetDataSetImportTaskCommand,
-  serializeAws_restJson1GetDataSetImportTaskCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetDataSetImportTaskRequest, GetDataSetImportTaskResponse } from "../models/models_0";
+import { GetDataSetImportTask$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetDataSetImportTaskCommand}.
+ */
 export interface GetDataSetImportTaskCommandInput extends GetDataSetImportTaskRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetDataSetImportTaskCommand}.
+ */
 export interface GetDataSetImportTaskCommandOutput extends GetDataSetImportTaskResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,71 @@ export interface GetDataSetImportTaskCommandOutput extends GetDataSetImportTaskR
  * ```javascript
  * import { M2Client, GetDataSetImportTaskCommand } from "@aws-sdk/client-m2"; // ES Modules import
  * // const { M2Client, GetDataSetImportTaskCommand } = require("@aws-sdk/client-m2"); // CommonJS import
+ * // import type { M2ClientConfig } from "@aws-sdk/client-m2";
+ * const config = {}; // type is M2ClientConfig
  * const client = new M2Client(config);
+ * const input = { // GetDataSetImportTaskRequest
+ *   applicationId: "STRING_VALUE", // required
+ *   taskId: "STRING_VALUE", // required
+ * };
  * const command = new GetDataSetImportTaskCommand(input);
  * const response = await client.send(command);
+ * // { // GetDataSetImportTaskResponse
+ * //   taskId: "STRING_VALUE", // required
+ * //   status: "STRING_VALUE", // required
+ * //   summary: { // DataSetImportSummary
+ * //     total: Number("int"), // required
+ * //     succeeded: Number("int"), // required
+ * //     failed: Number("int"), // required
+ * //     pending: Number("int"), // required
+ * //     inProgress: Number("int"), // required
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetDataSetImportTaskCommandInput - {@link GetDataSetImportTaskCommandInput}
+ * @returns {@link GetDataSetImportTaskCommandOutput}
  * @see {@link GetDataSetImportTaskCommandInput} for command's `input` shape.
  * @see {@link GetDataSetImportTaskCommandOutput} for command's `response` shape.
  * @see {@link M2ClientResolvedConfig | config} for M2Client's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>The account or role doesn't have the right permissions to make the request.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error occurred during the processing of the request.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The number of requests made exceeds the limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>One or more parameters provided in the request is not valid.</p>
+ *
+ * @throws {@link M2ServiceException}
+ * <p>Base exception class for all service exceptions from M2 service.</p>
+ *
+ *
+ * @public
  */
-export class GetDataSetImportTaskCommand extends $Command<
-  GetDataSetImportTaskCommandInput,
-  GetDataSetImportTaskCommandOutput,
-  M2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetDataSetImportTaskCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: M2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetDataSetImportTaskCommandInput, GetDataSetImportTaskCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "M2Client";
-    const commandName = "GetDataSetImportTaskCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetDataSetImportTaskRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetDataSetImportTaskResponseFilterSensitiveLog,
+export class GetDataSetImportTaskCommand extends command<GetDataSetImportTaskCommandInput, GetDataSetImportTaskCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetDataSetImportTask",
+  GetDataSetImportTask$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetDataSetImportTaskRequest;
+      output: GetDataSetImportTaskResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetDataSetImportTaskCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetDataSetImportTaskCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetDataSetImportTaskCommandOutput> {
-    return deserializeAws_restJson1GetDataSetImportTaskCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetDataSetImportTaskCommandInput;
+      output: GetDataSetImportTaskCommandOutput;
+    };
+  };
 }

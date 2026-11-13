@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  CreateGlobalClusterMessage,
-  CreateGlobalClusterMessageFilterSensitiveLog,
-  CreateGlobalClusterResult,
-  CreateGlobalClusterResultFilterSensitiveLog,
-} from "../models/models_0";
-import { NeptuneClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NeptuneClient";
-import {
-  deserializeAws_queryCreateGlobalClusterCommand,
-  serializeAws_queryCreateGlobalClusterCommand,
-} from "../protocols/Aws_query";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateGlobalClusterMessage, CreateGlobalClusterResult } from "../models/models_0";
+import { CreateGlobalCluster$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateGlobalClusterCommand}.
+ */
 export interface CreateGlobalClusterCommandInput extends CreateGlobalClusterMessage {}
+/**
+ * @public
+ *
+ * The output of {@link CreateGlobalClusterCommand}.
+ */
 export interface CreateGlobalClusterCommandOutput extends CreateGlobalClusterResult, __MetadataBearer {}
 
 /**
@@ -33,7 +28,6 @@ export interface CreateGlobalClusterCommandOutput extends CreateGlobalClusterRes
  *       capability, and read-only secondary clusters that receive data from the
  *       primary cluster through high-speed replication performed by the Neptune
  *       storage subsystem.</p>
- *
  *          <p>You can create a global database that is initially empty, and then
  *       add a primary cluster and secondary clusters to it, or you can specify
  *       an existing Neptune cluster during the create operation to become the
@@ -43,68 +37,103 @@ export interface CreateGlobalClusterCommandOutput extends CreateGlobalClusterRes
  * ```javascript
  * import { NeptuneClient, CreateGlobalClusterCommand } from "@aws-sdk/client-neptune"; // ES Modules import
  * // const { NeptuneClient, CreateGlobalClusterCommand } = require("@aws-sdk/client-neptune"); // CommonJS import
+ * // import type { NeptuneClientConfig } from "@aws-sdk/client-neptune";
+ * const config = {}; // type is NeptuneClientConfig
  * const client = new NeptuneClient(config);
+ * const input = { // CreateGlobalClusterMessage
+ *   GlobalClusterIdentifier: "STRING_VALUE", // required
+ *   SourceDBClusterIdentifier: "STRING_VALUE",
+ *   Engine: "STRING_VALUE",
+ *   EngineVersion: "STRING_VALUE",
+ *   DeletionProtection: true || false,
+ *   DatabaseName: "STRING_VALUE",
+ *   Tags: [ // TagList
+ *     { // Tag
+ *       Key: "STRING_VALUE",
+ *       Value: "STRING_VALUE",
+ *     },
+ *   ],
+ *   StorageEncrypted: true || false,
+ * };
  * const command = new CreateGlobalClusterCommand(input);
  * const response = await client.send(command);
+ * // { // CreateGlobalClusterResult
+ * //   GlobalCluster: { // GlobalCluster
+ * //     GlobalClusterIdentifier: "STRING_VALUE",
+ * //     GlobalClusterResourceId: "STRING_VALUE",
+ * //     GlobalClusterArn: "STRING_VALUE",
+ * //     Status: "STRING_VALUE",
+ * //     Engine: "STRING_VALUE",
+ * //     EngineVersion: "STRING_VALUE",
+ * //     DatabaseName: "STRING_VALUE",
+ * //     StorageEncrypted: true || false,
+ * //     DeletionProtection: true || false,
+ * //     GlobalClusterMembers: [ // GlobalClusterMemberList
+ * //       { // GlobalClusterMember
+ * //         DBClusterArn: "STRING_VALUE",
+ * //         Readers: [ // ReadersArnList
+ * //           "STRING_VALUE",
+ * //         ],
+ * //         IsWriter: true || false,
+ * //       },
+ * //     ],
+ * //     FailoverState: { // FailoverState
+ * //       Status: "pending" || "failing-over" || "cancelling",
+ * //       FromDbClusterArn: "STRING_VALUE",
+ * //       ToDbClusterArn: "STRING_VALUE",
+ * //       IsDataLossAllowed: true || false,
+ * //     },
+ * //     TagList: [ // TagList
+ * //       { // Tag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateGlobalClusterCommandInput - {@link CreateGlobalClusterCommandInput}
+ * @returns {@link CreateGlobalClusterCommandOutput}
  * @see {@link CreateGlobalClusterCommandInput} for command's `input` shape.
  * @see {@link CreateGlobalClusterCommandOutput} for command's `response` shape.
  * @see {@link NeptuneClientResolvedConfig | config} for NeptuneClient's `config` shape.
  *
+ * @throws {@link DBClusterNotFoundFault} (client fault)
+ *  <p>
+ *             <i>DBClusterIdentifier</i> does not refer to an existing DB cluster.</p>
+ *
+ * @throws {@link GlobalClusterAlreadyExistsFault} (client fault)
+ *  <p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global database identifier (unique name) to create a new global database cluster.</p>
+ *
+ * @throws {@link GlobalClusterQuotaExceededFault} (client fault)
+ *  <p>The number of global database clusters for this account is already at the maximum allowed.</p>
+ *
+ * @throws {@link InvalidDBClusterStateFault} (client fault)
+ *  <p>The DB cluster is not in a valid state.</p>
+ *
+ * @throws {@link NeptuneServiceException}
+ * <p>Base exception class for all service exceptions from Neptune service.</p>
+ *
+ *
+ * @public
  */
-export class CreateGlobalClusterCommand extends $Command<
-  CreateGlobalClusterCommandInput,
-  CreateGlobalClusterCommandOutput,
-  NeptuneClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateGlobalClusterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NeptuneClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateGlobalClusterCommandInput, CreateGlobalClusterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NeptuneClient";
-    const commandName = "CreateGlobalClusterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateGlobalClusterMessageFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateGlobalClusterResultFilterSensitiveLog,
+export class CreateGlobalClusterCommand extends command<CreateGlobalClusterCommandInput, CreateGlobalClusterCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateGlobalCluster",
+  CreateGlobalCluster$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateGlobalClusterMessage;
+      output: CreateGlobalClusterResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateGlobalClusterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_queryCreateGlobalClusterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateGlobalClusterCommandOutput> {
-    return deserializeAws_queryCreateGlobalClusterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateGlobalClusterCommandInput;
+      output: CreateGlobalClusterCommandOutput;
+    };
+  };
 }

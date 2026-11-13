@@ -1,103 +1,112 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DescribeResiliencyPolicyRequest,
-  DescribeResiliencyPolicyRequestFilterSensitiveLog,
-  DescribeResiliencyPolicyResponse,
-  DescribeResiliencyPolicyResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeResiliencyPolicyCommand,
-  serializeAws_restJson1DescribeResiliencyPolicyCommand,
-} from "../protocols/Aws_restJson1";
-import { ResiliencehubClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ResiliencehubClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeResiliencyPolicyRequest, DescribeResiliencyPolicyResponse } from "../models/models_0";
+import { DescribeResiliencyPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeResiliencyPolicyCommand}.
+ */
 export interface DescribeResiliencyPolicyCommandInput extends DescribeResiliencyPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeResiliencyPolicyCommand}.
+ */
 export interface DescribeResiliencyPolicyCommandOutput extends DescribeResiliencyPolicyResponse, __MetadataBearer {}
 
 /**
- * <p>Describes a specified resiliency policy for an AWS Resilience Hub application. The returned
- *       policy object includes creation time, data location constraints, the Amazon Resource Name
- *       (ARN) for the policy, tags, tier, and more.</p>
+ * <p>Describes a specified resiliency policy for an Resilience Hub application. The
+ *       returned policy object includes creation time, data location constraints, the Amazon Resource
+ *       Name (ARN) for the policy, tags, tier, and more.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { ResiliencehubClient, DescribeResiliencyPolicyCommand } from "@aws-sdk/client-resiliencehub"; // ES Modules import
  * // const { ResiliencehubClient, DescribeResiliencyPolicyCommand } = require("@aws-sdk/client-resiliencehub"); // CommonJS import
+ * // import type { ResiliencehubClientConfig } from "@aws-sdk/client-resiliencehub";
+ * const config = {}; // type is ResiliencehubClientConfig
  * const client = new ResiliencehubClient(config);
+ * const input = { // DescribeResiliencyPolicyRequest
+ *   policyArn: "STRING_VALUE", // required
+ * };
  * const command = new DescribeResiliencyPolicyCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeResiliencyPolicyResponse
+ * //   policy: { // ResiliencyPolicy
+ * //     policyArn: "STRING_VALUE",
+ * //     policyName: "STRING_VALUE",
+ * //     policyDescription: "STRING_VALUE",
+ * //     dataLocationConstraint: "AnyLocation" || "SameContinent" || "SameCountry",
+ * //     tier: "MissionCritical" || "Critical" || "Important" || "CoreServices" || "NonCritical" || "NotApplicable",
+ * //     estimatedCostTier: "L1" || "L2" || "L3" || "L4",
+ * //     policy: { // DisruptionPolicy
+ * //       "<keys>": { // FailurePolicy
+ * //         rtoInSecs: Number("int"), // required
+ * //         rpoInSecs: Number("int"), // required
+ * //       },
+ * //     },
+ * //     creationTime: new Date("TIMESTAMP"),
+ * //     tags: { // TagMap
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeResiliencyPolicyCommandInput - {@link DescribeResiliencyPolicyCommandInput}
+ * @returns {@link DescribeResiliencyPolicyCommandOutput}
  * @see {@link DescribeResiliencyPolicyCommandInput} for command's `input` shape.
  * @see {@link DescribeResiliencyPolicyCommandOutput} for command's `response` shape.
  * @see {@link ResiliencehubClientResolvedConfig | config} for ResiliencehubClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have permissions to perform the requested operation. The user or role that is
+ *       making the request must have at least one IAM permissions policy attached that grants the
+ *       required permissions.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>This exception occurs when there is an internal failure in the Resilience Hub
+ *       service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>This exception occurs when the specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>This exception occurs when you have exceeded the limit on the number of requests per second.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>This exception occurs when a request is not valid.</p>
+ *
+ * @throws {@link ResiliencehubServiceException}
+ * <p>Base exception class for all service exceptions from Resiliencehub service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeResiliencyPolicyCommand extends $Command<
-  DescribeResiliencyPolicyCommandInput,
-  DescribeResiliencyPolicyCommandOutput,
-  ResiliencehubClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeResiliencyPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ResiliencehubClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeResiliencyPolicyCommandInput, DescribeResiliencyPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ResiliencehubClient";
-    const commandName = "DescribeResiliencyPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeResiliencyPolicyRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeResiliencyPolicyResponseFilterSensitiveLog,
+export class DescribeResiliencyPolicyCommand extends command<DescribeResiliencyPolicyCommandInput, DescribeResiliencyPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeResiliencyPolicy",
+  DescribeResiliencyPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeResiliencyPolicyRequest;
+      output: DescribeResiliencyPolicyResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeResiliencyPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeResiliencyPolicyCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeResiliencyPolicyCommandOutput> {
-    return deserializeAws_restJson1DescribeResiliencyPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeResiliencyPolicyCommandInput;
+      output: DescribeResiliencyPolicyCommandOutput;
+    };
+  };
 }

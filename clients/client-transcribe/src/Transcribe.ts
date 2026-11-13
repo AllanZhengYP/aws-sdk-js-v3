@@ -1,1768 +1,1278 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { type WaiterResult, createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+  WaiterConfiguration,
+} from "@smithy/types";
 
 import {
+  type CreateCallAnalyticsCategoryCommandInput,
+  type CreateCallAnalyticsCategoryCommandOutput,
   CreateCallAnalyticsCategoryCommand,
-  CreateCallAnalyticsCategoryCommandInput,
-  CreateCallAnalyticsCategoryCommandOutput,
 } from "./commands/CreateCallAnalyticsCategoryCommand";
 import {
+  type CreateLanguageModelCommandInput,
+  type CreateLanguageModelCommandOutput,
   CreateLanguageModelCommand,
-  CreateLanguageModelCommandInput,
-  CreateLanguageModelCommandOutput,
 } from "./commands/CreateLanguageModelCommand";
 import {
+  type CreateMedicalVocabularyCommandInput,
+  type CreateMedicalVocabularyCommandOutput,
   CreateMedicalVocabularyCommand,
-  CreateMedicalVocabularyCommandInput,
-  CreateMedicalVocabularyCommandOutput,
 } from "./commands/CreateMedicalVocabularyCommand";
 import {
+  type CreateVocabularyCommandInput,
+  type CreateVocabularyCommandOutput,
   CreateVocabularyCommand,
-  CreateVocabularyCommandInput,
-  CreateVocabularyCommandOutput,
 } from "./commands/CreateVocabularyCommand";
 import {
+  type CreateVocabularyFilterCommandInput,
+  type CreateVocabularyFilterCommandOutput,
   CreateVocabularyFilterCommand,
-  CreateVocabularyFilterCommandInput,
-  CreateVocabularyFilterCommandOutput,
 } from "./commands/CreateVocabularyFilterCommand";
 import {
+  type DeleteCallAnalyticsCategoryCommandInput,
+  type DeleteCallAnalyticsCategoryCommandOutput,
   DeleteCallAnalyticsCategoryCommand,
-  DeleteCallAnalyticsCategoryCommandInput,
-  DeleteCallAnalyticsCategoryCommandOutput,
 } from "./commands/DeleteCallAnalyticsCategoryCommand";
 import {
+  type DeleteCallAnalyticsJobCommandInput,
+  type DeleteCallAnalyticsJobCommandOutput,
   DeleteCallAnalyticsJobCommand,
-  DeleteCallAnalyticsJobCommandInput,
-  DeleteCallAnalyticsJobCommandOutput,
 } from "./commands/DeleteCallAnalyticsJobCommand";
 import {
+  type DeleteLanguageModelCommandInput,
+  type DeleteLanguageModelCommandOutput,
   DeleteLanguageModelCommand,
-  DeleteLanguageModelCommandInput,
-  DeleteLanguageModelCommandOutput,
 } from "./commands/DeleteLanguageModelCommand";
 import {
+  type DeleteMedicalScribeJobCommandInput,
+  type DeleteMedicalScribeJobCommandOutput,
+  DeleteMedicalScribeJobCommand,
+} from "./commands/DeleteMedicalScribeJobCommand";
+import {
+  type DeleteMedicalTranscriptionJobCommandInput,
+  type DeleteMedicalTranscriptionJobCommandOutput,
   DeleteMedicalTranscriptionJobCommand,
-  DeleteMedicalTranscriptionJobCommandInput,
-  DeleteMedicalTranscriptionJobCommandOutput,
 } from "./commands/DeleteMedicalTranscriptionJobCommand";
 import {
+  type DeleteMedicalVocabularyCommandInput,
+  type DeleteMedicalVocabularyCommandOutput,
   DeleteMedicalVocabularyCommand,
-  DeleteMedicalVocabularyCommandInput,
-  DeleteMedicalVocabularyCommandOutput,
 } from "./commands/DeleteMedicalVocabularyCommand";
 import {
+  type DeleteTranscriptionJobCommandInput,
+  type DeleteTranscriptionJobCommandOutput,
   DeleteTranscriptionJobCommand,
-  DeleteTranscriptionJobCommandInput,
-  DeleteTranscriptionJobCommandOutput,
 } from "./commands/DeleteTranscriptionJobCommand";
 import {
+  type DeleteVocabularyCommandInput,
+  type DeleteVocabularyCommandOutput,
   DeleteVocabularyCommand,
-  DeleteVocabularyCommandInput,
-  DeleteVocabularyCommandOutput,
 } from "./commands/DeleteVocabularyCommand";
 import {
+  type DeleteVocabularyFilterCommandInput,
+  type DeleteVocabularyFilterCommandOutput,
   DeleteVocabularyFilterCommand,
-  DeleteVocabularyFilterCommandInput,
-  DeleteVocabularyFilterCommandOutput,
 } from "./commands/DeleteVocabularyFilterCommand";
 import {
+  type DescribeLanguageModelCommandInput,
+  type DescribeLanguageModelCommandOutput,
   DescribeLanguageModelCommand,
-  DescribeLanguageModelCommandInput,
-  DescribeLanguageModelCommandOutput,
 } from "./commands/DescribeLanguageModelCommand";
 import {
+  type GetCallAnalyticsCategoryCommandInput,
+  type GetCallAnalyticsCategoryCommandOutput,
   GetCallAnalyticsCategoryCommand,
-  GetCallAnalyticsCategoryCommandInput,
-  GetCallAnalyticsCategoryCommandOutput,
 } from "./commands/GetCallAnalyticsCategoryCommand";
 import {
+  type GetCallAnalyticsJobCommandInput,
+  type GetCallAnalyticsJobCommandOutput,
   GetCallAnalyticsJobCommand,
-  GetCallAnalyticsJobCommandInput,
-  GetCallAnalyticsJobCommandOutput,
 } from "./commands/GetCallAnalyticsJobCommand";
 import {
+  type GetMedicalScribeJobCommandInput,
+  type GetMedicalScribeJobCommandOutput,
+  GetMedicalScribeJobCommand,
+} from "./commands/GetMedicalScribeJobCommand";
+import {
+  type GetMedicalTranscriptionJobCommandInput,
+  type GetMedicalTranscriptionJobCommandOutput,
   GetMedicalTranscriptionJobCommand,
-  GetMedicalTranscriptionJobCommandInput,
-  GetMedicalTranscriptionJobCommandOutput,
 } from "./commands/GetMedicalTranscriptionJobCommand";
 import {
+  type GetMedicalVocabularyCommandInput,
+  type GetMedicalVocabularyCommandOutput,
   GetMedicalVocabularyCommand,
-  GetMedicalVocabularyCommandInput,
-  GetMedicalVocabularyCommandOutput,
 } from "./commands/GetMedicalVocabularyCommand";
 import {
+  type GetTranscriptionJobCommandInput,
+  type GetTranscriptionJobCommandOutput,
   GetTranscriptionJobCommand,
-  GetTranscriptionJobCommandInput,
-  GetTranscriptionJobCommandOutput,
 } from "./commands/GetTranscriptionJobCommand";
 import {
+  type GetVocabularyCommandInput,
+  type GetVocabularyCommandOutput,
   GetVocabularyCommand,
-  GetVocabularyCommandInput,
-  GetVocabularyCommandOutput,
 } from "./commands/GetVocabularyCommand";
 import {
+  type GetVocabularyFilterCommandInput,
+  type GetVocabularyFilterCommandOutput,
   GetVocabularyFilterCommand,
-  GetVocabularyFilterCommandInput,
-  GetVocabularyFilterCommandOutput,
 } from "./commands/GetVocabularyFilterCommand";
 import {
+  type ListCallAnalyticsCategoriesCommandInput,
+  type ListCallAnalyticsCategoriesCommandOutput,
   ListCallAnalyticsCategoriesCommand,
-  ListCallAnalyticsCategoriesCommandInput,
-  ListCallAnalyticsCategoriesCommandOutput,
 } from "./commands/ListCallAnalyticsCategoriesCommand";
 import {
+  type ListCallAnalyticsJobsCommandInput,
+  type ListCallAnalyticsJobsCommandOutput,
   ListCallAnalyticsJobsCommand,
-  ListCallAnalyticsJobsCommandInput,
-  ListCallAnalyticsJobsCommandOutput,
 } from "./commands/ListCallAnalyticsJobsCommand";
 import {
+  type ListLanguageModelsCommandInput,
+  type ListLanguageModelsCommandOutput,
   ListLanguageModelsCommand,
-  ListLanguageModelsCommandInput,
-  ListLanguageModelsCommandOutput,
 } from "./commands/ListLanguageModelsCommand";
 import {
+  type ListMedicalScribeJobsCommandInput,
+  type ListMedicalScribeJobsCommandOutput,
+  ListMedicalScribeJobsCommand,
+} from "./commands/ListMedicalScribeJobsCommand";
+import {
+  type ListMedicalTranscriptionJobsCommandInput,
+  type ListMedicalTranscriptionJobsCommandOutput,
   ListMedicalTranscriptionJobsCommand,
-  ListMedicalTranscriptionJobsCommandInput,
-  ListMedicalTranscriptionJobsCommandOutput,
 } from "./commands/ListMedicalTranscriptionJobsCommand";
 import {
+  type ListMedicalVocabulariesCommandInput,
+  type ListMedicalVocabulariesCommandOutput,
   ListMedicalVocabulariesCommand,
-  ListMedicalVocabulariesCommandInput,
-  ListMedicalVocabulariesCommandOutput,
 } from "./commands/ListMedicalVocabulariesCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTranscriptionJobsCommandInput,
+  type ListTranscriptionJobsCommandOutput,
   ListTranscriptionJobsCommand,
-  ListTranscriptionJobsCommandInput,
-  ListTranscriptionJobsCommandOutput,
 } from "./commands/ListTranscriptionJobsCommand";
 import {
+  type ListVocabulariesCommandInput,
+  type ListVocabulariesCommandOutput,
   ListVocabulariesCommand,
-  ListVocabulariesCommandInput,
-  ListVocabulariesCommandOutput,
 } from "./commands/ListVocabulariesCommand";
 import {
+  type ListVocabularyFiltersCommandInput,
+  type ListVocabularyFiltersCommandOutput,
   ListVocabularyFiltersCommand,
-  ListVocabularyFiltersCommandInput,
-  ListVocabularyFiltersCommandOutput,
 } from "./commands/ListVocabularyFiltersCommand";
 import {
+  type StartCallAnalyticsJobCommandInput,
+  type StartCallAnalyticsJobCommandOutput,
   StartCallAnalyticsJobCommand,
-  StartCallAnalyticsJobCommandInput,
-  StartCallAnalyticsJobCommandOutput,
 } from "./commands/StartCallAnalyticsJobCommand";
 import {
+  type StartMedicalScribeJobCommandInput,
+  type StartMedicalScribeJobCommandOutput,
+  StartMedicalScribeJobCommand,
+} from "./commands/StartMedicalScribeJobCommand";
+import {
+  type StartMedicalTranscriptionJobCommandInput,
+  type StartMedicalTranscriptionJobCommandOutput,
   StartMedicalTranscriptionJobCommand,
-  StartMedicalTranscriptionJobCommandInput,
-  StartMedicalTranscriptionJobCommandOutput,
 } from "./commands/StartMedicalTranscriptionJobCommand";
 import {
+  type StartTranscriptionJobCommandInput,
+  type StartTranscriptionJobCommandOutput,
   StartTranscriptionJobCommand,
-  StartTranscriptionJobCommandInput,
-  StartTranscriptionJobCommandOutput,
 } from "./commands/StartTranscriptionJobCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateCallAnalyticsCategoryCommandInput,
+  type UpdateCallAnalyticsCategoryCommandOutput,
   UpdateCallAnalyticsCategoryCommand,
-  UpdateCallAnalyticsCategoryCommandInput,
-  UpdateCallAnalyticsCategoryCommandOutput,
 } from "./commands/UpdateCallAnalyticsCategoryCommand";
 import {
+  type UpdateLanguageModelCommandInput,
+  type UpdateLanguageModelCommandOutput,
+  UpdateLanguageModelCommand,
+} from "./commands/UpdateLanguageModelCommand";
+import {
+  type UpdateMedicalVocabularyCommandInput,
+  type UpdateMedicalVocabularyCommandOutput,
   UpdateMedicalVocabularyCommand,
-  UpdateMedicalVocabularyCommandInput,
-  UpdateMedicalVocabularyCommandOutput,
 } from "./commands/UpdateMedicalVocabularyCommand";
 import {
+  type UpdateVocabularyCommandInput,
+  type UpdateVocabularyCommandOutput,
   UpdateVocabularyCommand,
-  UpdateVocabularyCommandInput,
-  UpdateVocabularyCommandOutput,
 } from "./commands/UpdateVocabularyCommand";
 import {
+  type UpdateVocabularyFilterCommandInput,
+  type UpdateVocabularyFilterCommandOutput,
   UpdateVocabularyFilterCommand,
-  UpdateVocabularyFilterCommandInput,
-  UpdateVocabularyFilterCommandOutput,
 } from "./commands/UpdateVocabularyFilterCommand";
+import type { TranscribeServiceException } from "./models/TranscribeServiceException";
+import { paginateListCallAnalyticsCategories } from "./pagination/ListCallAnalyticsCategoriesPaginator";
+import { paginateListCallAnalyticsJobs } from "./pagination/ListCallAnalyticsJobsPaginator";
+import { paginateListLanguageModels } from "./pagination/ListLanguageModelsPaginator";
+import { paginateListMedicalScribeJobs } from "./pagination/ListMedicalScribeJobsPaginator";
+import { paginateListMedicalTranscriptionJobs } from "./pagination/ListMedicalTranscriptionJobsPaginator";
+import { paginateListMedicalVocabularies } from "./pagination/ListMedicalVocabulariesPaginator";
+import { paginateListTranscriptionJobs } from "./pagination/ListTranscriptionJobsPaginator";
+import { paginateListVocabularies } from "./pagination/ListVocabulariesPaginator";
+import { paginateListVocabularyFilters } from "./pagination/ListVocabularyFiltersPaginator";
 import { TranscribeClient } from "./TranscribeClient";
+import { waitUntilCallAnalyticsJobCompleted } from "./waiters/waitForCallAnalyticsJobCompleted";
+import { waitUntilLanguageModelCompleted } from "./waiters/waitForLanguageModelCompleted";
+import { waitUntilMedicalScribeJobCompleted } from "./waiters/waitForMedicalScribeJobCompleted";
+import { waitUntilMedicalTranscriptionJobCompleted } from "./waiters/waitForMedicalTranscriptionJobCompleted";
+import { waitUntilMedicalVocabularyReady } from "./waiters/waitForMedicalVocabularyReady";
+import { waitUntilTranscriptionJobCompleted } from "./waiters/waitForTranscriptionJobCompleted";
+import { waitUntilVocabularyReady } from "./waiters/waitForVocabularyReady";
+
+const commands = {
+  CreateCallAnalyticsCategoryCommand,
+  CreateLanguageModelCommand,
+  CreateMedicalVocabularyCommand,
+  CreateVocabularyCommand,
+  CreateVocabularyFilterCommand,
+  DeleteCallAnalyticsCategoryCommand,
+  DeleteCallAnalyticsJobCommand,
+  DeleteLanguageModelCommand,
+  DeleteMedicalScribeJobCommand,
+  DeleteMedicalTranscriptionJobCommand,
+  DeleteMedicalVocabularyCommand,
+  DeleteTranscriptionJobCommand,
+  DeleteVocabularyCommand,
+  DeleteVocabularyFilterCommand,
+  DescribeLanguageModelCommand,
+  GetCallAnalyticsCategoryCommand,
+  GetCallAnalyticsJobCommand,
+  GetMedicalScribeJobCommand,
+  GetMedicalTranscriptionJobCommand,
+  GetMedicalVocabularyCommand,
+  GetTranscriptionJobCommand,
+  GetVocabularyCommand,
+  GetVocabularyFilterCommand,
+  ListCallAnalyticsCategoriesCommand,
+  ListCallAnalyticsJobsCommand,
+  ListLanguageModelsCommand,
+  ListMedicalScribeJobsCommand,
+  ListMedicalTranscriptionJobsCommand,
+  ListMedicalVocabulariesCommand,
+  ListTagsForResourceCommand,
+  ListTranscriptionJobsCommand,
+  ListVocabulariesCommand,
+  ListVocabularyFiltersCommand,
+  StartCallAnalyticsJobCommand,
+  StartMedicalScribeJobCommand,
+  StartMedicalTranscriptionJobCommand,
+  StartTranscriptionJobCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCallAnalyticsCategoryCommand,
+  UpdateLanguageModelCommand,
+  UpdateMedicalVocabularyCommand,
+  UpdateVocabularyCommand,
+  UpdateVocabularyFilterCommand,
+};
+const paginators = {
+  paginateListCallAnalyticsCategories,
+  paginateListCallAnalyticsJobs,
+  paginateListLanguageModels,
+  paginateListMedicalScribeJobs,
+  paginateListMedicalTranscriptionJobs,
+  paginateListMedicalVocabularies,
+  paginateListTranscriptionJobs,
+  paginateListVocabularies,
+  paginateListVocabularyFilters,
+};
+const waiters = {
+  waitUntilLanguageModelCompleted,
+  waitUntilCallAnalyticsJobCompleted,
+  waitUntilMedicalScribeJobCompleted,
+  waitUntilMedicalTranscriptionJobCompleted,
+  waitUntilMedicalVocabularyReady,
+  waitUntilTranscriptionJobCompleted,
+  waitUntilVocabularyReady,
+};
 
 /**
- * <p>Amazon Transcribe offers three main types of batch transcription:
- *             <b>Standard</b>, <b>Medical</b>, and
- *             <b>Call Analytics</b>.</p>
- *         <ul>
+ * @public
+ */
+export interface TranscribeRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Transcribe {
+  /**
+   * @see {@link CreateCallAnalyticsCategoryCommand}
+   */
+  createCallAnalyticsCategory(
+    args: CreateCallAnalyticsCategoryCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<CreateCallAnalyticsCategoryCommandOutput>;
+  createCallAnalyticsCategory(
+    args: CreateCallAnalyticsCategoryCommandInput,
+    cb: (err: any, data?: CreateCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+  createCallAnalyticsCategory(
+    args: CreateCallAnalyticsCategoryCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: CreateCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLanguageModelCommand}
+   */
+  createLanguageModel(
+    args: CreateLanguageModelCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<CreateLanguageModelCommandOutput>;
+  createLanguageModel(
+    args: CreateLanguageModelCommandInput,
+    cb: (err: any, data?: CreateLanguageModelCommandOutput) => void
+  ): void;
+  createLanguageModel(
+    args: CreateLanguageModelCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: CreateLanguageModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateMedicalVocabularyCommand}
+   */
+  createMedicalVocabulary(
+    args: CreateMedicalVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<CreateMedicalVocabularyCommandOutput>;
+  createMedicalVocabulary(
+    args: CreateMedicalVocabularyCommandInput,
+    cb: (err: any, data?: CreateMedicalVocabularyCommandOutput) => void
+  ): void;
+  createMedicalVocabulary(
+    args: CreateMedicalVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: CreateMedicalVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVocabularyCommand}
+   */
+  createVocabulary(
+    args: CreateVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<CreateVocabularyCommandOutput>;
+  createVocabulary(
+    args: CreateVocabularyCommandInput,
+    cb: (err: any, data?: CreateVocabularyCommandOutput) => void
+  ): void;
+  createVocabulary(
+    args: CreateVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: CreateVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateVocabularyFilterCommand}
+   */
+  createVocabularyFilter(
+    args: CreateVocabularyFilterCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<CreateVocabularyFilterCommandOutput>;
+  createVocabularyFilter(
+    args: CreateVocabularyFilterCommandInput,
+    cb: (err: any, data?: CreateVocabularyFilterCommandOutput) => void
+  ): void;
+  createVocabularyFilter(
+    args: CreateVocabularyFilterCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: CreateVocabularyFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCallAnalyticsCategoryCommand}
+   */
+  deleteCallAnalyticsCategory(
+    args: DeleteCallAnalyticsCategoryCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteCallAnalyticsCategoryCommandOutput>;
+  deleteCallAnalyticsCategory(
+    args: DeleteCallAnalyticsCategoryCommandInput,
+    cb: (err: any, data?: DeleteCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+  deleteCallAnalyticsCategory(
+    args: DeleteCallAnalyticsCategoryCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCallAnalyticsJobCommand}
+   */
+  deleteCallAnalyticsJob(
+    args: DeleteCallAnalyticsJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteCallAnalyticsJobCommandOutput>;
+  deleteCallAnalyticsJob(
+    args: DeleteCallAnalyticsJobCommandInput,
+    cb: (err: any, data?: DeleteCallAnalyticsJobCommandOutput) => void
+  ): void;
+  deleteCallAnalyticsJob(
+    args: DeleteCallAnalyticsJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteCallAnalyticsJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLanguageModelCommand}
+   */
+  deleteLanguageModel(
+    args: DeleteLanguageModelCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteLanguageModelCommandOutput>;
+  deleteLanguageModel(
+    args: DeleteLanguageModelCommandInput,
+    cb: (err: any, data?: DeleteLanguageModelCommandOutput) => void
+  ): void;
+  deleteLanguageModel(
+    args: DeleteLanguageModelCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteLanguageModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMedicalScribeJobCommand}
+   */
+  deleteMedicalScribeJob(
+    args: DeleteMedicalScribeJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteMedicalScribeJobCommandOutput>;
+  deleteMedicalScribeJob(
+    args: DeleteMedicalScribeJobCommandInput,
+    cb: (err: any, data?: DeleteMedicalScribeJobCommandOutput) => void
+  ): void;
+  deleteMedicalScribeJob(
+    args: DeleteMedicalScribeJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteMedicalScribeJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMedicalTranscriptionJobCommand}
+   */
+  deleteMedicalTranscriptionJob(
+    args: DeleteMedicalTranscriptionJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteMedicalTranscriptionJobCommandOutput>;
+  deleteMedicalTranscriptionJob(
+    args: DeleteMedicalTranscriptionJobCommandInput,
+    cb: (err: any, data?: DeleteMedicalTranscriptionJobCommandOutput) => void
+  ): void;
+  deleteMedicalTranscriptionJob(
+    args: DeleteMedicalTranscriptionJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteMedicalTranscriptionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteMedicalVocabularyCommand}
+   */
+  deleteMedicalVocabulary(
+    args: DeleteMedicalVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteMedicalVocabularyCommandOutput>;
+  deleteMedicalVocabulary(
+    args: DeleteMedicalVocabularyCommandInput,
+    cb: (err: any, data?: DeleteMedicalVocabularyCommandOutput) => void
+  ): void;
+  deleteMedicalVocabulary(
+    args: DeleteMedicalVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteMedicalVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteTranscriptionJobCommand}
+   */
+  deleteTranscriptionJob(
+    args: DeleteTranscriptionJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteTranscriptionJobCommandOutput>;
+  deleteTranscriptionJob(
+    args: DeleteTranscriptionJobCommandInput,
+    cb: (err: any, data?: DeleteTranscriptionJobCommandOutput) => void
+  ): void;
+  deleteTranscriptionJob(
+    args: DeleteTranscriptionJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteTranscriptionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVocabularyCommand}
+   */
+  deleteVocabulary(
+    args: DeleteVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteVocabularyCommandOutput>;
+  deleteVocabulary(
+    args: DeleteVocabularyCommandInput,
+    cb: (err: any, data?: DeleteVocabularyCommandOutput) => void
+  ): void;
+  deleteVocabulary(
+    args: DeleteVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteVocabularyFilterCommand}
+   */
+  deleteVocabularyFilter(
+    args: DeleteVocabularyFilterCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DeleteVocabularyFilterCommandOutput>;
+  deleteVocabularyFilter(
+    args: DeleteVocabularyFilterCommandInput,
+    cb: (err: any, data?: DeleteVocabularyFilterCommandOutput) => void
+  ): void;
+  deleteVocabularyFilter(
+    args: DeleteVocabularyFilterCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DeleteVocabularyFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DescribeLanguageModelCommand}
+   */
+  describeLanguageModel(
+    args: DescribeLanguageModelCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<DescribeLanguageModelCommandOutput>;
+  describeLanguageModel(
+    args: DescribeLanguageModelCommandInput,
+    cb: (err: any, data?: DescribeLanguageModelCommandOutput) => void
+  ): void;
+  describeLanguageModel(
+    args: DescribeLanguageModelCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: DescribeLanguageModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCallAnalyticsCategoryCommand}
+   */
+  getCallAnalyticsCategory(
+    args: GetCallAnalyticsCategoryCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetCallAnalyticsCategoryCommandOutput>;
+  getCallAnalyticsCategory(
+    args: GetCallAnalyticsCategoryCommandInput,
+    cb: (err: any, data?: GetCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+  getCallAnalyticsCategory(
+    args: GetCallAnalyticsCategoryCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCallAnalyticsJobCommand}
+   */
+  getCallAnalyticsJob(
+    args: GetCallAnalyticsJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetCallAnalyticsJobCommandOutput>;
+  getCallAnalyticsJob(
+    args: GetCallAnalyticsJobCommandInput,
+    cb: (err: any, data?: GetCallAnalyticsJobCommandOutput) => void
+  ): void;
+  getCallAnalyticsJob(
+    args: GetCallAnalyticsJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetCallAnalyticsJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMedicalScribeJobCommand}
+   */
+  getMedicalScribeJob(
+    args: GetMedicalScribeJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetMedicalScribeJobCommandOutput>;
+  getMedicalScribeJob(
+    args: GetMedicalScribeJobCommandInput,
+    cb: (err: any, data?: GetMedicalScribeJobCommandOutput) => void
+  ): void;
+  getMedicalScribeJob(
+    args: GetMedicalScribeJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetMedicalScribeJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMedicalTranscriptionJobCommand}
+   */
+  getMedicalTranscriptionJob(
+    args: GetMedicalTranscriptionJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetMedicalTranscriptionJobCommandOutput>;
+  getMedicalTranscriptionJob(
+    args: GetMedicalTranscriptionJobCommandInput,
+    cb: (err: any, data?: GetMedicalTranscriptionJobCommandOutput) => void
+  ): void;
+  getMedicalTranscriptionJob(
+    args: GetMedicalTranscriptionJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetMedicalTranscriptionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetMedicalVocabularyCommand}
+   */
+  getMedicalVocabulary(
+    args: GetMedicalVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetMedicalVocabularyCommandOutput>;
+  getMedicalVocabulary(
+    args: GetMedicalVocabularyCommandInput,
+    cb: (err: any, data?: GetMedicalVocabularyCommandOutput) => void
+  ): void;
+  getMedicalVocabulary(
+    args: GetMedicalVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetMedicalVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetTranscriptionJobCommand}
+   */
+  getTranscriptionJob(
+    args: GetTranscriptionJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetTranscriptionJobCommandOutput>;
+  getTranscriptionJob(
+    args: GetTranscriptionJobCommandInput,
+    cb: (err: any, data?: GetTranscriptionJobCommandOutput) => void
+  ): void;
+  getTranscriptionJob(
+    args: GetTranscriptionJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetTranscriptionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVocabularyCommand}
+   */
+  getVocabulary(
+    args: GetVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetVocabularyCommandOutput>;
+  getVocabulary(
+    args: GetVocabularyCommandInput,
+    cb: (err: any, data?: GetVocabularyCommandOutput) => void
+  ): void;
+  getVocabulary(
+    args: GetVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetVocabularyFilterCommand}
+   */
+  getVocabularyFilter(
+    args: GetVocabularyFilterCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<GetVocabularyFilterCommandOutput>;
+  getVocabularyFilter(
+    args: GetVocabularyFilterCommandInput,
+    cb: (err: any, data?: GetVocabularyFilterCommandOutput) => void
+  ): void;
+  getVocabularyFilter(
+    args: GetVocabularyFilterCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: GetVocabularyFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCallAnalyticsCategoriesCommand}
+   */
+  listCallAnalyticsCategories(): Promise<ListCallAnalyticsCategoriesCommandOutput>;
+  listCallAnalyticsCategories(
+    args: ListCallAnalyticsCategoriesCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListCallAnalyticsCategoriesCommandOutput>;
+  listCallAnalyticsCategories(
+    args: ListCallAnalyticsCategoriesCommandInput,
+    cb: (err: any, data?: ListCallAnalyticsCategoriesCommandOutput) => void
+  ): void;
+  listCallAnalyticsCategories(
+    args: ListCallAnalyticsCategoriesCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListCallAnalyticsCategoriesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCallAnalyticsJobsCommand}
+   */
+  listCallAnalyticsJobs(): Promise<ListCallAnalyticsJobsCommandOutput>;
+  listCallAnalyticsJobs(
+    args: ListCallAnalyticsJobsCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListCallAnalyticsJobsCommandOutput>;
+  listCallAnalyticsJobs(
+    args: ListCallAnalyticsJobsCommandInput,
+    cb: (err: any, data?: ListCallAnalyticsJobsCommandOutput) => void
+  ): void;
+  listCallAnalyticsJobs(
+    args: ListCallAnalyticsJobsCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListCallAnalyticsJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListLanguageModelsCommand}
+   */
+  listLanguageModels(): Promise<ListLanguageModelsCommandOutput>;
+  listLanguageModels(
+    args: ListLanguageModelsCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListLanguageModelsCommandOutput>;
+  listLanguageModels(
+    args: ListLanguageModelsCommandInput,
+    cb: (err: any, data?: ListLanguageModelsCommandOutput) => void
+  ): void;
+  listLanguageModels(
+    args: ListLanguageModelsCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListLanguageModelsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMedicalScribeJobsCommand}
+   */
+  listMedicalScribeJobs(): Promise<ListMedicalScribeJobsCommandOutput>;
+  listMedicalScribeJobs(
+    args: ListMedicalScribeJobsCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListMedicalScribeJobsCommandOutput>;
+  listMedicalScribeJobs(
+    args: ListMedicalScribeJobsCommandInput,
+    cb: (err: any, data?: ListMedicalScribeJobsCommandOutput) => void
+  ): void;
+  listMedicalScribeJobs(
+    args: ListMedicalScribeJobsCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListMedicalScribeJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMedicalTranscriptionJobsCommand}
+   */
+  listMedicalTranscriptionJobs(): Promise<ListMedicalTranscriptionJobsCommandOutput>;
+  listMedicalTranscriptionJobs(
+    args: ListMedicalTranscriptionJobsCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListMedicalTranscriptionJobsCommandOutput>;
+  listMedicalTranscriptionJobs(
+    args: ListMedicalTranscriptionJobsCommandInput,
+    cb: (err: any, data?: ListMedicalTranscriptionJobsCommandOutput) => void
+  ): void;
+  listMedicalTranscriptionJobs(
+    args: ListMedicalTranscriptionJobsCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListMedicalTranscriptionJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListMedicalVocabulariesCommand}
+   */
+  listMedicalVocabularies(): Promise<ListMedicalVocabulariesCommandOutput>;
+  listMedicalVocabularies(
+    args: ListMedicalVocabulariesCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListMedicalVocabulariesCommandOutput>;
+  listMedicalVocabularies(
+    args: ListMedicalVocabulariesCommandInput,
+    cb: (err: any, data?: ListMedicalVocabulariesCommandOutput) => void
+  ): void;
+  listMedicalVocabularies(
+    args: ListMedicalVocabulariesCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListMedicalVocabulariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTagsForResourceCommand}
+   */
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListTagsForResourceCommandOutput>;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+  listTagsForResource(
+    args: ListTagsForResourceCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListTranscriptionJobsCommand}
+   */
+  listTranscriptionJobs(): Promise<ListTranscriptionJobsCommandOutput>;
+  listTranscriptionJobs(
+    args: ListTranscriptionJobsCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListTranscriptionJobsCommandOutput>;
+  listTranscriptionJobs(
+    args: ListTranscriptionJobsCommandInput,
+    cb: (err: any, data?: ListTranscriptionJobsCommandOutput) => void
+  ): void;
+  listTranscriptionJobs(
+    args: ListTranscriptionJobsCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListTranscriptionJobsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVocabulariesCommand}
+   */
+  listVocabularies(): Promise<ListVocabulariesCommandOutput>;
+  listVocabularies(
+    args: ListVocabulariesCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListVocabulariesCommandOutput>;
+  listVocabularies(
+    args: ListVocabulariesCommandInput,
+    cb: (err: any, data?: ListVocabulariesCommandOutput) => void
+  ): void;
+  listVocabularies(
+    args: ListVocabulariesCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListVocabulariesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListVocabularyFiltersCommand}
+   */
+  listVocabularyFilters(): Promise<ListVocabularyFiltersCommandOutput>;
+  listVocabularyFilters(
+    args: ListVocabularyFiltersCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<ListVocabularyFiltersCommandOutput>;
+  listVocabularyFilters(
+    args: ListVocabularyFiltersCommandInput,
+    cb: (err: any, data?: ListVocabularyFiltersCommandOutput) => void
+  ): void;
+  listVocabularyFilters(
+    args: ListVocabularyFiltersCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: ListVocabularyFiltersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartCallAnalyticsJobCommand}
+   */
+  startCallAnalyticsJob(
+    args: StartCallAnalyticsJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<StartCallAnalyticsJobCommandOutput>;
+  startCallAnalyticsJob(
+    args: StartCallAnalyticsJobCommandInput,
+    cb: (err: any, data?: StartCallAnalyticsJobCommandOutput) => void
+  ): void;
+  startCallAnalyticsJob(
+    args: StartCallAnalyticsJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: StartCallAnalyticsJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMedicalScribeJobCommand}
+   */
+  startMedicalScribeJob(
+    args: StartMedicalScribeJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<StartMedicalScribeJobCommandOutput>;
+  startMedicalScribeJob(
+    args: StartMedicalScribeJobCommandInput,
+    cb: (err: any, data?: StartMedicalScribeJobCommandOutput) => void
+  ): void;
+  startMedicalScribeJob(
+    args: StartMedicalScribeJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: StartMedicalScribeJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartMedicalTranscriptionJobCommand}
+   */
+  startMedicalTranscriptionJob(
+    args: StartMedicalTranscriptionJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<StartMedicalTranscriptionJobCommandOutput>;
+  startMedicalTranscriptionJob(
+    args: StartMedicalTranscriptionJobCommandInput,
+    cb: (err: any, data?: StartMedicalTranscriptionJobCommandOutput) => void
+  ): void;
+  startMedicalTranscriptionJob(
+    args: StartMedicalTranscriptionJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: StartMedicalTranscriptionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartTranscriptionJobCommand}
+   */
+  startTranscriptionJob(
+    args: StartTranscriptionJobCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<StartTranscriptionJobCommandOutput>;
+  startTranscriptionJob(
+    args: StartTranscriptionJobCommandInput,
+    cb: (err: any, data?: StartTranscriptionJobCommandOutput) => void
+  ): void;
+  startTranscriptionJob(
+    args: StartTranscriptionJobCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: StartTranscriptionJobCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateCallAnalyticsCategoryCommand}
+   */
+  updateCallAnalyticsCategory(
+    args: UpdateCallAnalyticsCategoryCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<UpdateCallAnalyticsCategoryCommandOutput>;
+  updateCallAnalyticsCategory(
+    args: UpdateCallAnalyticsCategoryCommandInput,
+    cb: (err: any, data?: UpdateCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+  updateCallAnalyticsCategory(
+    args: UpdateCallAnalyticsCategoryCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: UpdateCallAnalyticsCategoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLanguageModelCommand}
+   */
+  updateLanguageModel(
+    args: UpdateLanguageModelCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<UpdateLanguageModelCommandOutput>;
+  updateLanguageModel(
+    args: UpdateLanguageModelCommandInput,
+    cb: (err: any, data?: UpdateLanguageModelCommandOutput) => void
+  ): void;
+  updateLanguageModel(
+    args: UpdateLanguageModelCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: UpdateLanguageModelCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateMedicalVocabularyCommand}
+   */
+  updateMedicalVocabulary(
+    args: UpdateMedicalVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<UpdateMedicalVocabularyCommandOutput>;
+  updateMedicalVocabulary(
+    args: UpdateMedicalVocabularyCommandInput,
+    cb: (err: any, data?: UpdateMedicalVocabularyCommandOutput) => void
+  ): void;
+  updateMedicalVocabulary(
+    args: UpdateMedicalVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: UpdateMedicalVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateVocabularyCommand}
+   */
+  updateVocabulary(
+    args: UpdateVocabularyCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<UpdateVocabularyCommandOutput>;
+  updateVocabulary(
+    args: UpdateVocabularyCommandInput,
+    cb: (err: any, data?: UpdateVocabularyCommandOutput) => void
+  ): void;
+  updateVocabulary(
+    args: UpdateVocabularyCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: UpdateVocabularyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateVocabularyFilterCommand}
+   */
+  updateVocabularyFilter(
+    args: UpdateVocabularyFilterCommandInput,
+    options?: TranscribeRequestOptions
+  ): Promise<UpdateVocabularyFilterCommandOutput>;
+  updateVocabularyFilter(
+    args: UpdateVocabularyFilterCommandInput,
+    cb: (err: any, data?: UpdateVocabularyFilterCommandOutput) => void
+  ): void;
+  updateVocabularyFilter(
+    args: UpdateVocabularyFilterCommandInput,
+    options: TranscribeRequestOptions,
+    cb: (err: any, data?: UpdateVocabularyFilterCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ListCallAnalyticsCategoriesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCallAnalyticsCategoriesCommandOutput}.
+   */
+  paginateListCallAnalyticsCategories(
+    args?: ListCallAnalyticsCategoriesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCallAnalyticsCategoriesCommandOutput>;
+
+  /**
+   * @see {@link ListCallAnalyticsJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCallAnalyticsJobsCommandOutput}.
+   */
+  paginateListCallAnalyticsJobs(
+    args?: ListCallAnalyticsJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCallAnalyticsJobsCommandOutput>;
+
+  /**
+   * @see {@link ListLanguageModelsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListLanguageModelsCommandOutput}.
+   */
+  paginateListLanguageModels(
+    args?: ListLanguageModelsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListLanguageModelsCommandOutput>;
+
+  /**
+   * @see {@link ListMedicalScribeJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMedicalScribeJobsCommandOutput}.
+   */
+  paginateListMedicalScribeJobs(
+    args?: ListMedicalScribeJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMedicalScribeJobsCommandOutput>;
+
+  /**
+   * @see {@link ListMedicalTranscriptionJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMedicalTranscriptionJobsCommandOutput}.
+   */
+  paginateListMedicalTranscriptionJobs(
+    args?: ListMedicalTranscriptionJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMedicalTranscriptionJobsCommandOutput>;
+
+  /**
+   * @see {@link ListMedicalVocabulariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListMedicalVocabulariesCommandOutput}.
+   */
+  paginateListMedicalVocabularies(
+    args?: ListMedicalVocabulariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListMedicalVocabulariesCommandOutput>;
+
+  /**
+   * @see {@link ListTranscriptionJobsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTranscriptionJobsCommandOutput}.
+   */
+  paginateListTranscriptionJobs(
+    args?: ListTranscriptionJobsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTranscriptionJobsCommandOutput>;
+
+  /**
+   * @see {@link ListVocabulariesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVocabulariesCommandOutput}.
+   */
+  paginateListVocabularies(
+    args?: ListVocabulariesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVocabulariesCommandOutput>;
+
+  /**
+   * @see {@link ListVocabularyFiltersCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListVocabularyFiltersCommandOutput}.
+   */
+  paginateListVocabularyFilters(
+    args?: ListVocabularyFiltersCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListVocabularyFiltersCommandOutput>;
+
+  /**
+   * @see {@link DescribeLanguageModelCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilLanguageModelCompleted(
+    args: DescribeLanguageModelCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transcribe>, "client">
+  ): Promise<WaiterResult<DescribeLanguageModelCommandOutput>>;
+
+  /**
+   * @see {@link GetCallAnalyticsJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilCallAnalyticsJobCompleted(
+    args: GetCallAnalyticsJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transcribe>, "client">
+  ): Promise<WaiterResult<GetCallAnalyticsJobCommandOutput>>;
+
+  /**
+   * @see {@link GetMedicalScribeJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMedicalScribeJobCompleted(
+    args: GetMedicalScribeJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transcribe>, "client">
+  ): Promise<WaiterResult<GetMedicalScribeJobCommandOutput>>;
+
+  /**
+   * @see {@link GetMedicalTranscriptionJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMedicalTranscriptionJobCompleted(
+    args: GetMedicalTranscriptionJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transcribe>, "client">
+  ): Promise<WaiterResult<GetMedicalTranscriptionJobCommandOutput>>;
+
+  /**
+   * @see {@link GetMedicalVocabularyCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilMedicalVocabularyReady(
+    args: GetMedicalVocabularyCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transcribe>, "client">
+  ): Promise<WaiterResult<GetMedicalVocabularyCommandOutput>>;
+
+  /**
+   * @see {@link GetTranscriptionJobCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilTranscriptionJobCompleted(
+    args: GetTranscriptionJobCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transcribe>, "client">
+  ): Promise<WaiterResult<GetTranscriptionJobCommandOutput>>;
+
+  /**
+   * @see {@link GetVocabularyCommand}
+   * @param args - command input.
+   * @param waiterConfig - `maxWaitTime` in seconds or waiter config object.
+   */
+  waitUntilVocabularyReady(
+    args: GetVocabularyCommandInput,
+    waiterConfig: number | Omit<WaiterConfiguration<Transcribe>, "client">
+  ): Promise<WaiterResult<GetVocabularyCommandOutput>>;
+}
+
+/**
+ * <p>Amazon Transcribe offers three main types of batch transcription: <b>Standard</b>, <b>Medical</b>, and
+ *                 <b>Call Analytics</b>.</p>
+ *          <ul>
  *             <li>
- *                 <p>
+ *                <p>
  *                   <b>Standard transcriptions</b> are the most common
  *                     option. Refer to  for details.</p>
  *             </li>
  *             <li>
- *                 <p>
- *                   <b>Medical transcriptions</b> are tailored to medical
- *                     professionals and incorporate medical terms. A common use case for this service is
- *                     transcribing doctor-patient dialogue into after-visit notes. Refer to
- *                      for details.</p>
+ *                <p>
+ *                   <b>Medical transcriptions</b> are tailored to
+ *                     medical professionals and incorporate medical terms. A common use case for this
+ *                     service is transcribing doctor-patient dialogue into after-visit notes. Refer to
+ *                          for details.</p>
  *             </li>
  *             <li>
- *                 <p>
- *                   <b>Call Analytics transcriptions</b> are designed for use
- *                     with call center audio on two different channels; if you're looking for insight into customer
- *                     service calls, use this option. Refer to  for
- *                     details.</p>
+ *                <p>
+ *                   <b>Call Analytics transcriptions</b> are designed
+ *                     for use with call center audio on two different channels; if you're looking for
+ *                     insight into customer service calls, use this option. Refer to  for details.</p>
  *             </li>
  *          </ul>
+ * @public
  */
-export class Transcribe extends TranscribeClient {
-  /**
-   * <p>Creates a new Call Analytics category.</p>
-   *         <p>All categories are automatically applied to your Call Analytics jobs. Note that in order to apply
-   *             your categories to your jobs, you must create them before submitting your job request, as
-   *             categories cannot be applied retroactively.</p>
-   *         <p>Call Analytics categories are composed of rules. For each category, you must create
-   *             between 1 and 20 rules. Rules can include these parameters: ,
-   *             , , and
-   *             .</p>
-   *         <p>To update an existing category, see .</p>
-   *         <p>To learn more about:</p>
-   *             <ul>
-   *             <li>
-   *                     <p>Call Analytics categories, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html">Creating categories</a>
-   *                </p>
-   *                 </li>
-   *             <li>
-   *                     <p>Using rules, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules">Rule
-   *             criteria</a> and refer to the  data type</p>
-   *                 </li>
-   *             <li>
-   *                     <p>Call Analytics, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html">Analyzing call center audio with Call
-   *             Analytics</a>
-   *                </p>
-   *                 </li>
-   *          </ul>
-   */
-  public createCallAnalyticsCategory(
-    args: CreateCallAnalyticsCategoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateCallAnalyticsCategoryCommandOutput>;
-  public createCallAnalyticsCategory(
-    args: CreateCallAnalyticsCategoryCommandInput,
-    cb: (err: any, data?: CreateCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public createCallAnalyticsCategory(
-    args: CreateCallAnalyticsCategoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public createCallAnalyticsCategory(
-    args: CreateCallAnalyticsCategoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCallAnalyticsCategoryCommandOutput) => void),
-    cb?: (err: any, data?: CreateCallAnalyticsCategoryCommandOutput) => void
-  ): Promise<CreateCallAnalyticsCategoryCommandOutput> | void {
-    const command = new CreateCallAnalyticsCategoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new custom language model.</p>
-   *         <p>When creating a new language model, you must specify:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>If you want a Wideband (audio sample rates over 16,000 Hz) or Narrowband (audio sample
-   *                     rates under 16,000 Hz) base model</p>
-   *             </li>
-   *             <li>
-   *                 <p>The location of your training and tuning files (this must be an Amazon S3 URI)</p>
-   *             </li>
-   *             <li>
-   *                 <p>The language of your model</p>
-   *             </li>
-   *             <li>
-   *                 <p>A unique name for your model</p>
-   *             </li>
-   *          </ul>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html">Custom language models</a>.</p>
-   */
-  public createLanguageModel(
-    args: CreateLanguageModelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateLanguageModelCommandOutput>;
-  public createLanguageModel(
-    args: CreateLanguageModelCommandInput,
-    cb: (err: any, data?: CreateLanguageModelCommandOutput) => void
-  ): void;
-  public createLanguageModel(
-    args: CreateLanguageModelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateLanguageModelCommandOutput) => void
-  ): void;
-  public createLanguageModel(
-    args: CreateLanguageModelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateLanguageModelCommandOutput) => void),
-    cb?: (err: any, data?: CreateLanguageModelCommandOutput) => void
-  ): Promise<CreateLanguageModelCommandOutput> | void {
-    const command = new CreateLanguageModelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new custom medical vocabulary.</p>
-   *         <p>Prior to creating a new medical vocabulary, you must first upload a text file that contains
-   *             your new entries, phrases, and terms into an Amazon S3 bucket. Note that this differs from
-   *             , where you can include a list of terms within
-   *             your request using the <code>Phrases</code> flag; <code>CreateMedicalVocabulary</code>
-   *             does not support the <code>Phrases</code> flag.</p>
-   *         <p>Each language has a character set that contains all allowed characters for that specific
-   *             language. If you use unsupported characters, your vocabulary request fails. Refer to
-   *             <a href="https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html">Character Sets for
-   *                 Custom Vocabularies</a> to get the character set for your language.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html">Creating a custom
-   *             vocabulary</a>.</p>
-   */
-  public createMedicalVocabulary(
-    args: CreateMedicalVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateMedicalVocabularyCommandOutput>;
-  public createMedicalVocabulary(
-    args: CreateMedicalVocabularyCommandInput,
-    cb: (err: any, data?: CreateMedicalVocabularyCommandOutput) => void
-  ): void;
-  public createMedicalVocabulary(
-    args: CreateMedicalVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateMedicalVocabularyCommandOutput) => void
-  ): void;
-  public createMedicalVocabulary(
-    args: CreateMedicalVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateMedicalVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: CreateMedicalVocabularyCommandOutput) => void
-  ): Promise<CreateMedicalVocabularyCommandOutput> | void {
-    const command = new CreateMedicalVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new custom vocabulary.</p>
-   *         <p>When creating a new vocabulary, you can either upload a text file that contains your new
-   *             entries, phrases, and terms into an Amazon S3 bucket and include the URI in your request, or
-   *             you can include a list of terms directly in your request using the <code>Phrases</code> flag.</p>
-   *         <p>Each language has a character set that contains all allowed characters for that specific
-   *             language. If you use unsupported characters, your vocabulary request fails. Refer to
-   *             <a href="https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html">Character Sets for
-   *                 Custom Vocabularies</a> to get the character set for your language.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary-create.html">Creating a custom
-   *                 vocabulary</a>.</p>
-   */
-  public createVocabulary(
-    args: CreateVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateVocabularyCommandOutput>;
-  public createVocabulary(
-    args: CreateVocabularyCommandInput,
-    cb: (err: any, data?: CreateVocabularyCommandOutput) => void
-  ): void;
-  public createVocabulary(
-    args: CreateVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateVocabularyCommandOutput) => void
-  ): void;
-  public createVocabulary(
-    args: CreateVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: CreateVocabularyCommandOutput) => void
-  ): Promise<CreateVocabularyCommandOutput> | void {
-    const command = new CreateVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new custom vocabulary filter.</p>
-   *         <p>You can use vocabulary filters to mask, delete, or flag specific words from your transcript.
-   *             Vocabulary filters are commonly used to mask profanity in transcripts.</p>
-   *         <p>Each language has a character set that contains all allowed characters for that specific
-   *             language. If you use unsupported characters, your vocabulary filter request fails. Refer to
-   *             <a href="https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html">Character Sets for
-   *                 Custom Vocabularies</a> to get the character set for your language.</p>
-   *         <p>For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html">Using vocabulary filtering with unwanted
-   *             words</a>.</p>
-   */
-  public createVocabularyFilter(
-    args: CreateVocabularyFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateVocabularyFilterCommandOutput>;
-  public createVocabularyFilter(
-    args: CreateVocabularyFilterCommandInput,
-    cb: (err: any, data?: CreateVocabularyFilterCommandOutput) => void
-  ): void;
-  public createVocabularyFilter(
-    args: CreateVocabularyFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateVocabularyFilterCommandOutput) => void
-  ): void;
-  public createVocabularyFilter(
-    args: CreateVocabularyFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateVocabularyFilterCommandOutput) => void),
-    cb?: (err: any, data?: CreateVocabularyFilterCommandOutput) => void
-  ): Promise<CreateVocabularyFilterCommandOutput> | void {
-    const command = new CreateVocabularyFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Call Analytics category. To use this operation, specify the name of the category
-   *             you want to delete using <code>CategoryName</code>. Category names are case
-   *             sensitive.</p>
-   */
-  public deleteCallAnalyticsCategory(
-    args: DeleteCallAnalyticsCategoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteCallAnalyticsCategoryCommandOutput>;
-  public deleteCallAnalyticsCategory(
-    args: DeleteCallAnalyticsCategoryCommandInput,
-    cb: (err: any, data?: DeleteCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public deleteCallAnalyticsCategory(
-    args: DeleteCallAnalyticsCategoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public deleteCallAnalyticsCategory(
-    args: DeleteCallAnalyticsCategoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCallAnalyticsCategoryCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCallAnalyticsCategoryCommandOutput) => void
-  ): Promise<DeleteCallAnalyticsCategoryCommandOutput> | void {
-    const command = new DeleteCallAnalyticsCategoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Call Analytics job. To use this operation, specify the name of the job you want to
-   *             delete using <code>CallAnalyticsJobName</code>. Job names are case sensitive.</p>
-   */
-  public deleteCallAnalyticsJob(
-    args: DeleteCallAnalyticsJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteCallAnalyticsJobCommandOutput>;
-  public deleteCallAnalyticsJob(
-    args: DeleteCallAnalyticsJobCommandInput,
-    cb: (err: any, data?: DeleteCallAnalyticsJobCommandOutput) => void
-  ): void;
-  public deleteCallAnalyticsJob(
-    args: DeleteCallAnalyticsJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteCallAnalyticsJobCommandOutput) => void
-  ): void;
-  public deleteCallAnalyticsJob(
-    args: DeleteCallAnalyticsJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCallAnalyticsJobCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCallAnalyticsJobCommandOutput) => void
-  ): Promise<DeleteCallAnalyticsJobCommandOutput> | void {
-    const command = new DeleteCallAnalyticsJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a custom language model. To use this operation, specify the name of the language
-   *             model you want to delete using <code>ModelName</code>. Language model names are case
-   *             sensitive.</p>
-   */
-  public deleteLanguageModel(
-    args: DeleteLanguageModelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteLanguageModelCommandOutput>;
-  public deleteLanguageModel(
-    args: DeleteLanguageModelCommandInput,
-    cb: (err: any, data?: DeleteLanguageModelCommandOutput) => void
-  ): void;
-  public deleteLanguageModel(
-    args: DeleteLanguageModelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteLanguageModelCommandOutput) => void
-  ): void;
-  public deleteLanguageModel(
-    args: DeleteLanguageModelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLanguageModelCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLanguageModelCommandOutput) => void
-  ): Promise<DeleteLanguageModelCommandOutput> | void {
-    const command = new DeleteLanguageModelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a medical transcription job. To use this operation, specify the name of the job you
-   *             want to delete using <code>MedicalTranscriptionJobName</code>. Job names are case
-   *             sensitive.</p>
-   */
-  public deleteMedicalTranscriptionJob(
-    args: DeleteMedicalTranscriptionJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteMedicalTranscriptionJobCommandOutput>;
-  public deleteMedicalTranscriptionJob(
-    args: DeleteMedicalTranscriptionJobCommandInput,
-    cb: (err: any, data?: DeleteMedicalTranscriptionJobCommandOutput) => void
-  ): void;
-  public deleteMedicalTranscriptionJob(
-    args: DeleteMedicalTranscriptionJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteMedicalTranscriptionJobCommandOutput) => void
-  ): void;
-  public deleteMedicalTranscriptionJob(
-    args: DeleteMedicalTranscriptionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteMedicalTranscriptionJobCommandOutput) => void),
-    cb?: (err: any, data?: DeleteMedicalTranscriptionJobCommandOutput) => void
-  ): Promise<DeleteMedicalTranscriptionJobCommandOutput> | void {
-    const command = new DeleteMedicalTranscriptionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a custom medical vocabulary. To use this operation, specify the name of the
-   *             vocabulary you want to delete using <code>VocabularyName</code>. Vocabulary names are
-   *             case sensitive.</p>
-   */
-  public deleteMedicalVocabulary(
-    args: DeleteMedicalVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteMedicalVocabularyCommandOutput>;
-  public deleteMedicalVocabulary(
-    args: DeleteMedicalVocabularyCommandInput,
-    cb: (err: any, data?: DeleteMedicalVocabularyCommandOutput) => void
-  ): void;
-  public deleteMedicalVocabulary(
-    args: DeleteMedicalVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteMedicalVocabularyCommandOutput) => void
-  ): void;
-  public deleteMedicalVocabulary(
-    args: DeleteMedicalVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteMedicalVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteMedicalVocabularyCommandOutput) => void
-  ): Promise<DeleteMedicalVocabularyCommandOutput> | void {
-    const command = new DeleteMedicalVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a transcription job. To use this operation, specify the name of the job you want to
-   *             delete using <code>TranscriptionJobName</code>. Job names are case sensitive.</p>
-   */
-  public deleteTranscriptionJob(
-    args: DeleteTranscriptionJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteTranscriptionJobCommandOutput>;
-  public deleteTranscriptionJob(
-    args: DeleteTranscriptionJobCommandInput,
-    cb: (err: any, data?: DeleteTranscriptionJobCommandOutput) => void
-  ): void;
-  public deleteTranscriptionJob(
-    args: DeleteTranscriptionJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteTranscriptionJobCommandOutput) => void
-  ): void;
-  public deleteTranscriptionJob(
-    args: DeleteTranscriptionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTranscriptionJobCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTranscriptionJobCommandOutput) => void
-  ): Promise<DeleteTranscriptionJobCommandOutput> | void {
-    const command = new DeleteTranscriptionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a custom vocabulary. To use this operation, specify the name of the vocabulary you
-   *             want to delete using <code>VocabularyName</code>. Vocabulary names are case
-   *             sensitive.</p>
-   */
-  public deleteVocabulary(
-    args: DeleteVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteVocabularyCommandOutput>;
-  public deleteVocabulary(
-    args: DeleteVocabularyCommandInput,
-    cb: (err: any, data?: DeleteVocabularyCommandOutput) => void
-  ): void;
-  public deleteVocabulary(
-    args: DeleteVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteVocabularyCommandOutput) => void
-  ): void;
-  public deleteVocabulary(
-    args: DeleteVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteVocabularyCommandOutput) => void
-  ): Promise<DeleteVocabularyCommandOutput> | void {
-    const command = new DeleteVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a vocabulary filter. To use this operation, specify the name of the vocabulary filter
-   *             you want to delete using <code>VocabularyFilterName</code>. Vocabulary filter names are
-   *             case sensitive.</p>
-   */
-  public deleteVocabularyFilter(
-    args: DeleteVocabularyFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteVocabularyFilterCommandOutput>;
-  public deleteVocabularyFilter(
-    args: DeleteVocabularyFilterCommandInput,
-    cb: (err: any, data?: DeleteVocabularyFilterCommandOutput) => void
-  ): void;
-  public deleteVocabularyFilter(
-    args: DeleteVocabularyFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteVocabularyFilterCommandOutput) => void
-  ): void;
-  public deleteVocabularyFilter(
-    args: DeleteVocabularyFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteVocabularyFilterCommandOutput) => void),
-    cb?: (err: any, data?: DeleteVocabularyFilterCommandOutput) => void
-  ): Promise<DeleteVocabularyFilterCommandOutput> | void {
-    const command = new DeleteVocabularyFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified custom language model.</p>
-   *         <p>This operation also shows if the base language model you used to create your custom
-   *             language model has been updated. If Amazon Transcribe has updated the base model, you
-   *             can create a new custom language model using the updated base model.</p>
-   *         <p>If you tried to create a new custom language model and the request wasn't successful,
-   *             you can use <code>DescribeLanguageModel</code> to help identify the reason for this
-   *             failure.</p>
-   *         <p>To get a list of your custom language models, use the
-   *              operation.</p>
-   */
-  public describeLanguageModel(
-    args: DescribeLanguageModelCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DescribeLanguageModelCommandOutput>;
-  public describeLanguageModel(
-    args: DescribeLanguageModelCommandInput,
-    cb: (err: any, data?: DescribeLanguageModelCommandOutput) => void
-  ): void;
-  public describeLanguageModel(
-    args: DescribeLanguageModelCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DescribeLanguageModelCommandOutput) => void
-  ): void;
-  public describeLanguageModel(
-    args: DescribeLanguageModelCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DescribeLanguageModelCommandOutput) => void),
-    cb?: (err: any, data?: DescribeLanguageModelCommandOutput) => void
-  ): Promise<DescribeLanguageModelCommandOutput> | void {
-    const command = new DescribeLanguageModelCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified Call Analytics category.</p>
-   *         <p>To get a list of your Call Analytics categories, use the
-   *              operation.</p>
-   */
-  public getCallAnalyticsCategory(
-    args: GetCallAnalyticsCategoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetCallAnalyticsCategoryCommandOutput>;
-  public getCallAnalyticsCategory(
-    args: GetCallAnalyticsCategoryCommandInput,
-    cb: (err: any, data?: GetCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public getCallAnalyticsCategory(
-    args: GetCallAnalyticsCategoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public getCallAnalyticsCategory(
-    args: GetCallAnalyticsCategoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCallAnalyticsCategoryCommandOutput) => void),
-    cb?: (err: any, data?: GetCallAnalyticsCategoryCommandOutput) => void
-  ): Promise<GetCallAnalyticsCategoryCommandOutput> | void {
-    const command = new GetCallAnalyticsCategoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified Call Analytics job.</p>
-   *         <p>To view the job's status, refer to <code>CallAnalyticsJobStatus</code>. If the status is
-   *             <code>COMPLETED</code>, the job is finished. You can find your completed transcript at
-   *             the URI specified in <code>TranscriptFileUri</code>. If the status is <code>FAILED</code>,
-   *             <code>FailureReason</code> provides details on why your transcription job failed.</p>
-   *         <p>If you enabled personally identifiable information (PII) redaction, the redacted transcript
-   *             appears at the location specified in <code>RedactedTranscriptFileUri</code>.</p>
-   *          <p>If you chose to redact the audio in your media file, you can find your redacted media file
-   *            at the location specified in <code>RedactedMediaFileUri</code>.</p>
-   *         <p>To get a list of your Call Analytics jobs, use the
-   *             operation.</p>
-   */
-  public getCallAnalyticsJob(
-    args: GetCallAnalyticsJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetCallAnalyticsJobCommandOutput>;
-  public getCallAnalyticsJob(
-    args: GetCallAnalyticsJobCommandInput,
-    cb: (err: any, data?: GetCallAnalyticsJobCommandOutput) => void
-  ): void;
-  public getCallAnalyticsJob(
-    args: GetCallAnalyticsJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCallAnalyticsJobCommandOutput) => void
-  ): void;
-  public getCallAnalyticsJob(
-    args: GetCallAnalyticsJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCallAnalyticsJobCommandOutput) => void),
-    cb?: (err: any, data?: GetCallAnalyticsJobCommandOutput) => void
-  ): Promise<GetCallAnalyticsJobCommandOutput> | void {
-    const command = new GetCallAnalyticsJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified medical transcription job.</p>
-   *         <p>To view the status of the specified medical transcription job, check the
-   *             <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>, the
-   *             job is finished and you can find the results at the location specified in
-   *             <code>TranscriptFileUri</code>. If the status is <code>FAILED</code>,
-   *             <code>FailureReason</code> provides details on why your transcription job failed.</p>
-   *         <p>To get a list of your medical transcription jobs, use the
-   *              operation.</p>
-   */
-  public getMedicalTranscriptionJob(
-    args: GetMedicalTranscriptionJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetMedicalTranscriptionJobCommandOutput>;
-  public getMedicalTranscriptionJob(
-    args: GetMedicalTranscriptionJobCommandInput,
-    cb: (err: any, data?: GetMedicalTranscriptionJobCommandOutput) => void
-  ): void;
-  public getMedicalTranscriptionJob(
-    args: GetMedicalTranscriptionJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMedicalTranscriptionJobCommandOutput) => void
-  ): void;
-  public getMedicalTranscriptionJob(
-    args: GetMedicalTranscriptionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMedicalTranscriptionJobCommandOutput) => void),
-    cb?: (err: any, data?: GetMedicalTranscriptionJobCommandOutput) => void
-  ): Promise<GetMedicalTranscriptionJobCommandOutput> | void {
-    const command = new GetMedicalTranscriptionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified custom medical vocabulary.</p>
-   *         <p>To view the status of the specified medical vocabulary, check the
-   *             <code>VocabularyState</code> field. If the status is <code>READY</code>, your vocabulary
-   *             is available to use. If the status is <code>FAILED</code>, <code>FailureReason</code> provides
-   *             details on why your vocabulary failed.</p>
-   *         <p>To get a list of your custom medical vocabularies, use the
-   *              operation.</p>
-   */
-  public getMedicalVocabulary(
-    args: GetMedicalVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetMedicalVocabularyCommandOutput>;
-  public getMedicalVocabulary(
-    args: GetMedicalVocabularyCommandInput,
-    cb: (err: any, data?: GetMedicalVocabularyCommandOutput) => void
-  ): void;
-  public getMedicalVocabulary(
-    args: GetMedicalVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetMedicalVocabularyCommandOutput) => void
-  ): void;
-  public getMedicalVocabulary(
-    args: GetMedicalVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetMedicalVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: GetMedicalVocabularyCommandOutput) => void
-  ): Promise<GetMedicalVocabularyCommandOutput> | void {
-    const command = new GetMedicalVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified transcription job.</p>
-   *         <p>To view the status of the specified transcription job, check the
-   *             <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>, the
-   *             job is finished and you can find the results at the location specified in
-   *             <code>TranscriptFileUri</code>. If the status is <code>FAILED</code>,
-   *             <code>FailureReason</code> provides details on why your transcription job failed.</p>
-   *         <p>If you enabled content redaction, the redacted transcript
-   *             can be found at the location specified in <code>RedactedTranscriptFileUri</code>.</p>
-   *         <p>To get a list of your transcription jobs, use the
-   *             operation.</p>
-   */
-  public getTranscriptionJob(
-    args: GetTranscriptionJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetTranscriptionJobCommandOutput>;
-  public getTranscriptionJob(
-    args: GetTranscriptionJobCommandInput,
-    cb: (err: any, data?: GetTranscriptionJobCommandOutput) => void
-  ): void;
-  public getTranscriptionJob(
-    args: GetTranscriptionJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetTranscriptionJobCommandOutput) => void
-  ): void;
-  public getTranscriptionJob(
-    args: GetTranscriptionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTranscriptionJobCommandOutput) => void),
-    cb?: (err: any, data?: GetTranscriptionJobCommandOutput) => void
-  ): Promise<GetTranscriptionJobCommandOutput> | void {
-    const command = new GetTranscriptionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified custom vocabulary.</p>
-   *         <p>To view the status of the specified vocabulary, check the <code>VocabularyState</code>
-   *             field. If the status is <code>READY</code>, your vocabulary is available to use. If the status
-   *             is <code>FAILED</code>, <code>FailureReason</code> provides details on why your
-   *             vocabulary failed.</p>
-   *         <p>To get a list of your custom vocabularies, use the
-   *             operation.</p>
-   */
-  public getVocabulary(
-    args: GetVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetVocabularyCommandOutput>;
-  public getVocabulary(
-    args: GetVocabularyCommandInput,
-    cb: (err: any, data?: GetVocabularyCommandOutput) => void
-  ): void;
-  public getVocabulary(
-    args: GetVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetVocabularyCommandOutput) => void
-  ): void;
-  public getVocabulary(
-    args: GetVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: GetVocabularyCommandOutput) => void
-  ): Promise<GetVocabularyCommandOutput> | void {
-    const command = new GetVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides information about the specified custom vocabulary filter.</p>
-   *         <p>To view the status of the specified vocabulary filter, check the <code>VocabularyState</code>
-   *             field. If the status is <code>READY</code>, your vocabulary is available to use. If the status is
-   *             <code>FAILED</code>, <code>FailureReason</code> provides details on why your vocabulary
-   *             filter failed.</p>
-   *         <p>To get a list of your custom vocabulary filters, use the
-   *              operation.</p>
-   */
-  public getVocabularyFilter(
-    args: GetVocabularyFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetVocabularyFilterCommandOutput>;
-  public getVocabularyFilter(
-    args: GetVocabularyFilterCommandInput,
-    cb: (err: any, data?: GetVocabularyFilterCommandOutput) => void
-  ): void;
-  public getVocabularyFilter(
-    args: GetVocabularyFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetVocabularyFilterCommandOutput) => void
-  ): void;
-  public getVocabularyFilter(
-    args: GetVocabularyFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetVocabularyFilterCommandOutput) => void),
-    cb?: (err: any, data?: GetVocabularyFilterCommandOutput) => void
-  ): Promise<GetVocabularyFilterCommandOutput> | void {
-    const command = new GetVocabularyFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of Call Analytics categories, including all rules that make up each category.</p>
-   *         <p>To get detailed information about a specific Call Analytics category, use the
-   *              operation.</p>
-   */
-  public listCallAnalyticsCategories(
-    args: ListCallAnalyticsCategoriesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListCallAnalyticsCategoriesCommandOutput>;
-  public listCallAnalyticsCategories(
-    args: ListCallAnalyticsCategoriesCommandInput,
-    cb: (err: any, data?: ListCallAnalyticsCategoriesCommandOutput) => void
-  ): void;
-  public listCallAnalyticsCategories(
-    args: ListCallAnalyticsCategoriesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListCallAnalyticsCategoriesCommandOutput) => void
-  ): void;
-  public listCallAnalyticsCategories(
-    args: ListCallAnalyticsCategoriesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCallAnalyticsCategoriesCommandOutput) => void),
-    cb?: (err: any, data?: ListCallAnalyticsCategoriesCommandOutput) => void
-  ): Promise<ListCallAnalyticsCategoriesCommandOutput> | void {
-    const command = new ListCallAnalyticsCategoriesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of Call Analytics jobs that match the specified criteria. If no criteria are
-   *             specified, all Call Analytics jobs are returned.</p>
-   *         <p>To get detailed information about a specific Call Analytics job, use the
-   *              operation.</p>
-   */
-  public listCallAnalyticsJobs(
-    args: ListCallAnalyticsJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListCallAnalyticsJobsCommandOutput>;
-  public listCallAnalyticsJobs(
-    args: ListCallAnalyticsJobsCommandInput,
-    cb: (err: any, data?: ListCallAnalyticsJobsCommandOutput) => void
-  ): void;
-  public listCallAnalyticsJobs(
-    args: ListCallAnalyticsJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListCallAnalyticsJobsCommandOutput) => void
-  ): void;
-  public listCallAnalyticsJobs(
-    args: ListCallAnalyticsJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCallAnalyticsJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListCallAnalyticsJobsCommandOutput) => void
-  ): Promise<ListCallAnalyticsJobsCommandOutput> | void {
-    const command = new ListCallAnalyticsJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of custom language models that match the specified criteria. If no criteria
-   *             are specified, all language models are returned.</p>
-   *         <p>To get detailed information about a specific custom language model, use the
-   *              operation.</p>
-   */
-  public listLanguageModels(
-    args: ListLanguageModelsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListLanguageModelsCommandOutput>;
-  public listLanguageModels(
-    args: ListLanguageModelsCommandInput,
-    cb: (err: any, data?: ListLanguageModelsCommandOutput) => void
-  ): void;
-  public listLanguageModels(
-    args: ListLanguageModelsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListLanguageModelsCommandOutput) => void
-  ): void;
-  public listLanguageModels(
-    args: ListLanguageModelsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListLanguageModelsCommandOutput) => void),
-    cb?: (err: any, data?: ListLanguageModelsCommandOutput) => void
-  ): Promise<ListLanguageModelsCommandOutput> | void {
-    const command = new ListLanguageModelsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of medical transcription jobs that match the specified criteria. If no criteria are
-   *             specified, all medical transcription jobs are returned.</p>
-   *         <p>To get detailed information about a specific medical transcription job, use the
-   *              operation.</p>
-   */
-  public listMedicalTranscriptionJobs(
-    args: ListMedicalTranscriptionJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListMedicalTranscriptionJobsCommandOutput>;
-  public listMedicalTranscriptionJobs(
-    args: ListMedicalTranscriptionJobsCommandInput,
-    cb: (err: any, data?: ListMedicalTranscriptionJobsCommandOutput) => void
-  ): void;
-  public listMedicalTranscriptionJobs(
-    args: ListMedicalTranscriptionJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListMedicalTranscriptionJobsCommandOutput) => void
-  ): void;
-  public listMedicalTranscriptionJobs(
-    args: ListMedicalTranscriptionJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMedicalTranscriptionJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListMedicalTranscriptionJobsCommandOutput) => void
-  ): Promise<ListMedicalTranscriptionJobsCommandOutput> | void {
-    const command = new ListMedicalTranscriptionJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of custom medical vocabularies that match the specified criteria. If no
-   *             criteria are specified, all custom medical vocabularies are returned.</p>
-   *         <p>To get detailed information about a specific custom medical vocabulary, use the
-   *              operation.</p>
-   */
-  public listMedicalVocabularies(
-    args: ListMedicalVocabulariesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListMedicalVocabulariesCommandOutput>;
-  public listMedicalVocabularies(
-    args: ListMedicalVocabulariesCommandInput,
-    cb: (err: any, data?: ListMedicalVocabulariesCommandOutput) => void
-  ): void;
-  public listMedicalVocabularies(
-    args: ListMedicalVocabulariesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListMedicalVocabulariesCommandOutput) => void
-  ): void;
-  public listMedicalVocabularies(
-    args: ListMedicalVocabulariesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListMedicalVocabulariesCommandOutput) => void),
-    cb?: (err: any, data?: ListMedicalVocabulariesCommandOutput) => void
-  ): Promise<ListMedicalVocabulariesCommandOutput> | void {
-    const command = new ListMedicalVocabulariesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Lists all tags associated with the specified transcription job, vocabulary, model, or
-   *             resource.</p>
-   *         <p>To learn more about using tags with Amazon Transcribe, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html">Tagging resources</a>.</p>
-   */
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of transcription jobs that match the specified criteria. If no criteria are
-   *             specified, all transcription jobs are returned.</p>
-   *         <p>To get detailed information about a specific transcription job, use the
-   *              operation.</p>
-   */
-  public listTranscriptionJobs(
-    args: ListTranscriptionJobsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListTranscriptionJobsCommandOutput>;
-  public listTranscriptionJobs(
-    args: ListTranscriptionJobsCommandInput,
-    cb: (err: any, data?: ListTranscriptionJobsCommandOutput) => void
-  ): void;
-  public listTranscriptionJobs(
-    args: ListTranscriptionJobsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListTranscriptionJobsCommandOutput) => void
-  ): void;
-  public listTranscriptionJobs(
-    args: ListTranscriptionJobsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTranscriptionJobsCommandOutput) => void),
-    cb?: (err: any, data?: ListTranscriptionJobsCommandOutput) => void
-  ): Promise<ListTranscriptionJobsCommandOutput> | void {
-    const command = new ListTranscriptionJobsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of custom vocabularies that match the specified criteria. If no criteria are
-   *             specified, all custom vocabularies are returned.</p>
-   *         <p>To get detailed information about a specific custom vocabulary, use the
-   *              operation.</p>
-   */
-  public listVocabularies(
-    args: ListVocabulariesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListVocabulariesCommandOutput>;
-  public listVocabularies(
-    args: ListVocabulariesCommandInput,
-    cb: (err: any, data?: ListVocabulariesCommandOutput) => void
-  ): void;
-  public listVocabularies(
-    args: ListVocabulariesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListVocabulariesCommandOutput) => void
-  ): void;
-  public listVocabularies(
-    args: ListVocabulariesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListVocabulariesCommandOutput) => void),
-    cb?: (err: any, data?: ListVocabulariesCommandOutput) => void
-  ): Promise<ListVocabulariesCommandOutput> | void {
-    const command = new ListVocabulariesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Provides a list of custom vocabulary filters that match the specified criteria. If no
-   *             criteria are specified, all custom vocabularies are returned.</p>
-   *         <p>To get detailed information about a specific custom vocabulary filter, use the
-   *              operation.</p>
-   */
-  public listVocabularyFilters(
-    args: ListVocabularyFiltersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ListVocabularyFiltersCommandOutput>;
-  public listVocabularyFilters(
-    args: ListVocabularyFiltersCommandInput,
-    cb: (err: any, data?: ListVocabularyFiltersCommandOutput) => void
-  ): void;
-  public listVocabularyFilters(
-    args: ListVocabularyFiltersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ListVocabularyFiltersCommandOutput) => void
-  ): void;
-  public listVocabularyFilters(
-    args: ListVocabularyFiltersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListVocabularyFiltersCommandOutput) => void),
-    cb?: (err: any, data?: ListVocabularyFiltersCommandOutput) => void
-  ): Promise<ListVocabularyFiltersCommandOutput> | void {
-    const command = new ListVocabularyFiltersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Transcribes the audio from a customer service call and applies any additional Request
-   *             Parameters you choose to include in your request.</p>
-   *         <p>In addition to many of the standard transcription features, Call Analytics provides you with
-   *             call characteristics, call summarization, speaker sentiment, and optional redaction of your text
-   *             transcript and your audio file. You can also apply custom categories to flag specified conditions. To
-   *             learn more about these features and insights, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html">Analyzing call center audio with Call
-   *                 Analytics</a>.</p>
-   *         <p>If you want to apply categories to your Call Analytics job, you must create them
-   *             before submitting your job request. Categories cannot be retroactively applied to a job. To
-   *             create a new category, use the  operation.
-   *             To learn more about Call Analytics categories, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html">Creating
-   *                 categories</a>.</p>
-   *         <p>To make a <code>StartCallAnalyticsJob</code> request, you must first upload your media file
-   *             into an Amazon S3 bucket; you can then specify the Amazon S3 location of the file
-   *             using the <code>Media</code> parameter.</p>
-   *         <p>You must include the following parameters in your <code>StartCallAnalyticsJob</code>
-   *             request:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>
-   *                   <code>region</code>: The Amazon Web Services Region where you are making your
-   *                     request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer
-   *                     to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html">Amazon Transcribe
-   *                         endpoints and quotas</a>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>CallAnalyticsJobName</code>: A custom name you create for your transcription job
-   *                     that is unique within your Amazon Web Services account.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>DataAccessRoleArn</code>: The Amazon Resource Name (ARN) of an IAM role that
-   *                     has permissions to access the Amazon S3 bucket that contains your input files.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>Media</code> (<code>MediaFileUri</code> or <code>RedactedMediaFileUri</code>):
-   *                     The Amazon S3 location of your media file.</p>
-   *             </li>
-   *          </ul>
-   *         <note>
-   *             <p>With Call Analytics, you can redact the audio contained in your media file by including
-   *                 <code>RedactedMediaFileUri</code>, instead of <code>MediaFileUri</code>, to specify the
-   *                 location of your input audio. If you choose to redact your audio, you can find your redacted
-   *                 media at the location specified in the <code>RedactedMediaFileUri</code> field of your
-   *                 response.</p>
-   *         </note>
-   */
-  public startCallAnalyticsJob(
-    args: StartCallAnalyticsJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartCallAnalyticsJobCommandOutput>;
-  public startCallAnalyticsJob(
-    args: StartCallAnalyticsJobCommandInput,
-    cb: (err: any, data?: StartCallAnalyticsJobCommandOutput) => void
-  ): void;
-  public startCallAnalyticsJob(
-    args: StartCallAnalyticsJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartCallAnalyticsJobCommandOutput) => void
-  ): void;
-  public startCallAnalyticsJob(
-    args: StartCallAnalyticsJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartCallAnalyticsJobCommandOutput) => void),
-    cb?: (err: any, data?: StartCallAnalyticsJobCommandOutput) => void
-  ): Promise<StartCallAnalyticsJobCommandOutput> | void {
-    const command = new StartCallAnalyticsJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Transcribes the audio from a medical dictation or conversation and applies any additional
-   *             Request Parameters you choose to include in your request.</p>
-   *         <p>In addition to many of the standard transcription features, Amazon Transcribe Medical provides
-   *             you with a robust medical vocabulary and, optionally, content identification, which adds flags to
-   *             personal health information (PHI). To learn more about these features, refer to
-   *             <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works-med.html">How
-   *                 Amazon Transcribe Medical works</a>.</p>
-   *         <p>To make a <code>StartMedicalTranscriptionJob</code> request, you must first upload your media
-   *             file into an Amazon S3 bucket; you can then specify the S3 location of the file using the
-   *             <code>Media</code> parameter.</p>
-   *         <p>You must include the following parameters in your <code>StartMedicalTranscriptionJob</code>
-   *             request:</p>
-   *         <ul>
-   *             <li>
-   *                 <p>
-   *                   <code>region</code>: The Amazon Web Services Region where you are making your
-   *                     request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer
-   *                     to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html">Amazon Transcribe
-   *                         endpoints and quotas</a>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>MedicalTranscriptionJobName</code>: A custom name you create for your
-   *                     transcription job that is unique within your Amazon Web Services account.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>Media</code> (<code>MediaFileUri</code>): The Amazon S3 location of
-   *                     your media file.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>LanguageCode</code>: This must be <code>en-US</code>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>OutputBucketName</code>: The Amazon S3 bucket where you want
-   *                     your transcript stored. If you want your output stored in a sub-folder of this bucket, you must
-   *                     also include <code>OutputKey</code>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>Specialty</code>: This must be <code>PRIMARYCARE</code>.</p>
-   *             </li>
-   *             <li>
-   *                 <p>
-   *                   <code>Type</code>: Choose whether your audio is a conversation or a dictation.</p>
-   *             </li>
-   *          </ul>
-   */
-  public startMedicalTranscriptionJob(
-    args: StartMedicalTranscriptionJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartMedicalTranscriptionJobCommandOutput>;
-  public startMedicalTranscriptionJob(
-    args: StartMedicalTranscriptionJobCommandInput,
-    cb: (err: any, data?: StartMedicalTranscriptionJobCommandOutput) => void
-  ): void;
-  public startMedicalTranscriptionJob(
-    args: StartMedicalTranscriptionJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartMedicalTranscriptionJobCommandOutput) => void
-  ): void;
-  public startMedicalTranscriptionJob(
-    args: StartMedicalTranscriptionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartMedicalTranscriptionJobCommandOutput) => void),
-    cb?: (err: any, data?: StartMedicalTranscriptionJobCommandOutput) => void
-  ): Promise<StartMedicalTranscriptionJobCommandOutput> | void {
-    const command = new StartMedicalTranscriptionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Transcribes the audio from a media file and applies any additional Request Parameters you
-   *             choose to include in your request.</p>
-   *         <p>To make a <code>StartTranscriptionJob</code> request, you must first upload your media file
-   *             into an Amazon S3 bucket; you can then specify the Amazon S3 location of the file
-   *             using the <code>Media</code> parameter.</p>
-   *             <p>You must include the following parameters in your <code>StartTranscriptionJob</code>
-   *                 request:</p>
-   *             <ul>
-   *             <li>
-   *                     <p>
-   *                   <code>region</code>: The Amazon Web Services Region where you are making your
-   *                         request. For a list of Amazon Web Services Regions supported with Amazon Transcribe, refer
-   *                         to <a href="https://docs.aws.amazon.com/general/latest/gr/transcribe.html">Amazon Transcribe
-   *                             endpoints and quotas</a>.</p>
-   *                 </li>
-   *             <li>
-   *                     <p>
-   *                   <code>TranscriptionJobName</code>: A custom name you create for your transcription
-   *                         job that is unique within your Amazon Web Services account.</p>
-   *                 </li>
-   *             <li>
-   *                     <p>
-   *                   <code>Media</code> (<code>MediaFileUri</code>): The Amazon S3 location of
-   *                         your media file.</p>
-   *                 </li>
-   *             <li>
-   *                     <p>One of <code>LanguageCode</code>, <code>IdentifyLanguage</code>, or
-   *                         <code>IdentifyMultipleLanguages</code>: If you know the language of your media file,
-   *                         specify it using the <code>LanguageCode</code> parameter; you can find all valid language
-   *                         codes in the <a href="https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html">Supported languages</a> table.
-   *                         If you don't know the languages spoken in your media, use either
-   *                         <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code> and let
-   *                         Amazon Transcribe identify the languages for you.</p>
-   *                 </li>
-   *          </ul>
-   */
-  public startTranscriptionJob(
-    args: StartTranscriptionJobCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartTranscriptionJobCommandOutput>;
-  public startTranscriptionJob(
-    args: StartTranscriptionJobCommandInput,
-    cb: (err: any, data?: StartTranscriptionJobCommandOutput) => void
-  ): void;
-  public startTranscriptionJob(
-    args: StartTranscriptionJobCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartTranscriptionJobCommandOutput) => void
-  ): void;
-  public startTranscriptionJob(
-    args: StartTranscriptionJobCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartTranscriptionJobCommandOutput) => void),
-    cb?: (err: any, data?: StartTranscriptionJobCommandOutput) => void
-  ): Promise<StartTranscriptionJobCommandOutput> | void {
-    const command = new StartTranscriptionJobCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds one or more custom tags, each in the form of a key:value pair, to the specified
-   *             resource.</p>
-   *         <p>To learn more about using tags with Amazon Transcribe, refer to <a href="https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html">Tagging resources</a>.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Removes the specified tags from the specified Amazon Transcribe resource.</p>
-   *         <p>If you include <code>UntagResource</code> in your request, you must also include
-   *             <code>ResourceArn</code> and <code>TagKeys</code>.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the specified Call Analytics category with new rules. Note that the
-   *             <code>UpdateCallAnalyticsCategory</code> operation overwrites all existing rules contained in
-   *             the specified category. You cannot append additional rules onto an existing category.</p>
-   *         <p>To create a new category, see .</p>
-   */
-  public updateCallAnalyticsCategory(
-    args: UpdateCallAnalyticsCategoryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateCallAnalyticsCategoryCommandOutput>;
-  public updateCallAnalyticsCategory(
-    args: UpdateCallAnalyticsCategoryCommandInput,
-    cb: (err: any, data?: UpdateCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public updateCallAnalyticsCategory(
-    args: UpdateCallAnalyticsCategoryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateCallAnalyticsCategoryCommandOutput) => void
-  ): void;
-  public updateCallAnalyticsCategory(
-    args: UpdateCallAnalyticsCategoryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCallAnalyticsCategoryCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCallAnalyticsCategoryCommandOutput) => void
-  ): Promise<UpdateCallAnalyticsCategoryCommandOutput> | void {
-    const command = new UpdateCallAnalyticsCategoryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing custom medical vocabulary with new values. This operation overwrites
-   *             all existing information with your new values; you cannot append new terms onto an existing
-   *             vocabulary.</p>
-   */
-  public updateMedicalVocabulary(
-    args: UpdateMedicalVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateMedicalVocabularyCommandOutput>;
-  public updateMedicalVocabulary(
-    args: UpdateMedicalVocabularyCommandInput,
-    cb: (err: any, data?: UpdateMedicalVocabularyCommandOutput) => void
-  ): void;
-  public updateMedicalVocabulary(
-    args: UpdateMedicalVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateMedicalVocabularyCommandOutput) => void
-  ): void;
-  public updateMedicalVocabulary(
-    args: UpdateMedicalVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateMedicalVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: UpdateMedicalVocabularyCommandOutput) => void
-  ): Promise<UpdateMedicalVocabularyCommandOutput> | void {
-    const command = new UpdateMedicalVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing custom vocabulary with new values. This operation overwrites all existing
-   *             information with your new values; you cannot append new terms onto an existing vocabulary.</p>
-   */
-  public updateVocabulary(
-    args: UpdateVocabularyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateVocabularyCommandOutput>;
-  public updateVocabulary(
-    args: UpdateVocabularyCommandInput,
-    cb: (err: any, data?: UpdateVocabularyCommandOutput) => void
-  ): void;
-  public updateVocabulary(
-    args: UpdateVocabularyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateVocabularyCommandOutput) => void
-  ): void;
-  public updateVocabulary(
-    args: UpdateVocabularyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateVocabularyCommandOutput) => void),
-    cb?: (err: any, data?: UpdateVocabularyCommandOutput) => void
-  ): Promise<UpdateVocabularyCommandOutput> | void {
-    const command = new UpdateVocabularyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing custom vocabulary filter with a new list of words. The new list you provide
-   *             overwrites all previous entries; you cannot append new terms onto an existing vocabulary
-   *             filter.</p>
-   */
-  public updateVocabularyFilter(
-    args: UpdateVocabularyFilterCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateVocabularyFilterCommandOutput>;
-  public updateVocabularyFilter(
-    args: UpdateVocabularyFilterCommandInput,
-    cb: (err: any, data?: UpdateVocabularyFilterCommandOutput) => void
-  ): void;
-  public updateVocabularyFilter(
-    args: UpdateVocabularyFilterCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateVocabularyFilterCommandOutput) => void
-  ): void;
-  public updateVocabularyFilter(
-    args: UpdateVocabularyFilterCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateVocabularyFilterCommandOutput) => void),
-    cb?: (err: any, data?: UpdateVocabularyFilterCommandOutput) => void
-  ): Promise<UpdateVocabularyFilterCommandOutput> | void {
-    const command = new UpdateVocabularyFilterCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Transcribe extends TranscribeClient implements Transcribe {}
+createAggregatedClient(commands, Transcribe, { paginators, waiters });

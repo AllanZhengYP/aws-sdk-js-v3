@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppSyncClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppSyncClient";
-import {
-  GetApiAssociationRequest,
-  GetApiAssociationRequestFilterSensitiveLog,
-  GetApiAssociationResponse,
-  GetApiAssociationResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1GetApiAssociationCommand,
-  serializeAws_restJson1GetApiAssociationCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetApiAssociationRequest, GetApiAssociationResponse } from "../models/models_0";
+import { GetApiAssociation$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetApiAssociationCommand}.
+ */
 export interface GetApiAssociationCommandInput extends GetApiAssociationRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetApiAssociationCommand}.
+ */
 export interface GetApiAssociationCommandOutput extends GetApiAssociationResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,66 @@ export interface GetApiAssociationCommandOutput extends GetApiAssociationRespons
  * ```javascript
  * import { AppSyncClient, GetApiAssociationCommand } from "@aws-sdk/client-appsync"; // ES Modules import
  * // const { AppSyncClient, GetApiAssociationCommand } = require("@aws-sdk/client-appsync"); // CommonJS import
+ * // import type { AppSyncClientConfig } from "@aws-sdk/client-appsync";
+ * const config = {}; // type is AppSyncClientConfig
  * const client = new AppSyncClient(config);
+ * const input = { // GetApiAssociationRequest
+ *   domainName: "STRING_VALUE", // required
+ * };
  * const command = new GetApiAssociationCommand(input);
  * const response = await client.send(command);
+ * // { // GetApiAssociationResponse
+ * //   apiAssociation: { // ApiAssociation
+ * //     domainName: "STRING_VALUE",
+ * //     apiId: "STRING_VALUE",
+ * //     associationStatus: "PROCESSING" || "FAILED" || "SUCCESS",
+ * //     deploymentDetail: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetApiAssociationCommandInput - {@link GetApiAssociationCommandInput}
+ * @returns {@link GetApiAssociationCommandOutput}
  * @see {@link GetApiAssociationCommandInput} for command's `input` shape.
  * @see {@link GetApiAssociationCommandOutput} for command's `response` shape.
  * @see {@link AppSyncClientResolvedConfig | config} for AppSyncClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have access to perform this operation on this resource.</p>
+ *
+ * @throws {@link BadRequestException} (client fault)
+ *  <p>The request is not well formed. For example, a value is invalid or a required field is
+ *          missing. Check the field values, and then try again.</p>
+ *
+ * @throws {@link InternalFailureException} (server fault)
+ *  <p>An internal AppSync error occurred. Try your request again.</p>
+ *
+ * @throws {@link NotFoundException} (client fault)
+ *  <p>The resource specified in the request was not found. Check the resource, and then try
+ *          again.</p>
+ *
+ * @throws {@link AppSyncServiceException}
+ * <p>Base exception class for all service exceptions from AppSync service.</p>
+ *
+ *
+ * @public
  */
-export class GetApiAssociationCommand extends $Command<
-  GetApiAssociationCommandInput,
-  GetApiAssociationCommandOutput,
-  AppSyncClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetApiAssociationCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppSyncClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetApiAssociationCommandInput, GetApiAssociationCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppSyncClient";
-    const commandName = "GetApiAssociationCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetApiAssociationRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetApiAssociationResponseFilterSensitiveLog,
+export class GetApiAssociationCommand extends command<GetApiAssociationCommandInput, GetApiAssociationCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetApiAssociation",
+  GetApiAssociation$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetApiAssociationRequest;
+      output: GetApiAssociationResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetApiAssociationCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetApiAssociationCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetApiAssociationCommandOutput> {
-    return deserializeAws_restJson1GetApiAssociationCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetApiAssociationCommandInput;
+      output: GetApiAssociationCommandOutput;
+    };
+  };
 }

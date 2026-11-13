@@ -1,118 +1,163 @@
 // smithy-typescript generated code
 import {
-  EndpointsInputConfig,
-  EndpointsResolvedConfig,
-  RegionInputConfig,
-  RegionResolvedConfig,
-  resolveEndpointsConfig,
-  resolveRegionConfig,
-} from "@aws-sdk/config-resolver";
-import { getContentLengthPlugin } from "@aws-sdk/middleware-content-length";
-import {
+  type HostHeaderInputConfig,
+  type HostHeaderResolvedConfig,
+  type UserAgentInputConfig,
+  type UserAgentResolvedConfig,
   getHostHeaderPlugin,
-  HostHeaderInputConfig,
-  HostHeaderResolvedConfig,
-  resolveHostHeaderConfig,
-} from "@aws-sdk/middleware-host-header";
-import { getLoggerPlugin } from "@aws-sdk/middleware-logger";
-import { getRecursionDetectionPlugin } from "@aws-sdk/middleware-recursion-detection";
-import { getRetryPlugin, resolveRetryConfig, RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
-import {
-  AwsAuthInputConfig,
-  AwsAuthResolvedConfig,
-  getAwsAuthPlugin,
-  resolveAwsAuthConfig,
-} from "@aws-sdk/middleware-signing";
-import {
+  getLoggerPlugin,
+  getRecursionDetectionPlugin,
   getUserAgentPlugin,
+  resolveHostHeaderConfig,
   resolveUserAgentConfig,
-  UserAgentInputConfig,
-  UserAgentResolvedConfig,
-} from "@aws-sdk/middleware-user-agent";
-import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+} from "@aws-sdk/core/client";
 import {
+  DefaultIdentityProviderConfig,
+  getHttpAuthSchemeEndpointRuleSetPlugin,
+  getHttpSigningPlugin,
+} from "@smithy/core";
+import {
+  type DefaultsMode as __DefaultsMode,
+  type SmithyConfiguration as __SmithyConfiguration,
+  type SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
   Client as __Client,
-  DefaultsMode,
-  SmithyConfiguration as __SmithyConfiguration,
-  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
-} from "@aws-sdk/smithy-client";
+} from "@smithy/core/client";
+import { type RegionInputConfig, type RegionResolvedConfig, resolveRegionConfig } from "@smithy/core/config";
+import { type EndpointInputConfig, type EndpointResolvedConfig, resolveEndpointConfig } from "@smithy/core/endpoints";
+import { type HttpHandlerUserInput as __HttpHandlerUserInput, getContentLengthPlugin } from "@smithy/core/protocols";
 import {
+  type RetryInputConfig,
+  type RetryResolvedConfig,
+  getRetryPlugin,
+  resolveRetryConfig,
+} from "@smithy/core/retry";
+import { getSchemaSerdePlugin } from "@smithy/core/schema";
+import type {
+  AwsCredentialIdentityProvider,
   BodyLengthCalculator as __BodyLengthCalculator,
-  Credentials as __Credentials,
+  CheckOptionalClientConfig as __CheckOptionalClientConfig,
+  ChecksumConstructor as __ChecksumConstructor,
   Decoder as __Decoder,
   Encoder as __Encoder,
-  Hash as __Hash,
   HashConstructor as __HashConstructor,
   HttpHandlerOptions as __HttpHandlerOptions,
   Logger as __Logger,
   Provider as __Provider,
-  Provider,
-  RegionInfoProvider,
   StreamCollector as __StreamCollector,
   UrlParser as __UrlParser,
   UserAgent as __UserAgent,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
 import {
+  type HttpAuthSchemeInputConfig,
+  type HttpAuthSchemeResolvedConfig,
+  defaultBackupGatewayHttpAuthSchemeParametersProvider,
+  resolveHttpAuthSchemeConfig,
+} from "./auth/httpAuthSchemeProvider";
+import type {
   AssociateGatewayToServerCommandInput,
   AssociateGatewayToServerCommandOutput,
 } from "./commands/AssociateGatewayToServerCommand";
-import { CreateGatewayCommandInput, CreateGatewayCommandOutput } from "./commands/CreateGatewayCommand";
-import { DeleteGatewayCommandInput, DeleteGatewayCommandOutput } from "./commands/DeleteGatewayCommand";
-import { DeleteHypervisorCommandInput, DeleteHypervisorCommandOutput } from "./commands/DeleteHypervisorCommand";
-import {
+import type { CreateGatewayCommandInput, CreateGatewayCommandOutput } from "./commands/CreateGatewayCommand";
+import type { DeleteGatewayCommandInput, DeleteGatewayCommandOutput } from "./commands/DeleteGatewayCommand";
+import type { DeleteHypervisorCommandInput, DeleteHypervisorCommandOutput } from "./commands/DeleteHypervisorCommand";
+import type {
   DisassociateGatewayFromServerCommandInput,
   DisassociateGatewayFromServerCommandOutput,
 } from "./commands/DisassociateGatewayFromServerCommand";
-import { GetGatewayCommandInput, GetGatewayCommandOutput } from "./commands/GetGatewayCommand";
-import {
+import type {
+  GetBandwidthRateLimitScheduleCommandInput,
+  GetBandwidthRateLimitScheduleCommandOutput,
+} from "./commands/GetBandwidthRateLimitScheduleCommand";
+import type { GetGatewayCommandInput, GetGatewayCommandOutput } from "./commands/GetGatewayCommand";
+import type { GetHypervisorCommandInput, GetHypervisorCommandOutput } from "./commands/GetHypervisorCommand";
+import type {
+  GetHypervisorPropertyMappingsCommandInput,
+  GetHypervisorPropertyMappingsCommandOutput,
+} from "./commands/GetHypervisorPropertyMappingsCommand";
+import type {
+  GetVirtualMachineCommandInput,
+  GetVirtualMachineCommandOutput,
+} from "./commands/GetVirtualMachineCommand";
+import type {
   ImportHypervisorConfigurationCommandInput,
   ImportHypervisorConfigurationCommandOutput,
 } from "./commands/ImportHypervisorConfigurationCommand";
-import { ListGatewaysCommandInput, ListGatewaysCommandOutput } from "./commands/ListGatewaysCommand";
-import { ListHypervisorsCommandInput, ListHypervisorsCommandOutput } from "./commands/ListHypervisorsCommand";
-import {
+import type { ListGatewaysCommandInput, ListGatewaysCommandOutput } from "./commands/ListGatewaysCommand";
+import type { ListHypervisorsCommandInput, ListHypervisorsCommandOutput } from "./commands/ListHypervisorsCommand";
+import type {
   ListTagsForResourceCommandInput,
   ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
-import {
+import type {
   ListVirtualMachinesCommandInput,
   ListVirtualMachinesCommandOutput,
 } from "./commands/ListVirtualMachinesCommand";
-import {
+import type {
+  PutBandwidthRateLimitScheduleCommandInput,
+  PutBandwidthRateLimitScheduleCommandOutput,
+} from "./commands/PutBandwidthRateLimitScheduleCommand";
+import type {
+  PutHypervisorPropertyMappingsCommandInput,
+  PutHypervisorPropertyMappingsCommandOutput,
+} from "./commands/PutHypervisorPropertyMappingsCommand";
+import type {
   PutMaintenanceStartTimeCommandInput,
   PutMaintenanceStartTimeCommandOutput,
 } from "./commands/PutMaintenanceStartTimeCommand";
-import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import {
+import type {
+  StartVirtualMachinesMetadataSyncCommandInput,
+  StartVirtualMachinesMetadataSyncCommandOutput,
+} from "./commands/StartVirtualMachinesMetadataSyncCommand";
+import type { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import type {
   TestHypervisorConfigurationCommandInput,
   TestHypervisorConfigurationCommandOutput,
 } from "./commands/TestHypervisorConfigurationCommand";
-import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
-import {
+import type { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import type {
   UpdateGatewayInformationCommandInput,
   UpdateGatewayInformationCommandOutput,
 } from "./commands/UpdateGatewayInformationCommand";
-import {
+import type {
   UpdateGatewaySoftwareNowCommandInput,
   UpdateGatewaySoftwareNowCommandOutput,
 } from "./commands/UpdateGatewaySoftwareNowCommand";
-import { UpdateHypervisorCommandInput, UpdateHypervisorCommandOutput } from "./commands/UpdateHypervisorCommand";
+import type { UpdateHypervisorCommandInput, UpdateHypervisorCommandOutput } from "./commands/UpdateHypervisorCommand";
+import {
+  type ClientInputEndpointParameters,
+  type ClientResolvedEndpointParameters,
+  type EndpointParameters,
+  resolveClientEndpointParameters,
+} from "./endpoint/EndpointParameters";
 import { getRuntimeConfig as __getRuntimeConfig } from "./runtimeConfig";
+import { type RuntimeExtension, type RuntimeExtensionsConfig, resolveRuntimeExtensions } from "./runtimeExtensions";
 
+export { __Client };
+
+/**
+ * @public
+ */
 export type ServiceInputTypes =
   | AssociateGatewayToServerCommandInput
   | CreateGatewayCommandInput
   | DeleteGatewayCommandInput
   | DeleteHypervisorCommandInput
   | DisassociateGatewayFromServerCommandInput
+  | GetBandwidthRateLimitScheduleCommandInput
   | GetGatewayCommandInput
+  | GetHypervisorCommandInput
+  | GetHypervisorPropertyMappingsCommandInput
+  | GetVirtualMachineCommandInput
   | ImportHypervisorConfigurationCommandInput
   | ListGatewaysCommandInput
   | ListHypervisorsCommandInput
   | ListTagsForResourceCommandInput
   | ListVirtualMachinesCommandInput
+  | PutBandwidthRateLimitScheduleCommandInput
+  | PutHypervisorPropertyMappingsCommandInput
   | PutMaintenanceStartTimeCommandInput
+  | StartVirtualMachinesMetadataSyncCommandInput
   | TagResourceCommandInput
   | TestHypervisorConfigurationCommandInput
   | UntagResourceCommandInput
@@ -120,19 +165,29 @@ export type ServiceInputTypes =
   | UpdateGatewaySoftwareNowCommandInput
   | UpdateHypervisorCommandInput;
 
+/**
+ * @public
+ */
 export type ServiceOutputTypes =
   | AssociateGatewayToServerCommandOutput
   | CreateGatewayCommandOutput
   | DeleteGatewayCommandOutput
   | DeleteHypervisorCommandOutput
   | DisassociateGatewayFromServerCommandOutput
+  | GetBandwidthRateLimitScheduleCommandOutput
   | GetGatewayCommandOutput
+  | GetHypervisorCommandOutput
+  | GetHypervisorPropertyMappingsCommandOutput
+  | GetVirtualMachineCommandOutput
   | ImportHypervisorConfigurationCommandOutput
   | ListGatewaysCommandOutput
   | ListHypervisorsCommandOutput
   | ListTagsForResourceCommandOutput
   | ListVirtualMachinesCommandOutput
+  | PutBandwidthRateLimitScheduleCommandOutput
+  | PutHypervisorPropertyMappingsCommandOutput
   | PutMaintenanceStartTimeCommandOutput
+  | StartVirtualMachinesMetadataSyncCommandOutput
   | TagResourceCommandOutput
   | TestHypervisorConfigurationCommandOutput
   | UntagResourceCommandOutput
@@ -140,18 +195,21 @@ export type ServiceOutputTypes =
   | UpdateGatewaySoftwareNowCommandOutput
   | UpdateHypervisorCommandOutput;
 
-export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+/**
+ * @public
+ */
+export interface ClientDefaults extends Partial<__SmithyConfiguration<__HttpHandlerOptions>> {
   /**
-   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   * The HTTP handler to use or its constructor options. Fetch in browser and Https in Nodejs.
    */
-  requestHandler?: __HttpHandler;
+  requestHandler?: __HttpHandlerUserInput;
 
   /**
-   * A constructor for a class implementing the {@link __Hash} interface
+   * A constructor for a class implementing the {@link @smithy/types#ChecksumConstructor} interface
    * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
    * @internal
    */
-  sha256?: __HashConstructor;
+  sha256?: __ChecksumConstructor | __HashConstructor;
 
   /**
    * The function that will be used to convert strings into HTTP endpoints.
@@ -202,25 +260,16 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   runtime?: string;
 
   /**
-   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * Disable dynamically changing the endpoint of the client based on the hostPrefix
    * trait of an operation.
    */
   disableHostPrefix?: boolean;
 
   /**
-   * Value for how many times a request will be made at most in case of retry.
+   * Unique service identifier.
+   * @internal
    */
-  maxAttempts?: number | __Provider<number>;
-
-  /**
-   * Specifies which retry algorithm to use.
-   */
-  retryMode?: string | __Provider<string>;
-
-  /**
-   * Optional logger for logging debug/info/warn/error.
-   */
-  logger?: __Logger;
+  serviceId?: string;
 
   /**
    * Enables IPv6/IPv4 dualstack endpoint.
@@ -233,76 +282,113 @@ export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__
   useFipsEndpoint?: boolean | __Provider<boolean>;
 
   /**
-   * Unique service identifier.
-   * @internal
-   */
-  serviceId?: string;
-
-  /**
    * The AWS region to which this client will send requests
    */
   region?: string | __Provider<string>;
 
   /**
-   * Default credentials provider; Not available in browser runtime.
-   * @internal
+   * Setting a client profile is similar to setting a value for the
+   * AWS_PROFILE environment variable. Setting a profile on a client
+   * in code only affects the single client instance, unlike AWS_PROFILE.
+   *
+   * When set, and only for environments where an AWS configuration
+   * file exists, fields configurable by this file will be retrieved
+   * from the specified profile within that file.
+   * Conflicting code configuration and environment variables will
+   * still have higher priority.
+   *
+   * For client credential resolution that involves checking the AWS
+   * configuration file, the client's profile (this value) will be
+   * used unless a different profile is set in the credential
+   * provider options.
+   *
    */
-  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
-
-  /**
-   * Fetch related hostname, signing name or signing region with given region.
-   * @internal
-   */
-  regionInfoProvider?: RegionInfoProvider;
+  profile?: string;
 
   /**
    * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
    * @internal
    */
-  defaultUserAgentProvider?: Provider<__UserAgent>;
+  defaultUserAgentProvider?: __Provider<__UserAgent>;
 
   /**
-   * The {@link DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   * Default credentials provider; Not available in browser runtime.
+   * @deprecated
+   * @internal
    */
-  defaultsMode?: DefaultsMode | Provider<DefaultsMode>;
+  credentialDefaultProvider?: (input: any) => AwsCredentialIdentityProvider;
+
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+
+  /**
+   * Specifies which retry algorithm to use.
+   * Accepted values are "standard" and "adaptive".
+   * @see https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html
+   *
+   */
+  retryMode?: string | __Provider<string>;
+
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+
+  /**
+   * Optional extensions
+   */
+  extensions?: RuntimeExtension[];
+
+  /**
+   * The {@link @smithy/smithy-client#DefaultsMode} that will be used to determine how certain default configuration options are resolved in the SDK.
+   */
+  defaultsMode?: __DefaultsMode | __Provider<__DefaultsMode>;
 }
 
-type BackupGatewayClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
-  ClientDefaults &
-  RegionInputConfig &
-  EndpointsInputConfig &
-  RetryInputConfig &
-  HostHeaderInputConfig &
-  AwsAuthInputConfig &
-  UserAgentInputConfig;
 /**
- * The configuration interface of BackupGatewayClient class constructor that set the region, credentials and other options.
+ * @public
+ */
+export type BackupGatewayClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  UserAgentInputConfig &
+  RetryInputConfig &
+  RegionInputConfig &
+  HostHeaderInputConfig &
+  EndpointInputConfig<EndpointParameters> &
+  HttpAuthSchemeInputConfig &
+  ClientInputEndpointParameters;
+/**
+ * @public
+ *
+ *  The configuration interface of BackupGatewayClient class constructor that set the region, credentials and other options.
  */
 export interface BackupGatewayClientConfig extends BackupGatewayClientConfigType {}
 
-type BackupGatewayClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
-  Required<ClientDefaults> &
-  RegionResolvedConfig &
-  EndpointsResolvedConfig &
-  RetryResolvedConfig &
-  HostHeaderResolvedConfig &
-  AwsAuthResolvedConfig &
-  UserAgentResolvedConfig;
 /**
- * The resolved configuration interface of BackupGatewayClient class. This is resolved and normalized from the {@link BackupGatewayClientConfig | constructor configuration interface}.
+ * @public
+ */
+export type BackupGatewayClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RuntimeExtensionsConfig &
+  UserAgentResolvedConfig &
+  RetryResolvedConfig &
+  RegionResolvedConfig &
+  HostHeaderResolvedConfig &
+  EndpointResolvedConfig<EndpointParameters> &
+  HttpAuthSchemeResolvedConfig &
+  ClientResolvedEndpointParameters;
+/**
+ * @public
+ *
+ *  The resolved configuration interface of BackupGatewayClient class. This is resolved and normalized from the {@link BackupGatewayClientConfig | constructor configuration interface}.
  */
 export interface BackupGatewayClientResolvedConfig extends BackupGatewayClientResolvedConfigType {}
 
 /**
- * <fullname>Backup gateway</fullname>
- *          <p>Backup gateway connects Backup to your hypervisor, so you can
- *       create, store, and restore backups of your virtual machines (VMs) anywhere, whether
- *       on-premises or in the VMware Cloud (VMC) on Amazon Web Services.</p>
- *          <p>Add on-premises resources by connecting to a hypervisor through a gateway. Backup will automatically discover the resources in your hypervisor.</p>
- *          <p>Use Backup to assign virtual or on-premises resources to a backup plan, or run
- *       on-demand backups. Once you have backed up your resources, you can view them and restore them
- *       like any resource supported by Backup.</p>
- *          <p>To download the Amazon Web Services software to get started, navigate to the Backup console, choose <b>Gateways</b>, then choose <b>Create gateway</b>.</p>
+ * <fullname>Backup gateway</fullname> <p>Backup gateway connects Backup to your hypervisor, so you can create, store, and restore backups of your virtual machines (VMs) anywhere, whether on-premises or in the VMware Cloud (VMC) on Amazon Web Services.</p> <p>Add on-premises resources by connecting to a hypervisor through a gateway. Backup will automatically discover the resources in your hypervisor.</p> <p>Use Backup to assign virtual or on-premises resources to a backup plan, or run on-demand backups. Once you have backed up your resources, you can view them and restore them like any resource supported by Backup.</p> <p>To download the Amazon Web Services software to get started, navigate to the Backup console, choose <b>Gateways</b>, then choose <b>Create gateway</b>.</p>
+ * @public
  */
 export class BackupGatewayClient extends __Client<
   __HttpHandlerOptions,
@@ -315,23 +401,36 @@ export class BackupGatewayClient extends __Client<
    */
   readonly config: BackupGatewayClientResolvedConfig;
 
-  constructor(configuration: BackupGatewayClientConfig) {
-    const _config_0 = __getRuntimeConfig(configuration);
-    const _config_1 = resolveRegionConfig(_config_0);
-    const _config_2 = resolveEndpointsConfig(_config_1);
+  constructor(...[configuration]: __CheckOptionalClientConfig<BackupGatewayClientConfig>) {
+    const _config_0 = __getRuntimeConfig(configuration || {});
+    super(_config_0 as any);
+    this.initConfig = _config_0;
+    const _config_1 = resolveClientEndpointParameters(_config_0);
+    const _config_2 = resolveUserAgentConfig(_config_1);
     const _config_3 = resolveRetryConfig(_config_2);
-    const _config_4 = resolveHostHeaderConfig(_config_3);
-    const _config_5 = resolveAwsAuthConfig(_config_4);
-    const _config_6 = resolveUserAgentConfig(_config_5);
-    super(_config_6);
-    this.config = _config_6;
+    const _config_4 = resolveRegionConfig(_config_3);
+    const _config_5 = resolveHostHeaderConfig(_config_4);
+    const _config_6 = resolveEndpointConfig(_config_5);
+    const _config_7 = resolveHttpAuthSchemeConfig(_config_6);
+    const _config_8 = resolveRuntimeExtensions(_config_7, configuration?.extensions || []);
+    this.config = _config_8;
+    this.middlewareStack.use(getSchemaSerdePlugin(this.config));
+    this.middlewareStack.use(getUserAgentPlugin(this.config));
     this.middlewareStack.use(getRetryPlugin(this.config));
     this.middlewareStack.use(getContentLengthPlugin(this.config));
     this.middlewareStack.use(getHostHeaderPlugin(this.config));
     this.middlewareStack.use(getLoggerPlugin(this.config));
     this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
-    this.middlewareStack.use(getAwsAuthPlugin(this.config));
-    this.middlewareStack.use(getUserAgentPlugin(this.config));
+    this.middlewareStack.use(
+      getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: defaultBackupGatewayHttpAuthSchemeParametersProvider,
+        identityProviderConfigProvider: async (config: BackupGatewayClientResolvedConfig) =>
+          new DefaultIdentityProviderConfig({
+            "aws.auth#sigv4": config.credentials,
+          }),
+      })
+    );
+    this.middlewareStack.use(getHttpSigningPlugin(this.config));
   }
 
   /**

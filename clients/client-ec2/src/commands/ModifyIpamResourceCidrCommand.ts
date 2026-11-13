@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { EC2ClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../EC2Client";
-import {
-  ModifyIpamResourceCidrRequest,
-  ModifyIpamResourceCidrRequestFilterSensitiveLog,
-  ModifyIpamResourceCidrResult,
-  ModifyIpamResourceCidrResultFilterSensitiveLog,
-} from "../models/models_5";
-import {
-  deserializeAws_ec2ModifyIpamResourceCidrCommand,
-  serializeAws_ec2ModifyIpamResourceCidrCommand,
-} from "../protocols/Aws_ec2";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ModifyIpamResourceCidrRequest, ModifyIpamResourceCidrResult } from "../models/models_7";
+import { ModifyIpamResourceCidr$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ModifyIpamResourceCidrCommand}.
+ */
 export interface ModifyIpamResourceCidrCommandInput extends ModifyIpamResourceCidrRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ModifyIpamResourceCidrCommand}.
+ */
 export interface ModifyIpamResourceCidrCommandOutput extends ModifyIpamResourceCidrResult, __MetadataBearer {}
 
 /**
@@ -35,68 +30,75 @@ export interface ModifyIpamResourceCidrCommandOutput extends ModifyIpamResourceC
  * ```javascript
  * import { EC2Client, ModifyIpamResourceCidrCommand } from "@aws-sdk/client-ec2"; // ES Modules import
  * // const { EC2Client, ModifyIpamResourceCidrCommand } = require("@aws-sdk/client-ec2"); // CommonJS import
+ * // import type { EC2ClientConfig } from "@aws-sdk/client-ec2";
+ * const config = {}; // type is EC2ClientConfig
  * const client = new EC2Client(config);
+ * const input = { // ModifyIpamResourceCidrRequest
+ *   DryRun: true || false,
+ *   ResourceId: "STRING_VALUE", // required
+ *   ResourceCidr: "STRING_VALUE", // required
+ *   ResourceRegion: "STRING_VALUE", // required
+ *   CurrentIpamScopeId: "STRING_VALUE", // required
+ *   DestinationIpamScopeId: "STRING_VALUE",
+ *   Monitored: true || false, // required
+ * };
  * const command = new ModifyIpamResourceCidrCommand(input);
  * const response = await client.send(command);
+ * // { // ModifyIpamResourceCidrResult
+ * //   IpamResourceCidr: { // IpamResourceCidr
+ * //     IpamId: "STRING_VALUE",
+ * //     IpamScopeId: "STRING_VALUE",
+ * //     IpamPoolId: "STRING_VALUE",
+ * //     ResourceRegion: "STRING_VALUE",
+ * //     ResourceOwnerId: "STRING_VALUE",
+ * //     ResourceId: "STRING_VALUE",
+ * //     ResourceName: "STRING_VALUE",
+ * //     ResourceCidr: "STRING_VALUE",
+ * //     ResourceType: "vpc" || "subnet" || "eip" || "public-ipv4-pool" || "ipv6-pool" || "eni" || "anycast-ip-list",
+ * //     ResourceTags: [ // IpamResourceTagList
+ * //       { // IpamResourceTag
+ * //         Key: "STRING_VALUE",
+ * //         Value: "STRING_VALUE",
+ * //       },
+ * //     ],
+ * //     IpUsage: Number("double"),
+ * //     ComplianceStatus: "compliant" || "noncompliant" || "unmanaged" || "ignored",
+ * //     ManagementState: "managed" || "unmanaged" || "ignored",
+ * //     OverlapStatus: "overlapping" || "nonoverlapping" || "ignored",
+ * //     VpcId: "STRING_VALUE",
+ * //     AvailabilityZoneId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param ModifyIpamResourceCidrCommandInput - {@link ModifyIpamResourceCidrCommandInput}
+ * @returns {@link ModifyIpamResourceCidrCommandOutput}
  * @see {@link ModifyIpamResourceCidrCommandInput} for command's `input` shape.
  * @see {@link ModifyIpamResourceCidrCommandOutput} for command's `response` shape.
  * @see {@link EC2ClientResolvedConfig | config} for EC2Client's `config` shape.
  *
+ * @throws {@link EC2ServiceException}
+ * <p>Base exception class for all service exceptions from EC2 service.</p>
+ *
+ *
+ * @public
  */
-export class ModifyIpamResourceCidrCommand extends $Command<
-  ModifyIpamResourceCidrCommandInput,
-  ModifyIpamResourceCidrCommandOutput,
-  EC2ClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ModifyIpamResourceCidrCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: EC2ClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ModifyIpamResourceCidrCommandInput, ModifyIpamResourceCidrCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "EC2Client";
-    const commandName = "ModifyIpamResourceCidrCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ModifyIpamResourceCidrRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ModifyIpamResourceCidrResultFilterSensitiveLog,
+export class ModifyIpamResourceCidrCommand extends command<ModifyIpamResourceCidrCommandInput, ModifyIpamResourceCidrCommandOutput>(
+  _ep0,
+  _mw0,
+  "ModifyIpamResourceCidr",
+  ModifyIpamResourceCidr$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ModifyIpamResourceCidrRequest;
+      output: ModifyIpamResourceCidrResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ModifyIpamResourceCidrCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_ec2ModifyIpamResourceCidrCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ModifyIpamResourceCidrCommandOutput> {
-    return deserializeAws_ec2ModifyIpamResourceCidrCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ModifyIpamResourceCidrCommandInput;
+      output: ModifyIpamResourceCidrCommandOutput;
+    };
+  };
 }

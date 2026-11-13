@@ -1,487 +1,1353 @@
 // smithy-typescript generated code
-import { ExceptionOptionType as __ExceptionOptionType, SENSITIVE_STRING } from "@aws-sdk/smithy-client";
-
-import { ConnectServiceException as __BaseException } from "./ConnectServiceException";
+import type {
+  AccessType,
+  ActionType,
+  AgentAvailabilityTimer,
+  AgentStatusState,
+  AgentStatusType,
+  AIAgentType,
+  AiUseCase,
+  AllowedUserAction,
+  ApplicationType,
+  AttachedFileInvalidRequestExceptionReason,
+  AttachedFileServiceQuotaExceededExceptionReason,
+  AuthCodeEntityType,
+  BehaviorType,
+  Channel,
+  ChannelWorkloadBehaviorType,
+  ConfigurableNotificationPriority,
+  ContactFlowStatus,
+  ContactFlowType,
+  ContactInitiationMethod,
+  ContactInteractionType,
+  ContactState,
+  DataTableAttributeValueType,
+  DataTableLockLevel,
+  DataTableStatus,
+  DeviceType,
+  DirectoryType,
+  EncryptionType,
+  EndpointType,
+  EntityType,
+  EvaluationFormItemEnablementSourceType,
+  EvaluationFormItemEnablementSourceValueType,
+  EvaluationFormItemSourceValuesComparator,
+  EvaluationFormLanguageCode,
+  EvaluationFormMetricType,
+  EvaluationFormMultiSelectQuestionDisplayMode,
+  EvaluationFormQuestionAutomationAnswerSourceType,
+  EvaluationFormScoringMode,
+  EvaluationFormScoringStatus,
+  EvaluationFormSingleSelectQuestionDisplayMode,
+  EvaluationReviewNotificationRecipientType,
+  EventSourceName,
+  FailureReasonCode,
+  FileStatusType,
+  FileUseCaseType,
+  FlowAssociationResourceType,
+  FlowModuleType,
+  HoursOfOperationDays,
+  InstanceStorageResourceType,
+  IntegrationType,
+  ListFlowAssociationResourceType,
+  LocaleCode,
+  MetricFilterBooleanConditionComparison,
+  MetricFilterNumberConditionComparison,
+  MetricFilterStringConditionComparison,
+  MetricStatus,
+  MetricUnit,
+  MultiSelectQuestionRuleCategoryAutomationCondition,
+  NotFoundBehaviorType,
+  NotificationContentType,
+  NotificationDeliveryType,
+  NumericQuestionPropertyAutomationLabel,
+  OutboundStrategyType,
+  OverrideDays,
+  OverrideType,
+  ParticipantRole,
+  ParticipantState,
+  PerformanceCategoryName,
+  PreEvaluationFilterOperator,
+  PreEvaluationFilterResourceType,
+  PreEvaluationFilterType,
+  QuickConnectType,
+  RecurrenceFrequency,
+  ReferenceStatus,
+  ReferenceType,
+  RehydrationType,
+  RulePublishStatus,
+  ScreenShareCapability,
+  SingleSelectQuestionRuleCategoryAutomationCondition,
+  SlaAssignmentType,
+  SlaType,
+  SourceType,
+  StorageType,
+  StringComparisonType,
+  TrendIndicator,
+  VideoCapability,
+  VocabularyLanguageCode,
+  VoiceEnhancementMode,
+} from "./enums";
 
 /**
- * <p>You do not have sufficient permissions to perform this action.</p>
+ * <p>Information about an action.</p>
+ * @public
  */
-export class AccessDeniedException extends __BaseException {
-  readonly name: "AccessDeniedException" = "AccessDeniedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface ActionSummary {
   /**
-   * @internal
+   * <p>The action type.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<AccessDeniedException, __BaseException>) {
-    super({
-      name: "AccessDeniedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, AccessDeniedException.prototype);
-    this.Message = opts.Message;
-  }
+  ActionType: ActionType | undefined;
 }
 
-export enum ContactState {
-  CONNECTED = "CONNECTED",
-  CONNECTED_ONHOLD = "CONNECTED_ONHOLD",
-  CONNECTING = "CONNECTING",
-  ENDED = "ENDED",
-  ERROR = "ERROR",
-  INCOMING = "INCOMING",
-  MISSED = "MISSED",
-  PENDING = "PENDING",
-  REJECTED = "REJECTED",
+/**
+ * @public
+ */
+export interface ActivateEvaluationFormRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the evaluation form.</p>
+   * @public
+   */
+  EvaluationFormId: string | undefined;
+
+  /**
+   * <p>The version of the evaluation form to activate. If the version property is not provided, the latest version of
+   *    the evaluation form is activated.</p>
+   * @public
+   */
+  EvaluationFormVersion: number | undefined;
 }
 
-export enum Channel {
-  CHAT = "CHAT",
-  TASK = "TASK",
-  VOICE = "VOICE",
+/**
+ * @public
+ */
+export interface ActivateEvaluationFormResponse {
+  /**
+   * <p>The unique identifier for the evaluation form.</p>
+   * @public
+   */
+  EvaluationFormId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the evaluation form resource.</p>
+   * @public
+   */
+  EvaluationFormArn: string | undefined;
+
+  /**
+   * <p>A version of the evaluation form.</p>
+   * @public
+   */
+  EvaluationFormVersion: number | undefined;
 }
 
-export enum ContactInitiationMethod {
-  API = "API",
-  CALLBACK = "CALLBACK",
-  INBOUND = "INBOUND",
-  OUTBOUND = "OUTBOUND",
-  QUEUE_TRANSFER = "QUEUE_TRANSFER",
-  TRANSFER = "TRANSFER",
+/**
+ * <p>Information about the email recipient</p>
+ * @public
+ */
+export interface EmailRecipient {
+  /**
+   * <p>Address of the email recipient.</p>
+   * @public
+   */
+  Address?: string | undefined;
+
+  /**
+   * <p>Display name of the email recipient.</p>
+   * @public
+   */
+  DisplayName?: string | undefined;
+}
+
+/**
+ * <p>List of additional email addresses for an email contact.</p>
+ * @public
+ */
+export interface AdditionalEmailRecipients {
+  /**
+   * <p>List of additional TO email recipients for an email contact.</p>
+   * @public
+   */
+  ToList?: EmailRecipient[] | undefined;
+
+  /**
+   * <p>List of additional CC email recipients for an email contact.</p>
+   * @public
+   */
+  CcList?: EmailRecipient[] | undefined;
+}
+
+/**
+ * <p>Configuration settings for after contact work (ACW) timeout.</p>
+ * @public
+ */
+export interface AfterContactWorkConfig {
+  /**
+   * <p>The after contact work (ACW) timeout duration in seconds. Minimum: 1 second. Maximum: 2,000,000 seconds (24 days). For the CHAT channel, the maximum for a specific duration is 5,400 seconds (90 minutes); higher values end ACW after 90 minutes. For all channels, including chat, you can enter 0 for an indefinite amount of time, meaning agents must manually choose to end ACW.</p>
+   * @public
+   */
+  AfterContactWorkTimeLimit?: number | undefined;
+}
+
+/**
+ * <p>Configuration settings for after contact work (ACW) timeout for a specific channel.</p>
+ * @public
+ */
+export interface AfterContactWorkConfigPerChannel {
+  /**
+   * <p>The channel for this ACW timeout configuration. Valid values: VOICE, CHAT, TASK, EMAIL.</p>
+   * @public
+   */
+  Channel: Channel | undefined;
+
+  /**
+   * <p>The ACW timeout settings for this channel.</p>
+   * @public
+   */
+  AfterContactWorkConfig: AfterContactWorkConfig | undefined;
+
+  /**
+   * <p>The ACW timeout settings for agent-first callbacks. This setting only applies to the VOICE channel.</p>
+   * @public
+   */
+  AgentFirstCallbackAfterContactWorkConfig?: AfterContactWorkConfig | undefined;
+}
+
+/**
+ * <p>Information about a traffic distribution.</p>
+ * @public
+ */
+export interface Distribution {
+  /**
+   * <p>The Amazon Web Services Region where the traffic is distributed.</p>
+   * @public
+   */
+  Region: string | undefined;
+
+  /**
+   * <p>The percentage of the traffic that is distributed, in increments of 10.</p>
+   * @public
+   */
+  Percentage: number | undefined;
+}
+
+/**
+ * <p>The distribution of agents between the instance and its replica(s).</p>
+ * @public
+ */
+export interface AgentConfig {
+  /**
+   * <p>Information about traffic distributions.</p>
+   * @public
+   */
+  Distributions: Distribution[] | undefined;
 }
 
 /**
  * <p>Contains information about a queue resource for which metrics are returned.</p>
+ * @public
  */
 export interface QueueReference {
   /**
    * <p>The identifier of the queue.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the queue.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 }
 
 /**
- * <p>Information about the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html">contact</a> associated to the
- *    user.</p>
+ * <p>Information about the <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html">contact</a> associated to the user.</p>
+ * @public
  */
 export interface AgentContactReference {
   /**
-   * <p>The identifier of the contact in this instance of Amazon Connect. </p>
+   * <p>The identifier of the contact in this instance of Connect Customer. </p>
+   * @public
    */
-  ContactId?: string;
+  ContactId?: string | undefined;
 
   /**
    * <p>The channel of the contact.</p>
+   * @public
    */
-  Channel?: Channel | string;
+  Channel?: Channel | undefined;
 
   /**
    * <p>How the contact was initiated.</p>
+   * @public
    */
-  InitiationMethod?: ContactInitiationMethod | string;
+  InitiationMethod?: ContactInitiationMethod | undefined;
 
   /**
-   * <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html">state of the contact</a>.</p>
+   * <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html">state of the
+   *     contact</a>.</p>
+   *          <note>
+   *             <p>When <code>AgentContactState</code> is set to <code>CONNECTED_ONHOLD</code>, <code>StateStartTimestamp</code>
+   *     is not changed. Instead, <code>StateStartTimestamp</code> reflects the time the contact was <code>CONNECTED</code>
+   *     to the agent.</p>
+   *          </note>
+   * @public
    */
-  AgentContactState?: ContactState | string;
+  AgentContactState?: ContactState | undefined;
 
   /**
    * <p>The epoch timestamp when the contact state started.</p>
+   * @public
    */
-  StateStartTimestamp?: Date;
+  StateStartTimestamp?: Date | undefined;
 
   /**
    * <p>The time at which the contact was connected to an agent.</p>
+   * @public
    */
-  ConnectedToAgentTimestamp?: Date;
+  ConnectedToAgentTimestamp?: Date | undefined;
 
   /**
    * <p>Contains information about a queue resource for which metrics are returned.</p>
+   * @public
    */
-  Queue?: QueueReference;
+  Queue?: QueueReference | undefined;
+}
+
+/**
+ * <p>Countdown timer configuration after the agent accepted the contact.</p>
+ * @public
+ */
+export interface PostAcceptTimeoutConfig {
+  /**
+   * <p>Duration in seconds for the countdown timer after the agent accepted the contact.</p>
+   * @public
+   */
+  DurationInSeconds: number | undefined;
+}
+
+/**
+ * <p>Information about agent-first preview mode outbound strategy configuration.</p>
+ * @public
+ */
+export interface Preview {
+  /**
+   * <p>Countdown timer configuration after the agent accepted the preview outbound contact.</p>
+   * @public
+   */
+  PostAcceptTimeoutConfig: PostAcceptTimeoutConfig | undefined;
+
+  /**
+   * <p>The actions the agent can perform after accepting the preview outbound contact.</p>
+   * @public
+   */
+  AllowedUserActions: AllowedUserAction[] | undefined;
+}
+
+/**
+ * <p>Information about agent-first outbound strategy configuration.</p>
+ * @public
+ */
+export interface AgentFirst {
+  /**
+   * <p>Information about preview configuration of agent first outbound strategy</p>
+   * @public
+   */
+  Preview?: Preview | undefined;
+}
+
+/**
+ * <p>Information about an agent hierarchy group.</p>
+ * @public
+ */
+export interface AgentHierarchyGroup {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the group.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+}
+
+/**
+ * <p>A structure that defines search criteria for contacts using agent hierarchy group levels. For more information
+ *    about agent hierarchies, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html">Set Up
+ *     Agent Hierarchies</a> in the <i>Connect Customer Administrator Guide</i>.</p>
+ * @public
+ */
+export interface AgentHierarchyGroups {
+  /**
+   * <p>The identifiers for level 1 hierarchy groups.</p>
+   * @public
+   */
+  L1Ids?: string[] | undefined;
+
+  /**
+   * <p>The identifiers for level 2 hierarchy groups.</p>
+   * @public
+   */
+  L2Ids?: string[] | undefined;
+
+  /**
+   * <p>The identifiers for level 3 hierarchy groups.</p>
+   * @public
+   */
+  L3Ids?: string[] | undefined;
+
+  /**
+   * <p>The identifiers for level 4 hierarchy groups.</p>
+   * @public
+   */
+  L4Ids?: string[] | undefined;
+
+  /**
+   * <p>The identifiers for level 5 hierarchy groups.</p>
+   * @public
+   */
+  L5Ids?: string[] | undefined;
+}
+
+/**
+ * <p>The configuration for the allowed video and screen sharing capabilities for participants present over the call.
+ *    For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html">Set up
+ *     in-app, web, video calling, and screen sharing capabilities</a> in the <i>Connect Customer Administrator
+ *     Guide</i>.</p>
+ * @public
+ */
+export interface ParticipantCapabilities {
+  /**
+   * <p>The configuration having the video and screen sharing capabilities for participants over the call.</p>
+   * @public
+   */
+  Video?: VideoCapability | undefined;
+
+  /**
+   * <p>The screen sharing capability that is enabled for the participant. <code>SEND</code> indicates the participant
+   *    can share their screen.</p>
+   * @public
+   */
+  ScreenShare?: ScreenShareCapability | undefined;
+}
+
+/**
+ * <p>Information regarding the device.</p>
+ * @public
+ */
+export interface DeviceInfo {
+  /**
+   * <p>Name of the platform that the participant used for the call.</p>
+   * @public
+   */
+  PlatformName?: string | undefined;
+
+  /**
+   * <p>Version of the platform that the participant used for the call.</p>
+   * @public
+   */
+  PlatformVersion?: string | undefined;
+
+  /**
+   * <p>Operating system that the participant used for the call.</p>
+   * @public
+   */
+  OperatingSystem?: string | undefined;
+}
+
+/**
+ * <p>Information about the agent hierarchy. Hierarchies can be configured with up to five levels.</p>
+ * @public
+ */
+export interface HierarchyGroups {
+  /**
+   * <p>The group at level one of the agent hierarchy.</p>
+   * @public
+   */
+  Level1?: AgentHierarchyGroup | undefined;
+
+  /**
+   * <p>The group at level two of the agent hierarchy.</p>
+   * @public
+   */
+  Level2?: AgentHierarchyGroup | undefined;
+
+  /**
+   * <p>The group at level three of the agent hierarchy.</p>
+   * @public
+   */
+  Level3?: AgentHierarchyGroup | undefined;
+
+  /**
+   * <p>The group at level four of the agent hierarchy.</p>
+   * @public
+   */
+  Level4?: AgentHierarchyGroup | undefined;
+
+  /**
+   * <p>The group at level five of the agent hierarchy.</p>
+   * @public
+   */
+  Level5?: AgentHierarchyGroup | undefined;
+}
+
+/**
+ * <p>Information about the state transition of a supervisor.</p>
+ * @public
+ */
+export interface StateTransition {
+  /**
+   * <p>The state of the transition.</p>
+   * @public
+   */
+  State?: ParticipantState | undefined;
+
+  /**
+   * <p>The date and time when the state started in UTC time.</p>
+   * @public
+   */
+  StateStartTimestamp?: Date | undefined;
+
+  /**
+   * <p>The date and time when the state ended in UTC time.</p>
+   * @public
+   */
+  StateEndTimestamp?: Date | undefined;
 }
 
 /**
  * <p>Information about the agent who accepted the contact.</p>
+ * @public
  */
 export interface AgentInfo {
   /**
    * <p>The identifier of the agent who accepted the contact.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
+
+  /**
+   * <p>The timestamp when the contact was accepted by the agent.</p>
+   * @public
+   */
+  AcceptedByAgentTimestamp?: Date | undefined;
+
+  /**
+   * <p>The timestamp when the agent finished previewing the contact.</p>
+   * @public
+   */
+  PreviewEndTimestamp?: Date | undefined;
 
   /**
    * <p>The timestamp when the contact was connected to the agent.</p>
+   * @public
    */
-  ConnectedToAgentTimestamp?: Date;
+  ConnectedToAgentTimestamp?: Date | undefined;
+
+  /**
+   * <p>Agent pause duration for a contact in seconds.</p>
+   * @public
+   */
+  AgentPauseDurationInSeconds?: number | undefined;
+
+  /**
+   * <p>The agent hierarchy groups for the agent.</p>
+   * @public
+   */
+  HierarchyGroups?: HierarchyGroups | undefined;
+
+  /**
+   * <p>Information regarding Agent’s device.</p>
+   * @public
+   */
+  DeviceInfo?: DeviceInfo | undefined;
+
+  /**
+   * <p>The configuration for the allowed video and screen sharing capabilities for participants present over the call.
+   *    For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html">Set up
+   *     in-app, web, video calling, and screen sharing capabilities</a> in the <i>Connect Customer Administrator
+   *     Guide</i>.</p>
+   * @public
+   */
+  Capabilities?: ParticipantCapabilities | undefined;
+
+  /**
+   * <p>The difference in time, in whole seconds, between <code>AfterContactWorkStartTimestamp</code> and
+   *     <code>AfterContactWorkEndTimestamp</code>.</p>
+   * @public
+   */
+  AfterContactWorkDuration?: number | undefined;
+
+  /**
+   * <p>The date and time when the agent started doing After Contact Work for the contact, in UTC time.</p>
+   * @public
+   */
+  AfterContactWorkStartTimestamp?: Date | undefined;
+
+  /**
+   * <p>The date and time when the agent ended After Contact Work for the contact, in UTC time. In cases when agent
+   *    finishes doing <code>AfterContactWork</code> for chat contacts and switches their activity status to offline or
+   *    equivalent without clearing the contact in CCP, discrepancies may be noticed for
+   *     <code>AfterContactWorkEndTimestamp</code>.</p>
+   * @public
+   */
+  AfterContactWorkEndTimestamp?: Date | undefined;
+
+  /**
+   * <p>The total hold duration in seconds initiated by the agent.</p>
+   * @public
+   */
+  AgentInitiatedHoldDuration?: number | undefined;
+
+  /**
+   * <p>List of <code>StateTransition</code> for a supervisor.</p>
+   * @public
+   */
+  StateTransitions?: StateTransition[] | undefined;
+
+  /**
+   * <p>The voice enhancement mode used by the agent as the call is ending.
+   *   Valid values: VOICE_ISOLATION | NOISE_SUPPRESSION | NONE.
+   *   A value of null indicates this mode has not yet been set for this user.</p>
+   * @public
+   */
+  VoiceEnhancementMode?: VoiceEnhancementMode | undefined;
+
+  /**
+   * <p>The Region where the agent was active when they handled the contact. For Amazon Connect Global Resiliency
+   *    instances enabled for global routing, this indicates the Region in which the agent's session was established
+   *    at the time of the contact.</p>
+   * @public
+   */
+  ActiveRegion?: string | undefined;
 }
 
-export enum AgentStatusState {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
+/**
+ * <p>Contains information for score and potential quality issues for Audio</p>
+ * @public
+ */
+export interface AudioQualityMetricsInfo {
+  /**
+   * <p>Number measuring the estimated quality of the media connection.</p>
+   * @public
+   */
+  QualityScore?: number | undefined;
+
+  /**
+   * <p>List of potential issues causing degradation of quality on a media connection. If the service did not detect any
+   *    potential quality issues the list is empty.</p>
+   *          <p>Valid values: <code>HighPacketLoss</code> | <code>HighRoundTripTime</code> |
+   *    <code>HighJitterBuffer</code>
+   *          </p>
+   * @public
+   */
+  PotentialQualityIssues?: string[] | undefined;
 }
 
-export enum AgentStatusType {
-  CUSTOM = "CUSTOM",
-  OFFLINE = "OFFLINE",
-  ROUTABLE = "ROUTABLE",
+/**
+ * <p>Information about the quality of the Agent's media connection</p>
+ * @public
+ */
+export interface AgentQualityMetrics {
+  /**
+   * <p>Information about the audio quality of the Agent</p>
+   * @public
+   */
+  Audio?: AudioQualityMetricsInfo | undefined;
+}
+
+/**
+ * <p>Can be used to define a list of preferred agents to target the contact to within the queue. Note that agents
+ *    must have the queue in their routing profile in order to be offered the contact.</p>
+ * @public
+ */
+export interface AgentsCriteria {
+  /**
+   * <p>An object to specify a list of agents, by user ID.</p>
+   * @public
+   */
+  AgentIds?: string[] | undefined;
 }
 
 /**
  * <p>Contains information about an agent status.</p>
+ * @public
  */
 export interface AgentStatus {
   /**
    * <p>The Amazon Resource Name (ARN) of the agent status.</p>
+   * @public
    */
-  AgentStatusARN?: string;
+  AgentStatusARN?: string | undefined;
 
   /**
    * <p>The identifier of the agent status.</p>
+   * @public
    */
-  AgentStatusId?: string;
+  AgentStatusId?: string | undefined;
 
   /**
    * <p>The name of the agent status.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The description of the agent status.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The type of agent status.</p>
+   * @public
    */
-  Type?: AgentStatusType | string;
+  Type?: AgentStatusType | undefined;
 
   /**
    * <p>The display order of the agent status.</p>
+   * @public
    */
-  DisplayOrder?: number;
+  DisplayOrder?: number | undefined;
 
   /**
    * <p>The state of the agent status.</p>
+   * @public
    */
-  State?: AgentStatusState | string;
+  State?: AgentStatusState | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  Tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The timestamp when this resource was last modified.</p>
+   * @public
+   */
+  LastModifiedTime?: Date | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region where this resource was last modified.</p>
+   * @public
+   */
+  LastModifiedRegion?: string | undefined;
+}
+
+/**
+ * <p>Information about the agent status assigned to the user.</p>
+ * @public
+ */
+export interface AgentStatusIdentifier {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the agent status.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The identifier of the agent status.</p>
+   * @public
+   */
+  Id?: string | undefined;
 }
 
 /**
  * <p>Information about the agent's status.</p>
+ * @public
  */
 export interface AgentStatusReference {
   /**
    * <p>The start timestamp of the agent's status.</p>
+   * @public
    */
-  StatusStartTimestamp?: Date;
+  StatusStartTimestamp?: Date | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the agent's status.</p>
+   * @public
    */
-  StatusArn?: string;
+  StatusArn?: string | undefined;
+
+  /**
+   * <p>The name of the agent status.</p>
+   * @public
+   */
+  StatusName?: string | undefined;
+}
+
+/**
+ * <p>A leaf node condition which can be used to specify a string condition.</p>
+ * @public
+ */
+export interface StringCondition {
+  /**
+   * <p>The name of the field in the string condition.</p>
+   * @public
+   */
+  FieldName?: string | undefined;
+
+  /**
+   * <p>The value of the string.</p>
+   * @public
+   */
+  Value?: string | undefined;
+
+  /**
+   * <p>The type of comparison to be made when evaluating the string condition.</p>
+   * @public
+   */
+  ComparisonType?: StringComparisonType | undefined;
+}
+
+/**
+ * <p>A leaf node condition which can be used to specify a tag condition, for example, <code>HAVE BPO = 123</code>.
+ *   </p>
+ * @public
+ */
+export interface TagCondition {
+  /**
+   * <p>The tag key in the tag condition.</p>
+   * @public
+   */
+  TagKey?: string | undefined;
+
+  /**
+   * <p>The tag value in the tag condition.</p>
+   * @public
+   */
+  TagValue?: string | undefined;
+}
+
+/**
+ * <p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>
+ * @public
+ */
+export interface CommonAttributeAndCondition {
+  /**
+   * <p>A leaf node condition which can be used to specify a tag condition.</p>
+   * @public
+   */
+  TagConditions?: TagCondition[] | undefined;
+}
+
+/**
+ * <p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an
+ *     <code>OR</code> or <code>AND</code> (List of List) input where:</p>
+ *          <ul>
+ *             <li>
+ *                <p>The top level list specifies conditions that need to be applied with <code>OR</code> operator.</p>
+ *             </li>
+ *             <li>
+ *                <p>The inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export interface ControlPlaneAttributeFilter {
+  /**
+   * <p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>
+   * @public
+   */
+  OrConditions?: CommonAttributeAndCondition[] | undefined;
+
+  /**
+   * <p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>
+   * @public
+   */
+  AndCondition?: CommonAttributeAndCondition | undefined;
+
+  /**
+   * <p>A leaf node condition which can be used to specify a tag condition, for example, <code>HAVE BPO = 123</code>.
+   *   </p>
+   * @public
+   */
+  TagCondition?: TagCondition | undefined;
+}
+
+/**
+ * <p>Filters to be applied to search results.</p>
+ * @public
+ */
+export interface AgentStatusSearchFilter {
+  /**
+   * <p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an
+   *     <code>OR</code> of <code>AND</code> (List of List) input where: </p>
+   *          <ul>
+   *             <li>
+   *                <p>The top level list specifies conditions that need to be applied with <code>OR</code> operator.</p>
+   *             </li>
+   *             <li>
+   *                <p>The inner list specifies conditions that need to be applied with <code>AND</code> operator.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  AttributeFilter?: ControlPlaneAttributeFilter | undefined;
 }
 
 /**
  * <p>Summary information for an agent status.</p>
+ * @public
  */
 export interface AgentStatusSummary {
   /**
    * <p>The identifier for an agent status.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) for the agent status.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 
   /**
    * <p>The name of the agent status.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 
   /**
    * <p>The type of the agent status.</p>
+   * @public
    */
-  Type?: AgentStatusType | string;
+  Type?: AgentStatusType | undefined;
+
+  /**
+   * <p>The timestamp when this resource was last modified.</p>
+   * @public
+   */
+  LastModifiedTime?: Date | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region where this resource was last modified.</p>
+   * @public
+   */
+  LastModifiedRegion?: string | undefined;
 }
 
+/**
+ * <p>Information about an AI agent that a security profile allows access to for Agent-to-Agent authorization.</p>
+ * @public
+ */
+export interface AIAgent {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the AI agent.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>The type of the AI agent. The valid value is <code>THIRD_PARTY</code>.</p>
+   * @public
+   */
+  Type?: AIAgentType | undefined;
+}
+
+/**
+ * <p> Information of the AI agent involved in the contact.</p>
+ * @public
+ */
+export interface AiAgentInfo {
+  /**
+   * <p> The use case or scenario for which the AI agent is involved in the contact </p>
+   * @public
+   */
+  AiUseCase?: AiUseCase | undefined;
+
+  /**
+   * <p> The unique identifier that specifies both the AI agent ID and its version number that was involved in the
+   *    contact </p>
+   * @public
+   */
+  AiAgentVersionId?: string | undefined;
+
+  /**
+   * <p> A boolean flag indicating whether the contact initially handled by this AI agent was escalated to a human
+   *    agent. </p>
+   * @public
+   */
+  AiAgentEscalated?: boolean | undefined;
+}
+
+/**
+ * <p>The AI agent that participates in the contact, including its identifier.</p>
+ * @public
+ */
+export interface AiAgentInput {
+  /**
+   * <p>The identifier of the AI agent that participates in the contact.</p>
+   * @public
+   */
+  AiAgentId: string | undefined;
+}
+
+/**
+ * <p>The search criteria based on AI Agents metadata.</p>
+ * @public
+ */
+export interface AiAgentSearchCriteria {
+  /**
+   * <p>ID of the AI Agent that was involved in the contact.</p>
+   * @public
+   */
+  Id?: string | undefined;
+
+  /**
+   * <p>Version of the AI agent that was involved in the contact. ID is required if VersionNumber
+   *    is passed.</p>
+   * @public
+   */
+  VersionNumber?: number | undefined;
+
+  /**
+   * <p>A boolean flag indicating whether the contact initially handled by this AI agent was
+   *    escalated to a human agent.</p>
+   * @public
+   */
+  AiAgentEscalated?: boolean | undefined;
+
+  /**
+   * <p>The use case or scenario for which the AI agent is involved in the contact.</p>
+   * @public
+   */
+  AiUseCase?: AiUseCase | undefined;
+}
+
+/**
+ * <p>AI Agent search criteria definitions.</p>
+ * @public
+ */
+export interface AiAgentsCriteria {
+  /**
+   * <p>The list of criteria based on AI Agent metadata.</p>
+   * @public
+   */
+  Criteria?: AiAgentSearchCriteria[] | undefined;
+}
+
+/**
+ * <p>Configuration information of an email alias.</p>
+ * @public
+ */
+export interface AliasConfiguration {
+  /**
+   * <p>The email address ID.</p>
+   * @public
+   */
+  EmailAddressId: string | undefined;
+}
+
+/**
+ * <p>Information about the capabilities enabled for participants of the contact.</p>
+ * @public
+ */
+export interface AllowedCapabilities {
+  /**
+   * <p>Information about the customer's video sharing capabilities.</p>
+   * @public
+   */
+  Customer?: ParticipantCapabilities | undefined;
+
+  /**
+   * <p>Information about the agent's video sharing capabilities.</p>
+   * @public
+   */
+  Agent?: ParticipantCapabilities | undefined;
+}
+
+/**
+ * <p>Information about an allowed file extension.</p>
+ * @public
+ */
+export interface AllowedExtension {
+  /**
+   * <p>The file extension. The extension must be between 1 and 10 characters and can contain only alphanumeric characters, hyphens, and underscores.</p>
+   * @public
+   */
+  Extension: string | undefined;
+}
+
+/**
+ * <p> A list of Flow Modules an AI Agent can invoke as a tool </p>
+ * @public
+ */
+export interface FlowModule {
+  /**
+   * <p> Only Type we support is MCP. </p>
+   * @public
+   */
+  Type?: FlowModuleType | undefined;
+
+  /**
+   * <p> If of Flow Modules invocable as tool </p>
+   * @public
+   */
+  FlowModuleId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateAnalyticsDataSetRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier of the dataset to associate with the target account.</p>
+   * @public
+   */
+  DataSetId: string | undefined;
+
+  /**
+   * <p>The identifier of the target account.  Use to associate a dataset to a different account than the one containing
+   *    the Connect Customer instance. If not specified, by default this value is the Amazon Web Services account that has the Connect Customer instance.</p>
+   * @public
+   */
+  TargetAccountId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateAnalyticsDataSetResponse {
+  /**
+   * <p>The identifier of the dataset that was associated.</p>
+   * @public
+   */
+  DataSetId?: string | undefined;
+
+  /**
+   * <p>The identifier of the target account. </p>
+   * @public
+   */
+  TargetAccountId?: string | undefined;
+
+  /**
+   * <p>The Resource Access Manager share ID that is generated.</p>
+   * @public
+   */
+  ResourceShareId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Resource Access Manager share. </p>
+   * @public
+   */
+  ResourceShareArn?: string | undefined;
+}
+
+/**
+ * <p>Reason why the request was invalid.</p>
+ * @public
+ */
+export type InvalidRequestExceptionReason =
+  | InvalidRequestExceptionReason.AttachedFileInvalidRequestExceptionReasonMember
+  | InvalidRequestExceptionReason.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace InvalidRequestExceptionReason {
+  /**
+   * <p>Reason why the StartAttachedFiledUpload request was invalid.</p>
+   * @public
+   */
+  export interface AttachedFileInvalidRequestExceptionReasonMember {
+    AttachedFileInvalidRequestExceptionReason: AttachedFileInvalidRequestExceptionReason;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    AttachedFileInvalidRequestExceptionReason?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    AttachedFileInvalidRequestExceptionReason: (value: AttachedFileInvalidRequestExceptionReason) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
 export interface AssociateApprovedOriginRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The domain to add to your allow list.</p>
+   * @public
    */
   Origin: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
 /**
- * <p>Request processing failed because of an error or failure with the service.</p>
+ * <p>The reason for the exception.</p>
+ * @public
  */
-export class InternalServiceException extends __BaseException {
-  readonly name: "InternalServiceException" = "InternalServiceException";
-  readonly $fault: "server" = "server";
+export type ServiceQuotaExceededExceptionReason =
+  | ServiceQuotaExceededExceptionReason.AttachedFileServiceQuotaExceededExceptionReasonMember
+  | ServiceQuotaExceededExceptionReason.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace ServiceQuotaExceededExceptionReason {
   /**
-   * <p>The message.</p>
+   * <p>Total file size of all files or total number of files exceeds the service quota</p>
+   * @public
    */
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InternalServiceException, __BaseException>) {
-    super({
-      name: "InternalServiceException",
-      $fault: "server",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InternalServiceException.prototype);
-    this.Message = opts.Message;
+  export interface AttachedFileServiceQuotaExceededExceptionReasonMember {
+    AttachedFileServiceQuotaExceededExceptionReason: AttachedFileServiceQuotaExceededExceptionReason;
+    $unknown?: never;
   }
-}
 
-/**
- * <p>One or more of the specified parameters are not valid.</p>
- */
-export class InvalidParameterException extends __BaseException {
-  readonly name: "InvalidParameterException" = "InvalidParameterException";
-  readonly $fault: "client" = "client";
   /**
-   * <p>The message about the parameters.</p>
+   * @public
    */
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidParameterException, __BaseException>) {
-    super({
-      name: "InvalidParameterException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidParameterException.prototype);
-    this.Message = opts.Message;
+  export interface $UnknownMember {
+    AttachedFileServiceQuotaExceededExceptionReason?: never;
+    $unknown: [string, any];
   }
-}
 
-/**
- * <p>The request is not valid.</p>
- */
-export class InvalidRequestException extends __BaseException {
-  readonly name: "InvalidRequestException" = "InvalidRequestException";
-  readonly $fault: "client" = "client";
   /**
-   * <p>The message about the request.</p>
+   * @deprecated unused in schema-serde mode.
+   *
    */
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<InvalidRequestException, __BaseException>) {
-    super({
-      name: "InvalidRequestException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidRequestException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>A resource already has that name.</p>
- */
-export class ResourceConflictException extends __BaseException {
-  readonly name: "ResourceConflictException" = "ResourceConflictException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceConflictException, __BaseException>) {
-    super({
-      name: "ResourceConflictException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceConflictException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The specified resource was not found.</p>
- */
-export class ResourceNotFoundException extends __BaseException {
-  readonly name: "ResourceNotFoundException" = "ResourceNotFoundException";
-  readonly $fault: "client" = "client";
-  /**
-   * <p>The message about the resource.</p>
-   */
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceNotFoundException, __BaseException>) {
-    super({
-      name: "ResourceNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceNotFoundException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The service quota has been exceeded.</p>
- */
-export class ServiceQuotaExceededException extends __BaseException {
-  readonly name: "ServiceQuotaExceededException" = "ServiceQuotaExceededException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ServiceQuotaExceededException, __BaseException>) {
-    super({
-      name: "ServiceQuotaExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ServiceQuotaExceededException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-/**
- * <p>The throttling limit has been exceeded.</p>
- */
-export class ThrottlingException extends __BaseException {
-  readonly name: "ThrottlingException" = "ThrottlingException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ThrottlingException, __BaseException>) {
-    super({
-      name: "ThrottlingException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ThrottlingException.prototype);
-    this.Message = opts.Message;
+  export interface Visitor<T> {
+    AttachedFileServiceQuotaExceededExceptionReason: (value: AttachedFileServiceQuotaExceededExceptionReason) => T;
+    _: (name: string, value: any) => T;
   }
 }
 
 /**
  * <p>Configuration information of an Amazon Lex bot.</p>
+ * @public
  */
 export interface LexBot {
   /**
    * <p>The name of the Amazon Lex bot.</p>
+   * @public
    */
-  Name?: string;
+  Name: string | undefined;
 
   /**
-   * <p>The Region that the Amazon Lex bot was created in.</p>
+   * <p>The Amazon Web Services Region where the Amazon Lex bot was created.</p>
+   * @public
    */
-  LexRegion?: string;
+  LexRegion: string | undefined;
 }
 
 /**
  * <p>Configuration information of an Amazon Lex V2 bot.</p>
+ * @public
  */
 export interface LexV2Bot {
   /**
    * <p>The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.</p>
+   * @public
    */
-  AliasArn?: string;
+  AliasArn?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateBotRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>Configuration information of an Amazon Lex bot.</p>
+   * @public
    */
-  LexBot?: LexBot;
+  LexBot?: LexBot | undefined;
 
   /**
    * <p>The Amazon Lex V2 bot to associate with the instance.</p>
+   * @public
    */
-  LexV2Bot?: LexV2Bot;
+  LexV2Bot?: LexV2Bot | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
 /**
- * <p>The allowed limit for the resource has been exceeded.</p>
+ * @public
  */
-export class LimitExceededException extends __BaseException {
-  readonly name: "LimitExceededException" = "LimitExceededException";
-  readonly $fault: "client" = "client";
+export interface AssociateContactWithUserRequest {
   /**
-   * <p>The message about the limit.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
-  Message?: string;
+  InstanceId: string | undefined;
+
   /**
-   * @internal
+   * <p>The identifier of the contact in this instance of Connect Customer. </p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<LimitExceededException, __BaseException>) {
-    super({
-      name: "LimitExceededException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, LimitExceededException.prototype);
-    this.Message = opts.Message;
-  }
+  ContactId: string | undefined;
+
+  /**
+   * <p>The identifier for the user. This can be the ID or the ARN of the user.</p>
+   * @public
+   */
+  UserId: string | undefined;
 }
 
-export enum VocabularyLanguageCode {
-  AR_AE = "ar-AE",
-  DE_CH = "de-CH",
-  DE_DE = "de-DE",
-  EN_AB = "en-AB",
-  EN_AU = "en-AU",
-  EN_GB = "en-GB",
-  EN_IE = "en-IE",
-  EN_IN = "en-IN",
-  EN_US = "en-US",
-  EN_WL = "en-WL",
-  ES_ES = "es-ES",
-  ES_US = "es-US",
-  FR_CA = "fr-CA",
-  FR_FR = "fr-FR",
-  HI_IN = "hi-IN",
-  IT_IT = "it-IT",
-  JA_JP = "ja-JP",
-  KO_KR = "ko-KR",
-  PT_BR = "pt-BR",
-  PT_PT = "pt-PT",
-  ZH_CN = "zh-CN",
-}
+/**
+ * @public
+ */
+export interface AssociateContactWithUserResponse {}
 
+/**
+ * @public
+ */
 export interface AssociateDefaultVocabularyRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
@@ -489,7237 +1355,6579 @@ export interface AssociateDefaultVocabularyRequest {
    * <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
    * <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
    *          </p>
+   * @public
    */
-  LanguageCode: VocabularyLanguageCode | string | undefined;
+  LanguageCode: VocabularyLanguageCode | undefined;
 
   /**
    * <p>The identifier of the custom vocabulary. If this is empty, the default is set to none.</p>
+   * @public
    */
-  VocabularyId?: string;
+  VocabularyId?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateDefaultVocabularyResponse {}
 
-export enum InstanceStorageResourceType {
-  AGENT_EVENTS = "AGENT_EVENTS",
-  CALL_RECORDINGS = "CALL_RECORDINGS",
-  CHAT_TRANSCRIPTS = "CHAT_TRANSCRIPTS",
-  CONTACT_TRACE_RECORDS = "CONTACT_TRACE_RECORDS",
-  MEDIA_STREAMS = "MEDIA_STREAMS",
-  REAL_TIME_CONTACT_ANALYSIS_SEGMENTS = "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
-  SCHEDULED_REPORTS = "SCHEDULED_REPORTS",
+/**
+ * @public
+ */
+export interface AssociateEmailAddressAliasRequest {
+  /**
+   * <p>The identifier of the email address.</p>
+   * @public
+   */
+  EmailAddressId: string | undefined;
+
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>Configuration object that specifies which email address will serve as the alias. The specified email address
+   *    must already exist in the Connect Customer instance and cannot already be configured as an alias or have an alias
+   *    of its own.</p>
+   * @public
+   */
+  AliasConfiguration: AliasConfiguration | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateEmailAddressAliasResponse {}
+
+/**
+ * @public
+ */
+export interface AssociateFlowRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier of the resource.</p>
+   *          <ul>
+   *             <li>
+   *                <p>Amazon Web Services End User Messaging SMS phone number ARN when using <code>SMS_PHONE_NUMBER</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Amazon Web Services End User Messaging Social phone number ARN when using
+   *       <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceId: string | undefined;
+
+  /**
+   * <p>The identifier of the flow.</p>
+   * @public
+   */
+  FlowId: string | undefined;
+
+  /**
+   * <p>A valid resource type.</p>
+   * @public
+   */
+  ResourceType: FlowAssociationResourceType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateFlowResponse {}
+
+/**
+ * <p>Contains configuration for the parent hours of operation.</p>
+ * @public
+ */
+export interface ParentHoursOfOperationConfig {
+  /**
+   * <p>The identifier for the hours of operation.</p>
+   * @public
+   */
+  HoursOfOperationId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateHoursOfOperationsRequest {
+  /**
+   * <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in
+   *    the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier of the child hours of operation.</p>
+   * @public
+   */
+  HoursOfOperationId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Names (ARNs) of the parent hours of operation resources to associate with the child hours of operation resource.</p>
+   * @public
+   */
+  ParentHoursOfOperationConfigs: ParentHoursOfOperationConfig[] | undefined;
 }
 
 /**
  * <p>Configuration information of a Kinesis Data Firehose delivery stream.</p>
+ * @public
  */
 export interface KinesisFirehoseConfig {
   /**
    * <p>The Amazon Resource Name (ARN) of the delivery stream.</p>
+   * @public
    */
   FirehoseArn: string | undefined;
 }
 
 /**
  * <p>Configuration information of a Kinesis data stream.</p>
+ * @public
  */
 export interface KinesisStreamConfig {
   /**
    * <p>The Amazon Resource Name (ARN) of the data stream.</p>
+   * @public
    */
   StreamArn: string | undefined;
 }
 
-export enum EncryptionType {
-  KMS = "KMS",
-}
-
 /**
  * <p>The encryption configuration.</p>
+ * @public
  */
 export interface EncryptionConfig {
   /**
    * <p>The type of encryption.</p>
+   * @public
    */
-  EncryptionType: EncryptionType | string | undefined;
+  EncryptionType: EncryptionType | undefined;
 
   /**
    * <p>The full ARN of the encryption key. </p>
    *          <note>
    *             <p>Be sure to provide the full ARN of the encryption key, not just the ID.</p>
+   *             <p>Connect Customer supports only KMS keys with the default key spec of <a href="https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-symmetric-default">
+   *                   <code>SYMMETRIC_DEFAULT</code>
+   *                </a>. </p>
    *          </note>
+   * @public
    */
   KeyId: string | undefined;
 }
 
 /**
  * <p>Configuration information of a Kinesis video stream.</p>
+ * @public
  */
 export interface KinesisVideoStreamConfig {
   /**
    * <p>The prefix of the video stream.</p>
+   * @public
    */
   Prefix: string | undefined;
 
   /**
-   * <p>The number of hours data is retained in the stream. Kinesis Video Streams retains the data
-   *    in a data store that is associated with the stream.</p>
+   * <p>The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that
+   *    is associated with the stream.</p>
    *          <p>The default value is 0, indicating that the stream does not persist data.</p>
+   * @public
    */
   RetentionPeriodHours: number | undefined;
 
   /**
    * <p>The encryption configuration.</p>
+   * @public
    */
   EncryptionConfig: EncryptionConfig | undefined;
 }
 
 /**
  * <p>Information about the Amazon Simple Storage Service (Amazon S3) storage type.</p>
+ * @public
  */
 export interface S3Config {
   /**
    * <p>The S3 bucket name.</p>
+   * @public
    */
   BucketName: string | undefined;
 
   /**
    * <p>The S3 bucket prefix.</p>
+   * @public
    */
   BucketPrefix: string | undefined;
 
   /**
    * <p>The Amazon S3 encryption configuration.</p>
+   * @public
    */
-  EncryptionConfig?: EncryptionConfig;
-}
-
-export enum StorageType {
-  KINESIS_FIREHOSE = "KINESIS_FIREHOSE",
-  KINESIS_STREAM = "KINESIS_STREAM",
-  KINESIS_VIDEO_STREAM = "KINESIS_VIDEO_STREAM",
-  S3 = "S3",
+  EncryptionConfig?: EncryptionConfig | undefined;
 }
 
 /**
  * <p>The storage configuration for the instance.</p>
+ * @public
  */
 export interface InstanceStorageConfig {
   /**
    * <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
+   * @public
    */
-  AssociationId?: string;
+  AssociationId?: string | undefined;
 
   /**
    * <p>A valid storage type.</p>
+   * @public
    */
-  StorageType: StorageType | string | undefined;
+  StorageType: StorageType | undefined;
 
   /**
    * <p>The S3 bucket
    *    configuration.</p>
+   * @public
    */
-  S3Config?: S3Config;
+  S3Config?: S3Config | undefined;
 
   /**
    * <p>The configuration of the Kinesis video stream.</p>
+   * @public
    */
-  KinesisVideoStreamConfig?: KinesisVideoStreamConfig;
+  KinesisVideoStreamConfig?: KinesisVideoStreamConfig | undefined;
 
   /**
    * <p>The configuration of the Kinesis data stream.</p>
+   * @public
    */
-  KinesisStreamConfig?: KinesisStreamConfig;
+  KinesisStreamConfig?: KinesisStreamConfig | undefined;
 
   /**
    * <p>The configuration of the Kinesis Firehose delivery stream.</p>
+   * @public
    */
-  KinesisFirehoseConfig?: KinesisFirehoseConfig;
+  KinesisFirehoseConfig?: KinesisFirehoseConfig | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateInstanceStorageConfigRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
-   * <p>A valid resource type.</p>
+   * <p>A valid resource type. To <a href="https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html">enable streaming for real-time analysis
+   *     of contacts</a>, use the following types:</p>
+   *          <ul>
+   *             <li>
+   *                <p>For chat contacts, use <code>REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS</code>.</p>
+   *             </li>
+   *             <li>
+   *                <p>For voice contacts, use <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code>.</p>
+   *             </li>
+   *          </ul>
+   *          <note>
+   *             <p>
+   *                <code>REAL_TIME_CONTACT_ANALYSIS_SEGMENTS</code> is deprecated, but it is still supported and will apply only
+   *     to VOICE channel contacts. Use <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code> for voice contacts moving
+   *     forward.</p>
+   *             <p>If you have previously associated a stream with <code>REAL_TIME_CONTACT_ANALYSIS_SEGMENTS</code>, no action is
+   *     needed to update the stream to <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code>.</p>
+   *          </note>
+   * @public
    */
-  ResourceType: InstanceStorageResourceType | string | undefined;
+  ResourceType: InstanceStorageResourceType | undefined;
 
   /**
    * <p>A valid storage type.</p>
+   * @public
    */
   StorageConfig: InstanceStorageConfig | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateInstanceStorageConfigResponse {
   /**
    * <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
+   * @public
    */
-  AssociationId?: string;
+  AssociationId?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateLambdaFunctionRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) for the Lambda function being associated. Maximum number of characters allowed is
-   *    140.</p>
+   * <p>The Amazon Resource Name (ARN) for the Lambda function being associated. Maximum number of characters allowed is 140.</p>
+   * @public
    */
   FunctionArn: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateLexBotRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The Amazon Lex bot to associate with the instance.</p>
+   * @public
    */
   LexBot: LexBot | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociatePhoneNumberContactFlowRequest {
   /**
    * <p>A unique identifier for the phone number.</p>
+   * @public
    */
   PhoneNumberId: string | undefined;
 
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The identifier of the flow.</p>
+   * @public
    */
   ContactFlowId: string | undefined;
 }
 
-export interface AssociateQueueQuickConnectsRequest {
+/**
+ * <p>Configuration object that specifies an email address to be associated with a queue. This configuration contains the identifier of the email address that should be linked to the queue for routing email contacts.</p>
+ * @public
+ */
+export interface EmailAddressConfig {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the email address that should be associated with the queue. This email address must already exist in the Connect Customer instance and will be used to route incoming email contacts to the specified queue.</p>
+   * @public
+   */
+  EmailAddressId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateQueueEmailAddressesRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The identifier for the queue.</p>
+   * @public
+   */
+  QueueId: string | undefined;
+
+  /**
+   * <p>Configuration list containing the email addresses to associate with the queue. Each configuration specifies an email address ID that should be linked to this queue for routing purposes.</p>
+   * @public
+   */
+  EmailAddressesConfig: EmailAddressConfig[] | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateQueueQuickConnectsRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier for the queue.</p>
+   * @public
    */
   QueueId: string | undefined;
 
   /**
    * <p>The quick connects to associate with this queue.</p>
+   * @public
    */
   QuickConnectIds: string[] | undefined;
 }
 
 /**
  * <p>Contains the channel and queue identifier for a routing profile.</p>
+ * @public
  */
 export interface RoutingProfileQueueReference {
   /**
    * <p>The identifier for the queue.</p>
+   * @public
    */
   QueueId: string | undefined;
 
   /**
-   * <p>The channels agents can handle in the Contact Control Panel (CCP) for this routing
-   *    profile.</p>
+   * <p>The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.</p>
+   * @public
    */
-  Channel: Channel | string | undefined;
+  Channel: Channel | undefined;
 }
 
 /**
- * <p>Contains information about the queue and channel for which priority and delay can be
- *    set.</p>
+ * <p>Contains information about the queue and channel for manual assignment behaviour can be enabled.</p>
+ * @public
+ */
+export interface RoutingProfileManualAssignmentQueueConfig {
+  /**
+   * <p>Contains the channel and queue identifier for a routing profile.</p>
+   * @public
+   */
+  QueueReference: RoutingProfileQueueReference | undefined;
+}
+
+/**
+ * <p>Contains information about the queue and channel for which priority and delay can be set.</p>
+ * @public
  */
 export interface RoutingProfileQueueConfig {
   /**
    * <p>Contains information about a queue resource.</p>
+   * @public
    */
   QueueReference: RoutingProfileQueueReference | undefined;
 
   /**
-   * <p>The order in which contacts are to be handled for the queue. For more information, see
-   *     <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and
+   * <p>The order in which contacts are to be handled for the queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and
    *     delay</a>.</p>
+   * @public
    */
   Priority: number | undefined;
 
   /**
-   * <p>The delay, in seconds, a contact should be in the queue before they are routed to an
-   *    available agent. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and
-   *     delay</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
+   * <p>The delay, in seconds, a contact should be in the queue before they are routed to an available agent. For more
+   *    information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and delay</a> in the <i>Connect Customer Administrator Guide</i>.</p>
+   * @public
    */
   Delay: number | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateRoutingProfileQueuesRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The identifier of the routing profile.</p>
+   * @public
    */
   RoutingProfileId: string | undefined;
 
   /**
    * <p>The queues to associate with this routing profile.</p>
+   * @public
    */
-  QueueConfigs: RoutingProfileQueueConfig[] | undefined;
+  QueueConfigs?: RoutingProfileQueueConfig[] | undefined;
+
+  /**
+   * <p>The manual assignment queues to associate with this routing profile.</p>
+   *          <note>
+   *             <p>For voice contacts, manual assignment supports only agent-first callback contacts. Chat, email, and task contacts are fully supported.</p>
+   *          </note>
+   * @public
+   */
+  ManualAssignmentQueueConfigs?: RoutingProfileManualAssignmentQueueConfig[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateSecurityKeyRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
-   * <p>A valid security key in PEM format.</p>
+   * <p>A valid security key in PEM format as a String.</p>
+   * @public
    */
   Key: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
 }
 
+/**
+ * @public
+ */
 export interface AssociateSecurityKeyResponse {
   /**
    * <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
+   * @public
    */
-  AssociationId?: string;
+  AssociationId?: string | undefined;
 }
 
-export interface ClaimPhoneNumberRequest {
+/**
+ * <p> Security profile items. </p>
+ * @public
+ */
+export interface SecurityProfileItem {
   /**
-   * <p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>
+   * <p> Id of a security profile item. </p>
+   * @public
    */
-  TargetArn: string | undefined;
+  Id?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateSecurityProfilesRequest {
+  /**
+   * <p> The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN)
+   *    of the instance. </p>
+   * @public
+   */
+  InstanceId: string | undefined;
 
   /**
-   * <p>The phone number you want to claim. Phone numbers are formatted <code>[+] [country code]
-   *     [subscriber number including area code]</code>.</p>
+   * <p> List of Security Profile Object. </p>
+   * @public
+   */
+  SecurityProfiles: SecurityProfileItem[] | undefined;
+
+  /**
+   * <p> Only supported type is AI_AGENT. </p>
+   * @public
+   */
+  EntityType: EntityType | undefined;
+
+  /**
+   * <p> Arn of a Q in Connect AI Agent. </p>
+   * @public
+   */
+  EntityArn: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateTrafficDistributionGroupUserRequest {
+  /**
+   * <p>The identifier of the traffic distribution group.
+   * This can be the ID or the ARN of the traffic distribution group.</p>
+   * @public
+   */
+  TrafficDistributionGroupId: string | undefined;
+
+  /**
+   * <p>The identifier of the user account. This can be the ID or the ARN of the user. </p>
+   * @public
+   */
+  UserId: string | undefined;
+
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateTrafficDistributionGroupUserResponse {}
+
+/**
+ * <p>Information about proficiency of a user.</p>
+ * @public
+ */
+export interface UserProficiency {
+  /**
+   * <p>The name of user's proficiency. You must use name of predefined attribute present in the Connect Customer instance.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The value of user's proficiency. You must use value of predefined attribute present in the Connect Customer
+   *    instance.</p>
+   * @public
+   */
+  AttributeValue: string | undefined;
+
+  /**
+   * <p>The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.</p>
+   * @public
+   */
+  Level: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateUserProficienciesRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can find the instance ID in the Amazon Resource Name (ARN of the
+   *    instance).</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier of the user account.</p>
+   * @public
+   */
+  UserId: string | undefined;
+
+  /**
+   * <p>The proficiencies to associate with the user.</p>
+   * @public
+   */
+  UserProficiencies: UserProficiency[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateWorkspaceRequest {
+  /**
+   * <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in
+   *    the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier of the workspace.</p>
+   * @public
+   */
+  WorkspaceId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Names (ARNs) of the resources to associate with the workspace. Valid resource types are
+   *    users and routing profiles.</p>
+   * @public
+   */
+  ResourceArns: string[] | undefined;
+}
+
+/**
+ * <p>Contains information about a resource that failed to be associated with a workspace in a batch operation.</p>
+ * @public
+ */
+export interface FailedBatchAssociationSummary {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the resource that failed to be associated.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+
+  /**
+   * <p>The error code indicating why the association failed.</p>
+   * @public
+   */
+  ErrorCode?: string | undefined;
+
+  /**
+   * <p>An error message describing why the association failed.</p>
+   * @public
+   */
+  ErrorMessage?: string | undefined;
+}
+
+/**
+ * <p>Contains information about a resource that was successfully associated with a workspace in a batch
+ *    operation.</p>
+ * @public
+ */
+export interface SuccessfulBatchAssociationSummary {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the resource that was successfully associated.</p>
+   * @public
+   */
+  ResourceArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface AssociateWorkspaceResponse {
+  /**
+   * <p>A list of resources that were successfully associated with the workspace.</p>
+   * @public
+   */
+  SuccessfulList?: SuccessfulBatchAssociationSummary[] | undefined;
+
+  /**
+   * <p>A list of resources that failed to be associated with the workspace, including error details.</p>
+   * @public
+   */
+  FailedList?: FailedBatchAssociationSummary[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchAssociateAnalyticsDataSetRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>An array of dataset identifiers to associate.</p>
+   * @public
+   */
+  DataSetIds: string[] | undefined;
+
+  /**
+   * <p>The identifier of the target account.  Use to associate a dataset to a different account than the one containing
+   *    the Connect Customer instance. If not specified, by default this value is the Amazon Web Services account that has the Connect Customer instance.</p>
+   * @public
+   */
+  TargetAccountId?: string | undefined;
+}
+
+/**
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>Information about associations that are successfully created: <code>DataSetId</code>,
+ *     <code>TargetAccountId</code>, <code>ResourceShareId</code>,
+ *    <code>ResourceShareArn</code>. </p>
+ * @public
+ */
+export interface AnalyticsDataAssociationResult {
+  /**
+   * <p>The identifier of the dataset.</p>
+   * @public
+   */
+  DataSetId?: string | undefined;
+
+  /**
+   * <p>The identifier of the target account. </p>
+   * @public
+   */
+  TargetAccountId?: string | undefined;
+
+  /**
+   * <p>The Resource Access Manager share ID.</p>
+   * @public
+   */
+  ResourceShareId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Resource Access Manager share. </p>
+   * @public
+   */
+  ResourceShareArn?: string | undefined;
+
+  /**
+   * <p>The Amazon Web Services Resource Access Manager status of association.</p>
+   * @public
+   */
+  ResourceShareStatus?: string | undefined;
+}
+
+/**
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>List of errors for dataset association failures. </p>
+ * @public
+ */
+export interface ErrorResult {
+  /**
+   * <p>The error code.</p>
+   * @public
+   */
+  ErrorCode?: string | undefined;
+
+  /**
+   * <p>The corresponding error message for the error code.</p>
+   * @public
+   */
+  ErrorMessage?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchAssociateAnalyticsDataSetResponse {
+  /**
+   * <p>Information about associations that are successfully created: <code>DataSetId</code>,
+   *     <code>TargetAccountId</code>, <code>ResourceShareId</code>,
+   *    <code>ResourceShareArn</code>. </p>
+   * @public
+   */
+  Created?: AnalyticsDataAssociationResult[] | undefined;
+
+  /**
+   * <p>A list of errors for datasets that aren't successfully associated with the target account.</p>
+   * @public
+   */
+  Errors?: ErrorResult[] | undefined;
+}
+
+/**
+ * <p>Contains lock version information for different levels of a data table hierarchy. Used for optimistic locking to
+ *    prevent concurrent modification conflicts. Each component has its own lock version that changes when that component
+ *    is modified.</p>
+ * @public
+ */
+export interface DataTableLockVersion {
+  /**
+   * <p>The lock version for the data table itself. Used for optimistic locking and table versioning. Changes with each
+   *    update to the table's metadata or structure.</p>
+   * @public
+   */
+  DataTable?: string | undefined;
+
+  /**
+   * <p>The lock version for a specific attribute. When the ValueLockLevel is ATTRIBUTE, this version changes when any
+   *    value for the attribute changes. For other lock levels, it only changes when the attribute's properties are directly
+   *    updated.</p>
+   * @public
+   */
+  Attribute?: string | undefined;
+
+  /**
+   * <p>The lock version for a specific set of primary values (record). This includes the default record even if the
+   *    table does not have any primary attributes. Used for record-level locking.</p>
+   * @public
+   */
+  PrimaryValues?: string | undefined;
+
+  /**
+   * <p>The lock version for a specific value. Changes each time the individual value is modified. Used for the
+   *    finest-grained locking control.</p>
+   * @public
+   */
+  Value?: string | undefined;
+}
+
+/**
+ * <p>Represents a primary key value used to identify a specific record in a data table. Primary values are used in
+ *    combination to create unique record identifiers when a table has multiple primary attributes.</p>
+ * @public
+ */
+export interface PrimaryValue {
+  /**
+   * <p>The name of the primary attribute that this value belongs to.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The actual value for the primary attribute. Must be provided as a string regardless of the attribute's value
+   *    type. Primary values cannot be expressions and must be explicitly specified.</p>
+   * @public
+   */
+  Value: string | undefined;
+}
+
+/**
+ * <p>A data table value.</p>
+ * @public
+ */
+export interface DataTableValue {
+  /**
+   * <p>The value's primary values.</p>
+   * @public
+   */
+  PrimaryValues?: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The value's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The value's value.</p>
+   * @public
+   */
+  Value: string | undefined;
+
+  /**
+   * <p>The value's lock version.</p>
+   * @public
+   */
+  LockVersion?: DataTableLockVersion | undefined;
+
+  /**
+   * <p>The value's last modified time.</p>
+   * @public
+   */
+  LastModifiedTime?: Date | undefined;
+
+  /**
+   * <p>The value's last modified region.</p>
+   * @public
+   */
+  LastModifiedRegion?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchCreateDataTableValueRequest {
+  /**
+   * <p>The unique identifier for the Amazon Connect instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If no
+   *    alias is provided, the default behavior is identical to providing the $LATEST alias.</p>
+   * @public
+   */
+  DataTableId: string | undefined;
+
+  /**
+   * <p>A list of values to create. Each value must specify the attribute name and optionally primary values if the
+   *    table has primary attributes.</p>
+   * @public
+   */
+  Values: DataTableValue[] | undefined;
+}
+
+/**
+ * <p>A batch create data table value failure result.</p>
+ * @public
+ */
+export interface BatchCreateDataTableValueFailureResult {
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's message.</p>
+   * @public
+   */
+  Message: string | undefined;
+}
+
+/**
+ * <p>A batch create data table value success result.</p>
+ * @public
+ */
+export interface BatchCreateDataTableValueSuccessResult {
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's record ID.</p>
+   * @public
+   */
+  RecordId: string | undefined;
+
+  /**
+   * <p>The result's lock version.</p>
+   * @public
+   */
+  LockVersion: DataTableLockVersion | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchCreateDataTableValueResponse {
+  /**
+   * <p>A list of successfully created values with their identifiers and lock versions.</p>
+   * @public
+   */
+  Successful: BatchCreateDataTableValueSuccessResult[] | undefined;
+
+  /**
+   * <p>A list of values that failed to be created with error messages explaining the failure reason.</p>
+   * @public
+   */
+  Failed: BatchCreateDataTableValueFailureResult[] | undefined;
+}
+
+/**
+ * <p>A data table delete value identifier.</p>
+ * @public
+ */
+export interface DataTableDeleteValueIdentifier {
+  /**
+   * <p>The identifier's primary values.</p>
+   * @public
+   */
+  PrimaryValues?: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The identifier's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The identifier's lock version.</p>
+   * @public
+   */
+  LockVersion: DataTableLockVersion | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDeleteDataTableValueRequest {
+  /**
+   * <p>The unique identifier for the Amazon Connect instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias.</p>
+   * @public
+   */
+  DataTableId: string | undefined;
+
+  /**
+   * <p>A list of value identifiers to delete, each specifying primary values, attribute name, and lock version
+   *    information.</p>
+   * @public
+   */
+  Values: DataTableDeleteValueIdentifier[] | undefined;
+}
+
+/**
+ * <p>A batch delete data table value failure result.</p>
+ * @public
+ */
+export interface BatchDeleteDataTableValueFailureResult {
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's message.</p>
+   * @public
+   */
+  Message: string | undefined;
+}
+
+/**
+ * <p>A batch delete data table value success result.</p>
+ * @public
+ */
+export interface BatchDeleteDataTableValueSuccessResult {
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's lock version.</p>
+   * @public
+   */
+  LockVersion: DataTableLockVersion | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDeleteDataTableValueResponse {
+  /**
+   * <p>A list of successfully deleted values with their identifiers and updated lock versions.</p>
+   * @public
+   */
+  Successful: BatchDeleteDataTableValueSuccessResult[] | undefined;
+
+  /**
+   * <p>A list of values that failed to be deleted with error messages explaining the failure reason.</p>
+   * @public
+   */
+  Failed: BatchDeleteDataTableValueFailureResult[] | undefined;
+}
+
+/**
+ * <p>A data table value identifier.</p>
+ * @public
+ */
+export interface DataTableValueIdentifier {
+  /**
+   * <p>The identifier's primary values.</p>
+   * @public
+   */
+  PrimaryValues?: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The identifier's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDescribeDataTableValueRequest {
+  /**
+   * <p>The unique identifier for the Amazon Connect instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias.</p>
+   * @public
+   */
+  DataTableId: string | undefined;
+
+  /**
+   * <p>A list of value identifiers to retrieve, each specifying primary values and attribute names.</p>
+   * @public
+   */
+  Values: DataTableValueIdentifier[] | undefined;
+}
+
+/**
+ * <p>A batch describe data table value failure result.</p>
+ * @public
+ */
+export interface BatchDescribeDataTableValueFailureResult {
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's message.</p>
+   * @public
+   */
+  Message: string | undefined;
+}
+
+/**
+ * <p>A primary value response.</p>
+ * @public
+ */
+export interface PrimaryValueResponse {
+  /**
+   * <p>The value's attribute name.</p>
+   * @public
+   */
+  AttributeName?: string | undefined;
+
+  /**
+   * <p>The value's attribute ID.</p>
+   * @public
+   */
+  AttributeId?: string | undefined;
+
+  /**
+   * <p>The value's value.</p>
+   * @public
+   */
+  Value?: string | undefined;
+}
+
+/**
+ * <p>A batch describe data table value success result.</p>
+ * @public
+ */
+export interface BatchDescribeDataTableValueSuccessResult {
+  /**
+   * <p>The result's record ID.</p>
+   * @public
+   */
+  RecordId: string | undefined;
+
+  /**
+   * <p>The result's attribute ID.</p>
+   * @public
+   */
+  AttributeId: string | undefined;
+
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValueResponse[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's value.</p>
+   * @public
+   */
+  Value?: string | undefined;
+
+  /**
+   * <p>The result's lock version.</p>
+   * @public
+   */
+  LockVersion: DataTableLockVersion | undefined;
+
+  /**
+   * <p>The result's last modified time.</p>
+   * @public
+   */
+  LastModifiedTime?: Date | undefined;
+
+  /**
+   * <p>The result's last modified region.</p>
+   * @public
+   */
+  LastModifiedRegion?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDescribeDataTableValueResponse {
+  /**
+   * <p>A list of successfully retrieved values with their data, metadata, and lock version information.</p>
+   * @public
+   */
+  Successful: BatchDescribeDataTableValueSuccessResult[] | undefined;
+
+  /**
+   * <p>A list of values that failed to be retrieved with error messages explaining the failure reason.</p>
+   * @public
+   */
+  Failed: BatchDescribeDataTableValueFailureResult[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDisassociateAnalyticsDataSetRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>An array of associated dataset identifiers to remove.</p>
+   * @public
+   */
+  DataSetIds: string[] | undefined;
+
+  /**
+   * <p>The identifier of the target account.  Use to disassociate a dataset from a different account than the one containing
+   *    the Connect Customer instance. If not specified, by default this value is the Amazon Web Services account that has the Connect Customer instance.</p>
+   * @public
+   */
+  TargetAccountId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchDisassociateAnalyticsDataSetResponse {
+  /**
+   * <p>An array of successfully disassociated dataset identifiers.</p>
+   * @public
+   */
+  Deleted?: string[] | undefined;
+
+  /**
+   * <p>A list of errors for any datasets not successfully removed.</p>
+   * @public
+   */
+  Errors?: ErrorResult[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchGetAttachedFileMetadataRequest {
+  /**
+   * <p>The unique identifiers of the attached file resource.</p>
+   * @public
+   */
+  FileIds: string[] | undefined;
+
+  /**
+   * <p>The unique identifier of the Connect instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cases.html">Cases</a>, <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html">Email</a>, and <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html">Task</a>.</p>
+   *          <note>
+   *             <p>This value must be a valid ARN.</p>
+   *          </note>
+   * @public
+   */
+  AssociatedResourceArn: string | undefined;
+}
+
+/**
+ * <p>Error describing a failure to retrieve attached file metadata through BatchGetAttachedFileMetadata
+ *    action.</p>
+ * @public
+ */
+export interface AttachedFileError {
+  /**
+   * <p> Status code describing the failure. </p>
+   * @public
+   */
+  ErrorCode?: string | undefined;
+
+  /**
+   * <p>Why the attached file couldn't be retrieved. </p>
+   * @public
+   */
+  ErrorMessage?: string | undefined;
+
+  /**
+   * <p>The unique identifier of the attached file resource.</p>
+   * @public
+   */
+  FileId?: string | undefined;
+}
+
+/**
+ * <p>Information on the identity that created the file.</p>
+ * @public
+ */
+export type CreatedByInfo =
+  | CreatedByInfo.AWSIdentityArnMember
+  | CreatedByInfo.ConnectUserArnMember
+  | CreatedByInfo.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace CreatedByInfo {
+  /**
+   * <p>An agent ARN representing a <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-resources-for-iam-policies">connect user</a>.</p>
+   * @public
+   */
+  export interface ConnectUserArnMember {
+    ConnectUserArn: string;
+    AWSIdentityArn?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>STS or IAM ARN representing the identity of API Caller. SDK users cannot populate this and this value is
+   *    calculated automatically if <code>ConnectUserArn</code> is not provided.</p>
+   * @public
+   */
+  export interface AWSIdentityArnMember {
+    ConnectUserArn?: never;
+    AWSIdentityArn: string;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    ConnectUserArn?: never;
+    AWSIdentityArn?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    ConnectUserArn: (value: string) => T;
+    AWSIdentityArn: (value: string) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Information about the attached file.</p>
+ * @public
+ */
+export interface AttachedFile {
+  /**
+   * <p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601 format:
+   *     <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2024-05-03T02:41:28.172Z</code>.</p>
+   * @public
+   */
+  CreationTime: string | undefined;
+
+  /**
+   * <p>The unique identifier of the attached file resource (ARN).</p>
+   * @public
+   */
+  FileArn: string | undefined;
+
+  /**
+   * <p>The unique identifier of the attached file resource.</p>
+   * @public
+   */
+  FileId: string | undefined;
+
+  /**
+   * <p>A case-sensitive name of the attached file being uploaded.</p>
+   * @public
+   */
+  FileName: string | undefined;
+
+  /**
+   * <p>The size of the attached file in bytes.</p>
+   * @public
+   */
+  FileSizeInBytes: number | undefined;
+
+  /**
+   * <p>The current status of the attached file.</p>
+   * @public
+   */
+  FileStatus: FileStatusType | undefined;
+
+  /**
+   * <p>Represents the identity that created the file.</p>
+   * @public
+   */
+  CreatedBy?: CreatedByInfo | undefined;
+
+  /**
+   * <p>The use case for the file.</p>
+   * @public
+   */
+  FileUseCaseType?: FileUseCaseType | undefined;
+
+  /**
+   * <p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cases.html">Cases</a>, <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html">Email</a>, and
+   *     <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html">Task</a>.</p>
+   *          <note>
+   *             <p>This value must be a valid ARN.</p>
+   *          </note>
+   * @public
+   */
+  AssociatedResourceArn?: string | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, <code>\{ "Tags":
+   *     \{"key1":"value1", "key2":"value2"\} \}</code>.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchGetAttachedFileMetadataResponse {
+  /**
+   * <p>List of attached files that were successfully retrieved. </p>
+   * @public
+   */
+  Files?: AttachedFile[] | undefined;
+
+  /**
+   * <p>List of errors of attached files that could not be retrieved. </p>
+   * @public
+   */
+  Errors?: AttachedFileError[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchGetFlowAssociationRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>A list of resource identifiers to retrieve flow associations.</p>
+   *          <ul>
+   *             <li>
+   *                <p>Amazon Web Services End User Messaging SMS phone number ARN when using <code>SMS_PHONE_NUMBER</code>
+   *                </p>
+   *             </li>
+   *             <li>
+   *                <p>Amazon Web Services End User Messaging Social phone number ARN when using
+   *       <code>WHATSAPP_MESSAGING_PHONE_NUMBER</code>
+   *                </p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceIds: string[] | undefined;
+
+  /**
+   * <p>The type of resource association.</p>
+   * @public
+   */
+  ResourceType?: ListFlowAssociationResourceType | undefined;
+}
+
+/**
+ * <p>Information about flow associations.</p>
+ * @public
+ */
+export interface FlowAssociationSummary {
+  /**
+   * <p>The identifier of the resource.</p>
+   * @public
+   */
+  ResourceId?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow.</p>
+   * @public
+   */
+  FlowId?: string | undefined;
+
+  /**
+   * <p>The type of resource association.</p>
+   * @public
+   */
+  ResourceType?: ListFlowAssociationResourceType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchGetFlowAssociationResponse {
+  /**
+   * <p>Information about flow associations.</p>
+   * @public
+   */
+  FlowAssociationSummaryList?: FlowAssociationSummary[] | undefined;
+}
+
+/**
+ * <p>Information associated with a campaign.</p>
+ * @public
+ */
+export interface Campaign {
+  /**
+   * <p>A unique identifier for a campaign.</p>
+   * @public
+   */
+  CampaignId?: string | undefined;
+}
+
+/**
+ * <p>Information about the endpoint.</p>
+ * @public
+ */
+export interface Endpoint {
+  /**
+   * <p>Type of the endpoint.</p>
+   * @public
+   */
+  Type?: EndpointType | undefined;
+
+  /**
+   * <p>Address of the endpoint.</p>
+   * @public
+   */
+  Address?: string | undefined;
+}
+
+/**
+ * <p>The config of the outbound strategy.</p>
+ * @public
+ */
+export interface OutboundStrategyConfig {
+  /**
+   * <p>The config of agent first outbound strategy.</p>
+   * @public
+   */
+  AgentFirst?: AgentFirst | undefined;
+}
+
+/**
+ * <p>Information about the outbound strategy.</p>
+ * @public
+ */
+export interface OutboundStrategy {
+  /**
+   * <p>Type of the outbound strategy.</p>
+   * @public
+   */
+  Type: OutboundStrategyType | undefined;
+
+  /**
+   * <p>Config of the outbound strategy.</p>
+   * @public
+   */
+  Config?: OutboundStrategyConfig | undefined;
+}
+
+/**
+ * <p>Request object with information to create a contact.</p>
+ * @public
+ */
+export interface ContactDataRequest {
+  /**
+   * <p>Endpoint associated with the Connect Customer instance from which outbound contact will be initiated for the
+   *    campaign.</p>
+   * @public
+   */
+  SystemEndpoint?: Endpoint | undefined;
+
+  /**
+   * <p>Endpoint of the customer for which contact will be initiated.</p>
+   * @public
+   */
+  CustomerEndpoint?: Endpoint | undefined;
+
+  /**
+   * <p>Identifier to uniquely identify individual requests in the batch.</p>
+   * @public
+   */
+  RequestIdentifier?: string | undefined;
+
+  /**
+   * <p>The identifier of the queue associated with the Connect Customer instance in which contacts that are created
+   *    will be queued.</p>
+   * @public
+   */
+  QueueId?: string | undefined;
+
+  /**
+   * <p>List of attributes to be stored in a contact.</p>
+   * @public
+   */
+  Attributes?: Record<string, string> | undefined;
+
+  /**
+   * <p>Structure to store information associated with a campaign.</p>
+   * @public
+   */
+  Campaign?: Campaign | undefined;
+
+  /**
+   * <p>Information about the outbound strategy.</p>
+   * @public
+   */
+  OutboundStrategy?: OutboundStrategy | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchPutContactRequest {
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>List of individual contact requests.</p>
+   * @public
+   */
+  ContactDataRequestList: ContactDataRequest[] | undefined;
+}
+
+/**
+ * <p>Request for which contact failed to be generated.</p>
+ * @public
+ */
+export interface FailedRequest {
+  /**
+   * <p>Request identifier provided in the API call in the ContactDataRequest to create a contact.</p>
+   * @public
+   */
+  RequestIdentifier?: string | undefined;
+
+  /**
+   * <p>Reason code for the failure.</p>
+   * @public
+   */
+  FailureReasonCode?: FailureReasonCode | undefined;
+
+  /**
+   * <p>Why the request to create a contact failed.</p>
+   * @public
+   */
+  FailureReasonMessage?: string | undefined;
+}
+
+/**
+ * <p>Request for which contact was successfully created.</p>
+ * @public
+ */
+export interface SuccessfulRequest {
+  /**
+   * <p>Request identifier provided in the API call in the ContactDataRequest to create a contact.</p>
+   * @public
+   */
+  RequestIdentifier?: string | undefined;
+
+  /**
+   * <p>The contactId of the contact that was created successfully.</p>
+   * @public
+   */
+  ContactId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchPutContactResponse {
+  /**
+   * <p>List of requests for which contact was successfully created.</p>
+   * @public
+   */
+  SuccessfulRequestList?: SuccessfulRequest[] | undefined;
+
+  /**
+   * <p>List of requests for which contact creation failed.</p>
+   * @public
+   */
+  FailedRequestList?: FailedRequest[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchUpdateDataTableValueRequest {
+  /**
+   * <p>The unique identifier for the Amazon Connect instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias.</p>
+   * @public
+   */
+  DataTableId: string | undefined;
+
+  /**
+   * <p>A list of values to update, each including the current lock version to ensure optimistic locking.</p>
+   * @public
+   */
+  Values: DataTableValue[] | undefined;
+}
+
+/**
+ * <p>A batch update data table value failure result.</p>
+ * @public
+ */
+export interface BatchUpdateDataTableValueFailureResult {
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's message.</p>
+   * @public
+   */
+  Message: string | undefined;
+}
+
+/**
+ * <p>A batch update data table value success result.</p>
+ * @public
+ */
+export interface BatchUpdateDataTableValueSuccessResult {
+  /**
+   * <p>The result's primary values.</p>
+   * @public
+   */
+  PrimaryValues: PrimaryValue[] | undefined;
+
+  /**
+   * <p>The result's attribute name.</p>
+   * @public
+   */
+  AttributeName: string | undefined;
+
+  /**
+   * <p>The result's lock version.</p>
+   * @public
+   */
+  LockVersion: DataTableLockVersion | undefined;
+}
+
+/**
+ * @public
+ */
+export interface BatchUpdateDataTableValueResponse {
+  /**
+   * <p>A list of successfully updated values with their new lock versions and identifiers.</p>
+   * @public
+   */
+  Successful: BatchUpdateDataTableValueSuccessResult[] | undefined;
+
+  /**
+   * <p>A list of values that failed to be updated with error messages explaining the failure reason.</p>
+   * @public
+   */
+  Failed: BatchUpdateDataTableValueFailureResult[] | undefined;
+}
+
+/**
+ * @public
+ */
+export interface ClaimPhoneNumberRequest {
+  /**
+   * <p>The Amazon Resource Name (ARN) for Connect Customer instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>
+   * @public
+   */
+  TargetArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the Connect Customer instance that phone numbers are claimed to. You
+   *    can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the
+   *     instance ID</a> in the Amazon Resource Name (ARN) of the instance. You must enter <code>InstanceId</code> or <code>TargetArn</code>. </p>
+   * @public
+   */
+  InstanceId?: string | undefined;
+
+  /**
+   * <p>The phone number you want to claim. Phone numbers are formatted <code>[+] [country code] [subscriber number
+   *     including area code]</code>.</p>
+   * @public
    */
   PhoneNumber: string | undefined;
 
   /**
    * <p>The description of the phone number.</p>
+   * @public
    */
-  PhoneNumberDescription?: string;
+  PhoneNumberDescription?: string | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request.</p>
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   *          <p>Pattern: <code>^[a-f0-9]\{8\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{4\}-[a-f0-9]\{12\}$</code>
+   *          </p>
+   * @public
    */
-  ClientToken?: string;
-}
-
-export interface ClaimPhoneNumberResponse {
-  /**
-   * <p>A unique identifier for the phone number.</p>
-   */
-  PhoneNumberId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the phone number.</p>
-   */
-  PhoneNumberArn?: string;
+  ClientToken?: string | undefined;
 }
 
 /**
- * <p>An entity with the same name already exists.</p>
+ * @public
  */
-export class IdempotencyException extends __BaseException {
-  readonly name: "IdempotencyException" = "IdempotencyException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface ClaimPhoneNumberResponse {
   /**
-   * @internal
+   * <p>A unique identifier for the phone number.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<IdempotencyException, __BaseException>) {
-    super({
-      name: "IdempotencyException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, IdempotencyException.prototype);
-    this.Message = opts.Message;
-  }
+  PhoneNumberId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the phone number.</p>
+   * @public
+   */
+  PhoneNumberArn?: string | undefined;
 }
 
+/**
+ * Request to CompleteAttachedFileUpload API
+ * @public
+ */
+export interface CompleteAttachedFileUploadRequest {
+  /**
+   * <p>The unique identifier of the Connect Customer instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The unique identifier of the attached file resource.</p>
+   * @public
+   */
+  FileId: string | undefined;
+
+  /**
+   * <p>The resource to which the attached file is (being) uploaded to. The supported resources are <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cases.html">Cases</a>, <a href="https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html">Email</a>, and <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html">Task</a>.</p>
+   *          <note>
+   *             <p>This value must be a valid ARN.</p>
+   *          </note>
+   * @public
+   */
+  AssociatedResourceArn: string | undefined;
+}
+
+/**
+ * Response from CompleteAttachedFileUpload API
+ * @public
+ */
+export interface CompleteAttachedFileUploadResponse {}
+
+/**
+ * @public
+ */
 export interface CreateAgentStatusRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The name of the status.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The description of the status.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The state of the status.</p>
+   * @public
    */
-  State: AgentStatusState | string | undefined;
+  State: AgentStatusState | undefined;
 
   /**
    * <p>The display order of the status.</p>
+   * @public
    */
-  DisplayOrder?: number;
+  DisplayOrder?: number | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
-}
-
-export interface CreateAgentStatusResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the agent status.</p>
-   */
-  AgentStatusARN?: string;
-
-  /**
-   * <p>The identifier of the agent status.</p>
-   */
-  AgentStatusId?: string;
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p>A resource with the specified name already exists.</p>
+ * @public
  */
-export class DuplicateResourceException extends __BaseException {
-  readonly name: "DuplicateResourceException" = "DuplicateResourceException";
-  readonly $fault: "client" = "client";
-  Message?: string;
+export interface CreateAgentStatusResponse {
   /**
-   * @internal
+   * <p>The Amazon Resource Name (ARN) of the agent status.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<DuplicateResourceException, __BaseException>) {
-    super({
-      name: "DuplicateResourceException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, DuplicateResourceException.prototype);
-    this.Message = opts.Message;
-  }
+  AgentStatusARN?: string | undefined;
+
+  /**
+   * <p>The identifier of the agent status.</p>
+   * @public
+   */
+  AgentStatusId?: string | undefined;
 }
 
-export enum ContactFlowType {
-  AGENT_HOLD = "AGENT_HOLD",
-  AGENT_TRANSFER = "AGENT_TRANSFER",
-  AGENT_WHISPER = "AGENT_WHISPER",
-  CONTACT_FLOW = "CONTACT_FLOW",
-  CUSTOMER_HOLD = "CUSTOMER_HOLD",
-  CUSTOMER_QUEUE = "CUSTOMER_QUEUE",
-  CUSTOMER_WHISPER = "CUSTOMER_WHISPER",
-  OUTBOUND_WHISPER = "OUTBOUND_WHISPER",
-  QUEUE_TRANSFER = "QUEUE_TRANSFER",
+/**
+ * @public
+ */
+export interface CreateAttachedFileRequest {
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The use case for the file.</p>
+   *          <important>
+   *             <p>Only <code>VOICE_RECORDING</code> is supported.</p>
+   *          </important>
+   * @public
+   */
+  FileUseCaseType: FileUseCaseType | undefined;
+
+  /**
+   * <p>The S3 URI of the file to be attached. Only S3 source URIs are supported.</p>
+   * @public
+   */
+  FileSourceUri: string | undefined;
+
+  /**
+   * <p>The ARN of the completed voice contact to attach the file to. Only voice contacts with Telephony subtype are
+   *    supported.</p>
+   *          <note>
+   *             <p>This value must be a valid ARN.</p>
+   *          </note>
+   * @public
+   */
+  AssociatedResourceArn: string | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, <code>\{ "Tags":
+   *     \{"key1":"value1", "key2":"value2"\} \}</code>.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * Response from CreateAttachedFile API.
+ * @public
+ */
+export interface CreateAttachedFileResponse {
+  /**
+   * <p>The unique identifier of the attached file resource (ARN).</p>
+   * @public
+   */
+  FileArn?: string | undefined;
+
+  /**
+   * <p>The unique identifier of the attached file resource.</p>
+   * @public
+   */
+  FileId?: string | undefined;
+
+  /**
+   * <p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601 format:
+   *     <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example, <code>2024-05-03T02:41:28.172Z</code>.</p>
+   * @public
+   */
+  CreationTime?: string | undefined;
+
+  /**
+   * <p>The current status of the attached file. Valid values: <code>PROCESSING</code> | <code>APPROVED</code> |
+   *     <code>REJECTED</code> | <code>FAILED</code>.</p>
+   * @public
+   */
+  FileStatus?: FileStatusType | undefined;
+}
+
+/**
+ * <p>Contains the scope configuration for an authorization code. Defines the permissions and access boundaries for
+ *    the session.</p>
+ * @public
+ */
+export interface AuthScope {
+  /**
+   * <p>The list of security profile identifiers to scope the session to. Maximum of 10 security profiles.</p>
+   * @public
+   */
+  SecurityProfileIds?: string[] | undefined;
+
+  /**
+   * <p>The type of entity to scope the session to.</p>
+   * @public
+   */
+  EntityType: AuthCodeEntityType | undefined;
+
+  /**
+   * <p>The identifier of the entity to scope the session to.</p>
+   * @public
+   */
+  EntityId?: string | undefined;
+
+  /**
+   * <p>The name of the Customer Profiles domain to scope the session to.</p>
+   * @public
+   */
+  DomainName?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAuthCodeRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The scope for the authorization code. Defines the permissions and access boundaries for the session.</p>
+   * @public
+   */
+  Scope: AuthScope | undefined;
+
+  /**
+   * <p>The maximum duration of the session, in minutes. Minimum value of 1440 (24 hours). Maximum value of 43200 (30
+   *    days). If no value is provided, the session will expire after 400 days.</p>
+   * @public
+   */
+  MaxSessionDurationMinutes?: number | undefined;
+
+  /**
+   * <p>The duration of inactivity, in minutes, after which the session expires. Minimum value of 1440 (24 hours).
+   *    Maximum value of 20160 (14 days).</p>
+   * @public
+   */
+  SessionInactivityDurationMinutes: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateAuthCodeResponse {
+  /**
+   * <p>The authorization code to use for establishing a session.</p>
+   * @public
+   */
+  AuthCode?: string | undefined;
+
+  /**
+   * <p>The identifier of the session created with the authorization code.</p>
+   * @public
+   */
+  SessionId?: string | undefined;
+
+  /**
+   * <p>The type of entity associated with the authorization code.</p>
+   * @public
+   */
+  EntityType?: AuthCodeEntityType | undefined;
+
+  /**
+   * <p>The identifier of the entity associated with the authorization code.</p>
+   * @public
+   */
+  EntityId?: string | undefined;
+}
+
+/**
+ * <p>Well-formed data on a contact, used by agents to complete a contact request. You can have up to 4,096 UTF-8
+ *    bytes across all references for a contact.</p>
+ * @public
+ */
+export interface Reference {
+  /**
+   * <p>A valid value for the reference. For example, for a URL reference, a formatted URL that is displayed to an agent
+   *    in the Contact Control Panel (CCP).</p>
+   * @public
+   */
+  Value?: string | undefined;
+
+  /**
+   * <p>The type of the reference. <code>DATE</code> must be of type Epoch timestamp.
+   *    </p>
+   * @public
+   */
+  Type: ReferenceType | undefined;
+
+  /**
+   * <p>Status of the attachment reference type.</p>
+   * @public
+   */
+  Status?: ReferenceStatus | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the reference</p>
+   * @public
+   */
+  Arn?: string | undefined;
+
+  /**
+   * <p>Relevant details why the reference was not successfully created.</p>
+   * @public
+   */
+  StatusReason?: string | undefined;
+}
+
+/**
+ * <p>The user details for the contact.</p>
+ * @public
+ */
+export interface UserInfo {
+  /**
+   * <p>The user identifier for the contact.</p>
+   * @public
+   */
+  UserId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateContactResponse {
+  /**
+   * <p>The identifier of the contact in this instance of Connect Customer. </p>
+   * @public
+   */
+  ContactId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the created contact.</p>
+   * @public
+   */
+  ContactArn?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateContactFlowRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance.</p>
+   * <p>The identifier of the Connect Customer instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The name of the flow.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
-   * <p>The type of the flow. For descriptions of the available types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types">Choose a flow type</a> in the <i>Amazon Connect Administrator
-   *    Guide</i>.</p>
+   * <p>The type of the flow. For descriptions of the available types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types">Choose a flow type</a> in the
+   *      <i>Connect Customer Administrator Guide</i>.</p>
+   * @public
    */
-  Type: ContactFlowType | string | undefined;
+  Type: ContactFlowType | undefined;
 
   /**
    * <p>The description of the flow. </p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>The content of the flow. </p>
+   * <p>The JSON string that represents the content of the flow. For an example, see <a href="https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html">Example
+   *     flow in Connect Customer Flow language</a>. </p>
+   *          <p>Length Constraints: Minimum length of 1. Maximum length of 256000.</p>
+   * @public
    */
   Content: string | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>Indicates the flow status as either <code>SAVED</code> or <code>PUBLISHED</code>. The <code>PUBLISHED</code>
+   *    status will initiate validation on the content. the <code>SAVED</code> status does not initiate validation of the
+   *    content. <code>SAVED</code> | <code>PUBLISHED</code>.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  Status?: ContactFlowStatus | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateContactFlowResponse {
   /**
    * <p>The identifier of the flow.</p>
+   * @public
    */
-  ContactFlowId?: string;
+  ContactFlowId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the flow.</p>
+   * @public
    */
-  ContactFlowArn?: string;
+  ContactFlowArn?: string | undefined;
+
+  /**
+   * <p>Indicates the checksum value of the latest published flow content.</p>
+   * @public
+   */
+  FlowContentSha256?: string | undefined;
 }
 
 /**
  * <p>Information about a problem detail.</p>
+ * @public
  */
 export interface ProblemDetail {
   /**
    * <p>The problem detail's message.</p>
+   * @public
    */
-  message?: string;
+  message?: string | undefined;
 }
 
 /**
- * <p>The flow is not valid.</p>
+ * @public
  */
-export class InvalidContactFlowException extends __BaseException {
-  readonly name: "InvalidContactFlowException" = "InvalidContactFlowException";
-  readonly $fault: "client" = "client";
+export interface CreateContactFlowAliasRequest {
   /**
-   * <p>The problems with the flow. Please fix before trying again.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
-  problems?: ProblemDetail[];
+  InstanceId: string | undefined;
+
   /**
-   * @internal
+   * <p>The description of the alias.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidContactFlowException, __BaseException>) {
-    super({
-      name: "InvalidContactFlowException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidContactFlowException.prototype);
-    this.problems = opts.problems;
-  }
+  Description?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow.</p>
+   * @public
+   */
+  ContactFlowId: string | undefined;
+
+  /**
+   * <p>The version of the flow.</p>
+   * @public
+   */
+  ContactFlowVersion: number | undefined;
+
+  /**
+   * <p>The name of the alias.</p>
+   * @public
+   */
+  AliasName: string | undefined;
 }
 
+/**
+ * @public
+ */
+export interface CreateContactFlowAliasResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the flow.</p>
+   * @public
+   */
+  ContactFlowArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the alias.</p>
+   * @public
+   */
+  Id?: string | undefined;
+}
+
+/**
+ * <p>The external invocation configuration for the flow module</p>
+ * @public
+ */
+export interface ExternalInvocationConfiguration {
+  /**
+   * <p>Enable external invocation.</p>
+   * @public
+   */
+  Enabled?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateContactFlowModuleRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The name of the flow module.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The description of the flow module. </p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>The content of the flow module.</p>
+   * <p>The JSON string that represents the content of the flow. For an example, see <a href="https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html">Example
+   *     flow in Connect Customer Flow language</a>. </p>
+   * @public
    */
   Content: string | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  Tags?: Record<string, string> | undefined;
 
   /**
    * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request.</p>
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
    */
-  ClientToken?: string;
-}
-
-export interface CreateContactFlowModuleResponse {
-  /**
-   * <p>The identifier of the flow module.</p>
-   */
-  Id?: string;
+  ClientToken?: string | undefined;
 
   /**
-   * <p>The Amazon Resource Name (ARN) of the flow module.</p>
+   * <p>The configuration settings for the flow module.</p>
+   * @public
    */
-  Arn?: string;
+  Settings?: string | undefined;
+
+  /**
+   * <p>The external invocation configuration for the flow module.</p>
+   * @public
+   */
+  ExternalInvocationConfiguration?: ExternalInvocationConfiguration | undefined;
 }
 
 /**
- * <p>The problems with the module. Please fix before trying again.</p>
+ * @public
  */
-export class InvalidContactFlowModuleException extends __BaseException {
-  readonly name: "InvalidContactFlowModuleException" = "InvalidContactFlowModuleException";
-  readonly $fault: "client" = "client";
-  Problems?: ProblemDetail[];
+export interface CreateContactFlowModuleResponse {
   /**
-   * @internal
+   * <p>The identifier of the flow module.</p>
+   * @public
    */
-  constructor(opts: __ExceptionOptionType<InvalidContactFlowModuleException, __BaseException>) {
-    super({
-      name: "InvalidContactFlowModuleException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, InvalidContactFlowModuleException.prototype);
-    this.Problems = opts.Problems;
+  Id?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the flow module.</p>
+   * @public
+   */
+  Arn?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateContactFlowModuleAliasRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The description of the alias.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow module.</p>
+   * @public
+   */
+  ContactFlowModuleId: string | undefined;
+
+  /**
+   * <p>The version of the flow module.</p>
+   * @public
+   */
+  ContactFlowModuleVersion: number | undefined;
+
+  /**
+   * <p>The name of the alias.</p>
+   * @public
+   */
+  AliasName: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateContactFlowModuleAliasResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the flow module.</p>
+   * @public
+   */
+  ContactFlowModuleArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the alias.</p>
+   * @public
+   */
+  Id?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateContactFlowModuleVersionRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The description of the flow module version.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow module.</p>
+   * @public
+   */
+  ContactFlowModuleId: string | undefined;
+
+  /**
+   * <p>Indicates the checksum value of the flow module content.</p>
+   * @public
+   */
+  FlowModuleContentSha256?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateContactFlowModuleVersionResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the flow module.</p>
+   * @public
+   */
+  ContactFlowModuleArn?: string | undefined;
+
+  /**
+   * <p>The version of the flow module.</p>
+   * @public
+   */
+  Version?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateContactFlowVersionRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The description of the flow version.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow.</p>
+   * @public
+   */
+  ContactFlowId: string | undefined;
+
+  /**
+   * <p>Indicates the checksum value of the flow content.</p>
+   * @public
+   */
+  FlowContentSha256?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow version.</p>
+   * @public
+   */
+  ContactFlowVersion?: number | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region where this resource was last modified.</p>
+   * @public
+   */
+  LastModifiedTime?: Date | undefined;
+
+  /**
+   * <p>The Amazon Web Services Region where this resource was last modified.</p>
+   * @public
+   */
+  LastModifiedRegion?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateContactFlowVersionResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the flow.</p>
+   * @public
+   */
+  ContactFlowArn?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow version.</p>
+   * @public
+   */
+  Version?: number | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDataTableRequest {
+  /**
+   * <p>The unique identifier for the Amazon Connect instance where the data table will be created.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The name for the data table. Must conform to Connect human readable string specification and have 1-127
+   *    characters. Whitespace must be trimmed first. Must not start with the reserved case insensitive values 'connect:' and
+   *    'aws:'. Must be unique for the instance using case-insensitive comparison.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>An optional description for the data table. Must conform to Connect human readable string specification and have
+   *    0-250 characters. Whitespace must be trimmed first.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The IANA timezone identifier to use when resolving time based dynamic values. Required even if no time slices
+   *    are specified.</p>
+   * @public
+   */
+  TimeZone: string | undefined;
+
+  /**
+   * <p>The data level that concurrent value edits are locked on. One of DATA_TABLE, PRIMARY_VALUE, ATTRIBUTE, VALUE,
+   *    and NONE. NONE is the default if unspecified. This determines how concurrent edits are handled when multiple users
+   *    attempt to modify values simultaneously.</p>
+   * @public
+   */
+  ValueLockLevel: DataTableLockLevel | undefined;
+
+  /**
+   * <p>The status of the data table. One of PUBLISHED or SAVED. Required parameter that determines the initial state of
+   *    the table.</p>
+   * @public
+   */
+  Status: DataTableStatus | undefined;
+
+  /**
+   * <p>Key value pairs for attribute based access control (TBAC or ABAC). Optional tags to apply to the data table for
+   *    organization and access control purposes.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDataTableResponse {
+  /**
+   * <p>The unique identifier for the created data table. Does not include the version alias.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the created data table. Does not include the version alias.</p>
+   * @public
+   */
+  Arn: string | undefined;
+
+  /**
+   * <p>The lock version information for the created data table, used for optimistic locking and table
+   *    versioning.</p>
+   * @public
+   */
+  LockVersion: DataTableLockVersion | undefined;
+}
+
+/**
+ * <p>Defines enumeration validation for attribute values. Allows specifying a list of permitted values and whether
+ *    custom values beyond the enumerated list are allowed.</p>
+ * @public
+ */
+export interface ValidationEnum {
+  /**
+   * <p>Boolean that defaults to false. When true, only values specified in the enum list are allowed. When false,
+   *    custom values beyond the enumerated list are permitted.</p>
+   * @public
+   */
+  Strict?: boolean | undefined;
+
+  /**
+   * <p>A list of predefined values that are allowed for this attribute. These values are always permitted regardless of
+   *    the Strict setting.</p>
+   * @public
+   */
+  Values?: string[] | undefined;
+}
+
+/**
+ * <p>Defines validation rules for data table attribute values. Based on JSON Schema Draft 2020-12 with additional
+ *    Connect-specific validations. Validation rules ensure data integrity and consistency across the data table.</p>
+ * @public
+ */
+export interface Validation {
+  /**
+   * <p>The minimum number of characters a text value can contain. Applies to TEXT value type and values within a
+   *    TEXT_LIST. Must be less than or equal to MaxLength.</p>
+   * @public
+   */
+  MinLength?: number | undefined;
+
+  /**
+   * <p>The maximum number of characters a text value can contain. Applies to TEXT value type and values within a
+   *    TEXT_LIST. Must be greater than or equal to MinLength.</p>
+   * @public
+   */
+  MaxLength?: number | undefined;
+
+  /**
+   * <p>The minimum number of values in a list. Must be an integer greater than or equal to 0 and less than or equal to
+   *    MaxValues. Applies to all list types.</p>
+   * @public
+   */
+  MinValues?: number | undefined;
+
+  /**
+   * <p>The maximum number of values in a list. Must be an integer greater than or equal to 0 and greater than or equal
+   *    to MinValues. Applies to all list types.</p>
+   * @public
+   */
+  MaxValues?: number | undefined;
+
+  /**
+   * <p>Boolean that defaults to false. Applies to text lists and text primary attributes. When true, enforces
+   *    case-insensitive uniqueness for primary attributes and allows case-insensitive lookups.</p>
+   * @public
+   */
+  IgnoreCase?: boolean | undefined;
+
+  /**
+   * <p>The smallest inclusive numeric value for NUMBER value type. Cannot be provided when ExclusiveMinimum is also
+   *    provided. Must be less than or equal to Maximum and less than ExclusiveMaximum. Applies to NUMBER and values within
+   *    NUMBER_LIST.</p>
+   * @public
+   */
+  Minimum?: number | undefined;
+
+  /**
+   * <p>The largest inclusive numeric value for NUMBER value type. Can be provided alongside ExclusiveMaximum where both
+   *    operate independently. Must be greater than or equal to Minimum and greater than ExclusiveMinimum. Applies to NUMBER
+   *    and values within NUMBER_LIST.</p>
+   * @public
+   */
+  Maximum?: number | undefined;
+
+  /**
+   * <p>The smallest exclusive numeric value for NUMBER value type. Can be provided alongside Minimum where both operate
+   *    independently. Must be less than ExclusiveMaximum and Maximum. Applies to NUMBER and values within
+   *    NUMBER_LIST.</p>
+   * @public
+   */
+  ExclusiveMinimum?: number | undefined;
+
+  /**
+   * <p>The largest exclusive numeric value for NUMBER value type. Can be provided alongside Maximum where both operate
+   *    independently. Must be greater than ExclusiveMinimum and Minimum. Applies to NUMBER and values within
+   *    NUMBER_LIST.</p>
+   * @public
+   */
+  ExclusiveMaximum?: number | undefined;
+
+  /**
+   * <p>Specifies that numeric values must be multiples of this number. Must be greater than 0. The result of dividing a
+   *    value by this multiple must result in an integer. Applies to NUMBER and values within NUMBER_LIST.</p>
+   * @public
+   */
+  MultipleOf?: number | undefined;
+
+  /**
+   * <p>Defines enumeration constraints for attribute values. Can specify a list of allowed values and whether custom
+   *    values are permitted beyond the enumerated list.</p>
+   * @public
+   */
+  Enum?: ValidationEnum | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDataTableAttributeRequest {
+  /**
+   * <p>The unique identifier for the Amazon Connect instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The unique identifier for the data table. Must also accept the table ARN with or without a version alias. If the
+   *    version is provided as part of the identifier or ARN, the version must be one of the two available system managed
+   *    aliases, $SAVED or $LATEST.</p>
+   * @public
+   */
+  DataTableId: string | undefined;
+
+  /**
+   * <p>The name for the attribute. Must conform to Connect human readable string specification and have 1-127
+   *    characters. Must not start with the reserved case insensitive values 'connect:' and 'aws:'. Whitespace trimmed before
+   *    persisting. Must be unique for the data table using case-insensitive comparison.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The type of value allowed or the resultant type after the value's expression is evaluated. Must be one of TEXT,
+   *    TEXT_LIST, NUMBER, NUMBER_LIST, and BOOLEAN.</p>
+   * @public
+   */
+  ValueType: DataTableAttributeValueType | undefined;
+
+  /**
+   * <p>An optional description for the attribute. Must conform to Connect human readable string specification and have
+   *    0-250 characters. Whitespace trimmed before persisting.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>Optional boolean that defaults to false. Determines if the value is used to identify a record in the table.
+   *    Values for primary attributes must not be expressions.</p>
+   * @public
+   */
+  Primary?: boolean | undefined;
+
+  /**
+   * <p>Optional validation rules for the attribute. Borrows heavily from JSON Schema - Draft 2020-12. The maximum
+   *    length of arrays within validations and depth of validations is 5. There are default limits that apply to all types.
+   *    Customer specified limits in excess of the default limits are not permitted.</p>
+   * @public
+   */
+  Validation?: Validation | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateDataTableAttributeResponse {
+  /**
+   * <p>The name of the created attribute since it also serves as the identifier. This could be different than the
+   *    parameter passed in since it will be trimmed for whitespace.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The unique identifier assigned to the created attribute.</p>
+   * @public
+   */
+  AttributeId?: string | undefined;
+
+  /**
+   * <p>The lock version information for the data table and attribute, used for optimistic locking and
+   *    versioning.</p>
+   * @public
+   */
+  LockVersion: DataTableLockVersion | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateEmailAddressRequest {
+  /**
+   * <p>The description of the email address.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The email address, including the domain.</p>
+   * @public
+   */
+  EmailAddress: string | undefined;
+
+  /**
+   * <p>The display name of email address</p>
+   * @public
+   */
+  DisplayName?: string | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateEmailAddressResponse {
+  /**
+   * <p>The identifier of the email address.</p>
+   * @public
+   */
+  EmailAddressId?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the email address.</p>
+   * @public
+   */
+  EmailAddressArn?: string | undefined;
+}
+
+/**
+ * <p>The automatic evaluation configuration of an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormAutoEvaluationConfiguration {
+  /**
+   * <p>When automated evaluation is enabled.</p>
+   * @public
+   */
+  Enabled: boolean | undefined;
+}
+
+/**
+ * <p>An enablement expression source item.</p>
+ * @public
+ */
+export interface EvaluationFormItemEnablementSource {
+  /**
+   * <p>A type of source item. </p>
+   * @public
+   */
+  Type: EvaluationFormItemEnablementSourceType | undefined;
+
+  /**
+   * <p>A referenceId of the source item.</p>
+   * @public
+   */
+  RefId?: string | undefined;
+}
+
+/**
+ * <p>An enablement expression source value.</p>
+ * @public
+ */
+export interface EvaluationFormItemEnablementSourceValue {
+  /**
+   * <p>A type of source item value. </p>
+   * @public
+   */
+  Type: EvaluationFormItemEnablementSourceValueType | undefined;
+
+  /**
+   * <p>A referenceId of the source value.</p>
+   * @public
+   */
+  RefId?: string | undefined;
+}
+
+/**
+ * <p>An expression that defines a basic building block of conditional enablement.</p>
+ * @public
+ */
+export interface EvaluationFormItemEnablementExpression {
+  /**
+   * <p>A source item of enablement expression.</p>
+   * @public
+   */
+  Source: EvaluationFormItemEnablementSource | undefined;
+
+  /**
+   * <p>A list of values from source item.</p>
+   * @public
+   */
+  Values: EvaluationFormItemEnablementSourceValue[] | undefined;
+
+  /**
+   * <p>A comparator to be used against list of values. </p>
+   * @public
+   */
+  Comparator: EvaluationFormItemSourceValuesComparator | undefined;
+}
+
+/**
+ * <p>Information about the metric configuration for an evaluation form question. Use this to associate a
+ *    business outcome metric with a question.</p>
+ * @public
+ */
+export interface EvaluationFormMetricConfiguration {
+  /**
+   * <p>The type of metric. Currently, only <code>BUSINESS_OUTCOME</code> is supported.</p>
+   * @public
+   */
+  MetricType: EvaluationFormMetricType | undefined;
+
+  /**
+   * <p>The name of the metric. Valid values are:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>SALE_SUCCESS</code> – Sale success.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CSAT</code> – Customer satisfaction.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CHURN_PROPENSITY</code> – Churn propensity.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>SELF_SERVICE_SUCCESS</code> – Self-service success.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>PARTIAL_SELF_SERVICE_SUCCESS</code> – Partial self-service success.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  MetricName: string | undefined;
+}
+
+/**
+ * <p>A question automation answer.</p>
+ * @public
+ */
+export interface EvaluationFormQuestionAutomationAnswerSource {
+  /**
+   * <p>The automation answer source type.</p>
+   * @public
+   */
+  SourceType: EvaluationFormQuestionAutomationAnswerSourceType | undefined;
+}
+
+/**
+ * <p>Automation rule for multi-select questions based on rule categories.</p>
+ * @public
+ */
+export interface MultiSelectQuestionRuleCategoryAutomation {
+  /**
+   * <p>The category name for this automation rule.</p>
+   * @public
+   */
+  Category: string | undefined;
+
+  /**
+   * <p>The condition for this automation rule.</p>
+   * @public
+   */
+  Condition: MultiSelectQuestionRuleCategoryAutomationCondition | undefined;
+
+  /**
+   * <p>Reference IDs of options for this automation rule.</p>
+   * @public
+   */
+  OptionRefIds: string[] | undefined;
+}
+
+/**
+ * <p>An automation option for a multi-select question.</p>
+ * @public
+ */
+export type EvaluationFormMultiSelectQuestionAutomationOption =
+  | EvaluationFormMultiSelectQuestionAutomationOption.RuleCategoryMember
+  | EvaluationFormMultiSelectQuestionAutomationOption.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EvaluationFormMultiSelectQuestionAutomationOption {
+  /**
+   * <p>Rule category configuration for this automation option.</p>
+   * @public
+   */
+  export interface RuleCategoryMember {
+    RuleCategory: MultiSelectQuestionRuleCategoryAutomation;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    RuleCategory?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    RuleCategory: (value: MultiSelectQuestionRuleCategoryAutomation) => T;
+    _: (name: string, value: any) => T;
   }
 }
 
-export enum HoursOfOperationDays {
-  FRIDAY = "FRIDAY",
-  MONDAY = "MONDAY",
-  SATURDAY = "SATURDAY",
-  SUNDAY = "SUNDAY",
-  THURSDAY = "THURSDAY",
-  TUESDAY = "TUESDAY",
-  WEDNESDAY = "WEDNESDAY",
+/**
+ * <p>Automation configuration for multi-select questions.</p>
+ * @public
+ */
+export interface EvaluationFormMultiSelectQuestionAutomation {
+  /**
+   * <p>Automation options for the multi-select question.</p>
+   * @public
+   */
+  Options?: EvaluationFormMultiSelectQuestionAutomationOption[] | undefined;
+
+  /**
+   * <p>Reference IDs of default options.</p>
+   * @public
+   */
+  DefaultOptionRefIds?: string[] | undefined;
+
+  /**
+   * <p>A question automation answer.</p>
+   * @public
+   */
+  AnswerSource?: EvaluationFormQuestionAutomationAnswerSource | undefined;
+}
+
+/**
+ * <p>Information about automatic fail configuration for an evaluation form.</p>
+ * @public
+ */
+export interface AutomaticFailConfiguration {
+  /**
+   * <p>The referenceId of the target section for auto failure.</p>
+   * @public
+   */
+  TargetSection?: string | undefined;
+}
+
+/**
+ * <p>Information about the points configuration for an answer option.</p>
+ * @public
+ */
+export interface QuestionOptionPointsConfiguration {
+  /**
+   * <p>The point value assigned to the answer option.</p>
+   * @public
+   */
+  PointValue: number | undefined;
+
+  /**
+   * <p>The flag to mark the option as a bonus option.</p>
+   * @public
+   */
+  IsBonus?: boolean | undefined;
+}
+
+/**
+ * <p>An option for a multi-select question in an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormMultiSelectQuestionOption {
+  /**
+   * <p>Reference identifier for this option.</p>
+   * @public
+   */
+  RefId: string | undefined;
+
+  /**
+   * <p>Display text for this option.</p>
+   * @public
+   */
+  Text: string | undefined;
+
+  /**
+   * <p>The score assigned to the answer option.</p>
+   * @public
+   */
+  Score?: number | undefined;
+
+  /**
+   * <p>The flag to mark the option as automatic fail. If an automatic fail answer is provided, the overall evaluation
+   *    gets a score of 0.</p>
+   * @public
+   */
+  AutomaticFail?: boolean | undefined;
+
+  /**
+   * <p>Information about automatic fail configuration for an evaluation form.</p>
+   * @public
+   */
+  AutomaticFailConfiguration?: AutomaticFailConfiguration | undefined;
+
+  /**
+   * <p>The points configuration for point-based scoring.</p>
+   * @public
+   */
+  PointsConfiguration?: QuestionOptionPointsConfiguration | undefined;
+}
+
+/**
+ * <p>Properties for a multi-select question in an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormMultiSelectQuestionProperties {
+  /**
+   * <p>Options available for this multi-select question.</p>
+   * @public
+   */
+  Options: EvaluationFormMultiSelectQuestionOption[] | undefined;
+
+  /**
+   * <p>Display format for the multi-select question.</p>
+   * @public
+   */
+  DisplayAs?: EvaluationFormMultiSelectQuestionDisplayMode | undefined;
+
+  /**
+   * <p>Automation configuration for this multi-select question.</p>
+   * @public
+   */
+  Automation?: EvaluationFormMultiSelectQuestionAutomation | undefined;
+}
+
+/**
+ * <p>Information about the property value used in automation of a numeric questions. Label values are associated with
+ *    minimum and maximum values for the numeric question.</p>
+ *          <ul>
+ *             <li>
+ *                <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p>
+ *             </li>
+ *             <li>
+ *                <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>,
+ *       <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum
+ *      value of 63072000.</p>
+ *             </li>
+ *             <li>
+ *                <p>Percentages have a minimum value of 0 and maximum value of 100. </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 1000.</p>
+ *             </li>
+ *          </ul>
+ * @public
+ */
+export interface NumericQuestionPropertyValueAutomation {
+  /**
+   * <p>The property label of the automation.</p>
+   * @public
+   */
+  Label: NumericQuestionPropertyAutomationLabel | undefined;
+}
+
+/**
+ * <p>Information about the automation configuration in numeric questions.</p>
+ * @public
+ */
+export type EvaluationFormNumericQuestionAutomation =
+  | EvaluationFormNumericQuestionAutomation.AnswerSourceMember
+  | EvaluationFormNumericQuestionAutomation.PropertyValueMember
+  | EvaluationFormNumericQuestionAutomation.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EvaluationFormNumericQuestionAutomation {
+  /**
+   * <p>The property value of the automation.</p>
+   * @public
+   */
+  export interface PropertyValueMember {
+    PropertyValue: NumericQuestionPropertyValueAutomation;
+    AnswerSource?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>A source of automation answer for numeric question.</p>
+   * @public
+   */
+  export interface AnswerSourceMember {
+    PropertyValue?: never;
+    AnswerSource: EvaluationFormQuestionAutomationAnswerSource;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    PropertyValue?: never;
+    AnswerSource?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    PropertyValue: (value: NumericQuestionPropertyValueAutomation) => T;
+    AnswerSource: (value: EvaluationFormQuestionAutomationAnswerSource) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Information about the option range used for scoring in numeric questions.</p>
+ * @public
+ */
+export interface EvaluationFormNumericQuestionOption {
+  /**
+   * <p>The minimum answer value of the range option.</p>
+   * @public
+   */
+  MinValue: number | undefined;
+
+  /**
+   * <p>The maximum answer value of the range option.</p>
+   * @public
+   */
+  MaxValue: number | undefined;
+
+  /**
+   * <p>The score assigned to answer values within the range option.</p>
+   * @public
+   */
+  Score?: number | undefined;
+
+  /**
+   * <p>The flag to mark the option as automatic fail. If an automatic fail answer is provided, the overall evaluation
+   *    gets a score of 0.</p>
+   * @public
+   */
+  AutomaticFail?: boolean | undefined;
+
+  /**
+   * <p>A configuration for automatic fail.</p>
+   * @public
+   */
+  AutomaticFailConfiguration?: AutomaticFailConfiguration | undefined;
+
+  /**
+   * <p>The points configuration for point-based scoring.</p>
+   * @public
+   */
+  PointsConfiguration?: QuestionOptionPointsConfiguration | undefined;
+}
+
+/**
+ * <p>Information about properties for a numeric question in an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormNumericQuestionProperties {
+  /**
+   * <p>The minimum answer value.</p>
+   * @public
+   */
+  MinValue: number | undefined;
+
+  /**
+   * <p>The maximum answer value.</p>
+   * @public
+   */
+  MaxValue: number | undefined;
+
+  /**
+   * <p>The scoring options of the numeric question.</p>
+   * @public
+   */
+  Options?: EvaluationFormNumericQuestionOption[] | undefined;
+
+  /**
+   * <p>The automation properties of the numeric question.</p>
+   * @public
+   */
+  Automation?: EvaluationFormNumericQuestionAutomation | undefined;
+}
+
+/**
+ * <p>Information about the automation option based on a rule category for a single select question.</p>
+ * @public
+ */
+export interface SingleSelectQuestionRuleCategoryAutomation {
+  /**
+   * <p>The category name, as defined in Rules. This is equivalent to a conversational analytics rule with the same
+   *    name: the automation option is applied based on whether that rule matched the contact. For more information about
+   *    creating rules, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-rules.html">Create rules</a> in the <i>Connect Customer
+   *    Administrator Guide</i>.</p>
+   * @public
+   */
+  Category: string | undefined;
+
+  /**
+   * <p>The condition to apply for the automation option. If the condition is <code>PRESENT</code>, then the option is
+   *    applied when the contact data includes the category. Similarly, if the condition is <code>NOT_PRESENT</code>, then
+   *    the option is applied when the contact data does not include the category.</p>
+   * @public
+   */
+  Condition: SingleSelectQuestionRuleCategoryAutomationCondition | undefined;
+
+  /**
+   * <p>The identifier of the answer option.</p>
+   * @public
+   */
+  OptionRefId: string | undefined;
+}
+
+/**
+ * <p>Information about the automation option of a single select question.</p>
+ * @public
+ */
+export type EvaluationFormSingleSelectQuestionAutomationOption =
+  | EvaluationFormSingleSelectQuestionAutomationOption.RuleCategoryMember
+  | EvaluationFormSingleSelectQuestionAutomationOption.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EvaluationFormSingleSelectQuestionAutomationOption {
+  /**
+   * <p>The automation option based on a rule category for the single select question.</p>
+   * @public
+   */
+  export interface RuleCategoryMember {
+    RuleCategory: SingleSelectQuestionRuleCategoryAutomation;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    RuleCategory?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    RuleCategory: (value: SingleSelectQuestionRuleCategoryAutomation) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Information about the automation configuration in single select questions. Automation options are evaluated in
+ *    order, and the first matched option is applied. If no automation option matches, and there is a default option, then
+ *    the default option is applied.</p>
+ * @public
+ */
+export interface EvaluationFormSingleSelectQuestionAutomation {
+  /**
+   * <p>The automation options of the single select question.</p>
+   * @public
+   */
+  Options?: EvaluationFormSingleSelectQuestionAutomationOption[] | undefined;
+
+  /**
+   * <p>The identifier of the default answer option, when none of the automation options match the criteria.</p>
+   * @public
+   */
+  DefaultOptionRefId?: string | undefined;
+
+  /**
+   * <p>Automation answer source.</p>
+   * @public
+   */
+  AnswerSource?: EvaluationFormQuestionAutomationAnswerSource | undefined;
+}
+
+/**
+ * <p>Information about the automation configuration in single select questions.</p>
+ * @public
+ */
+export interface EvaluationFormSingleSelectQuestionOption {
+  /**
+   * <p>The identifier of the answer option. An identifier must be unique within the question.</p>
+   * @public
+   */
+  RefId: string | undefined;
+
+  /**
+   * <p>The title of the answer option.</p>
+   * @public
+   */
+  Text: string | undefined;
+
+  /**
+   * <p>The score assigned to the answer option.</p>
+   * @public
+   */
+  Score?: number | undefined;
+
+  /**
+   * <p>The flag to mark the option as automatic fail. If an automatic fail answer is provided, the overall evaluation
+   *    gets a score of 0.</p>
+   * @public
+   */
+  AutomaticFail?: boolean | undefined;
+
+  /**
+   * <p>Whether automatic fail is configured on a single select question. </p>
+   * @public
+   */
+  AutomaticFailConfiguration?: AutomaticFailConfiguration | undefined;
+
+  /**
+   * <p>The points configuration for point-based scoring.</p>
+   * @public
+   */
+  PointsConfiguration?: QuestionOptionPointsConfiguration | undefined;
+}
+
+/**
+ * <p>Information about the options in single select questions.</p>
+ * @public
+ */
+export interface EvaluationFormSingleSelectQuestionProperties {
+  /**
+   * <p>The answer options of the single select question.</p>
+   * @public
+   */
+  Options: EvaluationFormSingleSelectQuestionOption[] | undefined;
+
+  /**
+   * <p>The display mode of the single select question.</p>
+   * @public
+   */
+  DisplayAs?: EvaluationFormSingleSelectQuestionDisplayMode | undefined;
+
+  /**
+   * <p>The display mode of the single select question.</p>
+   * @public
+   */
+  Automation?: EvaluationFormSingleSelectQuestionAutomation | undefined;
+}
+
+/**
+ * <p>Information about the automation configuration in text questions.</p>
+ * @public
+ */
+export interface EvaluationFormTextQuestionAutomation {
+  /**
+   * <p>Automation answer source.</p>
+   * @public
+   */
+  AnswerSource?: EvaluationFormQuestionAutomationAnswerSource | undefined;
+}
+
+/**
+ * <p>Information about properties for a text question in an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormTextQuestionProperties {
+  /**
+   * <p>The automation properties of the text question.</p>
+   * @public
+   */
+  Automation?: EvaluationFormTextQuestionAutomation | undefined;
+}
+
+/**
+ * <p>Information about properties for a question in an evaluation form. The question type properties must be either
+ *    for a numeric question or a single select question.</p>
+ * @public
+ */
+export type EvaluationFormQuestionTypeProperties =
+  | EvaluationFormQuestionTypeProperties.MultiSelectMember
+  | EvaluationFormQuestionTypeProperties.NumericMember
+  | EvaluationFormQuestionTypeProperties.SingleSelectMember
+  | EvaluationFormQuestionTypeProperties.TextMember
+  | EvaluationFormQuestionTypeProperties.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace EvaluationFormQuestionTypeProperties {
+  /**
+   * <p>The properties of the numeric question.</p>
+   * @public
+   */
+  export interface NumericMember {
+    Numeric: EvaluationFormNumericQuestionProperties;
+    SingleSelect?: never;
+    Text?: never;
+    MultiSelect?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The properties of the numeric question.</p>
+   * @public
+   */
+  export interface SingleSelectMember {
+    Numeric?: never;
+    SingleSelect: EvaluationFormSingleSelectQuestionProperties;
+    Text?: never;
+    MultiSelect?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>The properties of the text question.</p>
+   * @public
+   */
+  export interface TextMember {
+    Numeric?: never;
+    SingleSelect?: never;
+    Text: EvaluationFormTextQuestionProperties;
+    MultiSelect?: never;
+    $unknown?: never;
+  }
+
+  /**
+   * <p>Properties for multi-select question types.</p>
+   * @public
+   */
+  export interface MultiSelectMember {
+    Numeric?: never;
+    SingleSelect?: never;
+    Text?: never;
+    MultiSelect: EvaluationFormMultiSelectQuestionProperties;
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    Numeric?: never;
+    SingleSelect?: never;
+    Text?: never;
+    MultiSelect?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    Numeric: (value: EvaluationFormNumericQuestionProperties) => T;
+    SingleSelect: (value: EvaluationFormSingleSelectQuestionProperties) => T;
+    Text: (value: EvaluationFormTextQuestionProperties) => T;
+    MultiSelect: (value: EvaluationFormMultiSelectQuestionProperties) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * <p>Information about the points configuration for a question.</p>
+ * @public
+ */
+export interface QuestionPointsConfiguration {
+  /**
+   * <p>The maximum point value.</p>
+   * @public
+   */
+  MaxPointValue?: number | undefined;
+
+  /**
+   * <p>The minimum point value.</p>
+   * @public
+   */
+  MinPointValue?: number | undefined;
+
+  /**
+   * <p>The flag to mark the question as a bonus question.</p>
+   * @public
+   */
+  IsBonus?: boolean | undefined;
+}
+
+/**
+ * <p>Information about a score threshold for a performance category.</p>
+ * @public
+ */
+export interface EvaluationFormScoreThreshold {
+  /**
+   * <p>The performance category name.</p>
+   * @public
+   */
+  PerformanceCategory: PerformanceCategoryName | undefined;
+
+  /**
+   * <p>The minimum score percentage for the performance category.</p>
+   * @public
+   */
+  MinScorePercentage?: number | undefined;
+
+  /**
+   * <p>The maximum score percentage for the performance category.</p>
+   * @public
+   */
+  MaxScorePercentage?: number | undefined;
+}
+
+/**
+ * <p>Scoring configuration for a question in an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormQuestionScoringConfiguration {
+  /**
+   * <p>The points configuration for point-based scoring.</p>
+   * @public
+   */
+  PointsConfiguration?: QuestionPointsConfiguration | undefined;
+
+  /**
+   * <p>The flag to exclude the question from scoring.</p>
+   * @public
+   */
+  IsExcludedFromScoring?: boolean | undefined;
+
+  /**
+   * <p>The score thresholds for performance categories.</p>
+   * @public
+   */
+  ScoreThresholds?: EvaluationFormScoreThreshold[] | undefined;
+}
+
+/**
+ * <p>Language configuration for an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormLanguageConfiguration {
+  /**
+   * <p>The language for the evaluation form.</p>
+   * @public
+   */
+  FormLanguage?: EvaluationFormLanguageCode | undefined;
+}
+
+/**
+ * <p>The value information for an evaluation review notification recipient.</p>
+ * @public
+ */
+export interface EvaluationReviewNotificationRecipientValue {
+  /**
+   * <p>The user identifier for the notification recipient.</p>
+   * @public
+   */
+  UserId?: string | undefined;
+}
+
+/**
+ * <p>Information about a recipient who should be notified when an evaluation review is requested.</p>
+ * @public
+ */
+export interface EvaluationReviewNotificationRecipient {
+  /**
+   * <p>The type of notification recipient.</p>
+   * @public
+   */
+  Type: EvaluationReviewNotificationRecipientType | undefined;
+
+  /**
+   * <p>The value associated with the notification recipient type.</p>
+   * @public
+   */
+  Value: EvaluationReviewNotificationRecipientValue | undefined;
+}
+
+/**
+ * <p>Configuration settings for evaluation reviews.</p>
+ * @public
+ */
+export interface EvaluationReviewConfiguration {
+  /**
+   * <p>List of recipients who should be notified when a review is requested.</p>
+   * @public
+   */
+  ReviewNotificationRecipients: EvaluationReviewNotificationRecipient[] | undefined;
+
+  /**
+   * <p>Number of days during which a request for review can be submitted for evaluations created from this form.</p>
+   * @public
+   */
+  EligibilityDays?: number | undefined;
+}
+
+/**
+ * <p>Information about scoring strategy for an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormScoringStrategy {
+  /**
+   * <p>The scoring mode of the evaluation form.</p>
+   * @public
+   */
+  Mode: EvaluationFormScoringMode | undefined;
+
+  /**
+   * <p>The scoring status of the evaluation form.</p>
+   * @public
+   */
+  Status: EvaluationFormScoringStatus | undefined;
+
+  /**
+   * <p>The score thresholds for performance categories.</p>
+   * @public
+   */
+  ScoreThresholds?: EvaluationFormScoreThreshold[] | undefined;
+}
+
+/**
+ * <p>Configuration that specifies the target for an evaluation form.</p>
+ * @public
+ */
+export interface EvaluationFormTargetConfiguration {
+  /**
+   * <p>The contact interaction type for this evaluation form.</p>
+   * @public
+   */
+  ContactInteractionType: ContactInteractionType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateEvaluationFormResponse {
+  /**
+   * <p>The unique identifier for the evaluation form.</p>
+   * @public
+   */
+  EvaluationFormId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) for the evaluation form resource.</p>
+   * @public
+   */
+  EvaluationFormArn: string | undefined;
+}
+
+/**
+ * <p>The display configuration for an extraction definition.</p>
+ * @public
+ */
+export interface ExtractionDefinitionDisplay {
+  /**
+   * <p>The label displayed in the agent workspace for this extraction definition.</p>
+   * @public
+   */
+  Label?: string | undefined;
+}
+
+/**
+ * <p>The behavior configuration when an extraction definition cannot find the target value.</p>
+ * @public
+ */
+export interface ExtractionDefinitionNotFoundBehavior {
+  /**
+   * <p>The behavior type. <code>USE_DEFAULT_VALUE</code> returns the specified default value.
+   *    <code>OMIT</code> excludes the field from the output.</p>
+   * @public
+   */
+  Behavior: NotFoundBehaviorType | undefined;
+
+  /**
+   * <p>The default value to use when the behavior is <code>USE_DEFAULT_VALUE</code>.</p>
+   * @public
+   */
+  DefaultValue?: string | undefined;
+}
+
+/**
+ * <p>The extraction configuration that defines how data is extracted from customer
+ *    interactions.</p>
+ * @public
+ */
+export interface ExtractionConfiguration {
+  /**
+   * <p>The prompt hint that guides the extraction. This text tells the generative AI model what
+   *    data to look for in the customer interaction.</p>
+   * @public
+   */
+  PromptHint: string | undefined;
+
+  /**
+   * <p>The behavior when the extraction cannot find the specified data in the interaction.</p>
+   * @public
+   */
+  NotFoundBehavior?: ExtractionDefinitionNotFoundBehavior | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateExtractionDefinitionRequest {
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *    request. If not provided, the Amazon Web Services SDK populates this field.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>A unique name of the extraction definition.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The configuration that defines how data is extracted, including the prompt hint and
+   *    not-found behavior.</p>
+   * @public
+   */
+  ExtractionConfiguration: ExtractionConfiguration | undefined;
+
+  /**
+   * <p>The display settings for the extraction definition, including the label shown in the
+   *    agent workspace.</p>
+   * @public
+   */
+  Display?: ExtractionDefinitionDisplay | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateExtractionDefinitionResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the extraction definition.</p>
+   * @public
+   */
+  ExtractionDefinitionArn: string | undefined;
+
+  /**
+   * <p>The identifier of the extraction definition.</p>
+   * @public
+   */
+  ExtractionDefinitionId: string | undefined;
 }
 
 /**
  * <p>The start time or end time for an hours of operation.</p>
+ * @public
  */
 export interface HoursOfOperationTimeSlice {
   /**
    * <p>The hours.</p>
+   * @public
    */
   Hours: number | undefined;
 
   /**
    * <p>The minutes.</p>
+   * @public
    */
   Minutes: number | undefined;
 }
 
 /**
  * <p>Contains information about the hours of operation.</p>
+ * @public
  */
 export interface HoursOfOperationConfig {
   /**
    * <p>The day that the hours of operation applies to.</p>
+   * @public
    */
-  Day: HoursOfOperationDays | string | undefined;
+  Day: HoursOfOperationDays | undefined;
 
   /**
    * <p>The start time that your contact center opens.</p>
+   * @public
    */
   StartTime: HoursOfOperationTimeSlice | undefined;
 
   /**
    * <p>The end time that your contact center closes.</p>
+   * @public
    */
   EndTime: HoursOfOperationTimeSlice | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateHoursOfOperationRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The name of the hours of operation.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The description of the hours of operation.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The time zone of the hours of operation.</p>
+   * @public
    */
   TimeZone: string | undefined;
 
   /**
    * <p>Configuration information for the hours of operation: day, start time, and end time.</p>
+   * @public
    */
   Config: HoursOfOperationConfig[] | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>Configuration for parent hours of operations. Eg: ResourceArn. </p>
+   *          <p>For more information about parent hours of operations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html">Link overrides from different hours of operation</a> in the
+   *      <i> Administrator Guide</i>.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  ParentHoursOfOperationConfigs?: ParentHoursOfOperationConfig[] | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateHoursOfOperationResponse {
   /**
    * <p>The identifier for the hours of operation.</p>
+   * @public
    */
-  HoursOfOperationId?: string;
+  HoursOfOperationId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) for the hours of operation.</p>
+   * @public
    */
-  HoursOfOperationArn?: string;
+  HoursOfOperationArn?: string | undefined;
 }
 
-export enum DirectoryType {
-  CONNECT_MANAGED = "CONNECT_MANAGED",
-  EXISTING_DIRECTORY = "EXISTING_DIRECTORY",
-  SAML = "SAML",
+/**
+ * <p>The start time or end time for an hours of operation override.</p>
+ * @public
+ */
+export interface OverrideTimeSlice {
+  /**
+   * <p>The hours.</p>
+   * @public
+   */
+  Hours: number | undefined;
+
+  /**
+   * <p>The minutes.</p>
+   * @public
+   */
+  Minutes: number | undefined;
 }
 
+/**
+ * <p>Information about the hours of operation override config: day, start time, and end time.</p>
+ * @public
+ */
+export interface HoursOfOperationOverrideConfig {
+  /**
+   * <p>The day that the hours of operation override applies to.</p>
+   * @public
+   */
+  Day?: OverrideDays | undefined;
+
+  /**
+   * <p>The start time when your contact center opens if overrides are applied.</p>
+   * @public
+   */
+  StartTime?: OverrideTimeSlice | undefined;
+
+  /**
+   * <p>The end time that your contact center closes if overrides are applied.</p>
+   * @public
+   */
+  EndTime?: OverrideTimeSlice | undefined;
+}
+
+/**
+ * <p>Specifies the detailed pattern for event recurrence. Use this to define complex scheduling rules such as "every 2nd Tuesday of the month" or "every 3 months on the 15th".</p>
+ * @public
+ */
+export interface RecurrencePattern {
+  /**
+   * <p>Defines how often the pattern repeats. This is the base unit for the recurrence schedule and works in conjunction with the Interval field to determine the exact repetition sequence.</p>
+   * @public
+   */
+  Frequency: RecurrenceFrequency | undefined;
+
+  /**
+   * <p>Specifies the number of frequency units between each occurrence. Must be a positive integer. </p>
+   *          <p> Examples: To repeat every week, set Interval=1 with WEEKLY frequency. To repeat every two months, set Interval=2 with MONTHLY frequency.</p>
+   * @public
+   */
+  Interval: number | undefined;
+
+  /**
+   * <p>Specifies which month the event should occur in (1-12, where 1=January, 12=December). Used with YEARLY frequency to schedule events in specific month. </p>
+   *          <p>Note: It does not accept multiple values in the same list</p>
+   * @public
+   */
+  ByMonth?: number[] | undefined;
+
+  /**
+   * <p>Specifies which day of the month the event should occur on (1-31). Used with MONTHLY or YEARLY frequency to schedule events on specific date within a month.</p>
+   *          <p> Examples:
+   * [15] for events on the 15th of each month,
+   * [-1] for events on the last day of month. </p>
+   *          <p>Note: It does not accept multiple values in the same list. If a specified day doesn't exist in a particular month (e.g., day 31 in February), the event will be skipped for that month. This field cannot be used simultaneously with ByWeekdayOccurrence as they represent different scheduling approaches (specific dates vs. relative weekday positions).</p>
+   * @public
+   */
+  ByMonthDay?: number[] | undefined;
+
+  /**
+   * <p>Specifies which occurrence of a weekday within the month the event should occur on. Must be used with MONTHLY or YEARLY frequency. </p>
+   *          <p>Example: 2 corresponds to second occurrence of the weekday in the month. -1 corresponds to last occurrence of the weekday in the month </p>
+   *          <p>The weekday itself is specified separately in the HoursOfOperationConfig. Example: To schedule the recurring event for the 2nd Thursday of April every year, set ByWeekdayOccurrence=[2], Day=THURSDAY, ByMonth=[4], Frequency: YEARLY and INTERVAL=1.</p>
+   * @public
+   */
+  ByWeekdayOccurrence?: number[] | undefined;
+}
+
+/**
+ * <p>Defines the recurrence configuration for overrides. This configuration uses a recurrence pattern to specify when and how frequently an event should repeat.</p>
+ * @public
+ */
+export interface RecurrenceConfig {
+  /**
+   * <p>The recurrence pattern that defines how the event repeats. Example: Frequency, Interval, ByMonth, ByMonthDay, ByWeekdayOccurrence</p>
+   * @public
+   */
+  RecurrencePattern: RecurrencePattern | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateHoursOfOperationOverrideRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier for the hours of operation</p>
+   * @public
+   */
+  HoursOfOperationId: string | undefined;
+
+  /**
+   * <p>The name of the hours of operation override.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The description of the hours of operation override.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>Configuration information for the hours of operation override: day, start time, and end time.</p>
+   * @public
+   */
+  Config: HoursOfOperationOverrideConfig[] | undefined;
+
+  /**
+   * <p>The date from when the hours of operation override is effective.</p>
+   * @public
+   */
+  EffectiveFrom: string | undefined;
+
+  /**
+   * <p>The date until when the hours of operation override is effective.</p>
+   * @public
+   */
+  EffectiveTill: string | undefined;
+
+  /**
+   * <p>Configuration for a recurring event.</p>
+   * @public
+   */
+  RecurrenceConfig?: RecurrenceConfig | undefined;
+
+  /**
+   * <p>Whether the override will be defined as a <i>standard</i> or as a <i>recurring event</i>.</p>
+   *          <p>For more information about how override types are applied, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html">Build your list of overrides</a> in the
+   *      <i> Administrator Guide</i>.</p>
+   * @public
+   */
+  OverrideType?: OverrideType | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateHoursOfOperationOverrideResponse {
+  /**
+   * <p>The identifier for the hours of operation override.</p>
+   * @public
+   */
+  HoursOfOperationOverrideId?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateInstanceRequest {
   /**
    * <p>The idempotency token.</p>
+   * @public
    */
-  ClientToken?: string;
+  ClientToken?: string | undefined;
 
   /**
-   * <p>The type of identity management for your Amazon Connect users.</p>
+   * <p>The type of identity management for your Connect Customer users.</p>
+   * @public
    */
-  IdentityManagementType: DirectoryType | string | undefined;
+  IdentityManagementType: DirectoryType | undefined;
 
   /**
    * <p>The name for your instance.</p>
+   * @public
    */
-  InstanceAlias?: string;
+  InstanceAlias?: string | undefined;
 
   /**
    * <p>The identifier for the directory.</p>
+   * @public
    */
-  DirectoryId?: string;
+  DirectoryId?: string | undefined;
 
   /**
    * <p>Your contact center handles incoming contacts.</p>
+   * @public
    */
   InboundCallsEnabled: boolean | undefined;
 
   /**
    * <p>Your contact center allows outbound calls.</p>
+   * @public
    */
   OutboundCallsEnabled: boolean | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, <code>\{ "tags":
+   *     \{"key1":"value1", "key2":"value2"\} \}</code>.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateInstanceResponse {
   /**
    * <p>The identifier for the instance.</p>
+   * @public
    */
-  Id?: string;
+  Id?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
-  Arn?: string;
+  Arn?: string | undefined;
 }
 
-export enum IntegrationType {
-  EVENT = "EVENT",
-  PINPOINT_APP = "PINPOINT_APP",
-  VOICE_ID = "VOICE_ID",
-  WISDOM_ASSISTANT = "WISDOM_ASSISTANT",
-  WISDOM_KNOWLEDGE_BASE = "WISDOM_KNOWLEDGE_BASE",
-}
-
-export enum SourceType {
-  SALESFORCE = "SALESFORCE",
-  ZENDESK = "ZENDESK",
-}
-
+/**
+ * @public
+ */
 export interface CreateIntegrationAssociationRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The type of information to be ingested.</p>
+   * @public
    */
-  IntegrationType: IntegrationType | string | undefined;
+  IntegrationType: IntegrationType | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) of the integration.</p>
    *          <note>
-   *             <p>When integrating with Amazon Pinpoint, the Amazon Connect and Amazon Pinpoint instances must be in the same account.</p>
+   *             <p>When integrating with Amazon Web Services End User Messaging, the Connect Customer and Amazon Web Services End
+   *     User Messaging instances must be in the same account.</p>
    *          </note>
+   * @public
    */
   IntegrationArn: string | undefined;
 
   /**
    * <p>The URL for the external application. This field is only required for the EVENT integration type.</p>
+   * @public
    */
-  SourceApplicationUrl?: string;
+  SourceApplicationUrl?: string | undefined;
 
   /**
    * <p>The name of the external application. This field is only required for the EVENT integration type.</p>
+   * @public
    */
-  SourceApplicationName?: string;
+  SourceApplicationName?: string | undefined;
 
   /**
    * <p>The type of the data source. This field is only required for the EVENT integration type.</p>
+   * @public
    */
-  SourceType?: SourceType | string;
+  SourceType?: SourceType | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateIntegrationAssociationResponse {
   /**
    * <p>The identifier for the integration association.</p>
+   * @public
    */
-  IntegrationAssociationId?: string;
+  IntegrationAssociationId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) for the association.</p>
+   * @public
    */
-  IntegrationAssociationArn?: string;
+  IntegrationAssociationArn?: string | undefined;
+}
+
+/**
+ * <p>A boolean comparison condition for metric filters.</p>
+ * @public
+ */
+export interface MetricFilterBooleanCondition {
+  /**
+   * <p>The comparison operator. Valid values: <code>IS_TRUE</code> (matches when the field is true) | <code>IS_FALSE</code> (matches when the field is false).</p>
+   * @public
+   */
+  Comparison: MetricFilterBooleanConditionComparison | undefined;
+}
+
+/**
+ * <p>A numeric comparison condition for metric filters.</p>
+ * @public
+ */
+export interface MetricFilterNumberCondition {
+  /**
+   * <p>The comparison operator. Valid values: <code>LESSER</code> (less than) | <code>LESSER_OR_EQUAL</code> (less than or equal to) | <code>GREATER</code> (greater than) | <code>GREATER_OR_EQUAL</code> (greater than or equal to).</p>
+   * @public
+   */
+  Comparison: MetricFilterNumberConditionComparison | undefined;
+
+  /**
+   * <p>The numeric values to compare against.</p>
+   * @public
+   */
+  Values: number[] | undefined;
+}
+
+/**
+ * <p>A string comparison condition for metric filters.</p>
+ * @public
+ */
+export interface MetricFilterStringCondition {
+  /**
+   * <p>The comparison operator. Valid values: <code>MATCHES_ANY</code> (matches any of the specified values) | <code>MATCHES_NONE</code> (matches none of the specified values).</p>
+   * @public
+   */
+  Comparison: MetricFilterStringConditionComparison | undefined;
+
+  /**
+   * <p>The string values to compare against.</p>
+   * @public
+   */
+  Values: string[] | undefined;
+}
+
+/**
+ * <p>A filter condition applied to a metric component in a calculation. Filters restrict the data included in the metric computation.</p>
+ * @public
+ */
+export interface MetricFilter {
+  /**
+   * <p>The key identifying the field to filter on.</p>
+   * @public
+   */
+  MetricFilterKey: string | undefined;
+
+  /**
+   * <p>Specifies whether the filter condition is negated. When set to <code>true</code>, the filter excludes matching data instead of including it.</p>
+   * @public
+   */
+  Negate?: boolean | undefined;
+
+  /**
+   * <p>A numeric comparison condition.</p>
+   * @public
+   */
+  NumberCondition?: MetricFilterNumberCondition | undefined;
+
+  /**
+   * <p>A string comparison condition.</p>
+   * @public
+   */
+  StringCondition?: MetricFilterStringCondition | undefined;
+
+  /**
+   * <p>A boolean comparison condition.</p>
+   * @public
+   */
+  BooleanCondition?: MetricFilterBooleanCondition | undefined;
+}
+
+/**
+ * <p>Represents a component metric referenced in a custom metric calculation formula.</p>
+ * @public
+ */
+export interface CalculationComponent {
+  /**
+   * <p>The alias used to reference this component in the calculation expression.</p>
+   * @public
+   */
+  Alias: string | undefined;
+
+  /**
+   * <p>The name of an AWS-managed metric used in this calculation component (for example, <code>CONTACTS_HANDLED</code>). Mutually exclusive with <code>MetricId</code>.</p>
+   * @public
+   */
+  MetricName?: string | undefined;
+
+  /**
+   * <p>The ARN of an AWS-managed metric used in this calculation component. Mutually exclusive with <code>MetricName</code>.</p>
+   * @public
+   */
+  MetricId?: string | undefined;
+
+  /**
+   * <p>The filters applied to the calculation component.</p>
+   * @public
+   */
+  MetricFilters?: MetricFilter[] | undefined;
+}
+
+/**
+ * <p>Contains the formula and component metrics that define a custom metric calculation.</p>
+ * @public
+ */
+export interface MetricCalculation {
+  /**
+   * <p>The list of component metrics referenced in the calculation formula. Each component has an alias used in the formula expression.</p>
+   * @public
+   */
+  CalculationComponents: CalculationComponent[] | undefined;
+
+  /**
+   * <p>The formula expression that defines how the metric is calculated. Uses component aliases (for example, <code>100 * SUM(M1) / SUM(M2)</code>).</p>
+   * @public
+   */
+  Calculation: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateMetricRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The name of the metric.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The calculation definition for the metric, including the formula expression and the component metrics it references.</p>
+   * @public
+   */
+  MetricCalculation: MetricCalculation | undefined;
+
+  /**
+   * <p>The display unit for the metric's data.</p>
+   * @public
+   */
+  Unit: MetricUnit | undefined;
+
+  /**
+   * <p>The publish status of the metric. Set to <code>PUBLISHED</code> to make the metric available for use in dashboards and reports, or <code>SAVED</code> to keep it in draft state.</p>
+   * @public
+   */
+  Status?: MetricStatus | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The description of the metric.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>How an increase in the metric value should be interpreted. Valid values: <code>POSITIVE</code>, <code>NEUTRAL</code>, <code>NEGATIVE</code>.</p>
+   * @public
+   */
+  PositiveTrendIndicator?: TrendIndicator | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateMetricResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the metric.</p>
+   * @public
+   */
+  MetricArn: string | undefined;
+
+  /**
+   * <p>The identifier of the metric.</p>
+   * @public
+   */
+  MetricId: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateNotificationRequest {
+  /**
+   * <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The timestamp when the notification should expire and no longer be displayed to users. If not specified, defaults to one week from creation.</p>
+   * @public
+   */
+  ExpiresAt?: Date | undefined;
+
+  /**
+   * <p>A list of Amazon Resource Names (ARNs) identifying the recipients of the notification. Can include user ARNs or instance ARNs to target all users in an instance. Maximum of 200 recipients.</p>
+   * @public
+   */
+  Recipients: string[] | undefined;
+
+  /**
+   * <p>The priority level of the notification. Valid values are HIGH and LOW. High priority notifications are displayed above low priority notifications.</p>
+   * @public
+   */
+  Priority?: ConfigurableNotificationPriority | undefined;
+
+  /**
+   * <p>The localized content of the notification. A map where keys are locale codes and values are the notification text in that locale. Content supports links. Maximum 250 characters per locale.</p>
+   * @public
+   */
+  Content: Partial<Record<LocaleCode, string>> | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, <code>\{ "Tags": \{"key1":"value1", "key2":"value2"\} \}</code>.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The unique identifier for a notification.</p>
+   *
+   * @deprecated (since 3/13/2026) PredefinedNotificationId is deprecated. Use ClientToken for idempotency.
+   * @public
+   */
+  PredefinedNotificationId?: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateNotificationResponse {
+  /**
+   * <p>The unique identifier assigned to the created notification.</p>
+   * @public
+   */
+  NotificationId: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the created notification.</p>
+   * @public
+   */
+  NotificationArn: string | undefined;
+}
+
+/**
+ * <p>The details to add for the participant.</p>
+ * @public
+ */
+export interface ParticipantDetailsToAdd {
+  /**
+   * <p>The role of the participant being added.</p>
+   * @public
+   */
+  ParticipantRole?: ParticipantRole | undefined;
+
+  /**
+   * <p>The display name of the participant.</p>
+   * @public
+   */
+  DisplayName?: string | undefined;
+
+  /**
+   * <p>The configuration for the allowed video and screen sharing capabilities for participants present over the call.
+   *    For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html">Set up
+   *     in-app, web, video calling, and screen sharing capabilities</a> in the <i>Connect Customer Administrator
+   *     Guide</i>.</p>
+   * @public
+   */
+  ParticipantCapabilities?: ParticipantCapabilities | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateParticipantRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. </p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The identifier of the contact in this instance of Connect Customer.  Supports contacts in the CHAT channel and VOICE (WebRTC) channels. For WebRTC calls, this should be
+   *    the initial contact ID that was generated when the contact was first created (from the StartWebRTCContact API) in the
+   *    VOICE channel</p>
+   * @public
+   */
+  ContactId: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>Information identifying the participant.</p>
+   *          <important>
+   *             <p>The only valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code> for chat contact and
+   *      <code>CUSTOMER</code> for voice contact.</p>
+   *          </important>
+   * @public
+   */
+  ParticipantDetails: ParticipantDetailsToAdd | undefined;
+}
+
+/**
+ * <p>The credentials used by the participant.</p>
+ * @public
+ */
+export interface ParticipantTokenCredentials {
+  /**
+   * <p>The token used by the chat participant to call <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant. </p>
+   * @public
+   */
+  ParticipantToken?: string | undefined;
+
+  /**
+   * <p>The expiration of the token. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+   *    2019-11-08T02:41:28.172Z.</p>
+   * @public
+   */
+  Expiry?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateParticipantResponse {
+  /**
+   * <p>The token used by the chat participant to call <code>CreateParticipantConnection</code>. The participant token
+   *    is valid for the lifetime of a chat participant.</p>
+   * @public
+   */
+  ParticipantCredentials?: ParticipantTokenCredentials | undefined;
+
+  /**
+   * <p>The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat
+   *    lifecycle.</p>
+   * @public
+   */
+  ParticipantId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePersistentContactAssociationRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>This is the contactId of the current contact that the <code>CreatePersistentContactAssociation</code> API is
+   *    being called from.</p>
+   * @public
+   */
+  InitialContactId: string | undefined;
+
+  /**
+   * <p>The contactId chosen for rehydration depends on the type chosen.</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past chat contact of the
+   *      specified past ended chat session. To use this type, provide the <code>initialContactId</code> of the past ended
+   *      chat session in the <code>sourceContactId</code> field. In this type, Connect Customer determines what the most
+   *      recent chat contact on the past ended chat session and uses it to start a persistent chat. </p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>FROM_SEGMENT</code>: Rehydrates a chat from the specified past chat contact provided in the
+   *       <code>sourceContactId</code> field. </p>
+   *             </li>
+   *          </ul>
+   *          <p>The actual contactId used for rehydration is provided in the response of this API.</p>
+   *          <p>To illustrate how to use rehydration type, consider the following example: A customer starts a chat session.
+   *    Agent a1 accepts the chat and a conversation starts between the customer and Agent a1. This first contact creates a
+   *    contact ID <b>C1</b>. Agent a1 then transfers the chat to Agent a2. This creates another
+   *    contact ID <b>C2</b>. At this point Agent a2 ends the chat. The customer is forwarded to
+   *    the disconnect flow for a post chat survey that creates another contact ID <b>C3</b>. After
+   *    the chat survey, the chat session ends. Later, the customer returns and wants to resume their past chat session. At
+   *    this point, the customer can have following use cases: </p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <b>Use Case 1</b>: The customer wants to continue the past chat session but they
+   *      want to hide the post chat survey. For this they will use the following configuration:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <b>Configuration</b>
+   *                      </p>
+   *                      <ul>
+   *                         <li>
+   *                            <p>SourceContactId = "C2"</p>
+   *                         </li>
+   *                         <li>
+   *                            <p>RehydrationType = "FROM_SEGMENT"</p>
+   *                         </li>
+   *                      </ul>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <b>Expected behavior</b>
+   *                      </p>
+   *                      <ul>
+   *                         <li>
+   *                            <p>This starts a persistent chat session from the specified past ended contact (C2). Transcripts of past chat
+   *          sessions C2 and C1 are accessible in the current persistent chat session. Note that chat segment C3 is dropped
+   *          from the persistent chat session.</p>
+   *                         </li>
+   *                      </ul>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <b>Use Case 2</b>: The customer wants to continue the past chat session and see the
+   *      transcript of the entire past engagement, including the post chat survey. For this they will use the following
+   *      configuration:</p>
+   *                <ul>
+   *                   <li>
+   *                      <p>
+   *                         <b>Configuration</b>
+   *                      </p>
+   *                      <ul>
+   *                         <li>
+   *                            <p>SourceContactId = "C1"</p>
+   *                         </li>
+   *                         <li>
+   *                            <p>RehydrationType = "ENTIRE_PAST_SESSION"</p>
+   *                         </li>
+   *                      </ul>
+   *                   </li>
+   *                   <li>
+   *                      <p>
+   *                         <b>Expected behavior</b>
+   *                      </p>
+   *                      <ul>
+   *                         <li>
+   *                            <p>This starts a persistent chat session from the most recently ended chat contact (C3). Transcripts of past
+   *          chat sessions C3, C2 and C1 are accessible in the current persistent chat session.</p>
+   *                         </li>
+   *                      </ul>
+   *                   </li>
+   *                </ul>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  RehydrationType: RehydrationType | undefined;
+
+  /**
+   * <p>The contactId from which a persistent chat session must be started.</p>
+   * @public
+   */
+  SourceContactId: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePersistentContactAssociationResponse {
+  /**
+   * <p>The contactId from which a persistent chat session is started. This field is populated only for persistent
+   *    chat.</p>
+   * @public
+   */
+  ContinuedFromContactId?: string | undefined;
+}
+
+/**
+ * <p>Custom metadata that is associated to predefined attributes to control behavior in upstream services, such as
+ *    controlling how a predefined attribute should be displayed in the Connect Customer admin website.</p>
+ * @public
+ */
+export interface InputPredefinedAttributeConfiguration {
+  /**
+   * <p>When this parameter is set to true, Connect Customer enforces strict validation on the specific values, if the
+   *    values are predefined in attributes. The contact will store only valid and predefined values for the predefined
+   *    attribute key.</p>
+   * @public
+   */
+  EnableValueValidationOnAssociation?: boolean | undefined;
+}
+
+/**
+ * <p>Information about values of a predefined attribute.</p>
+ * @public
+ */
+export type PredefinedAttributeValues =
+  | PredefinedAttributeValues.StringListMember
+  | PredefinedAttributeValues.$UnknownMember;
+
+/**
+ * @public
+ */
+export namespace PredefinedAttributeValues {
+  /**
+   * <p>Predefined attribute values of type string list.</p>
+   * @public
+   */
+  export interface StringListMember {
+    StringList: string[];
+    $unknown?: never;
+  }
+
+  /**
+   * @public
+   */
+  export interface $UnknownMember {
+    StringList?: never;
+    $unknown: [string, any];
+  }
+
+  /**
+   * @deprecated unused in schema-serde mode.
+   *
+   */
+  export interface Visitor<T> {
+    StringList: (value: string[]) => T;
+    _: (name: string, value: any) => T;
+  }
+}
+
+/**
+ * @public
+ */
+export interface CreatePredefinedAttributeRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can find the instance ID in the Amazon Resource Name (ARN) of the
+   *    instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p> The name of the predefined attribute. </p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p> The values of the predefined attribute. </p>
+   * @public
+   */
+  Values?: PredefinedAttributeValues | undefined;
+
+  /**
+   * <p>Values that enable you to categorize your predefined attributes. You can use them in custom UI elements across the Connect Customer admin website.</p>
+   * @public
+   */
+  Purposes?: string[] | undefined;
+
+  /**
+   * <p>Custom metadata that is associated to predefined attributes to control behavior
+   * in upstream services, such as controlling
+   * how a predefined attribute should be displayed in the Connect Customer admin website.</p>
+   * @public
+   */
+  AttributeConfiguration?: InputPredefinedAttributeConfiguration | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePromptRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>The name of the prompt.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The description of the prompt.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the
+   * <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html">GetPromptFile</a>
+   *  API instead of providing S3 URIs.</p>
+   * @public
+   */
+  S3Uri: string | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePromptResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the prompt.</p>
+   * @public
+   */
+  PromptARN?: string | undefined;
+
+  /**
+   * <p>A unique identifier for the prompt.</p>
+   * @public
+   */
+  PromptId?: string | undefined;
+}
+
+/**
+ * <p>The contact configuration for push notification registration.</p>
+ * @public
+ */
+export interface ContactConfiguration {
+  /**
+   * <p>The identifier of the contact within the Amazon Connect instance.</p>
+   * @public
+   */
+  ContactId: string | undefined;
+
+  /**
+   * <p>The role of the participant in the chat conversation.</p>
+   *          <note>
+   *             <p>Only <code>CUSTOMER</code> is currently supported. Any other values other than <code>CUSTOMER</code> will
+   *     result in an exception (4xx error).</p>
+   *          </note>
+   * @public
+   */
+  ParticipantRole?: ParticipantRole | undefined;
+
+  /**
+   * <p>Whether to include raw connect message in the push notification payload. Default is <code>False</code>.</p>
+   * @public
+   */
+  IncludeRawMessage?: boolean | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePushNotificationRegistrationRequest {
+  /**
+   * <p>The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name
+   *    (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The Amazon Resource Name (ARN) of the Pinpoint application.</p>
+   * @public
+   */
+  PinpointAppArn: string | undefined;
+
+  /**
+   * <p>The push notification token issued by the Apple or Google gateways.</p>
+   * @public
+   */
+  DeviceToken: string | undefined;
+
+  /**
+   * <p>The device type to use when sending the message.</p>
+   * @public
+   */
+  DeviceType: DeviceType | undefined;
+
+  /**
+   * <p>The contact configuration for push notification registration.</p>
+   * @public
+   */
+  ContactConfiguration: ContactConfiguration | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreatePushNotificationRegistrationResponse {
+  /**
+   * <p>The identifier for the registration.</p>
+   * @public
+   */
+  RegistrationId: string | undefined;
 }
 
 /**
  * <p>The outbound caller ID name, number, and outbound whisper flow.</p>
+ * @public
  */
 export interface OutboundCallerConfig {
   /**
    * <p>The caller ID name.</p>
+   * @public
    */
-  OutboundCallerIdName?: string;
+  OutboundCallerIdName?: string | undefined;
 
   /**
    * <p>The caller ID number.</p>
+   * @public
    */
-  OutboundCallerIdNumberId?: string;
+  OutboundCallerIdNumberId?: string | undefined;
 
   /**
    * <p>The outbound whisper flow to be used during an outbound call.</p>
+   * @public
    */
-  OutboundFlowId?: string;
+  OutboundFlowId?: string | undefined;
 }
 
+/**
+ * <p>The outbound email address ID.</p>
+ * @public
+ */
+export interface OutboundEmailConfig {
+  /**
+   * <p>The identifier of the email address.</p>
+   * @public
+   */
+  OutboundEmailAddressId?: string | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateQueueRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The name of the queue.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The description of the queue.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>The outbound caller ID name, number, and outbound whisper flow.</p>
+   * @public
    */
-  OutboundCallerConfig?: OutboundCallerConfig;
+  OutboundCallerConfig?: OutboundCallerConfig | undefined;
+
+  /**
+   * <p>The outbound email address ID for a specified queue.</p>
+   * @public
+   */
+  OutboundEmailConfig?: OutboundEmailConfig | undefined;
 
   /**
    * <p>The identifier for the hours of operation.</p>
+   * @public
    */
   HoursOfOperationId: string | undefined;
 
   /**
    * <p>The maximum number of contacts that can be in the queue before it is considered full.</p>
+   * @public
    */
-  MaxContacts?: number;
+  MaxContacts?: number | undefined;
 
   /**
    * <p>The quick connects available to agents who are working the queue.</p>
+   * @public
    */
-  QuickConnectIds?: string[];
+  QuickConnectIds?: string[] | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>Configuration list containing the email addresses to associate with the queue during creation. Each configuration specifies an email address ID that agents can select when handling email contacts in this queue.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  EmailAddressesConfig?: EmailAddressConfig[] | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateQueueResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the queue.</p>
+   * @public
    */
-  QueueArn?: string;
+  QueueArn?: string | undefined;
 
   /**
    * <p>The identifier for the queue.</p>
+   * @public
    */
-  QueueId?: string;
+  QueueId?: string | undefined;
+}
+
+/**
+ * <p> Configuration for quick connect. </p>
+ * @public
+ */
+export interface FlowQuickConnectConfig {
+  /**
+   * <p> The contact flow ID for the quick connect configuration. </p>
+   * @public
+   */
+  ContactFlowId: string | undefined;
 }
 
 /**
  * <p>Contains information about a phone number for a quick connect.</p>
+ * @public
  */
 export interface PhoneNumberQuickConnectConfig {
   /**
    * <p>The phone number in E.164 format.</p>
+   * @public
    */
   PhoneNumber: string | undefined;
 }
 
 /**
- * <p>Contains information about a queue for a quick connect. The flow must be of type
- *    Transfer to Queue.</p>
+ * <p>Contains information about a queue for a quick connect. The flow must be of type Transfer to Queue.</p>
+ * @public
  */
 export interface QueueQuickConnectConfig {
   /**
    * <p>The identifier for the queue.</p>
+   * @public
    */
   QueueId: string | undefined;
 
   /**
    * <p>The identifier of the flow.</p>
+   * @public
    */
   ContactFlowId: string | undefined;
 }
 
-export enum QuickConnectType {
-  PHONE_NUMBER = "PHONE_NUMBER",
-  QUEUE = "QUEUE",
-  USER = "USER",
-}
-
 /**
- * <p>Contains information about the quick connect configuration settings for a user. The contact
- *    flow must be of type Transfer to Agent.</p>
+ * <p>Contains information about the quick connect configuration settings for a user. The contact flow must be of type
+ *    Transfer to Agent.</p>
+ * @public
  */
 export interface UserQuickConnectConfig {
   /**
    * <p>The identifier of the user.</p>
+   * @public
    */
   UserId: string | undefined;
 
   /**
    * <p>The identifier of the flow.</p>
+   * @public
    */
   ContactFlowId: string | undefined;
 }
 
 /**
  * <p>Contains configuration settings for a quick connect.</p>
+ * @public
  */
 export interface QuickConnectConfig {
   /**
-   * <p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are
+   * <p>The type of quick connect. In the Connect Customer admin website, when you create a quick connect, you are
    *    prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE). </p>
+   * @public
    */
-  QuickConnectType: QuickConnectType | string | undefined;
+  QuickConnectType: QuickConnectType | undefined;
 
   /**
    * <p>The user configuration. This is required only if QuickConnectType is USER.</p>
+   * @public
    */
-  UserConfig?: UserQuickConnectConfig;
+  UserConfig?: UserQuickConnectConfig | undefined;
 
   /**
    * <p>The queue configuration. This is required only if QuickConnectType is QUEUE.</p>
+   * @public
    */
-  QueueConfig?: QueueQuickConnectConfig;
+  QueueConfig?: QueueQuickConnectConfig | undefined;
 
   /**
    * <p>The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.</p>
+   * @public
    */
-  PhoneConfig?: PhoneNumberQuickConnectConfig;
+  PhoneConfig?: PhoneNumberQuickConnectConfig | undefined;
+
+  /**
+   * <p> Flow configuration for quick connect setup. </p>
+   * @public
+   */
+  FlowConfig?: FlowQuickConnectConfig | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateQuickConnectRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
-   * <p>The name of the quick connect.</p>
+   * <p>A unique name of the quick connect.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>The description of the quick connect.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
    * <p>Configuration settings for the quick connect.</p>
+   * @public
    */
   QuickConnectConfig: QuickConnectConfig | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
-}
-
-export interface CreateQuickConnectResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the quick connect. </p>
-   */
-  QuickConnectARN?: string;
-
-  /**
-   * <p>The identifier for the quick connect. </p>
-   */
-  QuickConnectId?: string;
+  Tags?: Record<string, string> | undefined;
 }
 
 /**
- * <p>Contains information about which channels are supported, and how many contacts an agent can
- *    have on a channel simultaneously.</p>
+ * @public
+ */
+export interface CreateQuickConnectResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) for the quick connect. </p>
+   * @public
+   */
+  QuickConnectARN?: string | undefined;
+
+  /**
+   * <p>The identifier for the quick connect. </p>
+   * @public
+   */
+  QuickConnectId?: string | undefined;
+}
+
+/**
+ * <p>Defines the cross-channel routing behavior that allows an agent working on a contact in one channel to be
+ *    offered a contact from a different channel.</p>
+ * @public
+ */
+export interface CrossChannelBehavior {
+  /**
+   * <p>Specifies the other channels that can be routed to an agent handling their current channel.</p>
+   * @public
+   */
+  BehaviorType: BehaviorType | undefined;
+}
+
+/**
+ * <p>Defines the cross-channel and workload type routing behavior that allows an agent working on a contact to be
+ *    offered a contact from a different channel or workload type.</p>
+ * @public
+ */
+export interface CrossChannelWorkloadBehavior {
+  /**
+   * <p>Specifies the routing behavior for an agent handling their current channel and workload type.</p>
+   * @public
+   */
+  ChannelWorkloadBehaviorType?: ChannelWorkloadBehaviorType | undefined;
+}
+
+/**
+ * <p>Defines the maximum number of contacts an agent can handle simultaneously for a specific channel and workload
+ *    type combination.</p>
+ * @public
+ */
+export interface WorkloadTypeConcurrency {
+  /**
+   * <p>The value of the workload type.</p>
+   * @public
+   */
+  WorkloadType: string | undefined;
+
+  /**
+   * <p>The maximum number of contacts an agent can handle simultaneously for a specific channel and workload type
+   *    combination.</p>
+   *          <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p>
+   *          <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p>
+   *          <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>
+   * @public
+   */
+  Concurrency: number | undefined;
+
+  /**
+   * <p>Defines the cross-channel and workload type routing behavior for each channel and workload type combination
+   *    that is enabled for this Routing Profile.</p>
+   * @public
+   */
+  CrossChannelWorkloadBehavior?: CrossChannelWorkloadBehavior | undefined;
+}
+
+/**
+ * <p>Contains information about which channels are supported, and how many contacts an agent can have on a channel
+ *    simultaneously.</p>
+ * @public
  */
 export interface MediaConcurrency {
   /**
    * <p>The channels that agents can handle in the Contact Control Panel (CCP).</p>
+   * @public
    */
-  Channel: Channel | string | undefined;
+  Channel: Channel | undefined;
 
   /**
    * <p>The number of contacts an agent can have on a channel simultaneously.</p>
    *          <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p>
    *          <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p>
    *          <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>
+   * @public
    */
-  Concurrency: number | undefined;
+  Concurrency?: number | undefined;
+
+  /**
+   * <p>Defines the cross-channel routing behavior for each channel that is enabled for this Routing Profile. For
+   *    example, this allows you to offer an agent a different contact from another channel when they are currently working
+   *    with a contact from a Voice channel.</p>
+   * @public
+   */
+  CrossChannelBehavior?: CrossChannelBehavior | undefined;
+
+  /**
+   * <p>Defines the list of workload type concurrency configurations for a channel. When provided, enables granular
+   *    concurrency control based on workload type values.</p>
+   * @public
+   */
+  WorkloadTypeConcurrencies?: WorkloadTypeConcurrency[] | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateRoutingProfileRequest {
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
    * <p>The name of the routing profile. Must not be more than 127 characters.</p>
+   * @public
    */
   Name: string | undefined;
 
   /**
    * <p>Description of the routing profile. Must not be more than 250 characters.</p>
+   * @public
    */
   Description: string | undefined;
 
   /**
    * <p>The default outbound queue for the routing profile.</p>
+   * @public
    */
   DefaultOutboundQueueId: string | undefined;
 
   /**
-   * <p>The inbound queues associated with the routing profile. If no queue is added, the agent can
-   *    make only outbound calls.</p>
+   * <p>The inbound queues associated with the routing profile. If no queue is added, the agent can make only outbound
+   *    calls.</p>
+   *          <p>The limit of 10 array members applies to the maximum number of <code>RoutingProfileQueueConfig</code> objects
+   *    that can be passed during a CreateRoutingProfile API request. It is different from the quota of 50 queues per routing
+   *    profile per instance that is listed in <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Connect Customer service quotas</a>.
+   *    </p>
+   * @public
    */
-  QueueConfigs?: RoutingProfileQueueConfig[];
+  QueueConfigs?: RoutingProfileQueueConfig[] | undefined;
 
   /**
-   * <p>The channels that agents can handle in the Contact Control Panel (CCP) for this routing
-   *    profile.</p>
+   * <p>The manual assignment queues associated with the routing profile. If no queue is added, agents and supervisors
+   *    can't pick or assign any contacts from this routing profile. The limit of 10 array members applies to the maximum
+   *    number of RoutingProfileManualAssignmentQueueConfig objects that can be passed during a CreateRoutingProfile API
+   *    request. It is different from the quota of 50 queues per routing profile per instance that is listed in Connect Customer service quotas.</p>
+   *          <note>
+   *             <p>For voice contacts, manual assignment supports only agent-first callback contacts. Chat, email, and task contacts are fully supported.</p>
+   *          </note>
+   * @public
+   */
+  ManualAssignmentQueueConfigs?: RoutingProfileManualAssignmentQueueConfig[] | undefined;
+
+  /**
+   * <p>The channels that agents can handle in the Contact Control Panel (CCP) for this routing profile.</p>
+   * @public
    */
   MediaConcurrencies: MediaConcurrency[] | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  Tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>Whether agents with this routing profile will have their routing order calculated based on <i>longest
+   *     idle time</i> or <i>time since their last inbound contact</i>. </p>
+   * @public
+   */
+  AgentAvailabilityTimer?: AgentAvailabilityTimer | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateRoutingProfileResponse {
   /**
    * <p>The Amazon Resource Name (ARN) of the routing profile.</p>
+   * @public
    */
-  RoutingProfileArn?: string;
+  RoutingProfileArn?: string | undefined;
 
   /**
    * <p>The identifier of the routing profile.</p>
+   * @public
    */
-  RoutingProfileId?: string;
+  RoutingProfileId?: string | undefined;
 }
 
+/**
+ * <p>This action must be set if <code>TriggerEventSource</code> is one of the following values:
+ *     <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |
+ *     <code>OnRealTimeChatAnalysisAvailable</code> | <code>OnPostChatAnalysisAvailable</code>. Contact is categorized
+ *    using the rule name.</p>
+ *          <p>
+ *             <code>RuleName</code> is used as <code>ContactCategory</code>.</p>
+ * @public
+ */
+export interface AssignContactCategoryActionDefinition {}
+
+/**
+ * <p>An empty value.</p>
+ * @public
+ */
+export interface EmptyFieldValue {}
+
+/**
+ * <p>Object to store union of Field values.</p>
+ * @public
+ */
+export interface FieldValueUnion {
+  /**
+   * <p>A Boolean number value type.</p>
+   * @public
+   */
+  BooleanValue?: boolean | undefined;
+
+  /**
+   * <p>A Double number value type.</p>
+   * @public
+   */
+  DoubleValue?: number | undefined;
+
+  /**
+   * <p>An empty value.</p>
+   * @public
+   */
+  EmptyValue?: EmptyFieldValue | undefined;
+
+  /**
+   * <p>String value type.</p>
+   * @public
+   */
+  StringValue?: string | undefined;
+}
+
+/**
+ * <p>The SLA configuration for Case SlaAssignmentType.</p>
+ * @public
+ */
+export interface CaseSlaConfiguration {
+  /**
+   * <p>Name of an SLA.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>Type of SLA for Case SlaAssignmentType.</p>
+   * @public
+   */
+  Type: SlaType | undefined;
+
+  /**
+   * <p>Unique identifier of a Case field.</p>
+   * @public
+   */
+  FieldId?: string | undefined;
+
+  /**
+   * <p>Represents a list of target field values for the fieldId specified in CaseSlaConfiguration. The SLA is
+   *    considered met if any one of these target field values matches the actual field value.</p>
+   * @public
+   */
+  TargetFieldValues?: FieldValueUnion[] | undefined;
+
+  /**
+   * <p>Target duration in minutes within which an SLA should be completed.</p>
+   * @public
+   */
+  TargetSlaMinutes: number | undefined;
+}
+
+/**
+ * <p>The AssignSla action definition.</p>
+ * @public
+ */
+export interface AssignSlaActionDefinition {
+  /**
+   * <p>Type of SLA assignment.</p>
+   * @public
+   */
+  SlaAssignmentType: SlaAssignmentType | undefined;
+
+  /**
+   * <p>The SLA configuration for Case SLA Assignment.</p>
+   * @public
+   */
+  CaseSlaConfiguration?: CaseSlaConfiguration | undefined;
+}
+
+/**
+ * <p>Object for case field values.</p>
+ * @public
+ */
+export interface FieldValue {
+  /**
+   * <p>Unique identifier of a field.</p>
+   * @public
+   */
+  Id: string | undefined;
+
+  /**
+   * <p>Union of potential field value types.</p>
+   * @public
+   */
+  Value: FieldValueUnion | undefined;
+}
+
+/**
+ * <p>The <code>CreateCase</code> action definition.</p>
+ * @public
+ */
+export interface CreateCaseActionDefinition {
+  /**
+   * <p>An array of objects with <code>Field ID</code> and <code>Value</code> data.</p>
+   * @public
+   */
+  Fields: FieldValue[] | undefined;
+
+  /**
+   * <p>A unique identifier of a template.</p>
+   * @public
+   */
+  TemplateId: string | undefined;
+}
+
+/**
+ * <p>End associated emails related to a case.</p>
+ * @public
+ */
+export interface EndAssociatedEmailsActionDefinition {}
+
+/**
+ * <p>End associated tasks related to a case.</p>
+ * @public
+ */
+export interface EndAssociatedTasksActionDefinition {}
+
+/**
+ * <p>The EventBridge action definition.</p>
+ * @public
+ */
+export interface EventBridgeActionDefinition {
+  /**
+   * <p>The name.</p>
+   * @public
+   */
+  Name: string | undefined;
+}
+
+/**
+ * <p>An identifier that references an extraction definition resource.</p>
+ * @public
+ */
+export interface RulesExtractionDefinitionIdentifier {
+  /**
+   * <p>The identifier of the extraction definition.</p>
+   * @public
+   */
+  Identifier: string | undefined;
+}
+
+/**
+ * <p>Information about the extract information action, which references extraction definitions
+ *    to use when extracting structured data from customer interactions.</p>
+ * @public
+ */
+export interface ExtractInformationActionDefinition {
+  /**
+   * <p>The list of extraction definition identifiers that specify what data to extract.</p>
+   * @public
+   */
+  RulesExtractionDefinitions: RulesExtractionDefinitionIdentifier[] | undefined;
+}
+
+/**
+ * <p>The type of notification recipient.</p>
+ * @public
+ */
+export interface NotificationRecipientType {
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}. Connect Customer users with the specified tags will be notified.</p>
+   * @public
+   */
+  UserTags?: Record<string, string> | undefined;
+
+  /**
+   * <p>A list of user IDs. Supports variable injection of <code>$.ContactLens.ContactEvaluation.Agent.AgentId</code>
+   *    for <code>OnContactEvaluationSubmit</code> event source. </p>
+   * @public
+   */
+  UserIds?: string[] | undefined;
+}
+
+/**
+ * <p>Information about the send in-app notification action.</p>
+ * @public
+ */
+export interface SendInAppNotificationActionDefinition {
+  /**
+   * <p>Notification content. Supports variable injection. For more information, see
+   * <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+   * in the <i>Connect Customer Administrators Guide</i>.</p>
+   * @public
+   */
+  Content: Partial<Record<LocaleCode, string>> | undefined;
+
+  /**
+   * <p>Notification recipient.</p>
+   * @public
+   */
+  Recipient: NotificationRecipientType | undefined;
+
+  /**
+   * <p>Recipients to exclude from notification.</p>
+   * @public
+   */
+  Exclusion?: NotificationRecipientType | undefined;
+
+  /**
+   * <p>Notification priority.</p>
+   * @public
+   */
+  Priority?: ConfigurableNotificationPriority | undefined;
+}
+
+/**
+ * <p>Information about the send notification action.</p>
+ * @public
+ */
+export interface SendNotificationActionDefinition {
+  /**
+   * <p>Notification delivery method.</p>
+   * @public
+   */
+  DeliveryMethod: NotificationDeliveryType | undefined;
+
+  /**
+   * <p>The subject of the email if the delivery method is <code>EMAIL</code>. Supports variable injection. For more information, see
+   * <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+   * in the <i>Connect Customer Administrators Guide</i>.</p>
+   * @public
+   */
+  Subject?: string | undefined;
+
+  /**
+   * <p>Notification content. Supports variable injection. For more information, see
+   * <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+   * in the <i>Connect Customer Administrators Guide</i>.</p>
+   * @public
+   */
+  Content: string | undefined;
+
+  /**
+   * <p>Content type format.</p>
+   * @public
+   */
+  ContentType: NotificationContentType | undefined;
+
+  /**
+   * <p>Notification recipient.</p>
+   * @public
+   */
+  Recipient: NotificationRecipientType | undefined;
+
+  /**
+   * <p>Recipients to exclude from notification.</p>
+   * @public
+   */
+  Exclusion?: NotificationRecipientType | undefined;
+}
+
+/**
+ * <p>Information about the submit automated evaluation action.</p>
+ * @public
+ */
+export interface SubmitAutoEvaluationActionDefinition {
+  /**
+   * <p>The identifier of the auto-evaluation enabled form.</p>
+   * @public
+   */
+  EvaluationFormId: string | undefined;
+}
+
+/**
+ * <p>Information about the task action.</p>
+ * @public
+ */
+export interface TaskActionDefinition {
+  /**
+   * <p>The name. Supports variable injection. For more information, see
+   * <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+   * in the <i>Connect Customer Administrators Guide</i>.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The description. Supports variable injection. For more information, see
+   * <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html">JSONPath reference</a>
+   * in the <i>Connect Customer Administrators Guide</i>.</p>
+   * @public
+   */
+  Description?: string | undefined;
+
+  /**
+   * <p>The identifier of the flow.</p>
+   * @public
+   */
+  ContactFlowId: string | undefined;
+
+  /**
+   * <p>Information about the reference when the <code>referenceType</code> is <code>URL</code>. Otherwise, null.
+   *    (Supports variable injection in the <code>Value</code> field.)</p>
+   * @public
+   */
+  References?: Record<string, Reference> | undefined;
+}
+
+/**
+ * <p>The <code>UpdateCase</code> action definition.</p>
+ * @public
+ */
+export interface UpdateCaseActionDefinition {
+  /**
+   * <p>An array of objects with <code>Field ID</code> and Value data.</p>
+   * @public
+   */
+  Fields: FieldValue[] | undefined;
+}
+
+/**
+ * <p>Information about the action to be performed when a rule is triggered.</p>
+ * @public
+ */
+export interface RuleAction {
+  /**
+   * <p>The type of action that creates a rule.</p>
+   * @public
+   */
+  ActionType: ActionType | undefined;
+
+  /**
+   * <p>Information about the task action. This field is required if <code>TriggerEventSource</code> is one of the
+   *    following values: <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> |
+   *     <code>OnSalesforceCaseCreate</code>
+   *          </p>
+   * @public
+   */
+  TaskAction?: TaskActionDefinition | undefined;
+
+  /**
+   * <p>Information about the EventBridge action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnPostCallAnalysisAvailable</code> |
+   *     <code>OnRealTimeCallAnalysisAvailable</code> | <code>OnRealTimeChatAnalysisAvailable</code> |
+   *     <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |
+   *    <code>OnMetricDataUpdate</code>
+   *          </p>
+   * @public
+   */
+  EventBridgeAction?: EventBridgeActionDefinition | undefined;
+
+  /**
+   * <p>Information about the contact category action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnPostCallAnalysisAvailable</code> |
+   *     <code>OnRealTimeCallAnalysisAvailable</code> | <code>OnRealTimeChatAnalysisAvailable</code> |
+   *     <code>OnPostChatAnalysisAvailable</code> | <code>OnZendeskTicketCreate</code> |
+   *     <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>
+   *          </p>
+   * @public
+   */
+  AssignContactCategoryAction?: AssignContactCategoryActionDefinition | undefined;
+
+  /**
+   * <p>Information about the send notification action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnPostCallAnalysisAvailable</code> |
+   *     <code>OnRealTimeCallAnalysisAvailable</code> | <code>OnRealTimeChatAnalysisAvailable</code> |
+   *     <code>OnPostChatAnalysisAvailable</code> | <code>OnContactEvaluationSubmit</code> |
+   *    <code>OnMetricDataUpdate</code>
+   *          </p>
+   * @public
+   */
+  SendNotificationAction?: SendNotificationActionDefinition | undefined;
+
+  /**
+   * <p>Information about the create case action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnPostCallAnalysisAvailable</code> |
+   *     <code>OnPostChatAnalysisAvailable</code>.</p>
+   * @public
+   */
+  CreateCaseAction?: CreateCaseActionDefinition | undefined;
+
+  /**
+   * <p>Information about the update case action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnCaseCreate</code> |
+   *    <code>OnCaseUpdate</code>.</p>
+   * @public
+   */
+  UpdateCaseAction?: UpdateCaseActionDefinition | undefined;
+
+  /**
+   * <p>Information about the assign SLA action.</p>
+   * @public
+   */
+  AssignSlaAction?: AssignSlaActionDefinition | undefined;
+
+  /**
+   * <p>Information about the end associated tasks action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnCaseUpdate</code>.</p>
+   * @public
+   */
+  EndAssociatedTasksAction?: EndAssociatedTasksActionDefinition | undefined;
+
+  /**
+   * <p>Information about the end associated emails action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnCaseUpdate</code>.</p>
+   * @public
+   */
+  EndAssociatedEmailsAction?: EndAssociatedEmailsActionDefinition | undefined;
+
+  /**
+   * <p>Information about the submit automated evaluation action.</p>
+   * @public
+   */
+  SubmitAutoEvaluationAction?: SubmitAutoEvaluationActionDefinition | undefined;
+
+  /**
+   * <p>Information about the extract information action.</p>
+   * @public
+   */
+  ExtractInformationAction?: ExtractInformationActionDefinition | undefined;
+
+  /**
+   * <p>Information about the send in-app notification action.</p>
+   *          <p>Supported only for <code>TriggerEventSource</code> values: <code>OnPostCallAnalysisAvailable</code> |
+   *     <code>OnRealTimeCallAnalysisAvailable</code> | <code>OnRealTimeChatAnalysisAvailable</code> |
+   *     <code>OnPostChatAnalysisAvailable</code> | <code>OnAfterCallWorkAvailable</code> |
+   *     <code>OnAfterChatWorkAvailable</code> | <code>OnEmailAnalysisAvailable</code> |
+   *     <code>OnContactEvaluationSubmit</code> | <code>OnCaseCreate</code> | <code>OnCaseUpdate</code> |
+   *     <code>OnSlaBreach</code> | <code>OnSchedulePublish</code> | <code>OnScheduleUpdate</code> |
+   *    <code>OnScheduleTimeOffRequestActivity</code>
+   *          </p>
+   * @public
+   */
+  SendInAppNotificationAction?: SendInAppNotificationActionDefinition | undefined;
+}
+
+/**
+ * <p>A single pre-evaluation filter condition. Specifies a resource type, filter type, key, value, and operator
+ *    to match against a resource attribute.</p>
+ * @public
+ */
+export interface PreEvaluationFilter {
+  /**
+   * <p>The type of resource to filter on. Valid values:</p>
+   *          <ul>
+   *             <li>
+   *                <p>
+   *                   <code>CONTACT</code> - Filter on attributes of the contact, such as tags assigned to the contact.</p>
+   *             </li>
+   *             <li>
+   *                <p>
+   *                   <code>CONTACT_EVALUATION</code> - Filter on attributes of the contact evaluation, such as tags assigned to the
+   *      contact evaluation, for rules triggered on the <code>OnContactEvaluationSubmit</code> event source.</p>
+   *             </li>
+   *          </ul>
+   * @public
+   */
+  ResourceType: PreEvaluationFilterResourceType | undefined;
+
+  /**
+   * <p>The type of filter to apply. Valid values: <code>TAG</code>.</p>
+   * @public
+   */
+  FilterType: PreEvaluationFilterType | undefined;
+
+  /**
+   * <p>The key of the attribute to filter on. For tag filters, this is the tag key.</p>
+   * @public
+   */
+  FilterKey: string | undefined;
+
+  /**
+   * <p>The value to match against. For tag filters, this is the tag value.</p>
+   * @public
+   */
+  FilterValue: string | undefined;
+
+  /**
+   * <p>The comparison operator for the filter condition. Valid values: <code>EQUALS</code>.</p>
+   * @public
+   */
+  Operator: PreEvaluationFilterOperator | undefined;
+}
+
+/**
+ * <p>The pre-evaluation filters for a rule, that restrict a rule to be applied to only certain resources based on
+ *    the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before
+ *    rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>
+ * @public
+ */
+export interface PreEvaluationFilters {
+  /**
+   * <p>A list of conditions that the rule evaluates together using AND logic. All conditions must be met for
+   *    the event to be evaluated by the rule.</p>
+   * @public
+   */
+  AndConditions?: PreEvaluationFilter[] | undefined;
+}
+
+/**
+ * <p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the following values:
+ *     <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>
+ *    | <code>OnContactEvaluationSubmit</code> | <code>OnMetricDataUpdate</code>.</p>
+ * @public
+ */
+export interface RuleTriggerEventSource {
+  /**
+   * <p>The name of the event source.</p>
+   * @public
+   */
+  EventSourceName: EventSourceName | undefined;
+
+  /**
+   * <p>The identifier for the integration association.</p>
+   * @public
+   */
+  IntegrationAssociationId?: string | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateRuleRequest {
+  /**
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
+   */
+  InstanceId: string | undefined;
+
+  /**
+   * <p>A unique name for the rule.</p>
+   * @public
+   */
+  Name: string | undefined;
+
+  /**
+   * <p>The event source to trigger the rule.</p>
+   * @public
+   */
+  TriggerEventSource: RuleTriggerEventSource | undefined;
+
+  /**
+   * <p>The conditions of the rule.</p>
+   * @public
+   */
+  Function: string | undefined;
+
+  /**
+   * <p>A list of actions to be run when the rule is triggered.</p>
+   * @public
+   */
+  Actions: RuleAction[] | undefined;
+
+  /**
+   * <p>The publish status of the rule.</p>
+   * @public
+   */
+  PublishStatus: RulePublishStatus | undefined;
+
+  /**
+   * <p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based
+   *    on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before
+   *    rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>
+   * @public
+   */
+  PreEvaluationFilters?: PreEvaluationFilters | undefined;
+
+  /**
+   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+   *             request. If not provided, the Amazon Web Services
+   *             SDK populates this field. For more information about idempotency, see
+   *             <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.</p>
+   * @public
+   */
+  ClientToken?: string | undefined;
+
+  /**
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
+   */
+  Tags?: Record<string, string> | undefined;
+}
+
+/**
+ * @public
+ */
+export interface CreateRuleResponse {
+  /**
+   * <p>The Amazon Resource Name (ARN) of the rule.</p>
+   * @public
+   */
+  RuleArn: string | undefined;
+
+  /**
+   * <p>A unique identifier for the rule.</p>
+   * @public
+   */
+  RuleId: string | undefined;
+}
+
+/**
+ * <p>This API is in preview release for Connect Customer and is subject to change.</p>
+ *          <p>A third-party application's metadata.</p>
+ * @public
+ */
+export interface Application {
+  /**
+   * <p>Namespace of the application that you want to give access to.</p>
+   * @public
+   */
+  Namespace?: string | undefined;
+
+  /**
+   * <p>The permissions that the agent is granted on the application. For third-party applications, only the
+   *     <code>ACCESS</code> permission is supported. For MCP Servers, the permissions are tool Identifiers accepted by MCP
+   *    Server. </p>
+   * @public
+   */
+  ApplicationPermissions?: string[] | undefined;
+
+  /**
+   * <p> Type of Application. </p>
+   * @public
+   */
+  Type?: ApplicationType | undefined;
+}
+
+/**
+ * <p>A primary attribute value.</p>
+ * @public
+ */
+export interface PrimaryAttributeValue {
+  /**
+   * <p>The value's access type.</p>
+   * @public
+   */
+  AccessType?: AccessType | undefined;
+
+  /**
+   * <p>The value's attribute name.</p>
+   * @public
+   */
+  AttributeName?: string | undefined;
+
+  /**
+   * <p>The value's values.</p>
+   * @public
+   */
+  Values?: string[] | undefined;
+}
+
+/**
+ * <p>A primary attribute access control configuration item.</p>
+ * @public
+ */
+export interface PrimaryAttributeAccessControlConfigurationItem {
+  /**
+   * <p>The item's primary attribute values.</p>
+   * @public
+   */
+  PrimaryAttributeValues?: PrimaryAttributeValue[] | undefined;
+}
+
+/**
+ * <p>A data table access control configuration.</p>
+ * @public
+ */
+export interface DataTableAccessControlConfiguration {
+  /**
+   * <p>The configuration's primary attribute access control configuration.</p>
+   * @public
+   */
+  PrimaryAttributeAccessControlConfiguration?: PrimaryAttributeAccessControlConfigurationItem | undefined;
+}
+
+/**
+ * <p>Contains granular access control configuration for security profiles, including data table access
+ *    permissions.</p>
+ * @public
+ */
+export interface GranularAccessControlConfiguration {
+  /**
+   * <p>The access control configuration for data tables.</p>
+   * @public
+   */
+  DataTableAccessControlConfiguration?: DataTableAccessControlConfiguration | undefined;
+}
+
+/**
+ * @public
+ */
 export interface CreateSecurityProfileRequest {
   /**
    * <p>The name of the security profile.</p>
+   * @public
    */
   SecurityProfileName: string | undefined;
 
   /**
    * <p>The description of the security profile.</p>
+   * @public
    */
-  Description?: string;
+  Description?: string | undefined;
 
   /**
-   * <p>Permissions assigned to the security profile.</p>
+   * <p>Permissions assigned to the security profile. For a list of valid permissions, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html">List of security profile permissions</a>. </p>
+   * @public
    */
-  Permissions?: string[];
+  Permissions?: string[] | undefined;
 
   /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
+   * <p>The identifier of the Connect Customer instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>
+   * @public
    */
   InstanceId: string | undefined;
 
   /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
+   * <p>The tags used to organize, track, or control access for this resource. For example, \{ "Tags": \{"key1":"value1", "key2":"value2"\} \}.</p>
+   * @public
    */
-  Tags?: Record<string, string>;
+  Tags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The list of tags that a security profile uses to restrict access to resources in Connect Customer.</p>
+   * @public
+   */
+  AllowedAccessControlTags?: Record<string, string> | undefined;
+
+  /**
+   * <p>The list of resources that a security profile applies tag restrictions to in Connect Customer. For a list of Connect Customer resources that you can tag, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html">Add tags to resources in Connect Customer</a> in the <i>Connect Customer Administrator Guide</i>. </p>
+   * @public
+   */
+  TagRestrictedResources?: string[] | undefined;
+
+  /**
+   * <p>A list of third-party applications or MCP Servers that the security profile will give access to.</p>
+   * @public
+   */
+  Applications?: Application[] | undefined;
+
+  /**
+   * <p>The list of resources that a security profile applies hierarchy restrictions to in Connect Customer. Following
+   *    are acceptable ResourceNames: <code>User</code>.</p>
+   * @public
+   */
+  HierarchyRestrictedResources?: string[] | undefined;
+
+  /**
+   * <p>The identifier of the hierarchy group that a security profile uses to restrict access to resources in Connect Customer.</p>
+   * @public
+   */
+  AllowedAccessControlHierarchyGroupId?: string | undefined;
+
+  /**
+   * <p> A list of Flow Modules an AI Agent can invoke as a tool. </p>
+   * @public
+   */
+  AllowedFlowModules?: FlowModule[] | undefined;
+
+  /**
+   * <p>A list of AI agents that the security profile will give access to.</p>
+   * @public
+   */
+  AllowedAIAgents?: AIAgent[] | undefined;
+
+  /**
+   * <p>The granular access control configuration for the security profile, including data table permissions.</p>
+   * @public
+   */
+  GranularAccessControlConfiguration?: GranularAccessControlConfiguration | undefined;
 }
 
+/**
+ * @public
+ */
 export interface CreateSecurityProfileResponse {
   /**
    * <p>The identifier for the security profle.</p>
+   * @public
    */
-  SecurityProfileId?: string;
+  SecurityProfileId?: string | undefined;
 
   /**
    * <p>The Amazon Resource Name (ARN) for the security profile.</p>
+   * @public
    */
-  SecurityProfileArn?: string;
+  SecurityProfileArn?: string | undefined;
 }
 
 /**
  * <p>The identifier of the task template field.</p>
+ * @public
  */
 export interface TaskTemplateFieldIdentifier {
   /**
    * <p>The name of the task template field.</p>
+   * @public
    */
-  Name?: string;
+  Name?: string | undefined;
 }
 
 /**
  * <p>A field that is invisible to an agent.</p>
+ * @public
  */
 export interface InvisibleFieldInfo {
   /**
    * <p>Identifier of the invisible field.</p>
+   * @public
    */
-  Id?: TaskTemplateFieldIdentifier;
+  Id?: TaskTemplateFieldIdentifier | undefined;
 }
 
 /**
  * <p>Indicates a field that is read-only to an agent.</p>
+ * @public
  */
 export interface ReadOnlyFieldInfo {
   /**
    * <p>Identifier of the read-only field.</p>
+   * @public
    */
-  Id?: TaskTemplateFieldIdentifier;
+  Id?: TaskTemplateFieldIdentifier | undefined;
 }
-
-/**
- * <p>Information about a required field.</p>
- */
-export interface RequiredFieldInfo {
-  /**
-   * <p>The unique identifier for the field.</p>
-   */
-  Id?: TaskTemplateFieldIdentifier;
-}
-
-/**
- * <p>Describes constraints that apply to the template fields.</p>
- */
-export interface TaskTemplateConstraints {
-  /**
-   * <p>Lists the fields that are required to be filled by agents.</p>
-   */
-  RequiredFields?: RequiredFieldInfo[];
-
-  /**
-   * <p>Lists the fields that are read-only to agents, and cannot be edited.</p>
-   */
-  ReadOnlyFields?: ReadOnlyFieldInfo[];
-
-  /**
-   * <p>Lists the fields that are invisible to agents.</p>
-   */
-  InvisibleFields?: InvisibleFieldInfo[];
-}
-
-/**
- * <p>Describes a default field and its corresponding value.</p>
- */
-export interface TaskTemplateDefaultFieldValue {
-  /**
-   * <p>Identifier of a field. </p>
-   */
-  Id?: TaskTemplateFieldIdentifier;
-
-  /**
-   * <p>Default value for the field.</p>
-   */
-  DefaultValue?: string;
-}
-
-/**
- * <p>Describes default values for fields on a template.</p>
- */
-export interface TaskTemplateDefaults {
-  /**
-   * <p>Default value for the field.</p>
-   */
-  DefaultFieldValues?: TaskTemplateDefaultFieldValue[];
-}
-
-export enum TaskTemplateFieldType {
-  BOOLEAN = "BOOLEAN",
-  DATE_TIME = "DATE_TIME",
-  DESCRIPTION = "DESCRIPTION",
-  EMAIL = "EMAIL",
-  NAME = "NAME",
-  NUMBER = "NUMBER",
-  QUICK_CONNECT = "QUICK_CONNECT",
-  SCHEDULED_TIME = "SCHEDULED_TIME",
-  SINGLE_SELECT = "SINGLE_SELECT",
-  TEXT = "TEXT",
-  TEXT_AREA = "TEXT_AREA",
-  URL = "URL",
-}
-
-/**
- * <p>Describes a single task template field.</p>
- */
-export interface TaskTemplateField {
-  /**
-   * <p>The unique identifier for the field.</p>
-   */
-  Id: TaskTemplateFieldIdentifier | undefined;
-
-  /**
-   * <p>The description of the field.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>Indicates the type of field.</p>
-   */
-  Type?: TaskTemplateFieldType | string;
-
-  /**
-   * <p>A list of options for a single select field.</p>
-   */
-  SingleSelectOptions?: string[];
-}
-
-export enum TaskTemplateStatus {
-  ACTIVE = "ACTIVE",
-  INACTIVE = "INACTIVE",
-}
-
-export interface CreateTaskTemplateRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The name of the task template.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The description of the task template.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>
-   */
-  ContactFlowId?: string;
-
-  /**
-   * <p>Constraints that are applicable to the fields listed.</p>
-   */
-  Constraints?: TaskTemplateConstraints;
-
-  /**
-   * <p>The default values for fields when a task is created by referencing this template.</p>
-   */
-  Defaults?: TaskTemplateDefaults;
-
-  /**
-   * <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
-   * Tasks can only be created from <code>ACTIVE</code> templates.
-   * If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created. </p>
-   */
-  Status?: TaskTemplateStatus | string;
-
-  /**
-   * <p>Fields that are part of the template.</p>
-   */
-  Fields: TaskTemplateField[] | undefined;
-
-  /**
-   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request.</p>
-   */
-  ClientToken?: string;
-}
-
-export interface CreateTaskTemplateResponse {
-  /**
-   * <p>The identifier of the task template resource.</p>
-   */
-  Id: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the task template resource.</p>
-   */
-  Arn: string | undefined;
-}
-
-export enum PropertyValidationExceptionReason {
-  INVALID_FORMAT = "INVALID_FORMAT",
-  NOT_SUPPORTED = "NOT_SUPPORTED",
-  REFERENCED_RESOURCE_NOT_FOUND = "REFERENCED_RESOURCE_NOT_FOUND",
-  REQUIRED_PROPERTY_MISSING = "REQUIRED_PROPERTY_MISSING",
-  RESOURCE_NAME_ALREADY_EXISTS = "RESOURCE_NAME_ALREADY_EXISTS",
-  UNIQUE_CONSTRAINT_VIOLATED = "UNIQUE_CONSTRAINT_VIOLATED",
-}
-
-/**
- * <p>Contains information about why a property is not valid.</p>
- */
-export interface PropertyValidationExceptionProperty {
-  /**
-   * <p>The full property path.</p>
-   */
-  PropertyPath: string | undefined;
-
-  /**
-   * <p>Why the property is not valid.</p>
-   */
-  Reason: PropertyValidationExceptionReason | string | undefined;
-
-  /**
-   * <p>A message describing why the property is not valid.</p>
-   */
-  Message: string | undefined;
-}
-
-/**
- * <p>The property is not valid.</p>
- */
-export class PropertyValidationException extends __BaseException {
-  readonly name: "PropertyValidationException" = "PropertyValidationException";
-  readonly $fault: "client" = "client";
-  Message: string | undefined;
-  PropertyList?: PropertyValidationExceptionProperty[];
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<PropertyValidationException, __BaseException>) {
-    super({
-      name: "PropertyValidationException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, PropertyValidationException.prototype);
-    this.Message = opts.Message;
-    this.PropertyList = opts.PropertyList;
-  }
-}
-
-export enum UseCaseType {
-  CONNECT_CAMPAIGNS = "CONNECT_CAMPAIGNS",
-  RULES_EVALUATION = "RULES_EVALUATION",
-}
-
-export interface CreateUseCaseRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the integration association.</p>
-   */
-  IntegrationAssociationId: string | undefined;
-
-  /**
-   * <p>The type of use case to associate to the integration association. Each integration
-   *    association can have only one of each use case type.</p>
-   */
-  UseCaseType: UseCaseType | string | undefined;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface CreateUseCaseResponse {
-  /**
-   * <p>The identifier of the use case.</p>
-   */
-  UseCaseId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the use case.</p>
-   */
-  UseCaseArn?: string;
-}
-
-/**
- * <p>Contains information about the identity of a user.</p>
- */
-export interface UserIdentityInfo {
-  /**
-   * <p>The first name. This is required if you are using Amazon Connect or SAML for identity
-   *    management.</p>
-   */
-  FirstName?: string;
-
-  /**
-   * <p>The last name. This is required if you are using Amazon Connect or SAML for identity
-   *    management.</p>
-   */
-  LastName?: string;
-
-  /**
-   * <p>The email address. If you are using SAML for identity management and include this parameter,
-   *    an error is returned.</p>
-   */
-  Email?: string;
-}
-
-export enum PhoneType {
-  DESK_PHONE = "DESK_PHONE",
-  SOFT_PHONE = "SOFT_PHONE",
-}
-
-/**
- * <p>Contains information about the phone configuration settings for a user.</p>
- */
-export interface UserPhoneConfig {
-  /**
-   * <p>The phone type.</p>
-   */
-  PhoneType: PhoneType | string | undefined;
-
-  /**
-   * <p>The Auto accept setting.</p>
-   */
-  AutoAccept?: boolean;
-
-  /**
-   * <p>The After Call Work (ACW) timeout setting, in seconds.</p>
-   */
-  AfterContactWorkTimeLimit?: number;
-
-  /**
-   * <p>The phone number for the user's desk phone.</p>
-   */
-  DeskPhoneNumber?: string;
-}
-
-export interface CreateUserRequest {
-  /**
-   * <p>The user name for the account. For instances not using SAML for identity management, the
-   *    user name can include up to 20 characters. If you are using SAML for identity management, the
-   *    user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.</p>
-   */
-  Username: string | undefined;
-
-  /**
-   * <p>The password for the user account. A password is required if you are using Amazon Connect for
-   *    identity management. Otherwise, it is an error to include a password.</p>
-   */
-  Password?: string;
-
-  /**
-   * <p>The information about the identity of the user.</p>
-   */
-  IdentityInfo?: UserIdentityInfo;
-
-  /**
-   * <p>The phone settings for the user.</p>
-   */
-  PhoneConfig: UserPhoneConfig | undefined;
-
-  /**
-   * <p>The identifier of the user account in the directory used for identity management. If Amazon Connect
-   *    cannot access the directory, you can specify this identifier to authenticate users. If you
-   *    include the identifier, we assume that Amazon Connect cannot access the directory. Otherwise, the identity
-   *    information is used to authenticate users from your directory.</p>
-   *          <p>This parameter is required if you are using an existing directory for identity management in
-   *    Amazon Connect when Amazon Connect cannot access your directory to authenticate users. If you are using SAML for
-   *    identity management and include this parameter, an error is returned.</p>
-   */
-  DirectoryUserId?: string;
-
-  /**
-   * <p>The identifier of the security profile for the user.</p>
-   */
-  SecurityProfileIds: string[] | undefined;
-
-  /**
-   * <p>The identifier of the routing profile for the user.</p>
-   */
-  RoutingProfileId: string | undefined;
-
-  /**
-   * <p>The identifier of the hierarchy group for the user.</p>
-   */
-  HierarchyGroupId?: string;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface CreateUserResponse {
-  /**
-   * <p>The identifier of the user account.</p>
-   */
-  UserId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the user account.</p>
-   */
-  UserArn?: string;
-}
-
-export interface CreateUserHierarchyGroupRequest {
-  /**
-   * <p>The name of the user hierarchy group. Must not be more than 100 characters.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The identifier for the parent hierarchy group. The user hierarchy is created at level one if
-   *    the parent group ID is null.</p>
-   */
-  ParentGroupId?: string;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface CreateUserHierarchyGroupResponse {
-  /**
-   * <p>The identifier of the hierarchy group.</p>
-   */
-  HierarchyGroupId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the hierarchy group. </p>
-   */
-  HierarchyGroupArn?: string;
-}
-
-export interface CreateVocabularyRequest {
-  /**
-   * <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-   *             request. If a create request is received more than once with same client token,
-   *    subsequent requests return the previous response without creating a vocabulary again.</p>
-   */
-  ClientToken?: string;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>A unique name of the custom vocabulary.</p>
-   */
-  VocabularyName: string | undefined;
-
-  /**
-   * <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
-   * <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
-   *          </p>
-   */
-  LanguageCode: VocabularyLanguageCode | string | undefined;
-
-  /**
-   * <p>The content of the custom vocabulary in plain-text format with a table of values. Each row
-   *    in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,
-   *     <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB
-   *    characters. The size limit is 50KB. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table">Create a custom
-   *     vocabulary using a table</a>.</p>
-   */
-  Content: string | undefined;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export enum VocabularyState {
-  ACTIVE = "ACTIVE",
-  CREATION_FAILED = "CREATION_FAILED",
-  CREATION_IN_PROGRESS = "CREATION_IN_PROGRESS",
-  DELETE_IN_PROGRESS = "DELETE_IN_PROGRESS",
-}
-
-export interface CreateVocabularyResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>
-   */
-  VocabularyArn: string | undefined;
-
-  /**
-   * <p>The identifier of the custom vocabulary.</p>
-   */
-  VocabularyId: string | undefined;
-
-  /**
-   * <p>The current state of the custom vocabulary.</p>
-   */
-  State: VocabularyState | string | undefined;
-}
-
-export interface DeleteContactFlowRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the flow.</p>
-   */
-  ContactFlowId: string | undefined;
-}
-
-export interface DeleteContactFlowModuleRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the flow module.</p>
-   */
-  ContactFlowModuleId: string | undefined;
-}
-
-export interface DeleteContactFlowModuleResponse {}
-
-export interface DeleteHoursOfOperationRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the hours of operation.</p>
-   */
-  HoursOfOperationId: string | undefined;
-}
-
-export interface DeleteInstanceRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-export interface DeleteIntegrationAssociationRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the integration association.</p>
-   */
-  IntegrationAssociationId: string | undefined;
-}
-
-export interface DeleteQuickConnectRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the quick connect.</p>
-   */
-  QuickConnectId: string | undefined;
-}
-
-export interface DeleteSecurityProfileRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the security profle.</p>
-   */
-  SecurityProfileId: string | undefined;
-}
-
-export enum ResourceType {
-  CONTACT = "CONTACT",
-  CONTACT_FLOW = "CONTACT_FLOW",
-  HIERARCHY_GROUP = "HIERARCHY_GROUP",
-  HIERARCHY_LEVEL = "HIERARCHY_LEVEL",
-  INSTANCE = "INSTANCE",
-  PARTICIPANT = "PARTICIPANT",
-  USER = "USER",
-}
-
-/**
- * <p>That resource is already in use. Please try another.</p>
- */
-export class ResourceInUseException extends __BaseException {
-  readonly name: "ResourceInUseException" = "ResourceInUseException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * <p>The type of resource.</p>
-   */
-  ResourceType?: ResourceType | string;
-
-  /**
-   * <p>The identifier for the resource.</p>
-   */
-  ResourceId?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ResourceInUseException, __BaseException>) {
-    super({
-      name: "ResourceInUseException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ResourceInUseException.prototype);
-    this.Message = opts.Message;
-    this.ResourceType = opts.ResourceType;
-    this.ResourceId = opts.ResourceId;
-  }
-}
-
-export interface DeleteTaskTemplateRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>A unique identifier for the task template.</p>
-   */
-  TaskTemplateId: string | undefined;
-}
-
-export interface DeleteTaskTemplateResponse {}
-
-export interface DeleteUseCaseRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the integration association.</p>
-   */
-  IntegrationAssociationId: string | undefined;
-
-  /**
-   * <p>The identifier for the use case.</p>
-   */
-  UseCaseId: string | undefined;
-}
-
-export interface DeleteUserRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the user.</p>
-   */
-  UserId: string | undefined;
-}
-
-export interface DeleteUserHierarchyGroupRequest {
-  /**
-   * <p>The identifier of the hierarchy group.</p>
-   */
-  HierarchyGroupId: string | undefined;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-export interface DeleteVocabularyRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the custom vocabulary.</p>
-   */
-  VocabularyId: string | undefined;
-}
-
-export interface DeleteVocabularyResponse {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>
-   */
-  VocabularyArn: string | undefined;
-
-  /**
-   * <p>The identifier of the custom vocabulary.</p>
-   */
-  VocabularyId: string | undefined;
-
-  /**
-   * <p>The current state of the custom vocabulary.</p>
-   */
-  State: VocabularyState | string | undefined;
-}
-
-export interface DescribeAgentStatusRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the agent status.</p>
-   */
-  AgentStatusId: string | undefined;
-}
-
-export interface DescribeAgentStatusResponse {
-  /**
-   * <p>The agent status.</p>
-   */
-  AgentStatus?: AgentStatus;
-}
-
-export interface DescribeContactRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the contact.</p>
-   */
-  ContactId: string | undefined;
-}
-
-/**
- * <p>If this contact was queued, this contains information about the queue. </p>
- */
-export interface QueueInfo {
-  /**
-   * <p>The identifier of the agent who accepted the contact.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The timestamp when the contact was added to the queue.</p>
-   */
-  EnqueueTimestamp?: Date;
-}
-
-/**
- * <p>Contains information about a contact.</p>
- */
-export interface Contact {
-  /**
-   * <p>The Amazon Resource Name (ARN) for the contact.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The identifier for the contact.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>If this contact is related to other contacts, this is the ID of the initial contact.</p>
-   */
-  InitialContactId?: string;
-
-  /**
-   * <p>If this contact is not the first contact, this is the ID of the previous contact.</p>
-   */
-  PreviousContactId?: string;
-
-  /**
-   * <p>Indicates how the contact was initiated.</p>
-   */
-  InitiationMethod?: ContactInitiationMethod | string;
-
-  /**
-   * <p>The name of the contact.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The description of the contact.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>How the contact reached your contact center.</p>
-   */
-  Channel?: Channel | string;
-
-  /**
-   * <p>If this contact was queued, this contains information about the queue. </p>
-   */
-  QueueInfo?: QueueInfo;
-
-  /**
-   * <p>Information about the agent who accepted the contact.</p>
-   */
-  AgentInfo?: AgentInfo;
-
-  /**
-   * <p>The date and time this contact was initiated, in UTC time. For <code>INBOUND</code>, this is
-   *    when the contact arrived. For <code>OUTBOUND</code>, this is when the agent began dialing. For
-   *     <code>CALLBACK</code>, this is when the callback contact was created. For <code>TRANSFER</code>
-   *    and <code>QUEUE_TRANSFER</code>, this is when the transfer was initiated. For <code>API</code>,
-   *    this is when the request arrived.</p>
-   */
-  InitiationTimestamp?: Date;
-
-  /**
-   * <p>The timestamp when the customer endpoint disconnected from Amazon Connect.</p>
-   */
-  DisconnectTimestamp?: Date;
-
-  /**
-   * <p>The timestamp when contact was last updated.</p>
-   */
-  LastUpdateTimestamp?: Date;
-
-  /**
-   * <p>The timestamp, in Unix epoch time format, at which to start running the inbound flow.
-   *   </p>
-   */
-  ScheduledTimestamp?: Date;
-}
-
-export interface DescribeContactResponse {
-  /**
-   * <p>Information about the contact.</p>
-   */
-  Contact?: Contact;
-}
-
-/**
- * <p>The flow has not been published.</p>
- */
-export class ContactFlowNotPublishedException extends __BaseException {
-  readonly name: "ContactFlowNotPublishedException" = "ContactFlowNotPublishedException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<ContactFlowNotPublishedException, __BaseException>) {
-    super({
-      name: "ContactFlowNotPublishedException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, ContactFlowNotPublishedException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export interface DescribeContactFlowRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the flow.</p>
-   */
-  ContactFlowId: string | undefined;
-}
-
-export enum ContactFlowState {
-  ACTIVE = "ACTIVE",
-  ARCHIVED = "ARCHIVED",
-}
-
-/**
- * <p>Contains information about a flow.</p>
- */
-export interface ContactFlow {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the flow.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The identifier of the flow.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The name of the flow.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The type of the flow. For descriptions of the available types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types">Choose a flow type</a> in the <i>Amazon Connect Administrator
-   *    Guide</i>.</p>
-   */
-  Type?: ContactFlowType | string;
-
-  /**
-   * <p>The type of flow.</p>
-   */
-  State?: ContactFlowState | string;
-
-  /**
-   * <p>The description of the flow.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The content of the flow.</p>
-   */
-  Content?: string;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeContactFlowResponse {
-  /**
-   * <p>Information about the flow.</p>
-   */
-  ContactFlow?: ContactFlow;
-}
-
-export interface DescribeContactFlowModuleRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the flow module.</p>
-   */
-  ContactFlowModuleId: string | undefined;
-}
-
-export enum ContactFlowModuleState {
-  ACTIVE = "ACTIVE",
-  ARCHIVED = "ARCHIVED",
-}
-
-export enum ContactFlowModuleStatus {
-  PUBLISHED = "PUBLISHED",
-  SAVED = "SAVED",
-}
-
-/**
- * <p>Contains information about a flow module.</p>
- */
-export interface ContactFlowModule {
-  /**
-   * <p>The Amazon Resource Name (ARN).</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The identifier of the flow module.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The name of the flow module.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The content of the flow module.</p>
-   */
-  Content?: string;
-
-  /**
-   * <p>The description of the flow module.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The type of flow module.</p>
-   */
-  State?: ContactFlowModuleState | string;
-
-  /**
-   * <p>The status of the flow module.</p>
-   */
-  Status?: ContactFlowModuleStatus | string;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeContactFlowModuleResponse {
-  /**
-   * <p>Information about the flow module.</p>
-   */
-  ContactFlowModule?: ContactFlowModule;
-}
-
-export interface DescribeHoursOfOperationRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the hours of operation.</p>
-   */
-  HoursOfOperationId: string | undefined;
-}
-
-/**
- * <p>Information about of the hours of operation.</p>
- */
-export interface HoursOfOperation {
-  /**
-   * <p>The identifier for the hours of operation.</p>
-   */
-  HoursOfOperationId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the hours of operation.</p>
-   */
-  HoursOfOperationArn?: string;
-
-  /**
-   * <p>The name for the hours of operation.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The description for the hours of operation.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The time zone for the hours of operation.</p>
-   */
-  TimeZone?: string;
-
-  /**
-   * <p>Configuration information for the hours of operation.</p>
-   */
-  Config?: HoursOfOperationConfig[];
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeHoursOfOperationResponse {
-  /**
-   * <p>The hours of operation.</p>
-   */
-  HoursOfOperation?: HoursOfOperation;
-}
-
-export interface DescribeInstanceRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-export enum InstanceStatus {
-  ACTIVE = "ACTIVE",
-  CREATION_FAILED = "CREATION_FAILED",
-  CREATION_IN_PROGRESS = "CREATION_IN_PROGRESS",
-}
-
-/**
- * <p>Relevant
- *    details why the instance was not successfully created.</p>
- */
-export interface InstanceStatusReason {
-  /**
-   * <p>The message.</p>
-   */
-  Message?: string;
-}
-
-/**
- * <p>The Amazon Connect instance.</p>
- */
-export interface Instance {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the instance.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The identity management type.</p>
-   */
-  IdentityManagementType?: DirectoryType | string;
-
-  /**
-   * <p>The alias of instance.</p>
-   */
-  InstanceAlias?: string;
-
-  /**
-   * <p>When the instance was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The service role of the instance.</p>
-   */
-  ServiceRole?: string;
-
-  /**
-   * <p>The state of the instance.</p>
-   */
-  InstanceStatus?: InstanceStatus | string;
-
-  /**
-   * <p>Relevant
-   *    details why the instance was not successfully created. </p>
-   */
-  StatusReason?: InstanceStatusReason;
-
-  /**
-   * <p>Whether inbound calls are enabled.</p>
-   */
-  InboundCallsEnabled?: boolean;
-
-  /**
-   * <p>Whether outbound calls are enabled.</p>
-   */
-  OutboundCallsEnabled?: boolean;
-}
-
-export interface DescribeInstanceResponse {
-  /**
-   * <p>The name of the instance.</p>
-   */
-  Instance?: Instance;
-}
-
-export enum InstanceAttributeType {
-  AUTO_RESOLVE_BEST_VOICES = "AUTO_RESOLVE_BEST_VOICES",
-  CONTACTFLOW_LOGS = "CONTACTFLOW_LOGS",
-  CONTACT_LENS = "CONTACT_LENS",
-  EARLY_MEDIA = "EARLY_MEDIA",
-  HIGH_VOLUME_OUTBOUND = "HIGH_VOLUME_OUTBOUND",
-  INBOUND_CALLS = "INBOUND_CALLS",
-  MULTI_PARTY_CONFERENCE = "MULTI_PARTY_CONFERENCE",
-  OUTBOUND_CALLS = "OUTBOUND_CALLS",
-  USE_CUSTOM_TTS_VOICES = "USE_CUSTOM_TTS_VOICES",
-}
-
-export interface DescribeInstanceAttributeRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The type of attribute.</p>
-   */
-  AttributeType: InstanceAttributeType | string | undefined;
-}
-
-/**
- * <p>A toggle for an individual feature at the instance level.</p>
- */
-export interface Attribute {
-  /**
-   * <p>The type of attribute.</p>
-   */
-  AttributeType?: InstanceAttributeType | string;
-
-  /**
-   * <p>The value of the attribute.</p>
-   */
-  Value?: string;
-}
-
-export interface DescribeInstanceAttributeResponse {
-  /**
-   * <p>The
-   *    type
-   *    of attribute.</p>
-   */
-  Attribute?: Attribute;
-}
-
-export interface DescribeInstanceStorageConfigRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
-   */
-  AssociationId: string | undefined;
-
-  /**
-   * <p>A valid resource type.</p>
-   */
-  ResourceType: InstanceStorageResourceType | string | undefined;
-}
-
-export interface DescribeInstanceStorageConfigResponse {
-  /**
-   * <p>A valid storage type.</p>
-   */
-  StorageConfig?: InstanceStorageConfig;
-}
-
-export interface DescribePhoneNumberRequest {
-  /**
-   * <p>A unique identifier for the phone number.</p>
-   */
-  PhoneNumberId: string | undefined;
-}
-
-export enum PhoneNumberCountryCode {
-  AD = "AD",
-  AE = "AE",
-  AF = "AF",
-  AG = "AG",
-  AI = "AI",
-  AL = "AL",
-  AM = "AM",
-  AN = "AN",
-  AO = "AO",
-  AQ = "AQ",
-  AR = "AR",
-  AS = "AS",
-  AT = "AT",
-  AU = "AU",
-  AW = "AW",
-  AZ = "AZ",
-  BA = "BA",
-  BB = "BB",
-  BD = "BD",
-  BE = "BE",
-  BF = "BF",
-  BG = "BG",
-  BH = "BH",
-  BI = "BI",
-  BJ = "BJ",
-  BL = "BL",
-  BM = "BM",
-  BN = "BN",
-  BO = "BO",
-  BR = "BR",
-  BS = "BS",
-  BT = "BT",
-  BW = "BW",
-  BY = "BY",
-  BZ = "BZ",
-  CA = "CA",
-  CC = "CC",
-  CD = "CD",
-  CF = "CF",
-  CG = "CG",
-  CH = "CH",
-  CI = "CI",
-  CK = "CK",
-  CL = "CL",
-  CM = "CM",
-  CN = "CN",
-  CO = "CO",
-  CR = "CR",
-  CU = "CU",
-  CV = "CV",
-  CW = "CW",
-  CX = "CX",
-  CY = "CY",
-  CZ = "CZ",
-  DE = "DE",
-  DJ = "DJ",
-  DK = "DK",
-  DM = "DM",
-  DO = "DO",
-  DZ = "DZ",
-  EC = "EC",
-  EE = "EE",
-  EG = "EG",
-  EH = "EH",
-  ER = "ER",
-  ES = "ES",
-  ET = "ET",
-  FI = "FI",
-  FJ = "FJ",
-  FK = "FK",
-  FM = "FM",
-  FO = "FO",
-  FR = "FR",
-  GA = "GA",
-  GB = "GB",
-  GD = "GD",
-  GE = "GE",
-  GG = "GG",
-  GH = "GH",
-  GI = "GI",
-  GL = "GL",
-  GM = "GM",
-  GN = "GN",
-  GQ = "GQ",
-  GR = "GR",
-  GT = "GT",
-  GU = "GU",
-  GW = "GW",
-  GY = "GY",
-  HK = "HK",
-  HN = "HN",
-  HR = "HR",
-  HT = "HT",
-  HU = "HU",
-  ID = "ID",
-  IE = "IE",
-  IL = "IL",
-  IM = "IM",
-  IN = "IN",
-  IO = "IO",
-  IQ = "IQ",
-  IR = "IR",
-  IS = "IS",
-  IT = "IT",
-  JE = "JE",
-  JM = "JM",
-  JO = "JO",
-  JP = "JP",
-  KE = "KE",
-  KG = "KG",
-  KH = "KH",
-  KI = "KI",
-  KM = "KM",
-  KN = "KN",
-  KP = "KP",
-  KR = "KR",
-  KW = "KW",
-  KY = "KY",
-  KZ = "KZ",
-  LA = "LA",
-  LB = "LB",
-  LC = "LC",
-  LI = "LI",
-  LK = "LK",
-  LR = "LR",
-  LS = "LS",
-  LT = "LT",
-  LU = "LU",
-  LV = "LV",
-  LY = "LY",
-  MA = "MA",
-  MC = "MC",
-  MD = "MD",
-  ME = "ME",
-  MF = "MF",
-  MG = "MG",
-  MH = "MH",
-  MK = "MK",
-  ML = "ML",
-  MM = "MM",
-  MN = "MN",
-  MO = "MO",
-  MP = "MP",
-  MR = "MR",
-  MS = "MS",
-  MT = "MT",
-  MU = "MU",
-  MV = "MV",
-  MW = "MW",
-  MX = "MX",
-  MY = "MY",
-  MZ = "MZ",
-  NA = "NA",
-  NC = "NC",
-  NE = "NE",
-  NG = "NG",
-  NI = "NI",
-  NL = "NL",
-  NO = "NO",
-  NP = "NP",
-  NR = "NR",
-  NU = "NU",
-  NZ = "NZ",
-  OM = "OM",
-  PA = "PA",
-  PE = "PE",
-  PF = "PF",
-  PG = "PG",
-  PH = "PH",
-  PK = "PK",
-  PL = "PL",
-  PM = "PM",
-  PN = "PN",
-  PR = "PR",
-  PT = "PT",
-  PW = "PW",
-  PY = "PY",
-  QA = "QA",
-  RE = "RE",
-  RO = "RO",
-  RS = "RS",
-  RU = "RU",
-  RW = "RW",
-  SA = "SA",
-  SB = "SB",
-  SC = "SC",
-  SD = "SD",
-  SE = "SE",
-  SG = "SG",
-  SH = "SH",
-  SI = "SI",
-  SJ = "SJ",
-  SK = "SK",
-  SL = "SL",
-  SM = "SM",
-  SN = "SN",
-  SO = "SO",
-  SR = "SR",
-  ST = "ST",
-  SV = "SV",
-  SX = "SX",
-  SY = "SY",
-  SZ = "SZ",
-  TC = "TC",
-  TD = "TD",
-  TG = "TG",
-  TH = "TH",
-  TJ = "TJ",
-  TK = "TK",
-  TL = "TL",
-  TM = "TM",
-  TN = "TN",
-  TO = "TO",
-  TR = "TR",
-  TT = "TT",
-  TV = "TV",
-  TW = "TW",
-  TZ = "TZ",
-  UA = "UA",
-  UG = "UG",
-  US = "US",
-  UY = "UY",
-  UZ = "UZ",
-  VA = "VA",
-  VC = "VC",
-  VE = "VE",
-  VG = "VG",
-  VI = "VI",
-  VN = "VN",
-  VU = "VU",
-  WF = "WF",
-  WS = "WS",
-  YE = "YE",
-  YT = "YT",
-  ZA = "ZA",
-  ZM = "ZM",
-  ZW = "ZW",
-}
-
-export enum PhoneNumberWorkflowStatus {
-  Claimed = "CLAIMED",
-  Failed = "FAILED",
-  InProgress = "IN_PROGRESS",
-}
-
-/**
- * <p>The status of the phone number.</p>
- */
-export interface PhoneNumberStatus {
-  /**
-   * <p>The status.</p>
-   */
-  Status?: PhoneNumberWorkflowStatus | string;
-
-  /**
-   * <p>The status message.</p>
-   */
-  Message?: string;
-}
-
-export enum PhoneNumberType {
-  DID = "DID",
-  TOLL_FREE = "TOLL_FREE",
-}
-
-/**
- * <p>Information about a phone number that has been claimed to your Amazon Connect instance.</p>
- */
-export interface ClaimedPhoneNumberSummary {
-  /**
-   * <p>A unique identifier for the phone number.</p>
-   */
-  PhoneNumberId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the phone number.</p>
-   */
-  PhoneNumberArn?: string;
-
-  /**
-   * <p>The phone number. Phone numbers are formatted <code>[+] [country code] [subscriber number including area code]</code>.</p>
-   */
-  PhoneNumber?: string;
-
-  /**
-   * <p>The ISO country code.</p>
-   */
-  PhoneNumberCountryCode?: PhoneNumberCountryCode | string;
-
-  /**
-   * <p>The type of phone number.</p>
-   */
-  PhoneNumberType?: PhoneNumberType | string;
-
-  /**
-   * <p>The description of the phone number.</p>
-   */
-  PhoneNumberDescription?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>
-   */
-  TargetArn?: string;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-
-  /**
-   * <p>The status of the phone number.</p>
-   */
-  PhoneNumberStatus?: PhoneNumberStatus;
-}
-
-export interface DescribePhoneNumberResponse {
-  /**
-   * <p>Information about a phone number that's been claimed to your Amazon Connect instance.</p>
-   */
-  ClaimedPhoneNumberSummary?: ClaimedPhoneNumberSummary;
-}
-
-export interface DescribeQueueRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the queue.</p>
-   */
-  QueueId: string | undefined;
-}
-
-export enum QueueStatus {
-  DISABLED = "DISABLED",
-  ENABLED = "ENABLED",
-}
-
-/**
- * <p>Contains information about a queue.</p>
- */
-export interface Queue {
-  /**
-   * <p>The name of the queue.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the queue.</p>
-   */
-  QueueArn?: string;
-
-  /**
-   * <p>The identifier for the queue.</p>
-   */
-  QueueId?: string;
-
-  /**
-   * <p>The description of the queue.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The outbound caller ID name, number, and outbound whisper flow.</p>
-   */
-  OutboundCallerConfig?: OutboundCallerConfig;
-
-  /**
-   * <p>The identifier for the hours of operation.</p>
-   */
-  HoursOfOperationId?: string;
-
-  /**
-   * <p>The maximum number of contacts that can be in the queue before it is considered full.</p>
-   */
-  MaxContacts?: number;
-
-  /**
-   * <p>The status of the queue.</p>
-   */
-  Status?: QueueStatus | string;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeQueueResponse {
-  /**
-   * <p>The name of the queue.</p>
-   */
-  Queue?: Queue;
-}
-
-export interface DescribeQuickConnectRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the quick connect.</p>
-   */
-  QuickConnectId: string | undefined;
-}
-
-/**
- * <p>Contains information about a quick connect.</p>
- */
-export interface QuickConnect {
-  /**
-   * <p>The Amazon Resource Name (ARN) of the quick connect.</p>
-   */
-  QuickConnectARN?: string;
-
-  /**
-   * <p>The identifier for the quick connect.</p>
-   */
-  QuickConnectId?: string;
-
-  /**
-   * <p>The name of the quick connect.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The description.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>Contains information about the quick connect.</p>
-   */
-  QuickConnectConfig?: QuickConnectConfig;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeQuickConnectResponse {
-  /**
-   * <p>Information about the quick connect.</p>
-   */
-  QuickConnect?: QuickConnect;
-}
-
-export interface DescribeRoutingProfileRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the routing profile.</p>
-   */
-  RoutingProfileId: string | undefined;
-}
-
-/**
- * <p>Contains information about a routing profile.</p>
- */
-export interface RoutingProfile {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId?: string;
-
-  /**
-   * <p>The name of the routing profile.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the routing profile.</p>
-   */
-  RoutingProfileArn?: string;
-
-  /**
-   * <p>The identifier of the routing profile.</p>
-   */
-  RoutingProfileId?: string;
-
-  /**
-   * <p>The description of the routing profile.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The channels agents can handle in the Contact Control Panel (CCP) for this routing
-   *    profile.</p>
-   */
-  MediaConcurrencies?: MediaConcurrency[];
-
-  /**
-   * <p>The identifier of the default outbound queue for this routing profile.</p>
-   */
-  DefaultOutboundQueueId?: string;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeRoutingProfileResponse {
-  /**
-   * <p>The routing profile.</p>
-   */
-  RoutingProfile?: RoutingProfile;
-}
-
-export interface DescribeSecurityProfileRequest {
-  /**
-   * <p>The identifier for the security profle.</p>
-   */
-  SecurityProfileId: string | undefined;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-/**
- * <p>Contains information about a security profile.</p>
- */
-export interface SecurityProfile {
-  /**
-   * <p>The identifier for the security profile.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The organization resource identifier for the security profile.</p>
-   */
-  OrganizationResourceId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the secruity profile.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name for the security profile.</p>
-   */
-  SecurityProfileName?: string;
-
-  /**
-   * <p>The description of the security profile.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeSecurityProfileResponse {
-  /**
-   * <p>The security profile.</p>
-   */
-  SecurityProfile?: SecurityProfile;
-}
-
-export interface DescribeUserRequest {
-  /**
-   * <p>The identifier of the user account.</p>
-   */
-  UserId: string | undefined;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-/**
- * <p>Contains information about a user account for a Amazon Connect instance.</p>
- */
-export interface User {
-  /**
-   * <p>The identifier of the user account.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the user account.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The user name assigned to the user account.</p>
-   */
-  Username?: string;
-
-  /**
-   * <p>Information about the user identity.</p>
-   */
-  IdentityInfo?: UserIdentityInfo;
-
-  /**
-   * <p>Information about the phone configuration for the user.</p>
-   */
-  PhoneConfig?: UserPhoneConfig;
-
-  /**
-   * <p>The identifier of the user account in the directory used for identity management.</p>
-   */
-  DirectoryUserId?: string;
-
-  /**
-   * <p>The identifiers of the security profiles for the user.</p>
-   */
-  SecurityProfileIds?: string[];
-
-  /**
-   * <p>The identifier of the routing profile for the user.</p>
-   */
-  RoutingProfileId?: string;
-
-  /**
-   * <p>The identifier of the hierarchy group for the user.</p>
-   */
-  HierarchyGroupId?: string;
-
-  /**
-   * <p>The
-   *    tags.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeUserResponse {
-  /**
-   * <p>Information about the user account and configuration settings.</p>
-   */
-  User?: User;
-}
-
-export interface DescribeUserHierarchyGroupRequest {
-  /**
-   * <p>The identifier of the hierarchy group.</p>
-   */
-  HierarchyGroupId: string | undefined;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-/**
- * <p>Contains summary information about a hierarchy group.</p>
- */
-export interface HierarchyGroupSummary {
-  /**
-   * <p>The identifier of the hierarchy group.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the hierarchy group.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the hierarchy group.</p>
-   */
-  Name?: string;
-}
-
-/**
- * <p>Contains information about the levels of a hierarchy group.</p>
- */
-export interface HierarchyPath {
-  /**
-   * <p>Information about level one.</p>
-   */
-  LevelOne?: HierarchyGroupSummary;
-
-  /**
-   * <p>Information about level two.</p>
-   */
-  LevelTwo?: HierarchyGroupSummary;
-
-  /**
-   * <p>Information about level three.</p>
-   */
-  LevelThree?: HierarchyGroupSummary;
-
-  /**
-   * <p>Information about level four.</p>
-   */
-  LevelFour?: HierarchyGroupSummary;
-
-  /**
-   * <p>Information about level five.</p>
-   */
-  LevelFive?: HierarchyGroupSummary;
-}
-
-/**
- * <p>Contains information about a hierarchy group.</p>
- */
-export interface HierarchyGroup {
-  /**
-   * <p>The identifier of the hierarchy group.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the hierarchy group.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the hierarchy group.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The identifier of the level in the hierarchy group.</p>
-   */
-  LevelId?: string;
-
-  /**
-   * <p>Information about the levels in the hierarchy group.</p>
-   */
-  HierarchyPath?: HierarchyPath;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeUserHierarchyGroupResponse {
-  /**
-   * <p>Information about the hierarchy group.</p>
-   */
-  HierarchyGroup?: HierarchyGroup;
-}
-
-export interface DescribeUserHierarchyStructureRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-/**
- * <p>Contains information about a hierarchy level.</p>
- */
-export interface HierarchyLevel {
-  /**
-   * <p>The identifier of the hierarchy level.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the hierarchy level.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the hierarchy level.</p>
-   */
-  Name?: string;
-}
-
-/**
- * <p>Contains information about a hierarchy structure.</p>
- */
-export interface HierarchyStructure {
-  /**
-   * <p>Information about level one.</p>
-   */
-  LevelOne?: HierarchyLevel;
-
-  /**
-   * <p>Information about level two.</p>
-   */
-  LevelTwo?: HierarchyLevel;
-
-  /**
-   * <p>Information about level three.</p>
-   */
-  LevelThree?: HierarchyLevel;
-
-  /**
-   * <p>Information about level four.</p>
-   */
-  LevelFour?: HierarchyLevel;
-
-  /**
-   * <p>Information about level five.</p>
-   */
-  LevelFive?: HierarchyLevel;
-}
-
-export interface DescribeUserHierarchyStructureResponse {
-  /**
-   * <p>Information about the hierarchy structure.</p>
-   */
-  HierarchyStructure?: HierarchyStructure;
-}
-
-export interface DescribeVocabularyRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the custom vocabulary.</p>
-   */
-  VocabularyId: string | undefined;
-}
-
-/**
- * <p>Contains information about a custom vocabulary.</p>
- */
-export interface Vocabulary {
-  /**
-   * <p>A unique name of the custom vocabulary.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The identifier of the custom vocabulary.</p>
-   */
-  Id: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>
-   */
-  Arn: string | undefined;
-
-  /**
-   * <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
-   * <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
-   *          </p>
-   */
-  LanguageCode: VocabularyLanguageCode | string | undefined;
-
-  /**
-   * <p>The current state of the custom vocabulary.</p>
-   */
-  State: VocabularyState | string | undefined;
-
-  /**
-   * <p>The timestamp when the custom vocabulary was last modified.</p>
-   */
-  LastModifiedTime: Date | undefined;
-
-  /**
-   * <p>The reason why the custom vocabulary was not created.</p>
-   */
-  FailureReason?: string;
-
-  /**
-   * <p>The content of the custom vocabulary in plain-text format with a table of values. Each row
-   *    in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,
-   *     <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB
-   *    characters. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table">Create a custom
-   *     vocabulary using a table</a>.</p>
-   */
-  Content?: string;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface DescribeVocabularyResponse {
-  /**
-   * <p>A list of specific words that you want Contact Lens for Amazon Connect to recognize in your audio input. They are
-   *    generally domain-specific words and phrases, words that Contact Lens is not recognizing, or proper
-   *    nouns.</p>
-   */
-  Vocabulary: Vocabulary | undefined;
-}
-
-export interface DisassociateApprovedOriginRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The domain URL of the integrated application.</p>
-   */
-  Origin: string | undefined;
-}
-
-export interface DisassociateBotRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>Configuration information of an Amazon Lex bot.</p>
-   */
-  LexBot?: LexBot;
-
-  /**
-   * <p>The Amazon Lex V2 bot to disassociate from the instance.</p>
-   */
-  LexV2Bot?: LexV2Bot;
-}
-
-export interface DisassociateInstanceStorageConfigRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
-   */
-  AssociationId: string | undefined;
-
-  /**
-   * <p>A valid resource type.</p>
-   */
-  ResourceType: InstanceStorageResourceType | string | undefined;
-}
-
-export interface DisassociateLambdaFunctionRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance..</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the Lambda function being disassociated.</p>
-   */
-  FunctionArn: string | undefined;
-}
-
-export interface DisassociateLexBotRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The name of the Amazon Lex bot. Maximum character limit of 50.</p>
-   */
-  BotName: string | undefined;
-
-  /**
-   * <p>The Region in which the Amazon Lex bot has been created.</p>
-   */
-  LexRegion: string | undefined;
-}
-
-export interface DisassociatePhoneNumberContactFlowRequest {
-  /**
-   * <p>A unique identifier for the phone number.</p>
-   */
-  PhoneNumberId: string | undefined;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-export interface DisassociateQueueQuickConnectsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the queue.</p>
-   */
-  QueueId: string | undefined;
-
-  /**
-   * <p>The quick connects to disassociate from the queue.</p>
-   */
-  QuickConnectIds: string[] | undefined;
-}
-
-export interface DisassociateRoutingProfileQueuesRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the routing profile.</p>
-   */
-  RoutingProfileId: string | undefined;
-
-  /**
-   * <p>The queues to disassociate from this routing profile.</p>
-   */
-  QueueReferences: RoutingProfileQueueReference[] | undefined;
-}
-
-export interface DisassociateSecurityKeyRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.</p>
-   */
-  AssociationId: string | undefined;
-}
-
-export interface GetContactAttributesRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the initial contact.</p>
-   */
-  InitialContactId: string | undefined;
-}
-
-export interface GetContactAttributesResponse {
-  /**
-   * <p>Information about the attributes.</p>
-   */
-  Attributes?: Record<string, string>;
-}
-
-export enum CurrentMetricName {
-  AGENTS_AFTER_CONTACT_WORK = "AGENTS_AFTER_CONTACT_WORK",
-  AGENTS_AVAILABLE = "AGENTS_AVAILABLE",
-  AGENTS_ERROR = "AGENTS_ERROR",
-  AGENTS_NON_PRODUCTIVE = "AGENTS_NON_PRODUCTIVE",
-  AGENTS_ONLINE = "AGENTS_ONLINE",
-  AGENTS_ON_CALL = "AGENTS_ON_CALL",
-  AGENTS_ON_CONTACT = "AGENTS_ON_CONTACT",
-  AGENTS_STAFFED = "AGENTS_STAFFED",
-  CONTACTS_IN_QUEUE = "CONTACTS_IN_QUEUE",
-  CONTACTS_SCHEDULED = "CONTACTS_SCHEDULED",
-  OLDEST_CONTACT_AGE = "OLDEST_CONTACT_AGE",
-  SLOTS_ACTIVE = "SLOTS_ACTIVE",
-  SLOTS_AVAILABLE = "SLOTS_AVAILABLE",
-}
-
-export enum Unit {
-  COUNT = "COUNT",
-  PERCENT = "PERCENT",
-  SECONDS = "SECONDS",
-}
-
-/**
- * <p>Contains information about a real-time metric. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator
- *    Guide</i>.</p>
- */
-export interface CurrentMetric {
-  /**
-   * <p>The name of the metric.</p>
-   */
-  Name?: CurrentMetricName | string;
-
-  /**
-   * <p>The unit for the metric.</p>
-   */
-  Unit?: Unit | string;
-}
-
-/**
- * <p>Contains the filter to apply when retrieving metrics.</p>
- */
-export interface Filters {
-  /**
-   * <p>The queues to use to filter the metrics. You should specify at least one queue, and can
-   *    specify up to 100 queues per request. The <code>GetCurrentMetricsData</code> API in particular
-   *    requires a queue when you include a <code>Filter</code> in your request. </p>
-   */
-  Queues?: string[];
-
-  /**
-   * <p>The channel to use to filter the metrics.</p>
-   */
-  Channels?: (Channel | string)[];
-}
-
-export enum Grouping {
-  CHANNEL = "CHANNEL",
-  QUEUE = "QUEUE",
-}
-
-export interface GetCurrentMetricDataRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is
-   *    retrieved only for the resources associated with the queues or channels included in the filter.
-   *    You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.</p>
-   */
-  Filters: Filters | undefined;
-
-  /**
-   * <p>The grouping applied to the metrics returned. For example, when grouped by
-   *     <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all
-   *    queues. If you group by <code>CHANNEL</code>, you should include a Channels filter.
-   *    VOICE, CHAT, and TASK channels are supported.</p>
-   *          <p>If no <code>Grouping</code> is included in the request, a summary of metrics is
-   *    returned.</p>
-   */
-  Groupings?: (Grouping | string)[];
-
-  /**
-   * <p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics
-   *    are available. For a description of all the metrics, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics
-   *     Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
-   *          <dl>
-   *             <dt>AGENTS_AFTER_CONTACT_WORK</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time">ACW</a>
-   *                </p>
-   *
-   *             </dd>
-   *             <dt>AGENTS_AVAILABLE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time">Available</a>
-   *                </p>
-   *             </dd>
-   *             <dt>AGENTS_ERROR</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time">Error</a>
-   *                </p>
-   *             </dd>
-   *             <dt>AGENTS_NON_PRODUCTIVE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time">NPT (Non-Productive Time)</a>
-   *                </p>
-   *             </dd>
-   *             <dt>AGENTS_ON_CALL</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time">On
-   *        contact</a>
-   *                </p>
-   *             </dd>
-   *             <dt>AGENTS_ON_CONTACT</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time">On
-   *        contact</a>
-   *                </p>
-   *             </dd>
-   *             <dt>AGENTS_ONLINE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time">Online</a>
-   *                </p>
-   *             </dd>
-   *             <dt>AGENTS_STAFFED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time">Staffed</a>
-   *                </p>
-   *             </dd>
-   *             <dt>CONTACTS_IN_QUEUE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time">In
-   *        queue</a>
-   *                </p>
-   *             </dd>
-   *             <dt>CONTACTS_SCHEDULED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time">Scheduled</a>
-   *                </p>
-   *             </dd>
-   *             <dt>OLDEST_CONTACT_AGE</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>
-   *                <p>When you do not use groupings, Unit says SECONDS but the Value is returned in
-   *       MILLISECONDS. For example, if you get a response like this:</p>
-   *                <p>
-   *                   <code>{ "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value": 24113.0
-   *       </code>}</p>
-   *                <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p>
-   *
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time">Oldest</a>
-   *                </p>
-   *             </dd>
-   *             <dt>SLOTS_ACTIVE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time">Active</a>
-   *                </p>
-   *             </dd>
-   *             <dt>SLOTS_AVAILABLE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time">Availability</a>
-   *                </p>
-   *             </dd>
-   *          </dl>
-   */
-  CurrentMetrics: CurrentMetric[] | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   *          <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use
-   *    the token must use the same request parameters as the request that generated the token.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains the data for a real-time metric.</p>
- */
-export interface CurrentMetricData {
-  /**
-   * <p>Information about the metric.</p>
-   */
-  Metric?: CurrentMetric;
-
-  /**
-   * <p>The value of the metric.</p>
-   */
-  Value?: number;
-}
-
-/**
- * <p>Contains information about the dimensions for a set of metrics.</p>
- */
-export interface Dimensions {
-  /**
-   * <p>Information about the queue for which metrics are returned.</p>
-   */
-  Queue?: QueueReference;
-
-  /**
-   * <p>The channel used for grouping and filters.</p>
-   */
-  Channel?: Channel | string;
-}
-
-/**
- * <p>Contains information about a set of real-time metrics.</p>
- */
-export interface CurrentMetricResult {
-  /**
-   * <p>The dimensions for the metrics.</p>
-   */
-  Dimensions?: Dimensions;
-
-  /**
-   * <p>The set of metrics.</p>
-   */
-  Collections?: CurrentMetricData[];
-}
-
-export interface GetCurrentMetricDataResponse {
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   *          <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use
-   *    the token must use the same request parameters as the request that generated the token.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Information about the real-time metrics.</p>
-   */
-  MetricResults?: CurrentMetricResult[];
-
-  /**
-   * <p>The time at which the metrics were retrieved and cached for pagination.</p>
-   */
-  DataSnapshotTime?: Date;
-}
-
-/**
- * <p>Filters user data based on the contact information that is associated to
- *    the users. It contains a list of <a href="https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html">contact states</a>.</p>
- */
-export interface ContactFilter {
-  /**
-   * <p>A list of up to 9 <a href="https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html">contact states</a>.</p>
-   */
-  ContactStates?: (ContactState | string)[];
-}
-
-/**
- * <p>A filter for the user data.</p>
- */
-export interface UserDataFilters {
-  /**
-   * <p>Contains information about a queue resource for which metrics are returned.</p>
-   */
-  Queues?: string[];
-
-  /**
-   * <p>A filter for the user data based on the contact information that is associated to the user. It
-   *    contains a list of contact states. </p>
-   */
-  ContactFilter?: ContactFilter;
-}
-
-export interface GetCurrentUserDataRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>Filters up to 100 <code>Queues</code>, or up to 9 <code>ContactStates</code>. The user data is retrieved only for those users who are associated with
-   *    the queues and have contacts that are in the specified <code>ContactState</code>. </p>
-   */
-  Filters: UserDataFilters | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Information about the hierarchy group.</p>
- */
-export interface HierarchyGroupSummaryReference {
-  /**
-   * <p>The unique identifier for the hierarchy group.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the hierarchy group. </p>
-   */
-  Arn?: string;
-}
-
-/**
- * <p>Information about the levels in the hierarchy group.</p>
- */
-export interface HierarchyPathReference {
-  /**
-   * <p>Information about level one.</p>
-   */
-  LevelOne?: HierarchyGroupSummaryReference;
-
-  /**
-   * <p>Information about level two.</p>
-   */
-  LevelTwo?: HierarchyGroupSummaryReference;
-
-  /**
-   * <p>Information about level three.</p>
-   */
-  LevelThree?: HierarchyGroupSummaryReference;
-
-  /**
-   * <p>Information about level four.</p>
-   */
-  LevelFour?: HierarchyGroupSummaryReference;
-
-  /**
-   * <p>Information about level five.</p>
-   */
-  LevelFive?: HierarchyGroupSummaryReference;
-}
-
-/**
- * <p>Information about the routing profile assigned to the user.</p>
- */
-export interface RoutingProfileReference {
-  /**
-   * <p>The identifier of the routing profile.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the routing profile.</p>
-   */
-  Arn?: string;
-}
-
-/**
- * <p>Information about the user.</p>
- */
-export interface UserReference {
-  /**
-   * <p>The unique identifier for the user.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the user.</p>
-   */
-  Arn?: string;
-}
-
-/**
- * <p>Data for a user.</p>
- */
-export interface UserData {
-  /**
-   * <p>Information about the user for the data that is returned. It contains resourceId and ARN of
-   *    the user. </p>
-   */
-  User?: UserReference;
-
-  /**
-   * <p>Information about the routing profile that is assigned to the user.</p>
-   */
-  RoutingProfile?: RoutingProfileReference;
-
-  /**
-   * <p>Contains information about the levels of a hierarchy group assigned to a user.</p>
-   */
-  HierarchyPath?: HierarchyPathReference;
-
-  /**
-   * <p>The status of the agent that they manually set in their Contact Control Panel (CCP), or that
-   *    the supervisor manually changes in the real-time metrics report.</p>
-   */
-  Status?: AgentStatusReference;
-
-  /**
-   * <p>A map of available slots by channel. The key is a channel name. The value is an integer: the
-   *    available number of slots. </p>
-   */
-  AvailableSlotsByChannel?: Record<string, number>;
-
-  /**
-   * <p>A map of maximum slots by channel. The key is a channel name. The value is an integer: the
-   *    maximum number of slots. This is calculated from <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_MediaConcurrency.html">MediaConcurrency</a> of the RoutingProfile assigned to the agent. </p>
-   */
-  MaxSlotsByChannel?: Record<string, number>;
-
-  /**
-   * <p> A map of active slots by channel. The key is a channel name. The value is an integer: the
-   *    number of active slots.  </p>
-   */
-  ActiveSlotsByChannel?: Record<string, number>;
-
-  /**
-   * <p>A list of contact reference information.</p>
-   */
-  Contacts?: AgentContactReference[];
-}
-
-export interface GetCurrentUserDataResponse {
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>A list of the user data that is returned.</p>
-   */
-  UserDataList?: UserData[];
-}
-
-export interface GetFederationTokenRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-}
-
-/**
- * <p>Contains credentials to use for federation.</p>
- */
-export interface Credentials {
-  /**
-   * <p>An access token generated for a federated user to access Amazon Connect.</p>
-   */
-  AccessToken?: string;
-
-  /**
-   * <p>A token generated with an expiration time for the session a user is logged in to
-   *    Amazon Connect.</p>
-   */
-  AccessTokenExpiration?: Date;
-
-  /**
-   * <p>Renews a token generated for a user to access the Amazon Connect instance.</p>
-   */
-  RefreshToken?: string;
-
-  /**
-   * <p>Renews the expiration timer for a generated token.</p>
-   */
-  RefreshTokenExpiration?: Date;
-}
-
-export interface GetFederationTokenResponse {
-  /**
-   * <p>The credentials to use for federation.</p>
-   */
-  Credentials?: Credentials;
-}
-
-/**
- * <p>No user with the specified credentials was found in the Amazon Connect instance.</p>
- */
-export class UserNotFoundException extends __BaseException {
-  readonly name: "UserNotFoundException" = "UserNotFoundException";
-  readonly $fault: "client" = "client";
-  Message?: string;
-  /**
-   * @internal
-   */
-  constructor(opts: __ExceptionOptionType<UserNotFoundException, __BaseException>) {
-    super({
-      name: "UserNotFoundException",
-      $fault: "client",
-      ...opts,
-    });
-    Object.setPrototypeOf(this, UserNotFoundException.prototype);
-    this.Message = opts.Message;
-  }
-}
-
-export enum HistoricalMetricName {
-  ABANDON_TIME = "ABANDON_TIME",
-  AFTER_CONTACT_WORK_TIME = "AFTER_CONTACT_WORK_TIME",
-  API_CONTACTS_HANDLED = "API_CONTACTS_HANDLED",
-  CALLBACK_CONTACTS_HANDLED = "CALLBACK_CONTACTS_HANDLED",
-  CONTACTS_ABANDONED = "CONTACTS_ABANDONED",
-  CONTACTS_AGENT_HUNG_UP_FIRST = "CONTACTS_AGENT_HUNG_UP_FIRST",
-  CONTACTS_CONSULTED = "CONTACTS_CONSULTED",
-  CONTACTS_HANDLED = "CONTACTS_HANDLED",
-  CONTACTS_HANDLED_INCOMING = "CONTACTS_HANDLED_INCOMING",
-  CONTACTS_HANDLED_OUTBOUND = "CONTACTS_HANDLED_OUTBOUND",
-  CONTACTS_HOLD_ABANDONS = "CONTACTS_HOLD_ABANDONS",
-  CONTACTS_MISSED = "CONTACTS_MISSED",
-  CONTACTS_QUEUED = "CONTACTS_QUEUED",
-  CONTACTS_TRANSFERRED_IN = "CONTACTS_TRANSFERRED_IN",
-  CONTACTS_TRANSFERRED_IN_FROM_QUEUE = "CONTACTS_TRANSFERRED_IN_FROM_QUEUE",
-  CONTACTS_TRANSFERRED_OUT = "CONTACTS_TRANSFERRED_OUT",
-  CONTACTS_TRANSFERRED_OUT_FROM_QUEUE = "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE",
-  HANDLE_TIME = "HANDLE_TIME",
-  HOLD_TIME = "HOLD_TIME",
-  INTERACTION_AND_HOLD_TIME = "INTERACTION_AND_HOLD_TIME",
-  INTERACTION_TIME = "INTERACTION_TIME",
-  OCCUPANCY = "OCCUPANCY",
-  QUEUED_TIME = "QUEUED_TIME",
-  QUEUE_ANSWER_TIME = "QUEUE_ANSWER_TIME",
-  SERVICE_LEVEL = "SERVICE_LEVEL",
-}
-
-export enum Statistic {
-  AVG = "AVG",
-  MAX = "MAX",
-  SUM = "SUM",
-}
-
-export enum Comparison {
-  LT = "LT",
-}
-
-/**
- * <p>Contains information about the threshold for service level metrics.</p>
- */
-export interface Threshold {
-  /**
-   * <p>The type of comparison. Only "less than" (LT) comparisons are supported.</p>
-   */
-  Comparison?: Comparison | string;
-
-  /**
-   * <p>The threshold value to compare.</p>
-   */
-  ThresholdValue?: number;
-}
-
-/**
- * <p>Contains information about a historical metric. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator
- *    Guide</i>.</p>
- */
-export interface HistoricalMetric {
-  /**
-   * <p>The name of the metric.</p>
-   */
-  Name?: HistoricalMetricName | string;
-
-  /**
-   * <p>The threshold for the metric, used with service level metrics.</p>
-   */
-  Threshold?: Threshold;
-
-  /**
-   * <p>The statistic for the metric.</p>
-   */
-  Statistic?: Statistic | string;
-
-  /**
-   * <p>The unit for the metric.</p>
-   */
-  Unit?: Unit | string;
-}
-
-export interface GetMetricDataRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the
-   *    retrieval of historical metrics data. The time must be specified using a multiple of 5 minutes,
-   *    such as 10:05, 10:10, 10:15.</p>
-   *          <p>The start time cannot be earlier than 24 hours before the time of the request. Historical
-   *    metrics are available only for 24 hours.</p>
-   */
-  StartTime: Date | undefined;
-
-  /**
-   * <p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the
-   *    retrieval of historical metrics data. The time must be specified using an interval of 5 minutes,
-   *    such as 11:00, 11:05, 11:10, and must be later than the start time timestamp.</p>
-   *          <p>The time range between the start and end time must be less than 24 hours.</p>
-   */
-  EndTime: Date | undefined;
-
-  /**
-   * <p>The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is
-   *    retrieved only for the resources associated with the queues or channels included in the filter.
-   *    You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.</p>
-   *          <note>
-   *             <p>To filter by <code>Queues</code>, enter the queue
-   *     ID/ARN, not the name of the queue.</p>
-   *          </note>
-   */
-  Filters: Filters | undefined;
-
-  /**
-   * <p>The grouping applied to the metrics returned. For example, when results are grouped by
-   *    queue, the metrics returned are grouped by queue. The values returned apply to the metrics for
-   *    each queue rather than aggregated for all queues.</p>
-   *
-   *          <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>
-   */
-  Groupings?: (Grouping | string)[];
-
-  /**
-   * <p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The
-   *    following historical metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator
-   *    Guide</i>.</p>
-   *          <note>
-   *             <p>This API does not support a contacts
-   *     incoming metric (there's no CONTACTS_INCOMING metric missing from the documented list). </p>
-   *          </note>
-   *
-   *          <dl>
-   *             <dt>ABANDON_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>AFTER_CONTACT_WORK_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>API_CONTACTS_HANDLED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CALLBACK_CONTACTS_HANDLED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_ABANDONED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_CONSULTED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_HANDLED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_HANDLED_INCOMING</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_HANDLED_OUTBOUND</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_HOLD_ABANDONS</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_MISSED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_QUEUED</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_TRANSFERRED_IN</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_TRANSFERRED_OUT</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>
-   *             <dd>
-   *                <p>Unit: COUNT</p>
-   *                <p>Statistic: SUM</p>
-   *             </dd>
-   *             <dt>HANDLE_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>HOLD_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>INTERACTION_AND_HOLD_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>INTERACTION_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>OCCUPANCY</dt>
-   *             <dd>
-   *                <p>Unit: PERCENT</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>QUEUE_ANSWER_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: AVG</p>
-   *             </dd>
-   *             <dt>QUEUED_TIME</dt>
-   *             <dd>
-   *                <p>Unit: SECONDS</p>
-   *                <p>Statistic: MAX</p>
-   *             </dd>
-   *             <dt>SERVICE_LEVEL</dt>
-   *             <dd>
-   *                <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>
-   *                <p>Unit: PERCENT</p>
-   *                <p>Statistic: AVG</p>
-   *                <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800
-   *       (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for
-   *       "Less than"). </p>
-   *             </dd>
-   *          </dl>
-   */
-  HistoricalMetrics: HistoricalMetric[] | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains the data for a historical metric.</p>
- */
-export interface HistoricalMetricData {
-  /**
-   * <p>Information about the metric.</p>
-   */
-  Metric?: HistoricalMetric;
-
-  /**
-   * <p>The value of the metric.</p>
-   */
-  Value?: number;
-}
-
-/**
- * <p>Contains information about the historical metrics retrieved.</p>
- */
-export interface HistoricalMetricResult {
-  /**
-   * <p>The dimension for the metrics.</p>
-   */
-  Dimensions?: Dimensions;
-
-  /**
-   * <p>The set of metrics.</p>
-   */
-  Collections?: HistoricalMetricData[];
-}
-
-export interface GetMetricDataResponse {
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   *          <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use
-   *    the token must use the same request parameters as the request that generated the token.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Information about the historical metrics.</p>
-   *          <p>If no grouping is specified, a summary of metric data is returned.</p>
-   */
-  MetricResults?: HistoricalMetricResult[];
-}
-
-export interface GetTaskTemplateRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>A unique identifier for the task template.</p>
-   */
-  TaskTemplateId: string | undefined;
-
-  /**
-   * <p>The system generated version of a task template that is associated with a task, when the
-   *    task is created.</p>
-   */
-  SnapshotVersion?: string;
-}
-
-export interface GetTaskTemplateResponse {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId?: string;
-
-  /**
-   * <p>A unique identifier for the task template.</p>
-   */
-  Id: string | undefined;
-
-  /**
-   * <p>The Amazon Resource Name (ARN).</p>
-   */
-  Arn: string | undefined;
-
-  /**
-   * <p>The name of the task template.</p>
-   */
-  Name: string | undefined;
-
-  /**
-   * <p>The description of the task template.</p>
-   */
-  Description?: string;
-
-  /**
-   * <p>The identifier of the flow that runs by default when a task is created by referencing this template.</p>
-   */
-  ContactFlowId?: string;
-
-  /**
-   * <p>Constraints that are applicable to the fields listed.</p>
-   */
-  Constraints?: TaskTemplateConstraints;
-
-  /**
-   * <p>The default values for fields when a task is created by referencing this template.</p>
-   */
-  Defaults?: TaskTemplateDefaults;
-
-  /**
-   * <p>Fields that are part of the template.</p>
-   */
-  Fields?: TaskTemplateField[];
-
-  /**
-   * <p>Marks a template as <code>ACTIVE</code> or <code>INACTIVE</code> for a task to refer to it.
-   * Tasks can only be created from <code>ACTIVE</code> templates.
-   * If a template is marked as <code>INACTIVE</code>, then a task that refers to this template cannot be created.</p>
-   */
-  Status?: TaskTemplateStatus | string;
-
-  /**
-   * <p>The timestamp when the task template was last modified.</p>
-   */
-  LastModifiedTime?: Date;
-
-  /**
-   * <p>The timestamp when the task template was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.</p>
-   */
-  Tags?: Record<string, string>;
-}
-
-export interface ListAgentStatusRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>Available agent status types.</p>
-   */
-  AgentStatusTypes?: (AgentStatusType | string)[];
-}
-
-export interface ListAgentStatusResponse {
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>A summary of agent statuses.</p>
-   */
-  AgentStatusSummaryList?: AgentStatusSummary[];
-}
-
-export interface ListApprovedOriginsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-export interface ListApprovedOriginsResponse {
-  /**
-   * <p>The approved origins.</p>
-   */
-  Origins?: string[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export enum LexVersion {
-  V1 = "V1",
-  V2 = "V2",
-}
-
-export interface ListBotsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>The version of Amazon Lex or Amazon Lex V2.</p>
-   */
-  LexVersion: LexVersion | string | undefined;
-}
-
-/**
- * <p>Configuration information of an Amazon Lex or Amazon Lex V2 bot.</p>
- */
-export interface LexBotConfig {
-  /**
-   * <p>Configuration information of an Amazon Lex bot.</p>
-   */
-  LexBot?: LexBot;
-
-  /**
-   * <p>Configuration information of an Amazon Lex V2 bot.</p>
-   */
-  LexV2Bot?: LexV2Bot;
-}
-
-export interface ListBotsResponse {
-  /**
-   * <p>The names and Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified
-   *    instance.</p>
-   */
-  LexBots?: LexBotConfig[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListContactFlowModulesRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>The state of the flow module.</p>
-   */
-  ContactFlowModuleState?: ContactFlowModuleState | string;
-}
-
-/**
- * <p>Contains summary information about a flow.</p>
- */
-export interface ContactFlowModuleSummary {
-  /**
-   * <p>The identifier of the flow module.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the flow module.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the flow module.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The type of flow module.</p>
-   */
-  State?: ContactFlowModuleState | string;
-}
-
-export interface ListContactFlowModulesResponse {
-  /**
-   * <p>Information about the flow module.</p>
-   */
-  ContactFlowModulesSummaryList?: ContactFlowModuleSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListContactFlowsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The type of flow.</p>
-   */
-  ContactFlowTypes?: (ContactFlowType | string)[];
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains summary information about a flow.</p>
- *          <p>You can also create and update flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect
- *    Flow language</a>.</p>
- */
-export interface ContactFlowSummary {
-  /**
-   * <p>The identifier of the flow.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the flow.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the flow.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The type of flow.</p>
-   */
-  ContactFlowType?: ContactFlowType | string;
-
-  /**
-   * <p>The type of flow.</p>
-   */
-  ContactFlowState?: ContactFlowState | string;
-}
-
-export interface ListContactFlowsResponse {
-  /**
-   * <p>Information about the flows.</p>
-   */
-  ContactFlowSummaryList?: ContactFlowSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export enum ReferenceType {
-  ATTACHMENT = "ATTACHMENT",
-  DATE = "DATE",
-  EMAIL = "EMAIL",
-  NUMBER = "NUMBER",
-  STRING = "STRING",
-  URL = "URL",
-}
-
-export interface ListContactReferencesRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier of the initial contact.</p>
-   */
-  ContactId: string | undefined;
-
-  /**
-   * <p>The type of reference.</p>
-   */
-  ReferenceTypes: (ReferenceType | string)[] | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   *          <important>
-   *             <p>This is not expected to be set, because the value returned in the previous response is
-   *     always null.</p>
-   *          </important>
-   */
-  NextToken?: string;
-}
-
-export enum ReferenceStatus {
-  APPROVED = "APPROVED",
-  REJECTED = "REJECTED",
-}
-
-/**
- * <p>Information about a reference when the <code>referenceType</code> is
- *    <code>ATTACHMENT</code>. Otherwise, null.</p>
- */
-export interface AttachmentReference {
-  /**
-   * <p>Identifier of the attachment reference.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The location path of the attachment reference.</p>
-   */
-  Value?: string;
-
-  /**
-   * <p>Status of the attachment reference type.</p>
-   */
-  Status?: ReferenceStatus | string;
-}
-
-/**
- * <p>Information about a reference when the <code>referenceType</code> is <code>DATE</code>.
- *    Otherwise, null.</p>
- */
-export interface DateReference {
-  /**
-   * <p>Identifier of the date reference.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A valid date.</p>
-   */
-  Value?: string;
-}
-
-/**
- * <p>Information about a reference when the <code>referenceType</code> is <code>EMAIL</code>.
- *    Otherwise, null.</p>
- */
-export interface EmailReference {
-  /**
-   * <p>Identifier of the email reference.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A valid email address.</p>
-   */
-  Value?: string;
-}
-
-/**
- * <p>Information about a reference when the <code>referenceType</code> is <code>NUMBER</code>.
- *    Otherwise, null.</p>
- */
-export interface NumberReference {
-  /**
-   * <p>Identifier of the number reference.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A valid number.</p>
-   */
-  Value?: string;
-}
-
-/**
- * <p>Information about a reference when the <code>referenceType</code> is <code>STRING</code>.
- *    Otherwise, null.</p>
- */
-export interface StringReference {
-  /**
-   * <p>Identifier of the string reference.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A valid string.</p>
-   */
-  Value?: string;
-}
-
-/**
- * <p>The URL reference.</p>
- */
-export interface UrlReference {
-  /**
-   * <p>Identifier of the URL reference.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>A valid URL.</p>
-   */
-  Value?: string;
-}
-
-/**
- * <p>Contains summary information about a reference. <code>ReferenceSummary</code> contains only
- *    one non null field between the URL and attachment based on the reference type.</p>
- */
-export type ReferenceSummary =
-  | ReferenceSummary.AttachmentMember
-  | ReferenceSummary.DateMember
-  | ReferenceSummary.EmailMember
-  | ReferenceSummary.NumberMember
-  | ReferenceSummary.StringMember
-  | ReferenceSummary.UrlMember
-  | ReferenceSummary.$UnknownMember;
-
-export namespace ReferenceSummary {
-  /**
-   * <p>Information about the reference when the <code>referenceType</code> is <code>URL</code>.
-   *    Otherwise, null.</p>
-   */
-  export interface UrlMember {
-    Url: UrlReference;
-    Attachment?: never;
-    String?: never;
-    Number?: never;
-    Date?: never;
-    Email?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>Information about the reference when the <code>referenceType</code> is
-   *     <code>ATTACHMENT</code>. Otherwise, null.</p>
-   */
-  export interface AttachmentMember {
-    Url?: never;
-    Attachment: AttachmentReference;
-    String?: never;
-    Number?: never;
-    Date?: never;
-    Email?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>Information about a reference when the <code>referenceType</code> is <code>STRING</code>.
-   *    Otherwise, null.</p>
-   */
-  export interface StringMember {
-    Url?: never;
-    Attachment?: never;
-    String: StringReference;
-    Number?: never;
-    Date?: never;
-    Email?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>Information about a reference when the <code>referenceType</code> is <code>NUMBER</code>.
-   *    Otherwise, null.</p>
-   */
-  export interface NumberMember {
-    Url?: never;
-    Attachment?: never;
-    String?: never;
-    Number: NumberReference;
-    Date?: never;
-    Email?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>Information about a reference when the <code>referenceType</code> is <code>DATE</code>.
-   *    Otherwise, null.</p>
-   */
-  export interface DateMember {
-    Url?: never;
-    Attachment?: never;
-    String?: never;
-    Number?: never;
-    Date: DateReference;
-    Email?: never;
-    $unknown?: never;
-  }
-
-  /**
-   * <p>Information about a reference when the <code>referenceType</code> is <code>EMAIL</code>.
-   *    Otherwise, null.</p>
-   */
-  export interface EmailMember {
-    Url?: never;
-    Attachment?: never;
-    String?: never;
-    Number?: never;
-    Date?: never;
-    Email: EmailReference;
-    $unknown?: never;
-  }
-
-  export interface $UnknownMember {
-    Url?: never;
-    Attachment?: never;
-    String?: never;
-    Number?: never;
-    Date?: never;
-    Email?: never;
-    $unknown: [string, any];
-  }
-
-  export interface Visitor<T> {
-    Url: (value: UrlReference) => T;
-    Attachment: (value: AttachmentReference) => T;
-    String: (value: StringReference) => T;
-    Number: (value: NumberReference) => T;
-    Date: (value: DateReference) => T;
-    Email: (value: EmailReference) => T;
-    _: (name: string, value: any) => T;
-  }
-
-  export const visit = <T>(value: ReferenceSummary, visitor: Visitor<T>): T => {
-    if (value.Url !== undefined) return visitor.Url(value.Url);
-    if (value.Attachment !== undefined) return visitor.Attachment(value.Attachment);
-    if (value.String !== undefined) return visitor.String(value.String);
-    if (value.Number !== undefined) return visitor.Number(value.Number);
-    if (value.Date !== undefined) return visitor.Date(value.Date);
-    if (value.Email !== undefined) return visitor.Email(value.Email);
-    return visitor._(value.$unknown[0], value.$unknown[1]);
-  };
-}
-
-export interface ListContactReferencesResponse {
-  /**
-   * <p>Information about the flows.</p>
-   */
-  ReferenceSummaryList?: ReferenceSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   *          <important>
-   *             <p>This is always returned as null in the response.</p>
-   *          </important>
-   */
-  NextToken?: string;
-}
-
-export interface ListDefaultVocabulariesRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
-   * <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
-   *          </p>
-   */
-  LanguageCode?: VocabularyLanguageCode | string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-/**
- * <p>Contains information about a default vocabulary.</p>
- */
-export interface DefaultVocabulary {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see
-   * <a href="https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html">What is Amazon Transcribe?</a>
-   *          </p>
-   */
-  LanguageCode: VocabularyLanguageCode | string | undefined;
-
-  /**
-   * <p>The identifier of the custom vocabulary.</p>
-   */
-  VocabularyId: string | undefined;
-
-  /**
-   * <p>A unique name of the custom vocabulary.</p>
-   */
-  VocabularyName: string | undefined;
-}
-
-export interface ListDefaultVocabulariesResponse {
-  /**
-   * <p>A list of default vocabularies.</p>
-   */
-  DefaultVocabularyList: DefaultVocabulary[] | undefined;
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListHoursOfOperationsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains summary information about hours of operation for a contact center.</p>
- */
-export interface HoursOfOperationSummary {
-  /**
-   * <p>The identifier of the hours of operation.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the hours of operation.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the hours of operation.</p>
-   */
-  Name?: string;
-}
-
-export interface ListHoursOfOperationsResponse {
-  /**
-   * <p>Information about the hours of operation.</p>
-   */
-  HoursOfOperationSummaryList?: HoursOfOperationSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListInstanceAttributesRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-export interface ListInstanceAttributesResponse {
-  /**
-   * <p>The attribute types.</p>
-   */
-  Attributes?: Attribute[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListInstancesRequest {
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Information about the instance.</p>
- */
-export interface InstanceSummary {
-  /**
-   * <p>The identifier of the instance.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the instance.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The identity management type of the instance.</p>
-   */
-  IdentityManagementType?: DirectoryType | string;
-
-  /**
-   * <p>The alias of the instance.</p>
-   */
-  InstanceAlias?: string;
-
-  /**
-   * <p>When the instance was created.</p>
-   */
-  CreatedTime?: Date;
-
-  /**
-   * <p>The service role of the instance.</p>
-   */
-  ServiceRole?: string;
-
-  /**
-   * <p>The state of the instance.</p>
-   */
-  InstanceStatus?: InstanceStatus | string;
-
-  /**
-   * <p>Whether inbound calls are enabled.</p>
-   */
-  InboundCallsEnabled?: boolean;
-
-  /**
-   * <p>Whether outbound calls are enabled.</p>
-   */
-  OutboundCallsEnabled?: boolean;
-}
-
-export interface ListInstancesResponse {
-  /**
-   * <p>Information about the instances.</p>
-   */
-  InstanceSummaryList?: InstanceSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListInstanceStorageConfigsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>A valid resource type.</p>
-   */
-  ResourceType: InstanceStorageResourceType | string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-export interface ListInstanceStorageConfigsResponse {
-  /**
-   * <p>A valid storage type.</p>
-   */
-  StorageConfigs?: InstanceStorageConfig[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListIntegrationAssociationsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The integration type.</p>
-   */
-  IntegrationType?: IntegrationType | string;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains summary information about the associated AppIntegrations.</p>
- */
-export interface IntegrationAssociationSummary {
-  /**
-   * <p>The identifier for the AppIntegration association.</p>
-   */
-  IntegrationAssociationId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the AppIntegration association.</p>
-   */
-  IntegrationAssociationArn?: string;
-
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId?: string;
-
-  /**
-   * <p>The integration type.</p>
-   */
-  IntegrationType?: IntegrationType | string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for the AppIntegration.</p>
-   */
-  IntegrationArn?: string;
-
-  /**
-   * <p>The URL for the external application.</p>
-   */
-  SourceApplicationUrl?: string;
-
-  /**
-   * <p>The user-provided, friendly name for the external application.</p>
-   */
-  SourceApplicationName?: string;
-
-  /**
-   * <p>The name of the source.</p>
-   */
-  SourceType?: SourceType | string;
-}
-
-export interface ListIntegrationAssociationsResponse {
-  /**
-   * <p>The associations.</p>
-   */
-  IntegrationAssociationSummaryList?: IntegrationAssociationSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListLambdaFunctionsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-}
-
-export interface ListLambdaFunctionsResponse {
-  /**
-   * <p>The Lambdafunction ARNs associated with the specified instance.</p>
-   */
-  LambdaFunctions?: string[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListLexBotsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page. If no value is specified, the default is 10.
-   *    </p>
-   */
-  MaxResults?: number;
-}
-
-export interface ListLexBotsResponse {
-  /**
-   * <p>The names and Regions of the Amazon Lex bots associated with the specified instance.</p>
-   */
-  LexBots?: LexBot[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListPhoneNumbersRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The type of phone number.</p>
-   */
-  PhoneNumberTypes?: (PhoneNumberType | string)[];
-
-  /**
-   * <p>The ISO country code.</p>
-   */
-  PhoneNumberCountryCodes?: (PhoneNumberCountryCode | string)[];
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains summary information about a phone number for a contact center.</p>
- */
-export interface PhoneNumberSummary {
-  /**
-   * <p>The identifier of the phone number.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the phone number.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The phone number.</p>
-   */
-  PhoneNumber?: string;
-
-  /**
-   * <p>The type of phone number.</p>
-   */
-  PhoneNumberType?: PhoneNumberType | string;
-
-  /**
-   * <p>The ISO country code.</p>
-   */
-  PhoneNumberCountryCode?: PhoneNumberCountryCode | string;
-}
-
-export interface ListPhoneNumbersResponse {
-  /**
-   * <p>Information about the phone numbers.</p>
-   */
-  PhoneNumberSummaryList?: PhoneNumberSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListPhoneNumbersV2Request {
-  /**
-   * <p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to. If <code>TargetArn</code> input is not provided, this API lists numbers claimed
-   *    to all the Amazon Connect instances belonging to your account.</p>
-   */
-  TargetArn?: string;
-
-  /**
-   * <p>The maximum number of results to return per page.</p>
-   */
-  MaxResults?: number;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The ISO country code.</p>
-   */
-  PhoneNumberCountryCodes?: (PhoneNumberCountryCode | string)[];
-
-  /**
-   * <p>The type of phone number.</p>
-   */
-  PhoneNumberTypes?: (PhoneNumberType | string)[];
-
-  /**
-   * <p>The prefix of the phone number. If provided, it must contain <code>+</code> as part of the country code.</p>
-   */
-  PhoneNumberPrefix?: string;
-}
-
-/**
- * <p>Information about phone numbers that have been claimed to your Amazon Connect instance.</p>
- */
-export interface ListPhoneNumbersSummary {
-  /**
-   * <p>A unique identifier for the phone number.</p>
-   */
-  PhoneNumberId?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the phone number.</p>
-   */
-  PhoneNumberArn?: string;
-
-  /**
-   * <p>The phone number. Phone numbers are formatted <code>[+] [country code] [subscriber number including area code]</code>.</p>
-   */
-  PhoneNumber?: string;
-
-  /**
-   * <p>The ISO country code.</p>
-   */
-  PhoneNumberCountryCode?: PhoneNumberCountryCode | string;
-
-  /**
-   * <p>The type of phone number.</p>
-   */
-  PhoneNumberType?: PhoneNumberType | string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.</p>
-   */
-  TargetArn?: string;
-}
-
-export interface ListPhoneNumbersV2Response {
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Information about phone numbers that have been claimed to your Amazon Connect instances.</p>
-   */
-  ListPhoneNumbersSummaryList?: ListPhoneNumbersSummary[];
-}
-
-export interface ListPromptsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous response in
-   *    the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains information about the prompt.</p>
- */
-export interface PromptSummary {
-  /**
-   * <p>The identifier of the prompt.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the prompt.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the prompt.</p>
-   */
-  Name?: string;
-}
-
-export interface ListPromptsResponse {
-  /**
-   * <p>Information about the prompts.</p>
-   */
-  PromptSummaryList?: PromptSummary[];
-
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-}
-
-export interface ListQueueQuickConnectsRequest {
-  /**
-   * <p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>
-   */
-  InstanceId: string | undefined;
-
-  /**
-   * <p>The identifier for the queue.</p>
-   */
-  QueueId: string | undefined;
-
-  /**
-   * <p>The token for the next set of results. Use the value returned in the previous
-   * response in the next request to retrieve the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>The maximum number of results to return per page. The default MaxResult size is 100.</p>
-   */
-  MaxResults?: number;
-}
-
-/**
- * <p>Contains summary information about a quick connect.</p>
- */
-export interface QuickConnectSummary {
-  /**
-   * <p>The identifier for the quick connect.</p>
-   */
-  Id?: string;
-
-  /**
-   * <p>The Amazon Resource Name (ARN) of the quick connect.</p>
-   */
-  Arn?: string;
-
-  /**
-   * <p>The name of the quick connect.</p>
-   */
-  Name?: string;
-
-  /**
-   * <p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are
-   *    prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>
-   */
-  QuickConnectType?: QuickConnectType | string;
-}
-
-export interface ListQueueQuickConnectsResponse {
-  /**
-   * <p>If there are additional results, this is the token for the next set of results.</p>
-   */
-  NextToken?: string;
-
-  /**
-   * <p>Information about the quick connects.</p>
-   */
-  QuickConnectSummaryList?: QuickConnectSummary[];
-}
-
-/**
- * @internal
- */
-export const QueueReferenceFilterSensitiveLog = (obj: QueueReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AgentContactReferenceFilterSensitiveLog = (obj: AgentContactReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AgentInfoFilterSensitiveLog = (obj: AgentInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AgentStatusFilterSensitiveLog = (obj: AgentStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AgentStatusReferenceFilterSensitiveLog = (obj: AgentStatusReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AgentStatusSummaryFilterSensitiveLog = (obj: AgentStatusSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateApprovedOriginRequestFilterSensitiveLog = (obj: AssociateApprovedOriginRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LexBotFilterSensitiveLog = (obj: LexBot): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LexV2BotFilterSensitiveLog = (obj: LexV2Bot): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateBotRequestFilterSensitiveLog = (obj: AssociateBotRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateDefaultVocabularyRequestFilterSensitiveLog = (obj: AssociateDefaultVocabularyRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateDefaultVocabularyResponseFilterSensitiveLog = (obj: AssociateDefaultVocabularyResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const KinesisFirehoseConfigFilterSensitiveLog = (obj: KinesisFirehoseConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const KinesisStreamConfigFilterSensitiveLog = (obj: KinesisStreamConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EncryptionConfigFilterSensitiveLog = (obj: EncryptionConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const KinesisVideoStreamConfigFilterSensitiveLog = (obj: KinesisVideoStreamConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const S3ConfigFilterSensitiveLog = (obj: S3Config): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InstanceStorageConfigFilterSensitiveLog = (obj: InstanceStorageConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateInstanceStorageConfigRequestFilterSensitiveLog = (
-  obj: AssociateInstanceStorageConfigRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateInstanceStorageConfigResponseFilterSensitiveLog = (
-  obj: AssociateInstanceStorageConfigResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateLambdaFunctionRequestFilterSensitiveLog = (obj: AssociateLambdaFunctionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateLexBotRequestFilterSensitiveLog = (obj: AssociateLexBotRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociatePhoneNumberContactFlowRequestFilterSensitiveLog = (
-  obj: AssociatePhoneNumberContactFlowRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateQueueQuickConnectsRequestFilterSensitiveLog = (obj: AssociateQueueQuickConnectsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RoutingProfileQueueReferenceFilterSensitiveLog = (obj: RoutingProfileQueueReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RoutingProfileQueueConfigFilterSensitiveLog = (obj: RoutingProfileQueueConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateRoutingProfileQueuesRequestFilterSensitiveLog = (
-  obj: AssociateRoutingProfileQueuesRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateSecurityKeyRequestFilterSensitiveLog = (obj: AssociateSecurityKeyRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AssociateSecurityKeyResponseFilterSensitiveLog = (obj: AssociateSecurityKeyResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ClaimPhoneNumberRequestFilterSensitiveLog = (obj: ClaimPhoneNumberRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ClaimPhoneNumberResponseFilterSensitiveLog = (obj: ClaimPhoneNumberResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateAgentStatusRequestFilterSensitiveLog = (obj: CreateAgentStatusRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateAgentStatusResponseFilterSensitiveLog = (obj: CreateAgentStatusResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateContactFlowRequestFilterSensitiveLog = (obj: CreateContactFlowRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateContactFlowResponseFilterSensitiveLog = (obj: CreateContactFlowResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ProblemDetailFilterSensitiveLog = (obj: ProblemDetail): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateContactFlowModuleRequestFilterSensitiveLog = (obj: CreateContactFlowModuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateContactFlowModuleResponseFilterSensitiveLog = (obj: CreateContactFlowModuleResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HoursOfOperationTimeSliceFilterSensitiveLog = (obj: HoursOfOperationTimeSlice): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HoursOfOperationConfigFilterSensitiveLog = (obj: HoursOfOperationConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateHoursOfOperationRequestFilterSensitiveLog = (obj: CreateHoursOfOperationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateHoursOfOperationResponseFilterSensitiveLog = (obj: CreateHoursOfOperationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateInstanceRequestFilterSensitiveLog = (obj: CreateInstanceRequest): any => ({
-  ...obj,
-  ...(obj.InstanceAlias && { InstanceAlias: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const CreateInstanceResponseFilterSensitiveLog = (obj: CreateInstanceResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateIntegrationAssociationRequestFilterSensitiveLog = (
-  obj: CreateIntegrationAssociationRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateIntegrationAssociationResponseFilterSensitiveLog = (
-  obj: CreateIntegrationAssociationResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const OutboundCallerConfigFilterSensitiveLog = (obj: OutboundCallerConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateQueueRequestFilterSensitiveLog = (obj: CreateQueueRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateQueueResponseFilterSensitiveLog = (obj: CreateQueueResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PhoneNumberQuickConnectConfigFilterSensitiveLog = (obj: PhoneNumberQuickConnectConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const QueueQuickConnectConfigFilterSensitiveLog = (obj: QueueQuickConnectConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserQuickConnectConfigFilterSensitiveLog = (obj: UserQuickConnectConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const QuickConnectConfigFilterSensitiveLog = (obj: QuickConnectConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateQuickConnectRequestFilterSensitiveLog = (obj: CreateQuickConnectRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateQuickConnectResponseFilterSensitiveLog = (obj: CreateQuickConnectResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const MediaConcurrencyFilterSensitiveLog = (obj: MediaConcurrency): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateRoutingProfileRequestFilterSensitiveLog = (obj: CreateRoutingProfileRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateRoutingProfileResponseFilterSensitiveLog = (obj: CreateRoutingProfileResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateSecurityProfileRequestFilterSensitiveLog = (obj: CreateSecurityProfileRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateSecurityProfileResponseFilterSensitiveLog = (obj: CreateSecurityProfileResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TaskTemplateFieldIdentifierFilterSensitiveLog = (obj: TaskTemplateFieldIdentifier): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InvisibleFieldInfoFilterSensitiveLog = (obj: InvisibleFieldInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReadOnlyFieldInfoFilterSensitiveLog = (obj: ReadOnlyFieldInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RequiredFieldInfoFilterSensitiveLog = (obj: RequiredFieldInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TaskTemplateConstraintsFilterSensitiveLog = (obj: TaskTemplateConstraints): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TaskTemplateDefaultFieldValueFilterSensitiveLog = (obj: TaskTemplateDefaultFieldValue): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TaskTemplateDefaultsFilterSensitiveLog = (obj: TaskTemplateDefaults): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const TaskTemplateFieldFilterSensitiveLog = (obj: TaskTemplateField): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateTaskTemplateRequestFilterSensitiveLog = (obj: CreateTaskTemplateRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateTaskTemplateResponseFilterSensitiveLog = (obj: CreateTaskTemplateResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PropertyValidationExceptionPropertyFilterSensitiveLog = (
-  obj: PropertyValidationExceptionProperty
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateUseCaseRequestFilterSensitiveLog = (obj: CreateUseCaseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateUseCaseResponseFilterSensitiveLog = (obj: CreateUseCaseResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserIdentityInfoFilterSensitiveLog = (obj: UserIdentityInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserPhoneConfigFilterSensitiveLog = (obj: UserPhoneConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateUserRequestFilterSensitiveLog = (obj: CreateUserRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateUserResponseFilterSensitiveLog = (obj: CreateUserResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateUserHierarchyGroupRequestFilterSensitiveLog = (obj: CreateUserHierarchyGroupRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateUserHierarchyGroupResponseFilterSensitiveLog = (obj: CreateUserHierarchyGroupResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateVocabularyRequestFilterSensitiveLog = (obj: CreateVocabularyRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CreateVocabularyResponseFilterSensitiveLog = (obj: CreateVocabularyResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteContactFlowRequestFilterSensitiveLog = (obj: DeleteContactFlowRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteContactFlowModuleRequestFilterSensitiveLog = (obj: DeleteContactFlowModuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteContactFlowModuleResponseFilterSensitiveLog = (obj: DeleteContactFlowModuleResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteHoursOfOperationRequestFilterSensitiveLog = (obj: DeleteHoursOfOperationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteInstanceRequestFilterSensitiveLog = (obj: DeleteInstanceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteIntegrationAssociationRequestFilterSensitiveLog = (
-  obj: DeleteIntegrationAssociationRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteQuickConnectRequestFilterSensitiveLog = (obj: DeleteQuickConnectRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteSecurityProfileRequestFilterSensitiveLog = (obj: DeleteSecurityProfileRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteTaskTemplateRequestFilterSensitiveLog = (obj: DeleteTaskTemplateRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteTaskTemplateResponseFilterSensitiveLog = (obj: DeleteTaskTemplateResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteUseCaseRequestFilterSensitiveLog = (obj: DeleteUseCaseRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteUserRequestFilterSensitiveLog = (obj: DeleteUserRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteUserHierarchyGroupRequestFilterSensitiveLog = (obj: DeleteUserHierarchyGroupRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteVocabularyRequestFilterSensitiveLog = (obj: DeleteVocabularyRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DeleteVocabularyResponseFilterSensitiveLog = (obj: DeleteVocabularyResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeAgentStatusRequestFilterSensitiveLog = (obj: DescribeAgentStatusRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeAgentStatusResponseFilterSensitiveLog = (obj: DescribeAgentStatusResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeContactRequestFilterSensitiveLog = (obj: DescribeContactRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const QueueInfoFilterSensitiveLog = (obj: QueueInfo): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ContactFilterSensitiveLog = (obj: Contact): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeContactResponseFilterSensitiveLog = (obj: DescribeContactResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeContactFlowRequestFilterSensitiveLog = (obj: DescribeContactFlowRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ContactFlowFilterSensitiveLog = (obj: ContactFlow): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeContactFlowResponseFilterSensitiveLog = (obj: DescribeContactFlowResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeContactFlowModuleRequestFilterSensitiveLog = (obj: DescribeContactFlowModuleRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ContactFlowModuleFilterSensitiveLog = (obj: ContactFlowModule): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeContactFlowModuleResponseFilterSensitiveLog = (obj: DescribeContactFlowModuleResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeHoursOfOperationRequestFilterSensitiveLog = (obj: DescribeHoursOfOperationRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HoursOfOperationFilterSensitiveLog = (obj: HoursOfOperation): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeHoursOfOperationResponseFilterSensitiveLog = (obj: DescribeHoursOfOperationResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeInstanceRequestFilterSensitiveLog = (obj: DescribeInstanceRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InstanceStatusReasonFilterSensitiveLog = (obj: InstanceStatusReason): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InstanceFilterSensitiveLog = (obj: Instance): any => ({
-  ...obj,
-  ...(obj.InstanceAlias && { InstanceAlias: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const DescribeInstanceResponseFilterSensitiveLog = (obj: DescribeInstanceResponse): any => ({
-  ...obj,
-  ...(obj.Instance && { Instance: InstanceFilterSensitiveLog(obj.Instance) }),
-});
-
-/**
- * @internal
- */
-export const DescribeInstanceAttributeRequestFilterSensitiveLog = (obj: DescribeInstanceAttributeRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AttributeFilterSensitiveLog = (obj: Attribute): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeInstanceAttributeResponseFilterSensitiveLog = (obj: DescribeInstanceAttributeResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeInstanceStorageConfigRequestFilterSensitiveLog = (
-  obj: DescribeInstanceStorageConfigRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeInstanceStorageConfigResponseFilterSensitiveLog = (
-  obj: DescribeInstanceStorageConfigResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribePhoneNumberRequestFilterSensitiveLog = (obj: DescribePhoneNumberRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PhoneNumberStatusFilterSensitiveLog = (obj: PhoneNumberStatus): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ClaimedPhoneNumberSummaryFilterSensitiveLog = (obj: ClaimedPhoneNumberSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribePhoneNumberResponseFilterSensitiveLog = (obj: DescribePhoneNumberResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeQueueRequestFilterSensitiveLog = (obj: DescribeQueueRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const QueueFilterSensitiveLog = (obj: Queue): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeQueueResponseFilterSensitiveLog = (obj: DescribeQueueResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeQuickConnectRequestFilterSensitiveLog = (obj: DescribeQuickConnectRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const QuickConnectFilterSensitiveLog = (obj: QuickConnect): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeQuickConnectResponseFilterSensitiveLog = (obj: DescribeQuickConnectResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeRoutingProfileRequestFilterSensitiveLog = (obj: DescribeRoutingProfileRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RoutingProfileFilterSensitiveLog = (obj: RoutingProfile): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeRoutingProfileResponseFilterSensitiveLog = (obj: DescribeRoutingProfileResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeSecurityProfileRequestFilterSensitiveLog = (obj: DescribeSecurityProfileRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const SecurityProfileFilterSensitiveLog = (obj: SecurityProfile): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeSecurityProfileResponseFilterSensitiveLog = (obj: DescribeSecurityProfileResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeUserRequestFilterSensitiveLog = (obj: DescribeUserRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserFilterSensitiveLog = (obj: User): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeUserResponseFilterSensitiveLog = (obj: DescribeUserResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeUserHierarchyGroupRequestFilterSensitiveLog = (obj: DescribeUserHierarchyGroupRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HierarchyGroupSummaryFilterSensitiveLog = (obj: HierarchyGroupSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HierarchyPathFilterSensitiveLog = (obj: HierarchyPath): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HierarchyGroupFilterSensitiveLog = (obj: HierarchyGroup): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeUserHierarchyGroupResponseFilterSensitiveLog = (obj: DescribeUserHierarchyGroupResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeUserHierarchyStructureRequestFilterSensitiveLog = (
-  obj: DescribeUserHierarchyStructureRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HierarchyLevelFilterSensitiveLog = (obj: HierarchyLevel): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HierarchyStructureFilterSensitiveLog = (obj: HierarchyStructure): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeUserHierarchyStructureResponseFilterSensitiveLog = (
-  obj: DescribeUserHierarchyStructureResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeVocabularyRequestFilterSensitiveLog = (obj: DescribeVocabularyRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const VocabularyFilterSensitiveLog = (obj: Vocabulary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DescribeVocabularyResponseFilterSensitiveLog = (obj: DescribeVocabularyResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateApprovedOriginRequestFilterSensitiveLog = (obj: DisassociateApprovedOriginRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateBotRequestFilterSensitiveLog = (obj: DisassociateBotRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateInstanceStorageConfigRequestFilterSensitiveLog = (
-  obj: DisassociateInstanceStorageConfigRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateLambdaFunctionRequestFilterSensitiveLog = (obj: DisassociateLambdaFunctionRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateLexBotRequestFilterSensitiveLog = (obj: DisassociateLexBotRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociatePhoneNumberContactFlowRequestFilterSensitiveLog = (
-  obj: DisassociatePhoneNumberContactFlowRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateQueueQuickConnectsRequestFilterSensitiveLog = (
-  obj: DisassociateQueueQuickConnectsRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateRoutingProfileQueuesRequestFilterSensitiveLog = (
-  obj: DisassociateRoutingProfileQueuesRequest
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DisassociateSecurityKeyRequestFilterSensitiveLog = (obj: DisassociateSecurityKeyRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetContactAttributesRequestFilterSensitiveLog = (obj: GetContactAttributesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetContactAttributesResponseFilterSensitiveLog = (obj: GetContactAttributesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CurrentMetricFilterSensitiveLog = (obj: CurrentMetric): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const FiltersFilterSensitiveLog = (obj: Filters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetCurrentMetricDataRequestFilterSensitiveLog = (obj: GetCurrentMetricDataRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CurrentMetricDataFilterSensitiveLog = (obj: CurrentMetricData): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DimensionsFilterSensitiveLog = (obj: Dimensions): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CurrentMetricResultFilterSensitiveLog = (obj: CurrentMetricResult): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetCurrentMetricDataResponseFilterSensitiveLog = (obj: GetCurrentMetricDataResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ContactFilterFilterSensitiveLog = (obj: ContactFilter): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserDataFiltersFilterSensitiveLog = (obj: UserDataFilters): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetCurrentUserDataRequestFilterSensitiveLog = (obj: GetCurrentUserDataRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HierarchyGroupSummaryReferenceFilterSensitiveLog = (obj: HierarchyGroupSummaryReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HierarchyPathReferenceFilterSensitiveLog = (obj: HierarchyPathReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const RoutingProfileReferenceFilterSensitiveLog = (obj: RoutingProfileReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserReferenceFilterSensitiveLog = (obj: UserReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UserDataFilterSensitiveLog = (obj: UserData): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetCurrentUserDataResponseFilterSensitiveLog = (obj: GetCurrentUserDataResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetFederationTokenRequestFilterSensitiveLog = (obj: GetFederationTokenRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const CredentialsFilterSensitiveLog = (obj: Credentials): any => ({
-  ...obj,
-  ...(obj.AccessToken && { AccessToken: SENSITIVE_STRING }),
-  ...(obj.RefreshToken && { RefreshToken: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const GetFederationTokenResponseFilterSensitiveLog = (obj: GetFederationTokenResponse): any => ({
-  ...obj,
-  ...(obj.Credentials && { Credentials: CredentialsFilterSensitiveLog(obj.Credentials) }),
-});
-
-/**
- * @internal
- */
-export const ThresholdFilterSensitiveLog = (obj: Threshold): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HistoricalMetricFilterSensitiveLog = (obj: HistoricalMetric): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetMetricDataRequestFilterSensitiveLog = (obj: GetMetricDataRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HistoricalMetricDataFilterSensitiveLog = (obj: HistoricalMetricData): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HistoricalMetricResultFilterSensitiveLog = (obj: HistoricalMetricResult): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetMetricDataResponseFilterSensitiveLog = (obj: GetMetricDataResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetTaskTemplateRequestFilterSensitiveLog = (obj: GetTaskTemplateRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const GetTaskTemplateResponseFilterSensitiveLog = (obj: GetTaskTemplateResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListAgentStatusRequestFilterSensitiveLog = (obj: ListAgentStatusRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListAgentStatusResponseFilterSensitiveLog = (obj: ListAgentStatusResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListApprovedOriginsRequestFilterSensitiveLog = (obj: ListApprovedOriginsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListApprovedOriginsResponseFilterSensitiveLog = (obj: ListApprovedOriginsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListBotsRequestFilterSensitiveLog = (obj: ListBotsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const LexBotConfigFilterSensitiveLog = (obj: LexBotConfig): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListBotsResponseFilterSensitiveLog = (obj: ListBotsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListContactFlowModulesRequestFilterSensitiveLog = (obj: ListContactFlowModulesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ContactFlowModuleSummaryFilterSensitiveLog = (obj: ContactFlowModuleSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListContactFlowModulesResponseFilterSensitiveLog = (obj: ListContactFlowModulesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListContactFlowsRequestFilterSensitiveLog = (obj: ListContactFlowsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ContactFlowSummaryFilterSensitiveLog = (obj: ContactFlowSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListContactFlowsResponseFilterSensitiveLog = (obj: ListContactFlowsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListContactReferencesRequestFilterSensitiveLog = (obj: ListContactReferencesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const AttachmentReferenceFilterSensitiveLog = (obj: AttachmentReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DateReferenceFilterSensitiveLog = (obj: DateReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const EmailReferenceFilterSensitiveLog = (obj: EmailReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const NumberReferenceFilterSensitiveLog = (obj: NumberReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const StringReferenceFilterSensitiveLog = (obj: StringReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const UrlReferenceFilterSensitiveLog = (obj: UrlReference): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ReferenceSummaryFilterSensitiveLog = (obj: ReferenceSummary): any => {
-  if (obj.Url !== undefined) return { Url: UrlReferenceFilterSensitiveLog(obj.Url) };
-  if (obj.Attachment !== undefined) return { Attachment: AttachmentReferenceFilterSensitiveLog(obj.Attachment) };
-  if (obj.String !== undefined) return { String: StringReferenceFilterSensitiveLog(obj.String) };
-  if (obj.Number !== undefined) return { Number: NumberReferenceFilterSensitiveLog(obj.Number) };
-  if (obj.Date !== undefined) return { Date: DateReferenceFilterSensitiveLog(obj.Date) };
-  if (obj.Email !== undefined) return { Email: EmailReferenceFilterSensitiveLog(obj.Email) };
-  if (obj.$unknown !== undefined) return { [obj.$unknown[0]]: "UNKNOWN" };
-};
-
-/**
- * @internal
- */
-export const ListContactReferencesResponseFilterSensitiveLog = (obj: ListContactReferencesResponse): any => ({
-  ...obj,
-  ...(obj.ReferenceSummaryList && {
-    ReferenceSummaryList: obj.ReferenceSummaryList.map((item) => ReferenceSummaryFilterSensitiveLog(item)),
-  }),
-});
-
-/**
- * @internal
- */
-export const ListDefaultVocabulariesRequestFilterSensitiveLog = (obj: ListDefaultVocabulariesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const DefaultVocabularyFilterSensitiveLog = (obj: DefaultVocabulary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListDefaultVocabulariesResponseFilterSensitiveLog = (obj: ListDefaultVocabulariesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListHoursOfOperationsRequestFilterSensitiveLog = (obj: ListHoursOfOperationsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const HoursOfOperationSummaryFilterSensitiveLog = (obj: HoursOfOperationSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListHoursOfOperationsResponseFilterSensitiveLog = (obj: ListHoursOfOperationsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListInstanceAttributesRequestFilterSensitiveLog = (obj: ListInstanceAttributesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListInstanceAttributesResponseFilterSensitiveLog = (obj: ListInstanceAttributesResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListInstancesRequestFilterSensitiveLog = (obj: ListInstancesRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const InstanceSummaryFilterSensitiveLog = (obj: InstanceSummary): any => ({
-  ...obj,
-  ...(obj.InstanceAlias && { InstanceAlias: SENSITIVE_STRING }),
-});
-
-/**
- * @internal
- */
-export const ListInstancesResponseFilterSensitiveLog = (obj: ListInstancesResponse): any => ({
-  ...obj,
-  ...(obj.InstanceSummaryList && {
-    InstanceSummaryList: obj.InstanceSummaryList.map((item) => InstanceSummaryFilterSensitiveLog(item)),
-  }),
-});
-
-/**
- * @internal
- */
-export const ListInstanceStorageConfigsRequestFilterSensitiveLog = (obj: ListInstanceStorageConfigsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListInstanceStorageConfigsResponseFilterSensitiveLog = (obj: ListInstanceStorageConfigsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListIntegrationAssociationsRequestFilterSensitiveLog = (obj: ListIntegrationAssociationsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const IntegrationAssociationSummaryFilterSensitiveLog = (obj: IntegrationAssociationSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListIntegrationAssociationsResponseFilterSensitiveLog = (
-  obj: ListIntegrationAssociationsResponse
-): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLambdaFunctionsRequestFilterSensitiveLog = (obj: ListLambdaFunctionsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLambdaFunctionsResponseFilterSensitiveLog = (obj: ListLambdaFunctionsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLexBotsRequestFilterSensitiveLog = (obj: ListLexBotsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListLexBotsResponseFilterSensitiveLog = (obj: ListLexBotsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPhoneNumbersRequestFilterSensitiveLog = (obj: ListPhoneNumbersRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PhoneNumberSummaryFilterSensitiveLog = (obj: PhoneNumberSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPhoneNumbersResponseFilterSensitiveLog = (obj: ListPhoneNumbersResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPhoneNumbersV2RequestFilterSensitiveLog = (obj: ListPhoneNumbersV2Request): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPhoneNumbersSummaryFilterSensitiveLog = (obj: ListPhoneNumbersSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPhoneNumbersV2ResponseFilterSensitiveLog = (obj: ListPhoneNumbersV2Response): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPromptsRequestFilterSensitiveLog = (obj: ListPromptsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const PromptSummaryFilterSensitiveLog = (obj: PromptSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListPromptsResponseFilterSensitiveLog = (obj: ListPromptsResponse): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListQueueQuickConnectsRequestFilterSensitiveLog = (obj: ListQueueQuickConnectsRequest): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const QuickConnectSummaryFilterSensitiveLog = (obj: QuickConnectSummary): any => ({
-  ...obj,
-});
-
-/**
- * @internal
- */
-export const ListQueueQuickConnectsResponseFilterSensitiveLog = (obj: ListQueueQuickConnectsResponse): any => ({
-  ...obj,
-});

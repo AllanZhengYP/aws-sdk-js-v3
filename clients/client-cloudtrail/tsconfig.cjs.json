@@ -1,8 +1,7 @@
 {
   "extends": "./tsconfig",
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "commonjs",
-    "outDir": "dist-cjs"
+    "outDir": "dist-cjs",
+    "noCheck": true
   }
 }

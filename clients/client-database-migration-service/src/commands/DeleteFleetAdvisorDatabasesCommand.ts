@@ -1,110 +1,94 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  DatabaseMigrationServiceClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../DatabaseMigrationServiceClient";
-import {
-  DeleteFleetAdvisorDatabasesRequest,
-  DeleteFleetAdvisorDatabasesRequestFilterSensitiveLog,
-  DeleteFleetAdvisorDatabasesResponse,
-  DeleteFleetAdvisorDatabasesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1DeleteFleetAdvisorDatabasesCommand,
-  serializeAws_json1_1DeleteFleetAdvisorDatabasesCommand,
-} from "../protocols/Aws_json1_1";
-
-export interface DeleteFleetAdvisorDatabasesCommandInput extends DeleteFleetAdvisorDatabasesRequest {}
-export interface DeleteFleetAdvisorDatabasesCommandOutput
-  extends DeleteFleetAdvisorDatabasesResponse,
-    __MetadataBearer {}
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteFleetAdvisorDatabasesRequest, DeleteFleetAdvisorDatabasesResponse } from "../models/models_0";
+import { DeleteFleetAdvisorDatabases$ } from "../schemas/schemas_0";
 
 /**
- * <p>Deletes the specified Fleet Advisor collector databases.</p>
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteFleetAdvisorDatabasesCommand}.
+ */
+export interface DeleteFleetAdvisorDatabasesCommandInput extends DeleteFleetAdvisorDatabasesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteFleetAdvisorDatabasesCommand}.
+ */
+export interface DeleteFleetAdvisorDatabasesCommandOutput extends DeleteFleetAdvisorDatabasesResponse, __MetadataBearer {}
+
+/**
+ * <important>
+ *             <p>
+ * End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;. After May 20, 2026, you will no longer be able to access the Amazon Web Services DMS Fleet Advisor; console or Amazon Web Services DMS Fleet Advisor; resources. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html">Amazon Web Services DMS Fleet Advisor end of support</a>.
+ * </p>
+ *          </important>
+ *          <p>Deletes the specified Fleet Advisor collector databases.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { DatabaseMigrationServiceClient, DeleteFleetAdvisorDatabasesCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
  * // const { DatabaseMigrationServiceClient, DeleteFleetAdvisorDatabasesCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * // import type { DatabaseMigrationServiceClientConfig } from "@aws-sdk/client-database-migration-service";
+ * const config = {}; // type is DatabaseMigrationServiceClientConfig
  * const client = new DatabaseMigrationServiceClient(config);
+ * const input = { // DeleteFleetAdvisorDatabasesRequest
+ *   DatabaseIds: [ // StringList // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new DeleteFleetAdvisorDatabasesCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteFleetAdvisorDatabasesResponse
+ * //   DatabaseIds: [ // StringList
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param DeleteFleetAdvisorDatabasesCommandInput - {@link DeleteFleetAdvisorDatabasesCommandInput}
+ * @returns {@link DeleteFleetAdvisorDatabasesCommandOutput}
  * @see {@link DeleteFleetAdvisorDatabasesCommandInput} for command's `input` shape.
  * @see {@link DeleteFleetAdvisorDatabasesCommandOutput} for command's `response` shape.
  * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for DatabaseMigrationServiceClient's `config` shape.
  *
+ * @throws {@link AccessDeniedFault} (client fault)
+ *  <p>DMS was denied access to the endpoint. Check that the
+ *             role is correctly configured.</p>
+ *
+ * @throws {@link InvalidOperationFault} (client fault)
+ *  <p>The action or operation requested isn't valid.</p>
+ *
+ * @throws {@link ResourceNotFoundFault} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link DatabaseMigrationServiceServiceException}
+ * <p>Base exception class for all service exceptions from DatabaseMigrationService service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteFleetAdvisorDatabasesCommand extends $Command<
-  DeleteFleetAdvisorDatabasesCommandInput,
-  DeleteFleetAdvisorDatabasesCommandOutput,
-  DatabaseMigrationServiceClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteFleetAdvisorDatabasesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: DatabaseMigrationServiceClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteFleetAdvisorDatabasesCommandInput, DeleteFleetAdvisorDatabasesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "DatabaseMigrationServiceClient";
-    const commandName = "DeleteFleetAdvisorDatabasesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteFleetAdvisorDatabasesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteFleetAdvisorDatabasesResponseFilterSensitiveLog,
+export class DeleteFleetAdvisorDatabasesCommand extends command<DeleteFleetAdvisorDatabasesCommandInput, DeleteFleetAdvisorDatabasesCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteFleetAdvisorDatabases",
+  DeleteFleetAdvisorDatabases$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteFleetAdvisorDatabasesRequest;
+      output: DeleteFleetAdvisorDatabasesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteFleetAdvisorDatabasesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1DeleteFleetAdvisorDatabasesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteFleetAdvisorDatabasesCommandOutput> {
-    return deserializeAws_json1_1DeleteFleetAdvisorDatabasesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteFleetAdvisorDatabasesCommandInput;
+      output: DeleteFleetAdvisorDatabasesCommandOutput;
+    };
+  };
 }

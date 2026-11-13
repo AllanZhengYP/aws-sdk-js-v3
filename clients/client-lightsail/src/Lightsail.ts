@@ -1,681 +1,3870 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type { HttpHandlerOptions as __HttpHandlerOptions, MetricsRecorder as __MetricsRecorder } from "@smithy/types";
 
 import {
+  type AllocateStaticIpCommandInput,
+  type AllocateStaticIpCommandOutput,
   AllocateStaticIpCommand,
-  AllocateStaticIpCommandInput,
-  AllocateStaticIpCommandOutput,
 } from "./commands/AllocateStaticIpCommand";
 import {
+  type AttachCertificateToDistributionCommandInput,
+  type AttachCertificateToDistributionCommandOutput,
   AttachCertificateToDistributionCommand,
-  AttachCertificateToDistributionCommandInput,
-  AttachCertificateToDistributionCommandOutput,
 } from "./commands/AttachCertificateToDistributionCommand";
-import { AttachDiskCommand, AttachDiskCommandInput, AttachDiskCommandOutput } from "./commands/AttachDiskCommand";
 import {
+  type AttachDiskCommandInput,
+  type AttachDiskCommandOutput,
+  AttachDiskCommand,
+} from "./commands/AttachDiskCommand";
+import {
+  type AttachInstancesToLoadBalancerCommandInput,
+  type AttachInstancesToLoadBalancerCommandOutput,
   AttachInstancesToLoadBalancerCommand,
-  AttachInstancesToLoadBalancerCommandInput,
-  AttachInstancesToLoadBalancerCommandOutput,
 } from "./commands/AttachInstancesToLoadBalancerCommand";
 import {
+  type AttachLoadBalancerTlsCertificateCommandInput,
+  type AttachLoadBalancerTlsCertificateCommandOutput,
   AttachLoadBalancerTlsCertificateCommand,
-  AttachLoadBalancerTlsCertificateCommandInput,
-  AttachLoadBalancerTlsCertificateCommandOutput,
 } from "./commands/AttachLoadBalancerTlsCertificateCommand";
 import {
+  type AttachStaticIpCommandInput,
+  type AttachStaticIpCommandOutput,
   AttachStaticIpCommand,
-  AttachStaticIpCommandInput,
-  AttachStaticIpCommandOutput,
 } from "./commands/AttachStaticIpCommand";
 import {
+  type CheckSubdomainAvailabilityCommandInput,
+  type CheckSubdomainAvailabilityCommandOutput,
+  CheckSubdomainAvailabilityCommand,
+} from "./commands/CheckSubdomainAvailabilityCommand";
+import {
+  type CloseInstancePublicPortsCommandInput,
+  type CloseInstancePublicPortsCommandOutput,
   CloseInstancePublicPortsCommand,
-  CloseInstancePublicPortsCommandInput,
-  CloseInstancePublicPortsCommandOutput,
 } from "./commands/CloseInstancePublicPortsCommand";
 import {
+  type CopySnapshotCommandInput,
+  type CopySnapshotCommandOutput,
   CopySnapshotCommand,
-  CopySnapshotCommandInput,
-  CopySnapshotCommandOutput,
 } from "./commands/CopySnapshotCommand";
 import {
+  type CreateBucketAccessKeyCommandInput,
+  type CreateBucketAccessKeyCommandOutput,
   CreateBucketAccessKeyCommand,
-  CreateBucketAccessKeyCommandInput,
-  CreateBucketAccessKeyCommandOutput,
 } from "./commands/CreateBucketAccessKeyCommand";
 import {
+  type CreateBucketCommandInput,
+  type CreateBucketCommandOutput,
   CreateBucketCommand,
-  CreateBucketCommandInput,
-  CreateBucketCommandOutput,
 } from "./commands/CreateBucketCommand";
 import {
+  type CreateCertificateCommandInput,
+  type CreateCertificateCommandOutput,
   CreateCertificateCommand,
-  CreateCertificateCommandInput,
-  CreateCertificateCommandOutput,
 } from "./commands/CreateCertificateCommand";
 import {
+  type CreateCloudFormationStackCommandInput,
+  type CreateCloudFormationStackCommandOutput,
   CreateCloudFormationStackCommand,
-  CreateCloudFormationStackCommandInput,
-  CreateCloudFormationStackCommandOutput,
 } from "./commands/CreateCloudFormationStackCommand";
 import {
+  type CreateContactMethodCommandInput,
+  type CreateContactMethodCommandOutput,
   CreateContactMethodCommand,
-  CreateContactMethodCommandInput,
-  CreateContactMethodCommandOutput,
 } from "./commands/CreateContactMethodCommand";
 import {
+  type CreateContainerServiceCommandInput,
+  type CreateContainerServiceCommandOutput,
   CreateContainerServiceCommand,
-  CreateContainerServiceCommandInput,
-  CreateContainerServiceCommandOutput,
 } from "./commands/CreateContainerServiceCommand";
 import {
+  type CreateContainerServiceDeploymentCommandInput,
+  type CreateContainerServiceDeploymentCommandOutput,
   CreateContainerServiceDeploymentCommand,
-  CreateContainerServiceDeploymentCommandInput,
-  CreateContainerServiceDeploymentCommandOutput,
 } from "./commands/CreateContainerServiceDeploymentCommand";
 import {
+  type CreateContainerServiceRegistryLoginCommandInput,
+  type CreateContainerServiceRegistryLoginCommandOutput,
   CreateContainerServiceRegistryLoginCommand,
-  CreateContainerServiceRegistryLoginCommandInput,
-  CreateContainerServiceRegistryLoginCommandOutput,
 } from "./commands/CreateContainerServiceRegistryLoginCommand";
-import { CreateDiskCommand, CreateDiskCommandInput, CreateDiskCommandOutput } from "./commands/CreateDiskCommand";
 import {
+  type CreateDiskCommandInput,
+  type CreateDiskCommandOutput,
+  CreateDiskCommand,
+} from "./commands/CreateDiskCommand";
+import {
+  type CreateDiskFromSnapshotCommandInput,
+  type CreateDiskFromSnapshotCommandOutput,
   CreateDiskFromSnapshotCommand,
-  CreateDiskFromSnapshotCommandInput,
-  CreateDiskFromSnapshotCommandOutput,
 } from "./commands/CreateDiskFromSnapshotCommand";
 import {
+  type CreateDiskSnapshotCommandInput,
+  type CreateDiskSnapshotCommandOutput,
   CreateDiskSnapshotCommand,
-  CreateDiskSnapshotCommandInput,
-  CreateDiskSnapshotCommandOutput,
 } from "./commands/CreateDiskSnapshotCommand";
 import {
+  type CreateDistributionCommandInput,
+  type CreateDistributionCommandOutput,
   CreateDistributionCommand,
-  CreateDistributionCommandInput,
-  CreateDistributionCommandOutput,
 } from "./commands/CreateDistributionCommand";
 import {
+  type CreateDomainCommandInput,
+  type CreateDomainCommandOutput,
   CreateDomainCommand,
-  CreateDomainCommandInput,
-  CreateDomainCommandOutput,
 } from "./commands/CreateDomainCommand";
 import {
+  type CreateDomainEntryCommandInput,
+  type CreateDomainEntryCommandOutput,
   CreateDomainEntryCommand,
-  CreateDomainEntryCommandInput,
-  CreateDomainEntryCommandOutput,
 } from "./commands/CreateDomainEntryCommand";
 import {
+  type CreateGUISessionAccessDetailsCommandInput,
+  type CreateGUISessionAccessDetailsCommandOutput,
+  CreateGUISessionAccessDetailsCommand,
+} from "./commands/CreateGUISessionAccessDetailsCommand";
+import {
+  type CreateInstancesCommandInput,
+  type CreateInstancesCommandOutput,
   CreateInstancesCommand,
-  CreateInstancesCommandInput,
-  CreateInstancesCommandOutput,
 } from "./commands/CreateInstancesCommand";
 import {
+  type CreateInstancesFromSnapshotCommandInput,
+  type CreateInstancesFromSnapshotCommandOutput,
   CreateInstancesFromSnapshotCommand,
-  CreateInstancesFromSnapshotCommandInput,
-  CreateInstancesFromSnapshotCommandOutput,
 } from "./commands/CreateInstancesFromSnapshotCommand";
 import {
+  type CreateInstanceSnapshotCommandInput,
+  type CreateInstanceSnapshotCommandOutput,
   CreateInstanceSnapshotCommand,
-  CreateInstanceSnapshotCommandInput,
-  CreateInstanceSnapshotCommandOutput,
 } from "./commands/CreateInstanceSnapshotCommand";
 import {
+  type CreateKeyPairCommandInput,
+  type CreateKeyPairCommandOutput,
   CreateKeyPairCommand,
-  CreateKeyPairCommandInput,
-  CreateKeyPairCommandOutput,
 } from "./commands/CreateKeyPairCommand";
 import {
+  type CreateLoadBalancerCommandInput,
+  type CreateLoadBalancerCommandOutput,
   CreateLoadBalancerCommand,
-  CreateLoadBalancerCommandInput,
-  CreateLoadBalancerCommandOutput,
 } from "./commands/CreateLoadBalancerCommand";
 import {
+  type CreateLoadBalancerTlsCertificateCommandInput,
+  type CreateLoadBalancerTlsCertificateCommandOutput,
   CreateLoadBalancerTlsCertificateCommand,
-  CreateLoadBalancerTlsCertificateCommandInput,
-  CreateLoadBalancerTlsCertificateCommandOutput,
 } from "./commands/CreateLoadBalancerTlsCertificateCommand";
 import {
+  type CreateRelationalDatabaseCommandInput,
+  type CreateRelationalDatabaseCommandOutput,
   CreateRelationalDatabaseCommand,
-  CreateRelationalDatabaseCommandInput,
-  CreateRelationalDatabaseCommandOutput,
 } from "./commands/CreateRelationalDatabaseCommand";
 import {
+  type CreateRelationalDatabaseFromSnapshotCommandInput,
+  type CreateRelationalDatabaseFromSnapshotCommandOutput,
   CreateRelationalDatabaseFromSnapshotCommand,
-  CreateRelationalDatabaseFromSnapshotCommandInput,
-  CreateRelationalDatabaseFromSnapshotCommandOutput,
 } from "./commands/CreateRelationalDatabaseFromSnapshotCommand";
 import {
+  type CreateRelationalDatabaseSnapshotCommandInput,
+  type CreateRelationalDatabaseSnapshotCommandOutput,
   CreateRelationalDatabaseSnapshotCommand,
-  CreateRelationalDatabaseSnapshotCommandInput,
-  CreateRelationalDatabaseSnapshotCommandOutput,
 } from "./commands/CreateRelationalDatabaseSnapshotCommand";
-import { DeleteAlarmCommand, DeleteAlarmCommandInput, DeleteAlarmCommandOutput } from "./commands/DeleteAlarmCommand";
 import {
+  type CreateSubdomainCommandInput,
+  type CreateSubdomainCommandOutput,
+  CreateSubdomainCommand,
+} from "./commands/CreateSubdomainCommand";
+import {
+  type DeleteAlarmCommandInput,
+  type DeleteAlarmCommandOutput,
+  DeleteAlarmCommand,
+} from "./commands/DeleteAlarmCommand";
+import {
+  type DeleteAutoSnapshotCommandInput,
+  type DeleteAutoSnapshotCommandOutput,
   DeleteAutoSnapshotCommand,
-  DeleteAutoSnapshotCommandInput,
-  DeleteAutoSnapshotCommandOutput,
 } from "./commands/DeleteAutoSnapshotCommand";
 import {
+  type DeleteBucketAccessKeyCommandInput,
+  type DeleteBucketAccessKeyCommandOutput,
   DeleteBucketAccessKeyCommand,
-  DeleteBucketAccessKeyCommandInput,
-  DeleteBucketAccessKeyCommandOutput,
 } from "./commands/DeleteBucketAccessKeyCommand";
 import {
+  type DeleteBucketCommandInput,
+  type DeleteBucketCommandOutput,
   DeleteBucketCommand,
-  DeleteBucketCommandInput,
-  DeleteBucketCommandOutput,
 } from "./commands/DeleteBucketCommand";
 import {
+  type DeleteCertificateCommandInput,
+  type DeleteCertificateCommandOutput,
   DeleteCertificateCommand,
-  DeleteCertificateCommandInput,
-  DeleteCertificateCommandOutput,
 } from "./commands/DeleteCertificateCommand";
 import {
+  type DeleteContactMethodCommandInput,
+  type DeleteContactMethodCommandOutput,
   DeleteContactMethodCommand,
-  DeleteContactMethodCommandInput,
-  DeleteContactMethodCommandOutput,
 } from "./commands/DeleteContactMethodCommand";
 import {
+  type DeleteContainerImageCommandInput,
+  type DeleteContainerImageCommandOutput,
   DeleteContainerImageCommand,
-  DeleteContainerImageCommandInput,
-  DeleteContainerImageCommandOutput,
 } from "./commands/DeleteContainerImageCommand";
 import {
+  type DeleteContainerServiceCommandInput,
+  type DeleteContainerServiceCommandOutput,
   DeleteContainerServiceCommand,
-  DeleteContainerServiceCommandInput,
-  DeleteContainerServiceCommandOutput,
 } from "./commands/DeleteContainerServiceCommand";
-import { DeleteDiskCommand, DeleteDiskCommandInput, DeleteDiskCommandOutput } from "./commands/DeleteDiskCommand";
 import {
+  type DeleteDiskCommandInput,
+  type DeleteDiskCommandOutput,
+  DeleteDiskCommand,
+} from "./commands/DeleteDiskCommand";
+import {
+  type DeleteDiskSnapshotCommandInput,
+  type DeleteDiskSnapshotCommandOutput,
   DeleteDiskSnapshotCommand,
-  DeleteDiskSnapshotCommandInput,
-  DeleteDiskSnapshotCommandOutput,
 } from "./commands/DeleteDiskSnapshotCommand";
 import {
+  type DeleteDistributionCommandInput,
+  type DeleteDistributionCommandOutput,
   DeleteDistributionCommand,
-  DeleteDistributionCommandInput,
-  DeleteDistributionCommandOutput,
 } from "./commands/DeleteDistributionCommand";
 import {
+  type DeleteDomainCommandInput,
+  type DeleteDomainCommandOutput,
   DeleteDomainCommand,
-  DeleteDomainCommandInput,
-  DeleteDomainCommandOutput,
 } from "./commands/DeleteDomainCommand";
 import {
+  type DeleteDomainEntryCommandInput,
+  type DeleteDomainEntryCommandOutput,
   DeleteDomainEntryCommand,
-  DeleteDomainEntryCommandInput,
-  DeleteDomainEntryCommandOutput,
 } from "./commands/DeleteDomainEntryCommand";
 import {
+  type DeleteInstanceCommandInput,
+  type DeleteInstanceCommandOutput,
   DeleteInstanceCommand,
-  DeleteInstanceCommandInput,
-  DeleteInstanceCommandOutput,
 } from "./commands/DeleteInstanceCommand";
 import {
+  type DeleteInstanceSnapshotCommandInput,
+  type DeleteInstanceSnapshotCommandOutput,
   DeleteInstanceSnapshotCommand,
-  DeleteInstanceSnapshotCommandInput,
-  DeleteInstanceSnapshotCommandOutput,
 } from "./commands/DeleteInstanceSnapshotCommand";
 import {
+  type DeleteKeyPairCommandInput,
+  type DeleteKeyPairCommandOutput,
   DeleteKeyPairCommand,
-  DeleteKeyPairCommandInput,
-  DeleteKeyPairCommandOutput,
 } from "./commands/DeleteKeyPairCommand";
 import {
+  type DeleteKnownHostKeysCommandInput,
+  type DeleteKnownHostKeysCommandOutput,
   DeleteKnownHostKeysCommand,
-  DeleteKnownHostKeysCommandInput,
-  DeleteKnownHostKeysCommandOutput,
 } from "./commands/DeleteKnownHostKeysCommand";
 import {
+  type DeleteLoadBalancerCommandInput,
+  type DeleteLoadBalancerCommandOutput,
   DeleteLoadBalancerCommand,
-  DeleteLoadBalancerCommandInput,
-  DeleteLoadBalancerCommandOutput,
 } from "./commands/DeleteLoadBalancerCommand";
 import {
+  type DeleteLoadBalancerTlsCertificateCommandInput,
+  type DeleteLoadBalancerTlsCertificateCommandOutput,
   DeleteLoadBalancerTlsCertificateCommand,
-  DeleteLoadBalancerTlsCertificateCommandInput,
-  DeleteLoadBalancerTlsCertificateCommandOutput,
 } from "./commands/DeleteLoadBalancerTlsCertificateCommand";
 import {
+  type DeleteRelationalDatabaseCommandInput,
+  type DeleteRelationalDatabaseCommandOutput,
   DeleteRelationalDatabaseCommand,
-  DeleteRelationalDatabaseCommandInput,
-  DeleteRelationalDatabaseCommandOutput,
 } from "./commands/DeleteRelationalDatabaseCommand";
 import {
+  type DeleteRelationalDatabaseSnapshotCommandInput,
+  type DeleteRelationalDatabaseSnapshotCommandOutput,
   DeleteRelationalDatabaseSnapshotCommand,
-  DeleteRelationalDatabaseSnapshotCommandInput,
-  DeleteRelationalDatabaseSnapshotCommandOutput,
 } from "./commands/DeleteRelationalDatabaseSnapshotCommand";
 import {
-  DetachCertificateFromDistributionCommand,
-  DetachCertificateFromDistributionCommandInput,
-  DetachCertificateFromDistributionCommandOutput,
-} from "./commands/DetachCertificateFromDistributionCommand";
-import { DetachDiskCommand, DetachDiskCommandInput, DetachDiskCommandOutput } from "./commands/DetachDiskCommand";
+  type DeleteSubdomainCommandInput,
+  type DeleteSubdomainCommandOutput,
+  DeleteSubdomainCommand,
+} from "./commands/DeleteSubdomainCommand";
 import {
+  type DetachCertificateFromDistributionCommandInput,
+  type DetachCertificateFromDistributionCommandOutput,
+  DetachCertificateFromDistributionCommand,
+} from "./commands/DetachCertificateFromDistributionCommand";
+import {
+  type DetachDiskCommandInput,
+  type DetachDiskCommandOutput,
+  DetachDiskCommand,
+} from "./commands/DetachDiskCommand";
+import {
+  type DetachInstancesFromLoadBalancerCommandInput,
+  type DetachInstancesFromLoadBalancerCommandOutput,
   DetachInstancesFromLoadBalancerCommand,
-  DetachInstancesFromLoadBalancerCommandInput,
-  DetachInstancesFromLoadBalancerCommandOutput,
 } from "./commands/DetachInstancesFromLoadBalancerCommand";
 import {
+  type DetachStaticIpCommandInput,
+  type DetachStaticIpCommandOutput,
   DetachStaticIpCommand,
-  DetachStaticIpCommandInput,
-  DetachStaticIpCommandOutput,
 } from "./commands/DetachStaticIpCommand";
 import {
+  type DisableAddOnCommandInput,
+  type DisableAddOnCommandOutput,
   DisableAddOnCommand,
-  DisableAddOnCommandInput,
-  DisableAddOnCommandOutput,
 } from "./commands/DisableAddOnCommand";
 import {
+  type DownloadDefaultKeyPairCommandInput,
+  type DownloadDefaultKeyPairCommandOutput,
   DownloadDefaultKeyPairCommand,
-  DownloadDefaultKeyPairCommandInput,
-  DownloadDefaultKeyPairCommandOutput,
 } from "./commands/DownloadDefaultKeyPairCommand";
-import { EnableAddOnCommand, EnableAddOnCommandInput, EnableAddOnCommandOutput } from "./commands/EnableAddOnCommand";
 import {
+  type EnableAddOnCommandInput,
+  type EnableAddOnCommandOutput,
+  EnableAddOnCommand,
+} from "./commands/EnableAddOnCommand";
+import {
+  type ExportSnapshotCommandInput,
+  type ExportSnapshotCommandOutput,
   ExportSnapshotCommand,
-  ExportSnapshotCommandInput,
-  ExportSnapshotCommandOutput,
 } from "./commands/ExportSnapshotCommand";
 import {
+  type GetActiveNamesCommandInput,
+  type GetActiveNamesCommandOutput,
   GetActiveNamesCommand,
-  GetActiveNamesCommandInput,
-  GetActiveNamesCommandOutput,
 } from "./commands/GetActiveNamesCommand";
-import { GetAlarmsCommand, GetAlarmsCommandInput, GetAlarmsCommandOutput } from "./commands/GetAlarmsCommand";
+import { type GetAlarmsCommandInput, type GetAlarmsCommandOutput, GetAlarmsCommand } from "./commands/GetAlarmsCommand";
 import {
+  type GetAutoSnapshotsCommandInput,
+  type GetAutoSnapshotsCommandOutput,
   GetAutoSnapshotsCommand,
-  GetAutoSnapshotsCommandInput,
-  GetAutoSnapshotsCommandOutput,
 } from "./commands/GetAutoSnapshotsCommand";
 import {
+  type GetBlueprintsCommandInput,
+  type GetBlueprintsCommandOutput,
   GetBlueprintsCommand,
-  GetBlueprintsCommandInput,
-  GetBlueprintsCommandOutput,
 } from "./commands/GetBlueprintsCommand";
 import {
+  type GetBucketAccessKeysCommandInput,
+  type GetBucketAccessKeysCommandOutput,
   GetBucketAccessKeysCommand,
-  GetBucketAccessKeysCommandInput,
-  GetBucketAccessKeysCommandOutput,
 } from "./commands/GetBucketAccessKeysCommand";
 import {
+  type GetBucketBundlesCommandInput,
+  type GetBucketBundlesCommandOutput,
   GetBucketBundlesCommand,
-  GetBucketBundlesCommandInput,
-  GetBucketBundlesCommandOutput,
 } from "./commands/GetBucketBundlesCommand";
 import {
+  type GetBucketMetricDataCommandInput,
+  type GetBucketMetricDataCommandOutput,
   GetBucketMetricDataCommand,
-  GetBucketMetricDataCommandInput,
-  GetBucketMetricDataCommandOutput,
 } from "./commands/GetBucketMetricDataCommand";
-import { GetBucketsCommand, GetBucketsCommandInput, GetBucketsCommandOutput } from "./commands/GetBucketsCommand";
-import { GetBundlesCommand, GetBundlesCommandInput, GetBundlesCommandOutput } from "./commands/GetBundlesCommand";
 import {
+  type GetBucketsCommandInput,
+  type GetBucketsCommandOutput,
+  GetBucketsCommand,
+} from "./commands/GetBucketsCommand";
+import {
+  type GetBundlesCommandInput,
+  type GetBundlesCommandOutput,
+  GetBundlesCommand,
+} from "./commands/GetBundlesCommand";
+import {
+  type GetCertificatesCommandInput,
+  type GetCertificatesCommandOutput,
   GetCertificatesCommand,
-  GetCertificatesCommandInput,
-  GetCertificatesCommandOutput,
 } from "./commands/GetCertificatesCommand";
 import {
+  type GetCloudFormationStackRecordsCommandInput,
+  type GetCloudFormationStackRecordsCommandOutput,
   GetCloudFormationStackRecordsCommand,
-  GetCloudFormationStackRecordsCommandInput,
-  GetCloudFormationStackRecordsCommandOutput,
 } from "./commands/GetCloudFormationStackRecordsCommand";
 import {
+  type GetContactMethodsCommandInput,
+  type GetContactMethodsCommandOutput,
   GetContactMethodsCommand,
-  GetContactMethodsCommandInput,
-  GetContactMethodsCommandOutput,
 } from "./commands/GetContactMethodsCommand";
 import {
+  type GetContainerAPIMetadataCommandInput,
+  type GetContainerAPIMetadataCommandOutput,
   GetContainerAPIMetadataCommand,
-  GetContainerAPIMetadataCommandInput,
-  GetContainerAPIMetadataCommandOutput,
 } from "./commands/GetContainerAPIMetadataCommand";
 import {
+  type GetContainerImagesCommandInput,
+  type GetContainerImagesCommandOutput,
   GetContainerImagesCommand,
-  GetContainerImagesCommandInput,
-  GetContainerImagesCommandOutput,
 } from "./commands/GetContainerImagesCommand";
 import {
+  type GetContainerLogCommandInput,
+  type GetContainerLogCommandOutput,
   GetContainerLogCommand,
-  GetContainerLogCommandInput,
-  GetContainerLogCommandOutput,
 } from "./commands/GetContainerLogCommand";
 import {
+  type GetContainerServiceDeploymentsCommandInput,
+  type GetContainerServiceDeploymentsCommandOutput,
   GetContainerServiceDeploymentsCommand,
-  GetContainerServiceDeploymentsCommandInput,
-  GetContainerServiceDeploymentsCommandOutput,
 } from "./commands/GetContainerServiceDeploymentsCommand";
 import {
+  type GetContainerServiceMetricDataCommandInput,
+  type GetContainerServiceMetricDataCommandOutput,
   GetContainerServiceMetricDataCommand,
-  GetContainerServiceMetricDataCommandInput,
-  GetContainerServiceMetricDataCommandOutput,
 } from "./commands/GetContainerServiceMetricDataCommand";
 import {
+  type GetContainerServicePowersCommandInput,
+  type GetContainerServicePowersCommandOutput,
   GetContainerServicePowersCommand,
-  GetContainerServicePowersCommandInput,
-  GetContainerServicePowersCommandOutput,
 } from "./commands/GetContainerServicePowersCommand";
 import {
+  type GetContainerServicesCommandInput,
+  type GetContainerServicesCommandOutput,
   GetContainerServicesCommand,
-  GetContainerServicesCommandInput,
-  GetContainerServicesCommandOutput,
 } from "./commands/GetContainerServicesCommand";
-import { GetDiskCommand, GetDiskCommandInput, GetDiskCommandOutput } from "./commands/GetDiskCommand";
-import { GetDisksCommand, GetDisksCommandInput, GetDisksCommandOutput } from "./commands/GetDisksCommand";
 import {
+  type GetCostEstimateCommandInput,
+  type GetCostEstimateCommandOutput,
+  GetCostEstimateCommand,
+} from "./commands/GetCostEstimateCommand";
+import { type GetDiskCommandInput, type GetDiskCommandOutput, GetDiskCommand } from "./commands/GetDiskCommand";
+import { type GetDisksCommandInput, type GetDisksCommandOutput, GetDisksCommand } from "./commands/GetDisksCommand";
+import {
+  type GetDiskSnapshotCommandInput,
+  type GetDiskSnapshotCommandOutput,
   GetDiskSnapshotCommand,
-  GetDiskSnapshotCommandInput,
-  GetDiskSnapshotCommandOutput,
 } from "./commands/GetDiskSnapshotCommand";
 import {
+  type GetDiskSnapshotsCommandInput,
+  type GetDiskSnapshotsCommandOutput,
   GetDiskSnapshotsCommand,
-  GetDiskSnapshotsCommandInput,
-  GetDiskSnapshotsCommandOutput,
 } from "./commands/GetDiskSnapshotsCommand";
 import {
+  type GetDistributionBundlesCommandInput,
+  type GetDistributionBundlesCommandOutput,
   GetDistributionBundlesCommand,
-  GetDistributionBundlesCommandInput,
-  GetDistributionBundlesCommandOutput,
 } from "./commands/GetDistributionBundlesCommand";
 import {
+  type GetDistributionLatestCacheResetCommandInput,
+  type GetDistributionLatestCacheResetCommandOutput,
   GetDistributionLatestCacheResetCommand,
-  GetDistributionLatestCacheResetCommandInput,
-  GetDistributionLatestCacheResetCommandOutput,
 } from "./commands/GetDistributionLatestCacheResetCommand";
 import {
+  type GetDistributionMetricDataCommandInput,
+  type GetDistributionMetricDataCommandOutput,
   GetDistributionMetricDataCommand,
-  GetDistributionMetricDataCommandInput,
-  GetDistributionMetricDataCommandOutput,
 } from "./commands/GetDistributionMetricDataCommand";
 import {
+  type GetDistributionsCommandInput,
+  type GetDistributionsCommandOutput,
   GetDistributionsCommand,
-  GetDistributionsCommandInput,
-  GetDistributionsCommandOutput,
 } from "./commands/GetDistributionsCommand";
-import { GetDomainCommand, GetDomainCommandInput, GetDomainCommandOutput } from "./commands/GetDomainCommand";
-import { GetDomainsCommand, GetDomainsCommandInput, GetDomainsCommandOutput } from "./commands/GetDomainsCommand";
+import { type GetDomainCommandInput, type GetDomainCommandOutput, GetDomainCommand } from "./commands/GetDomainCommand";
 import {
+  type GetDomainsCommandInput,
+  type GetDomainsCommandOutput,
+  GetDomainsCommand,
+} from "./commands/GetDomainsCommand";
+import {
+  type GetExportSnapshotRecordsCommandInput,
+  type GetExportSnapshotRecordsCommandOutput,
   GetExportSnapshotRecordsCommand,
-  GetExportSnapshotRecordsCommandInput,
-  GetExportSnapshotRecordsCommandOutput,
 } from "./commands/GetExportSnapshotRecordsCommand";
 import {
+  type GetInstanceAccessDetailsCommandInput,
+  type GetInstanceAccessDetailsCommandOutput,
   GetInstanceAccessDetailsCommand,
-  GetInstanceAccessDetailsCommandInput,
-  GetInstanceAccessDetailsCommandOutput,
 } from "./commands/GetInstanceAccessDetailsCommand";
-import { GetInstanceCommand, GetInstanceCommandInput, GetInstanceCommandOutput } from "./commands/GetInstanceCommand";
 import {
+  type GetInstanceCommandInput,
+  type GetInstanceCommandOutput,
+  GetInstanceCommand,
+} from "./commands/GetInstanceCommand";
+import {
+  type GetInstanceMetricDataCommandInput,
+  type GetInstanceMetricDataCommandOutput,
   GetInstanceMetricDataCommand,
-  GetInstanceMetricDataCommandInput,
-  GetInstanceMetricDataCommandOutput,
 } from "./commands/GetInstanceMetricDataCommand";
 import {
+  type GetInstancePortStatesCommandInput,
+  type GetInstancePortStatesCommandOutput,
   GetInstancePortStatesCommand,
-  GetInstancePortStatesCommandInput,
-  GetInstancePortStatesCommandOutput,
 } from "./commands/GetInstancePortStatesCommand";
 import {
+  type GetInstancesCommandInput,
+  type GetInstancesCommandOutput,
   GetInstancesCommand,
-  GetInstancesCommandInput,
-  GetInstancesCommandOutput,
 } from "./commands/GetInstancesCommand";
 import {
+  type GetInstanceSnapshotCommandInput,
+  type GetInstanceSnapshotCommandOutput,
   GetInstanceSnapshotCommand,
-  GetInstanceSnapshotCommandInput,
-  GetInstanceSnapshotCommandOutput,
 } from "./commands/GetInstanceSnapshotCommand";
 import {
+  type GetInstanceSnapshotsCommandInput,
+  type GetInstanceSnapshotsCommandOutput,
   GetInstanceSnapshotsCommand,
-  GetInstanceSnapshotsCommandInput,
-  GetInstanceSnapshotsCommandOutput,
 } from "./commands/GetInstanceSnapshotsCommand";
 import {
+  type GetInstanceStateCommandInput,
+  type GetInstanceStateCommandOutput,
   GetInstanceStateCommand,
-  GetInstanceStateCommandInput,
-  GetInstanceStateCommandOutput,
 } from "./commands/GetInstanceStateCommand";
-import { GetKeyPairCommand, GetKeyPairCommandInput, GetKeyPairCommandOutput } from "./commands/GetKeyPairCommand";
-import { GetKeyPairsCommand, GetKeyPairsCommandInput, GetKeyPairsCommandOutput } from "./commands/GetKeyPairsCommand";
 import {
+  type GetKeyPairCommandInput,
+  type GetKeyPairCommandOutput,
+  GetKeyPairCommand,
+} from "./commands/GetKeyPairCommand";
+import {
+  type GetKeyPairsCommandInput,
+  type GetKeyPairsCommandOutput,
+  GetKeyPairsCommand,
+} from "./commands/GetKeyPairsCommand";
+import {
+  type GetLoadBalancerCommandInput,
+  type GetLoadBalancerCommandOutput,
   GetLoadBalancerCommand,
-  GetLoadBalancerCommandInput,
-  GetLoadBalancerCommandOutput,
 } from "./commands/GetLoadBalancerCommand";
 import {
+  type GetLoadBalancerMetricDataCommandInput,
+  type GetLoadBalancerMetricDataCommandOutput,
   GetLoadBalancerMetricDataCommand,
-  GetLoadBalancerMetricDataCommandInput,
-  GetLoadBalancerMetricDataCommandOutput,
 } from "./commands/GetLoadBalancerMetricDataCommand";
 import {
+  type GetLoadBalancersCommandInput,
+  type GetLoadBalancersCommandOutput,
   GetLoadBalancersCommand,
-  GetLoadBalancersCommandInput,
-  GetLoadBalancersCommandOutput,
 } from "./commands/GetLoadBalancersCommand";
 import {
+  type GetLoadBalancerTlsCertificatesCommandInput,
+  type GetLoadBalancerTlsCertificatesCommandOutput,
   GetLoadBalancerTlsCertificatesCommand,
-  GetLoadBalancerTlsCertificatesCommandInput,
-  GetLoadBalancerTlsCertificatesCommandOutput,
 } from "./commands/GetLoadBalancerTlsCertificatesCommand";
 import {
+  type GetLoadBalancerTlsPoliciesCommandInput,
+  type GetLoadBalancerTlsPoliciesCommandOutput,
   GetLoadBalancerTlsPoliciesCommand,
-  GetLoadBalancerTlsPoliciesCommandInput,
-  GetLoadBalancerTlsPoliciesCommandOutput,
 } from "./commands/GetLoadBalancerTlsPoliciesCommand";
 import {
+  type GetOperationCommandInput,
+  type GetOperationCommandOutput,
   GetOperationCommand,
-  GetOperationCommandInput,
-  GetOperationCommandOutput,
 } from "./commands/GetOperationCommand";
 import {
+  type GetOperationsCommandInput,
+  type GetOperationsCommandOutput,
   GetOperationsCommand,
-  GetOperationsCommandInput,
-  GetOperationsCommandOutput,
 } from "./commands/GetOperationsCommand";
 import {
+  type GetOperationsForResourceCommandInput,
+  type GetOperationsForResourceCommandOutput,
   GetOperationsForResourceCommand,
-  GetOperationsForResourceCommandInput,
-  GetOperationsForResourceCommandOutput,
 } from "./commands/GetOperationsForResourceCommand";
-import { GetRegionsCommand, GetRegionsCommandInput, GetRegionsCommandOutput } from "./commands/GetRegionsCommand";
 import {
+  type GetProfileCommandInput,
+  type GetProfileCommandOutput,
+  GetProfileCommand,
+} from "./commands/GetProfileCommand";
+import {
+  type GetRegionsCommandInput,
+  type GetRegionsCommandOutput,
+  GetRegionsCommand,
+} from "./commands/GetRegionsCommand";
+import {
+  type GetRelationalDatabaseBlueprintsCommandInput,
+  type GetRelationalDatabaseBlueprintsCommandOutput,
   GetRelationalDatabaseBlueprintsCommand,
-  GetRelationalDatabaseBlueprintsCommandInput,
-  GetRelationalDatabaseBlueprintsCommandOutput,
 } from "./commands/GetRelationalDatabaseBlueprintsCommand";
 import {
+  type GetRelationalDatabaseBundlesCommandInput,
+  type GetRelationalDatabaseBundlesCommandOutput,
   GetRelationalDatabaseBundlesCommand,
-  GetRelationalDatabaseBundlesCommandInput,
-  GetRelationalDatabaseBundlesCommandOutput,
 } from "./commands/GetRelationalDatabaseBundlesCommand";
 import {
+  type GetRelationalDatabaseCommandInput,
+  type GetRelationalDatabaseCommandOutput,
   GetRelationalDatabaseCommand,
-  GetRelationalDatabaseCommandInput,
-  GetRelationalDatabaseCommandOutput,
 } from "./commands/GetRelationalDatabaseCommand";
 import {
+  type GetRelationalDatabaseEventsCommandInput,
+  type GetRelationalDatabaseEventsCommandOutput,
   GetRelationalDatabaseEventsCommand,
-  GetRelationalDatabaseEventsCommandInput,
-  GetRelationalDatabaseEventsCommandOutput,
 } from "./commands/GetRelationalDatabaseEventsCommand";
 import {
+  type GetRelationalDatabaseLogEventsCommandInput,
+  type GetRelationalDatabaseLogEventsCommandOutput,
   GetRelationalDatabaseLogEventsCommand,
-  GetRelationalDatabaseLogEventsCommandInput,
-  GetRelationalDatabaseLogEventsCommandOutput,
 } from "./commands/GetRelationalDatabaseLogEventsCommand";
 import {
+  type GetRelationalDatabaseLogStreamsCommandInput,
+  type GetRelationalDatabaseLogStreamsCommandOutput,
   GetRelationalDatabaseLogStreamsCommand,
-  GetRelationalDatabaseLogStreamsCommandInput,
-  GetRelationalDatabaseLogStreamsCommandOutput,
 } from "./commands/GetRelationalDatabaseLogStreamsCommand";
 import {
+  type GetRelationalDatabaseMasterUserPasswordCommandInput,
+  type GetRelationalDatabaseMasterUserPasswordCommandOutput,
   GetRelationalDatabaseMasterUserPasswordCommand,
-  GetRelationalDatabaseMasterUserPasswordCommandInput,
-  GetRelationalDatabaseMasterUserPasswordCommandOutput,
 } from "./commands/GetRelationalDatabaseMasterUserPasswordCommand";
 import {
+  type GetRelationalDatabaseMetricDataCommandInput,
+  type GetRelationalDatabaseMetricDataCommandOutput,
   GetRelationalDatabaseMetricDataCommand,
-  GetRelationalDatabaseMetricDataCommandInput,
-  GetRelationalDatabaseMetricDataCommandOutput,
 } from "./commands/GetRelationalDatabaseMetricDataCommand";
 import {
+  type GetRelationalDatabaseParametersCommandInput,
+  type GetRelationalDatabaseParametersCommandOutput,
   GetRelationalDatabaseParametersCommand,
-  GetRelationalDatabaseParametersCommandInput,
-  GetRelationalDatabaseParametersCommandOutput,
 } from "./commands/GetRelationalDatabaseParametersCommand";
 import {
+  type GetRelationalDatabasesCommandInput,
+  type GetRelationalDatabasesCommandOutput,
   GetRelationalDatabasesCommand,
-  GetRelationalDatabasesCommandInput,
-  GetRelationalDatabasesCommandOutput,
 } from "./commands/GetRelationalDatabasesCommand";
 import {
+  type GetRelationalDatabaseSnapshotCommandInput,
+  type GetRelationalDatabaseSnapshotCommandOutput,
   GetRelationalDatabaseSnapshotCommand,
-  GetRelationalDatabaseSnapshotCommandInput,
-  GetRelationalDatabaseSnapshotCommandOutput,
 } from "./commands/GetRelationalDatabaseSnapshotCommand";
 import {
+  type GetRelationalDatabaseSnapshotsCommandInput,
+  type GetRelationalDatabaseSnapshotsCommandOutput,
   GetRelationalDatabaseSnapshotsCommand,
-  GetRelationalDatabaseSnapshotsCommandInput,
-  GetRelationalDatabaseSnapshotsCommandOutput,
 } from "./commands/GetRelationalDatabaseSnapshotsCommand";
-import { GetStaticIpCommand, GetStaticIpCommandInput, GetStaticIpCommandOutput } from "./commands/GetStaticIpCommand";
 import {
+  type GetSetupHistoryCommandInput,
+  type GetSetupHistoryCommandOutput,
+  GetSetupHistoryCommand,
+} from "./commands/GetSetupHistoryCommand";
+import {
+  type GetStaticIpCommandInput,
+  type GetStaticIpCommandOutput,
+  GetStaticIpCommand,
+} from "./commands/GetStaticIpCommand";
+import {
+  type GetStaticIpsCommandInput,
+  type GetStaticIpsCommandOutput,
   GetStaticIpsCommand,
-  GetStaticIpsCommandInput,
-  GetStaticIpsCommandOutput,
 } from "./commands/GetStaticIpsCommand";
 import {
+  type GetSubdomainsCommandInput,
+  type GetSubdomainsCommandOutput,
+  GetSubdomainsCommand,
+} from "./commands/GetSubdomainsCommand";
+import {
+  type ImportKeyPairCommandInput,
+  type ImportKeyPairCommandOutput,
   ImportKeyPairCommand,
-  ImportKeyPairCommandInput,
-  ImportKeyPairCommandOutput,
 } from "./commands/ImportKeyPairCommand";
-import { IsVpcPeeredCommand, IsVpcPeeredCommandInput, IsVpcPeeredCommandOutput } from "./commands/IsVpcPeeredCommand";
 import {
+  type IsVpcPeeredCommandInput,
+  type IsVpcPeeredCommandOutput,
+  IsVpcPeeredCommand,
+} from "./commands/IsVpcPeeredCommand";
+import {
+  type OpenInstancePublicPortsCommandInput,
+  type OpenInstancePublicPortsCommandOutput,
   OpenInstancePublicPortsCommand,
-  OpenInstancePublicPortsCommandInput,
-  OpenInstancePublicPortsCommandOutput,
 } from "./commands/OpenInstancePublicPortsCommand";
-import { PeerVpcCommand, PeerVpcCommandInput, PeerVpcCommandOutput } from "./commands/PeerVpcCommand";
-import { PutAlarmCommand, PutAlarmCommandInput, PutAlarmCommandOutput } from "./commands/PutAlarmCommand";
+import { type PeerVpcCommandInput, type PeerVpcCommandOutput, PeerVpcCommand } from "./commands/PeerVpcCommand";
+import { type PutAlarmCommandInput, type PutAlarmCommandOutput, PutAlarmCommand } from "./commands/PutAlarmCommand";
 import {
+  type PutInstancePublicPortsCommandInput,
+  type PutInstancePublicPortsCommandOutput,
   PutInstancePublicPortsCommand,
-  PutInstancePublicPortsCommandInput,
-  PutInstancePublicPortsCommandOutput,
 } from "./commands/PutInstancePublicPortsCommand";
 import {
+  type RebootInstanceCommandInput,
+  type RebootInstanceCommandOutput,
   RebootInstanceCommand,
-  RebootInstanceCommandInput,
-  RebootInstanceCommandOutput,
 } from "./commands/RebootInstanceCommand";
 import {
+  type RebootRelationalDatabaseCommandInput,
+  type RebootRelationalDatabaseCommandOutput,
   RebootRelationalDatabaseCommand,
-  RebootRelationalDatabaseCommandInput,
-  RebootRelationalDatabaseCommandOutput,
 } from "./commands/RebootRelationalDatabaseCommand";
 import {
+  type RegisterContainerImageCommandInput,
+  type RegisterContainerImageCommandOutput,
   RegisterContainerImageCommand,
-  RegisterContainerImageCommandInput,
-  RegisterContainerImageCommandOutput,
 } from "./commands/RegisterContainerImageCommand";
 import {
+  type ReleaseStaticIpCommandInput,
+  type ReleaseStaticIpCommandOutput,
   ReleaseStaticIpCommand,
-  ReleaseStaticIpCommandInput,
-  ReleaseStaticIpCommandOutput,
 } from "./commands/ReleaseStaticIpCommand";
 import {
+  type ResetDistributionCacheCommandInput,
+  type ResetDistributionCacheCommandOutput,
   ResetDistributionCacheCommand,
-  ResetDistributionCacheCommandInput,
-  ResetDistributionCacheCommandOutput,
 } from "./commands/ResetDistributionCacheCommand";
 import {
+  type SendContactMethodVerificationCommandInput,
+  type SendContactMethodVerificationCommandOutput,
   SendContactMethodVerificationCommand,
-  SendContactMethodVerificationCommandInput,
-  SendContactMethodVerificationCommandOutput,
 } from "./commands/SendContactMethodVerificationCommand";
 import {
+  type SetIpAddressTypeCommandInput,
+  type SetIpAddressTypeCommandOutput,
   SetIpAddressTypeCommand,
-  SetIpAddressTypeCommandInput,
-  SetIpAddressTypeCommandOutput,
 } from "./commands/SetIpAddressTypeCommand";
 import {
+  type SetResourceAccessForBucketCommandInput,
+  type SetResourceAccessForBucketCommandOutput,
   SetResourceAccessForBucketCommand,
-  SetResourceAccessForBucketCommandInput,
-  SetResourceAccessForBucketCommandOutput,
 } from "./commands/SetResourceAccessForBucketCommand";
 import {
+  type SetupInstanceHttpsCommandInput,
+  type SetupInstanceHttpsCommandOutput,
+  SetupInstanceHttpsCommand,
+} from "./commands/SetupInstanceHttpsCommand";
+import {
+  type StartGUISessionCommandInput,
+  type StartGUISessionCommandOutput,
+  StartGUISessionCommand,
+} from "./commands/StartGUISessionCommand";
+import {
+  type StartInstanceCommandInput,
+  type StartInstanceCommandOutput,
   StartInstanceCommand,
-  StartInstanceCommandInput,
-  StartInstanceCommandOutput,
 } from "./commands/StartInstanceCommand";
 import {
+  type StartRelationalDatabaseCommandInput,
+  type StartRelationalDatabaseCommandOutput,
   StartRelationalDatabaseCommand,
-  StartRelationalDatabaseCommandInput,
-  StartRelationalDatabaseCommandOutput,
 } from "./commands/StartRelationalDatabaseCommand";
 import {
+  type StopGUISessionCommandInput,
+  type StopGUISessionCommandOutput,
+  StopGUISessionCommand,
+} from "./commands/StopGUISessionCommand";
+import {
+  type StopInstanceCommandInput,
+  type StopInstanceCommandOutput,
   StopInstanceCommand,
-  StopInstanceCommandInput,
-  StopInstanceCommandOutput,
 } from "./commands/StopInstanceCommand";
 import {
+  type StopRelationalDatabaseCommandInput,
+  type StopRelationalDatabaseCommandOutput,
   StopRelationalDatabaseCommand,
-  StopRelationalDatabaseCommandInput,
-  StopRelationalDatabaseCommandOutput,
 } from "./commands/StopRelationalDatabaseCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
-import { TestAlarmCommand, TestAlarmCommandInput, TestAlarmCommandOutput } from "./commands/TestAlarmCommand";
-import { UnpeerVpcCommand, UnpeerVpcCommandInput, UnpeerVpcCommandOutput } from "./commands/UnpeerVpcCommand";
 import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import { type TestAlarmCommandInput, type TestAlarmCommandOutput, TestAlarmCommand } from "./commands/TestAlarmCommand";
+import { type UnpeerVpcCommandInput, type UnpeerVpcCommandOutput, UnpeerVpcCommand } from "./commands/UnpeerVpcCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
 import {
+  type UpdateBucketBundleCommandInput,
+  type UpdateBucketBundleCommandOutput,
   UpdateBucketBundleCommand,
-  UpdateBucketBundleCommandInput,
-  UpdateBucketBundleCommandOutput,
 } from "./commands/UpdateBucketBundleCommand";
 import {
+  type UpdateBucketCommandInput,
+  type UpdateBucketCommandOutput,
   UpdateBucketCommand,
-  UpdateBucketCommandInput,
-  UpdateBucketCommandOutput,
 } from "./commands/UpdateBucketCommand";
 import {
+  type UpdateContainerServiceCommandInput,
+  type UpdateContainerServiceCommandOutput,
   UpdateContainerServiceCommand,
-  UpdateContainerServiceCommandInput,
-  UpdateContainerServiceCommandOutput,
 } from "./commands/UpdateContainerServiceCommand";
 import {
+  type UpdateDistributionBundleCommandInput,
+  type UpdateDistributionBundleCommandOutput,
   UpdateDistributionBundleCommand,
-  UpdateDistributionBundleCommandInput,
-  UpdateDistributionBundleCommandOutput,
 } from "./commands/UpdateDistributionBundleCommand";
 import {
+  type UpdateDistributionCommandInput,
+  type UpdateDistributionCommandOutput,
   UpdateDistributionCommand,
-  UpdateDistributionCommandInput,
-  UpdateDistributionCommandOutput,
 } from "./commands/UpdateDistributionCommand";
 import {
+  type UpdateDomainEntryCommandInput,
+  type UpdateDomainEntryCommandOutput,
   UpdateDomainEntryCommand,
-  UpdateDomainEntryCommandInput,
-  UpdateDomainEntryCommandOutput,
 } from "./commands/UpdateDomainEntryCommand";
 import {
+  type UpdateInstanceMetadataOptionsCommandInput,
+  type UpdateInstanceMetadataOptionsCommandOutput,
+  UpdateInstanceMetadataOptionsCommand,
+} from "./commands/UpdateInstanceMetadataOptionsCommand";
+import {
+  type UpdateLoadBalancerAttributeCommandInput,
+  type UpdateLoadBalancerAttributeCommandOutput,
   UpdateLoadBalancerAttributeCommand,
-  UpdateLoadBalancerAttributeCommandInput,
-  UpdateLoadBalancerAttributeCommandOutput,
 } from "./commands/UpdateLoadBalancerAttributeCommand";
 import {
+  type UpdateRelationalDatabaseCommandInput,
+  type UpdateRelationalDatabaseCommandOutput,
   UpdateRelationalDatabaseCommand,
-  UpdateRelationalDatabaseCommandInput,
-  UpdateRelationalDatabaseCommandOutput,
 } from "./commands/UpdateRelationalDatabaseCommand";
 import {
+  type UpdateRelationalDatabaseParametersCommandInput,
+  type UpdateRelationalDatabaseParametersCommandOutput,
   UpdateRelationalDatabaseParametersCommand,
-  UpdateRelationalDatabaseParametersCommandInput,
-  UpdateRelationalDatabaseParametersCommandOutput,
 } from "./commands/UpdateRelationalDatabaseParametersCommand";
+import {
+  type UpdateSubdomainAssociationCommandInput,
+  type UpdateSubdomainAssociationCommandOutput,
+  UpdateSubdomainAssociationCommand,
+} from "./commands/UpdateSubdomainAssociationCommand";
 import { LightsailClient } from "./LightsailClient";
+
+const commands = {
+  AllocateStaticIpCommand,
+  AttachCertificateToDistributionCommand,
+  AttachDiskCommand,
+  AttachInstancesToLoadBalancerCommand,
+  AttachLoadBalancerTlsCertificateCommand,
+  AttachStaticIpCommand,
+  CheckSubdomainAvailabilityCommand,
+  CloseInstancePublicPortsCommand,
+  CopySnapshotCommand,
+  CreateBucketCommand,
+  CreateBucketAccessKeyCommand,
+  CreateCertificateCommand,
+  CreateCloudFormationStackCommand,
+  CreateContactMethodCommand,
+  CreateContainerServiceCommand,
+  CreateContainerServiceDeploymentCommand,
+  CreateContainerServiceRegistryLoginCommand,
+  CreateDiskCommand,
+  CreateDiskFromSnapshotCommand,
+  CreateDiskSnapshotCommand,
+  CreateDistributionCommand,
+  CreateDomainCommand,
+  CreateDomainEntryCommand,
+  CreateGUISessionAccessDetailsCommand,
+  CreateInstancesCommand,
+  CreateInstancesFromSnapshotCommand,
+  CreateInstanceSnapshotCommand,
+  CreateKeyPairCommand,
+  CreateLoadBalancerCommand,
+  CreateLoadBalancerTlsCertificateCommand,
+  CreateRelationalDatabaseCommand,
+  CreateRelationalDatabaseFromSnapshotCommand,
+  CreateRelationalDatabaseSnapshotCommand,
+  CreateSubdomainCommand,
+  DeleteAlarmCommand,
+  DeleteAutoSnapshotCommand,
+  DeleteBucketCommand,
+  DeleteBucketAccessKeyCommand,
+  DeleteCertificateCommand,
+  DeleteContactMethodCommand,
+  DeleteContainerImageCommand,
+  DeleteContainerServiceCommand,
+  DeleteDiskCommand,
+  DeleteDiskSnapshotCommand,
+  DeleteDistributionCommand,
+  DeleteDomainCommand,
+  DeleteDomainEntryCommand,
+  DeleteInstanceCommand,
+  DeleteInstanceSnapshotCommand,
+  DeleteKeyPairCommand,
+  DeleteKnownHostKeysCommand,
+  DeleteLoadBalancerCommand,
+  DeleteLoadBalancerTlsCertificateCommand,
+  DeleteRelationalDatabaseCommand,
+  DeleteRelationalDatabaseSnapshotCommand,
+  DeleteSubdomainCommand,
+  DetachCertificateFromDistributionCommand,
+  DetachDiskCommand,
+  DetachInstancesFromLoadBalancerCommand,
+  DetachStaticIpCommand,
+  DisableAddOnCommand,
+  DownloadDefaultKeyPairCommand,
+  EnableAddOnCommand,
+  ExportSnapshotCommand,
+  GetActiveNamesCommand,
+  GetAlarmsCommand,
+  GetAutoSnapshotsCommand,
+  GetBlueprintsCommand,
+  GetBucketAccessKeysCommand,
+  GetBucketBundlesCommand,
+  GetBucketMetricDataCommand,
+  GetBucketsCommand,
+  GetBundlesCommand,
+  GetCertificatesCommand,
+  GetCloudFormationStackRecordsCommand,
+  GetContactMethodsCommand,
+  GetContainerAPIMetadataCommand,
+  GetContainerImagesCommand,
+  GetContainerLogCommand,
+  GetContainerServiceDeploymentsCommand,
+  GetContainerServiceMetricDataCommand,
+  GetContainerServicePowersCommand,
+  GetContainerServicesCommand,
+  GetCostEstimateCommand,
+  GetDiskCommand,
+  GetDisksCommand,
+  GetDiskSnapshotCommand,
+  GetDiskSnapshotsCommand,
+  GetDistributionBundlesCommand,
+  GetDistributionLatestCacheResetCommand,
+  GetDistributionMetricDataCommand,
+  GetDistributionsCommand,
+  GetDomainCommand,
+  GetDomainsCommand,
+  GetExportSnapshotRecordsCommand,
+  GetInstanceCommand,
+  GetInstanceAccessDetailsCommand,
+  GetInstanceMetricDataCommand,
+  GetInstancePortStatesCommand,
+  GetInstancesCommand,
+  GetInstanceSnapshotCommand,
+  GetInstanceSnapshotsCommand,
+  GetInstanceStateCommand,
+  GetKeyPairCommand,
+  GetKeyPairsCommand,
+  GetLoadBalancerCommand,
+  GetLoadBalancerMetricDataCommand,
+  GetLoadBalancersCommand,
+  GetLoadBalancerTlsCertificatesCommand,
+  GetLoadBalancerTlsPoliciesCommand,
+  GetOperationCommand,
+  GetOperationsCommand,
+  GetOperationsForResourceCommand,
+  GetProfileCommand,
+  GetRegionsCommand,
+  GetRelationalDatabaseCommand,
+  GetRelationalDatabaseBlueprintsCommand,
+  GetRelationalDatabaseBundlesCommand,
+  GetRelationalDatabaseEventsCommand,
+  GetRelationalDatabaseLogEventsCommand,
+  GetRelationalDatabaseLogStreamsCommand,
+  GetRelationalDatabaseMasterUserPasswordCommand,
+  GetRelationalDatabaseMetricDataCommand,
+  GetRelationalDatabaseParametersCommand,
+  GetRelationalDatabasesCommand,
+  GetRelationalDatabaseSnapshotCommand,
+  GetRelationalDatabaseSnapshotsCommand,
+  GetSetupHistoryCommand,
+  GetStaticIpCommand,
+  GetStaticIpsCommand,
+  GetSubdomainsCommand,
+  ImportKeyPairCommand,
+  IsVpcPeeredCommand,
+  OpenInstancePublicPortsCommand,
+  PeerVpcCommand,
+  PutAlarmCommand,
+  PutInstancePublicPortsCommand,
+  RebootInstanceCommand,
+  RebootRelationalDatabaseCommand,
+  RegisterContainerImageCommand,
+  ReleaseStaticIpCommand,
+  ResetDistributionCacheCommand,
+  SendContactMethodVerificationCommand,
+  SetIpAddressTypeCommand,
+  SetResourceAccessForBucketCommand,
+  SetupInstanceHttpsCommand,
+  StartGUISessionCommand,
+  StartInstanceCommand,
+  StartRelationalDatabaseCommand,
+  StopGUISessionCommand,
+  StopInstanceCommand,
+  StopRelationalDatabaseCommand,
+  TagResourceCommand,
+  TestAlarmCommand,
+  UnpeerVpcCommand,
+  UntagResourceCommand,
+  UpdateBucketCommand,
+  UpdateBucketBundleCommand,
+  UpdateContainerServiceCommand,
+  UpdateDistributionCommand,
+  UpdateDistributionBundleCommand,
+  UpdateDomainEntryCommand,
+  UpdateInstanceMetadataOptionsCommand,
+  UpdateLoadBalancerAttributeCommand,
+  UpdateRelationalDatabaseCommand,
+  UpdateRelationalDatabaseParametersCommand,
+  UpdateSubdomainAssociationCommand,
+};
+
+/**
+ * @public
+ */
+export interface LightsailRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface Lightsail {
+  /**
+   * @see {@link AllocateStaticIpCommand}
+   */
+  allocateStaticIp(
+    args: AllocateStaticIpCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<AllocateStaticIpCommandOutput>;
+  allocateStaticIp(
+    args: AllocateStaticIpCommandInput,
+    cb: (err: any, data?: AllocateStaticIpCommandOutput) => void
+  ): void;
+  allocateStaticIp(
+    args: AllocateStaticIpCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: AllocateStaticIpCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachCertificateToDistributionCommand}
+   */
+  attachCertificateToDistribution(
+    args: AttachCertificateToDistributionCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<AttachCertificateToDistributionCommandOutput>;
+  attachCertificateToDistribution(
+    args: AttachCertificateToDistributionCommandInput,
+    cb: (err: any, data?: AttachCertificateToDistributionCommandOutput) => void
+  ): void;
+  attachCertificateToDistribution(
+    args: AttachCertificateToDistributionCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: AttachCertificateToDistributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachDiskCommand}
+   */
+  attachDisk(
+    args: AttachDiskCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<AttachDiskCommandOutput>;
+  attachDisk(
+    args: AttachDiskCommandInput,
+    cb: (err: any, data?: AttachDiskCommandOutput) => void
+  ): void;
+  attachDisk(
+    args: AttachDiskCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: AttachDiskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachInstancesToLoadBalancerCommand}
+   */
+  attachInstancesToLoadBalancer(
+    args: AttachInstancesToLoadBalancerCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<AttachInstancesToLoadBalancerCommandOutput>;
+  attachInstancesToLoadBalancer(
+    args: AttachInstancesToLoadBalancerCommandInput,
+    cb: (err: any, data?: AttachInstancesToLoadBalancerCommandOutput) => void
+  ): void;
+  attachInstancesToLoadBalancer(
+    args: AttachInstancesToLoadBalancerCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: AttachInstancesToLoadBalancerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachLoadBalancerTlsCertificateCommand}
+   */
+  attachLoadBalancerTlsCertificate(
+    args: AttachLoadBalancerTlsCertificateCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<AttachLoadBalancerTlsCertificateCommandOutput>;
+  attachLoadBalancerTlsCertificate(
+    args: AttachLoadBalancerTlsCertificateCommandInput,
+    cb: (err: any, data?: AttachLoadBalancerTlsCertificateCommandOutput) => void
+  ): void;
+  attachLoadBalancerTlsCertificate(
+    args: AttachLoadBalancerTlsCertificateCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: AttachLoadBalancerTlsCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link AttachStaticIpCommand}
+   */
+  attachStaticIp(
+    args: AttachStaticIpCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<AttachStaticIpCommandOutput>;
+  attachStaticIp(
+    args: AttachStaticIpCommandInput,
+    cb: (err: any, data?: AttachStaticIpCommandOutput) => void
+  ): void;
+  attachStaticIp(
+    args: AttachStaticIpCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: AttachStaticIpCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CheckSubdomainAvailabilityCommand}
+   */
+  checkSubdomainAvailability(
+    args: CheckSubdomainAvailabilityCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CheckSubdomainAvailabilityCommandOutput>;
+  checkSubdomainAvailability(
+    args: CheckSubdomainAvailabilityCommandInput,
+    cb: (err: any, data?: CheckSubdomainAvailabilityCommandOutput) => void
+  ): void;
+  checkSubdomainAvailability(
+    args: CheckSubdomainAvailabilityCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CheckSubdomainAvailabilityCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CloseInstancePublicPortsCommand}
+   */
+  closeInstancePublicPorts(
+    args: CloseInstancePublicPortsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CloseInstancePublicPortsCommandOutput>;
+  closeInstancePublicPorts(
+    args: CloseInstancePublicPortsCommandInput,
+    cb: (err: any, data?: CloseInstancePublicPortsCommandOutput) => void
+  ): void;
+  closeInstancePublicPorts(
+    args: CloseInstancePublicPortsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CloseInstancePublicPortsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CopySnapshotCommand}
+   */
+  copySnapshot(
+    args: CopySnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CopySnapshotCommandOutput>;
+  copySnapshot(
+    args: CopySnapshotCommandInput,
+    cb: (err: any, data?: CopySnapshotCommandOutput) => void
+  ): void;
+  copySnapshot(
+    args: CopySnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CopySnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBucketCommand}
+   */
+  createBucket(
+    args: CreateBucketCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateBucketCommandOutput>;
+  createBucket(
+    args: CreateBucketCommandInput,
+    cb: (err: any, data?: CreateBucketCommandOutput) => void
+  ): void;
+  createBucket(
+    args: CreateBucketCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateBucketCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateBucketAccessKeyCommand}
+   */
+  createBucketAccessKey(
+    args: CreateBucketAccessKeyCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateBucketAccessKeyCommandOutput>;
+  createBucketAccessKey(
+    args: CreateBucketAccessKeyCommandInput,
+    cb: (err: any, data?: CreateBucketAccessKeyCommandOutput) => void
+  ): void;
+  createBucketAccessKey(
+    args: CreateBucketAccessKeyCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateBucketAccessKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCertificateCommand}
+   */
+  createCertificate(
+    args: CreateCertificateCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateCertificateCommandOutput>;
+  createCertificate(
+    args: CreateCertificateCommandInput,
+    cb: (err: any, data?: CreateCertificateCommandOutput) => void
+  ): void;
+  createCertificate(
+    args: CreateCertificateCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateCloudFormationStackCommand}
+   */
+  createCloudFormationStack(
+    args: CreateCloudFormationStackCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateCloudFormationStackCommandOutput>;
+  createCloudFormationStack(
+    args: CreateCloudFormationStackCommandInput,
+    cb: (err: any, data?: CreateCloudFormationStackCommandOutput) => void
+  ): void;
+  createCloudFormationStack(
+    args: CreateCloudFormationStackCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateCloudFormationStackCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContactMethodCommand}
+   */
+  createContactMethod(
+    args: CreateContactMethodCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateContactMethodCommandOutput>;
+  createContactMethod(
+    args: CreateContactMethodCommandInput,
+    cb: (err: any, data?: CreateContactMethodCommandOutput) => void
+  ): void;
+  createContactMethod(
+    args: CreateContactMethodCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateContactMethodCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContainerServiceCommand}
+   */
+  createContainerService(
+    args: CreateContainerServiceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateContainerServiceCommandOutput>;
+  createContainerService(
+    args: CreateContainerServiceCommandInput,
+    cb: (err: any, data?: CreateContainerServiceCommandOutput) => void
+  ): void;
+  createContainerService(
+    args: CreateContainerServiceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateContainerServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContainerServiceDeploymentCommand}
+   */
+  createContainerServiceDeployment(
+    args: CreateContainerServiceDeploymentCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateContainerServiceDeploymentCommandOutput>;
+  createContainerServiceDeployment(
+    args: CreateContainerServiceDeploymentCommandInput,
+    cb: (err: any, data?: CreateContainerServiceDeploymentCommandOutput) => void
+  ): void;
+  createContainerServiceDeployment(
+    args: CreateContainerServiceDeploymentCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateContainerServiceDeploymentCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateContainerServiceRegistryLoginCommand}
+   */
+  createContainerServiceRegistryLogin(): Promise<CreateContainerServiceRegistryLoginCommandOutput>;
+  createContainerServiceRegistryLogin(
+    args: CreateContainerServiceRegistryLoginCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateContainerServiceRegistryLoginCommandOutput>;
+  createContainerServiceRegistryLogin(
+    args: CreateContainerServiceRegistryLoginCommandInput,
+    cb: (err: any, data?: CreateContainerServiceRegistryLoginCommandOutput) => void
+  ): void;
+  createContainerServiceRegistryLogin(
+    args: CreateContainerServiceRegistryLoginCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateContainerServiceRegistryLoginCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDiskCommand}
+   */
+  createDisk(
+    args: CreateDiskCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateDiskCommandOutput>;
+  createDisk(
+    args: CreateDiskCommandInput,
+    cb: (err: any, data?: CreateDiskCommandOutput) => void
+  ): void;
+  createDisk(
+    args: CreateDiskCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateDiskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDiskFromSnapshotCommand}
+   */
+  createDiskFromSnapshot(
+    args: CreateDiskFromSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateDiskFromSnapshotCommandOutput>;
+  createDiskFromSnapshot(
+    args: CreateDiskFromSnapshotCommandInput,
+    cb: (err: any, data?: CreateDiskFromSnapshotCommandOutput) => void
+  ): void;
+  createDiskFromSnapshot(
+    args: CreateDiskFromSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateDiskFromSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDiskSnapshotCommand}
+   */
+  createDiskSnapshot(
+    args: CreateDiskSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateDiskSnapshotCommandOutput>;
+  createDiskSnapshot(
+    args: CreateDiskSnapshotCommandInput,
+    cb: (err: any, data?: CreateDiskSnapshotCommandOutput) => void
+  ): void;
+  createDiskSnapshot(
+    args: CreateDiskSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateDiskSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDistributionCommand}
+   */
+  createDistribution(
+    args: CreateDistributionCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateDistributionCommandOutput>;
+  createDistribution(
+    args: CreateDistributionCommandInput,
+    cb: (err: any, data?: CreateDistributionCommandOutput) => void
+  ): void;
+  createDistribution(
+    args: CreateDistributionCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateDistributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDomainCommand}
+   */
+  createDomain(
+    args: CreateDomainCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateDomainCommandOutput>;
+  createDomain(
+    args: CreateDomainCommandInput,
+    cb: (err: any, data?: CreateDomainCommandOutput) => void
+  ): void;
+  createDomain(
+    args: CreateDomainCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateDomainEntryCommand}
+   */
+  createDomainEntry(
+    args: CreateDomainEntryCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateDomainEntryCommandOutput>;
+  createDomainEntry(
+    args: CreateDomainEntryCommandInput,
+    cb: (err: any, data?: CreateDomainEntryCommandOutput) => void
+  ): void;
+  createDomainEntry(
+    args: CreateDomainEntryCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateDomainEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateGUISessionAccessDetailsCommand}
+   */
+  createGUISessionAccessDetails(
+    args: CreateGUISessionAccessDetailsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateGUISessionAccessDetailsCommandOutput>;
+  createGUISessionAccessDetails(
+    args: CreateGUISessionAccessDetailsCommandInput,
+    cb: (err: any, data?: CreateGUISessionAccessDetailsCommandOutput) => void
+  ): void;
+  createGUISessionAccessDetails(
+    args: CreateGUISessionAccessDetailsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateGUISessionAccessDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstancesCommand}
+   */
+  createInstances(
+    args: CreateInstancesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateInstancesCommandOutput>;
+  createInstances(
+    args: CreateInstancesCommandInput,
+    cb: (err: any, data?: CreateInstancesCommandOutput) => void
+  ): void;
+  createInstances(
+    args: CreateInstancesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstancesFromSnapshotCommand}
+   */
+  createInstancesFromSnapshot(
+    args: CreateInstancesFromSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateInstancesFromSnapshotCommandOutput>;
+  createInstancesFromSnapshot(
+    args: CreateInstancesFromSnapshotCommandInput,
+    cb: (err: any, data?: CreateInstancesFromSnapshotCommandOutput) => void
+  ): void;
+  createInstancesFromSnapshot(
+    args: CreateInstancesFromSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateInstancesFromSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateInstanceSnapshotCommand}
+   */
+  createInstanceSnapshot(
+    args: CreateInstanceSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateInstanceSnapshotCommandOutput>;
+  createInstanceSnapshot(
+    args: CreateInstanceSnapshotCommandInput,
+    cb: (err: any, data?: CreateInstanceSnapshotCommandOutput) => void
+  ): void;
+  createInstanceSnapshot(
+    args: CreateInstanceSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateInstanceSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateKeyPairCommand}
+   */
+  createKeyPair(
+    args: CreateKeyPairCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateKeyPairCommandOutput>;
+  createKeyPair(
+    args: CreateKeyPairCommandInput,
+    cb: (err: any, data?: CreateKeyPairCommandOutput) => void
+  ): void;
+  createKeyPair(
+    args: CreateKeyPairCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateKeyPairCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLoadBalancerCommand}
+   */
+  createLoadBalancer(
+    args: CreateLoadBalancerCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateLoadBalancerCommandOutput>;
+  createLoadBalancer(
+    args: CreateLoadBalancerCommandInput,
+    cb: (err: any, data?: CreateLoadBalancerCommandOutput) => void
+  ): void;
+  createLoadBalancer(
+    args: CreateLoadBalancerCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateLoadBalancerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateLoadBalancerTlsCertificateCommand}
+   */
+  createLoadBalancerTlsCertificate(
+    args: CreateLoadBalancerTlsCertificateCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateLoadBalancerTlsCertificateCommandOutput>;
+  createLoadBalancerTlsCertificate(
+    args: CreateLoadBalancerTlsCertificateCommandInput,
+    cb: (err: any, data?: CreateLoadBalancerTlsCertificateCommandOutput) => void
+  ): void;
+  createLoadBalancerTlsCertificate(
+    args: CreateLoadBalancerTlsCertificateCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateLoadBalancerTlsCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRelationalDatabaseCommand}
+   */
+  createRelationalDatabase(
+    args: CreateRelationalDatabaseCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateRelationalDatabaseCommandOutput>;
+  createRelationalDatabase(
+    args: CreateRelationalDatabaseCommandInput,
+    cb: (err: any, data?: CreateRelationalDatabaseCommandOutput) => void
+  ): void;
+  createRelationalDatabase(
+    args: CreateRelationalDatabaseCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateRelationalDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRelationalDatabaseFromSnapshotCommand}
+   */
+  createRelationalDatabaseFromSnapshot(
+    args: CreateRelationalDatabaseFromSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateRelationalDatabaseFromSnapshotCommandOutput>;
+  createRelationalDatabaseFromSnapshot(
+    args: CreateRelationalDatabaseFromSnapshotCommandInput,
+    cb: (err: any, data?: CreateRelationalDatabaseFromSnapshotCommandOutput) => void
+  ): void;
+  createRelationalDatabaseFromSnapshot(
+    args: CreateRelationalDatabaseFromSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateRelationalDatabaseFromSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateRelationalDatabaseSnapshotCommand}
+   */
+  createRelationalDatabaseSnapshot(
+    args: CreateRelationalDatabaseSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateRelationalDatabaseSnapshotCommandOutput>;
+  createRelationalDatabaseSnapshot(
+    args: CreateRelationalDatabaseSnapshotCommandInput,
+    cb: (err: any, data?: CreateRelationalDatabaseSnapshotCommandOutput) => void
+  ): void;
+  createRelationalDatabaseSnapshot(
+    args: CreateRelationalDatabaseSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateRelationalDatabaseSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link CreateSubdomainCommand}
+   */
+  createSubdomain(
+    args: CreateSubdomainCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<CreateSubdomainCommandOutput>;
+  createSubdomain(
+    args: CreateSubdomainCommandInput,
+    cb: (err: any, data?: CreateSubdomainCommandOutput) => void
+  ): void;
+  createSubdomain(
+    args: CreateSubdomainCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: CreateSubdomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAlarmCommand}
+   */
+  deleteAlarm(
+    args: DeleteAlarmCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteAlarmCommandOutput>;
+  deleteAlarm(
+    args: DeleteAlarmCommandInput,
+    cb: (err: any, data?: DeleteAlarmCommandOutput) => void
+  ): void;
+  deleteAlarm(
+    args: DeleteAlarmCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteAlarmCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteAutoSnapshotCommand}
+   */
+  deleteAutoSnapshot(
+    args: DeleteAutoSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteAutoSnapshotCommandOutput>;
+  deleteAutoSnapshot(
+    args: DeleteAutoSnapshotCommandInput,
+    cb: (err: any, data?: DeleteAutoSnapshotCommandOutput) => void
+  ): void;
+  deleteAutoSnapshot(
+    args: DeleteAutoSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteAutoSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBucketCommand}
+   */
+  deleteBucket(
+    args: DeleteBucketCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteBucketCommandOutput>;
+  deleteBucket(
+    args: DeleteBucketCommandInput,
+    cb: (err: any, data?: DeleteBucketCommandOutput) => void
+  ): void;
+  deleteBucket(
+    args: DeleteBucketCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteBucketCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteBucketAccessKeyCommand}
+   */
+  deleteBucketAccessKey(
+    args: DeleteBucketAccessKeyCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteBucketAccessKeyCommandOutput>;
+  deleteBucketAccessKey(
+    args: DeleteBucketAccessKeyCommandInput,
+    cb: (err: any, data?: DeleteBucketAccessKeyCommandOutput) => void
+  ): void;
+  deleteBucketAccessKey(
+    args: DeleteBucketAccessKeyCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteBucketAccessKeyCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCertificateCommand}
+   */
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteCertificateCommandOutput>;
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
+  ): void;
+  deleteCertificate(
+    args: DeleteCertificateCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContactMethodCommand}
+   */
+  deleteContactMethod(
+    args: DeleteContactMethodCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteContactMethodCommandOutput>;
+  deleteContactMethod(
+    args: DeleteContactMethodCommandInput,
+    cb: (err: any, data?: DeleteContactMethodCommandOutput) => void
+  ): void;
+  deleteContactMethod(
+    args: DeleteContactMethodCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteContactMethodCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContainerImageCommand}
+   */
+  deleteContainerImage(
+    args: DeleteContainerImageCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteContainerImageCommandOutput>;
+  deleteContainerImage(
+    args: DeleteContainerImageCommandInput,
+    cb: (err: any, data?: DeleteContainerImageCommandOutput) => void
+  ): void;
+  deleteContainerImage(
+    args: DeleteContainerImageCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteContainerImageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteContainerServiceCommand}
+   */
+  deleteContainerService(
+    args: DeleteContainerServiceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteContainerServiceCommandOutput>;
+  deleteContainerService(
+    args: DeleteContainerServiceCommandInput,
+    cb: (err: any, data?: DeleteContainerServiceCommandOutput) => void
+  ): void;
+  deleteContainerService(
+    args: DeleteContainerServiceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteContainerServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDiskCommand}
+   */
+  deleteDisk(
+    args: DeleteDiskCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteDiskCommandOutput>;
+  deleteDisk(
+    args: DeleteDiskCommandInput,
+    cb: (err: any, data?: DeleteDiskCommandOutput) => void
+  ): void;
+  deleteDisk(
+    args: DeleteDiskCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteDiskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDiskSnapshotCommand}
+   */
+  deleteDiskSnapshot(
+    args: DeleteDiskSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteDiskSnapshotCommandOutput>;
+  deleteDiskSnapshot(
+    args: DeleteDiskSnapshotCommandInput,
+    cb: (err: any, data?: DeleteDiskSnapshotCommandOutput) => void
+  ): void;
+  deleteDiskSnapshot(
+    args: DeleteDiskSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteDiskSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDistributionCommand}
+   */
+  deleteDistribution(): Promise<DeleteDistributionCommandOutput>;
+  deleteDistribution(
+    args: DeleteDistributionCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteDistributionCommandOutput>;
+  deleteDistribution(
+    args: DeleteDistributionCommandInput,
+    cb: (err: any, data?: DeleteDistributionCommandOutput) => void
+  ): void;
+  deleteDistribution(
+    args: DeleteDistributionCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteDistributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainCommand}
+   */
+  deleteDomain(
+    args: DeleteDomainCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteDomainCommandOutput>;
+  deleteDomain(
+    args: DeleteDomainCommandInput,
+    cb: (err: any, data?: DeleteDomainCommandOutput) => void
+  ): void;
+  deleteDomain(
+    args: DeleteDomainCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteDomainEntryCommand}
+   */
+  deleteDomainEntry(
+    args: DeleteDomainEntryCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteDomainEntryCommandOutput>;
+  deleteDomainEntry(
+    args: DeleteDomainEntryCommandInput,
+    cb: (err: any, data?: DeleteDomainEntryCommandOutput) => void
+  ): void;
+  deleteDomainEntry(
+    args: DeleteDomainEntryCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteDomainEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInstanceCommand}
+   */
+  deleteInstance(
+    args: DeleteInstanceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteInstanceCommandOutput>;
+  deleteInstance(
+    args: DeleteInstanceCommandInput,
+    cb: (err: any, data?: DeleteInstanceCommandOutput) => void
+  ): void;
+  deleteInstance(
+    args: DeleteInstanceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteInstanceSnapshotCommand}
+   */
+  deleteInstanceSnapshot(
+    args: DeleteInstanceSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteInstanceSnapshotCommandOutput>;
+  deleteInstanceSnapshot(
+    args: DeleteInstanceSnapshotCommandInput,
+    cb: (err: any, data?: DeleteInstanceSnapshotCommandOutput) => void
+  ): void;
+  deleteInstanceSnapshot(
+    args: DeleteInstanceSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteInstanceSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKeyPairCommand}
+   */
+  deleteKeyPair(
+    args: DeleteKeyPairCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteKeyPairCommandOutput>;
+  deleteKeyPair(
+    args: DeleteKeyPairCommandInput,
+    cb: (err: any, data?: DeleteKeyPairCommandOutput) => void
+  ): void;
+  deleteKeyPair(
+    args: DeleteKeyPairCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteKeyPairCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteKnownHostKeysCommand}
+   */
+  deleteKnownHostKeys(
+    args: DeleteKnownHostKeysCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteKnownHostKeysCommandOutput>;
+  deleteKnownHostKeys(
+    args: DeleteKnownHostKeysCommandInput,
+    cb: (err: any, data?: DeleteKnownHostKeysCommandOutput) => void
+  ): void;
+  deleteKnownHostKeys(
+    args: DeleteKnownHostKeysCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteKnownHostKeysCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLoadBalancerCommand}
+   */
+  deleteLoadBalancer(
+    args: DeleteLoadBalancerCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteLoadBalancerCommandOutput>;
+  deleteLoadBalancer(
+    args: DeleteLoadBalancerCommandInput,
+    cb: (err: any, data?: DeleteLoadBalancerCommandOutput) => void
+  ): void;
+  deleteLoadBalancer(
+    args: DeleteLoadBalancerCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteLoadBalancerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteLoadBalancerTlsCertificateCommand}
+   */
+  deleteLoadBalancerTlsCertificate(
+    args: DeleteLoadBalancerTlsCertificateCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteLoadBalancerTlsCertificateCommandOutput>;
+  deleteLoadBalancerTlsCertificate(
+    args: DeleteLoadBalancerTlsCertificateCommandInput,
+    cb: (err: any, data?: DeleteLoadBalancerTlsCertificateCommandOutput) => void
+  ): void;
+  deleteLoadBalancerTlsCertificate(
+    args: DeleteLoadBalancerTlsCertificateCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteLoadBalancerTlsCertificateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRelationalDatabaseCommand}
+   */
+  deleteRelationalDatabase(
+    args: DeleteRelationalDatabaseCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteRelationalDatabaseCommandOutput>;
+  deleteRelationalDatabase(
+    args: DeleteRelationalDatabaseCommandInput,
+    cb: (err: any, data?: DeleteRelationalDatabaseCommandOutput) => void
+  ): void;
+  deleteRelationalDatabase(
+    args: DeleteRelationalDatabaseCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteRelationalDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteRelationalDatabaseSnapshotCommand}
+   */
+  deleteRelationalDatabaseSnapshot(
+    args: DeleteRelationalDatabaseSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteRelationalDatabaseSnapshotCommandOutput>;
+  deleteRelationalDatabaseSnapshot(
+    args: DeleteRelationalDatabaseSnapshotCommandInput,
+    cb: (err: any, data?: DeleteRelationalDatabaseSnapshotCommandOutput) => void
+  ): void;
+  deleteRelationalDatabaseSnapshot(
+    args: DeleteRelationalDatabaseSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteRelationalDatabaseSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteSubdomainCommand}
+   */
+  deleteSubdomain(
+    args: DeleteSubdomainCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DeleteSubdomainCommandOutput>;
+  deleteSubdomain(
+    args: DeleteSubdomainCommandInput,
+    cb: (err: any, data?: DeleteSubdomainCommandOutput) => void
+  ): void;
+  deleteSubdomain(
+    args: DeleteSubdomainCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DeleteSubdomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetachCertificateFromDistributionCommand}
+   */
+  detachCertificateFromDistribution(
+    args: DetachCertificateFromDistributionCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DetachCertificateFromDistributionCommandOutput>;
+  detachCertificateFromDistribution(
+    args: DetachCertificateFromDistributionCommandInput,
+    cb: (err: any, data?: DetachCertificateFromDistributionCommandOutput) => void
+  ): void;
+  detachCertificateFromDistribution(
+    args: DetachCertificateFromDistributionCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DetachCertificateFromDistributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetachDiskCommand}
+   */
+  detachDisk(
+    args: DetachDiskCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DetachDiskCommandOutput>;
+  detachDisk(
+    args: DetachDiskCommandInput,
+    cb: (err: any, data?: DetachDiskCommandOutput) => void
+  ): void;
+  detachDisk(
+    args: DetachDiskCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DetachDiskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetachInstancesFromLoadBalancerCommand}
+   */
+  detachInstancesFromLoadBalancer(
+    args: DetachInstancesFromLoadBalancerCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DetachInstancesFromLoadBalancerCommandOutput>;
+  detachInstancesFromLoadBalancer(
+    args: DetachInstancesFromLoadBalancerCommandInput,
+    cb: (err: any, data?: DetachInstancesFromLoadBalancerCommandOutput) => void
+  ): void;
+  detachInstancesFromLoadBalancer(
+    args: DetachInstancesFromLoadBalancerCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DetachInstancesFromLoadBalancerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DetachStaticIpCommand}
+   */
+  detachStaticIp(
+    args: DetachStaticIpCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DetachStaticIpCommandOutput>;
+  detachStaticIp(
+    args: DetachStaticIpCommandInput,
+    cb: (err: any, data?: DetachStaticIpCommandOutput) => void
+  ): void;
+  detachStaticIp(
+    args: DetachStaticIpCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DetachStaticIpCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DisableAddOnCommand}
+   */
+  disableAddOn(
+    args: DisableAddOnCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DisableAddOnCommandOutput>;
+  disableAddOn(
+    args: DisableAddOnCommandInput,
+    cb: (err: any, data?: DisableAddOnCommandOutput) => void
+  ): void;
+  disableAddOn(
+    args: DisableAddOnCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DisableAddOnCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DownloadDefaultKeyPairCommand}
+   */
+  downloadDefaultKeyPair(): Promise<DownloadDefaultKeyPairCommandOutput>;
+  downloadDefaultKeyPair(
+    args: DownloadDefaultKeyPairCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<DownloadDefaultKeyPairCommandOutput>;
+  downloadDefaultKeyPair(
+    args: DownloadDefaultKeyPairCommandInput,
+    cb: (err: any, data?: DownloadDefaultKeyPairCommandOutput) => void
+  ): void;
+  downloadDefaultKeyPair(
+    args: DownloadDefaultKeyPairCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: DownloadDefaultKeyPairCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link EnableAddOnCommand}
+   */
+  enableAddOn(
+    args: EnableAddOnCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<EnableAddOnCommandOutput>;
+  enableAddOn(
+    args: EnableAddOnCommandInput,
+    cb: (err: any, data?: EnableAddOnCommandOutput) => void
+  ): void;
+  enableAddOn(
+    args: EnableAddOnCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: EnableAddOnCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ExportSnapshotCommand}
+   */
+  exportSnapshot(
+    args: ExportSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<ExportSnapshotCommandOutput>;
+  exportSnapshot(
+    args: ExportSnapshotCommandInput,
+    cb: (err: any, data?: ExportSnapshotCommandOutput) => void
+  ): void;
+  exportSnapshot(
+    args: ExportSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: ExportSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetActiveNamesCommand}
+   */
+  getActiveNames(): Promise<GetActiveNamesCommandOutput>;
+  getActiveNames(
+    args: GetActiveNamesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetActiveNamesCommandOutput>;
+  getActiveNames(
+    args: GetActiveNamesCommandInput,
+    cb: (err: any, data?: GetActiveNamesCommandOutput) => void
+  ): void;
+  getActiveNames(
+    args: GetActiveNamesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetActiveNamesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAlarmsCommand}
+   */
+  getAlarms(): Promise<GetAlarmsCommandOutput>;
+  getAlarms(
+    args: GetAlarmsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetAlarmsCommandOutput>;
+  getAlarms(
+    args: GetAlarmsCommandInput,
+    cb: (err: any, data?: GetAlarmsCommandOutput) => void
+  ): void;
+  getAlarms(
+    args: GetAlarmsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetAlarmsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetAutoSnapshotsCommand}
+   */
+  getAutoSnapshots(
+    args: GetAutoSnapshotsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetAutoSnapshotsCommandOutput>;
+  getAutoSnapshots(
+    args: GetAutoSnapshotsCommandInput,
+    cb: (err: any, data?: GetAutoSnapshotsCommandOutput) => void
+  ): void;
+  getAutoSnapshots(
+    args: GetAutoSnapshotsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetAutoSnapshotsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBlueprintsCommand}
+   */
+  getBlueprints(): Promise<GetBlueprintsCommandOutput>;
+  getBlueprints(
+    args: GetBlueprintsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetBlueprintsCommandOutput>;
+  getBlueprints(
+    args: GetBlueprintsCommandInput,
+    cb: (err: any, data?: GetBlueprintsCommandOutput) => void
+  ): void;
+  getBlueprints(
+    args: GetBlueprintsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetBlueprintsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBucketAccessKeysCommand}
+   */
+  getBucketAccessKeys(
+    args: GetBucketAccessKeysCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetBucketAccessKeysCommandOutput>;
+  getBucketAccessKeys(
+    args: GetBucketAccessKeysCommandInput,
+    cb: (err: any, data?: GetBucketAccessKeysCommandOutput) => void
+  ): void;
+  getBucketAccessKeys(
+    args: GetBucketAccessKeysCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetBucketAccessKeysCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBucketBundlesCommand}
+   */
+  getBucketBundles(): Promise<GetBucketBundlesCommandOutput>;
+  getBucketBundles(
+    args: GetBucketBundlesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetBucketBundlesCommandOutput>;
+  getBucketBundles(
+    args: GetBucketBundlesCommandInput,
+    cb: (err: any, data?: GetBucketBundlesCommandOutput) => void
+  ): void;
+  getBucketBundles(
+    args: GetBucketBundlesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetBucketBundlesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBucketMetricDataCommand}
+   */
+  getBucketMetricData(
+    args: GetBucketMetricDataCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetBucketMetricDataCommandOutput>;
+  getBucketMetricData(
+    args: GetBucketMetricDataCommandInput,
+    cb: (err: any, data?: GetBucketMetricDataCommandOutput) => void
+  ): void;
+  getBucketMetricData(
+    args: GetBucketMetricDataCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetBucketMetricDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBucketsCommand}
+   */
+  getBuckets(): Promise<GetBucketsCommandOutput>;
+  getBuckets(
+    args: GetBucketsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetBucketsCommandOutput>;
+  getBuckets(
+    args: GetBucketsCommandInput,
+    cb: (err: any, data?: GetBucketsCommandOutput) => void
+  ): void;
+  getBuckets(
+    args: GetBucketsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetBucketsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetBundlesCommand}
+   */
+  getBundles(): Promise<GetBundlesCommandOutput>;
+  getBundles(
+    args: GetBundlesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetBundlesCommandOutput>;
+  getBundles(
+    args: GetBundlesCommandInput,
+    cb: (err: any, data?: GetBundlesCommandOutput) => void
+  ): void;
+  getBundles(
+    args: GetBundlesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetBundlesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCertificatesCommand}
+   */
+  getCertificates(): Promise<GetCertificatesCommandOutput>;
+  getCertificates(
+    args: GetCertificatesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetCertificatesCommandOutput>;
+  getCertificates(
+    args: GetCertificatesCommandInput,
+    cb: (err: any, data?: GetCertificatesCommandOutput) => void
+  ): void;
+  getCertificates(
+    args: GetCertificatesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetCertificatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCloudFormationStackRecordsCommand}
+   */
+  getCloudFormationStackRecords(): Promise<GetCloudFormationStackRecordsCommandOutput>;
+  getCloudFormationStackRecords(
+    args: GetCloudFormationStackRecordsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetCloudFormationStackRecordsCommandOutput>;
+  getCloudFormationStackRecords(
+    args: GetCloudFormationStackRecordsCommandInput,
+    cb: (err: any, data?: GetCloudFormationStackRecordsCommandOutput) => void
+  ): void;
+  getCloudFormationStackRecords(
+    args: GetCloudFormationStackRecordsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetCloudFormationStackRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContactMethodsCommand}
+   */
+  getContactMethods(): Promise<GetContactMethodsCommandOutput>;
+  getContactMethods(
+    args: GetContactMethodsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContactMethodsCommandOutput>;
+  getContactMethods(
+    args: GetContactMethodsCommandInput,
+    cb: (err: any, data?: GetContactMethodsCommandOutput) => void
+  ): void;
+  getContactMethods(
+    args: GetContactMethodsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContactMethodsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContainerAPIMetadataCommand}
+   */
+  getContainerAPIMetadata(): Promise<GetContainerAPIMetadataCommandOutput>;
+  getContainerAPIMetadata(
+    args: GetContainerAPIMetadataCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContainerAPIMetadataCommandOutput>;
+  getContainerAPIMetadata(
+    args: GetContainerAPIMetadataCommandInput,
+    cb: (err: any, data?: GetContainerAPIMetadataCommandOutput) => void
+  ): void;
+  getContainerAPIMetadata(
+    args: GetContainerAPIMetadataCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContainerAPIMetadataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContainerImagesCommand}
+   */
+  getContainerImages(
+    args: GetContainerImagesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContainerImagesCommandOutput>;
+  getContainerImages(
+    args: GetContainerImagesCommandInput,
+    cb: (err: any, data?: GetContainerImagesCommandOutput) => void
+  ): void;
+  getContainerImages(
+    args: GetContainerImagesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContainerImagesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContainerLogCommand}
+   */
+  getContainerLog(
+    args: GetContainerLogCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContainerLogCommandOutput>;
+  getContainerLog(
+    args: GetContainerLogCommandInput,
+    cb: (err: any, data?: GetContainerLogCommandOutput) => void
+  ): void;
+  getContainerLog(
+    args: GetContainerLogCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContainerLogCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContainerServiceDeploymentsCommand}
+   */
+  getContainerServiceDeployments(
+    args: GetContainerServiceDeploymentsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContainerServiceDeploymentsCommandOutput>;
+  getContainerServiceDeployments(
+    args: GetContainerServiceDeploymentsCommandInput,
+    cb: (err: any, data?: GetContainerServiceDeploymentsCommandOutput) => void
+  ): void;
+  getContainerServiceDeployments(
+    args: GetContainerServiceDeploymentsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContainerServiceDeploymentsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContainerServiceMetricDataCommand}
+   */
+  getContainerServiceMetricData(
+    args: GetContainerServiceMetricDataCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContainerServiceMetricDataCommandOutput>;
+  getContainerServiceMetricData(
+    args: GetContainerServiceMetricDataCommandInput,
+    cb: (err: any, data?: GetContainerServiceMetricDataCommandOutput) => void
+  ): void;
+  getContainerServiceMetricData(
+    args: GetContainerServiceMetricDataCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContainerServiceMetricDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContainerServicePowersCommand}
+   */
+  getContainerServicePowers(): Promise<GetContainerServicePowersCommandOutput>;
+  getContainerServicePowers(
+    args: GetContainerServicePowersCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContainerServicePowersCommandOutput>;
+  getContainerServicePowers(
+    args: GetContainerServicePowersCommandInput,
+    cb: (err: any, data?: GetContainerServicePowersCommandOutput) => void
+  ): void;
+  getContainerServicePowers(
+    args: GetContainerServicePowersCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContainerServicePowersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetContainerServicesCommand}
+   */
+  getContainerServices(): Promise<GetContainerServicesCommandOutput>;
+  getContainerServices(
+    args: GetContainerServicesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetContainerServicesCommandOutput>;
+  getContainerServices(
+    args: GetContainerServicesCommandInput,
+    cb: (err: any, data?: GetContainerServicesCommandOutput) => void
+  ): void;
+  getContainerServices(
+    args: GetContainerServicesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetContainerServicesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetCostEstimateCommand}
+   */
+  getCostEstimate(
+    args: GetCostEstimateCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetCostEstimateCommandOutput>;
+  getCostEstimate(
+    args: GetCostEstimateCommandInput,
+    cb: (err: any, data?: GetCostEstimateCommandOutput) => void
+  ): void;
+  getCostEstimate(
+    args: GetCostEstimateCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetCostEstimateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDiskCommand}
+   */
+  getDisk(
+    args: GetDiskCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDiskCommandOutput>;
+  getDisk(
+    args: GetDiskCommandInput,
+    cb: (err: any, data?: GetDiskCommandOutput) => void
+  ): void;
+  getDisk(
+    args: GetDiskCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDiskCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDisksCommand}
+   */
+  getDisks(): Promise<GetDisksCommandOutput>;
+  getDisks(
+    args: GetDisksCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDisksCommandOutput>;
+  getDisks(
+    args: GetDisksCommandInput,
+    cb: (err: any, data?: GetDisksCommandOutput) => void
+  ): void;
+  getDisks(
+    args: GetDisksCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDisksCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDiskSnapshotCommand}
+   */
+  getDiskSnapshot(
+    args: GetDiskSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDiskSnapshotCommandOutput>;
+  getDiskSnapshot(
+    args: GetDiskSnapshotCommandInput,
+    cb: (err: any, data?: GetDiskSnapshotCommandOutput) => void
+  ): void;
+  getDiskSnapshot(
+    args: GetDiskSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDiskSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDiskSnapshotsCommand}
+   */
+  getDiskSnapshots(): Promise<GetDiskSnapshotsCommandOutput>;
+  getDiskSnapshots(
+    args: GetDiskSnapshotsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDiskSnapshotsCommandOutput>;
+  getDiskSnapshots(
+    args: GetDiskSnapshotsCommandInput,
+    cb: (err: any, data?: GetDiskSnapshotsCommandOutput) => void
+  ): void;
+  getDiskSnapshots(
+    args: GetDiskSnapshotsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDiskSnapshotsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDistributionBundlesCommand}
+   */
+  getDistributionBundles(): Promise<GetDistributionBundlesCommandOutput>;
+  getDistributionBundles(
+    args: GetDistributionBundlesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDistributionBundlesCommandOutput>;
+  getDistributionBundles(
+    args: GetDistributionBundlesCommandInput,
+    cb: (err: any, data?: GetDistributionBundlesCommandOutput) => void
+  ): void;
+  getDistributionBundles(
+    args: GetDistributionBundlesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDistributionBundlesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDistributionLatestCacheResetCommand}
+   */
+  getDistributionLatestCacheReset(): Promise<GetDistributionLatestCacheResetCommandOutput>;
+  getDistributionLatestCacheReset(
+    args: GetDistributionLatestCacheResetCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDistributionLatestCacheResetCommandOutput>;
+  getDistributionLatestCacheReset(
+    args: GetDistributionLatestCacheResetCommandInput,
+    cb: (err: any, data?: GetDistributionLatestCacheResetCommandOutput) => void
+  ): void;
+  getDistributionLatestCacheReset(
+    args: GetDistributionLatestCacheResetCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDistributionLatestCacheResetCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDistributionMetricDataCommand}
+   */
+  getDistributionMetricData(
+    args: GetDistributionMetricDataCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDistributionMetricDataCommandOutput>;
+  getDistributionMetricData(
+    args: GetDistributionMetricDataCommandInput,
+    cb: (err: any, data?: GetDistributionMetricDataCommandOutput) => void
+  ): void;
+  getDistributionMetricData(
+    args: GetDistributionMetricDataCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDistributionMetricDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDistributionsCommand}
+   */
+  getDistributions(): Promise<GetDistributionsCommandOutput>;
+  getDistributions(
+    args: GetDistributionsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDistributionsCommandOutput>;
+  getDistributions(
+    args: GetDistributionsCommandInput,
+    cb: (err: any, data?: GetDistributionsCommandOutput) => void
+  ): void;
+  getDistributions(
+    args: GetDistributionsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDistributionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDomainCommand}
+   */
+  getDomain(
+    args: GetDomainCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDomainCommandOutput>;
+  getDomain(
+    args: GetDomainCommandInput,
+    cb: (err: any, data?: GetDomainCommandOutput) => void
+  ): void;
+  getDomain(
+    args: GetDomainCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDomainCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetDomainsCommand}
+   */
+  getDomains(): Promise<GetDomainsCommandOutput>;
+  getDomains(
+    args: GetDomainsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetDomainsCommandOutput>;
+  getDomains(
+    args: GetDomainsCommandInput,
+    cb: (err: any, data?: GetDomainsCommandOutput) => void
+  ): void;
+  getDomains(
+    args: GetDomainsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetDomainsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetExportSnapshotRecordsCommand}
+   */
+  getExportSnapshotRecords(): Promise<GetExportSnapshotRecordsCommandOutput>;
+  getExportSnapshotRecords(
+    args: GetExportSnapshotRecordsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetExportSnapshotRecordsCommandOutput>;
+  getExportSnapshotRecords(
+    args: GetExportSnapshotRecordsCommandInput,
+    cb: (err: any, data?: GetExportSnapshotRecordsCommandOutput) => void
+  ): void;
+  getExportSnapshotRecords(
+    args: GetExportSnapshotRecordsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetExportSnapshotRecordsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceCommand}
+   */
+  getInstance(
+    args: GetInstanceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstanceCommandOutput>;
+  getInstance(
+    args: GetInstanceCommandInput,
+    cb: (err: any, data?: GetInstanceCommandOutput) => void
+  ): void;
+  getInstance(
+    args: GetInstanceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceAccessDetailsCommand}
+   */
+  getInstanceAccessDetails(
+    args: GetInstanceAccessDetailsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstanceAccessDetailsCommandOutput>;
+  getInstanceAccessDetails(
+    args: GetInstanceAccessDetailsCommandInput,
+    cb: (err: any, data?: GetInstanceAccessDetailsCommandOutput) => void
+  ): void;
+  getInstanceAccessDetails(
+    args: GetInstanceAccessDetailsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstanceAccessDetailsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceMetricDataCommand}
+   */
+  getInstanceMetricData(
+    args: GetInstanceMetricDataCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstanceMetricDataCommandOutput>;
+  getInstanceMetricData(
+    args: GetInstanceMetricDataCommandInput,
+    cb: (err: any, data?: GetInstanceMetricDataCommandOutput) => void
+  ): void;
+  getInstanceMetricData(
+    args: GetInstanceMetricDataCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstanceMetricDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstancePortStatesCommand}
+   */
+  getInstancePortStates(
+    args: GetInstancePortStatesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstancePortStatesCommandOutput>;
+  getInstancePortStates(
+    args: GetInstancePortStatesCommandInput,
+    cb: (err: any, data?: GetInstancePortStatesCommandOutput) => void
+  ): void;
+  getInstancePortStates(
+    args: GetInstancePortStatesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstancePortStatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstancesCommand}
+   */
+  getInstances(): Promise<GetInstancesCommandOutput>;
+  getInstances(
+    args: GetInstancesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstancesCommandOutput>;
+  getInstances(
+    args: GetInstancesCommandInput,
+    cb: (err: any, data?: GetInstancesCommandOutput) => void
+  ): void;
+  getInstances(
+    args: GetInstancesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstancesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceSnapshotCommand}
+   */
+  getInstanceSnapshot(
+    args: GetInstanceSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstanceSnapshotCommandOutput>;
+  getInstanceSnapshot(
+    args: GetInstanceSnapshotCommandInput,
+    cb: (err: any, data?: GetInstanceSnapshotCommandOutput) => void
+  ): void;
+  getInstanceSnapshot(
+    args: GetInstanceSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstanceSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceSnapshotsCommand}
+   */
+  getInstanceSnapshots(): Promise<GetInstanceSnapshotsCommandOutput>;
+  getInstanceSnapshots(
+    args: GetInstanceSnapshotsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstanceSnapshotsCommandOutput>;
+  getInstanceSnapshots(
+    args: GetInstanceSnapshotsCommandInput,
+    cb: (err: any, data?: GetInstanceSnapshotsCommandOutput) => void
+  ): void;
+  getInstanceSnapshots(
+    args: GetInstanceSnapshotsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstanceSnapshotsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetInstanceStateCommand}
+   */
+  getInstanceState(
+    args: GetInstanceStateCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetInstanceStateCommandOutput>;
+  getInstanceState(
+    args: GetInstanceStateCommandInput,
+    cb: (err: any, data?: GetInstanceStateCommandOutput) => void
+  ): void;
+  getInstanceState(
+    args: GetInstanceStateCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetInstanceStateCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetKeyPairCommand}
+   */
+  getKeyPair(
+    args: GetKeyPairCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetKeyPairCommandOutput>;
+  getKeyPair(
+    args: GetKeyPairCommandInput,
+    cb: (err: any, data?: GetKeyPairCommandOutput) => void
+  ): void;
+  getKeyPair(
+    args: GetKeyPairCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetKeyPairCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetKeyPairsCommand}
+   */
+  getKeyPairs(): Promise<GetKeyPairsCommandOutput>;
+  getKeyPairs(
+    args: GetKeyPairsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetKeyPairsCommandOutput>;
+  getKeyPairs(
+    args: GetKeyPairsCommandInput,
+    cb: (err: any, data?: GetKeyPairsCommandOutput) => void
+  ): void;
+  getKeyPairs(
+    args: GetKeyPairsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetKeyPairsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLoadBalancerCommand}
+   */
+  getLoadBalancer(
+    args: GetLoadBalancerCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetLoadBalancerCommandOutput>;
+  getLoadBalancer(
+    args: GetLoadBalancerCommandInput,
+    cb: (err: any, data?: GetLoadBalancerCommandOutput) => void
+  ): void;
+  getLoadBalancer(
+    args: GetLoadBalancerCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetLoadBalancerCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLoadBalancerMetricDataCommand}
+   */
+  getLoadBalancerMetricData(
+    args: GetLoadBalancerMetricDataCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetLoadBalancerMetricDataCommandOutput>;
+  getLoadBalancerMetricData(
+    args: GetLoadBalancerMetricDataCommandInput,
+    cb: (err: any, data?: GetLoadBalancerMetricDataCommandOutput) => void
+  ): void;
+  getLoadBalancerMetricData(
+    args: GetLoadBalancerMetricDataCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetLoadBalancerMetricDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLoadBalancersCommand}
+   */
+  getLoadBalancers(): Promise<GetLoadBalancersCommandOutput>;
+  getLoadBalancers(
+    args: GetLoadBalancersCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetLoadBalancersCommandOutput>;
+  getLoadBalancers(
+    args: GetLoadBalancersCommandInput,
+    cb: (err: any, data?: GetLoadBalancersCommandOutput) => void
+  ): void;
+  getLoadBalancers(
+    args: GetLoadBalancersCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetLoadBalancersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLoadBalancerTlsCertificatesCommand}
+   */
+  getLoadBalancerTlsCertificates(
+    args: GetLoadBalancerTlsCertificatesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetLoadBalancerTlsCertificatesCommandOutput>;
+  getLoadBalancerTlsCertificates(
+    args: GetLoadBalancerTlsCertificatesCommandInput,
+    cb: (err: any, data?: GetLoadBalancerTlsCertificatesCommandOutput) => void
+  ): void;
+  getLoadBalancerTlsCertificates(
+    args: GetLoadBalancerTlsCertificatesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetLoadBalancerTlsCertificatesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetLoadBalancerTlsPoliciesCommand}
+   */
+  getLoadBalancerTlsPolicies(): Promise<GetLoadBalancerTlsPoliciesCommandOutput>;
+  getLoadBalancerTlsPolicies(
+    args: GetLoadBalancerTlsPoliciesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetLoadBalancerTlsPoliciesCommandOutput>;
+  getLoadBalancerTlsPolicies(
+    args: GetLoadBalancerTlsPoliciesCommandInput,
+    cb: (err: any, data?: GetLoadBalancerTlsPoliciesCommandOutput) => void
+  ): void;
+  getLoadBalancerTlsPolicies(
+    args: GetLoadBalancerTlsPoliciesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetLoadBalancerTlsPoliciesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetOperationCommand}
+   */
+  getOperation(
+    args: GetOperationCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetOperationCommandOutput>;
+  getOperation(
+    args: GetOperationCommandInput,
+    cb: (err: any, data?: GetOperationCommandOutput) => void
+  ): void;
+  getOperation(
+    args: GetOperationCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetOperationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetOperationsCommand}
+   */
+  getOperations(): Promise<GetOperationsCommandOutput>;
+  getOperations(
+    args: GetOperationsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetOperationsCommandOutput>;
+  getOperations(
+    args: GetOperationsCommandInput,
+    cb: (err: any, data?: GetOperationsCommandOutput) => void
+  ): void;
+  getOperations(
+    args: GetOperationsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetOperationsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetOperationsForResourceCommand}
+   */
+  getOperationsForResource(
+    args: GetOperationsForResourceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetOperationsForResourceCommandOutput>;
+  getOperationsForResource(
+    args: GetOperationsForResourceCommandInput,
+    cb: (err: any, data?: GetOperationsForResourceCommandOutput) => void
+  ): void;
+  getOperationsForResource(
+    args: GetOperationsForResourceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetOperationsForResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetProfileCommand}
+   */
+  getProfile(): Promise<GetProfileCommandOutput>;
+  getProfile(
+    args: GetProfileCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetProfileCommandOutput>;
+  getProfile(
+    args: GetProfileCommandInput,
+    cb: (err: any, data?: GetProfileCommandOutput) => void
+  ): void;
+  getProfile(
+    args: GetProfileCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetProfileCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRegionsCommand}
+   */
+  getRegions(): Promise<GetRegionsCommandOutput>;
+  getRegions(
+    args: GetRegionsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRegionsCommandOutput>;
+  getRegions(
+    args: GetRegionsCommandInput,
+    cb: (err: any, data?: GetRegionsCommandOutput) => void
+  ): void;
+  getRegions(
+    args: GetRegionsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRegionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseCommand}
+   */
+  getRelationalDatabase(
+    args: GetRelationalDatabaseCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseCommandOutput>;
+  getRelationalDatabase(
+    args: GetRelationalDatabaseCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseCommandOutput) => void
+  ): void;
+  getRelationalDatabase(
+    args: GetRelationalDatabaseCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseBlueprintsCommand}
+   */
+  getRelationalDatabaseBlueprints(): Promise<GetRelationalDatabaseBlueprintsCommandOutput>;
+  getRelationalDatabaseBlueprints(
+    args: GetRelationalDatabaseBlueprintsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseBlueprintsCommandOutput>;
+  getRelationalDatabaseBlueprints(
+    args: GetRelationalDatabaseBlueprintsCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseBlueprintsCommandOutput) => void
+  ): void;
+  getRelationalDatabaseBlueprints(
+    args: GetRelationalDatabaseBlueprintsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseBlueprintsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseBundlesCommand}
+   */
+  getRelationalDatabaseBundles(): Promise<GetRelationalDatabaseBundlesCommandOutput>;
+  getRelationalDatabaseBundles(
+    args: GetRelationalDatabaseBundlesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseBundlesCommandOutput>;
+  getRelationalDatabaseBundles(
+    args: GetRelationalDatabaseBundlesCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseBundlesCommandOutput) => void
+  ): void;
+  getRelationalDatabaseBundles(
+    args: GetRelationalDatabaseBundlesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseBundlesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseEventsCommand}
+   */
+  getRelationalDatabaseEvents(
+    args: GetRelationalDatabaseEventsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseEventsCommandOutput>;
+  getRelationalDatabaseEvents(
+    args: GetRelationalDatabaseEventsCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseEventsCommandOutput) => void
+  ): void;
+  getRelationalDatabaseEvents(
+    args: GetRelationalDatabaseEventsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseLogEventsCommand}
+   */
+  getRelationalDatabaseLogEvents(
+    args: GetRelationalDatabaseLogEventsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseLogEventsCommandOutput>;
+  getRelationalDatabaseLogEvents(
+    args: GetRelationalDatabaseLogEventsCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseLogEventsCommandOutput) => void
+  ): void;
+  getRelationalDatabaseLogEvents(
+    args: GetRelationalDatabaseLogEventsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseLogEventsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseLogStreamsCommand}
+   */
+  getRelationalDatabaseLogStreams(
+    args: GetRelationalDatabaseLogStreamsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseLogStreamsCommandOutput>;
+  getRelationalDatabaseLogStreams(
+    args: GetRelationalDatabaseLogStreamsCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseLogStreamsCommandOutput) => void
+  ): void;
+  getRelationalDatabaseLogStreams(
+    args: GetRelationalDatabaseLogStreamsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseLogStreamsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseMasterUserPasswordCommand}
+   */
+  getRelationalDatabaseMasterUserPassword(
+    args: GetRelationalDatabaseMasterUserPasswordCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseMasterUserPasswordCommandOutput>;
+  getRelationalDatabaseMasterUserPassword(
+    args: GetRelationalDatabaseMasterUserPasswordCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseMasterUserPasswordCommandOutput) => void
+  ): void;
+  getRelationalDatabaseMasterUserPassword(
+    args: GetRelationalDatabaseMasterUserPasswordCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseMasterUserPasswordCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseMetricDataCommand}
+   */
+  getRelationalDatabaseMetricData(
+    args: GetRelationalDatabaseMetricDataCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseMetricDataCommandOutput>;
+  getRelationalDatabaseMetricData(
+    args: GetRelationalDatabaseMetricDataCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseMetricDataCommandOutput) => void
+  ): void;
+  getRelationalDatabaseMetricData(
+    args: GetRelationalDatabaseMetricDataCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseMetricDataCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseParametersCommand}
+   */
+  getRelationalDatabaseParameters(
+    args: GetRelationalDatabaseParametersCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseParametersCommandOutput>;
+  getRelationalDatabaseParameters(
+    args: GetRelationalDatabaseParametersCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseParametersCommandOutput) => void
+  ): void;
+  getRelationalDatabaseParameters(
+    args: GetRelationalDatabaseParametersCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseParametersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabasesCommand}
+   */
+  getRelationalDatabases(): Promise<GetRelationalDatabasesCommandOutput>;
+  getRelationalDatabases(
+    args: GetRelationalDatabasesCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabasesCommandOutput>;
+  getRelationalDatabases(
+    args: GetRelationalDatabasesCommandInput,
+    cb: (err: any, data?: GetRelationalDatabasesCommandOutput) => void
+  ): void;
+  getRelationalDatabases(
+    args: GetRelationalDatabasesCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabasesCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseSnapshotCommand}
+   */
+  getRelationalDatabaseSnapshot(
+    args: GetRelationalDatabaseSnapshotCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseSnapshotCommandOutput>;
+  getRelationalDatabaseSnapshot(
+    args: GetRelationalDatabaseSnapshotCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseSnapshotCommandOutput) => void
+  ): void;
+  getRelationalDatabaseSnapshot(
+    args: GetRelationalDatabaseSnapshotCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseSnapshotCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetRelationalDatabaseSnapshotsCommand}
+   */
+  getRelationalDatabaseSnapshots(): Promise<GetRelationalDatabaseSnapshotsCommandOutput>;
+  getRelationalDatabaseSnapshots(
+    args: GetRelationalDatabaseSnapshotsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetRelationalDatabaseSnapshotsCommandOutput>;
+  getRelationalDatabaseSnapshots(
+    args: GetRelationalDatabaseSnapshotsCommandInput,
+    cb: (err: any, data?: GetRelationalDatabaseSnapshotsCommandOutput) => void
+  ): void;
+  getRelationalDatabaseSnapshots(
+    args: GetRelationalDatabaseSnapshotsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetRelationalDatabaseSnapshotsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSetupHistoryCommand}
+   */
+  getSetupHistory(
+    args: GetSetupHistoryCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetSetupHistoryCommandOutput>;
+  getSetupHistory(
+    args: GetSetupHistoryCommandInput,
+    cb: (err: any, data?: GetSetupHistoryCommandOutput) => void
+  ): void;
+  getSetupHistory(
+    args: GetSetupHistoryCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetSetupHistoryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStaticIpCommand}
+   */
+  getStaticIp(
+    args: GetStaticIpCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetStaticIpCommandOutput>;
+  getStaticIp(
+    args: GetStaticIpCommandInput,
+    cb: (err: any, data?: GetStaticIpCommandOutput) => void
+  ): void;
+  getStaticIp(
+    args: GetStaticIpCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetStaticIpCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetStaticIpsCommand}
+   */
+  getStaticIps(): Promise<GetStaticIpsCommandOutput>;
+  getStaticIps(
+    args: GetStaticIpsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetStaticIpsCommandOutput>;
+  getStaticIps(
+    args: GetStaticIpsCommandInput,
+    cb: (err: any, data?: GetStaticIpsCommandOutput) => void
+  ): void;
+  getStaticIps(
+    args: GetStaticIpsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetStaticIpsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link GetSubdomainsCommand}
+   */
+  getSubdomains(): Promise<GetSubdomainsCommandOutput>;
+  getSubdomains(
+    args: GetSubdomainsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<GetSubdomainsCommandOutput>;
+  getSubdomains(
+    args: GetSubdomainsCommandInput,
+    cb: (err: any, data?: GetSubdomainsCommandOutput) => void
+  ): void;
+  getSubdomains(
+    args: GetSubdomainsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: GetSubdomainsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ImportKeyPairCommand}
+   */
+  importKeyPair(
+    args: ImportKeyPairCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<ImportKeyPairCommandOutput>;
+  importKeyPair(
+    args: ImportKeyPairCommandInput,
+    cb: (err: any, data?: ImportKeyPairCommandOutput) => void
+  ): void;
+  importKeyPair(
+    args: ImportKeyPairCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: ImportKeyPairCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link IsVpcPeeredCommand}
+   */
+  isVpcPeered(): Promise<IsVpcPeeredCommandOutput>;
+  isVpcPeered(
+    args: IsVpcPeeredCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<IsVpcPeeredCommandOutput>;
+  isVpcPeered(
+    args: IsVpcPeeredCommandInput,
+    cb: (err: any, data?: IsVpcPeeredCommandOutput) => void
+  ): void;
+  isVpcPeered(
+    args: IsVpcPeeredCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: IsVpcPeeredCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link OpenInstancePublicPortsCommand}
+   */
+  openInstancePublicPorts(
+    args: OpenInstancePublicPortsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<OpenInstancePublicPortsCommandOutput>;
+  openInstancePublicPorts(
+    args: OpenInstancePublicPortsCommandInput,
+    cb: (err: any, data?: OpenInstancePublicPortsCommandOutput) => void
+  ): void;
+  openInstancePublicPorts(
+    args: OpenInstancePublicPortsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: OpenInstancePublicPortsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PeerVpcCommand}
+   */
+  peerVpc(): Promise<PeerVpcCommandOutput>;
+  peerVpc(
+    args: PeerVpcCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<PeerVpcCommandOutput>;
+  peerVpc(
+    args: PeerVpcCommandInput,
+    cb: (err: any, data?: PeerVpcCommandOutput) => void
+  ): void;
+  peerVpc(
+    args: PeerVpcCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: PeerVpcCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutAlarmCommand}
+   */
+  putAlarm(
+    args: PutAlarmCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<PutAlarmCommandOutput>;
+  putAlarm(
+    args: PutAlarmCommandInput,
+    cb: (err: any, data?: PutAlarmCommandOutput) => void
+  ): void;
+  putAlarm(
+    args: PutAlarmCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: PutAlarmCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutInstancePublicPortsCommand}
+   */
+  putInstancePublicPorts(
+    args: PutInstancePublicPortsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<PutInstancePublicPortsCommandOutput>;
+  putInstancePublicPorts(
+    args: PutInstancePublicPortsCommandInput,
+    cb: (err: any, data?: PutInstancePublicPortsCommandOutput) => void
+  ): void;
+  putInstancePublicPorts(
+    args: PutInstancePublicPortsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: PutInstancePublicPortsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RebootInstanceCommand}
+   */
+  rebootInstance(
+    args: RebootInstanceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<RebootInstanceCommandOutput>;
+  rebootInstance(
+    args: RebootInstanceCommandInput,
+    cb: (err: any, data?: RebootInstanceCommandOutput) => void
+  ): void;
+  rebootInstance(
+    args: RebootInstanceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: RebootInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RebootRelationalDatabaseCommand}
+   */
+  rebootRelationalDatabase(
+    args: RebootRelationalDatabaseCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<RebootRelationalDatabaseCommandOutput>;
+  rebootRelationalDatabase(
+    args: RebootRelationalDatabaseCommandInput,
+    cb: (err: any, data?: RebootRelationalDatabaseCommandOutput) => void
+  ): void;
+  rebootRelationalDatabase(
+    args: RebootRelationalDatabaseCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: RebootRelationalDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link RegisterContainerImageCommand}
+   */
+  registerContainerImage(
+    args: RegisterContainerImageCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<RegisterContainerImageCommandOutput>;
+  registerContainerImage(
+    args: RegisterContainerImageCommandInput,
+    cb: (err: any, data?: RegisterContainerImageCommandOutput) => void
+  ): void;
+  registerContainerImage(
+    args: RegisterContainerImageCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: RegisterContainerImageCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ReleaseStaticIpCommand}
+   */
+  releaseStaticIp(
+    args: ReleaseStaticIpCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<ReleaseStaticIpCommandOutput>;
+  releaseStaticIp(
+    args: ReleaseStaticIpCommandInput,
+    cb: (err: any, data?: ReleaseStaticIpCommandOutput) => void
+  ): void;
+  releaseStaticIp(
+    args: ReleaseStaticIpCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: ReleaseStaticIpCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResetDistributionCacheCommand}
+   */
+  resetDistributionCache(): Promise<ResetDistributionCacheCommandOutput>;
+  resetDistributionCache(
+    args: ResetDistributionCacheCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<ResetDistributionCacheCommandOutput>;
+  resetDistributionCache(
+    args: ResetDistributionCacheCommandInput,
+    cb: (err: any, data?: ResetDistributionCacheCommandOutput) => void
+  ): void;
+  resetDistributionCache(
+    args: ResetDistributionCacheCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: ResetDistributionCacheCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SendContactMethodVerificationCommand}
+   */
+  sendContactMethodVerification(
+    args: SendContactMethodVerificationCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<SendContactMethodVerificationCommandOutput>;
+  sendContactMethodVerification(
+    args: SendContactMethodVerificationCommandInput,
+    cb: (err: any, data?: SendContactMethodVerificationCommandOutput) => void
+  ): void;
+  sendContactMethodVerification(
+    args: SendContactMethodVerificationCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: SendContactMethodVerificationCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetIpAddressTypeCommand}
+   */
+  setIpAddressType(
+    args: SetIpAddressTypeCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<SetIpAddressTypeCommandOutput>;
+  setIpAddressType(
+    args: SetIpAddressTypeCommandInput,
+    cb: (err: any, data?: SetIpAddressTypeCommandOutput) => void
+  ): void;
+  setIpAddressType(
+    args: SetIpAddressTypeCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: SetIpAddressTypeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetResourceAccessForBucketCommand}
+   */
+  setResourceAccessForBucket(
+    args: SetResourceAccessForBucketCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<SetResourceAccessForBucketCommandOutput>;
+  setResourceAccessForBucket(
+    args: SetResourceAccessForBucketCommandInput,
+    cb: (err: any, data?: SetResourceAccessForBucketCommandOutput) => void
+  ): void;
+  setResourceAccessForBucket(
+    args: SetResourceAccessForBucketCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: SetResourceAccessForBucketCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link SetupInstanceHttpsCommand}
+   */
+  setupInstanceHttps(
+    args: SetupInstanceHttpsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<SetupInstanceHttpsCommandOutput>;
+  setupInstanceHttps(
+    args: SetupInstanceHttpsCommandInput,
+    cb: (err: any, data?: SetupInstanceHttpsCommandOutput) => void
+  ): void;
+  setupInstanceHttps(
+    args: SetupInstanceHttpsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: SetupInstanceHttpsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartGUISessionCommand}
+   */
+  startGUISession(
+    args: StartGUISessionCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<StartGUISessionCommandOutput>;
+  startGUISession(
+    args: StartGUISessionCommandInput,
+    cb: (err: any, data?: StartGUISessionCommandOutput) => void
+  ): void;
+  startGUISession(
+    args: StartGUISessionCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: StartGUISessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartInstanceCommand}
+   */
+  startInstance(
+    args: StartInstanceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<StartInstanceCommandOutput>;
+  startInstance(
+    args: StartInstanceCommandInput,
+    cb: (err: any, data?: StartInstanceCommandOutput) => void
+  ): void;
+  startInstance(
+    args: StartInstanceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: StartInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StartRelationalDatabaseCommand}
+   */
+  startRelationalDatabase(
+    args: StartRelationalDatabaseCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<StartRelationalDatabaseCommandOutput>;
+  startRelationalDatabase(
+    args: StartRelationalDatabaseCommandInput,
+    cb: (err: any, data?: StartRelationalDatabaseCommandOutput) => void
+  ): void;
+  startRelationalDatabase(
+    args: StartRelationalDatabaseCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: StartRelationalDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopGUISessionCommand}
+   */
+  stopGUISession(
+    args: StopGUISessionCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<StopGUISessionCommandOutput>;
+  stopGUISession(
+    args: StopGUISessionCommandInput,
+    cb: (err: any, data?: StopGUISessionCommandOutput) => void
+  ): void;
+  stopGUISession(
+    args: StopGUISessionCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: StopGUISessionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopInstanceCommand}
+   */
+  stopInstance(
+    args: StopInstanceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<StopInstanceCommandOutput>;
+  stopInstance(
+    args: StopInstanceCommandInput,
+    cb: (err: any, data?: StopInstanceCommandOutput) => void
+  ): void;
+  stopInstance(
+    args: StopInstanceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: StopInstanceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link StopRelationalDatabaseCommand}
+   */
+  stopRelationalDatabase(
+    args: StopRelationalDatabaseCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<StopRelationalDatabaseCommandOutput>;
+  stopRelationalDatabase(
+    args: StopRelationalDatabaseCommandInput,
+    cb: (err: any, data?: StopRelationalDatabaseCommandOutput) => void
+  ): void;
+  stopRelationalDatabase(
+    args: StopRelationalDatabaseCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: StopRelationalDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
+    args: TagResourceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+  tagResource(
+    args: TagResourceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TestAlarmCommand}
+   */
+  testAlarm(
+    args: TestAlarmCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<TestAlarmCommandOutput>;
+  testAlarm(
+    args: TestAlarmCommandInput,
+    cb: (err: any, data?: TestAlarmCommandOutput) => void
+  ): void;
+  testAlarm(
+    args: TestAlarmCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: TestAlarmCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UnpeerVpcCommand}
+   */
+  unpeerVpc(): Promise<UnpeerVpcCommandOutput>;
+  unpeerVpc(
+    args: UnpeerVpcCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UnpeerVpcCommandOutput>;
+  unpeerVpc(
+    args: UnpeerVpcCommandInput,
+    cb: (err: any, data?: UnpeerVpcCommandOutput) => void
+  ): void;
+  unpeerVpc(
+    args: UnpeerVpcCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UnpeerVpcCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UntagResourceCommand}
+   */
+  untagResource(
+    args: UntagResourceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UntagResourceCommandOutput>;
+  untagResource(
+    args: UntagResourceCommandInput,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+  untagResource(
+    args: UntagResourceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UntagResourceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBucketCommand}
+   */
+  updateBucket(
+    args: UpdateBucketCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateBucketCommandOutput>;
+  updateBucket(
+    args: UpdateBucketCommandInput,
+    cb: (err: any, data?: UpdateBucketCommandOutput) => void
+  ): void;
+  updateBucket(
+    args: UpdateBucketCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateBucketCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateBucketBundleCommand}
+   */
+  updateBucketBundle(
+    args: UpdateBucketBundleCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateBucketBundleCommandOutput>;
+  updateBucketBundle(
+    args: UpdateBucketBundleCommandInput,
+    cb: (err: any, data?: UpdateBucketBundleCommandOutput) => void
+  ): void;
+  updateBucketBundle(
+    args: UpdateBucketBundleCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateBucketBundleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateContainerServiceCommand}
+   */
+  updateContainerService(
+    args: UpdateContainerServiceCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateContainerServiceCommandOutput>;
+  updateContainerService(
+    args: UpdateContainerServiceCommandInput,
+    cb: (err: any, data?: UpdateContainerServiceCommandOutput) => void
+  ): void;
+  updateContainerService(
+    args: UpdateContainerServiceCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateContainerServiceCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDistributionCommand}
+   */
+  updateDistribution(
+    args: UpdateDistributionCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateDistributionCommandOutput>;
+  updateDistribution(
+    args: UpdateDistributionCommandInput,
+    cb: (err: any, data?: UpdateDistributionCommandOutput) => void
+  ): void;
+  updateDistribution(
+    args: UpdateDistributionCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateDistributionCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDistributionBundleCommand}
+   */
+  updateDistributionBundle(): Promise<UpdateDistributionBundleCommandOutput>;
+  updateDistributionBundle(
+    args: UpdateDistributionBundleCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateDistributionBundleCommandOutput>;
+  updateDistributionBundle(
+    args: UpdateDistributionBundleCommandInput,
+    cb: (err: any, data?: UpdateDistributionBundleCommandOutput) => void
+  ): void;
+  updateDistributionBundle(
+    args: UpdateDistributionBundleCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateDistributionBundleCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateDomainEntryCommand}
+   */
+  updateDomainEntry(
+    args: UpdateDomainEntryCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateDomainEntryCommandOutput>;
+  updateDomainEntry(
+    args: UpdateDomainEntryCommandInput,
+    cb: (err: any, data?: UpdateDomainEntryCommandOutput) => void
+  ): void;
+  updateDomainEntry(
+    args: UpdateDomainEntryCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateDomainEntryCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateInstanceMetadataOptionsCommand}
+   */
+  updateInstanceMetadataOptions(
+    args: UpdateInstanceMetadataOptionsCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateInstanceMetadataOptionsCommandOutput>;
+  updateInstanceMetadataOptions(
+    args: UpdateInstanceMetadataOptionsCommandInput,
+    cb: (err: any, data?: UpdateInstanceMetadataOptionsCommandOutput) => void
+  ): void;
+  updateInstanceMetadataOptions(
+    args: UpdateInstanceMetadataOptionsCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateInstanceMetadataOptionsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateLoadBalancerAttributeCommand}
+   */
+  updateLoadBalancerAttribute(
+    args: UpdateLoadBalancerAttributeCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateLoadBalancerAttributeCommandOutput>;
+  updateLoadBalancerAttribute(
+    args: UpdateLoadBalancerAttributeCommandInput,
+    cb: (err: any, data?: UpdateLoadBalancerAttributeCommandOutput) => void
+  ): void;
+  updateLoadBalancerAttribute(
+    args: UpdateLoadBalancerAttributeCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateLoadBalancerAttributeCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRelationalDatabaseCommand}
+   */
+  updateRelationalDatabase(
+    args: UpdateRelationalDatabaseCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateRelationalDatabaseCommandOutput>;
+  updateRelationalDatabase(
+    args: UpdateRelationalDatabaseCommandInput,
+    cb: (err: any, data?: UpdateRelationalDatabaseCommandOutput) => void
+  ): void;
+  updateRelationalDatabase(
+    args: UpdateRelationalDatabaseCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateRelationalDatabaseCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateRelationalDatabaseParametersCommand}
+   */
+  updateRelationalDatabaseParameters(
+    args: UpdateRelationalDatabaseParametersCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateRelationalDatabaseParametersCommandOutput>;
+  updateRelationalDatabaseParameters(
+    args: UpdateRelationalDatabaseParametersCommandInput,
+    cb: (err: any, data?: UpdateRelationalDatabaseParametersCommandOutput) => void
+  ): void;
+  updateRelationalDatabaseParameters(
+    args: UpdateRelationalDatabaseParametersCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateRelationalDatabaseParametersCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link UpdateSubdomainAssociationCommand}
+   */
+  updateSubdomainAssociation(
+    args: UpdateSubdomainAssociationCommandInput,
+    options?: LightsailRequestOptions
+  ): Promise<UpdateSubdomainAssociationCommandOutput>;
+  updateSubdomainAssociation(
+    args: UpdateSubdomainAssociationCommandInput,
+    cb: (err: any, data?: UpdateSubdomainAssociationCommandOutput) => void
+  ): void;
+  updateSubdomainAssociation(
+    args: UpdateSubdomainAssociationCommandInput,
+    options: LightsailRequestOptions,
+    cb: (err: any, data?: UpdateSubdomainAssociationCommandOutput) => void
+  ): void;
+}
 
 /**
  * <p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (Amazon Web Services) for developers who need to build websites or web applications. It includes
@@ -684,5381 +3873,15 @@ import { LightsailClient } from "./LightsailClient";
  *       addresses, load balancers, content delivery network (CDN) distributions, DNS management of
  *       registered domains, and resource snapshots (backups) - for a low, predictable monthly
  *       price.</p>
- *
  *          <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API,
- *       AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts
- *       and tasks, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Amazon Lightsail Developer Guide</a>.</p>
- *
+ *         Command Line Interface (CLI), or SDKs. For more information about Lightsail
+ *       concepts and tasks, see the <a href="https://docs.aws.amazon.com/lightsail/latest/userguide/lightsail-how-to-set-up-and-configure-aws-cli">Amazon Lightsail Developer Guide</a>.</p>
  *          <p>This API Reference provides detailed information about the actions, data types,
  *       parameters, and errors of the Lightsail service. For more information about the supported
  *         Amazon Web Services Regions, endpoints, and service quotas of the Lightsail service, see
  *         <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail Endpoints
  *         and Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>
+ * @public
  */
-export class Lightsail extends LightsailClient {
-  /**
-   * <p>Allocates a static IP address.</p>
-   */
-  public allocateStaticIp(
-    args: AllocateStaticIpCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AllocateStaticIpCommandOutput>;
-  public allocateStaticIp(
-    args: AllocateStaticIpCommandInput,
-    cb: (err: any, data?: AllocateStaticIpCommandOutput) => void
-  ): void;
-  public allocateStaticIp(
-    args: AllocateStaticIpCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AllocateStaticIpCommandOutput) => void
-  ): void;
-  public allocateStaticIp(
-    args: AllocateStaticIpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AllocateStaticIpCommandOutput) => void),
-    cb?: (err: any, data?: AllocateStaticIpCommandOutput) => void
-  ): Promise<AllocateStaticIpCommandOutput> | void {
-    const command = new AllocateStaticIpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN)
-   *       distribution.</p>
-   *          <p>After the certificate is attached, your distribution accepts HTTPS traffic for all of the
-   *       domains that are associated with the certificate.</p>
-   *          <p>Use the <code>CreateCertificate</code> action to create a certificate that you can attach
-   *       to your distribution.</p>
-   *          <important>
-   *             <p>Only certificates created in the <code>us-east-1</code>
-   *         Amazon Web Services Region can be attached to Lightsail distributions. Lightsail
-   *         distributions are global resources that can reference an origin in any Amazon Web Services
-   *         Region, and distribute its content globally. However, all distributions are located in the
-   *           <code>us-east-1</code> Region.</p>
-   *          </important>
-   */
-  public attachCertificateToDistribution(
-    args: AttachCertificateToDistributionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AttachCertificateToDistributionCommandOutput>;
-  public attachCertificateToDistribution(
-    args: AttachCertificateToDistributionCommandInput,
-    cb: (err: any, data?: AttachCertificateToDistributionCommandOutput) => void
-  ): void;
-  public attachCertificateToDistribution(
-    args: AttachCertificateToDistributionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AttachCertificateToDistributionCommandOutput) => void
-  ): void;
-  public attachCertificateToDistribution(
-    args: AttachCertificateToDistributionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AttachCertificateToDistributionCommandOutput) => void),
-    cb?: (err: any, data?: AttachCertificateToDistributionCommandOutput) => void
-  ): Promise<AttachCertificateToDistributionCommandOutput> | void {
-    const command = new AttachCertificateToDistributionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it
-   *       to the instance with the specified disk name.</p>
-   *          <p>The <code>attach disk</code> operation supports tag-based access control via resource tags
-   *       applied to the resource identified by <code>disk name</code>. For more information, see the
-   *         <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public attachDisk(args: AttachDiskCommandInput, options?: __HttpHandlerOptions): Promise<AttachDiskCommandOutput>;
-  public attachDisk(args: AttachDiskCommandInput, cb: (err: any, data?: AttachDiskCommandOutput) => void): void;
-  public attachDisk(
-    args: AttachDiskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AttachDiskCommandOutput) => void
-  ): void;
-  public attachDisk(
-    args: AttachDiskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AttachDiskCommandOutput) => void),
-    cb?: (err: any, data?: AttachDiskCommandOutput) => void
-  ): Promise<AttachDiskCommandOutput> | void {
-    const command = new AttachDiskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Attaches one or more Lightsail instances to a load balancer.</p>
-   *          <p>After some time, the instances are attached to the load balancer and the health check
-   *       status is available.</p>
-   *          <p>The <code>attach instances to load balancer</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by <code>load balancer
-   *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Developer Guide</a>.</p>
-   */
-  public attachInstancesToLoadBalancer(
-    args: AttachInstancesToLoadBalancerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AttachInstancesToLoadBalancerCommandOutput>;
-  public attachInstancesToLoadBalancer(
-    args: AttachInstancesToLoadBalancerCommandInput,
-    cb: (err: any, data?: AttachInstancesToLoadBalancerCommandOutput) => void
-  ): void;
-  public attachInstancesToLoadBalancer(
-    args: AttachInstancesToLoadBalancerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AttachInstancesToLoadBalancerCommandOutput) => void
-  ): void;
-  public attachInstancesToLoadBalancer(
-    args: AttachInstancesToLoadBalancerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AttachInstancesToLoadBalancerCommandOutput) => void),
-    cb?: (err: any, data?: AttachInstancesToLoadBalancerCommandOutput) => void
-  ): Promise<AttachInstancesToLoadBalancerCommandOutput> | void {
-    const command = new AttachInstancesToLoadBalancerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just
-   *       an updated, more secure version of Secure Socket Layer (SSL).</p>
-   *          <p>Once you create and validate your certificate, you can attach it to your load balancer.
-   *       You can also use this API to rotate the certificates on your account. Use the
-   *         <code>AttachLoadBalancerTlsCertificate</code> action with the non-attached certificate, and
-   *       it will replace the existing one and become the attached certificate.</p>
-   *          <p>The <code>AttachLoadBalancerTlsCertificate</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by <code>load balancer
-   *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public attachLoadBalancerTlsCertificate(
-    args: AttachLoadBalancerTlsCertificateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AttachLoadBalancerTlsCertificateCommandOutput>;
-  public attachLoadBalancerTlsCertificate(
-    args: AttachLoadBalancerTlsCertificateCommandInput,
-    cb: (err: any, data?: AttachLoadBalancerTlsCertificateCommandOutput) => void
-  ): void;
-  public attachLoadBalancerTlsCertificate(
-    args: AttachLoadBalancerTlsCertificateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AttachLoadBalancerTlsCertificateCommandOutput) => void
-  ): void;
-  public attachLoadBalancerTlsCertificate(
-    args: AttachLoadBalancerTlsCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AttachLoadBalancerTlsCertificateCommandOutput) => void),
-    cb?: (err: any, data?: AttachLoadBalancerTlsCertificateCommandOutput) => void
-  ): Promise<AttachLoadBalancerTlsCertificateCommandOutput> | void {
-    const command = new AttachLoadBalancerTlsCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Attaches a static IP address to a specific Amazon Lightsail instance.</p>
-   */
-  public attachStaticIp(
-    args: AttachStaticIpCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<AttachStaticIpCommandOutput>;
-  public attachStaticIp(
-    args: AttachStaticIpCommandInput,
-    cb: (err: any, data?: AttachStaticIpCommandOutput) => void
-  ): void;
-  public attachStaticIp(
-    args: AttachStaticIpCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: AttachStaticIpCommandOutput) => void
-  ): void;
-  public attachStaticIp(
-    args: AttachStaticIpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: AttachStaticIpCommandOutput) => void),
-    cb?: (err: any, data?: AttachStaticIpCommandOutput) => void
-  ): Promise<AttachStaticIpCommandOutput> | void {
-    const command = new AttachStaticIpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Closes ports for a specific Amazon Lightsail instance.</p>
-   *          <p>The <code>CloseInstancePublicPorts</code> action supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>instanceName</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public closeInstancePublicPorts(
-    args: CloseInstancePublicPortsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CloseInstancePublicPortsCommandOutput>;
-  public closeInstancePublicPorts(
-    args: CloseInstancePublicPortsCommandInput,
-    cb: (err: any, data?: CloseInstancePublicPortsCommandOutput) => void
-  ): void;
-  public closeInstancePublicPorts(
-    args: CloseInstancePublicPortsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CloseInstancePublicPortsCommandOutput) => void
-  ): void;
-  public closeInstancePublicPorts(
-    args: CloseInstancePublicPortsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CloseInstancePublicPortsCommandOutput) => void),
-    cb?: (err: any, data?: CloseInstancePublicPortsCommandOutput) => void
-  ): Promise<CloseInstancePublicPortsCommandOutput> | void {
-    const command = new CloseInstancePublicPortsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an
-   *       automatic snapshot of an instance or disk as a manual snapshot. This operation can also be
-   *       used to copy a manual or automatic snapshot of an instance or a disk from one Amazon Web Services Region to another in Amazon Lightsail.</p>
-   *          <p>When copying a <i>manual snapshot</i>, be sure to define the <code>source
-   *         region</code>, <code>source snapshot name</code>, and <code>target snapshot name</code>
-   *       parameters.</p>
-   *          <p>When copying an <i>automatic snapshot</i>, be sure to define the
-   *         <code>source region</code>, <code>source resource name</code>, <code>target snapshot
-   *         name</code>, and either the <code>restore date</code> or the <code>use latest restorable
-   *         auto snapshot</code> parameters.</p>
-   */
-  public copySnapshot(
-    args: CopySnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CopySnapshotCommandOutput>;
-  public copySnapshot(args: CopySnapshotCommandInput, cb: (err: any, data?: CopySnapshotCommandOutput) => void): void;
-  public copySnapshot(
-    args: CopySnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CopySnapshotCommandOutput) => void
-  ): void;
-  public copySnapshot(
-    args: CopySnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CopySnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CopySnapshotCommandOutput) => void
-  ): Promise<CopySnapshotCommandOutput> | void {
-    const command = new CopySnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Amazon Lightsail bucket.</p>
-   *
-   *          <p>A bucket is a cloud storage resource available in the Lightsail object storage service.
-   *       Use buckets to store objects such as data and its descriptive metadata. For more information
-   *       about buckets, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail">Buckets in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer
-   *         Guide</i>.</p>
-   */
-  public createBucket(
-    args: CreateBucketCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBucketCommandOutput>;
-  public createBucket(args: CreateBucketCommandInput, cb: (err: any, data?: CreateBucketCommandOutput) => void): void;
-  public createBucket(
-    args: CreateBucketCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBucketCommandOutput) => void
-  ): void;
-  public createBucket(
-    args: CreateBucketCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBucketCommandOutput) => void),
-    cb?: (err: any, data?: CreateBucketCommandOutput) => void
-  ): Promise<CreateBucketCommandOutput> | void {
-    const command = new CreateBucketCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new access key for the specified Amazon Lightsail bucket. Access keys consist of
-   *       an access key ID and corresponding secret access key.</p>
-   *
-   *          <p>Access keys grant full programmatic access to the specified bucket and its objects. You
-   *       can have a maximum of two access keys per bucket. Use the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html">GetBucketAccessKeys</a> action to get a list of current access keys for a specific bucket. For more
-   *       information about access keys, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys">Creating access keys for a bucket in Amazon Lightsail</a> in the
-   *         <i>Amazon Lightsail Developer Guide</i>.</p>
-   *
-   *          <important>
-   *             <p>The <code>secretAccessKey</code> value is returned only in response to the
-   *           <code>CreateBucketAccessKey</code> action. You can get a secret access key only when you
-   *         first create an access key; you cannot get the secret access key later. If you lose the
-   *         secret access key, you must create a new access key.</p>
-   *          </important>
-   */
-  public createBucketAccessKey(
-    args: CreateBucketAccessKeyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateBucketAccessKeyCommandOutput>;
-  public createBucketAccessKey(
-    args: CreateBucketAccessKeyCommandInput,
-    cb: (err: any, data?: CreateBucketAccessKeyCommandOutput) => void
-  ): void;
-  public createBucketAccessKey(
-    args: CreateBucketAccessKeyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateBucketAccessKeyCommandOutput) => void
-  ): void;
-  public createBucketAccessKey(
-    args: CreateBucketAccessKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateBucketAccessKeyCommandOutput) => void),
-    cb?: (err: any, data?: CreateBucketAccessKeyCommandOutput) => void
-  ): Promise<CreateBucketAccessKeyCommandOutput> | void {
-    const command = new CreateBucketAccessKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN)
-   *       distribution and a container service.</p>
-   *          <p>After the certificate is valid, use the <code>AttachCertificateToDistribution</code>
-   *       action to use the certificate and its domains with your distribution. Or use the
-   *         <code>UpdateContainerService</code> action to use the certificate and its domains with your
-   *       container service.</p>
-   *          <important>
-   *             <p>Only certificates created in the <code>us-east-1</code>
-   *         Amazon Web Services Region can be attached to Lightsail distributions. Lightsail
-   *         distributions are global resources that can reference an origin in any Amazon Web Services
-   *         Region, and distribute its content globally. However, all distributions are located in the
-   *           <code>us-east-1</code> Region.</p>
-   *          </important>
-   */
-  public createCertificate(
-    args: CreateCertificateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateCertificateCommandOutput>;
-  public createCertificate(
-    args: CreateCertificateCommandInput,
-    cb: (err: any, data?: CreateCertificateCommandOutput) => void
-  ): void;
-  public createCertificate(
-    args: CreateCertificateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateCertificateCommandOutput) => void
-  ): void;
-  public createCertificate(
-    args: CreateCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCertificateCommandOutput) => void),
-    cb?: (err: any, data?: CreateCertificateCommandOutput) => void
-  ): Promise<CreateCertificateCommandOutput> | void {
-    const command = new CreateCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an AWS CloudFormation stack, which creates a new Amazon EC2 instance from an exported
-   *       Amazon Lightsail snapshot. This operation results in a CloudFormation stack record that can be
-   *       used to track the AWS CloudFormation stack created. Use the <code>get cloud formation stack
-   *         records</code> operation to get a list of the CloudFormation stacks created.</p>
-   *          <important>
-   *             <p>Wait until after your new Amazon EC2 instance is created before running the <code>create
-   *           cloud formation stack</code> operation again with the same export snapshot record.</p>
-   *          </important>
-   */
-  public createCloudFormationStack(
-    args: CreateCloudFormationStackCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateCloudFormationStackCommandOutput>;
-  public createCloudFormationStack(
-    args: CreateCloudFormationStackCommandInput,
-    cb: (err: any, data?: CreateCloudFormationStackCommandOutput) => void
-  ): void;
-  public createCloudFormationStack(
-    args: CreateCloudFormationStackCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateCloudFormationStackCommandOutput) => void
-  ): void;
-  public createCloudFormationStack(
-    args: CreateCloudFormationStackCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateCloudFormationStackCommandOutput) => void),
-    cb?: (err: any, data?: CreateCloudFormationStackCommandOutput) => void
-  ): Promise<CreateCloudFormationStackCommandOutput> | void {
-    const command = new CreateCloudFormationStackCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an email or SMS text message contact method.</p>
-   *          <p>A contact method is used to send you notifications about your Amazon Lightsail resources.
-   *       You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services
-   *       Regions, and SMS text messages cannot be sent to some countries/regions. For more information,
-   *       see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>
-   */
-  public createContactMethod(
-    args: CreateContactMethodCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateContactMethodCommandOutput>;
-  public createContactMethod(
-    args: CreateContactMethodCommandInput,
-    cb: (err: any, data?: CreateContactMethodCommandOutput) => void
-  ): void;
-  public createContactMethod(
-    args: CreateContactMethodCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateContactMethodCommandOutput) => void
-  ): void;
-  public createContactMethod(
-    args: CreateContactMethodCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateContactMethodCommandOutput) => void),
-    cb?: (err: any, data?: CreateContactMethodCommandOutput) => void
-  ): Promise<CreateContactMethodCommandOutput> | void {
-    const command = new CreateContactMethodCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Amazon Lightsail container service.</p>
-   *
-   *          <p>A Lightsail container service is a compute resource to which you can deploy containers.
-   *       For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services">Container services in Amazon Lightsail</a> in the <i>Lightsail Dev
-   *         Guide</i>.</p>
-   */
-  public createContainerService(
-    args: CreateContainerServiceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateContainerServiceCommandOutput>;
-  public createContainerService(
-    args: CreateContainerServiceCommandInput,
-    cb: (err: any, data?: CreateContainerServiceCommandOutput) => void
-  ): void;
-  public createContainerService(
-    args: CreateContainerServiceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateContainerServiceCommandOutput) => void
-  ): void;
-  public createContainerService(
-    args: CreateContainerServiceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateContainerServiceCommandOutput) => void),
-    cb?: (err: any, data?: CreateContainerServiceCommandOutput) => void
-  ): Promise<CreateContainerServiceCommandOutput> | void {
-    const command = new CreateContainerServiceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a deployment for your Amazon Lightsail container service.</p>
-   *
-   *          <p>A deployment specifies the containers that will be launched on the container service and
-   *       their settings, such as the ports to open, the environment variables to apply, and the launch
-   *       command to run. It also specifies the container that will serve as the public endpoint of the
-   *       deployment and its settings, such as the HTTP or HTTPS port to use, and the health check
-   *       configuration.</p>
-   *
-   *          <p>You can deploy containers to your container service using container images from a public
-   *       registry such as Amazon ECR Public, or from your local machine. For more information, see
-   *         <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images">Creating container images for your Amazon Lightsail container services</a> in the
-   *         <i>Amazon Lightsail Developer Guide</i>.</p>
-   */
-  public createContainerServiceDeployment(
-    args: CreateContainerServiceDeploymentCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateContainerServiceDeploymentCommandOutput>;
-  public createContainerServiceDeployment(
-    args: CreateContainerServiceDeploymentCommandInput,
-    cb: (err: any, data?: CreateContainerServiceDeploymentCommandOutput) => void
-  ): void;
-  public createContainerServiceDeployment(
-    args: CreateContainerServiceDeploymentCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateContainerServiceDeploymentCommandOutput) => void
-  ): void;
-  public createContainerServiceDeployment(
-    args: CreateContainerServiceDeploymentCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateContainerServiceDeploymentCommandOutput) => void),
-    cb?: (err: any, data?: CreateContainerServiceDeploymentCommandOutput) => void
-  ): Promise<CreateContainerServiceDeploymentCommandOutput> | void {
-    const command = new CreateContainerServiceDeploymentCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a temporary set of log in credentials that you can use to log in to the Docker
-   *       process on your local machine. After you're logged in, you can use the native Docker commands
-   *       to push your local container images to the container image registry of your Amazon Lightsail
-   *       account so that you can use them with your Lightsail container service. The log in
-   *       credentials expire 12 hours after they are created, at which point you will need to create a
-   *       new set of log in credentials.</p>
-   *
-   *          <note>
-   *             <p>You can only push container images to the container service registry of your Lightsail
-   *         account. You cannot pull container images or perform any other container image management
-   *         actions on the container service registry.</p>
-   *          </note>
-   *
-   *          <p>After you push your container images to the container image registry of your Lightsail
-   *       account, use the <code>RegisterContainerImage</code> action to register the pushed images to a
-   *       specific Lightsail container service.</p>
-   *
-   *          <note>
-   *             <p>This action is not required if you install and use the Lightsail Control
-   *         (lightsailctl) plugin to push container images to your Lightsail container service. For
-   *         more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a>
-   *         in the <i>Amazon Lightsail Developer Guide</i>.</p>
-   *          </note>
-   */
-  public createContainerServiceRegistryLogin(
-    args: CreateContainerServiceRegistryLoginCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateContainerServiceRegistryLoginCommandOutput>;
-  public createContainerServiceRegistryLogin(
-    args: CreateContainerServiceRegistryLoginCommandInput,
-    cb: (err: any, data?: CreateContainerServiceRegistryLoginCommandOutput) => void
-  ): void;
-  public createContainerServiceRegistryLogin(
-    args: CreateContainerServiceRegistryLoginCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateContainerServiceRegistryLoginCommandOutput) => void
-  ): void;
-  public createContainerServiceRegistryLogin(
-    args: CreateContainerServiceRegistryLoginCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateContainerServiceRegistryLoginCommandOutput) => void),
-    cb?: (err: any, data?: CreateContainerServiceRegistryLoginCommandOutput) => void
-  ): Promise<CreateContainerServiceRegistryLoginCommandOutput> | void {
-    const command = new CreateContainerServiceRegistryLoginCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the
-   *       same Availability Zone (e.g., <code>us-east-2a</code>).</p>
-   *          <p>The <code>create disk</code> operation supports tag-based access control via request tags.
-   *       For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createDisk(args: CreateDiskCommandInput, options?: __HttpHandlerOptions): Promise<CreateDiskCommandOutput>;
-  public createDisk(args: CreateDiskCommandInput, cb: (err: any, data?: CreateDiskCommandOutput) => void): void;
-  public createDisk(
-    args: CreateDiskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDiskCommandOutput) => void
-  ): void;
-  public createDisk(
-    args: CreateDiskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDiskCommandOutput) => void),
-    cb?: (err: any, data?: CreateDiskCommandOutput) => void
-  ): Promise<CreateDiskCommandOutput> | void {
-    const command = new CreateDiskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting
-   *       disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g.,
-   *         <code>us-east-2a</code>).</p>
-   *          <p>The <code>create disk from snapshot</code> operation supports tag-based access control via
-   *       request tags and resource tags applied to the resource identified by <code>disk snapshot
-   *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createDiskFromSnapshot(
-    args: CreateDiskFromSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDiskFromSnapshotCommandOutput>;
-  public createDiskFromSnapshot(
-    args: CreateDiskFromSnapshotCommandInput,
-    cb: (err: any, data?: CreateDiskFromSnapshotCommandOutput) => void
-  ): void;
-  public createDiskFromSnapshot(
-    args: CreateDiskFromSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDiskFromSnapshotCommandOutput) => void
-  ): void;
-  public createDiskFromSnapshot(
-    args: CreateDiskFromSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDiskFromSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CreateDiskFromSnapshotCommandOutput) => void
-  ): Promise<CreateDiskFromSnapshotCommandOutput> | void {
-    const command = new CreateDiskFromSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make
-   *       copies of disks, and to save data before shutting down a Lightsail instance.</p>
-   *          <p>You can take a snapshot of an attached disk that is in use; however, snapshots only
-   *       capture data that has been written to your disk at the time the snapshot command is issued.
-   *       This may exclude any data that has been cached by any applications or the operating system. If
-   *       you can pause any file systems on the disk long enough to take a snapshot, your snapshot
-   *       should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should
-   *       unmount the disk from within the Lightsail instance, issue the create disk snapshot command,
-   *       and then remount the disk to ensure a consistent and complete snapshot. You may remount and
-   *       use your disk while the snapshot status is pending.</p>
-   *          <p>You can also use this operation to create a snapshot of an instance's system volume. You
-   *       might want to do this, for example, to recover data from the system volume of a botched
-   *       instance or to create a backup of the system volume like you would for a block storage disk.
-   *       To create a snapshot of a system volume, just define the <code>instance name</code> parameter
-   *       when issuing the snapshot command, and a snapshot of the defined instance's system volume will
-   *       be created. After the snapshot is available, you can create a block storage disk from the
-   *       snapshot and attach it to a running instance to access the data on the disk.</p>
-   *
-   *          <p>The <code>create disk snapshot</code> operation supports tag-based access control via
-   *       request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createDiskSnapshot(
-    args: CreateDiskSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDiskSnapshotCommandOutput>;
-  public createDiskSnapshot(
-    args: CreateDiskSnapshotCommandInput,
-    cb: (err: any, data?: CreateDiskSnapshotCommandOutput) => void
-  ): void;
-  public createDiskSnapshot(
-    args: CreateDiskSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDiskSnapshotCommandOutput) => void
-  ): void;
-  public createDiskSnapshot(
-    args: CreateDiskSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDiskSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CreateDiskSnapshotCommandOutput) => void
-  ): Promise<CreateDiskSnapshotCommandOutput> | void {
-    const command = new CreateDiskSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an Amazon Lightsail content delivery network (CDN) distribution.</p>
-   *          <p>A distribution is a globally distributed network of caching servers that improve the
-   *       performance of your website or web application hosted on a Lightsail instance. For more
-   *       information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions">Content delivery networks in Amazon Lightsail</a>.</p>
-   */
-  public createDistribution(
-    args: CreateDistributionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDistributionCommandOutput>;
-  public createDistribution(
-    args: CreateDistributionCommandInput,
-    cb: (err: any, data?: CreateDistributionCommandOutput) => void
-  ): void;
-  public createDistribution(
-    args: CreateDistributionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDistributionCommandOutput) => void
-  ): void;
-  public createDistribution(
-    args: CreateDistributionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDistributionCommandOutput) => void),
-    cb?: (err: any, data?: CreateDistributionCommandOutput) => void
-  ): Promise<CreateDistributionCommandOutput> | void {
-    const command = new CreateDistributionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a domain resource for the specified domain (e.g., example.com).</p>
-   *          <p>The <code>create domain</code> operation supports tag-based access control via request
-   *       tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createDomain(
-    args: CreateDomainCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDomainCommandOutput>;
-  public createDomain(args: CreateDomainCommandInput, cb: (err: any, data?: CreateDomainCommandOutput) => void): void;
-  public createDomain(
-    args: CreateDomainCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDomainCommandOutput) => void
-  ): void;
-  public createDomain(
-    args: CreateDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDomainCommandOutput) => void),
-    cb?: (err: any, data?: CreateDomainCommandOutput) => void
-  ): Promise<CreateDomainCommandOutput> | void {
-    const command = new CreateDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates one of the following domain name system (DNS) records in a domain DNS zone:
-   *       Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority
-   *       (SOA), service locator (SRV), or text (TXT).</p>
-   *
-   *
-   *
-   *          <p>The <code>create domain entry</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>domain name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createDomainEntry(
-    args: CreateDomainEntryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateDomainEntryCommandOutput>;
-  public createDomainEntry(
-    args: CreateDomainEntryCommandInput,
-    cb: (err: any, data?: CreateDomainEntryCommandOutput) => void
-  ): void;
-  public createDomainEntry(
-    args: CreateDomainEntryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateDomainEntryCommandOutput) => void
-  ): void;
-  public createDomainEntry(
-    args: CreateDomainEntryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateDomainEntryCommandOutput) => void),
-    cb?: (err: any, data?: CreateDomainEntryCommandOutput) => void
-  ): Promise<CreateDomainEntryCommandOutput> | void {
-    const command = new CreateDomainEntryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates one or more Amazon Lightsail instances.</p>
-   *          <p>The <code>create instances</code> operation supports tag-based access control via request
-   *       tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Developer Guide</a>.</p>
-   */
-  public createInstances(
-    args: CreateInstancesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateInstancesCommandOutput>;
-  public createInstances(
-    args: CreateInstancesCommandInput,
-    cb: (err: any, data?: CreateInstancesCommandOutput) => void
-  ): void;
-  public createInstances(
-    args: CreateInstancesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateInstancesCommandOutput) => void
-  ): void;
-  public createInstances(
-    args: CreateInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateInstancesCommandOutput) => void),
-    cb?: (err: any, data?: CreateInstancesCommandOutput) => void
-  ): Promise<CreateInstancesCommandOutput> | void {
-    const command = new CreateInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates one or more new instances from a manual or automatic snapshot of an
-   *       instance.</p>
-   *          <p>The <code>create instances from snapshot</code> operation supports tag-based access
-   *       control via request tags and resource tags applied to the resource identified by
-   *         <code>instance snapshot name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createInstancesFromSnapshot(
-    args: CreateInstancesFromSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateInstancesFromSnapshotCommandOutput>;
-  public createInstancesFromSnapshot(
-    args: CreateInstancesFromSnapshotCommandInput,
-    cb: (err: any, data?: CreateInstancesFromSnapshotCommandOutput) => void
-  ): void;
-  public createInstancesFromSnapshot(
-    args: CreateInstancesFromSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateInstancesFromSnapshotCommandOutput) => void
-  ): void;
-  public createInstancesFromSnapshot(
-    args: CreateInstancesFromSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateInstancesFromSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CreateInstancesFromSnapshotCommandOutput) => void
-  ): Promise<CreateInstancesFromSnapshotCommandOutput> | void {
-    const command = new CreateInstancesFromSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a snapshot of a specific virtual private server, or <i>instance</i>.
-   *       You can use a snapshot to create a new instance that is based on that snapshot.</p>
-   *          <p>The <code>create instance snapshot</code> operation supports tag-based access control via
-   *       request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createInstanceSnapshot(
-    args: CreateInstanceSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateInstanceSnapshotCommandOutput>;
-  public createInstanceSnapshot(
-    args: CreateInstanceSnapshotCommandInput,
-    cb: (err: any, data?: CreateInstanceSnapshotCommandOutput) => void
-  ): void;
-  public createInstanceSnapshot(
-    args: CreateInstanceSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateInstanceSnapshotCommandOutput) => void
-  ): void;
-  public createInstanceSnapshot(
-    args: CreateInstanceSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateInstanceSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CreateInstanceSnapshotCommandOutput) => void
-  ): Promise<CreateInstanceSnapshotCommandOutput> | void {
-    const command = new CreateInstanceSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a custom SSH key pair that you can use with an Amazon Lightsail
-   *       instance.</p>
-   *          <note>
-   *             <p>Use the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html">DownloadDefaultKeyPair</a> action to create a Lightsail default key
-   *         pair in an Amazon Web Services Region where a default key pair does not currently
-   *         exist.</p>
-   *          </note>
-   *          <p>The <code>create key pair</code> operation supports tag-based access control via request
-   *       tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createKeyPair(
-    args: CreateKeyPairCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateKeyPairCommandOutput>;
-  public createKeyPair(
-    args: CreateKeyPairCommandInput,
-    cb: (err: any, data?: CreateKeyPairCommandOutput) => void
-  ): void;
-  public createKeyPair(
-    args: CreateKeyPairCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateKeyPairCommandOutput) => void
-  ): void;
-  public createKeyPair(
-    args: CreateKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: CreateKeyPairCommandOutput) => void
-  ): Promise<CreateKeyPairCommandOutput> | void {
-    const command = new CreateKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance
-   *       your application, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/configure-lightsail-instances-for-load-balancing">Configure your Lightsail instances for load balancing</a>. You can create up to 5
-   *       load balancers per AWS Region in your account.</p>
-   *          <p>When you create a load balancer, you can specify a unique name and port settings. To
-   *       change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code>
-   *       operation.</p>
-   *          <p>The <code>create load balancer</code> operation supports tag-based access control via
-   *       request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createLoadBalancer(
-    args: CreateLoadBalancerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateLoadBalancerCommandOutput>;
-  public createLoadBalancer(
-    args: CreateLoadBalancerCommandInput,
-    cb: (err: any, data?: CreateLoadBalancerCommandOutput) => void
-  ): void;
-  public createLoadBalancer(
-    args: CreateLoadBalancerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateLoadBalancerCommandOutput) => void
-  ): void;
-  public createLoadBalancer(
-    args: CreateLoadBalancerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateLoadBalancerCommandOutput) => void),
-    cb?: (err: any, data?: CreateLoadBalancerCommandOutput) => void
-  ): Promise<CreateLoadBalancerCommandOutput> | void {
-    const command = new CreateLoadBalancerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.</p>
-   *          <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>
-   *          <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by <code>load balancer
-   *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createLoadBalancerTlsCertificate(
-    args: CreateLoadBalancerTlsCertificateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateLoadBalancerTlsCertificateCommandOutput>;
-  public createLoadBalancerTlsCertificate(
-    args: CreateLoadBalancerTlsCertificateCommandInput,
-    cb: (err: any, data?: CreateLoadBalancerTlsCertificateCommandOutput) => void
-  ): void;
-  public createLoadBalancerTlsCertificate(
-    args: CreateLoadBalancerTlsCertificateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateLoadBalancerTlsCertificateCommandOutput) => void
-  ): void;
-  public createLoadBalancerTlsCertificate(
-    args: CreateLoadBalancerTlsCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateLoadBalancerTlsCertificateCommandOutput) => void),
-    cb?: (err: any, data?: CreateLoadBalancerTlsCertificateCommandOutput) => void
-  ): Promise<CreateLoadBalancerTlsCertificateCommandOutput> | void {
-    const command = new CreateLoadBalancerTlsCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new database in Amazon Lightsail.</p>
-   *          <p>The <code>create relational database</code> operation supports tag-based access control
-   *       via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createRelationalDatabase(
-    args: CreateRelationalDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRelationalDatabaseCommandOutput>;
-  public createRelationalDatabase(
-    args: CreateRelationalDatabaseCommandInput,
-    cb: (err: any, data?: CreateRelationalDatabaseCommandOutput) => void
-  ): void;
-  public createRelationalDatabase(
-    args: CreateRelationalDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRelationalDatabaseCommandOutput) => void
-  ): void;
-  public createRelationalDatabase(
-    args: CreateRelationalDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRelationalDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: CreateRelationalDatabaseCommandOutput) => void
-  ): Promise<CreateRelationalDatabaseCommandOutput> | void {
-    const command = new CreateRelationalDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p>
-   *          <p>You can create a new database from a snapshot in if something goes wrong with your
-   *       original database, or to change it to a different plan, such as a high availability or
-   *       standard plan.</p>
-   *          <p>The <code>create relational database from snapshot</code> operation supports tag-based
-   *       access control via request tags and resource tags applied to the resource identified by
-   *       relationalDatabaseSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createRelationalDatabaseFromSnapshot(
-    args: CreateRelationalDatabaseFromSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRelationalDatabaseFromSnapshotCommandOutput>;
-  public createRelationalDatabaseFromSnapshot(
-    args: CreateRelationalDatabaseFromSnapshotCommandInput,
-    cb: (err: any, data?: CreateRelationalDatabaseFromSnapshotCommandOutput) => void
-  ): void;
-  public createRelationalDatabaseFromSnapshot(
-    args: CreateRelationalDatabaseFromSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRelationalDatabaseFromSnapshotCommandOutput) => void
-  ): void;
-  public createRelationalDatabaseFromSnapshot(
-    args: CreateRelationalDatabaseFromSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRelationalDatabaseFromSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CreateRelationalDatabaseFromSnapshotCommandOutput) => void
-  ): Promise<CreateRelationalDatabaseFromSnapshotCommandOutput> | void {
-    const command = new CreateRelationalDatabaseFromSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups,
-   *       to make copies of a database, and to save data before deleting a database.</p>
-   *          <p>The <code>create relational database snapshot</code> operation supports tag-based access
-   *       control via request tags. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public createRelationalDatabaseSnapshot(
-    args: CreateRelationalDatabaseSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<CreateRelationalDatabaseSnapshotCommandOutput>;
-  public createRelationalDatabaseSnapshot(
-    args: CreateRelationalDatabaseSnapshotCommandInput,
-    cb: (err: any, data?: CreateRelationalDatabaseSnapshotCommandOutput) => void
-  ): void;
-  public createRelationalDatabaseSnapshot(
-    args: CreateRelationalDatabaseSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: CreateRelationalDatabaseSnapshotCommandOutput) => void
-  ): void;
-  public createRelationalDatabaseSnapshot(
-    args: CreateRelationalDatabaseSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateRelationalDatabaseSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: CreateRelationalDatabaseSnapshotCommandOutput) => void
-  ): Promise<CreateRelationalDatabaseSnapshotCommandOutput> | void {
-    const command = new CreateRelationalDatabaseSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an alarm.</p>
-   *          <p>An alarm is used to monitor a single metric for one of your resources. When a metric
-   *       condition is met, the alarm can notify you by email, SMS text message, and a banner displayed
-   *       on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms
-   *         in Amazon Lightsail</a>.</p>
-   */
-  public deleteAlarm(args: DeleteAlarmCommandInput, options?: __HttpHandlerOptions): Promise<DeleteAlarmCommandOutput>;
-  public deleteAlarm(args: DeleteAlarmCommandInput, cb: (err: any, data?: DeleteAlarmCommandOutput) => void): void;
-  public deleteAlarm(
-    args: DeleteAlarmCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAlarmCommandOutput) => void
-  ): void;
-  public deleteAlarm(
-    args: DeleteAlarmCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAlarmCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAlarmCommandOutput) => void
-  ): Promise<DeleteAlarmCommandOutput> | void {
-    const command = new DeleteAlarmCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an automatic snapshot of an instance or disk. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteAutoSnapshot(
-    args: DeleteAutoSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteAutoSnapshotCommandOutput>;
-  public deleteAutoSnapshot(
-    args: DeleteAutoSnapshotCommandInput,
-    cb: (err: any, data?: DeleteAutoSnapshotCommandOutput) => void
-  ): void;
-  public deleteAutoSnapshot(
-    args: DeleteAutoSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteAutoSnapshotCommandOutput) => void
-  ): void;
-  public deleteAutoSnapshot(
-    args: DeleteAutoSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteAutoSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: DeleteAutoSnapshotCommandOutput) => void
-  ): Promise<DeleteAutoSnapshotCommandOutput> | void {
-    const command = new DeleteAutoSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Amazon Lightsail bucket.</p>
-   *
-   *          <note>
-   *             <p>When you delete your bucket, the bucket name is released and can be reused for a new
-   *         bucket in your account or another Amazon Web Services account.</p>
-   *          </note>
-   */
-  public deleteBucket(
-    args: DeleteBucketCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteBucketCommandOutput>;
-  public deleteBucket(args: DeleteBucketCommandInput, cb: (err: any, data?: DeleteBucketCommandOutput) => void): void;
-  public deleteBucket(
-    args: DeleteBucketCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteBucketCommandOutput) => void
-  ): void;
-  public deleteBucket(
-    args: DeleteBucketCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBucketCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBucketCommandOutput) => void
-  ): Promise<DeleteBucketCommandOutput> | void {
-    const command = new DeleteBucketCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an access key for the specified Amazon Lightsail bucket.</p>
-   *
-   *          <p>We recommend that you delete an access key if the secret access key is compromised.</p>
-   *
-   *          <p>For more information about access keys, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys">Creating access keys for a bucket in Amazon Lightsail</a> in the
-   *         <i>Amazon Lightsail Developer Guide</i>.</p>
-   */
-  public deleteBucketAccessKey(
-    args: DeleteBucketAccessKeyCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteBucketAccessKeyCommandOutput>;
-  public deleteBucketAccessKey(
-    args: DeleteBucketAccessKeyCommandInput,
-    cb: (err: any, data?: DeleteBucketAccessKeyCommandOutput) => void
-  ): void;
-  public deleteBucketAccessKey(
-    args: DeleteBucketAccessKeyCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteBucketAccessKeyCommandOutput) => void
-  ): void;
-  public deleteBucketAccessKey(
-    args: DeleteBucketAccessKeyCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteBucketAccessKeyCommandOutput) => void),
-    cb?: (err: any, data?: DeleteBucketAccessKeyCommandOutput) => void
-  ): Promise<DeleteBucketAccessKeyCommandOutput> | void {
-    const command = new DeleteBucketAccessKeyCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an SSL/TLS certificate for your Amazon Lightsail content delivery network (CDN)
-   *       distribution.</p>
-   *          <p>Certificates that are currently attached to a distribution cannot be deleted. Use the
-   *         <code>DetachCertificateFromDistribution</code> action to detach a certificate from a
-   *       distribution.</p>
-   */
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteCertificateCommandOutput>;
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
-  ): void;
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteCertificateCommandOutput) => void
-  ): void;
-  public deleteCertificate(
-    args: DeleteCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCertificateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCertificateCommandOutput) => void
-  ): Promise<DeleteCertificateCommandOutput> | void {
-    const command = new DeleteCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a contact method.</p>
-   *          <p>A contact method is used to send you notifications about your Amazon Lightsail resources.
-   *       You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services
-   *       Regions, and SMS text messages cannot be sent to some countries/regions. For more information,
-   *       see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>
-   */
-  public deleteContactMethod(
-    args: DeleteContactMethodCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteContactMethodCommandOutput>;
-  public deleteContactMethod(
-    args: DeleteContactMethodCommandInput,
-    cb: (err: any, data?: DeleteContactMethodCommandOutput) => void
-  ): void;
-  public deleteContactMethod(
-    args: DeleteContactMethodCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteContactMethodCommandOutput) => void
-  ): void;
-  public deleteContactMethod(
-    args: DeleteContactMethodCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteContactMethodCommandOutput) => void),
-    cb?: (err: any, data?: DeleteContactMethodCommandOutput) => void
-  ): Promise<DeleteContactMethodCommandOutput> | void {
-    const command = new DeleteContactMethodCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a container image that is registered to your Amazon Lightsail container
-   *       service.</p>
-   */
-  public deleteContainerImage(
-    args: DeleteContainerImageCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteContainerImageCommandOutput>;
-  public deleteContainerImage(
-    args: DeleteContainerImageCommandInput,
-    cb: (err: any, data?: DeleteContainerImageCommandOutput) => void
-  ): void;
-  public deleteContainerImage(
-    args: DeleteContainerImageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteContainerImageCommandOutput) => void
-  ): void;
-  public deleteContainerImage(
-    args: DeleteContainerImageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteContainerImageCommandOutput) => void),
-    cb?: (err: any, data?: DeleteContainerImageCommandOutput) => void
-  ): Promise<DeleteContainerImageCommandOutput> | void {
-    const command = new DeleteContainerImageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes your Amazon Lightsail container service.</p>
-   */
-  public deleteContainerService(
-    args: DeleteContainerServiceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteContainerServiceCommandOutput>;
-  public deleteContainerService(
-    args: DeleteContainerServiceCommandInput,
-    cb: (err: any, data?: DeleteContainerServiceCommandOutput) => void
-  ): void;
-  public deleteContainerService(
-    args: DeleteContainerServiceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteContainerServiceCommandOutput) => void
-  ): void;
-  public deleteContainerService(
-    args: DeleteContainerServiceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteContainerServiceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteContainerServiceCommandOutput) => void
-  ): Promise<DeleteContainerServiceCommandOutput> | void {
-    const command = new DeleteContainerServiceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified block storage disk. The disk must be in the <code>available</code>
-   *       state (not attached to a Lightsail instance).</p>
-   *          <note>
-   *             <p>The disk may remain in the <code>deleting</code> state for several minutes.</p>
-   *          </note>
-   *          <p>The <code>delete disk</code> operation supports tag-based access control via resource tags
-   *       applied to the resource identified by <code>disk name</code>. For more information, see the
-   *         <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteDisk(args: DeleteDiskCommandInput, options?: __HttpHandlerOptions): Promise<DeleteDiskCommandOutput>;
-  public deleteDisk(args: DeleteDiskCommandInput, cb: (err: any, data?: DeleteDiskCommandOutput) => void): void;
-  public deleteDisk(
-    args: DeleteDiskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDiskCommandOutput) => void
-  ): void;
-  public deleteDisk(
-    args: DeleteDiskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDiskCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDiskCommandOutput) => void
-  ): Promise<DeleteDiskCommandOutput> | void {
-    const command = new DeleteDiskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified disk snapshot.</p>
-   *          <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the
-   *       blocks on the device that have changed since your last snapshot are saved in the new snapshot.
-   *       When you delete a snapshot, only the data not needed for any other snapshot is removed. So
-   *       regardless of which prior snapshots have been deleted, all active snapshots will have access
-   *       to all the information needed to restore the disk.</p>
-   *          <p>The <code>delete disk snapshot</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>disk snapshot name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteDiskSnapshot(
-    args: DeleteDiskSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDiskSnapshotCommandOutput>;
-  public deleteDiskSnapshot(
-    args: DeleteDiskSnapshotCommandInput,
-    cb: (err: any, data?: DeleteDiskSnapshotCommandOutput) => void
-  ): void;
-  public deleteDiskSnapshot(
-    args: DeleteDiskSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDiskSnapshotCommandOutput) => void
-  ): void;
-  public deleteDiskSnapshot(
-    args: DeleteDiskSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDiskSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDiskSnapshotCommandOutput) => void
-  ): Promise<DeleteDiskSnapshotCommandOutput> | void {
-    const command = new DeleteDiskSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes your Amazon Lightsail content delivery network (CDN) distribution.</p>
-   */
-  public deleteDistribution(
-    args: DeleteDistributionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDistributionCommandOutput>;
-  public deleteDistribution(
-    args: DeleteDistributionCommandInput,
-    cb: (err: any, data?: DeleteDistributionCommandOutput) => void
-  ): void;
-  public deleteDistribution(
-    args: DeleteDistributionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDistributionCommandOutput) => void
-  ): void;
-  public deleteDistribution(
-    args: DeleteDistributionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDistributionCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDistributionCommandOutput) => void
-  ): Promise<DeleteDistributionCommandOutput> | void {
-    const command = new DeleteDistributionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified domain recordset and all of its domain records.</p>
-   *          <p>The <code>delete domain</code> operation supports tag-based access control via resource
-   *       tags applied to the resource identified by <code>domain name</code>. For more information, see
-   *       the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteDomain(
-    args: DeleteDomainCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDomainCommandOutput>;
-  public deleteDomain(args: DeleteDomainCommandInput, cb: (err: any, data?: DeleteDomainCommandOutput) => void): void;
-  public deleteDomain(
-    args: DeleteDomainCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDomainCommandOutput) => void
-  ): void;
-  public deleteDomain(
-    args: DeleteDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDomainCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDomainCommandOutput) => void
-  ): Promise<DeleteDomainCommandOutput> | void {
-    const command = new DeleteDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specific domain entry.</p>
-   *          <p>The <code>delete domain entry</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>domain name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteDomainEntry(
-    args: DeleteDomainEntryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteDomainEntryCommandOutput>;
-  public deleteDomainEntry(
-    args: DeleteDomainEntryCommandInput,
-    cb: (err: any, data?: DeleteDomainEntryCommandOutput) => void
-  ): void;
-  public deleteDomainEntry(
-    args: DeleteDomainEntryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteDomainEntryCommandOutput) => void
-  ): void;
-  public deleteDomainEntry(
-    args: DeleteDomainEntryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteDomainEntryCommandOutput) => void),
-    cb?: (err: any, data?: DeleteDomainEntryCommandOutput) => void
-  ): Promise<DeleteDomainEntryCommandOutput> | void {
-    const command = new DeleteDomainEntryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an Amazon Lightsail instance.</p>
-   *          <p>The <code>delete instance</code> operation supports tag-based access control via resource
-   *       tags applied to the resource identified by <code>instance name</code>. For more information,
-   *       see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteInstance(
-    args: DeleteInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteInstanceCommandOutput>;
-  public deleteInstance(
-    args: DeleteInstanceCommandInput,
-    cb: (err: any, data?: DeleteInstanceCommandOutput) => void
-  ): void;
-  public deleteInstance(
-    args: DeleteInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteInstanceCommandOutput) => void
-  ): void;
-  public deleteInstance(
-    args: DeleteInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteInstanceCommandOutput) => void),
-    cb?: (err: any, data?: DeleteInstanceCommandOutput) => void
-  ): Promise<DeleteInstanceCommandOutput> | void {
-    const command = new DeleteInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specific snapshot of a virtual private server (or
-   *       <i>instance</i>).</p>
-   *          <p>The <code>delete instance snapshot</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>instance snapshot name</code>. For
-   *       more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteInstanceSnapshot(
-    args: DeleteInstanceSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteInstanceSnapshotCommandOutput>;
-  public deleteInstanceSnapshot(
-    args: DeleteInstanceSnapshotCommandInput,
-    cb: (err: any, data?: DeleteInstanceSnapshotCommandOutput) => void
-  ): void;
-  public deleteInstanceSnapshot(
-    args: DeleteInstanceSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteInstanceSnapshotCommandOutput) => void
-  ): void;
-  public deleteInstanceSnapshot(
-    args: DeleteInstanceSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteInstanceSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: DeleteInstanceSnapshotCommandOutput) => void
-  ): Promise<DeleteInstanceSnapshotCommandOutput> | void {
-    const command = new DeleteInstanceSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified key pair by removing the public key from Amazon Lightsail.</p>
-   *          <p>You can delete key pairs that were created using the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html">ImportKeyPair</a> and
-   *         <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html">CreateKeyPair</a> actions, as well as the Lightsail default key pair. A new default
-   *       key pair will not be created unless you launch an instance without specifying a custom key
-   *       pair, or you call the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html">DownloadDefaultKeyPair</a> API. </p>
-   *
-   *          <p>The <code>delete key pair</code> operation supports tag-based access control via resource
-   *       tags applied to the resource identified by <code>key pair name</code>. For more information,
-   *       see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteKeyPair(
-    args: DeleteKeyPairCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteKeyPairCommandOutput>;
-  public deleteKeyPair(
-    args: DeleteKeyPairCommandInput,
-    cb: (err: any, data?: DeleteKeyPairCommandOutput) => void
-  ): void;
-  public deleteKeyPair(
-    args: DeleteKeyPairCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteKeyPairCommandOutput) => void
-  ): void;
-  public deleteKeyPair(
-    args: DeleteKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: DeleteKeyPairCommandOutput) => void
-  ): Promise<DeleteKeyPairCommandOutput> | void {
-    const command = new DeleteKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the known host key or certificate used by the Amazon Lightsail browser-based SSH or
-   *       RDP clients to authenticate an instance. This operation enables the Lightsail browser-based
-   *       SSH or RDP clients to connect to the instance after a host key mismatch.</p>
-   *          <important>
-   *             <p>Perform this operation only if you were expecting the host key or certificate mismatch
-   *         or if you are familiar with the new host key or certificate on the instance. For more
-   *         information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection">Troubleshooting connection issues when using the Amazon Lightsail browser-based SSH or RDP
-   *           client</a>.</p>
-   *          </important>
-   */
-  public deleteKnownHostKeys(
-    args: DeleteKnownHostKeysCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteKnownHostKeysCommandOutput>;
-  public deleteKnownHostKeys(
-    args: DeleteKnownHostKeysCommandInput,
-    cb: (err: any, data?: DeleteKnownHostKeysCommandOutput) => void
-  ): void;
-  public deleteKnownHostKeys(
-    args: DeleteKnownHostKeysCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteKnownHostKeysCommandOutput) => void
-  ): void;
-  public deleteKnownHostKeys(
-    args: DeleteKnownHostKeysCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteKnownHostKeysCommandOutput) => void),
-    cb?: (err: any, data?: DeleteKnownHostKeysCommandOutput) => void
-  ): Promise<DeleteKnownHostKeysCommandOutput> | void {
-    const command = new DeleteKnownHostKeysCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the
-   *       load balancer is deleted, you will need to create a new load balancer, create a new
-   *       certificate, and verify domain ownership again.</p>
-   *          <p>The <code>delete load balancer</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>load balancer name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteLoadBalancer(
-    args: DeleteLoadBalancerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteLoadBalancerCommandOutput>;
-  public deleteLoadBalancer(
-    args: DeleteLoadBalancerCommandInput,
-    cb: (err: any, data?: DeleteLoadBalancerCommandOutput) => void
-  ): void;
-  public deleteLoadBalancer(
-    args: DeleteLoadBalancerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteLoadBalancerCommandOutput) => void
-  ): void;
-  public deleteLoadBalancer(
-    args: DeleteLoadBalancerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLoadBalancerCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLoadBalancerCommandOutput) => void
-  ): Promise<DeleteLoadBalancerCommandOutput> | void {
-    const command = new DeleteLoadBalancerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes an SSL/TLS certificate associated with a Lightsail load balancer.</p>
-   *          <p>The <code>DeleteLoadBalancerTlsCertificate</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by <code>load balancer
-   *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteLoadBalancerTlsCertificate(
-    args: DeleteLoadBalancerTlsCertificateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteLoadBalancerTlsCertificateCommandOutput>;
-  public deleteLoadBalancerTlsCertificate(
-    args: DeleteLoadBalancerTlsCertificateCommandInput,
-    cb: (err: any, data?: DeleteLoadBalancerTlsCertificateCommandOutput) => void
-  ): void;
-  public deleteLoadBalancerTlsCertificate(
-    args: DeleteLoadBalancerTlsCertificateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteLoadBalancerTlsCertificateCommandOutput) => void
-  ): void;
-  public deleteLoadBalancerTlsCertificate(
-    args: DeleteLoadBalancerTlsCertificateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteLoadBalancerTlsCertificateCommandOutput) => void),
-    cb?: (err: any, data?: DeleteLoadBalancerTlsCertificateCommandOutput) => void
-  ): Promise<DeleteLoadBalancerTlsCertificateCommandOutput> | void {
-    const command = new DeleteLoadBalancerTlsCertificateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a database in Amazon Lightsail.</p>
-   *          <p>The <code>delete relational database</code> operation supports tag-based access control
-   *       via resource tags applied to the resource identified by relationalDatabaseName. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteRelationalDatabase(
-    args: DeleteRelationalDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRelationalDatabaseCommandOutput>;
-  public deleteRelationalDatabase(
-    args: DeleteRelationalDatabaseCommandInput,
-    cb: (err: any, data?: DeleteRelationalDatabaseCommandOutput) => void
-  ): void;
-  public deleteRelationalDatabase(
-    args: DeleteRelationalDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRelationalDatabaseCommandOutput) => void
-  ): void;
-  public deleteRelationalDatabase(
-    args: DeleteRelationalDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRelationalDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRelationalDatabaseCommandOutput) => void
-  ): Promise<DeleteRelationalDatabaseCommandOutput> | void {
-    const command = new DeleteRelationalDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a database snapshot in Amazon Lightsail.</p>
-   *          <p>The <code>delete relational database snapshot</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by relationalDatabaseName. For
-   *       more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public deleteRelationalDatabaseSnapshot(
-    args: DeleteRelationalDatabaseSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DeleteRelationalDatabaseSnapshotCommandOutput>;
-  public deleteRelationalDatabaseSnapshot(
-    args: DeleteRelationalDatabaseSnapshotCommandInput,
-    cb: (err: any, data?: DeleteRelationalDatabaseSnapshotCommandOutput) => void
-  ): void;
-  public deleteRelationalDatabaseSnapshot(
-    args: DeleteRelationalDatabaseSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DeleteRelationalDatabaseSnapshotCommandOutput) => void
-  ): void;
-  public deleteRelationalDatabaseSnapshot(
-    args: DeleteRelationalDatabaseSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteRelationalDatabaseSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: DeleteRelationalDatabaseSnapshotCommandOutput) => void
-  ): Promise<DeleteRelationalDatabaseSnapshotCommandOutput> | void {
-    const command = new DeleteRelationalDatabaseSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Detaches an SSL/TLS certificate from your Amazon Lightsail content delivery network (CDN)
-   *       distribution.</p>
-   *          <p>After the certificate is detached, your distribution stops accepting traffic for all of
-   *       the domains that are associated with the certificate.</p>
-   */
-  public detachCertificateFromDistribution(
-    args: DetachCertificateFromDistributionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DetachCertificateFromDistributionCommandOutput>;
-  public detachCertificateFromDistribution(
-    args: DetachCertificateFromDistributionCommandInput,
-    cb: (err: any, data?: DetachCertificateFromDistributionCommandOutput) => void
-  ): void;
-  public detachCertificateFromDistribution(
-    args: DetachCertificateFromDistributionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DetachCertificateFromDistributionCommandOutput) => void
-  ): void;
-  public detachCertificateFromDistribution(
-    args: DetachCertificateFromDistributionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetachCertificateFromDistributionCommandOutput) => void),
-    cb?: (err: any, data?: DetachCertificateFromDistributionCommandOutput) => void
-  ): Promise<DetachCertificateFromDistributionCommandOutput> | void {
-    const command = new DetachCertificateFromDistributionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount
-   *       any file systems on the device within your operating system before stopping the instance and
-   *       detaching the disk.</p>
-   *          <p>The <code>detach disk</code> operation supports tag-based access control via resource tags
-   *       applied to the resource identified by <code>disk name</code>. For more information, see the
-   *         <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public detachDisk(args: DetachDiskCommandInput, options?: __HttpHandlerOptions): Promise<DetachDiskCommandOutput>;
-  public detachDisk(args: DetachDiskCommandInput, cb: (err: any, data?: DetachDiskCommandOutput) => void): void;
-  public detachDisk(
-    args: DetachDiskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DetachDiskCommandOutput) => void
-  ): void;
-  public detachDisk(
-    args: DetachDiskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetachDiskCommandOutput) => void),
-    cb?: (err: any, data?: DetachDiskCommandOutput) => void
-  ): Promise<DetachDiskCommandOutput> | void {
-    const command = new DetachDiskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Detaches the specified instances from a Lightsail load balancer.</p>
-   *          <p>This operation waits until the instances are no longer needed before they are detached
-   *       from the load balancer.</p>
-   *          <p>The <code>detach instances from load balancer</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by <code>load balancer
-   *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public detachInstancesFromLoadBalancer(
-    args: DetachInstancesFromLoadBalancerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DetachInstancesFromLoadBalancerCommandOutput>;
-  public detachInstancesFromLoadBalancer(
-    args: DetachInstancesFromLoadBalancerCommandInput,
-    cb: (err: any, data?: DetachInstancesFromLoadBalancerCommandOutput) => void
-  ): void;
-  public detachInstancesFromLoadBalancer(
-    args: DetachInstancesFromLoadBalancerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DetachInstancesFromLoadBalancerCommandOutput) => void
-  ): void;
-  public detachInstancesFromLoadBalancer(
-    args: DetachInstancesFromLoadBalancerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetachInstancesFromLoadBalancerCommandOutput) => void),
-    cb?: (err: any, data?: DetachInstancesFromLoadBalancerCommandOutput) => void
-  ): Promise<DetachInstancesFromLoadBalancerCommandOutput> | void {
-    const command = new DetachInstancesFromLoadBalancerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Detaches a static IP from the Amazon Lightsail instance to which it is attached.</p>
-   */
-  public detachStaticIp(
-    args: DetachStaticIpCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DetachStaticIpCommandOutput>;
-  public detachStaticIp(
-    args: DetachStaticIpCommandInput,
-    cb: (err: any, data?: DetachStaticIpCommandOutput) => void
-  ): void;
-  public detachStaticIp(
-    args: DetachStaticIpCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DetachStaticIpCommandOutput) => void
-  ): void;
-  public detachStaticIp(
-    args: DetachStaticIpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DetachStaticIpCommandOutput) => void),
-    cb?: (err: any, data?: DetachStaticIpCommandOutput) => void
-  ): Promise<DetachStaticIpCommandOutput> | void {
-    const command = new DetachStaticIpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Disables an add-on for an Amazon Lightsail resource. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public disableAddOn(
-    args: DisableAddOnCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DisableAddOnCommandOutput>;
-  public disableAddOn(args: DisableAddOnCommandInput, cb: (err: any, data?: DisableAddOnCommandOutput) => void): void;
-  public disableAddOn(
-    args: DisableAddOnCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DisableAddOnCommandOutput) => void
-  ): void;
-  public disableAddOn(
-    args: DisableAddOnCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableAddOnCommandOutput) => void),
-    cb?: (err: any, data?: DisableAddOnCommandOutput) => void
-  ): Promise<DisableAddOnCommandOutput> | void {
-    const command = new DisableAddOnCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Downloads the regional Amazon Lightsail default key pair.</p>
-   *          <p>This action also creates a Lightsail default key pair if a default key pair
-   *       does not currently exist in the Amazon Web Services Region.</p>
-   */
-  public downloadDefaultKeyPair(
-    args: DownloadDefaultKeyPairCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<DownloadDefaultKeyPairCommandOutput>;
-  public downloadDefaultKeyPair(
-    args: DownloadDefaultKeyPairCommandInput,
-    cb: (err: any, data?: DownloadDefaultKeyPairCommandOutput) => void
-  ): void;
-  public downloadDefaultKeyPair(
-    args: DownloadDefaultKeyPairCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: DownloadDefaultKeyPairCommandOutput) => void
-  ): void;
-  public downloadDefaultKeyPair(
-    args: DownloadDefaultKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DownloadDefaultKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: DownloadDefaultKeyPairCommandOutput) => void
-  ): Promise<DownloadDefaultKeyPairCommandOutput> | void {
-    const command = new DownloadDefaultKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see
-   *       the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public enableAddOn(args: EnableAddOnCommandInput, options?: __HttpHandlerOptions): Promise<EnableAddOnCommandOutput>;
-  public enableAddOn(args: EnableAddOnCommandInput, cb: (err: any, data?: EnableAddOnCommandOutput) => void): void;
-  public enableAddOn(
-    args: EnableAddOnCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: EnableAddOnCommandOutput) => void
-  ): void;
-  public enableAddOn(
-    args: EnableAddOnCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableAddOnCommandOutput) => void),
-    cb?: (err: any, data?: EnableAddOnCommandOutput) => void
-  ): Promise<EnableAddOnCommandOutput> | void {
-    const command = new EnableAddOnCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2).
-   *       This operation results in an export snapshot record that can be used with the <code>create
-   *         cloud formation stack</code> operation to create new Amazon EC2 instances.</p>
-   *          <p>Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the
-   *       instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in
-   *       Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in
-   *       Amazon EC2 as the source Lightsail snapshot.</p>
-   *          <p></p>
-   *          <p>The <code>export snapshot</code> operation supports tag-based access control via resource
-   *       tags applied to the resource identified by <code>source snapshot name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   *          <note>
-   *             <p>Use the <code>get instance snapshots</code> or <code>get disk snapshots</code>
-   *         operations to get a list of snapshots that you can export to Amazon EC2.</p>
-   *          </note>
-   */
-  public exportSnapshot(
-    args: ExportSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ExportSnapshotCommandOutput>;
-  public exportSnapshot(
-    args: ExportSnapshotCommandInput,
-    cb: (err: any, data?: ExportSnapshotCommandOutput) => void
-  ): void;
-  public exportSnapshot(
-    args: ExportSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ExportSnapshotCommandOutput) => void
-  ): void;
-  public exportSnapshot(
-    args: ExportSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ExportSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: ExportSnapshotCommandOutput) => void
-  ): Promise<ExportSnapshotCommandOutput> | void {
-    const command = new ExportSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the names of all active (not deleted) resources.</p>
-   */
-  public getActiveNames(
-    args: GetActiveNamesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetActiveNamesCommandOutput>;
-  public getActiveNames(
-    args: GetActiveNamesCommandInput,
-    cb: (err: any, data?: GetActiveNamesCommandOutput) => void
-  ): void;
-  public getActiveNames(
-    args: GetActiveNamesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetActiveNamesCommandOutput) => void
-  ): void;
-  public getActiveNames(
-    args: GetActiveNamesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetActiveNamesCommandOutput) => void),
-    cb?: (err: any, data?: GetActiveNamesCommandOutput) => void
-  ): Promise<GetActiveNamesCommandOutput> | void {
-    const command = new GetActiveNamesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the configured alarms. Specify an alarm name in your request to
-   *       return information about a specific alarm, or specify a monitored resource name to return
-   *       information about all alarms for a specific resource.</p>
-   *          <p>An alarm is used to monitor a single metric for one of your resources. When a metric
-   *       condition is met, the alarm can notify you by email, SMS text message, and a banner displayed
-   *       on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms
-   *         in Amazon Lightsail</a>.</p>
-   */
-  public getAlarms(args: GetAlarmsCommandInput, options?: __HttpHandlerOptions): Promise<GetAlarmsCommandOutput>;
-  public getAlarms(args: GetAlarmsCommandInput, cb: (err: any, data?: GetAlarmsCommandOutput) => void): void;
-  public getAlarms(
-    args: GetAlarmsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAlarmsCommandOutput) => void
-  ): void;
-  public getAlarms(
-    args: GetAlarmsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAlarmsCommandOutput) => void),
-    cb?: (err: any, data?: GetAlarmsCommandOutput) => void
-  ): Promise<GetAlarmsCommandOutput> | void {
-    const command = new GetAlarmsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the available automatic snapshots for an instance or disk. For more information,
-   *       see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public getAutoSnapshots(
-    args: GetAutoSnapshotsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetAutoSnapshotsCommandOutput>;
-  public getAutoSnapshots(
-    args: GetAutoSnapshotsCommandInput,
-    cb: (err: any, data?: GetAutoSnapshotsCommandOutput) => void
-  ): void;
-  public getAutoSnapshots(
-    args: GetAutoSnapshotsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetAutoSnapshotsCommandOutput) => void
-  ): void;
-  public getAutoSnapshots(
-    args: GetAutoSnapshotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetAutoSnapshotsCommandOutput) => void),
-    cb?: (err: any, data?: GetAutoSnapshotsCommandOutput) => void
-  ): Promise<GetAutoSnapshotsCommandOutput> | void {
-    const command = new GetAutoSnapshotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the list of available instance images, or <i>blueprints</i>. You can
-   *       use a blueprint to create a new instance already running a specific operating system, as well
-   *       as a preinstalled app or development stack. The software each instance is running depends on
-   *       the blueprint image you choose.</p>
-   *          <note>
-   *             <p>Use active blueprints when creating new instances. Inactive blueprints are listed to
-   *         support customers with existing instances and are not necessarily available to create new
-   *         instances. Blueprints are marked inactive when they become outdated due to operating system
-   *         updates or new application releases.</p>
-   *          </note>
-   */
-  public getBlueprints(
-    args: GetBlueprintsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBlueprintsCommandOutput>;
-  public getBlueprints(
-    args: GetBlueprintsCommandInput,
-    cb: (err: any, data?: GetBlueprintsCommandOutput) => void
-  ): void;
-  public getBlueprints(
-    args: GetBlueprintsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBlueprintsCommandOutput) => void
-  ): void;
-  public getBlueprints(
-    args: GetBlueprintsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBlueprintsCommandOutput) => void),
-    cb?: (err: any, data?: GetBlueprintsCommandOutput) => void
-  ): Promise<GetBlueprintsCommandOutput> | void {
-    const command = new GetBlueprintsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the existing access key IDs for the specified Amazon Lightsail bucket.</p>
-   *
-   *          <important>
-   *             <p>This action does not return the secret access key value of an access key. You can get a
-   *         secret access key only when you create it from the response of the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html">CreateBucketAccessKey</a> action. If you lose the secret access key, you must create
-   *         a new access key.</p>
-   *          </important>
-   */
-  public getBucketAccessKeys(
-    args: GetBucketAccessKeysCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBucketAccessKeysCommandOutput>;
-  public getBucketAccessKeys(
-    args: GetBucketAccessKeysCommandInput,
-    cb: (err: any, data?: GetBucketAccessKeysCommandOutput) => void
-  ): void;
-  public getBucketAccessKeys(
-    args: GetBucketAccessKeysCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBucketAccessKeysCommandOutput) => void
-  ): void;
-  public getBucketAccessKeys(
-    args: GetBucketAccessKeysCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBucketAccessKeysCommandOutput) => void),
-    cb?: (err: any, data?: GetBucketAccessKeysCommandOutput) => void
-  ): Promise<GetBucketAccessKeysCommandOutput> | void {
-    const command = new GetBucketAccessKeysCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the bundles that you can apply to a Amazon Lightsail bucket.</p>
-   *
-   *          <p>The bucket bundle specifies the monthly cost, storage quota, and data transfer quota for a
-   *       bucket.</p>
-   *
-   *          <p>Use the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html">UpdateBucketBundle</a> action to update the
-   *       bundle for a bucket.</p>
-   */
-  public getBucketBundles(
-    args: GetBucketBundlesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBucketBundlesCommandOutput>;
-  public getBucketBundles(
-    args: GetBucketBundlesCommandInput,
-    cb: (err: any, data?: GetBucketBundlesCommandOutput) => void
-  ): void;
-  public getBucketBundles(
-    args: GetBucketBundlesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBucketBundlesCommandOutput) => void
-  ): void;
-  public getBucketBundles(
-    args: GetBucketBundlesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBucketBundlesCommandOutput) => void),
-    cb?: (err: any, data?: GetBucketBundlesCommandOutput) => void
-  ): Promise<GetBucketBundlesCommandOutput> | void {
-    const command = new GetBucketBundlesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data points of a specific metric for an Amazon Lightsail bucket.</p>
-   *
-   *          <p>Metrics report the utilization of a bucket. View and collect metric data regularly to
-   *       monitor the number of objects stored in a bucket (including object versions) and the storage
-   *       space used by those objects.</p>
-   */
-  public getBucketMetricData(
-    args: GetBucketMetricDataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetBucketMetricDataCommandOutput>;
-  public getBucketMetricData(
-    args: GetBucketMetricDataCommandInput,
-    cb: (err: any, data?: GetBucketMetricDataCommandOutput) => void
-  ): void;
-  public getBucketMetricData(
-    args: GetBucketMetricDataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBucketMetricDataCommandOutput) => void
-  ): void;
-  public getBucketMetricData(
-    args: GetBucketMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBucketMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetBucketMetricDataCommandOutput) => void
-  ): Promise<GetBucketMetricDataCommandOutput> | void {
-    const command = new GetBucketMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about one or more Amazon Lightsail buckets. The information returned
-   *       includes the synchronization status of the Amazon Simple Storage Service (Amazon S3)
-   *       account-level block public access feature for your Lightsail buckets.</p>
-   *
-   *          <p>For more information about buckets, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail">Buckets in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer
-   *         Guide</i>.</p>
-   */
-  public getBuckets(args: GetBucketsCommandInput, options?: __HttpHandlerOptions): Promise<GetBucketsCommandOutput>;
-  public getBuckets(args: GetBucketsCommandInput, cb: (err: any, data?: GetBucketsCommandOutput) => void): void;
-  public getBuckets(
-    args: GetBucketsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBucketsCommandOutput) => void
-  ): void;
-  public getBuckets(
-    args: GetBucketsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBucketsCommandOutput) => void),
-    cb?: (err: any, data?: GetBucketsCommandOutput) => void
-  ): Promise<GetBucketsCommandOutput> | void {
-    const command = new GetBucketsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the bundles that you can apply to an Amazon Lightsail instance when you create
-   *       it.</p>
-   *
-   *          <p>A bundle describes the specifications of an instance, such as the monthly cost, amount of
-   *       memory, the number of vCPUs, amount of storage space, and monthly network data transfer
-   *       quota.</p>
-   *
-   *          <note>
-   *             <p>Bundles are referred to as <i>instance plans</i> in the Lightsail
-   *         console.</p>
-   *          </note>
-   */
-  public getBundles(args: GetBundlesCommandInput, options?: __HttpHandlerOptions): Promise<GetBundlesCommandOutput>;
-  public getBundles(args: GetBundlesCommandInput, cb: (err: any, data?: GetBundlesCommandOutput) => void): void;
-  public getBundles(
-    args: GetBundlesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetBundlesCommandOutput) => void
-  ): void;
-  public getBundles(
-    args: GetBundlesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetBundlesCommandOutput) => void),
-    cb?: (err: any, data?: GetBundlesCommandOutput) => void
-  ): Promise<GetBundlesCommandOutput> | void {
-    const command = new GetBundlesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about one or more Amazon Lightsail SSL/TLS certificates.</p>
-   *          <note>
-   *             <p>To get a summary of a certificate, ommit <code>includeCertificateDetails</code> from
-   *         your request. The response will include only the certificate Amazon Resource Name (ARN),
-   *         certificate name, domain name, and tags.</p>
-   *          </note>
-   */
-  public getCertificates(
-    args: GetCertificatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetCertificatesCommandOutput>;
-  public getCertificates(
-    args: GetCertificatesCommandInput,
-    cb: (err: any, data?: GetCertificatesCommandOutput) => void
-  ): void;
-  public getCertificates(
-    args: GetCertificatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCertificatesCommandOutput) => void
-  ): void;
-  public getCertificates(
-    args: GetCertificatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCertificatesCommandOutput) => void),
-    cb?: (err: any, data?: GetCertificatesCommandOutput) => void
-  ): Promise<GetCertificatesCommandOutput> | void {
-    const command = new GetCertificatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the CloudFormation stack record created as a result of the <code>create cloud
-   *         formation stack</code> operation.</p>
-   *          <p>An AWS CloudFormation stack is used to create a new Amazon EC2 instance from an exported Lightsail
-   *       snapshot.</p>
-   */
-  public getCloudFormationStackRecords(
-    args: GetCloudFormationStackRecordsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetCloudFormationStackRecordsCommandOutput>;
-  public getCloudFormationStackRecords(
-    args: GetCloudFormationStackRecordsCommandInput,
-    cb: (err: any, data?: GetCloudFormationStackRecordsCommandOutput) => void
-  ): void;
-  public getCloudFormationStackRecords(
-    args: GetCloudFormationStackRecordsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetCloudFormationStackRecordsCommandOutput) => void
-  ): void;
-  public getCloudFormationStackRecords(
-    args: GetCloudFormationStackRecordsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCloudFormationStackRecordsCommandOutput) => void),
-    cb?: (err: any, data?: GetCloudFormationStackRecordsCommandOutput) => void
-  ): Promise<GetCloudFormationStackRecordsCommandOutput> | void {
-    const command = new GetCloudFormationStackRecordsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the configured contact methods. Specify a protocol in your
-   *       request to return information about a specific contact method.</p>
-   *          <p>A contact method is used to send you notifications about your Amazon Lightsail resources.
-   *       You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services
-   *       Regions, and SMS text messages cannot be sent to some countries/regions. For more information,
-   *       see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>
-   */
-  public getContactMethods(
-    args: GetContactMethodsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContactMethodsCommandOutput>;
-  public getContactMethods(
-    args: GetContactMethodsCommandInput,
-    cb: (err: any, data?: GetContactMethodsCommandOutput) => void
-  ): void;
-  public getContactMethods(
-    args: GetContactMethodsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContactMethodsCommandOutput) => void
-  ): void;
-  public getContactMethods(
-    args: GetContactMethodsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContactMethodsCommandOutput) => void),
-    cb?: (err: any, data?: GetContactMethodsCommandOutput) => void
-  ): Promise<GetContactMethodsCommandOutput> | void {
-    const command = new GetContactMethodsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about Amazon Lightsail containers, such as the current version of the
-   *       Lightsail Control (lightsailctl) plugin.</p>
-   */
-  public getContainerAPIMetadata(
-    args: GetContainerAPIMetadataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContainerAPIMetadataCommandOutput>;
-  public getContainerAPIMetadata(
-    args: GetContainerAPIMetadataCommandInput,
-    cb: (err: any, data?: GetContainerAPIMetadataCommandOutput) => void
-  ): void;
-  public getContainerAPIMetadata(
-    args: GetContainerAPIMetadataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContainerAPIMetadataCommandOutput) => void
-  ): void;
-  public getContainerAPIMetadata(
-    args: GetContainerAPIMetadataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContainerAPIMetadataCommandOutput) => void),
-    cb?: (err: any, data?: GetContainerAPIMetadataCommandOutput) => void
-  ): Promise<GetContainerAPIMetadataCommandOutput> | void {
-    const command = new GetContainerAPIMetadataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the container images that are registered to your Amazon Lightsail container
-   *       service.</p>
-   *
-   *          <note>
-   *             <p>If you created a deployment on your Lightsail container service that uses container
-   *         images from a public registry like Docker Hub, those images are not returned as part of this
-   *         action. Those images are not registered to your Lightsail container service.</p>
-   *          </note>
-   */
-  public getContainerImages(
-    args: GetContainerImagesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContainerImagesCommandOutput>;
-  public getContainerImages(
-    args: GetContainerImagesCommandInput,
-    cb: (err: any, data?: GetContainerImagesCommandOutput) => void
-  ): void;
-  public getContainerImages(
-    args: GetContainerImagesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContainerImagesCommandOutput) => void
-  ): void;
-  public getContainerImages(
-    args: GetContainerImagesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContainerImagesCommandOutput) => void),
-    cb?: (err: any, data?: GetContainerImagesCommandOutput) => void
-  ): Promise<GetContainerImagesCommandOutput> | void {
-    const command = new GetContainerImagesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the log events of a container of your Amazon Lightsail container service.</p>
-   *
-   *          <p>If your container service has more than one node (i.e., a scale greater than 1), then the
-   *       log events that are returned for the specified container are merged from all nodes on your
-   *       container service.</p>
-   *
-   *          <note>
-   *             <p>Container logs are retained for a certain amount of time. For more information, see
-   *           <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail
-   *           endpoints and quotas</a> in the <i>AWS General Reference</i>.</p>
-   *          </note>
-   */
-  public getContainerLog(
-    args: GetContainerLogCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContainerLogCommandOutput>;
-  public getContainerLog(
-    args: GetContainerLogCommandInput,
-    cb: (err: any, data?: GetContainerLogCommandOutput) => void
-  ): void;
-  public getContainerLog(
-    args: GetContainerLogCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContainerLogCommandOutput) => void
-  ): void;
-  public getContainerLog(
-    args: GetContainerLogCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContainerLogCommandOutput) => void),
-    cb?: (err: any, data?: GetContainerLogCommandOutput) => void
-  ): Promise<GetContainerLogCommandOutput> | void {
-    const command = new GetContainerLogCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the deployments for your Amazon Lightsail container service</p>
-   *
-   *          <p>A deployment specifies the settings, such as the ports and launch command, of containers
-   *       that are deployed to your container service.</p>
-   *
-   *          <p>The deployments are ordered by version in ascending order. The newest version is listed at
-   *       the top of the response.</p>
-   *
-   *          <note>
-   *             <p>A set number of deployments are kept before the oldest one is replaced with the newest
-   *         one. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail
-   *           endpoints and quotas</a> in the <i>AWS General Reference</i>.</p>
-   *          </note>
-   */
-  public getContainerServiceDeployments(
-    args: GetContainerServiceDeploymentsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContainerServiceDeploymentsCommandOutput>;
-  public getContainerServiceDeployments(
-    args: GetContainerServiceDeploymentsCommandInput,
-    cb: (err: any, data?: GetContainerServiceDeploymentsCommandOutput) => void
-  ): void;
-  public getContainerServiceDeployments(
-    args: GetContainerServiceDeploymentsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContainerServiceDeploymentsCommandOutput) => void
-  ): void;
-  public getContainerServiceDeployments(
-    args: GetContainerServiceDeploymentsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContainerServiceDeploymentsCommandOutput) => void),
-    cb?: (err: any, data?: GetContainerServiceDeploymentsCommandOutput) => void
-  ): Promise<GetContainerServiceDeploymentsCommandOutput> | void {
-    const command = new GetContainerServiceDeploymentsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data points of a specific metric of your Amazon Lightsail container
-   *       service.</p>
-   *
-   *          <p>Metrics report the utilization of your resources. Monitor and collect metric data
-   *       regularly to maintain the reliability, availability, and performance of your resources.</p>
-   */
-  public getContainerServiceMetricData(
-    args: GetContainerServiceMetricDataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContainerServiceMetricDataCommandOutput>;
-  public getContainerServiceMetricData(
-    args: GetContainerServiceMetricDataCommandInput,
-    cb: (err: any, data?: GetContainerServiceMetricDataCommandOutput) => void
-  ): void;
-  public getContainerServiceMetricData(
-    args: GetContainerServiceMetricDataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContainerServiceMetricDataCommandOutput) => void
-  ): void;
-  public getContainerServiceMetricData(
-    args: GetContainerServiceMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContainerServiceMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetContainerServiceMetricDataCommandOutput) => void
-  ): Promise<GetContainerServiceMetricDataCommandOutput> | void {
-    const command = new GetContainerServiceMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the list of powers that can be specified for your Amazon Lightsail container
-   *       services.</p>
-   *
-   *          <p>The power specifies the amount of memory, the number of vCPUs, and the base price of the
-   *       container service.</p>
-   */
-  public getContainerServicePowers(
-    args: GetContainerServicePowersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContainerServicePowersCommandOutput>;
-  public getContainerServicePowers(
-    args: GetContainerServicePowersCommandInput,
-    cb: (err: any, data?: GetContainerServicePowersCommandOutput) => void
-  ): void;
-  public getContainerServicePowers(
-    args: GetContainerServicePowersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContainerServicePowersCommandOutput) => void
-  ): void;
-  public getContainerServicePowers(
-    args: GetContainerServicePowersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContainerServicePowersCommandOutput) => void),
-    cb?: (err: any, data?: GetContainerServicePowersCommandOutput) => void
-  ): Promise<GetContainerServicePowersCommandOutput> | void {
-    const command = new GetContainerServicePowersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about one or more of your Amazon Lightsail container services.</p>
-   */
-  public getContainerServices(
-    args: GetContainerServicesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetContainerServicesCommandOutput>;
-  public getContainerServices(
-    args: GetContainerServicesCommandInput,
-    cb: (err: any, data?: GetContainerServicesCommandOutput) => void
-  ): void;
-  public getContainerServices(
-    args: GetContainerServicesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetContainerServicesCommandOutput) => void
-  ): void;
-  public getContainerServices(
-    args: GetContainerServicesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetContainerServicesCommandOutput) => void),
-    cb?: (err: any, data?: GetContainerServicesCommandOutput) => void
-  ): Promise<GetContainerServicesCommandOutput> | void {
-    const command = new GetContainerServicesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific block storage disk.</p>
-   */
-  public getDisk(args: GetDiskCommandInput, options?: __HttpHandlerOptions): Promise<GetDiskCommandOutput>;
-  public getDisk(args: GetDiskCommandInput, cb: (err: any, data?: GetDiskCommandOutput) => void): void;
-  public getDisk(
-    args: GetDiskCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDiskCommandOutput) => void
-  ): void;
-  public getDisk(
-    args: GetDiskCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDiskCommandOutput) => void),
-    cb?: (err: any, data?: GetDiskCommandOutput) => void
-  ): Promise<GetDiskCommandOutput> | void {
-    const command = new GetDiskCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all block storage disks in your AWS account and region.</p>
-   */
-  public getDisks(args: GetDisksCommandInput, options?: __HttpHandlerOptions): Promise<GetDisksCommandOutput>;
-  public getDisks(args: GetDisksCommandInput, cb: (err: any, data?: GetDisksCommandOutput) => void): void;
-  public getDisks(
-    args: GetDisksCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDisksCommandOutput) => void
-  ): void;
-  public getDisks(
-    args: GetDisksCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDisksCommandOutput) => void),
-    cb?: (err: any, data?: GetDisksCommandOutput) => void
-  ): Promise<GetDisksCommandOutput> | void {
-    const command = new GetDisksCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific block storage disk snapshot.</p>
-   */
-  public getDiskSnapshot(
-    args: GetDiskSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDiskSnapshotCommandOutput>;
-  public getDiskSnapshot(
-    args: GetDiskSnapshotCommandInput,
-    cb: (err: any, data?: GetDiskSnapshotCommandOutput) => void
-  ): void;
-  public getDiskSnapshot(
-    args: GetDiskSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDiskSnapshotCommandOutput) => void
-  ): void;
-  public getDiskSnapshot(
-    args: GetDiskSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDiskSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: GetDiskSnapshotCommandOutput) => void
-  ): Promise<GetDiskSnapshotCommandOutput> | void {
-    const command = new GetDiskSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all block storage disk snapshots in your AWS account and
-   *       region.</p>
-   */
-  public getDiskSnapshots(
-    args: GetDiskSnapshotsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDiskSnapshotsCommandOutput>;
-  public getDiskSnapshots(
-    args: GetDiskSnapshotsCommandInput,
-    cb: (err: any, data?: GetDiskSnapshotsCommandOutput) => void
-  ): void;
-  public getDiskSnapshots(
-    args: GetDiskSnapshotsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDiskSnapshotsCommandOutput) => void
-  ): void;
-  public getDiskSnapshots(
-    args: GetDiskSnapshotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDiskSnapshotsCommandOutput) => void),
-    cb?: (err: any, data?: GetDiskSnapshotsCommandOutput) => void
-  ): Promise<GetDiskSnapshotsCommandOutput> | void {
-    const command = new GetDiskSnapshotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the bundles that can be applied to your Amazon Lightsail content delivery network
-   *       (CDN) distributions.</p>
-   *          <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of
-   *       your distribution.</p>
-   */
-  public getDistributionBundles(
-    args: GetDistributionBundlesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDistributionBundlesCommandOutput>;
-  public getDistributionBundles(
-    args: GetDistributionBundlesCommandInput,
-    cb: (err: any, data?: GetDistributionBundlesCommandOutput) => void
-  ): void;
-  public getDistributionBundles(
-    args: GetDistributionBundlesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDistributionBundlesCommandOutput) => void
-  ): void;
-  public getDistributionBundles(
-    args: GetDistributionBundlesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDistributionBundlesCommandOutput) => void),
-    cb?: (err: any, data?: GetDistributionBundlesCommandOutput) => void
-  ): Promise<GetDistributionBundlesCommandOutput> | void {
-    const command = new GetDistributionBundlesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the timestamp and status of the last cache reset of a specific Amazon Lightsail
-   *       content delivery network (CDN) distribution.</p>
-   */
-  public getDistributionLatestCacheReset(
-    args: GetDistributionLatestCacheResetCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDistributionLatestCacheResetCommandOutput>;
-  public getDistributionLatestCacheReset(
-    args: GetDistributionLatestCacheResetCommandInput,
-    cb: (err: any, data?: GetDistributionLatestCacheResetCommandOutput) => void
-  ): void;
-  public getDistributionLatestCacheReset(
-    args: GetDistributionLatestCacheResetCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDistributionLatestCacheResetCommandOutput) => void
-  ): void;
-  public getDistributionLatestCacheReset(
-    args: GetDistributionLatestCacheResetCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDistributionLatestCacheResetCommandOutput) => void),
-    cb?: (err: any, data?: GetDistributionLatestCacheResetCommandOutput) => void
-  ): Promise<GetDistributionLatestCacheResetCommandOutput> | void {
-    const command = new GetDistributionLatestCacheResetCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data points of a specific metric for an Amazon Lightsail content delivery
-   *       network (CDN) distribution.</p>
-   *          <p>Metrics report the utilization of your resources, and the error counts generated by them.
-   *       Monitor and collect metric data regularly to maintain the reliability, availability, and
-   *       performance of your resources.</p>
-   */
-  public getDistributionMetricData(
-    args: GetDistributionMetricDataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDistributionMetricDataCommandOutput>;
-  public getDistributionMetricData(
-    args: GetDistributionMetricDataCommandInput,
-    cb: (err: any, data?: GetDistributionMetricDataCommandOutput) => void
-  ): void;
-  public getDistributionMetricData(
-    args: GetDistributionMetricDataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDistributionMetricDataCommandOutput) => void
-  ): void;
-  public getDistributionMetricData(
-    args: GetDistributionMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDistributionMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetDistributionMetricDataCommandOutput) => void
-  ): Promise<GetDistributionMetricDataCommandOutput> | void {
-    const command = new GetDistributionMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about one or more of your Amazon Lightsail content delivery network
-   *       (CDN) distributions.</p>
-   */
-  public getDistributions(
-    args: GetDistributionsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetDistributionsCommandOutput>;
-  public getDistributions(
-    args: GetDistributionsCommandInput,
-    cb: (err: any, data?: GetDistributionsCommandOutput) => void
-  ): void;
-  public getDistributions(
-    args: GetDistributionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDistributionsCommandOutput) => void
-  ): void;
-  public getDistributions(
-    args: GetDistributionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDistributionsCommandOutput) => void),
-    cb?: (err: any, data?: GetDistributionsCommandOutput) => void
-  ): Promise<GetDistributionsCommandOutput> | void {
-    const command = new GetDistributionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific domain recordset.</p>
-   */
-  public getDomain(args: GetDomainCommandInput, options?: __HttpHandlerOptions): Promise<GetDomainCommandOutput>;
-  public getDomain(args: GetDomainCommandInput, cb: (err: any, data?: GetDomainCommandOutput) => void): void;
-  public getDomain(
-    args: GetDomainCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDomainCommandOutput) => void
-  ): void;
-  public getDomain(
-    args: GetDomainCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDomainCommandOutput) => void),
-    cb?: (err: any, data?: GetDomainCommandOutput) => void
-  ): Promise<GetDomainCommandOutput> | void {
-    const command = new GetDomainCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all domains in the user's account.</p>
-   */
-  public getDomains(args: GetDomainsCommandInput, options?: __HttpHandlerOptions): Promise<GetDomainsCommandOutput>;
-  public getDomains(args: GetDomainsCommandInput, cb: (err: any, data?: GetDomainsCommandOutput) => void): void;
-  public getDomains(
-    args: GetDomainsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetDomainsCommandOutput) => void
-  ): void;
-  public getDomains(
-    args: GetDomainsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetDomainsCommandOutput) => void),
-    cb?: (err: any, data?: GetDomainsCommandOutput) => void
-  ): Promise<GetDomainsCommandOutput> | void {
-    const command = new GetDomainsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns all export snapshot records created as a result of the <code>export
-   *         snapshot</code> operation.</p>
-   *          <p>An export snapshot record can be used to create a new Amazon EC2 instance and its related
-   *       resources with the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateCloudFormationStack.html">CreateCloudFormationStack</a>
-   *       action.</p>
-   */
-  public getExportSnapshotRecords(
-    args: GetExportSnapshotRecordsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetExportSnapshotRecordsCommandOutput>;
-  public getExportSnapshotRecords(
-    args: GetExportSnapshotRecordsCommandInput,
-    cb: (err: any, data?: GetExportSnapshotRecordsCommandOutput) => void
-  ): void;
-  public getExportSnapshotRecords(
-    args: GetExportSnapshotRecordsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetExportSnapshotRecordsCommandOutput) => void
-  ): void;
-  public getExportSnapshotRecords(
-    args: GetExportSnapshotRecordsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetExportSnapshotRecordsCommandOutput) => void),
-    cb?: (err: any, data?: GetExportSnapshotRecordsCommandOutput) => void
-  ): Promise<GetExportSnapshotRecordsCommandOutput> | void {
-    const command = new GetExportSnapshotRecordsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific Amazon Lightsail instance, which is a virtual private
-   *       server.</p>
-   */
-  public getInstance(args: GetInstanceCommandInput, options?: __HttpHandlerOptions): Promise<GetInstanceCommandOutput>;
-  public getInstance(args: GetInstanceCommandInput, cb: (err: any, data?: GetInstanceCommandOutput) => void): void;
-  public getInstance(
-    args: GetInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstanceCommandOutput) => void
-  ): void;
-  public getInstance(
-    args: GetInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstanceCommandOutput) => void),
-    cb?: (err: any, data?: GetInstanceCommandOutput) => void
-  ): Promise<GetInstanceCommandOutput> | void {
-    const command = new GetInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns temporary SSH keys you can use to connect to a specific virtual private server, or
-   *         <i>instance</i>.</p>
-   *          <p>The <code>get instance access details</code> operation supports tag-based access control
-   *       via resource tags applied to the resource identified by <code>instance name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public getInstanceAccessDetails(
-    args: GetInstanceAccessDetailsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInstanceAccessDetailsCommandOutput>;
-  public getInstanceAccessDetails(
-    args: GetInstanceAccessDetailsCommandInput,
-    cb: (err: any, data?: GetInstanceAccessDetailsCommandOutput) => void
-  ): void;
-  public getInstanceAccessDetails(
-    args: GetInstanceAccessDetailsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstanceAccessDetailsCommandOutput) => void
-  ): void;
-  public getInstanceAccessDetails(
-    args: GetInstanceAccessDetailsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstanceAccessDetailsCommandOutput) => void),
-    cb?: (err: any, data?: GetInstanceAccessDetailsCommandOutput) => void
-  ): Promise<GetInstanceAccessDetailsCommandOutput> | void {
-    const command = new GetInstanceAccessDetailsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data points for the specified Amazon Lightsail instance metric, given an
-   *       instance name.</p>
-   *          <p>Metrics report the utilization of your resources, and the error counts generated by them.
-   *       Monitor and collect metric data regularly to maintain the reliability, availability, and
-   *       performance of your resources.</p>
-   */
-  public getInstanceMetricData(
-    args: GetInstanceMetricDataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInstanceMetricDataCommandOutput>;
-  public getInstanceMetricData(
-    args: GetInstanceMetricDataCommandInput,
-    cb: (err: any, data?: GetInstanceMetricDataCommandOutput) => void
-  ): void;
-  public getInstanceMetricData(
-    args: GetInstanceMetricDataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstanceMetricDataCommandOutput) => void
-  ): void;
-  public getInstanceMetricData(
-    args: GetInstanceMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstanceMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetInstanceMetricDataCommandOutput) => void
-  ): Promise<GetInstanceMetricDataCommandOutput> | void {
-    const command = new GetInstanceMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the firewall port states for a specific Amazon Lightsail instance, the IP addresses
-   *       allowed to connect to the instance through the ports, and the protocol.</p>
-   */
-  public getInstancePortStates(
-    args: GetInstancePortStatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInstancePortStatesCommandOutput>;
-  public getInstancePortStates(
-    args: GetInstancePortStatesCommandInput,
-    cb: (err: any, data?: GetInstancePortStatesCommandOutput) => void
-  ): void;
-  public getInstancePortStates(
-    args: GetInstancePortStatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstancePortStatesCommandOutput) => void
-  ): void;
-  public getInstancePortStates(
-    args: GetInstancePortStatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstancePortStatesCommandOutput) => void),
-    cb?: (err: any, data?: GetInstancePortStatesCommandOutput) => void
-  ): Promise<GetInstancePortStatesCommandOutput> | void {
-    const command = new GetInstancePortStatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all Amazon Lightsail virtual private servers, or
-   *         <i>instances</i>.</p>
-   */
-  public getInstances(
-    args: GetInstancesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInstancesCommandOutput>;
-  public getInstances(args: GetInstancesCommandInput, cb: (err: any, data?: GetInstancesCommandOutput) => void): void;
-  public getInstances(
-    args: GetInstancesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstancesCommandOutput) => void
-  ): void;
-  public getInstances(
-    args: GetInstancesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstancesCommandOutput) => void),
-    cb?: (err: any, data?: GetInstancesCommandOutput) => void
-  ): Promise<GetInstancesCommandOutput> | void {
-    const command = new GetInstancesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific instance snapshot.</p>
-   */
-  public getInstanceSnapshot(
-    args: GetInstanceSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInstanceSnapshotCommandOutput>;
-  public getInstanceSnapshot(
-    args: GetInstanceSnapshotCommandInput,
-    cb: (err: any, data?: GetInstanceSnapshotCommandOutput) => void
-  ): void;
-  public getInstanceSnapshot(
-    args: GetInstanceSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstanceSnapshotCommandOutput) => void
-  ): void;
-  public getInstanceSnapshot(
-    args: GetInstanceSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstanceSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: GetInstanceSnapshotCommandOutput) => void
-  ): Promise<GetInstanceSnapshotCommandOutput> | void {
-    const command = new GetInstanceSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns all instance snapshots for the user's account.</p>
-   */
-  public getInstanceSnapshots(
-    args: GetInstanceSnapshotsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInstanceSnapshotsCommandOutput>;
-  public getInstanceSnapshots(
-    args: GetInstanceSnapshotsCommandInput,
-    cb: (err: any, data?: GetInstanceSnapshotsCommandOutput) => void
-  ): void;
-  public getInstanceSnapshots(
-    args: GetInstanceSnapshotsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstanceSnapshotsCommandOutput) => void
-  ): void;
-  public getInstanceSnapshots(
-    args: GetInstanceSnapshotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstanceSnapshotsCommandOutput) => void),
-    cb?: (err: any, data?: GetInstanceSnapshotsCommandOutput) => void
-  ): Promise<GetInstanceSnapshotsCommandOutput> | void {
-    const command = new GetInstanceSnapshotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the state of a specific instance. Works on one instance at a time.</p>
-   */
-  public getInstanceState(
-    args: GetInstanceStateCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetInstanceStateCommandOutput>;
-  public getInstanceState(
-    args: GetInstanceStateCommandInput,
-    cb: (err: any, data?: GetInstanceStateCommandOutput) => void
-  ): void;
-  public getInstanceState(
-    args: GetInstanceStateCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetInstanceStateCommandOutput) => void
-  ): void;
-  public getInstanceState(
-    args: GetInstanceStateCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetInstanceStateCommandOutput) => void),
-    cb?: (err: any, data?: GetInstanceStateCommandOutput) => void
-  ): Promise<GetInstanceStateCommandOutput> | void {
-    const command = new GetInstanceStateCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific key pair.</p>
-   */
-  public getKeyPair(args: GetKeyPairCommandInput, options?: __HttpHandlerOptions): Promise<GetKeyPairCommandOutput>;
-  public getKeyPair(args: GetKeyPairCommandInput, cb: (err: any, data?: GetKeyPairCommandOutput) => void): void;
-  public getKeyPair(
-    args: GetKeyPairCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetKeyPairCommandOutput) => void
-  ): void;
-  public getKeyPair(
-    args: GetKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: GetKeyPairCommandOutput) => void
-  ): Promise<GetKeyPairCommandOutput> | void {
-    const command = new GetKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all key pairs in the user's account.</p>
-   */
-  public getKeyPairs(args: GetKeyPairsCommandInput, options?: __HttpHandlerOptions): Promise<GetKeyPairsCommandOutput>;
-  public getKeyPairs(args: GetKeyPairsCommandInput, cb: (err: any, data?: GetKeyPairsCommandOutput) => void): void;
-  public getKeyPairs(
-    args: GetKeyPairsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetKeyPairsCommandOutput) => void
-  ): void;
-  public getKeyPairs(
-    args: GetKeyPairsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetKeyPairsCommandOutput) => void),
-    cb?: (err: any, data?: GetKeyPairsCommandOutput) => void
-  ): Promise<GetKeyPairsCommandOutput> | void {
-    const command = new GetKeyPairsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the specified Lightsail load balancer.</p>
-   */
-  public getLoadBalancer(
-    args: GetLoadBalancerCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLoadBalancerCommandOutput>;
-  public getLoadBalancer(
-    args: GetLoadBalancerCommandInput,
-    cb: (err: any, data?: GetLoadBalancerCommandOutput) => void
-  ): void;
-  public getLoadBalancer(
-    args: GetLoadBalancerCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLoadBalancerCommandOutput) => void
-  ): void;
-  public getLoadBalancer(
-    args: GetLoadBalancerCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLoadBalancerCommandOutput) => void),
-    cb?: (err: any, data?: GetLoadBalancerCommandOutput) => void
-  ): Promise<GetLoadBalancerCommandOutput> | void {
-    const command = new GetLoadBalancerCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about health metrics for your Lightsail load balancer.</p>
-   *          <p>Metrics report the utilization of your resources, and the error counts generated by them.
-   *       Monitor and collect metric data regularly to maintain the reliability, availability, and
-   *       performance of your resources.</p>
-   */
-  public getLoadBalancerMetricData(
-    args: GetLoadBalancerMetricDataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLoadBalancerMetricDataCommandOutput>;
-  public getLoadBalancerMetricData(
-    args: GetLoadBalancerMetricDataCommandInput,
-    cb: (err: any, data?: GetLoadBalancerMetricDataCommandOutput) => void
-  ): void;
-  public getLoadBalancerMetricData(
-    args: GetLoadBalancerMetricDataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLoadBalancerMetricDataCommandOutput) => void
-  ): void;
-  public getLoadBalancerMetricData(
-    args: GetLoadBalancerMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLoadBalancerMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetLoadBalancerMetricDataCommandOutput) => void
-  ): Promise<GetLoadBalancerMetricDataCommandOutput> | void {
-    const command = new GetLoadBalancerMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all load balancers in an account.</p>
-   */
-  public getLoadBalancers(
-    args: GetLoadBalancersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLoadBalancersCommandOutput>;
-  public getLoadBalancers(
-    args: GetLoadBalancersCommandInput,
-    cb: (err: any, data?: GetLoadBalancersCommandOutput) => void
-  ): void;
-  public getLoadBalancers(
-    args: GetLoadBalancersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLoadBalancersCommandOutput) => void
-  ): void;
-  public getLoadBalancers(
-    args: GetLoadBalancersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLoadBalancersCommandOutput) => void),
-    cb?: (err: any, data?: GetLoadBalancersCommandOutput) => void
-  ): Promise<GetLoadBalancersCommandOutput> | void {
-    const command = new GetLoadBalancersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about the TLS certificates that are associated with the specified
-   *       Lightsail load balancer.</p>
-   *          <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>
-   *          <p>You can have a maximum of 2 certificates associated with a Lightsail load balancer. One
-   *       is active and the other is inactive.</p>
-   */
-  public getLoadBalancerTlsCertificates(
-    args: GetLoadBalancerTlsCertificatesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLoadBalancerTlsCertificatesCommandOutput>;
-  public getLoadBalancerTlsCertificates(
-    args: GetLoadBalancerTlsCertificatesCommandInput,
-    cb: (err: any, data?: GetLoadBalancerTlsCertificatesCommandOutput) => void
-  ): void;
-  public getLoadBalancerTlsCertificates(
-    args: GetLoadBalancerTlsCertificatesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLoadBalancerTlsCertificatesCommandOutput) => void
-  ): void;
-  public getLoadBalancerTlsCertificates(
-    args: GetLoadBalancerTlsCertificatesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLoadBalancerTlsCertificatesCommandOutput) => void),
-    cb?: (err: any, data?: GetLoadBalancerTlsCertificatesCommandOutput) => void
-  ): Promise<GetLoadBalancerTlsCertificatesCommandOutput> | void {
-    const command = new GetLoadBalancerTlsCertificatesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of TLS security policies that you can apply to Lightsail load
-   *       balancers.</p>
-   *
-   *          <p>For more information about load balancer TLS security policies, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy">Configuring TLS security policies on your Amazon Lightsail load
-   *         balancers</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>
-   */
-  public getLoadBalancerTlsPolicies(
-    args: GetLoadBalancerTlsPoliciesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetLoadBalancerTlsPoliciesCommandOutput>;
-  public getLoadBalancerTlsPolicies(
-    args: GetLoadBalancerTlsPoliciesCommandInput,
-    cb: (err: any, data?: GetLoadBalancerTlsPoliciesCommandOutput) => void
-  ): void;
-  public getLoadBalancerTlsPolicies(
-    args: GetLoadBalancerTlsPoliciesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetLoadBalancerTlsPoliciesCommandOutput) => void
-  ): void;
-  public getLoadBalancerTlsPolicies(
-    args: GetLoadBalancerTlsPoliciesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetLoadBalancerTlsPoliciesCommandOutput) => void),
-    cb?: (err: any, data?: GetLoadBalancerTlsPoliciesCommandOutput) => void
-  ): Promise<GetLoadBalancerTlsPoliciesCommandOutput> | void {
-    const command = new GetLoadBalancerTlsPoliciesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific operation. Operations include events such as when you
-   *       create an instance, allocate a static IP, attach a static IP, and so on.</p>
-   */
-  public getOperation(
-    args: GetOperationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetOperationCommandOutput>;
-  public getOperation(args: GetOperationCommandInput, cb: (err: any, data?: GetOperationCommandOutput) => void): void;
-  public getOperation(
-    args: GetOperationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetOperationCommandOutput) => void
-  ): void;
-  public getOperation(
-    args: GetOperationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetOperationCommandOutput) => void),
-    cb?: (err: any, data?: GetOperationCommandOutput) => void
-  ): Promise<GetOperationCommandOutput> | void {
-    const command = new GetOperationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all operations.</p>
-   *          <p>Results are returned from oldest to newest, up to a maximum of 200. Results can be paged
-   *       by making each subsequent call to <code>GetOperations</code> use the maximum (last)
-   *         <code>statusChangedAt</code> value from the previous request.</p>
-   */
-  public getOperations(
-    args: GetOperationsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetOperationsCommandOutput>;
-  public getOperations(
-    args: GetOperationsCommandInput,
-    cb: (err: any, data?: GetOperationsCommandOutput) => void
-  ): void;
-  public getOperations(
-    args: GetOperationsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetOperationsCommandOutput) => void
-  ): void;
-  public getOperations(
-    args: GetOperationsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetOperationsCommandOutput) => void),
-    cb?: (err: any, data?: GetOperationsCommandOutput) => void
-  ): Promise<GetOperationsCommandOutput> | void {
-    const command = new GetOperationsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Gets operations for a specific resource (e.g., an instance or a static IP).</p>
-   */
-  public getOperationsForResource(
-    args: GetOperationsForResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetOperationsForResourceCommandOutput>;
-  public getOperationsForResource(
-    args: GetOperationsForResourceCommandInput,
-    cb: (err: any, data?: GetOperationsForResourceCommandOutput) => void
-  ): void;
-  public getOperationsForResource(
-    args: GetOperationsForResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetOperationsForResourceCommandOutput) => void
-  ): void;
-  public getOperationsForResource(
-    args: GetOperationsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetOperationsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: GetOperationsForResourceCommandOutput) => void
-  ): Promise<GetOperationsForResourceCommandOutput> | void {
-    const command = new GetOperationsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of all valid regions for Amazon Lightsail. Use the <code>include
-   *         availability zones</code> parameter to also return the Availability Zones in a
-   *       region.</p>
-   */
-  public getRegions(args: GetRegionsCommandInput, options?: __HttpHandlerOptions): Promise<GetRegionsCommandOutput>;
-  public getRegions(args: GetRegionsCommandInput, cb: (err: any, data?: GetRegionsCommandOutput) => void): void;
-  public getRegions(
-    args: GetRegionsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRegionsCommandOutput) => void
-  ): void;
-  public getRegions(
-    args: GetRegionsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRegionsCommandOutput) => void),
-    cb?: (err: any, data?: GetRegionsCommandOutput) => void
-  ): Promise<GetRegionsCommandOutput> | void {
-    const command = new GetRegionsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific database in Amazon Lightsail.</p>
-   */
-  public getRelationalDatabase(
-    args: GetRelationalDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseCommandOutput>;
-  public getRelationalDatabase(
-    args: GetRelationalDatabaseCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseCommandOutput) => void
-  ): void;
-  public getRelationalDatabase(
-    args: GetRelationalDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseCommandOutput) => void
-  ): void;
-  public getRelationalDatabase(
-    args: GetRelationalDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseCommandOutput) => void
-  ): Promise<GetRelationalDatabaseCommandOutput> | void {
-    const command = new GetRelationalDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of available database blueprints in Amazon Lightsail. A blueprint describes
-   *       the major engine version of a database.</p>
-   *          <p>You can use a blueprint ID to create a new database that runs a specific database
-   *       engine.</p>
-   */
-  public getRelationalDatabaseBlueprints(
-    args: GetRelationalDatabaseBlueprintsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseBlueprintsCommandOutput>;
-  public getRelationalDatabaseBlueprints(
-    args: GetRelationalDatabaseBlueprintsCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseBlueprintsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseBlueprints(
-    args: GetRelationalDatabaseBlueprintsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseBlueprintsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseBlueprints(
-    args: GetRelationalDatabaseBlueprintsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseBlueprintsCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseBlueprintsCommandOutput) => void
-  ): Promise<GetRelationalDatabaseBlueprintsCommandOutput> | void {
-    const command = new GetRelationalDatabaseBlueprintsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the list of bundles that are available in Amazon Lightsail. A bundle describes the
-   *       performance specifications for a database.</p>
-   *          <p>You can use a bundle ID to create a new database with explicit performance
-   *       specifications.</p>
-   */
-  public getRelationalDatabaseBundles(
-    args: GetRelationalDatabaseBundlesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseBundlesCommandOutput>;
-  public getRelationalDatabaseBundles(
-    args: GetRelationalDatabaseBundlesCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseBundlesCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseBundles(
-    args: GetRelationalDatabaseBundlesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseBundlesCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseBundles(
-    args: GetRelationalDatabaseBundlesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseBundlesCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseBundlesCommandOutput) => void
-  ): Promise<GetRelationalDatabaseBundlesCommandOutput> | void {
-    const command = new GetRelationalDatabaseBundlesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of events for a specific database in Amazon Lightsail.</p>
-   */
-  public getRelationalDatabaseEvents(
-    args: GetRelationalDatabaseEventsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseEventsCommandOutput>;
-  public getRelationalDatabaseEvents(
-    args: GetRelationalDatabaseEventsCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseEventsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseEvents(
-    args: GetRelationalDatabaseEventsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseEventsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseEvents(
-    args: GetRelationalDatabaseEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseEventsCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseEventsCommandOutput) => void
-  ): Promise<GetRelationalDatabaseEventsCommandOutput> | void {
-    const command = new GetRelationalDatabaseEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of log events for a database in Amazon Lightsail.</p>
-   */
-  public getRelationalDatabaseLogEvents(
-    args: GetRelationalDatabaseLogEventsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseLogEventsCommandOutput>;
-  public getRelationalDatabaseLogEvents(
-    args: GetRelationalDatabaseLogEventsCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseLogEventsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseLogEvents(
-    args: GetRelationalDatabaseLogEventsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseLogEventsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseLogEvents(
-    args: GetRelationalDatabaseLogEventsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseLogEventsCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseLogEventsCommandOutput) => void
-  ): Promise<GetRelationalDatabaseLogEventsCommandOutput> | void {
-    const command = new GetRelationalDatabaseLogEventsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a list of available log streams for a specific database in Amazon Lightsail.</p>
-   */
-  public getRelationalDatabaseLogStreams(
-    args: GetRelationalDatabaseLogStreamsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseLogStreamsCommandOutput>;
-  public getRelationalDatabaseLogStreams(
-    args: GetRelationalDatabaseLogStreamsCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseLogStreamsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseLogStreams(
-    args: GetRelationalDatabaseLogStreamsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseLogStreamsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseLogStreams(
-    args: GetRelationalDatabaseLogStreamsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseLogStreamsCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseLogStreamsCommandOutput) => void
-  ): Promise<GetRelationalDatabaseLogStreamsCommandOutput> | void {
-    const command = new GetRelationalDatabaseLogStreamsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the current, previous, or pending versions of the master user password for a
-   *       Lightsail database.</p>
-   *          <p>The <code>GetRelationalDatabaseMasterUserPassword</code> operation supports tag-based
-   *       access control via resource tags applied to the resource identified by
-   *       relationalDatabaseName.</p>
-   */
-  public getRelationalDatabaseMasterUserPassword(
-    args: GetRelationalDatabaseMasterUserPasswordCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseMasterUserPasswordCommandOutput>;
-  public getRelationalDatabaseMasterUserPassword(
-    args: GetRelationalDatabaseMasterUserPasswordCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseMasterUserPasswordCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseMasterUserPassword(
-    args: GetRelationalDatabaseMasterUserPasswordCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseMasterUserPasswordCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseMasterUserPassword(
-    args: GetRelationalDatabaseMasterUserPasswordCommandInput,
-    optionsOrCb?:
-      | __HttpHandlerOptions
-      | ((err: any, data?: GetRelationalDatabaseMasterUserPasswordCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseMasterUserPasswordCommandOutput) => void
-  ): Promise<GetRelationalDatabaseMasterUserPasswordCommandOutput> | void {
-    const command = new GetRelationalDatabaseMasterUserPasswordCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns the data points of the specified metric for a database in Amazon Lightsail.</p>
-   *          <p>Metrics report the utilization of your resources, and the error counts generated by them.
-   *       Monitor and collect metric data regularly to maintain the reliability, availability, and
-   *       performance of your resources.</p>
-   */
-  public getRelationalDatabaseMetricData(
-    args: GetRelationalDatabaseMetricDataCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseMetricDataCommandOutput>;
-  public getRelationalDatabaseMetricData(
-    args: GetRelationalDatabaseMetricDataCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseMetricDataCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseMetricData(
-    args: GetRelationalDatabaseMetricDataCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseMetricDataCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseMetricData(
-    args: GetRelationalDatabaseMetricDataCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseMetricDataCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseMetricDataCommandOutput) => void
-  ): Promise<GetRelationalDatabaseMetricDataCommandOutput> | void {
-    const command = new GetRelationalDatabaseMetricDataCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns all of the runtime parameters offered by the underlying database software, or
-   *       engine, for a specific database in Amazon Lightsail.</p>
-   *          <p>In addition to the parameter names and values, this operation returns other information
-   *       about each parameter. This information includes whether changes require a reboot, whether the
-   *       parameter is modifiable, the allowed values, and the data types.</p>
-   */
-  public getRelationalDatabaseParameters(
-    args: GetRelationalDatabaseParametersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseParametersCommandOutput>;
-  public getRelationalDatabaseParameters(
-    args: GetRelationalDatabaseParametersCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseParametersCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseParameters(
-    args: GetRelationalDatabaseParametersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseParametersCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseParameters(
-    args: GetRelationalDatabaseParametersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseParametersCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseParametersCommandOutput) => void
-  ): Promise<GetRelationalDatabaseParametersCommandOutput> | void {
-    const command = new GetRelationalDatabaseParametersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all of your databases in Amazon Lightsail.</p>
-   */
-  public getRelationalDatabases(
-    args: GetRelationalDatabasesCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabasesCommandOutput>;
-  public getRelationalDatabases(
-    args: GetRelationalDatabasesCommandInput,
-    cb: (err: any, data?: GetRelationalDatabasesCommandOutput) => void
-  ): void;
-  public getRelationalDatabases(
-    args: GetRelationalDatabasesCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabasesCommandOutput) => void
-  ): void;
-  public getRelationalDatabases(
-    args: GetRelationalDatabasesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabasesCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabasesCommandOutput) => void
-  ): Promise<GetRelationalDatabasesCommandOutput> | void {
-    const command = new GetRelationalDatabasesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about a specific database snapshot in Amazon Lightsail.</p>
-   */
-  public getRelationalDatabaseSnapshot(
-    args: GetRelationalDatabaseSnapshotCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseSnapshotCommandOutput>;
-  public getRelationalDatabaseSnapshot(
-    args: GetRelationalDatabaseSnapshotCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseSnapshotCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseSnapshot(
-    args: GetRelationalDatabaseSnapshotCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseSnapshotCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseSnapshot(
-    args: GetRelationalDatabaseSnapshotCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseSnapshotCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseSnapshotCommandOutput) => void
-  ): Promise<GetRelationalDatabaseSnapshotCommandOutput> | void {
-    const command = new GetRelationalDatabaseSnapshotCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all of your database snapshots in Amazon Lightsail.</p>
-   */
-  public getRelationalDatabaseSnapshots(
-    args: GetRelationalDatabaseSnapshotsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetRelationalDatabaseSnapshotsCommandOutput>;
-  public getRelationalDatabaseSnapshots(
-    args: GetRelationalDatabaseSnapshotsCommandInput,
-    cb: (err: any, data?: GetRelationalDatabaseSnapshotsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseSnapshots(
-    args: GetRelationalDatabaseSnapshotsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetRelationalDatabaseSnapshotsCommandOutput) => void
-  ): void;
-  public getRelationalDatabaseSnapshots(
-    args: GetRelationalDatabaseSnapshotsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetRelationalDatabaseSnapshotsCommandOutput) => void),
-    cb?: (err: any, data?: GetRelationalDatabaseSnapshotsCommandOutput) => void
-  ): Promise<GetRelationalDatabaseSnapshotsCommandOutput> | void {
-    const command = new GetRelationalDatabaseSnapshotsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about an Amazon Lightsail static IP.</p>
-   */
-  public getStaticIp(args: GetStaticIpCommandInput, options?: __HttpHandlerOptions): Promise<GetStaticIpCommandOutput>;
-  public getStaticIp(args: GetStaticIpCommandInput, cb: (err: any, data?: GetStaticIpCommandOutput) => void): void;
-  public getStaticIp(
-    args: GetStaticIpCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetStaticIpCommandOutput) => void
-  ): void;
-  public getStaticIp(
-    args: GetStaticIpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStaticIpCommandOutput) => void),
-    cb?: (err: any, data?: GetStaticIpCommandOutput) => void
-  ): Promise<GetStaticIpCommandOutput> | void {
-    const command = new GetStaticIpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns information about all static IPs in the user's account.</p>
-   */
-  public getStaticIps(
-    args: GetStaticIpsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<GetStaticIpsCommandOutput>;
-  public getStaticIps(args: GetStaticIpsCommandInput, cb: (err: any, data?: GetStaticIpsCommandOutput) => void): void;
-  public getStaticIps(
-    args: GetStaticIpsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: GetStaticIpsCommandOutput) => void
-  ): void;
-  public getStaticIps(
-    args: GetStaticIpsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetStaticIpsCommandOutput) => void),
-    cb?: (err: any, data?: GetStaticIpsCommandOutput) => void
-  ): Promise<GetStaticIpsCommandOutput> | void {
-    const command = new GetStaticIpsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Imports a public SSH key from a specific key pair.</p>
-   */
-  public importKeyPair(
-    args: ImportKeyPairCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ImportKeyPairCommandOutput>;
-  public importKeyPair(
-    args: ImportKeyPairCommandInput,
-    cb: (err: any, data?: ImportKeyPairCommandOutput) => void
-  ): void;
-  public importKeyPair(
-    args: ImportKeyPairCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ImportKeyPairCommandOutput) => void
-  ): void;
-  public importKeyPair(
-    args: ImportKeyPairCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportKeyPairCommandOutput) => void),
-    cb?: (err: any, data?: ImportKeyPairCommandOutput) => void
-  ): Promise<ImportKeyPairCommandOutput> | void {
-    const command = new ImportKeyPairCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Returns a Boolean value indicating whether your Lightsail VPC is peered.</p>
-   */
-  public isVpcPeered(args: IsVpcPeeredCommandInput, options?: __HttpHandlerOptions): Promise<IsVpcPeeredCommandOutput>;
-  public isVpcPeered(args: IsVpcPeeredCommandInput, cb: (err: any, data?: IsVpcPeeredCommandOutput) => void): void;
-  public isVpcPeered(
-    args: IsVpcPeeredCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: IsVpcPeeredCommandOutput) => void
-  ): void;
-  public isVpcPeered(
-    args: IsVpcPeeredCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: IsVpcPeeredCommandOutput) => void),
-    cb?: (err: any, data?: IsVpcPeeredCommandOutput) => void
-  ): Promise<IsVpcPeeredCommandOutput> | void {
-    const command = new IsVpcPeeredCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses
-   *       allowed to connect to the instance through the ports, and the protocol.</p>
-   *          <p>The <code>OpenInstancePublicPorts</code> action supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>instanceName</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public openInstancePublicPorts(
-    args: OpenInstancePublicPortsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<OpenInstancePublicPortsCommandOutput>;
-  public openInstancePublicPorts(
-    args: OpenInstancePublicPortsCommandInput,
-    cb: (err: any, data?: OpenInstancePublicPortsCommandOutput) => void
-  ): void;
-  public openInstancePublicPorts(
-    args: OpenInstancePublicPortsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: OpenInstancePublicPortsCommandOutput) => void
-  ): void;
-  public openInstancePublicPorts(
-    args: OpenInstancePublicPortsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: OpenInstancePublicPortsCommandOutput) => void),
-    cb?: (err: any, data?: OpenInstancePublicPortsCommandOutput) => void
-  ): Promise<OpenInstancePublicPortsCommandOutput> | void {
-    const command = new OpenInstancePublicPortsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Peers the Lightsail VPC with the user's default VPC.</p>
-   */
-  public peerVpc(args: PeerVpcCommandInput, options?: __HttpHandlerOptions): Promise<PeerVpcCommandOutput>;
-  public peerVpc(args: PeerVpcCommandInput, cb: (err: any, data?: PeerVpcCommandOutput) => void): void;
-  public peerVpc(
-    args: PeerVpcCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PeerVpcCommandOutput) => void
-  ): void;
-  public peerVpc(
-    args: PeerVpcCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PeerVpcCommandOutput) => void),
-    cb?: (err: any, data?: PeerVpcCommandOutput) => void
-  ): Promise<PeerVpcCommandOutput> | void {
-    const command = new PeerVpcCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Creates or updates an alarm, and associates it with the specified metric.</p>
-   *          <p>An alarm is used to monitor a single metric for one of your resources. When a metric
-   *       condition is met, the alarm can notify you by email, SMS text message, and a banner displayed
-   *       on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms
-   *         in Amazon Lightsail</a>.</p>
-   *          <p>When this action creates an alarm, the alarm state is immediately set to
-   *         <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set
-   *       appropriately. Any actions associated with the new state are then executed.</p>
-   *          <p>When you update an existing alarm, its state is left unchanged, but the update completely
-   *       overwrites the previous configuration of the alarm. The alarm is then evaluated with the
-   *       updated configuration.</p>
-   */
-  public putAlarm(args: PutAlarmCommandInput, options?: __HttpHandlerOptions): Promise<PutAlarmCommandOutput>;
-  public putAlarm(args: PutAlarmCommandInput, cb: (err: any, data?: PutAlarmCommandOutput) => void): void;
-  public putAlarm(
-    args: PutAlarmCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutAlarmCommandOutput) => void
-  ): void;
-  public putAlarm(
-    args: PutAlarmCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutAlarmCommandOutput) => void),
-    cb?: (err: any, data?: PutAlarmCommandOutput) => void
-  ): Promise<PutAlarmCommandOutput> | void {
-    const command = new PutAlarmCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses
-   *       allowed to connect to the instance through the ports, and the protocol. This action also
-   *       closes all currently open ports that are not included in the request. Include all of the ports
-   *       and the protocols you want to open in your <code>PutInstancePublicPorts</code>request. Or use
-   *       the <code>OpenInstancePublicPorts</code> action to open ports without closing currently open
-   *       ports.</p>
-   *          <p>The <code>PutInstancePublicPorts</code> action supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>instanceName</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public putInstancePublicPorts(
-    args: PutInstancePublicPortsCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<PutInstancePublicPortsCommandOutput>;
-  public putInstancePublicPorts(
-    args: PutInstancePublicPortsCommandInput,
-    cb: (err: any, data?: PutInstancePublicPortsCommandOutput) => void
-  ): void;
-  public putInstancePublicPorts(
-    args: PutInstancePublicPortsCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: PutInstancePublicPortsCommandOutput) => void
-  ): void;
-  public putInstancePublicPorts(
-    args: PutInstancePublicPortsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: PutInstancePublicPortsCommandOutput) => void),
-    cb?: (err: any, data?: PutInstancePublicPortsCommandOutput) => void
-  ): Promise<PutInstancePublicPortsCommandOutput> | void {
-    const command = new PutInstancePublicPortsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Restarts a specific instance.</p>
-   *          <p>The <code>reboot instance</code> operation supports tag-based access control via resource
-   *       tags applied to the resource identified by <code>instance name</code>. For more information,
-   *       see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public rebootInstance(
-    args: RebootInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RebootInstanceCommandOutput>;
-  public rebootInstance(
-    args: RebootInstanceCommandInput,
-    cb: (err: any, data?: RebootInstanceCommandOutput) => void
-  ): void;
-  public rebootInstance(
-    args: RebootInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RebootInstanceCommandOutput) => void
-  ): void;
-  public rebootInstance(
-    args: RebootInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RebootInstanceCommandOutput) => void),
-    cb?: (err: any, data?: RebootInstanceCommandOutput) => void
-  ): Promise<RebootInstanceCommandOutput> | void {
-    const command = new RebootInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Restarts a specific database in Amazon Lightsail.</p>
-   *          <p>The <code>reboot relational database</code> operation supports tag-based access control
-   *       via resource tags applied to the resource identified by relationalDatabaseName. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public rebootRelationalDatabase(
-    args: RebootRelationalDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RebootRelationalDatabaseCommandOutput>;
-  public rebootRelationalDatabase(
-    args: RebootRelationalDatabaseCommandInput,
-    cb: (err: any, data?: RebootRelationalDatabaseCommandOutput) => void
-  ): void;
-  public rebootRelationalDatabase(
-    args: RebootRelationalDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RebootRelationalDatabaseCommandOutput) => void
-  ): void;
-  public rebootRelationalDatabase(
-    args: RebootRelationalDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RebootRelationalDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: RebootRelationalDatabaseCommandOutput) => void
-  ): Promise<RebootRelationalDatabaseCommandOutput> | void {
-    const command = new RebootRelationalDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Registers a container image to your Amazon Lightsail container service.</p>
-   *
-   *          <note>
-   *             <p>This action is not required if you install and use the Lightsail Control
-   *         (lightsailctl) plugin to push container images to your Lightsail container service. For
-   *         more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a>
-   *         in the <i>Amazon Lightsail Developer Guide</i>.</p>
-   *          </note>
-   */
-  public registerContainerImage(
-    args: RegisterContainerImageCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<RegisterContainerImageCommandOutput>;
-  public registerContainerImage(
-    args: RegisterContainerImageCommandInput,
-    cb: (err: any, data?: RegisterContainerImageCommandOutput) => void
-  ): void;
-  public registerContainerImage(
-    args: RegisterContainerImageCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: RegisterContainerImageCommandOutput) => void
-  ): void;
-  public registerContainerImage(
-    args: RegisterContainerImageCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: RegisterContainerImageCommandOutput) => void),
-    cb?: (err: any, data?: RegisterContainerImageCommandOutput) => void
-  ): Promise<RegisterContainerImageCommandOutput> | void {
-    const command = new RegisterContainerImageCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes a specific static IP from your account.</p>
-   */
-  public releaseStaticIp(
-    args: ReleaseStaticIpCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ReleaseStaticIpCommandOutput>;
-  public releaseStaticIp(
-    args: ReleaseStaticIpCommandInput,
-    cb: (err: any, data?: ReleaseStaticIpCommandOutput) => void
-  ): void;
-  public releaseStaticIp(
-    args: ReleaseStaticIpCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ReleaseStaticIpCommandOutput) => void
-  ): void;
-  public releaseStaticIp(
-    args: ReleaseStaticIpCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ReleaseStaticIpCommandOutput) => void),
-    cb?: (err: any, data?: ReleaseStaticIpCommandOutput) => void
-  ): Promise<ReleaseStaticIpCommandOutput> | void {
-    const command = new ReleaseStaticIpCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes currently cached content from your Amazon Lightsail content delivery network (CDN)
-   *       distribution.</p>
-   *          <p>After resetting the cache, the next time a content request is made, your distribution
-   *       pulls, serves, and caches it from the origin.</p>
-   */
-  public resetDistributionCache(
-    args: ResetDistributionCacheCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<ResetDistributionCacheCommandOutput>;
-  public resetDistributionCache(
-    args: ResetDistributionCacheCommandInput,
-    cb: (err: any, data?: ResetDistributionCacheCommandOutput) => void
-  ): void;
-  public resetDistributionCache(
-    args: ResetDistributionCacheCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: ResetDistributionCacheCommandOutput) => void
-  ): void;
-  public resetDistributionCache(
-    args: ResetDistributionCacheCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ResetDistributionCacheCommandOutput) => void),
-    cb?: (err: any, data?: ResetDistributionCacheCommandOutput) => void
-  ): Promise<ResetDistributionCacheCommandOutput> | void {
-    const command = new ResetDistributionCacheCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sends a verification request to an email contact method to ensure it's owned by the
-   *       requester. SMS contact methods don't need to be verified.</p>
-   *          <p>A contact method is used to send you notifications about your Amazon Lightsail resources.
-   *       You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services
-   *       Regions, and SMS text messages cannot be sent to some countries/regions. For more information,
-   *       see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications">Notifications in Amazon Lightsail</a>.</p>
-   *          <p>A verification request is sent to the contact method when you initially create it. Use
-   *       this action to send another verification request if a previous verification request was
-   *       deleted, or has expired.</p>
-   *          <important>
-   *             <p>Notifications are not sent to an email contact method until after it is verified, and
-   *         confirmed as valid.</p>
-   *          </important>
-   */
-  public sendContactMethodVerification(
-    args: SendContactMethodVerificationCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<SendContactMethodVerificationCommandOutput>;
-  public sendContactMethodVerification(
-    args: SendContactMethodVerificationCommandInput,
-    cb: (err: any, data?: SendContactMethodVerificationCommandOutput) => void
-  ): void;
-  public sendContactMethodVerification(
-    args: SendContactMethodVerificationCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: SendContactMethodVerificationCommandOutput) => void
-  ): void;
-  public sendContactMethodVerification(
-    args: SendContactMethodVerificationCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SendContactMethodVerificationCommandOutput) => void),
-    cb?: (err: any, data?: SendContactMethodVerificationCommandOutput) => void
-  ): Promise<SendContactMethodVerificationCommandOutput> | void {
-    const command = new SendContactMethodVerificationCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sets the IP address type for an Amazon Lightsail resource.</p>
-   *
-   *          <p>Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the
-   *       specified resource. Alternately, you can use this action to disable dual-stack, and enable
-   *       IPv4 only.</p>
-   */
-  public setIpAddressType(
-    args: SetIpAddressTypeCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<SetIpAddressTypeCommandOutput>;
-  public setIpAddressType(
-    args: SetIpAddressTypeCommandInput,
-    cb: (err: any, data?: SetIpAddressTypeCommandOutput) => void
-  ): void;
-  public setIpAddressType(
-    args: SetIpAddressTypeCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: SetIpAddressTypeCommandOutput) => void
-  ): void;
-  public setIpAddressType(
-    args: SetIpAddressTypeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetIpAddressTypeCommandOutput) => void),
-    cb?: (err: any, data?: SetIpAddressTypeCommandOutput) => void
-  ): Promise<SetIpAddressTypeCommandOutput> | void {
-    const command = new SetIpAddressTypeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Sets the Amazon Lightsail resources that can access the specified Lightsail
-   *       bucket.</p>
-   *
-   *          <p>Lightsail buckets currently support setting access for Lightsail instances in the same
-   *         Amazon Web Services Region.</p>
-   */
-  public setResourceAccessForBucket(
-    args: SetResourceAccessForBucketCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<SetResourceAccessForBucketCommandOutput>;
-  public setResourceAccessForBucket(
-    args: SetResourceAccessForBucketCommandInput,
-    cb: (err: any, data?: SetResourceAccessForBucketCommandOutput) => void
-  ): void;
-  public setResourceAccessForBucket(
-    args: SetResourceAccessForBucketCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: SetResourceAccessForBucketCommandOutput) => void
-  ): void;
-  public setResourceAccessForBucket(
-    args: SetResourceAccessForBucketCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: SetResourceAccessForBucketCommandOutput) => void),
-    cb?: (err: any, data?: SetResourceAccessForBucketCommandOutput) => void
-  ): Promise<SetResourceAccessForBucketCommandOutput> | void {
-    const command = new SetResourceAccessForBucketCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance,
-   *       use the <code>reboot instance</code> operation.</p>
-   *          <note>
-   *             <p>When you start a stopped instance, Lightsail assigns a new public IP address to the
-   *         instance. To use the same IP address after stopping and starting an instance, create a
-   *         static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip">Amazon Lightsail Developer Guide</a>.</p>
-   *          </note>
-   *          <p>The <code>start instance</code> operation supports tag-based access control via resource
-   *       tags applied to the resource identified by <code>instance name</code>. For more information,
-   *       see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public startInstance(
-    args: StartInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartInstanceCommandOutput>;
-  public startInstance(
-    args: StartInstanceCommandInput,
-    cb: (err: any, data?: StartInstanceCommandOutput) => void
-  ): void;
-  public startInstance(
-    args: StartInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartInstanceCommandOutput) => void
-  ): void;
-  public startInstance(
-    args: StartInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartInstanceCommandOutput) => void),
-    cb?: (err: any, data?: StartInstanceCommandOutput) => void
-  ): Promise<StartInstanceCommandOutput> | void {
-    const command = new StartInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Starts a specific database from a stopped state in Amazon Lightsail. To restart a database,
-   *       use the <code>reboot relational database</code> operation.</p>
-   *          <p>The <code>start relational database</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by relationalDatabaseName. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public startRelationalDatabase(
-    args: StartRelationalDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StartRelationalDatabaseCommandOutput>;
-  public startRelationalDatabase(
-    args: StartRelationalDatabaseCommandInput,
-    cb: (err: any, data?: StartRelationalDatabaseCommandOutput) => void
-  ): void;
-  public startRelationalDatabase(
-    args: StartRelationalDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StartRelationalDatabaseCommandOutput) => void
-  ): void;
-  public startRelationalDatabase(
-    args: StartRelationalDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StartRelationalDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: StartRelationalDatabaseCommandOutput) => void
-  ): Promise<StartRelationalDatabaseCommandOutput> | void {
-    const command = new StartRelationalDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops a specific Amazon Lightsail instance that is currently running.</p>
-   *          <note>
-   *             <p>When you start a stopped instance, Lightsail assigns a new public IP address to the
-   *         instance. To use the same IP address after stopping and starting an instance, create a
-   *         static IP address and attach it to the instance. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip">Amazon Lightsail Developer Guide</a>.</p>
-   *          </note>
-   *          <p>The <code>stop instance</code> operation supports tag-based access control via resource
-   *       tags applied to the resource identified by <code>instance name</code>. For more information,
-   *       see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public stopInstance(
-    args: StopInstanceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopInstanceCommandOutput>;
-  public stopInstance(args: StopInstanceCommandInput, cb: (err: any, data?: StopInstanceCommandOutput) => void): void;
-  public stopInstance(
-    args: StopInstanceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopInstanceCommandOutput) => void
-  ): void;
-  public stopInstance(
-    args: StopInstanceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopInstanceCommandOutput) => void),
-    cb?: (err: any, data?: StopInstanceCommandOutput) => void
-  ): Promise<StopInstanceCommandOutput> | void {
-    const command = new StopInstanceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Stops a specific database that is currently running in Amazon Lightsail.</p>
-   *          <p>The <code>stop relational database</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by relationalDatabaseName. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public stopRelationalDatabase(
-    args: StopRelationalDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<StopRelationalDatabaseCommandOutput>;
-  public stopRelationalDatabase(
-    args: StopRelationalDatabaseCommandInput,
-    cb: (err: any, data?: StopRelationalDatabaseCommandOutput) => void
-  ): void;
-  public stopRelationalDatabase(
-    args: StopRelationalDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: StopRelationalDatabaseCommandOutput) => void
-  ): void;
-  public stopRelationalDatabase(
-    args: StopRelationalDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: StopRelationalDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: StopRelationalDatabaseCommandOutput) => void
-  ): Promise<StopRelationalDatabaseCommandOutput> | void {
-    const command = new StopRelationalDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a
-   *       maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique
-   *       per resource. For more information about tags, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags">Amazon Lightsail Developer Guide</a>.</p>
-   *          <p>The <code>tag resource</code> operation supports tag-based access control via request tags
-   *       and resource tags applied to the resource identified by <code>resource name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TagResourceCommandOutput) => void
-  ): void;
-  public tagResource(
-    args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Tests an alarm by displaying a banner on the Amazon Lightsail console. If a notification
-   *       trigger is configured for the specified alarm, the test also sends a notification to the
-   *       notification protocol (<code>Email</code> and/or <code>SMS</code>) configured for the
-   *       alarm.</p>
-   *          <p>An alarm is used to monitor a single metric for one of your resources. When a metric
-   *       condition is met, the alarm can notify you by email, SMS text message, and a banner displayed
-   *       on the Amazon Lightsail console. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms">Alarms
-   *         in Amazon Lightsail</a>.</p>
-   */
-  public testAlarm(args: TestAlarmCommandInput, options?: __HttpHandlerOptions): Promise<TestAlarmCommandOutput>;
-  public testAlarm(args: TestAlarmCommandInput, cb: (err: any, data?: TestAlarmCommandOutput) => void): void;
-  public testAlarm(
-    args: TestAlarmCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: TestAlarmCommandOutput) => void
-  ): void;
-  public testAlarm(
-    args: TestAlarmCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TestAlarmCommandOutput) => void),
-    cb?: (err: any, data?: TestAlarmCommandOutput) => void
-  ): Promise<TestAlarmCommandOutput> | void {
-    const command = new TestAlarmCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Unpeers the Lightsail VPC from the user's default VPC.</p>
-   */
-  public unpeerVpc(args: UnpeerVpcCommandInput, options?: __HttpHandlerOptions): Promise<UnpeerVpcCommandOutput>;
-  public unpeerVpc(args: UnpeerVpcCommandInput, cb: (err: any, data?: UnpeerVpcCommandOutput) => void): void;
-  public unpeerVpc(
-    args: UnpeerVpcCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UnpeerVpcCommandOutput) => void
-  ): void;
-  public unpeerVpc(
-    args: UnpeerVpcCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UnpeerVpcCommandOutput) => void),
-    cb?: (err: any, data?: UnpeerVpcCommandOutput) => void
-  ): Promise<UnpeerVpcCommandOutput> | void {
-    const command = new UnpeerVpcCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail
-   *       resource.</p>
-   *          <p>The <code>untag resource</code> operation supports tag-based access control via request
-   *       tags and resource tags applied to the resource identified by <code>resource name</code>. For
-   *       more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UntagResourceCommandOutput) => void
-  ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing Amazon Lightsail bucket.</p>
-   *
-   *          <p>Use this action to update the configuration of an existing bucket, such as versioning,
-   *       public accessibility, and the Amazon Web Services accounts that can access the bucket.</p>
-   */
-  public updateBucket(
-    args: UpdateBucketCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBucketCommandOutput>;
-  public updateBucket(args: UpdateBucketCommandInput, cb: (err: any, data?: UpdateBucketCommandOutput) => void): void;
-  public updateBucket(
-    args: UpdateBucketCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBucketCommandOutput) => void
-  ): void;
-  public updateBucket(
-    args: UpdateBucketCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBucketCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBucketCommandOutput) => void
-  ): Promise<UpdateBucketCommandOutput> | void {
-    const command = new UpdateBucketCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket.</p>
-   *
-   *          <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a
-   *       bucket. You can update a bucket's bundle only one time within a monthly AWS billing cycle. To
-   *       determine if you can update a bucket's bundle, use the <a href="https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html">GetBuckets</a> action. The
-   *         <code>ableToUpdateBundle</code> parameter in the response will indicate whether you can
-   *       currently update a bucket's bundle.</p>
-   *
-   *          <p>Update a bucket's bundle if it's consistently going over its storage space or data
-   *       transfer quota, or if a bucket's usage is consistently in the lower range of its storage space
-   *       or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might
-   *       experience, we strongly recommend that you update a bucket's bundle only as a long-term
-   *       strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle
-   *       that will provide the bucket with ample storage space and data transfer for a long time to
-   *       come.</p>
-   */
-  public updateBucketBundle(
-    args: UpdateBucketBundleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateBucketBundleCommandOutput>;
-  public updateBucketBundle(
-    args: UpdateBucketBundleCommandInput,
-    cb: (err: any, data?: UpdateBucketBundleCommandOutput) => void
-  ): void;
-  public updateBucketBundle(
-    args: UpdateBucketBundleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateBucketBundleCommandOutput) => void
-  ): void;
-  public updateBucketBundle(
-    args: UpdateBucketBundleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateBucketBundleCommandOutput) => void),
-    cb?: (err: any, data?: UpdateBucketBundleCommandOutput) => void
-  ): Promise<UpdateBucketBundleCommandOutput> | void {
-    const command = new UpdateBucketBundleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the configuration of your Amazon Lightsail container service, such as its power,
-   *       scale, and public domain names.</p>
-   */
-  public updateContainerService(
-    args: UpdateContainerServiceCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateContainerServiceCommandOutput>;
-  public updateContainerService(
-    args: UpdateContainerServiceCommandInput,
-    cb: (err: any, data?: UpdateContainerServiceCommandOutput) => void
-  ): void;
-  public updateContainerService(
-    args: UpdateContainerServiceCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateContainerServiceCommandOutput) => void
-  ): void;
-  public updateContainerService(
-    args: UpdateContainerServiceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateContainerServiceCommandOutput) => void),
-    cb?: (err: any, data?: UpdateContainerServiceCommandOutput) => void
-  ): Promise<UpdateContainerServiceCommandOutput> | void {
-    const command = new UpdateContainerServiceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates an existing Amazon Lightsail content delivery network (CDN) distribution.</p>
-   *          <p>Use this action to update the configuration of your existing distribution.</p>
-   */
-  public updateDistribution(
-    args: UpdateDistributionCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDistributionCommandOutput>;
-  public updateDistribution(
-    args: UpdateDistributionCommandInput,
-    cb: (err: any, data?: UpdateDistributionCommandOutput) => void
-  ): void;
-  public updateDistribution(
-    args: UpdateDistributionCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDistributionCommandOutput) => void
-  ): void;
-  public updateDistribution(
-    args: UpdateDistributionCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDistributionCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDistributionCommandOutput) => void
-  ): Promise<UpdateDistributionCommandOutput> | void {
-    const command = new UpdateDistributionCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the bundle of your Amazon Lightsail content delivery network (CDN)
-   *       distribution.</p>
-   *          <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of
-   *       your distribution.</p>
-   *          <p>Update your distribution's bundle if your distribution is going over its monthly network
-   *       transfer quota and is incurring an overage fee.</p>
-   *          <p>You can update your distribution's bundle only one time within your monthly AWS billing
-   *       cycle. To determine if you can update your distribution's bundle, use the
-   *         <code>GetDistributions</code> action. The <code>ableToUpdateBundle</code> parameter in the
-   *       result will indicate whether you can currently update your distribution's bundle.</p>
-   */
-  public updateDistributionBundle(
-    args: UpdateDistributionBundleCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDistributionBundleCommandOutput>;
-  public updateDistributionBundle(
-    args: UpdateDistributionBundleCommandInput,
-    cb: (err: any, data?: UpdateDistributionBundleCommandOutput) => void
-  ): void;
-  public updateDistributionBundle(
-    args: UpdateDistributionBundleCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDistributionBundleCommandOutput) => void
-  ): void;
-  public updateDistributionBundle(
-    args: UpdateDistributionBundleCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDistributionBundleCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDistributionBundleCommandOutput) => void
-  ): Promise<UpdateDistributionBundleCommandOutput> | void {
-    const command = new UpdateDistributionBundleCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates a domain recordset after it is created.</p>
-   *          <p>The <code>update domain entry</code> operation supports tag-based access control via
-   *       resource tags applied to the resource identified by <code>domain name</code>. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public updateDomainEntry(
-    args: UpdateDomainEntryCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateDomainEntryCommandOutput>;
-  public updateDomainEntry(
-    args: UpdateDomainEntryCommandInput,
-    cb: (err: any, data?: UpdateDomainEntryCommandOutput) => void
-  ): void;
-  public updateDomainEntry(
-    args: UpdateDomainEntryCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateDomainEntryCommandOutput) => void
-  ): void;
-  public updateDomainEntry(
-    args: UpdateDomainEntryCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateDomainEntryCommandOutput) => void),
-    cb?: (err: any, data?: UpdateDomainEntryCommandOutput) => void
-  ): Promise<UpdateDomainEntryCommandOutput> | void {
-    const command = new UpdateDomainEntryCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Updates the specified attribute for a load balancer. You can only update one attribute at
-   *       a time.</p>
-   *          <p>The <code>update load balancer attribute</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by <code>load balancer
-   *         name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public updateLoadBalancerAttribute(
-    args: UpdateLoadBalancerAttributeCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateLoadBalancerAttributeCommandOutput>;
-  public updateLoadBalancerAttribute(
-    args: UpdateLoadBalancerAttributeCommandInput,
-    cb: (err: any, data?: UpdateLoadBalancerAttributeCommandOutput) => void
-  ): void;
-  public updateLoadBalancerAttribute(
-    args: UpdateLoadBalancerAttributeCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateLoadBalancerAttributeCommandOutput) => void
-  ): void;
-  public updateLoadBalancerAttribute(
-    args: UpdateLoadBalancerAttributeCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateLoadBalancerAttributeCommandOutput) => void),
-    cb?: (err: any, data?: UpdateLoadBalancerAttributeCommandOutput) => void
-  ): Promise<UpdateLoadBalancerAttributeCommandOutput> | void {
-    const command = new UpdateLoadBalancerAttributeCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Allows the update of one or more attributes of a database in Amazon Lightsail.</p>
-   *          <p>Updates are applied immediately, or in cases where the updates could result in an outage,
-   *       are applied during the database's predefined maintenance window.</p>
-   *          <p>The <code>update relational database</code> operation supports tag-based access control
-   *       via resource tags applied to the resource identified by relationalDatabaseName. For more
-   *       information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public updateRelationalDatabase(
-    args: UpdateRelationalDatabaseCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateRelationalDatabaseCommandOutput>;
-  public updateRelationalDatabase(
-    args: UpdateRelationalDatabaseCommandInput,
-    cb: (err: any, data?: UpdateRelationalDatabaseCommandOutput) => void
-  ): void;
-  public updateRelationalDatabase(
-    args: UpdateRelationalDatabaseCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRelationalDatabaseCommandOutput) => void
-  ): void;
-  public updateRelationalDatabase(
-    args: UpdateRelationalDatabaseCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRelationalDatabaseCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRelationalDatabaseCommandOutput) => void
-  ): Promise<UpdateRelationalDatabaseCommandOutput> | void {
-    const command = new UpdateRelationalDatabaseCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-
-  /**
-   * <p>Allows the update of one or more parameters of a database in Amazon Lightsail.</p>
-   *          <p>Parameter updates don't cause outages; therefore, their application is not subject to the
-   *       preferred maintenance window. However, there are two ways in which parameter updates are
-   *       applied: <code>dynamic</code> or <code>pending-reboot</code>. Parameters marked with a
-   *         <code>dynamic</code> apply type are applied immediately. Parameters marked with a
-   *         <code>pending-reboot</code> apply type are applied only after the database is rebooted using
-   *       the <code>reboot relational database</code> operation.</p>
-   *          <p>The <code>update relational database parameters</code> operation supports tag-based access
-   *       control via resource tags applied to the resource identified by relationalDatabaseName. For
-   *       more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags">Amazon Lightsail Developer Guide</a>.</p>
-   */
-  public updateRelationalDatabaseParameters(
-    args: UpdateRelationalDatabaseParametersCommandInput,
-    options?: __HttpHandlerOptions
-  ): Promise<UpdateRelationalDatabaseParametersCommandOutput>;
-  public updateRelationalDatabaseParameters(
-    args: UpdateRelationalDatabaseParametersCommandInput,
-    cb: (err: any, data?: UpdateRelationalDatabaseParametersCommandOutput) => void
-  ): void;
-  public updateRelationalDatabaseParameters(
-    args: UpdateRelationalDatabaseParametersCommandInput,
-    options: __HttpHandlerOptions,
-    cb: (err: any, data?: UpdateRelationalDatabaseParametersCommandOutput) => void
-  ): void;
-  public updateRelationalDatabaseParameters(
-    args: UpdateRelationalDatabaseParametersCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateRelationalDatabaseParametersCommandOutput) => void),
-    cb?: (err: any, data?: UpdateRelationalDatabaseParametersCommandOutput) => void
-  ): Promise<UpdateRelationalDatabaseParametersCommandOutput> | void {
-    const command = new UpdateRelationalDatabaseParametersCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
-}
+export class Lightsail extends LightsailClient implements Lightsail {}
+createAggregatedClient(commands, Lightsail);

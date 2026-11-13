@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
-  DescribeTransactionRequest,
-  DescribeTransactionRequestFilterSensitiveLog,
-  DescribeTransactionResponse,
-  DescribeTransactionResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DescribeTransactionCommand,
-  serializeAws_restJson1DescribeTransactionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DescribeTransactionRequest, DescribeTransactionResponse } from "../models/models_0";
+import { DescribeTransaction$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DescribeTransactionCommand}.
+ */
 export interface DescribeTransactionCommandInput extends DescribeTransactionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DescribeTransactionCommand}.
+ */
 export interface DescribeTransactionCommandOutput extends DescribeTransactionResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,64 @@ export interface DescribeTransactionCommandOutput extends DescribeTransactionRes
  * ```javascript
  * import { LakeFormationClient, DescribeTransactionCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, DescribeTransactionCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // DescribeTransactionRequest
+ *   TransactionId: "STRING_VALUE", // required
+ * };
  * const command = new DescribeTransactionCommand(input);
  * const response = await client.send(command);
+ * // { // DescribeTransactionResponse
+ * //   TransactionDescription: { // TransactionDescription
+ * //     TransactionId: "STRING_VALUE",
+ * //     TransactionStatus: "ACTIVE" || "COMMITTED" || "ABORTED" || "COMMIT_IN_PROGRESS",
+ * //     TransactionStartTime: new Date("TIMESTAMP"),
+ * //     TransactionEndTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param DescribeTransactionCommandInput - {@link DescribeTransactionCommandInput}
+ * @returns {@link DescribeTransactionCommandOutput}
  * @see {@link DescribeTransactionCommandInput} for command's `input` shape.
  * @see {@link DescribeTransactionCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link EntityNotFoundException} (client fault)
+ *  <p>A specified entity does not exist.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class DescribeTransactionCommand extends $Command<
-  DescribeTransactionCommandInput,
-  DescribeTransactionCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DescribeTransactionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DescribeTransactionCommandInput, DescribeTransactionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "DescribeTransactionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DescribeTransactionRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DescribeTransactionResponseFilterSensitiveLog,
+export class DescribeTransactionCommand extends command<DescribeTransactionCommandInput, DescribeTransactionCommandOutput>(
+  _ep0,
+  _mw0,
+  "DescribeTransaction",
+  DescribeTransaction$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DescribeTransactionRequest;
+      output: DescribeTransactionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DescribeTransactionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DescribeTransactionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DescribeTransactionCommandOutput> {
-    return deserializeAws_restJson1DescribeTransactionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DescribeTransactionCommandInput;
+      output: DescribeTransactionCommandOutput;
+    };
+  };
 }

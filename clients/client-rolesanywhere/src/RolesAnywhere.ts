@@ -1,972 +1,753 @@
 // smithy-typescript generated code
-import { HttpHandlerOptions as __HttpHandlerOptions } from "@aws-sdk/types";
+import { createAggregatedClient } from "@smithy/core/client";
+import type {
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetricsRecorder as __MetricsRecorder,
+  PaginationConfiguration,
+  Paginator,
+} from "@smithy/types";
 
 import {
+  type CreateProfileCommandInput,
+  type CreateProfileCommandOutput,
   CreateProfileCommand,
-  CreateProfileCommandInput,
-  CreateProfileCommandOutput,
 } from "./commands/CreateProfileCommand";
 import {
+  type CreateTrustAnchorCommandInput,
+  type CreateTrustAnchorCommandOutput,
   CreateTrustAnchorCommand,
-  CreateTrustAnchorCommandInput,
-  CreateTrustAnchorCommandOutput,
 } from "./commands/CreateTrustAnchorCommand";
-import { DeleteCrlCommand, DeleteCrlCommandInput, DeleteCrlCommandOutput } from "./commands/DeleteCrlCommand";
 import {
+  type DeleteAttributeMappingCommandInput,
+  type DeleteAttributeMappingCommandOutput,
+  DeleteAttributeMappingCommand,
+} from "./commands/DeleteAttributeMappingCommand";
+import { type DeleteCrlCommandInput, type DeleteCrlCommandOutput, DeleteCrlCommand } from "./commands/DeleteCrlCommand";
+import {
+  type DeleteProfileCommandInput,
+  type DeleteProfileCommandOutput,
   DeleteProfileCommand,
-  DeleteProfileCommandInput,
-  DeleteProfileCommandOutput,
 } from "./commands/DeleteProfileCommand";
 import {
+  type DeleteTrustAnchorCommandInput,
+  type DeleteTrustAnchorCommandOutput,
   DeleteTrustAnchorCommand,
-  DeleteTrustAnchorCommandInput,
-  DeleteTrustAnchorCommandOutput,
 } from "./commands/DeleteTrustAnchorCommand";
-import { DisableCrlCommand, DisableCrlCommandInput, DisableCrlCommandOutput } from "./commands/DisableCrlCommand";
 import {
+  type DisableCrlCommandInput,
+  type DisableCrlCommandOutput,
+  DisableCrlCommand,
+} from "./commands/DisableCrlCommand";
+import {
+  type DisableProfileCommandInput,
+  type DisableProfileCommandOutput,
   DisableProfileCommand,
-  DisableProfileCommandInput,
-  DisableProfileCommandOutput,
 } from "./commands/DisableProfileCommand";
 import {
+  type DisableTrustAnchorCommandInput,
+  type DisableTrustAnchorCommandOutput,
   DisableTrustAnchorCommand,
-  DisableTrustAnchorCommandInput,
-  DisableTrustAnchorCommandOutput,
 } from "./commands/DisableTrustAnchorCommand";
-import { EnableCrlCommand, EnableCrlCommandInput, EnableCrlCommandOutput } from "./commands/EnableCrlCommand";
+import { type EnableCrlCommandInput, type EnableCrlCommandOutput, EnableCrlCommand } from "./commands/EnableCrlCommand";
 import {
+  type EnableProfileCommandInput,
+  type EnableProfileCommandOutput,
   EnableProfileCommand,
-  EnableProfileCommandInput,
-  EnableProfileCommandOutput,
 } from "./commands/EnableProfileCommand";
 import {
+  type EnableTrustAnchorCommandInput,
+  type EnableTrustAnchorCommandOutput,
   EnableTrustAnchorCommand,
-  EnableTrustAnchorCommandInput,
-  EnableTrustAnchorCommandOutput,
 } from "./commands/EnableTrustAnchorCommand";
-import { GetCrlCommand, GetCrlCommandInput, GetCrlCommandOutput } from "./commands/GetCrlCommand";
-import { GetProfileCommand, GetProfileCommandInput, GetProfileCommandOutput } from "./commands/GetProfileCommand";
-import { GetSubjectCommand, GetSubjectCommandInput, GetSubjectCommandOutput } from "./commands/GetSubjectCommand";
+import { type GetCrlCommandInput, type GetCrlCommandOutput, GetCrlCommand } from "./commands/GetCrlCommand";
 import {
+  type GetProfileCommandInput,
+  type GetProfileCommandOutput,
+  GetProfileCommand,
+} from "./commands/GetProfileCommand";
+import {
+  type GetSubjectCommandInput,
+  type GetSubjectCommandOutput,
+  GetSubjectCommand,
+} from "./commands/GetSubjectCommand";
+import {
+  type GetTrustAnchorCommandInput,
+  type GetTrustAnchorCommandOutput,
   GetTrustAnchorCommand,
-  GetTrustAnchorCommandInput,
-  GetTrustAnchorCommandOutput,
 } from "./commands/GetTrustAnchorCommand";
-import { ImportCrlCommand, ImportCrlCommandInput, ImportCrlCommandOutput } from "./commands/ImportCrlCommand";
-import { ListCrlsCommand, ListCrlsCommandInput, ListCrlsCommandOutput } from "./commands/ListCrlsCommand";
+import { type ImportCrlCommandInput, type ImportCrlCommandOutput, ImportCrlCommand } from "./commands/ImportCrlCommand";
+import { type ListCrlsCommandInput, type ListCrlsCommandOutput, ListCrlsCommand } from "./commands/ListCrlsCommand";
 import {
+  type ListProfilesCommandInput,
+  type ListProfilesCommandOutput,
   ListProfilesCommand,
-  ListProfilesCommandInput,
-  ListProfilesCommandOutput,
 } from "./commands/ListProfilesCommand";
 import {
+  type ListSubjectsCommandInput,
+  type ListSubjectsCommandOutput,
   ListSubjectsCommand,
-  ListSubjectsCommandInput,
-  ListSubjectsCommandOutput,
 } from "./commands/ListSubjectsCommand";
 import {
+  type ListTagsForResourceCommandInput,
+  type ListTagsForResourceCommandOutput,
   ListTagsForResourceCommand,
-  ListTagsForResourceCommandInput,
-  ListTagsForResourceCommandOutput,
 } from "./commands/ListTagsForResourceCommand";
 import {
+  type ListTrustAnchorsCommandInput,
+  type ListTrustAnchorsCommandOutput,
   ListTrustAnchorsCommand,
-  ListTrustAnchorsCommandInput,
-  ListTrustAnchorsCommandOutput,
 } from "./commands/ListTrustAnchorsCommand";
-import { TagResourceCommand, TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
 import {
+  type PutAttributeMappingCommandInput,
+  type PutAttributeMappingCommandOutput,
+  PutAttributeMappingCommand,
+} from "./commands/PutAttributeMappingCommand";
+import {
+  type PutNotificationSettingsCommandInput,
+  type PutNotificationSettingsCommandOutput,
+  PutNotificationSettingsCommand,
+} from "./commands/PutNotificationSettingsCommand";
+import {
+  type ResetNotificationSettingsCommandInput,
+  type ResetNotificationSettingsCommandOutput,
+  ResetNotificationSettingsCommand,
+} from "./commands/ResetNotificationSettingsCommand";
+import {
+  type TagResourceCommandInput,
+  type TagResourceCommandOutput,
+  TagResourceCommand,
+} from "./commands/TagResourceCommand";
+import {
+  type UntagResourceCommandInput,
+  type UntagResourceCommandOutput,
   UntagResourceCommand,
-  UntagResourceCommandInput,
-  UntagResourceCommandOutput,
 } from "./commands/UntagResourceCommand";
-import { UpdateCrlCommand, UpdateCrlCommandInput, UpdateCrlCommandOutput } from "./commands/UpdateCrlCommand";
+import { type UpdateCrlCommandInput, type UpdateCrlCommandOutput, UpdateCrlCommand } from "./commands/UpdateCrlCommand";
 import {
+  type UpdateProfileCommandInput,
+  type UpdateProfileCommandOutput,
   UpdateProfileCommand,
-  UpdateProfileCommandInput,
-  UpdateProfileCommandOutput,
 } from "./commands/UpdateProfileCommand";
 import {
+  type UpdateTrustAnchorCommandInput,
+  type UpdateTrustAnchorCommandOutput,
   UpdateTrustAnchorCommand,
-  UpdateTrustAnchorCommandInput,
-  UpdateTrustAnchorCommandOutput,
 } from "./commands/UpdateTrustAnchorCommand";
+import { paginateListCrls } from "./pagination/ListCrlsPaginator";
+import { paginateListProfiles } from "./pagination/ListProfilesPaginator";
+import { paginateListSubjects } from "./pagination/ListSubjectsPaginator";
+import { paginateListTrustAnchors } from "./pagination/ListTrustAnchorsPaginator";
 import { RolesAnywhereClient } from "./RolesAnywhereClient";
 
+const commands = {
+  CreateProfileCommand,
+  CreateTrustAnchorCommand,
+  DeleteAttributeMappingCommand,
+  DeleteCrlCommand,
+  DeleteProfileCommand,
+  DeleteTrustAnchorCommand,
+  DisableCrlCommand,
+  DisableProfileCommand,
+  DisableTrustAnchorCommand,
+  EnableCrlCommand,
+  EnableProfileCommand,
+  EnableTrustAnchorCommand,
+  GetCrlCommand,
+  GetProfileCommand,
+  GetSubjectCommand,
+  GetTrustAnchorCommand,
+  ImportCrlCommand,
+  ListCrlsCommand,
+  ListProfilesCommand,
+  ListSubjectsCommand,
+  ListTagsForResourceCommand,
+  ListTrustAnchorsCommand,
+  PutAttributeMappingCommand,
+  PutNotificationSettingsCommand,
+  ResetNotificationSettingsCommand,
+  TagResourceCommand,
+  UntagResourceCommand,
+  UpdateCrlCommand,
+  UpdateProfileCommand,
+  UpdateTrustAnchorCommand,
+};
+const paginators = {
+  paginateListCrls,
+  paginateListProfiles,
+  paginateListSubjects,
+  paginateListTrustAnchors,
+};
+
 /**
- * <p>AWS Identity and Access Management Roles Anywhere provides a secure way for your workloads such as servers, containers, and applications running outside of AWS to obtain Temporary AWS credentials. Your workloads can use the same IAM policies and roles that you have configured with native AWS applications to access AWS resources. Using IAM Roles Anywhere will eliminate the need to manage long term credentials for workloads running outside of AWS.</p>
- *          <p>To use IAM Roles Anywhere customer workloads will need to use X.509 certificates issued by their Certificate Authority (CA) . The Certificate Authority (CA) needs to be registered with IAM Roles Anywhere as a trust anchor to establish trust between customer PKI and IAM Roles Anywhere. Customers who do not manage their own PKI system can use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a Certificate Authority and use that to establish trust with IAM Roles Anywhere</p>
- *          <p>This guide describes the IAM rolesanywhere operations that you can call programmatically. For general information about IAM Roles Anywhere see <a href="https://docs.aws.amazon.com/">https://docs.aws.amazon.com/</a>
- *          </p>
+ * @public
  */
-export class RolesAnywhere extends RolesAnywhereClient {
+export interface RolesAnywhereRequestOptions extends __HttpHandlerOptions {
+  metricsRecorder?: __MetricsRecorder<unknown>;
+}
+
+export interface RolesAnywhere {
   /**
-   * <p>Creates a profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can intersect permissions with IAM managed policies.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:CreateProfile</code>.
-   *          </p>
+   * @see {@link CreateProfileCommand}
    */
-  public createProfile(
+  createProfile(
     args: CreateProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<CreateProfileCommandOutput>;
-  public createProfile(
+  createProfile(
     args: CreateProfileCommandInput,
     cb: (err: any, data?: CreateProfileCommandOutput) => void
   ): void;
-  public createProfile(
+  createProfile(
     args: CreateProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: CreateProfileCommandOutput) => void
   ): void;
-  public createProfile(
-    args: CreateProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateProfileCommandOutput) => void),
-    cb?: (err: any, data?: CreateProfileCommandOutput) => void
-  ): Promise<CreateProfileCommandOutput> | void {
-    const command = new CreateProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:CreateTrustAnchor</code>.
-   *          </p>
+   * @see {@link CreateTrustAnchorCommand}
    */
-  public createTrustAnchor(
+  createTrustAnchor(
     args: CreateTrustAnchorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<CreateTrustAnchorCommandOutput>;
-  public createTrustAnchor(
+  createTrustAnchor(
     args: CreateTrustAnchorCommandInput,
     cb: (err: any, data?: CreateTrustAnchorCommandOutput) => void
   ): void;
-  public createTrustAnchor(
+  createTrustAnchor(
     args: CreateTrustAnchorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: CreateTrustAnchorCommandOutput) => void
   ): void;
-  public createTrustAnchor(
-    args: CreateTrustAnchorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: CreateTrustAnchorCommandOutput) => void),
-    cb?: (err: any, data?: CreateTrustAnchorCommandOutput) => void
-  ): Promise<CreateTrustAnchorCommandOutput> | void {
-    const command = new CreateTrustAnchorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a certificate revocation list (CRL).</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:DeleteCrl</code>.
-   *          </p>
+   * @see {@link DeleteAttributeMappingCommand}
    */
-  public deleteCrl(args: DeleteCrlCommandInput, options?: __HttpHandlerOptions): Promise<DeleteCrlCommandOutput>;
-  public deleteCrl(args: DeleteCrlCommandInput, cb: (err: any, data?: DeleteCrlCommandOutput) => void): void;
-  public deleteCrl(
+  deleteAttributeMapping(
+    args: DeleteAttributeMappingCommandInput,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<DeleteAttributeMappingCommandOutput>;
+  deleteAttributeMapping(
+    args: DeleteAttributeMappingCommandInput,
+    cb: (err: any, data?: DeleteAttributeMappingCommandOutput) => void
+  ): void;
+  deleteAttributeMapping(
+    args: DeleteAttributeMappingCommandInput,
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: DeleteAttributeMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link DeleteCrlCommand}
+   */
+  deleteCrl(
     args: DeleteCrlCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<DeleteCrlCommandOutput>;
+  deleteCrl(
+    args: DeleteCrlCommandInput,
     cb: (err: any, data?: DeleteCrlCommandOutput) => void
   ): void;
-  public deleteCrl(
+  deleteCrl(
     args: DeleteCrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteCrlCommandOutput) => void),
-    cb?: (err: any, data?: DeleteCrlCommandOutput) => void
-  ): Promise<DeleteCrlCommandOutput> | void {
-    const command = new DeleteCrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: DeleteCrlCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Deletes a profile.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:DeleteProfile</code>.
-   *          </p>
+   * @see {@link DeleteProfileCommand}
    */
-  public deleteProfile(
+  deleteProfile(
     args: DeleteProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<DeleteProfileCommandOutput>;
-  public deleteProfile(
+  deleteProfile(
     args: DeleteProfileCommandInput,
     cb: (err: any, data?: DeleteProfileCommandOutput) => void
   ): void;
-  public deleteProfile(
+  deleteProfile(
     args: DeleteProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: DeleteProfileCommandOutput) => void
   ): void;
-  public deleteProfile(
-    args: DeleteProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteProfileCommandOutput) => void),
-    cb?: (err: any, data?: DeleteProfileCommandOutput) => void
-  ): Promise<DeleteProfileCommandOutput> | void {
-    const command = new DeleteProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Deletes a trust anchor.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:DeleteTrustAnchor</code>.
-   *          </p>
+   * @see {@link DeleteTrustAnchorCommand}
    */
-  public deleteTrustAnchor(
+  deleteTrustAnchor(
     args: DeleteTrustAnchorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<DeleteTrustAnchorCommandOutput>;
-  public deleteTrustAnchor(
+  deleteTrustAnchor(
     args: DeleteTrustAnchorCommandInput,
     cb: (err: any, data?: DeleteTrustAnchorCommandOutput) => void
   ): void;
-  public deleteTrustAnchor(
+  deleteTrustAnchor(
     args: DeleteTrustAnchorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: DeleteTrustAnchorCommandOutput) => void
   ): void;
-  public deleteTrustAnchor(
-    args: DeleteTrustAnchorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DeleteTrustAnchorCommandOutput) => void),
-    cb?: (err: any, data?: DeleteTrustAnchorCommandOutput) => void
-  ): Promise<DeleteTrustAnchorCommandOutput> | void {
-    const command = new DeleteTrustAnchorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disables a certificate revocation list (CRL).</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:DisableCrl</code>.
-   *          </p>
+   * @see {@link DisableCrlCommand}
    */
-  public disableCrl(args: DisableCrlCommandInput, options?: __HttpHandlerOptions): Promise<DisableCrlCommandOutput>;
-  public disableCrl(args: DisableCrlCommandInput, cb: (err: any, data?: DisableCrlCommandOutput) => void): void;
-  public disableCrl(
+  disableCrl(
     args: DisableCrlCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<DisableCrlCommandOutput>;
+  disableCrl(
+    args: DisableCrlCommandInput,
     cb: (err: any, data?: DisableCrlCommandOutput) => void
   ): void;
-  public disableCrl(
+  disableCrl(
     args: DisableCrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableCrlCommandOutput) => void),
-    cb?: (err: any, data?: DisableCrlCommandOutput) => void
-  ): Promise<DisableCrlCommandOutput> | void {
-    const command = new DisableCrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: DisableCrlCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Disables a profile. When disabled, <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile fail.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:DisableProfile</code>.
-   *          </p>
+   * @see {@link DisableProfileCommand}
    */
-  public disableProfile(
+  disableProfile(
     args: DisableProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<DisableProfileCommandOutput>;
-  public disableProfile(
+  disableProfile(
     args: DisableProfileCommandInput,
     cb: (err: any, data?: DisableProfileCommandOutput) => void
   ): void;
-  public disableProfile(
+  disableProfile(
     args: DisableProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: DisableProfileCommandOutput) => void
   ): void;
-  public disableProfile(
-    args: DisableProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableProfileCommandOutput) => void),
-    cb?: (err: any, data?: DisableProfileCommandOutput) => void
-  ): Promise<DisableProfileCommandOutput> | void {
-    const command = new DisableProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Disables a trust anchor. When disabled, <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests specifying this trust anchor are unauthorized.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:DisableTrustAnchor</code>.
-   *          </p>
+   * @see {@link DisableTrustAnchorCommand}
    */
-  public disableTrustAnchor(
+  disableTrustAnchor(
     args: DisableTrustAnchorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<DisableTrustAnchorCommandOutput>;
-  public disableTrustAnchor(
+  disableTrustAnchor(
     args: DisableTrustAnchorCommandInput,
     cb: (err: any, data?: DisableTrustAnchorCommandOutput) => void
   ): void;
-  public disableTrustAnchor(
+  disableTrustAnchor(
     args: DisableTrustAnchorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: DisableTrustAnchorCommandOutput) => void
   ): void;
-  public disableTrustAnchor(
-    args: DisableTrustAnchorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: DisableTrustAnchorCommandOutput) => void),
-    cb?: (err: any, data?: DisableTrustAnchorCommandOutput) => void
-  ): Promise<DisableTrustAnchorCommandOutput> | void {
-    const command = new DisableTrustAnchorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Enables a certificate revocation list (CRL). When enabled, certificates stored in the CRL are unauthorized to receive session credentials.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:EnableCrl</code>.
-   *          </p>
+   * @see {@link EnableCrlCommand}
    */
-  public enableCrl(args: EnableCrlCommandInput, options?: __HttpHandlerOptions): Promise<EnableCrlCommandOutput>;
-  public enableCrl(args: EnableCrlCommandInput, cb: (err: any, data?: EnableCrlCommandOutput) => void): void;
-  public enableCrl(
+  enableCrl(
     args: EnableCrlCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<EnableCrlCommandOutput>;
+  enableCrl(
+    args: EnableCrlCommandInput,
     cb: (err: any, data?: EnableCrlCommandOutput) => void
   ): void;
-  public enableCrl(
+  enableCrl(
     args: EnableCrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableCrlCommandOutput) => void),
-    cb?: (err: any, data?: EnableCrlCommandOutput) => void
-  ): Promise<EnableCrlCommandOutput> | void {
-    const command = new EnableCrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: EnableCrlCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Enables the roles in a profile to receive session credentials in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a>. </p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:EnableProfile</code>.
-   *          </p>
+   * @see {@link EnableProfileCommand}
    */
-  public enableProfile(
+  enableProfile(
     args: EnableProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<EnableProfileCommandOutput>;
-  public enableProfile(
+  enableProfile(
     args: EnableProfileCommandInput,
     cb: (err: any, data?: EnableProfileCommandOutput) => void
   ): void;
-  public enableProfile(
+  enableProfile(
     args: EnableProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: EnableProfileCommandOutput) => void
   ): void;
-  public enableProfile(
-    args: EnableProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableProfileCommandOutput) => void),
-    cb?: (err: any, data?: EnableProfileCommandOutput) => void
-  ): Promise<EnableProfileCommandOutput> | void {
-    const command = new EnableProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Enables a trust anchor. When enabled, certificates in the trust anchor chain are authorized for trust validation. </p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:EnableTrustAnchor</code>.
-   *          </p>
+   * @see {@link EnableTrustAnchorCommand}
    */
-  public enableTrustAnchor(
+  enableTrustAnchor(
     args: EnableTrustAnchorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<EnableTrustAnchorCommandOutput>;
-  public enableTrustAnchor(
+  enableTrustAnchor(
     args: EnableTrustAnchorCommandInput,
     cb: (err: any, data?: EnableTrustAnchorCommandOutput) => void
   ): void;
-  public enableTrustAnchor(
+  enableTrustAnchor(
     args: EnableTrustAnchorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: EnableTrustAnchorCommandOutput) => void
   ): void;
-  public enableTrustAnchor(
-    args: EnableTrustAnchorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: EnableTrustAnchorCommandOutput) => void),
-    cb?: (err: any, data?: EnableTrustAnchorCommandOutput) => void
-  ): Promise<EnableTrustAnchorCommandOutput> | void {
-    const command = new EnableTrustAnchorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Gets a certificate revocation list (CRL).</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:GetCrl</code>.
-   *          </p>
+   * @see {@link GetCrlCommand}
    */
-  public getCrl(args: GetCrlCommandInput, options?: __HttpHandlerOptions): Promise<GetCrlCommandOutput>;
-  public getCrl(args: GetCrlCommandInput, cb: (err: any, data?: GetCrlCommandOutput) => void): void;
-  public getCrl(
+  getCrl(
     args: GetCrlCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<GetCrlCommandOutput>;
+  getCrl(
+    args: GetCrlCommandInput,
     cb: (err: any, data?: GetCrlCommandOutput) => void
   ): void;
-  public getCrl(
+  getCrl(
     args: GetCrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetCrlCommandOutput) => void),
-    cb?: (err: any, data?: GetCrlCommandOutput) => void
-  ): Promise<GetCrlCommandOutput> | void {
-    const command = new GetCrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: GetCrlCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a profile.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:GetProfile</code>.
-   *          </p>
+   * @see {@link GetProfileCommand}
    */
-  public getProfile(args: GetProfileCommandInput, options?: __HttpHandlerOptions): Promise<GetProfileCommandOutput>;
-  public getProfile(args: GetProfileCommandInput, cb: (err: any, data?: GetProfileCommandOutput) => void): void;
-  public getProfile(
+  getProfile(
     args: GetProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<GetProfileCommandOutput>;
+  getProfile(
+    args: GetProfileCommandInput,
     cb: (err: any, data?: GetProfileCommandOutput) => void
   ): void;
-  public getProfile(
+  getProfile(
     args: GetProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetProfileCommandOutput) => void),
-    cb?: (err: any, data?: GetProfileCommandOutput) => void
-  ): Promise<GetProfileCommandOutput> | void {
-    const command = new GetProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: GetProfileCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a Subject. A Subject associates a certificate identity with authentication attempts by CreateSession. The Subject resources stores audit information such as status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:GetSubject</code>.
-   *          </p>
+   * @see {@link GetSubjectCommand}
    */
-  public getSubject(args: GetSubjectCommandInput, options?: __HttpHandlerOptions): Promise<GetSubjectCommandOutput>;
-  public getSubject(args: GetSubjectCommandInput, cb: (err: any, data?: GetSubjectCommandOutput) => void): void;
-  public getSubject(
+  getSubject(
     args: GetSubjectCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<GetSubjectCommandOutput>;
+  getSubject(
+    args: GetSubjectCommandInput,
     cb: (err: any, data?: GetSubjectCommandOutput) => void
   ): void;
-  public getSubject(
+  getSubject(
     args: GetSubjectCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetSubjectCommandOutput) => void),
-    cb?: (err: any, data?: GetSubjectCommandOutput) => void
-  ): Promise<GetSubjectCommandOutput> | void {
-    const command = new GetSubjectCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: GetSubjectCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Gets a trust anchor.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:GetTrustAnchor</code>.
-   *          </p>
+   * @see {@link GetTrustAnchorCommand}
    */
-  public getTrustAnchor(
+  getTrustAnchor(
     args: GetTrustAnchorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<GetTrustAnchorCommandOutput>;
-  public getTrustAnchor(
+  getTrustAnchor(
     args: GetTrustAnchorCommandInput,
     cb: (err: any, data?: GetTrustAnchorCommandOutput) => void
   ): void;
-  public getTrustAnchor(
+  getTrustAnchor(
     args: GetTrustAnchorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: GetTrustAnchorCommandOutput) => void
   ): void;
-  public getTrustAnchor(
-    args: GetTrustAnchorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: GetTrustAnchorCommandOutput) => void),
-    cb?: (err: any, data?: GetTrustAnchorCommandOutput) => void
-  ): Promise<GetTrustAnchorCommandOutput> | void {
-    const command = new GetTrustAnchorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Imports the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials. </p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:ImportCrl</code>.
-   *          </p>
+   * @see {@link ImportCrlCommand}
    */
-  public importCrl(args: ImportCrlCommandInput, options?: __HttpHandlerOptions): Promise<ImportCrlCommandOutput>;
-  public importCrl(args: ImportCrlCommandInput, cb: (err: any, data?: ImportCrlCommandOutput) => void): void;
-  public importCrl(
+  importCrl(
     args: ImportCrlCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<ImportCrlCommandOutput>;
+  importCrl(
+    args: ImportCrlCommandInput,
     cb: (err: any, data?: ImportCrlCommandOutput) => void
   ): void;
-  public importCrl(
+  importCrl(
     args: ImportCrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ImportCrlCommandOutput) => void),
-    cb?: (err: any, data?: ImportCrlCommandOutput) => void
-  ): Promise<ImportCrlCommandOutput> | void {
-    const command = new ImportCrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: ImportCrlCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all Crls in the authenticated account and Amazon Web Services Region.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:ListCrls</code>.
-   *          </p>
+   * @see {@link ListCrlsCommand}
    */
-  public listCrls(args: ListCrlsCommandInput, options?: __HttpHandlerOptions): Promise<ListCrlsCommandOutput>;
-  public listCrls(args: ListCrlsCommandInput, cb: (err: any, data?: ListCrlsCommandOutput) => void): void;
-  public listCrls(
+  listCrls(): Promise<ListCrlsCommandOutput>;
+  listCrls(
     args: ListCrlsCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<ListCrlsCommandOutput>;
+  listCrls(
+    args: ListCrlsCommandInput,
     cb: (err: any, data?: ListCrlsCommandOutput) => void
   ): void;
-  public listCrls(
+  listCrls(
     args: ListCrlsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListCrlsCommandOutput) => void),
-    cb?: (err: any, data?: ListCrlsCommandOutput) => void
-  ): Promise<ListCrlsCommandOutput> | void {
-    const command = new ListCrlsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: ListCrlsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists all profiles in the authenticated account and Amazon Web Services Region.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:ListProfiles</code>.
-   *          </p>
+   * @see {@link ListProfilesCommand}
    */
-  public listProfiles(
+  listProfiles(): Promise<ListProfilesCommandOutput>;
+  listProfiles(
     args: ListProfilesCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<ListProfilesCommandOutput>;
-  public listProfiles(args: ListProfilesCommandInput, cb: (err: any, data?: ListProfilesCommandOutput) => void): void;
-  public listProfiles(
+  listProfiles(
     args: ListProfilesCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListProfilesCommandOutput) => void
   ): void;
-  public listProfiles(
+  listProfiles(
     args: ListProfilesCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListProfilesCommandOutput) => void),
-    cb?: (err: any, data?: ListProfilesCommandOutput) => void
-  ): Promise<ListProfilesCommandOutput> | void {
-    const command = new ListProfilesCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: ListProfilesCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the subjects in the authenticated account and Amazon Web Services Region.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:ListSubjects</code>.
-   *          </p>
+   * @see {@link ListSubjectsCommand}
    */
-  public listSubjects(
+  listSubjects(): Promise<ListSubjectsCommandOutput>;
+  listSubjects(
     args: ListSubjectsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<ListSubjectsCommandOutput>;
-  public listSubjects(args: ListSubjectsCommandInput, cb: (err: any, data?: ListSubjectsCommandOutput) => void): void;
-  public listSubjects(
+  listSubjects(
     args: ListSubjectsCommandInput,
-    options: __HttpHandlerOptions,
     cb: (err: any, data?: ListSubjectsCommandOutput) => void
   ): void;
-  public listSubjects(
+  listSubjects(
     args: ListSubjectsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListSubjectsCommandOutput) => void),
-    cb?: (err: any, data?: ListSubjectsCommandOutput) => void
-  ): Promise<ListSubjectsCommandOutput> | void {
-    const command = new ListSubjectsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: ListSubjectsCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Lists the tags attached to the resource.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:ListTagsForResource</code>.
-   *          </p>
+   * @see {@link ListTagsForResourceCommand}
    */
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<ListTagsForResourceCommandOutput>;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
+  listTagsForResource(
     args: ListTagsForResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: ListTagsForResourceCommandOutput) => void
   ): void;
-  public listTagsForResource(
-    args: ListTagsForResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTagsForResourceCommandOutput) => void),
-    cb?: (err: any, data?: ListTagsForResourceCommandOutput) => void
-  ): Promise<ListTagsForResourceCommandOutput> | void {
-    const command = new ListTagsForResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Lists the trust anchors in the authenticated account and Amazon Web Services Region.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:ListTrustAnchors</code>.
-   *          </p>
+   * @see {@link ListTrustAnchorsCommand}
    */
-  public listTrustAnchors(
+  listTrustAnchors(): Promise<ListTrustAnchorsCommandOutput>;
+  listTrustAnchors(
     args: ListTrustAnchorsCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<ListTrustAnchorsCommandOutput>;
-  public listTrustAnchors(
+  listTrustAnchors(
     args: ListTrustAnchorsCommandInput,
     cb: (err: any, data?: ListTrustAnchorsCommandOutput) => void
   ): void;
-  public listTrustAnchors(
+  listTrustAnchors(
     args: ListTrustAnchorsCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: ListTrustAnchorsCommandOutput) => void
   ): void;
-  public listTrustAnchors(
-    args: ListTrustAnchorsCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: ListTrustAnchorsCommandOutput) => void),
-    cb?: (err: any, data?: ListTrustAnchorsCommandOutput) => void
-  ): Promise<ListTrustAnchorsCommandOutput> | void {
-    const command = new ListTrustAnchorsCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Attaches tags to a resource.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:TagResource</code>.
-   *          </p>
+   * @see {@link PutAttributeMappingCommand}
    */
-  public tagResource(args: TagResourceCommandInput, options?: __HttpHandlerOptions): Promise<TagResourceCommandOutput>;
-  public tagResource(args: TagResourceCommandInput, cb: (err: any, data?: TagResourceCommandOutput) => void): void;
-  public tagResource(
+  putAttributeMapping(
+    args: PutAttributeMappingCommandInput,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<PutAttributeMappingCommandOutput>;
+  putAttributeMapping(
+    args: PutAttributeMappingCommandInput,
+    cb: (err: any, data?: PutAttributeMappingCommandOutput) => void
+  ): void;
+  putAttributeMapping(
+    args: PutAttributeMappingCommandInput,
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: PutAttributeMappingCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link PutNotificationSettingsCommand}
+   */
+  putNotificationSettings(
+    args: PutNotificationSettingsCommandInput,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<PutNotificationSettingsCommandOutput>;
+  putNotificationSettings(
+    args: PutNotificationSettingsCommandInput,
+    cb: (err: any, data?: PutNotificationSettingsCommandOutput) => void
+  ): void;
+  putNotificationSettings(
+    args: PutNotificationSettingsCommandInput,
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: PutNotificationSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link ResetNotificationSettingsCommand}
+   */
+  resetNotificationSettings(
+    args: ResetNotificationSettingsCommandInput,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<ResetNotificationSettingsCommandOutput>;
+  resetNotificationSettings(
+    args: ResetNotificationSettingsCommandInput,
+    cb: (err: any, data?: ResetNotificationSettingsCommandOutput) => void
+  ): void;
+  resetNotificationSettings(
+    args: ResetNotificationSettingsCommandInput,
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: ResetNotificationSettingsCommandOutput) => void
+  ): void;
+
+  /**
+   * @see {@link TagResourceCommand}
+   */
+  tagResource(
     args: TagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<TagResourceCommandOutput>;
+  tagResource(
+    args: TagResourceCommandInput,
     cb: (err: any, data?: TagResourceCommandOutput) => void
   ): void;
-  public tagResource(
+  tagResource(
     args: TagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: TagResourceCommandOutput) => void),
-    cb?: (err: any, data?: TagResourceCommandOutput) => void
-  ): Promise<TagResourceCommandOutput> | void {
-    const command = new TagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: TagResourceCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Removes tags from the resource.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:UntagResource</code>.
-   *          </p>
+   * @see {@link UntagResourceCommand}
    */
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<UntagResourceCommandOutput>;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
+  untagResource(
     args: UntagResourceCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: UntagResourceCommandOutput) => void
   ): void;
-  public untagResource(
-    args: UntagResourceCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UntagResourceCommandOutput) => void),
-    cb?: (err: any, data?: UntagResourceCommandOutput) => void
-  ): Promise<UntagResourceCommandOutput> | void {
-    const command = new UntagResourceCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:UpdateCrl</code>.
-   *          </p>
+   * @see {@link UpdateCrlCommand}
    */
-  public updateCrl(args: UpdateCrlCommandInput, options?: __HttpHandlerOptions): Promise<UpdateCrlCommandOutput>;
-  public updateCrl(args: UpdateCrlCommandInput, cb: (err: any, data?: UpdateCrlCommandOutput) => void): void;
-  public updateCrl(
+  updateCrl(
     args: UpdateCrlCommandInput,
-    options: __HttpHandlerOptions,
+    options?: RolesAnywhereRequestOptions
+  ): Promise<UpdateCrlCommandOutput>;
+  updateCrl(
+    args: UpdateCrlCommandInput,
     cb: (err: any, data?: UpdateCrlCommandOutput) => void
   ): void;
-  public updateCrl(
+  updateCrl(
     args: UpdateCrlCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateCrlCommandOutput) => void),
-    cb?: (err: any, data?: UpdateCrlCommandOutput) => void
-  ): Promise<UpdateCrlCommandOutput> | void {
-    const command = new UpdateCrlCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+    options: RolesAnywhereRequestOptions,
+    cb: (err: any, data?: UpdateCrlCommandOutput) => void
+  ): void;
 
   /**
-   * <p>Updates the profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can scope-down permissions with IAM managed policies.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:UpdateProfile</code>.
-   *          </p>
+   * @see {@link UpdateProfileCommand}
    */
-  public updateProfile(
+  updateProfile(
     args: UpdateProfileCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<UpdateProfileCommandOutput>;
-  public updateProfile(
+  updateProfile(
     args: UpdateProfileCommandInput,
     cb: (err: any, data?: UpdateProfileCommandOutput) => void
   ): void;
-  public updateProfile(
+  updateProfile(
     args: UpdateProfileCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: UpdateProfileCommandOutput) => void
   ): void;
-  public updateProfile(
-    args: UpdateProfileCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateProfileCommandOutput) => void),
-    cb?: (err: any, data?: UpdateProfileCommandOutput) => void
-  ): Promise<UpdateProfileCommandOutput> | void {
-    const command = new UpdateProfileCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
 
   /**
-   * <p>Updates the trust anchor.You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p>
-   *          <p>
-   *             <b>Required permissions: </b>
-   *             <code>rolesanywhere:UpdateTrustAnchor</code>.
-   *          </p>
+   * @see {@link UpdateTrustAnchorCommand}
    */
-  public updateTrustAnchor(
+  updateTrustAnchor(
     args: UpdateTrustAnchorCommandInput,
-    options?: __HttpHandlerOptions
+    options?: RolesAnywhereRequestOptions
   ): Promise<UpdateTrustAnchorCommandOutput>;
-  public updateTrustAnchor(
+  updateTrustAnchor(
     args: UpdateTrustAnchorCommandInput,
     cb: (err: any, data?: UpdateTrustAnchorCommandOutput) => void
   ): void;
-  public updateTrustAnchor(
+  updateTrustAnchor(
     args: UpdateTrustAnchorCommandInput,
-    options: __HttpHandlerOptions,
+    options: RolesAnywhereRequestOptions,
     cb: (err: any, data?: UpdateTrustAnchorCommandOutput) => void
   ): void;
-  public updateTrustAnchor(
-    args: UpdateTrustAnchorCommandInput,
-    optionsOrCb?: __HttpHandlerOptions | ((err: any, data?: UpdateTrustAnchorCommandOutput) => void),
-    cb?: (err: any, data?: UpdateTrustAnchorCommandOutput) => void
-  ): Promise<UpdateTrustAnchorCommandOutput> | void {
-    const command = new UpdateTrustAnchorCommand(args);
-    if (typeof optionsOrCb === "function") {
-      this.send(command, optionsOrCb);
-    } else if (typeof cb === "function") {
-      if (typeof optionsOrCb !== "object") throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-      this.send(command, optionsOrCb || {}, cb);
-    } else {
-      return this.send(command, optionsOrCb);
-    }
-  }
+
+  /**
+   * @see {@link ListCrlsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListCrlsCommandOutput}.
+   */
+  paginateListCrls(
+    args?: ListCrlsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListCrlsCommandOutput>;
+
+  /**
+   * @see {@link ListProfilesCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListProfilesCommandOutput}.
+   */
+  paginateListProfiles(
+    args?: ListProfilesCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListProfilesCommandOutput>;
+
+  /**
+   * @see {@link ListSubjectsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListSubjectsCommandOutput}.
+   */
+  paginateListSubjects(
+    args?: ListSubjectsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListSubjectsCommandOutput>;
+
+  /**
+   * @see {@link ListTrustAnchorsCommand}
+   * @param args - command input.
+   * @param paginationConfig - optional pagination config.
+   * @returns AsyncIterable of {@link ListTrustAnchorsCommandOutput}.
+   */
+  paginateListTrustAnchors(
+    args?: ListTrustAnchorsCommandInput,
+    paginationConfig?: Omit<PaginationConfiguration, "client">
+  ): Paginator<ListTrustAnchorsCommandOutput>;
 }
+
+/**
+ * <p>Identity and Access Management Roles Anywhere provides a secure way for your workloads such as servers, containers, and applications that run outside of Amazon Web Services to obtain temporary Amazon Web Services credentials. Your workloads can use the same IAM policies and roles you have for native Amazon Web Services applications to access Amazon Web Services resources. Using IAM Roles Anywhere eliminates the need to manage long-term credentials for workloads running outside of Amazon Web Services.</p> <p> To use IAM Roles Anywhere, your workloads must use X.509 certificates issued by their certificate authority (CA). You register the CA with IAM Roles Anywhere as a trust anchor to establish trust between your public key infrastructure (PKI) and IAM Roles Anywhere. If you don't manage your own PKI system, you can use Private Certificate Authority to create a CA and then use that to establish trust with IAM Roles Anywhere. </p> <p>This guide describes the IAM Roles Anywhere operations that you can call programmatically. For more information about IAM Roles Anywhere, see the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html">IAM Roles Anywhere User Guide</a>.</p>
+ * @public
+ */
+export class RolesAnywhere extends RolesAnywhereClient implements RolesAnywhere {}
+createAggregatedClient(commands, RolesAnywhere, { paginators });

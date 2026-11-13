@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetSnapshotRequest,
-  GetSnapshotRequestFilterSensitiveLog,
-  GetSnapshotResponse,
-  GetSnapshotResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1GetSnapshotCommand,
-  serializeAws_json1_1GetSnapshotCommand,
-} from "../protocols/Aws_json1_1";
-import {
-  RedshiftServerlessClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../RedshiftServerlessClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetSnapshotRequest, GetSnapshotResponse } from "../models/models_0";
+import { GetSnapshot$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetSnapshotCommand}.
+ */
 export interface GetSnapshotCommandInput extends GetSnapshotRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetSnapshotCommand}.
+ */
 export interface GetSnapshotCommandOutput extends GetSnapshotResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,85 @@ export interface GetSnapshotCommandOutput extends GetSnapshotResponse, __Metadat
  * ```javascript
  * import { RedshiftServerlessClient, GetSnapshotCommand } from "@aws-sdk/client-redshift-serverless"; // ES Modules import
  * // const { RedshiftServerlessClient, GetSnapshotCommand } = require("@aws-sdk/client-redshift-serverless"); // CommonJS import
+ * // import type { RedshiftServerlessClientConfig } from "@aws-sdk/client-redshift-serverless";
+ * const config = {}; // type is RedshiftServerlessClientConfig
  * const client = new RedshiftServerlessClient(config);
+ * const input = { // GetSnapshotRequest
+ *   snapshotName: "STRING_VALUE",
+ *   ownerAccount: "STRING_VALUE",
+ *   snapshotArn: "STRING_VALUE",
+ * };
  * const command = new GetSnapshotCommand(input);
  * const response = await client.send(command);
+ * // { // GetSnapshotResponse
+ * //   snapshot: { // Snapshot
+ * //     namespaceName: "STRING_VALUE",
+ * //     namespaceArn: "STRING_VALUE",
+ * //     snapshotName: "STRING_VALUE",
+ * //     snapshotCreateTime: new Date("TIMESTAMP"),
+ * //     adminUsername: "STRING_VALUE",
+ * //     status: "STRING_VALUE",
+ * //     kmsKeyId: "STRING_VALUE",
+ * //     ownerAccount: "STRING_VALUE",
+ * //     totalBackupSizeInMegaBytes: Number("double"),
+ * //     actualIncrementalBackupSizeInMegaBytes: Number("double"),
+ * //     backupProgressInMegaBytes: Number("double"),
+ * //     currentBackupRateInMegaBytesPerSecond: Number("double"),
+ * //     estimatedSecondsToCompletion: Number("long"),
+ * //     elapsedTimeInSeconds: Number("long"),
+ * //     snapshotRetentionPeriod: Number("int"),
+ * //     snapshotRemainingDays: Number("int"),
+ * //     snapshotRetentionStartTime: new Date("TIMESTAMP"),
+ * //     snapshotArn: "STRING_VALUE",
+ * //     accountsWithRestoreAccess: [ // AccountIdList
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     accountsWithProvisionedRestoreAccess: [
+ * //       "STRING_VALUE",
+ * //     ],
+ * //     adminPasswordSecretArn: "STRING_VALUE",
+ * //     adminPasswordSecretKmsKeyId: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetSnapshotCommandInput - {@link GetSnapshotCommandInput}
+ * @returns {@link GetSnapshotCommandOutput}
  * @see {@link GetSnapshotCommandInput} for command's `input` shape.
  * @see {@link GetSnapshotCommandOutput} for command's `response` shape.
  * @see {@link RedshiftServerlessClientResolvedConfig | config} for RedshiftServerlessClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request processing has failed because of an unknown error, exception or failure.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource could not be found.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input failed to satisfy the constraints specified by an Amazon Web Services service.</p>
+ *
+ * @throws {@link RedshiftServerlessServiceException}
+ * <p>Base exception class for all service exceptions from RedshiftServerless service.</p>
+ *
+ *
+ * @public
  */
-export class GetSnapshotCommand extends $Command<
-  GetSnapshotCommandInput,
-  GetSnapshotCommandOutput,
-  RedshiftServerlessClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetSnapshotCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: RedshiftServerlessClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetSnapshotCommandInput, GetSnapshotCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "RedshiftServerlessClient";
-    const commandName = "GetSnapshotCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetSnapshotRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetSnapshotResponseFilterSensitiveLog,
+export class GetSnapshotCommand extends command<GetSnapshotCommandInput, GetSnapshotCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetSnapshot",
+  GetSnapshot$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetSnapshotRequest;
+      output: GetSnapshotResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetSnapshotCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1GetSnapshotCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetSnapshotCommandOutput> {
-    return deserializeAws_json1_1GetSnapshotCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetSnapshotCommandInput;
+      output: GetSnapshotCommandOutput;
+    };
+  };
 }

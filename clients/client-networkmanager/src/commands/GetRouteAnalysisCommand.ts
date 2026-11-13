@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  GetRouteAnalysisRequest,
-  GetRouteAnalysisRequestFilterSensitiveLog,
-  GetRouteAnalysisResponse,
-  GetRouteAnalysisResponseFilterSensitiveLog,
-} from "../models/models_0";
-import { NetworkManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NetworkManagerClient";
-import {
-  deserializeAws_restJson1GetRouteAnalysisCommand,
-  serializeAws_restJson1GetRouteAnalysisCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { GetRouteAnalysisRequest, GetRouteAnalysisResponse } from "../models/models_0";
+import { GetRouteAnalysis$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link GetRouteAnalysisCommand}.
+ */
 export interface GetRouteAnalysisCommandInput extends GetRouteAnalysisRequest {}
+/**
+ * @public
+ *
+ * The output of {@link GetRouteAnalysisCommand}.
+ */
 export interface GetRouteAnalysisCommandOutput extends GetRouteAnalysisResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,127 @@ export interface GetRouteAnalysisCommandOutput extends GetRouteAnalysisResponse,
  * ```javascript
  * import { NetworkManagerClient, GetRouteAnalysisCommand } from "@aws-sdk/client-networkmanager"; // ES Modules import
  * // const { NetworkManagerClient, GetRouteAnalysisCommand } = require("@aws-sdk/client-networkmanager"); // CommonJS import
+ * // import type { NetworkManagerClientConfig } from "@aws-sdk/client-networkmanager";
+ * const config = {}; // type is NetworkManagerClientConfig
  * const client = new NetworkManagerClient(config);
+ * const input = { // GetRouteAnalysisRequest
+ *   GlobalNetworkId: "STRING_VALUE", // required
+ *   RouteAnalysisId: "STRING_VALUE", // required
+ * };
  * const command = new GetRouteAnalysisCommand(input);
  * const response = await client.send(command);
+ * // { // GetRouteAnalysisResponse
+ * //   RouteAnalysis: { // RouteAnalysis
+ * //     GlobalNetworkId: "STRING_VALUE",
+ * //     OwnerAccountId: "STRING_VALUE",
+ * //     RouteAnalysisId: "STRING_VALUE",
+ * //     StartTimestamp: new Date("TIMESTAMP"),
+ * //     Status: "RUNNING" || "COMPLETED" || "FAILED",
+ * //     Source: { // RouteAnalysisEndpointOptions
+ * //       TransitGatewayAttachmentArn: "STRING_VALUE",
+ * //       TransitGatewayArn: "STRING_VALUE",
+ * //       IpAddress: "STRING_VALUE",
+ * //     },
+ * //     Destination: {
+ * //       TransitGatewayAttachmentArn: "STRING_VALUE",
+ * //       TransitGatewayArn: "STRING_VALUE",
+ * //       IpAddress: "STRING_VALUE",
+ * //     },
+ * //     IncludeReturnPath: true || false,
+ * //     UseMiddleboxes: true || false,
+ * //     ForwardPath: { // RouteAnalysisPath
+ * //       CompletionStatus: { // RouteAnalysisCompletion
+ * //         ResultCode: "CONNECTED" || "NOT_CONNECTED",
+ * //         ReasonCode: "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND" || "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY" || "CYCLIC_PATH_DETECTED" || "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND" || "ROUTE_NOT_FOUND" || "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND" || "INACTIVE_ROUTE_FOR_DESTINATION_FOUND" || "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH" || "MAX_HOPS_EXCEEDED" || "POSSIBLE_MIDDLEBOX" || "NO_DESTINATION_ARN_PROVIDED",
+ * //         ReasonContext: { // ReasonContextMap
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Path: [ // PathComponentList
+ * //         { // PathComponent
+ * //           Sequence: Number("int"),
+ * //           Resource: { // NetworkResourceSummary
+ * //             RegisteredGatewayArn: "STRING_VALUE",
+ * //             ResourceArn: "STRING_VALUE",
+ * //             ResourceType: "STRING_VALUE",
+ * //             Definition: "STRING_VALUE",
+ * //             NameTag: "STRING_VALUE",
+ * //             IsMiddlebox: true || false,
+ * //           },
+ * //           DestinationCidrBlock: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //     ReturnPath: {
+ * //       CompletionStatus: {
+ * //         ResultCode: "CONNECTED" || "NOT_CONNECTED",
+ * //         ReasonCode: "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND" || "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY" || "CYCLIC_PATH_DETECTED" || "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND" || "ROUTE_NOT_FOUND" || "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND" || "INACTIVE_ROUTE_FOR_DESTINATION_FOUND" || "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH" || "MAX_HOPS_EXCEEDED" || "POSSIBLE_MIDDLEBOX" || "NO_DESTINATION_ARN_PROVIDED",
+ * //         ReasonContext: {
+ * //           "<keys>": "STRING_VALUE",
+ * //         },
+ * //       },
+ * //       Path: [
+ * //         {
+ * //           Sequence: Number("int"),
+ * //           Resource: {
+ * //             RegisteredGatewayArn: "STRING_VALUE",
+ * //             ResourceArn: "STRING_VALUE",
+ * //             ResourceType: "STRING_VALUE",
+ * //             Definition: "STRING_VALUE",
+ * //             NameTag: "STRING_VALUE",
+ * //             IsMiddlebox: true || false,
+ * //           },
+ * //           DestinationCidrBlock: "STRING_VALUE",
+ * //         },
+ * //       ],
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param GetRouteAnalysisCommandInput - {@link GetRouteAnalysisCommandInput}
+ * @returns {@link GetRouteAnalysisCommandOutput}
  * @see {@link GetRouteAnalysisCommandInput} for command's `input` shape.
  * @see {@link GetRouteAnalysisCommandOutput} for command's `response` shape.
  * @see {@link NetworkManagerClientResolvedConfig | config} for NetworkManagerClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You do not have sufficient access to perform this action.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>The request has failed due to an internal error.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource could not be found.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied due to request throttling.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>The input fails to satisfy the constraints.</p>
+ *
+ * @throws {@link NetworkManagerServiceException}
+ * <p>Base exception class for all service exceptions from NetworkManager service.</p>
+ *
+ *
+ * @public
  */
-export class GetRouteAnalysisCommand extends $Command<
-  GetRouteAnalysisCommandInput,
-  GetRouteAnalysisCommandOutput,
-  NetworkManagerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: GetRouteAnalysisCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: NetworkManagerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<GetRouteAnalysisCommandInput, GetRouteAnalysisCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "NetworkManagerClient";
-    const commandName = "GetRouteAnalysisCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: GetRouteAnalysisRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: GetRouteAnalysisResponseFilterSensitiveLog,
+export class GetRouteAnalysisCommand extends command<GetRouteAnalysisCommandInput, GetRouteAnalysisCommandOutput>(
+  _ep0,
+  _mw0,
+  "GetRouteAnalysis",
+  GetRouteAnalysis$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: GetRouteAnalysisRequest;
+      output: GetRouteAnalysisResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: GetRouteAnalysisCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1GetRouteAnalysisCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<GetRouteAnalysisCommandOutput> {
-    return deserializeAws_restJson1GetRouteAnalysisCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: GetRouteAnalysisCommandInput;
+      output: GetRouteAnalysisCommandOutput;
+    };
+  };
 }

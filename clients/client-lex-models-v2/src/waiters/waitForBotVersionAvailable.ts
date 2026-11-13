@@ -1,18 +1,29 @@
 // smithy-typescript generated code
-import { checkExceptions, createWaiter, WaiterConfiguration, WaiterResult, WaiterState } from "@aws-sdk/util-waiter";
+import {
+  type WaiterConfiguration,
+  type WaiterResult,
+  checkExceptions,
+  createWaiter,
+  WaiterState,
+} from "@smithy/core/client";
 
-import { DescribeBotVersionCommand, DescribeBotVersionCommandInput } from "../commands/DescribeBotVersionCommand";
-import { LexModelsV2Client } from "../LexModelsV2Client";
+import {
+  type DescribeBotVersionCommandInput,
+  type DescribeBotVersionCommandOutput,
+  DescribeBotVersionCommand,
+} from "../commands/DescribeBotVersionCommand";
+import type { LexModelsV2Client } from "../LexModelsV2Client";
+import type { LexModelsV2ServiceException } from "../models/LexModelsV2ServiceException";
 
-const checkState = async (client: LexModelsV2Client, input: DescribeBotVersionCommandInput): Promise<WaiterResult> => {
+const checkState = async (client: LexModelsV2Client, input: DescribeBotVersionCommandInput): Promise<WaiterResult<DescribeBotVersionCommandOutput | LexModelsV2ServiceException>> => {
   let reason;
   try {
-    const result: any = await client.send(new DescribeBotVersionCommand(input));
+    let result: DescribeBotVersionCommandOutput & any = await client.send(new DescribeBotVersionCommand(input));
     reason = result;
     try {
       const returnComparator = () => {
         return result.botStatus;
-      };
+      }
       if (returnComparator() === "Available") {
         return { state: WaiterState.SUCCESS, reason };
       }
@@ -20,7 +31,7 @@ const checkState = async (client: LexModelsV2Client, input: DescribeBotVersionCo
     try {
       const returnComparator = () => {
         return result.botStatus;
-      };
+      }
       if (returnComparator() === "Deleting") {
         return { state: WaiterState.FAILURE, reason };
       }
@@ -28,14 +39,14 @@ const checkState = async (client: LexModelsV2Client, input: DescribeBotVersionCo
     try {
       const returnComparator = () => {
         return result.botStatus;
-      };
+      }
       if (returnComparator() === "Failed") {
         return { state: WaiterState.FAILURE, reason };
       }
     } catch (e) {}
   } catch (exception) {
     reason = exception;
-    if (exception.name && exception.name == "ResourceNotFoundException") {
+    if (exception.name === "ResourceNotFoundException") {
       return { state: WaiterState.RETRY, reason };
     }
   }
@@ -48,7 +59,7 @@ const checkState = async (client: LexModelsV2Client, input: DescribeBotVersionCo
 export const waitForBotVersionAvailable = async (
   params: WaiterConfiguration<LexModelsV2Client>,
   input: DescribeBotVersionCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeBotVersionCommandOutput | LexModelsV2ServiceException>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   return createWaiter({ ...serviceDefaults, ...params }, input, checkState);
 };
@@ -60,8 +71,8 @@ export const waitForBotVersionAvailable = async (
 export const waitUntilBotVersionAvailable = async (
   params: WaiterConfiguration<LexModelsV2Client>,
   input: DescribeBotVersionCommandInput
-): Promise<WaiterResult> => {
+): Promise<WaiterResult<DescribeBotVersionCommandOutput>> => {
   const serviceDefaults = { minDelay: 10, maxDelay: 120 };
   const result = await createWaiter({ ...serviceDefaults, ...params }, input, checkState);
-  return checkExceptions(result);
+  return checkExceptions(result) as WaiterResult<DescribeBotVersionCommandOutput>;
 };

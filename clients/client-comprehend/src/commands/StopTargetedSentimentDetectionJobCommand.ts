@@ -1,33 +1,29 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ComprehendClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ComprehendClient";
-import {
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type {
   StopTargetedSentimentDetectionJobRequest,
-  StopTargetedSentimentDetectionJobRequestFilterSensitiveLog,
   StopTargetedSentimentDetectionJobResponse,
-  StopTargetedSentimentDetectionJobResponseFilterSensitiveLog,
 } from "../models/models_0";
-import {
-  deserializeAws_json1_1StopTargetedSentimentDetectionJobCommand,
-  serializeAws_json1_1StopTargetedSentimentDetectionJobCommand,
-} from "../protocols/Aws_json1_1";
+import { StopTargetedSentimentDetectionJob$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopTargetedSentimentDetectionJobCommand}.
+ */
 export interface StopTargetedSentimentDetectionJobCommandInput extends StopTargetedSentimentDetectionJobRequest {}
-export interface StopTargetedSentimentDetectionJobCommandOutput
-  extends StopTargetedSentimentDetectionJobResponse,
-    __MetadataBearer {}
+/**
+ * @public
+ *
+ * The output of {@link StopTargetedSentimentDetectionJobCommand}.
+ */
+export interface StopTargetedSentimentDetectionJobCommandOutput extends StopTargetedSentimentDetectionJobResponse, __MetadataBearer {}
 
 /**
  * <p>Stops a targeted sentiment detection job in progress.</p>
@@ -45,74 +41,57 @@ export interface StopTargetedSentimentDetectionJobCommandOutput
  * ```javascript
  * import { ComprehendClient, StopTargetedSentimentDetectionJobCommand } from "@aws-sdk/client-comprehend"; // ES Modules import
  * // const { ComprehendClient, StopTargetedSentimentDetectionJobCommand } = require("@aws-sdk/client-comprehend"); // CommonJS import
+ * // import type { ComprehendClientConfig } from "@aws-sdk/client-comprehend";
+ * const config = {}; // type is ComprehendClientConfig
  * const client = new ComprehendClient(config);
+ * const input = { // StopTargetedSentimentDetectionJobRequest
+ *   JobId: "STRING_VALUE", // required
+ * };
  * const command = new StopTargetedSentimentDetectionJobCommand(input);
  * const response = await client.send(command);
+ * // { // StopTargetedSentimentDetectionJobResponse
+ * //   JobId: "STRING_VALUE",
+ * //   JobStatus: "SUBMITTED" || "IN_PROGRESS" || "COMPLETED" || "FAILED" || "STOP_REQUESTED" || "STOPPED",
+ * // };
+ *
  * ```
  *
+ * @param StopTargetedSentimentDetectionJobCommandInput - {@link StopTargetedSentimentDetectionJobCommandInput}
+ * @returns {@link StopTargetedSentimentDetectionJobCommandOutput}
  * @see {@link StopTargetedSentimentDetectionJobCommandInput} for command's `input` shape.
  * @see {@link StopTargetedSentimentDetectionJobCommandOutput} for command's `response` shape.
  * @see {@link ComprehendClientResolvedConfig | config} for ComprehendClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal server error occurred. Retry your request.</p>
+ *
+ * @throws {@link InvalidRequestException} (client fault)
+ *  <p>The request is invalid.</p>
+ *
+ * @throws {@link JobNotFoundException} (client fault)
+ *  <p>The specified job was not found. Check the job ID and try again.</p>
+ *
+ * @throws {@link ComprehendServiceException}
+ * <p>Base exception class for all service exceptions from Comprehend service.</p>
+ *
+ *
+ * @public
  */
-export class StopTargetedSentimentDetectionJobCommand extends $Command<
-  StopTargetedSentimentDetectionJobCommandInput,
-  StopTargetedSentimentDetectionJobCommandOutput,
-  ComprehendClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopTargetedSentimentDetectionJobCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ComprehendClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopTargetedSentimentDetectionJobCommandInput, StopTargetedSentimentDetectionJobCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ComprehendClient";
-    const commandName = "StopTargetedSentimentDetectionJobCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopTargetedSentimentDetectionJobRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StopTargetedSentimentDetectionJobResponseFilterSensitiveLog,
+export class StopTargetedSentimentDetectionJobCommand extends command<StopTargetedSentimentDetectionJobCommandInput, StopTargetedSentimentDetectionJobCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopTargetedSentimentDetectionJob",
+  StopTargetedSentimentDetectionJob$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopTargetedSentimentDetectionJobRequest;
+      output: StopTargetedSentimentDetectionJobResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(
-    input: StopTargetedSentimentDetectionJobCommandInput,
-    context: __SerdeContext
-  ): Promise<__HttpRequest> {
-    return serializeAws_json1_1StopTargetedSentimentDetectionJobCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<StopTargetedSentimentDetectionJobCommandOutput> {
-    return deserializeAws_json1_1StopTargetedSentimentDetectionJobCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopTargetedSentimentDetectionJobCommandInput;
+      output: StopTargetedSentimentDetectionJobCommandOutput;
+    };
+  };
 }

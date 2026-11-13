@@ -1,9 +1,11 @@
 // smithy-typescript generated code
-import { PaginationConfiguration } from "@aws-sdk/types";
+import type { PaginationConfiguration } from "@smithy/types";
 
-import { CloudTrail } from "../CloudTrail";
 import { CloudTrailClient } from "../CloudTrailClient";
 
+/**
+ * @public
+ */
 export interface CloudTrailPaginationConfiguration extends PaginationConfiguration {
-  client: CloudTrail | CloudTrailClient;
+  client: CloudTrailClient;
 }

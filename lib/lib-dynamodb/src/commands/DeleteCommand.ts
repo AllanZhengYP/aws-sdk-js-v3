@@ -1,42 +1,64 @@
 // smithy-typescript generated code
-import {
-  DeleteItemCommand as __DeleteItemCommand,
-  DeleteItemCommandInput as __DeleteItemCommandInput,
-  DeleteItemCommandOutput as __DeleteItemCommandOutput,
-  ExpectedAttributeValue,
-  ItemCollectionMetrics,
-} from "@aws-sdk/client-dynamodb";
-import { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@aws-sdk/types";
-import { NativeAttributeValue } from "@aws-sdk/util-dynamodb";
+import { Command as $Command } from "@smithy/core/client";
+import type { Handler, HttpHandlerOptions as __HttpHandlerOptions, MiddlewareStack } from "@smithy/types";
 
 import { DynamoDBDocumentClientCommand } from "../baseCommand/DynamoDBDocumentClientCommand";
-import { DynamoDBDocumentClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../DynamoDBDocumentClient";
+import { ALL_MEMBERS, ALL_VALUES, SELF } from "../commands/utils";
+import type {
+  DynamoDBDocumentClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../DynamoDBDocumentClient";
+import { DeleteItemCommand as __DeleteItemCommand } from "@aws-sdk/client-dynamodb";
 
+/**
+ * @public
+ */
+export { DynamoDBDocumentClientCommand, $Command };
+
+/**
+ * @public
+ */
+export type DeleteExpectedAttributeValue = Omit<ExpectedAttributeValue, "Value" | "AttributeValueList"> & {
+  Value?: NativeAttributeValue | undefined;
+  AttributeValueList?: NativeAttributeValue[] | undefined;
+};
+
+/**
+ * @public
+ */
+export type DeleteItemCollectionMetrics = Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
+  ItemCollectionKey?: Record<string, NativeAttributeValue> | undefined;
+};
+
+/**
+ * @public
+ */
 export type DeleteCommandInput = Omit<__DeleteItemCommandInput, "Key" | "Expected" | "ExpressionAttributeValues"> & {
   Key: Record<string, NativeAttributeValue> | undefined;
   Expected?: Record<
     string,
-    Omit<ExpectedAttributeValue, "Value" | "AttributeValueList"> & {
-      Value?: NativeAttributeValue;
-      AttributeValueList?: NativeAttributeValue[];
-    }
-  >;
-  ExpressionAttributeValues?: Record<string, NativeAttributeValue>;
+    DeleteExpectedAttributeValue
+  > | undefined;
+  ExpressionAttributeValues?: Record<string, NativeAttributeValue> | undefined;
 };
 
+/**
+ * @public
+ */
 export type DeleteCommandOutput = Omit<__DeleteItemCommandOutput, "Attributes" | "ItemCollectionMetrics"> & {
-  Attributes?: Record<string, NativeAttributeValue>;
-  ItemCollectionMetrics?: Omit<ItemCollectionMetrics, "ItemCollectionKey"> & {
-    ItemCollectionKey?: Record<string, NativeAttributeValue>;
-  };
+  Attributes?: Record<string, NativeAttributeValue> | undefined;
+  ItemCollectionMetrics?: DeleteItemCollectionMetrics | undefined;
 };
 
 /**
  * Accepts native JavaScript types instead of `AttributeValue`s, and calls
- * DeleteItemCommand operation from {@link https://www.npmjs.com/package/@aws-sdk/client-dynamodb @aws-sdk/client-dynamodb}.
+ * DeleteItemCommand operation from {@link @aws-sdk/client-dynamodb#DeleteItemCommand}.
  *
  * JavaScript objects passed in as parameters are marshalled into `AttributeValue` shapes
  * required by Amazon DynamoDB. Responses from DynamoDB are unmarshalled into plain JavaScript objects.
+ *
+ * @public
  */
 export class DeleteCommand extends DynamoDBDocumentClientCommand<
   DeleteCommandInput,
@@ -45,26 +67,26 @@ export class DeleteCommand extends DynamoDBDocumentClientCommand<
   __DeleteItemCommandOutput,
   DynamoDBDocumentClientResolvedConfig
 > {
-  protected readonly inputKeyNodes = [
-    { key: "Key" },
-    {
-      key: "Expected",
-      children: {
-        children: [{ key: "Value" }, { key: "AttributeValueList" }],
+  protected readonly inputKeyNodes = {
+    Key: ALL_VALUES, // map with AttributeValue
+    Expected: {
+      "*": {
+        Value: SELF,
+        AttributeValueList: ALL_MEMBERS, // set/list of AttributeValue
       },
     },
-    { key: "ExpressionAttributeValues" },
-  ];
-  protected readonly outputKeyNodes = [
-    { key: "Attributes" },
-    { key: "ItemCollectionMetrics", children: [{ key: "ItemCollectionKey" }] },
-  ];
+    ExpressionAttributeValues: ALL_VALUES, // map with AttributeValue
+  };
+  protected readonly outputKeyNodes = {
+    Attributes: ALL_VALUES, // map with AttributeValue
+    ItemCollectionMetrics: {
+      ItemCollectionKey: ALL_VALUES, // map with AttributeValue
+    },
+  };
 
   protected readonly clientCommand: __DeleteItemCommand;
-  public readonly middlewareStack: MiddlewareStack<
-    DeleteCommandInput | __DeleteItemCommandInput,
-    DeleteCommandOutput | __DeleteItemCommandOutput
-  >;
+  public readonly middlewareStack: MiddlewareStack<DeleteCommandInput | __DeleteItemCommandInput,
+  DeleteCommandOutput | __DeleteItemCommandOutput>;
 
   constructor(readonly input: DeleteCommandInput) {
     super();
@@ -87,3 +109,13 @@ export class DeleteCommand extends DynamoDBDocumentClientCommand<
     return async () => handler(this.clientCommand);
   }
 }
+
+import type {
+  DeleteItemCommandInput as __DeleteItemCommandInput,
+  DeleteItemCommandOutput as __DeleteItemCommandOutput,
+  ExpectedAttributeValue,
+  ItemCollectionMetrics,
+} from "@aws-sdk/client-dynamodb";
+import type {
+  NativeAttributeValue,
+} from "@aws-sdk/util-dynamodb";

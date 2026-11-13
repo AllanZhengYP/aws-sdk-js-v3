@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { GlueClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../GlueClient";
-import {
-  BatchGetCustomEntityTypesRequest,
-  BatchGetCustomEntityTypesRequestFilterSensitiveLog,
-  BatchGetCustomEntityTypesResponse,
-  BatchGetCustomEntityTypesResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1BatchGetCustomEntityTypesCommand,
-  serializeAws_json1_1BatchGetCustomEntityTypesCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { BatchGetCustomEntityTypesRequest, BatchGetCustomEntityTypesResponse } from "../models/models_0";
+import { BatchGetCustomEntityTypes$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link BatchGetCustomEntityTypesCommand}.
+ */
 export interface BatchGetCustomEntityTypesCommandInput extends BatchGetCustomEntityTypesRequest {}
+/**
+ * @public
+ *
+ * The output of {@link BatchGetCustomEntityTypesCommand}.
+ */
 export interface BatchGetCustomEntityTypesCommandOutput extends BatchGetCustomEntityTypesResponse, __MetadataBearer {}
 
 /**
@@ -34,71 +29,69 @@ export interface BatchGetCustomEntityTypesCommandOutput extends BatchGetCustomEn
  * ```javascript
  * import { GlueClient, BatchGetCustomEntityTypesCommand } from "@aws-sdk/client-glue"; // ES Modules import
  * // const { GlueClient, BatchGetCustomEntityTypesCommand } = require("@aws-sdk/client-glue"); // CommonJS import
+ * // import type { GlueClientConfig } from "@aws-sdk/client-glue";
+ * const config = {}; // type is GlueClientConfig
  * const client = new GlueClient(config);
+ * const input = { // BatchGetCustomEntityTypesRequest
+ *   Names: [ // CustomEntityTypeNames // required
+ *     "STRING_VALUE",
+ *   ],
+ * };
  * const command = new BatchGetCustomEntityTypesCommand(input);
  * const response = await client.send(command);
+ * // { // BatchGetCustomEntityTypesResponse
+ * //   CustomEntityTypes: [ // CustomEntityTypes
+ * //     { // CustomEntityType
+ * //       Name: "STRING_VALUE", // required
+ * //       RegexString: "STRING_VALUE", // required
+ * //       ContextWords: [ // ContextWords
+ * //         "STRING_VALUE",
+ * //       ],
+ * //     },
+ * //   ],
+ * //   CustomEntityTypesNotFound: [ // CustomEntityTypeNames
+ * //     "STRING_VALUE",
+ * //   ],
+ * // };
+ *
  * ```
  *
+ * @param BatchGetCustomEntityTypesCommandInput - {@link BatchGetCustomEntityTypesCommandInput}
+ * @returns {@link BatchGetCustomEntityTypesCommandOutput}
  * @see {@link BatchGetCustomEntityTypesCommandInput} for command's `input` shape.
  * @see {@link BatchGetCustomEntityTypesCommandOutput} for command's `response` shape.
  * @see {@link GlueClientResolvedConfig | config} for GlueClient's `config` shape.
  *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link GlueServiceException}
+ * <p>Base exception class for all service exceptions from Glue service.</p>
+ *
+ *
+ * @public
  */
-export class BatchGetCustomEntityTypesCommand extends $Command<
-  BatchGetCustomEntityTypesCommandInput,
-  BatchGetCustomEntityTypesCommandOutput,
-  GlueClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: BatchGetCustomEntityTypesCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: GlueClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<BatchGetCustomEntityTypesCommandInput, BatchGetCustomEntityTypesCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "GlueClient";
-    const commandName = "BatchGetCustomEntityTypesCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: BatchGetCustomEntityTypesRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: BatchGetCustomEntityTypesResponseFilterSensitiveLog,
+export class BatchGetCustomEntityTypesCommand extends command<BatchGetCustomEntityTypesCommandInput, BatchGetCustomEntityTypesCommandOutput>(
+  _ep0,
+  _mw0,
+  "BatchGetCustomEntityTypes",
+  BatchGetCustomEntityTypes$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: BatchGetCustomEntityTypesRequest;
+      output: BatchGetCustomEntityTypesResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: BatchGetCustomEntityTypesCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1BatchGetCustomEntityTypesCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<BatchGetCustomEntityTypesCommandOutput> {
-    return deserializeAws_json1_1BatchGetCustomEntityTypesCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: BatchGetCustomEntityTypesCommandInput;
+      output: BatchGetCustomEntityTypesCommandOutput;
+    };
+  };
 }

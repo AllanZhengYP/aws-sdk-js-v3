@@ -1,34 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  LicenseManagerUserSubscriptionsClientResolvedConfig,
-  ServiceInputTypes,
-  ServiceOutputTypes,
-} from "../LicenseManagerUserSubscriptionsClient";
-import {
-  StopProductSubscriptionRequest,
-  StopProductSubscriptionRequestFilterSensitiveLog,
-  StopProductSubscriptionResponse,
-  StopProductSubscriptionResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1StopProductSubscriptionCommand,
-  serializeAws_restJson1StopProductSubscriptionCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { StopProductSubscriptionRequest, StopProductSubscriptionResponse } from "../models/models_0";
+import { StopProductSubscription$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link StopProductSubscriptionCommand}.
+ */
 export interface StopProductSubscriptionCommandInput extends StopProductSubscriptionRequest {}
+/**
+ * @public
+ *
+ * The output of {@link StopProductSubscriptionCommand}.
+ */
 export interface StopProductSubscriptionCommandOutput extends StopProductSubscriptionResponse, __MetadataBearer {}
 
 /**
@@ -38,68 +29,133 @@ export interface StopProductSubscriptionCommandOutput extends StopProductSubscri
  * ```javascript
  * import { LicenseManagerUserSubscriptionsClient, StopProductSubscriptionCommand } from "@aws-sdk/client-license-manager-user-subscriptions"; // ES Modules import
  * // const { LicenseManagerUserSubscriptionsClient, StopProductSubscriptionCommand } = require("@aws-sdk/client-license-manager-user-subscriptions"); // CommonJS import
+ * // import type { LicenseManagerUserSubscriptionsClientConfig } from "@aws-sdk/client-license-manager-user-subscriptions";
+ * const config = {}; // type is LicenseManagerUserSubscriptionsClientConfig
  * const client = new LicenseManagerUserSubscriptionsClient(config);
+ * const input = { // StopProductSubscriptionRequest
+ *   Username: "STRING_VALUE",
+ *   IdentityProvider: { // IdentityProvider Union: only one key present
+ *     ActiveDirectoryIdentityProvider: { // ActiveDirectoryIdentityProvider
+ *       DirectoryId: "STRING_VALUE",
+ *       ActiveDirectorySettings: { // ActiveDirectorySettings
+ *         DomainName: "STRING_VALUE",
+ *         DomainIpv4List: [ // IpV4List
+ *           "STRING_VALUE",
+ *         ],
+ *         DomainIpv6List: [ // IpV6List
+ *           "STRING_VALUE",
+ *         ],
+ *         DomainCredentialsProvider: { // CredentialsProvider Union: only one key present
+ *           SecretsManagerCredentialsProvider: { // SecretsManagerCredentialsProvider
+ *             SecretId: "STRING_VALUE",
+ *           },
+ *         },
+ *         DomainNetworkSettings: { // DomainNetworkSettings
+ *           Subnets: [ // Subnets // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       },
+ *       ActiveDirectoryType: "STRING_VALUE",
+ *       IsSharedActiveDirectory: true || false,
+ *     },
+ *   },
+ *   Product: "STRING_VALUE",
+ *   ProductUserArn: "STRING_VALUE",
+ *   Domain: "STRING_VALUE",
+ * };
  * const command = new StopProductSubscriptionCommand(input);
  * const response = await client.send(command);
+ * // { // StopProductSubscriptionResponse
+ * //   ProductUserSummary: { // ProductUserSummary
+ * //     Username: "STRING_VALUE", // required
+ * //     Product: "STRING_VALUE", // required
+ * //     IdentityProvider: { // IdentityProvider Union: only one key present
+ * //       ActiveDirectoryIdentityProvider: { // ActiveDirectoryIdentityProvider
+ * //         DirectoryId: "STRING_VALUE",
+ * //         ActiveDirectorySettings: { // ActiveDirectorySettings
+ * //           DomainName: "STRING_VALUE",
+ * //           DomainIpv4List: [ // IpV4List
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           DomainIpv6List: [ // IpV6List
+ * //             "STRING_VALUE",
+ * //           ],
+ * //           DomainCredentialsProvider: { // CredentialsProvider Union: only one key present
+ * //             SecretsManagerCredentialsProvider: { // SecretsManagerCredentialsProvider
+ * //               SecretId: "STRING_VALUE",
+ * //             },
+ * //           },
+ * //           DomainNetworkSettings: { // DomainNetworkSettings
+ * //             Subnets: [ // Subnets // required
+ * //               "STRING_VALUE",
+ * //             ],
+ * //           },
+ * //         },
+ * //         ActiveDirectoryType: "STRING_VALUE",
+ * //         IsSharedActiveDirectory: true || false,
+ * //       },
+ * //     },
+ * //     Status: "STRING_VALUE", // required
+ * //     ProductUserArn: "STRING_VALUE",
+ * //     StatusMessage: "STRING_VALUE",
+ * //     Domain: "STRING_VALUE",
+ * //     SubscriptionStartDate: "STRING_VALUE",
+ * //     SubscriptionEndDate: "STRING_VALUE",
+ * //     LicenseExpirationDate: "STRING_VALUE",
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param StopProductSubscriptionCommandInput - {@link StopProductSubscriptionCommandInput}
+ * @returns {@link StopProductSubscriptionCommandOutput}
  * @see {@link StopProductSubscriptionCommandInput} for command's `input` shape.
  * @see {@link StopProductSubscriptionCommandOutput} for command's `response` shape.
  * @see {@link LicenseManagerUserSubscriptionsClientResolvedConfig | config} for LicenseManagerUserSubscriptionsClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>You don't have sufficient access to perform this action.</p>
+ *
+ * @throws {@link ConflictException} (server fault)
+ *  <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An exception occurred with the service.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource couldn't be found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The request failed because a service quota is exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The request was denied because of request throttling. Retry the request.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>A parameter is not valid.</p>
+ *
+ * @throws {@link LicenseManagerUserSubscriptionsServiceException}
+ * <p>Base exception class for all service exceptions from LicenseManagerUserSubscriptions service.</p>
+ *
+ *
+ * @public
  */
-export class StopProductSubscriptionCommand extends $Command<
-  StopProductSubscriptionCommandInput,
-  StopProductSubscriptionCommandOutput,
-  LicenseManagerUserSubscriptionsClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: StopProductSubscriptionCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LicenseManagerUserSubscriptionsClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<StopProductSubscriptionCommandInput, StopProductSubscriptionCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LicenseManagerUserSubscriptionsClient";
-    const commandName = "StopProductSubscriptionCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: StopProductSubscriptionRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: StopProductSubscriptionResponseFilterSensitiveLog,
+export class StopProductSubscriptionCommand extends command<StopProductSubscriptionCommandInput, StopProductSubscriptionCommandOutput>(
+  _ep0,
+  _mw0,
+  "StopProductSubscription",
+  StopProductSubscription$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: StopProductSubscriptionRequest;
+      output: StopProductSubscriptionResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: StopProductSubscriptionCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1StopProductSubscriptionCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<StopProductSubscriptionCommandOutput> {
-    return deserializeAws_restJson1StopProductSubscriptionCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: StopProductSubscriptionCommandInput;
+      output: StopProductSubscriptionCommandOutput;
+    };
+  };
 }

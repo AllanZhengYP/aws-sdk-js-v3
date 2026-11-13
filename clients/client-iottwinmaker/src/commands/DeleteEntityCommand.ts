@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { IoTTwinMakerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTTwinMakerClient";
-import {
-  DeleteEntityRequest,
-  DeleteEntityRequestFilterSensitiveLog,
-  DeleteEntityResponse,
-  DeleteEntityResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1DeleteEntityCommand,
-  serializeAws_restJson1DeleteEntityCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteEntityRequest, DeleteEntityResponse } from "../models/models_0";
+import { DeleteEntity$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteEntityCommand}.
+ */
 export interface DeleteEntityCommandInput extends DeleteEntityRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteEntityCommand}.
+ */
 export interface DeleteEntityCommandOutput extends DeleteEntityResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,64 @@ export interface DeleteEntityCommandOutput extends DeleteEntityResponse, __Metad
  * ```javascript
  * import { IoTTwinMakerClient, DeleteEntityCommand } from "@aws-sdk/client-iottwinmaker"; // ES Modules import
  * // const { IoTTwinMakerClient, DeleteEntityCommand } = require("@aws-sdk/client-iottwinmaker"); // CommonJS import
+ * // import type { IoTTwinMakerClientConfig } from "@aws-sdk/client-iottwinmaker";
+ * const config = {}; // type is IoTTwinMakerClientConfig
  * const client = new IoTTwinMakerClient(config);
+ * const input = { // DeleteEntityRequest
+ *   workspaceId: "STRING_VALUE", // required
+ *   entityId: "STRING_VALUE", // required
+ *   isRecursive: true || false,
+ * };
  * const command = new DeleteEntityCommand(input);
  * const response = await client.send(command);
+ * // { // DeleteEntityResponse
+ * //   state: "STRING_VALUE", // required
+ * // };
+ *
  * ```
  *
+ * @param DeleteEntityCommandInput - {@link DeleteEntityCommandInput}
+ * @returns {@link DeleteEntityCommandOutput}
  * @see {@link DeleteEntityCommandInput} for command's `input` shape.
  * @see {@link DeleteEntityCommandOutput} for command's `response` shape.
  * @see {@link IoTTwinMakerClientResolvedConfig | config} for IoTTwinMakerClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An unexpected error has occurred.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The resource wasn't found.</p>
+ *
+ * @throws {@link ServiceQuotaExceededException} (client fault)
+ *  <p>The service quota was exceeded.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>The rate exceeds the limit.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>Failed</p>
+ *
+ * @throws {@link IoTTwinMakerServiceException}
+ * <p>Base exception class for all service exceptions from IoTTwinMaker service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteEntityCommand extends $Command<
-  DeleteEntityCommandInput,
-  DeleteEntityCommandOutput,
-  IoTTwinMakerClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteEntityCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: IoTTwinMakerClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteEntityCommandInput, DeleteEntityCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "IoTTwinMakerClient";
-    const commandName = "DeleteEntityCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteEntityRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: DeleteEntityResponseFilterSensitiveLog,
+export class DeleteEntityCommand extends command<DeleteEntityCommandInput, DeleteEntityCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteEntity",
+  DeleteEntity$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteEntityRequest;
+      output: DeleteEntityResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteEntityCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1DeleteEntityCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<DeleteEntityCommandOutput> {
-    return deserializeAws_restJson1DeleteEntityCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteEntityCommandInput;
+      output: DeleteEntityCommandOutput;
+    };
+  };
 }

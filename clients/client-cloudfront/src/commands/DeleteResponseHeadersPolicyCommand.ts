@@ -1,108 +1,92 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { CloudFrontClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudFrontClient";
-import {
-  DeleteResponseHeadersPolicyRequest,
-  DeleteResponseHeadersPolicyRequestFilterSensitiveLog,
-} from "../models/models_1";
-import {
-  deserializeAws_restXmlDeleteResponseHeadersPolicyCommand,
-  serializeAws_restXmlDeleteResponseHeadersPolicyCommand,
-} from "../protocols/Aws_restXml";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { DeleteResponseHeadersPolicyRequest } from "../models/models_0";
+import { DeleteResponseHeadersPolicy$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link DeleteResponseHeadersPolicyCommand}.
+ */
 export interface DeleteResponseHeadersPolicyCommandInput extends DeleteResponseHeadersPolicyRequest {}
+/**
+ * @public
+ *
+ * The output of {@link DeleteResponseHeadersPolicyCommand}.
+ */
 export interface DeleteResponseHeadersPolicyCommandOutput extends __MetadataBearer {}
 
 /**
- * <p>Deletes a response headers policy.</p>
- * 		       <p>You cannot delete a response headers policy if it’s attached to a cache behavior.
- * 			First update your distributions to remove the response headers policy from all cache
- * 			behaviors, then delete the response headers policy.</p>
- * 		       <p>To delete a response headers policy, you must provide the policy’s identifier and
- * 			version. To get these values, you can use <code>ListResponseHeadersPolicies</code> or
- * 				<code>GetResponseHeadersPolicy</code>. </p>
+ * <p>Deletes a response headers policy.</p> <p>You cannot delete a response headers policy if it's attached to a cache behavior. First update your distributions to remove the response headers policy from all cache behaviors, then delete the response headers policy.</p> <p>To delete a response headers policy, you must provide the policy's identifier and version. To get these values, you can use <code>ListResponseHeadersPolicies</code> or <code>GetResponseHeadersPolicy</code>.</p>
  * @example
  * Use a bare-bones client and the command you need to make an API call.
  * ```javascript
  * import { CloudFrontClient, DeleteResponseHeadersPolicyCommand } from "@aws-sdk/client-cloudfront"; // ES Modules import
  * // const { CloudFrontClient, DeleteResponseHeadersPolicyCommand } = require("@aws-sdk/client-cloudfront"); // CommonJS import
+ * // import type { CloudFrontClientConfig } from "@aws-sdk/client-cloudfront";
+ * const config = {}; // type is CloudFrontClientConfig
  * const client = new CloudFrontClient(config);
+ * const input = { // DeleteResponseHeadersPolicyRequest
+ *   Id: "STRING_VALUE", // required
+ *   IfMatch: "STRING_VALUE",
+ * };
  * const command = new DeleteResponseHeadersPolicyCommand(input);
  * const response = await client.send(command);
+ * // {};
+ *
  * ```
  *
+ * @param DeleteResponseHeadersPolicyCommandInput - {@link DeleteResponseHeadersPolicyCommandInput}
+ * @returns {@link DeleteResponseHeadersPolicyCommandOutput}
  * @see {@link DeleteResponseHeadersPolicyCommandInput} for command's `input` shape.
  * @see {@link DeleteResponseHeadersPolicyCommandOutput} for command's `response` shape.
  * @see {@link CloudFrontClientResolvedConfig | config} for CloudFrontClient's `config` shape.
  *
+ * @throws {@link AccessDenied} (client fault)
+ *  <p>Access denied.</p>
+ *
+ * @throws {@link IllegalDelete} (client fault)
+ *  <p>Deletion is not allowed for this entity.</p>
+ *
+ * @throws {@link InvalidIfMatchVersion} (client fault)
+ *  <p>The <code>If-Match</code> version is missing or not valid.</p>
+ *
+ * @throws {@link NoSuchResponseHeadersPolicy} (client fault)
+ *  <p>The response headers policy does not exist.</p>
+ *
+ * @throws {@link PreconditionFailed} (client fault)
+ *  <p>The precondition in one or more of the request fields evaluated to <code>false</code>.</p>
+ *
+ * @throws {@link ResponseHeadersPolicyInUse} (client fault)
+ *  <p>Cannot delete the response headers policy because it is attached to one or more cache behaviors in a CloudFront distribution.</p>
+ *
+ * @throws {@link CloudFrontServiceException}
+ * <p>Base exception class for all service exceptions from CloudFront service.</p>
+ *
+ *
+ * @public
  */
-export class DeleteResponseHeadersPolicyCommand extends $Command<
-  DeleteResponseHeadersPolicyCommandInput,
-  DeleteResponseHeadersPolicyCommandOutput,
-  CloudFrontClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: DeleteResponseHeadersPolicyCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: CloudFrontClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<DeleteResponseHeadersPolicyCommandInput, DeleteResponseHeadersPolicyCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "CloudFrontClient";
-    const commandName = "DeleteResponseHeadersPolicyCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: DeleteResponseHeadersPolicyRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: (output: any) => output,
+export class DeleteResponseHeadersPolicyCommand extends command<DeleteResponseHeadersPolicyCommandInput, DeleteResponseHeadersPolicyCommandOutput>(
+  _ep0,
+  _mw0,
+  "DeleteResponseHeadersPolicy",
+  DeleteResponseHeadersPolicy$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: DeleteResponseHeadersPolicyRequest;
+      output: {};
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: DeleteResponseHeadersPolicyCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restXmlDeleteResponseHeadersPolicyCommand(input, context);
-  }
-
-  private deserialize(
-    output: __HttpResponse,
-    context: __SerdeContext
-  ): Promise<DeleteResponseHeadersPolicyCommandOutput> {
-    return deserializeAws_restXmlDeleteResponseHeadersPolicyCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: DeleteResponseHeadersPolicyCommandInput;
+      output: DeleteResponseHeadersPolicyCommandOutput;
+    };
+  };
 }

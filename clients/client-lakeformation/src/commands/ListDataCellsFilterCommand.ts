@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { LakeFormationClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LakeFormationClient";
-import {
-  ListDataCellsFilterRequest,
-  ListDataCellsFilterRequestFilterSensitiveLog,
-  ListDataCellsFilterResponse,
-  ListDataCellsFilterResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListDataCellsFilterCommand,
-  serializeAws_restJson1ListDataCellsFilterCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListDataCellsFilterRequest, ListDataCellsFilterResponse } from "../models/models_0";
+import { ListDataCellsFilter$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListDataCellsFilterCommand}.
+ */
 export interface ListDataCellsFilterCommandInput extends ListDataCellsFilterRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListDataCellsFilterCommand}.
+ */
 export interface ListDataCellsFilterCommandOutput extends ListDataCellsFilterResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,87 @@ export interface ListDataCellsFilterCommandOutput extends ListDataCellsFilterRes
  * ```javascript
  * import { LakeFormationClient, ListDataCellsFilterCommand } from "@aws-sdk/client-lakeformation"; // ES Modules import
  * // const { LakeFormationClient, ListDataCellsFilterCommand } = require("@aws-sdk/client-lakeformation"); // CommonJS import
+ * // import type { LakeFormationClientConfig } from "@aws-sdk/client-lakeformation";
+ * const config = {}; // type is LakeFormationClientConfig
  * const client = new LakeFormationClient(config);
+ * const input = { // ListDataCellsFilterRequest
+ *   Table: { // TableResource
+ *     CatalogId: "STRING_VALUE",
+ *     DatabaseName: "STRING_VALUE", // required
+ *     Name: "STRING_VALUE",
+ *     TableWildcard: {},
+ *   },
+ *   NextToken: "STRING_VALUE",
+ *   MaxResults: Number("int"),
+ * };
  * const command = new ListDataCellsFilterCommand(input);
  * const response = await client.send(command);
+ * // { // ListDataCellsFilterResponse
+ * //   DataCellsFilters: [ // DataCellsFilterList
+ * //     { // DataCellsFilter
+ * //       TableCatalogId: "STRING_VALUE", // required
+ * //       DatabaseName: "STRING_VALUE", // required
+ * //       TableName: "STRING_VALUE", // required
+ * //       Name: "STRING_VALUE", // required
+ * //       RowFilter: { // RowFilter
+ * //         FilterExpression: "STRING_VALUE",
+ * //         AllRowsWildcard: {},
+ * //       },
+ * //       ColumnNames: [ // ColumnNames
+ * //         "STRING_VALUE",
+ * //       ],
+ * //       ColumnWildcard: { // ColumnWildcard
+ * //         ExcludedColumnNames: [
+ * //           "STRING_VALUE",
+ * //         ],
+ * //       },
+ * //       VersionId: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   NextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListDataCellsFilterCommandInput - {@link ListDataCellsFilterCommandInput}
+ * @returns {@link ListDataCellsFilterCommandOutput}
  * @see {@link ListDataCellsFilterCommandInput} for command's `input` shape.
  * @see {@link ListDataCellsFilterCommandOutput} for command's `response` shape.
  * @see {@link LakeFormationClientResolvedConfig | config} for LakeFormationClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access to a resource was denied.</p>
+ *
+ * @throws {@link InternalServiceException} (server fault)
+ *  <p>An internal service error occurred.</p>
+ *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>The input provided was not valid.</p>
+ *
+ * @throws {@link OperationTimeoutException} (client fault)
+ *  <p>The operation timed out.</p>
+ *
+ * @throws {@link LakeFormationServiceException}
+ * <p>Base exception class for all service exceptions from LakeFormation service.</p>
+ *
+ *
+ * @public
  */
-export class ListDataCellsFilterCommand extends $Command<
-  ListDataCellsFilterCommandInput,
-  ListDataCellsFilterCommandOutput,
-  LakeFormationClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListDataCellsFilterCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: LakeFormationClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListDataCellsFilterCommandInput, ListDataCellsFilterCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "LakeFormationClient";
-    const commandName = "ListDataCellsFilterCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListDataCellsFilterRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListDataCellsFilterResponseFilterSensitiveLog,
+export class ListDataCellsFilterCommand extends command<ListDataCellsFilterCommandInput, ListDataCellsFilterCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListDataCellsFilter",
+  ListDataCellsFilter$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListDataCellsFilterRequest;
+      output: ListDataCellsFilterResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListDataCellsFilterCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListDataCellsFilterCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListDataCellsFilterCommandOutput> {
-    return deserializeAws_restJson1ListDataCellsFilterCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListDataCellsFilterCommandInput;
+      output: ListDataCellsFilterCommandOutput;
+    };
+  };
 }

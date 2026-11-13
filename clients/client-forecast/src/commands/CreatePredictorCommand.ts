@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { ForecastClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ForecastClient";
-import {
-  CreatePredictorRequest,
-  CreatePredictorRequestFilterSensitiveLog,
-  CreatePredictorResponse,
-  CreatePredictorResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1CreatePredictorCommand,
-  serializeAws_json1_1CreatePredictorCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreatePredictorRequest, CreatePredictorResponse } from "../models/models_0";
+import { CreatePredictor$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreatePredictorCommand}.
+ */
 export interface CreatePredictorCommandInput extends CreatePredictorRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreatePredictorCommand}.
+ */
 export interface CreatePredictorCommandOutput extends CreatePredictorResponse, __MetadataBearer {}
 
 /**
@@ -81,9 +76,6 @@ export interface CreatePredictorCommandOutput extends CreatePredictorResponse, _
  *                </p>
  *             </li>
  *          </ul>
- *
- *
- *
  *          <p>To get a list of all of your predictors, use the <a>ListPredictors</a>
  *       operation.</p>
  *          <note>
@@ -96,68 +88,146 @@ export interface CreatePredictorCommandOutput extends CreatePredictorResponse, _
  * ```javascript
  * import { ForecastClient, CreatePredictorCommand } from "@aws-sdk/client-forecast"; // ES Modules import
  * // const { ForecastClient, CreatePredictorCommand } = require("@aws-sdk/client-forecast"); // CommonJS import
+ * // import type { ForecastClientConfig } from "@aws-sdk/client-forecast";
+ * const config = {}; // type is ForecastClientConfig
  * const client = new ForecastClient(config);
+ * const input = { // CreatePredictorRequest
+ *   PredictorName: "STRING_VALUE", // required
+ *   AlgorithmArn: "STRING_VALUE",
+ *   ForecastHorizon: Number("int"), // required
+ *   ForecastTypes: [ // ForecastTypes
+ *     "STRING_VALUE",
+ *   ],
+ *   PerformAutoML: true || false,
+ *   AutoMLOverrideStrategy: "LatencyOptimized" || "AccuracyOptimized",
+ *   PerformHPO: true || false,
+ *   TrainingParameters: { // TrainingParameters
+ *     "<keys>": "STRING_VALUE",
+ *   },
+ *   EvaluationParameters: { // EvaluationParameters
+ *     NumberOfBacktestWindows: Number("int"),
+ *     BackTestWindowOffset: Number("int"),
+ *   },
+ *   HPOConfig: { // HyperParameterTuningJobConfig
+ *     ParameterRanges: { // ParameterRanges
+ *       CategoricalParameterRanges: [ // CategoricalParameterRanges
+ *         { // CategoricalParameterRange
+ *           Name: "STRING_VALUE", // required
+ *           Values: [ // Values // required
+ *             "STRING_VALUE",
+ *           ],
+ *         },
+ *       ],
+ *       ContinuousParameterRanges: [ // ContinuousParameterRanges
+ *         { // ContinuousParameterRange
+ *           Name: "STRING_VALUE", // required
+ *           MaxValue: Number("double"), // required
+ *           MinValue: Number("double"), // required
+ *           ScalingType: "Auto" || "Linear" || "Logarithmic" || "ReverseLogarithmic",
+ *         },
+ *       ],
+ *       IntegerParameterRanges: [ // IntegerParameterRanges
+ *         { // IntegerParameterRange
+ *           Name: "STRING_VALUE", // required
+ *           MaxValue: Number("int"), // required
+ *           MinValue: Number("int"), // required
+ *           ScalingType: "Auto" || "Linear" || "Logarithmic" || "ReverseLogarithmic",
+ *         },
+ *       ],
+ *     },
+ *   },
+ *   InputDataConfig: { // InputDataConfig
+ *     DatasetGroupArn: "STRING_VALUE", // required
+ *     SupplementaryFeatures: [ // SupplementaryFeatures
+ *       { // SupplementaryFeature
+ *         Name: "STRING_VALUE", // required
+ *         Value: "STRING_VALUE", // required
+ *       },
+ *     ],
+ *   },
+ *   FeaturizationConfig: { // FeaturizationConfig
+ *     ForecastFrequency: "STRING_VALUE", // required
+ *     ForecastDimensions: [ // ForecastDimensions
+ *       "STRING_VALUE",
+ *     ],
+ *     Featurizations: [ // Featurizations
+ *       { // Featurization
+ *         AttributeName: "STRING_VALUE", // required
+ *         FeaturizationPipeline: [ // FeaturizationPipeline
+ *           { // FeaturizationMethod
+ *             FeaturizationMethodName: "filling", // required
+ *             FeaturizationMethodParameters: { // FeaturizationMethodParameters
+ *               "<keys>": "STRING_VALUE",
+ *             },
+ *           },
+ *         ],
+ *       },
+ *     ],
+ *   },
+ *   EncryptionConfig: { // EncryptionConfig
+ *     RoleArn: "STRING_VALUE", // required
+ *     KMSKeyArn: "STRING_VALUE", // required
+ *   },
+ *   Tags: [ // Tags
+ *     { // Tag
+ *       Key: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ *   OptimizationMetric: "WAPE" || "RMSE" || "AverageWeightedQuantileLoss" || "MASE" || "MAPE",
+ * };
  * const command = new CreatePredictorCommand(input);
  * const response = await client.send(command);
+ * // { // CreatePredictorResponse
+ * //   PredictorArn: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param CreatePredictorCommandInput - {@link CreatePredictorCommandInput}
+ * @returns {@link CreatePredictorCommandOutput}
  * @see {@link CreatePredictorCommandInput} for command's `input` shape.
  * @see {@link CreatePredictorCommandOutput} for command's `response` shape.
  * @see {@link ForecastClientResolvedConfig | config} for ForecastClient's `config` shape.
  *
+ * @throws {@link InvalidInputException} (client fault)
+ *  <p>We can't process the request because it includes an invalid value or a value that exceeds
+ *       the valid range.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The limit on the number of resources per account has been exceeded.</p>
+ *
+ * @throws {@link ResourceAlreadyExistsException} (client fault)
+ *  <p>There is already a resource with this name. Try again with a different name.</p>
+ *
+ * @throws {@link ResourceInUseException} (client fault)
+ *  <p>The specified resource is in use.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>We can't find a resource with that Amazon Resource Name (ARN). Check the ARN and try
+ *       again.</p>
+ *
+ * @throws {@link ForecastServiceException}
+ * <p>Base exception class for all service exceptions from Forecast service.</p>
+ *
+ *
+ * @public
  */
-export class CreatePredictorCommand extends $Command<
-  CreatePredictorCommandInput,
-  CreatePredictorCommandOutput,
-  ForecastClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreatePredictorCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: ForecastClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreatePredictorCommandInput, CreatePredictorCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "ForecastClient";
-    const commandName = "CreatePredictorCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreatePredictorRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreatePredictorResponseFilterSensitiveLog,
+export class CreatePredictorCommand extends command<CreatePredictorCommandInput, CreatePredictorCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreatePredictor",
+  CreatePredictor$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreatePredictorRequest;
+      output: CreatePredictorResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreatePredictorCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreatePredictorCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreatePredictorCommandOutput> {
-    return deserializeAws_json1_1CreatePredictorCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreatePredictorCommandInput;
+      output: CreatePredictorCommandOutput;
+    };
+  };
 }

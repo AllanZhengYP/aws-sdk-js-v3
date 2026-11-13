@@ -4,4 +4,6 @@ export * from "./ListApplicationStatesPaginator";
 export * from "./ListCreatedArtifactsPaginator";
 export * from "./ListDiscoveredResourcesPaginator";
 export * from "./ListMigrationTasksPaginator";
+export * from "./ListMigrationTaskUpdatesPaginator";
 export * from "./ListProgressUpdateStreamsPaginator";
+export * from "./ListSourceResourcesPaginator";

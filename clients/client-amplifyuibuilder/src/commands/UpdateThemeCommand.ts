@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AmplifyUIBuilderClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AmplifyUIBuilderClient";
-import {
-  UpdateThemeRequest,
-  UpdateThemeRequestFilterSensitiveLog,
-  UpdateThemeResponse,
-  UpdateThemeResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1UpdateThemeCommand,
-  serializeAws_restJson1UpdateThemeCommand,
-} from "../protocols/Aws_restJson1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { UpdateThemeRequest, UpdateThemeResponse } from "../models/models_0";
+import { UpdateTheme$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link UpdateThemeCommand}.
+ */
 export interface UpdateThemeCommandInput extends UpdateThemeRequest {}
+/**
+ * @public
+ *
+ * The output of {@link UpdateThemeCommand}.
+ */
 export interface UpdateThemeCommandOutput extends UpdateThemeResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,109 @@ export interface UpdateThemeCommandOutput extends UpdateThemeResponse, __Metadat
  * ```javascript
  * import { AmplifyUIBuilderClient, UpdateThemeCommand } from "@aws-sdk/client-amplifyuibuilder"; // ES Modules import
  * // const { AmplifyUIBuilderClient, UpdateThemeCommand } = require("@aws-sdk/client-amplifyuibuilder"); // CommonJS import
+ * // import type { AmplifyUIBuilderClientConfig } from "@aws-sdk/client-amplifyuibuilder";
+ * const config = {}; // type is AmplifyUIBuilderClientConfig
  * const client = new AmplifyUIBuilderClient(config);
+ * const input = { // UpdateThemeRequest
+ *   appId: "STRING_VALUE", // required
+ *   environmentName: "STRING_VALUE", // required
+ *   id: "STRING_VALUE", // required
+ *   clientToken: "STRING_VALUE",
+ *   updatedTheme: { // UpdateThemeData
+ *     id: "STRING_VALUE",
+ *     name: "STRING_VALUE",
+ *     values: [ // ThemeValuesList // required
+ *       { // ThemeValues
+ *         key: "STRING_VALUE",
+ *         value: { // ThemeValue
+ *           value: "STRING_VALUE",
+ *           children: [
+ *             {
+ *               key: "STRING_VALUE",
+ *               value: {
+ *                 value: "STRING_VALUE",
+ *                 children: "<ThemeValuesList>",
+ *               },
+ *             },
+ *           ],
+ *         },
+ *       },
+ *     ],
+ *     overrides: "<ThemeValuesList>",
+ *   },
+ * };
  * const command = new UpdateThemeCommand(input);
  * const response = await client.send(command);
+ * // { // UpdateThemeResponse
+ * //   entity: { // Theme
+ * //     appId: "STRING_VALUE", // required
+ * //     environmentName: "STRING_VALUE", // required
+ * //     id: "STRING_VALUE", // required
+ * //     name: "STRING_VALUE", // required
+ * //     createdAt: new Date("TIMESTAMP"), // required
+ * //     modifiedAt: new Date("TIMESTAMP"),
+ * //     values: [ // ThemeValuesList // required
+ * //       { // ThemeValues
+ * //         key: "STRING_VALUE",
+ * //         value: { // ThemeValue
+ * //           value: "STRING_VALUE",
+ * //           children: [
+ * //             {
+ * //               key: "STRING_VALUE",
+ * //               value: {
+ * //                 value: "STRING_VALUE",
+ * //                 children: "<ThemeValuesList>",
+ * //               },
+ * //             },
+ * //           ],
+ * //         },
+ * //       },
+ * //     ],
+ * //     overrides: "<ThemeValuesList>",
+ * //     tags: { // Tags
+ * //       "<keys>": "STRING_VALUE",
+ * //     },
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param UpdateThemeCommandInput - {@link UpdateThemeCommandInput}
+ * @returns {@link UpdateThemeCommandOutput}
  * @see {@link UpdateThemeCommandInput} for command's `input` shape.
  * @see {@link UpdateThemeCommandOutput} for command's `response` shape.
  * @see {@link AmplifyUIBuilderClientResolvedConfig | config} for AmplifyUIBuilderClient's `config` shape.
  *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>An internal error has occurred. Please retry your request.</p>
+ *
+ * @throws {@link InvalidParameterException} (client fault)
+ *  <p>An invalid or out-of-range value was supplied for the input parameter.</p>
+ *
+ * @throws {@link ResourceConflictException} (client fault)
+ *  <p>The resource specified in the request conflicts with an existing resource.</p>
+ *
+ * @throws {@link AmplifyUIBuilderServiceException}
+ * <p>Base exception class for all service exceptions from AmplifyUIBuilder service.</p>
+ *
+ *
+ * @public
  */
-export class UpdateThemeCommand extends $Command<
-  UpdateThemeCommandInput,
-  UpdateThemeCommandOutput,
-  AmplifyUIBuilderClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: UpdateThemeCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AmplifyUIBuilderClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<UpdateThemeCommandInput, UpdateThemeCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AmplifyUIBuilderClient";
-    const commandName = "UpdateThemeCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: UpdateThemeRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: UpdateThemeResponseFilterSensitiveLog,
+export class UpdateThemeCommand extends command<UpdateThemeCommandInput, UpdateThemeCommandOutput>(
+  _ep0,
+  _mw0,
+  "UpdateTheme",
+  UpdateTheme$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: UpdateThemeRequest;
+      output: UpdateThemeResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: UpdateThemeCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1UpdateThemeCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<UpdateThemeCommandOutput> {
-    return deserializeAws_restJson1UpdateThemeCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: UpdateThemeCommandInput;
+      output: UpdateThemeCommandOutput;
+    };
+  };
 }

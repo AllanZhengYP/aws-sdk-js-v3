@@ -1,30 +1,25 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import {
-  ListPortalsRequest,
-  ListPortalsRequestFilterSensitiveLog,
-  ListPortalsResponse,
-  ListPortalsResponseFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_restJson1ListPortalsCommand,
-  serializeAws_restJson1ListPortalsCommand,
-} from "../protocols/Aws_restJson1";
-import { ServiceInputTypes, ServiceOutputTypes, WorkSpacesWebClientResolvedConfig } from "../WorkSpacesWebClient";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { ListPortalsRequest, ListPortalsResponse } from "../models/models_0";
+import { ListPortals$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link ListPortalsCommand}.
+ */
 export interface ListPortalsCommandInput extends ListPortalsRequest {}
+/**
+ * @public
+ *
+ * The output of {@link ListPortalsCommand}.
+ */
 export interface ListPortalsCommandOutput extends ListPortalsResponse, __MetadataBearer {}
 
 /**
@@ -34,68 +29,83 @@ export interface ListPortalsCommandOutput extends ListPortalsResponse, __Metadat
  * ```javascript
  * import { WorkSpacesWebClient, ListPortalsCommand } from "@aws-sdk/client-workspaces-web"; // ES Modules import
  * // const { WorkSpacesWebClient, ListPortalsCommand } = require("@aws-sdk/client-workspaces-web"); // CommonJS import
+ * // import type { WorkSpacesWebClientConfig } from "@aws-sdk/client-workspaces-web";
+ * const config = {}; // type is WorkSpacesWebClientConfig
  * const client = new WorkSpacesWebClient(config);
+ * const input = { // ListPortalsRequest
+ *   nextToken: "STRING_VALUE",
+ *   maxResults: Number("int"),
+ * };
  * const command = new ListPortalsCommand(input);
  * const response = await client.send(command);
+ * // { // ListPortalsResponse
+ * //   portals: [ // PortalList
+ * //     { // PortalSummary
+ * //       portalArn: "STRING_VALUE", // required
+ * //       rendererType: "STRING_VALUE",
+ * //       browserType: "STRING_VALUE",
+ * //       portalStatus: "STRING_VALUE",
+ * //       portalEndpoint: "STRING_VALUE",
+ * //       displayName: "STRING_VALUE",
+ * //       creationDate: new Date("TIMESTAMP"),
+ * //       browserSettingsArn: "STRING_VALUE",
+ * //       dataProtectionSettingsArn: "STRING_VALUE",
+ * //       userSettingsArn: "STRING_VALUE",
+ * //       networkSettingsArn: "STRING_VALUE",
+ * //       sessionLoggerArn: "STRING_VALUE",
+ * //       trustStoreArn: "STRING_VALUE",
+ * //       userAccessLoggingSettingsArn: "STRING_VALUE",
+ * //       authenticationType: "STRING_VALUE",
+ * //       ipAccessSettingsArn: "STRING_VALUE",
+ * //       instanceType: "STRING_VALUE",
+ * //       maxConcurrentSessions: Number("int"),
+ * //       portalCustomDomain: "STRING_VALUE",
+ * //     },
+ * //   ],
+ * //   nextToken: "STRING_VALUE",
+ * // };
+ *
  * ```
  *
+ * @param ListPortalsCommandInput - {@link ListPortalsCommandInput}
+ * @returns {@link ListPortalsCommandOutput}
  * @see {@link ListPortalsCommandInput} for command's `input` shape.
  * @see {@link ListPortalsCommandOutput} for command's `response` shape.
  * @see {@link WorkSpacesWebClientResolvedConfig | config} for WorkSpacesWebClient's `config` shape.
  *
+ * @throws {@link AccessDeniedException} (client fault)
+ *  <p>Access is denied.</p>
+ *
+ * @throws {@link InternalServerException} (server fault)
+ *  <p>There is an internal server error.</p>
+ *
+ * @throws {@link ThrottlingException} (client fault)
+ *  <p>There is a throttling error.</p>
+ *
+ * @throws {@link ValidationException} (client fault)
+ *  <p>There is a validation error.</p>
+ *
+ * @throws {@link WorkSpacesWebServiceException}
+ * <p>Base exception class for all service exceptions from WorkSpacesWeb service.</p>
+ *
+ *
+ * @public
  */
-export class ListPortalsCommand extends $Command<
-  ListPortalsCommandInput,
-  ListPortalsCommandOutput,
-  WorkSpacesWebClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: ListPortalsCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: WorkSpacesWebClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<ListPortalsCommandInput, ListPortalsCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "WorkSpacesWebClient";
-    const commandName = "ListPortalsCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: ListPortalsRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: ListPortalsResponseFilterSensitiveLog,
+export class ListPortalsCommand extends command<ListPortalsCommandInput, ListPortalsCommandOutput>(
+  _ep0,
+  _mw0,
+  "ListPortals",
+  ListPortals$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: ListPortalsRequest;
+      output: ListPortalsResponse;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: ListPortalsCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_restJson1ListPortalsCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<ListPortalsCommandOutput> {
-    return deserializeAws_restJson1ListPortalsCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: ListPortalsCommandInput;
+      output: ListPortalsCommandOutput;
+    };
+  };
 }

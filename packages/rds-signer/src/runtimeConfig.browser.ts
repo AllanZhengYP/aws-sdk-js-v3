@@ -1,7 +1,6 @@
-import { Sha256 } from "@aws-crypto/sha256-browser";
-import { invalidProvider } from "@aws-sdk/invalid-dependency";
+import { invalidProvider } from "@smithy/core/client";
 
-import { SignerConfig } from "./Signer";
+import type { SignerConfig } from "./Signer";
 
 /**
  * @internal
@@ -9,9 +8,8 @@ import { SignerConfig } from "./Signer";
 export const getRuntimeConfig = (config: SignerConfig) => {
   return {
     runtime: "browser",
-    sha256: config?.sha256 ?? Sha256,
-    credentials: invalidProvider("Credential is missing"),
-    region: invalidProvider("Region is missing"),
     ...config,
+    credentials: config?.credentials ?? invalidProvider("Credential is missing"),
+    region: config?.region ?? invalidProvider("Region is missing"),
   };
 };

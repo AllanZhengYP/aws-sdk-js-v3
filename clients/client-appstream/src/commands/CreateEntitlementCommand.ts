@@ -1,36 +1,31 @@
 // smithy-typescript generated code
-import { getSerdePlugin } from "@aws-sdk/middleware-serde";
-import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
-  FinalizeHandlerArguments,
-  Handler,
-  HandlerExecutionContext,
-  HttpHandlerOptions as __HttpHandlerOptions,
-  MetadataBearer as __MetadataBearer,
-  MiddlewareStack,
-  SerdeContext as __SerdeContext,
-} from "@aws-sdk/types";
+import type { MetadataBearer as __MetadataBearer } from "@smithy/types";
 
-import { AppStreamClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppStreamClient";
-import {
-  CreateEntitlementRequest,
-  CreateEntitlementRequestFilterSensitiveLog,
-  CreateEntitlementResult,
-  CreateEntitlementResultFilterSensitiveLog,
-} from "../models/models_0";
-import {
-  deserializeAws_json1_1CreateEntitlementCommand,
-  serializeAws_json1_1CreateEntitlementCommand,
-} from "../protocols/Aws_json1_1";
+import { _ep0, _mw0, command } from "../commandBuilder";
+import type { CreateEntitlementRequest, CreateEntitlementResult } from "../models/models_0";
+import { CreateEntitlement$ } from "../schemas/schemas_0";
 
+/**
+ * @public
+ */
+export type { __MetadataBearer };
+/**
+ * @public
+ *
+ * The input for {@link CreateEntitlementCommand}.
+ */
 export interface CreateEntitlementCommandInput extends CreateEntitlementRequest {}
+/**
+ * @public
+ *
+ * The output of {@link CreateEntitlementCommand}.
+ */
 export interface CreateEntitlementCommandOutput extends CreateEntitlementResult, __MetadataBearer {}
 
 /**
  * <p>Creates a new entitlement. Entitlements control access to specific applications within
  *             a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user
- *             identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all
+ *             identities. WorkSpaces Applications user pool and streaming URL users are entitled to all
  *             applications in a stack. Entitlements don't apply to the desktop stream view
  *             application, or to applications managed by a dynamic app provider using the Dynamic
  *             Application Framework.</p>
@@ -39,68 +34,81 @@ export interface CreateEntitlementCommandOutput extends CreateEntitlementResult,
  * ```javascript
  * import { AppStreamClient, CreateEntitlementCommand } from "@aws-sdk/client-appstream"; // ES Modules import
  * // const { AppStreamClient, CreateEntitlementCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * // import type { AppStreamClientConfig } from "@aws-sdk/client-appstream";
+ * const config = {}; // type is AppStreamClientConfig
  * const client = new AppStreamClient(config);
+ * const input = { // CreateEntitlementRequest
+ *   Name: "STRING_VALUE", // required
+ *   StackName: "STRING_VALUE", // required
+ *   Description: "STRING_VALUE",
+ *   AppVisibility: "ALL" || "ASSOCIATED", // required
+ *   Attributes: [ // EntitlementAttributeList // required
+ *     { // EntitlementAttribute
+ *       Name: "STRING_VALUE", // required
+ *       Value: "STRING_VALUE", // required
+ *     },
+ *   ],
+ * };
  * const command = new CreateEntitlementCommand(input);
  * const response = await client.send(command);
+ * // { // CreateEntitlementResult
+ * //   Entitlement: { // Entitlement
+ * //     Name: "STRING_VALUE", // required
+ * //     StackName: "STRING_VALUE", // required
+ * //     Description: "STRING_VALUE",
+ * //     AppVisibility: "ALL" || "ASSOCIATED", // required
+ * //     Attributes: [ // EntitlementAttributeList // required
+ * //       { // EntitlementAttribute
+ * //         Name: "STRING_VALUE", // required
+ * //         Value: "STRING_VALUE", // required
+ * //       },
+ * //     ],
+ * //     CreatedTime: new Date("TIMESTAMP"),
+ * //     LastModifiedTime: new Date("TIMESTAMP"),
+ * //   },
+ * // };
+ *
  * ```
  *
+ * @param CreateEntitlementCommandInput - {@link CreateEntitlementCommandInput}
+ * @returns {@link CreateEntitlementCommandOutput}
  * @see {@link CreateEntitlementCommandInput} for command's `input` shape.
  * @see {@link CreateEntitlementCommandOutput} for command's `response` shape.
  * @see {@link AppStreamClientResolvedConfig | config} for AppStreamClient's `config` shape.
  *
+ * @throws {@link EntitlementAlreadyExistsException} (client fault)
+ *  <p>The entitlement already exists.</p>
+ *
+ * @throws {@link LimitExceededException} (client fault)
+ *  <p>The requested limit exceeds the permitted limit for an account.</p>
+ *
+ * @throws {@link OperationNotPermittedException} (client fault)
+ *  <p>The attempted operation is not permitted.</p>
+ *
+ * @throws {@link ResourceNotFoundException} (client fault)
+ *  <p>The specified resource was not found.</p>
+ *
+ * @throws {@link AppStreamServiceException}
+ * <p>Base exception class for all service exceptions from AppStream service.</p>
+ *
+ *
+ * @public
  */
-export class CreateEntitlementCommand extends $Command<
-  CreateEntitlementCommandInput,
-  CreateEntitlementCommandOutput,
-  AppStreamClientResolvedConfig
-> {
-  // Start section: command_properties
-  // End section: command_properties
-
-  constructor(readonly input: CreateEntitlementCommandInput) {
-    // Start section: command_constructor
-    super();
-    // End section: command_constructor
-  }
-
-  /**
-   * @internal
-   */
-  resolveMiddleware(
-    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
-    configuration: AppStreamClientResolvedConfig,
-    options?: __HttpHandlerOptions
-  ): Handler<CreateEntitlementCommandInput, CreateEntitlementCommandOutput> {
-    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
-
-    const stack = clientStack.concat(this.middlewareStack);
-
-    const { logger } = configuration;
-    const clientName = "AppStreamClient";
-    const commandName = "CreateEntitlementCommand";
-    const handlerExecutionContext: HandlerExecutionContext = {
-      logger,
-      clientName,
-      commandName,
-      inputFilterSensitiveLog: CreateEntitlementRequestFilterSensitiveLog,
-      outputFilterSensitiveLog: CreateEntitlementResultFilterSensitiveLog,
+export class CreateEntitlementCommand extends command<CreateEntitlementCommandInput, CreateEntitlementCommandOutput>(
+  _ep0,
+  _mw0,
+  "CreateEntitlement",
+  CreateEntitlement$
+) {
+  /** @internal type navigation helper, not in runtime. */
+  protected declare static __types: {
+    api: {
+      input: CreateEntitlementRequest;
+      output: CreateEntitlementResult;
     };
-    const { requestHandler } = configuration;
-    return stack.resolve(
-      (request: FinalizeHandlerArguments<any>) =>
-        requestHandler.handle(request.request as __HttpRequest, options || {}),
-      handlerExecutionContext
-    );
-  }
-
-  private serialize(input: CreateEntitlementCommandInput, context: __SerdeContext): Promise<__HttpRequest> {
-    return serializeAws_json1_1CreateEntitlementCommand(input, context);
-  }
-
-  private deserialize(output: __HttpResponse, context: __SerdeContext): Promise<CreateEntitlementCommandOutput> {
-    return deserializeAws_json1_1CreateEntitlementCommand(output, context);
-  }
-
-  // Start section: command_body_extra
-  // End section: command_body_extra
+    sdk: {
+      input: CreateEntitlementCommandInput;
+      output: CreateEntitlementCommandOutput;
+    };
+  };
 }

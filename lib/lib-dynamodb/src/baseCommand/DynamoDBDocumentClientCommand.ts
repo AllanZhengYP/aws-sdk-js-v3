@@ -1,53 +1,76 @@
-import { Command as $Command } from "@aws-sdk/smithy-client";
-import {
+import { setFeature } from "@aws-sdk/core/client";
+import { Command as $Command } from "@smithy/core/client";
+import type {
   DeserializeHandler,
   DeserializeHandlerArguments,
   DeserializeHandlerOutput,
+  HandlerExecutionContext,
   InitializeHandler,
   InitializeHandlerArguments,
   InitializeHandlerOutput,
   MiddlewareStack,
-} from "@aws-sdk/types";
+} from "@smithy/types";
 
-import { KeyNode, marshallInput, unmarshallOutput } from "../commands/utils";
-import { DynamoDBDocumentClientResolvedConfig } from "../DynamoDBDocumentClient";
+import type { KeyNodeChildren } from "../commands/utils";
+import { marshallInput, unmarshallOutput } from "../commands/utils";
+import type { DynamoDBDocumentClientResolvedConfig } from "../DynamoDBDocumentClient";
+
+// /** @public */
+// export { $Command, DynamoDBDocumentClientResolvedConfig };
 
 /**
  * Base class for Commands in lib-dynamodb used to pass middleware to
  * the underlying DynamoDBClient Commands.
+ *
+ * @public
  */
 export abstract class DynamoDBDocumentClientCommand<
   Input extends object,
   Output extends object,
   BaseInput extends object,
   BaseOutput extends object,
-  ResolvedClientConfiguration
+  ResolvedClientConfiguration,
 > extends $Command<Input | BaseInput, Output | BaseOutput, ResolvedClientConfiguration> {
-  protected abstract readonly inputKeyNodes: KeyNode[];
-  protected abstract readonly outputKeyNodes: KeyNode[];
+  protected abstract readonly inputKeyNodes: KeyNodeChildren;
+  protected abstract readonly outputKeyNodes: KeyNodeChildren;
   protected abstract clientCommand: $Command<Input | BaseInput, Output | BaseOutput, ResolvedClientConfiguration>;
 
   public abstract middlewareStack: MiddlewareStack<Input | BaseInput, Output | BaseOutput>;
 
   protected addMarshallingMiddleware(configuration: DynamoDBDocumentClientResolvedConfig): void {
-    const { marshallOptions, unmarshallOptions } = configuration.translateConfig || {};
+    const { marshallOptions = {}, unmarshallOptions = {} } = configuration.translateConfig || {};
 
-    this.clientCommand.middlewareStack.add(
-      (next: InitializeHandler<Input | BaseInput, Output | BaseOutput>) =>
+    marshallOptions.convertTopLevelContainer = marshallOptions.convertTopLevelContainer ?? true;
+    unmarshallOptions.convertWithoutMapWrapper = unmarshallOptions.convertWithoutMapWrapper ?? true;
+
+    this.clientCommand.middlewareStack.addRelativeTo(
+      (next: InitializeHandler<Input | BaseInput, Output | BaseOutput>, context: HandlerExecutionContext) =>
         async (
           args: InitializeHandlerArguments<Input | BaseInput>
         ): Promise<InitializeHandlerOutput<Output | BaseOutput>> => {
-          args.input = marshallInput(this.input, this.inputKeyNodes, marshallOptions);
-          return next(args);
+          setFeature(context, "DDB_MAPPER", "d");
+          return next({
+            ...args,
+            /**
+             * We overwrite `args.input` at this middleware, but do not
+             * mutate the args object itself, which is initially the Command instance.
+             *
+             * The reason for this is to prevent mutations to the Command instance's inputs
+             * from being carried over if the Command instance is reused in a new
+             * request.
+             */
+            input: marshallInput(args.input, this.inputKeyNodes, marshallOptions),
+          });
         },
       {
         name: "DocumentMarshall",
-        step: "initialize",
+        relation: "before",
+        toMiddleware: "serializerMiddleware",
         override: true,
       }
     );
-    this.clientCommand.middlewareStack.add(
-      (next: DeserializeHandler<Input | BaseInput, Output | BaseOutput>) =>
+    this.clientCommand.middlewareStack.addRelativeTo(
+      (next: DeserializeHandler<Input | BaseInput, Output | BaseOutput>, context: HandlerExecutionContext) =>
         async (
           args: DeserializeHandlerArguments<Input | BaseInput>
         ): Promise<DeserializeHandlerOutput<Output | BaseOutput>> => {
@@ -57,7 +80,8 @@ export abstract class DynamoDBDocumentClientCommand<
         },
       {
         name: "DocumentUnmarshall",
-        step: "deserialize",
+        relation: "before",
+        toMiddleware: "deserializerMiddleware",
         override: true,
       }
     );

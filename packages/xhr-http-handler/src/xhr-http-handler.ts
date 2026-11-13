@@ -1,9 +1,10 @@
-import { HttpHandler, HttpRequest, HttpResponse } from "@aws-sdk/protocol-http";
-import { buildQueryString } from "@aws-sdk/querystring-builder";
-import { HttpHandlerOptions, Provider } from "@aws-sdk/types";
+import type { HttpHandler, HttpRequest } from "@smithy/core/protocols";
+import { buildQueryString, HttpResponse } from "@smithy/core/protocols";
+import type { HttpHandlerOptions, Provider } from "@smithy/types";
+// eslint-disable-next-line n/prefer-node-protocol
 import { EventEmitter } from "events";
 
-import { requestTimeout } from "./request-timeout";
+import { requestTimeout as requestTimeoutFn } from "./request-timeout";
 
 /**
  * Represents the http options that can be passed to the xhr http client.
@@ -26,7 +27,7 @@ export type XhrHttpHandlerEvents = {
    * differentiation of multiple concurrent request events.
    */
   readonly PROGRESS: "xhr.progress";
-  
+
   /**
    * Emitted for xhr.upload on progress.
    * Payload is the native ProgressEvent and the HttpRequest to allow
@@ -66,11 +67,25 @@ const EVENTS: XhrHttpHandlerEvents = {
  * An implementation of HttpHandler that uses XMLHttpRequest, which is
  * traditionally associated with browsers.
  */
-export class XhrHttpHandler extends EventEmitter implements HttpHandler {
+export class XhrHttpHandler extends EventEmitter implements HttpHandler<XhrHttpHandlerOptions> {
   public static readonly EVENTS: XhrHttpHandlerEvents = EVENTS;
+  public static readonly ERROR_IDENTIFIER = "XHR_HTTP_HANDLER_ERROR";
 
   private config?: XhrHttpHandlerOptions;
-  private readonly configProvider: Promise<XhrHttpHandlerOptions>;
+  private configProvider: Promise<XhrHttpHandlerOptions>;
+
+  /**
+   * @returns the input if it is an HttpHandler of any class,
+   * or instantiates a new instance of this handler.
+   */
+  public static create(instanceOrOptions?: HttpHandler<any> | XhrHttpHandlerOptions) {
+    if (typeof (instanceOrOptions as any)?.handle === "function") {
+      // is already an instance of HttpHandler.
+      return instanceOrOptions as HttpHandler<any>;
+    }
+    // input is ctor options or undefined.
+    return new XhrHttpHandler(instanceOrOptions as XhrHttpHandlerOptions);
+  }
 
   public constructor(options?: XhrHttpHandlerOptions | Provider<XhrHttpHandlerOptions>) {
     super();
@@ -82,18 +97,30 @@ export class XhrHttpHandler extends EventEmitter implements HttpHandler {
     }
   }
 
+  updateHttpClientConfig(key: keyof XhrHttpHandlerOptions, value: XhrHttpHandlerOptions[typeof key]): void {
+    this.config = undefined;
+    this.configProvider = this.configProvider.then((config) => {
+      config[key] = value;
+      return config;
+    });
+  }
+
+  httpHandlerConfigs(): XhrHttpHandlerOptions {
+    return this.config ?? {};
+  }
+
   public destroy(): void {
     // Do nothing. Connection pooling is handled by the browser.
   }
 
   public async handle(
     request: HttpRequest,
-    { abortSignal }: HttpHandlerOptions = {}
+    { abortSignal, requestTimeout }: HttpHandlerOptions = {}
   ): Promise<{ response: HttpResponse }> {
     if (!this.config) {
       this.config = await this.configProvider;
     }
-    const requestTimeoutInMs = Number(this.config!.requestTimeout) | 0;
+    const requestTimeoutInMs = Number(requestTimeout ?? this.config!.requestTimeout) | 0;
 
     // if the request was already aborted, prevent doing extra work
     if (abortSignal?.aborted) {
@@ -130,7 +157,10 @@ export class XhrHttpHandler extends EventEmitter implements HttpHandler {
         xhr.addEventListener("progress", (event: ProgressEvent) => {
           this.emit(XhrHttpHandler.EVENTS.PROGRESS, event, request);
         });
-        xhr.addEventListener("error", reject);
+        xhr.addEventListener("error", (err) => {
+          const error = new Error(XhrHttpHandler.ERROR_IDENTIFIER + ": " + err);
+          reject(error);
+        });
         xhr.addEventListener("timeout", () => {
           reject(new Error("XMLHttpRequest timed out."));
         });
@@ -156,6 +186,8 @@ export class XhrHttpHandler extends EventEmitter implements HttpHandler {
                 }
 
                 if (isText) {
+                  streamCursor !== xhr.responseText.length &&
+                    writer.write?.(streamCursor > 0 ? xhr.responseText.slice(streamCursor) : xhr.responseText);
                   writer.releaseLock();
                   stream.writable.close();
                   return stream.readable;
@@ -183,21 +215,30 @@ export class XhrHttpHandler extends EventEmitter implements HttpHandler {
         this.emit(EVENTS.BEFORE_XHR_SEND, xhr);
         xhr.send(body);
       }),
-      requestTimeout(requestTimeoutInMs),
+      requestTimeoutFn(requestTimeoutInMs),
     ];
+    let removeSignalEventListener = () => {};
     if (abortSignal) {
       raceOfPromises.push(
         new Promise<never>((resolve, reject) => {
-          abortSignal.onabort = () => {
+          const onAbort = () => {
             xhr.abort();
             const abortError = new Error("Request aborted");
             abortError.name = "AbortError";
             reject(abortError);
           };
+          if (typeof (abortSignal as any).addEventListener === "function") {
+            const signal = abortSignal as any;
+            signal.addEventListener("abort", onAbort, { once: true });
+            removeSignalEventListener = () => signal.removeEventListener("abort", onAbort);
+          } else {
+            // backwards compatibility
+            abortSignal.onabort = onAbort;
+          }
         })
       );
     }
-    return Promise.race(raceOfPromises);
+    return Promise.race(raceOfPromises).finally(removeSignalEventListener);
   }
 
   /**
@@ -242,7 +283,7 @@ export class XhrHttpHandler extends EventEmitter implements HttpHandler {
 
 /**
  * Used to omit headers that will be ignored by XHR to prevent excessive logging.
- * @private
+ * @internal
  */
 const isForbiddenRequestHeader = (header: string): boolean => {
   header = header.toLowerCase();
@@ -256,7 +297,7 @@ const isForbiddenRequestHeader = (header: string): boolean => {
 };
 
 /**
- * @private
+ * @internal
  */
 const forbiddenHeaders = [
   "Accept-Charset",
